@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: GameTile
+    uniqueID: 2652223015
+    locked: 0
+  - name: Turret
+    uniqueID: 3781178083
+    locked: 0

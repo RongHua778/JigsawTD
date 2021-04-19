@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b5e7d9a89618bc4dade5c8c8a6427cf, type: 3}
+  m_Name: GameContentFactory
+  m_EditorClassIdentifier: 
+  emptyPrefab: {fileID: 2132816818547703652, guid: de60f9bc2d75c6749abc2e9bb46e7bda, type: 3}
+  destinationPrefab: {fileID: 5146344450635639640, guid: 79009d1655cf89b40ae44a62ae1d40d8, type: 3}
+  spawnPointPrefab: {fileID: 8396236271270030035, guid: 7c3b10bc4f30d5d4788d544f500e730d, type: 3}
+  turretPrefab: {fileID: 4622811570672915330, guid: 974b0b38a9a2db34f9348f484c687485, type: 3}
+  rockPrefab: {fileID: 1515099727344519454, guid: 61443307e00c3094c8fdbeddc6963c1e, type: 3}
