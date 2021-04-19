@@ -14,7 +14,32 @@ public class GameBoard : MonoBehaviour
 
     GameTileContentFactory tileContentFactory;
     Queue<GameTile> searchFrontier = new Queue<GameTile>();
+    List<GameTile> shortestPath = new List<GameTile>();
+    List<GameTile> spawnPoints = new List<GameTile>();
 
+    bool showPaths = true;
+    public bool ShowPaths
+    {
+        get => showPaths;
+        set
+        {
+            showPaths = value;
+            if (showPaths)
+            {
+                foreach (GameTile tile in shortestPath)
+                {
+                    tile.ShowPath();
+                }
+            }
+            else
+            {
+                foreach (GameTile tile in shortestPath)
+                {
+                    tile.HidePath();
+                }
+            }
+        }
+    }
 
 
     public void Initialize(Vector2Int size, GameTileContentFactory contentFactory)
@@ -43,8 +68,8 @@ public class GameBoard : MonoBehaviour
 
         }
 
-        ToggleSpawnPoint(tiles[11]);
-        ToggleDestination(tiles[13]);
+        ToggleDestination(tiles[5]);
+        ToggleSpawnPoint(tiles[3]);
 
     }
 
@@ -53,7 +78,6 @@ public class GameBoard : MonoBehaviour
         if (tile.Content.Type == GameTileContentType.Empty)
         {
             tile.Content = tileContentFactory.Get(GameTileContentType.Destination);
-            FindPaths();
         }
     }
 
@@ -62,6 +86,36 @@ public class GameBoard : MonoBehaviour
         if (tile.Content.Type == GameTileContentType.Empty)
         {
             tile.Content = tileContentFactory.Get(GameTileContentType.SpawnPoint);
+            spawnPoints.Add(tile);
+            FindPaths();
+        }
+    }
+
+    public GameTile GetSpawnPoint(int index)
+    {
+        return spawnPoints[index];
+    }
+
+    public void GetShortestPath()
+    {
+        if (shortestPath.Count > 0)
+        {
+            foreach (GameTile tile in shortestPath)
+            {
+                tile.HidePath();
+            }
+            shortestPath.Clear();
+        }
+        GameTile findTile = spawnPoints[0];
+        while (findTile != null)
+        {
+            shortestPath.Add(findTile);
+            findTile = findTile.NextTileOnPath;
+        }
+        foreach(GameTile tile in shortestPath)
+        {
+            if (ShowPaths)
+                tile.ShowPath();
         }
     }
 
@@ -85,6 +139,7 @@ public class GameBoard : MonoBehaviour
         {
             tile.Content = tileContentFactory.Get(GameTileContentType.Rock);
             FindPaths();
+
         }
         else if (tile.Content.Type == GameTileContentType.Rock)
         {
@@ -137,10 +192,7 @@ public class GameBoard : MonoBehaviour
                 return false;
             }
         }
-        foreach (GameTile tile in tiles)
-        {
-            tile.ShowPath();
-        }
+        GetShortestPath();
         return true;
     }
 

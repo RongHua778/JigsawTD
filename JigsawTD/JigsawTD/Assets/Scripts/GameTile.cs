@@ -71,7 +71,7 @@ public class GameTile : MonoBehaviour
             return null;
         neighbour.distance = distance + 1;
         neighbour.nextOnPath = this;
-        return neighbour.Content.Type != GameTileContentType.Turret || neighbour.Content.Type != GameTileContentType.Rock ? neighbour : null;
+        return (neighbour.Content.Type != GameTileContentType.Turret && neighbour.Content.Type != GameTileContentType.Rock) ? neighbour : null;
     }
 
     public void ShowPath()
@@ -88,4 +88,11 @@ public class GameTile : MonoBehaviour
             nextOnPath == right ? rightRoatation :
             downRoatation;
     }
+
+    public void HidePath()
+    {
+        arrow.gameObject.SetActive(false);
+    }
+
+
 }

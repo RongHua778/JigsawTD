@@ -39,5 +39,9 @@ public class GameManager : MonoBehaviour
                 _board.ToggleRock(tile);
             }
         }
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            _board.ShowPaths = !_board.ShowPaths;
+        }
     }
 }

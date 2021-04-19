@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _board: {fileID: 8398349}
-  _startSize: {x: 5, y: 5}
+  _startSize: {x: 3, y: 3}
   _contentFactory: {fileID: 11400000, guid: e9b28f73aa8e8a840beba1e769ed0c70, type: 2}
 --- !u!4 &286649183
 Transform:

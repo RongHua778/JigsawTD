@@ -17,7 +17,7 @@ public class GameTileContent : ReusableObject
         get => originFactory;
         set
         {
-            Debug.Assert(originFactory == null, "Redefined orign factory!"+this.name);
+            //Debug.Assert(originFactory == null, "Redefined orign factory!"+this.name);
             originFactory = value;
         }
     }
