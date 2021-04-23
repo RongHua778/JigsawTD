@@ -12,7 +12,7 @@ public class SubPool
         //get { return m_prefab.name; }
         get { return m_Name; }
     }
-    public SubPool(string name,GameObject prefab)
+    public SubPool(string name, GameObject prefab)
     {
         this.m_prefab = prefab;
         m_Name = name;

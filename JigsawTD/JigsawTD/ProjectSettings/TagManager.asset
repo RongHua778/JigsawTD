@@ -11,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - GameTile
   - 
   - 
   - 
@@ -46,4 +46,10 @@ TagManager:
     locked: 0
   - name: Turret
     uniqueID: 3781178083
+    locked: 0
+  - name: TempTile
+    uniqueID: 395707555
+    locked: 0
+  - name: UI
+    uniqueID: 2301588753
     locked: 0

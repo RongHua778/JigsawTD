@@ -6,7 +6,7 @@ public abstract class GameObjectFactory : ScriptableObject
 {
     protected GameObject CreateGameObjectInstance(GameObject prefab)
     {
-        GameObject instance = ObjectPool.Instance.Spawn(prefab.gameObject);
+        GameObject instance = ObjectPool.Instance.Spawn(prefab);
         return instance;
     }
 }
