@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6317956750879752327}
   m_Layer: 6
   m_Name: GameTile
-  m_TagString: Untagged
+  m_TagString: GameTile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,6 +98,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrow: {fileID: 6604616036314486557}
+  NeighbourTiles:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!61 &6317956750879752327
 BoxCollider2D:
   m_ObjectHideFlags: 0

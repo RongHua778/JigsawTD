@@ -4,29 +4,33 @@ using UnityEngine;
 
 public class GameTile : MonoBehaviour
 {
+    Direction pathDirection;
+    public Direction PathDirection { get => pathDirection; set => pathDirection = value; }
     [SerializeField]
     Transform arrow = default;
     int distance;
     GameTile left, down, up, right, nextOnPath;
 
-    [HideInInspector]
     public GameTile[] NeighbourTiles = new GameTile[4];//0=up,1=left,2=right,3=down
     public GameTile NextTileOnPath => nextOnPath;
 
+    bool isAlternative = true;
     public bool IsAlternative
     {
-        get;
-        //{
-        //    if ((((int)OffsetCoord.x & 1) == 0) && (((int)OffsetCoord.y & 1) == 0))
-        //    {
-        //        return false;
-        //    }
-        //    else
-        //    {
-        //        return true;
-        //    }
-        //}
-        set;
+        get
+        {
+            bool alter = ((int)OffsetCoord.y & 1) == 0;
+            if (((int)OffsetCoord.x & 1) == 0)
+            {
+                return alter ? isAlternative : !isAlternative;
+            }
+            else
+            {
+                return alter ? !isAlternative : isAlternative;
+            }
+
+        }
+        //set;
     }
     public bool HasPath => distance != int.MaxValue;
 
@@ -47,10 +51,6 @@ public class GameTile : MonoBehaviour
         }
     }
 
-    static readonly Vector2[] directions =
-    {
-        new Vector2(0,1),new Vector2(-1,0),new Vector2(1,0),new Vector2(0,-1)
-    };
 
     static Quaternion
         upRotation = Quaternion.Euler(0f, 0f, 0f),
@@ -98,7 +98,7 @@ public class GameTile : MonoBehaviour
         {
             if (NeighbourTiles[i] == null)
             {
-                var neighbour = tiles.Find(t => t.OffsetCoord == OffsetCoord + directions[i]);
+                var neighbour = tiles.Find(t => t.OffsetCoord == OffsetCoord + DirectionExtensions.NormalizeDistance[i]);
                 if (neighbour != null)
                 {
                     Debug.Assert(neighbour.NeighbourTiles[3 - i] == null, "Already Assign Neighbour!");
@@ -121,18 +121,19 @@ public class GameTile : MonoBehaviour
         nextOnPath = null;
     }
 
-    public GameTile GrowPathUp() => GrowPathTo(up);
-    public GameTile GrowPathDown() => GrowPathTo(down);
-    public GameTile GrowPathLeft() => GrowPathTo(left);
-    public GameTile GrowPathRight() => GrowPathTo(right);
+    //public GameTile GrowPathUp() => GrowPathTo(up);
+    //public GameTile GrowPathDown() => GrowPathTo(down);
+    //public GameTile GrowPathLeft() => GrowPathTo(left);
+    //public GameTile GrowPathRight() => GrowPathTo(right);
 
-    public GameTile GrowPathTo(GameTile neighbour)
+    public GameTile GrowPathTo(GameTile neighbour, int directionIndex)
     {
         Debug.Assert(HasPath, "No Path!");
         if (neighbour == null || neighbour.HasPath)
             return null;
         neighbour.distance = distance + 1;
         neighbour.nextOnPath = this;
+        neighbour.PathDirection = DirectionExtensions.GetDirection(3 - directionIndex);
         return (neighbour.Content.Type != GameTileContentType.Turret && neighbour.Content.Type != GameTileContentType.Rock) ? neighbour : null;
     }
 

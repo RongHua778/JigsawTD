@@ -11,5 +11,16 @@ public class GameEvents : Singleton<GameEvents>
     //     if (onEventName != null)
     //         onEventName(para);
     // }
-    
+    public event Action<string> onMessage;
+    public void Message(string content)
+    {
+        onMessage?.Invoke(content);
+    }
+
+    public event Action<List<GameTile>> onAddTiles;
+    public void AddTiles(List<GameTile> tiles)
+    {
+        onAddTiles?.Invoke(tiles);
+    }
+
 }

@@ -6,10 +6,12 @@ public class GameBoard : MonoBehaviour
 {
     [SerializeField]
     Ground ground = default;
-
     [SerializeField]
     GameTile tilePrefab = default;
-    float tileSize = 1f;
+    [SerializeField]
+    GameObject tempTilePrefab = default;
+    List<GameObject> tempTileList = new List<GameObject>();
+
     Vector2Int size;
     List<GameTile> tiles;
 
@@ -41,13 +43,40 @@ public class GameBoard : MonoBehaviour
             }
         }
     }
+    bool showTempTile = false;
+    public bool ShowTempTile
+    {
+        get => showTempTile;
+        set
+        {
+            showTempTile = value;
+            if (showTempTile)
+            {
+                foreach (GameObject temp in tempTileList)
+                {
+                    temp.SetActive(true);
+                }
+            }
+            else
+            {
+                foreach (GameObject temp in tempTileList)
+                {
+                    temp.SetActive(false);
+                }
+            }
+        }
+    }
 
+    private void Start()
+    {
+        GameEvents.Instance.onAddTiles += AddTile;
+    }
 
     public void Initialize(Vector2Int size, GameTileContentFactory contentFactory)
     {
         this.size = size;
         tileContentFactory = contentFactory;
-        Vector2 offset = new Vector2((size.x - 1) * 0.5f, (size.y - 1) * 0.5f) * tileSize;
+        Vector2 offset = new Vector2((size.x - 1) * 0.5f, (size.y - 1) * 0.5f) * StaticData.Instance.TileSize;
         tiles = new List<GameTile>();
         for (int i = 0, y = 0; y < size.y; y++)
         {
@@ -56,11 +85,11 @@ public class GameBoard : MonoBehaviour
                 GameTile tile = Instantiate(tilePrefab);
                 tiles.Add(tile);
                 tile.transform.SetParent(transform, false);
-                tile.transform.localPosition = new Vector2(x, y) * tileSize - offset;
+                tile.transform.localPosition = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
                 CorrectTileCoord(tile);
-                tile.IsAlternative = (x & 1) == 0;
-                if ((y & 1) == 0)
-                    tile.IsAlternative = !tile.IsAlternative;
+                //tile.IsAlternative = (x & 1) == 0;
+                //if ((y & 1) == 0)
+                //    tile.IsAlternative = !tile.IsAlternative;
                 //if (x > 0)
                 //    GameTile.MakeLeftRightNeighbours(tile, tiles[i - 1]);
                 //if (y > 0)
@@ -71,15 +100,32 @@ public class GameBoard : MonoBehaviour
         }
         foreach (GameTile tile in tiles)
         {
-            //tile.GetNeighbours(tiles);
             tile.GetNeighbours2(tiles);
 
         }
+        foreach (GameTile tile in tiles)
+        {
+            GenerateTempTile(tile);
+        }
 
-        ToggleDestination(tiles[40]);
+
+        ToggleDestination(tiles[5]);
         ToggleSpawnPoint(tiles[3]);
 
 
+    }
+
+    private void GenerateTempTile(GameTile tile)
+    {
+        for (int i = 0; i < tile.NeighbourTiles.Length; i++)
+        {
+            if (tile.NeighbourTiles[i] == null)
+            {
+                GameObject tempTile = ObjectPool.Instance.Spawn(tempTilePrefab);
+                tempTile.transform.position = (Vector2)tile.transform.position + DirectionExtensions.GetDirectionPos(i);
+                tempTileList.Add(tempTile);
+            }
+        }
     }
 
     public void ToggleDestination(GameTile tile)
@@ -157,6 +203,33 @@ public class GameBoard : MonoBehaviour
         }
     }
 
+    private void AddTile(List<GameTile> newTiles)
+    {
+        foreach (GameTile tile in newTiles)
+        {
+            tiles.Add(tile);
+            tile.GetComponent<Collider2D>().enabled = true;
+            tile.transform.SetParent(this.transform);
+            tile.Content = tileContentFactory.Get(GameTileContentType.Empty);
+            CorrectTileCoord(tile);
+            var tempTile = tempTileList.Find(t => t.transform.position == tile.transform.position);
+            if (tempTile != null)
+            {
+                tempTileList.Remove(tempTile);
+                ObjectPool.Instance.UnSpawn(tempTile);
+            }
+        }
+        foreach (GameTile tile in newTiles)
+        {
+            tile.GetNeighbours2(tiles);
+        }
+        foreach (GameTile tile in newTiles)
+        {
+            GenerateTempTile(tile);
+        }
+        FindPaths();
+    }
+
     bool FindPaths()
     {
         foreach (GameTile tile in tiles)
@@ -196,14 +269,14 @@ public class GameBoard : MonoBehaviour
                 {
                     for (int i = 0; i < tile.NeighbourTiles.Length; i++)
                     {
-                        searchFrontier.Enqueue(tile.GrowPathTo(tile.NeighbourTiles[i]));
+                        searchFrontier.Enqueue(tile.GrowPathTo(tile.NeighbourTiles[i], i));
                     }
                 }
                 else
                 {
                     for (int i = tile.NeighbourTiles.Length - 1; i >= 0; i--)
                     {
-                        searchFrontier.Enqueue(tile.GrowPathTo(tile.NeighbourTiles[i]));
+                        searchFrontier.Enqueue(tile.GrowPathTo(tile.NeighbourTiles[i], i));
                     }
                 }
             }
@@ -229,8 +302,8 @@ public class GameBoard : MonoBehaviour
     {
         Vector2 coord = tile.transform.localPosition;
         //coord = new Vector2(coord.x + tileSize / 2, coord.y + tileSize / 2);
-        float newX = coord.x / tileSize;
-        float newY = coord.y / tileSize;
+        float newX = coord.x / StaticData.Instance.TileSize;
+        float newY = coord.y / StaticData.Instance.TileSize;
         tile.OffsetCoord = new Vector2(newX, newY);
     }
 

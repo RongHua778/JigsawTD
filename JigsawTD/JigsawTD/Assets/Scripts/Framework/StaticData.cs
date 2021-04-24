@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class StaticData : Singleton<StaticData>
 {
+
     [Header("LevelSetting")]
     public float MaxPersistime = default;
     public int StartMoney = default;
@@ -19,12 +20,9 @@ public class StaticData : Singleton<StaticData>
 
     [Header("GameSetting")]
     public float GameSlowDownRate = default;
+    public float TileSize = default;
 
-    [Header("BuffValue")]
-    public float SlowDownRate = default;
-    public float MagicRangeIntensify = default;
-    public Color TowerRangeColor;
-    public Color MagicRangeColor;
+
 
 
     public void GameSlowDown()

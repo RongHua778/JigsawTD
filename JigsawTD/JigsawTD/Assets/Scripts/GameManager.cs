@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _board.Initialize(_startSize, _contentFactory);
+        _board.ShowTempTile = false;
     }
 
     // Update is called once per frame
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.V))
         {
             _board.ShowPaths = !_board.ShowPaths;
+            _board.ShowTempTile = !_board.ShowTempTile;
         }
     }
 }
