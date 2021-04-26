@@ -1,13 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameTile : MonoBehaviour
+public abstract class GameTile : MonoBehaviour
 {
+    public int TileID;
+    SpriteRenderer tileTypeSr;
+    Transform arrow;
+
     Direction pathDirection;
     public Direction PathDirection { get => pathDirection; set => pathDirection = value; }
-    [SerializeField]
-    Transform arrow = default;
     int distance;
     GameTile left, down, up, right, nextOnPath;
 
@@ -30,8 +33,8 @@ public class GameTile : MonoBehaviour
             }
 
         }
-        //set;
     }
+
     public bool HasPath => distance != int.MaxValue;
 
     Vector2 _offsetCoord;
@@ -51,47 +54,34 @@ public class GameTile : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        tileTypeSr = transform.Find("TileType").GetComponent<SpriteRenderer>();
+        arrow = transform.Find("PathArrow");
+    }
 
-    static Quaternion
-        upRotation = Quaternion.Euler(0f, 0f, 0f),
-        downRoatation = Quaternion.Euler(0f, 0f, 180f),
-        leftRotation = Quaternion.Euler(0f, 0f, 270f),
-        rightRoatation = Quaternion.Euler(0f, 0f, 90f);
+    public void SetPreviewing(bool isPreviewing)
+    {
+        if (isPreviewing)
+        {
+            tileTypeSr.sortingOrder = 5;
+            GetComponent<SpriteRenderer>().sortingOrder = 4;
+            GetComponent<Collider2D>().enabled = false;
 
+        }
+        else
+        {
+            tileTypeSr.sortingOrder = 2;
+            GetComponent<SpriteRenderer>().sortingOrder = 1;
+            GetComponent<Collider2D>().enabled = true;
+        }
+    }
 
-    //public static void MakeUpDownNeighbours(GameTile up, GameTile down)
-    //{
-    //    //Debug.Assert(up.down == null && down.up == null, "Redefined Neighbours!");
-    //    up.down = down;
-    //    down.up = up;
-    //}
+    public virtual void OnTilePass()
+    {
 
-    //public static void MakeLeftRightNeighbours(GameTile left, GameTile right)
-    //{
-    //    //Debug.Assert(left.right == null && right.left == null, "Redefined Neighbours!");
-    //    left.right = right;
-    //    right.left = left;
-    //}
+    }
 
-
-    //public void GetNeighbours(List<GameTile> tiles)
-    //{
-    //    foreach (Vector2 direction in directions)
-    //    {
-    //        var neighbour = tiles.Find(t => t.OffsetCoord == OffsetCoord + direction);
-    //        if (neighbour == null)
-    //            continue;
-    //        if (neighbour.OffsetCoord.x < OffsetCoord.x)
-    //            MakeLeftRightNeighbours(this, neighbour);
-    //        else if (neighbour.OffsetCoord.x > OffsetCoord.x)
-    //            MakeLeftRightNeighbours(neighbour, this);
-    //        else if (neighbour.OffsetCoord.y < OffsetCoord.y)
-    //            MakeUpDownNeighbours(this, neighbour);
-    //        else if (neighbour.OffsetCoord.y > OffsetCoord.y)
-    //            MakeUpDownNeighbours(neighbour, this);
-    //    }
-
-    //}
     public void GetNeighbours2(List<GameTile> tiles)
     {
         for (int i = 0; i < NeighbourTiles.Length; i++)
@@ -121,10 +111,7 @@ public class GameTile : MonoBehaviour
         nextOnPath = null;
     }
 
-    //public GameTile GrowPathUp() => GrowPathTo(up);
-    //public GameTile GrowPathDown() => GrowPathTo(down);
-    //public GameTile GrowPathLeft() => GrowPathTo(left);
-    //public GameTile GrowPathRight() => GrowPathTo(right);
+
 
     public GameTile GrowPathTo(GameTile neighbour, int directionIndex)
     {
@@ -145,11 +132,7 @@ public class GameTile : MonoBehaviour
             return;
         }
         arrow.gameObject.SetActive(true);
-        arrow.localRotation =
-            nextOnPath == NeighbourTiles[0] ? upRotation :
-            nextOnPath == NeighbourTiles[2] ? leftRotation :
-            nextOnPath == NeighbourTiles[1] ? rightRoatation :
-            downRoatation;
+        arrow.rotation = DirectionExtensions.GetRotation((int)PathDirection);
     }
 
     public void HidePath()

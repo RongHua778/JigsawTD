@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class LevelUIManager : MonoBehaviour
 {
@@ -9,10 +10,19 @@ public class LevelUIManager : MonoBehaviour
     GameObject messagePanel;
     [SerializeField]
     TMP_Text messageTxt;
+
+    [SerializeField] RoadPlacement _roadPlacament=default;
+
     // Start is called before the first frame update
     void Start()
     {
         GameEvents.Instance.onMessage += ShowMessage;
+
+    }
+
+    public void DisplayShape(int displayID,TileShape shape)
+    {
+        _roadPlacament.DisplayShapeOnTileSelct(displayID, shape);
     }
 
     private void ShowMessage(string content)
@@ -29,9 +39,8 @@ public class LevelUIManager : MonoBehaviour
         messageTxt.text = "";
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ShowSelections()
     {
-        
+        _roadPlacament.ShowSelectionArea();
     }
 }

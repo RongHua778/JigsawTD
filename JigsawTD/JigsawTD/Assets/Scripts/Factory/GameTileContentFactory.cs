@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Factory", fileName = "GameContentFactory")]
+[CreateAssetMenu(menuName = "Factory/ContentFactory", fileName = "GameContentFactory")]
 public class GameTileContentFactory : GameObjectFactory
 {
     [SerializeField]

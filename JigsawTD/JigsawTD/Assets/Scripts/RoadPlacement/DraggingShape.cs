@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class DraggingShape : DraggingActions
 {
+
+    TileShape tileShape;
     List<Material> tileMaterials;
-    List<GameTile> tiles = new List<GameTile>();
     //List<Collider2D> detectColliders;
     Collider2D detectCollider;
 
@@ -23,15 +24,15 @@ public class DraggingShape : DraggingActions
 
     private bool CanDrop = false;
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
+        tileShape = this.GetComponent<TileShape>();
         tileMaterials = new List<Material>();
         detectCollider = this.GetComponent<Collider2D>();
-        //detectColliders = new List<Collider2D>();
-        foreach (GameTile tile in transform.GetComponentsInChildren<GameTile>())
+
+        foreach (GameTile tile in tileShape.tiles)
         {
-            //detectColliders.Add(tile.GetComponent<Collider2D>());
-            tiles.Add(tile);
             tileMaterials.Add(tile.GetComponent<SpriteRenderer>().material);
         }
         filter = new ContactFilter2D();
@@ -49,6 +50,7 @@ public class DraggingShape : DraggingActions
     }
 
 
+
     public override void OnDraggingInUpdate()
     {
         base.OnDraggingInUpdate();
@@ -56,15 +58,10 @@ public class DraggingShape : DraggingActions
     }
     private void CheckCollid()
     {
-        //int hit = 0;
-        //foreach(Collider2D collider in detectColliders)
-        //{
-        //    hit += Physics2D.OverlapCollider(collider, filter, collideResult);
 
-        //}
         int hit = Physics2D.OverlapCollider(detectCollider, filter, collideResult);
         CanDrop = false;
-        for(int i = 0; i < hit; i++)
+        for (int i = 0; i < hit; i++)
         {
             if (collideResult[i].CompareTag("GameTile"))
             {
@@ -86,17 +83,6 @@ public class DraggingShape : DraggingActions
         }
     }
 
-    public void ConfirmShape()
-    {
-        if (CanDrop)
-        {
-            GameEvents.Instance.AddTiles(tiles);
-            Destroy(this.gameObject);
-        }
-        else
-            GameEvents.Instance.Message("必须与原区块相连");
-
-    }
 
     public void RotateShape()
     {
@@ -104,6 +90,19 @@ public class DraggingShape : DraggingActions
         menuTrans.Rotate(0, 0, 90f);
         Physics2D.SyncTransforms();
         CheckCollid();
+    }
+
+    public void ConfirmShape()
+    {
+        if (CanDrop)
+        {
+            GameEvents.Instance.AddTiles(tileShape.tiles);
+            GameManager.holdingShape = null;
+            Destroy(this.gameObject);
+        }
+        else
+            GameEvents.Instance.Message("必须与原区块相连");
+
     }
 
 

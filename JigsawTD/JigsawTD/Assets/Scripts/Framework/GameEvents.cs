@@ -23,4 +23,10 @@ public class GameEvents : Singleton<GameEvents>
         onAddTiles?.Invoke(tiles);
     }
 
+    public event Action<ShapeType, List<TileInfo>> onGenerateShape;
+    public void GenerateShape(ShapeType type,List<TileInfo> infoList)
+    {
+        onGenerateShape?.Invoke(type, infoList);
+    }
+
 }

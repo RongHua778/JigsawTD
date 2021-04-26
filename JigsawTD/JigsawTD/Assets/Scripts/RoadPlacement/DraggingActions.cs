@@ -14,7 +14,7 @@ public abstract class DraggingActions : MonoBehaviour
     public static DraggingActions DraggingThis => _draggingThis;
 
     // Start is called before the first frame update
-    void Awake()
+    protected virtual void Awake()
     {
         cam = Camera.main;
     }
