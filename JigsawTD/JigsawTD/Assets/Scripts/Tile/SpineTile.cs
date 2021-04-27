@@ -4,15 +4,6 @@ using UnityEngine;
 
 public class SpineTile : GameTile
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public override int TileLevel => 1;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

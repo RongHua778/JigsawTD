@@ -500,7 +500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d58923b7a91e19c48a95f0f1067417d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shapeType: 2
+  shapeType: 0
   tilePos:
   - {fileID: 2241537902967590327}
   - {fileID: 3239026429419919654}

@@ -17,6 +17,8 @@ public class GameBoard : MonoBehaviour
     List<GameTile> shortestPath = new List<GameTile>();
     List<GameTile> spawnPoints = new List<GameTile>();
 
+    bool findPath = false;
+
     bool showPaths = true;
     public bool ShowPaths
     {
@@ -112,9 +114,14 @@ public class GameBoard : MonoBehaviour
         {
             if (tile.NeighbourTiles[i] == null)
             {
-                GameObject tempTile = ObjectPool.Instance.Spawn(tempTilePrefab);
-                tempTile.transform.position = (Vector2)tile.transform.position + DirectionExtensions.GetDirectionPos(i);
-                tempTileList.Add(tempTile);
+                Vector2 pos = (Vector2)tile.transform.position + DirectionExtensions.GetDirectionPos(i);
+                var temp = tempTileList.Find(t => (Vector2)t.transform.position == pos);
+                if (temp == null)
+                {
+                    GameObject tempTile = ObjectPool.Instance.Spawn(tempTilePrefab);
+                    tempTile.transform.position = pos;
+                    tempTileList.Add(tempTile);
+                }
             }
         }
     }
@@ -221,8 +228,9 @@ public class GameBoard : MonoBehaviour
         FindPaths();
     }
 
-    bool FindPaths()
+    void FindPaths()
     {
+
         foreach (GameTile tile in tiles)
         {
             if (tile.Content.Type == GameTileContentType.Destination)
@@ -236,37 +244,51 @@ public class GameBoard : MonoBehaviour
             }
         }
         if (searchFrontier.Count == 0)
-            return false;
-        while (searchFrontier.Count > 0)
         {
-            GameTile tile = searchFrontier.Dequeue();
-            if (tile != null)
+            findPath = false;
+        }
+        else
+        {
+            while (searchFrontier.Count > 0)
             {
-                if (tile.IsAlternative)
+                GameTile tile = searchFrontier.Dequeue();
+                if (tile != null)
                 {
-                    for (int i = 0; i < tile.NeighbourTiles.Length; i++)
+                    if (tile.IsAlternative)
                     {
-                        searchFrontier.Enqueue(tile.GrowPathTo(tile.NeighbourTiles[i], i));
+                        for (int i = 0; i < tile.NeighbourTiles.Length; i++)
+                        {
+                            searchFrontier.Enqueue(tile.GrowPathTo(tile.NeighbourTiles[i], i));
+                        }
                     }
-                }
-                else
-                {
-                    for (int i = tile.NeighbourTiles.Length - 1; i >= 0; i--)
+                    else
                     {
-                        searchFrontier.Enqueue(tile.GrowPathTo(tile.NeighbourTiles[i], i));
+                        for (int i = tile.NeighbourTiles.Length - 1; i >= 0; i--)
+                        {
+                            searchFrontier.Enqueue(tile.GrowPathTo(tile.NeighbourTiles[i], i));
+                        }
                     }
                 }
             }
-        }
-        foreach (GameTile tile in tiles)
-        {
-            if (!tile.HasPath)
+            findPath = true;
+            foreach (GameTile tile in tiles)
             {
-                return false;
+                if (!tile.HasPath)
+                {
+                    findPath = false;
+                }
             }
         }
-        GetShortestPath();
-        return true;
+        if(findPath)
+            GetShortestPath();
+        else
+        {
+            foreach(GameTile tile in shortestPath)
+            {
+                tile.HidePath();
+            }
+            shortestPath.Clear();
+        }
     }
 
     Vector3 MouseInWorldCoords()
@@ -287,13 +309,17 @@ public class GameBoard : MonoBehaviour
 
     public GameTile GetTile()
     {
-        RaycastHit2D hit;
-        hit = Physics2D.Raycast(MouseInWorldCoords(), Vector3.forward, Mathf.Infinity);
-        if (hit.collider == null)
-            return null;
-        if (hit.collider.GetComponent<GameTile>() != null)
-            return hit.collider.GetComponent<GameTile>();
-        return null;
+        RaycastHit2D[] hits;
+        hits = Physics2D.RaycastAll(MouseInWorldCoords(), Vector3.forward, Mathf.Infinity);
+        GameTile hitTile = null;
+        foreach (RaycastHit2D hit in hits)
+        {
+            if (hit.collider.GetComponent<DraggingActions>() != null)//正在拖动方块
+                return null;
+            if (hit.collider.GetComponent<GameTile>() != null)
+                hitTile = hit.collider.GetComponent<GameTile>();
+        }
+        return hitTile;
     }
 }
 

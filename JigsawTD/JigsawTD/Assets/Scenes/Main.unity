@@ -640,6 +640,7 @@ MonoBehaviour:
   NoTargetEffect: {fileID: 0}
   GameSlowDownRate: 0
   TileSize: 1
+  TileShapeChance: []
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

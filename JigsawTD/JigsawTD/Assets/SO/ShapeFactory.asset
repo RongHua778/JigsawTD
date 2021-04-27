@@ -16,3 +16,8 @@ MonoBehaviour:
   LShapePrefab: {fileID: 423573634930684413, guid: d332dae0f9c2e744db13569610fc0f18, type: 3}
   IShapePrefab: {fileID: 423573634930684413, guid: 148839e9131bb0e469f5d31cc21ba2d4, type: 3}
   OShapePrefab: {fileID: 423573634930684413, guid: 27cc1f6e58b81154aa8ec652fedc30d9, type: 3}
+  RandomShapeChance:
+  - 40
+  - 40
+  - 40
+  - 40

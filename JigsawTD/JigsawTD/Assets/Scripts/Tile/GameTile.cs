@@ -6,14 +6,18 @@ using UnityEngine;
 public abstract class GameTile : MonoBehaviour
 {
     public int TileID;
+    public abstract int TileLevel { get; }
+
+    bool showingPath = false;
+    float pathSpeed = 0.5f;
+    LineRenderer lineSR;
     SpriteRenderer tileTypeSr;
-    Transform arrow;
 
     Direction pathDirection;
     public Direction PathDirection { get => pathDirection; set => pathDirection = value; }
     int distance;
     GameTile left, down, up, right, nextOnPath;
-
+    [HideInInspector]
     public GameTile[] NeighbourTiles = new GameTile[4];//0=up,1=left,2=right,3=down
     public GameTile NextTileOnPath => nextOnPath;
 
@@ -56,8 +60,15 @@ public abstract class GameTile : MonoBehaviour
 
     private void Awake()
     {
+        lineSR = this.GetComponent<LineRenderer>();
         tileTypeSr = transform.Find("TileType").GetComponent<SpriteRenderer>();
-        arrow = transform.Find("PathArrow");
+    }
+    private void Update()
+    {
+        if (showingPath)
+        {
+            lineSR.material.SetTextureOffset("_MainTex", new Vector2(-Time.time * pathSpeed, 0));
+        }
     }
 
     public void SetPreviewing(bool isPreviewing)
@@ -112,7 +123,6 @@ public abstract class GameTile : MonoBehaviour
     }
 
 
-
     public GameTile GrowPathTo(GameTile neighbour, int directionIndex)
     {
         Debug.Assert(HasPath, "No Path!");
@@ -126,19 +136,27 @@ public abstract class GameTile : MonoBehaviour
 
     public void ShowPath()
     {
-        if (Content.Type == GameTileContentType.SpawnPoint || Content.Type == GameTileContentType.Destination)
+        if (Content.Type == GameTileContentType.Destination)
         {
-            arrow.gameObject.SetActive(false);
             return;
         }
-        arrow.gameObject.SetActive(true);
-        arrow.rotation = DirectionExtensions.GetRotation((int)PathDirection);
+        showingPath = true;
+        lineSR.enabled = true;
+        Vector3[] pathPoss = new Vector3[2];
+        pathPoss[0] = transform.position + new Vector3(0, 0, -0.1f);
+        pathPoss[1] = nextOnPath.transform.position + new Vector3(0, 0, -0.1f);
+        lineSR.positionCount = 2;
+        lineSR.SetPositions(pathPoss);
     }
 
     public void HidePath()
     {
-        arrow.gameObject.SetActive(false);
+        lineSR.enabled = false;
+        showingPath = false;
     }
+
+
+
 
 
 }

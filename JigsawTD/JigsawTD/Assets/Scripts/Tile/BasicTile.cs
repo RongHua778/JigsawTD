@@ -4,6 +4,5 @@ using UnityEngine;
 
 public class BasicTile : GameTile
 {
-    
-
+    public override int TileLevel => 0;
 }

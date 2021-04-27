@@ -10,6 +10,15 @@ public class TileShapeFactory : ScriptableObject
     [SerializeField] TileShape IShapePrefab = default;
     [SerializeField] TileShape OShapePrefab = default;
 
+    [SerializeField] float[] RandomShapeChance = new float[4];
+
+
+    public TileShape GetRandomShape()
+    {
+        int shapeID = StaticData.RandomNumber(RandomShapeChance);
+        return GetShape((ShapeType)shapeID);
+    }
+
     public TileShape GetShape(ShapeType type)
     {
         switch (type)

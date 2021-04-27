@@ -22,7 +22,8 @@ public class StaticData : Singleton<StaticData>
     public float GameSlowDownRate = default;
     public float TileSize = default;
 
-
+    [Header("ProbabilitySetting")]
+    public float[] TileShapeChance = default;
 
 
     public void GameSlowDown()
@@ -56,6 +57,26 @@ public class StaticData : Singleton<StaticData>
         }
         return pros.Length - 1;
 
+    }
+
+    public static int[] GetRandomSequence(int total,int count)
+    {
+        int[] sequence = new int[total];
+        int[] output = new int[count];
+
+        for(int i = 0; i < total; i++)
+        {
+            sequence[i] = i;
+        }
+        int end = total - 1;
+        for(int i = 0; i < count; i++)
+        {
+            int num = Random.Range(0, end + 1);
+            output[i] = sequence[num];
+            sequence[num] = sequence[end];
+            end--;
+        }
+        return output;
     }
 
 }

@@ -49,10 +49,7 @@ public class GameManager : MonoBehaviour
 
     private TileShape GetRandomNewShape()
     {
-        int c = Enum.GetNames(typeof(ShapeType)).Length;
-        ShapeType type = (ShapeType)UnityEngine.Random.Range(0, c);
-
-        TileShape shape = _shapeFactory.GetShape(type);
+        TileShape shape = _shapeFactory.GetRandomShape();
         shape.InitializeRandomShpe(_tileFactory);
         return shape;
     }

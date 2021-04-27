@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 
 public enum ShapeType
@@ -30,12 +31,35 @@ public class TileShape : MonoBehaviour
     public List<GameTile> tiles = new List<GameTile>();
 
 
+    int levelTileCount = 0;
 
     public void InitializeRandomShpe(TileFactory tileFactory)
     {
+        switch (shapeType)
+        {
+            case ShapeType.T:
+                levelTileCount = Random.value > 0.3f ? 2 : 1;
+                break;
+            case ShapeType.L:
+            case ShapeType.I:
+                levelTileCount = Random.value > 0.9f ? 2 : 1;
+                break;
+            case ShapeType.O:
+                levelTileCount = Random.value > 0.5f ? 1 : 0;
+                break;
+        }
+        List<int> levelPos = StaticData.GetRandomSequence(tilePos.Length, levelTileCount).ToList();
         for (int i = 0; i < tilePos.Length; i++)
         {
-            GameTile tile = tileFactory.GetRandomTile();
+            GameTile tile;
+            if (levelPos.Contains(i))
+            {
+                tile = tileFactory.GetRandomTile();
+            }
+            else
+            {
+                tile = tileFactory.GetTile(0);
+            }
             tile.transform.position = tilePos[i].position;
             tile.transform.rotation = DirectionExtensions.GetRotation(Random.Range(0, 4));
             tile.transform.SetParent(this.transform);
