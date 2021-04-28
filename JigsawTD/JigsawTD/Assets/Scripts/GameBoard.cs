@@ -114,7 +114,7 @@ public class GameBoard : MonoBehaviour
         {
             if (tile.NeighbourTiles[i] == null)
             {
-                Vector2 pos = (Vector2)tile.transform.position + DirectionExtensions.GetDirectionPos(i);
+                Vector2 pos = (Vector2)tile.transform.position + DirectionExtensions.NormalizeDistance[i];
                 var temp = tempTileList.Find(t => (Vector2)t.transform.position == pos);
                 if (temp == null)
                 {

@@ -61,7 +61,7 @@ public class TileShape : MonoBehaviour
                 tile = tileFactory.GetTile(0);
             }
             tile.transform.position = tilePos[i].position;
-            tile.transform.rotation = DirectionExtensions.GetRotation(Random.Range(0, 4));
+            tile.transform.rotation = DirectionExtensions.GetRandomRotation();
             tile.transform.SetParent(this.transform);
             tile.SetPreviewing(true);
             tiles.Add(tile);

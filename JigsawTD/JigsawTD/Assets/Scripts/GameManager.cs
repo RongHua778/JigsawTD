@@ -17,6 +17,14 @@ public class GameManager : MonoBehaviour
     TileShapeFactory _shapeFactory = default;
     [SerializeField]
     TileFactory _tileFactory = default;
+    [SerializeField]
+    EnemyFactory _enemyFactory = default;
+
+    EnemyCollection enemies = new EnemyCollection();
+    [SerializeField, Range(0.1f, 10f)]
+    float spawnSpeed = 100f;
+    float spawnProgress;
+
 
     [SerializeField]
     LevelUIManager _levelUIManager = default;
@@ -57,6 +65,15 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        spawnProgress += spawnSpeed * Time.deltaTime;
+        while (spawnProgress >= 1f)
+        {
+            spawnProgress -= 1f;
+            SpawnEnemy();
+        }
+        enemies.GameUpdate();
+
+
         if (Input.GetKeyDown(KeyCode.R)&&holdingShape!=null)
         {
             holdingShape.RotateShape();
@@ -90,5 +107,13 @@ public class GameManager : MonoBehaviour
             _board.ShowPaths = !_board.ShowPaths;
             _board.ShowTempTile = !_board.ShowTempTile;
         }
+    }
+
+    private void SpawnEnemy()
+    {
+        GameTile spawnPoint = _board.GetSpawnPoint(0);
+        Enemy enemy = _enemyFactory.Get();
+        enemy.SpawnOn(spawnPoint);
+        enemies.Add(enemy);
     }
 }

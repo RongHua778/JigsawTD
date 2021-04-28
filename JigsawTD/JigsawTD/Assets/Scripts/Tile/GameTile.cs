@@ -16,10 +16,13 @@ public abstract class GameTile : MonoBehaviour
     Direction pathDirection;
     public Direction PathDirection { get => pathDirection; set => pathDirection = value; }
     int distance;
-    GameTile left, down, up, right, nextOnPath;
-    [HideInInspector]
-    public GameTile[] NeighbourTiles = new GameTile[4];//0=up,1=left,2=right,3=down
+    
+    public GameTile[] NeighbourTiles = new GameTile[4];//0=up,1=left,2=down,3=right
+
+    GameTile nextOnPath;
     public GameTile NextTileOnPath => nextOnPath;
+    public Vector3 ExitPoint { get; private set; }
+
 
     bool isAlternative = true;
     public bool IsAlternative
@@ -102,8 +105,9 @@ public abstract class GameTile : MonoBehaviour
                 var neighbour = tiles.Find(t => t.OffsetCoord == OffsetCoord + DirectionExtensions.NormalizeDistance[i]);
                 if (neighbour != null)
                 {
-                    Debug.Assert(neighbour.NeighbourTiles[3 - i] == null, "Already Assign Neighbour!");
-                    neighbour.NeighbourTiles[3 - i] = this;
+                    int revert = i == 1 ? 3 : Mathf.Abs(2 - i);
+                    Debug.Assert(neighbour.NeighbourTiles[revert] == null, "Already Assign Neighbour!");
+                    neighbour.NeighbourTiles[revert] = this;
                     NeighbourTiles[i] = neighbour;
                 }
             }
@@ -120,17 +124,20 @@ public abstract class GameTile : MonoBehaviour
     {
         distance = 0;
         nextOnPath = null;
+        ExitPoint = transform.localPosition;
     }
 
 
-    public GameTile GrowPathTo(GameTile neighbour, int directionIndex)
+    public GameTile GrowPathTo(GameTile neighbour, int i)
     {
         Debug.Assert(HasPath, "No Path!");
         if (neighbour == null || neighbour.HasPath)
             return null;
         neighbour.distance = distance + 1;
         neighbour.nextOnPath = this;
-        neighbour.PathDirection = DirectionExtensions.GetDirection(3 - directionIndex);
+        int revert = i == 1 ? 3 : Mathf.Abs(2 - i);
+        neighbour.PathDirection = (Direction)(revert);
+        neighbour.ExitPoint = (neighbour.transform.localPosition + transform.localPosition) * 0.5f;
         return (neighbour.Content.Type != GameTileContentType.Turret && neighbour.Content.Type != GameTileContentType.Rock) ? neighbour : null;
     }
 

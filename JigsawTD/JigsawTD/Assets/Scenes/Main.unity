@@ -576,6 +576,8 @@ MonoBehaviour:
   _contentFactory: {fileID: 11400000, guid: e9b28f73aa8e8a840beba1e769ed0c70, type: 2}
   _shapeFactory: {fileID: 11400000, guid: e561f9a0ed33f674284817e826a7cb56, type: 2}
   _tileFactory: {fileID: 11400000, guid: d1395574e706e2d4b9a5223f53bc89fa, type: 2}
+  _enemyFactory: {fileID: 11400000, guid: 49641aa71a9726d44b89676d62fd4df1, type: 2}
+  spawnSpeed: 0.5
   _levelUIManager: {fileID: 1576089492}
 --- !u!4 &286649183
 Transform:
