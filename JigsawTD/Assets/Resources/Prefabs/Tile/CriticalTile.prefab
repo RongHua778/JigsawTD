@@ -207,12 +207,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dabb5342ffbf0934fb0d671f95803472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _offsetCoord: {x: 0, y: 0}
   TileID: 5
-  NeighbourTiles:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!120 &3813908022212883373
 LineRenderer:
   m_ObjectHideFlags: 0

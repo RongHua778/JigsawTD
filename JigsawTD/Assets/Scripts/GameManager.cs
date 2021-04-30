@@ -36,7 +36,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         GameEvents.Instance.onGenerateShape += PreSpawnShape;
-
         _tileFactory.InitializeFactory();
 
         _board.Initialize(_startSize, _tileFactory, _contentFactory);
@@ -65,11 +64,14 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        spawnProgress += spawnSpeed * Time.deltaTime;
-        while (spawnProgress >= 1f)
+        if (_board.FindPath)
         {
-            spawnProgress -= 1f;
-            SpawnEnemy();
+            spawnProgress += spawnSpeed * Time.deltaTime;
+            while (spawnProgress >= 1f)
+            {
+                spawnProgress -= 1f;
+                SpawnEnemy();
+            }
         }
         enemies.GameUpdate();
 
@@ -94,14 +96,6 @@ public class GameManager : MonoBehaviour
                 _board.ToggleTurret(tile);
             }
         }
-        else if (Input.GetMouseButtonDown(1))
-        {
-            GameTile tile = _board.GetTile();
-            if (tile != null)
-            {
-                _board.ToggleRock(tile);
-            }
-        }
         if (Input.GetKeyDown(KeyCode.V))
         {
             _board.ShowPaths = !_board.ShowPaths;
@@ -111,9 +105,9 @@ public class GameManager : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        GameTile spawnPoint = _board.GetSpawnPoint(0);
+        GameTile tile = _board.SpawnPoint;
         Enemy enemy = _enemyFactory.Get();
-        enemy.SpawnOn(spawnPoint);
+        enemy.SpawnOn(tile);
         enemies.Add(enemy);
     }
 }

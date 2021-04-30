@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3415758027838649131}
   - component: {fileID: 8193798862594278780}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4269376366680113545}
   - component: {fileID: 5616258618194393402}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4095326391380243109}
   - component: {fileID: 4622811570672915330}
-  m_Layer: 0
+  - component: {fileID: 1240290038575985157}
+  m_Layer: 7
   m_Name: TurretPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,3 +211,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 3
+--- !u!58 &1240290038575985157
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9210515582784860518}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5

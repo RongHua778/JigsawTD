@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public abstract class DraggingActions : MonoBehaviour
 {
     bool isDragging = false;
-    private Vector3 pointerOffset;
+    protected Vector3 pointerOffset;
     private float zDisplacement;
     Camera cam;
 
@@ -24,8 +24,8 @@ public abstract class DraggingActions : MonoBehaviour
     {
         if (isDragging)
         {
-            Vector3 mousePos = MouseInWorldCoords();
-            transform.position = new Vector3(Mathf.Round(mousePos.x + pointerOffset.x), Mathf.Round(mousePos.y + pointerOffset.z), transform.position.z);
+            //Vector3 mousePos = MouseInWorldCoords();
+            //transform.position = new Vector3(Mathf.Round(mousePos.x + pointerOffset.x), Mathf.Round(mousePos.y + pointerOffset.z), transform.position.z);
 
             OnDraggingInUpdate();
         }

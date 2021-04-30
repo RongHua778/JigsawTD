@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DraggingShape : DraggingActions
 {
-
+    GroundTile lastTile;
     TileShape tileShape;
     List<Material> tileMaterials;
     //List<Collider2D> detectColliders;
@@ -54,6 +54,7 @@ public class DraggingShape : DraggingActions
     public override void OnDraggingInUpdate()
     {
         base.OnDraggingInUpdate();
+        PosCheck();
         CheckCollid();
     }
     private void CheckCollid()
@@ -63,14 +64,10 @@ public class DraggingShape : DraggingActions
         CanDrop = false;
         for (int i = 0; i < hit; i++)
         {
-            if (collideResult[i].CompareTag("GameTile"))
-            {
-                CanDrop = false;
-                break;
-            }
-            if (collideResult[i].CompareTag("TempTile"))
+            if (collideResult[i].CompareTag("Tile"))
             {
                 CanDrop = true;
+                break;
             }
         }
         if (!CanDrop)
@@ -83,6 +80,34 @@ public class DraggingShape : DraggingActions
         }
     }
 
+    private void PosCheck()
+    {
+        RaycastHit2D[] hits;
+        hits = Physics2D.RaycastAll(MouseInWorldCoords() + pointerOffset, Vector3.forward, Mathf.Infinity);
+        foreach (RaycastHit2D hit in hits)
+        {
+            if (hit.collider.CompareTag("Tile"))
+            {
+                GroundTile tileBase = hit.collider.GetComponent<GroundTile>();
+
+                if (lastTile != tileBase||lastTile==null)
+                {
+                    lastTile = tileBase;
+                    StopAllCoroutines();
+                    StartCoroutine(TryFindPath());
+                    Debug.Log("TileChange");
+                }
+                transform.position = hit.transform.position + Vector3.back;
+            }
+        }
+    }
+
+    private IEnumerator TryFindPath()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Debug.Log("Try FindPath");
+
+    }
 
     public void RotateShape()
     {

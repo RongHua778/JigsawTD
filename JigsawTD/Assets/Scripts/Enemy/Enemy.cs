@@ -14,6 +14,7 @@ public class Enemy : ReusableObject
     float pathOffset;
     float speed = 2f;
 
+
     EnemyFactory originFacoty;
     public EnemyFactory OriginFactory
     {
@@ -31,8 +32,10 @@ public class Enemy : ReusableObject
     private float maxHealth;
     public float MaxHealth { get => maxHealth; set => maxHealth = value; }
     private float currentHealth;
-    public float CurrentHealth { get => currentHealth;
-        set 
+    public float CurrentHealth
+    {
+        get => currentHealth;
+        set
         {
             currentHealth = Mathf.Clamp(value, 0, MaxHealth);
             healthBar.FillAmount = CurrentHealth / MaxHealth;
@@ -40,9 +43,8 @@ public class Enemy : ReusableObject
             {
                 IsDie = true;
             }
-        } 
+        }
     }
-
     public bool GameUpdate()
     {
         if (IsDie)
@@ -74,7 +76,7 @@ public class Enemy : ReusableObject
         return true;
     }
 
-    public void Initialize(float pathOffset,HealthBar healthBar)
+    public void Initialize(float pathOffset, HealthBar healthBar)
     {
         this.pathOffset = pathOffset;
         this.healthBar = healthBar;
@@ -88,7 +90,7 @@ public class Enemy : ReusableObject
     {
         Debug.Assert(tile.NextTileOnPath != null, "No where to go", this);
         tileFrom = tile;
-        tileTo = tile.NextTileOnPath;
+        tileTo = tileFrom.NextTileOnPath;
         progress = 0f;
         PrepareIntro();
     }
@@ -145,6 +147,110 @@ public class Enemy : ReusableObject
                 break;
         }
     }
+    //public bool GameUpdate()
+    //{
+    //    if (IsDie)
+    //    {
+    //        OriginFactory.Reclaim(this);
+    //        return false;
+    //    }
+    //    progress += Time.deltaTime * progressFactor;
+    //    while (progress >= 1f)
+    //    {
+    //        if (currentWayPointIndex >= m_Path.Count - 1)
+    //        {
+    //            OriginFactory.Reclaim(this);
+    //            return false;
+    //        }
+    //        progress = (progress - 1f) / progressFactor;
+    //        PrepareNextState();
+    //        progress *= progressFactor;
+    //    }
+    //    if (directionChange == DirectionChange.None)
+    //    {
+    //        transform.localPosition = Vector3.LerpUnclamped(positionFrom, positionTo, progress);
+    //    }
+    //    else
+    //    {
+    //        float angle = Mathf.LerpUnclamped(directionAngleFrom, directionAngleTo, progress);
+    //        transform.localRotation = Quaternion.Euler(0f, 0f, angle);
+    //    }
+    //    return true;
+    //}
+
+    //public void Initialize(float pathOffset, HealthBar healthBar, List<Vector3> path)
+    //{
+    //    this.m_Path = path;
+    //    this.pathOffset = pathOffset;
+    //    this.healthBar = healthBar;
+    //    this.healthBar.followTrans = model;
+    //    //test
+    //    MaxHealth = 100;
+    //    CurrentHealth = 100;
+    //}
+
+    //public void SpawnOn()
+    //{
+    //    progress = 0f;
+    //    PrepareIntro();
+    //}
+
+    //private void PrepareIntro()
+    //{
+    //    currentWayPointIndex = 0;
+    //    positionFrom = m_Path[currentWayPointIndex];
+    //    positionTo = (positionFrom + m_Path[currentWayPointIndex + 1]) * 0.5f;
+    //    Vector3 moveDirection = positionTo - positionFrom;
+    //    float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg - 90f;
+    //    transform.localRotation = Quaternion.Euler(0, 0, angle);
+    //    directionAngleFrom = directionAngleTo = angle;
+    //    direction = DirectionExtensions.GetDirection(m_Path[currentWayPointIndex], positionTo);
+    //    directionChange = DirectionChange.None;
+    //    model.localPosition = new Vector3(pathOffset, 0);
+    //    progressFactor = 2f * speed;
+    //}
+
+    //private void PrepareOutro()
+    //{
+    //    positionFrom = positionTo;
+    //    positionTo = m_Path[currentWayPointIndex];
+    //    directionChange = DirectionChange.None;
+    //    directionAngleTo = direction.GetAngle();
+    //    model.localPosition = new Vector3(pathOffset, 0);
+    //    transform.localRotation = direction.GetRotation();
+    //    progressFactor = 2f * speed;
+    //}
+
+    //private void PrepareNextState()
+    //{
+    //    currentWayPointIndex++;
+    //    if (currentWayPointIndex >= m_Path.Count-1)
+    //    {
+    //        PrepareOutro();
+    //        return;
+    //    }
+    //    positionFrom = positionTo;
+    //    positionTo = (m_Path[currentWayPointIndex] + m_Path[currentWayPointIndex + 1]) * 0.5f;
+    //    Direction newDirection = DirectionExtensions.GetDirection(m_Path[currentWayPointIndex], positionTo);
+    //    directionChange = direction.GetDirectionChangeTo(newDirection);
+    //    direction = newDirection;
+    //    directionAngleFrom = directionAngleTo;
+    //    switch (directionChange)
+    //    {
+    //        case DirectionChange.None:
+    //            PrepareForward();
+    //            break;
+    //        case DirectionChange.TurnRight:
+    //            PrepareTurnRight();
+    //            break;
+    //        case DirectionChange.TurnLeft:
+    //            PrepareTurnLeft();
+    //            break;
+    //        case DirectionChange.TurnAround:
+    //            PrepareTurnAround();
+    //            break;
+    //    }
+    //}
 
     void PrepareForward()
     {
@@ -181,7 +287,7 @@ public class Enemy : ReusableObject
         CurrentHealth -= amount;
     }
 
-    
+
 
     public override void OnSpawn()
     {
@@ -192,6 +298,6 @@ public class Enemy : ReusableObject
     {
         model.localPosition = Vector3.zero;
         ObjectPool.Instance.UnSpawn(healthBar.gameObject);
-        
+
     }
 }

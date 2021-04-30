@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class GameTile : MonoBehaviour
+public abstract class GameTile : TileBase
 {
+
     public int TileID;
     public abstract int TileLevel { get; }
 
@@ -15,37 +16,10 @@ public abstract class GameTile : MonoBehaviour
 
     Direction pathDirection;
     public Direction PathDirection { get => pathDirection; set => pathDirection = value; }
-    int distance;
-    
-    public GameTile[] NeighbourTiles = new GameTile[4];//0=up,1=left,2=down,3=right
 
     GameTile nextOnPath;
-    public GameTile NextTileOnPath => nextOnPath;
-    public Vector3 ExitPoint { get; private set; }
-
-
-    bool isAlternative = true;
-    public bool IsAlternative
-    {
-        get
-        {
-            bool alter = ((int)OffsetCoord.y & 1) == 0;
-            if (((int)OffsetCoord.x & 1) == 0)
-            {
-                return alter ? isAlternative : !isAlternative;
-            }
-            else
-            {
-                return alter ? !isAlternative : isAlternative;
-            }
-
-        }
-    }
-
-    public bool HasPath => distance != int.MaxValue;
-
-    Vector2 _offsetCoord;
-    public Vector2 OffsetCoord { get => _offsetCoord; set => _offsetCoord = value; }
+    public GameTile NextTileOnPath { get => nextOnPath; set => nextOnPath = value; }
+    public Vector3 ExitPoint { get; set; }
 
     GameTileContent content;
     public GameTileContent Content
@@ -94,51 +68,6 @@ public abstract class GameTile : MonoBehaviour
     public virtual void OnTilePass()
     {
 
-    }
-
-    public void GetNeighbours2(List<GameTile> tiles)
-    {
-        for (int i = 0; i < NeighbourTiles.Length; i++)
-        {
-            if (NeighbourTiles[i] == null)
-            {
-                var neighbour = tiles.Find(t => t.OffsetCoord == OffsetCoord + DirectionExtensions.NormalizeDistance[i]);
-                if (neighbour != null)
-                {
-                    int revert = i == 1 ? 3 : Mathf.Abs(2 - i);
-                    Debug.Assert(neighbour.NeighbourTiles[revert] == null, "Already Assign Neighbour!");
-                    neighbour.NeighbourTiles[revert] = this;
-                    NeighbourTiles[i] = neighbour;
-                }
-            }
-        }
-    }
-
-    public void ClearPath()
-    {
-        distance = int.MaxValue;
-        nextOnPath = null;
-    }
-
-    public void BecomeDestination()
-    {
-        distance = 0;
-        nextOnPath = null;
-        ExitPoint = transform.localPosition;
-    }
-
-
-    public GameTile GrowPathTo(GameTile neighbour, int i)
-    {
-        Debug.Assert(HasPath, "No Path!");
-        if (neighbour == null || neighbour.HasPath)
-            return null;
-        neighbour.distance = distance + 1;
-        neighbour.nextOnPath = this;
-        int revert = i == 1 ? 3 : Mathf.Abs(2 - i);
-        neighbour.PathDirection = (Direction)(revert);
-        neighbour.ExitPoint = (neighbour.transform.localPosition + transform.localPosition) * 0.5f;
-        return (neighbour.Content.Type != GameTileContentType.Turret && neighbour.Content.Type != GameTileContentType.Rock) ? neighbour : null;
     }
 
     public void ShowPath()
