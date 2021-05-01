@@ -29,4 +29,10 @@ public class GameEvents : Singleton<GameEvents>
         onGenerateShape?.Invoke(type, infoList);
     }
 
+    public event Action onSeekPath;
+
+    public void SeekPath()
+    {
+        onSeekPath?.Invoke();
+    }
 }

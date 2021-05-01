@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 3813908022212883373}
   m_Layer: 6
   m_Name: CriticalTile
-  m_TagString: GameTile
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

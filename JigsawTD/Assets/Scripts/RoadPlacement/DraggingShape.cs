@@ -60,14 +60,18 @@ public class DraggingShape : DraggingActions
     private void CheckCollid()
     {
 
-        int hit = Physics2D.OverlapCollider(detectCollider, filter, collideResult);
+        int hit = Physics2D.OverlapCollider(detectCollider, filter, collideResult);//根据layer判断是否与Gametile重合
         CanDrop = false;
         for (int i = 0; i < hit; i++)
         {
-            if (collideResult[i].CompareTag("Tile"))
+            if (collideResult[i].CompareTag("UnDropablePoint"))
+            {
+                CanDrop = false;
+                break;
+            }
+            else
             {
                 CanDrop = true;
-                break;
             }
         }
         if (!CanDrop)
@@ -106,7 +110,7 @@ public class DraggingShape : DraggingActions
     {
         yield return new WaitForSeconds(0.5f);
         Debug.Log("Try FindPath");
-
+        GameEvents.Instance.SeekPath();
     }
 
     public void RotateShape()

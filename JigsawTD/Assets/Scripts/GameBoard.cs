@@ -82,6 +82,13 @@ public class GameBoard : MonoBehaviour
     private void Start()
     {
         GameEvents.Instance.onAddTiles += AddTile;
+        GameEvents.Instance.onSeekPath += SeekPath;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.Instance.onAddTiles -= AddTile;
+        GameEvents.Instance.onSeekPath -= SeekPath;
     }
 
     public void Initialize(Vector2Int size, TileFactory tileFactory, GameTileContentFactory contentFactory)
@@ -128,7 +135,7 @@ public class GameBoard : MonoBehaviour
         if (!p.error)
         {
             path = p;
-            foreach (GameTile tile in shortestPath)
+            foreach (GameTile tile in tiles)
             {
                 tile.HidePath();
             }
@@ -194,6 +201,7 @@ public class GameBoard : MonoBehaviour
             {
                 GameObject tempTile = ObjectPool.Instance.Spawn(tempTilePrefab.gameObject);
                 tempTile.transform.position = pos;
+                CorrectTileCoord(tempTile.GetComponent<TempTile>());
                 tempTileList.Add(tempTile.GetComponent<TempTile>());
             }
         }
@@ -223,7 +231,7 @@ public class GameBoard : MonoBehaviour
     {
         if (shortestPath.Count > 0)
         {
-            foreach (GameTile tile in shortestPath)
+            foreach (GameTile tile in tiles)
             {
                 tile.HidePath();
             }
@@ -270,22 +278,32 @@ public class GameBoard : MonoBehaviour
     {
         foreach (GameTile tile in newTiles)
         {
-            tiles.Add(tile);
+            
             tile.SetPreviewing(false);
             tile.transform.SetParent(this.transform);
-
             tile.Content = tileContentFactory.Get(GameTileContentType.Empty);
             CorrectTileCoord(tile);
+
             var tempTile = tempTileList.Find(t => t.OffsetCoord == tile.OffsetCoord);
             if (tempTile != null)
             {
                 tempTileList.Remove(tempTile);
                 ObjectPool.Instance.UnSpawn(tempTile.gameObject);
             }
+            var gameTile = tiles.Find(t => t.OffsetCoord == tile.OffsetCoord);
+            if (gameTile != null)
+            {
+                tiles.Remove(gameTile);
+                Destroy(gameTile.gameObject);
+            }
             var groundTile= groundTiles.Find(t => t.OffsetCoord == tile.OffsetCoord);
             if (groundTile != null)
+            {
+                groundTiles.Remove(groundTile);
                 Destroy(groundTile.gameObject);
-            
+            }
+            tiles.Add(tile);
+
         }
         foreach (GameTile tile in newTiles)
         {
