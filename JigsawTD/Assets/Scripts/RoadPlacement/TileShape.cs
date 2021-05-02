@@ -93,6 +93,7 @@ public class TileShape : MonoBehaviour
         bgObj.SetActive(false);
         Vector2 pos = Camera.main.transform.position;
         transform.position = new Vector3(Mathf.Round(pos.x), Mathf.Round(pos.y), -1f);
+        this.GetComponent<DraggingShape>().Initialized();
         this.GetComponent<DraggingShape>().OnDraggingInUpdate();
         GameManager.holdingShape = this.GetComponent<DraggingShape>();
     }

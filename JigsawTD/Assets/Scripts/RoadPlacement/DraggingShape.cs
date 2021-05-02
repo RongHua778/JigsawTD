@@ -27,6 +27,12 @@ public class DraggingShape : DraggingActions
     protected override void Awake()
     {
         base.Awake();
+        //Initialized();
+
+    }
+
+    public void Initialized()
+    {
         tileShape = this.GetComponent<TileShape>();
         tileMaterials = new List<Material>();
         detectCollider = new List<Collider2D>();
@@ -36,7 +42,6 @@ public class DraggingShape : DraggingActions
             tileMaterials.Add(tile.GetComponent<SpriteRenderer>().material);
             detectCollider.Add(tile.GetComponent<Collider2D>());
         }
-
     }
 
     private void SetColor(Color colorToSet)

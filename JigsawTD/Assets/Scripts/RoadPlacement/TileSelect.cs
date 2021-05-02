@@ -17,12 +17,15 @@ public class TileSelect : MonoBehaviour
 
     public void OnShapeClick()
     {
-        TileShape newShape = Instantiate(m_Shape);
-        newShape.SetPreviewPlace();
+        //TileShape newShape = Instantiate(m_Shape);
+        m_Shape.SetPreviewPlace();
+        m_Shape = null;
     }
 
     public void ClearShape()
     {
+        if (m_Shape == null)
+            return;
         m_Shape.ReclaimTiles();
         Destroy(m_Shape.gameObject);
         m_Shape = null;

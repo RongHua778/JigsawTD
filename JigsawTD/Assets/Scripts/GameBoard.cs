@@ -271,6 +271,7 @@ public class GameBoard : MonoBehaviour
         {
             tile.SetPreviewing(false);
             tile.transform.SetParent(this.transform);
+            tile.transform.localPosition = new Vector3(tile.transform.localPosition.x, tile.transform.localPosition.y, 0);
             tile.gameObject.layer = LayerMask.NameToLayer("ConcreteTile");
             tile.Content = tileContentFactory.Get(GameTileContentType.Empty);
             CorrectTileCoord(tile);
