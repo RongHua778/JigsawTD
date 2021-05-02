@@ -44,7 +44,7 @@ public class GameTileContentFactory : GameObjectFactory
 
     GameTileContent Get(GameTileContent prefab)
     {
-        GameTileContent instance = CreateGameObjectInstance(prefab.gameObject).GetComponent<GameTileContent>();
+        GameTileContent instance = CreateInstance(prefab.gameObject).GetComponent<GameTileContent>();
         instance.OriginFactory = this;
         return instance;
     }

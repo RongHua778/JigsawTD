@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class DraggingShape : DraggingActions
 {
-    GroundTile lastTile;
+    Vector3 lastPos;
     TileShape tileShape;
     List<Material> tileMaterials;
-    //List<Collider2D> detectColliders;
-    Collider2D detectCollider;
+    List<Collider2D> detectCollider;
 
     Collider2D[] collideResult = new Collider2D[10];
-    ContactFilter2D filter;
 
     [SerializeField]
-    LayerMask GameTileLayer = default;
+    LayerMask GameTileLayer, GroundTileLayer = default;
 
     [SerializeField]
     Color wrongColor, correctColor = default;
 
     [SerializeField]
     Transform menuTrans = default;
+
+    private List<Collider2D> groundTileList = new List<Collider2D>();
 
     private bool CanDrop = false;
 
@@ -29,16 +29,14 @@ public class DraggingShape : DraggingActions
         base.Awake();
         tileShape = this.GetComponent<TileShape>();
         tileMaterials = new List<Material>();
-        detectCollider = this.GetComponent<Collider2D>();
+        detectCollider = new List<Collider2D>();
 
         foreach (GameTile tile in tileShape.tiles)
         {
             tileMaterials.Add(tile.GetComponent<SpriteRenderer>().material);
+            detectCollider.Add(tile.GetComponent<Collider2D>());
         }
-        filter = new ContactFilter2D();
-        filter.useTriggers = true;
-        filter.SetLayerMask(GameTileLayer);
-        filter.useLayerMask = true;
+
     }
 
     private void SetColor(Color colorToSet)
@@ -50,65 +48,86 @@ public class DraggingShape : DraggingActions
     }
 
 
-
     public override void OnDraggingInUpdate()
     {
         base.OnDraggingInUpdate();
-        PosCheck();
-        CheckCollid();
-    }
-    private void CheckCollid()
-    {
-
-        int hit = Physics2D.OverlapCollider(detectCollider, filter, collideResult);//根据layer判断是否与Gametile重合
-        CanDrop = false;
-        for (int i = 0; i < hit; i++)
+        Vector3 mousePos = MouseInWorldCoords();
+        transform.position = new Vector3(Mathf.Round(mousePos.x + pointerOffset.x), Mathf.Round(mousePos.y + pointerOffset.z), transform.position.z);
+        if (transform.position != lastPos)
         {
-            if (collideResult[i].CompareTag("UnDropablePoint"))
+            CheckCanDrop();
+            StopAllCoroutines();
+            StartCoroutine(TryFindPath());
+        }
+        lastPos = transform.position;
+    }
+
+    private void SetGroundForPathFinding()
+    {
+        Physics2D.SyncTransforms();
+        if (groundTileList.Count > 0)
+        {
+            foreach (var groundTile in groundTileList)
             {
-                CanDrop = false;
-                break;
+                groundTile.enabled = true;
             }
-            else
+            groundTileList.Clear();
+        }
+        RaycastHit2D hitInfo;
+        foreach (Collider2D col in detectCollider)
+        {
+            hitInfo = Physics2D.Raycast(col.transform.position, Vector3.forward, Mathf.Infinity, GroundTileLayer);
+            if (hitInfo.collider != null)
+                groundTileList.Add(hitInfo.collider);
+        }
+        foreach (var groundTile in groundTileList)
+        {
+            groundTile.enabled = false;
+        }
+
+    }
+    private bool CheckCanDrop()
+    {
+        Physics2D.SyncTransforms();
+        CanDrop = false;
+        int hits;
+        foreach (Collider2D col in detectCollider)
+        {
+            Vector3 pos = new Vector3(col.transform.position.x, col.transform.position.y, 0);
+            hits = Physics2D.OverlapCircleNonAlloc(pos, 0.51f, collideResult, GameTileLayer);
+
+            if (hits > 0)
             {
+                for (int i = 0; i < hits; i++)
+                {
+                    if (collideResult[i].CompareTag("UnDropablePoint"))
+                    {
+                        CanDrop = false;
+                        SetColor(wrongColor);
+                        return false;
+                    }
+                }
                 CanDrop = true;
             }
         }
         if (!CanDrop)
         {
             SetColor(wrongColor);
+            return false;
         }
         else
         {
             SetColor(correctColor);
+            return true;
         }
+
     }
 
-    private void PosCheck()
-    {
-        RaycastHit2D[] hits;
-        hits = Physics2D.RaycastAll(MouseInWorldCoords() + pointerOffset, Vector3.forward, Mathf.Infinity);
-        foreach (RaycastHit2D hit in hits)
-        {
-            if (hit.collider.CompareTag("Tile"))
-            {
-                GroundTile tileBase = hit.collider.GetComponent<GroundTile>();
-
-                if (lastTile != tileBase||lastTile==null)
-                {
-                    lastTile = tileBase;
-                    StopAllCoroutines();
-                    StartCoroutine(TryFindPath());
-                    Debug.Log("TileChange");
-                }
-                transform.position = hit.transform.position + Vector3.back;
-            }
-        }
-    }
 
     private IEnumerator TryFindPath()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
+        SetGroundForPathFinding();
         Debug.Log("Try FindPath");
         GameEvents.Instance.SeekPath();
     }
@@ -117,8 +136,9 @@ public class DraggingShape : DraggingActions
     {
         transform.Rotate(0, 0, -90f);
         menuTrans.Rotate(0, 0, 90f);
-        Physics2D.SyncTransforms();
-        CheckCollid();
+        CheckCanDrop();
+        StopAllCoroutines();
+        StartCoroutine(TryFindPath());
     }
 
     public void ConfirmShape()
@@ -133,6 +153,23 @@ public class DraggingShape : DraggingActions
             GameEvents.Instance.Message("必须与原区块相连");
 
     }
+    public void StartDragging()
+    {
+        isDragging = true;
+        DraggingThis = this;
+        pointerOffset = transform.position - MouseInWorldCoords();
+        pointerOffset.z = 0;
+        OnStartDrag();
+    }
 
+    public void EndDragging()
+    {
+        if (isDragging)
+        {
+            isDragging = false;
+            DraggingThis = null;
+            OnEndDrag();
+        }
+    }
 
 }

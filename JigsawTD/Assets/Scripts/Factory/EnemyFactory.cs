@@ -13,8 +13,8 @@ public class EnemyFactory : GameObjectFactory
 
     public Enemy Get()
     {
-        Enemy instance = CreateGameObjectInstance(prefab.gameObject).GetComponent<Enemy>();
-        HealthBar healthInstance = CreateGameObjectInstance(healthBarPrefab.gameObject).GetComponent<HealthBar>();
+        Enemy instance = CreateInstance(prefab.gameObject).GetComponent<Enemy>();
+        HealthBar healthInstance = CreateInstance(healthBarPrefab.gameObject).GetComponent<HealthBar>();
 
         instance.OriginFactory = this;
         instance.Initialize(Random.Range(-pathOffset, pathOffset), healthInstance);

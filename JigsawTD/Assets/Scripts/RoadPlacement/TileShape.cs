@@ -6,10 +6,7 @@ using System.Linq;
 
 public enum ShapeType
 {
-    T,
-    L,
-    I,
-    O
+    T,L,I,O
 }
 
 public struct TileInfo
@@ -60,10 +57,11 @@ public class TileShape : MonoBehaviour
             {
                 tile = tileFactory.GetTile(0);
             }
-            tile.transform.position = tilePos[i].position;
+            tile.transform.position = tilePos[i].position; 
             tile.transform.rotation = DirectionExtensions.GetRandomRotation();
             tile.transform.SetParent(this.transform);
             tile.SetPreviewing(true);
+            tile.m_DraggingShape = this.GetComponent<DraggingShape>();
             tiles.Add(tile);
         }
 
@@ -74,6 +72,13 @@ public class TileShape : MonoBehaviour
         return tilePos.Length;
     }
 
+    public void ReclaimTiles()
+    {
+        foreach(GameTile tile in tiles)
+        {
+            ObjectPool.Instance.UnSpawn(tile.gameObject);
+        }
+    }
 
 
     public void SetUIDisplay(int displayID, RenderTexture texture)
@@ -87,7 +92,7 @@ public class TileShape : MonoBehaviour
     {
         bgObj.SetActive(false);
         Vector2 pos = Camera.main.transform.position;
-        transform.position = new Vector3(Mathf.Round(pos.x), Mathf.Round(pos.y), -0.1f);
+        transform.position = new Vector3(Mathf.Round(pos.x), Mathf.Round(pos.y), -1f);
         this.GetComponent<DraggingShape>().OnDraggingInUpdate();
         GameManager.holdingShape = this.GetComponent<DraggingShape>();
     }

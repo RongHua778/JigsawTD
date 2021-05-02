@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4351213648332045786}
   - component: {fileID: 3487816600691310816}
   - component: {fileID: -247571366827182316}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: TempTile
   m_TagString: TempTile
   m_Icon: {fileID: 0}

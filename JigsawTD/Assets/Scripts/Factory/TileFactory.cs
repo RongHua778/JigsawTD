@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum BasicTileType
+{
+    SpawnPoint, Destination, Ground
+}
 [CreateAssetMenu(menuName = "Factory/TileFactory", fileName = "TileFactory")]
-public class TileFactory : ScriptableObject
+public class TileFactory : GameObjectFactory
 {
 
     [SerializeField] List<GameTile> tiles = new List<GameTile>();
@@ -15,12 +19,15 @@ public class TileFactory : ScriptableObject
     private List<GameTile> Level3Tiles = new List<GameTile>();
 
     [SerializeField] float[] levelTileChance = new float[4];
+    [SerializeField] GroundTile groundTile = default;
+    [SerializeField] GameTile spawnPoint = default;
+    [SerializeField] GameTile destinationTile = default;
 
 
     public void InitializeFactory()
     {
         tileDIC.Clear();
-        foreach(GameTile tile in tiles)
+        foreach (GameTile tile in tiles)
         {
             switch (tile.TileLevel)
             {
@@ -48,7 +55,7 @@ public class TileFactory : ScriptableObject
     {
         if (tileDIC.ContainsKey(id))
         {
-            return Instantiate(tileDIC[id]);
+            return CreateInstance(tileDIC[id].gameObject).GetComponent<GameTile>();
         }
         else
         {
@@ -57,10 +64,29 @@ public class TileFactory : ScriptableObject
         }
     }
 
+
+    public GameTile GetBasicTile(BasicTileType tileType)
+    {
+        switch (tileType)
+        {
+            case BasicTileType.SpawnPoint:
+                return CreateInstance(spawnPoint.gameObject).GetComponent<GameTile>();
+            case BasicTileType.Destination:
+                return CreateInstance(destinationTile.gameObject).GetComponent<GameTile>();
+        }
+        return null;
+    }
+
+    public GroundTile GetGroundTile()
+    {
+        return CreateInstance(groundTile.gameObject).GetComponent<GroundTile>();
+
+    }
+
     public GameTile GetRandomTile()
     {
         int level = StaticData.RandomNumber(levelTileChance);
-        return Instantiate(GetRandomLevelTile(level));
+        return CreateInstance(GetRandomLevelTile(level).gameObject).GetComponent<GameTile>();
     }
 
     public GameTile GetRandomLevelTile(int level)

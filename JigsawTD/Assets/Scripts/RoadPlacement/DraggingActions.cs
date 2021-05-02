@@ -5,13 +5,12 @@ using UnityEngine.EventSystems;
 
 public abstract class DraggingActions : MonoBehaviour
 {
-    bool isDragging = false;
+    public bool isDragging = false;
     protected Vector3 pointerOffset;
-    private float zDisplacement;
     Camera cam;
 
     private static DraggingActions _draggingThis;
-    public static DraggingActions DraggingThis => _draggingThis;
+    public static DraggingActions DraggingThis { get => _draggingThis; set => _draggingThis = value; }
 
     // Start is called before the first frame update
     protected virtual void Awake()
@@ -20,13 +19,10 @@ public abstract class DraggingActions : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if (isDragging)
         {
-            //Vector3 mousePos = MouseInWorldCoords();
-            //transform.position = new Vector3(Mathf.Round(mousePos.x + pointerOffset.x), Mathf.Round(mousePos.y + pointerOffset.z), transform.position.z);
-
             OnDraggingInUpdate();
         }
     }
@@ -46,6 +42,8 @@ public abstract class DraggingActions : MonoBehaviour
 
     }
 
+
+
     private void OnMouseDown()
     {
         isDragging = true;
@@ -53,7 +51,6 @@ public abstract class DraggingActions : MonoBehaviour
         pointerOffset = transform.position - MouseInWorldCoords();
         pointerOffset.z = 0;
         OnStartDrag();
-        zDisplacement = transform.position.z - cam.transform.position.z;
     }
 
     private void OnMouseUp()

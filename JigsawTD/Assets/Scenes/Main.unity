@@ -167,8 +167,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdc165b02d6c6ee49a1d3c1f73d37cf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tempTilePrefab: {fileID: -247571366827182316, guid: 7249bb4e2996340408c606bc6f89eb10, type: 3}
-  baseTilePrefab: {fileID: 458233090153635530, guid: 616c0c537063af4489540002ccbcbb03, type: 3}
+  ConcreteTileLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  shortestPath: []
+  GameTileMask:
+    serializedVersion: 2
+    m_Bits: 1088
 --- !u!1 &29417393
 GameObject:
   m_ObjectHideFlags: 0
@@ -1028,7 +1033,7 @@ MonoBehaviour:
   showSearchTree: 0
   unwalkableNodeDebugSize: 0.3
   logPathResults: 1
-  maxNearestNodeDistance: 1.5
+  maxNearestNodeDistance: 1.2
   scanOnStartup: 0
   fullGetNearestSearch: 0
   prioritizeGraphs: 0

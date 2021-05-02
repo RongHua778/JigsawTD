@@ -15,11 +15,11 @@ TagManager:
   - 
   - Water
   - UI
-  - GameTile
+  - ConcreteTile
   - Turret
-  - BaseTile
+  - GroundTile
   - ImportantPoint
-  - 
+  - TempTile
   - 
   - 
   - 

@@ -130,7 +130,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1642744281
   m_SortingLayer: 1
-  m_SortingOrder: 2
+  m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
   m_Color: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
   m_FlipX: 0
@@ -551,9 +551,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cffe450cef4814d438cc92c3af5a08fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDragging: 0
   GameTileLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 576
+  GroundTileLayer:
+    serializedVersion: 2
+    m_Bits: 256
   wrongColor: {r: 1, g: 0, b: 0, a: 0.49019608}
   correctColor: {r: 1, g: 1, b: 1, a: 1}
   menuTrans: {fileID: 6889555362419343919}
@@ -564,7 +568,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6889555363922204876}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1

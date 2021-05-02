@@ -4,9 +4,11 @@ using UnityEngine;
 
 public abstract class GameObjectFactory : ScriptableObject
 {
-    protected GameObject CreateGameObjectInstance(GameObject prefab)
+    protected GameObject CreateInstance(GameObject prefab)
     {
         GameObject instance = ObjectPool.Instance.Spawn(prefab);
         return instance;
     }
+
+    
 }

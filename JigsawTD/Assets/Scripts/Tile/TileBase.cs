@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class TileBase : MonoBehaviour
+public abstract class TileBase : ReusableObject
 {
     [SerializeField]
     Vector2 _offsetCoord;

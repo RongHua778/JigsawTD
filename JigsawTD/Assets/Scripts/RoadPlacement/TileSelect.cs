@@ -23,6 +23,7 @@ public class TileSelect : MonoBehaviour
 
     public void ClearShape()
     {
+        m_Shape.ReclaimTiles();
         Destroy(m_Shape.gameObject);
         m_Shape = null;
     }

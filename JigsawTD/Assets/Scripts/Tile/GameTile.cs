@@ -6,6 +6,8 @@ using UnityEngine;
 public abstract class GameTile : TileBase
 {
 
+    public DraggingShape m_DraggingShape;
+
     public int TileID;
     public abstract int TileLevel { get; }
 
@@ -50,19 +52,19 @@ public abstract class GameTile : TileBase
 
     public void SetPreviewing(bool isPreviewing)
     {
-        if (isPreviewing)
-        {
-            tileTypeSr.sortingOrder = 5;
-            GetComponent<SpriteRenderer>().sortingOrder = 4;
-            GetComponent<Collider2D>().enabled = false;
+        //if (isPreviewing)
+        //{
+        //    tileTypeSr.sortingOrder = 5;
+        //    GetComponent<SpriteRenderer>().sortingOrder = 4;
+        //    //GetComponent<Collider2D>().enabled = false;
 
-        }
-        else
-        {
-            tileTypeSr.sortingOrder = 2;
-            GetComponent<SpriteRenderer>().sortingOrder = 1;
-            GetComponent<Collider2D>().enabled = true;
-        }
+        //}
+        //else
+        //{
+        //    tileTypeSr.sortingOrder = 2;
+        //    GetComponent<SpriteRenderer>().sortingOrder = 1;
+        //    //GetComponent<Collider2D>().enabled = true;
+        //}
     }
 
     public virtual void OnTilePass()
@@ -72,10 +74,8 @@ public abstract class GameTile : TileBase
 
     public void ShowPath()
     {
-        if (Content.Type == GameTileContentType.Destination)
-        {
+        if (NextTileOnPath == null)
             return;
-        }
         showingPath = true;
         lineSR.enabled = true;
         Vector3[] pathPoss = new Vector3[2];
@@ -91,7 +91,36 @@ public abstract class GameTile : TileBase
         showingPath = false;
     }
 
+    private void OnMouseDown()
+    {
+        if (m_DraggingShape != null)
+        {
+            m_DraggingShape.StartDragging();
+        }
+    }
 
+    private void OnMouseUp()
+    {
+        if (m_DraggingShape != null)
+        {
+            m_DraggingShape.EndDragging();
+        }
+    }
+
+    public override void OnUnSpawn()
+    {
+        base.OnUnSpawn();
+        m_DraggingShape = null;
+    }
+
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    Debug.Log(collision.name);
+    //    if (collision.CompareTag("Tile"))
+    //    {
+    //        collision.gameObject.layer = 0;
+    //    }
+    //}
 
 
 

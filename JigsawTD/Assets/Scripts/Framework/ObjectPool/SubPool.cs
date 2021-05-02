@@ -37,6 +37,9 @@ public class SubPool
             go = GameObject.Instantiate<GameObject>(m_prefab);
             m_objects.Add(go);
             go.transform.SetParent(container.transform);
+
+            if (go.GetComponent<ReusableObject>() != null)
+                go.GetComponent<ReusableObject>().ParentObj = container.transform;
         }
 
         go.SetActive(true);

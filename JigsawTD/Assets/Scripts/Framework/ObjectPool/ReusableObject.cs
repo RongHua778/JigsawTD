@@ -4,6 +4,14 @@ using UnityEngine;
 
 public abstract class ReusableObject : MonoBehaviour,IResuable
 {
-    public abstract void OnSpawn();
-    public abstract void OnUnSpawn();
+    public Transform ParentObj;
+    public virtual void OnSpawn()
+    {
+
+    }
+    public virtual void OnUnSpawn()
+    {
+        if (ParentObj != null)
+            transform.SetParent(ParentObj);
+    }
 }

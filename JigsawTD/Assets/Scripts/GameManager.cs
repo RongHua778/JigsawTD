@@ -35,24 +35,12 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameEvents.Instance.onGenerateShape += PreSpawnShape;
         _tileFactory.InitializeFactory();
 
         _board.Initialize(_startSize, _tileFactory, _contentFactory);
         _board.ShowTempTile = true;
     }
 
-    private void OnDestroy()
-    {
-        GameEvents.Instance.onGenerateShape -= PreSpawnShape;
-    }
-
-    private void PreSpawnShape(ShapeType shapeType, List<TileInfo> infoList)
-    {
-        TileShape shape = _shapeFactory.GetShape(shapeType);
-        shape.InitializeRandomShpe(_tileFactory);
-        _levelUIManager.DisplayShape(0, shape);
-    }
 
     private TileShape GetRandomNewShape()
     {
@@ -64,15 +52,15 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_board.FindPath)
-        {
-            spawnProgress += spawnSpeed * Time.deltaTime;
-            while (spawnProgress >= 1f)
-            {
-                spawnProgress -= 1f;
-                SpawnEnemy();
-            }
-        }
+        //if (_board.FindPath)
+        //{
+        //    spawnProgress += spawnSpeed * Time.deltaTime;
+        //    while (spawnProgress >= 1f)
+        //    {
+        //        spawnProgress -= 1f;
+        //        SpawnEnemy();
+        //    }
+        //}
         enemies.GameUpdate();
 
 
@@ -88,14 +76,14 @@ public class GameManager : MonoBehaviour
             _levelUIManager.ShowSelections();
         }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            GameTile tile = _board.GetTile();
-            if (tile != null)
-            {
-                _board.ToggleTurret(tile);
-            }
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    GameTile tile = _board.GetTile();
+        //    if (tile != null)
+        //    {
+        //        _board.ToggleTurret(tile);
+        //    }
+        //}
         if (Input.GetKeyDown(KeyCode.V))
         {
             _board.ShowPaths = !_board.ShowPaths;
