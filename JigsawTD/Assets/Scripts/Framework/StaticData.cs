@@ -7,16 +7,10 @@ public class StaticData : Singleton<StaticData>
 {
 
     [Header("LevelSetting")]
-    public float MaxPersistime = default;
-    public int StartMoney = default;
-    public int InitMaxMoney = default;
-    public int MaxMoney = default;
-    public int BasicIncome = default;
-    public float BasicIncomeInterval = default;
-    public float InitNodeSpeed = default;
-    public float NodeSpeed = default;
-    public float NodeSpawnInterval = default;
-    public GameObject NoTargetEffect = default;
+    public static DraggingShape holdingShape;
+    public static string ConcreteTileMask = "ConcreteTile";
+    public static string GroundTileMask = "GroundTile";
+    public static string TempTileMask = "TempTile";
 
     [Header("GameSetting")]
     public float GameSlowDownRate = default;
@@ -59,17 +53,17 @@ public class StaticData : Singleton<StaticData>
 
     }
 
-    public static int[] GetRandomSequence(int total,int count)
+    public static int[] GetRandomSequence(int total, int count)
     {
         int[] sequence = new int[total];
         int[] output = new int[count];
 
-        for(int i = 0; i < total; i++)
+        for (int i = 0; i < total; i++)
         {
             sequence[i] = i;
         }
         int end = total - 1;
-        for(int i = 0; i < count; i++)
+        for (int i = 0; i < count; i++)
         {
             int num = Random.Range(0, end + 1);
             output[i] = sequence[num];
@@ -78,5 +72,6 @@ public class StaticData : Singleton<StaticData>
         }
         return output;
     }
+
 
 }

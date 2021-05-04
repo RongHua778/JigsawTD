@@ -3,33 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-
 public enum ShapeType
 {
     T,L,I,O
 }
-
-public struct TileInfo
-{
-    public Quaternion rotation;
-    public int tileID;
-    public TileInfo(Quaternion rot, int id)
-    {
-        rotation = rot;
-        tileID = id;
-    }
-}
 public class TileShape : MonoBehaviour
 {
-    public ShapeType shapeType;
-    [SerializeField] Transform[] tilePos = default;
-    [SerializeField] Camera renderCam = default;
-    [SerializeField] GameObject bgObj = default;
+    TileSlot[] tilePos;
+    Camera renderCam;
+    GameObject bgObj;
+    int levelTileCount = 0;
+    DraggingShape draggingShape;
+
+    [HideInInspector]
     public List<GameTile> tiles = new List<GameTile>();
 
+    public ShapeType shapeType = default;
 
-    int levelTileCount = 0;
-
+    private void Awake()
+    {
+        tilePos = transform.GetComponentsInChildren<TileSlot>();
+        renderCam = transform.Find("RenderCam").GetComponent<Camera>();
+        bgObj = transform.Find("BG").gameObject;
+        draggingShape = this.GetComponent<DraggingShape>();
+    }
     public void InitializeRandomShpe(TileFactory tileFactory)
     {
         switch (shapeType)
@@ -57,14 +54,13 @@ public class TileShape : MonoBehaviour
             {
                 tile = tileFactory.GetTile(0);
             }
-            tile.transform.position = tilePos[i].position; 
+            tile.transform.position = tilePos[i].transform.position; 
             tile.transform.rotation = DirectionExtensions.GetRandomRotation();
             tile.transform.SetParent(this.transform);
-            tile.SetPreviewing(true);
             tile.m_DraggingShape = this.GetComponent<DraggingShape>();
             tiles.Add(tile);
         }
-
+        draggingShape.Initialized();
     }
 
     public int GetSlotCount()
@@ -93,9 +89,12 @@ public class TileShape : MonoBehaviour
         bgObj.SetActive(false);
         Vector2 pos = Camera.main.transform.position;
         transform.position = new Vector3(Mathf.Round(pos.x), Mathf.Round(pos.y), -1f);
-        this.GetComponent<DraggingShape>().Initialized();
-        this.GetComponent<DraggingShape>().OnDraggingInUpdate();
-        GameManager.holdingShape = this.GetComponent<DraggingShape>();
+        draggingShape.OnDraggingInUpdate();
+        StaticData.holdingShape = draggingShape;
+        foreach (GameTile tile in tiles)
+        {
+            tile.SetPreviewing(true);
+        }
     }
 
 

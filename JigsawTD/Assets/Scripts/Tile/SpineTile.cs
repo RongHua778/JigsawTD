@@ -6,6 +6,8 @@ public class SpineTile : GameTile
 {
     public override int TileLevel => 1;
 
+    public override int TileID => 3;
+
     public override void OnSpawn()
     {
         

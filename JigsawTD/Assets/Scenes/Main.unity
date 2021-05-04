@@ -167,13 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdc165b02d6c6ee49a1d3c1f73d37cf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ConcreteTileLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  shortestPath: []
-  GameTileMask:
-    serializedVersion: 2
-    m_Bits: 1088
+  pathLinePrefab: {fileID: 1637904061932472847, guid: e6033176e804ec740b74225190b69115, type: 3}
 --- !u!1 &29417393
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,13 +572,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _board: {fileID: 8398349}
+  _levelUIManager: {fileID: 1576089492}
   _startSize: {x: 3, y: 3}
-  _contentFactory: {fileID: 11400000, guid: e9b28f73aa8e8a840beba1e769ed0c70, type: 2}
+  _groundSize: {x: 21, y: 21}
   _shapeFactory: {fileID: 11400000, guid: e561f9a0ed33f674284817e826a7cb56, type: 2}
   _tileFactory: {fileID: 11400000, guid: d1395574e706e2d4b9a5223f53bc89fa, type: 2}
   _enemyFactory: {fileID: 11400000, guid: 49641aa71a9726d44b89676d62fd4df1, type: 2}
   spawnSpeed: 0.5
-  _levelUIManager: {fileID: 1576089492}
 --- !u!4 &286649183
 Transform:
   m_ObjectHideFlags: 0
@@ -636,16 +630,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c36269159d099e40bfe87a4cf0fb38e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxPersistime: 0
-  StartMoney: 0
-  InitMaxMoney: 0
-  MaxMoney: 0
-  BasicIncome: 0
-  BasicIncomeInterval: 0
-  InitNodeSpeed: 0
-  NodeSpeed: 0
-  NodeSpawnInterval: 0
-  NoTargetEffect: {fileID: 0}
   GameSlowDownRate: 0
   TileSize: 1
   TileShapeChance: []
@@ -1033,7 +1017,7 @@ MonoBehaviour:
   showSearchTree: 0
   unwalkableNodeDebugSize: 0.3
   logPathResults: 1
-  maxNearestNodeDistance: 1.2
+  maxNearestNodeDistance: 0.9
   scanOnStartup: 0
   fullGetNearestSearch: 0
   prioritizeGraphs: 0

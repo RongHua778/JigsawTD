@@ -5,38 +5,26 @@ using UnityEngine;
 public class DraggingShape : DraggingActions
 {
     Vector3 lastPos;
+    Transform menuTrans;
     TileShape tileShape;
-    List<Material> tileMaterials;
-    List<Collider2D> detectCollider;
-
+    bool CanDrop = false;
+    bool OverLapPoint = false;
     Collider2D[] collideResult = new Collider2D[10];
 
+    List<Material> tileMaterials = new List<Material>();
+    List<Collider2D> detectCollider = new List<Collider2D>();
+    List<Collider2D> groundTileList = new List<Collider2D>();
+
     [SerializeField]
-    LayerMask GameTileLayer, GroundTileLayer = default;
+    LayerMask CheckDropLayer = default;
 
     [SerializeField]
     Color wrongColor, correctColor = default;
 
-    [SerializeField]
-    Transform menuTrans = default;
-
-    private List<Collider2D> groundTileList = new List<Collider2D>();
-
-    private bool CanDrop = false;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        //Initialized();
-
-    }
-
     public void Initialized()
     {
+        menuTrans = transform.Find("DragMenu");
         tileShape = this.GetComponent<TileShape>();
-        tileMaterials = new List<Material>();
-        detectCollider = new List<Collider2D>();
-
         foreach (GameTile tile in tileShape.tiles)
         {
             tileMaterials.Add(tile.GetComponent<SpriteRenderer>().material);
@@ -81,7 +69,7 @@ public class DraggingShape : DraggingActions
         RaycastHit2D hitInfo;
         foreach (Collider2D col in detectCollider)
         {
-            hitInfo = Physics2D.Raycast(col.transform.position, Vector3.forward, Mathf.Infinity, GroundTileLayer);
+            hitInfo = Physics2D.Raycast(col.transform.position, Vector3.forward, Mathf.Infinity, LayerMask.GetMask(StaticData.GroundTileMask));
             if (hitInfo.collider != null)
                 groundTileList.Add(hitInfo.collider);
         }
@@ -99,7 +87,7 @@ public class DraggingShape : DraggingActions
         foreach (Collider2D col in detectCollider)
         {
             Vector3 pos = new Vector3(col.transform.position.x, col.transform.position.y, 0);
-            hits = Physics2D.OverlapCircleNonAlloc(pos, 0.51f, collideResult, GameTileLayer);
+            hits = Physics2D.OverlapCircleNonAlloc(pos, 0.51f, collideResult, CheckDropLayer);
 
             if (hits > 0)
             {
@@ -107,11 +95,16 @@ public class DraggingShape : DraggingActions
                 {
                     if (collideResult[i].CompareTag("UnDropablePoint"))
                     {
-                        CanDrop = false;
-                        SetColor(wrongColor);
-                        return false;
+                        if (col.OverlapPoint(collideResult[i].transform.position))
+                        {
+                            CanDrop = false;
+                            OverLapPoint = true;
+                            SetColor(wrongColor);
+                            return false;
+                        }
                     }
                 }
+                OverLapPoint = false;
                 CanDrop = true;
             }
         }
@@ -146,17 +139,28 @@ public class DraggingShape : DraggingActions
         StartCoroutine(TryFindPath());
     }
 
+    public void ResetRotation()
+    {
+        transform.rotation = Quaternion.identity;
+        menuTrans.rotation = Quaternion.identity;
+    }
+
     public void ConfirmShape()
     {
         if (CanDrop)
         {
             GameEvents.Instance.AddTiles(tileShape.tiles);
-            GameManager.holdingShape = null;
+            StaticData.holdingShape = null;
             Destroy(this.gameObject);
         }
+        else if (OverLapPoint)
+        {
+            GameEvents.Instance.Message("不可覆盖起点或终点");
+        }
         else
-            GameEvents.Instance.Message("必须与原区块相连");
-
+        {
+            GameEvents.Instance.Message("必须覆盖或与已有区域相连");
+        }
     }
     public void StartDragging()
     {

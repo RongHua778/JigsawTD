@@ -17,7 +17,6 @@ public class TileSelect : MonoBehaviour
 
     public void OnShapeClick()
     {
-        //TileShape newShape = Instantiate(m_Shape);
         m_Shape.SetPreviewPlace();
         m_Shape = null;
     }

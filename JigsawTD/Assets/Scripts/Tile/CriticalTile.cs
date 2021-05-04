@@ -5,6 +5,9 @@ using UnityEngine;
 public class CriticalTile : GameTile
 {
     public override int TileLevel => 3;
+
+    public override int TileID => 4;
+
     public override void OnSpawn()
     {
 

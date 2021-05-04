@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public abstract class DraggingActions : MonoBehaviour
 {
-    public bool isDragging = false;
+    protected bool isDragging = false;
     protected Vector3 pointerOffset;
     Camera cam;
 

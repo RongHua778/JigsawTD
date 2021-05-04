@@ -5,6 +5,9 @@ using UnityEngine;
 public class ArrowTile : GameTile
 {
     public override int TileLevel => 2;
+
+    public override int TileID => 2;
+
     public override void OnSpawn()
     {
 

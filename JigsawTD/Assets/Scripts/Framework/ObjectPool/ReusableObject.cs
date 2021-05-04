@@ -4,12 +4,17 @@ using UnityEngine;
 
 public abstract class ReusableObject : MonoBehaviour,IResuable
 {
-    public Transform ParentObj;
+    public Transform ParentObj { get; set; }
     public virtual void OnSpawn()
     {
 
     }
     public virtual void OnUnSpawn()
+    {
+        SetBackToParent();
+    }
+
+    public void SetBackToParent()
     {
         if (ParentObj != null)
             transform.SetParent(ParentObj);

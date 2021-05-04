@@ -3,30 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 using System;
+using System.Linq;
 
 public class GameBoard : MonoBehaviour
 {
-    List<GroundTile> groundTiles = new List<GroundTile>();
-    List<TempTile> tempTileList = new List<TempTile>();
+    [SerializeField] PathLine pathLinePrefab = default;
 
-    Vector2Int size;
-    List<GameTile> tiles;
 
     TileFactory tileFactory;
-    GameTileContentFactory tileContentFactory;
 
-    public List<GameTile> shortestPath = new List<GameTile>();
+    List<PathLine> pathLines = new List<PathLine>();
+    List<GroundTile> groundTiles = new List<GroundTile>();
+    List<GameTile> tiles = new List<GameTile>();
+    List<GameTile> shortestPath = new List<GameTile>();
+
+    public static Path path;
 
     GameTile spawnPoint;
     public GameTile SpawnPoint { get => spawnPoint; set => spawnPoint = value; }
     GameTile destinationPoint;
     public GameTile DestinationPoint { get => destinationPoint; set => destinationPoint = value; }
 
-    public static Path path;
-
-    bool findPath = false;
-
-    public bool FindPath { get => findPath; set => findPath = value; }
+    public bool FindPath { get => shortestPath.Count >= 1;}
 
     bool showPaths = true;
     public bool ShowPaths
@@ -35,41 +33,18 @@ public class GameBoard : MonoBehaviour
         set
         {
             showPaths = value;
-            if (showPaths)
+            if (!showPaths)
             {
-                foreach (GameTile tile in shortestPath)
+                foreach (PathLine line in pathLines)
                 {
-                    tile.ShowPath();
+                    line.HidePath();
                 }
             }
             else
             {
-                foreach (GameTile tile in shortestPath)
+                foreach (PathLine line in pathLines)
                 {
-                    tile.HidePath();
-                }
-            }
-        }
-    }
-    bool showTempTile = false;
-    public bool ShowTempTile
-    {
-        get => showTempTile;
-        set
-        {
-            showTempTile = value;
-            if (showTempTile)
-            {
-                foreach (TempTile temp in tempTileList)
-                {
-                    temp.gameObject.SetActive(true);
-                }
-            }
-            else
-            {
-                foreach (TempTile temp in tempTileList)
-                {
-                    temp.gameObject.SetActive(false);
+                    line.ShowPath();
                 }
             }
         }
@@ -78,35 +53,34 @@ public class GameBoard : MonoBehaviour
 
     private void Start()
     {
-        GameEvents.Instance.onAddTiles += AddTile;
+        GameEvents.Instance.onAddTiles += RePlaceTiles;
         GameEvents.Instance.onSeekPath += SeekPath;
     }
 
     private void OnDisable()
     {
-        GameEvents.Instance.onAddTiles -= AddTile;
+        GameEvents.Instance.onAddTiles -= RePlaceTiles;
         GameEvents.Instance.onSeekPath -= SeekPath;
     }
 
-    public void Initialize(Vector2Int size, TileFactory tileFactory, GameTileContentFactory contentFactory)
+    public void Initialize(Vector2Int size, Vector2Int groundSize, TileFactory tileFactory)
     {
-        this.size = size;
         this.tileFactory = tileFactory;
-        tileContentFactory = contentFactory;
-        GenerateGroundTiles();
+        GenerateGroundTiles(groundSize);
+        Physics2D.SyncTransforms();
         Vector2 offset = new Vector2((size.x - 1) * 0.5f, (size.y - 1) * 0.5f) * StaticData.Instance.TileSize;
-        tiles = new List<GameTile>();
         for (int i = 0, y = 0; y < size.y; y++)
         {
             for (int x = 0; x < size.x; x++, i++)
             {
                 GameTile tile;
-                if (i==3)//SpawnPoint
+                Vector2 pos = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
+                if (pos.x == -1 && pos.y == 0)//SpawnPoint
                 {
                     tile = this.tileFactory.GetBasicTile(BasicTileType.SpawnPoint);
                     SpawnPoint = tile;
-                } 
-                else if (i==5)//Destination
+                }
+                else if (pos.x == 1 && pos.y == 0)//Destination
                 {
                     tile = this.tileFactory.GetBasicTile(BasicTileType.Destination);
                     DestinationPoint = tile;
@@ -115,144 +89,19 @@ public class GameBoard : MonoBehaviour
                 {
                     tile = this.tileFactory.GetTile(0);
                 }
-                tiles.Add(tile);
-                tile.gameObject.layer = LayerMask.NameToLayer("ConcreteTile");
-                tile.transform.localPosition = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
-                CorrectTileCoord(tile);
-                tile.Content = contentFactory.Get(GameTileContentType.Empty);
-                GroundTile groundTile = groundTiles.Find(c => c.OffsetCoord == tile.OffsetCoord);
-                if (groundTile != null)
-                {
-                    groundTile.gameObject.layer = 0;
-                }
+                RemoveGroundTileOnTile(pos);
+                AddGameTile(tile, pos);
             }
-
         }
-
-
-
-        //ToggleDestination(tiles[5]);
-        //ToggleSpawnPoint(tiles[3]);
-
         SeekPath();
     }
 
-    public LayerMask GameTileMask;
-    private void OnPathComplete(Path p)
+    private void AddGameTile(GameTile tile, Vector2 pos)
     {
-        if (!p.error)
-        {
-            path = p;
-            foreach (GameTile tile in tiles)
-            {
-                tile.HidePath();
-            }
-            shortestPath.Clear();
-            for (int i = 0; i < path.vectorPath.Count; i++)
-            {
-                RaycastHit2D hit = Physics2D.Raycast(path.vectorPath[i], Vector3.forward, Mathf.Infinity, GameTileMask);
-                GameTile tile = hit.collider.GetComponent<GameTile>();
-                shortestPath.Add(tile);
-            }
-            for(int i = 1; i < shortestPath.Count; i++)
-            {
-                shortestPath[i - 1].NextTileOnPath = shortestPath[i];
-                shortestPath[i - 1].ExitPoint = (shortestPath[i].transform.position + shortestPath[i - 1].transform.position) * 0.5f;
-                shortestPath[i - 1].PathDirection = DirectionExtensions.GetDirection(shortestPath[i - 1].transform.position, shortestPath[i - 1].ExitPoint);
-            }
-            if (ShowPaths)
-            {
-                foreach (GameTile tile in shortestPath)
-                {
-                    tile.ShowPath();
-                }
-            }
-            FindPath = true;
-            Debug.Log("find path!");
-        }
-        else
-        {
-            path = p;
-            foreach (GameTile tile in shortestPath)
-            {
-                tile.HidePath();
-            }
-            shortestPath.Clear();
-            FindPath = false;
-            Debug.LogError("NoPathFound");
-        }
-    }
-
-    private void GenerateGroundTiles()
-    {
-        Vector2 offset = new Vector2((21 - 1) * 0.5f, (21 - 1) * 0.5f) * StaticData.Instance.TileSize;
-        for (int i = 0, y = 0; y < 21; y++)
-        {
-            for (int x = 0; x < 21; x++, i++)
-            {
-                GroundTile groundTile = tileFactory.GetGroundTile();
-                groundTile.transform.localPosition = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
-                CorrectTileCoord(groundTile);
-                groundTiles.Add(groundTile);
-            }
-        }
-    }
-
-
-    public void ToggleDestination(GameTile tile)
-    {
-        if (tile.Content.Type == GameTileContentType.Empty)
-        {
-            tile.Content = tileContentFactory.Get(GameTileContentType.Destination);
-            DestinationPoint = tile;
-        }
-    }
-
-    public void ToggleSpawnPoint(GameTile tile)
-    {
-        if (tile.Content.Type == GameTileContentType.Empty)
-        {
-            tile.Content = tileContentFactory.Get(GameTileContentType.SpawnPoint);
-            SpawnPoint = tile;
-        }
-    }
-
-
-    public void GetShortestPath()
-    {
-        if (shortestPath.Count > 0)
-        {
-            foreach (GameTile tile in tiles)
-            {
-                tile.HidePath();
-            }
-            shortestPath.Clear();
-        }
-        GameTile findTile = SpawnPoint;
-        while (findTile != null)
-        {
-            shortestPath.Add(findTile);
-            findTile = findTile.NextTileOnPath;
-        }
-        foreach (GameTile tile in shortestPath)
-        {
-            if (ShowPaths)
-                tile.ShowPath();
-        }
-    }
-
-    public void ToggleTurret(GameTile tile)
-    {
-        if (tile.Content.Type == GameTileContentType.Empty)
-        {
-            tile.Content = tileContentFactory.Get(GameTileContentType.Turret);
-            SeekPath();
-        }
-        else if (tile.Content.Type == GameTileContentType.Turret)
-        {
-            tile.Content = tileContentFactory.Get(GameTileContentType.Empty);
-            SeekPath();
-        }
+        tile.gameObject.layer = LayerMask.NameToLayer(StaticData.ConcreteTileMask);
+        tile.transform.localPosition = pos;
+        CorrectTileCoord(tile);
+        tiles.Add(tile);
     }
 
     private void SeekPath()
@@ -262,43 +111,102 @@ public class GameBoard : MonoBehaviour
         var p = ABPath.Construct(SpawnPoint.transform.position, DestinationPoint.transform.position, OnPathComplete);
         AstarPath.StartPath(p);
     }
+    private void OnPathComplete(Path p)
+    {
+        if (!p.error)
+        {
+            if (path != null && p.vectorPath.SequenceEqual(path.vectorPath))
+            {
+                Debug.Log("Found Same Path");
+                return;
+            }
+            path = p;
+            shortestPath.Clear();
+            for (int i = 0; i < path.vectorPath.Count; i++)
+            {
+                GameTile tile = GetTile(path.vectorPath[i], LayerMask.GetMask(StaticData.ConcreteTileMask)) as GameTile;
+                shortestPath.Add(tile);
+            }
+            GetTilePath();
+            Debug.Log("Find Path!");
+        }
+        else
+        {
+            path = p;
+            foreach (PathLine pl in pathLines)
+            {
+                ObjectPool.Instance.UnSpawn(pl.gameObject);
+            }
+            shortestPath.Clear();
+            Debug.LogError("No Path Found");
+        }
+    }
 
+    private void GetTilePath()
+    {
+        foreach (PathLine pl in pathLines)
+        {
+            ObjectPool.Instance.UnSpawn(pl.gameObject);
+        }
+        for (int i = 1; i < shortestPath.Count; i++)
+        {
+            shortestPath[i - 1].NextTileOnPath = shortestPath[i];
+            shortestPath[i - 1].ExitPoint = (shortestPath[i].transform.position + shortestPath[i - 1].transform.position) * 0.5f;
+            shortestPath[i - 1].PathDirection = DirectionExtensions.GetDirection(shortestPath[i - 1].transform.position, shortestPath[i - 1].ExitPoint);
+            PathLine pathLine = ObjectPool.Instance.Spawn(pathLinePrefab.gameObject).GetComponent<PathLine>();
+            pathLine.ShowPath(new Vector3[] { (Vector2)shortestPath[i - 1].transform.position, (Vector2)shortestPath[i].transform.position });
+            pathLines.Add(pathLine);
+        }
+    }
 
+    private void GenerateGroundTiles(Vector2Int groundSize)
+    {
+        Vector2 offset = new Vector2((groundSize.x - 1) * 0.5f, (groundSize.y - 1) * 0.5f) * StaticData.Instance.TileSize;
+        for (int i = 0, y = 0; y < groundSize.y; y++)
+        {
+            for (int x = 0; x < groundSize.x; x++, i++)
+            {
+                GroundTile groundTile = tileFactory.GetGroundTile();
+                groundTile.transform.localPosition = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
+                CorrectTileCoord(groundTile);
+                groundTiles.Add(groundTile);
+            }
+        }
+    }
 
-    private void AddTile(List<GameTile> newTiles)
+    private void RePlaceTiles(List<GameTile> newTiles)
     {
         foreach (GameTile tile in newTiles)
         {
+            tile.GetComponent<ReusableObject>().SetBackToParent();
+            Vector3 pos = new Vector3(tile.transform.position.x, tile.transform.position.y, 0);
+            RemoveGameTileOnTile(pos);
+            RemoveGroundTileOnTile(pos);
             tile.SetPreviewing(false);
-            tile.transform.SetParent(this.transform);
-            tile.transform.localPosition = new Vector3(tile.transform.localPosition.x, tile.transform.localPosition.y, 0);
-            tile.gameObject.layer = LayerMask.NameToLayer("ConcreteTile");
-            tile.Content = tileContentFactory.Get(GameTileContentType.Empty);
-            CorrectTileCoord(tile);
-
-            var gameTile = tiles.Find(t => t.OffsetCoord == tile.OffsetCoord);
-            if (gameTile != null)
-            {
-                tiles.Remove(gameTile);
-                ObjectPool.Instance.UnSpawn(gameTile.gameObject);
-            }
-            var groundTile = groundTiles.Find(t => t.OffsetCoord == tile.OffsetCoord);
-            if (groundTile != null)
-            {
-                groundTiles.Remove(groundTile);
-                ObjectPool.Instance.UnSpawn(groundTile.gameObject);
-            }
-            tiles.Add(tile);
-
+            AddGameTile(tile, pos);
         }
 
         SeekPath();
     }
 
-    Vector3 MouseInWorldCoords()
+    private void RemoveGameTileOnTile(Vector3 pos)
     {
-        var screenMousePos = Input.mousePosition;
-        return Camera.main.ScreenToWorldPoint(screenMousePos);
+        GameTile gameTile = GetTile(pos, LayerMask.GetMask(StaticData.ConcreteTileMask)) as GameTile;
+        if (gameTile != null)
+        {
+            tiles.Remove(gameTile);
+            ObjectPool.Instance.UnSpawn(gameTile.gameObject);
+        }
+    }
+
+    private void RemoveGroundTileOnTile(Vector3 pos)
+    {
+        GroundTile groundTile = GetTile(pos, LayerMask.GetMask(StaticData.GroundTileMask)) as GroundTile;
+        if (groundTile != null)
+        {
+            groundTiles.Remove(groundTile);
+            ObjectPool.Instance.UnSpawn(groundTile.gameObject);
+        }
     }
 
     private void CorrectTileCoord(TileBase tile)
@@ -311,19 +219,19 @@ public class GameBoard : MonoBehaviour
 
 
 
-    public GameTile GetTile()
+    public TileBase GetTile(Vector3 origin, LayerMask layer)
     {
-        RaycastHit2D[] hits;
-        hits = Physics2D.RaycastAll(MouseInWorldCoords(), Vector3.forward, Mathf.Infinity);
-        GameTile hitTile = null;
-        foreach (RaycastHit2D hit in hits)
+        RaycastHit2D hit;
+        hit = Physics2D.Raycast(origin, Vector3.forward, Mathf.Infinity, layer);
+        if (hit.collider != null)
         {
-            if (hit.collider.GetComponent<DraggingActions>() != null)//正在拖动方块
-                return null;
-            if (hit.collider.GetComponent<GameTile>() != null)
-                hitTile = hit.collider.GetComponent<GameTile>();
+            TileBase hitTile = hit.collider.GetComponent<TileBase>();
+            if (hitTile != null)
+            {
+                return hitTile;
+            }
         }
-        return hitTile;
+        return null;
     }
 }
 
