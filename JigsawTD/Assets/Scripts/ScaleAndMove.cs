@@ -11,7 +11,7 @@ public class ScaleAndMove : MonoBehaviour
 
     private float scrollSpeed = 2.5f;
     private float maximum = 10;
-    private float minmum = 5;
+    private float minmum = 3;
     // Start is called before the first frame update
     void Start()
     {

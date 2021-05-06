@@ -8,6 +8,7 @@ public class StaticData : Singleton<StaticData>
 
     [Header("LevelSetting")]
     public static DraggingShape holdingShape;
+    public static LayerMask PathLayer = 1 << 6 | 1 << 10;
     public static string ConcreteTileMask = "ConcreteTile";
     public static string GroundTileMask = "GroundTile";
     public static string TempTileMask = "TempTile";
@@ -73,5 +74,19 @@ public class StaticData : Singleton<StaticData>
         return output;
     }
 
-
+    public static List<Vector2> GetRangePoints(int range,Vector2 origin)
+    {
+        List<Vector2> pointsToRetrun = new List<Vector2>();
+        for(int x = -range; x <= range; x++)
+        {
+            for (int y = -(range - Mathf.Abs(x)); y <= range - Mathf.Abs(x); y++)
+            {
+                if (x == 0 && y == 0)
+                    continue;
+                Vector2 pos = new Vector2(origin.x + x, origin.y + y);
+                pointsToRetrun.Add(pos);
+            }
+        }
+        return pointsToRetrun;
+    }
 }

@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (_board.FindPath)
+        if (GameBoard.FindPath)
         {
             spawnProgress += spawnSpeed * Time.deltaTime;
             while (spawnProgress >= 1f)
@@ -59,6 +59,8 @@ public class GameManager : MonoBehaviour
             }
         }
         enemies.GameUpdate();
+        Physics2D.SyncTransforms();
+        _board.GameUpdate();
 
         if (Input.GetKeyDown(KeyCode.R) && StaticData.holdingShape != null)
         {
@@ -77,14 +79,7 @@ public class GameManager : MonoBehaviour
         {
             _board.ShowPaths = !_board.ShowPaths;
         }
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    GameTile tile = _board.GetTile();
-        //    if (tile != null)
-        //    {
-        //        _board.ToggleTurret(tile);
-        //    }
-        //}
+
     }
 
     private void SpawnEnemy()

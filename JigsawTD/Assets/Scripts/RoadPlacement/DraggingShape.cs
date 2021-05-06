@@ -7,8 +7,9 @@ public class DraggingShape : DraggingActions
     Vector3 lastPos;
     Transform menuTrans;
     TileShape tileShape;
-    bool CanDrop = false;
-    bool OverLapPoint = false;
+    bool canDrop = false;
+    bool overLapPoint = false;
+    bool waitingForPath = false;
     Collider2D[] collideResult = new Collider2D[10];
 
     List<Material> tileMaterials = new List<Material>();
@@ -27,7 +28,7 @@ public class DraggingShape : DraggingActions
         tileShape = this.GetComponent<TileShape>();
         foreach (GameTile tile in tileShape.tiles)
         {
-            tileMaterials.Add(tile.GetComponent<SpriteRenderer>().material);
+            tileMaterials.Add(tile.tileBase.GetComponent<SpriteRenderer>().material);
             detectCollider.Add(tile.GetComponent<Collider2D>());
         }
     }
@@ -82,7 +83,7 @@ public class DraggingShape : DraggingActions
     private bool CheckCanDrop()
     {
         Physics2D.SyncTransforms();
-        CanDrop = false;
+        canDrop = false;
         int hits;
         foreach (Collider2D col in detectCollider)
         {
@@ -97,18 +98,18 @@ public class DraggingShape : DraggingActions
                     {
                         if (col.OverlapPoint(collideResult[i].transform.position))
                         {
-                            CanDrop = false;
-                            OverLapPoint = true;
+                            canDrop = false;
+                            overLapPoint = true;
                             SetColor(wrongColor);
                             return false;
                         }
                     }
                 }
-                OverLapPoint = false;
-                CanDrop = true;
+                overLapPoint = false;
+                canDrop = true;
             }
         }
-        if (!CanDrop)
+        if (!canDrop)
         {
             SetColor(wrongColor);
             return false;
@@ -124,16 +125,23 @@ public class DraggingShape : DraggingActions
 
     private IEnumerator TryFindPath()
     {
+        waitingForPath = true;
         yield return new WaitForSeconds(0.1f);
         SetGroundForPathFinding();
         Debug.Log("Try FindPath");
         GameEvents.Instance.SeekPath();
+        yield return new WaitForSeconds(0.1f);
+        waitingForPath = false;
     }
 
     public void RotateShape()
     {
         transform.Rotate(0, 0, -90f);
         menuTrans.Rotate(0, 0, 90f);
+        foreach(GameTile tile in tileShape.tiles)
+        {
+            tile.CorrectRotation();
+        }
         CheckCanDrop();
         StopAllCoroutines();
         StartCoroutine(TryFindPath());
@@ -147,13 +155,23 @@ public class DraggingShape : DraggingActions
 
     public void ConfirmShape()
     {
-        if (CanDrop)
+        if (waitingForPath)
         {
+            GameEvents.Instance.Message("你点的太快了，道路判定中>>>");
+            return;
+        }
+        if (canDrop)
+        {
+            if (!GameBoard.FindPath)
+            {
+                GameEvents.Instance.Message("必须有道路连接起点和终点");
+                return;
+            }
             GameEvents.Instance.AddTiles(tileShape.tiles);
             StaticData.holdingShape = null;
             Destroy(this.gameObject);
         }
-        else if (OverLapPoint)
+        else if (overLapPoint)
         {
             GameEvents.Instance.Message("不可覆盖起点或终点");
         }

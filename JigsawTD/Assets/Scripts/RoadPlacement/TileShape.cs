@@ -55,7 +55,7 @@ public class TileShape : MonoBehaviour
                 tile = tileFactory.GetTile(0);
             }
             tile.transform.position = tilePos[i].transform.position; 
-            tile.transform.rotation = DirectionExtensions.GetRandomRotation();
+            tile.tileType.rotation = DirectionExtensions.GetRandomRotation();
             tile.transform.SetParent(this.transform);
             tile.m_DraggingShape = this.GetComponent<DraggingShape>();
             tiles.Add(tile);

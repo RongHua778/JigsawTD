@@ -10,6 +10,9 @@ public abstract class GameTile : TileBase
     public abstract int TileLevel { get; }
 
     GameObject previewGlow;
+    public Transform tileBase { get; set; }
+    public Transform tileType { get; set; }
+    public Turret TileTurret { get; set; }
     Direction pathDirection;
     public Direction PathDirection { get => pathDirection; set => pathDirection = value; }
     GameTile nextOnPath;
@@ -33,8 +36,15 @@ public abstract class GameTile : TileBase
     private void Awake()
     {
         previewGlow = transform.Find("PreviewGlow").gameObject;
+        tileBase = transform.Find("TileBase");
+        tileType = transform.Find("TileType");
+        TileTurret = transform.GetComponentInChildren<Turret>();
     }
 
+    public virtual void TileDroped()
+    {
+
+    }
 
     public void SetPreviewing(bool isPreviewing)
     {
@@ -77,6 +87,9 @@ public abstract class GameTile : TileBase
         gameObject.layer = LayerMask.NameToLayer(StaticData.TempTileMask);
     }
 
-
+    public void CorrectRotation()
+    {
+        tileBase.rotation = Quaternion.identity;
+    }
 
 }

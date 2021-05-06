@@ -8,6 +8,7 @@ using System.Linq;
 public class GameBoard : MonoBehaviour
 {
     [SerializeField] PathLine pathLinePrefab = default;
+    List<Turret> updatingTurret = new List<Turret>();
 
 
     TileFactory tileFactory;
@@ -15,7 +16,7 @@ public class GameBoard : MonoBehaviour
     List<PathLine> pathLines = new List<PathLine>();
     List<GroundTile> groundTiles = new List<GroundTile>();
     List<GameTile> tiles = new List<GameTile>();
-    List<GameTile> shortestPath = new List<GameTile>();
+    static List<GameTile> shortestPath = new List<GameTile>();
 
     public static Path path;
 
@@ -24,7 +25,7 @@ public class GameBoard : MonoBehaviour
     GameTile destinationPoint;
     public GameTile DestinationPoint { get => destinationPoint; set => destinationPoint = value; }
 
-    public bool FindPath { get => shortestPath.Count >= 1;}
+    public static bool FindPath { get => shortestPath.Count >= 1;}
 
     bool showPaths = true;
     public bool ShowPaths
@@ -61,6 +62,14 @@ public class GameBoard : MonoBehaviour
     {
         GameEvents.Instance.onAddTiles -= RePlaceTiles;
         GameEvents.Instance.onSeekPath -= SeekPath;
+    }
+
+    public void GameUpdate()
+    {
+        for(int i = 0; i < updatingTurret.Count; i++)
+        {
+            updatingTurret[i].GameUpdate();
+        }
     }
 
     public void Initialize(Vector2Int size, Vector2Int groundSize, TileFactory tileFactory)
@@ -102,6 +111,8 @@ public class GameBoard : MonoBehaviour
         tile.transform.localPosition = pos;
         CorrectTileCoord(tile);
         tiles.Add(tile);
+        if (tile.TileTurret != null)
+            updatingTurret.Add(tile.TileTurret);
     }
 
     private void SeekPath()
@@ -110,6 +121,7 @@ public class GameBoard : MonoBehaviour
         AstarPath.active.Scan();
         var p = ABPath.Construct(SpawnPoint.transform.position, DestinationPoint.transform.position, OnPathComplete);
         AstarPath.StartPath(p);
+        AstarPath.BlockUntilCalculated(p);
     }
     private void OnPathComplete(Path p)
     {
@@ -124,7 +136,7 @@ public class GameBoard : MonoBehaviour
             shortestPath.Clear();
             for (int i = 0; i < path.vectorPath.Count; i++)
             {
-                GameTile tile = GetTile(path.vectorPath[i], LayerMask.GetMask(StaticData.ConcreteTileMask)) as GameTile;
+                GameTile tile = GetTile(path.vectorPath[i], StaticData.PathLayer) as GameTile;
                 shortestPath.Add(tile);
             }
             GetTilePath();
@@ -184,9 +196,8 @@ public class GameBoard : MonoBehaviour
             RemoveGroundTileOnTile(pos);
             tile.SetPreviewing(false);
             AddGameTile(tile, pos);
+            tile.TileDroped();
         }
-
-        SeekPath();
     }
 
     private void RemoveGameTileOnTile(Vector3 pos)
