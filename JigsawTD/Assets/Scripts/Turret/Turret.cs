@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,9 +14,7 @@ public abstract class Turret : MonoBehaviour
     [SerializeField] GameObject rangeIndicator = default;
     [SerializeField] Transform rangeParent = default;
 
-    ContactFilter2D filter = new ContactFilter2D();
-    static Collider2D[] targetBuffers = new Collider2D[10];
-
+    List<TargetPoint> targetList = new List<TargetPoint>();
 
     float nextAttackTime;
 
@@ -29,20 +28,33 @@ public abstract class Turret : MonoBehaviour
     public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
     public float BulletSpeed { get => bulletSpeed; set => bulletSpeed = value; }
 
-    private void Awake()
-    {
-        filter.useTriggers = true;
-        filter.SetLayerMask(enemyLayerMask);
-    }
+
 
     public void InitializeTurret()
     {
         GenerateRange();
     }
 
+    public void AddTarget(TargetPoint target)
+    {
+        targetList.Add(target);
+    }
+
+    public void RemoveTarget(TargetPoint target)
+    {
+        if (targetList.Contains(target))
+        {
+            if (this.target == target)
+            {
+                this.target = null;
+            }
+            targetList.Remove(target);
+        }
+    }
+
     public void RecycleRanges()
     {
-        foreach(var range in rangeIndicators)
+        foreach (var range in rangeIndicators)
         {
             ObjectPool.Instance.UnSpawn(range.gameObject);
         }
@@ -63,27 +75,26 @@ public abstract class Turret : MonoBehaviour
         {
             return false;
         }
-        Vector2 a = transform.position;
-        Vector2 b = target.transform.position;
-        if ((a - b).magnitude > AttackRange+0.5f)
-        {
-            target = null;
-            return false;
-        }
-        
         return true;
     }
     private bool AcquireTarget()
     {
-        int hits = Physics2D.OverlapCollider(detectCollider, filter, targetBuffers);
-        if (hits > 0)
+
+        if (targetList.Count <= 0)
+            return false;
+        else
         {
-            Debug.Log("hit");
-            target = targetBuffers[0].GetComponent<TargetPoint>();
-            return true;
+            target = targetList[UnityEngine.Random.Range(0, targetList.Count - 1)];
+            return false;
         }
-        target = null;
-        return false;
+    }
+
+    public void ShowRange(bool show)
+    {
+        foreach(var indicator in rangeIndicators)
+        {
+            indicator.ShowSprite(show);
+        }
     }
 
     private void GenerateRange()
@@ -105,10 +116,10 @@ public abstract class Turret : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
+        //Gizmos.color = Color.yellow;
         Vector3 position = transform.position;
         position.z -= 0.1f;
-        Gizmos.DrawWireSphere(position, AttackRange);
+        //Gizmos.DrawWireSphere(position, AttackRange);
         if (target != null)
         {
             Gizmos.DrawLine(position, target.transform.position);

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public abstract class GameTile : TileBase
 {
@@ -19,19 +20,6 @@ public abstract class GameTile : TileBase
     public GameTile NextTileOnPath { get => nextOnPath; set => nextOnPath = value; }
     public Vector3 ExitPoint { get; set; }
 
-    //GameTileContent content;
-    //public GameTileContent Content
-    //{
-    //    get => content;
-    //    set
-    //    {
-    //        Debug.Assert(value != null, "Null Content Assigned");
-    //        if (content != null)
-    //            content.Recycle();
-    //        content = value;
-    //        content.transform.localPosition = transform.localPosition;
-    //    }
-    //}
 
     private void Awake()
     {
@@ -66,17 +54,26 @@ public abstract class GameTile : TileBase
 
     private void OnMouseDown()
     {
-        if (m_DraggingShape != null)
+        if (!EventSystem.current.IsPointerOverGameObject())
         {
-            m_DraggingShape.StartDragging();
+            if (m_DraggingShape != null)
+            {
+                m_DraggingShape.StartDragging();
+            }
+            GameEvents.Instance.TileClick();
         }
     }
+    
 
     private void OnMouseUp()
     {
-        if (m_DraggingShape != null)
+        if (!EventSystem.current.IsPointerOverGameObject())
         {
-            m_DraggingShape.EndDragging();
+            if (m_DraggingShape != null)
+            {
+                m_DraggingShape.EndDragging();
+            }
+            GameEvents.Instance.TileUp(this);
         }
     }
 
@@ -92,4 +89,11 @@ public abstract class GameTile : TileBase
         tileBase.rotation = Quaternion.identity;
     }
 
+    public void ShowTurretRange(bool show)
+    {
+        if (TileTurret != null)
+        {
+            TileTurret.ShowRange(show);
+        }
+    }
 }

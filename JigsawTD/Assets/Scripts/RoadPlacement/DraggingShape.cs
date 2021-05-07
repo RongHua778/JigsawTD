@@ -46,7 +46,7 @@ public class DraggingShape : DraggingActions
     {
         base.OnDraggingInUpdate();
         Vector3 mousePos = MouseInWorldCoords();
-        transform.position = new Vector3(Mathf.Round(mousePos.x + pointerOffset.x), Mathf.Round(mousePos.y + pointerOffset.z), transform.position.z);
+        transform.position = new Vector3(Mathf.Round(mousePos.x + pointerOffset.x), Mathf.Round(mousePos.y + pointerOffset.y), transform.position.z);
         if (transform.position != lastPos)
         {
             CheckCanDrop();

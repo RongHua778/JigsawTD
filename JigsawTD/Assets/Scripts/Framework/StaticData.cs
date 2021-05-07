@@ -12,6 +12,7 @@ public class StaticData : Singleton<StaticData>
     public static string ConcreteTileMask = "ConcreteTile";
     public static string GroundTileMask = "GroundTile";
     public static string TempTileMask = "TempTile";
+    public static string TurretMask = "Turret";
 
     [Header("GameSetting")]
     public float GameSlowDownRate = default;

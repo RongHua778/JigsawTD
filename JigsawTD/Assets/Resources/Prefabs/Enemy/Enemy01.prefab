@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2772120739689601470}
   - component: {fileID: 3018060727897808281}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4482347274792429065}
   - component: {fileID: 3149575588098138726}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Enemy01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7619665209501119904}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 6941142978531091582}
   m_Layer: 11
   m_Name: GFX
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -10,9 +10,25 @@ public class RangeDetect : MonoBehaviour
         Turret = this.transform.root.GetComponentInChildren<Turret>();
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if(collision.CompareTag)
-    //}
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            TargetPoint target = collision.GetComponent<TargetPoint>();
+            Turret.AddTarget(target);
+            Debug.Log("Enter");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            TargetPoint target = collision.GetComponent<TargetPoint>();
+            Turret.RemoveTarget(target);
+            Debug.Log("Exit");
+
+        }
+    }
 
 }

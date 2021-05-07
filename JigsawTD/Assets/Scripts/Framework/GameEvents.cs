@@ -30,4 +30,16 @@ public class GameEvents : Singleton<GameEvents>
     {
         onSeekPath?.Invoke();
     }
+
+    public event Action onTileClick;
+    public void TileClick()
+    {
+        onTileClick?.Invoke();
+    }
+
+    public event Action<GameTile> onTileUp;
+    public void TileUp(GameTile tile)
+    {
+        onTileUp?.Invoke(tile);
+    }
 }

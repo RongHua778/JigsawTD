@@ -8,6 +8,7 @@ TagManager:
   - GameTile
   - Tile
   - UnDropablePoint
+  - Enemy
   layers:
   - Default
   - TransparentFX

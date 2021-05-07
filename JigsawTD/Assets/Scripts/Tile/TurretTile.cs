@@ -13,16 +13,17 @@ public class TurretTile : GameTile
     {
         base.TileDroped();
         Turret.layer = LayerMask.NameToLayer(StaticData.GroundTileMask);
-        TileTurret.InitializeTurret();
     }
     public override void OnSpawn()
     {
-
+        TileTurret.InitializeTurret();
     }
 
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
         TileTurret.RecycleRanges();
+        Turret.layer = LayerMask.NameToLayer(StaticData.TurretMask);
+        Turret.GetComponent<Collider2D>().enabled = true;//被覆盖时，会被射线检测disable掉groundtile层的Collider
     }
 }
