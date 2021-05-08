@@ -16,7 +16,6 @@ public class RangeDetect : MonoBehaviour
         {
             TargetPoint target = collision.GetComponent<TargetPoint>();
             Turret.AddTarget(target);
-            Debug.Log("Enter");
         }
     }
 
@@ -26,8 +25,6 @@ public class RangeDetect : MonoBehaviour
         {
             TargetPoint target = collision.GetComponent<TargetPoint>();
             Turret.RemoveTarget(target);
-            Debug.Log("Exit");
-
         }
     }
 

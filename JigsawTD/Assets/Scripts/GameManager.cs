@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     [SerializeField]
     GameBoard _board = default;
@@ -22,7 +22,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     EnemyFactory _enemyFactory = default;
 
-    EnemyCollection enemies = new EnemyCollection();
+    public GameBehaviorCollection enemies = new GameBehaviorCollection();
+    public GameBehaviorCollection nonEnemies = new GameBehaviorCollection();
 
     [SerializeField, Range(0.1f, 10f)]
     float spawnSpeed = 100f;
@@ -37,19 +38,11 @@ public class GameManager : MonoBehaviour
     public static GameTile SelectingTile = null;
 
 
-
-    //private void Awake()
-    //{
-    //    GameEvents.Instance.onTileClick += TileClick;
-    //    GameEvents.Instance.onTileUp += TileUp;
-    //}
-
     private void OnDisable()
     {
         GameEvents.Instance.onTileClick -= TileClick;
         GameEvents.Instance.onTileUp -= TileUp;
     }
-    // Start is called before the first frame update
     void Start()
     {
         GameEvents.Instance.onTileClick += TileClick;
@@ -87,8 +80,6 @@ public class GameManager : MonoBehaviour
                 {
                     SelectingTile.ShowTurretRange(false);
                 }
-                //selection.SetActive(true);
-                //selection.transform.position = tile.transform.position;
                 tile.ShowTurretRange(true);
                 SelectingTile = tile;
             }
@@ -110,6 +101,7 @@ public class GameManager : MonoBehaviour
         enemies.GameUpdate();
         Physics2D.SyncTransforms();
         _board.GameUpdate();
+        nonEnemies.GameUpdate();
 
         if (Input.GetKeyDown(KeyCode.R) && StaticData.holdingShape != null)
         {
@@ -167,4 +159,5 @@ public class GameManager : MonoBehaviour
         enemy.SpawnOn(tile);
         enemies.Add(enemy);
     }
+
 }

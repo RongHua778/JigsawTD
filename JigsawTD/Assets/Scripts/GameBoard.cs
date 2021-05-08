@@ -8,7 +8,6 @@ using System.Linq;
 public class GameBoard : MonoBehaviour
 {
     [SerializeField] PathLine pathLinePrefab = default;
-    [SerializeField] GameObject selection = default;
     
     List<Turret> updatingTurret = new List<Turret>();
     TileFactory tileFactory;

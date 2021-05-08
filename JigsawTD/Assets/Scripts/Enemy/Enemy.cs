@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : ReusableObject
+public class Enemy : GameBehavior
 {
     Direction direction;
     DirectionChange directionChange;
@@ -12,7 +12,7 @@ public class Enemy : ReusableObject
     float progress, progressFactor;
     float directionAngleFrom, directionAngleTo;
     float pathOffset;
-    float speed = 2f;
+    float speed = 1f;
     public float Speed { get => speed; set => speed = value; }
 
 
@@ -46,7 +46,7 @@ public class Enemy : ReusableObject
             }
         }
     }
-    public bool GameUpdate()
+    public override bool GameUpdate()
     {
         if (IsDie)
         {
