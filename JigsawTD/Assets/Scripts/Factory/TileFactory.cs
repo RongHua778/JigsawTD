@@ -11,12 +11,12 @@ public class TileFactory : GameObjectFactory
 {
 
     [SerializeField] List<GameTile> tiles = new List<GameTile>();
-    private Dictionary<int, GameTile> tileDIC = new Dictionary<int, GameTile>();
+    private Dictionary<int, GameTile> tileDIC;
 
-    private List<GameTile> Level0Tiles = new List<GameTile>();
-    private List<GameTile> Level1Tiles = new List<GameTile>();
-    private List<GameTile> Level2Tiles = new List<GameTile>();
-    private List<GameTile> Level3Tiles = new List<GameTile>();
+    private List<GameTile> Level0Tiles;
+    private List<GameTile> Level1Tiles;
+    private List<GameTile> Level2Tiles;
+    private List<GameTile> Level3Tiles;
 
     [SerializeField] float[] levelTileChance = new float[4];
     [SerializeField] GroundTile groundTile = default;
@@ -26,7 +26,11 @@ public class TileFactory : GameObjectFactory
 
     public void InitializeFactory()
     {
-        tileDIC.Clear();
+        //tileDIC = new Dictionary<int, GameTile>();
+        Level0Tiles = new List<GameTile>();
+        Level1Tiles = new List<GameTile>();
+        Level2Tiles = new List<GameTile>();
+        Level3Tiles = new List<GameTile>();
         foreach (GameTile tile in tiles)
         {
             switch (tile.TileLevel)
@@ -47,7 +51,7 @@ public class TileFactory : GameObjectFactory
                     Debug.Assert(false, "定义了错误的TILE等级");
                     break;
             }
-            tileDIC.Add(tile.TileID, tile);
+            //tileDIC.Add(tile.TileID, tile);
         }
     }
 
@@ -81,6 +85,10 @@ public class TileFactory : GameObjectFactory
     {
         return CreateInstance(groundTile.gameObject).GetComponent<GroundTile>();
 
+    }
+    public BasicTile GetBasicTile()
+    {
+        return CreateInstance(GetRandomLevelTile(0).gameObject).GetComponent<BasicTile>();
     }
 
     public GameTile GetRandomTile()

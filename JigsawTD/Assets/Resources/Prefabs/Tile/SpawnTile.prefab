@@ -270,7 +270,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6604616035422911932}
   - component: {fileID: 6317956750879752327}
-  - component: {fileID: 1466643203679672764}
+  - component: {fileID: -6666671750581329292}
   m_Layer: 10
   m_Name: SpawnTile
   m_TagString: UnDropablePoint
@@ -322,7 +322,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.98, y: 0.98}
   m_EdgeRadius: 0
---- !u!114 &1466643203679672764
+--- !u!114 &-6666671750581329292
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -331,10 +331,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6604616035422911931}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e2669bcb0dfdef4d88425505234dfe7, type: 3}
+  m_Script: {fileID: 11500000, guid: 11ea9f238d4509e47a1b8590ee24faa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _offsetCoord: {x: 0, y: 0}
+  TileID: 98
+  TileLevel: 0
 --- !u!1 &6934175286737831987
 GameObject:
   m_ObjectHideFlags: 0

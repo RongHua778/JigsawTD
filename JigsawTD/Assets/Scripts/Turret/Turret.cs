@@ -5,18 +5,18 @@ using UnityEngine;
 
 public abstract class Turret : MonoBehaviour
 {
+    protected RangeType RangeType;
+    [SerializeField] protected GameObject bulletPrefab = default;
     public const int enemyLayerMask = 1 << 11;
-
-
-    protected float _rotSpeed = 5f;
+    protected float _rotSpeed = 10f;
     protected TargetPoint target;
     protected List<RangeIndicator> rangeIndicators = new List<RangeIndicator>();
-    [SerializeField] protected CompositeCollider2D detectCollider = default;
-    [SerializeField] protected GameObject bulletPrefab = default;
-    [SerializeField] GameObject rangeIndicator = default;
-    [SerializeField] Transform rangeParent = default;
-    [SerializeField] Transform rotTrans = default;
-    [SerializeField] Transform shootPoint = default;
+    protected CompositeCollider2D detectCollider;
+    GameObject rangeIndicator;
+    Transform rangeParent;
+    Transform rotTrans;
+    protected Transform shootPoint;
+    protected float CheckAngle = 10f;
 
     List<TargetPoint> targetList = new List<TargetPoint>();
 
@@ -24,18 +24,24 @@ public abstract class Turret : MonoBehaviour
     Quaternion look_Rotation;
 
     [Header("TurretAttribute")]
-    float attackDamage = 1f;
-    int attackRange = 1;
-    float attackSpeed = 1f;
-    float bulletSpeed = 1f;
-    public float AttackDamage { get => attackDamage; set => attackDamage = value; }
-    public int AttackRange { get => attackRange; set => attackRange = value; }
-    public float AttackSpeed { get => attackSpeed; set => attackSpeed = value; }
-    public float BulletSpeed { get => bulletSpeed; set => bulletSpeed = value; }
+    public TurretAttribute m_TurretAttribute = default;
+    protected int Level = 0;
+    public float AttackDamage { get => m_TurretAttribute.TurretLevels[Level].AttackDamage; }
+    public int AttackRange { get => m_TurretAttribute.TurretLevels[Level].AttackRange; }
+    public float AttackSpeed { get => m_TurretAttribute.TurretLevels[Level].AttackSpeed; }
+    public float BulletSpeed { get => m_TurretAttribute.TurretLevels[Level].BulletSpeed; }
 
+    private void Awake()
+    {
+        rangeIndicator = Resources.Load<GameObject>("Prefabs/RangeIndicator");
+        rangeParent = transform.Find("TurretRangeCol");
+        detectCollider = rangeParent.GetComponent<CompositeCollider2D>();
+        rotTrans = transform.Find("RotPoint");
+        shootPoint = rotTrans.Find("ShootPoint");
+        RangeType = m_TurretAttribute.RangeType;
+    }
 
-
-    public void InitializeTurret()
+    public virtual void InitializeTurret()
     {
         GenerateRange();
     }
@@ -108,12 +114,23 @@ public abstract class Turret : MonoBehaviour
         {
             RecycleRanges();
         }
-        List<Vector2> points = StaticData.GetRangePoints(AttackRange, transform.position);
+        List<Vector2> points = null;
+        switch (RangeType)
+        {
+            case RangeType.Circle:
+                points = StaticData.GetCirclePoints(AttackRange);
+                break;
+            case RangeType.HalfCircle:
+                break;
+            case RangeType.Line:
+                points = StaticData.GetLinePoints(AttackRange);
+                break;
+        }
         foreach (Vector2 point in points)
         {
             GameObject rangeObj = ObjectPool.Instance.Spawn(rangeIndicator);
             rangeObj.transform.SetParent(rangeParent);
-            rangeObj.transform.position = point;
+            rangeObj.transform.localPosition = point;
             rangeIndicators.Add(rangeObj.GetComponent<RangeIndicator>());
         }
         detectCollider.GenerateGeometry();
@@ -132,7 +149,7 @@ public abstract class Turret : MonoBehaviour
     private bool AngleCheck()
     {
         var angleCheck = Quaternion.Angle(rotTrans.rotation, look_Rotation);
-        if (angleCheck < 10)
+        if (angleCheck < CheckAngle)
         {
             return true;
         }
@@ -159,7 +176,7 @@ public abstract class Turret : MonoBehaviour
     {
         Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
         bullet.transform.position = shootPoint.position;
-        bullet.Initialize(target, AttackDamage);
+        bullet.Initialize(target,target.Position, AttackDamage, BulletSpeed);
     }
 
     private void OnDrawGizmos()

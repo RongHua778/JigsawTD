@@ -152,10 +152,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6604616035422911931}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dabb5342ffbf0934fb0d671f95803472, type: 3}
+  m_Script: {fileID: 11500000, guid: d8d2e9ceceded444a9bf889cc0007209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _offsetCoord: {x: 0, y: 0}
+  TileID: 4
+  TileLevel: 3
+  m_TrapAttribute: {fileID: 0}
 --- !u!1 &7927276109108995915
 GameObject:
   m_ObjectHideFlags: 0

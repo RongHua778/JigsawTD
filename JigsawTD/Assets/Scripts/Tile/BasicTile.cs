@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class BasicTile : GameTile
 {
-    public override int TileLevel => 0;
-
-    public override int TileID => 0;
-
     public override void OnSpawn()
     {
 

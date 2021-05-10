@@ -316,7 +316,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6604616035422911931}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac4d53f7a24f5b04783c07425af3a797, type: 3}
+  m_Script: {fileID: 11500000, guid: d8d2e9ceceded444a9bf889cc0007209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _offsetCoord: {x: 0, y: 0}
+  TileID: 5
+  TileLevel: 3
+  m_TrapAttribute: {fileID: 0}

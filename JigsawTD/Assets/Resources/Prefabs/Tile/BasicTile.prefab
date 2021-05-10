@@ -320,3 +320,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _offsetCoord: {x: 0, y: 0}
+  TileID: 0
+  TileLevel: 0

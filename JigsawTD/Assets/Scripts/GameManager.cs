@@ -33,7 +33,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] GameObject selection = default;
     static float pressCounter = 0;
     public bool IsPressingTile = false;
-    public bool IsLongPress { get => pressCounter >= 0.5f; }
+    public bool IsLongPress { get => pressCounter >= 0.3f; }
 
     public static GameTile SelectingTile = null;
 

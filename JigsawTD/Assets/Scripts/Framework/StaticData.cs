@@ -75,18 +75,29 @@ public class StaticData : Singleton<StaticData>
         return output;
     }
 
-    public static List<Vector2> GetRangePoints(int range,Vector2 origin)
+    public static List<Vector2> GetCirclePoints(int range)
     {
         List<Vector2> pointsToRetrun = new List<Vector2>();
-        for(int x = -range; x <= range; x++)
+        for (int x = -range; x <= range; x++)
         {
             for (int y = -(range - Mathf.Abs(x)); y <= range - Mathf.Abs(x); y++)
             {
                 if (x == 0 && y == 0)
                     continue;
-                Vector2 pos = new Vector2(origin.x + x, origin.y + y);
+                Vector2 pos = new Vector2(x, y);
                 pointsToRetrun.Add(pos);
             }
+        }
+        return pointsToRetrun;
+    }
+
+    public static List<Vector2> GetLinePoints(int range)
+    {
+        List<Vector2> pointsToRetrun = new List<Vector2>();
+        for(int i = 1; i <= range; i++)
+        {
+            Vector2 pos = new Vector2(0, i);
+            pointsToRetrun.Add(pos);
         }
         return pointsToRetrun;
     }

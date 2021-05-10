@@ -52,7 +52,7 @@ public class TileShape : MonoBehaviour
             }
             else
             {
-                tile = tileFactory.GetTile(0);
+                tile = tileFactory.GetBasicTile();
             }
             tile.transform.position = tilePos[i].transform.position; 
             tile.tileType.rotation = DirectionExtensions.GetRandomRotation();

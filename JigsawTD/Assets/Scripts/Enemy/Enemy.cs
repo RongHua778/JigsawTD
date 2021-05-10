@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : GameBehavior
 {
+    public EnemyAttribute m_Attribute = default;
     Direction direction;
     DirectionChange directionChange;
     [SerializeField] Transform model = default;
@@ -12,8 +13,19 @@ public class Enemy : GameBehavior
     float progress, progressFactor;
     float directionAngleFrom, directionAngleTo;
     float pathOffset;
-    float speed = 1f;
-    public float Speed { get => speed; set => speed = value; }
+
+    [Header("EnemyAttribute")]
+    float speed;
+    public float Speed { get => speed * (1 - SlowRate); set => speed = value; }
+    int shell;
+    public int Shell { get => Mathf.Max(0, shell - BrokeShell); set => shell = value; }
+    float slowRate;
+    public float SlowRate { get => slowRate; set => slowRate = value; }
+    int brokeShell;
+    public int BrokeShell { get => brokeShell; set => brokeShell = value; }
+
+
+    public BuffableEntity Buffable { get; private set; }
 
 
     EnemyFactory originFacoty;
@@ -82,9 +94,11 @@ public class Enemy : GameBehavior
         this.pathOffset = pathOffset;
         this.healthBar = healthBar;
         this.healthBar.followTrans = model;
-        //test
-        MaxHealth = 100;
-        CurrentHealth = 100;
+        Buffable = this.GetComponent<BuffableEntity>();
+        MaxHealth = CurrentHealth = m_Attribute.Health;
+        Speed = m_Attribute.Speed;
+        Shell = m_Attribute.Shell;
+
     }
 
     public void SpawnOn(GameTile tile)
@@ -120,6 +134,11 @@ public class Enemy : GameBehavior
 
     private void PrepareNextState()
     {
+
+        //执行TILETO的TILEPASS效果
+        tileTo.OnTilePass(this);
+        Buffable.Tick();
+
         tileFrom = tileTo;
         tileTo = tileTo.NextTileOnPath;
         positionFrom = positionTo;
@@ -181,7 +200,8 @@ public class Enemy : GameBehavior
 
     public void ApplyDamage(float amount)
     {
-        CurrentHealth -= amount;
+        float damage = amount * 5 / (5 + Shell);
+        CurrentHealth -= damage;
     }
 
 
@@ -195,6 +215,7 @@ public class Enemy : GameBehavior
     {
         model.localPosition = Vector3.zero;
         ObjectPool.Instance.UnSpawn(healthBar.gameObject);
+        Buffable.Buffs.Clear();
 
     }
 }

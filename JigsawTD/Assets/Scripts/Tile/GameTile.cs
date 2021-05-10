@@ -7,8 +7,8 @@ using UnityEngine.EventSystems;
 public abstract class GameTile : TileBase
 {
     public DraggingShape m_DraggingShape { get; set; }
-    public abstract int TileID { get; }
-    public abstract int TileLevel { get; }
+    //public int TileID = default;
+    public int TileLevel = default;
 
     GameObject previewGlow;
     public Transform tileBase { get; set; }
@@ -46,7 +46,7 @@ public abstract class GameTile : TileBase
         }
     }
 
-    public virtual void OnTilePass()
+    public virtual void OnTilePass(Enemy enemy)
     {
 
     }
@@ -63,7 +63,7 @@ public abstract class GameTile : TileBase
             GameEvents.Instance.TileClick();
         }
     }
-    
+
 
     private void OnMouseUp()
     {

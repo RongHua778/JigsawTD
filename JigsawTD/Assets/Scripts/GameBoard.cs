@@ -95,7 +95,7 @@ public class GameBoard : MonoBehaviour
                 }
                 else
                 {
-                    tile = this.tileFactory.GetTile(0);
+                    tile = this.tileFactory.GetBasicTile();
                 }
                 RemoveGroundTileOnTile(pos);
                 AddGameTile(tile, pos);
@@ -126,11 +126,11 @@ public class GameBoard : MonoBehaviour
     {
         if (!p.error)
         {
-            if (path != null && p.vectorPath.SequenceEqual(path.vectorPath))
-            {
-                Debug.Log("Found Same Path");
-                return;
-            }
+            //if (path != null && p.vectorPath.SequenceEqual(path.vectorPath))
+            //{
+            //    Debug.Log("Found Same Path");
+            //    return;
+            //}
             path = p;
             shortestPath.Clear();
             for (int i = 0; i < path.vectorPath.Count; i++)

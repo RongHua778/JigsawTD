@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class TurretTile : GameTile
 {
-    public override int TileLevel => 1;
-
-    public override int TileID => 1;
     [SerializeField] GameObject Turret = default;
 
     public override void TileDroped()
