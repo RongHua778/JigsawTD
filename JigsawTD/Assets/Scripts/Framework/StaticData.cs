@@ -91,6 +91,22 @@ public class StaticData : Singleton<StaticData>
         return pointsToRetrun;
     }
 
+    public static List<Vector2> GetHalfCirclePoints(int range)
+    {
+        List<Vector2> pointsToRetrun = new List<Vector2>();
+        for (int x = -range; x <= range; x++)
+        {
+            for (int y = 0; y <= range - Mathf.Abs(x); y++)
+            {
+                if (x == 0 && y == 0)
+                    continue;
+                Vector2 pos = new Vector2(x, y);
+                pointsToRetrun.Add(pos);
+            }
+        }
+        return pointsToRetrun;
+    }
+
     public static List<Vector2> GetLinePoints(int range)
     {
         List<Vector2> pointsToRetrun = new List<Vector2>();

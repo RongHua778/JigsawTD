@@ -9,9 +9,11 @@ public enum BulletType
 }
 public abstract class Bullet : GameBehavior
 {
+    protected const int enemyLayerMask = 1 << 11;
     public abstract BulletType BulletType { get; }
     protected TargetPoint target;
     Vector2 targetPos;
+    public GameObject turretParent;
     protected Vector2 TargetPos
     {
         get => BulletType != BulletType.Target ? targetPos : target.Position;
@@ -20,18 +22,22 @@ public abstract class Bullet : GameBehavior
     protected float bulletSpeed;
     protected readonly float minDistanceToDealDamage = .1f;
     protected float damage;
+    protected float sputteringRange;
+    protected float criticalRate;
     public override void OnSpawn()
     {
         base.OnSpawn();
         GameManager.Instance.nonEnemies.Add(this);
     }
 
-    public void Initialize(TargetPoint target, Vector2 targetPos, float damage, float bulletSpeed)
+    public void Initialize(TargetPoint target, Vector2 targetPos, float damage, float bulletSpeed, float sputteringRange = 0, float criticalRate = 0)
     {
         this.target = target;
         this.TargetPos = targetPos;
         this.damage = damage;
         this.bulletSpeed = bulletSpeed;
+        this.sputteringRange = sputteringRange;
+        this.criticalRate = criticalRate;
     }
 
     public override bool GameUpdate()
@@ -73,7 +79,7 @@ public abstract class Bullet : GameBehavior
 
     protected virtual void DealDamage()
     {
-        target.Enemy.ApplyDamage(damage);
+        
     }
 
 

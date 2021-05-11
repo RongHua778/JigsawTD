@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BasicTile : GameTile
 {
+    public override BasicTileType BasicTileType => BasicTileType.Trap;
+
     public override void OnSpawn()
     {
 

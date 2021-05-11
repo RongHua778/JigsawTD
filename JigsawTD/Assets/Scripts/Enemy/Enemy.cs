@@ -6,11 +6,13 @@ public class Enemy : GameBehavior
 {
     public EnemyAttribute m_Attribute = default;
     Direction direction;
+    public Direction Direction { get => direction; set => direction = value; }
     DirectionChange directionChange;
+    public DirectionChange DirectionChange { get => directionChange; set => directionChange = value; }
     [SerializeField] Transform model = default;
-    GameTile tileFrom, tileTo;
+    [HideInInspector] public GameTile tileFrom, tileTo;
     Vector3 positionFrom, positionTo;
-    float progress, progressFactor;
+    float progress, progressFactor, adjust;
     float directionAngleFrom, directionAngleTo;
     float pathOffset;
 
@@ -20,7 +22,17 @@ public class Enemy : GameBehavior
     int shell;
     public int Shell { get => Mathf.Max(0, shell - BrokeShell); set => shell = value; }
     float slowRate;
-    public float SlowRate { get => slowRate; set => slowRate = value; }
+    public float SlowRate
+    {
+        get => Mathf.Min(0.8f, PathSlow + slowRate);
+        set
+        {
+            slowRate = value;
+            progressFactor = Speed * adjust;//子弹减速即时更新速度
+        }
+    }//道路减速和子弹减速，取其合
+    float pathSlow;
+    public float PathSlow { get => pathSlow; set => pathSlow = value; }
     int brokeShell;
     public int BrokeShell { get => brokeShell; set => brokeShell = value; }
 
@@ -58,6 +70,9 @@ public class Enemy : GameBehavior
             }
         }
     }
+
+
+
     public override bool GameUpdate()
     {
         if (IsDie)
@@ -77,7 +92,7 @@ public class Enemy : GameBehavior
             PrepareNextState();
             progress *= progressFactor;
         }
-        if (directionChange == DirectionChange.None)
+        if (DirectionChange == DirectionChange.None)
         {
             transform.localPosition = Vector3.LerpUnclamped(positionFrom, positionTo, progress);
         }
@@ -101,6 +116,7 @@ public class Enemy : GameBehavior
 
     }
 
+
     public void SpawnOn(GameTile tile)
     {
         Debug.Assert(tile.NextTileOnPath != null, "No where to go", this);
@@ -114,31 +130,28 @@ public class Enemy : GameBehavior
     {
         positionFrom = tileFrom.transform.localPosition;
         positionTo = tileFrom.ExitPoint;
-        direction = tileFrom.PathDirection;
-        directionChange = DirectionChange.None;
+        Direction = tileFrom.PathDirection;
+        DirectionChange = DirectionChange.None;
         model.localPosition = new Vector3(pathOffset, 0);
-        directionAngleFrom = directionAngleTo = direction.GetAngle();
+        directionAngleFrom = directionAngleTo = Direction.GetAngle();
         transform.localRotation = tileFrom.PathDirection.GetRotation();
-        progressFactor = 2f * Speed;
+        adjust = 2f;
+        progressFactor = adjust * Speed;
     }
 
     private void PrepareOutro()
     {
         positionTo = tileFrom.transform.localPosition;
-        directionChange = DirectionChange.None;
-        directionAngleTo = direction.GetAngle();
+        DirectionChange = DirectionChange.None;
+        directionAngleTo = Direction.GetAngle();
         model.localPosition = new Vector3(pathOffset, 0);
-        transform.localRotation = direction.GetRotation();
-        progressFactor = 2f * Speed;
+        transform.localRotation = Direction.GetRotation();
+        adjust = 2f;
+        progressFactor = adjust * Speed;
     }
 
     private void PrepareNextState()
     {
-
-        //执行TILETO的TILEPASS效果
-        tileTo.OnTilePass(this);
-        Buffable.Tick();
-
         tileFrom = tileTo;
         tileTo = tileTo.NextTileOnPath;
         positionFrom = positionTo;
@@ -148,10 +161,14 @@ public class Enemy : GameBehavior
             return;
         }
         positionTo = tileFrom.ExitPoint;
-        directionChange = direction.GetDirectionChangeTo(tileFrom.PathDirection);
-        direction = tileFrom.PathDirection;
+        DirectionChange = Direction.GetDirectionChangeTo(tileFrom.PathDirection);
+        Direction = tileFrom.PathDirection;
         directionAngleFrom = directionAngleTo;
-        switch (directionChange)
+
+        Buffable.Tick();//先移除BUFF再加BUFF//放在Prepare前面，因为要提前改变Path速度
+        tileFrom.OnTilePass(this);
+
+        switch (DirectionChange)
         {
             case DirectionChange.None:
                 PrepareForward();
@@ -166,36 +183,42 @@ public class Enemy : GameBehavior
                 PrepareTurnAround();
                 break;
         }
+
+
     }
 
     void PrepareForward()
     {
-        transform.localRotation = direction.GetRotation();
-        directionAngleTo = direction.GetAngle();
+        transform.localRotation = Direction.GetRotation();
+        directionAngleTo = Direction.GetAngle();
         model.localPosition = new Vector3(pathOffset, 0f);
-        progressFactor = Speed;
+        adjust = 1f;
+        progressFactor = adjust * Speed;
     }
 
     void PrepareTurnRight()
     {
         directionAngleTo = directionAngleFrom - 90f;
         model.localPosition = new Vector3(pathOffset - 0.5f, 0f);
-        transform.localPosition = positionFrom + direction.GetHalfVector();
-        progressFactor = Speed / (Mathf.PI * 0.5f * (0.5f - pathOffset));
+        transform.localPosition = positionFrom + Direction.GetHalfVector();
+        adjust = 1 / (Mathf.PI * 0.5f * (0.5f - pathOffset));
+        progressFactor = adjust * Speed;
     }
     void PrepareTurnLeft()
     {
         directionAngleTo = directionAngleFrom + 90f;
         model.localPosition = new Vector3(pathOffset + 0.5f, 0f);
-        transform.localPosition = positionFrom + direction.GetHalfVector();
-        progressFactor = Speed / (Mathf.PI * 0.5f * (0.5f + pathOffset));
+        transform.localPosition = positionFrom + Direction.GetHalfVector();
+        adjust = 1 / (Mathf.PI * 0.5f * (0.5f + pathOffset));
+        progressFactor = adjust * Speed;
     }
     void PrepareTurnAround()
     {
         directionAngleTo = directionAngleFrom + (pathOffset < 0f ? 180f : -180f);
         model.localPosition = new Vector3(pathOffset, 0);
         transform.localPosition = positionFrom;
-        progressFactor = Speed / (Mathf.PI * Mathf.Max(Mathf.Abs(pathOffset), 0.2f));
+        adjust = 1 / (Mathf.PI * Mathf.Max(Mathf.Abs(pathOffset), 0.2f));
+        progressFactor = adjust * Speed;
     }
 
     public void ApplyDamage(float amount)
@@ -203,7 +226,6 @@ public class Enemy : GameBehavior
         float damage = amount * 5 / (5 + Shell);
         CurrentHealth -= damage;
     }
-
 
 
     public override void OnSpawn()
@@ -215,7 +237,6 @@ public class Enemy : GameBehavior
     {
         model.localPosition = Vector3.zero;
         ObjectPool.Instance.UnSpawn(healthBar.gameObject);
-        Buffable.Buffs.Clear();
-
+        Buffable.RemoveAllBuffs();
     }
 }

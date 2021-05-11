@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum EnemyBuffName
 {
-    SlowDown,DealDamage,BreakShell
+    SlowDown, DealDamage, BreakShell, PathSlow, HealthBaseDamage
 }
 public abstract class EnemyBuff
 {
@@ -16,7 +16,7 @@ public abstract class EnemyBuff
     public float KeyValue;
     public Enemy Target;
 
-    public virtual void ApplyBuff(Enemy target,float keyValue,int tileCount)
+    public virtual void ApplyBuff(Enemy target, float keyValue, int tileCount)
     {
         this.Target = target;
         if (IsStackable)
@@ -42,7 +42,7 @@ public abstract class EnemyBuff
     public virtual void Tick()//先TICK再Affect
     {
         TileCount--;
-        if (TileCount <= -1)
+        if (TileCount <= 0)
         {
             End();
             IsFinished = true;
@@ -70,6 +70,32 @@ public class SlowBuff : EnemyBuff
     }
 }
 
+public class PathSlow : EnemyBuff
+{
+    public override EnemyBuffName BuffName => EnemyBuffName.PathSlow;
+    public override bool IsStackable => false;
+
+    public override void Tick()//发生转向时移除BUFF
+    {
+        if (Target.DirectionChange != DirectionChange.None)
+        {
+            End();
+            IsFinished = true;
+            return;
+        }
+    }
+
+    public override void Affect()
+    {
+        if (Target.Direction == Target.tileFrom.GetTileDirection())
+            Target.PathSlow = KeyValue;
+    }
+    public override void End()
+    {
+        Target.PathSlow = 0;
+    }
+}
+
 public class DealDamage : EnemyBuff
 {
     public override EnemyBuffName BuffName => EnemyBuffName.DealDamage;
@@ -83,7 +109,7 @@ public class DealDamage : EnemyBuff
 
     public override void End()
     {
-        
+
     }
 }
 
@@ -101,5 +127,24 @@ public class BreakShell : EnemyBuff
     public override void End()
     {
         Target.BrokeShell = 0;
+    }
+}
+
+public class HealthBaseDamage : EnemyBuff
+{
+    public override EnemyBuffName BuffName => EnemyBuffName.HealthBaseDamage;
+
+    public override bool IsStackable => false;
+
+    public override void Affect()
+    {
+        float damage = KeyValue * (Target.MaxHealth - Target.CurrentHealth);
+        Debug.Log("Deal HelathBase Damge="+damage);
+        Target.ApplyDamage(damage);
+    }
+
+    public override void End()
+    {
+
     }
 }

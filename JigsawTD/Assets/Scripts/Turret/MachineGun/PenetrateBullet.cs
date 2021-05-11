@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MachineGun_Bullet : Bullet
+public class PenetrateBullet : Bullet
 {
     public override BulletType BulletType => BulletType.Penetrate;
 

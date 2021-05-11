@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum BasicTileType
 {
-    SpawnPoint, Destination, Ground
+    SpawnPoint, Destination, Ground, Turret, Trap
 }
 [CreateAssetMenu(menuName = "Factory/TileFactory", fileName = "TileFactory")]
 public class TileFactory : GameObjectFactory

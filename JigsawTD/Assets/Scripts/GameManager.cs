@@ -24,6 +24,7 @@ public class GameManager : Singleton<GameManager>
 
     public GameBehaviorCollection enemies = new GameBehaviorCollection();
     public GameBehaviorCollection nonEnemies = new GameBehaviorCollection();
+    public GameBehaviorCollection turrets = new GameBehaviorCollection();
 
     [SerializeField, Range(0.1f, 10f)]
     float spawnSpeed = 100f;
@@ -70,7 +71,8 @@ public class GameManager : Singleton<GameManager>
         {
             if (tile == SelectingTile)
             {
-                SelectingTile.ShowTurretRange(false);
+                if (SelectingTile.BasicTileType == BasicTileType.Turret)
+                    ((TurretTile)SelectingTile).ShowTurretRange(false);
                 SelectingTile = null;
                 HideSelection();
             }
@@ -78,9 +80,11 @@ public class GameManager : Singleton<GameManager>
             {
                 if (SelectingTile != null)
                 {
-                    SelectingTile.ShowTurretRange(false);
+                    if (SelectingTile.BasicTileType == BasicTileType.Turret)
+                        ((TurretTile)SelectingTile).ShowTurretRange(false);
                 }
-                tile.ShowTurretRange(true);
+                if (tile.BasicTileType == BasicTileType.Turret)
+                    ((TurretTile)tile).ShowTurretRange(true);
                 SelectingTile = tile;
             }
         }
@@ -100,7 +104,7 @@ public class GameManager : Singleton<GameManager>
         }
         enemies.GameUpdate();
         Physics2D.SyncTransforms();
-        _board.GameUpdate();
+        turrets.GameUpdate();
         nonEnemies.GameUpdate();
 
         if (Input.GetKeyDown(KeyCode.R) && StaticData.holdingShape != null)
@@ -124,9 +128,6 @@ public class GameManager : Singleton<GameManager>
         if (IsPressingTile && Input.GetMouseButton(0))
         {
             pressCounter += Time.deltaTime;
-            //当Draggingshape!=null且大于一定值时，关闭tips显示//关闭防御塔范围显示
-            
-            //点击TIPS区域关闭显示
         }
         else
         {

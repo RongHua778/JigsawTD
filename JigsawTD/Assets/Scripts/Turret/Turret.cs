@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Turret : MonoBehaviour
+public abstract class Turret : GameBehavior
 {
     protected RangeType RangeType;
     [SerializeField] protected GameObject bulletPrefab = default;
@@ -14,9 +14,12 @@ public abstract class Turret : MonoBehaviour
     protected CompositeCollider2D detectCollider;
     GameObject rangeIndicator;
     Transform rangeParent;
-    Transform rotTrans;
+    protected Transform rotTrans;
     protected Transform shootPoint;
     protected float CheckAngle = 10f;
+
+    
+    public bool Spawned = true;
 
     List<TargetPoint> targetList = new List<TargetPoint>();
 
@@ -26,10 +29,12 @@ public abstract class Turret : MonoBehaviour
     [Header("TurretAttribute")]
     public TurretAttribute m_TurretAttribute = default;
     protected int Level = 0;
-    public float AttackDamage { get => m_TurretAttribute.TurretLevels[Level].AttackDamage; }
+    public virtual float AttackDamage { get => m_TurretAttribute.TurretLevels[Level].AttackDamage; }
     public int AttackRange { get => m_TurretAttribute.TurretLevels[Level].AttackRange; }
-    public float AttackSpeed { get => m_TurretAttribute.TurretLevels[Level].AttackSpeed; }
+    public virtual float AttackSpeed { get => m_TurretAttribute.TurretLevels[Level].AttackSpeed; }
     public float BulletSpeed { get => m_TurretAttribute.TurretLevels[Level].BulletSpeed; }
+    public float SputteringRange { get => m_TurretAttribute.TurretLevels[Level].SputteringRange; }
+    public float CriticalRate { get => m_TurretAttribute.TurretLevels[Level].CriticalRate; }
 
     private void Awake()
     {
@@ -72,13 +77,16 @@ public abstract class Turret : MonoBehaviour
         rangeIndicators.Clear();
     }
 
-    public virtual void GameUpdate()
+    public override bool GameUpdate()
     {
+        if (!Spawned)
+            return false;
         if (TrackTarget() || AcquireTarget())
         {
             RotateTowards();
             FireProjectile();
         }
+        return true;
     }
 
     private bool TrackTarget()
@@ -121,6 +129,7 @@ public abstract class Turret : MonoBehaviour
                 points = StaticData.GetCirclePoints(AttackRange);
                 break;
             case RangeType.HalfCircle:
+                points = StaticData.GetHalfCirclePoints(AttackRange);
                 break;
             case RangeType.Line:
                 points = StaticData.GetLinePoints(AttackRange);
@@ -176,10 +185,11 @@ public abstract class Turret : MonoBehaviour
     {
         Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
         bullet.transform.position = shootPoint.position;
-        bullet.Initialize(target,target.Position, AttackDamage, BulletSpeed);
+        bullet.Initialize(target, target.Position, AttackDamage, BulletSpeed);
+        bullet.turretParent = this.gameObject;
     }
 
-    private void OnDrawGizmos()
+    protected virtual void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Vector3 position = transform.position;

@@ -6,6 +6,7 @@ using UnityEngine;
 public class TurretInfo
 {
     public int AttackRange;
+    public int ForbidRange;
     public float AttackDamage;
     public float AttackSpeed;
     public float BulletSpeed;

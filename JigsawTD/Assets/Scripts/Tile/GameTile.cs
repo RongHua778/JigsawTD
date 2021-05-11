@@ -6,27 +6,38 @@ using UnityEngine.EventSystems;
 
 public abstract class GameTile : TileBase
 {
+    public abstract BasicTileType BasicTileType { get; }
     public DraggingShape m_DraggingShape { get; set; }
     //public int TileID = default;
     public int TileLevel = default;
 
     GameObject previewGlow;
+    Transform directionCheckPoint;
     public Transform tileBase { get; set; }
     public Transform tileType { get; set; }
-    public Turret TileTurret { get; set; }
+
     Direction pathDirection;
     public Direction PathDirection { get => pathDirection; set => pathDirection = value; }
     GameTile nextOnPath;
     public GameTile NextTileOnPath { get => nextOnPath; set => nextOnPath = value; }
+
+    Direction tileDirection;
+
     public Vector3 ExitPoint { get; set; }
 
-
-    private void Awake()
+    protected virtual void Awake()
     {
         previewGlow = transform.Find("PreviewGlow").gameObject;
         tileBase = transform.Find("TileBase");
         tileType = transform.Find("TileType");
-        TileTurret = transform.GetComponentInChildren<Turret>();
+        directionCheckPoint = tileType.Find("CheckPoint");
+        GetTileDirection();
+    }
+
+    public Direction GetTileDirection()
+    {
+        tileDirection = DirectionExtensions.GetDirection(transform.position, directionCheckPoint.position);
+        return tileDirection;
     }
 
     public virtual void TileDroped()
@@ -89,11 +100,5 @@ public abstract class GameTile : TileBase
         tileBase.rotation = Quaternion.identity;
     }
 
-    public void ShowTurretRange(bool show)
-    {
-        if (TileTurret != null)
-        {
-            TileTurret.ShowRange(show);
-        }
-    }
+
 }

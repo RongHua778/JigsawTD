@@ -5,6 +5,9 @@ using UnityEngine;
 public class TrapTile : GameTile
 {
     public TrapAttribute m_TrapAttribute = default;
+
+    public override BasicTileType BasicTileType => BasicTileType.Trap;
+
     public override void OnTilePass(Enemy enemy)
     {
         base.OnTilePass(enemy);

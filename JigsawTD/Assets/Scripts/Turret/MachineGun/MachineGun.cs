@@ -8,7 +8,7 @@ public class MachineGun : Turret
     {
         base.InitializeTurret();
         _rotSpeed = 0f;
-        CheckAngle = 90f;
+        CheckAngle = 45f;
     }
 
 

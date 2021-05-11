@@ -8,8 +8,8 @@ using System.Linq;
 public class GameBoard : MonoBehaviour
 {
     [SerializeField] PathLine pathLinePrefab = default;
-    
-    List<Turret> updatingTurret = new List<Turret>();
+
+
     TileFactory tileFactory;
 
     List<PathLine> pathLines = new List<PathLine>();
@@ -24,7 +24,7 @@ public class GameBoard : MonoBehaviour
     GameTile destinationPoint;
     public GameTile DestinationPoint { get => destinationPoint; set => destinationPoint = value; }
 
-    public static bool FindPath { get => shortestPath.Count >= 1;}
+    public static bool FindPath { get => shortestPath.Count >= 1; }
 
     bool showPaths = true;
     public bool ShowPaths
@@ -63,13 +63,7 @@ public class GameBoard : MonoBehaviour
         GameEvents.Instance.onSeekPath -= SeekPath;
     }
 
-    public void GameUpdate()
-    {
-        for(int i = 0; i < updatingTurret.Count; i++)
-        {
-            updatingTurret[i].GameUpdate();
-        }
-    }
+
 
     public void Initialize(Vector2Int size, Vector2Int groundSize, TileFactory tileFactory)
     {
@@ -110,8 +104,10 @@ public class GameBoard : MonoBehaviour
         tile.transform.localPosition = pos;
         CorrectTileCoord(tile);
         tiles.Add(tile);
-        if (tile.TileTurret != null)
-            updatingTurret.Add(tile.TileTurret);
+        if (tile.BasicTileType == BasicTileType.Turret)
+        {
+            GameManager.Instance.turrets.Add(((TurretTile)tile).TileTurret);
+        }
     }
 
     private void SeekPath()

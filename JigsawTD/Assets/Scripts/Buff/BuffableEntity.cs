@@ -41,4 +41,13 @@ public class BuffableEntity : MonoBehaviour
         }
     }
 
+    public void RemoveAllBuffs()
+    {
+        foreach (var buff in Buffs.Values.ToList())
+        {
+            buff.End();
+        }
+        Buffs.Clear();
+    }
+
 }
