@@ -12,6 +12,7 @@ public class TurretInfo
     public float BulletSpeed;
     public float SputteringRange;
     public float CriticalRate;
+    public List<AttackEffectInfo> AttackEffects = new List<AttackEffectInfo>();
 }
 
 public enum RangeType

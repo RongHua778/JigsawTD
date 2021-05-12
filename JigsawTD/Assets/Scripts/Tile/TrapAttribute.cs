@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class TrapInfo
+public class BuffInfo
 {
     public EnemyBuffName EnemyBuffName;
     public float KeyValue;
-    public int TileCount;
+    public float Duration;
+    public BuffInfo(EnemyBuffName name,float keyValue,float duration)
+    {
+        this.EnemyBuffName = name;
+        this.KeyValue = keyValue;
+        this.Duration = duration;
+    }
 }
 
 
 [CreateAssetMenu(menuName = "Attribute/TrapAttribute", fileName = "TrapAttribute")]
 public class TrapAttribute : LevelAttribute
 {
-    public List<TrapInfo> TrapInfos = new List<TrapInfo>();
+    public List<BuffInfo> TrapInfos = new List<BuffInfo>();
 }

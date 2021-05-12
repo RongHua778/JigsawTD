@@ -9,7 +9,8 @@ public abstract class Turret : GameBehavior
     [SerializeField] protected GameObject bulletPrefab = default;
     public const int enemyLayerMask = 1 << 11;
     protected float _rotSpeed = 10f;
-    protected TargetPoint target;
+    private TargetPoint target;
+    public TargetPoint Target { get => target; set => target = value; }
     protected List<RangeIndicator> rangeIndicators = new List<RangeIndicator>();
     protected CompositeCollider2D detectCollider;
     GameObject rangeIndicator;
@@ -36,6 +37,8 @@ public abstract class Turret : GameBehavior
     public float SputteringRange { get => m_TurretAttribute.TurretLevels[Level].SputteringRange; }
     public float CriticalRate { get => m_TurretAttribute.TurretLevels[Level].CriticalRate; }
 
+    public List<AttackEffectInfo> AttackEffectInfos => m_TurretAttribute.TurretLevels[Level].AttackEffects;
+
     private void Awake()
     {
         rangeIndicator = Resources.Load<GameObject>("Prefabs/RangeIndicator");
@@ -60,9 +63,9 @@ public abstract class Turret : GameBehavior
     {
         if (targetList.Contains(target))
         {
-            if (this.target == target)
+            if (this.Target == target)
             {
-                this.target = null;
+                this.Target = null;
             }
             targetList.Remove(target);
         }
@@ -91,7 +94,7 @@ public abstract class Turret : GameBehavior
 
     private bool TrackTarget()
     {
-        if (target == null)
+        if (Target == null)
         {
             return false;
         }
@@ -103,7 +106,7 @@ public abstract class Turret : GameBehavior
             return false;
         else
         {
-            target = targetList[UnityEngine.Random.Range(0, targetList.Count - 1)];
+            Target = targetList[UnityEngine.Random.Range(0, targetList.Count - 1)];
             return false;
         }
     }
@@ -147,9 +150,9 @@ public abstract class Turret : GameBehavior
 
     protected virtual void RotateTowards()
     {
-        if (target == null)
+        if (Target == null)
             return;
-        var dir = target.transform.position - rotTrans.position;
+        var dir = Target.transform.position - rotTrans.position;
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
         look_Rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         rotTrans.rotation = Quaternion.Lerp(rotTrans.rotation, look_Rotation, _rotSpeed * Time.deltaTime);
@@ -169,7 +172,7 @@ public abstract class Turret : GameBehavior
     {
         if (Time.time - nextAttackTime > 1 / AttackSpeed)
         {
-            if (target != null && AngleCheck())
+            if (Target != null && AngleCheck())
             {
                 Shoot();
             }
@@ -185,8 +188,7 @@ public abstract class Turret : GameBehavior
     {
         Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
         bullet.transform.position = shootPoint.position;
-        bullet.Initialize(target, target.Position, AttackDamage, BulletSpeed);
-        bullet.turretParent = this.gameObject;
+        bullet.Initialize(this);
     }
 
     protected virtual void OnDrawGizmos()
@@ -194,9 +196,9 @@ public abstract class Turret : GameBehavior
         Gizmos.color = Color.yellow;
         Vector3 position = transform.position;
         position.z -= 0.1f;
-        if (target != null)
+        if (Target != null)
         {
-            Gizmos.DrawLine(position, target.transform.position);
+            Gizmos.DrawLine(position, Target.transform.position);
         }
     }
 }

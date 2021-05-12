@@ -4,50 +4,29 @@ using UnityEngine;
 
 public enum EnemyBuffName
 {
-    SlowDown, DealDamage, BreakShell, PathSlow, HealthBaseDamage
+    SlowDown, DealDamage, BreakShell, DirectionSlow, HealthBaseDamage, DamageTarget,Stun,TileStun
 }
 public abstract class EnemyBuff
 {
     public abstract EnemyBuffName BuffName { get; }
     public bool IsFinished { get; set; }
+    public abstract bool IsTimeBase { get; }
     public abstract bool IsStackable { get; }
     public int Stacks;
-    public int TileCount;
     public float KeyValue;
     public Enemy Target;
 
-    public virtual void ApplyBuff(Enemy target, float keyValue, int tileCount)
+    public virtual void ApplyBuff(Enemy target, float keyValue, float duration)
     {
         this.Target = target;
-        if (IsStackable)
-        {
-            Stacks += (int)keyValue;
-            TileCount = tileCount;
-            Affect();
-        }
-        else
-        {
-            if (KeyValue < keyValue)
-            {
-                KeyValue = keyValue;
-                TileCount = tileCount;
-                Affect();
-            }
-        }
     }
 
 
     public abstract void Affect();
 
-    public virtual void Tick()//先TICK再Affect
+    public virtual void Tick(float delta)//先TICK再Affect
     {
-        TileCount--;
-        if (TileCount <= 0)
-        {
-            End();
-            IsFinished = true;
-            return;
-        }
+
     }
 
     public abstract void End();
@@ -55,10 +34,55 @@ public abstract class EnemyBuff
 
 }
 
-public class SlowBuff : EnemyBuff
+public abstract class TimeBuff : EnemyBuff
+{
+    public float Duration;
+
+    public override void ApplyBuff(Enemy target, float keyValue, float duration)
+    {
+        base.ApplyBuff(target, keyValue, duration);
+        KeyValue = keyValue;
+        Duration = duration;
+        Affect();
+    }
+    public override void Tick(float delta)
+    {
+        Duration -= delta;
+        if (Duration <= 0)
+        {
+            End();
+            IsFinished = true;
+        }
+    }
+}
+
+public abstract class TileBuff : EnemyBuff
+{
+    public int TileCount;
+    public override void ApplyBuff(Enemy target, float keyValue, float duration)
+    {
+        base.ApplyBuff(target, keyValue, duration);
+        KeyValue = keyValue;
+        TileCount = (int)duration;
+        Affect();
+    }
+    public override void Tick(float delta)//先TICK再Affect
+    {
+        TileCount -= (int)delta;
+        if (TileCount <= 0)
+        {
+            End();
+            IsFinished = true;
+            return;
+        }
+    }
+}
+
+public class SlowBuff : TimeBuff
 {
     public override EnemyBuffName BuffName => EnemyBuffName.SlowDown;
-    public override bool IsStackable => false;
+    public override bool IsStackable => true;
+    public override bool IsTimeBase => true;
 
     public override void Affect()
     {
@@ -70,12 +94,14 @@ public class SlowBuff : EnemyBuff
     }
 }
 
-public class PathSlow : EnemyBuff
+public class DirectionSlow : TileBuff
 {
-    public override EnemyBuffName BuffName => EnemyBuffName.PathSlow;
+    public override EnemyBuffName BuffName => EnemyBuffName.DirectionSlow;
     public override bool IsStackable => false;
 
-    public override void Tick()//发生转向时移除BUFF
+    public override bool IsTimeBase => false;
+
+    public override void Tick(float delta)//发生转向时移除BUFF
     {
         if (Target.DirectionChange != DirectionChange.None)
         {
@@ -88,23 +114,26 @@ public class PathSlow : EnemyBuff
     public override void Affect()
     {
         if (Target.Direction == Target.tileFrom.GetTileDirection())
-            Target.PathSlow = KeyValue;
+            Target.PathSlow += KeyValue;
     }
     public override void End()
     {
-        Target.PathSlow = 0;
+        Target.PathSlow -= KeyValue;
     }
 }
 
-public class DealDamage : EnemyBuff
+public class DealDamage : TileBuff
 {
     public override EnemyBuffName BuffName => EnemyBuffName.DealDamage;
 
-    public override bool IsStackable => false;
+    public override bool IsStackable => true;
+
+    public override bool IsTimeBase => false;
 
     public override void Affect()
     {
         Target.ApplyDamage(KeyValue);
+        Debug.Log("DealDamage" + KeyValue);
     }
 
     public override void End()
@@ -113,38 +142,108 @@ public class DealDamage : EnemyBuff
     }
 }
 
-public class BreakShell : EnemyBuff
+public class BreakShell : TileBuff
 {
     public override EnemyBuffName BuffName => EnemyBuffName.BreakShell;
 
     public override bool IsStackable => true;
 
+    public override bool IsTimeBase => false;
+
     public override void Affect()
     {
-        Target.BrokeShell = Stacks;
+        Target.BrokeShell += (int)KeyValue;
+        Debug.Log("BreakShell" + (int)KeyValue);
+
     }
 
     public override void End()
     {
-        Target.BrokeShell = 0;
+        Target.BrokeShell -= (int)KeyValue;
     }
 }
 
-public class HealthBaseDamage : EnemyBuff
+public class HealthBaseDamage : TileBuff
 {
     public override EnemyBuffName BuffName => EnemyBuffName.HealthBaseDamage;
 
     public override bool IsStackable => false;
 
+    public override bool IsTimeBase => false;
+
     public override void Affect()
     {
         float damage = KeyValue * (Target.MaxHealth - Target.CurrentHealth);
-        Debug.Log("Deal HelathBase Damge="+damage);
+        Debug.Log("Deal HelathBase Damge=" + damage);
         Target.ApplyDamage(damage);
     }
 
     public override void End()
     {
 
+    }
+}
+
+public class DamageTarget : TileBuff
+{
+    public override EnemyBuffName BuffName => EnemyBuffName.DamageTarget;
+
+    public override bool IsTimeBase => false;
+
+    public override bool IsStackable => false;
+
+
+    public override void Affect()
+    {
+        Debug.Log("TriggerDamageTarget" + Target.TargetDamageCounter * KeyValue);
+        Target.ApplyDamage(Target.TargetDamageCounter * KeyValue);
+        Target.TargetDamageCounter = 0;
+    }
+
+    public override void End()
+    {
+
+    }
+}
+
+public class TileStun : TileBuff
+{
+    public override EnemyBuffName BuffName => EnemyBuffName.TileStun;
+
+    public override bool IsTimeBase => false;
+
+    public override bool IsStackable => false;
+
+    public override void Affect()
+    {
+        BuffInfo info = new BuffInfo(EnemyBuffName.Stun, Target.TileStunCounter * KeyValue, 0);
+        Target.Buffable.AddBuff(info);
+        Debug.Log("TileSutn" + Target.TileStunCounter * KeyValue);
+        Target.TileStunCounter = 0;
+    }
+
+    public override void End()
+    {
+        
+    }
+}
+
+public class Stun : TimeBuff
+{
+    public override EnemyBuffName BuffName => EnemyBuffName.Stun;
+
+    public override bool IsTimeBase => true;
+
+    public override bool IsStackable => true;
+
+    public override void Affect()
+    {
+        Target.StunTime += KeyValue;
+        Debug.Log("TargetSutn" + KeyValue);
+    }
+
+    public override void End()
+    {
+        
     }
 }

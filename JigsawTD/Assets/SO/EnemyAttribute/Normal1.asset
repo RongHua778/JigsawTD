@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 100
   Speed: 1
-  Shell: 1
+  Shell: 0

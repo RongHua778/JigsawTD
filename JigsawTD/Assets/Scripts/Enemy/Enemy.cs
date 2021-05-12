@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Enemy : GameBehavior
 {
+    public float TargetDamageCounter { get; set; }
+    public int TileStunCounter { get; set; }
+    public float StunTime { get; set; }
     public EnemyAttribute m_Attribute = default;
     Direction direction;
     public Direction Direction { get => direction; set => direction = value; }
@@ -18,21 +21,29 @@ public class Enemy : GameBehavior
 
     [Header("EnemyAttribute")]
     float speed;
-    public float Speed { get => speed * (1 - SlowRate); set => speed = value; }
+    public float Speed { get => StunTime > 0 ? 0 : speed * (1 - SlowRate); set => speed = value; }
     int shell;
     public int Shell { get => Mathf.Max(0, shell - BrokeShell); set => shell = value; }
     float slowRate;
     public float SlowRate
     {
-        get => Mathf.Min(0.8f, PathSlow + slowRate);
+        get => Mathf.Min(0.8f, (PathSlow + slowRate) / (PathSlow + slowRate + 1));
         set
         {
             slowRate = value;
             progressFactor = Speed * adjust;//子弹减速即时更新速度
         }
-    }//道路减速和子弹减速，取其合
+    }
     float pathSlow;
-    public float PathSlow { get => pathSlow; set => pathSlow = value; }
+    public float PathSlow
+    {
+        get => pathSlow;
+        set
+        {
+            pathSlow = value;
+            progressFactor = Speed * adjust;//子弹减速即时更新速度
+        }
+    }
     int brokeShell;
     public int BrokeShell { get => brokeShell; set => brokeShell = value; }
 
@@ -72,13 +83,18 @@ public class Enemy : GameBehavior
     }
 
 
-
     public override bool GameUpdate()
     {
         if (IsDie)
         {
             OriginFactory.Reclaim(this);
             return false;
+        }
+        if (StunTime >= 0)
+        {
+            StunTime -= Time.deltaTime;
+            if (StunTime < 0)
+                progressFactor = Speed * adjust;
         }
         progress += Time.deltaTime * progressFactor;
         while (progress >= 1f)
@@ -165,7 +181,8 @@ public class Enemy : GameBehavior
         Direction = tileFrom.PathDirection;
         directionAngleFrom = directionAngleTo;
 
-        Buffable.Tick();//先移除BUFF再加BUFF//放在Prepare前面，因为要提前改变Path速度
+        TileStunCounter++;
+        Buffable.TileTick();//先移除BUFF再加BUFF//放在Prepare前面，因为要提前改变Path速度
         tileFrom.OnTilePass(this);
 
         switch (DirectionChange)
@@ -225,18 +242,25 @@ public class Enemy : GameBehavior
     {
         float damage = amount * 5 / (5 + Shell);
         CurrentHealth -= damage;
+        TargetDamageCounter += damage;
     }
 
 
     public override void OnSpawn()
     {
-        IsDie = false;
+
     }
 
     public override void OnUnSpawn()
     {
         model.localPosition = Vector3.zero;
         ObjectPool.Instance.UnSpawn(healthBar.gameObject);
+        IsDie = false;
+        TargetDamageCounter = 0;
+        TileStunCounter = 0;
+        PathSlow = 0;
+        SlowRate = 0;
+        BrokeShell = 0;
         Buffable.RemoveAllBuffs();
     }
 }

@@ -129,6 +129,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Attribute: {fileID: 11400000, guid: a6b4f2578a98cf54caf0ac3718b54059, type: 2}
   model: {fileID: 7619665209501119904}
+  tileFrom: {fileID: 0}
+  tileTo: {fileID: 0}
 --- !u!114 &3616903904554418895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,6 +187,7 @@ GameObject:
   - component: {fileID: 1900518670408692583}
   - component: {fileID: 7372573104823191232}
   - component: {fileID: 6941142978531091582}
+  - component: {fileID: 236055208716200946}
   m_Layer: 11
   m_Name: GFX
   m_TagString: Enemy
@@ -285,3 +288,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b287204cbbc96b64ea356ded954df546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &236055208716200946
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8441449879656583668}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

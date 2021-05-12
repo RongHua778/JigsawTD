@@ -22,6 +22,7 @@ MonoBehaviour:
   - {fileID: 3568044695007039410, guid: 7561f5f3bdfe9cf4486ea710b7a3922a, type: 3}
   - {fileID: 3568044695007039410, guid: cf46f8a30a266dc428fa8ce7cbd63612, type: 3}
   - {fileID: 3568044695007039410, guid: 7e7a0ddb1ff47644686ad6418b271fd3, type: 3}
+  - {fileID: 3568044695007039410, guid: f6d73c6dad6a8b64c9e0a60c6338d7be, type: 3}
   levelTileChance:
   - 0
   - 100

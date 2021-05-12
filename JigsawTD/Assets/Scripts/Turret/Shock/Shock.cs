@@ -30,7 +30,7 @@ public class Shock : Turret
 
     private void SelfRotateControl()
     {
-        if (target != null)
+        if (Target != null)
             RotSpeed += changeSpeed * Time.deltaTime;
         else
             RotSpeed -= 2 * changeSpeed * Time.deltaTime;
@@ -41,7 +41,7 @@ public class Shock : Turret
     {
         Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
         bullet.transform.position = shootPoint.position;
-        bullet.Initialize(target, transform.position, AttackDamage, BulletSpeed, SputteringRange);
+        bullet.Initialize(this);
     }
 
     protected override void OnDrawGizmos()

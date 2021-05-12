@@ -13,7 +13,7 @@ public class TrapTile : GameTile
         base.OnTilePass(enemy);
         if (m_TrapAttribute.TrapInfos.Count <= 0)
             return;
-        foreach (TrapInfo trap in m_TrapAttribute.TrapInfos)
+        foreach (BuffInfo trap in m_TrapAttribute.TrapInfos)
         {
             enemy.Buffable.AddBuff(trap);
         }

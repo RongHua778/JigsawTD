@@ -11,38 +11,84 @@ public abstract class Bullet : GameBehavior
 {
     protected const int enemyLayerMask = 1 << 11;
     public abstract BulletType BulletType { get; }
-    protected TargetPoint target;
+    private TargetPoint target;
+    public TargetPoint Target { get => target; set => target = value; }
     Vector2 targetPos;
-    public GameObject turretParent;
+    public Turret turretParent;
+    private List<AttackEffectInfo> attackEffectInfos;
     protected Vector2 TargetPos
     {
-        get => BulletType != BulletType.Target ? targetPos : target.Position;
+        get => BulletType != BulletType.Target ? targetPos : Target.Position;
         set => targetPos = value;
     }
+
+
     protected float bulletSpeed;
     protected readonly float minDistanceToDealDamage = .1f;
-    protected float damage;
-    protected float sputteringRange;
-    protected float criticalRate;
+    private float damage;
+    public float Damage { get => damage; set => damage = value; }
+    private float sputteringRange;
+    public float SputteringRange { get => sputteringRange; set => sputteringRange = value; }
+
+    private float criticalRate;
+    public float CriticalRate { get => criticalRate; set => criticalRate = value; }
+
+
     public override void OnSpawn()
     {
         base.OnSpawn();
         GameManager.Instance.nonEnemies.Add(this);
     }
 
-    public void Initialize(TargetPoint target, Vector2 targetPos, float damage, float bulletSpeed, float sputteringRange = 0, float criticalRate = 0)
+    public override void OnUnSpawn()
     {
-        this.target = target;
-        this.TargetPos = targetPos;
-        this.damage = damage;
-        this.bulletSpeed = bulletSpeed;
-        this.sputteringRange = sputteringRange;
-        this.criticalRate = criticalRate;
+        base.OnUnSpawn();
+    }
+
+    public void Initialize(Turret turret, Vector2? pos = null)
+    {
+        this.turretParent = turret;
+        this.Target = turret.Target;
+        this.TargetPos = pos ?? turret.Target.Position;
+        this.Damage = turret.AttackDamage;
+        this.bulletSpeed = turret.BulletSpeed;
+        this.SputteringRange = turret.SputteringRange;
+        this.CriticalRate = turret.CriticalRate;
+        this.attackEffectInfos = turret.AttackEffectInfos;
+        TriggerShootEffect();
+    }
+
+    protected void TriggerShootEffect()
+    {
+        if (attackEffectInfos.Count > 0)
+        {
+            foreach (AttackEffectInfo info in attackEffectInfos)
+            {
+                AttackEffect effect = AttackEffectFactory.GetEffect((int)info.EffectName);
+                effect.bullet = this;
+                effect.KeyValue = info.KeyValue;
+                effect.Shoot();
+            }
+        }
+    }
+
+    protected void TriggerHitEffect(Enemy target)
+    {
+        if (attackEffectInfos.Count > 0)
+        {
+            foreach (AttackEffectInfo info in attackEffectInfos)
+            {
+                AttackEffect effect = AttackEffectFactory.GetEffect((int)info.EffectName);
+                effect.bullet = this;
+                effect.KeyValue = info.KeyValue;
+                effect.Hit(target);
+            }
+        }
     }
 
     public override bool GameUpdate()
     {
-        if (target.Enemy.IsDie || !target.Enemy.gameObject.activeSelf)
+        if (Target.Enemy.IsDie || !Target.Enemy.gameObject.activeSelf)
         {
             ReclaimBullet();
             return false;
@@ -79,7 +125,7 @@ public abstract class Bullet : GameBehavior
 
     protected virtual void DealDamage()
     {
-        
+
     }
 
 
