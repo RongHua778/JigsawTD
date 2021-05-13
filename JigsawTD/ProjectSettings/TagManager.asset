@@ -22,8 +22,8 @@ TagManager:
   - ImportantPoint
   - TempTile
   - Enemy
-  - 
-  - 
+  - TempGround
+  - TempTurret
   - 
   - 
   - 

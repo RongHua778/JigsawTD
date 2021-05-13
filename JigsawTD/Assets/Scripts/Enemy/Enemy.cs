@@ -261,6 +261,7 @@ public class Enemy : GameBehavior
         PathSlow = 0;
         SlowRate = 0;
         BrokeShell = 0;
+        StunTime = 0;
         Buffable.RemoveAllBuffs();
     }
 }

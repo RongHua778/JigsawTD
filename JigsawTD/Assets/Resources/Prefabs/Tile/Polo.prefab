@@ -184,7 +184,7 @@ SpriteRenderer:
   m_SortingLayerID: -1642744281
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 16b5833e912b4124c86c0ff5ddcfab99, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 55d1322e4bfb4db4a90c0d2476a99b8f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -297,7 +297,7 @@ SpriteRenderer:
   m_SortingLayerID: -1642744281
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 2f866d234fdcb594cb99ad9b24bbaa74, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9ded6d6e3486ba04aa9907b672b4bfba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -365,7 +365,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9179870020333665588}
-  - component: {fileID: 1029889417135179916}
+  - component: {fileID: 3947039678590777200}
   m_Layer: 10
   m_Name: TileType
   m_TagString: Untagged
@@ -390,7 +390,7 @@ Transform:
   m_Father: {fileID: 6604616035422911932}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1029889417135179916
+--- !u!114 &3947039678590777200
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -399,12 +399,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4617212374467823460}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0793b8d0356b2fa48ae64805ed6483a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c6a8b775f5743f489da9c2ba16a2f1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 3850126010392176229, guid: c07565a3bb33e2547853d7e983019346, type: 3}
+  bulletPrefab: {fileID: 0}
   Spawned: 1
-  m_TurretAttribute: {fileID: 11400000, guid: 7a632e108e590034fb17f70e165e2898, type: 2}
+  m_TurretAttribute: {fileID: 11400000, guid: f91eb09cc50d5ca4da3088ee82a91732, type: 2}
 --- !u!1 &6195695841050206438
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,7 +505,7 @@ GameObject:
   - component: {fileID: 6317956750879752327}
   - component: {fileID: 3568044695007039410}
   m_Layer: 10
-  m_Name: Shock
+  m_Name: Polo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -567,7 +567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _offsetCoord: {x: 0, y: 0}
-  TileLevel: 1
+  TileLevel: 4
   Turret: {fileID: 3630730106229569036}
 --- !u!1 &7521166759708259578
 GameObject:

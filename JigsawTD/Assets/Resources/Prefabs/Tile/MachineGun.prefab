@@ -373,6 +373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3850126010392176229, guid: f22cf9b0a0803b242aac9b92dc875dc6, type: 3}
+  Spawned: 1
   m_TurretAttribute: {fileID: 11400000, guid: 6c3131e68b56a9b4db13891b470a159b, type: 2}
 --- !u!1 &6195695841050206438
 GameObject:
@@ -473,7 +474,7 @@ GameObject:
   - component: {fileID: 6604616035422911932}
   - component: {fileID: 6317956750879752327}
   - component: {fileID: 3568044695007039410}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: MachineGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}

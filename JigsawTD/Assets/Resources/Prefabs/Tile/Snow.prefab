@@ -267,7 +267,7 @@ SpriteRenderer:
   m_SortingLayerID: -1642744281
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 50b6298bbf000e24ea6d32657168717e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2f866d234fdcb594cb99ad9b24bbaa74, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -474,7 +474,7 @@ GameObject:
   - component: {fileID: 6604616035422911932}
   - component: {fileID: 6317956750879752327}
   - component: {fileID: 3568044695007039410}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Snow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

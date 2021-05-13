@@ -14,7 +14,7 @@ public abstract class Bullet : GameBehavior
     private TargetPoint target;
     public TargetPoint Target { get => target; set => target = value; }
     Vector2 targetPos;
-    public Turret turretParent;
+    [HideInInspector] public Turret turretParent;
     private List<AttackEffectInfo> attackEffectInfos;
     protected Vector2 TargetPos
     {

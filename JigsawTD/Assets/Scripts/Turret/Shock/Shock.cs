@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Shock : Turret
 {
-    public override float AttackSpeed => base.AttackSpeed * (1 + RotSpeed / 360);
+    public override float AttackSpeed => base.AttackSpeed * (1 + RotSpeed / 180);
     float changeSpeed = 60f;
     float rotSpeed = 0;
     float RotSpeed { get => rotSpeed; set => rotSpeed = Mathf.Clamp(value, 0, 360); }
@@ -40,8 +40,9 @@ public class Shock : Turret
     protected override void Shoot()
     {
         Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
-        bullet.transform.position = shootPoint.position;
-        bullet.Initialize(this);
+        bullet.transform.position = 0.3f * Random.insideUnitCircle.normalized + (Vector2)transform.position;
+        Vector2 targetPos = (bullet.transform.position - transform.position).normalized * (AttackRange + 1) + transform.position;
+        bullet.Initialize(this, targetPos);
     }
 
     protected override void OnDrawGizmos()

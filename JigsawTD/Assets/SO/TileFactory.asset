@@ -23,10 +23,14 @@ MonoBehaviour:
   - {fileID: 3568044695007039410, guid: cf46f8a30a266dc428fa8ce7cbd63612, type: 3}
   - {fileID: 3568044695007039410, guid: 7e7a0ddb1ff47644686ad6418b271fd3, type: 3}
   - {fileID: 3568044695007039410, guid: f6d73c6dad6a8b64c9e0a60c6338d7be, type: 3}
+  - {fileID: 3568044695007039410, guid: 4ce61665656640249b97041fdf5b3dce, type: 3}
+  - {fileID: 3568044695007039410, guid: 62942efd9d8b4ee49bf8748db1e399e6, type: 3}
+  - {fileID: 3568044695007039410, guid: 66d1c9792fdea6440858041d5eb9e8f4, type: 3}
   levelTileChance:
   - 0
-  - 100
-  - 100
+  - 0
+  - 0
+  - 0
   - 100
   groundTile: {fileID: 458233090153635530, guid: 616c0c537063af4489540002ccbcbb03, type: 3}
   spawnPoint: {fileID: -6666671750581329292, guid: ee9b6e8057f37354682685fcae0e7645, type: 3}

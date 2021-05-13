@@ -175,6 +175,7 @@ public class GameBoard : MonoBehaviour
             {
                 GroundTile groundTile = tileFactory.GetGroundTile();
                 groundTile.transform.localPosition = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
+                groundTile.transform.localPosition += Vector3.forward * 0.1f;
                 CorrectTileCoord(groundTile);
                 groundTiles.Add(groundTile);
             }
@@ -201,6 +202,8 @@ public class GameBoard : MonoBehaviour
         if (gameTile != null)
         {
             tiles.Remove(gameTile);
+            if (GameManager.SelectingTile == gameTile)
+                GameManager.SelectingTile = null;
             ObjectPool.Instance.UnSpawn(gameTile.gameObject);
         }
     }
@@ -210,8 +213,9 @@ public class GameBoard : MonoBehaviour
         GroundTile groundTile = GetTile(pos, LayerMask.GetMask(StaticData.GroundTileMask)) as GroundTile;
         if (groundTile != null)
         {
-            groundTiles.Remove(groundTile);
-            ObjectPool.Instance.UnSpawn(groundTile.gameObject);
+            //groundTiles.Remove(groundTile);
+            groundTile.gameObject.layer = LayerMask.NameToLayer(StaticData.TempGroundMask);
+            //ObjectPool.Instance.UnSpawn(groundTile.gameObject);
         }
     }
 
@@ -225,7 +229,7 @@ public class GameBoard : MonoBehaviour
 
 
 
-    public TileBase GetTile(Vector3 origin, LayerMask layer)
+    public static TileBase GetTile(Vector3 origin, LayerMask layer)
     {
         RaycastHit2D hit;
         hit = Physics2D.Raycast(origin, Vector3.forward, Mathf.Infinity, layer);

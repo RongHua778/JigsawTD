@@ -10,31 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
-  m_Name: ShockAttribute
+  m_Name: UltraAttribute
   m_EditorClassIdentifier: 
-  RangeType: 0
+  RangeType: 1
   TurretLevels:
-  - AttackRange: 1
-    ForbidRange: 0
-    AttackDamage: 1
-    AttackSpeed: 2
-    BulletSpeed: 2
-    SputteringRange: 0
+  - AttackRange: 4
+    ForbidRange: 2
+    AttackDamage: 30
+    AttackSpeed: 0.2
+    BulletSpeed: 8
+    SputteringRange: 2
     CriticalRate: 0
     AttackEffects: []
-  - AttackRange: 1
-    ForbidRange: 0
-    AttackDamage: 2
-    AttackSpeed: 2.2
-    BulletSpeed: 2
-    SputteringRange: 0
+  - AttackRange: 4
+    ForbidRange: 2
+    AttackDamage: 60
+    AttackSpeed: 0.25
+    BulletSpeed: 8
+    SputteringRange: 2.5
     CriticalRate: 0
     AttackEffects: []
-  - AttackRange: 1
-    ForbidRange: 0
-    AttackDamage: 3
-    AttackSpeed: 2.5
-    BulletSpeed: 2
-    SputteringRange: 0
+  - AttackRange: 4
+    ForbidRange: 2
+    AttackDamage: 90
+    AttackSpeed: 0.3
+    BulletSpeed: 8
+    SputteringRange: 3
     CriticalRate: 0
     AttackEffects: []

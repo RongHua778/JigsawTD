@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 3850126009927277739}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.2, y: 0.4, z: 0.1}
   m_Children: []
   m_Father: {fileID: 3850126010392176226}
   m_RootOrder: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
-  m_Color: {r: 1, g: 0.83519596, b: 0.15471691, a: 1}
+  m_Color: {r: 1, g: 0.9886852, b: 0.50377357, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -91,9 +91,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3850126010392176226}
-  - component: {fileID: 5081353380679039851}
+  - component: {fileID: 3403851472078358663}
   m_Layer: 0
-  m_Name: Bullet_Shock
+  m_Name: Bullet_Ultra
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,7 +114,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5081353380679039851
+--- !u!114 &3403851472078358663
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3850126010392176229}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8da4001dcb25ad244beae3cf98d317b7, type: 3}
+  m_Script: {fileID: 11500000, guid: efe64772fdf4ebe499cd2c97842c5c55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   turretParent: {fileID: 0}

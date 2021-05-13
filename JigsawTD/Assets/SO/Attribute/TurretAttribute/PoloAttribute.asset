@@ -10,31 +10,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
-  m_Name: ShockAttribute
+  m_Name: PoloAttribute
   m_EditorClassIdentifier: 
   RangeType: 0
   TurretLevels:
   - AttackRange: 1
     ForbidRange: 0
-    AttackDamage: 1
-    AttackSpeed: 2
-    BulletSpeed: 2
+    AttackDamage: 0
+    AttackSpeed: 0
+    BulletSpeed: 0
     SputteringRange: 0
     CriticalRate: 0
     AttackEffects: []
+    PoloEffects:
+    - EffectType: 0
+      KeyValue: 1
   - AttackRange: 1
     ForbidRange: 0
-    AttackDamage: 2
-    AttackSpeed: 2.2
-    BulletSpeed: 2
+    AttackDamage: 0
+    AttackSpeed: 0
+    BulletSpeed: 0
     SputteringRange: 0
     CriticalRate: 0
     AttackEffects: []
+    PoloEffects: []
   - AttackRange: 1
     ForbidRange: 0
-    AttackDamage: 3
-    AttackSpeed: 2.5
-    BulletSpeed: 2
+    AttackDamage: 0
+    AttackSpeed: 0
+    BulletSpeed: 0
     SputteringRange: 0
     CriticalRate: 0
     AttackEffects: []
+    PoloEffects: []

@@ -17,8 +17,9 @@ public class TileFactory : GameObjectFactory
     private List<GameTile> Level1Tiles;
     private List<GameTile> Level2Tiles;
     private List<GameTile> Level3Tiles;
+    private List<GameTile> Level4Tiles;
 
-    [SerializeField] float[] levelTileChance = new float[4];
+    [SerializeField] float[] levelTileChance = new float[5];
     [SerializeField] GroundTile groundTile = default;
     [SerializeField] GameTile spawnPoint = default;
     [SerializeField] GameTile destinationTile = default;
@@ -31,6 +32,7 @@ public class TileFactory : GameObjectFactory
         Level1Tiles = new List<GameTile>();
         Level2Tiles = new List<GameTile>();
         Level3Tiles = new List<GameTile>();
+        Level4Tiles = new List<GameTile>();
         foreach (GameTile tile in tiles)
         {
             switch (tile.TileLevel)
@@ -46,6 +48,9 @@ public class TileFactory : GameObjectFactory
                     break;
                 case 3:
                     Level3Tiles.Add(tile);
+                    break;
+                case 4:
+                    Level4Tiles.Add(tile);
                     break;
                 default:
                     Debug.Assert(false, "定义了错误的TILE等级");
@@ -109,6 +114,8 @@ public class TileFactory : GameObjectFactory
                 return Level2Tiles[Random.Range(0, Level2Tiles.Count)];
             case 3:
                 return Level3Tiles[Random.Range(0, Level3Tiles.Count)];
+            case 4:
+                return Level4Tiles[Random.Range(0, Level4Tiles.Count)];
         }
         Debug.Assert(false, "使用了错误的等级获取TILE");
         return null;

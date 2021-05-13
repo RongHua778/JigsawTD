@@ -59,24 +59,18 @@ public class DraggingShape : DraggingActions
     private void SetGroundForPathFinding()
     {
         Physics2D.SyncTransforms();
-        if (groundTileList.Count > 0)
-        {
-            foreach (var groundTile in groundTileList)
-            {
-                groundTile.enabled = true;
-            }
-            groundTileList.Clear();
-        }
+        EnableGroundColliders();
         RaycastHit2D hitInfo;
         foreach (Collider2D col in detectCollider)
         {
-            hitInfo = Physics2D.Raycast(col.transform.position, Vector3.forward, Mathf.Infinity, LayerMask.GetMask(StaticData.GroundTileMask));
+            hitInfo = Physics2D.Raycast(col.transform.position, Vector3.forward, Mathf.Infinity, StaticData.RunTimeFindPathLayer);
             if (hitInfo.collider != null)
                 groundTileList.Add(hitInfo.collider);
         }
         foreach (var groundTile in groundTileList)
         {
             groundTile.enabled = false;
+            //groundTile.gameObject.layer=LayerMask.NameToLayer(StaticData.TempGroundMask);
         }
 
     }
@@ -167,6 +161,7 @@ public class DraggingShape : DraggingActions
                 GameEvents.Instance.Message("必须有道路连接起点和终点");
                 return;
             }
+            EnableGroundColliders();
             GameEvents.Instance.AddTiles(tileShape.tiles);
             StaticData.holdingShape = null;
             Destroy(this.gameObject);
@@ -180,6 +175,19 @@ public class DraggingShape : DraggingActions
             GameEvents.Instance.Message("必须覆盖或与已有区域相连");
         }
     }
+
+    private void EnableGroundColliders()
+    {
+        if (groundTileList.Count > 0)
+        {
+            foreach (var groundTile in groundTileList)
+            {
+                groundTile.enabled = true;
+            }
+            groundTileList.Clear();
+        }
+    }
+
     public void StartDragging()
     {
         isDragging = true;

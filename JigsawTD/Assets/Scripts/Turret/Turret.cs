@@ -19,10 +19,10 @@ public abstract class Turret : GameBehavior
     protected Transform shootPoint;
     protected float CheckAngle = 10f;
 
-    
+
     public bool Spawned = true;
 
-    List<TargetPoint> targetList = new List<TargetPoint>();
+    protected List<TargetPoint> targetList = new List<TargetPoint>();
 
     float nextAttackTime;
     Quaternion look_Rotation;
@@ -31,7 +31,8 @@ public abstract class Turret : GameBehavior
     public TurretAttribute m_TurretAttribute = default;
     protected int Level = 0;
     public virtual float AttackDamage { get => m_TurretAttribute.TurretLevels[Level].AttackDamage; }
-    public int AttackRange { get => m_TurretAttribute.TurretLevels[Level].AttackRange; }
+    public virtual int AttackRange { get => m_TurretAttribute.TurretLevels[Level].AttackRange; }
+    public int ForbidRange { get => m_TurretAttribute.TurretLevels[Level].ForbidRange; }
     public virtual float AttackSpeed { get => m_TurretAttribute.TurretLevels[Level].AttackSpeed; }
     public float BulletSpeed { get => m_TurretAttribute.TurretLevels[Level].BulletSpeed; }
     public float SputteringRange { get => m_TurretAttribute.TurretLevels[Level].SputteringRange; }
@@ -52,6 +53,35 @@ public abstract class Turret : GameBehavior
     public virtual void InitializeTurret()
     {
         GenerateRange();
+        rotTrans.localRotation = Quaternion.identity;
+    }
+
+    public virtual void TriggerPoloEffect(bool value)
+    {
+        if (m_TurretAttribute.TurretLevels[Level].PoloEffects.Count > 0)
+        {
+            List<Vector2> poss = StaticData.GetCirclePoints(AttackRange, ForbidRange);
+            foreach (var polo in m_TurretAttribute.TurretLevels[Level].PoloEffects)
+            {
+                switch (polo.EffectType)
+                {
+                    case PoloEffectType.RangeIntensify:
+                        foreach (var pos in poss)
+                        {
+                            GroundTile groungTile = GameBoard.GetTile(pos + (Vector2)transform.position, StaticData.GetGroundLayer) as GroundTile;
+                            groungTile.RangeIntensify += value ? polo.KeyValue : -polo.KeyValue;
+                        }
+                        break;
+                    case PoloEffectType.AttackIntensify:
+                        foreach (var pos in poss)
+                        {
+                            GroundTile groungTile = GameBoard.GetTile(pos + (Vector2)transform.position, StaticData.GetGroundLayer) as GroundTile;
+                            groungTile.AttackIntensify += value ? polo.KeyValue : -polo.KeyValue;
+                        }
+                        break;
+                }
+            }
+        }
     }
 
     public void AddTarget(TargetPoint target)
@@ -59,7 +89,7 @@ public abstract class Turret : GameBehavior
         targetList.Add(target);
     }
 
-    public void RemoveTarget(TargetPoint target)
+    public virtual void RemoveTarget(TargetPoint target)
     {
         if (targetList.Contains(target))
         {
@@ -129,13 +159,13 @@ public abstract class Turret : GameBehavior
         switch (RangeType)
         {
             case RangeType.Circle:
-                points = StaticData.GetCirclePoints(AttackRange);
+                points = StaticData.GetCirclePoints(AttackRange, ForbidRange);
                 break;
             case RangeType.HalfCircle:
-                points = StaticData.GetHalfCirclePoints(AttackRange);
+                points = StaticData.GetHalfCirclePoints(AttackRange, ForbidRange);
                 break;
             case RangeType.Line:
-                points = StaticData.GetLinePoints(AttackRange);
+                points = StaticData.GetLinePoints(AttackRange, ForbidRange);
                 break;
         }
         foreach (Vector2 point in points)
@@ -158,7 +188,7 @@ public abstract class Turret : GameBehavior
         rotTrans.rotation = Quaternion.Lerp(rotTrans.rotation, look_Rotation, _rotSpeed * Time.deltaTime);
     }
 
-    private bool AngleCheck()
+    protected bool AngleCheck()
     {
         var angleCheck = Quaternion.Angle(rotTrans.rotation, look_Rotation);
         if (angleCheck < CheckAngle)
