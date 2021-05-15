@@ -91,7 +91,7 @@ public class GameBoard : MonoBehaviour
                 {
                     tile = this.tileFactory.GetBasicTile();
                 }
-                RemoveGroundTileOnTile(pos);
+                //RemoveGroundTileOnTile(tile, pos);
                 AddGameTile(tile, pos);
             }
         }
@@ -100,6 +100,13 @@ public class GameBoard : MonoBehaviour
 
     private void AddGameTile(GameTile tile, Vector2 pos)
     {
+        GroundTile groundTile = GetTile(pos, StaticData.GetGroundLayer) as GroundTile;
+        if (groundTile != null)
+        {
+            groundTile.TileAbrove = tile;
+            groundTile.gameObject.layer = LayerMask.NameToLayer(StaticData.TempGroundMask);
+        }
+        tile.m_GroundTile = groundTile;
         tile.gameObject.layer = LayerMask.NameToLayer(StaticData.ConcreteTileMask);
         tile.transform.localPosition = pos;
         CorrectTileCoord(tile);
@@ -108,6 +115,7 @@ public class GameBoard : MonoBehaviour
         {
             GameManager.Instance.turrets.Add(((TurretTile)tile).TileTurret);
         }
+        groundTile.TriggerIntensify();
     }
 
     private void SeekPath()
@@ -189,9 +197,11 @@ public class GameBoard : MonoBehaviour
             tile.GetComponent<ReusableObject>().SetBackToParent();
             Vector3 pos = new Vector3(tile.transform.position.x, tile.transform.position.y, 0);
             RemoveGameTileOnTile(pos);
-            RemoveGroundTileOnTile(pos);
             tile.SetPreviewing(false);
             AddGameTile(tile, pos);
+        }
+        foreach(GameTile tile in newTiles)
+        {
             tile.TileDroped();
         }
     }
@@ -208,16 +218,17 @@ public class GameBoard : MonoBehaviour
         }
     }
 
-    private void RemoveGroundTileOnTile(Vector3 pos)
-    {
-        GroundTile groundTile = GetTile(pos, LayerMask.GetMask(StaticData.GroundTileMask)) as GroundTile;
-        if (groundTile != null)
-        {
-            //groundTiles.Remove(groundTile);
-            groundTile.gameObject.layer = LayerMask.NameToLayer(StaticData.TempGroundMask);
-            //ObjectPool.Instance.UnSpawn(groundTile.gameObject);
-        }
-    }
+    //private void RemoveGroundTileOnTile(GameTile tile, Vector3 pos)
+    //{
+    //    GroundTile groundTile = GetTile(pos, LayerMask.GetMask(StaticData.GroundTileMask)) as GroundTile;
+    //    if (groundTile != null)
+    //    {
+    //        //groundTiles.Remove(groundTile);
+    //        groundTile.TileAbrove = tile;
+    //        groundTile.gameObject.layer = LayerMask.NameToLayer(StaticData.TempGroundMask);
+    //        //ObjectPool.Instance.UnSpawn(groundTile.gameObject);
+    //    }
+    //}
 
     private void CorrectTileCoord(TileBase tile)
     {

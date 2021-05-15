@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Laser : Turret
 {
-    public override float AttackSpeed => base.AttackSpeed * (1 + SpeedIntensify);
-    float speedIntensify;
-    float SpeedIntensify { get => speedIntensify; set => speedIntensify = Mathf.Min(3, value); }
+    public override float AttackSpeed => base.AttackSpeed * (1 + SpeedUp);
+    float speedUp;
+    float SpeedUp { get => speedUp; set => speedUp = Mathf.Min(3, value); }
     float SpeedPerSecond = .5f;
     [SerializeField] LineRenderer lineSR = default;
 
@@ -17,9 +17,9 @@ public class Laser : Turret
         return true;
     }
 
-    public override void InitializeTurret()
+    public override void InitializeTurret(GameTile tile)
     {
-        base.InitializeTurret();
+        base.InitializeTurret(tile);
         CheckAngle = 10f;
         lineSR.positionCount = 2;
 
@@ -31,7 +31,7 @@ public class Laser : Turret
         {
             if (this.Target == target)
             {
-                SpeedIntensify = 0;
+                SpeedUp = 0;
                 this.Target = null;
             }
             targetList.Remove(target);
@@ -44,7 +44,7 @@ public class Laser : Turret
             lineSR.enabled = true;
             lineSR.SetPosition(0, transform.position);
             lineSR.SetPosition(1, Target.Position);
-            SpeedIntensify += SpeedPerSecond * Time.deltaTime;
+            SpeedUp += SpeedPerSecond * Time.deltaTime;
         }
         else
         {

@@ -15,14 +15,16 @@ public abstract class Turret : GameBehavior
     protected CompositeCollider2D detectCollider;
     GameObject rangeIndicator;
     Transform rangeParent;
+
+
+    protected bool ShowingRange = false;
     protected Transform rotTrans;
     protected Transform shootPoint;
     protected float CheckAngle = 10f;
 
+    public bool Dropped = false;
 
-    public bool Spawned = true;
-
-    protected List<TargetPoint> targetList = new List<TargetPoint>();
+    public List<TargetPoint> targetList = new List<TargetPoint>();
 
     float nextAttackTime;
     Quaternion look_Rotation;
@@ -30,15 +32,31 @@ public abstract class Turret : GameBehavior
     [Header("TurretAttribute")]
     public TurretAttribute m_TurretAttribute = default;
     protected int Level = 0;
-    public virtual float AttackDamage { get => m_TurretAttribute.TurretLevels[Level].AttackDamage; }
-    public virtual int AttackRange { get => m_TurretAttribute.TurretLevels[Level].AttackRange; }
+    public virtual float AttackDamage { get => m_TurretAttribute.TurretLevels[Level].AttackDamage *(1+ AttackIntensify); }
+    public virtual int AttackRange { get => m_TurretAttribute.TurretLevels[Level].AttackRange + RangeIntensify; }
     public int ForbidRange { get => m_TurretAttribute.TurretLevels[Level].ForbidRange; }
-    public virtual float AttackSpeed { get => m_TurretAttribute.TurretLevels[Level].AttackSpeed; }
+    public virtual float AttackSpeed { get => m_TurretAttribute.TurretLevels[Level].AttackSpeed * (1 + SpeedIntensify); }
     public float BulletSpeed { get => m_TurretAttribute.TurretLevels[Level].BulletSpeed; }
     public float SputteringRange { get => m_TurretAttribute.TurretLevels[Level].SputteringRange; }
     public float CriticalRate { get => m_TurretAttribute.TurretLevels[Level].CriticalRate; }
 
+    float attackIntensify;
+    public float AttackIntensify { get => attackIntensify; set => attackIntensify = value; }
+    int rangeIntensify;
+    public int RangeIntensify { get => rangeIntensify; 
+        set 
+        { 
+            rangeIntensify = value; 
+            GenerateRange(); 
+        } 
+    }
+
+    float speedIntensify;
+    public float SpeedIntensify { get => speedIntensify; set => speedIntensify = value; }
+
+
     public List<AttackEffectInfo> AttackEffectInfos => m_TurretAttribute.TurretLevels[Level].AttackEffects;
+
 
     private void Awake()
     {
@@ -50,7 +68,7 @@ public abstract class Turret : GameBehavior
         RangeType = m_TurretAttribute.RangeType;
     }
 
-    public virtual void InitializeTurret()
+    public virtual void InitializeTurret(GameTile tile)
     {
         GenerateRange();
         rotTrans.localRotation = Quaternion.identity;
@@ -69,7 +87,8 @@ public abstract class Turret : GameBehavior
                         foreach (var pos in poss)
                         {
                             GroundTile groungTile = GameBoard.GetTile(pos + (Vector2)transform.position, StaticData.GetGroundLayer) as GroundTile;
-                            groungTile.RangeIntensify += value ? polo.KeyValue : -polo.KeyValue;
+                            groungTile.RangeIntensify += value ? (int)polo.KeyValue : -(int)polo.KeyValue;
+                            groungTile.TriggerIntensify();
                         }
                         break;
                     case PoloEffectType.AttackIntensify:
@@ -77,6 +96,7 @@ public abstract class Turret : GameBehavior
                         {
                             GroundTile groungTile = GameBoard.GetTile(pos + (Vector2)transform.position, StaticData.GetGroundLayer) as GroundTile;
                             groungTile.AttackIntensify += value ? polo.KeyValue : -polo.KeyValue;
+                            groungTile.TriggerIntensify();
                         }
                         break;
                 }
@@ -112,7 +132,7 @@ public abstract class Turret : GameBehavior
 
     public override bool GameUpdate()
     {
-        if (!Spawned)
+        if (!Dropped)
             return false;
         if (TrackTarget() || AcquireTarget())
         {
@@ -126,6 +146,12 @@ public abstract class Turret : GameBehavior
     {
         if (Target == null)
         {
+            return false;
+        }
+        if (!Target.Enemy.gameObject.activeSelf)
+        {
+            targetList.Remove(Target);
+            Target = null;
             return false;
         }
         return true;
@@ -143,11 +169,14 @@ public abstract class Turret : GameBehavior
 
     public void ShowRange(bool show)
     {
+        ShowingRange = show;
         foreach (var indicator in rangeIndicators)
         {
             indicator.ShowSprite(show);
         }
     }
+
+
 
     private void GenerateRange()
     {
@@ -176,6 +205,7 @@ public abstract class Turret : GameBehavior
             rangeIndicators.Add(rangeObj.GetComponent<RangeIndicator>());
         }
         detectCollider.GenerateGeometry();
+        ShowRange(ShowingRange);
     }
 
     protected virtual void RotateTowards()

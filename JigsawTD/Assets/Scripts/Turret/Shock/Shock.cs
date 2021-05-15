@@ -20,9 +20,9 @@ public class Shock : Turret
         return true;
     }
 
-    public override void InitializeTurret()
+    public override void InitializeTurret(GameTile tile)
     {
-        base.InitializeTurret();
+        base.InitializeTurret(tile);
         rotTrans.rotation = Quaternion.identity;
         RotSpeed = 0f;
         CheckAngle = 360f;

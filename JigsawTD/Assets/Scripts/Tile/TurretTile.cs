@@ -15,13 +15,13 @@ public class TurretTile : GameTile
     public override void TileDroped()
     {
         base.TileDroped();
-        TileTurret.Spawned = true;
+        TileTurret.Dropped = true;
         TileTurret.TriggerPoloEffect(true);
         Turret.layer = LayerMask.NameToLayer(StaticData.TurretMask);
     }
     public override void OnSpawn()
     {
-        TileTurret.InitializeTurret();
+        TileTurret.InitializeTurret(this);
         Turret.layer = LayerMask.NameToLayer(StaticData.TempTurretMask);
     }
 
@@ -36,10 +36,17 @@ public class TurretTile : GameTile
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
-        TileTurret.Spawned = false;
+        if (TileTurret.Dropped)
+        {
+            TileTurret.TriggerPoloEffect(false);
+        }
+        TileTurret.AttackIntensify = 0;
+        TileTurret.RangeIntensify = 0;
+        TileTurret.SpeedIntensify = 0;
+        TileTurret.targetList.Clear();
+        TileTurret.Dropped = false;
         TileTurret.RecycleRanges();
         //Turret.layer = LayerMask.NameToLayer(StaticData.TempTurretMask);
         //Turret.GetComponent<Collider2D>().enabled = true;//被覆盖时，会被射线检测disable掉groundtile层的Collider
-        TileTurret.TriggerPoloEffect(false);
     }
 }

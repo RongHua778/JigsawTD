@@ -28,7 +28,7 @@ MonoBehaviour:
   - {fileID: 3568044695007039410, guid: 66d1c9792fdea6440858041d5eb9e8f4, type: 3}
   levelTileChance:
   - 0
-  - 0
+  - 100
   - 0
   - 0
   - 100

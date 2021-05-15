@@ -4,11 +4,27 @@ using UnityEngine;
 using TMPro;
 public class GroundTile : TileBase
 {
-    float rangeIntensify;
-    public float RangeIntensify { get => rangeIntensify; set { rangeIntensify = value; txt.text = value.ToString(); } }
+    int rangeIntensify;
+
+    public GameTile TileAbrove;
+    public int RangeIntensify { get => rangeIntensify; set { rangeIntensify = value; txt.text = value.ToString(); } }
     public float AttackIntensify;
     public float SpeedIntensify;
     [SerializeField] TextMeshPro txt = default;
+
+    public void TriggerIntensify()
+    {
+        if (TileAbrove == null)
+            return;
+        if (TileAbrove.BasicTileType == BasicTileType.Turret)
+        {
+            Turret turret = ((TurretTile)TileAbrove).TileTurret;
+            turret.RangeIntensify = RangeIntensify;
+            turret.AttackIntensify = AttackIntensify;
+            turret.SpeedIntensify = SpeedIntensify;
+        }
+    }
+
 
     public override void OnSpawn()
     {
