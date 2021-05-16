@@ -10,8 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 614735ba97a8e4b4bbdf8128289355f3, type: 3}
-  m_Name: Normal1
+  m_Name: Restorer
   m_EditorClassIdentifier: 
-  Health: 100
-  Speed: 1
-  Shell: 0
+  EnemyType: 2
+  CountPerWave: 4
+  Health: 30
+  Speed: 0.6
+  Shell: 1
+  CoolDown: 0.5
+  Prefab: {fileID: 821673950540951135, guid: 673cb8fb8fac45949b3e29c50a2d7ac3, type: 3}

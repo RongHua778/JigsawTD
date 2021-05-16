@@ -2,28 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Factory/EnemyFactory", fileName = "EnemyFactory")]
-public class EnemyFactory : GameObjectFactory
+public enum EnemyType
 {
-    [SerializeField]
-    float pathOffset = 0.4f;
+    Soilder, Runner, Restorer, Tanker
+}
+[CreateAssetMenu(menuName = "Factory/EnemyFactory", fileName = "EnemyFactory")]
+public class EnemyFactory : ScriptableObject
+{
+    [SerializeField] List<EnemyAttribute> enemies = new List<EnemyAttribute>();
+    private Dictionary<EnemyType, EnemyAttribute> EnemyDIC;
 
-    [SerializeField] Enemy prefab = default;
-    [SerializeField] HealthBar healthBarPrefab = default;
-
-    public Enemy Get()
+    public void InitializeFactory()
     {
-        Enemy instance = CreateInstance(prefab.gameObject).GetComponent<Enemy>();
-        HealthBar healthInstance = CreateInstance(healthBarPrefab.gameObject).GetComponent<HealthBar>();
-
-        instance.OriginFactory = this;
-        instance.Initialize(Random.Range(-pathOffset, pathOffset), healthInstance);
-        return instance;
+        EnemyDIC = new Dictionary<EnemyType, EnemyAttribute>();
+        foreach (var enemy in enemies)
+        {
+            EnemyDIC.Add(enemy.EnemyType, enemy);
+        }
     }
-    public void Reclaim(Enemy enemy)
+    public EnemyAttribute Get(EnemyType type)
     {
-        Debug.Assert(enemy.OriginFactory == this, "Wrong factory reclaimed!");
-        enemy.OriginFactory = null;
-        ObjectPool.Instance.UnSpawn(enemy.gameObject);
+        if (EnemyDIC.ContainsKey(type))
+        {
+            return EnemyDIC[type];
+        }
+        Debug.Log("使用了未定义的敌人类型");
+        return null;
+        //if (EnemyDIC.ContainsKey(type))
+        //{
+        //    instance = CreateInstance(EnemyDIC[type].gameObject).GetComponent<Enemy>();
+        //    HealthBar healthInstance = CreateInstance(healthBarPrefab.gameObject).GetComponent<HealthBar>();
+        //    instance.Initialize(Random.Range(-pathOffset, pathOffset), healthInstance);
+        //}
+        //else
+        //{
+        //    Debug.LogWarning("使用了未定义的敌人类型");
+        //}
     }
+
 }

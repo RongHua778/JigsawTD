@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : GameBehavior
+public abstract class Enemy : GameBehavior
 {
+    public abstract EnemyType EnemyType { get; }
     public float TargetDamageCounter { get; set; }
     public int TileStunCounter { get; set; }
     public float StunTime { get; set; }
-    public EnemyAttribute m_Attribute = default;
     Direction direction;
     public Direction Direction { get => direction; set => direction = value; }
     DirectionChange directionChange;
-    public DirectionChange DirectionChange { get => directionChange; set => directionChange = value; }
+    public virtual DirectionChange DirectionChange { get => directionChange; set => directionChange = value; }
     [SerializeField] Transform model = default;
     [HideInInspector] public GameTile tileFrom, tileTo;
     Vector3 positionFrom, positionTo;
@@ -20,8 +20,8 @@ public class Enemy : GameBehavior
     float pathOffset;
 
     [Header("EnemyAttribute")]
-    float speed;
-    public float Speed { get => StunTime > 0 ? 0 : speed * (1 - SlowRate); set => speed = value; }
+    protected float speed;
+    public virtual float Speed { get => StunTime > 0 ? 0 : speed * (1 - SlowRate); set => speed = value; }
     int shell;
     public int Shell { get => Mathf.Max(0, shell - BrokeShell); set => shell = value; }
     float slowRate;
@@ -51,15 +51,6 @@ public class Enemy : GameBehavior
     public BuffableEntity Buffable { get; private set; }
 
 
-    EnemyFactory originFacoty;
-    public EnemyFactory OriginFactory
-    {
-        get => originFacoty;
-        set
-        {
-            originFacoty = value;
-        }
-    }
 
     [Header("HealthSetting")]
     HealthBar healthBar;
@@ -87,7 +78,7 @@ public class Enemy : GameBehavior
     {
         if (IsDie)
         {
-            OriginFactory.Reclaim(this);
+            ObjectPool.Instance.UnSpawn(this.gameObject);
             return false;
         }
         if (StunTime >= 0)
@@ -101,7 +92,7 @@ public class Enemy : GameBehavior
         {
             if (tileTo == null)
             {
-                OriginFactory.Reclaim(this);
+                ObjectPool.Instance.UnSpawn(this.gameObject);
                 return false;
             }
             progress = (progress - 1f) / progressFactor;
@@ -120,15 +111,15 @@ public class Enemy : GameBehavior
         return true;
     }
 
-    public void Initialize(float pathOffset, HealthBar healthBar)
+    public void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify)
     {
         this.pathOffset = pathOffset;
         this.healthBar = healthBar;
         this.healthBar.followTrans = model;
         Buffable = this.GetComponent<BuffableEntity>();
-        MaxHealth = CurrentHealth = m_Attribute.Health;
-        Speed = m_Attribute.Speed;
-        Shell = m_Attribute.Shell;
+        CurrentHealth = MaxHealth = Mathf.RoundToInt(attribute.Health * intensify);
+        Speed = attribute.Speed;
+        Shell = attribute.Shell;
 
     }
 
@@ -238,7 +229,7 @@ public class Enemy : GameBehavior
         progressFactor = adjust * Speed;
     }
 
-    public void ApplyDamage(float amount)
+    public virtual void ApplyDamage(float amount)
     {
         float damage = amount * 5 / (5 + Shell);
         CurrentHealth -= damage;

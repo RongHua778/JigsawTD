@@ -38,6 +38,7 @@ public class GameManager : Singleton<GameManager>
 
     public static GameTile SelectingTile = null;
 
+    public EnemySpawner EnemySpawnHelper;
 
     private void OnDisable()
     {
@@ -48,9 +49,15 @@ public class GameManager : Singleton<GameManager>
     {
         GameEvents.Instance.onTileClick += TileClick;
         GameEvents.Instance.onTileUp += TileUp;
+        _enemyFactory.InitializeFactory();
         _tileFactory.InitializeFactory();
         _board.Initialize(_startSize, _groundSize, _tileFactory);
+
+        EnemySpawnHelper = this.GetComponent<EnemySpawner>();
+        EnemySpawnHelper.LevelInitialize(_enemyFactory);
     }
+
+
 
 
     private TileShape GetRandomNewShape()
@@ -93,15 +100,16 @@ public class GameManager : Singleton<GameManager>
 
     void Update()
     {
-        if (GameBoard.FindPath)
-        {
-            spawnProgress += spawnSpeed * Time.deltaTime;
-            while (spawnProgress >= 1f)
-            {
-                spawnProgress -= 1f;
-                SpawnEnemy();
-            }
-        }
+        //if (GameBoard.FindPath)
+        //{
+        //    spawnProgress += spawnSpeed * Time.deltaTime;
+        //    while (spawnProgress >= 1f)
+        //    {
+        //        spawnProgress -= 1f;
+        //        SpawnEnemy();
+        //    }
+        //}
+        EnemySpawnHelper.GameUpdate();
         enemies.GameUpdate();
         Physics2D.SyncTransforms();
         turrets.GameUpdate();
@@ -153,10 +161,10 @@ public class GameManager : Singleton<GameManager>
         selection.SetActive(false);
     }
 
-    private void SpawnEnemy()
+    public void SpawnEnemy(EnemySequence sequence)
     {
+        Enemy enemy = EnemySpawnHelper.SpawnEnemy(sequence.EnemyAttribute, sequence.Intensify);
         GameTile tile = _board.SpawnPoint;
-        Enemy enemy = _enemyFactory.Get();
         enemy.SpawnOn(tile);
         enemies.Add(enemy);
     }

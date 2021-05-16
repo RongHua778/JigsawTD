@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29bf6815976e66244aecc8c1b7b1456b, type: 3}
   m_Name: EnemyFactory
   m_EditorClassIdentifier: 
-  pathOffset: 0.2
-  prefab: {fileID: 3149575588098138726, guid: 0a0eaa2abe1fb674fa53f8a4364f22be, type: 3}
-  healthBarPrefab: {fileID: 904725062044126347, guid: 2362ca59ddd854447ba882941722eec4, type: 3}
+  enemies:
+  - {fileID: 11400000, guid: a2fa830bad8e11c448623ce28354a1bd, type: 2}
+  - {fileID: 11400000, guid: a6b4f2578a98cf54caf0ac3718b54059, type: 2}
+  - {fileID: 11400000, guid: 52077df3b03c9b446a10d3ec4b279ff5, type: 2}
+  - {fileID: 11400000, guid: 8efd383e225b02844a5ac997f1e5f924, type: 2}
