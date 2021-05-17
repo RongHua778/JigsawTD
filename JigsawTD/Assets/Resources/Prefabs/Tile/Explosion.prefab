@@ -157,7 +157,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _offsetCoord: {x: 0, y: 0}
-  TileLevel: 3
+  TileLevel: 4
+  m_GroundTile: {fileID: 0}
   m_TrapAttribute: {fileID: 11400000, guid: 0c2811512d8e2c347af8dec98aa3165e, type: 2}
 --- !u!1 &7927276109108995915
 GameObject:

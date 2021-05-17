@@ -5,6 +5,8 @@ using UnityEngine;
 public abstract class Enemy : GameBehavior
 {
     public abstract EnemyType EnemyType { get; }
+
+    public int ReachDamage { get; set; }
     public float TargetDamageCounter { get; set; }
     public int TileStunCounter { get; set; }
     public float StunTime { get; set; }
@@ -78,6 +80,7 @@ public abstract class Enemy : GameBehavior
     {
         if (IsDie)
         {
+            GameEvents.Instance.EnemyDie(this);
             ObjectPool.Instance.UnSpawn(this.gameObject);
             return false;
         }
@@ -92,6 +95,7 @@ public abstract class Enemy : GameBehavior
         {
             if (tileTo == null)
             {
+                GameEvents.Instance.EnemyReach(this);
                 ObjectPool.Instance.UnSpawn(this.gameObject);
                 return false;
             }
@@ -120,6 +124,7 @@ public abstract class Enemy : GameBehavior
         CurrentHealth = MaxHealth = Mathf.RoundToInt(attribute.Health * intensify);
         Speed = attribute.Speed;
         Shell = attribute.Shell;
+        ReachDamage = attribute.ReachDamage;
 
     }
 

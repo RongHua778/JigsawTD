@@ -19,3 +19,4 @@ MonoBehaviour:
   Shell: 2
   CoolDown: 2
   Prefab: {fileID: 8538428539047822095, guid: f7b1c5b6e3f289240b40cfb7e17d87e4, type: 3}
+  ReachDamage: 3

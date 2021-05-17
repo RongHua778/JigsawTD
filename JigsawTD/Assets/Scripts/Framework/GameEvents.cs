@@ -42,4 +42,22 @@ public class GameEvents : Singleton<GameEvents>
     {
         onTileUp?.Invoke(tile);
     }
+
+    public event Action<Enemy> onEnemyReach;
+    public void EnemyReach(Enemy enemy)
+    {
+        onEnemyReach?.Invoke(enemy);
+    }
+
+    public event Action<Enemy> onEnemyDie;
+    public void EnemyDie(Enemy enemy)
+    {
+        onEnemyDie?.Invoke(enemy);
+    }
+
+    public event Action<EnemySequence> onStartNewWave;
+    public void StartNewWave(EnemySequence sequence)
+    {
+        onStartNewWave?.Invoke(sequence);
+    }
 }

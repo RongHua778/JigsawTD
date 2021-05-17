@@ -6,6 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class EnemySequence
 {
+    public int Wave;
     public EnemyAttribute EnemyAttribute;
     public int Amount;
     public float AmountIntensify;
@@ -13,8 +14,9 @@ public class EnemySequence
     public float CoolDown;
     private float SpawnTimer;
     private int SpawnCounter;
-    public EnemySequence(EnemyAttribute attribute, float intensify,float amountIntensify)
+    public EnemySequence(int wave, EnemyAttribute attribute, float intensify,float amountIntensify)
     {
+        this.Wave = wave;
         this.EnemyAttribute = attribute;
         this.AmountIntensify = amountIntensify;
         this.Amount = Mathf.RoundToInt(attribute.CountPerWave * amountIntensify);

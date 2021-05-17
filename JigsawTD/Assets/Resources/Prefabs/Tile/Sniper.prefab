@@ -373,7 +373,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3850126010392176229, guid: 2f3d9d2a3f539e04b8c171a1e5e85dde, type: 3}
-  Spawned: 1
+  Dropped: 0
+  targetList: []
   m_TurretAttribute: {fileID: 11400000, guid: b748c053e8109884e83bc34830734ae1, type: 2}
 --- !u!1 &6195695841050206438
 GameObject:
@@ -537,7 +538,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _offsetCoord: {x: 0, y: 0}
-  TileLevel: 2
+  TileLevel: 3
+  m_GroundTile: {fileID: 0}
   Turret: {fileID: 3630730106229569036}
 --- !u!1 &6764159820211702733
 GameObject:

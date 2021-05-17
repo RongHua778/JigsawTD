@@ -23,13 +23,6 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            GetSequence();
-        }
-    }
 
     public void LevelInitialize(EnemyFactory factory)
     {
@@ -40,15 +33,24 @@ public class EnemySpawner : MonoBehaviour
         {
             intensify = (10 + Mathf.Pow(i, 1.2f)) / 10;
             amountIntensify = 1 + (float)i / 10;
-            EnemySequence sequence = new EnemySequence(_enemyFactory.Get(EnemyType.Restorer), intensify, amountIntensify);
+            EnemyType type = (EnemyType)UnityEngine.Random.Range(0, 4);
+            EnemySequence sequence = new EnemySequence(i + 1, _enemyFactory.Get(type), intensify, amountIntensify);
             LevelSequence.Enqueue(sequence);
         }
-        GetSequence();
     }
 
-    private void GetSequence()
+    public void GetSequence()
     {
-        runningSequence = LevelSequence.Dequeue();
+        if (LevelSequence.Count > 0)
+        {
+            runningSequence = LevelSequence.Dequeue();
+            GameEvents.Instance.StartNewWave(runningSequence);
+        }
+        else
+        {
+            Debug.Log("Running Out Of Sequence");
+        }
+
     }
 
     public Enemy SpawnEnemy(EnemyAttribute attribute, float intensify)

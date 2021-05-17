@@ -24,7 +24,8 @@ public class StaticData : Singleton<StaticData>
 
     [Header("ProbabilitySetting")]
     public float[] TileShapeChance = default;
-
+    public int PlayerMaxHealth;
+    public int LevelMaxWave;
 
     public void GameSlowDown()
     {

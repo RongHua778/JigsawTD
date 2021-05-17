@@ -4,15 +4,19 @@ using UnityEngine;
 using Pathfinding;
 using System;
 using System.Linq;
+using PathCreation;
 
 public class GameBoard : MonoBehaviour
 {
     [SerializeField] PathLine pathLinePrefab = default;
+    List<PathLine> pathLines = new List<PathLine>();
 
+    //private PathCreator pathCreator;
+    //public MeshRenderer pathMeshHolder;
 
     TileFactory tileFactory;
 
-    List<PathLine> pathLines = new List<PathLine>();
+
     List<GroundTile> groundTiles = new List<GroundTile>();
     List<GameTile> tiles = new List<GameTile>();
     static List<GameTile> shortestPath = new List<GameTile>();
@@ -24,7 +28,7 @@ public class GameBoard : MonoBehaviour
     GameTile destinationPoint;
     public GameTile DestinationPoint { get => destinationPoint; set => destinationPoint = value; }
 
-    public static bool FindPath { get => shortestPath.Count >= 1; }
+    public static bool FindPath { get => path.vectorPath.Count > 0; }
 
     bool showPaths = true;
     public bool ShowPaths
@@ -55,6 +59,9 @@ public class GameBoard : MonoBehaviour
     {
         GameEvents.Instance.onAddTiles += RePlaceTiles;
         GameEvents.Instance.onSeekPath += SeekPath;
+
+        //pathCreator = this.GetComponent<PathCreator>();
+        //pathMeshHolder.sortingLayerName = "UI";
     }
 
     private void OnDisable()
@@ -130,19 +137,13 @@ public class GameBoard : MonoBehaviour
     {
         if (!p.error)
         {
-            //if (path != null && p.vectorPath.SequenceEqual(path.vectorPath))
-            //{
-            //    Debug.Log("Found Same Path");
-            //    return;
-            //}
-            path = p;
-            shortestPath.Clear();
-            for (int i = 0; i < path.vectorPath.Count; i++)
+            if (path != null && p.vectorPath.SequenceEqual(path.vectorPath))
             {
-                GameTile tile = GetTile(path.vectorPath[i], StaticData.PathLayer) as GameTile;
-                shortestPath.Add(tile);
+                Debug.Log("Found Same Path");
+                return;
             }
-            GetTilePath();
+            path = p;
+            ShowPath(path);
             Debug.Log("Find Path!");
         }
         else
@@ -157,21 +158,44 @@ public class GameBoard : MonoBehaviour
         }
     }
 
-    private void GetTilePath()
+    public void GetPathTiles()
     {
-        foreach (PathLine pl in pathLines)
+        shortestPath.Clear();
+        for (int i = 0; i < path.vectorPath.Count; i++)
         {
-            ObjectPool.Instance.UnSpawn(pl.gameObject);
+            GameTile tile = GetTile(path.vectorPath[i], StaticData.PathLayer) as GameTile;
+            shortestPath.Add(tile);
         }
         for (int i = 1; i < shortestPath.Count; i++)
         {
             shortestPath[i - 1].NextTileOnPath = shortestPath[i];
             shortestPath[i - 1].ExitPoint = (shortestPath[i].transform.position + shortestPath[i - 1].transform.position) * 0.5f;
             shortestPath[i - 1].PathDirection = DirectionExtensions.GetDirection(shortestPath[i - 1].transform.position, shortestPath[i - 1].ExitPoint);
+        }
+    }
+
+    private void ShowPath(Path path)
+    {
+        foreach (PathLine pl in pathLines)
+        {
+            ObjectPool.Instance.UnSpawn(pl.gameObject);
+        }
+        //for (int i = 1; i < shortestPath.Count; i++)
+        //{
+        //    shortestPath[i - 1].NextTileOnPath = shortestPath[i];
+        //    shortestPath[i - 1].ExitPoint = (shortestPath[i].transform.position + shortestPath[i - 1].transform.position) * 0.5f;
+        //    shortestPath[i - 1].PathDirection = DirectionExtensions.GetDirection(shortestPath[i - 1].transform.position, shortestPath[i - 1].ExitPoint);
+        //    PathLine pathLine = ObjectPool.Instance.Spawn(pathLinePrefab.gameObject).GetComponent<PathLine>();
+        //    pathLine.ShowPath(new Vector3[] { (Vector2)shortestPath[i - 1].transform.position, (Vector2)shortestPath[i].transform.position });
+        //    pathLines.Add(pathLine);
+        //}
+        for (int i = 1; i < path.vectorPath.Count; i++)
+        {
             PathLine pathLine = ObjectPool.Instance.Spawn(pathLinePrefab.gameObject).GetComponent<PathLine>();
-            pathLine.ShowPath(new Vector3[] { (Vector2)shortestPath[i - 1].transform.position, (Vector2)shortestPath[i].transform.position });
+            pathLine.ShowPath(new Vector3[] { (Vector2)path.vectorPath[i - 1], (Vector2)path.vectorPath[i] });
             pathLines.Add(pathLine);
         }
+
     }
 
     private void GenerateGroundTiles(Vector2Int groundSize)
@@ -200,7 +224,7 @@ public class GameBoard : MonoBehaviour
             tile.SetPreviewing(false);
             AddGameTile(tile, pos);
         }
-        foreach(GameTile tile in newTiles)
+        foreach (GameTile tile in newTiles)
         {
             tile.TileDroped();
         }

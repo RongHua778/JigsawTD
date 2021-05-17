@@ -12,5 +12,5 @@ public class EnemyAttribute : ScriptableObject
     public int Shell;
     public float CoolDown;
     public Enemy Prefab;
-
+    public int ReachDamage;
 }

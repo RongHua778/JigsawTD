@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyType: 2
   CountPerWave: 4
-  Health: 30
+  Health: 6
   Speed: 0.6
   Shell: 1
   CoolDown: 0.5
   Prefab: {fileID: 821673950540951135, guid: 673cb8fb8fac45949b3e29c50a2d7ac3, type: 3}
+  ReachDamage: 2
