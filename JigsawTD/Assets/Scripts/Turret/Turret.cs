@@ -31,7 +31,7 @@ public abstract class Turret : GameBehavior
 
     [Header("TurretAttribute")]
     public TurretAttribute m_TurretAttribute = default;
-    protected int Level = 0;
+    public int Level = 0;
     public virtual float AttackDamage { get => m_TurretAttribute.TurretLevels[Level].AttackDamage *(1+ AttackIntensify); }
     public virtual int AttackRange { get => m_TurretAttribute.TurretLevels[Level].AttackRange + RangeIntensify; }
     public int ForbidRange { get => m_TurretAttribute.TurretLevels[Level].ForbidRange; }

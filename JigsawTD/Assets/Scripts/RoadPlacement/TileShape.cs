@@ -5,7 +5,7 @@ using System.Linq;
 
 public enum ShapeType
 {
-    T,L,I,O
+    J,L,T,O,I
 }
 public class TileShape : MonoBehaviour
 {
@@ -29,19 +29,20 @@ public class TileShape : MonoBehaviour
     }
     public void InitializeRandomShpe(TileFactory tileFactory)
     {
-        switch (shapeType)
-        {
-            case ShapeType.T:
-                levelTileCount = Random.value > 0.3f ? 2 : 1;
-                break;
-            case ShapeType.L:
-            case ShapeType.I:
-                levelTileCount = Random.value > 0.9f ? 2 : 1;
-                break;
-            case ShapeType.O:
-                levelTileCount = Random.value > 0.5f ? 1 : 0;
-                break;
-        }
+        levelTileCount = Random.value > 0.9f ? 2 : 1;
+        //switch (shapeType)
+        //{
+        //    case ShapeType.T:
+        //        levelTileCount = Random.value > 0.3f ? 2 : 1;
+        //        break;
+        //    case ShapeType.L:
+        //    case ShapeType.I:
+        //        levelTileCount = Random.value > 0.9f ? 2 : 1;
+        //        break;
+        //    case ShapeType.O:
+        //        levelTileCount = Random.value > 0.5f ? 1 : 0;
+        //        break;
+        //}
         List<int> levelPos = StaticData.GetRandomSequence(tilePos.Length, levelTileCount).ToList();
         for (int i = 0; i < tilePos.Length; i++)
         {

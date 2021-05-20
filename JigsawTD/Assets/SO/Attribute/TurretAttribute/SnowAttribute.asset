@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
   m_Name: SnowAttribute
   m_EditorClassIdentifier: 
+  Icon: {fileID: 21300000, guid: 69bb3202d6a6c1d45a7fc6c12788a457, type: 3}
+  Name: Snow
+  Description: Shoot a snow ball to front direction. Range is Line.
   RangeType: 2
   TurretLevels:
   - AttackRange: 3
@@ -24,6 +27,7 @@ MonoBehaviour:
     AttackEffects:
     - EffectName: 1
       KeyValue: 0.8
+    PoloEffects: []
   - AttackRange: 3
     ForbidRange: 0
     AttackDamage: 6
@@ -32,6 +36,7 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     AttackEffects: []
+    PoloEffects: []
   - AttackRange: 3
     ForbidRange: 0
     AttackDamage: 9
@@ -40,3 +45,4 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     AttackEffects: []
+    PoloEffects: []

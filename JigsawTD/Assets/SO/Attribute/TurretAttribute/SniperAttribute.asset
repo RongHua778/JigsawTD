@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
   m_Name: SniperAttribute
   m_EditorClassIdentifier: 
+  Icon: {fileID: 21300000, guid: f9432b2c94b4c2747a204acf71061aa6, type: 3}
+  Name: Sniper
+  Description: Dear more damage when attacking farer target. Range is Half Circle.
   RangeType: 1
   TurretLevels:
   - AttackRange: 3
@@ -24,6 +27,7 @@ MonoBehaviour:
     AttackEffects:
     - EffectName: 0
       KeyValue: 0.5
+    PoloEffects: []
   - AttackRange: 3
     ForbidRange: 0
     AttackDamage: 20
@@ -34,6 +38,7 @@ MonoBehaviour:
     AttackEffects:
     - EffectName: 0
       KeyValue: 0.5
+    PoloEffects: []
   - AttackRange: 3
     ForbidRange: 0
     AttackDamage: 30
@@ -44,3 +49,4 @@ MonoBehaviour:
     AttackEffects:
     - EffectName: 0
       KeyValue: 0.5
+    PoloEffects: []

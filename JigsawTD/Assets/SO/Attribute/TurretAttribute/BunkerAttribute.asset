@@ -12,22 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
   m_Name: BunkerAttribute
   m_EditorClassIdentifier: 
+  Icon: {fileID: 21300000, guid: 65756f16355ed27489d3bb0e0ac7d940, type: 3}
+  Name: Bunker
+  Description: A good turret to serve as barrier. Range is Circle.
+  RangeType: 0
   TurretLevels:
   - AttackRange: 1
+    ForbidRange: 0
     AttackDamage: 3
     AttackSpeed: 2
     BulletSpeed: 12
     SputteringRange: 0
     CriticalRate: 0
+    AttackEffects: []
+    PoloEffects: []
   - AttackRange: 1
+    ForbidRange: 0
     AttackDamage: 6
     AttackSpeed: 2.2
     BulletSpeed: 12
     SputteringRange: 0
     CriticalRate: 0
+    AttackEffects: []
+    PoloEffects: []
   - AttackRange: 1
+    ForbidRange: 0
     AttackDamage: 9
     AttackSpeed: 2.4
     BulletSpeed: 12
     SputteringRange: 0
     CriticalRate: 0
+    AttackEffects: []
+    PoloEffects: []

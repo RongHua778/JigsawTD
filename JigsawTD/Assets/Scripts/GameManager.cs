@@ -83,6 +83,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (!IsLongPress)
         {
+            _levelUIManager.HideTips();
             if (tile == SelectingTile)
             {
                 if (SelectingTile.BasicTileType == BasicTileType.Turret)
@@ -98,7 +99,10 @@ public class GameManager : Singleton<GameManager>
                         ((TurretTile)SelectingTile).ShowTurretRange(false);
                 }
                 if (tile.BasicTileType == BasicTileType.Turret)
+                {
                     ((TurretTile)tile).ShowTurretRange(true);
+                }
+                _levelUIManager.ShowTileTips(tile);
                 SelectingTile = tile;
             }
         }

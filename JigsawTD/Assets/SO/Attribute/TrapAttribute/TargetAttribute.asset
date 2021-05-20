@@ -12,7 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a06a8e352dd064bab9b6bf5b84988e, type: 3}
   m_Name: TargetAttribute
   m_EditorClassIdentifier: 
-  TrapInfos:
-  - EnemyBuffName: 5
-    KeyValue: 1
-    Duration: 1
+  Icon: {fileID: 21300000, guid: be48c30df6f05ed4c8764c62c97cc9c2, type: 3}
+  Name: Target Trap
+  Description: Deal 20%/30%/40% of the damage it took since last TargetTrap.
+  LevelInfos:
+  - BuffInfos:
+    - EnemyBuffName: 5
+      KeyValue: 0.2
+      Duration: 1
+  - BuffInfos:
+    - EnemyBuffName: 5
+      KeyValue: 0.3
+      Duration: 1
+  - BuffInfos:
+    - EnemyBuffName: 5
+      KeyValue: 0.4
+      Duration: 1

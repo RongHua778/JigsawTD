@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
   m_Name: UltraAttribute
   m_EditorClassIdentifier: 
+  Icon: {fileID: 21300000, guid: f288911aca0fdda45b24999f09f1ef35, type: 3}
+  Name: Ultra
+  Description: Deal AOE damage. Range is Half Circle.
   RangeType: 1
   TurretLevels:
   - AttackRange: 4
@@ -22,6 +25,7 @@ MonoBehaviour:
     SputteringRange: 2
     CriticalRate: 0
     AttackEffects: []
+    PoloEffects: []
   - AttackRange: 4
     ForbidRange: 2
     AttackDamage: 60
@@ -30,6 +34,7 @@ MonoBehaviour:
     SputteringRange: 2.5
     CriticalRate: 0
     AttackEffects: []
+    PoloEffects: []
   - AttackRange: 4
     ForbidRange: 2
     AttackDamage: 90
@@ -38,3 +43,4 @@ MonoBehaviour:
     SputteringRange: 3
     CriticalRate: 0
     AttackEffects: []
+    PoloEffects: []

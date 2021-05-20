@@ -352,4 +352,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _offsetCoord: {x: 0, y: 0}
   TileLevel: 2
+  m_GroundTile: {fileID: 0}
   m_TrapAttribute: {fileID: 11400000, guid: 201af454a56b147428bcc12e84b17d0b, type: 2}
+  TrapLevel: 0

@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a06a8e352dd064bab9b6bf5b84988e, type: 3}
   m_Name: DamageDirAttribute
   m_EditorClassIdentifier: 
-  TrapInfos: []
+  Icon: {fileID: 0}
+  Name: DamageArrow
+  Description: 
+  LevelInfos: []

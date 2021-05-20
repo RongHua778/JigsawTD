@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using System.Linq;
 
 public class LevelUIManager : MonoBehaviour
 {
@@ -10,12 +11,15 @@ public class LevelUIManager : MonoBehaviour
     GameObject messagePanel;
     [SerializeField]
     TMP_Text messageTxt;
+    [SerializeField] TileTips turretTipPrefab, trapTipPrefab = default;
 
     [SerializeField] RoadPlacement _roadPlacament = default;
 
     [SerializeField] TMP_Text healthTxt = default;
     [SerializeField] TMP_Text coinTxt = default;
     [SerializeField] TMP_Text waveTxt = default;
+
+    List<TileTips> tips = new List<TileTips>();
     float playerHealth;
     public float PlayerHealth
     {
@@ -28,21 +32,21 @@ public class LevelUIManager : MonoBehaviour
     }
 
     int currentWave;
-    public int CurrentWave 
-    { 
+    public int CurrentWave
+    {
         get => currentWave;
         set
         {
             currentWave = Mathf.Clamp(value, 0, StaticData.Instance.LevelMaxWave);
             waveTxt.text = "WAVE " + currentWave.ToString() + "/" + StaticData.Instance.LevelMaxWave.ToString();
-        } 
+        }
     }
 
     int enemyRemain = 0;
-    public int EnemyRemain 
-    { 
+    public int EnemyRemain
+    {
         get => enemyRemain;
-        set 
+        set
         {
             enemyRemain = value;
             if (enemyRemain <= 0)
@@ -50,7 +54,7 @@ public class LevelUIManager : MonoBehaviour
                 enemyRemain = 0;
                 GameManager.Instance.TransitionToState(StateName.BuildingState);
             }
-        } 
+        }
     }
 
 
@@ -116,6 +120,47 @@ public class LevelUIManager : MonoBehaviour
         StartCoroutine(MessageCor(content));
     }
 
+    public void ShowTileTips(GameTile tile)
+    {
+        Vector2 size;
+        Vector2 pos;
+        switch (tile.BasicTileType)
+        {
+            case BasicTileType.SpawnPoint:
+            case BasicTileType.Destination:
+            case BasicTileType.Trap:
+                TrapTips trapTip = Instantiate(trapTipPrefab, this.transform) as TrapTips;
+                size = trapTip.GetComponent<RectTransform>().sizeDelta;
+                pos = new Vector2(size.x / 2 + 50, Screen.height / 2);
+                trapTip.transform.position = pos;
+                trapTip.ReadAttribute(((TrapTile)tile));
+                tips.Add(trapTip);
+                break;
+            case BasicTileType.Turret:
+                TurretTips turretTip = Instantiate(turretTipPrefab, this.transform) as TurretTips;
+                size = turretTip.GetComponent<RectTransform>().sizeDelta;
+                pos = new Vector2(size.x / 2 + 50, Screen.height / 2);
+                turretTip.transform.position = pos;
+                turretTip.ReadAttribute(((TurretTile)tile).TileTurret);
+                tips.Add(turretTip);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void HideTips()
+    {
+        if (tips.Count > 0)
+        {
+            foreach (var tip in tips.ToList())
+            {
+                tips.Remove(tip);
+                tip.Hide();
+            }
+        }
+    }
+
     IEnumerator MessageCor(string content)
     {
         messagePanel.SetActive(true);
@@ -148,4 +193,6 @@ public class LevelUIManager : MonoBehaviour
         HideArea(1);
         GameManager.Instance.TransitionToState(StateName.WaveState);
     }
+
+
 }

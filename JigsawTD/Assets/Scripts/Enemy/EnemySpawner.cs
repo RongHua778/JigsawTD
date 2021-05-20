@@ -31,7 +31,7 @@ public class EnemySpawner : MonoBehaviour
         float amountIntensify = 1;
         for (int i = 0; i < 30; i++)
         {
-            intensify = (10 + Mathf.Pow(i, 1.2f)) / 10;
+            intensify = 0.75f * (i + 1);
             amountIntensify = 1 + (float)i / 10;
             EnemyType type = (EnemyType)UnityEngine.Random.Range(0, 4);
             EnemySequence sequence = new EnemySequence(i + 1, _enemyFactory.Get(type), intensify, amountIntensify);

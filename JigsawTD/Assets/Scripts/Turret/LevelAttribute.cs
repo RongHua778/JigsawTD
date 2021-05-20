@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class LevelAttribute : ScriptableObject
 {
-
+    public Sprite Icon;
+    public string Name;
+    public string Description;
     public virtual void Upgrade()
     {
 

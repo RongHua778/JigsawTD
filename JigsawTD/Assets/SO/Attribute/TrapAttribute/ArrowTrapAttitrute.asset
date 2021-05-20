@@ -12,7 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a06a8e352dd064bab9b6bf5b84988e, type: 3}
   m_Name: ArrowTrapAttitrute
   m_EditorClassIdentifier: 
-  TrapInfos:
-  - EnemyBuffName: 3
-    KeyValue: 0.5
-    Duration: 1
+  Icon: {fileID: 21300000, guid: f867635e5adc79f4bb2508e9e9ae454f, type: 3}
+  Name: ArrowTrap
+  Description: Slow down enemy by 25%/35%/45% until it changes direction.
+  LevelInfos:
+  - BuffInfos:
+    - EnemyBuffName: 3
+      KeyValue: 0.25
+      Duration: 1
+  - BuffInfos:
+    - EnemyBuffName: 3
+      KeyValue: 0.35
+      Duration: 1
+  - BuffInfos:
+    - EnemyBuffName: 3
+      KeyValue: 0.45
+      Duration: 1

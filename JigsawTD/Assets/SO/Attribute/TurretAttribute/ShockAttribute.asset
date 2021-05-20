@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
   m_Name: ShockAttribute
   m_EditorClassIdentifier: 
+  Icon: {fileID: 21300000, guid: baf58bfb7bf76ad48b19c0d30653cbb3, type: 3}
+  Name: Shock
+  Description: Shoot multiple bullets to random direction. Increase speed every time
+    it shoots. Range is Circle.
   RangeType: 0
   TurretLevels:
   - AttackRange: 1
@@ -22,6 +26,7 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     AttackEffects: []
+    PoloEffects: []
   - AttackRange: 1
     ForbidRange: 0
     AttackDamage: 2
@@ -30,6 +35,7 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     AttackEffects: []
+    PoloEffects: []
   - AttackRange: 1
     ForbidRange: 0
     AttackDamage: 3
@@ -38,3 +44,4 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     AttackEffects: []
+    PoloEffects: []

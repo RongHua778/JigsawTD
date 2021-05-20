@@ -16,9 +16,15 @@ public class BuffInfo
     }
 }
 
+[System.Serializable]
+public class TrapInfo
+{
+    public List<BuffInfo> BuffInfos = new List<BuffInfo>();
+}
 
 [CreateAssetMenu(menuName = "Attribute/TrapAttribute", fileName = "TrapAttribute")]
 public class TrapAttribute : LevelAttribute
 {
-    public List<BuffInfo> TrapInfos = new List<BuffInfo>();
+    
+    public List<TrapInfo> LevelInfos = new List<TrapInfo>();
 }

@@ -37,6 +37,7 @@ public class TurretAttribute : LevelAttribute
 {
     public RangeType RangeType;
     public List<TurretInfo> TurretLevels = new List<TurretInfo>();
+
     public override void Upgrade()
     {
         base.Upgrade();

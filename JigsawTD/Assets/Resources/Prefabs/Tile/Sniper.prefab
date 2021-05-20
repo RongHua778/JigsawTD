@@ -376,6 +376,7 @@ MonoBehaviour:
   Dropped: 0
   targetList: []
   m_TurretAttribute: {fileID: 11400000, guid: b748c053e8109884e83bc34830734ae1, type: 2}
+  Level: 0
 --- !u!1 &6195695841050206438
 GameObject:
   m_ObjectHideFlags: 0

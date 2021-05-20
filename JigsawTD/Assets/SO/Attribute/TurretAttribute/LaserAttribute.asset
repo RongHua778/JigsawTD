@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
   m_Name: LaserAttribute
   m_EditorClassIdentifier: 
+  Icon: {fileID: 21300000, guid: 9360f6da6820e0b4c931d84ac24be35e, type: 3}
+  Name: Laser
+  Description: Gradually increase damage, reset damage intensify after switching
+    target. Range is Circle.
   RangeType: 0
   TurretLevels:
   - AttackRange: 2
@@ -22,6 +26,7 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     AttackEffects: []
+    PoloEffects: []
   - AttackRange: 2
     ForbidRange: 0
     AttackDamage: 2
@@ -30,6 +35,7 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     AttackEffects: []
+    PoloEffects: []
   - AttackRange: 2
     ForbidRange: 0
     AttackDamage: 3
@@ -38,3 +44,4 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     AttackEffects: []
+    PoloEffects: []
