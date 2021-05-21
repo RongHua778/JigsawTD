@@ -18,7 +18,7 @@ public class GroundTile : TileBase
             return;
         if (TileAbrove.BasicTileType == BasicTileType.Turret)
         {
-            Turret turret = ((TurretTile)TileAbrove).TileTurret;
+            Turret turret = ((TurretTile)TileAbrove).tile;
             turret.RangeIntensify = RangeIntensify;
             turret.AttackIntensify = AttackIntensify;
             turret.SpeedIntensify = SpeedIntensify;

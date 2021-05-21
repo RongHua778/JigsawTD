@@ -5,6 +5,8 @@ using UnityEngine;
 
 public abstract class Turret : GameBehavior
 {
+    private List<Composition> compositions;
+    private bool buildable=true;
     protected RangeType RangeType;
     [SerializeField] protected GameObject bulletPrefab = default;
     public const int enemyLayerMask = 1 << 11;
@@ -32,6 +34,7 @@ public abstract class Turret : GameBehavior
     [Header("TurretAttribute")]
     public TurretAttribute m_TurretAttribute = default;
     public int Level = 0;
+    public virtual int Quality { get => m_TurretAttribute.quality; }
     public virtual float AttackDamage { get => m_TurretAttribute.TurretLevels[Level].AttackDamage *(1+ AttackIntensify); }
     public virtual int AttackRange { get => m_TurretAttribute.TurretLevels[Level].AttackRange + RangeIntensify; }
     public int ForbidRange { get => m_TurretAttribute.TurretLevels[Level].ForbidRange; }
@@ -66,6 +69,7 @@ public abstract class Turret : GameBehavior
         rotTrans = transform.Find("RotPoint");
         shootPoint = rotTrans.Find("ShootPoint");
         RangeType = m_TurretAttribute.RangeType;
+        GenerateComposition();
     }
 
     public virtual void InitializeTurret(GameTile tile)
@@ -175,9 +179,6 @@ public abstract class Turret : GameBehavior
             indicator.ShowSprite(show);
         }
     }
-
-
-
     private void GenerateRange()
     {
         if (rangeIndicators.Count > 0)
@@ -250,7 +251,6 @@ public abstract class Turret : GameBehavior
         bullet.transform.position = shootPoint.position;
         bullet.Initialize(this);
     }
-
     protected virtual void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
@@ -260,5 +260,20 @@ public abstract class Turret : GameBehavior
         {
             Gizmos.DrawLine(position, Target.transform.position);
         }
+    }
+    private void GenerateComposition()
+    {
+        int[] tempLevel = StaticData.GetSomeRandoms(m_TurretAttribute.totalLevel, m_TurretAttribute.elementNumber);
+        int [] tempElement = new int[m_TurretAttribute.elementNumber];
+        for(int i = 0; i < m_TurretAttribute.elementNumber; i++)
+        {
+            compositions.Add(new Composition(tempLevel[i],tempElement[i]));
+        }
+    }
+   
+    private bool CheckBuildable(List<Composition> compositions)
+    {
+        
+        return false;
     }
 }

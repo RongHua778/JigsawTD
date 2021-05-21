@@ -9,8 +9,11 @@ public enum BasicTileType
 [CreateAssetMenu(menuName = "Factory/TileFactory", fileName = "TileFactory")]
 public class TileFactory : GameObjectFactory
 {
-
-    [SerializeField] List<GameTile> tiles = new List<GameTile>();
+    //**************
+    //[SerializeField] List<GameTile> tiles = new List<GameTile>();
+    [SerializeField] List<TurretTile> turretTiles = new List<TurretTile>();
+    [SerializeField] GameTile ground;
+    //**************
     private Dictionary<int, GameTile> tileDIC;
 
     private List<GameTile> Level0Tiles;
@@ -18,8 +21,9 @@ public class TileFactory : GameObjectFactory
     private List<GameTile> Level2Tiles;
     private List<GameTile> Level3Tiles;
     private List<GameTile> Level4Tiles;
+    private List<GameTile> Level5Tiles;
 
-    [SerializeField] float[] levelTileChance = new float[5];
+    [SerializeField] float[] levelTileChance = new float[6];
     [SerializeField] GroundTile groundTile = default;
     [SerializeField] GameTile spawnPoint = default;
     [SerializeField] GameTile destinationTile = default;
@@ -28,18 +32,15 @@ public class TileFactory : GameObjectFactory
     public void InitializeFactory()
     {
         //tileDIC = new Dictionary<int, GameTile>();
-        Level0Tiles = new List<GameTile>();
         Level1Tiles = new List<GameTile>();
         Level2Tiles = new List<GameTile>();
         Level3Tiles = new List<GameTile>();
         Level4Tiles = new List<GameTile>();
-        foreach (GameTile tile in tiles)
+        Level5Tiles = new List<GameTile>();
+        foreach (TurretTile tile in turretTiles)
         {
-            switch (tile.TileLevel)
+            switch (tile.tile.m_TurretAttribute.quality)
             {
-                case 0:
-                    Level0Tiles.Add(tile);
-                    break;
                 case 1:
                     Level1Tiles.Add(tile);
                     break;
@@ -51,6 +52,9 @@ public class TileFactory : GameObjectFactory
                     break;
                 case 4:
                     Level4Tiles.Add(tile);
+                    break;
+                case 5:
+                    Level5Tiles.Add(tile);
                     break;
                 default:
                     Debug.Assert(false, "定义了错误的TILE等级");
@@ -95,11 +99,12 @@ public class TileFactory : GameObjectFactory
     {
         return CreateInstance(GetRandomLevelTile(0).gameObject).GetComponent<BasicTile>();
     }
-
+    //get random塔
     public GameTile GetRandomTile()
     {
         int level = StaticData.RandomNumber(levelTileChance);
-        return CreateInstance(GetRandomLevelTile(level).gameObject).GetComponent<GameTile>();
+        //Debug.Log(level);
+        return CreateInstance(GetRandomLevelTile(level).gameObject).GetComponent<TurretTile>();
     }
 
     public GameTile GetRandomLevelTile(int level)
@@ -107,7 +112,7 @@ public class TileFactory : GameObjectFactory
         switch (level)
         {
             case 0:
-                return Level0Tiles[Random.Range(0, Level0Tiles.Count)];
+                return ground;
             case 1:
                 return Level1Tiles[Random.Range(0, Level1Tiles.Count)];
             case 2:
@@ -116,6 +121,8 @@ public class TileFactory : GameObjectFactory
                 return Level3Tiles[Random.Range(0, Level3Tiles.Count)];
             case 4:
                 return Level4Tiles[Random.Range(0, Level4Tiles.Count)];
+            case 5:
+                return Level5Tiles[Random.Range(0, Level5Tiles.Count)];
         }
         Debug.Assert(false, "使用了错误的等级获取TILE");
         return null;

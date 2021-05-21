@@ -45,3 +45,4 @@ MonoBehaviour:
     CriticalRate: 0
     AttackEffects: []
     PoloEffects: []
+  quality: 3

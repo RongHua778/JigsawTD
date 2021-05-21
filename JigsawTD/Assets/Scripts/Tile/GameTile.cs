@@ -8,7 +8,8 @@ public abstract class GameTile : TileBase
 {
     public abstract BasicTileType BasicTileType { get; }
     public DraggingShape m_DraggingShape { get; set; }
-    public int TileLevel = default;
+    //地形等级
+    //public int TileLevel = default;
     public GroundTile m_GroundTile;
     GameObject previewGlow;
     Transform directionCheckPoint;

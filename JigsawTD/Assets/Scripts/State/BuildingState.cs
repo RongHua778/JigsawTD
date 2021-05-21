@@ -10,7 +10,7 @@ public class BuildingState : State
 
     public override IEnumerator EnterState()
     {
-        Debug.Log("Eneter Building State");
+        //Debug.Log("Eneter Building State");
         yield return new WaitForSeconds(2f);
         gameManager._levelUIManager.GetNewBuildings();
         yield break;
@@ -18,7 +18,7 @@ public class BuildingState : State
 
     public override IEnumerator ExitState(State newState)
     {
-        Debug.Log("Exit Building State");
+        //Debug.Log("Exit Building State");
         gameManager.Board.GetPathTiles();
         yield return new WaitForSeconds(1f);
         gameManager.EnterNewState(newState);

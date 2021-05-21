@@ -50,3 +50,4 @@ MonoBehaviour:
     - EffectName: 0
       KeyValue: 0.5
     PoloEffects: []
+  quality: 4

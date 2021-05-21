@@ -120,7 +120,7 @@ public class GameBoard : MonoBehaviour
         tiles.Add(tile);
         if (tile.BasicTileType == BasicTileType.Turret)
         {
-            GameManager.Instance.turrets.Add(((TurretTile)tile).TileTurret);
+            GameManager.Instance.turrets.Add(((TurretTile)tile).tile);
         }
         groundTile.TriggerIntensify();
     }

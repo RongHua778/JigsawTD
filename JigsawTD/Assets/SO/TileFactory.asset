@@ -12,20 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bb392d5c0c76a340a988e90a0e2f2fa, type: 3}
   m_Name: TileFactory
   m_EditorClassIdentifier: 
-  tiles:
-  - {fileID: 1381369290962742139, guid: 557a00bbb39db9146a95b084ae54a7cb, type: 3}
-  - {fileID: 9048356806529147140, guid: 4309b8d9aff48c84f8bc65f0f15a6f5c, type: 3}
-  - {fileID: 1065283022250296622, guid: 12a5cc0b04e663c4ea6831a0f0960229, type: 3}
+  turretTiles:
   - {fileID: 3568044695007039410, guid: 6d63a6fce6ff83845ae79fbf4a5b921f, type: 3}
-  - {fileID: 2245542040433213113, guid: 61f10bd8d9c05a341a8ab0547e78cb64, type: 3}
-  - {fileID: 5851236424861579152, guid: da9843bf5326984459f1a8238d44c1a9, type: 3}
   - {fileID: 3568044695007039410, guid: 7561f5f3bdfe9cf4486ea710b7a3922a, type: 3}
+  - {fileID: 3568044695007039410, guid: 7e7a0ddb1ff47644686ad6418b271fd3, type: 3}
+  - {fileID: 3568044695007039410, guid: 4ce61665656640249b97041fdf5b3dce, type: 3}
+  - {fileID: 3568044695007039410, guid: 62942efd9d8b4ee49bf8748db1e399e6, type: 3}
   - {fileID: 3568044695007039410, guid: cf46f8a30a266dc428fa8ce7cbd63612, type: 3}
   - {fileID: 3568044695007039410, guid: 7e7a0ddb1ff47644686ad6418b271fd3, type: 3}
   - {fileID: 3568044695007039410, guid: f6d73c6dad6a8b64c9e0a60c6338d7be, type: 3}
-  - {fileID: 3568044695007039410, guid: 4ce61665656640249b97041fdf5b3dce, type: 3}
-  - {fileID: 3568044695007039410, guid: 62942efd9d8b4ee49bf8748db1e399e6, type: 3}
-  - {fileID: 3568044695007039410, guid: 66d1c9792fdea6440858041d5eb9e8f4, type: 3}
+  ground: {fileID: 1381369290962742139, guid: 557a00bbb39db9146a95b084ae54a7cb, type: 3}
   levelTileChance:
   - 0
   - 65

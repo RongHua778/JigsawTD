@@ -141,7 +141,7 @@ public class LevelUIManager : MonoBehaviour
                 size = turretTip.GetComponent<RectTransform>().sizeDelta;
                 pos = new Vector2(size.x / 2 + 50, Screen.height / 2);
                 turretTip.transform.position = pos;
-                turretTip.ReadAttribute(((TurretTile)tile).TileTurret);
+                turretTip.ReadAttribute(((TurretTile)tile).tile);
                 tips.Add(turretTip);
                 break;
             default:

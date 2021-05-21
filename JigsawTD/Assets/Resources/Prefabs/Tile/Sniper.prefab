@@ -539,9 +539,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _offsetCoord: {x: 0, y: 0}
-  TileLevel: 3
   m_GroundTile: {fileID: 0}
-  Turret: {fileID: 3630730106229569036}
+  TurretBase: {fileID: 3630730106229569036}
+  tile: {fileID: 5310905133998210070}
 --- !u!1 &6764159820211702733
 GameObject:
   m_ObjectHideFlags: 0

@@ -406,6 +406,7 @@ MonoBehaviour:
   Dropped: 0
   targetList: []
   m_TurretAttribute: {fileID: 11400000, guid: 7a632e108e590034fb17f70e165e2898, type: 2}
+  Level: 0
 --- !u!1 &6195695841050206438
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,9 +569,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _offsetCoord: {x: 0, y: 0}
-  TileLevel: 3
   m_GroundTile: {fileID: 0}
-  Turret: {fileID: 3630730106229569036}
+  TurretBase: {fileID: 3630730106229569036}
+  tile: {fileID: 1029889417135179916}
 --- !u!1 &7521166759708259578
 GameObject:
   m_ObjectHideFlags: 0

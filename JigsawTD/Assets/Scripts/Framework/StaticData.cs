@@ -21,6 +21,10 @@ public class StaticData : Singleton<StaticData>
     [Header("GameSetting")]
     public float GameSlowDownRate = default;
     public float TileSize = default;
+    //塔的最大等级
+    public static int maxLevel = 5;
+    //一共有几种元素
+    public static int elementN=5;
 
     [Header("ProbabilitySetting")]
     public float[] TileShapeChance = default;
@@ -161,5 +165,41 @@ public class StaticData : Singleton<StaticData>
             return pointsToRetrun.Except(pointsToExcept).ToList();
         }
         return pointsToRetrun;
+    }
+    //给定一个总等级，返回若干个随机数的方法
+    public static int[] GetSomeRandoms(int totalLevel,int number)
+    {
+        int[] result = new int[number];
+        while (number > 1)
+        {
+        if (number == 2)
+        {
+            int min = 1;
+            while (totalLevel - min > maxLevel)
+            {
+                min++;
+            }
+            int[] a = new int[2];
+            a[0] = Random.Range(min ,totalLevel-min+1);
+            a[1] = totalLevel - a[0];
+                Debug.Log(a[0]);
+                Debug.Log(a[1]);
+                number--;
+        }else if (number >=2)
+        {
+            int max = Mathf.Min(totalLevel - (number - 1), maxLevel);
+            int a = Random.Range(1, max);
+                Debug.Log(a);
+                totalLevel -= a;
+            result[number - 1] = a;
+            number--;
+        }
+        else
+        {
+            Debug.LogWarning("刷随机等级的算法不支持！");
+            return null;
+        }
+        }
+        return result;
     }
 }

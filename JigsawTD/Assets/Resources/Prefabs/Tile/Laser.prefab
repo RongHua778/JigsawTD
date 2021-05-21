@@ -407,6 +407,7 @@ MonoBehaviour:
   Dropped: 0
   targetList: []
   m_TurretAttribute: {fileID: 11400000, guid: 73471fcd313f1bb45a34cef6d1899899, type: 2}
+  Level: 0
   lineSR: {fileID: 8243767065218065790}
 --- !u!120 &8243767065218065790
 LineRenderer:
@@ -668,9 +669,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _offsetCoord: {x: 0, y: 0}
-  TileLevel: 4
   m_GroundTile: {fileID: 0}
-  Turret: {fileID: 3630730106229569036}
+  TurretBase: {fileID: 3630730106229569036}
+  tile: {fileID: 7322644638782432687}
 --- !u!1 &7521166759708259578
 GameObject:
   m_ObjectHideFlags: 0
