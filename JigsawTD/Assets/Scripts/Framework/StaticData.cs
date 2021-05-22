@@ -169,6 +169,18 @@ public class StaticData : Singleton<StaticData>
     //给定一个总等级，返回若干个随机数的方法
     public static int[] GetSomeRandoms(int totalLevel,int number)
     {
+        if (number < 1)
+        {
+            number = 1;
+        }
+        if (totalLevel < 1)
+        {
+            totalLevel = 1;
+        }
+        if (number > totalLevel)
+        {
+            totalLevel = number;
+        }
         int[] result = new int[number];
         while (number > 1)
         {
@@ -179,18 +191,14 @@ public class StaticData : Singleton<StaticData>
             {
                 min++;
             }
-            int[] a = new int[2];
-            a[0] = Random.Range(min ,totalLevel-min+1);
-            a[1] = totalLevel - a[0];
-                Debug.Log(a[0]);
-                Debug.Log(a[1]);
+            result[0] = Random.Range(min ,totalLevel-min+1);
+            result[1] = totalLevel - result[0];
                 number--;
         }else if (number >=2)
         {
             int max = Mathf.Min(totalLevel - (number - 1), maxLevel);
-            int a = Random.Range(1, max);
-                Debug.Log(a);
-                totalLevel -= a;
+            int a = Random.Range(1, max+1);
+            totalLevel -= a;
             result[number - 1] = a;
             number--;
         }

@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class GameBehaviorCollection
 {
-    List<GameBehavior> behaviors = new List<GameBehavior>();
+    public List<GameBehavior> behaviors = new List<GameBehavior>();
 
     public void Add(GameBehavior behavior)
     {

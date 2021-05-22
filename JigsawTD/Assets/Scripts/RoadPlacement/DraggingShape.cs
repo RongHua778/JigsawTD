@@ -122,7 +122,7 @@ public class DraggingShape : DraggingActions
         waitingForPath = true;
         yield return new WaitForSeconds(0.1f);
         SetGroundForPathFinding();
-        Debug.Log("Try FindPath");
+        //Debug.Log("Try FindPath");
         GameEvents.Instance.SeekPath();
         yield return new WaitForSeconds(0.1f);
         waitingForPath = false;

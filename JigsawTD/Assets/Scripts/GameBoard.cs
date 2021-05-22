@@ -120,7 +120,10 @@ public class GameBoard : MonoBehaviour
         tiles.Add(tile);
         if (tile.BasicTileType == BasicTileType.Turret)
         {
+            //turret的tile加入一个list
             GameManager.Instance.turrets.Add(((TurretTile)tile).tile);
+            //turret加入一个list以检测合成逻辑
+            GameManager.Instance.turretsElements.Add(tile.GetComponentInChildren<Turret>());
         }
         groundTile.TriggerIntensify();
     }

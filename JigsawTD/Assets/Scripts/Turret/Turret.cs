@@ -5,8 +5,7 @@ using UnityEngine;
 
 public abstract class Turret : GameBehavior
 {
-    private List<Composition> compositions;
-    private bool buildable=true;
+    public Composition[] compositions;
     protected RangeType RangeType;
     [SerializeField] protected GameObject bulletPrefab = default;
     public const int enemyLayerMask = 1 << 11;
@@ -34,7 +33,12 @@ public abstract class Turret : GameBehavior
     [Header("TurretAttribute")]
     public TurretAttribute m_TurretAttribute = default;
     public int Level = 0;
-    public virtual int Quality { get => m_TurretAttribute.quality; }
+    //塔的品质
+    private int quality=default;
+    //塔的元素属性
+    private Element element=default;
+    public int Quality { get => quality; }
+    public Element Element { get => element; }
     public virtual float AttackDamage { get => m_TurretAttribute.TurretLevels[Level].AttackDamage *(1+ AttackIntensify); }
     public virtual int AttackRange { get => m_TurretAttribute.TurretLevels[Level].AttackRange + RangeIntensify; }
     public int ForbidRange { get => m_TurretAttribute.TurretLevels[Level].ForbidRange; }
@@ -69,7 +73,8 @@ public abstract class Turret : GameBehavior
         rotTrans = transform.Find("RotPoint");
         shootPoint = rotTrans.Find("ShootPoint");
         RangeType = m_TurretAttribute.RangeType;
-        GenerateComposition();
+        element = m_TurretAttribute.element;
+        quality = m_TurretAttribute.quality;
     }
 
     public virtual void InitializeTurret(GameTile tile)
@@ -261,19 +266,42 @@ public abstract class Turret : GameBehavior
             Gizmos.DrawLine(position, Target.transform.position);
         }
     }
+    //根据特定参数生成配方
     private void GenerateComposition()
     {
+        compositions = new Composition[m_TurretAttribute.elementNumber];
         int[] tempLevel = StaticData.GetSomeRandoms(m_TurretAttribute.totalLevel, m_TurretAttribute.elementNumber);
         int [] tempElement = new int[m_TurretAttribute.elementNumber];
         for(int i = 0; i < m_TurretAttribute.elementNumber; i++)
         {
-            compositions.Add(new Composition(tempLevel[i],tempElement[i]));
+            compositions[i].elementRequirement = tempElement[i];
+            compositions[i].levelRequirement = tempLevel[i];
         }
     }
-   
-    private bool CheckBuildable(List<Composition> compositions)
+   //检查是否已满足可以建造的配方条件
+    public bool CheckBuildable()
     {
-        
-        return false;
+        bool result = true;
+        for(int i = 0; i < compositions.Length; i++)
+        {
+            result = result && compositions[i].obtained;
+        }
+        return result;
+    }
+    //检测每个配方是否存在在场上的方法
+    private void CheckElement()
+    {
+        List<Turret> temp = GameManager.Instance.turretsElements;
+        for (int i = 0; i < compositions.Length; i++)
+        {
+            for(int j=0;j< temp.Count; j++)
+            {
+                if (compositions[i].elementRequirement == (int)temp[j].element&&
+                    compositions[i].levelRequirement==temp[j].quality)
+                {
+                    compositions[i].obtained = true;
+                }
+            }
+        }
     }
 }

@@ -103,8 +103,8 @@ public class TileFactory : GameObjectFactory
     public GameTile GetRandomTile()
     {
         int level = StaticData.RandomNumber(levelTileChance);
-        //Debug.Log(level);
-        return CreateInstance(GetRandomLevelTile(level).gameObject).GetComponent<TurretTile>();
+        GameObject temp = CreateInstance(GetRandomLevelTile(level).gameObject);
+        return temp.GetComponent<TurretTile>();
     }
 
     public GameTile GetRandomLevelTile(int level)

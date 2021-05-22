@@ -26,6 +26,9 @@ public class GameManager : Singleton<GameManager>
     public GameBehaviorCollection nonEnemies = new GameBehaviorCollection();
     public GameBehaviorCollection turrets = new GameBehaviorCollection();
 
+    //把场上所有塔都放进去以判断合成规则的集合
+    public List<Turret> turretsElements = new List<Turret>();
+
     [SerializeField, Range(0.1f, 10f)]
     float spawnSpeed = 100f;
     float spawnProgress;
