@@ -34,9 +34,11 @@ public abstract class Turret : GameBehavior
     public TurretAttribute m_TurretAttribute = default;
     public int Level = 0;
     //塔的品质
-    private int quality=default;
+    private int quality = default;
     //塔的元素属性
-    private Element element=default;
+    private Element element = default;
+    //查看塔的状态（如是否购买了其蓝图，是否集齐了蓝图上面的配方）
+    public TurretStatus Status{get;set;}
     public int Quality { get => quality; }
     public Element Element { get => element; }
     public virtual float AttackDamage { get => m_TurretAttribute.TurretLevels[Level].AttackDamage *(1+ AttackIntensify); }

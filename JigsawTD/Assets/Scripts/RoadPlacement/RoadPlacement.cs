@@ -7,38 +7,28 @@ public class RoadPlacement : MonoBehaviour
     [SerializeField]
     TileSelect[] tileSelects = default;
     [SerializeField]
-    GameObject selectArea, confirmArea = default;
+    GameObject[] areas;
 
-    public void ShowArea(int areaID)
+    public void ShowArea(int exceptId)
     {
-        switch (areaID)
+        for(int i = 0; i < areas.Length; i++)
         {
-            case 0:
-                selectArea.SetActive(true);
-                confirmArea.SetActive(false);
-                break;
-            case 1:
-                selectArea.SetActive(false);
-                confirmArea.SetActive(true);
-                break;
+            areas[i].SetActive(false);
         }
+        areas[exceptId].SetActive(true);
     }
 
-    public void HideArea(int id)
+    public void HideArea()
     {
-        switch (id)
+        for(int i = 0; i < areas.Length; i++)
         {
-            case 0:
-                selectArea.SetActive(false);
-                break;
-            case 1:
-                confirmArea.SetActive(false);
-                break;
+            areas[i].SetActive(false);
         }
     }
 
     public void ClearAllSelections()
     {
+        HideArea();
         foreach (TileSelect select in tileSelects)
         {
             select.ClearShape();

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildingState : State
+public class MoneyState : State
 {
-    public BuildingState(GameManager gameManager) : base(gameManager)
+    public MoneyState(GameManager gameManager) : base(gameManager)
     {
     }
 
@@ -12,7 +12,7 @@ public class BuildingState : State
     {
         //Debug.Log("Eneter Building State");
         yield return new WaitForSeconds(2f);
-        gameManager._levelUIManager.Preparing();
+        gameManager._levelUIManager.GetNewBuildings();
         yield break;
     }
 

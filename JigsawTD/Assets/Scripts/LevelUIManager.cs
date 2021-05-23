@@ -18,8 +18,54 @@ public class LevelUIManager : MonoBehaviour
     [SerializeField] TMP_Text healthTxt = default;
     [SerializeField] TMP_Text coinTxt = default;
     [SerializeField] TMP_Text waveTxt = default;
+    [SerializeField] TMP_Text playerLevelTxt = default;
+    [SerializeField] TMP_Text playerLevelUpMoneyTxt = default;
+    [SerializeField] TMP_Text lotteryDrawTxt = default;
+    [SerializeField] TMP_Text luckyPointsTxt = default;
 
     List<TileTips> tips = new List<TileTips>();
+
+    int playerLevel=1;
+    public int PlayerLevel 
+    {   get => playerLevel; 
+        set 
+        { 
+            playerLevel = value;
+            playerLevelTxt.text = "LV"+ playerLevel.ToString();
+        } 
+    }
+    int playerLvUpMoney;
+    public int PlayerLvUpMoney 
+    { 
+        get => playerLvUpMoney;
+        set
+        {
+            playerLvUpMoney = value;
+            playerLevelUpMoneyTxt.text = "升级(金币): "+playerLvUpMoney.ToString();
+        }
+    }
+
+    int lotteryDraw=1;
+    public int LotteryDraw
+    {
+        get => LotteryDraw;
+        set
+        {
+            lotteryDraw = value;
+            lotteryDrawTxt.text = "抽取模块 X " + lotteryDraw.ToString();
+        }
+    }
+    int luckyPoints = 5;
+    public int LuckyPoints
+    {
+        get => luckyPoints;
+        set
+        {
+            luckyPoints = value;
+            luckyPointsTxt.text = "当前幸运点数:" + luckyPoints.ToString();
+        }
+    }
+
     float playerHealth;
     public float PlayerHealth
     {
@@ -27,7 +73,7 @@ public class LevelUIManager : MonoBehaviour
         set
         {
             playerHealth = Mathf.Clamp(value, 0, StaticData.Instance.PlayerMaxHealth);
-            healthTxt.text = playerHealth.ToString() + "/" + StaticData.Instance.PlayerMaxHealth.ToString();
+            healthTxt.text = playerLevel.ToString() + "/" + StaticData.Instance.PlayerMaxHealth.ToString();
         }
     }
 
@@ -58,7 +104,6 @@ public class LevelUIManager : MonoBehaviour
     }
 
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -68,7 +113,10 @@ public class LevelUIManager : MonoBehaviour
         GameEvents.Instance.onAddTiles += ConfirmShape;
         GameEvents.Instance.onEnemyDie += EnemyDie;
         PlayerHealth = StaticData.Instance.PlayerMaxHealth;
-
+        PlayerLevel = playerLevel;
+        PlayerLvUpMoney = playerLvUpMoney;
+        LotteryDraw = lotteryDraw;
+        LuckyPoints = luckyPoints;
     }
 
     private void OnDisable()
@@ -106,9 +154,13 @@ public class LevelUIManager : MonoBehaviour
         DisplayShape(0, GameManager.Instance.GetRandomNewShape());
         DisplayShape(1, GameManager.Instance.GetRandomNewShape());
         DisplayShape(2, GameManager.Instance.GetRandomNewShape());
-        ShowArea(0);
+        ShowArea(1);
     }
 
+    public void Preparing() 
+    { 
+        ShowArea(0);
+    }
 
     public void DisplayShape(int displayID, TileShape shape)
     {
@@ -176,11 +228,11 @@ public class LevelUIManager : MonoBehaviour
     }
     public void HideArea(int id)
     {
-        _roadPlacament.HideArea(id);
+        _roadPlacament.HideArea();
     }
     private void ConfirmShape(List<GameTile> tiles)
     {
-        ShowArea(1);
+        ShowArea(0);
     }
 
     public void ExtraDrawClick()
