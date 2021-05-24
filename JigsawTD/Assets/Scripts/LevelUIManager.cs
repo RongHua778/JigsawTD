@@ -45,16 +45,18 @@ public class LevelUIManager : MonoBehaviour
         }
     }
 
-    int lotteryDraw=1;
+    int lotteryDraw=2;
     public int LotteryDraw
     {
-        get => LotteryDraw;
+        get => lotteryDraw;
         set
         {
             lotteryDraw = value;
             lotteryDrawTxt.text = "抽取模块 X " + lotteryDraw.ToString();
         }
     }
+    //控制每回合加的幸运点数
+    int luckPointsProcess = 0;
     int luckyPoints = 5;
     public int LuckyPoints
     {
@@ -63,6 +65,16 @@ public class LevelUIManager : MonoBehaviour
         {
             luckyPoints = value;
             luckyPointsTxt.text = "当前幸运点数:" + luckyPoints.ToString();
+        }
+    }
+    int playerCoin = 10;
+    public int PlayerCoin
+    {
+        get => playerCoin;
+        set
+        {
+            playerCoin = value;
+            coinTxt.text = playerCoin.ToString();
         }
     }
 
@@ -104,6 +116,7 @@ public class LevelUIManager : MonoBehaviour
     }
 
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -117,6 +130,7 @@ public class LevelUIManager : MonoBehaviour
         PlayerLvUpMoney = playerLvUpMoney;
         LotteryDraw = lotteryDraw;
         LuckyPoints = luckyPoints;
+        PlayerCoin = playerCoin;
     }
 
     private void OnDisable()
@@ -156,9 +170,21 @@ public class LevelUIManager : MonoBehaviour
         DisplayShape(2, GameManager.Instance.GetRandomNewShape());
         ShowArea(1);
     }
-
+    //每回合开始前计算幸运点、抽取模块次数等逻辑。
     public void Preparing() 
-    { 
+    {
+        LotteryDraw++;
+        if (luckPointsProcess < 0) luckPointsProcess = 0;
+        else 
+        { 
+            if(luckPointsProcess<5)luckPointsProcess++; 
+        }
+        LuckyPoints += luckPointsProcess;
+        if (LuckyPoints >= 10)
+        {
+            LuckyPoints -= 10;
+            LotteryDraw++;
+        }
         ShowArea(0);
     }
 
@@ -237,7 +263,12 @@ public class LevelUIManager : MonoBehaviour
 
     public void ExtraDrawClick()
     {
-        GetNewBuildings();
+        if (LotteryDraw > 0)
+        {
+            LotteryDraw--;
+            luckPointsProcess = -1;
+            GetNewBuildings();
+        }
     }
 
     public void NextWaveClick()

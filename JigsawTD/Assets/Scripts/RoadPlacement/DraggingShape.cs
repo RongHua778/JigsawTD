@@ -175,6 +175,7 @@ public class DraggingShape : DraggingActions
             GameEvents.Instance.Message("必须覆盖或与已有区域相连");
         }
     }
+    //取消选择当前模块，返回模块选择界面
 
     private void EnableGroundColliders()
     {
