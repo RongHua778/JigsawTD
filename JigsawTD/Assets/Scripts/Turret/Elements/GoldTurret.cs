@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoldTurret : Turret
+public class GoldTurret:Turret
 {
-
 
 }

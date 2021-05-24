@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Sniper : Turret
 {
-    public override void InitializeTurret(GameTile tile)
+    public override void InitializeTurret(GameTile tile,int quality)
     {
-        base.InitializeTurret(tile);
+        base.InitializeTurret(tile, quality);
         _rotSpeed = 1f;
     }
 }

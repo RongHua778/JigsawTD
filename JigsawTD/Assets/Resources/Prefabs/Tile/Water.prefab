@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2174224172969267675}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalPosition: {x: 0, y: 0.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 173669962325498538}
@@ -101,7 +101,7 @@ SpriteRenderer:
   m_SortingLayerID: -1642744281
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 7860556bcf5ab834c8449433723a78c0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 08c2e617391010649aa7de03b85ad5bf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -289,7 +289,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ab93fc15e10eeb4ea1b3888f7884787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerManager: {fileID: 0}
   bulletPrefab: {fileID: 3850126010392176229, guid: 98bd253b0342caf4daf35704c5347b27, type: 3}
+  shootPoint: {fileID: 7955279244983291}
   Dropped: 0
   targetList: []
   BaseSprite: {fileID: 1619076599716742364}

@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class WoodTurret : Turret
 {
-    public override void InitializeTurret(GameTile tile)
+    public override void InitializeTurret(GameTile tile,int quality)
     {
-        base.InitializeTurret(tile);
+        base.InitializeTurret(tile, quality);
         _rotSpeed = 0f;
         CheckAngle = 45f;
     }
-
 
     protected override void Shoot()
     {

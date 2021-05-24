@@ -5,6 +5,7 @@ using UnityEngine;
 
 public abstract class Turret : GameBehavior
 {
+    public PlayerManager playerManager;
     public Composition[] compositions;
     protected RangeType RangeType;
     [SerializeField] protected GameObject bulletPrefab = default;
@@ -18,7 +19,7 @@ public abstract class Turret : GameBehavior
     Transform rangeParent;
     protected bool ShowingRange = false;
     protected Transform rotTrans;
-    protected Transform shootPoint;
+    public Transform shootPoint;
     protected float CheckAngle = 10f;
 
     public bool Dropped = false;
@@ -37,13 +38,19 @@ public abstract class Turret : GameBehavior
     public TurretAttribute m_TurretAttribute = default;
     public int Level = 0;
     //塔的品质
-    private int quality = default;
+    private int quality = 1;
     //塔的元素属性
-    private Element element = default;
+    private Element element;
     //查看塔的状态（如是否购买了其蓝图，是否集齐了蓝图上面的配方）
     public TurretStatus Status{get;set;}
-    public int Quality { get => quality; }
-    public Element Element { get => element; }
+    public int Quality { get => quality; 
+        set 
+        {
+            quality = value;
+            SetGraphic();
+        }  
+    }
+    public Element Element { get => element; set => element=value; }
     public virtual float AttackDamage { get => m_TurretAttribute.TurretLevels[Level].AttackDamage *(1+ AttackIntensify); }
     public virtual int AttackRange { get => m_TurretAttribute.TurretLevels[Level].AttackRange + RangeIntensify; }
     public int ForbidRange { get => m_TurretAttribute.TurretLevels[Level].ForbidRange; }
@@ -69,34 +76,30 @@ public abstract class Turret : GameBehavior
 
     public List<AttackEffectInfo> AttackEffectInfos => m_TurretAttribute.TurretLevels[Level].AttackEffects;
 
-
     private void Awake()
     {
         rangeIndicator = Resources.Load<GameObject>("Prefabs/RangeIndicator");
         rangeParent = transform.Find("TurretRangeCol");
         detectCollider = rangeParent.GetComponent<CompositeCollider2D>();
         rotTrans = transform.Find("RotPoint");
-        shootPoint = rotTrans.Find("ShootPoint");
         RangeType = m_TurretAttribute.RangeType;
-        element = m_TurretAttribute.element;
-        //quality = m_TurretAttribute.quality;
-        quality = UnityEngine.Random.Range(0, 5);
+        shootPoint= transform.Find("ShootPoint");
     }
 
-    public virtual void InitializeTurret(GameTile tile)
+    public virtual void InitializeTurret(GameTile tile,int quality)
     {
         GenerateRange();
         rotTrans.localRotation = Quaternion.identity;
-        SetGraphic();
-
+        this.quality = quality;
+        //SetGraphic();
     }
 
     //设置不同等级的美术资源
-    private void SetGraphic()
+    public void SetGraphic()
     {
-        shootPoint.transform.localPosition = m_TurretAttribute.TurretLevels[Quality].ShootPointOffset;
-        BaseSprite.sprite = m_TurretAttribute.TurretLevels[Quality].BaseSprite;
-        CannonSprite.sprite = m_TurretAttribute.TurretLevels[Quality].CannonSprite;
+        shootPoint.transform.localPosition = m_TurretAttribute.TurretLevels[quality - 1].ShootPointOffset;
+        BaseSprite.sprite = m_TurretAttribute.TurretLevels[quality - 1].BaseSprite;
+        CannonSprite.sprite = m_TurretAttribute.TurretLevels[quality - 1].CannonSprite;
     }
 
     public virtual void TriggerPoloEffect(bool value)

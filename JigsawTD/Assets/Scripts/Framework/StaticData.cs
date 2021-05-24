@@ -25,11 +25,14 @@ public class StaticData : Singleton<StaticData>
     public static int maxLevel = 5;
     //一共有几种元素
     public static int elementN=5;
+    //最大quality
+    public static int maxQuality = 5;
 
     [Header("ProbabilitySetting")]
     public float[] TileShapeChance = default;
     public int PlayerMaxHealth;
     public int LevelMaxWave;
+    public int PlayerMaxLevel;
 
     public void GameSlowDown()
     {

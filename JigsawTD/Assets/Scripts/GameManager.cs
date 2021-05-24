@@ -17,8 +17,8 @@ public class GameManager : Singleton<GameManager>
     //GameTileContentFactory _contentFactory = default;
     [SerializeField]
     TileShapeFactory _shapeFactory = default;
-    [SerializeField]
-    TileFactory _tileFactory = default;
+    
+    public TileFactory _tileFactory = default;
     [SerializeField]
     EnemyFactory _enemyFactory = default;
 
@@ -47,6 +47,7 @@ public class GameManager : Singleton<GameManager>
     public BuildingState buildingState;
     public WaveState waveState;
 
+    public PlayerManager playerManager;
     private void OnDisable()
     {
         GameEvents.Instance.onTileClick -= TileClick;
@@ -160,7 +161,6 @@ public class GameManager : Singleton<GameManager>
         }
 
     }
-
 
     public void HideSelection()
     {

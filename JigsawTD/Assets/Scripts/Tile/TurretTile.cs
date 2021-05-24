@@ -20,7 +20,7 @@ public class TurretTile : GameTile
     }
     public override void OnSpawn()
     {
-        tile.InitializeTurret(this);
+        tile.InitializeTurret(this,tile.Quality);
         TurretBase.layer = LayerMask.NameToLayer(StaticData.TempTurretMask);
     }
 

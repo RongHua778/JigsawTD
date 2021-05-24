@@ -24,70 +24,7 @@ public class LevelUIManager : MonoBehaviour
     [SerializeField] TMP_Text luckyPointsTxt = default;
 
     List<TileTips> tips = new List<TileTips>();
-
-    int playerLevel=1;
-    public int PlayerLevel 
-    {   get => playerLevel; 
-        set 
-        { 
-            playerLevel = value;
-            playerLevelTxt.text = "LV"+ playerLevel.ToString();
-        } 
-    }
-    int playerLvUpMoney;
-    public int PlayerLvUpMoney 
-    { 
-        get => playerLvUpMoney;
-        set
-        {
-            playerLvUpMoney = value;
-            playerLevelUpMoneyTxt.text = "升级(金币): "+playerLvUpMoney.ToString();
-        }
-    }
-
-    int lotteryDraw=2;
-    public int LotteryDraw
-    {
-        get => lotteryDraw;
-        set
-        {
-            lotteryDraw = value;
-            lotteryDrawTxt.text = "抽取模块 X " + lotteryDraw.ToString();
-        }
-    }
-    //控制每回合加的幸运点数
-    int luckPointsProcess = 0;
-    int luckyPoints = 5;
-    public int LuckyPoints
-    {
-        get => luckyPoints;
-        set
-        {
-            luckyPoints = value;
-            luckyPointsTxt.text = "当前幸运点数:" + luckyPoints.ToString();
-        }
-    }
-    int playerCoin = 10;
-    public int PlayerCoin
-    {
-        get => playerCoin;
-        set
-        {
-            playerCoin = value;
-            coinTxt.text = playerCoin.ToString();
-        }
-    }
-
-    float playerHealth;
-    public float PlayerHealth
-    {
-        get => playerHealth;
-        set
-        {
-            playerHealth = Mathf.Clamp(value, 0, StaticData.Instance.PlayerMaxHealth);
-            healthTxt.text = playerLevel.ToString() + "/" + StaticData.Instance.PlayerMaxHealth.ToString();
-        }
-    }
+    public PlayerManager playerManager;
 
     int currentWave;
     public int CurrentWave
@@ -125,12 +62,6 @@ public class LevelUIManager : MonoBehaviour
         GameEvents.Instance.onStartNewWave += NewWaveStart;
         GameEvents.Instance.onAddTiles += ConfirmShape;
         GameEvents.Instance.onEnemyDie += EnemyDie;
-        PlayerHealth = StaticData.Instance.PlayerMaxHealth;
-        PlayerLevel = playerLevel;
-        PlayerLvUpMoney = playerLvUpMoney;
-        LotteryDraw = lotteryDraw;
-        LuckyPoints = luckyPoints;
-        PlayerCoin = playerCoin;
     }
 
     private void OnDisable()
@@ -160,7 +91,7 @@ public class LevelUIManager : MonoBehaviour
 
     public void ChangePlayerHealth(int value)
     {
-        PlayerHealth += value;
+        playerManager.PlayerHealth += value;
     }
 
     public void GetNewBuildings()
@@ -173,17 +104,17 @@ public class LevelUIManager : MonoBehaviour
     //每回合开始前计算幸运点、抽取模块次数等逻辑。
     public void Preparing() 
     {
-        LotteryDraw++;
-        if (luckPointsProcess < 0) luckPointsProcess = 0;
+        playerManager.LotteryDraw++;
+        if (playerManager.luckPointsProcess < 0) playerManager.luckPointsProcess = 0;
         else 
         { 
-            if(luckPointsProcess<5)luckPointsProcess++; 
+            if(playerManager.luckPointsProcess <5) playerManager.luckPointsProcess++; 
         }
-        LuckyPoints += luckPointsProcess;
-        if (LuckyPoints >= 10)
+        playerManager.LuckyPoints += playerManager.luckPointsProcess;
+        if (playerManager.LuckyPoints >= 10)
         {
-            LuckyPoints -= 10;
-            LotteryDraw++;
+            playerManager.LuckyPoints -= 10;
+            playerManager.LotteryDraw++;
         }
         ShowArea(0);
     }
@@ -263,10 +194,10 @@ public class LevelUIManager : MonoBehaviour
 
     public void ExtraDrawClick()
     {
-        if (LotteryDraw > 0)
+        if (playerManager.LotteryDraw > 0)
         {
-            LotteryDraw--;
-            luckPointsProcess = -1;
+            playerManager.LotteryDraw--;
+            playerManager.luckPointsProcess = -1;
             GetNewBuildings();
         }
     }
@@ -277,5 +208,35 @@ public class LevelUIManager : MonoBehaviour
         GameManager.Instance.TransitionToState(StateName.WaveState);
     }
 
-
+    //把player的数据同步到UI上
+    public void SynchronizeLabels()
+    {
+        playerLevelTxt.text = "LV" + playerManager.PlayerLevel.ToString();
+        if (playerManager.PlayerLevel < StaticData.Instance.PlayerMaxLevel)
+        {
+            playerLevelUpMoneyTxt.text = "升级(金币): " + playerManager.PlayerLvUpMoney.ToString();
+        }
+        else
+        {
+            playerLevelUpMoneyTxt.text = "已达到最大等级";
+        }
+        lotteryDrawTxt.text = "抽取模块 X " + playerManager.LotteryDraw.ToString();
+        luckyPointsTxt.text = "当前幸运点数:" + playerManager.LuckyPoints.ToString();
+        coinTxt.text = playerManager.PlayerCoin.ToString();
+        healthTxt.text = playerManager.PlayerHealth.ToString() + "/" + StaticData.Instance.PlayerMaxHealth.ToString();
+    }
+    //player升级
+    public void LevelUp()
+    {
+        if (playerManager.PlayerLevel < StaticData.Instance.PlayerMaxLevel)
+        {
+            if (playerManager.PlayerCoin >= playerManager.PlayerLvUpMoney)
+            {
+                playerManager.PlayerLevel++;
+                playerManager.PlayerCoin -= playerManager.PlayerLvUpMoney;
+                playerManager.PlayerLvUpMoney = playerManager.levelMoney[playerManager.PlayerLevel];
+                SynchronizeLabels();
+            }
+        }
+    }
 }
