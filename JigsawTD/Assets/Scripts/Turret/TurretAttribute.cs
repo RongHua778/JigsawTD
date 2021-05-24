@@ -14,6 +14,12 @@ public class TurretInfo
     public float CriticalRate;
     public List<AttackEffectInfo> AttackEffects = new List<AttackEffectInfo>();
     public List<PoloEffect> PoloEffects = new List<PoloEffect>();
+    [Header("美术资源设置")]
+    public string TurretName;
+    public Sprite Icon;
+    public Sprite BaseSprite;
+    public Sprite CannonSprite;
+    public Vector2 ShootPointOffset;
 }
 
 [System.Serializable]

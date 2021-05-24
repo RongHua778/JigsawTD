@@ -16,8 +16,6 @@ public abstract class Turret : GameBehavior
     protected CompositeCollider2D detectCollider;
     GameObject rangeIndicator;
     Transform rangeParent;
-
-
     protected bool ShowingRange = false;
     protected Transform rotTrans;
     protected Transform shootPoint;
@@ -29,6 +27,11 @@ public abstract class Turret : GameBehavior
 
     float nextAttackTime;
     Quaternion look_Rotation;
+
+    [Header("美术资源设置")]
+    [SerializeField]private SpriteRenderer BaseSprite;
+    [SerializeField] private SpriteRenderer CannonSprite;
+    //************
 
     [Header("TurretAttribute")]
     public TurretAttribute m_TurretAttribute = default;
@@ -76,13 +79,24 @@ public abstract class Turret : GameBehavior
         shootPoint = rotTrans.Find("ShootPoint");
         RangeType = m_TurretAttribute.RangeType;
         element = m_TurretAttribute.element;
-        quality = m_TurretAttribute.quality;
+        //quality = m_TurretAttribute.quality;
+        quality = UnityEngine.Random.Range(0, 5);
     }
 
     public virtual void InitializeTurret(GameTile tile)
     {
         GenerateRange();
         rotTrans.localRotation = Quaternion.identity;
+        SetGraphic();
+
+    }
+
+    //设置不同等级的美术资源
+    private void SetGraphic()
+    {
+        shootPoint.transform.localPosition = m_TurretAttribute.TurretLevels[Quality].ShootPointOffset;
+        BaseSprite.sprite = m_TurretAttribute.TurretLevels[Quality].BaseSprite;
+        CannonSprite.sprite = m_TurretAttribute.TurretLevels[Quality].CannonSprite;
     }
 
     public virtual void TriggerPoloEffect(bool value)

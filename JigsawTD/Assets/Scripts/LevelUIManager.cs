@@ -217,7 +217,7 @@ public class LevelUIManager : MonoBehaviour
             case BasicTileType.Turret:
                 TurretTips turretTip = Instantiate(turretTipPrefab, this.transform) as TurretTips;
                 size = turretTip.GetComponent<RectTransform>().sizeDelta;
-                pos = new Vector2(size.x / 2 + 50, Screen.height / 2);
+                pos = new Vector2(size.x / 2, Screen.height / 2);
                 turretTip.transform.position = pos;
                 turretTip.ReadAttribute(((TurretTile)tile).tile);
                 tips.Add(turretTip);

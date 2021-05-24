@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyType: 3
   CountPerWave: 2
-  Health: 10
+  Health: 100
   Speed: 0.8
   Shell: 2
   CoolDown: 2
