@@ -11,7 +11,7 @@ public class BuildingState : State
     public override IEnumerator EnterState()
     {
         //Debug.Log("Eneter Building State");
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
         gameManager._levelUIManager.Preparing();
         yield break;
     }

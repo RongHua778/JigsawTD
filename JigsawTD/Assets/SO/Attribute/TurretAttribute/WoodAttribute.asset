@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
+  m_Name: WoodAttribute
+  m_EditorClassIdentifier: 
+  Icon: {fileID: 21300000, guid: 125c2ce36f9328941b24e09d3ac498fb, type: 3}
+  Name: Wood
+  Description: Dear AOE damage to front side. Range is Line.
+  RangeType: 2
+  TurretLevels:
+  - AttackRange: 2
+    ForbidRange: 0
+    AttackDamage: 2
+    AttackSpeed: 8
+    BulletSpeed: 10
+    SputteringRange: 0
+    CriticalRate: 0
+    AttackEffects: []
+    PoloEffects: []
+    TurretName: B1
+    Icon: {fileID: 21300000, guid: 2e21061c7d14f12408092e85b0dfeae6, type: 3}
+    BaseSprite: {fileID: 21300000, guid: 46ef006f93358d546964463ecd4b0f48, type: 3}
+    CannonSprite: {fileID: 21300000, guid: e30d6c51d114d974f9c771d6963b0195, type: 3}
+    ShootPointOffset: {x: 0, y: 0.19}
+  - AttackRange: 2
+    ForbidRange: 0
+    AttackDamage: 3
+    AttackSpeed: 9
+    BulletSpeed: 10
+    SputteringRange: 0
+    CriticalRate: 0
+    AttackEffects: []
+    PoloEffects: []
+    TurretName: B2
+    Icon: {fileID: 21300000, guid: 9289ff56e98a5434297385abd00d523d, type: 3}
+    BaseSprite: {fileID: 21300000, guid: 46ef006f93358d546964463ecd4b0f48, type: 3}
+    CannonSprite: {fileID: 21300000, guid: 0551f7b92e03be340a733b3098e8938e, type: 3}
+    ShootPointOffset: {x: 0, y: 0.2}
+  - AttackRange: 2
+    ForbidRange: 0
+    AttackDamage: 4
+    AttackSpeed: 10
+    BulletSpeed: 10
+    SputteringRange: 0
+    CriticalRate: 0
+    AttackEffects: []
+    PoloEffects: []
+    TurretName: B3
+    Icon: {fileID: 21300000, guid: 151ca16f927174d47bc1c26f7a168671, type: 3}
+    BaseSprite: {fileID: 21300000, guid: 46ef006f93358d546964463ecd4b0f48, type: 3}
+    CannonSprite: {fileID: 21300000, guid: 1e2373d6a1c3c794c82742b633114d43, type: 3}
+    ShootPointOffset: {x: 0, y: 0.21}
+  - AttackRange: 2
+    ForbidRange: 0
+    AttackDamage: 6
+    AttackSpeed: 11
+    BulletSpeed: 10
+    SputteringRange: 0
+    CriticalRate: 0
+    AttackEffects: []
+    PoloEffects: []
+    TurretName: B4
+    Icon: {fileID: 21300000, guid: ac5da07c8f159244a881891276ebe9f1, type: 3}
+    BaseSprite: {fileID: 21300000, guid: 96c03dd35664a4b4c8498a29b89ec736, type: 3}
+    CannonSprite: {fileID: 21300000, guid: b8455ebf3d7e3d64da4b7991380c8b72, type: 3}
+    ShootPointOffset: {x: 0, y: 0.21}
+  - AttackRange: 2
+    ForbidRange: 0
+    AttackDamage: 9
+    AttackSpeed: 12
+    BulletSpeed: 10
+    SputteringRange: 0
+    CriticalRate: 0
+    AttackEffects: []
+    PoloEffects: []
+    TurretName: B5
+    Icon: {fileID: 21300000, guid: b298176c1968ed949af7afa821ff58c9, type: 3}
+    BaseSprite: {fileID: 21300000, guid: 96c03dd35664a4b4c8498a29b89ec736, type: 3}
+    CannonSprite: {fileID: 21300000, guid: f122162c2b6d09e41b938a9e2f237874, type: 3}
+    ShootPointOffset: {x: 0, y: 0.21}
+  quality: 1
+  turretTile: {fileID: 0}
+  element: 1
+  totalLevel: 0
+  elementNumber: 0

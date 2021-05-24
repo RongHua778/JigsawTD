@@ -9,6 +9,7 @@ public class TargetBullet : Bullet
     protected override void DealDamage()
     {
         base.DealDamage();
-        Target.Enemy.ApplyDamage(Damage);
+        TriggerHitEffect(Target.Enemy);
+        Target.Enemy.ApplyDamage(Random.value <= CriticalRate ? Damage * 2 : Damage);
     }
 }

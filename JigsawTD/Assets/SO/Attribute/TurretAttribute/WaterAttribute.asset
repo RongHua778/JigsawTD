@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
+  m_Name: WaterAttribute
+  m_EditorClassIdentifier: 
+  Icon: {fileID: 21300000, guid: 65756f16355ed27489d3bb0e0ac7d940, type: 3}
+  Name: Water
+  Description: shoot slow bullet
+  RangeType: 0
+  TurretLevels:
+  - AttackRange: 1
+    ForbidRange: 0
+    AttackDamage: 3
+    AttackSpeed: 0.5
+    BulletSpeed: 6
+    SputteringRange: 0
+    CriticalRate: 0
+    AttackEffects:
+    - EffectName: 1
+      KeyValue: 0.3
+    PoloEffects: []
+    TurretName: C1
+    Icon: {fileID: 21300000, guid: 2d3effa093a304e4ba99e0d88aedb016, type: 3}
+    BaseSprite: {fileID: 21300000, guid: 5d462925671e636478d63e48fbee3678, type: 3}
+    CannonSprite: {fileID: 21300000, guid: 08c2e617391010649aa7de03b85ad5bf, type: 3}
+    ShootPointOffset: {x: 0, y: 0.24}
+  - AttackRange: 1
+    ForbidRange: 0
+    AttackDamage: 5
+    AttackSpeed: 0.55
+    BulletSpeed: 6
+    SputteringRange: 0
+    CriticalRate: 0
+    AttackEffects:
+    - EffectName: 1
+      KeyValue: 0.325
+    PoloEffects: []
+    TurretName: C2
+    Icon: {fileID: 21300000, guid: dbc88cad0c6490a429285738e90a3454, type: 3}
+    BaseSprite: {fileID: 21300000, guid: 5d462925671e636478d63e48fbee3678, type: 3}
+    CannonSprite: {fileID: 21300000, guid: 45a150eaa2efb1b4ab5fbd0aeda7de54, type: 3}
+    ShootPointOffset: {x: 0, y: 0.24}
+  - AttackRange: 1
+    ForbidRange: 0
+    AttackDamage: 7
+    AttackSpeed: 0.6
+    BulletSpeed: 6
+    SputteringRange: 0
+    CriticalRate: 0
+    AttackEffects:
+    - EffectName: 1
+      KeyValue: 0.35
+    PoloEffects: []
+    TurretName: C3
+    Icon: {fileID: 21300000, guid: fb3c57c6cc375864695193eb79fcb311, type: 3}
+    BaseSprite: {fileID: 21300000, guid: 5d462925671e636478d63e48fbee3678, type: 3}
+    CannonSprite: {fileID: 21300000, guid: 7860556bcf5ab834c8449433723a78c0, type: 3}
+    ShootPointOffset: {x: 0, y: 0.25}
+  - AttackRange: 1
+    ForbidRange: 0
+    AttackDamage: 10
+    AttackSpeed: 0.65
+    BulletSpeed: 6
+    SputteringRange: 0
+    CriticalRate: 0
+    AttackEffects:
+    - EffectName: 1
+      KeyValue: 0.375
+    PoloEffects: []
+    TurretName: C4
+    Icon: {fileID: 21300000, guid: bd6614810e25ea44e92758b51e453eb9, type: 3}
+    BaseSprite: {fileID: 21300000, guid: c23ca6db87906d64f849ee5566924797, type: 3}
+    CannonSprite: {fileID: 21300000, guid: 4ae5b107e2e114c43b26fbdc5e6a22ca, type: 3}
+    ShootPointOffset: {x: 0, y: 0.25}
+  - AttackRange: 1
+    ForbidRange: 0
+    AttackDamage: 15
+    AttackSpeed: 0.7
+    BulletSpeed: 6
+    SputteringRange: 0
+    CriticalRate: 0
+    AttackEffects:
+    - EffectName: 1
+      KeyValue: 0.4
+    PoloEffects: []
+    TurretName: C5
+    Icon: {fileID: 21300000, guid: 112809437a38c694b995ef1bd637b82f, type: 3}
+    BaseSprite: {fileID: 21300000, guid: c23ca6db87906d64f849ee5566924797, type: 3}
+    CannonSprite: {fileID: 21300000, guid: 10cec7929cb918b49a527ac64960ff75, type: 3}
+    ShootPointOffset: {x: 0, y: 0.25}
+  quality: 1
+  turretTile: {fileID: 0}
+  element: 2
+  totalLevel: 0
+  elementNumber: 0
