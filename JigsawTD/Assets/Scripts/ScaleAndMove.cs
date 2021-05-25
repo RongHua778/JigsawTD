@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ScaleAndMove : MonoBehaviour
 {
@@ -35,6 +36,8 @@ public class ScaleAndMove : MonoBehaviour
             cam.orthographicSize += Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
 
         }
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
         if (DraggingActions.DraggingThis == null && Input.GetMouseButton(0))
         {
             transform.Translate(Vector3.left * Input.GetAxis("Mouse X") * moveSpeed * Time.deltaTime);

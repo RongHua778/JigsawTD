@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using System.Linq;
+using UnityEngine.UI;
 
 public class LevelUIManager : MonoBehaviour
 {
@@ -94,19 +95,19 @@ public class LevelUIManager : MonoBehaviour
 
     [SerializeField]
     GameObject messagePanel;
-    [SerializeField]
-    TMP_Text messageTxt;
+    
     [SerializeField] TileTips turretTipPrefab, trapTipPrefab = default;
 
     [SerializeField] RoadPlacement _roadPlacament = default;
 
-    [SerializeField] TMP_Text healthTxt = default;
-    [SerializeField] TMP_Text coinTxt = default;
-    [SerializeField] TMP_Text waveTxt = default;
-    [SerializeField] TMP_Text playerLevelTxt = default;
-    [SerializeField] TMP_Text playerLevelUpMoneyTxt = default;
-    [SerializeField] TMP_Text lotteryDrawTxt = default;
-    [SerializeField] TMP_Text luckyPointsTxt = default;
+    [SerializeField] Text messageTxt=default;
+    [SerializeField] Text healthTxt = default;
+    [SerializeField] Text coinTxt = default;
+    [SerializeField] Text waveTxt = default;
+    [SerializeField] Text playerLevelTxt = default;
+    [SerializeField] Text playerLevelUpMoneyTxt = default;
+    [SerializeField] Text lotteryDrawTxt = default;
+    [SerializeField] Text luckyPointsTxt = default;
 
     List<TileTips> tips = new List<TileTips>();
     public PlayerManager playerManager;
