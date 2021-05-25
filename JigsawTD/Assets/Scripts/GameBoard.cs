@@ -121,7 +121,7 @@ public class GameBoard : MonoBehaviour
         if (tile.BasicTileType == BasicTileType.Turret)
         {
             //turret的tile加入一个list
-            GameManager.Instance.turrets.Add(((TurretTile)tile).tile);
+            GameManager.Instance.turrets.Add(((TurretTile)tile).turret);
             //turret加入一个list以检测合成逻辑
             GameManager.Instance.turretsElements.Add(tile.GetComponentInChildren<Turret>());
         }

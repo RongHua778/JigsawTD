@@ -78,6 +78,12 @@ public class GameManager : Singleton<GameManager>
         return shape;
     }
 
+    public TileShape GetComposedShape(Blueprint blueprint)
+    {
+        TileShape shape = _shapeFactory.GetShape(ShapeType.D);
+        shape.GetComposedShape(_tileFactory, blueprint);
+        return shape;
+    }
     private void TileClick()
     {
         IsPressingTile = true;

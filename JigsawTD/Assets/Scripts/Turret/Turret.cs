@@ -5,8 +5,7 @@ using UnityEngine;
 
 public abstract class Turret : GameBehavior
 {
-    public PlayerManager playerManager;
-    public Composition[] compositions;
+    List<Composition> compositions=new List<Composition>();
     protected RangeType RangeType;
     [SerializeField] protected GameObject bulletPrefab = default;
     public const int enemyLayerMask = 1 << 11;
@@ -51,13 +50,13 @@ public abstract class Turret : GameBehavior
         }  
     }
     public Element Element { get => element; set => element=value; }
-    public virtual float AttackDamage { get => m_TurretAttribute.TurretLevels[Level].AttackDamage *(1+ AttackIntensify); }
-    public virtual int AttackRange { get => m_TurretAttribute.TurretLevels[Level].AttackRange + RangeIntensify; }
-    public int ForbidRange { get => m_TurretAttribute.TurretLevels[Level].ForbidRange; }
-    public virtual float AttackSpeed { get => m_TurretAttribute.TurretLevels[Level].AttackSpeed * (1 + SpeedIntensify); }
-    public float BulletSpeed { get => m_TurretAttribute.TurretLevels[Level].BulletSpeed; }
-    public float SputteringRange { get => m_TurretAttribute.TurretLevels[Level].SputteringRange; }
-    public float CriticalRate { get => m_TurretAttribute.TurretLevels[Level].CriticalRate; }
+    public virtual float AttackDamage { get => m_TurretAttribute.TurretLevels[Quality-1].AttackDamage *(1+ AttackIntensify); }
+    public virtual int AttackRange { get => m_TurretAttribute.TurretLevels[Quality - 1].AttackRange + RangeIntensify; }
+    public int ForbidRange { get => m_TurretAttribute.TurretLevels[Quality - 1].ForbidRange; }
+    public virtual float AttackSpeed { get => m_TurretAttribute.TurretLevels[Quality - 1].AttackSpeed * (1 + SpeedIntensify); }
+    public float BulletSpeed { get => m_TurretAttribute.TurretLevels[Quality - 1].BulletSpeed; }
+    public float SputteringRange { get => m_TurretAttribute.TurretLevels[Quality - 1].SputteringRange; }
+    public float CriticalRate { get => m_TurretAttribute.TurretLevels[Quality - 1].CriticalRate; }
 
     float attackIntensify;
     public float AttackIntensify { get => attackIntensify; set => attackIntensify = value; }
@@ -76,6 +75,8 @@ public abstract class Turret : GameBehavior
 
     public List<AttackEffectInfo> AttackEffectInfos => m_TurretAttribute.TurretLevels[Level].AttackEffects;
 
+    public List<Composition> Compositions { get => compositions; set => compositions = value; }
+
     private void Awake()
     {
         rangeIndicator = Resources.Load<GameObject>("Prefabs/RangeIndicator");
@@ -83,7 +84,7 @@ public abstract class Turret : GameBehavior
         detectCollider = rangeParent.GetComponent<CompositeCollider2D>();
         rotTrans = transform.Find("RotPoint");
         RangeType = m_TurretAttribute.RangeType;
-        shootPoint= transform.Find("ShootPoint");
+        Element = m_TurretAttribute.element;
     }
 
     public virtual void InitializeTurret(GameTile tile,int quality)
@@ -91,7 +92,6 @@ public abstract class Turret : GameBehavior
         GenerateRange();
         rotTrans.localRotation = Quaternion.identity;
         this.quality = quality;
-        //SetGraphic();
     }
 
     //设置不同等级的美术资源
@@ -288,39 +288,13 @@ public abstract class Turret : GameBehavior
     //根据特定参数生成配方
     private void GenerateComposition()
     {
-        compositions = new Composition[m_TurretAttribute.elementNumber];
         int[] tempLevel = StaticData.GetSomeRandoms(m_TurretAttribute.totalLevel, m_TurretAttribute.elementNumber);
         int [] tempElement = new int[m_TurretAttribute.elementNumber];
         for(int i = 0; i < m_TurretAttribute.elementNumber; i++)
         {
-            compositions[i].elementRequirement = tempElement[i];
-            compositions[i].levelRequirement = tempLevel[i];
+            Composition c = new Composition(tempLevel[i],tempElement[i]);
+            Compositions.Add(c);
         }
     }
-   //检查是否已满足可以建造的配方条件
-    public bool CheckBuildable()
-    {
-        bool result = true;
-        for(int i = 0; i < compositions.Length; i++)
-        {
-            result = result && compositions[i].obtained;
-        }
-        return result;
-    }
-    //检测每个配方是否存在在场上的方法
-    private void CheckElement()
-    {
-        List<Turret> temp = GameManager.Instance.turretsElements;
-        for (int i = 0; i < compositions.Length; i++)
-        {
-            for(int j=0;j< temp.Count; j++)
-            {
-                if (compositions[i].elementRequirement == (int)temp[j].element&&
-                    compositions[i].levelRequirement==temp[j].quality)
-                {
-                    compositions[i].obtained = true;
-                }
-            }
-        }
-    }
+
 }

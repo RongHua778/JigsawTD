@@ -402,9 +402,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0793b8d0356b2fa48ae64805ed6483a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerManager: {fileID: 0}
   bulletPrefab: {fileID: 3850126010392176229, guid: c07565a3bb33e2547853d7e983019346, type: 3}
+  shootPoint: {fileID: 7955279244983291}
   Dropped: 0
   targetList: []
+  BaseSprite: {fileID: 0}
+  CannonSprite: {fileID: 0}
   m_TurretAttribute: {fileID: 11400000, guid: 7a632e108e590034fb17f70e165e2898, type: 2}
   Level: 0
 --- !u!1 &6195695841050206438

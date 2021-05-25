@@ -9,42 +9,35 @@ public enum BasicTileType
 [CreateAssetMenu(menuName = "Factory/TileFactory", fileName = "TileFactory")]
 public class TileFactory : GameObjectFactory
 {
-    [SerializeField] List<TurretTile> turretTiles;
     [SerializeField] GameObject ground;
-    private Dictionary<int, GameTile> tileDIC;
 
     [SerializeField] float[] elementTileChance;
     int playerLevel;
-    public int LevelTileChance { get => playerLevel; set => playerLevel = value; }
+    public int PlayerLevel { get => playerLevel; set => playerLevel = value; }
 
     [SerializeField] GroundTile groundTile = default;
     [SerializeField] GameTile spawnPoint = default;
     [SerializeField] GameTile destinationTile = default;
     [SerializeField] TurretFactory turretFactory;
 
-    float[] level1 = { 0f, 0.75f, 0.25f, 0f, 0f, 0f };
-    float[] level2 = { 0f, 0.75f, 0.25f, 0f, 0f, 0f };
-    float[] level3 = { 0f, 0.75f, 0.25f, 0f, 0f, 0f };
-    float[] level4 = { 0f, 0.75f, 0.25f, 0f, 0f, 0f };
-    float[] level5 = { 0f, 0.75f, 0.25f, 0f, 0f, 0f };
-    float[] level6 = { 0f, 0.75f, 0.25f, 0f, 0f, 0f };
-
+    float[,] levelChance = new float[6, 5]
+    {
+        { 0.75f, 0.25f, 0f, 0f, 0f },
+        { 0.6f, 0.3f, 0.1f, 0f, 0f },
+        { 0.5f, 0.35f, 0.15f, 0.05f, 0f },
+        { 0.38f, 0.4f, 0.2f, 0.1f, 0.02f },
+        { 0.19f, 0.35f, 0.25f, 0.15f, 0.06f },
+        { 0.1f, 0.3f, 0.3f, 0.2f, 0.1f }
+    };
     public void InitializeFactory()
     {
 
     }
 
-    public GameTile GetTile(int id)
+    public GameTile GetComposedTile(Blueprint blueprint)
     {
-        if (tileDIC.ContainsKey(id))
-        {
-            return CreateInstance(tileDIC[id].gameObject).GetComponent<GameTile>();
-        }
-        else
-        {
-            Debug.Assert(false, "没有对应ID的TIle");
-            return null;
-        }
+        GameObject temp=turretFactory.GetComposedTurret(blueprint);
+        return temp.GetComponent<TurretTile>();
     }
 
 
@@ -75,9 +68,13 @@ public class TileFactory : GameObjectFactory
     {
         int element = StaticData.RandomNumber(elementTileChance);
         //要根据playerlevel变化
-        int level = StaticData.RandomNumber(level1);
-        GameObject temp = CreateInstance(GetRandomElementTile(level, element));
-        Debug.Log(playerLevel);
+        float[] levelC = new float[5];
+        for(int i = 0; i < 5; i++)
+        {
+            levelC[i] = levelChance[playerLevel-1, i];
+        }
+        int level = StaticData.RandomNumber(levelC)+1;
+        GameObject temp =GetRandomElementTile(level, element);
         return temp.GetComponent<TurretTile>();
     }
 
@@ -90,7 +87,7 @@ public class TileFactory : GameObjectFactory
         }
         else
         {
-            return turretFactory.GetTurret(quality,element);
+            return turretFactory.GetBasicTurret(quality,element);
         }
     }
 }

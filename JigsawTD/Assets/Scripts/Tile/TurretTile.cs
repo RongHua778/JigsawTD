@@ -3,7 +3,7 @@ using UnityEngine;
 public class TurretTile : GameTile
 {
     [SerializeField] GameObject TurretBase = default;
-    public Turret tile;
+    public Turret turret;
 
     public override BasicTileType BasicTileType => BasicTileType.Turret;
 
@@ -14,37 +14,40 @@ public class TurretTile : GameTile
     public override void TileDroped()
     {
         base.TileDroped();
-        tile.Dropped = true;
-        tile.TriggerPoloEffect(true);
+        turret.Dropped = true;
+        turret.TriggerPoloEffect(true);
         TurretBase.layer = LayerMask.NameToLayer(StaticData.TurretMask);
     }
     public override void OnSpawn()
     {
-        tile.InitializeTurret(this,tile.Quality);
+        turret.InitializeTurret(this,turret.Quality);
         TurretBase.layer = LayerMask.NameToLayer(StaticData.TempTurretMask);
     }
 
     public void ShowTurretRange(bool show)
     {
-        if (tile != null)
+        if (turret != null)
         {
-            tile.ShowRange(show);
+            turret.ShowRange(show);
         }
     }
 
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
-        if (tile.Dropped)
+        if (turret.Dropped)
         {
-            tile.TriggerPoloEffect(false);
+            turret.TriggerPoloEffect(false);
         }
-        tile.AttackIntensify = 0;
-        tile.RangeIntensify = 0;
-        tile.SpeedIntensify = 0;
-        tile.targetList.Clear();
-        tile.Dropped = false;
-        tile.RecycleRanges();
+        turret.AttackIntensify = 0;
+        turret.Compositions.Clear();
+        turret.Quality=1;
+        turret.Element = Element.Gold;
+        turret.RangeIntensify = 0;
+        turret.SpeedIntensify = 0;
+        turret.targetList.Clear();
+        turret.Dropped = false;
+        turret.RecycleRanges();
         //Turret.layer = LayerMask.NameToLayer(StaticData.TempTurretMask);
         //Turret.GetComponent<Collider2D>().enabled = true;//被覆盖时，会被射线检测disable掉groundtile层的Collider
     }

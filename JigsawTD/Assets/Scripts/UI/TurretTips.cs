@@ -14,8 +14,8 @@ public class TurretTips : TileTips
 
     public void ReadAttribute(Turret turret)
     {
-        Icon.sprite = turret.m_TurretAttribute.TurretLevels[turret.Quality].Icon;
-        Name.text = turret.m_TurretAttribute.TurretLevels[turret.Quality].TurretName;
+        Icon.sprite = turret.m_TurretAttribute.TurretLevels[turret.Quality-1].Icon;
+        Name.text = turret.m_TurretAttribute.TurretLevels[turret.Quality-1].TurretName;
         AttackValue.text = turret.AttackDamage.ToString();
         SpeedValue.text = turret.AttackSpeed.ToString();
         RangeValue.text = turret.AttackRange.ToString();

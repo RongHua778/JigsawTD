@@ -5,7 +5,7 @@ using System.Linq;
 
 public enum ShapeType
 {
-    J,L,T,O,I
+    J,L,T,O,I,D
 }
 public class TileShape : MonoBehaviour
 {
@@ -29,7 +29,10 @@ public class TileShape : MonoBehaviour
     }
     public void InitializeRandomShpe(TileFactory tileFactory)
     {
-        levelTileCount = Random.value > 0.9f ? 2 : 1;
+        //判断shape上面生成几个塔
+        //levelTileCount = Random.value > 0.9f ? 2 : 1;
+        levelTileCount = 1;
+
         //switch (shapeType)
         //{
         //    case ShapeType.T:
@@ -64,6 +67,17 @@ public class TileShape : MonoBehaviour
         draggingShape.Initialized();
     }
 
+    public void GetComposedShape(TileFactory tileFactory,Blueprint blueprint)
+    {
+        GameTile tile;
+        tile = tileFactory.GetComposedTile(blueprint);
+        tile.transform.position = tilePos[0].transform.position;
+        tile.transform.SetParent(this.transform);
+        tile.m_DraggingShape = this.GetComponent<DraggingShape>();
+        tiles.Add(tile);
+        draggingShape.Initialized();
+        SetPreviewPlace();
+    }
     public int GetSlotCount()
     {
         return tilePos.Length;
@@ -82,6 +96,7 @@ public class TileShape : MonoBehaviour
     {
         transform.position = new Vector3(1000f + 10f * displayID, 0, -12f);
         renderCam.targetTexture = texture;
+        renderCam.gameObject.SetActive(true);
         bgObj.SetActive(true);
     }
 
@@ -89,6 +104,7 @@ public class TileShape : MonoBehaviour
     {
         bgObj.SetActive(false);
         Vector2 pos = Camera.main.transform.position;
+        renderCam.gameObject.SetActive(false);
         transform.position = new Vector3(Mathf.Round(pos.x), Mathf.Round(pos.y), -1f);
         draggingShape.OnDraggingInUpdate();
         StaticData.holdingShape = draggingShape;

@@ -7,6 +7,33 @@ public class PlayerManager : MonoBehaviour
     public LevelUIManager levelUIManager;
     public int[] levelMoney;
     public GameManager gameManager;
+    public BlueprintFactory blueprintFactory;
+
+    List<Blueprint> blueprintsInPocket=new List<Blueprint>();
+    public List<Blueprint> BlueprintsInPocket { get => blueprintsInPocket; set => blueprintsInPocket = value; }
+
+    public List<Blueprint> GetBluePrints(int bluePrintsN)
+    {
+        List<Blueprint> bluePrints = blueprintFactory.GetBluePrints(bluePrintsN);
+        for (int j = 0; j < bluePrints.Count; j++)
+        {
+            bluePrints[j].CheckElement();
+        }
+        return bluePrints;
+    }
+    public void BuildBlueprint(Blueprint blueprint)
+    {
+
+    }
+    public void BuyBlueprint(Blueprint blueprint)
+    {
+        BlueprintsInPocket.Add(blueprint);
+    }
+    public void deleteBlueprint(Blueprint blueprint)
+    {
+        BlueprintsInPocket.Remove(blueprint);
+    }
+
     int playerLevel = 1;
     public int PlayerLevel
     {
@@ -14,7 +41,7 @@ public class PlayerManager : MonoBehaviour
         set
         {
             playerLevel = value;
-            gameManager._tileFactory.LevelTileChance = value;
+            gameManager._tileFactory.PlayerLevel = value;
             levelUIManager.SynchronizeLabels();
         }
     }
@@ -29,7 +56,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    int lotteryDraw = 2;
+    int lotteryDraw = 100;
     public int LotteryDraw
     {
         get => lotteryDraw;

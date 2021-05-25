@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a948abfc34b0ee488808a3378f742ae, type: 3}
   m_Name: ShapeFactory
   m_EditorClassIdentifier: 
-  TShapePrefab: {fileID: 423573634930684413, guid: 16053ba66d25f954988061534a000b5a, type: 3}
+  TShapePrefab: {fileID: 423573634930684413, guid: 1124744f5ab16004786363cd72e2f2d1, type: 3}
   LShapePrefab: {fileID: 423573634930684413, guid: d332dae0f9c2e744db13569610fc0f18, type: 3}
   IShapePrefab: {fileID: 423573634930684413, guid: 148839e9131bb0e469f5d31cc21ba2d4, type: 3}
   OShapePrefab: {fileID: 423573634930684413, guid: 27cc1f6e58b81154aa8ec652fedc30d9, type: 3}
   JShapePrefab: {fileID: 423573634930684413, guid: 540d6a943bac30c42aa4416f427b9fd1, type: 3}
+  DShapePrefab: {fileID: 423573634930684413, guid: 16053ba66d25f954988061534a000b5a, type: 3}
   RandomShapeChance:
   - 10
   - 10

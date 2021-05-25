@@ -7,6 +7,91 @@ using System.Linq;
 
 public class LevelUIManager : MonoBehaviour
 {
+    //888888888测试用88888888888888888888888888888888888888888888
+    public TurretFactory test;
+    [SerializeField] TMP_Text[] peifangTxt = default;
+    [SerializeField] TMP_Text[] blueprintsTxt = default;
+    List<Blueprint> blueprints;
+    Blueprint p1;
+    Blueprint p2;
+    Blueprint p3;
+
+    public void testXiezi(List<Blueprint> l, TMP_Text[] txt)
+    {
+        for(int i=0;i<txt.Length;i++)
+        {
+            txt[i].text = "";
+        }
+        for (int j = 0; j < l.Count; j++)
+        {
+            Blueprint t = l[j];
+            string s = "";
+            string buildable = "";
+            for (int i = 0; i < t.Compositions.Count; i++)
+            {
+                string b;
+                if (t.Compositions[i].obtained)
+                {
+                    b = "已拥有";
+
+                }
+                else
+                {
+                    b = "没有";
+
+                }
+                s = s + "配方" + (i + 1).ToString() + "  元素:" + t.Compositions[i].elementRequirement.ToString() +
+                    "  等级:" + t.Compositions[i].levelRequirement.ToString() + "  状态:" + b + "\n";
+            }
+            if (t.CheckBuildable())
+            {
+                buildable = "可建造";
+
+            }
+            else
+            {
+                buildable = "不可建造";
+
+            }
+            txt[j].text = s + " \n" + buildable;
+        }
+    }
+    public void Test()
+    {
+        blueprints = playerManager.GetBluePrints(3);
+        testXiezi(blueprints, peifangTxt);
+        p1=blueprints[0];
+        p2=blueprints[1];
+        p3=blueprints[2];
+    }
+
+    public void test21()
+    {
+        playerManager.BuyBlueprint(p1);
+        blueprints.Remove(p1);
+        testXiezi(blueprints, peifangTxt);
+        testXiezi(playerManager.BlueprintsInPocket, blueprintsTxt);
+    }
+    public void test22()
+    {
+        playerManager.BuyBlueprint(p2);
+        blueprints.Remove(p2);
+        testXiezi(blueprints, peifangTxt);
+        testXiezi(playerManager.BlueprintsInPocket, blueprintsTxt);
+    }
+    public void test23()
+    {
+        playerManager.BuyBlueprint(p3);
+        blueprints.Remove(p3);
+        testXiezi(blueprints, peifangTxt);
+        testXiezi(playerManager.BlueprintsInPocket, blueprintsTxt);
+    }
+    public void testComposition()
+    {
+        GetComposedShape(p1);
+    }
+    //888888888888888888888888888888888888888888888888888888888
+
     [SerializeField]
     GameObject messagePanel;
     [SerializeField]
@@ -101,6 +186,11 @@ public class LevelUIManager : MonoBehaviour
         DisplayShape(2, GameManager.Instance.GetRandomNewShape());
         ShowArea(1);
     }
+
+    public void GetComposedShape(Blueprint blueprint)
+    {
+        GameManager.Instance.GetComposedShape(blueprint);
+    }
     //每回合开始前计算幸运点、抽取模块次数等逻辑。
     public void Preparing() 
     {
@@ -150,7 +240,7 @@ public class LevelUIManager : MonoBehaviour
                 size = turretTip.GetComponent<RectTransform>().sizeDelta;
                 pos = new Vector2(size.x / 2, Screen.height / 2);
                 turretTip.transform.position = pos;
-                turretTip.ReadAttribute(((TurretTile)tile).tile);
+                turretTip.ReadAttribute(((TurretTile)tile).turret);
                 tips.Add(turretTip);
                 break;
             default:

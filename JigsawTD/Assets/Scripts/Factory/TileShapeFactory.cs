@@ -10,6 +10,7 @@ public class TileShapeFactory : ScriptableObject
     [SerializeField] TileShape IShapePrefab = default;
     [SerializeField] TileShape OShapePrefab = default;
     [SerializeField] TileShape JShapePrefab = default;
+    [SerializeField] TileShape DShapePrefab = default;
 
     [SerializeField] float[] RandomShapeChance = new float[5];
 
@@ -34,6 +35,8 @@ public class TileShapeFactory : ScriptableObject
                 return Get(OShapePrefab);
             case ShapeType.J:
                 return Get(JShapePrefab);
+            case ShapeType.D:
+                return Get(DShapePrefab);
         }
         Debug.Assert(false, "Î´Ö¸¶¨µÄShapetype");
         return null;
