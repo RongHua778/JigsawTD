@@ -77,12 +77,12 @@ public class EnemyCountAttackIncrease : TurretEffect
 
     public override void EnemyEnter()
     {
-
+        turret.AttackIntensify += KeyValue;
     }
 
     public override void EnemyExit()
     {
-
+        turret.AttackIntensify -= KeyValue;
     }
 
 }

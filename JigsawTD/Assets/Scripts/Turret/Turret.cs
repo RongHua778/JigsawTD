@@ -299,10 +299,7 @@ public abstract class Turret : GameBehavior
 
     protected virtual void Shoot()
     {
-        foreach(var effect in TurretEffects)
-        {
-            effect.Shoot();
-        }
+        
     }
     protected virtual void OnDrawGizmos()
     {

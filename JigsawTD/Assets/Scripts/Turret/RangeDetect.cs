@@ -15,6 +15,10 @@ public class RangeDetect : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             TargetPoint target = collision.GetComponent<TargetPoint>();
+            foreach(var effect in Turret.TurretEffects)
+            {
+                effect.EnemyEnter();
+            }
             Turret.AddTarget(target);
         }
     }
@@ -24,6 +28,10 @@ public class RangeDetect : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             TargetPoint target = collision.GetComponent<TargetPoint>();
+            foreach (var effect in Turret.TurretEffects)
+            {
+                effect.EnemyExit();
+            }
             Turret.RemoveTarget(target);
         }
     }

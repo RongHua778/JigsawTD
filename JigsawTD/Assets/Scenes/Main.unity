@@ -1830,6 +1830,12 @@ MonoBehaviour:
   PlayerMaxHealth: 30
   LevelMaxWave: 30
   PlayerMaxLevel: 6
+  ElementAttributes:
+  - {fileID: 11400000, guid: 8b69e55deebc49d44b73c6e458a12794, type: 2}
+  - {fileID: 11400000, guid: 2a0c266b352137f45b20d3723395e650, type: 2}
+  - {fileID: 11400000, guid: 493c6f7428affb6409f06eaac5d19930, type: 2}
+  - {fileID: 11400000, guid: 0387619ceeeda7746a7e51b43f234353, type: 2}
+  - {fileID: 11400000, guid: 6c3131e68b56a9b4db13891b470a159b, type: 2}
 --- !u!114 &286649187
 MonoBehaviour:
   m_ObjectHideFlags: 0

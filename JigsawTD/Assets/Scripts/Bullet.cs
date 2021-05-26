@@ -15,7 +15,7 @@ public abstract class Bullet : GameBehavior
     public TargetPoint Target { get => target; set => target = value; }
     Vector2 targetPos;
     [HideInInspector] public Turret turretParent;
-    private List<TurretEffectInfo> attackEffectInfos;
+    private List<TurretEffect> turretEffects;
     protected Vector2 TargetPos
     {
         get => BulletType != BulletType.Target ? targetPos : Target.Position;
@@ -54,19 +54,17 @@ public abstract class Bullet : GameBehavior
         this.bulletSpeed = turret.BulletSpeed;
         this.SputteringRange = turret.SputteringRange;
         this.CriticalRate = turret.CriticalRate;
-        this.attackEffectInfos = turret.TurretEffectInfos;
+        this.turretEffects = turret.TurretEffects;
         TriggerShootEffect();
     }
 
     protected void TriggerShootEffect()
     {
-        if (attackEffectInfos.Count > 0)
+        if (turretEffects.Count > 0)
         {
-            foreach (TurretEffectInfo info in attackEffectInfos)
+            foreach (TurretEffect effect in turretEffects)
             {
-                TurretEffect effect = AttackEffectFactory.GetEffect((int)info.EffectName);
                 effect.bullet = this;
-                effect.KeyValue = info.KeyValue;
                 effect.Shoot();
             }
         }
@@ -74,13 +72,11 @@ public abstract class Bullet : GameBehavior
 
     protected void TriggerHitEffect(Enemy target)
     {
-        if (attackEffectInfos.Count > 0)
+        if (turretEffects.Count > 0)
         {
-            foreach (TurretEffectInfo info in attackEffectInfos)
+            foreach (TurretEffect effect in turretEffects)
             {
-                TurretEffect effect = AttackEffectFactory.GetEffect((int)info.EffectName);
                 effect.bullet = this;
-                effect.KeyValue = info.KeyValue;
                 effect.Hit(target);
             }
         }

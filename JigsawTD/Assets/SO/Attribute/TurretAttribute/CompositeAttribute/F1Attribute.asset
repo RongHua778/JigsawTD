@@ -31,6 +31,8 @@ MonoBehaviour:
     AttackEffects:
     - EffectName: 2
       KeyValue: 1
+    - EffectName: 3
+      KeyValue: 1
     PoloEffects: []
     TurretName: 
     Icon: {fileID: 21300000, guid: efd7eca78d1a1d44d8b38abd7973113e, type: 3}
@@ -47,6 +49,8 @@ MonoBehaviour:
     AttackEffects:
     - EffectName: 2
       KeyValue: 5
+    - EffectName: 3
+      KeyValue: 1
     PoloEffects: []
     TurretName: 
     Icon: {fileID: 21300000, guid: efd7eca78d1a1d44d8b38abd7973113e, type: 3}
