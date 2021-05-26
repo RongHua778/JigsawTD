@@ -12,7 +12,7 @@ public class TurretInfo
     public float BulletSpeed;
     public float SputteringRange;
     public float CriticalRate;
-    public List<AttackEffectInfo> AttackEffects = new List<AttackEffectInfo>();
+    public List<TurretEffectInfo> AttackEffects = new List<TurretEffectInfo>();
     public List<PoloEffect> PoloEffects = new List<PoloEffect>();
     [Header("美术资源设置")]
     public string TurretName;
@@ -42,12 +42,10 @@ public enum RangeType
 public class TurretAttribute : LevelAttribute
 {
     public RangeType RangeType;
-    public List<TurretInfo> TurretLevels = new List<TurretInfo>();
-    //public int quality;
-    public TurretTile turretTile;
     public Element element;
     public int totalLevel;
     public int elementNumber;
+    public List<TurretInfo> TurretLevels = new List<TurretInfo>();
     public override void Upgrade()
     {
         base.Upgrade();

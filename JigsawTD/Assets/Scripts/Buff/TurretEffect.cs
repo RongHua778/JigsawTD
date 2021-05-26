@@ -2,23 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum AttackEffectName
+public enum TurretEffectName
 {
     DistanceBaseDamage,SlowBullet,AttackIncreasePerShoot
 }
 [System.Serializable]
-public class AttackEffectInfo
+public class TurretEffectInfo
 {
-    public AttackEffectName EffectName;
+    public TurretEffectName EffectName;
     public float KeyValue;
 }
-public abstract class AttackEffect
+public abstract class TurretEffect
 {
-    public abstract AttackEffectName EffectName { get; }
+    public abstract TurretEffectName EffectName { get; }
 
     public Bullet bullet;
     public float KeyValue;
 
+    public virtual void EnemyEnter()
+    {
+
+    }
+    public virtual void EnemyExit()
+    {
+
+    }
     public virtual void Shoot()
     {
 
@@ -30,9 +38,9 @@ public abstract class AttackEffect
     }
 }
 
-public class DistanceBaseDamage : AttackEffect
+public class DistanceBaseDamage : TurretEffect
 {
-    public override AttackEffectName EffectName => AttackEffectName.DistanceBaseDamage;
+    public override TurretEffectName EffectName => TurretEffectName.DistanceBaseDamage;
 
     public override void Shoot()
     {
@@ -41,9 +49,9 @@ public class DistanceBaseDamage : AttackEffect
     }
 }
 
-public class SlowBullet : AttackEffect
+public class SlowBullet : TurretEffect
 {
-    public override AttackEffectName EffectName => AttackEffectName.SlowBullet;
+    public override TurretEffectName EffectName => TurretEffectName.SlowBullet;
     public float Duration = 2f;
     public override void Hit(Enemy target)
     {
@@ -53,9 +61,9 @@ public class SlowBullet : AttackEffect
 
 }
 
-public class AttackIncreasePerShoot : AttackEffect
+public class AttackIncreasePerShoot : TurretEffect
 {
-    public override AttackEffectName EffectName => AttackEffectName.AttackIncreasePerShoot;
+    public override TurretEffectName EffectName => TurretEffectName.AttackIncreasePerShoot;
 
     public override void Hit(Enemy target)
     {

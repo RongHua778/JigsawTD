@@ -15,7 +15,7 @@ public abstract class Bullet : GameBehavior
     public TargetPoint Target { get => target; set => target = value; }
     Vector2 targetPos;
     [HideInInspector] public Turret turretParent;
-    private List<AttackEffectInfo> attackEffectInfos;
+    private List<TurretEffectInfo> attackEffectInfos;
     protected Vector2 TargetPos
     {
         get => BulletType != BulletType.Target ? targetPos : Target.Position;
@@ -62,9 +62,9 @@ public abstract class Bullet : GameBehavior
     {
         if (attackEffectInfos.Count > 0)
         {
-            foreach (AttackEffectInfo info in attackEffectInfos)
+            foreach (TurretEffectInfo info in attackEffectInfos)
             {
-                AttackEffect effect = AttackEffectFactory.GetEffect((int)info.EffectName);
+                TurretEffect effect = AttackEffectFactory.GetEffect((int)info.EffectName);
                 effect.bullet = this;
                 effect.KeyValue = info.KeyValue;
                 effect.Shoot();
@@ -76,9 +76,9 @@ public abstract class Bullet : GameBehavior
     {
         if (attackEffectInfos.Count > 0)
         {
-            foreach (AttackEffectInfo info in attackEffectInfos)
+            foreach (TurretEffectInfo info in attackEffectInfos)
             {
-                AttackEffect effect = AttackEffectFactory.GetEffect((int)info.EffectName);
+                TurretEffect effect = AttackEffectFactory.GetEffect((int)info.EffectName);
                 effect.bullet = this;
                 effect.KeyValue = info.KeyValue;
                 effect.Hit(target);

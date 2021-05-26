@@ -15,23 +15,23 @@ public class AttackEffectFactory
     {
         if (isInitialize)
             return;
-        var types = Assembly.GetAssembly(typeof(AttackEffect)).GetTypes().
-            Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(AttackEffect)));
+        var types = Assembly.GetAssembly(typeof(TurretEffect)).GetTypes().
+            Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(TurretEffect)));
         AttackEffectDIC = new Dictionary<int, Type>();
         foreach (var type in types)
         {
-            var effect = Activator.CreateInstance(type) as AttackEffect;
+            var effect = Activator.CreateInstance(type) as TurretEffect;
             AttackEffectDIC.Add((int)effect.EffectName, type);
         }
     }
 
-    public static AttackEffect GetEffect(int id)
+    public static TurretEffect GetEffect(int id)
     {
         Initialize();
         if (AttackEffectDIC.ContainsKey(id))
         {
             Type type = AttackEffectDIC[id];
-            AttackEffect effect = Activator.CreateInstance(type) as AttackEffect;
+            TurretEffect effect = Activator.CreateInstance(type) as TurretEffect;
             return effect;
         }
         return null;

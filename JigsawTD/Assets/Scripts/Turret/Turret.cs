@@ -80,13 +80,12 @@ public abstract class Turret : GameBehavior
             GenerateRange();
         }
     }
-
     float speedIntensify;
     public float SpeedIntensify { get => speedIntensify; set => speedIntensify = value; }
     //*************
 
-    public List<AttackEffectInfo> AttackEffectInfos => m_TurretAttribute.TurretLevels[Level].AttackEffects;
-
+    public List<TurretEffectInfo> AttackEffectInfos => m_TurretAttribute.TurretLevels[Level].AttackEffects;
+    public List<TurretEffect> AttackEffects = new List<TurretEffect>();
 
 
     private void Awake()
