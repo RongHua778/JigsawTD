@@ -10,14 +10,19 @@ public class GameManager : Singleton<GameManager>
 
     public LevelUIManager _levelUIManager = default;
 
+    //地图每一边上方块的数量
     [SerializeField]
     Vector2Int _startSize, _groundSize = default;
+
 
     //[SerializeField]
     //GameTileContentFactory _contentFactory = default;
     [SerializeField]
     TileShapeFactory _shapeFactory = default;
-    
+
+    [SerializeField]
+    TurretFactory _turretFactory = default;
+
     public TileFactory _tileFactory = default;
     [SerializeField]
     EnemyFactory _enemyFactory = default;
@@ -45,6 +50,7 @@ public class GameManager : Singleton<GameManager>
     private State state;
     public State State { get => state; }
     public TileShapeFactory ShapeFactory { get => _shapeFactory; set => _shapeFactory = value; }
+    public TurretFactory TurretFactory { get => _turretFactory; set => _turretFactory = value; }
 
     public BuildingState buildingState;
     public WaveState waveState;

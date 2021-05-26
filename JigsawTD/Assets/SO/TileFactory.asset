@@ -12,20 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bb392d5c0c76a340a988e90a0e2f2fa, type: 3}
   m_Name: TileFactory
   m_EditorClassIdentifier: 
-  turretTiles:
-  - {fileID: 3568044695007039410, guid: 6d63a6fce6ff83845ae79fbf4a5b921f, type: 3}
-  - {fileID: 3568044695007039410, guid: 7561f5f3bdfe9cf4486ea710b7a3922a, type: 3}
-  - {fileID: 3568044695007039410, guid: 4ce61665656640249b97041fdf5b3dce, type: 3}
-  - {fileID: 3568044695007039410, guid: d60638da85bf8a14d80f45ecf27fa570, type: 3}
-  - {fileID: 3568044695007039410, guid: 24008486aeb5cc14d9b096b6415a87b8, type: 3}
   ground: {fileID: 6604616035422911931, guid: 557a00bbb39db9146a95b084ae54a7cb, type: 3}
-  elementTileChance:
-  - 0.2
-  - 0.2
-  - 0.2
-  - 0.2
-  - 0.2
   groundTile: {fileID: 458233090153635530, guid: 616c0c537063af4489540002ccbcbb03, type: 3}
+  trapTile: {fileID: 1065283022250296622, guid: 12a5cc0b04e663c4ea6831a0f0960229, type: 3}
   spawnPoint: {fileID: -6666671750581329292, guid: ee9b6e8057f37354682685fcae0e7645, type: 3}
   destinationTile: {fileID: 5923658230637393832, guid: 5f7ca72f3f4fce04dbe1c0a08b7a3876, type: 3}
   turretFactory: {fileID: 11400000, guid: a7462b451c9a2e34993f437b96292d0d, type: 2}

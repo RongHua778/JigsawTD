@@ -8,7 +8,7 @@ public class ScaleAndMove : MonoBehaviour
     Vector2 m_ScreenPos = new Vector2();
     Vector3 oldPosition;
     Camera cam;
-    float moveSpeed = 30f;
+    float moveSpeed = 300f;
 
     private float scrollSpeed = 2.5f;
     private float maximum = 10;

@@ -8,6 +8,8 @@ using PathCreation;
 
 public class GameBoard : MonoBehaviour
 {
+    int[,] traps = new int[25, 25];
+
     [SerializeField] PathLine pathLinePrefab = default;
     List<PathLine> pathLines = new List<PathLine>();
 
@@ -16,8 +18,9 @@ public class GameBoard : MonoBehaviour
 
     TileFactory tileFactory;
 
-
+    //地板上的空tile
     List<GroundTile> groundTiles = new List<GroundTile>();
+
     List<GameTile> tiles = new List<GameTile>();
     static List<GameTile> shortestPath = new List<GameTile>();
 
@@ -199,19 +202,42 @@ public class GameBoard : MonoBehaviour
         }
 
     }
-
+    private void GenerateTrapTiles()
+    {
+        int trapN = 20;
+        for(int i = 0; i < trapN; i++)
+        {
+            int x = UnityEngine.Random.Range(0,25);
+            int y = UnityEngine.Random.Range(0,25);
+            traps[x, y] = 1;
+        }
+    }
     private void GenerateGroundTiles(Vector2Int groundSize)
     {
+        GenerateTrapTiles();
         Vector2 offset = new Vector2((groundSize.x - 1) * 0.5f, (groundSize.y - 1) * 0.5f) * StaticData.Instance.TileSize;
         for (int i = 0, y = 0; y < groundSize.y; y++)
         {
             for (int x = 0; x < groundSize.x; x++, i++)
             {
-                GroundTile groundTile = tileFactory.GetGroundTile();
-                groundTile.transform.localPosition = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
-                groundTile.transform.localPosition += Vector3.forward * 0.1f;
-                CorrectTileCoord(groundTile);
-                groundTiles.Add(groundTile);
+                if (traps[x, y] == 0)
+                {
+                    //在这里判断哪里有陷阱
+                    GroundTile groundTile = tileFactory.GetGroundTile();
+                    groundTile.transform.localPosition = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
+                    groundTile.transform.localPosition += Vector3.forward * 0.1f;
+                    CorrectTileCoord(groundTile);
+                    groundTiles.Add(groundTile);
+                }
+                else
+                {
+                    TrapTile groundTile = tileFactory.GetTrapTile();
+                    groundTile.transform.localPosition = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
+                    groundTile.transform.localPosition += Vector3.forward * 0.1f;
+                    CorrectTileCoord(groundTile);
+                    //trap.Add(groundTile);
+                }
+
             }
         }
     }

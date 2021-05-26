@@ -1758,6 +1758,7 @@ MonoBehaviour:
   _startSize: {x: 3, y: 3}
   _groundSize: {x: 25, y: 25}
   _shapeFactory: {fileID: 11400000, guid: e561f9a0ed33f674284817e826a7cb56, type: 2}
+  _turretFactory: {fileID: 11400000, guid: a7462b451c9a2e34993f437b96292d0d, type: 2}
   _tileFactory: {fileID: 11400000, guid: d1395574e706e2d4b9a5223f53bc89fa, type: 2}
   _enemyFactory: {fileID: 11400000, guid: 49641aa71a9726d44b89676d62fd4df1, type: 2}
   enemies:
@@ -10642,7 +10643,6 @@ MonoBehaviour:
   playerLevelUpMoneyTxt: {fileID: 881587328}
   lotteryDrawTxt: {fileID: 395549260}
   luckyPointsTxt: {fileID: 219744387}
-  playerManager: {fileID: 1136564379}
 --- !u!1 &1590786595
 GameObject:
   m_ObjectHideFlags: 0
