@@ -13,6 +13,11 @@ public class BuildingState : State
         //Debug.Log("Eneter Building State");
         yield return new WaitForSeconds(0.5f);
         gameManager._levelUIManager.Preparing();
+        //重置所有防御塔的回合临时加成
+        foreach(var turret in gameManager.turrets.behaviors)
+        {
+            ((Turret)turret).ClearTurnIntensify();
+        }
         yield break;
     }
 

@@ -116,5 +116,5 @@ public class PlayerManager : MonoBehaviour
 //Íæ¼ÒÏëÒªÉ¶
 public enum PlayerWish
 {
-    Element,Composition
+    Element,Composition,none
 }

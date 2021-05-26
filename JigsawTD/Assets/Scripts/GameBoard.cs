@@ -113,7 +113,6 @@ public class GameBoard : MonoBehaviour
             groundTile.TileAbrove = tile;
             groundTile.gameObject.layer = LayerMask.NameToLayer(StaticData.TempGroundMask);
         }
-        tile.m_GroundTile = groundTile;
         tile.gameObject.layer = LayerMask.NameToLayer(StaticData.ConcreteTileMask);
         tile.transform.localPosition = pos;
         CorrectTileCoord(tile);

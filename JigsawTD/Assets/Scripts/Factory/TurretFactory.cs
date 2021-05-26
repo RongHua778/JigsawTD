@@ -8,6 +8,7 @@ public class TurretFactory : GameObjectFactory
 {
     public GameObject[] basicTurrets;
     public GameObject[] composedTurrets;
+    public GameObject test;
     [SerializeField] float[] elementTileChance;
     float[,] levelChance = new float[6, 5]
 {
@@ -33,6 +34,12 @@ public class TurretFactory : GameObjectFactory
         return temp;
     }
 
+    private GameObject GetNoneTurret()
+    {
+        GameObject temp = CreateInstance(test);
+        return temp;
+    }
+
     //随机返回一个基础元素塔
     private GameObject GetRandomBasicTurret()
     {
@@ -52,6 +59,8 @@ public class TurretFactory : GameObjectFactory
     {
         switch (GameManager.Instance.playerManager.PlayerWish)
         {
+            case PlayerWish.none:
+                return GetNoneTurret();
             case PlayerWish.Element:
                 return GetRandomBasicTurret();
             case PlayerWish.Composition:

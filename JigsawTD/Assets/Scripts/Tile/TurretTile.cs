@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class TurretTile : GameTile
 {
-    [SerializeField] GameObject TurretBase = default;
-    public Turret turret;
+    private GameObject TurretBase = default;
+    [HideInInspector] public Turret turret;
 
     public override BasicTileType BasicTileType => BasicTileType.Turret;
 
@@ -20,6 +20,8 @@ public class TurretTile : GameTile
     }
     public override void OnSpawn()
     {
+        TurretBase = transform.Find("TileBase/TurretBase").gameObject;
+        turret = GetComponentInChildren<Turret>();
         turret.InitializeTurret(this,turret.Quality);
         TurretBase.layer = LayerMask.NameToLayer(StaticData.TempTurretMask);
     }
@@ -47,6 +49,7 @@ public class TurretTile : GameTile
         turret.SpeedIntensify = 0;
         turret.targetList.Clear();
         turret.Dropped = false;
+        turret.ClearTurnIntensify();
         turret.RecycleRanges();
         //Turret.layer = LayerMask.NameToLayer(StaticData.TempTurretMask);
         //Turret.GetComponent<Collider2D>().enabled = true;//被覆盖时，会被射线检测disable掉groundtile层的Collider

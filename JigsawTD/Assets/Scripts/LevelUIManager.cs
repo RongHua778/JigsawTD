@@ -59,7 +59,7 @@ public class LevelUIManager : MonoBehaviour
     }
     public void Test()
     {
-        blueprints = GameManager.Instance.playerManager.GetBluePrints(3);
+        blueprints = playerManager.GetBluePrints(3);
         testXiezi(blueprints, peifangTxt);
         p1=blueprints[0];
         p2=blueprints[1];
@@ -68,27 +68,28 @@ public class LevelUIManager : MonoBehaviour
 
     public void test21()
     {
-        GameManager.Instance.playerManager.BuyBlueprint(p1);
+        playerManager.BuyBlueprint(p1);
         blueprints.Remove(p1);
         testXiezi(blueprints, peifangTxt);
-        testXiezi(GameManager.Instance.playerManager.BlueprintsInPocket, blueprintsTxt);
+        testXiezi(playerManager.BlueprintsInPocket, blueprintsTxt);
     }
     public void test22()
     {
-        GameManager.Instance.playerManager.BuyBlueprint(p2);
+        playerManager.BuyBlueprint(p2);
         blueprints.Remove(p2);
         testXiezi(blueprints, peifangTxt);
-        testXiezi(GameManager.Instance.playerManager.BlueprintsInPocket, blueprintsTxt);
+        testXiezi(playerManager.BlueprintsInPocket, blueprintsTxt);
     }
     public void test23()
     {
-        GameManager.Instance.playerManager.BuyBlueprint(p3);
+        playerManager.BuyBlueprint(p3);
         blueprints.Remove(p3);
         testXiezi(blueprints, peifangTxt);
-        testXiezi(GameManager.Instance.playerManager.BlueprintsInPocket, blueprintsTxt);
+        testXiezi(playerManager.BlueprintsInPocket, blueprintsTxt);
     }
     public void testComposition()
     {
+        playerManager.BlueprintInBuilding=p1;
         GetComposedShape();
     }
     //888888888888888888888888888888888888888888888888888888888
@@ -110,6 +111,7 @@ public class LevelUIManager : MonoBehaviour
     [SerializeField] Text luckyPointsTxt = default;
 
     List<TileTips> tips = new List<TileTips>();
+    public PlayerManager playerManager;
 
     int currentWave;
     public int CurrentWave
@@ -176,35 +178,28 @@ public class LevelUIManager : MonoBehaviour
         EnemyRemain--;
     }
 
-    private void ChangePlayerHealth(int value)
+    public void ChangePlayerHealth(int value)
     {
-        GameManager.Instance.playerManager.PlayerHealth += value;
+        playerManager.PlayerHealth += value;
     }
-    private TileShape GetRandomNewShape()
-    {
-        TileShape shape = GameManager.Instance.ShapeFactory.GetRandomShape();
-        shape.InitializeShape();
-        return shape;
-    }
+
     public void GetNewBuildings()
     {
-        DisplayShape(0, GetRandomNewShape());
-        DisplayShape(1, GetRandomNewShape());
-        DisplayShape(2, GetRandomNewShape());
+        DisplayShape(0, GameManager.Instance.GetRandomNewShape());
+        DisplayShape(1, GameManager.Instance.GetRandomNewShape());
+        DisplayShape(2, GameManager.Instance.GetRandomNewShape());
         ShowArea(1);
     }
 
     public void GetComposedShape()
     {
-        GameManager.Instance.playerManager.BlueprintInBuilding = p1;
-        GameManager.Instance.playerManager.PlayerWish = PlayerWish.Composition;
-        TileShape shape = GameManager.Instance.ShapeFactory.GetOneShape();
+        playerManager.PlayerWish = PlayerWish.none;
+        TileShape shape = GameManager.Instance.ShapeFactory.GetShape(ShapeType.D);
         shape.InitializeShape();
     }
     //每回合开始前计算幸运点、抽取模块次数等逻辑。
     public void Preparing() 
     {
-        PlayerManager playerManager = GameManager.Instance.playerManager;
         playerManager.LotteryDraw++;
         if (playerManager.luckPointsProcess < 0) playerManager.luckPointsProcess = 0;
         else 
@@ -295,7 +290,6 @@ public class LevelUIManager : MonoBehaviour
 
     public void ExtraDrawClick()
     {
-        PlayerManager playerManager = GameManager.Instance.playerManager;
         if (playerManager.LotteryDraw > 0)
         {
             playerManager.LotteryDraw--;
@@ -313,7 +307,6 @@ public class LevelUIManager : MonoBehaviour
     //把player的数据同步到UI上
     public void SynchronizeLabels()
     {
-        PlayerManager playerManager = GameManager.Instance.playerManager;
         playerLevelTxt.text = "LV" + playerManager.PlayerLevel.ToString();
         if (playerManager.PlayerLevel < StaticData.Instance.PlayerMaxLevel)
         {
@@ -331,7 +324,6 @@ public class LevelUIManager : MonoBehaviour
     //player升级
     public void LevelUp()
     {
-        PlayerManager playerManager = GameManager.Instance.playerManager;
         if (playerManager.PlayerLevel < StaticData.Instance.PlayerMaxLevel)
         {
             if (playerManager.PlayerCoin >= playerManager.PlayerLvUpMoney)
