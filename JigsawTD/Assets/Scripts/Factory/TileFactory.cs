@@ -11,6 +11,7 @@ public class TileFactory : GameObjectFactory
 {
     [SerializeField] GameObject ground;
     [SerializeField] GroundTile groundTile = default;
+    [SerializeField] TrapTile trapTile = default;
     [SerializeField] GameTile spawnPoint = default;
     [SerializeField] GameTile destinationTile = default;
     [SerializeField] TurretFactory turretFactory;
@@ -44,8 +45,12 @@ public class TileFactory : GameObjectFactory
     //get´øÓÐËþµÄtile
     public GameTile GetTurretTile()
     {
-        GameObject temp =turretFactory.GetTurret();
+        GameObject temp =GameManager.Instance.TurretFactory.GetTurret();
         return temp.GetComponent<TurretTile>();
     }
 
+    public TrapTile GetTrapTile()
+    {
+        return CreateInstance(trapTile.gameObject).GetComponent<TrapTile>();
+    }
 }
