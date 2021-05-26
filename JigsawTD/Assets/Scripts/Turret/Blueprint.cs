@@ -6,7 +6,7 @@ public class Blueprint
 {
     int totalLevel;
     int compositionN;
-    List<Composition> compositions=new List<Composition>();
+    List<Composition> compositions = new List<Composition>();
     public List<Composition> Compositions { get => compositions; set => compositions = value; }
     public int CompositionN { get => compositionN; set => compositionN = value; }
     public int TotalLevel { get => totalLevel; set => totalLevel = value; }

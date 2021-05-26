@@ -148,6 +148,7 @@ public class LevelUIManager : MonoBehaviour
         GameEvents.Instance.onStartNewWave += NewWaveStart;
         GameEvents.Instance.onAddTiles += ConfirmShape;
         GameEvents.Instance.onEnemyDie += EnemyDie;
+        GameEvents.Instance.onShowTileTips += ShowTileTips;
     }
 
     private void OnDisable()
@@ -157,6 +158,7 @@ public class LevelUIManager : MonoBehaviour
         GameEvents.Instance.onStartNewWave -= NewWaveStart;
         GameEvents.Instance.onAddTiles -= ConfirmShape;
         GameEvents.Instance.onEnemyDie -= EnemyDie;
+        GameEvents.Instance.onShowTileTips -= ShowTileTips;
     }
 
     private void NewWaveStart(EnemySequence sequence)

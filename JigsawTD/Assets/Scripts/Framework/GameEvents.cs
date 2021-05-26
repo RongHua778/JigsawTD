@@ -60,4 +60,10 @@ public class GameEvents : Singleton<GameEvents>
     {
         onStartNewWave?.Invoke(sequence);
     }
+
+    public event Action<GameTile> onShowTileTips;
+    public void ShowTileTips(GameTile tile)
+    {
+        onShowTileTips?.Invoke(tile);
+    }
 }
