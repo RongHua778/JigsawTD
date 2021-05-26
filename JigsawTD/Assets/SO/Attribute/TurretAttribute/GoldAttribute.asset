@@ -15,7 +15,11 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: 65756f16355ed27489d3bb0e0ac7d940, type: 3}
   Name: Gold
   Description: A good turret to serve as barrier. Range is Circle.
+  TilePrefab: {fileID: 6604616035422911931, guid: 6d63a6fce6ff83845ae79fbf4a5b921f, type: 3}
   RangeType: 0
+  element: 0
+  totalLevel: 0
+  elementNumber: 0
   TurretLevels:
   - AttackRange: 1
     ForbidRange: 0
@@ -87,8 +91,3 @@ MonoBehaviour:
     BaseSprite: {fileID: 21300000, guid: 0f6ce133ceca7fe45bd7df52fb7cbf63, type: 3}
     CannonSprite: {fileID: 21300000, guid: 12bdb67d9834bc34592dccc5d5ec3897, type: 3}
     ShootPointOffset: {x: 0, y: 0.26}
-  quality: 1
-  turretTile: {fileID: 0}
-  element: 0
-  totalLevel: 0
-  elementNumber: 0

@@ -10642,7 +10642,6 @@ MonoBehaviour:
   playerLevelUpMoneyTxt: {fileID: 881587328}
   lotteryDrawTxt: {fileID: 395549260}
   luckyPointsTxt: {fileID: 219744387}
-  playerManager: {fileID: 1136564379}
 --- !u!1 &1590786595
 GameObject:
   m_ObjectHideFlags: 0

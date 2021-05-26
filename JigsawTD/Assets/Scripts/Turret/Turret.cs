@@ -84,8 +84,8 @@ public abstract class Turret : GameBehavior
     public float SpeedIntensify { get => speedIntensify; set => speedIntensify = value; }
     //*************
 
-    public List<TurretEffectInfo> AttackEffectInfos => m_TurretAttribute.TurretLevels[Level].AttackEffects;
-    public List<TurretEffect> AttackEffects = new List<TurretEffect>();
+    public List<TurretEffectInfo> TurretEffectInfos => m_TurretAttribute.TurretLevels[Level].AttackEffects;
+    public List<TurretEffect> TurretEffects = new List<TurretEffect>();
 
 
     private void Awake()
@@ -97,16 +97,29 @@ public abstract class Turret : GameBehavior
         shootPoint = rotTrans.Find("ShootPoint");
         BaseSprite = transform.root.Find("TileBase/TurretBase").GetComponent<SpriteRenderer>();
         CannonSprite = rotTrans.Find("Cannon").GetComponent<SpriteRenderer>();
-        RangeType = m_TurretAttribute.RangeType;
-        Element = m_TurretAttribute.element;
+
     }
 
-    public virtual void InitializeTurret(GameTile tile, int quality)
+    public virtual void InitializeTurret()
     {
         GenerateRange();
         rotTrans.localRotation = Quaternion.identity;
-        this.quality = quality;
+        RangeType = m_TurretAttribute.RangeType;
+        Element = m_TurretAttribute.element;
         SetGraphic();
+        GetTurretEffects();
+    }
+
+    private void GetTurretEffects()
+    {
+        TurretEffects.Clear();
+        foreach (TurretEffectInfo info in TurretEffectInfos)
+        {
+            TurretEffect effect = AttackEffectFactory.GetEffect((int)info.EffectName);
+            effect.turret = this;
+            effect.KeyValue = info.KeyValue;
+            TurretEffects.Add(effect);
+        }
     }
 
     //设置不同等级的美术资源
@@ -286,9 +299,10 @@ public abstract class Turret : GameBehavior
 
     protected virtual void Shoot()
     {
-        Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
-        bullet.transform.position = shootPoint.position;
-        bullet.Initialize(this);
+        foreach(var effect in TurretEffects)
+        {
+            effect.Shoot();
+        }
     }
     protected virtual void OnDrawGizmos()
     {
@@ -298,17 +312,6 @@ public abstract class Turret : GameBehavior
         if (Target != null)
         {
             Gizmos.DrawLine(position, Target.transform.position);
-        }
-    }
-    //根据特定参数生成配方
-    private void GenerateComposition()
-    {
-        int[] tempLevel = StaticData.GetSomeRandoms(m_TurretAttribute.totalLevel, m_TurretAttribute.elementNumber);
-        int[] tempElement = new int[m_TurretAttribute.elementNumber];
-        for (int i = 0; i < m_TurretAttribute.elementNumber; i++)
-        {
-            Composition c = new Composition(tempLevel[i], tempElement[i]);
-            Compositions.Add(c);
         }
     }
 

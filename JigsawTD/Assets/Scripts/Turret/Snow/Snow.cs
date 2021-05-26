@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Snow : Turret
 {
-    public override void InitializeTurret(GameTile tile,int quality)
+    public override void InitializeTurret()
     {
-        base.InitializeTurret(tile, quality);
+        base.InitializeTurret();
         _rotSpeed = 0f;
         CheckAngle = 45f;
     }

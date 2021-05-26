@@ -24,7 +24,7 @@ public class StaticData : Singleton<StaticData>
     //塔的最大等级
     public static int maxLevel = 5;
     //一共有几种元素
-    public static int elementN=5;
+    public static int elementN = 5;
     //最大quality
     public static int maxQuality = 5;
 
@@ -34,6 +34,23 @@ public class StaticData : Singleton<StaticData>
     public int LevelMaxWave;
     public int PlayerMaxLevel;
 
+    [Header("ElementAttributes")]
+    public List<TurretAttribute> ElementAttributes = new List<TurretAttribute>();
+    public Dictionary<Element, TurretAttribute> ElementDIC = new Dictionary<Element, TurretAttribute>();
+
+    protected override void Awake()
+    {
+        base.Awake();
+        InitElementDIC();
+    }
+
+    private void InitElementDIC()
+    {
+        foreach (var attribute in ElementAttributes)
+        {
+            ElementDIC.Add(attribute.element, attribute);
+        }
+    }
     public void GameSlowDown()
     {
         Time.timeScale = GameSlowDownRate;
@@ -170,7 +187,7 @@ public class StaticData : Singleton<StaticData>
         return pointsToRetrun;
     }
     //给定一个总等级，返回若干个随机数的方法
-    public static int[] GetSomeRandoms(int totalLevel,int number)
+    public static int[] GetSomeRandoms(int totalLevel, int number)
     {
         if (number < 1)
         {
@@ -187,30 +204,41 @@ public class StaticData : Singleton<StaticData>
         int[] result = new int[number];
         while (number > 1)
         {
-        if (number == 2)
-        {
-            int min = 1;
-            while (totalLevel - min > maxLevel)
+            if (number == 2)
             {
-                min++;
-            }
-            result[0] = Random.Range(min ,totalLevel-min+1);
-            result[1] = totalLevel - result[0];
+                int min = 1;
+                while (totalLevel - min > maxLevel)
+                {
+                    min++;
+                }
+                result[0] = Random.Range(min, totalLevel - min + 1);
+                result[1] = totalLevel - result[0];
                 number--;
-        }else if (number >=2)
-        {
-            int max = Mathf.Min(totalLevel - (number - 1), maxLevel);
-            int a = Random.Range(1, max+1);
-            totalLevel -= a;
-            result[number - 1] = a;
-            number--;
-        }
-        else
-        {
-            Debug.LogWarning("刷随机等级的算法不支持！");
-            return null;
-        }
+            }
+            else if (number >= 2)
+            {
+                int max = Mathf.Min(totalLevel - (number - 1), maxLevel);
+                int a = Random.Range(1, max + 1);
+                totalLevel -= a;
+                result[number - 1] = a;
+                number--;
+            }
+            else
+            {
+                Debug.LogWarning("刷随机等级的算法不支持！");
+                return null;
+            }
         }
         return result;
+    }
+
+    public TurretAttribute GetElementsAttributes(Element element)
+    {
+        if (ElementDIC.ContainsKey(element))
+        {
+            return ElementDIC[element];
+        }
+        Debug.LogWarning(element + "没有对应的元素attribute");
+        return null;
     }
 }

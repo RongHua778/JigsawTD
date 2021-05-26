@@ -141,12 +141,12 @@ public class GameBoard : MonoBehaviour
         {
             if (path != null && p.vectorPath.SequenceEqual(path.vectorPath))
             {
-                Debug.Log("Found Same Path");
+                //Debug.Log("Found Same Path");
                 return;
             }
             path = p;
             ShowPath(path);
-            Debug.Log("Find Path!");
+            //Debug.Log("Find Path!");
         }
         else
         {
@@ -156,7 +156,7 @@ public class GameBoard : MonoBehaviour
                 ObjectPool.Instance.UnSpawn(pl.gameObject);
             }
             shortestPath.Clear();
-            Debug.LogError("No Path Found");
+            //Debug.LogError("No Path Found");
         }
     }
 

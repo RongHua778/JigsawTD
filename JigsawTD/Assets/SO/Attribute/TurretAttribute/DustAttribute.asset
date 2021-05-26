@@ -15,7 +15,11 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: f288911aca0fdda45b24999f09f1ef35, type: 3}
   Name: Dust
   Description: Deal AOE damage. Range is Half Circle.
+  TilePrefab: {fileID: 6604616035422911931, guid: 4ce61665656640249b97041fdf5b3dce, type: 3}
   RangeType: 1
+  element: 4
+  totalLevel: 0
+  elementNumber: 0
   TurretLevels:
   - AttackRange: 3
     ForbidRange: 1
@@ -87,8 +91,3 @@ MonoBehaviour:
     BaseSprite: {fileID: 21300000, guid: 537e57241659f504488d2a4c4c44f314, type: 3}
     CannonSprite: {fileID: 21300000, guid: 4233b36c68c8c794caec02968e1d0ec1, type: 3}
     ShootPointOffset: {x: 0, y: 0.17}
-  quality: 1
-  turretTile: {fileID: 0}
-  element: 4
-  totalLevel: 0
-  elementNumber: 0
