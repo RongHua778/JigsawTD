@@ -15,7 +15,11 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: 65756f16355ed27489d3bb0e0ac7d940, type: 3}
   Name: Water
   Description: shoot slow bullet
+  TilePrefab: {fileID: 6604616035422911931, guid: d60638da85bf8a14d80f45ecf27fa570, type: 3}
   RangeType: 0
+  element: 2
+  totalLevel: 0
+  elementNumber: 0
   TurretLevels:
   - AttackRange: 1
     ForbidRange: 0
@@ -97,8 +101,3 @@ MonoBehaviour:
     BaseSprite: {fileID: 21300000, guid: c23ca6db87906d64f849ee5566924797, type: 3}
     CannonSprite: {fileID: 21300000, guid: 10cec7929cb918b49a527ac64960ff75, type: 3}
     ShootPointOffset: {x: 0, y: 0.25}
-  quality: 1
-  turretTile: {fileID: 0}
-  element: 2
-  totalLevel: 0
-  elementNumber: 0

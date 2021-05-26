@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Factory/TurretFactory", fileName = "TurretFactory")]
 public class TurretFactory : GameObjectFactory
 {
-    public GameObject[] basicTurrets;
+   // public GameObject[] basicTurrets;
     public GameObject[] composedTurrets;
     public GameObject test;
     [SerializeField] float[] elementTileChance;
@@ -21,7 +21,7 @@ public class TurretFactory : GameObjectFactory
 };
     private GameObject GetBasicTurret(int quality,int element)
     {
-        GameObject temp = CreateInstance(basicTurrets[element]);
+        GameObject temp = CreateInstance(StaticData.Instance.GetElementsAttributes((Element)element).TilePrefab);
         temp.GetComponentInChildren<Turret>().Quality = quality;
         return temp;
     }

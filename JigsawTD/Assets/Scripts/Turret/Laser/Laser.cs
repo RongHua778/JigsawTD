@@ -17,9 +17,9 @@ public class Laser : Turret
         return true;
     }
 
-    public override void InitializeTurret(GameTile tile, int quality)
+    public override void InitializeTurret()
     {
-        base.InitializeTurret(tile, quality);
+        base.InitializeTurret();
         CheckAngle = 10f;
         lineSR.positionCount = 2;
 

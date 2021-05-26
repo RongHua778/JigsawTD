@@ -8,6 +8,7 @@ public class LevelAttribute : ScriptableObject
     public Sprite Icon;
     public string Name;
     public string Description;
+    public GameObject TilePrefab;
     public virtual void Upgrade()
     {
 

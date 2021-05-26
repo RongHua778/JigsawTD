@@ -15,7 +15,11 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: 125c2ce36f9328941b24e09d3ac498fb, type: 3}
   Name: Wood
   Description: Dear AOE damage to front side. Range is Line.
+  TilePrefab: {fileID: 6604616035422911931, guid: 7561f5f3bdfe9cf4486ea710b7a3922a, type: 3}
   RangeType: 2
+  element: 1
+  totalLevel: 0
+  elementNumber: 0
   TurretLevels:
   - AttackRange: 2
     ForbidRange: 0
@@ -87,8 +91,3 @@ MonoBehaviour:
     BaseSprite: {fileID: 21300000, guid: 96c03dd35664a4b4c8498a29b89ec736, type: 3}
     CannonSprite: {fileID: 21300000, guid: f122162c2b6d09e41b938a9e2f237874, type: 3}
     ShootPointOffset: {x: 0, y: 0.21}
-  quality: 1
-  turretTile: {fileID: 0}
-  element: 1
-  totalLevel: 0
-  elementNumber: 0

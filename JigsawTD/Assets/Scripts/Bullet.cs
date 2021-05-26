@@ -54,7 +54,7 @@ public abstract class Bullet : GameBehavior
         this.bulletSpeed = turret.BulletSpeed;
         this.SputteringRange = turret.SputteringRange;
         this.CriticalRate = turret.CriticalRate;
-        this.attackEffectInfos = turret.AttackEffectInfos;
+        this.attackEffectInfos = turret.TurretEffectInfos;
         TriggerShootEffect();
     }
 

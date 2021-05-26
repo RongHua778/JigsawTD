@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum TurretEffectName
 {
-    DistanceBaseDamage,SlowBullet,AttackIncreasePerShoot
+    DistanceBaseDamage,SlowBullet,AttackIncreasePerShoot,EnemyCountAttackIncrease
 }
 [System.Serializable]
 public class TurretEffectInfo
@@ -15,7 +15,7 @@ public class TurretEffectInfo
 public abstract class TurretEffect
 {
     public abstract TurretEffectName EffectName { get; }
-
+    public Turret turret;
     public Bullet bullet;
     public float KeyValue;
 
@@ -69,4 +69,20 @@ public class AttackIncreasePerShoot : TurretEffect
     {
         bullet.turretParent.TurnAdditionalAttack += (int)KeyValue;
     }
+}
+
+public class EnemyCountAttackIncrease : TurretEffect
+{
+    public override TurretEffectName EffectName => TurretEffectName.EnemyCountAttackIncrease;
+
+    public override void EnemyEnter()
+    {
+
+    }
+
+    public override void EnemyExit()
+    {
+
+    }
+
 }

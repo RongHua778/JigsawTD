@@ -22,7 +22,7 @@ public class TurretTile : GameTile
     {
         TurretBase = transform.Find("TileBase/TurretBase").gameObject;
         turret = GetComponentInChildren<Turret>();
-        turret.InitializeTurret(this,turret.Quality);
+        turret.InitializeTurret();
         TurretBase.layer = LayerMask.NameToLayer(StaticData.TempTurretMask);
     }
 
