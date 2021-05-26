@@ -6,13 +6,14 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Factory/BlueprintFactory", fileName = "blueprintFactory")]
 public class BlueprintFactory : GameObjectFactory
 {
-    public Blueprint GetComposedTurret(int compositionN, int totalLevel)
+    public Blueprint GetComposedTurret(TurretAttribute attribute)
     {
         Blueprint blueprint = new Blueprint();
-        blueprint.TotalLevel = totalLevel;
-        blueprint.CompositionN = compositionN;
-        int[] compositionLevel = StaticData.GetSomeRandoms(totalLevel, compositionN);
-        for (int i = 0; i < compositionN; i++)
+        blueprint.CompositeTurretAttribute = attribute;
+        //blueprint.TotalLevel = attribute.totalLevel;
+        //blueprint.CompositionN = attribute.elementNumber;
+        int[] compositionLevel = StaticData.GetSomeRandoms(attribute.totalLevel, attribute.elementNumber);
+        for (int i = 0; i < attribute.elementNumber; i++)
         {
             Composition c = new Composition(compositionLevel[i], Random.Range(0, StaticData.elementN));
             blueprint.Compositions.Add(c);
@@ -23,10 +24,10 @@ public class BlueprintFactory : GameObjectFactory
     public List<Blueprint> GetBluePrints(int bluePrintN)
     {
         List<Blueprint> result = new List<Blueprint>();
-        for (int i = 0; i < bluePrintN; i++)
-        {
-            result.Add(GetComposedTurret(2, 1));
-        }
+        //for (int i = 0; i < bluePrintN; i++)
+        //{
+        //    result.Add(GetComposedTurret(2, 1));
+        //}
         return result;
     }
 }

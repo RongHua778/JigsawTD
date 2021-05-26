@@ -1,7 +1,7 @@
 public enum Element
 {
     //½ğÄ¾Ë®»ğÍÁ£¡
-    Gold,Wood,Water,Fire,Dust
+    Gold,Wood,Water,Fire,Dust,None
 }
 
 public enum TurretStatus

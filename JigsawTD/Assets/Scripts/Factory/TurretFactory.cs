@@ -29,8 +29,8 @@ public class TurretFactory : GameObjectFactory
     private GameObject GetComposedTurret()
     {
         GameObject temp = CreateInstance(composedTurrets[0]);
-        //Blueprint blueprint = GameManager.Instance.playerManager.BlueprintInBuilding;
-        //temp.GetComponentInChildren<Turret>().Compositions = new List<Composition>(blueprint.Compositions);
+        Blueprint blueprint = GameManager.Instance.playerManager.BlueprintInBuilding;
+        temp.GetComponentInChildren<Turret>().Compositions = new List<Composition>(blueprint.Compositions);
         return temp;
     }
 

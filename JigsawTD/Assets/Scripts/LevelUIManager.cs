@@ -10,16 +10,16 @@ public class LevelUIManager : MonoBehaviour
 {
     //888888888测试用88888888888888888888888888888888888888888888
     public TurretFactory test;
-    [SerializeField] TMP_Text[] peifangTxt = default;
-    [SerializeField] TMP_Text[] blueprintsTxt = default;
+    [SerializeField] Text[] peifangTxt = default;
+    [SerializeField] Text[] blueprintsTxt = default;
     List<Blueprint> blueprints;
     Blueprint p1;
     Blueprint p2;
     Blueprint p3;
 
-    public void testXiezi(List<Blueprint> l, TMP_Text[] txt)
+    public void testXiezi(List<Blueprint> l, Text[] txt)
     {
-        for(int i=0;i<txt.Length;i++)
+        for (int i = 0; i < txt.Length; i++)
         {
             txt[i].text = "";
         }
@@ -59,11 +59,11 @@ public class LevelUIManager : MonoBehaviour
     }
     public void Test()
     {
-        blueprints = GameManager.Instance.playerManager.GetBluePrints(3);
+        //blueprints = GameManager.Instance.playerManager.GetBluePrints(3);
         testXiezi(blueprints, peifangTxt);
-        p1=blueprints[0];
-        p2=blueprints[1];
-        p3=blueprints[2];
+        p1 = blueprints[0];
+        p2 = blueprints[1];
+        p3 = blueprints[2];
     }
 
     public void test21()
@@ -89,19 +89,19 @@ public class LevelUIManager : MonoBehaviour
     }
     public void testComposition()
     {
-        GameManager.Instance.playerManager.BlueprintInBuilding=p1;
+        GameManager.Instance.playerManager.BlueprintInBuilding = p1;
         GetComposedShape();
     }
     //888888888888888888888888888888888888888888888888888888888
 
-    [SerializeField]
-    GameObject messagePanel;
-    
+    [SerializeField] TurretTips turretTips = default;
+    [SerializeField] GameObject messagePanel = default;
+
     [SerializeField] TileTips turretTipPrefab, trapTipPrefab = default;
 
     [SerializeField] RoadPlacement _roadPlacament = default;
 
-    [SerializeField] Text messageTxt=default;
+    [SerializeField] Text messageTxt = default;
     [SerializeField] Text healthTxt = default;
     [SerializeField] Text coinTxt = default;
     [SerializeField] Text waveTxt = default;
@@ -110,7 +110,7 @@ public class LevelUIManager : MonoBehaviour
     [SerializeField] Text lotteryDrawTxt = default;
     [SerializeField] Text luckyPointsTxt = default;
 
-    List<TileTips> tips = new List<TileTips>();
+    //List<TileTips> tips = new List<TileTips>();
 
     int currentWave;
     public int CurrentWave
@@ -149,6 +149,8 @@ public class LevelUIManager : MonoBehaviour
         GameEvents.Instance.onAddTiles += ConfirmShape;
         GameEvents.Instance.onEnemyDie += EnemyDie;
         GameEvents.Instance.onShowTileTips += ShowTileTips;
+        GameEvents.Instance.onShowTurretTips += ShowTurretAttributeTips;
+        GameEvents.Instance.onHideTips += HideTips;
     }
 
     private void OnDisable()
@@ -159,8 +161,19 @@ public class LevelUIManager : MonoBehaviour
         GameEvents.Instance.onAddTiles -= ConfirmShape;
         GameEvents.Instance.onEnemyDie -= EnemyDie;
         GameEvents.Instance.onShowTileTips -= ShowTileTips;
+        GameEvents.Instance.onShowTurretTips -= ShowTurretAttributeTips;
+        GameEvents.Instance.onHideTips -= HideTips;
     }
 
+    //合成界面显示配方塔TIPS
+    private void ShowTurretAttributeTips(TurretAttribute attribute)
+    {
+        turretTips.gameObject.SetActive(true);
+        Vector2 size = turretTips.GetComponent<RectTransform>().sizeDelta;
+        Vector2 pos = new Vector2(size.x / 2 + 500, Screen.height / 2);
+        turretTips.transform.position = pos;
+        turretTips.ReadAttribute(attribute, true);
+    }
     private void NewWaveStart(EnemySequence sequence)
     {
         CurrentWave = sequence.Wave;
@@ -188,7 +201,7 @@ public class LevelUIManager : MonoBehaviour
         return shape;
     }
 
-        public void GetNewBuildings()
+    public void GetNewBuildings()
     {
         DisplayShape(0, GetRandomNewShape());
         DisplayShape(1, GetRandomNewShape());
@@ -204,14 +217,14 @@ public class LevelUIManager : MonoBehaviour
         shape.InitializeShape();
     }
     //每回合开始前计算幸运点、抽取模块次数等逻辑。
-    public void Preparing() 
+    public void Preparing()
     {
-        PlayerManager playerManager= GameManager.Instance.playerManager;
+        PlayerManager playerManager = GameManager.Instance.playerManager;
         playerManager.LotteryDraw++;
         if (playerManager.luckPointsProcess < 0) playerManager.luckPointsProcess = 0;
-        else 
-        { 
-            if(playerManager.luckPointsProcess <5) playerManager.luckPointsProcess++; 
+        else
+        {
+            if (playerManager.luckPointsProcess < 5) playerManager.luckPointsProcess++;
         }
         playerManager.LuckyPoints += playerManager.luckPointsProcess;
         if (playerManager.LuckyPoints >= 10)
@@ -246,15 +259,14 @@ public class LevelUIManager : MonoBehaviour
                 pos = new Vector2(size.x / 2 + 50, Screen.height / 2);
                 trapTip.transform.position = pos;
                 trapTip.ReadAttribute(((TrapTile)tile));
-                tips.Add(trapTip);
+                //tips.Add(trapTip);
                 break;
             case BasicTileType.Turret:
-                TurretTips turretTip = Instantiate(turretTipPrefab, this.transform) as TurretTips;
-                size = turretTip.GetComponent<RectTransform>().sizeDelta;
+                turretTips.gameObject.SetActive(true);
+                size = turretTips.GetComponent<RectTransform>().sizeDelta;
                 pos = new Vector2(size.x / 2, Screen.height / 2);
-                turretTip.transform.position = pos;
-                turretTip.ReadAttribute(((TurretTile)tile).turret);
-                tips.Add(turretTip);
+                turretTips.transform.position = pos;
+                turretTips.ReadTurret(((TurretTile)tile).turret);
                 break;
             default:
                 break;
@@ -263,14 +275,15 @@ public class LevelUIManager : MonoBehaviour
 
     public void HideTips()
     {
-        if (tips.Count > 0)
-        {
-            foreach (var tip in tips.ToList())
-            {
-                tips.Remove(tip);
-                tip.Hide();
-            }
-        }
+        //if (tips.Count > 0)
+        //{
+        //    foreach (var tip in tips.ToList())
+        //    {
+        //        tips.Remove(tip);
+        //        tip.Hide();
+        //    }
+        //}
+        turretTips.gameObject.SetActive(false);
     }
 
     IEnumerator MessageCor(string content)
@@ -297,7 +310,7 @@ public class LevelUIManager : MonoBehaviour
 
     public void ExtraDrawClick()
     {
-        PlayerManager playerManager= GameManager.Instance.playerManager;
+        PlayerManager playerManager = GameManager.Instance.playerManager;
         if (playerManager.LotteryDraw > 0)
         {
             playerManager.LotteryDraw--;
@@ -315,7 +328,7 @@ public class LevelUIManager : MonoBehaviour
     //把player的数据同步到UI上
     public void SynchronizeLabels()
     {
-        PlayerManager playerManager= GameManager.Instance.playerManager;
+        PlayerManager playerManager = GameManager.Instance.playerManager;
         playerLevelTxt.text = "LV" + playerManager.PlayerLevel.ToString();
         if (playerManager.PlayerLevel < StaticData.Instance.PlayerMaxLevel)
         {
@@ -333,7 +346,7 @@ public class LevelUIManager : MonoBehaviour
     //player升级
     public void LevelUp()
     {
-        PlayerManager playerManager= GameManager.Instance.playerManager;
+        PlayerManager playerManager = GameManager.Instance.playerManager;
         if (playerManager.PlayerLevel < StaticData.Instance.PlayerMaxLevel)
         {
             if (playerManager.PlayerCoin >= playerManager.PlayerLvUpMoney)

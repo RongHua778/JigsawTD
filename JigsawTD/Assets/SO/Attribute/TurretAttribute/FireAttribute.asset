@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300000, guid: 0fc4aee69dd71dd4a80c702accbef93c, type: 3}
   Name: Fire
-  Description: Has critical change
+  Description: "\u6709\u6982\u7387\u66B4\u51FB\u3002\u653B\u51FB\u8303\u56F4\u534A\u5706\u3002"
   TilePrefab: {fileID: 6604616035422911931, guid: 24008486aeb5cc14d9b096b6415a87b8, type: 3}
   RangeType: 1
   element: 3

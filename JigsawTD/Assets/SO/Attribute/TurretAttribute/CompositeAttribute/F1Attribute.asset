@@ -17,9 +17,9 @@ MonoBehaviour:
   Description: "\u524D\u671F\u4E0D\u9519\u7684\u5408\u6210\u5854"
   TilePrefab: {fileID: 0}
   RangeType: 0
-  element: 0
-  totalLevel: 0
-  elementNumber: 0
+  element: 5
+  totalLevel: 4
+  elementNumber: 3
   TurretLevels:
   - AttackRange: 2
     ForbidRange: 0
@@ -34,7 +34,7 @@ MonoBehaviour:
     - EffectName: 3
       KeyValue: 1
     PoloEffects: []
-    TurretName: 
+    TurretName: "F1\u7EC4\u5408\u70AE"
     Icon: {fileID: 21300000, guid: efd7eca78d1a1d44d8b38abd7973113e, type: 3}
     BaseSprite: {fileID: 21300000, guid: cfc4a480c7295054ebb4cfc6d03633ce, type: 3}
     CannonSprite: {fileID: 21300000, guid: d14cac682188a64479d99ce0766836ff, type: 3}
@@ -52,7 +52,7 @@ MonoBehaviour:
     - EffectName: 3
       KeyValue: 1
     PoloEffects: []
-    TurretName: 
+    TurretName: "F2\u7EC4\u5408\u70AE"
     Icon: {fileID: 21300000, guid: efd7eca78d1a1d44d8b38abd7973113e, type: 3}
     BaseSprite: {fileID: 0}
     CannonSprite: {fileID: 0}
@@ -66,7 +66,7 @@ MonoBehaviour:
     CriticalRate: 0
     AttackEffects: []
     PoloEffects: []
-    TurretName: 
+    TurretName: "F3\u7EC4\u5408\u70AE"
     Icon: {fileID: 21300000, guid: efd7eca78d1a1d44d8b38abd7973113e, type: 3}
     BaseSprite: {fileID: 21300000, guid: cfc4a480c7295054ebb4cfc6d03633ce, type: 3}
     CannonSprite: {fileID: 0}

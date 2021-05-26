@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300000, guid: 65756f16355ed27489d3bb0e0ac7d940, type: 3}
   Name: Gold
-  Description: A good turret to serve as barrier. Range is Circle.
+  Description: "\u7A33\u5B9A\u7684\u9632\u5FA1\u5854\u3002\u653B\u51FB\u8303\u56F4\u5706\u3002"
   TilePrefab: {fileID: 6604616035422911931, guid: 6d63a6fce6ff83845ae79fbf4a5b921f, type: 3}
   RangeType: 0
   element: 0

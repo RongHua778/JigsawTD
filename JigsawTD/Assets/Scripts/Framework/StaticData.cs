@@ -38,6 +38,8 @@ public class StaticData : Singleton<StaticData>
     public List<TurretAttribute> ElementAttributes = new List<TurretAttribute>();
     public Dictionary<Element, TurretAttribute> ElementDIC = new Dictionary<Element, TurretAttribute>();
 
+    [Header("CompositionAttributes")]
+    public List<TurretAttribute> CompositionAttributes = new List<TurretAttribute>();
     protected override void Awake()
     {
         base.Awake();
@@ -240,5 +242,10 @@ public class StaticData : Singleton<StaticData>
         }
         Debug.LogWarning(element + "没有对应的元素attribute");
         return null;
+    }
+
+    public TurretAttribute GetRandomCompositionTurret()
+    {
+        return CompositionAttributes[Random.Range(0, CompositionAttributes.Count)];
     }
 }

@@ -2,26 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : Singleton<PlayerManager>
 {
     public LevelUIManager levelUIManager;
     public int[] levelMoney;
-    public GameManager gameManager;
-    public BlueprintFactory blueprintFactory;
-    List<Blueprint> blueprintsInPocket=new List<Blueprint>();
-    Blueprint blueprintInBuilding; 
+    [SerializeField] private BlueprintFactory blueprintFactory;
+    List<Blueprint> blueprintsInPocket = new List<Blueprint>();
+    Blueprint blueprintInBuilding;
     PlayerWish playerWish;
     public PlayerWish PlayerWish { get => playerWish; set => playerWish = value; }
     public Blueprint BlueprintInBuilding { get => blueprintInBuilding; set => blueprintInBuilding = value; }
     public List<Blueprint> BlueprintsInPocket { get => blueprintsInPocket; set => blueprintsInPocket = value; }
-    public List<Blueprint> GetBluePrints(int bluePrintsN)
+    //public List<Blueprint> GetBluePrints(int bluePrintsN)
+    //{
+    //    List<Blueprint> bluePrints = blueprintFactory.GetBluePrints(bluePrintsN);
+    //    for (int j = 0; j < bluePrints.Count; j++)
+    //    {
+    //        bluePrints[j].CheckElement();
+    //    }
+    //    return bluePrints;
+    //}
+
+    public Blueprint GetSingleBluePrint(TurretAttribute attribute)
     {
-        List<Blueprint> bluePrints = blueprintFactory.GetBluePrints(bluePrintsN);
-        for (int j = 0; j < bluePrints.Count; j++)
-        {
-            bluePrints[j].CheckElement();
-        }
-        return bluePrints;
+        Blueprint bluePrint = blueprintFactory.GetComposedTurret(attribute);
+        return bluePrint;
     }
     public void BuildBlueprint(Blueprint blueprint)
     {
@@ -47,7 +52,7 @@ public class PlayerManager : MonoBehaviour
             levelUIManager.SynchronizeLabels();
         }
     }
-    int playerLvUpMoney=50;
+    int playerLvUpMoney = 50;
     public int PlayerLvUpMoney
     {
         get => playerLvUpMoney;
@@ -116,5 +121,5 @@ public class PlayerManager : MonoBehaviour
 //Íæ¼ÒÏëÒªÉ¶
 public enum PlayerWish
 {
-    Element,Composition,none
+    Element, Composition, none
 }

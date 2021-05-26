@@ -66,4 +66,16 @@ public class GameEvents : Singleton<GameEvents>
     {
         onShowTileTips?.Invoke(tile);
     }
+
+    public event Action<TurretAttribute> onShowTurretTips;
+    public void ShowTurretTips(TurretAttribute attribute)
+    {
+        onShowTurretTips?.Invoke(attribute);
+    }
+
+    public event Action onHideTips;
+    public void HideTips()
+    {
+        onHideTips?.Invoke();
+    }
 }

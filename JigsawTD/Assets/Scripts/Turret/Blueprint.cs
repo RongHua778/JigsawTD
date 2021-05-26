@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Blueprint
 {
-    int totalLevel;
-    int compositionN;
+    public TurretAttribute CompositeTurretAttribute;
+    //int totalLevel;
+    //int compositionN;
     List<Composition> compositions = new List<Composition>();
     public List<Composition> Compositions { get => compositions; set => compositions = value; }
-    public int CompositionN { get => compositionN; set => compositionN = value; }
-    public int TotalLevel { get => totalLevel; set => totalLevel = value; }
+    //public int CompositionN { get => compositionN; set => compositionN = value; }
+    //public int TotalLevel { get => totalLevel; set => totalLevel = value; }
 
     //检测每个配方是否存在在场上的方法
     public void CheckElement()
@@ -17,12 +18,14 @@ public class Blueprint
         List<Turret> temp = GameManager.Instance.turretsElements;
         for (int i = 0; i < compositions.Count; i++)
         {
+            compositions[i].obtained = false;
             for (int j = 0; j < temp.Count; j++)
             {
                 if (compositions[i].elementRequirement == (int)temp[j].Element &&
                     compositions[i].levelRequirement == temp[j].Quality)
                 {
                     compositions[i].obtained = true;
+                    break;
                 }
             }
         }
