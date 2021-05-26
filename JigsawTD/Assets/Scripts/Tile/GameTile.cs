@@ -8,9 +8,7 @@ public abstract class GameTile : TileBase
 {
     public abstract BasicTileType BasicTileType { get; }
     public DraggingShape m_DraggingShape { get; set; }
-    //地形等级
-    //public int TileLevel = default;
-    public GroundTile m_GroundTile;
+
     GameObject previewGlow;
     Transform directionCheckPoint;
     public Transform tileBase { get; set; }
@@ -91,7 +89,6 @@ public abstract class GameTile : TileBase
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
-        m_GroundTile = null;
         m_DraggingShape = null;
         gameObject.layer = LayerMask.NameToLayer(StaticData.TempTileMask);
     }

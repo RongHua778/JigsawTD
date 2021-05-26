@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum AttackEffectName
 {
-    DistanceBaseDamage,SlowBullet
+    DistanceBaseDamage,SlowBullet,AttackIncreasePerShoot
 }
 [System.Serializable]
 public class AttackEffectInfo
@@ -51,4 +51,14 @@ public class SlowBullet : AttackEffect
         target.Buffable.AddBuff(info);
     }
 
+}
+
+public class AttackIncreasePerShoot : AttackEffect
+{
+    public override AttackEffectName EffectName => AttackEffectName.AttackIncreasePerShoot;
+
+    public override void Hit(Enemy target)
+    {
+        bullet.turretParent.TurnAdditionalAttack += (int)KeyValue;
+    }
 }

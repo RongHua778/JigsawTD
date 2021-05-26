@@ -128,19 +128,6 @@ public class GameManager : Singleton<GameManager>
             StaticData.holdingShape.RotateShape();
         }
 
-        //if (Input.GetKeyDown(KeyCode.T))
-        //{
-        //    _levelUIManager.DisplayShape(0, GetRandomNewShape());
-        //    _levelUIManager.DisplayShape(1, GetRandomNewShape());
-        //    _levelUIManager.DisplayShape(2, GetRandomNewShape());
-        //    _levelUIManager.ShowArea(0);
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.V))
-        //{
-        //    //_board.ShowPaths = !_board.ShowPaths;
-        //    TransitionToState(waveState);
-        //}
 
         if (IsPressingTile && Input.GetMouseButton(0))
         {

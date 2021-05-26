@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
+  m_Name: F1Attribute
+  m_EditorClassIdentifier: 
+  Icon: {fileID: 21300000, guid: efd7eca78d1a1d44d8b38abd7973113e, type: 3}
+  Name: "F1\u7EC4\u5408\u70AE"
+  Description: "\u524D\u671F\u4E0D\u9519\u7684\u5408\u6210\u5854"
+  RangeType: 0
+  TurretLevels:
+  - AttackRange: 2
+    ForbidRange: 0
+    AttackDamage: 15
+    AttackSpeed: 1.5
+    BulletSpeed: 8
+    SputteringRange: 0
+    CriticalRate: 0
+    AttackEffects:
+    - EffectName: 2
+      KeyValue: 1
+    PoloEffects: []
+    TurretName: 
+    Icon: {fileID: 21300000, guid: efd7eca78d1a1d44d8b38abd7973113e, type: 3}
+    BaseSprite: {fileID: 21300000, guid: cfc4a480c7295054ebb4cfc6d03633ce, type: 3}
+    CannonSprite: {fileID: 21300000, guid: d14cac682188a64479d99ce0766836ff, type: 3}
+    ShootPointOffset: {x: 0, y: 0.27}
+  - AttackRange: 2
+    ForbidRange: 0
+    AttackDamage: 25
+    AttackSpeed: 1.7
+    BulletSpeed: 8
+    SputteringRange: 0
+    CriticalRate: 0
+    AttackEffects: []
+    PoloEffects: []
+    TurretName: 
+    Icon: {fileID: 21300000, guid: efd7eca78d1a1d44d8b38abd7973113e, type: 3}
+    BaseSprite: {fileID: 0}
+    CannonSprite: {fileID: 0}
+    ShootPointOffset: {x: 0, y: 0}
+  - AttackRange: 2
+    ForbidRange: 0
+    AttackDamage: 40
+    AttackSpeed: 2
+    BulletSpeed: 8
+    SputteringRange: 0
+    CriticalRate: 0
+    AttackEffects: []
+    PoloEffects: []
+    TurretName: 
+    Icon: {fileID: 21300000, guid: efd7eca78d1a1d44d8b38abd7973113e, type: 3}
+    BaseSprite: {fileID: 21300000, guid: cfc4a480c7295054ebb4cfc6d03633ce, type: 3}
+    CannonSprite: {fileID: 0}
+    ShootPointOffset: {x: 0, y: 0}
+  turretTile: {fileID: 3568044695007039410, guid: bea362283cf50314d8c64ee93cee9038, type: 3}
+  element: 0
+  totalLevel: 0
+  elementNumber: 0

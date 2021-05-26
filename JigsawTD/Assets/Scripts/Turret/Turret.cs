@@ -5,52 +5,55 @@ using UnityEngine;
 
 public abstract class Turret : GameBehavior
 {
-    List<Composition> compositions=new List<Composition>();
+    List<Composition> compositions = new List<Composition>();
+    public List<Composition> Compositions { get => compositions; set => compositions = value; }
+
+    private GameObject rangeIndicator;
+    private Transform rangeParent;
+    private float nextAttackTime;
+    private Quaternion look_Rotation;
+
     protected RangeType RangeType;
     [SerializeField] protected GameObject bulletPrefab = default;
-    public const int enemyLayerMask = 1 << 11;
     protected float _rotSpeed = 10f;
     private TargetPoint target;
     public TargetPoint Target { get => target; set => target = value; }
     protected List<RangeIndicator> rangeIndicators = new List<RangeIndicator>();
     protected CompositeCollider2D detectCollider;
-    GameObject rangeIndicator;
-    Transform rangeParent;
     protected bool ShowingRange = false;
     protected Transform rotTrans;
-    public Transform shootPoint;
+    protected Transform shootPoint;
     protected float CheckAngle = 10f;
 
-    public bool Dropped = false;
+    [HideInInspector] public bool Dropped = false;
 
     public List<TargetPoint> targetList = new List<TargetPoint>();
 
-    float nextAttackTime;
-    Quaternion look_Rotation;
 
-    [Header("美术资源设置")]
-    [SerializeField]private SpriteRenderer BaseSprite;
-    [SerializeField] private SpriteRenderer CannonSprite;
+    //[Header("美术资源设置")]
+    private SpriteRenderer BaseSprite;
+    private SpriteRenderer CannonSprite;
     //************
 
     [Header("TurretAttribute")]
-    public TurretAttribute m_TurretAttribute = default;
     public int Level = 0;
+    public TurretAttribute m_TurretAttribute = default;
     //塔的品质
     private int quality = 1;
     //塔的元素属性
     private Element element;
     //查看塔的状态（如是否购买了其蓝图，是否集齐了蓝图上面的配方）
-    public TurretStatus Status{get;set;}
-    public int Quality { get => quality; 
-        set 
+    public TurretStatus Status { get; set; }
+    public int Quality
+    {
+        get => quality;
+        set
         {
             quality = value;
-            SetGraphic();
-        }  
+        }
     }
-    public Element Element { get => element; set => element=value; }
-    public virtual float AttackDamage { get => m_TurretAttribute.TurretLevels[Quality-1].AttackDamage *(1+ AttackIntensify); }
+    public Element Element { get => element; set => element = value; }
+    public virtual float AttackDamage { get => (m_TurretAttribute.TurretLevels[Quality - 1].AttackDamage + TurnAdditionalAttack) * (1 + AttackIntensify); }
     public virtual int AttackRange { get => m_TurretAttribute.TurretLevels[Quality - 1].AttackRange + RangeIntensify; }
     public int ForbidRange { get => m_TurretAttribute.TurretLevels[Quality - 1].ForbidRange; }
     public virtual float AttackSpeed { get => m_TurretAttribute.TurretLevels[Quality - 1].AttackSpeed * (1 + SpeedIntensify); }
@@ -58,24 +61,33 @@ public abstract class Turret : GameBehavior
     public float SputteringRange { get => m_TurretAttribute.TurretLevels[Quality - 1].SputteringRange; }
     public float CriticalRate { get => m_TurretAttribute.TurretLevels[Quality - 1].CriticalRate; }
 
+
+    //**************回合临时属性
+    int turnAddtionalAttack = 0;
+    public int TurnAdditionalAttack { get => turnAddtionalAttack; set => turnAddtionalAttack = value; }
+    //*************
+
+    //*************光环加成
     float attackIntensify;
     public float AttackIntensify { get => attackIntensify; set => attackIntensify = value; }
     int rangeIntensify;
-    public int RangeIntensify { get => rangeIntensify; 
-        set 
-        { 
-            rangeIntensify = value; 
-            GenerateRange(); 
-        } 
+    public int RangeIntensify
+    {
+        get => rangeIntensify;
+        set
+        {
+            rangeIntensify = value;
+            GenerateRange();
+        }
     }
 
     float speedIntensify;
     public float SpeedIntensify { get => speedIntensify; set => speedIntensify = value; }
-
+    //*************
 
     public List<AttackEffectInfo> AttackEffectInfos => m_TurretAttribute.TurretLevels[Level].AttackEffects;
 
-    public List<Composition> Compositions { get => compositions; set => compositions = value; }
+
 
     private void Awake()
     {
@@ -83,15 +95,19 @@ public abstract class Turret : GameBehavior
         rangeParent = transform.Find("TurretRangeCol");
         detectCollider = rangeParent.GetComponent<CompositeCollider2D>();
         rotTrans = transform.Find("RotPoint");
+        shootPoint = rotTrans.Find("ShootPoint");
+        BaseSprite = transform.root.Find("TileBase/TurretBase").GetComponent<SpriteRenderer>();
+        CannonSprite = rotTrans.Find("Cannon").GetComponent<SpriteRenderer>();
         RangeType = m_TurretAttribute.RangeType;
         Element = m_TurretAttribute.element;
     }
 
-    public virtual void InitializeTurret(GameTile tile,int quality)
+    public virtual void InitializeTurret(GameTile tile, int quality)
     {
         GenerateRange();
         rotTrans.localRotation = Quaternion.identity;
         this.quality = quality;
+        SetGraphic();
     }
 
     //设置不同等级的美术资源
@@ -289,12 +305,17 @@ public abstract class Turret : GameBehavior
     private void GenerateComposition()
     {
         int[] tempLevel = StaticData.GetSomeRandoms(m_TurretAttribute.totalLevel, m_TurretAttribute.elementNumber);
-        int [] tempElement = new int[m_TurretAttribute.elementNumber];
-        for(int i = 0; i < m_TurretAttribute.elementNumber; i++)
+        int[] tempElement = new int[m_TurretAttribute.elementNumber];
+        for (int i = 0; i < m_TurretAttribute.elementNumber; i++)
         {
-            Composition c = new Composition(tempLevel[i],tempElement[i]);
+            Composition c = new Composition(tempLevel[i], tempElement[i]);
             Compositions.Add(c);
         }
+    }
+
+    public void ClearTurnIntensify()
+    {
+        TurnAdditionalAttack = 0;
     }
 
 }

@@ -193,7 +193,7 @@ public class LevelUIManager : MonoBehaviour
 
     public void GetComposedShape()
     {
-        playerManager.PlayerWish = PlayerWish.Composition;
+        playerManager.PlayerWish = PlayerWish.none;
         TileShape shape = GameManager.Instance.ShapeFactory.GetShape(ShapeType.D);
         shape.InitializeShape();
     }
