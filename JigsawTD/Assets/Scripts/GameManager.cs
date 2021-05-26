@@ -73,13 +73,6 @@ public class GameManager : Singleton<GameManager>
         EnemySpawnHelper.LevelInitialize(_enemyFactory);
     }
 
-    public TileShape GetRandomNewShape()
-    {
-        TileShape shape = ShapeFactory.GetRandomShape();
-        shape.InitializeShape();
-        return shape;
-    }
-
     private void TileClick()
     {
         IsPressingTile = true;

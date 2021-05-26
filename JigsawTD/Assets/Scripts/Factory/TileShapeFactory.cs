@@ -20,8 +20,11 @@ public class TileShapeFactory : ScriptableObject
         int shapeID = StaticData.RandomNumber(RandomShapeChance);
         return GetShape((ShapeType)shapeID);
     }
-
-    public TileShape GetShape(ShapeType type)
+    public TileShape GetOneShape()
+    {
+        return GetShape(ShapeType.D);
+    }
+    private TileShape GetShape(ShapeType type)
     {
         switch (type)
         {
