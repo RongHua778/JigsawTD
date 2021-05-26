@@ -44,6 +44,8 @@ public class GameManager : Singleton<GameManager>
     //State
     private State state;
     public State State { get => state; }
+    public TileShapeFactory ShapeFactory { get => _shapeFactory; set => _shapeFactory = value; }
+
     public BuildingState buildingState;
     public WaveState waveState;
 
@@ -73,17 +75,11 @@ public class GameManager : Singleton<GameManager>
 
     public TileShape GetRandomNewShape()
     {
-        TileShape shape = _shapeFactory.GetRandomShape();
-        shape.InitializeRandomShpe(_tileFactory);
+        TileShape shape = ShapeFactory.GetRandomShape();
+        shape.InitializeShape();
         return shape;
     }
 
-    public TileShape GetComposedShape(Blueprint blueprint)
-    {
-        TileShape shape = _shapeFactory.GetShape(ShapeType.D);
-        shape.GetComposedShape(_tileFactory, blueprint);
-        return shape;
-    }
     private void TileClick()
     {
         IsPressingTile = true;

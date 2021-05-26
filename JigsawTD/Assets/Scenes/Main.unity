@@ -1771,7 +1771,7 @@ MonoBehaviour:
   selection: {fileID: 2055688742}
   IsPressingTile: 0
   EnemySpawnHelper: {fileID: 286649187}
-  playerManager: {fileID: 0}
+  playerManager: {fileID: 1136564379}
 --- !u!4 &286649183
 Transform:
   m_ObjectHideFlags: 0

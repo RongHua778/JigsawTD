@@ -8,10 +8,12 @@ public class PlayerManager : MonoBehaviour
     public int[] levelMoney;
     public GameManager gameManager;
     public BlueprintFactory blueprintFactory;
-
     List<Blueprint> blueprintsInPocket=new List<Blueprint>();
+    Blueprint blueprintInBuilding; 
+    PlayerWish playerWish;
+    public PlayerWish PlayerWish { get => playerWish; set => playerWish = value; }
+    public Blueprint BlueprintInBuilding { get => blueprintInBuilding; set => blueprintInBuilding = value; }
     public List<Blueprint> BlueprintsInPocket { get => blueprintsInPocket; set => blueprintsInPocket = value; }
-
     public List<Blueprint> GetBluePrints(int bluePrintsN)
     {
         List<Blueprint> bluePrints = blueprintFactory.GetBluePrints(bluePrintsN);
@@ -41,7 +43,7 @@ public class PlayerManager : MonoBehaviour
         set
         {
             playerLevel = value;
-            gameManager._tileFactory.PlayerLevel = value;
+            //gameManager..PlayerLevel = value;
             levelUIManager.SynchronizeLabels();
         }
     }
@@ -109,4 +111,10 @@ public class PlayerManager : MonoBehaviour
         LuckyPoints = luckyPoints;
         PlayerCoin = playerCoin;
     }
+}
+
+//Íæ¼ÒÏëÒªÉ¶
+public enum PlayerWish
+{
+    Element,Composition
 }

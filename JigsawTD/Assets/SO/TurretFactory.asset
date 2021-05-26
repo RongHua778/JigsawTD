@@ -20,3 +20,9 @@ MonoBehaviour:
   - {fileID: 6604616035422911931, guid: 4ce61665656640249b97041fdf5b3dce, type: 3}
   composedTurrets:
   - {fileID: 6604616035422911931, guid: 6d63a6fce6ff83845ae79fbf4a5b921f, type: 3}
+  elementTileChance:
+  - 0.2
+  - 0.2
+  - 0.2
+  - 0.2
+  - 0.2

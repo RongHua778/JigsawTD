@@ -289,7 +289,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fb6d081fcb7f87448a492ce05e717ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerManager: {fileID: 0}
   bulletPrefab: {fileID: 3850126010392176229, guid: f22cf9b0a0803b242aac9b92dc875dc6, type: 3}
   shootPoint: {fileID: 7955279244983291}
   Dropped: 0
@@ -462,7 +461,7 @@ MonoBehaviour:
   _offsetCoord: {x: 0, y: 0}
   m_GroundTile: {fileID: 0}
   TurretBase: {fileID: 3630730106229569036}
-  tile: {fileID: 2904809193016090288}
+  turret: {fileID: 2904809193016090288}
 --- !u!1 &7521166759708259578
 GameObject:
   m_ObjectHideFlags: 0

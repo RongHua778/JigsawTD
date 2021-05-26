@@ -89,7 +89,8 @@ public class LevelUIManager : MonoBehaviour
     }
     public void testComposition()
     {
-        GetComposedShape(p1);
+        playerManager.BlueprintInBuilding=p1;
+        GetComposedShape();
     }
     //888888888888888888888888888888888888888888888888888888888
 
@@ -190,9 +191,11 @@ public class LevelUIManager : MonoBehaviour
         ShowArea(1);
     }
 
-    public void GetComposedShape(Blueprint blueprint)
+    public void GetComposedShape()
     {
-        GameManager.Instance.GetComposedShape(blueprint);
+        playerManager.PlayerWish = PlayerWish.Composition;
+        TileShape shape = GameManager.Instance.ShapeFactory.GetShape(ShapeType.D);
+        shape.InitializeShape();
     }
     //每回合开始前计算幸运点、抽取模块次数等逻辑。
     public void Preparing() 

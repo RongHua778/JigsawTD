@@ -27,12 +27,46 @@ public class TileShape : MonoBehaviour
         bgObj = transform.Find("BG").gameObject;
         draggingShape = this.GetComponent<DraggingShape>();
     }
-    public void InitializeRandomShpe(TileFactory tileFactory)
+    //在shape上面加上塔
+    public void InitializeShape()
     {
         //判断shape上面生成几个塔
         //levelTileCount = Random.value > 0.9f ? 2 : 1;
         levelTileCount = 1;
-
+        TileFactory tileFactory = GameManager.Instance._tileFactory;
+        if (shapeType == ShapeType.D)
+        {
+            GameTile tile;
+            tile = tileFactory.GetTurretTile();
+            tile.transform.position = tilePos[0].transform.position;
+            tile.transform.SetParent(this.transform);
+            tile.m_DraggingShape = this.GetComponent<DraggingShape>();
+            tiles.Add(tile);
+            draggingShape.Initialized();
+            SetPreviewPlace();
+        }
+        else
+        {
+            List<int> levelPos = StaticData.GetRandomSequence(tilePos.Length, levelTileCount).ToList();
+            for (int i = 0; i < tilePos.Length; i++)
+            {
+                GameTile tile;
+                if (levelPos.Contains(i))
+                {
+                    tile = tileFactory.GetTurretTile();
+                }
+                else
+                {
+                    tile = tileFactory.GetBasicTile();
+                }
+                tile.transform.position = tilePos[i].transform.position;
+                tile.tileType.rotation = DirectionExtensions.GetRandomRotation();
+                tile.transform.SetParent(this.transform);
+                tile.m_DraggingShape = this.GetComponent<DraggingShape>();
+                tiles.Add(tile);
+            }
+            draggingShape.Initialized();
+        }
         //switch (shapeType)
         //{
         //    case ShapeType.T:
@@ -46,37 +80,7 @@ public class TileShape : MonoBehaviour
         //        levelTileCount = Random.value > 0.5f ? 1 : 0;
         //        break;
         //}
-        List<int> levelPos = StaticData.GetRandomSequence(tilePos.Length, levelTileCount).ToList();
-        for (int i = 0; i < tilePos.Length; i++)
-        {
-            GameTile tile;
-            if (levelPos.Contains(i))
-            {
-                tile = tileFactory.GetRandomTile();
-            }
-            else
-            {
-                tile = tileFactory.GetBasicTile();
-            }
-            tile.transform.position = tilePos[i].transform.position;
-            tile.tileType.rotation = DirectionExtensions.GetRandomRotation();
-            tile.transform.SetParent(this.transform);
-            tile.m_DraggingShape = this.GetComponent<DraggingShape>();
-            tiles.Add(tile);
-        }
-        draggingShape.Initialized();
-    }
 
-    public void GetComposedShape(TileFactory tileFactory,Blueprint blueprint)
-    {
-        GameTile tile;
-        tile = tileFactory.GetComposedTile(blueprint);
-        tile.transform.position = tilePos[0].transform.position;
-        tile.transform.SetParent(this.transform);
-        tile.m_DraggingShape = this.GetComponent<DraggingShape>();
-        tiles.Add(tile);
-        draggingShape.Initialized();
-        SetPreviewPlace();
     }
     public int GetSlotCount()
     {
