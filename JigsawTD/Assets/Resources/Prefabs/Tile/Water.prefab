@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8426196659992694477}
   - component: {fileID: 3044099392712669338}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 6969100300411665519}
   - component: {fileID: 1619076599716742364}
   - component: {fileID: 7999024685708191520}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: TurretBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,13 +290,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3850126010392176229, guid: 98bd253b0342caf4daf35704c5347b27, type: 3}
-  shootPoint: {fileID: 7955279244983291}
   Dropped: 0
   targetList: []
-  BaseSprite: {fileID: 1619076599716742364}
-  CannonSprite: {fileID: 3044099392712669338}
-  m_TurretAttribute: {fileID: 11400000, guid: 0387619ceeeda7746a7e51b43f234353, type: 2}
   Level: 0
+  m_TurretAttribute: {fileID: 11400000, guid: 0387619ceeeda7746a7e51b43f234353, type: 2}
 --- !u!1 &6195695841050206438
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,7 +306,7 @@ GameObject:
   - component: {fileID: 2323391431117371324}
   - component: {fileID: 370413473917423801}
   - component: {fileID: 9149595982355884373}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: TurretRangeCol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -398,7 +395,7 @@ GameObject:
   - component: {fileID: 3568044695007039410}
   m_Layer: 10
   m_Name: Water
-  m_TagString: Untagged
+  m_TagString: UnDropablePoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -458,9 +455,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5368d84d890b4e94ea653a90fedb4ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offsetCoord: {x: 0, y: 0}
-  m_GroundTile: {fileID: 0}
-  TurretBase: {fileID: 3630730106229569036}
   turret: {fileID: 23852933632502355}
 --- !u!1 &6764159820211702733
 GameObject:
@@ -628,6 +622,10 @@ PrefabInstance:
     - target: {fileID: 5587558566511084432, guid: d5e8d45a468dafd47ae00a9f2439d1c1, type: 3}
       propertyPath: m_Name
       value: TileBase
+      objectReference: {fileID: 0}
+    - target: {fileID: 5587558566511084432, guid: d5e8d45a468dafd47ae00a9f2439d1c1, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5e8d45a468dafd47ae00a9f2439d1c1, type: 3}

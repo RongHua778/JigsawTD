@@ -20,6 +20,9 @@ public class GameBoard : MonoBehaviour
 
     //地板上的空tile
     List<GroundTile> groundTiles = new List<GroundTile>();
+    //生成的陷阱
+    List<TrapTile> trapTiles = new List<TrapTile>();
+
 
     List<GameTile> tiles = new List<GameTile>();
     static List<GameTile> shortestPath = new List<GameTile>();
@@ -105,6 +108,7 @@ public class GameBoard : MonoBehaviour
                 AddGameTile(tile, pos);
             }
         }
+        GenerateTrapTiles(groundSize,StaticData.trapN);
         SeekPath();
     }
 
@@ -202,42 +206,58 @@ public class GameBoard : MonoBehaviour
         }
 
     }
-    private void GenerateTrapTiles()
+    private void GenerateTrapTiles(Vector2Int groundSize,int trapN)
     {
-        int trapN = 20;
-        for(int i = 0; i < trapN; i++)
+        List<int> X=new List<int>();
+        List<int> Y=new List<int>();
+
+        for(int i = 0; i < groundSize.x; i++)
         {
-            int x = UnityEngine.Random.Range(0,25);
-            int y = UnityEngine.Random.Range(0,25);
+            X.Add(i);
+        }
+        for (int i = 0; i < groundSize.y; i++)
+        {
+            Y.Add(i);
+        }
+        for (int i = 0; i < trapN; i++)
+        {
+            int x = UnityEngine.Random.Range(0,X.Count);
+            int y = UnityEngine.Random.Range(0,Y.Count);
+            //*****以后需要根据需求改动
+            while ((x <=14&&x>=12)&&(y<=14&&y<=14))
+            {
+                x = UnityEngine.Random.Range(0, X.Count);
+                y = UnityEngine.Random.Range(0, Y.Count);
+            }
             traps[x, y] = 1;
+            X.Remove(x);
+            Y.Remove(y);
+        }
+        for (int i = 0, y = 0; y < groundSize.y; y++)
+        {
+            for (int x = 0; x < groundSize.x; x++, i++)
+            {
+                //在这里判断哪里有陷阱
+                if (traps[x, y] == 1)
+                {
+                    TrapTile trapTile = tileFactory.GetRandomTrap();
+                    AddGameTile(trapTile, new Vector2(x-(groundSize.x-1)/2, y - (groundSize.y - 1) / 2));
+                }
+            }
         }
     }
     private void GenerateGroundTiles(Vector2Int groundSize)
     {
-        GenerateTrapTiles();
         Vector2 offset = new Vector2((groundSize.x - 1) * 0.5f, (groundSize.y - 1) * 0.5f) * StaticData.Instance.TileSize;
         for (int i = 0, y = 0; y < groundSize.y; y++)
         {
             for (int x = 0; x < groundSize.x; x++, i++)
             {
-                if (traps[x, y] == 0)
-                {
-                    //在这里判断哪里有陷阱
                     GroundTile groundTile = tileFactory.GetGroundTile();
                     groundTile.transform.localPosition = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
                     groundTile.transform.localPosition += Vector3.forward * 0.1f;
                     CorrectTileCoord(groundTile);
                     groundTiles.Add(groundTile);
-                }
-                else
-                {
-                    TrapTile groundTile = tileFactory.GetTrapTile();
-                    groundTile.transform.localPosition = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
-                    groundTile.transform.localPosition += Vector3.forward * 0.1f;
-                    CorrectTileCoord(groundTile);
-                    //trap.Add(groundTile);
-                }
-
             }
         }
     }

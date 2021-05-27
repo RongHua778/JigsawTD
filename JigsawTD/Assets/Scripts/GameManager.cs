@@ -11,7 +11,8 @@ public class GameManager : Singleton<GameManager>
 
     public BluePrintShop _bluePrintShop = default;
 
-    //地图每一边上方块的数量
+    //_groundsize是地图每一边上方块的数量
+    //startSize是初始生成的有方块的大小
     [SerializeField]
     Vector2Int _startSize, _groundSize = default;
 
@@ -65,6 +66,12 @@ public class GameManager : Singleton<GameManager>
     }
     void Start()
     {
+        List<int> result = StaticData.SelectNoRepeat(3,4);
+        foreach(int x in result)
+        {
+            Debug.Log(x+"test");
+        }
+
         GameEvents.Instance.onTileClick += TileClick;
         GameEvents.Instance.onTileUp += TileUp;
 
