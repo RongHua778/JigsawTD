@@ -108,7 +108,7 @@ public class GameBoard : MonoBehaviour
                 AddGameTile(tile, pos);
             }
         }
-        GenerateTrapTiles(groundSize,StaticData.trapN,tileFactory);
+        //GenerateTrapTiles(groundSize,StaticData.trapN,tileFactory);
         SeekPath();
     }
 
@@ -193,15 +193,7 @@ public class GameBoard : MonoBehaviour
         {
             ObjectPool.Instance.UnSpawn(pl.gameObject);
         }
-        //for (int i = 1; i < shortestPath.Count; i++)
-        //{
-        //    shortestPath[i - 1].NextTileOnPath = shortestPath[i];
-        //    shortestPath[i - 1].ExitPoint = (shortestPath[i].transform.position + shortestPath[i - 1].transform.position) * 0.5f;
-        //    shortestPath[i - 1].PathDirection = DirectionExtensions.GetDirection(shortestPath[i - 1].transform.position, shortestPath[i - 1].ExitPoint);
-        //    PathLine pathLine = ObjectPool.Instance.Spawn(pathLinePrefab.gameObject).GetComponent<PathLine>();
-        //    pathLine.ShowPath(new Vector3[] { (Vector2)shortestPath[i - 1].transform.position, (Vector2)shortestPath[i].transform.position });
-        //    pathLines.Add(pathLine);
-        //}
+
         for (int i = 1; i < path.vectorPath.Count; i++)
         {
             PathLine pathLine = ObjectPool.Instance.Spawn(pathLinePrefab.gameObject).GetComponent<PathLine>();
@@ -234,50 +226,6 @@ public class GameBoard : MonoBehaviour
             tiles = tiles.Except(neibor).ToList();
             tiles.Remove(temp);
         }
-        //Dictionary<int,Vector2Int> tiles = new Dictionary<int,Vector2Int>();
-        //int point = 0;
-        //for (int i = 0; i < groundSize.x; i++)
-        //{
-        //    for (int j = 0; j < groundSize.y; j++)
-        //    {
-        //        Vector2Int temp = new Vector2Int(i, j);
-        //        tiles.Add(point,temp);
-        //        point++;
-        //    }
-        //}
-
-        //List<int> totalIndex = tiles.Keys.ToList();
-        //List<int> index = new List<int>();
-        //for (int i = 0; i < trapN; i++) 
-        //{
-        //    int temp = UnityEngine.Random.Range(0,totalIndex.Count);
-        //    int tempIndex = totalIndex[temp];
-        //    traps[tiles[tempIndex].x, tiles[tempIndex].y] = 1;
-        //    List<Vector2> test = StaticData.GetCirclePoints(1);
-        //    List<int> neighbor = new List<int>();
-        //    for(int k=0;k<test.Count;k++)
-        //    {
-        //        test[k] = test[k]+new Vector2(tiles[tempIndex].x, tiles[tempIndex].y);
-        //        //neighbor.Add();
-        //    }
-
-        //    List<int> neibor = new List<int>();
-        //    totalIndex.Remove(totalIndex[temp]-1);
-        //    totalIndex.Remove(totalIndex[temp]+1);
-        //    totalIndex.Remove(totalIndex[temp] - groundSize.x);
-        //    totalIndex.Remove(totalIndex[temp] - groundSize.x - 1);
-        //    totalIndex.Remove(totalIndex[temp] - groundSize.x + 1);
-        //    totalIndex.Remove(totalIndex[temp] + groundSize.x);
-        //    totalIndex.Remove(totalIndex[temp] + groundSize.x + 1);
-        //    totalIndex.Remove(totalIndex[temp] + groundSize.x - 1);
-        //    totalIndex.Remove(totalIndex[temp]);
-        //}
-        //foreach (int i in index)
-        //{
-        //    traps[tiles[i].x, tiles[i].y] = 1;
-        //    AddGameTile(t.GetRandomTrap(),new Vector2(tiles[i].x-(groundSize.x-1)/2, 
-        //        tiles[i].y- (groundSize.y - 1) / 2));
-        //}
         foreach(Vector2 trap in traps)
         {
             AddGameTile(t.GetRandomTrap(), new Vector2(trap.x - (groundSize.x - 1) / 2,

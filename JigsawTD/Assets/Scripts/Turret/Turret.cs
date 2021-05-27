@@ -40,7 +40,14 @@ public abstract class Turret : GameBehavior
     public TurretAttribute m_TurretAttribute = default;
     //塔的品质
     private int quality = 1;
-    public int Quality { get => quality; set => quality = value; }
+    public int Quality
+    {
+        get => quality; set
+        {
+            quality = value;
+            SetGraphic();
+        }
+    }
     //塔的元素属性
     private Element element;
     public Element Element { get => element; set => element = value; }
@@ -96,11 +103,11 @@ public abstract class Turret : GameBehavior
 
     public virtual void InitializeTurret()
     {
-        GenerateRange();
         rotTrans.localRotation = Quaternion.identity;
         RangeType = m_TurretAttribute.RangeType;
         Element = m_TurretAttribute.element;
         SetGraphic();
+        GenerateRange();
         GetTurretEffects();
     }
 
@@ -321,6 +328,12 @@ public abstract class Turret : GameBehavior
 
     protected virtual void Shoot()
     {
+        foreach (TargetPoint target in Target)
+        {
+            Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
+            bullet.transform.position = shootPoint.position;
+            bullet.Initialize(this, target);
+        }
 
     }
 

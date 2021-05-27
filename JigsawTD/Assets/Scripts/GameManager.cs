@@ -58,7 +58,6 @@ public class GameManager : Singleton<GameManager>
     public BuildingState buildingState;
     public WaveState waveState;
 
-    public PlayerManager playerManager;
     private void OnDisable()
     {
         GameEvents.Instance.onTileClick -= TileClick;

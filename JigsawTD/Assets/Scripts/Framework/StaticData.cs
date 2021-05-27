@@ -20,6 +20,9 @@ public class StaticData : Singleton<StaticData>
     public static LayerMask RunTimeFindPathLayer = 1 << 7 | 1 << 8;
     public int PlayerMaxLevel;
     public int[] LevelUpMoney;
+    public int StartCoin;
+    public int BaseWaveIncome;
+    public int WaveMultiplyIncome;
     public float[,] LevelChances = new float[6, 5]
     {
         { 0.75f, 0.25f, 0f, 0f, 0f },

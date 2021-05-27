@@ -8,8 +8,6 @@ public class G1Turret : Turret
     protected override void Shoot()
     {
         base.Shoot();
-        Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
-        bullet.transform.position = shootPoint.position;
-        bullet.Initialize(this);
+
     }
 }

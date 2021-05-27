@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7955279244983291}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8426196659992694477}
   - component: {fileID: 3044099392712669338}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,7 +220,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 173669962325498538}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: RotPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -253,7 +253,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9179870020333665588}
   - component: {fileID: 1120964700057809696}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: TileType
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,7 +306,7 @@ GameObject:
   - component: {fileID: 2323391431117371324}
   - component: {fileID: 370413473917423801}
   - component: {fileID: 9149595982355884373}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: TurretRangeCol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -465,7 +465,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3603753279135973792}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: CheckPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
