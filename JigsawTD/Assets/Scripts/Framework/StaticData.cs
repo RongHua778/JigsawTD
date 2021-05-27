@@ -39,6 +39,7 @@ public class StaticData : Singleton<StaticData>
     public static int elementN = 5;
     //最大quality
     public static int maxQuality = 5;
+    public static int trapN = 20;
 
     [Header("ProbabilitySetting")]
     public float[] TileShapeChance = default;
@@ -258,5 +259,30 @@ public class StaticData : Singleton<StaticData>
     public TurretAttribute GetRandomCompositionTurret()
     {
         return CompositionAttributes[Random.Range(0, CompositionAttributes.Count)];
+    }
+
+    //total是总量，number是想要几个随机数
+    public static List<int> SelectNoRepeat(int total,int number)
+    {
+        List<int> data = new List<int>();
+        for(int i = 0; i < total; i++)
+        {
+            data.Add(i);
+        }
+        if (data.Count < number)
+        {
+            return data;
+        }
+        else
+        {
+            List<int> result = new List<int>();
+            for (int i = 0; i < number; i++)
+            {
+                int index = Random.Range(0, data.Count);
+                result.Add(data[index]);
+                data.RemoveAt(index);
+            }
+            return result;
+        }
     }
 }

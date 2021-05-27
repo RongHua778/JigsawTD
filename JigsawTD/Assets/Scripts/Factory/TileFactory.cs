@@ -11,7 +11,7 @@ public class TileFactory : GameObjectFactory
 {
     [SerializeField] GameObject ground;
     [SerializeField] GroundTile groundTile = default;
-    [SerializeField] TrapTile trapTile = default;
+    [SerializeField] TrapTile[] trapTile = default;
     [SerializeField] GameTile spawnPoint = default;
     [SerializeField] GameTile destinationTile = default;
     [SerializeField] float[] elementTileChance;
@@ -43,9 +43,9 @@ public class TileFactory : GameObjectFactory
         return CreateInstance(ground).GetComponent<BasicTile>();
     }
 
-    public TrapTile GetTrapTile()
+    public TrapTile GetRandomTrap()
     {
-        return CreateInstance(trapTile.gameObject).GetComponent<TrapTile>();
+        return CreateInstance(trapTile[0].gameObject).GetComponent<TrapTile>();
     }
 
 
