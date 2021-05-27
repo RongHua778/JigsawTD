@@ -46,11 +46,11 @@ public abstract class Bullet : GameBehavior
         base.OnUnSpawn();
     }
 
-    public void Initialize(Turret turret, Vector2? pos = null)
+    public void Initialize(Turret turret,TargetPoint target=null, Vector2? pos = null)
     {
         this.turretParent = turret;
-        this.Target = turret.Target[0];
-        this.TargetPos = pos ?? turret.Target[0].Position;
+        this.Target = target;
+        this.TargetPos = pos ?? target.Position;
         this.Damage = turret.AttackDamage;
         this.bulletSpeed = turret.BulletSpeed;
         this.SputteringRange = turret.SputteringRange;
@@ -119,6 +119,12 @@ public abstract class Bullet : GameBehavior
             return false;
         }
         return true;
+    }
+
+    public float GetTargetDistance()
+    {
+        float distanceToTarget = ((Vector2)transform.position - TargetPos).magnitude;
+        return distanceToTarget;
     }
 
     private void ReclaimBullet()
