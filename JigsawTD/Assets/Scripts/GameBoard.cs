@@ -108,7 +108,7 @@ public class GameBoard : MonoBehaviour
                 AddGameTile(tile, pos);
             }
         }
-        GenerateTrapTiles(groundSize,StaticData.trapN);
+        GenerateTrapTiles(groundSize,StaticData.trapN,tileFactory);
         SeekPath();
     }
 
@@ -120,7 +120,11 @@ public class GameBoard : MonoBehaviour
             groundTile.TileAbrove = tile;
             groundTile.gameObject.layer = LayerMask.NameToLayer(StaticData.TempGroundMask);
         }
-        tile.gameObject.layer = LayerMask.NameToLayer(StaticData.ConcreteTileMask);
+        //只有非陷阱才会改成concreteLayer
+        if (!tile.GetComponent<TrapTile>())
+        {
+            tile.gameObject.layer = LayerMask.NameToLayer(StaticData.ConcreteTileMask);
+        }
         tile.transform.localPosition = pos;
         CorrectTileCoord(tile);
         tiles.Add(tile);
@@ -206,44 +210,78 @@ public class GameBoard : MonoBehaviour
         }
 
     }
-    private void GenerateTrapTiles(Vector2Int groundSize,int trapN)
+    private void GenerateTrapTiles(Vector2Int groundSize,int trapN,TileFactory t)
     {
-        List<int> X=new List<int>();
-        List<int> Y=new List<int>();
-
-        for(int i = 0; i < groundSize.x; i++)
+        List<Vector2> tiles = new List<Vector2>();
+        List<Vector2> traps = new List<Vector2>();
+        for (int i = 0; i < groundSize.x; i++)
         {
-            X.Add(i);
-        }
-        for (int i = 0; i < groundSize.y; i++)
-        {
-            Y.Add(i);
+            for (int j = 0; j < groundSize.y; j++)
+            {
+                tiles.Add(new Vector2(i, j));
+            }
         }
         for (int i = 0; i < trapN; i++)
         {
-            int x = UnityEngine.Random.Range(0,X.Count);
-            int y = UnityEngine.Random.Range(0,Y.Count);
-            //*****以后需要根据需求改动
-            while ((x <=14&&x>=12)&&(y<=14&&y<=14))
+            int index = UnityEngine.Random.Range(0, tiles.Count);
+            Vector2 temp = tiles[index];
+            traps.Add(temp);
+            List<Vector2> neibor = StaticData.GetCirclePoints(3, 0);
+            for (int k = 0; k < neibor.Count; k++)
             {
-                x = UnityEngine.Random.Range(0, X.Count);
-                y = UnityEngine.Random.Range(0, Y.Count);
+                neibor[k] = neibor[k] + tiles[index];
             }
-            traps[x, y] = 1;
-            X.Remove(x);
-            Y.Remove(y);
+            tiles = tiles.Except(neibor).ToList();
+            tiles.Remove(temp);
         }
-        for (int i = 0, y = 0; y < groundSize.y; y++)
+        //Dictionary<int,Vector2Int> tiles = new Dictionary<int,Vector2Int>();
+        //int point = 0;
+        //for (int i = 0; i < groundSize.x; i++)
+        //{
+        //    for (int j = 0; j < groundSize.y; j++)
+        //    {
+        //        Vector2Int temp = new Vector2Int(i, j);
+        //        tiles.Add(point,temp);
+        //        point++;
+        //    }
+        //}
+
+        //List<int> totalIndex = tiles.Keys.ToList();
+        //List<int> index = new List<int>();
+        //for (int i = 0; i < trapN; i++) 
+        //{
+        //    int temp = UnityEngine.Random.Range(0,totalIndex.Count);
+        //    int tempIndex = totalIndex[temp];
+        //    traps[tiles[tempIndex].x, tiles[tempIndex].y] = 1;
+        //    List<Vector2> test = StaticData.GetCirclePoints(1);
+        //    List<int> neighbor = new List<int>();
+        //    for(int k=0;k<test.Count;k++)
+        //    {
+        //        test[k] = test[k]+new Vector2(tiles[tempIndex].x, tiles[tempIndex].y);
+        //        //neighbor.Add();
+        //    }
+
+        //    List<int> neibor = new List<int>();
+        //    totalIndex.Remove(totalIndex[temp]-1);
+        //    totalIndex.Remove(totalIndex[temp]+1);
+        //    totalIndex.Remove(totalIndex[temp] - groundSize.x);
+        //    totalIndex.Remove(totalIndex[temp] - groundSize.x - 1);
+        //    totalIndex.Remove(totalIndex[temp] - groundSize.x + 1);
+        //    totalIndex.Remove(totalIndex[temp] + groundSize.x);
+        //    totalIndex.Remove(totalIndex[temp] + groundSize.x + 1);
+        //    totalIndex.Remove(totalIndex[temp] + groundSize.x - 1);
+        //    totalIndex.Remove(totalIndex[temp]);
+        //}
+        //foreach (int i in index)
+        //{
+        //    traps[tiles[i].x, tiles[i].y] = 1;
+        //    AddGameTile(t.GetRandomTrap(),new Vector2(tiles[i].x-(groundSize.x-1)/2, 
+        //        tiles[i].y- (groundSize.y - 1) / 2));
+        //}
+        foreach(Vector2 trap in traps)
         {
-            for (int x = 0; x < groundSize.x; x++, i++)
-            {
-                //在这里判断哪里有陷阱
-                if (traps[x, y] == 1)
-                {
-                    TrapTile trapTile = tileFactory.GetRandomTrap();
-                    AddGameTile(trapTile, new Vector2(x-(groundSize.x-1)/2, y - (groundSize.y - 1) / 2));
-                }
-            }
+            AddGameTile(t.GetRandomTrap(), new Vector2(trap.x - (groundSize.x - 1) / 2,
+                trap.y - (groundSize.y - 1) / 2));
         }
     }
     private void GenerateGroundTiles(Vector2Int groundSize)

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5067352388520802223}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: CheckPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9179870020333665588}
   - component: {fileID: 2549559556743705479}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: TileType
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1778828849411726599}
   - component: {fileID: 2063032990958818205}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: TileBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1480341273983732860}
   - component: {fileID: 8746405363728918631}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: PreviewGlow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,9 +288,9 @@ GameObject:
   - component: {fileID: 6604616035422911932}
   - component: {fileID: 6317956750879752327}
   - component: {fileID: 5851236424861579152}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: TargetTile
-  m_TagString: Untagged
+  m_TagString: UnDropablePoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -350,6 +350,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8d2e9ceceded444a9bf889cc0007209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offsetCoord: {x: 0, y: 0}
-  TileLevel: 3
   m_TrapAttribute: {fileID: 11400000, guid: c09d9ab69fe482743be7a990ad9a6fcd, type: 2}
+  TrapLevel: 0

@@ -18,6 +18,8 @@ public class DraggingShape : DraggingActions
 
     [SerializeField]
     LayerMask CheckDropLayer = default;
+    [SerializeField]
+    LayerMask TrapLayer = default;
 
     [SerializeField]
     Color wrongColor, correctColor = default;
@@ -163,6 +165,7 @@ public class DraggingShape : DraggingActions
             }
             EnableGroundColliders();
             GameEvents.Instance.AddTiles(tileShape.tiles);
+            SetTrapActived();
             StaticData.holdingShape = null;
             Destroy(this.gameObject);
         }
@@ -176,7 +179,21 @@ public class DraggingShape : DraggingActions
         }
     }
     //取消选择当前模块，返回模块选择界面
-
+    private void SetTrapActived()
+    {
+        foreach (Collider2D col in detectCollider)
+        {
+            Vector3 pos = new Vector3(col.transform.position.x, col.transform.position.y, 0);
+            int hits = Physics2D.OverlapCircleNonAlloc(pos, 0.51f, collideResult, TrapLayer);
+            if (hits > 0)
+            {
+                for (int i = 0; i < hits; i++)
+                {
+                    collideResult[i].gameObject.GetComponent<TrapTile>().Actived = true;
+                }
+            }
+        }
+    }
     private void EnableGroundColliders()
     {
         if (groundTileList.Count > 0)

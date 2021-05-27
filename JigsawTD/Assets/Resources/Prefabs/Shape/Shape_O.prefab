@@ -543,9 +543,9 @@ MonoBehaviour:
   CheckDropLayer:
     serializedVersion: 2
     m_Bits: 576
-  PathFindingAdjustLayers:
+  TrapLayer:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 16384
   wrongColor: {r: 1, g: 0, b: 0, a: 0.49019608}
   correctColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &6889555364187642330

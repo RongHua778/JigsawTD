@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6720698324725736010}
   - component: {fileID: 2418461218607343131}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: PreviewGlow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7293228015476973820}
   - component: {fileID: 2558457717066190966}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9179870020333665588}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: TileType
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,9 +206,9 @@ GameObject:
   - component: {fileID: 6604616035422911932}
   - component: {fileID: 6317956750879752327}
   - component: {fileID: 2245542040433213113}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: SpineTile
-  m_TagString: Untagged
+  m_TagString: UnDropablePoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -268,9 +268,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8d2e9ceceded444a9bf889cc0007209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offsetCoord: {x: 0, y: 0}
-  TileLevel: 2
   m_TrapAttribute: {fileID: 11400000, guid: ff2d6060582da1b48a5ac45759d6b105, type: 2}
+  TrapLevel: 0
 --- !u!1 &8383059541034112253
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,7 +279,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5160157818048341357}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: CheckPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,7 +310,7 @@ GameObject:
   m_Component:
   - component: {fileID: 897823790356124684}
   - component: {fileID: 3468289369096959769}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: TileBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}

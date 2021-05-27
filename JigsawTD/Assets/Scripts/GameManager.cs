@@ -66,12 +66,6 @@ public class GameManager : Singleton<GameManager>
     }
     void Start()
     {
-        List<int> result = StaticData.SelectNoRepeat(3,4);
-        foreach(int x in result)
-        {
-            Debug.Log(x+"test");
-        }
-
         GameEvents.Instance.onTileClick += TileClick;
         GameEvents.Instance.onTileUp += TileUp;
 

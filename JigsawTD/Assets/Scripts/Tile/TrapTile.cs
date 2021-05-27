@@ -9,6 +9,19 @@ public class TrapTile : GameTile
     public int TrapLevel;
     public override BasicTileType BasicTileType => BasicTileType.Trap;
 
+    public bool Actived { get => actived; 
+        set 
+        {
+            if (value)
+            {
+                gameObject.layer = LayerMask.NameToLayer(StaticData.ConcreteTileMask);
+                actived = value;
+            }
+        } 
+    }
+
+    bool actived;
+
     public override void OnTilePass(Enemy enemy)
     {
         base.OnTilePass(enemy);
@@ -19,5 +32,4 @@ public class TrapTile : GameTile
             enemy.Buffable.AddBuff(trap);
         }
     }
-
 }
