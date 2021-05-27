@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9179870020333665588}
   - component: {fileID: 2549559556743705479}
-  m_Layer: 6
+  m_Layer: 14
   m_Name: TileType
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 6604616035422911932}
   - component: {fileID: 6317956750879752327}
   - component: {fileID: 1065283022250296622}
-  m_Layer: 6
+  m_Layer: 14
   m_Name: StunTile
   m_TagString: UnDropablePoint
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4996489750327129840}
   - component: {fileID: 6947924260079310004}
-  m_Layer: 6
+  m_Layer: 14
   m_Name: PreviewGlow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7974237858713753737}
-  m_Layer: 6
+  m_Layer: 14
   m_Name: CheckPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,7 +280,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2013575418683711059}
   - component: {fileID: 5489280141188472958}
-  m_Layer: 6
+  m_Layer: 14
   m_Name: TileBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -45,7 +45,8 @@ public class TileFactory : GameObjectFactory
 
     public TrapTile GetRandomTrap()
     {
-        return CreateInstance(trapTile[0].gameObject).GetComponent<TrapTile>();
+        int index = Random.Range(0,trapTile.Length);
+        return CreateInstance(trapTile[index].gameObject).GetComponent<TrapTile>();
     }
 
 
