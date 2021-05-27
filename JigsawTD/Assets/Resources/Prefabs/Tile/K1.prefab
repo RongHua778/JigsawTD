@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2174224172969267675}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.2, z: 0}
+  m_LocalPosition: {x: 0, y: 0.278, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 173669962325498538}
@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8426196659992694477}
   - component: {fileID: 3044099392712669338}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ SpriteRenderer:
   m_SortingLayerID: -1642744281
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 0551f7b92e03be340a733b3098e8938e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 241964eb55082844bbb53a9b07e3da52, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 6969100300411665519}
   - component: {fileID: 1619076599716742364}
   - component: {fileID: 7999024685708191520}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: TurretBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2744151727381189060}
+  m_Father: {fileID: 2989334206888800465}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1619076599716742364
@@ -184,7 +184,7 @@ SpriteRenderer:
   m_SortingLayerID: -1642744281
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 46ef006f93358d546964463ecd4b0f48, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cfc4a480c7295054ebb4cfc6d03633ce, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -252,7 +252,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9179870020333665588}
-  - component: {fileID: 2904809193016090288}
+  - component: {fileID: 953503354149735896}
   m_Layer: 0
   m_Name: TileType
   m_TagString: Untagged
@@ -271,13 +271,13 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8812002125670487274}
+  - {fileID: 3603753279135973792}
   - {fileID: 3877034930414394609}
   - {fileID: 173669962325498538}
   m_Father: {fileID: 6604616035422911932}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2904809193016090288
+--- !u!114 &953503354149735896
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -286,14 +286,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4617212374467823460}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fb6d081fcb7f87448a492ce05e717ef, type: 3}
+  m_Script: {fileID: 11500000, guid: fd6b1ef2d1d35df44958b6933d9e5588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 3850126010392176229, guid: f22cf9b0a0803b242aac9b92dc875dc6, type: 3}
+  bulletPrefab: {fileID: 3850126010392176229, guid: 98bd253b0342caf4daf35704c5347b27, type: 3}
   Dropped: 0
   targetList: []
   Level: 0
-  m_TurretAttribute: {fileID: 11400000, guid: 6c3131e68b56a9b4db13891b470a159b, type: 2}
+  m_TurretAttribute: {fileID: 11400000, guid: 9061b9baec821234b8474f052693dc8b, type: 2}
 --- !u!1 &6195695841050206438
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,7 +306,7 @@ GameObject:
   - component: {fileID: 2323391431117371324}
   - component: {fileID: 370413473917423801}
   - component: {fileID: 9149595982355884373}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: TurretRangeCol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -394,8 +394,8 @@ GameObject:
   - component: {fileID: 6317956750879752327}
   - component: {fileID: 3568044695007039410}
   m_Layer: 10
-  m_Name: Wood
-  m_TagString: UnDropablePoint
+  m_Name: K1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -411,7 +411,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2744151727381189060}
+  - {fileID: 2989334206888800465}
   - {fileID: 9179870020333665588}
   - {fileID: 5333752023627116614}
   m_Father: {fileID: 0}
@@ -455,7 +455,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5368d84d890b4e94ea653a90fedb4ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turret: {fileID: 2904809193016090288}
+  turret: {fileID: 0}
+--- !u!1 &6764159820211702733
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3603753279135973792}
+  m_Layer: 0
+  m_Name: CheckPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3603753279135973792
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6764159820211702733}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0.20000002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9179870020333665588}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7521166759708259578
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,37 +568,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &8797403072330271597
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8812002125670487274}
-  m_Layer: 0
-  m_Name: CheckPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8812002125670487274
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8797403072330271597}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0.20000002}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 9179870020333665588}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &3245424552328278144
+--- !u!1001 &2477824791047360917
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -624,13 +624,13 @@ PrefabInstance:
       value: TileBase
       objectReference: {fileID: 0}
     - target: {fileID: 5587558566511084432, guid: d5e8d45a468dafd47ae00a9f2439d1c1, type: 3}
-      propertyPath: m_Layer
-      value: 10
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5e8d45a468dafd47ae00a9f2439d1c1, type: 3}
---- !u!4 &2744151727381189060 stripped
+--- !u!4 &2989334206888800465 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 801428646216540484, guid: d5e8d45a468dafd47ae00a9f2439d1c1, type: 3}
-  m_PrefabInstance: {fileID: 3245424552328278144}
+  m_PrefabInstance: {fileID: 2477824791047360917}
   m_PrefabAsset: {fileID: 0}

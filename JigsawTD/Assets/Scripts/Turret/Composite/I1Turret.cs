@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shock : Turret
+public class I1Turret : Turret
 {
     public override float AttackSpeed => base.AttackSpeed * (1 + RotSpeed / 180);
     float changeSpeed = 60f;
@@ -10,7 +10,7 @@ public class Shock : Turret
     float RotSpeed { get => rotSpeed; set => rotSpeed = Mathf.Clamp(value, 0, 360); }
     protected override void RotateTowards()
     {
-
+        //11
     }
 
     public override bool GameUpdate()
@@ -39,10 +39,10 @@ public class Shock : Turret
 
     protected override void Shoot()
     {
-        //Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
-        //bullet.transform.position = 0.3f * Random.insideUnitCircle.normalized + (Vector2)transform.position;
-        //Vector2 targetPos = (bullet.transform.position - transform.position).normalized * (AttackRange + 1) + transform.position;
-        //bullet.Initialize(this, targetPos);
+        Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
+        bullet.transform.position = 0.3f * Random.insideUnitCircle.normalized + (Vector2)transform.position;
+        Vector2 targetPos = (bullet.transform.position - transform.position).normalized * (AttackRange + 1) + transform.position;
+        bullet.Initialize(this, null, targetPos);
     }
 
     protected override void OnDrawGizmos()

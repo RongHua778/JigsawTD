@@ -14,9 +14,6 @@ public class Snow : Turret
 
     protected override void Shoot()
     {
-        Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
-        bullet.transform.position = shootPoint.position;
-        Vector2 pos = (Vector2)shootPoint.position + (Vector2)shootPoint.up * AttackRange;
-        bullet.Initialize(this, pos);
+        base.Shoot();
     }
 }

@@ -1904,6 +1904,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6c3131e68b56a9b4db13891b470a159b, type: 2}
   CompositionAttributes:
   - {fileID: 11400000, guid: e3e54c1bced6a334b9535d9abfcb8bb5, type: 2}
+  - {fileID: 11400000, guid: 5b4fc6b2f1f50624a9801389b31a9dfb, type: 2}
+  - {fileID: 11400000, guid: 2c1b05c440668c94abe59b6953c69310, type: 2}
 --- !u!114 &286649187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4437,13 +4439,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1576089492}
-        m_TargetAssemblyTypeName: LevelUIManager, Assembly-CSharp
-        m_MethodName: GetComposedShape
-        m_Mode: 1
+      - m_Target: {fileID: 286649182}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: GetTestShape
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 11400000, guid: 33e33721f8e10504dba35cde5c1041e0, type: 2}
+          m_ObjectArgumentAssemblyTypeName: TurretAttribute, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5525,7 +5527,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1383652722
 RectTransform:
   m_ObjectHideFlags: 0

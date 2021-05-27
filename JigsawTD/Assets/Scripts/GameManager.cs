@@ -219,4 +219,11 @@ public class GameManager : Singleton<GameManager>
         return shape;
     }
 
+
+    public void GetTestShape(TurretAttribute compositeAttribute)
+    {
+        TileShape shape = _shapeFactory.GetDShape();
+        GameTile tile = _tileFactory.GetCompositeTurretTile(compositeAttribute);
+        shape.InitializeShape(tile);
+    }
 }

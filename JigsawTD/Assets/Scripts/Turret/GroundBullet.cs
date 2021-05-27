@@ -6,6 +6,7 @@ public class GroundBullet : Bullet
 {
     public override BulletType BulletType => BulletType.Ground;
 
+
     protected override void DealDamage()
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, SputteringRange, enemyLayerMask);
