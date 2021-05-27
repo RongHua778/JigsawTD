@@ -4,7 +4,12 @@ using UnityEngine;
 
 public enum TurretEffectName
 {
-    DistanceBaseDamage,SlowBullet,AttackIncreasePerShoot,EnemyCountAttackIncrease
+    DistanceBaseDamage,
+    SlowBullet,
+    AttackIncreasePerShoot,
+    EnemyCountAttackIncrease,
+    MultiTarget,
+    RangeBaseSputtering
 }
 [System.Serializable]
 public class TurretEffectInfo
@@ -18,6 +23,11 @@ public abstract class TurretEffect
     public Turret turret;
     public Bullet bullet;
     public float KeyValue;
+
+    public virtual void Build()
+    {
+
+    }
 
     public virtual void EnemyEnter()
     {
@@ -48,6 +58,28 @@ public class DistanceBaseDamage : TurretEffect
         bullet.Damage *= (1 + distance * KeyValue);
     }
 }
+
+public class MultiTarget : TurretEffect
+{
+    public override TurretEffectName EffectName => TurretEffectName.MultiTarget;
+
+    public override void Build()
+    {
+        turret.TargetCount += (int)KeyValue;
+    }
+
+}
+
+public class RangeBaseSputtering : TurretEffect
+{
+    public override TurretEffectName EffectName => TurretEffectName.RangeBaseSputtering;
+
+    public override void Shoot()
+    {
+        bullet.SputteringRange += KeyValue * bullet.GetTargetDistance();
+    }
+}
+
 
 public class SlowBullet : TurretEffect
 {

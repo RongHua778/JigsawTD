@@ -39,10 +39,10 @@ public class Shock : Turret
 
     protected override void Shoot()
     {
-        Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
-        bullet.transform.position = 0.3f * Random.insideUnitCircle.normalized + (Vector2)transform.position;
-        Vector2 targetPos = (bullet.transform.position - transform.position).normalized * (AttackRange + 1) + transform.position;
-        bullet.Initialize(this, targetPos);
+        //Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
+        //bullet.transform.position = 0.3f * Random.insideUnitCircle.normalized + (Vector2)transform.position;
+        //Vector2 targetPos = (bullet.transform.position - transform.position).normalized * (AttackRange + 1) + transform.position;
+        //bullet.Initialize(this, targetPos);
     }
 
     protected override void OnDrawGizmos()

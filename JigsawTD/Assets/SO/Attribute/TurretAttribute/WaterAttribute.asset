@@ -28,9 +28,8 @@ MonoBehaviour:
     BulletSpeed: 6
     SputteringRange: 0
     CriticalRate: 0
-    AttackEffects:
-    - EffectName: 1
-      KeyValue: 0.3
+    SlowRate: 0.3
+    AttackEffects: []
     PoloEffects: []
     TurretName: C1
     Icon: {fileID: 21300000, guid: 2d3effa093a304e4ba99e0d88aedb016, type: 3}
@@ -44,9 +43,8 @@ MonoBehaviour:
     BulletSpeed: 6
     SputteringRange: 0
     CriticalRate: 0
-    AttackEffects:
-    - EffectName: 1
-      KeyValue: 0.325
+    SlowRate: 0.325
+    AttackEffects: []
     PoloEffects: []
     TurretName: C2
     Icon: {fileID: 21300000, guid: dbc88cad0c6490a429285738e90a3454, type: 3}
@@ -60,9 +58,8 @@ MonoBehaviour:
     BulletSpeed: 6
     SputteringRange: 0
     CriticalRate: 0
-    AttackEffects:
-    - EffectName: 1
-      KeyValue: 0.35
+    SlowRate: 0.35
+    AttackEffects: []
     PoloEffects: []
     TurretName: C3
     Icon: {fileID: 21300000, guid: fb3c57c6cc375864695193eb79fcb311, type: 3}
@@ -76,9 +73,8 @@ MonoBehaviour:
     BulletSpeed: 6
     SputteringRange: 0
     CriticalRate: 0
-    AttackEffects:
-    - EffectName: 1
-      KeyValue: 0.375
+    SlowRate: 0.375
+    AttackEffects: []
     PoloEffects: []
     TurretName: C4
     Icon: {fileID: 21300000, guid: bd6614810e25ea44e92758b51e453eb9, type: 3}
@@ -92,9 +88,8 @@ MonoBehaviour:
     BulletSpeed: 6
     SputteringRange: 0
     CriticalRate: 0
-    AttackEffects:
-    - EffectName: 1
-      KeyValue: 0.4
+    SlowRate: 0.4
+    AttackEffects: []
     PoloEffects: []
     TurretName: C5
     Icon: {fileID: 21300000, guid: 112809437a38c694b995ef1bd637b82f, type: 3}

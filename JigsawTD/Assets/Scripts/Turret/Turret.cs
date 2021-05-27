@@ -16,8 +16,8 @@ public abstract class Turret : GameBehavior
     protected RangeType RangeType;
     [SerializeField] protected GameObject bulletPrefab = default;
     protected float _rotSpeed = 10f;
-    private TargetPoint target;
-    public TargetPoint Target { get => target; set => target = value; }
+    private List<TargetPoint> target = new List<TargetPoint>();
+    public List<TargetPoint> Target { get => target; set => target = value; }
     protected List<RangeIndicator> rangeIndicators = new List<RangeIndicator>();
     protected CompositeCollider2D detectCollider;
     protected bool ShowingRange = false;
@@ -40,19 +40,11 @@ public abstract class Turret : GameBehavior
     public TurretAttribute m_TurretAttribute = default;
     //塔的品质
     private int quality = 1;
+    public int Quality { get => quality; set => quality = value; }
     //塔的元素属性
     private Element element;
-    //查看塔的状态（如是否购买了其蓝图，是否集齐了蓝图上面的配方）
-    public TurretStatus Status { get; set; }
-    public int Quality
-    {
-        get => quality;
-        set
-        {
-            quality = value;
-        }
-    }
     public Element Element { get => element; set => element = value; }
+
     public virtual float AttackDamage { get => (m_TurretAttribute.TurretLevels[Quality - 1].AttackDamage + TurnAdditionalAttack) * (1 + AttackIntensify); }
     public virtual int AttackRange { get => m_TurretAttribute.TurretLevels[Quality - 1].AttackRange + RangeIntensify; }
     public int ForbidRange { get => m_TurretAttribute.TurretLevels[Quality - 1].ForbidRange; }
@@ -60,8 +52,10 @@ public abstract class Turret : GameBehavior
     public float BulletSpeed { get => m_TurretAttribute.TurretLevels[Quality - 1].BulletSpeed; }
     public float SputteringRange { get => m_TurretAttribute.TurretLevels[Quality - 1].SputteringRange; }
     public float CriticalRate { get => m_TurretAttribute.TurretLevels[Quality - 1].CriticalRate; }
+    public float SlowRate { get => m_TurretAttribute.TurretLevels[Quality - 1].SlowRate; }
 
-
+    int targetCount = 1;
+    public int TargetCount { get => targetCount; set => targetCount = value; }
     //**************回合临时属性
     int turnAddtionalAttack = 0;
     public int TurnAdditionalAttack { get => turnAddtionalAttack; set => turnAddtionalAttack = value; }
@@ -169,9 +163,10 @@ public abstract class Turret : GameBehavior
     {
         if (targetList.Contains(target))
         {
-            if (this.Target == target)
+            if (this.Target.Contains(target))
             {
-                this.Target = null;
+                this.Target.Remove(target);
+                //this.Target = null;
             }
             targetList.Remove(target);
         }
@@ -204,12 +199,22 @@ public abstract class Turret : GameBehavior
         {
             return false;
         }
-        if (!Target.Enemy.gameObject.activeSelf)
+        for (int i = 0; i < Target.Count; i++)
         {
-            targetList.Remove(Target);
-            Target = null;
-            return false;
+            if (!Target[i].Enemy.gameObject.activeSelf)
+            {
+                targetList.Remove(Target[i]);
+                Target.Remove(Target[i]);
+            }
         }
+        if (Target.Count == 0)
+            return false;
+        //if (!Target.Enemy.gameObject.activeSelf)
+        //{
+        //    targetList.Remove(Target);
+        //    Target = null;
+        //    return false;
+        //}
         return true;
     }
     private bool AcquireTarget()
@@ -218,7 +223,24 @@ public abstract class Turret : GameBehavior
             return false;
         else
         {
-            Target = targetList[UnityEngine.Random.Range(0, targetList.Count - 1)];
+            if (TargetCount > 1)
+            {
+                List<int> returnInt = null;
+                foreach (int i in returnInt)
+                {
+                    Target.Add(targetList[i]);
+                }
+            }
+            else
+            {
+                Target.Add(targetList[UnityEngine.Random.Range(0, targetList.Count - 1)]);
+            }
+            //List<int> returnInt = null;
+            //foreach (int i in returnInt)
+            //{
+            //    Target.Add(targetList[i]);
+            //}
+            ////Target = targetList[UnityEngine.Random.Range(0, targetList.Count - 1)];
             return false;
         }
     }
@@ -263,9 +285,9 @@ public abstract class Turret : GameBehavior
 
     protected virtual void RotateTowards()
     {
-        if (Target == null)
+        if (Target.Count == 0)
             return;
-        var dir = Target.transform.position - rotTrans.position;
+        var dir = Target[0].transform.position - rotTrans.position;
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
         look_Rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         rotTrans.rotation = Quaternion.Lerp(rotTrans.rotation, look_Rotation, _rotSpeed * Time.deltaTime);
@@ -299,17 +321,19 @@ public abstract class Turret : GameBehavior
 
     protected virtual void Shoot()
     {
-        
+
     }
+
+
     protected virtual void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Vector3 position = transform.position;
         position.z -= 0.1f;
-        if (Target != null)
-        {
-            Gizmos.DrawLine(position, Target.transform.position);
-        }
+        //if (Target != null)
+        //{
+        //    Gizmos.DrawLine(position, Target.transform.position);
+        //}
     }
 
     public void ClearTurnIntensify()

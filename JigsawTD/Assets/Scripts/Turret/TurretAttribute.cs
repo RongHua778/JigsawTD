@@ -12,6 +12,7 @@ public class TurretInfo
     public float BulletSpeed;
     public float SputteringRange;
     public float CriticalRate;
+    public float SlowRate;
     public List<TurretEffectInfo> AttackEffects = new List<TurretEffectInfo>();
     public List<PoloEffect> PoloEffects = new List<PoloEffect>();
     [Header("美术资源设置")]
