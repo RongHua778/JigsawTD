@@ -40,7 +40,20 @@ public abstract class Turret : GameBehavior
     public TurretAttribute m_TurretAttribute = default;
     //塔的品质
     private int quality = 1;
+<<<<<<< Updated upstream
     public int Quality { get => quality; set => quality = value; }
+=======
+<<<<<<< Updated upstream
+=======
+    public int Quality { get => quality; 
+        set 
+        {
+            quality = value;
+            SetGraphic(); 
+        } 
+    }
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     //塔的元素属性
     private Element element;
     public Element Element { get => element; set => element = value; }
@@ -96,12 +109,12 @@ public abstract class Turret : GameBehavior
 
     public virtual void InitializeTurret()
     {
-        GenerateRange();
-        rotTrans.localRotation = Quaternion.identity;
         RangeType = m_TurretAttribute.RangeType;
+        rotTrans.localRotation = Quaternion.identity;
         Element = m_TurretAttribute.element;
-        SetGraphic();
+        GenerateRange();
         GetTurretEffects();
+        TurretBuildEffects();
     }
 
     private void GetTurretEffects()
@@ -116,12 +129,20 @@ public abstract class Turret : GameBehavior
         }
     }
 
+    private void TurretBuildEffects()
+    {
+        foreach (var effect in TurretEffects)
+        {
+            effect.Build();
+        }
+    }
+
     //设置不同等级的美术资源
     public void SetGraphic()
     {
-        shootPoint.transform.localPosition = m_TurretAttribute.TurretLevels[quality - 1].ShootPointOffset;
-        BaseSprite.sprite = m_TurretAttribute.TurretLevels[quality - 1].BaseSprite;
-        CannonSprite.sprite = m_TurretAttribute.TurretLevels[quality - 1].CannonSprite;
+        shootPoint.transform.localPosition = m_TurretAttribute.TurretLevels[Quality - 1].ShootPointOffset;
+        BaseSprite.sprite = m_TurretAttribute.TurretLevels[Quality - 1].BaseSprite;
+        CannonSprite.sprite = m_TurretAttribute.TurretLevels[Quality - 1].CannonSprite;
     }
 
     public virtual void TriggerPoloEffect(bool value)
@@ -157,6 +178,10 @@ public abstract class Turret : GameBehavior
     public void AddTarget(TargetPoint target)
     {
         targetList.Add(target);
+        if (TargetCount > 1)
+        {
+            AcquireTarget();
+        }
     }
 
     public virtual void RemoveTarget(TargetPoint target)
@@ -223,9 +248,18 @@ public abstract class Turret : GameBehavior
             return false;
         else
         {
+<<<<<<< Updated upstream
             if (TargetCount > 1)
             {
                 List<int> returnInt = null;
+=======
+<<<<<<< Updated upstream
+            Target = targetList[UnityEngine.Random.Range(0, targetList.Count - 1)];
+=======
+            if (TargetCount > 1)
+            {
+                List<int> returnInt = StaticData.SelectNoRepeat(targetList.Count, TargetCount);
+>>>>>>> Stashed changes
                 foreach (int i in returnInt)
                 {
                     Target.Add(targetList[i]);
@@ -241,6 +275,10 @@ public abstract class Turret : GameBehavior
             //    Target.Add(targetList[i]);
             //}
             ////Target = targetList[UnityEngine.Random.Range(0, targetList.Count - 1)];
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
             return false;
         }
     }
@@ -321,7 +359,20 @@ public abstract class Turret : GameBehavior
 
     protected virtual void Shoot()
     {
+<<<<<<< Updated upstream
 
+=======
+<<<<<<< Updated upstream
+        
+=======
+        foreach(var target in Target)
+        {
+            Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
+            bullet.transform.position = shootPoint.position;
+            bullet.Initialize(this,target);
+        }
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     }
 
 

@@ -46,11 +46,21 @@ public abstract class Bullet : GameBehavior
         base.OnUnSpawn();
     }
 
-    public void Initialize(Turret turret, Vector2? pos = null)
+    public void Initialize(Turret turret, TargetPoint target = null, Vector2? pos = null)
     {
         this.turretParent = turret;
+<<<<<<< Updated upstream
         this.Target = turret.Target[0];
         this.TargetPos = pos ?? turret.Target[0].Position;
+=======
+<<<<<<< Updated upstream
+        this.Target = turret.Target;
+        this.TargetPos = pos ?? turret.Target.Position;
+=======
+        this.Target = target;
+        this.TargetPos = pos ?? target.Position;
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
         this.Damage = turret.AttackDamage;
         this.bulletSpeed = turret.BulletSpeed;
         this.SputteringRange = turret.SputteringRange;
@@ -121,6 +131,12 @@ public abstract class Bullet : GameBehavior
         return true;
     }
 
+    public float GetTargetDistance()
+    {
+        float distanceToTarget = ((Vector2)transform.position - TargetPos).magnitude;
+        return distanceToTarget;
+    }
+
     private void ReclaimBullet()
     {
         ObjectPool.Instance.UnSpawn(this.gameObject);
@@ -131,5 +147,11 @@ public abstract class Bullet : GameBehavior
 
     }
 
-
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Vector3 position = transform.position;
+        position.z -= 0.1f;
+        Gizmos.DrawWireSphere(position, SputteringRange);
+    }
 }

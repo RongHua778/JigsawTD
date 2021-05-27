@@ -108,7 +108,14 @@ public class GameBoard : MonoBehaviour
                 AddGameTile(tile, pos);
             }
         }
+<<<<<<< Updated upstream
         GenerateTrapTiles(groundSize,StaticData.trapN);
+=======
+<<<<<<< Updated upstream
+=======
+        //GenerateTrapTiles(groundSize,StaticData.trapN);
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
         SeekPath();
     }
 

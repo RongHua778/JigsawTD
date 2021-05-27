@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7955279244983291}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,15 @@ GameObject:
   - component: {fileID: 6969100300411665519}
   - component: {fileID: 1619076599716742364}
   - component: {fileID: 7999024685708191520}
+<<<<<<< Updated upstream
   m_Layer: 10
+=======
+<<<<<<< Updated upstream
+  m_Layer: 7
+=======
+  m_Layer: 13
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
   m_Name: TurretBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,7 +228,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 173669962325498538}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: RotPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -253,7 +261,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9179870020333665588}
   - component: {fileID: 9153375314512549090}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: TileType
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -465,7 +473,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3603753279135973792}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: CheckPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
