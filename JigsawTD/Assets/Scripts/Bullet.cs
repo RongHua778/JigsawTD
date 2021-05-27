@@ -32,7 +32,8 @@ public abstract class Bullet : GameBehavior
 
     private float criticalRate;
     public float CriticalRate { get => criticalRate; set => criticalRate = value; }
-
+    private float slowRate;
+    public float SlowRate { get => slowRate; set => slowRate = value; }
 
     public override void OnSpawn()
     {
@@ -48,13 +49,14 @@ public abstract class Bullet : GameBehavior
     public void Initialize(Turret turret, Vector2? pos = null)
     {
         this.turretParent = turret;
-        this.Target = turret.Target;
-        this.TargetPos = pos ?? turret.Target.Position;
+        this.Target = turret.Target[0];
+        this.TargetPos = pos ?? turret.Target[0].Position;
         this.Damage = turret.AttackDamage;
         this.bulletSpeed = turret.BulletSpeed;
         this.SputteringRange = turret.SputteringRange;
         this.CriticalRate = turret.CriticalRate;
         this.turretEffects = turret.TurretEffects;
+        this.SlowRate = turret.SlowRate;
         TriggerShootEffect();
     }
 
@@ -72,6 +74,11 @@ public abstract class Bullet : GameBehavior
 
     protected void TriggerHitEffect(Enemy target)
     {
+        if (SlowRate > 0)
+        {
+            BuffInfo info = new BuffInfo(EnemyBuffName.SlowDown, SlowRate, 2f);
+            target.Buffable.AddBuff(info);
+        }
         if (turretEffects.Count > 0)
         {
             foreach (TurretEffect effect in turretEffects)

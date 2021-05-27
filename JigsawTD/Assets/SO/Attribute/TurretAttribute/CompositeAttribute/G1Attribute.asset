@@ -17,7 +17,7 @@ MonoBehaviour:
   Description: "\u53EF\u4EE5\u540C\u65F6\u653B\u51FB\u591A\u4E2A\u76EE\u6807\u7684\u9632\u5FA1\u5854"
   TilePrefab: {fileID: 0}
   RangeType: 0
-  element: 0
+  element: 5
   totalLevel: 5
   elementNumber: 2
   TurretLevels:
@@ -28,9 +28,7 @@ MonoBehaviour:
     BulletSpeed: 5
     SputteringRange: 0
     CriticalRate: 0
-    AttackEffects:
-    - EffectName: 2
-      KeyValue: 1
+    AttackEffects: []
     PoloEffects: []
     TurretName: 
     Icon: {fileID: 21300000, guid: efd7eca78d1a1d44d8b38abd7973113e, type: 3}

@@ -11,6 +11,7 @@ public class TurretTips : TileTips
     [SerializeField] Text RangeValue = default;
     [SerializeField] Text CriticalValue = default;
     [SerializeField] Text SputteringValue = default;
+    [SerializeField] Text SlowRateValue = default;
     [SerializeField] GameObject BtnArea = default;
     [SerializeField] GameObject IntensifyArea = default;
 
@@ -24,6 +25,7 @@ public class TurretTips : TileTips
         RangeValue.text = turret.AttackRange.ToString();
         CriticalValue.text = turret.CriticalRate.ToString();
         SputteringValue.text = turret.SputteringRange.ToString();
+        SlowRateValue.text = turret.SlowRate.ToString();
         Description.text = turret.m_TurretAttribute.Description;
         BtnArea.SetActive(false);
         IntensifyArea.SetActive(true);
@@ -40,6 +42,7 @@ public class TurretTips : TileTips
         RangeValue.text = attribute.TurretLevels[0].AttackRange.ToString();
         CriticalValue.text = attribute.TurretLevels[0].CriticalRate.ToString();
         SputteringValue.text = attribute.TurretLevels[0].SputteringRange.ToString();
+        SlowRateValue.text = attribute.TurretLevels[0].SlowRate.ToString();
         Description.text = attribute.Description;
         IntensifyArea.SetActive(false);
         BtnArea.SetActive(true);

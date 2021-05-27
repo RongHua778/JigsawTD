@@ -3585,6 +3585,7 @@ MonoBehaviour:
   RangeValue: {fileID: 6799999875241803344}
   CriticalValue: {fileID: 2892821043490034711}
   SputteringValue: {fileID: 4348273420673197645}
+  SlowRateValue: {fileID: 5789773020802957434}
   BtnArea: {fileID: 6030200085263075469}
   IntensifyArea: {fileID: 3873196845415134752}
 --- !u!114 &1450690358925690924

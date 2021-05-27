@@ -29,11 +29,11 @@ public class Laser : Turret
     {
         if (targetList.Contains(target))
         {
-            if (this.Target == target)
-            {
-                SpeedUp = 0;
-                this.Target = null;
-            }
+            //if (this.Target == target)
+            //{
+            //    SpeedUp = 0;
+            //    this.Target = null;
+            //}
             targetList.Remove(target);
         }
     }
@@ -43,7 +43,7 @@ public class Laser : Turret
         {
             lineSR.enabled = true;
             lineSR.SetPosition(0, transform.position);
-            lineSR.SetPosition(1, Target.Position);
+            //lineSR.SetPosition(1, Target.Position);
             SpeedUp += SpeedPerSecond * Time.deltaTime;
         }
         else
@@ -55,6 +55,6 @@ public class Laser : Turret
 
     protected override void Shoot()
     {
-        Target.Enemy.ApplyDamage(AttackDamage);
+        //Target.Enemy.ApplyDamage(AttackDamage);
     }
 }

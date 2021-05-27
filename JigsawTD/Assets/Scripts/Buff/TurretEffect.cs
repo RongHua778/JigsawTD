@@ -19,6 +19,11 @@ public abstract class TurretEffect
     public Bullet bullet;
     public float KeyValue;
 
+    public virtual void Build()
+    {
+
+    }
+
     public virtual void EnemyEnter()
     {
 
