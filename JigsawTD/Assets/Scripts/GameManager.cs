@@ -8,7 +8,8 @@ public class GameManager : Singleton<GameManager>
 {
     public GameBoard Board = default;
 
-    public LevelUIManager _levelUIManager = default;
+
+    public BluePrintShop _bluePrintShop = default;
 
     //地图每一边上方块的数量
     [SerializeField]
@@ -18,11 +19,12 @@ public class GameManager : Singleton<GameManager>
     //[SerializeField]
     //GameTileContentFactory _contentFactory = default;
     [SerializeField]
+    BlueprintFactory _bluePrintFacotry = default;
+    [SerializeField]
     TileShapeFactory _shapeFactory = default;
-
     [SerializeField]
     TurretFactory _turretFactory = default;
-
+    [SerializeField]
     public TileFactory _tileFactory = default;
     [SerializeField]
     EnemyFactory _enemyFactory = default;
@@ -32,11 +34,11 @@ public class GameManager : Singleton<GameManager>
     public GameBehaviorCollection turrets = new GameBehaviorCollection();
 
     //把场上所有塔都放进去以判断合成规则的集合
-    public List<Turret> turretsElements = new List<Turret>();
+    //public List<Turret> turretsElements = new List<Turret>();
 
-    [SerializeField, Range(0.1f, 10f)]
-    float spawnSpeed = 100f;
-    float spawnProgress;
+    //[SerializeField, Range(0.1f, 10f)]
+    //float spawnSpeed = 100f;
+    //float spawnProgress;
 
     //计算点击选中
     [SerializeField] GameObject selection = default;
@@ -73,6 +75,8 @@ public class GameManager : Singleton<GameManager>
 
         _enemyFactory.InitializeFactory();
         _tileFactory.InitializeFactory();
+        _bluePrintFacotry.InitializeFactory();
+
         Board.Initialize(_startSize, _groundSize, _tileFactory);
 
         EnemySpawnHelper = this.GetComponent<EnemySpawner>();
@@ -88,7 +92,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (!IsLongPress)
         {
-            _levelUIManager.HideTips();
+            LevelUIManager.Instance.HideTips();
             if (tile == SelectingTile)
             {
                 if (SelectingTile.BasicTileType == BasicTileType.Turret)
@@ -107,7 +111,7 @@ public class GameManager : Singleton<GameManager>
                 {
                     ((TurretTile)tile).ShowTurretRange(true);
                 }
-                _levelUIManager.ShowTileTips(tile);
+                LevelUIManager.Instance.ShowTileTips(tile);
                 SelectingTile = tile;
             }
         }
@@ -184,6 +188,28 @@ public class GameManager : Singleton<GameManager>
     {
         this.state = newState;
         StartCoroutine(this.state.EnterState());
+    }
+
+    public Blueprint GetSingleBluePrint(TurretAttribute attribute)
+    {
+        Blueprint bluePrint = _bluePrintFacotry.GetComposedTurret(attribute);
+        return bluePrint;
+    }
+
+    public TileShape GenerateRandomBasicShape()
+    {
+        TileShape shape = _shapeFactory.GetBasicShape();
+        GameTile randomElementTile = _tileFactory.GetRandomElementTile();
+        shape.InitializeShape(randomElementTile, _tileFactory);
+        return shape;
+    }
+
+    public TileShape GenerateDShape(TurretAttribute compositeAttribute)
+    {
+        TileShape shape = _shapeFactory.GetDShape();
+        GameTile tile = _tileFactory.GetCompositeTurretTile(compositeAttribute);
+        shape.InitializeShape(tile);
+        return shape;
     }
 
 }

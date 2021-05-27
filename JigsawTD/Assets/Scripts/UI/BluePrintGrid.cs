@@ -12,27 +12,45 @@ public class BluePrintGrid : MonoBehaviour
     private Toggle toggle;
 
     private Blueprint m_BluePrint;
-    public void SetElements(ToggleGroup group, Blueprint bluePrint)
+    private BluePrintShop m_Shop;
+    public bool BuildAble = false;
+
+    public Blueprint BluePrint { get => m_BluePrint; set => m_BluePrint = value; }
+
+    public void SetElements(BluePrintShop shop, ToggleGroup group, Blueprint bluePrint)
     {
+        m_Shop = shop;
         toggle = this.GetComponent<Toggle>();
-        m_BluePrint = bluePrint;
+        BluePrint = bluePrint;
+        BluePrint.CheckElement();
         toggle.group = group;
         compositeIcon.sprite = bluePrint.CompositeTurretAttribute.TurretLevels[0].Icon;
         //给每一个组件设置图片
+        RefreshElementsSprite();
+
+    }
+
+    private void RefreshElementsSprite()
+    {
         for (int i = 0; i < elementGrids.Length; i++)
         {
-            if (i < bluePrint.CompositeTurretAttribute.elementNumber)
+            if (i < BluePrint.CompositeTurretAttribute.elementNumber)
             {
                 elementGrids[i].gameObject.SetActive(true);
-                elementGrids[i].SetElement(bluePrint.Compositions[i]);
-                bluePrint.CheckElement();
+                elementGrids[i].SetElement(BluePrint.Compositions[i]);
             }
             else
             {
                 elementGrids[i].gameObject.SetActive(false);
             }
         }
+        BuildAble = BluePrint.CanBuild;
+        compositeIcon.color = BuildAble ? Color.white : Color.gray;
+    }
 
+    public void MoveToPocket()
+    {
+        m_Shop.MoveBluePrintToPocket(this);
     }
 
     public void OnBluePrintSelect()
@@ -42,7 +60,7 @@ public class BluePrintGrid : MonoBehaviour
             if (SelectingBluePrint != null)
                 SelectingBluePrint.OnBluePrintDeselect();
             SelectingBluePrint = this;
-            GameEvents.Instance.ShowTurretTips(m_BluePrint.CompositeTurretAttribute);
+            GameEvents.Instance.ShowTurretTips(this);
         }
         else
         {
@@ -57,4 +75,22 @@ public class BluePrintGrid : MonoBehaviour
         GameEvents.Instance.HideTips();
     }
 
+    public void RemoveBuildPrint()
+    {
+        if (m_Shop.ShopBluePrints.Contains(this))
+        {
+            m_Shop.ShopBluePrints.Remove(this);
+        }
+        if (m_Shop.OwnBluePrints.Contains(this))
+        {
+            m_Shop.OwnBluePrints.Remove(this);
+        }
+        ObjectPool.Instance.UnSpawn(this.gameObject);
+    }
+
+    public void CheckElements()
+    {
+        BluePrint.CheckElement();
+        RefreshElementsSprite();
+    }
 }

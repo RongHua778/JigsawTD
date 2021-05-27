@@ -67,15 +67,21 @@ public class GameEvents : Singleton<GameEvents>
         onShowTileTips?.Invoke(tile);
     }
 
-    public event Action<TurretAttribute> onShowTurretTips;
-    public void ShowTurretTips(TurretAttribute attribute)
+    public event Action<BluePrintGrid> onShowTurretTips;
+    public void ShowTurretTips(BluePrintGrid bGrid)
     {
-        onShowTurretTips?.Invoke(attribute);
+        onShowTurretTips?.Invoke(bGrid);
     }
 
     public event Action onHideTips;
     public void HideTips()
     {
         onHideTips?.Invoke();
+    }
+
+    public event Action onCheckBluePrint;
+    public void CheckBluePrint()
+    {
+        onCheckBluePrint?.Invoke();
     }
 }

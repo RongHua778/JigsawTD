@@ -7,6 +7,7 @@ public class Blueprint
     public TurretAttribute CompositeTurretAttribute;
     //int totalLevel;
     //int compositionN;
+    public bool CanBuild => CheckBuildable();
     List<Composition> compositions = new List<Composition>();
     public List<Composition> Compositions { get => compositions; set => compositions = value; }
     //public int CompositionN { get => compositionN; set => compositionN = value; }
@@ -15,14 +16,15 @@ public class Blueprint
     //检测每个配方是否存在在场上的方法
     public void CheckElement()
     {
-        List<Turret> temp = GameManager.Instance.turretsElements;
+        List<GameBehavior> temp = GameManager.Instance.turrets.behaviors;
         for (int i = 0; i < compositions.Count; i++)
         {
             compositions[i].obtained = false;
             for (int j = 0; j < temp.Count; j++)
             {
-                if (compositions[i].elementRequirement == (int)temp[j].Element &&
-                    compositions[i].levelRequirement == temp[j].Quality)
+                Turret turret = temp[j] as Turret;
+                if (compositions[i].elementRequirement == (int)turret.Element &&
+                    compositions[i].levelRequirement == turret.Quality)
                 {
                     compositions[i].obtained = true;
                     break;

@@ -18,6 +18,18 @@ public class StaticData : Singleton<StaticData>
     public static string TempGroundMask = "TempGround";
     public static LayerMask GetGroundLayer = 1 << 8 | 1 << 12;
     public static LayerMask RunTimeFindPathLayer = 1 << 7 | 1 << 8;
+    public int PlayerMaxLevel;
+    public int[] LevelUpMoney;
+    public float[,] LevelChances = new float[6, 5]
+    {
+        { 0.75f, 0.25f, 0f, 0f, 0f },
+        { 0.6f, 0.3f, 0.1f, 0f, 0f },
+        { 0.5f, 0.35f, 0.15f, 0.05f, 0f },
+        { 0.38f, 0.4f, 0.2f, 0.1f, 0.02f },
+        { 0.19f, 0.35f, 0.25f, 0.15f, 0.06f },
+        { 0.1f, 0.3f, 0.3f, 0.2f, 0.1f }
+    };
+    public static int BuyBluePrintCost = 20;
     [Header("GameSetting")]
     public float GameSlowDownRate = default;
     public float TileSize = default;
@@ -32,7 +44,6 @@ public class StaticData : Singleton<StaticData>
     public float[] TileShapeChance = default;
     public int PlayerMaxHealth;
     public int LevelMaxWave;
-    public int PlayerMaxLevel;
 
     [Header("ElementAttributes")]
     public List<TurretAttribute> ElementAttributes = new List<TurretAttribute>();

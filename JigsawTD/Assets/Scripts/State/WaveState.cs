@@ -10,14 +10,12 @@ public class WaveState : State
 
     public override IEnumerator EnterState()
     {
-        Debug.Log("Eneter Wave State");
         gameManager.EnemySpawnHelper.GetSequence();
         yield break;
     }
 
     public override IEnumerator ExitState(State newState)
     {
-        Debug.Log("Exit Wave State");
         gameManager.EnterNewState(newState);
         yield break;
     }

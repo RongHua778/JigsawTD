@@ -17,4 +17,9 @@ MonoBehaviour:
   trapTile: {fileID: 1065283022250296622, guid: 12a5cc0b04e663c4ea6831a0f0960229, type: 3}
   spawnPoint: {fileID: -6666671750581329292, guid: ee9b6e8057f37354682685fcae0e7645, type: 3}
   destinationTile: {fileID: 5923658230637393832, guid: 5f7ca72f3f4fce04dbe1c0a08b7a3876, type: 3}
-  turretFactory: {fileID: 11400000, guid: a7462b451c9a2e34993f437b96292d0d, type: 2}
+  elementTileChance:
+  - 0.2
+  - 0.2
+  - 0.2
+  - 0.2
+  - 0.2

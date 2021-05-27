@@ -125,7 +125,7 @@ public class GameBoard : MonoBehaviour
             //turret的tile加入一个list
             GameManager.Instance.turrets.Add(((TurretTile)tile).turret);
             //turret加入一个list以检测合成逻辑
-            GameManager.Instance.turretsElements.Add(tile.GetComponentInChildren<Turret>());
+            //GameManager.Instance.turretsElements.Add(tile.GetComponentInChildren<Turret>());
         }
         groundTile.TriggerIntensify();
     }
@@ -256,6 +256,7 @@ public class GameBoard : MonoBehaviour
         {
             tile.TileDroped();
         }
+        GameEvents.Instance.CheckBluePrint();
     }
 
     private void RemoveGameTileOnTile(Vector3 pos)

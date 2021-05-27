@@ -14,7 +14,7 @@ public class TileFactory : GameObjectFactory
     [SerializeField] TrapTile trapTile = default;
     [SerializeField] GameTile spawnPoint = default;
     [SerializeField] GameTile destinationTile = default;
-    [SerializeField] TurretFactory turretFactory;
+    [SerializeField] float[] elementTileChance;
 
     public void InitializeFactory()
     {
@@ -42,15 +42,39 @@ public class TileFactory : GameObjectFactory
     {
         return CreateInstance(ground).GetComponent<BasicTile>();
     }
-    //get带有塔的tile
-    public GameTile GetTurretTile()
-    {
-        GameObject temp =GameManager.Instance.TurretFactory.GetTurret();
-        return temp.GetComponent<TurretTile>();
-    }
 
     public TrapTile GetTrapTile()
     {
         return CreateInstance(trapTile.gameObject).GetComponent<TrapTile>();
     }
+
+
+    //******************turrettile部分**************
+
+    private GameObject GetBasicTurret(int quality, int element)
+    {
+        GameObject temp = CreateInstance(StaticData.Instance.GetElementsAttributes((Element)element).TilePrefab);
+        temp.GetComponentInChildren<Turret>().Quality = quality;
+        return temp;
+    }
+    public GameTile GetRandomElementTile()
+    {
+        int playerLevel = LevelUIManager.Instance.PlayerLevel;
+        int element = StaticData.RandomNumber(elementTileChance);
+        float[] levelC = new float[5];
+        for (int i = 0; i < 5; i++)
+        {
+            levelC[i] = StaticData.Instance.LevelChances[playerLevel - 1, i];
+        }
+        int level = StaticData.RandomNumber(levelC) + 1;
+        GameObject temp = GetBasicTurret(level, element);
+        return temp.GetComponent<GameTile>();
+    }
+
+    public GameTile GetCompositeTurretTile(TurretAttribute attribute)
+    {
+        GameObject temp = CreateInstance(attribute.TilePrefab);
+        return temp.GetComponent<TurretTile>();
+    }
+
 }

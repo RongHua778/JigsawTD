@@ -13,6 +13,8 @@ public class TurretTips : TileTips
     [SerializeField] Text SputteringValue = default;
     [SerializeField] GameObject BtnArea = default;
     [SerializeField] GameObject IntensifyArea = default;
+
+    private BluePrintGrid m_BGrid;
     public void ReadTurret(Turret turret)
     {
         Icon.sprite = turret.m_TurretAttribute.TurretLevels[turret.Quality-1].Icon;
@@ -27,8 +29,10 @@ public class TurretTips : TileTips
         IntensifyArea.SetActive(true);
     }
 
-    public void ReadAttribute(TurretAttribute attribute,bool isCompositing)
+    public void ReadAttribute(BluePrintGrid bGrid)
     {
+        m_BGrid = bGrid;
+        TurretAttribute attribute = bGrid.BluePrint.CompositeTurretAttribute;
         Icon.sprite = attribute.TurretLevels[0].Icon;
         Name.text = attribute.TurretLevels[0].TurretName;
         AttackValue.text = attribute.TurretLevels[0].AttackDamage.ToString();
@@ -38,14 +42,7 @@ public class TurretTips : TileTips
         SputteringValue.text = attribute.TurretLevels[0].SputteringRange.ToString();
         Description.text = attribute.Description;
         IntensifyArea.SetActive(false);
-        if (isCompositing)
-        {
-            BtnArea.SetActive(true);
-        }
-        else
-        {
-            BtnArea.SetActive(false);
-        }
+        BtnArea.SetActive(true);
     }
 
     public void CloseTips()
@@ -53,6 +50,25 @@ public class TurretTips : TileTips
         this.gameObject.SetActive(false);
     }
 
+    public void BuyBluePrintBtnClick()
+    {
+        if (LevelUIManager.Instance.ConsumeMoney(StaticData.BuyBluePrintCost))
+        {
+            m_BGrid.MoveToPocket();
+        }
+    }
+
+    public void CompositeBtnClick()
+    {
+        if (!m_BGrid.BuildAble)
+        {
+            GameEvents.Instance.Message("È±ÉÙ±ØÒªËØ²Ä");
+            return;
+        }
+        GameManager.Instance.GenerateDShape(m_BGrid.BluePrint.CompositeTurretAttribute);
+        CloseTips();
+        m_BGrid.RemoveBuildPrint();
+    }
 
 
 }

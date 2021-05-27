@@ -5,14 +5,13 @@ using System.Linq;
 
 public enum ShapeType
 {
-    J,L,T,O,I,D
+    J, L, T, O, I, D
 }
 public class TileShape : MonoBehaviour
 {
     TileSlot[] tilePos;
     Camera renderCam;
     GameObject bgObj;
-    int levelTileCount = 0;
     DraggingShape draggingShape;
 
     [HideInInspector]
@@ -28,32 +27,26 @@ public class TileShape : MonoBehaviour
         draggingShape = this.GetComponent<DraggingShape>();
     }
     //在shape上面加上塔
-    public void InitializeShape()
+    public void InitializeShape(GameTile specialTile, TileFactory tileFactory = null)
     {
-        //判断shape上面生成几个塔
-        //levelTileCount = Random.value > 0.9f ? 2 : 1;
-        levelTileCount = 1;
-        TileFactory tileFactory = GameManager.Instance._tileFactory;
         if (shapeType == ShapeType.D)
         {
-            GameTile tile;
-            tile = tileFactory.GetTurretTile();
-            tile.transform.position = tilePos[0].transform.position;
-            tile.transform.SetParent(this.transform);
-            tile.m_DraggingShape = this.GetComponent<DraggingShape>();
-            tiles.Add(tile);
+            specialTile.transform.position = tilePos[0].transform.position;
+            specialTile.transform.SetParent(this.transform);
+            specialTile.m_DraggingShape = this.GetComponent<DraggingShape>();
+            tiles.Add(specialTile);
             draggingShape.Initialized();
             SetPreviewPlace();
         }
         else
         {
-            List<int> levelPos = StaticData.GetRandomSequence(tilePos.Length, levelTileCount).ToList();
+            int g = Random.Range(0, tilePos.Length);
             for (int i = 0; i < tilePos.Length; i++)
             {
                 GameTile tile;
-                if (levelPos.Contains(i))
+                if (i == g)
                 {
-                    tile = tileFactory.GetTurretTile();
+                    tile = specialTile;
                 }
                 else
                 {
@@ -67,19 +60,6 @@ public class TileShape : MonoBehaviour
             }
             draggingShape.Initialized();
         }
-        //switch (shapeType)
-        //{
-        //    case ShapeType.T:
-        //        levelTileCount = Random.value > 0.3f ? 2 : 1;
-        //        break;
-        //    case ShapeType.L:
-        //    case ShapeType.I:
-        //        levelTileCount = Random.value > 0.9f ? 2 : 1;
-        //        break;
-        //    case ShapeType.O:
-        //        levelTileCount = Random.value > 0.5f ? 1 : 0;
-        //        break;
-        //}
 
     }
     public int GetSlotCount()
@@ -89,7 +69,7 @@ public class TileShape : MonoBehaviour
 
     public void ReclaimTiles()
     {
-        foreach(GameTile tile in tiles)
+        foreach (GameTile tile in tiles)
         {
             ObjectPool.Instance.UnSpawn(tile.gameObject);
         }

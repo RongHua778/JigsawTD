@@ -15,12 +15,12 @@ public class TileShapeFactory : ScriptableObject
     [SerializeField] float[] RandomShapeChance = new float[5];
 
 
-    public TileShape GetRandomShape()
+    public TileShape GetBasicShape()
     {
         int shapeID = StaticData.RandomNumber(RandomShapeChance);
         return GetShape((ShapeType)shapeID);
     }
-    public TileShape GetOneShape()
+    public TileShape GetDShape()
     {
         return GetShape(ShapeType.D);
     }
