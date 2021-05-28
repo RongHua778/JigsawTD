@@ -108,7 +108,7 @@ public class GameBoard : MonoBehaviour
                 AddGameTile(tile, pos);
             }
         }
-        //GenerateTrapTiles(groundSize,StaticData.trapN,tileFactory);
+        GenerateTrapTiles(groundSize,StaticData.trapN,tileFactory);
         SeekPath();
     }
 
@@ -193,7 +193,15 @@ public class GameBoard : MonoBehaviour
         {
             ObjectPool.Instance.UnSpawn(pl.gameObject);
         }
-
+        //for (int i = 1; i < shortestPath.Count; i++)
+        //{
+        //    shortestPath[i - 1].NextTileOnPath = shortestPath[i];
+        //    shortestPath[i - 1].ExitPoint = (shortestPath[i].transform.position + shortestPath[i - 1].transform.position) * 0.5f;
+        //    shortestPath[i - 1].PathDirection = DirectionExtensions.GetDirection(shortestPath[i - 1].transform.position, shortestPath[i - 1].ExitPoint);
+        //    PathLine pathLine = ObjectPool.Instance.Spawn(pathLinePrefab.gameObject).GetComponent<PathLine>();
+        //    pathLine.ShowPath(new Vector3[] { (Vector2)shortestPath[i - 1].transform.position, (Vector2)shortestPath[i].transform.position });
+        //    pathLines.Add(pathLine);
+        //}
         for (int i = 1; i < path.vectorPath.Count; i++)
         {
             PathLine pathLine = ObjectPool.Instance.Spawn(pathLinePrefab.gameObject).GetComponent<PathLine>();
@@ -210,6 +218,7 @@ public class GameBoard : MonoBehaviour
         {
             for (int j = 0; j < groundSize.y; j++)
             {
+                if(i!=0&&j!=0)
                 tiles.Add(new Vector2(i, j));
             }
         }
@@ -226,6 +235,7 @@ public class GameBoard : MonoBehaviour
             tiles = tiles.Except(neibor).ToList();
             tiles.Remove(temp);
         }
+
         foreach(Vector2 trap in traps)
         {
             AddGameTile(t.GetRandomTrap(), new Vector2(trap.x - (groundSize.x - 1) / 2,
