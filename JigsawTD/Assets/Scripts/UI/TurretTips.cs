@@ -16,11 +16,13 @@ public class TurretTips : TileTips
     [SerializeField] GameObject BtnArea = default;
     [SerializeField] GameObject IntensifyArea = default;
     [SerializeField] GameObject AnalysisArea = default;
+    [SerializeField] TipsElementConstruct elementConstruct = default;
 
     private Turret m_Turret;
     private BluePrintGrid m_BGrid;
     public void ReadTurret(Turret turret)
     {
+
         this.m_Turret = turret;
         Icon.sprite = turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].Icon;
         Name.text = turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].TurretName;
@@ -41,10 +43,10 @@ public class TurretTips : TileTips
 
         UpdateInfo(turret);
 
-        if (turret.TurretEffects.Count > 0)
+        if (turret.m_TurretAttribute.TurretLevels[turret.Quality-1].TurretEffects.Count > 0)
         {
             string finalDes = turret.m_TurretAttribute.Description;
-            foreach (TurretEffect effect in turret.TurretEffects)
+            foreach (TurretEffectInfo effect in turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].TurretEffects)
             {
                 finalDes += effect.EffectDescription;
                 finalDes += "\n";
@@ -55,9 +57,18 @@ public class TurretTips : TileTips
         {
             Description.text = turret.m_TurretAttribute.Description;
         }
-
+        if (turret.Element == Element.None)
+        {
+            elementConstruct.gameObject.SetActive(true);
+            elementConstruct.SetElements(turret.Compositions);
+            IntensifyArea.SetActive(false);
+        }
+        else
+        {
+            elementConstruct.gameObject.SetActive(false);
+            IntensifyArea.SetActive(true);
+        }
         BtnArea.SetActive(false);
-        IntensifyArea.SetActive(true);
         AnalysisArea.SetActive(true);
     }
 
@@ -77,14 +88,30 @@ public class TurretTips : TileTips
         m_BGrid = bGrid;
         TurretAttribute attribute = bGrid.BluePrint.CompositeTurretAttribute;
         Icon.sprite = attribute.TurretLevels[0].Icon;
-        Name.text = attribute.TurretLevels[0].TurretName;
+        Name.text = attribute.Name;
         AttackValue.text = attribute.TurretLevels[0].AttackDamage.ToString();
         SpeedValue.text = attribute.TurretLevels[0].AttackSpeed.ToString();
         RangeValue.text = attribute.TurretLevels[0].AttackRange.ToString();
         CriticalValue.text = attribute.TurretLevels[0].CriticalRate.ToString();
         SputteringValue.text = attribute.TurretLevels[0].SputteringRange.ToString();
         SlowRateValue.text = attribute.TurretLevels[0].SlowRate.ToString();
-        Description.text = attribute.Description;
+
+        if (attribute.TurretLevels[0].TurretEffects.Count > 0)
+        {
+            string finalDes = attribute.Description+ "\n";
+            foreach (TurretEffectInfo effect in attribute.TurretLevels[0].TurretEffects)
+            {
+                finalDes += effect.EffectDescription;
+                finalDes += "\n";
+            }
+            Description.text = finalDes;
+        }
+        else
+        {
+            Description.text = attribute.Description;
+        }
+        elementConstruct.gameObject.SetActive(true);
+        elementConstruct.SetElements(bGrid.BluePrint.Compositions);
         IntensifyArea.SetActive(false);
         BtnArea.SetActive(true);
         AnalysisArea.SetActive(false);
@@ -117,7 +144,8 @@ public class TurretTips : TileTips
 
     private void FixedUpdate()
     {
-        UpdateInfo(m_Turret);
+        if (m_Turret != null)
+            UpdateInfo(m_Turret);
     }
 
 }

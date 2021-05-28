@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WoodAttribute
   m_EditorClassIdentifier: 
   Name: Wood
-  Description: "\u53EA\u80FD\u653B\u51FB\u524D\u65B9\uFF0C\u4F46\u662F\u53EF\u4EE5\u9020\u6210\u7A7F\u900F\u4F24\u5BB3\u3002\u653B\u51FB\u8303\u56F4\u76F4\u7EBF\u3002"
+  Description: "\u53EA\u80FD\u653B\u51FB\u524D\u65B9\uFF0C\u4F46\u662F\u53EF\u4EE5\u9020\u6210\u7A7F\u900F\u4F24\u5BB3\u3002"
   TilePrefab: {fileID: 6604616035422911931, guid: 7561f5f3bdfe9cf4486ea710b7a3922a, type: 3}
   RangeType: 2
   element: 1
@@ -29,7 +29,7 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    AttackEffects: []
+    TurretEffects: []
     PoloEffects: []
     TurretName: B1
     Icon: {fileID: 21300000, guid: 2e21061c7d14f12408092e85b0dfeae6, type: 3}
@@ -43,7 +43,7 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    AttackEffects: []
+    TurretEffects: []
     PoloEffects: []
     TurretName: B2
     Icon: {fileID: 21300000, guid: 9289ff56e98a5434297385abd00d523d, type: 3}
@@ -57,7 +57,7 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    AttackEffects: []
+    TurretEffects: []
     PoloEffects: []
     TurretName: B3
     Icon: {fileID: 21300000, guid: 151ca16f927174d47bc1c26f7a168671, type: 3}
@@ -71,7 +71,7 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    AttackEffects: []
+    TurretEffects: []
     PoloEffects: []
     TurretName: B4
     Icon: {fileID: 21300000, guid: ac5da07c8f159244a881891276ebe9f1, type: 3}
@@ -85,7 +85,7 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    AttackEffects: []
+    TurretEffects: []
     PoloEffects: []
     TurretName: B5
     Icon: {fileID: 21300000, guid: b298176c1968ed949af7afa821ff58c9, type: 3}

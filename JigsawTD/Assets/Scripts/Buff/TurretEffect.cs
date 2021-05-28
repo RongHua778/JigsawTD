@@ -16,6 +16,8 @@ public class TurretEffectInfo
 {
     public TurretEffectName EffectName;
     public float KeyValue;
+    [TextArea(2,3)]
+    public string EffectDescription;
 }
 public abstract class TurretEffect
 {

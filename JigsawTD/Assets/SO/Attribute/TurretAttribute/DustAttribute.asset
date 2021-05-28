@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DustAttribute
   m_EditorClassIdentifier: 
   Name: Dust
-  Description: "\u653B\u51FB\u53EF\u4EE5\u9020\u6210\u6E85\u5C04\u4F24\u5BB3\uFF0C\u65E0\u6CD5\u653B\u51FB\u592A\u8FD1\u7684\u76EE\u6807\u3002\u653B\u51FB\u8303\u56F4\u534A\u5706\u3002"
+  Description: "\u653B\u51FB\u53EF\u4EE5\u9020\u6210\u6E85\u5C04\u4F24\u5BB3\uFF0C\u65E0\u6CD5\u653B\u51FB\u592A\u8FD1\u7684\u76EE\u6807\u3002"
   TilePrefab: {fileID: 6604616035422911931, guid: 4ce61665656640249b97041fdf5b3dce, type: 3}
   RangeType: 1
   element: 4
@@ -29,7 +29,7 @@ MonoBehaviour:
     SputteringRange: 0.3
     CriticalRate: 0
     SlowRate: 0
-    AttackEffects: []
+    TurretEffects: []
     PoloEffects: []
     TurretName: E1
     Icon: {fileID: 21300000, guid: ac34de510b26cac49a880e929f1b49b5, type: 3}
@@ -43,7 +43,7 @@ MonoBehaviour:
     SputteringRange: 0.35
     CriticalRate: 0
     SlowRate: 0
-    AttackEffects: []
+    TurretEffects: []
     PoloEffects: []
     TurretName: E2
     Icon: {fileID: 21300000, guid: a31e53d7d5dcd664aadcf0b2c4515240, type: 3}
@@ -57,7 +57,7 @@ MonoBehaviour:
     SputteringRange: 0.4
     CriticalRate: 0
     SlowRate: 0
-    AttackEffects: []
+    TurretEffects: []
     PoloEffects: []
     TurretName: E3
     Icon: {fileID: 21300000, guid: 6b1723685bbd25343b0c16b8a9272391, type: 3}
@@ -71,7 +71,7 @@ MonoBehaviour:
     SputteringRange: 0.45
     CriticalRate: 0
     SlowRate: 0
-    AttackEffects: []
+    TurretEffects: []
     PoloEffects: []
     TurretName: E4
     Icon: {fileID: 21300000, guid: 5be2b0f7f8fba344aa92ad53ace74a98, type: 3}
@@ -85,7 +85,7 @@ MonoBehaviour:
     SputteringRange: 0.5
     CriticalRate: 0
     SlowRate: 0
-    AttackEffects: []
+    TurretEffects: []
     PoloEffects: []
     TurretName: E5
     Icon: {fileID: 21300000, guid: bfd2ab5fab8b5384bbfaf075c5a88131, type: 3}

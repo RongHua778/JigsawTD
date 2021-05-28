@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: F1Attribute
   m_EditorClassIdentifier: 
   Name: F1
-  Description: "\u653B\u51FB\u8303\u56F4\u4E3A\u5706\u3002"
+  Description: 
   TilePrefab: {fileID: 6604616035422911931, guid: bea362283cf50314d8c64ee93cee9038, type: 3}
   RangeType: 0
   element: 5
@@ -29,9 +29,10 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    AttackEffects:
+    TurretEffects:
     - EffectName: 2
-      KeyValue: 1
+      KeyValue: 2
+      EffectDescription: "\u6108\u6218\u6108\u52C7\uFF1A\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347\u672C\u56DE\u54082\u70B9\u653B\u51FB\u529B\u3002"
     PoloEffects: []
     TurretName: "F1\u7EC4\u5408\u70AE"
     Icon: {fileID: 21300000, guid: efd7eca78d1a1d44d8b38abd7973113e, type: 3}
@@ -45,9 +46,7 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    AttackEffects:
-    - EffectName: 2
-      KeyValue: 2
+    TurretEffects: []
     PoloEffects: []
     TurretName: "F2\u7EC4\u5408\u70AE"
     Icon: {fileID: 21300000, guid: efd7eca78d1a1d44d8b38abd7973113e, type: 3}
@@ -61,9 +60,7 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    AttackEffects:
-    - EffectName: 2
-      KeyValue: 3
+    TurretEffects: []
     PoloEffects: []
     TurretName: "F3\u7EC4\u5408\u70AE"
     Icon: {fileID: 21300000, guid: efd7eca78d1a1d44d8b38abd7973113e, type: 3}
