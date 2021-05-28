@@ -20,9 +20,8 @@ public class TurretTips : TileTips
 
     private Turret m_Turret;
     private BluePrintGrid m_BGrid;
-    public void ReadTurret(Turret turret)
+    public void ReadTurret(Turret turret)//通过场上防御塔查看
     {
-
         this.m_Turret = turret;
         Icon.sprite = turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].Icon;
         Name.text = turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].TurretName;
@@ -43,9 +42,11 @@ public class TurretTips : TileTips
 
         UpdateInfo(turret);
 
-        if (turret.m_TurretAttribute.TurretLevels[turret.Quality-1].TurretEffects.Count > 0)
+        if (turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].TurretEffects.Count > 0)
         {
-            string finalDes = turret.m_TurretAttribute.Description;
+            string finalDes = "";
+            if (turret.m_TurretAttribute.Description != "")
+                finalDes += turret.m_TurretAttribute.Description + "\n";
             foreach (TurretEffectInfo effect in turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].TurretEffects)
             {
                 finalDes += effect.EffectDescription;
@@ -57,10 +58,11 @@ public class TurretTips : TileTips
         {
             Description.text = turret.m_TurretAttribute.Description;
         }
-        if (turret.Element == Element.None)
+
+        if (turret.TurretType == TurretType.CompositeTurret)
         {
             elementConstruct.gameObject.SetActive(true);
-            elementConstruct.SetElements(turret.Compositions);
+            elementConstruct.SetElements(((CompositeTurret)turret).CompositeBluePrint.Compositions);
             IntensifyArea.SetActive(false);
         }
         else
@@ -77,28 +79,42 @@ public class TurretTips : TileTips
         AttackValue.text = turret.AttackDamage.ToString();
         SpeedValue.text = turret.AttackSpeed.ToString();
         RangeValue.text = turret.AttackRange.ToString();
-        CriticalValue.text = turret.CriticalRate.ToString();
+        CriticalValue.text = (turret.CriticalRate * 100).ToString() + "%";
         SputteringValue.text = turret.SputteringRange.ToString();
         SlowRateValue.text = turret.SlowRate.ToString();
         AnalysisValue.text = turret.DamageAnalysis.ToString();
     }
 
-    public void ReadAttribute(BluePrintGrid bGrid)
+    public void ReadAttribute(BluePrintGrid bGrid)//通过配方查看
     {
+        m_Turret = null;
         m_BGrid = bGrid;
         TurretAttribute attribute = bGrid.BluePrint.CompositeTurretAttribute;
         Icon.sprite = attribute.TurretLevels[0].Icon;
         Name.text = attribute.Name;
-        AttackValue.text = attribute.TurretLevels[0].AttackDamage.ToString();
-        SpeedValue.text = attribute.TurretLevels[0].AttackSpeed.ToString();
+
+        string damageIntensify = bGrid.BluePrint.CompositeAttackDamage <= 0 ? "" : "<color=#00ffffff> +" + (attribute.TurretLevels[0].AttackDamage * bGrid.BluePrint.CompositeAttackDamage).ToString() + "</color>";
+        AttackValue.text = attribute.TurretLevels[0].AttackDamage.ToString() + damageIntensify;
+
+        string speedIntensify = bGrid.BluePrint.CompositeAttackSpeed <= 0 ? "" : "<color=#00ffffff> +" + (attribute.TurretLevels[0].AttackSpeed * bGrid.BluePrint.CompositeAttackSpeed).ToString() + "</color>";
+        SpeedValue.text = attribute.TurretLevels[0].AttackSpeed.ToString() + speedIntensify;
+
         RangeValue.text = attribute.TurretLevels[0].AttackRange.ToString();
-        CriticalValue.text = attribute.TurretLevels[0].CriticalRate.ToString();
-        SputteringValue.text = attribute.TurretLevels[0].SputteringRange.ToString();
-        SlowRateValue.text = attribute.TurretLevels[0].SlowRate.ToString();
+
+        string criticalIntensify = bGrid.BluePrint.CompositeCriticalRate <= 0 ? "" : "<color=#00ffffff> +" + (bGrid.BluePrint.CompositeCriticalRate * 100).ToString() + "</color>";
+        CriticalValue.text = (attribute.TurretLevels[0].CriticalRate * 100).ToString() + criticalIntensify + "%";
+
+        string sputteringIntensify = bGrid.BluePrint.CompositeSputteringRange <= 0 ? "" : "<color=#00ffffff> +" + bGrid.BluePrint.CompositeSputteringRange.ToString() + "</color>";
+        SputteringValue.text = attribute.TurretLevels[0].SputteringRange.ToString() + sputteringIntensify;
+
+        string slowIntensify = bGrid.BluePrint.CompositeSlowRate <= 0 ? "" : "<color=#00ffffff> +" + bGrid.BluePrint.CompositeSlowRate.ToString() + "</color>";
+        SlowRateValue.text = attribute.TurretLevels[0].SlowRate.ToString() + slowIntensify;
 
         if (attribute.TurretLevels[0].TurretEffects.Count > 0)
         {
-            string finalDes = attribute.Description+ "\n";
+            string finalDes = "";
+            if (attribute.Description != "")
+                finalDes += attribute.Description + "\n";
             foreach (TurretEffectInfo effect in attribute.TurretLevels[0].TurretEffects)
             {
                 finalDes += effect.EffectDescription;
@@ -137,7 +153,7 @@ public class TurretTips : TileTips
             GameEvents.Instance.Message("缺少必要素材");
             return;
         }
-        GameManager.Instance.GenerateDShape(m_BGrid.BluePrint.CompositeTurretAttribute);
+        GameManager.Instance.GenerateDShape(m_BGrid.BluePrint);
         CloseTips();
         m_BGrid.RemoveBuildPrint();
     }

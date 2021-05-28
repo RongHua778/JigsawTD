@@ -108,7 +108,7 @@ public class GameBoard : MonoBehaviour
                 AddGameTile(tile, pos);
             }
         }
-        GenerateTrapTiles(groundSize,StaticData.trapN,tileFactory);
+        //GenerateTrapTiles(groundSize,StaticData.trapN,tileFactory);
         SeekPath();
     }
 

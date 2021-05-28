@@ -235,10 +235,13 @@ public class GameManager : Singleton<GameManager>
         return shape;
     }
 
-    public TileShape GenerateDShape(TurretAttribute compositeAttribute)
+    public TileShape GenerateDShape(Blueprint bluePrint)//生成合成塔
     {
         TileShape shape = _shapeFactory.GetDShape();
-        GameTile tile = _tileFactory.GetCompositeTurretTile(compositeAttribute);
+        GameTile tile = _tileFactory.GetCompositeTurretTile(bluePrint.CompositeTurretAttribute);
+        //将蓝图赋值给合成塔turret
+        Turret turret = ((TurretTile)tile).turret;
+        ((CompositeTurret)turret).CompositeBluePrint = bluePrint;
         shape.InitializeShape(tile);
         return shape;
     }
@@ -248,6 +251,9 @@ public class GameManager : Singleton<GameManager>
     {
         TileShape shape = _shapeFactory.GetDShape();
         GameTile tile = _tileFactory.GetCompositeTurretTile(compositeAttribute);
+        Blueprint bluePrint = _bluePrintFacotry.GetRandomBluePrint();
+        Turret turret= ((TurretTile)tile).turret;
+         ((CompositeTurret)turret).CompositeBluePrint = bluePrint;
         shape.InitializeShape(tile);
     }
 

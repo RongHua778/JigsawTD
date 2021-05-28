@@ -29,6 +29,7 @@ public class BlueprintFactory : GameObjectFactory
             Composition c = new Composition(compositionLevel[i], Random.Range(0, StaticData.elementN));
             blueprint.Compositions.Add(c);
         }
+        blueprint.SetCompositeValues();
         return blueprint;
     }
 

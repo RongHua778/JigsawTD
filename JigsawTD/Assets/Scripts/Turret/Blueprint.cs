@@ -9,6 +9,39 @@ public class Blueprint
     List<Composition> compositions = new List<Composition>();
     public List<Composition> Compositions { get => compositions; set => compositions = value; }
 
+    public float CompositeAttackDamage;
+    public float CompositeAttackSpeed;
+    public float CompositeSlowRate;
+    public float CompositeCriticalRate;
+    public float CompositeSputteringRange;
+
+    public void SetCompositeValues()
+    {
+        CompositeAttackDamage = CompositeAttackSpeed = CompositeSlowRate = CompositeCriticalRate = CompositeSputteringRange = 0;
+        foreach (Composition com in Compositions)
+        {
+            switch ((Element)com.elementRequirement)
+            {
+                case Element.Gold:
+                    CompositeAttackDamage += 0.1f * com.levelRequirement;
+                    break;
+                case Element.Wood:
+                    CompositeAttackSpeed += 0.2f * com.levelRequirement;
+                    break;
+                case Element.Water:
+                    CompositeSlowRate += 0.2f * com.levelRequirement;
+                    break;
+                case Element.Fire:
+                    CompositeCriticalRate += 0.08f * com.levelRequirement;
+                    break;
+                case Element.Dust:
+                    CompositeSputteringRange += 0.1f * com.levelRequirement;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 
     //检测每个配方是否存在在场上的方法
     public void CheckElement()

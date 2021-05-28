@@ -42,7 +42,6 @@ public class TurretTile : GameTile
             turret.TriggerPoloEffect(false);
         }
         turret.AttackIntensify = 0;
-        turret.Compositions.Clear();
         turret.Quality = 1;
         turret.Element = Element.Gold;
         turret.RangeIntensify = 0;

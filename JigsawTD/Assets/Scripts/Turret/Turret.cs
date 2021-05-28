@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum TurretType
+{
+    ElementTurret, CompositeTurret
+}
 public abstract class Turret : GameBehavior
 {
-    List<Composition> compositions = new List<Composition>();
-    public List<Composition> Compositions { get => compositions; set => compositions = value; }
-
+    public virtual TurretType TurretType => TurretType.ElementTurret;
     private GameObject rangeIndicator;
     private Transform rangeParent;
     private float nextAttackTime;
@@ -60,9 +62,9 @@ public abstract class Turret : GameBehavior
     public int ForbidRange { get => m_TurretAttribute.TurretLevels[Quality - 1].ForbidRange; }
     public virtual float AttackSpeed { get => m_TurretAttribute.TurretLevels[Quality - 1].AttackSpeed * (1 + SpeedIntensify); }
     public float BulletSpeed { get => m_TurretAttribute.BulletSpeed; }
-    public virtual float SputteringRange { get => m_TurretAttribute.TurretLevels[Quality - 1].SputteringRange; }
-    public float CriticalRate { get => m_TurretAttribute.TurretLevels[Quality - 1].CriticalRate; }
-    public float SlowRate { get => m_TurretAttribute.TurretLevels[Quality - 1].SlowRate; }
+    public virtual float SputteringRange { get => m_TurretAttribute.TurretLevels[Quality - 1].SputteringRange + SputteringIntensify; }
+    public float CriticalRate { get => m_TurretAttribute.TurretLevels[Quality - 1].CriticalRate + CriticalIntensify; }
+    public float SlowRate { get => m_TurretAttribute.TurretLevels[Quality - 1].SlowRate + SlowIntensify; }
 
     int targetCount = 1;
     public int TargetCount { get => targetCount; set => targetCount = value; }
@@ -73,7 +75,7 @@ public abstract class Turret : GameBehavior
 
     //*************光环加成
     float attackIntensify;
-    public float AttackIntensify { get => attackIntensify; set => attackIntensify = value; }
+    public virtual float AttackIntensify { get => attackIntensify; set => attackIntensify = value; }
     int rangeIntensify;
     public int RangeIntensify
     {
@@ -85,7 +87,15 @@ public abstract class Turret : GameBehavior
         }
     }
     float speedIntensify;
-    public float SpeedIntensify { get => speedIntensify; set => speedIntensify = value; }
+    public virtual float SpeedIntensify { get => speedIntensify; set => speedIntensify = value; }
+
+    float criticalIntensify;
+    public virtual float CriticalIntensify { get => criticalIntensify; set => criticalIntensify = value; }
+    float slowIntensify;
+    public virtual float SlowIntensify { get => slowIntensify; set => slowIntensify = value; }
+    float sputteringIntensify;
+    public virtual float SputteringIntensify { get => sputteringIntensify; set => sputteringIntensify = value; }
+
     //*************
 
     public List<TurretEffectInfo> TurretEffectInfos => m_TurretAttribute.TurretLevels[Level].TurretEffects;
