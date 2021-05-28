@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
   m_Name: WaterAttribute
   m_EditorClassIdentifier: 
-  Icon: {fileID: 21300000, guid: 65756f16355ed27489d3bb0e0ac7d940, type: 3}
   Name: Water
-  Description: "\u53EF\u4EE5\u9020\u6210\u51CF\u901F\u3002\u653B\u51FB\u8303\u56F4\u5706\u3002"
+  Description: "\u653B\u51FB\u4F1A\u9020\u6210\u51CF\u901F\u3002\u653B\u51FB\u8303\u56F4\u5706\u3002"
   TilePrefab: {fileID: 6604616035422911931, guid: d60638da85bf8a14d80f45ecf27fa570, type: 3}
   RangeType: 0
   element: 2
+  Bullet: {fileID: 3850126010392176229, guid: 9abb303ed4c6ce94bb9edfa94ac411d6, type: 3}
+  BulletSpeed: 3
   totalLevel: 0
   elementNumber: 0
   TurretLevels:
@@ -25,7 +26,6 @@ MonoBehaviour:
     ForbidRange: 0
     AttackDamage: 3
     AttackSpeed: 0.5
-    BulletSpeed: 6
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0.3
@@ -40,7 +40,6 @@ MonoBehaviour:
     ForbidRange: 0
     AttackDamage: 5
     AttackSpeed: 0.55
-    BulletSpeed: 6
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0.325
@@ -55,7 +54,6 @@ MonoBehaviour:
     ForbidRange: 0
     AttackDamage: 7
     AttackSpeed: 0.6
-    BulletSpeed: 6
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0.35
@@ -70,7 +68,6 @@ MonoBehaviour:
     ForbidRange: 0
     AttackDamage: 10
     AttackSpeed: 0.65
-    BulletSpeed: 6
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0.375
@@ -85,7 +82,6 @@ MonoBehaviour:
     ForbidRange: 0
     AttackDamage: 15
     AttackSpeed: 0.7
-    BulletSpeed: 6
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0.4

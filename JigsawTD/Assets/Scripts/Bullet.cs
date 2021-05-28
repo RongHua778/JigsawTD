@@ -9,6 +9,7 @@ public enum BulletType
 }
 public abstract class Bullet : GameBehavior
 {
+    [SerializeField]protected GameObject SputteringEffect = default;
     TrailRenderer trailRenderer;
     protected const int enemyLayerMask = 1 << 11;
     public abstract BulletType BulletType { get; }
@@ -17,9 +18,9 @@ public abstract class Bullet : GameBehavior
     Vector2 targetPos;
     [HideInInspector] public Turret turretParent;
     private List<TurretEffect> turretEffects;
-    protected Vector2 TargetPos
+    protected virtual Vector2 TargetPos
     {
-        get => BulletType != BulletType.Target ? targetPos : Target.Position;
+        get => targetPos;
         set => targetPos = value;
     }
 
@@ -51,7 +52,7 @@ public abstract class Bullet : GameBehavior
         base.OnUnSpawn();
     }
 
-    public void Initialize(Turret turret,TargetPoint target=null, Vector2? pos = null)
+    public void Initialize(Turret turret, TargetPoint target = null, Vector2? pos = null)
     {
         trailRenderer.Clear();
         this.turretParent = turret;
@@ -97,10 +98,11 @@ public abstract class Bullet : GameBehavior
 
     public override bool GameUpdate()
     {
-        if (Target.Enemy.IsDie || !Target.Enemy.gameObject.activeSelf)
+
+        if (Target != null && (Target.Enemy.IsDie || !Target.Enemy.gameObject.activeSelf))
         {
-            ReclaimBullet();
-            return false;
+            TargetPos = Target.transform.position;
+            Target = null;
         }
         RotateBullet(TargetPos);
         return MoveTowards(TargetPos);

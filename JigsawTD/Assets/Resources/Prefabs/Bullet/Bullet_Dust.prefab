@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 3850126009927277739}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.1}
   m_Children: []
   m_Father: {fileID: 3850126010392176226}
   m_RootOrder: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
-  m_Color: {r: 1, g: 0.98954016, b: 0.66415095, a: 1}
+  m_Color: {r: 1, g: 0.633029, b: 0.390566, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 2245073835532274941}
   - component: {fileID: 134762492602489568}
   m_Layer: 0
-  m_Name: Bullet_Gold
+  m_Name: Bullet_Dust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e11c71b178a694e448979f0fae09425c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SputteringEffect: {fileID: 1324124168371050, guid: eb6cba38b10cbae4595d14d7b62081a8, type: 3}
   turretParent: {fileID: 0}
 --- !u!96 &134762492602489568
 TrailRenderer:
@@ -169,10 +170,10 @@ TrailRenderer:
   m_SortingLayerID: -513789213
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Time: 0.1
+  m_Time: 0.08
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.06
+    widthMultiplier: 0.15
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -199,9 +200,9 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.80191046, b: 0.3150943, a: 1}
-      key1: {r: 1, g: 0.8157768, b: 0.2113207, a: 0}
-      key2: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 0.8301887, g: 0.43621495, b: 0.32424346, a: 1}
+      key1: {r: 1, g: 0.3859666, b: 0.2117647, a: 0}
+      key2: {r: 1, g: 0.3859666, b: 0.2117647, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -209,7 +210,7 @@ TrailRenderer:
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
       ctime1: 65535
-      ctime2: 0
+      ctime2: 65535
       ctime3: 0
       ctime4: 0
       ctime5: 0

@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: DustAttribute
   m_EditorClassIdentifier: 
   Name: Dust
-  Description: "\u53EF\u4EE5\u9020\u6210\u6E85\u5C04\u4F24\u5BB3\u3002\u653B\u51FB\u8303\u56F4\u5706\u3002"
+  Description: "\u653B\u51FB\u53EF\u4EE5\u9020\u6210\u6E85\u5C04\u4F24\u5BB3\uFF0C\u65E0\u6CD5\u653B\u51FB\u592A\u8FD1\u7684\u76EE\u6807\u3002\u653B\u51FB\u8303\u56F4\u534A\u5706\u3002"
   TilePrefab: {fileID: 6604616035422911931, guid: 4ce61665656640249b97041fdf5b3dce, type: 3}
   RangeType: 1
   element: 4
+  Bullet: {fileID: 3850126010392176229, guid: 93a6638b5f5d3504e81fbaa4958ebe74, type: 3}
+  BulletSpeed: 5
   totalLevel: 0
   elementNumber: 0
   TurretLevels:
@@ -24,7 +26,6 @@ MonoBehaviour:
     ForbidRange: 1
     AttackDamage: 4
     AttackSpeed: 0.5
-    BulletSpeed: 8
     SputteringRange: 0.2
     CriticalRate: 0
     SlowRate: 0
@@ -39,7 +40,6 @@ MonoBehaviour:
     ForbidRange: 1
     AttackDamage: 6
     AttackSpeed: 0.55
-    BulletSpeed: 8
     SputteringRange: 0.225
     CriticalRate: 0
     SlowRate: 0
@@ -54,7 +54,6 @@ MonoBehaviour:
     ForbidRange: 1
     AttackDamage: 8
     AttackSpeed: 0.6
-    BulletSpeed: 8
     SputteringRange: 0.25
     CriticalRate: 0
     SlowRate: 0
@@ -69,7 +68,6 @@ MonoBehaviour:
     ForbidRange: 1
     AttackDamage: 12
     AttackSpeed: 0.65
-    BulletSpeed: 8
     SputteringRange: 0.275
     CriticalRate: 0
     SlowRate: 0
@@ -84,7 +82,6 @@ MonoBehaviour:
     ForbidRange: 1
     AttackDamage: 18
     AttackSpeed: 0.7
-    BulletSpeed: 8
     SputteringRange: 0.3
     CriticalRate: 0
     SlowRate: 0
