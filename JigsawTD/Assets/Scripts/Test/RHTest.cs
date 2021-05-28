@@ -32,13 +32,7 @@ public class RHTest : MonoBehaviour
 
     public void GetCompositeClick()
     {
-        foreach (TurretAttribute attribute in StaticData.Instance.CompositionAttributes)
-        {
-            if (attribute.Name == compositeInputField.text)
-            {
-                GameManager.Instance.GetTestShape(attribute);
-            }
-        }
+        GameManager.Instance.GetCompositeAttributeByName(compositeInputField.text);
     }
 
     public void GetElementClick()

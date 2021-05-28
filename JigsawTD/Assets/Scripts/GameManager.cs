@@ -7,8 +7,6 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     public GameBoard Board = default;
-
-
     public BluePrintShop _bluePrintShop = default;
 
     //_groundsize是地图每一边上方块的数量
@@ -24,7 +22,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     TileShapeFactory _shapeFactory = default;
     [SerializeField]
-    TurretFactory _turretFactory = default;
+    TurretAttributeFactory _turretFactory = default;
     [SerializeField]
     TileFactory _tileFactory = default;
     [SerializeField]
@@ -80,8 +78,6 @@ public class GameManager : Singleton<GameManager>
     //State
     private State state;
     public State State { get => state; }
-    public TileShapeFactory ShapeFactory { get => _shapeFactory; set => _shapeFactory = value; }
-    public TurretFactory TurretFactory { get => _turretFactory; set => _turretFactory = value; }
 
     public BuildingState buildingState;
     public WaveState waveState;
@@ -105,7 +101,8 @@ public class GameManager : Singleton<GameManager>
 
         _enemyFactory.InitializeFactory();
         _tileFactory.InitializeFactory();
-        _bluePrintFacotry.InitializeFactory();
+       // _bluePrintFacotry.InitializeFactory();
+        _turretFactory.InitializeFacotory();
 
         Board.Initialize(_startSize, _groundSize, _tileFactory);
 
@@ -124,27 +121,6 @@ public class GameManager : Singleton<GameManager>
         {
             LevelUIManager.Instance.HideTips();
             SelectingTile = tile;
-            //if (tile == SelectingTile)
-            //{
-            //    if (SelectingTile.BasicTileType == BasicTileType.Turret)
-            //        ((TurretTile)SelectingTile).ShowTurretRange(false);
-            //    SelectingTile = null;
-            //    HideSelection();
-            //}
-            //else
-            //{
-            //    if (SelectingTile != null)
-            //    {
-            //        if (SelectingTile.BasicTileType == BasicTileType.Turret)
-            //            ((TurretTile)SelectingTile).ShowTurretRange(false);
-            //    }
-            //    if (tile.BasicTileType == BasicTileType.Turret)
-            //    {
-            //        ((TurretTile)tile).ShowTurretRange(true);
-            //    }
-            //    LevelUIManager.Instance.ShowTileTips(tile);
-            //    SelectingTile = tile;
-            //}
         }
         IsPressingTile = false;
     }
@@ -221,9 +197,11 @@ public class GameManager : Singleton<GameManager>
         StartCoroutine(this.state.EnterState());
     }
 
+
+    //***************工厂中介者服务区
     public Blueprint GetSingleBluePrint(TurretAttribute attribute)
     {
-        Blueprint bluePrint = _bluePrintFacotry.GetComposedTurret(attribute);
+        Blueprint bluePrint = _bluePrintFacotry.GetRandomBluePrint(attribute);
         return bluePrint;
     }
 
@@ -251,9 +229,9 @@ public class GameManager : Singleton<GameManager>
     {
         TileShape shape = _shapeFactory.GetDShape();
         GameTile tile = _tileFactory.GetCompositeTurretTile(compositeAttribute);
-        Blueprint bluePrint = _bluePrintFacotry.GetRandomBluePrint();
-        Turret turret= ((TurretTile)tile).turret;
-         ((CompositeTurret)turret).CompositeBluePrint = bluePrint;
+        Blueprint bluePrint = _bluePrintFacotry.GetRandomBluePrint(_turretFactory.GetRandomCompositionTurret());
+        Turret turret = ((TurretTile)tile).turret;
+        ((CompositeTurret)turret).CompositeBluePrint = bluePrint;
         shape.InitializeShape(tile);
     }
 
@@ -261,6 +239,26 @@ public class GameManager : Singleton<GameManager>
     {
         TileShape shape = _shapeFactory.GetDShape();
         GameTile tile = _tileFactory.GetBasicTurret(quality, element);
+        shape.InitializeShape(tile);
+    }
+
+    public TurretAttribute GetElementAttribute(Element element)
+    {
+        return _turretFactory.GetElementsAttributes(element);
+    }
+
+    public TurretAttribute GetRandomCompositeAttribute()
+    {
+        return _turretFactory.GetRandomCompositionTurret();
+    }
+
+    public void GetCompositeAttributeByName(string name)
+    {
+        TileShape shape = _shapeFactory.GetDShape();
+        GameTile tile = _tileFactory.GetCompositeTurretTile(_turretFactory.TestGetCompositeByName(name));
+        Blueprint bluePrint = _bluePrintFacotry.GetRandomBluePrint(_turretFactory.GetRandomCompositionTurret());
+        Turret turret = ((TurretTile)tile).turret;
+        ((CompositeTurret)turret).CompositeBluePrint = bluePrint;
         shape.InitializeShape(tile);
     }
 }

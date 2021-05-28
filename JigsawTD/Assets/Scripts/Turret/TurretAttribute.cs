@@ -47,6 +47,7 @@ public class TurretAttribute : LevelAttribute
     public float BulletSpeed;
 
     [Header("合成塔参数")]
+    public int Rare;//稀有度
     public int totalLevel;
     public int elementNumber;
     public List<TurretInfo> TurretLevels = new List<TurretInfo>();

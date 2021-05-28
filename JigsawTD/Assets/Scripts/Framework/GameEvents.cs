@@ -84,4 +84,10 @@ public class GameEvents : Singleton<GameEvents>
     {
         onCheckBluePrint?.Invoke();
     }
+
+    public event Action<GameTile> onRemoveGameTile;
+    public void RemoveGameTile(GameTile tile)
+    {
+        onRemoveGameTile?.Invoke(tile);
+    }
 }

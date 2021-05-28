@@ -54,7 +54,7 @@ public class TileFactory : GameObjectFactory
 
     public GameTile GetBasicTurret(int quality, int element)
     {
-        TurretAttribute attribute = StaticData.Instance.GetElementsAttributes((Element)element);
+        TurretAttribute attribute = GameManager.Instance.GetElementAttribute((Element)element);
         GameObject temp = CreateInstance(attribute.TilePrefab);
         TurretTile tile = temp.GetComponent<TurretTile>();
         tile.turret.m_TurretAttribute = attribute;

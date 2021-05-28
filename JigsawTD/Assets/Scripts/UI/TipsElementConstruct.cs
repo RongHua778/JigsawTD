@@ -17,7 +17,7 @@ public class TipsElementConstruct : MonoBehaviour
                 continue;
             }
             Elements[i].gameObject.SetActive(true);
-            TurretAttribute attribute = StaticData.Instance.GetElementsAttributes((Element)compositions[i].elementRequirement);
+            TurretAttribute attribute = GameManager.Instance.GetElementAttribute((Element)compositions[i].elementRequirement);
             Elements[i].sprite = attribute.TurretLevels[compositions[i].levelRequirement - 1].Icon;
         }
     }

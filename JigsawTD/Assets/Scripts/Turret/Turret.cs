@@ -10,6 +10,8 @@ public enum TurretType
 public abstract class Turret : GameBehavior
 {
     public virtual TurretType TurretType => TurretType.ElementTurret;
+
+    public TurretTile m_TurretTile;
     private GameObject rangeIndicator;
     private Transform rangeParent;
     private float nextAttackTime;
@@ -38,8 +40,10 @@ public abstract class Turret : GameBehavior
     private SpriteRenderer CannonSprite;
     //************
 
-    [Header("TurretAttribute")]
-    public int Level = 0;
+    //[Header("TurretAttribute")]
+    //private int level = 0;
+    //public int Level { get => level; set => level = value; }
+
     [HideInInspector] public TurretAttribute m_TurretAttribute = default;
     private int damageAnalysis;
     public int DamageAnalysis { get => damageAnalysis; set => damageAnalysis = value; }
@@ -98,7 +102,8 @@ public abstract class Turret : GameBehavior
 
     //*************
 
-    public List<TurretEffectInfo> TurretEffectInfos => m_TurretAttribute.TurretLevels[Level].TurretEffects;
+    public List<TurretEffectInfo> TurretEffectInfos => m_TurretAttribute.TurretLevels[Quality-1].TurretEffects;
+
 
 
     public List<TurretEffect> TurretEffects = new List<TurretEffect>();
@@ -150,10 +155,10 @@ public abstract class Turret : GameBehavior
 
     public virtual void TriggerPoloEffect(bool value)
     {
-        if (m_TurretAttribute.TurretLevels[Level].PoloEffects.Count > 0)
+        if (m_TurretAttribute.TurretLevels[Quality-1].PoloEffects.Count > 0)
         {
             List<Vector2> poss = StaticData.GetCirclePoints(AttackRange, ForbidRange);
-            foreach (var polo in m_TurretAttribute.TurretLevels[Level].PoloEffects)
+            foreach (var polo in m_TurretAttribute.TurretLevels[Quality - 1].PoloEffects)
             {
                 switch (polo.EffectType)
                 {

@@ -10,6 +10,7 @@ public class TurretTile : GameTile
     protected override void Awake()
     {
         base.Awake();
+        turret.m_TurretTile = this;
     }
     public override void TileDroped()
     {

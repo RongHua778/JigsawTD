@@ -691,14 +691,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2186e4cb75da3fc4c92f6ffd1e1832a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  compositeName: {fileID: 7880736186876840949}
   compositeIcon: {fileID: 7880736186131341294}
   elementGrids:
   - {fileID: 7880736187033983746}
   - {fileID: 7880736187190419414}
   - {fileID: 7880736187008495124}
   - {fileID: 7880736186503830900}
-  compositeTurretTile: {fileID: 3568044695007039410, guid: d60638da85bf8a14d80f45ecf27fa570, type: 3}
-  toggle: {fileID: 7880736186444964220}
+  BuildAble: 0
 --- !u!114 &7880736186444964220
 MonoBehaviour:
   m_ObjectHideFlags: 0

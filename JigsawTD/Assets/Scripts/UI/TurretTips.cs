@@ -12,14 +12,19 @@ public class TurretTips : TileTips
     [SerializeField] Text CriticalValue = default;
     [SerializeField] Text SputteringValue = default;
     [SerializeField] Text SlowRateValue = default;
+    [SerializeField] Text IntensifyValue = default;
     [SerializeField] Text AnalysisValue = default;
-    [SerializeField] GameObject BtnArea = default;
-    [SerializeField] GameObject IntensifyArea = default;
-    [SerializeField] GameObject AnalysisArea = default;
-    [SerializeField] TipsElementConstruct elementConstruct = default;
+    [SerializeField] Text UpgradeCostValue = default;
+    [SerializeField] GameObject UpgradeArea = default;//合成塔升级区
+    [SerializeField] GameObject BtnArea = default;//购买/合成按钮区
+    [SerializeField] GameObject IntensifyArea = default;//元素塔加成效果区
+    [SerializeField] GameObject AnalysisArea = default;//伤害统计区
+    [SerializeField] TipsElementConstruct elementConstruct = default;//合成塔组成元素区
+    //合成塔升级区
 
     private Turret m_Turret;
     private BluePrintGrid m_BGrid;
+    int upgradeCost;
     public void ReadTurret(Turret turret)//通过场上防御塔查看
     {
         this.m_Turret = turret;
@@ -39,9 +44,9 @@ public class TurretTips : TileTips
                 break;
         }
         this.RangeTypeValue.text = rangeTypeTxt;
-
+        //即时更新攻击，攻速，伤害统计等数据
         UpdateInfo(turret);
-
+        //设置描述文案
         if (turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].TurretEffects.Count > 0)
         {
             string finalDes = "";
@@ -58,17 +63,49 @@ public class TurretTips : TileTips
         {
             Description.text = turret.m_TurretAttribute.Description;
         }
-
+        //控制区块显示
         if (turret.TurretType == TurretType.CompositeTurret)
         {
             elementConstruct.gameObject.SetActive(true);
             elementConstruct.SetElements(((CompositeTurret)turret).CompositeBluePrint.Compositions);
             IntensifyArea.SetActive(false);
+            if (turret.Quality < 3)
+            {
+                UpgradeArea.SetActive(true);
+                upgradeCost = StaticData.Instance.LevelUpCost[turret.m_TurretAttribute.Rare, turret.Quality - 1];
+                UpgradeCostValue.text = upgradeCost.ToString();
+            }
+            else
+                UpgradeArea.SetActive(false);
+
         }
         else
         {
             elementConstruct.gameObject.SetActive(false);
             IntensifyArea.SetActive(true);
+            string intensifyType = "";//根据元素及品质设置显示加成效果
+            switch (turret.Element)
+            {
+                case Element.Gold:
+                    intensifyType = "攻击+" + StaticData.Instance.GoldAttackIntensify * 100 * turret.Quality + "%";
+                    break;
+                case Element.Wood:
+                    intensifyType = "攻速+" + StaticData.Instance.WoodSpeedIntensify * 100 * turret.Quality + "%";
+                    break;
+                case Element.Water:
+                    intensifyType = "减速效果+" + StaticData.Instance.WaterSlowIntensify * turret.Quality;
+                    break;
+                case Element.Fire:
+                    intensifyType = "暴击率+" + StaticData.Instance.FireCriticalIntensify * 100 * turret.Quality + "%";
+                    break;
+                case Element.Dust:
+                    intensifyType = "溅射范围+" + StaticData.Instance.FireCriticalIntensify * turret.Quality;
+                    break;
+                case Element.None:
+                    break;
+            }
+            IntensifyValue.text = intensifyType;
+            UpgradeArea.SetActive(false);
         }
         BtnArea.SetActive(false);
         AnalysisArea.SetActive(true);
@@ -91,7 +128,7 @@ public class TurretTips : TileTips
         m_BGrid = bGrid;
         TurretAttribute attribute = bGrid.BluePrint.CompositeTurretAttribute;
         Icon.sprite = attribute.TurretLevels[0].Icon;
-        Name.text = attribute.Name;
+        Name.text = attribute.TurretLevels[0].TurretName;
 
         string damageIntensify = bGrid.BluePrint.CompositeAttackDamage <= 0 ? "" : "<color=#00ffffff> +" + (attribute.TurretLevels[0].AttackDamage * bGrid.BluePrint.CompositeAttackDamage).ToString() + "</color>";
         AttackValue.text = attribute.TurretLevels[0].AttackDamage.ToString() + damageIntensify;
@@ -131,6 +168,7 @@ public class TurretTips : TileTips
         IntensifyArea.SetActive(false);
         BtnArea.SetActive(true);
         AnalysisArea.SetActive(false);
+        UpgradeArea.SetActive(false);
     }
 
     public void CloseTips()
@@ -153,11 +191,24 @@ public class TurretTips : TileTips
             GameEvents.Instance.Message("缺少必要素材");
             return;
         }
-        GameManager.Instance.GenerateDShape(m_BGrid.BluePrint);
         CloseTips();
-        m_BGrid.RemoveBuildPrint();
+        m_BGrid.Shop.CompositeBluePrint(m_BGrid);
     }
 
+    public void UpgradeBtnClick()
+    {
+        if (LevelUIManager.Instance.ConsumeMoney(upgradeCost))
+        {
+            m_Turret.Quality++;
+            if (m_Turret.Quality > 2)
+            {
+                UpgradeArea.SetActive(false);
+                return;
+            }
+            upgradeCost = StaticData.Instance.LevelUpCost[m_Turret.m_TurretAttribute.Rare, m_Turret.Quality - 1];
+            UpgradeCostValue.text = upgradeCost.ToString();
+        }
+    }
     private void FixedUpdate()
     {
         if (m_Turret != null)

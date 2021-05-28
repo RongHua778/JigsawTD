@@ -23,23 +23,32 @@ public class Blueprint
             switch ((Element)com.elementRequirement)
             {
                 case Element.Gold:
-                    CompositeAttackDamage += 0.1f * com.levelRequirement;
+                    CompositeAttackDamage += StaticData.Instance.GoldAttackIntensify * com.levelRequirement;
                     break;
                 case Element.Wood:
-                    CompositeAttackSpeed += 0.2f * com.levelRequirement;
+                    CompositeAttackSpeed += StaticData.Instance.WoodSpeedIntensify * com.levelRequirement;
                     break;
                 case Element.Water:
-                    CompositeSlowRate += 0.2f * com.levelRequirement;
+                    CompositeSlowRate += StaticData.Instance.WaterSlowIntensify * com.levelRequirement;
                     break;
                 case Element.Fire:
-                    CompositeCriticalRate += 0.08f * com.levelRequirement;
+                    CompositeCriticalRate += StaticData.Instance.FireCriticalIntensify * com.levelRequirement;
                     break;
                 case Element.Dust:
-                    CompositeSputteringRange += 0.1f * com.levelRequirement;
+                    CompositeSputteringRange += StaticData.Instance.DustSputteringIntensify * com.levelRequirement;
                     break;
                 default:
                     break;
             }
+        }
+    }
+
+    public void BuildBluePrint()
+    {
+        //建造合成塔，移除所有配方
+        foreach(Composition com in Compositions)
+        {
+            GameEvents.Instance.RemoveGameTile(com.turretTile);
         }
     }
 
@@ -57,6 +66,7 @@ public class Blueprint
                     compositions[i].levelRequirement == turret.Quality)
                 {
                     compositions[i].obtained = true;
+                    compositions[i].turretTile = turret.m_TurretTile;
                     break;
                 }
             }

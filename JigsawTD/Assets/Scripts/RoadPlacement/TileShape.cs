@@ -96,7 +96,7 @@ public class TileShape : MonoBehaviour
         Vector2 pos = Camera.main.transform.position;
         renderCam.gameObject.SetActive(false);
         transform.position = new Vector3(Mathf.Round(pos.x), Mathf.Round(pos.y), -1f);
-        draggingShape.OnDraggingInUpdate();
+        draggingShape.ShapeSpawned();
         StaticData.holdingShape = draggingShape;
         foreach (GameTile tile in tiles)
         {
