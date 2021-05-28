@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
-  m_Color: {r: 0.7490566, g: 1, b: 0.9954097, a: 1}
+  m_Color: {r: 1, g: 0.98954016, b: 0.66415095, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -91,11 +91,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3850126010392176226}
-  - component: {fileID: 5648256579142243961}
-  - component: {fileID: 7452733334590818961}
-  - component: {fileID: 6626670298393208332}
+  - component: {fileID: 2245073835532274941}
+  - component: {fileID: 134762492602489568}
   m_Layer: 0
-  m_Name: Bullet_Snow
+  m_Name: Bullet_Gold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,23 +115,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &5648256579142243961
-CircleCollider2D:
+--- !u!114 &2245073835532274941
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3850126010392176229}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.25
---- !u!96 &7452733334590818961
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e11c71b178a694e448979f0fae09425c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turretParent: {fileID: 0}
+--- !u!96 &134762492602489568
 TrailRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
@@ -176,7 +172,7 @@ TrailRenderer:
   m_Time: 0.1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.08
+    widthMultiplier: 0.06
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -203,8 +199,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.31372547, g: 1, b: 0.98596936, a: 1}
-      key1: {r: 0.2117647, g: 1, b: 0.9335615, a: 0}
+      key0: {r: 1, g: 0.80191046, b: 0.3150943, a: 1}
+      key1: {r: 1, g: 0.8157768, b: 0.2113207, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -239,16 +235,3 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!114 &6626670298393208332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3850126010392176229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e11c71b178a694e448979f0fae09425c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turretParent: {fileID: 0}

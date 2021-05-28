@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: H1Attribute
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300000, guid: 210ece2c2e01aab46860c56550dc1802, type: 3}
-  Name: "H1\u8FEB\u51FB\u70AE"
+  Name: H1
   Description: "\u6E85\u5C04\u8303\u56F4\u968F\u5B50\u5F39\u98DE\u884C\u8DDD\u79BB\u63D0\u5347"
   TilePrefab: {fileID: 6604616035422911931, guid: ee9e3277bea669d4786180da64fac450, type: 3}
   RangeType: 1

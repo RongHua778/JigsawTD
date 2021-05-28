@@ -86,11 +86,11 @@ public class SlowBuff : TimeBuff
 
     public override void Affect()
     {
-        Target.SlowRate = KeyValue;
+        Target.SlowRate += KeyValue;
     }
     public override void End()
     {
-        Target.SlowRate = 0;
+        Target.SlowRate -= KeyValue;
     }
 }
 

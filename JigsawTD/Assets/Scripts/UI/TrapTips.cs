@@ -6,8 +6,8 @@ public class TrapTips : TileTips
 {
     public void ReadAttribute(TrapTile trapTile)
     {
-        Icon.sprite = trapTile.m_TrapAttribute.Icon;
-        Name.text = trapTile.m_TrapAttribute.Name;
+        //Icon.sprite = trapTile.m_TrapAttribute.Icon;
+        //Name.text = trapTile.m_TrapAttribute.Name;
         Description.text = trapTile.m_TrapAttribute.Description;
 
         foreach (var slot in LevelSlots)

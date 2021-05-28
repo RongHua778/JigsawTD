@@ -253,6 +253,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9179870020333665588}
   - component: {fileID: 23852933632502355}
+  - component: {fileID: 666569215639069871}
   m_Layer: 0
   m_Name: TileType
   m_TagString: Untagged
@@ -289,11 +290,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ab93fc15e10eeb4ea1b3888f7884787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 3850126010392176229, guid: 98bd253b0342caf4daf35704c5347b27, type: 3}
   Dropped: 0
   targetList: []
   Level: 0
   m_TurretAttribute: {fileID: 11400000, guid: 0387619ceeeda7746a7e51b43f234353, type: 2}
+--- !u!95 &666569215639069871
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4617212374467823460}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 6deb11fed21a24f44b96bf8753746e3b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6195695841050206438
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,9 +12,10 @@ public abstract class Turret : GameBehavior
     private Transform rangeParent;
     private float nextAttackTime;
     private Quaternion look_Rotation;
+    protected Animator turretAnim;
 
     protected RangeType RangeType;
-    [SerializeField] protected GameObject bulletPrefab = default;
+    protected GameObject bulletPrefab = default;
     protected float _rotSpeed = 10f;
     private List<TargetPoint> target = new List<TargetPoint>();
     public List<TargetPoint> Target { get => target; set => target = value; }
@@ -37,7 +38,7 @@ public abstract class Turret : GameBehavior
 
     [Header("TurretAttribute")]
     public int Level = 0;
-    public TurretAttribute m_TurretAttribute = default;
+    [HideInInspector] public TurretAttribute m_TurretAttribute = default;
     //ËþµÄÆ·ÖÊ
     private int quality = 1;
     public int Quality
@@ -56,8 +57,8 @@ public abstract class Turret : GameBehavior
     public virtual int AttackRange { get => m_TurretAttribute.TurretLevels[Quality - 1].AttackRange + RangeIntensify; }
     public int ForbidRange { get => m_TurretAttribute.TurretLevels[Quality - 1].ForbidRange; }
     public virtual float AttackSpeed { get => m_TurretAttribute.TurretLevels[Quality - 1].AttackSpeed * (1 + SpeedIntensify); }
-    public float BulletSpeed { get => m_TurretAttribute.TurretLevels[Quality - 1].BulletSpeed; }
-    public float SputteringRange { get => m_TurretAttribute.TurretLevels[Quality - 1].SputteringRange; }
+    public float BulletSpeed { get => m_TurretAttribute.BulletSpeed; }
+    public virtual float SputteringRange { get => m_TurretAttribute.TurretLevels[Quality - 1].SputteringRange; }
     public float CriticalRate { get => m_TurretAttribute.TurretLevels[Quality - 1].CriticalRate; }
     public float SlowRate { get => m_TurretAttribute.TurretLevels[Quality - 1].SlowRate; }
 
@@ -98,6 +99,7 @@ public abstract class Turret : GameBehavior
         shootPoint = rotTrans.Find("ShootPoint");
         BaseSprite = transform.root.Find("TileBase/TurretBase").GetComponent<SpriteRenderer>();
         CannonSprite = rotTrans.Find("Cannon").GetComponent<SpriteRenderer>();
+        turretAnim = this.GetComponent<Animator>();
 
     }
 
@@ -106,6 +108,7 @@ public abstract class Turret : GameBehavior
         rotTrans.localRotation = Quaternion.identity;
         RangeType = m_TurretAttribute.RangeType;
         Element = m_TurretAttribute.element;
+        bulletPrefab = m_TurretAttribute.Bullet;
         SetGraphic();
         GenerateRange();
         GetTurretEffects();
@@ -202,7 +205,7 @@ public abstract class Turret : GameBehavior
 
     private bool TrackTarget()
     {
-        if (Target == null)
+        if (Target.Count == 0)
         {
             return false;
         }
@@ -328,6 +331,7 @@ public abstract class Turret : GameBehavior
 
     protected virtual void Shoot()
     {
+        turretAnim.SetTrigger("Attack");
         foreach (TargetPoint target in Target)
         {
             Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
@@ -343,10 +347,7 @@ public abstract class Turret : GameBehavior
         Gizmos.color = Color.yellow;
         Vector3 position = transform.position;
         position.z -= 0.1f;
-        //if (Target != null)
-        //{
-        //    Gizmos.DrawLine(position, Target.transform.position);
-        //}
+
     }
 
     public void ClearTurnIntensify()

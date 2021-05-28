@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: F1Attribute
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300000, guid: efd7eca78d1a1d44d8b38abd7973113e, type: 3}
-  Name: "F1\u7EC4\u5408\u70AE"
+  Name: F1
   Description: "\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u672C\u56DE\u5408\u653B\u51FB\u63D0\u9AD81\u70B9\u3002"
   TilePrefab: {fileID: 6604616035422911931, guid: bea362283cf50314d8c64ee93cee9038, type: 3}
   RangeType: 0
@@ -28,6 +28,7 @@ MonoBehaviour:
     BulletSpeed: 8
     SputteringRange: 0
     CriticalRate: 0
+    SlowRate: 0
     AttackEffects:
     - EffectName: 2
       KeyValue: 1
@@ -44,6 +45,7 @@ MonoBehaviour:
     BulletSpeed: 8
     SputteringRange: 0
     CriticalRate: 0
+    SlowRate: 0
     AttackEffects:
     - EffectName: 2
       KeyValue: 2
@@ -60,6 +62,7 @@ MonoBehaviour:
     BulletSpeed: 8
     SputteringRange: 0
     CriticalRate: 0
+    SlowRate: 0
     AttackEffects:
     - EffectName: 2
       KeyValue: 3

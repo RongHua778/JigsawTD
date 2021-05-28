@@ -9,7 +9,6 @@ public class TurretInfo
     public int ForbidRange;
     public float AttackDamage;
     public float AttackSpeed;
-    public float BulletSpeed;
     public float SputteringRange;
     public float CriticalRate;
     public float SlowRate;
@@ -44,6 +43,10 @@ public class TurretAttribute : LevelAttribute
 {
     public RangeType RangeType;
     public Element element;
+    public GameObject Bullet;
+    public float BulletSpeed;
+
+    [Header("合成塔参数")]
     public int totalLevel;
     public int elementNumber;
     public List<TurretInfo> TurretLevels = new List<TurretInfo>();

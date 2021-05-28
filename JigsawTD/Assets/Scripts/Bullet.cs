@@ -9,6 +9,7 @@ public enum BulletType
 }
 public abstract class Bullet : GameBehavior
 {
+    TrailRenderer trailRenderer;
     protected const int enemyLayerMask = 1 << 11;
     public abstract BulletType BulletType { get; }
     private TargetPoint target;
@@ -35,6 +36,10 @@ public abstract class Bullet : GameBehavior
     private float slowRate;
     public float SlowRate { get => slowRate; set => slowRate = value; }
 
+    private void Awake()
+    {
+        trailRenderer = this.GetComponent<TrailRenderer>();
+    }
     public override void OnSpawn()
     {
         base.OnSpawn();
@@ -48,6 +53,7 @@ public abstract class Bullet : GameBehavior
 
     public void Initialize(Turret turret,TargetPoint target=null, Vector2? pos = null)
     {
+        trailRenderer.Clear();
         this.turretParent = turret;
         this.Target = target;
         this.TargetPos = pos ?? target.Position;

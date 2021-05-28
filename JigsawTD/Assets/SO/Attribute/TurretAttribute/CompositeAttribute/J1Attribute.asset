@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: J1Attribute
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300000, guid: 1343cb83955a70747aad1c46bfb9891f, type: 3}
-  Name: "J1\u72D9\u51FB\u5854"
+  Name: J1
   Description: "\u968F\u673A\u653B\u51FB\u5468\u56F4\u76EE\u6807\u3002\u653B\u51FB\u901F\u5EA6\u9010\u6E10\u63D0\u9AD8\u3002"
   TilePrefab: {fileID: 6604616035422911931, guid: b766d396faae99047bf70246c9fb1515, type: 3}
   RangeType: 1

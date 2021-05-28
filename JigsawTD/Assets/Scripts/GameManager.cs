@@ -26,7 +26,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     TurretFactory _turretFactory = default;
     [SerializeField]
-    public TileFactory _tileFactory = default;
+    TileFactory _tileFactory = default;
     [SerializeField]
     EnemyFactory _enemyFactory = default;
 
@@ -34,8 +34,6 @@ public class GameManager : Singleton<GameManager>
     public GameBehaviorCollection nonEnemies = new GameBehaviorCollection();
     public GameBehaviorCollection turrets = new GameBehaviorCollection();
 
-    //把场上所有塔都放进去以判断合成规则的集合
-    //public List<Turret> turretsElements = new List<Turret>();
 
     //[SerializeField, Range(0.1f, 10f)]
     //float spawnSpeed = 100f;
@@ -217,6 +215,13 @@ public class GameManager : Singleton<GameManager>
     {
         TileShape shape = _shapeFactory.GetDShape();
         GameTile tile = _tileFactory.GetCompositeTurretTile(compositeAttribute);
+        shape.InitializeShape(tile);
+    }
+
+    public void GetTestElement(int quality, int element)
+    {
+        TileShape shape = _shapeFactory.GetDShape();
+        GameTile tile = _tileFactory.GetBasicTurret(quality, element);
         shape.InitializeShape(tile);
     }
 }
