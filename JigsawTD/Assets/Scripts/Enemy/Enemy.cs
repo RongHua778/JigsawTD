@@ -23,17 +23,18 @@ public abstract class Enemy : GameBehavior
 
     [Header("EnemyAttribute")]
     protected float speed;
-    public virtual float Speed { get => StunTime > 0 ? 0 : speed * (1 - SlowRate); set => speed = value; }
+    public virtual float Speed { get => StunTime > 0 ? 0 : speed * (1 - SlowRate / (1 + SlowRate)); set => speed = value; }
     int shell;
     public int Shell { get => Mathf.Max(0, shell - BrokeShell); set => shell = value; }
     float slowRate;
     public float SlowRate
     {
-        get => Mathf.Min(0.8f, (PathSlow + slowRate) / (PathSlow + slowRate + 1));
+        get => slowRate;// Mathf.Min(0.8f, (PathSlow + slowRate) / (PathSlow + slowRate + 1));
         set
         {
             slowRate = value;
             progressFactor = Speed * adjust;//子弹减速即时更新速度
+            healthBar.ShowSlowIcon(slowRate > 0);
         }
     }
     float pathSlow;
@@ -234,11 +235,11 @@ public abstract class Enemy : GameBehavior
         progressFactor = adjust * Speed;
     }
 
-    public virtual void ApplyDamage(float amount)
+    public virtual void ApplyDamage(float amount, out float realDamage)
     {
-        float damage = amount * 5 / (5 + Shell);
-        CurrentHealth -= damage;
-        TargetDamageCounter += damage;
+        realDamage = amount * 5 / (5 + Shell);
+        CurrentHealth -= realDamage;
+        TargetDamageCounter += realDamage;
     }
 
 

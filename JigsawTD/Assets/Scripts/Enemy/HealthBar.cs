@@ -6,9 +6,11 @@ using UnityEngine.UI;
 public class HealthBar : ReusableObject
 {
     [SerializeField] Image healthProgress = default;
+    [SerializeField] Image slowIcon = default;
     [SerializeField] Vector2 offset = default;
     public Transform followTrans;
     float fillAmount;
+
     public float FillAmount
     {
         get => fillAmount;
@@ -31,7 +33,10 @@ public class HealthBar : ReusableObject
         FillAmount = 1;
     }
 
-
+    public void ShowSlowIcon(bool value)
+    {
+        slowIcon.gameObject.SetActive(value);
+    }
     private void LateUpdate()
     {
         if (followTrans != null)

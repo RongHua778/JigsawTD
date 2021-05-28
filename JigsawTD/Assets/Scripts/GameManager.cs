@@ -40,11 +40,41 @@ public class GameManager : Singleton<GameManager>
     //float spawnProgress;
 
     //计算点击选中
-    [SerializeField] GameObject selection = default;
+    static GameObject selection;
     static float pressCounter = 0;
     public bool IsPressingTile = false;
     public bool IsLongPress { get => pressCounter >= 0.3f; }
-    public static GameTile SelectingTile = null;
+    private static GameTile selectingTile;
+    public static GameTile SelectingTile
+    {
+        get => selectingTile;
+        set
+        {
+            if (selectingTile != null)
+            {
+                if (selectingTile.BasicTileType == BasicTileType.Turret)
+                {
+                    ((TurretTile)selectingTile).ShowTurretRange(false);
+                }
+                selectingTile = selectingTile == value ? null : value;
+            }
+            else
+            {
+                selectingTile = value;
+            }
+            if (selectingTile != null)
+            {
+                if (selectingTile.BasicTileType == BasicTileType.Turret)
+                {
+                    ((TurretTile)selectingTile).ShowTurretRange(true);
+                }
+                LevelUIManager.Instance.ShowTileTips(selectingTile);
+                selection.transform.position = selectingTile.transform.position;
+            }
+            selection.SetActive(selectingTile != null);
+        }
+
+    }
     public EnemySpawner EnemySpawnHelper;
 
     //State
@@ -65,6 +95,8 @@ public class GameManager : Singleton<GameManager>
     {
         GameEvents.Instance.onTileClick += TileClick;
         GameEvents.Instance.onTileUp += TileUp;
+
+        selection = transform.Find("Selection").gameObject;
 
         buildingState = new BuildingState(this);
         waveState = new WaveState(this);
@@ -91,27 +123,28 @@ public class GameManager : Singleton<GameManager>
         if (!IsLongPress)
         {
             LevelUIManager.Instance.HideTips();
-            if (tile == SelectingTile)
-            {
-                if (SelectingTile.BasicTileType == BasicTileType.Turret)
-                    ((TurretTile)SelectingTile).ShowTurretRange(false);
-                SelectingTile = null;
-                HideSelection();
-            }
-            else
-            {
-                if (SelectingTile != null)
-                {
-                    if (SelectingTile.BasicTileType == BasicTileType.Turret)
-                        ((TurretTile)SelectingTile).ShowTurretRange(false);
-                }
-                if (tile.BasicTileType == BasicTileType.Turret)
-                {
-                    ((TurretTile)tile).ShowTurretRange(true);
-                }
-                LevelUIManager.Instance.ShowTileTips(tile);
-                SelectingTile = tile;
-            }
+            SelectingTile = tile;
+            //if (tile == SelectingTile)
+            //{
+            //    if (SelectingTile.BasicTileType == BasicTileType.Turret)
+            //        ((TurretTile)SelectingTile).ShowTurretRange(false);
+            //    SelectingTile = null;
+            //    HideSelection();
+            //}
+            //else
+            //{
+            //    if (SelectingTile != null)
+            //    {
+            //        if (SelectingTile.BasicTileType == BasicTileType.Turret)
+            //            ((TurretTile)SelectingTile).ShowTurretRange(false);
+            //    }
+            //    if (tile.BasicTileType == BasicTileType.Turret)
+            //    {
+            //        ((TurretTile)tile).ShowTurretRange(true);
+            //    }
+            //    LevelUIManager.Instance.ShowTileTips(tile);
+            //    SelectingTile = tile;
+            //}
         }
         IsPressingTile = false;
     }

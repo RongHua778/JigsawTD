@@ -5,30 +5,71 @@ using UnityEngine.UI;
 
 public class TurretTips : TileTips
 {
-
+    [SerializeField] Text RangeTypeValue = default;
     [SerializeField] Text AttackValue = default;
     [SerializeField] Text SpeedValue = default;
     [SerializeField] Text RangeValue = default;
     [SerializeField] Text CriticalValue = default;
     [SerializeField] Text SputteringValue = default;
     [SerializeField] Text SlowRateValue = default;
+    [SerializeField] Text AnalysisValue = default;
     [SerializeField] GameObject BtnArea = default;
     [SerializeField] GameObject IntensifyArea = default;
+    [SerializeField] GameObject AnalysisArea = default;
 
+    private Turret m_Turret;
     private BluePrintGrid m_BGrid;
     public void ReadTurret(Turret turret)
     {
-        Icon.sprite = turret.m_TurretAttribute.TurretLevels[turret.Quality-1].Icon;
-        Name.text = turret.m_TurretAttribute.TurretLevels[turret.Quality-1].TurretName;
+        this.m_Turret = turret;
+        Icon.sprite = turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].Icon;
+        Name.text = turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].TurretName;
+        string rangeTypeTxt = "";
+        switch (turret.m_TurretAttribute.RangeType)
+        {
+            case RangeType.Circle:
+                rangeTypeTxt = "圆型";
+                break;
+            case RangeType.HalfCircle:
+                rangeTypeTxt = "半圆型";
+                break;
+            case RangeType.Line:
+                rangeTypeTxt = "直线型";
+                break;
+        }
+        this.RangeTypeValue.text = rangeTypeTxt;
+
+        UpdateInfo(turret);
+
+        if (turret.TurretEffects.Count > 0)
+        {
+            string finalDes = turret.m_TurretAttribute.Description;
+            foreach (TurretEffect effect in turret.TurretEffects)
+            {
+                finalDes += effect.EffectDescription;
+                finalDes += "\n";
+            }
+            Description.text = finalDes;
+        }
+        else
+        {
+            Description.text = turret.m_TurretAttribute.Description;
+        }
+
+        BtnArea.SetActive(false);
+        IntensifyArea.SetActive(true);
+        AnalysisArea.SetActive(true);
+    }
+
+    private void UpdateInfo(Turret turret)
+    {
         AttackValue.text = turret.AttackDamage.ToString();
         SpeedValue.text = turret.AttackSpeed.ToString();
         RangeValue.text = turret.AttackRange.ToString();
         CriticalValue.text = turret.CriticalRate.ToString();
         SputteringValue.text = turret.SputteringRange.ToString();
         SlowRateValue.text = turret.SlowRate.ToString();
-        Description.text = turret.m_TurretAttribute.Description;
-        BtnArea.SetActive(false);
-        IntensifyArea.SetActive(true);
+        AnalysisValue.text = turret.DamageAnalysis.ToString();
     }
 
     public void ReadAttribute(BluePrintGrid bGrid)
@@ -46,6 +87,7 @@ public class TurretTips : TileTips
         Description.text = attribute.Description;
         IntensifyArea.SetActive(false);
         BtnArea.SetActive(true);
+        AnalysisArea.SetActive(false);
     }
 
     public void CloseTips()
@@ -73,5 +115,9 @@ public class TurretTips : TileTips
         m_BGrid.RemoveBuildPrint();
     }
 
+    private void FixedUpdate()
+    {
+        UpdateInfo(m_Turret);
+    }
 
 }

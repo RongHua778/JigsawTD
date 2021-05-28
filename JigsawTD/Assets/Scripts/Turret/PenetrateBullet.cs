@@ -16,8 +16,7 @@ public class PenetrateBullet : Bullet
         if (collision.CompareTag("Enemy"))
         {
             Enemy enemy = collision.GetComponent<TargetPoint>().Enemy;
-            TriggerHitEffect(enemy);
-            enemy.ApplyDamage(Damage);
+            DealRealDamage(enemy);
         }
     }
 }

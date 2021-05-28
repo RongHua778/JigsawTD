@@ -122,7 +122,7 @@ public abstract class Bullet : GameBehavior
         float distanceToTarget = ((Vector2)transform.position - pos).magnitude;
         if (distanceToTarget < minDistanceToDealDamage)
         {
-            DealDamage();
+            TriggerDamage();
             ReclaimBullet();
             return false;
         }
@@ -140,10 +140,17 @@ public abstract class Bullet : GameBehavior
         ObjectPool.Instance.UnSpawn(this.gameObject);
     }
 
-    protected virtual void DealDamage()
+    protected virtual void TriggerDamage()
     {
 
     }
-
+    protected void DealRealDamage(Enemy enemy)
+    {
+        float damage = UnityEngine.Random.value <= CriticalRate ? Damage * 2 : Damage;
+        TriggerHitEffect(enemy);
+        float realDamage;
+        enemy.ApplyDamage(damage, out realDamage);
+        turretParent.DamageAnalysis += (int)realDamage;
+    }
 
 }

@@ -39,6 +39,8 @@ public abstract class Turret : GameBehavior
     [Header("TurretAttribute")]
     public int Level = 0;
     [HideInInspector] public TurretAttribute m_TurretAttribute = default;
+    private int damageAnalysis;
+    public int DamageAnalysis { get => damageAnalysis; set => damageAnalysis = value; }
     //ËþµÄÆ·ÖÊ
     private int quality = 1;
     public int Quality
@@ -86,7 +88,9 @@ public abstract class Turret : GameBehavior
     public float SpeedIntensify { get => speedIntensify; set => speedIntensify = value; }
     //*************
 
-    public List<TurretEffectInfo> TurretEffectInfos => m_TurretAttribute.TurretLevels[Level].AttackEffects;
+    public List<TurretEffectInfo> TurretEffectInfos => m_TurretAttribute.TurretLevels[Level].TurretEffects;
+
+
     public List<TurretEffect> TurretEffects = new List<TurretEffect>();
 
 
@@ -119,7 +123,7 @@ public abstract class Turret : GameBehavior
         TurretEffects.Clear();
         foreach (TurretEffectInfo info in TurretEffectInfos)
         {
-            TurretEffect effect = AttackEffectFactory.GetEffect((int)info.EffectName);
+            TurretEffect effect = TurretEffectFactory.GetEffect((int)info.EffectName);
             effect.turret = this;
             effect.KeyValue = info.KeyValue;
             TurretEffects.Add(effect);

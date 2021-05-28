@@ -132,7 +132,7 @@ public class DealDamage : TileBuff
 
     public override void Affect()
     {
-        Target.ApplyDamage(KeyValue);
+        //Target.ApplyDamage(KeyValue);
         Debug.Log("DealDamage" + KeyValue);
     }
 
@@ -175,7 +175,7 @@ public class HealthBaseDamage : TileBuff
     {
         float damage = KeyValue * (Target.MaxHealth - Target.CurrentHealth);
         Debug.Log("Deal HelathBase Damge=" + damage);
-        Target.ApplyDamage(damage);
+        //Target.ApplyDamage(damage);
     }
 
     public override void End()
@@ -196,7 +196,7 @@ public class DamageTarget : TileBuff
     public override void Affect()
     {
         Debug.Log("TriggerDamageTarget" + Target.TargetDamageCounter * KeyValue);
-        Target.ApplyDamage(Target.TargetDamageCounter * KeyValue);
+        //Target.ApplyDamage(Target.TargetDamageCounter * KeyValue);
         Target.TargetDamageCounter = 0;
     }
 

@@ -16,10 +16,10 @@ public class TargetBullet : Bullet
         }
         set => base.TargetPos = value;
     }
-    protected override void DealDamage()
+    protected override void TriggerDamage()
     {
-        base.DealDamage();
-        float damage = Random.value <= CriticalRate ? Damage * 2 : Damage;
+        base.TriggerDamage();
+
         if (SputteringRange > 0)
         {
             if (SputteringEffect != null)
@@ -35,8 +35,7 @@ public class TargetBullet : Bullet
                 TargetPoint target = hit.GetComponent<TargetPoint>();
                 if (target != null)
                 {
-                    TriggerHitEffect(target.Enemy);
-                    target.Enemy.ApplyDamage(damage);
+                    DealRealDamage(target.Enemy);
                 }
             }
         }
@@ -44,11 +43,12 @@ public class TargetBullet : Bullet
         {
             if (Target == null)
                 return;
-            TriggerHitEffect(Target.Enemy);
-            Target.Enemy.ApplyDamage(damage);
+            DealRealDamage(Target.Enemy);
         }
 
     }
+
+
 
     private void OnDrawGizmos()
     {

@@ -43,13 +43,14 @@ public class TurretTile : GameTile
         }
         turret.AttackIntensify = 0;
         turret.Compositions.Clear();
-        turret.Quality=1;
+        turret.Quality = 1;
         turret.Element = Element.Gold;
         turret.RangeIntensify = 0;
         turret.SpeedIntensify = 0;
         turret.targetList.Clear();
         turret.Dropped = false;
         turret.TargetCount = 1;
+        turret.DamageAnalysis = 0;
         turret.ClearTurnIntensify();
         turret.RecycleRanges();
         //Turret.layer = LayerMask.NameToLayer(StaticData.TempTurretMask);

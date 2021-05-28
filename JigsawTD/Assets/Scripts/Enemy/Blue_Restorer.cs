@@ -17,9 +17,9 @@ public class Blue_Restorer : Enemy
         return base.GameUpdate();
     }
 
-    public override void ApplyDamage(float amount)
+    public override void ApplyDamage(float amount, out float realDamage)
     {
-        base.ApplyDamage(amount);
+        base.ApplyDamage(amount, out realDamage);
         damagedCounter = 0;
     }
 
