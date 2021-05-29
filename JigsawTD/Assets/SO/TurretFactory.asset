@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CompositionAttributes:
   - {fileID: 11400000, guid: e3e54c1bced6a334b9535d9abfcb8bb5, type: 2}
+  - {fileID: 11400000, guid: 5b4fc6b2f1f50624a9801389b31a9dfb, type: 2}
+  - {fileID: 11400000, guid: 2c1b05c440668c94abe59b6953c69310, type: 2}
+  - {fileID: 11400000, guid: 33e33721f8e10504dba35cde5c1041e0, type: 2}
   ElementAttributes:
   - {fileID: 11400000, guid: 8b69e55deebc49d44b73c6e458a12794, type: 2}
   - {fileID: 11400000, guid: 2a0c266b352137f45b20d3723395e650, type: 2}

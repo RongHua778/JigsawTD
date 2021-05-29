@@ -36,8 +36,8 @@ public abstract class Turret : GameBehavior
 
 
     //[Header("美术资源设置")]
-    private SpriteRenderer BaseSprite;
-    private SpriteRenderer CannonSprite;
+    protected SpriteRenderer BaseSprite;
+    protected SpriteRenderer CannonSprite;
     //************
 
     //[Header("TurretAttribute")]
@@ -64,7 +64,7 @@ public abstract class Turret : GameBehavior
     public virtual float AttackDamage { get => (m_TurretAttribute.TurretLevels[Quality - 1].AttackDamage + TurnAdditionalAttack) * (1 + AttackIntensify); }
     public virtual int AttackRange { get => m_TurretAttribute.TurretLevels[Quality - 1].AttackRange + RangeIntensify; }
     public int ForbidRange { get => m_TurretAttribute.TurretLevels[Quality - 1].ForbidRange; }
-    public virtual float AttackSpeed { get => m_TurretAttribute.TurretLevels[Quality - 1].AttackSpeed * (1 + SpeedIntensify); }
+    public virtual float AttackSpeed { get => (m_TurretAttribute.TurretLevels[Quality - 1].AttackSpeed+turnAdditionalSpeed) * (1 + SpeedIntensify); }
     public float BulletSpeed { get => m_TurretAttribute.BulletSpeed; }
     public virtual float SputteringRange { get => m_TurretAttribute.TurretLevels[Quality - 1].SputteringRange + SputteringIntensify; }
     public float CriticalRate { get => m_TurretAttribute.TurretLevels[Quality - 1].CriticalRate + CriticalIntensify; }
@@ -72,10 +72,17 @@ public abstract class Turret : GameBehavior
 
     int targetCount = 1;
     public int TargetCount { get => targetCount; set => targetCount = value; }
+
+
     //**************回合临时属性
     int turnAddtionalAttack = 0;
     public int TurnAdditionalAttack { get => turnAddtionalAttack; set => turnAddtionalAttack = value; }
+    float turnAdditionalSpeed = 0;
+    public float TurnAdditionalSpeed { get => turnAdditionalSpeed; set => turnAdditionalSpeed = value; }
+
     //*************
+
+
 
     //*************光环加成
     float attackIntensify;
@@ -102,8 +109,7 @@ public abstract class Turret : GameBehavior
 
     //*************
 
-    public List<TurretEffectInfo> TurretEffectInfos => m_TurretAttribute.TurretLevels[Quality-1].TurretEffects;
-
+    public List<TurretEffectInfo> TurretEffectInfos => m_TurretAttribute.TurretLevels[Quality - 1].TurretEffects;
 
 
     public List<TurretEffect> TurretEffects = new List<TurretEffect>();
@@ -142,11 +148,12 @@ public abstract class Turret : GameBehavior
             effect.turret = this;
             effect.KeyValue = info.KeyValue;
             TurretEffects.Add(effect);
+            effect.Build();
         }
     }
 
     //设置不同等级的美术资源
-    public void SetGraphic()
+    public virtual void SetGraphic()
     {
         shootPoint.transform.localPosition = m_TurretAttribute.TurretLevels[quality - 1].ShootPointOffset;
         BaseSprite.sprite = m_TurretAttribute.TurretLevels[quality - 1].BaseSprite;
@@ -155,7 +162,7 @@ public abstract class Turret : GameBehavior
 
     public virtual void TriggerPoloEffect(bool value)
     {
-        if (m_TurretAttribute.TurretLevels[Quality-1].PoloEffects.Count > 0)
+        if (m_TurretAttribute.TurretLevels[Quality - 1].PoloEffects.Count > 0)
         {
             List<Vector2> poss = StaticData.GetCirclePoints(AttackRange, ForbidRange);
             foreach (var polo in m_TurretAttribute.TurretLevels[Quality - 1].PoloEffects)
@@ -186,6 +193,7 @@ public abstract class Turret : GameBehavior
     public void AddTarget(TargetPoint target)
     {
         targetList.Add(target);
+        AcquireTarget();
     }
 
     public virtual void RemoveTarget(TargetPoint target)
@@ -238,12 +246,7 @@ public abstract class Turret : GameBehavior
         }
         if (Target.Count == 0)
             return false;
-        //if (!Target.Enemy.gameObject.activeSelf)
-        //{
-        //    targetList.Remove(Target);
-        //    Target = null;
-        //    return false;
-        //}
+
         return true;
     }
     private bool AcquireTarget()
@@ -252,24 +255,20 @@ public abstract class Turret : GameBehavior
             return false;
         else
         {
-            if (TargetCount > 1)
+            if (TargetCount > Target.Count)
             {
-                List<int> returnInt = null;
+                Target.Clear();
+                List<int> returnInt = StaticData.SelectNoRepeat(targetList.Count, TargetCount);
                 foreach (int i in returnInt)
                 {
                     Target.Add(targetList[i]);
                 }
             }
-            else
+            else if (Target.Count <= 0)
             {
                 Target.Add(targetList[UnityEngine.Random.Range(0, targetList.Count - 1)]);
             }
-            //List<int> returnInt = null;
-            //foreach (int i in returnInt)
-            //{
-            //    Target.Add(targetList[i]);
-            //}
-            ////Target = targetList[UnityEngine.Random.Range(0, targetList.Count - 1)];
+
             return false;
         }
     }
@@ -372,6 +371,7 @@ public abstract class Turret : GameBehavior
     public void ClearTurnIntensify()
     {
         TurnAdditionalAttack = 0;
+        TurnAdditionalSpeed = 0;
     }
 
 }

@@ -9,7 +9,7 @@ public enum BulletType
 }
 public abstract class Bullet : GameBehavior
 {
-    [SerializeField]protected GameObject SputteringEffect = default;
+    [SerializeField] protected GameObject SputteringEffect = default;
     TrailRenderer trailRenderer;
     protected const int enemyLayerMask = 1 << 11;
     public abstract BulletType BulletType { get; }
@@ -52,9 +52,10 @@ public abstract class Bullet : GameBehavior
         base.OnUnSpawn();
     }
 
-    public void Initialize(Turret turret, TargetPoint target = null, Vector2? pos = null)
+    public virtual void Initialize(Turret turret, TargetPoint target = null, Vector2? pos = null)
     {
-        trailRenderer.Clear();
+        if (trailRenderer != null)
+            trailRenderer.Clear();
         this.turretParent = turret;
         this.Target = target;
         this.TargetPos = pos ?? target.Position;

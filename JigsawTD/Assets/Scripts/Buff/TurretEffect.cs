@@ -9,7 +9,8 @@ public enum TurretEffectName
     AttackIncreasePerShoot,
     EnemyCountAttackIncrease,
     MultiTarget,
-    RangeBaseSputtering
+    RangeBaseSputtering,
+    SpeedIncreasePerShoot
 }
 [System.Serializable]
 public class TurretEffectInfo
@@ -50,7 +51,15 @@ public abstract class TurretEffect
 
     }
 }
-
+public class SpeedIncreasePerShoot : TurretEffect
+{
+    public override TurretEffectName EffectName => TurretEffectName.SpeedIncreasePerShoot;
+    public override string EffectDescription => "极速过载：每次攻击后，提升本回合攻速" + KeyValue + "。";
+    public override void Shoot()
+    {
+        turret.TurnAdditionalSpeed += KeyValue;
+    }
+}
 public class DistanceBaseDamage : TurretEffect
 {
     public override TurretEffectName EffectName => TurretEffectName.DistanceBaseDamage;

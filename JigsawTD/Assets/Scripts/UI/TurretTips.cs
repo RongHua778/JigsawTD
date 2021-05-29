@@ -47,22 +47,7 @@ public class TurretTips : TileTips
         //即时更新攻击，攻速，伤害统计等数据
         UpdateInfo(turret);
         //设置描述文案
-        if (turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].TurretEffects.Count > 0)
-        {
-            string finalDes = "";
-            if (turret.m_TurretAttribute.Description != "")
-                finalDes += turret.m_TurretAttribute.Description + "\n";
-            foreach (TurretEffectInfo effect in turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].TurretEffects)
-            {
-                finalDes += effect.EffectDescription;
-                finalDes += "\n";
-            }
-            Description.text = finalDes;
-        }
-        else
-        {
-            Description.text = turret.m_TurretAttribute.Description;
-        }
+        SetDescription(turret);
         //控制区块显示
         if (turret.TurretType == TurretType.CompositeTurret)
         {
@@ -109,6 +94,26 @@ public class TurretTips : TileTips
         }
         BtnArea.SetActive(false);
         AnalysisArea.SetActive(true);
+    }
+
+    private void SetDescription(Turret turret)
+    {
+        if (turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].TurretEffects.Count > 0)
+        {
+            string finalDes = "";
+            if (turret.m_TurretAttribute.Description != "")
+                finalDes += turret.m_TurretAttribute.Description + "\n";
+            foreach (TurretEffectInfo effect in turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].TurretEffects)
+            {
+                finalDes += effect.EffectDescription;
+                finalDes += "\n";
+            }
+            Description.text = finalDes;
+        }
+        else
+        {
+            Description.text = turret.m_TurretAttribute.Description;
+        }
     }
 
     private void UpdateInfo(Turret turret)
@@ -205,6 +210,7 @@ public class TurretTips : TileTips
                 UpgradeArea.SetActive(false);
                 return;
             }
+            SetDescription(m_Turret);
             upgradeCost = StaticData.Instance.LevelUpCost[m_Turret.m_TurretAttribute.Rare, m_Turret.Quality - 1];
             UpgradeCostValue.text = upgradeCost.ToString();
         }

@@ -10,7 +10,7 @@ public class TurretTile : GameTile
     protected override void Awake()
     {
         base.Awake();
-        turret.m_TurretTile = this;
+        
     }
     public override void TileDroped()
     {
@@ -24,6 +24,7 @@ public class TurretTile : GameTile
         TurretBase = transform.Find("TileBase/TurretBase").gameObject;
         turret = GetComponentInChildren<Turret>();
         turret.InitializeTurret();
+        turret.m_TurretTile = this;
         TurretBase.layer = LayerMask.NameToLayer(StaticData.TempTurretMask);
     }
 

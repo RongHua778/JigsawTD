@@ -2092,7 +2092,7 @@ MonoBehaviour:
   WoodSpeedIntensify: 0.08
   WaterSlowIntensify: 0.2
   FireCriticalIntensify: 0.1
-  DustSputteringIntensify: 0.2
+  DustSputteringIntensify: 0.1
 --- !u!114 &286649187
 MonoBehaviour:
   m_ObjectHideFlags: 0
