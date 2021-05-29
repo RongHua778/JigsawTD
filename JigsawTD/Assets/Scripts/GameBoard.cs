@@ -108,7 +108,7 @@ public class GameBoard : MonoBehaviour
                 AddGameTile(tile, pos);
             }
         }
-        //GenerateTrapTiles(groundSize,StaticData.trapN,tileFactory);
+        GenerateTrapTiles(groundSize, StaticData.trapN, tileFactory);
         SeekPath();
     }
 
@@ -207,7 +207,8 @@ public class GameBoard : MonoBehaviour
         {
             for (int j = 0; j < groundSize.y; j++)
             {
-                if(i!=0&&j!=0)
+                //避免陷阱刷到初始的方块上
+                if(!(i>=11&&i<=13&&j>=11&&j<=13))
                 tiles.Add(new Vector2(i, j));
             }
         }
