@@ -9,7 +9,8 @@ using UnityEngine.UI;
 public class LevelUIManager : Singleton<LevelUIManager>
 {
     [SerializeField] TurretTips turretTips = default;
-    [SerializeField] TrapTips trapTips = default; 
+    [SerializeField] TrapTips trapTips = default;
+    [SerializeField] TempTips tempTips = default;
     [SerializeField] GameObject messagePanel = default;
 
 
@@ -102,7 +103,9 @@ public class LevelUIManager : Singleton<LevelUIManager>
         }
     }
     bool drawThisTurn = false;
-    public bool DrawThisTurn { get => drawThisTurn;
+    public bool DrawThisTurn
+    {
+        get => drawThisTurn;
         set
         {
             drawThisTurn = value;
@@ -110,7 +113,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
             {
                 luckPointsProcess = 0;//如果抽了卡，清空幸运点进度
             }
-        } 
+        }
     }
 
     int playerCoin = 0;
@@ -271,6 +274,18 @@ public class LevelUIManager : Singleton<LevelUIManager>
         trapTips.gameObject.SetActive(false);
     }
 
+    public void ShowTempTips(string text, Vector2 pos)
+    {
+        tempTips.gameObject.SetActive(true);
+        tempTips.SendText(text);
+        tempTips.rect.position = pos + new Vector2(0, tempTips.rect.sizeDelta.y / 2 + 30);
+    }
+
+    public void HideTempTips()
+    {
+        tempTips.gameObject.SetActive(false);
+    }
+
     IEnumerator MessageCor(string content)
     {
         messagePanel.SetActive(true);
@@ -315,7 +330,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
 
     public bool ConsumeMoney(int amount)
     {
-        if(PlayerCoin>= amount)
+        if (PlayerCoin >= amount)
         {
             PlayerCoin -= amount;
             return true;

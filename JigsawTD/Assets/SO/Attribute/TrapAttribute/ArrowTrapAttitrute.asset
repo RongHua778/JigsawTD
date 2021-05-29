@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ArrowTrapAttitrute
   m_EditorClassIdentifier: 
   Name: "\u51CF\u901F\u7BAD\u5934"
-  Description: "\u6309\u7BAD\u5934\u65B9\u5411\u7ECF\u8FC7\u6B64\u5904\u7684\u654C\u4EBA\u4F1A\u88AB\u51CF\u901F\uFF0C\u76F4\u5230\u8F6C\u5411"
+  Description: "\u6309\u7BAD\u5934\u65B9\u5411\u7ECF\u8FC7\u6B64\u5904\u7684\u654C\u4EBA\u4F1A\u88AB\u51CF\u901F\uFF0C\u76F4\u5230\u8F6C\u5411\u3002"
   TilePrefab: {fileID: 6604616035422911931, guid: 4309b8d9aff48c84f8bc65f0f15a6f5c, type: 3}
   TrapIcon: {fileID: 21300000, guid: e69932bc2dd63f74686775f1b6cb0ba5, type: 3}
   BuffInfos:
