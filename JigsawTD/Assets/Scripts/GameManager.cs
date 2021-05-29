@@ -255,8 +255,9 @@ public class GameManager : Singleton<GameManager>
     public void GetCompositeAttributeByName(string name)
     {
         TileShape shape = _shapeFactory.GetDShape();
-        GameTile tile = _tileFactory.GetCompositeTurretTile(_turretFactory.TestGetCompositeByName(name));
-        Blueprint bluePrint = _bluePrintFacotry.GetRandomBluePrint(_turretFactory.GetRandomCompositionTurret());
+        TurretAttribute attribute = _turretFactory.TestGetCompositeByName(name);
+        GameTile tile = _tileFactory.GetCompositeTurretTile(attribute);
+        Blueprint bluePrint = _bluePrintFacotry.GetRandomBluePrint(attribute);
         Turret turret = ((TurretTile)tile).turret;
         ((CompositeTurret)turret).CompositeBluePrint = bluePrint;
         shape.InitializeShape(tile);

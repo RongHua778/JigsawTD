@@ -64,11 +64,14 @@ public abstract class Turret : GameBehavior
     public virtual float AttackDamage { get => (m_TurretAttribute.TurretLevels[Quality - 1].AttackDamage + TurnAdditionalAttack) * (1 + AttackIntensify); }
     public virtual int AttackRange { get => m_TurretAttribute.TurretLevels[Quality - 1].AttackRange + RangeIntensify; }
     public int ForbidRange { get => m_TurretAttribute.TurretLevels[Quality - 1].ForbidRange; }
-    public virtual float AttackSpeed { get => (m_TurretAttribute.TurretLevels[Quality - 1].AttackSpeed+turnAdditionalSpeed) * (1 + SpeedIntensify); }
+    public virtual float AttackSpeed { get => (m_TurretAttribute.TurretLevels[Quality - 1].AttackSpeed + turnAdditionalSpeed) * (1 + SpeedIntensify); }
     public float BulletSpeed { get => m_TurretAttribute.BulletSpeed; }
     public virtual float SputteringRange { get => m_TurretAttribute.TurretLevels[Quality - 1].SputteringRange + SputteringIntensify; }
     public float CriticalRate { get => m_TurretAttribute.TurretLevels[Quality - 1].CriticalRate + CriticalIntensify; }
     public float SlowRate { get => m_TurretAttribute.TurretLevels[Quality - 1].SlowRate + SlowIntensify; }
+
+    float criticalPercentage = 1.5f;
+    public float CriticalPercentage { get => criticalPercentage; set => criticalPercentage = value; }
 
     int targetCount = 1;
     public int TargetCount { get => targetCount; set => targetCount = value; }

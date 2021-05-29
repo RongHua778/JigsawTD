@@ -49,6 +49,7 @@ public class TurretTile : GameTile
         turret.RangeIntensify = 0;
         turret.SpeedIntensify = 0;
         turret.targetList.Clear();
+        turret.CriticalPercentage = 1.5f;
         turret.Dropped = false;
         turret.TargetCount = 1;
         turret.DamageAnalysis = 0;

@@ -10,14 +10,15 @@ public enum TurretEffectName
     EnemyCountAttackIncrease,
     MultiTarget,
     RangeBaseSputtering,
-    SpeedIncreasePerShoot
+    SpeedIncreasePerShoot,
+    ChangeCriticalPercentage
 }
 [System.Serializable]
 public class TurretEffectInfo
 {
     public TurretEffectName EffectName;
     public float KeyValue;
-    [TextArea(2,3)]
+    [TextArea(2, 3)]
     public string EffectDescription;
 }
 public abstract class TurretEffect
@@ -66,8 +67,8 @@ public class DistanceBaseDamage : TurretEffect
     public override string EffectDescription => "致命瞄准：基于子弹飞行距离提升" + KeyValue * 100 + "%伤害/米。";
     public override void Shoot()
     {
-        float distance = ((Vector2)bullet.transform.position - bullet.Target.Position).magnitude;
-        bullet.Damage *= (1 + distance * KeyValue);
+        bullet.Damage *= (1 + KeyValue * bullet.GetTargetDistance());
+        //Debug.Log(bullet.Damage);
     }
 }
 
@@ -82,7 +83,17 @@ public class MultiTarget : TurretEffect
     }
 
 }
+public class ChangeCriticalPercentage : TurretEffect
+{
+    public override TurretEffectName EffectName => TurretEffectName.ChangeCriticalPercentage;
+    public override string EffectDescription => "多重射击：可以同时攻击" + KeyValue + "个额外目标。";
 
+    public override void Build()
+    {
+        turret.CriticalPercentage += KeyValue;
+    }
+
+}
 public class RangeBaseSputtering : TurretEffect
 {
     public override TurretEffectName EffectName => TurretEffectName.RangeBaseSputtering;
