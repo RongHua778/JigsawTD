@@ -46,7 +46,12 @@ public class TileFactory : GameObjectFactory
     public TrapTile GetRandomTrap()
     {
         int index = Random.Range(0,trapTile.Length);
-        return CreateInstance(trapTile[index].gameObject).GetComponent<TrapTile>();
+        TrapTile trap=CreateInstance(trapTile[index].gameObject).GetComponent<TrapTile>();
+        int direction = Random.Range(0, 4);
+        trap.gameObject.transform.localRotation= Quaternion.Euler(new Vector3(0, 0, 90*direction));
+        Transform t = trap.gameObject.transform.GetChild(0);
+        t.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -90 * direction));
+        return trap;
     }
 
 

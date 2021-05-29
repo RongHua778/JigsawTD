@@ -213,6 +213,16 @@ public class StaticData : Singleton<StaticData>
     //给定一个总等级，返回若干个随机数的方法
     public static int[] GetSomeRandoms(int totalLevel, int number)
     {
+        if ((totalLevel / number )> maxLevel)
+        {
+            Debug.LogWarning("配方等级输错了，菜鸡");
+            int[] errorRandom = new int[number];
+            for (int i = 0; i < number; i++)
+            {
+                errorRandom[i] = maxLevel;
+            }
+            return errorRandom;
+        }
         if (number < 1)
         {
             number = 1;
@@ -242,7 +252,12 @@ public class StaticData : Singleton<StaticData>
             else if (number >= 2)
             {
                 int max = Mathf.Min(totalLevel - (number - 1), maxLevel);
-                int a = Random.Range(1, max + 1);
+                int min = 1;
+                while (totalLevel - min > maxLevel*(number-1))
+                {
+                    min++;
+                }
+                int a = Random.Range(min, max + 1);
                 totalLevel -= a;
                 result[number - 1] = a;
                 number--;
