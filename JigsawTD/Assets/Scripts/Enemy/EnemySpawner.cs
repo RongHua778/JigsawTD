@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField]
-    float pathOffset = 0.4f;
+    float pathOffset = 0.3f;
     [SerializeField] HealthBar healthBarPrefab = default;
     private EnemyFactory _enemyFactory;
     [SerializeField]

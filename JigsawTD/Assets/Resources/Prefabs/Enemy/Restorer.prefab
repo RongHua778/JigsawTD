@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4482347274792429065}
   - component: {fileID: 3616903904554418895}
   - component: {fileID: 821673950540951135}
+  - component: {fileID: 8228902068761863343}
   m_Layer: 0
   m_Name: Restorer
   m_TagString: Untagged
@@ -60,6 +61,25 @@ MonoBehaviour:
   model: {fileID: 7619665209501119904}
   tileFrom: {fileID: 0}
   tileTo: {fileID: 0}
+--- !u!95 &8228902068761863343
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5799880304811824769}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4e3c7cd0b78a0c749bd35f70f4ca72a1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8360252054385358165
 GameObject:
   m_ObjectHideFlags: 0

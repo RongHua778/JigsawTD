@@ -264,4 +264,12 @@ public class GameManager : Singleton<GameManager>
         ((CompositeTurret)turret).CompositeBluePrint = bluePrint;
         shape.InitializeShape(tile);
     }
+
+    //测试用，根据名字生成一个陷阱
+    public void GetTrapByName(string name)
+    {
+        TileShape shape = _shapeFactory.GetDShape();
+        GameTile tile = _tileFactory.GetTrapByName(name);
+        shape.InitializeShape(tile);
+    }
 }

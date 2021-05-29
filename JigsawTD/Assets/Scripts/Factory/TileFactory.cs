@@ -11,11 +11,11 @@ public class TileFactory : GameObjectFactory
 {
     [SerializeField] GameObject ground;
     [SerializeField] GroundTile groundTile = default;
-    [SerializeField] TrapTile[] trapTile = default;
     [SerializeField] GameTile spawnPoint = default;
     [SerializeField] GameTile destinationTile = default;
     [SerializeField] float[] elementTileChance;
 
+    [SerializeField] TrapAttribute[] trapAttributes;
     public void InitializeFactory()
     {
 
@@ -45,13 +45,25 @@ public class TileFactory : GameObjectFactory
 
     public TrapTile GetRandomTrap()
     {
-        int index = Random.Range(0,trapTile.Length);
-        TrapTile trap=CreateInstance(trapTile[index].gameObject).GetComponent<TrapTile>();
-        int direction = Random.Range(0, 4);
-        trap.gameObject.transform.localRotation= Quaternion.Euler(new Vector3(0, 0, 90*direction));
-        Transform t = trap.gameObject.transform.GetChild(0);
-        t.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, -90 * direction));
+        int index = Random.Range(0,trapAttributes.Length);
+        TrapTile trap = CreateInstance(trapAttributes[index].TilePrefab).GetComponent<TrapTile>();
+        trap.tileType.rotation = DirectionExtensions.GetRandomRotation();
         return trap;
+    }
+
+    public TrapTile GetTrapByName(string name)
+    {
+        foreach(var attribute in trapAttributes)
+        {
+            if (attribute.Name == name)
+            {
+                TrapTile trap = CreateInstance(attribute.TilePrefab).GetComponent<TrapTile>();
+                trap.tileType.rotation = DirectionExtensions.GetRandomRotation();
+                return trap;
+            }
+        }
+        Debug.LogWarning("没有这个名字的TRAP");
+        return null;
     }
 
 

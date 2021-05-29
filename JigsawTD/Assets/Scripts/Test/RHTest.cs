@@ -15,6 +15,8 @@ public class RHTest : MonoBehaviour
     [SerializeField] InputField qualityInputField = default;
     [SerializeField] InputField elementInputField = default;
 
+    [SerializeField] InputField trapInputField = default;
+
     public void MenuBtnClick()
     {
         panel.SetActive(!panel.activeSelf);
@@ -38,5 +40,11 @@ public class RHTest : MonoBehaviour
     public void GetElementClick()
     {
         GameManager.Instance.GetTestElement(int.Parse(qualityInputField.text), int.Parse(elementInputField.text));
+    }
+
+    public void GetTrapClick()
+    {
+        GameManager.Instance.GetTrapByName(trapInputField.text);
+
     }
 }

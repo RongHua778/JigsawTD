@@ -9,7 +9,6 @@ public class TileTips : MonoBehaviour
     [SerializeField] protected Image Icon = default;
     [SerializeField] protected Text Name = default;
     [SerializeField] protected Text Description = default;
-    [SerializeField] protected GameObject[] LevelSlots = default;
     public virtual void Hide()
     {
         Destroy(this.gameObject);

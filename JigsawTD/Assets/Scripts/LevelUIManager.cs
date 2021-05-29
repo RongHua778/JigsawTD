@@ -9,9 +9,9 @@ using UnityEngine.UI;
 public class LevelUIManager : Singleton<LevelUIManager>
 {
     [SerializeField] TurretTips turretTips = default;
+    [SerializeField] TrapTips trapTips = default; 
     [SerializeField] GameObject messagePanel = default;
 
-    [SerializeField] TileTips turretTipPrefab, trapTipPrefab = default;
 
     [SerializeField] RoadPlacement _roadPlacament = default;
 
@@ -247,12 +247,11 @@ public class LevelUIManager : Singleton<LevelUIManager>
             case BasicTileType.SpawnPoint:
             case BasicTileType.Destination:
             case BasicTileType.Trap:
-                TrapTips trapTip = Instantiate(trapTipPrefab, this.transform) as TrapTips;
-                size = trapTip.GetComponent<RectTransform>().sizeDelta;
+                trapTips.gameObject.SetActive(true);
+                size = trapTips.GetComponent<RectTransform>().sizeDelta;
                 pos = new Vector2(size.x / 2 + 50, Screen.height / 2);
-                trapTip.transform.position = pos;
-                trapTip.ReadAttribute(((TrapTile)tile));
-                //tips.Add(trapTip);
+                trapTips.transform.position = pos;
+                trapTips.ReadAttribute(((TrapTile)tile));
                 break;
             case BasicTileType.Turret:
                 turretTips.gameObject.SetActive(true);
@@ -269,6 +268,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
     public void HideTips()
     {
         turretTips.gameObject.SetActive(false);
+        trapTips.gameObject.SetActive(false);
     }
 
     IEnumerator MessageCor(string content)

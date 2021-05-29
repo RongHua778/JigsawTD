@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum EnemyBuffName
 {
-    SlowDown, DealDamage, BreakShell, DirectionSlow, HealthBaseDamage, DamageTarget,Stun,TileStun
+    SlowDown, DealDamage, BreakShell, DirectionSlow, HealthBaseDamage, DamageTarget, Stun, TileStun
 }
 public abstract class EnemyBuff
 {
@@ -113,6 +113,7 @@ public class DirectionSlow : TileBuff
 
     public override void Affect()
     {
+        //Debug.Log("SlowDown");
         if (Target.Direction == Target.tileFrom.GetTileDirection())
             Target.PathSlow += KeyValue;
     }
@@ -195,9 +196,12 @@ public class DamageTarget : TileBuff
 
     public override void Affect()
     {
-        Debug.Log("TriggerDamageTarget" + Target.TargetDamageCounter * KeyValue);
-        //Target.ApplyDamage(Target.TargetDamageCounter * KeyValue);
+        float damageReturn;
+        Target.ApplyDamage(Target.TargetDamageCounter * KeyValue, out damageReturn);
+        ((TrapTile)(Target.tileFrom)).DamageAnalysis += (int)damageReturn;
         Target.TargetDamageCounter = 0;
+        Debug.Log("TriggerDamageTarget" + damageReturn);
+
     }
 
     public override void End()
@@ -218,13 +222,12 @@ public class TileStun : TileBuff
     {
         BuffInfo info = new BuffInfo(EnemyBuffName.Stun, Target.TileStunCounter * KeyValue, 0);
         Target.Buffable.AddBuff(info);
-        Debug.Log("TileSutn" + Target.TileStunCounter * KeyValue);
         Target.TileStunCounter = 0;
     }
 
     public override void End()
     {
-        
+
     }
 }
 
@@ -244,6 +247,6 @@ public class Stun : TimeBuff
 
     public override void End()
     {
-        
+
     }
 }

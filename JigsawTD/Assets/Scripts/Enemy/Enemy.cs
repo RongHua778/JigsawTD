@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Enemy : GameBehavior
 {
     public abstract EnemyType EnemyType { get; }
-
+    private Animator anim;
     public int ReachDamage { get; set; }
     public float TargetDamageCounter { get; set; }
     public int TileStunCounter { get; set; }
@@ -23,13 +23,14 @@ public abstract class Enemy : GameBehavior
 
     [Header("EnemyAttribute")]
     protected float speed;
-    public virtual float Speed { get => StunTime > 0 ? 0 : speed * (1 - SlowRate / (1 + SlowRate)); set => speed = value; }
+    public virtual float Speed { get => StunTime > 0 ? 0 : speed * (1 - SlowRate); set => speed = value; }
     int shell;
     public int Shell { get => Mathf.Max(0, shell - BrokeShell); set => shell = value; }
     float slowRate;
     public float SlowRate
     {
-        get => slowRate;// Mathf.Min(0.8f, (PathSlow + slowRate) / (PathSlow + slowRate + 1));
+        get => (PathSlow + slowRate) / (1 + slowRate + PathSlow);
+        //slowRate;// Mathf.Min(0.8f, (PathSlow + slowRate) / (PathSlow + slowRate + 1));
         set
         {
             slowRate = value;
@@ -58,7 +59,18 @@ public abstract class Enemy : GameBehavior
     [Header("HealthSetting")]
     HealthBar healthBar;
     private bool isDie = false;
-    public bool IsDie { get => isDie; set => isDie = value; }
+    public bool IsDie
+    {
+        get => isDie;
+        set
+        {
+            isDie = value;
+            if (isDie)
+            {
+                StopAllCoroutines();//取消消失动画后的扣血
+            }
+        }
+    }
     private float maxHealth;
     public float MaxHealth { get => maxHealth; set => maxHealth = value; }
     private float currentHealth;
@@ -76,6 +88,10 @@ public abstract class Enemy : GameBehavior
         }
     }
 
+    private void Awake()
+    {
+        anim = this.GetComponent<Animator>();
+    }
 
     public override bool GameUpdate()
     {
@@ -96,8 +112,7 @@ public abstract class Enemy : GameBehavior
         {
             if (tileTo == null)
             {
-                GameEvents.Instance.EnemyReach(this);
-                ObjectPool.Instance.UnSpawn(this.gameObject);
+                StartCoroutine(ExitCor());
                 return false;
             }
             progress = (progress - 1f) / progressFactor;
@@ -116,6 +131,14 @@ public abstract class Enemy : GameBehavior
         return true;
     }
 
+
+    private IEnumerator ExitCor()
+    {
+        anim.SetTrigger("Exit");
+        yield return new WaitForSeconds(0.5f);
+        GameEvents.Instance.EnemyReach(this);
+        ObjectPool.Instance.UnSpawn(this.gameObject);
+    }
     public void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify)
     {
         this.pathOffset = pathOffset;
@@ -141,6 +164,9 @@ public abstract class Enemy : GameBehavior
 
     private void PrepareIntro()
     {
+        anim.Play("Default");
+        anim.SetTrigger("Enter");
+
         positionFrom = tileFrom.transform.localPosition;
         positionTo = tileFrom.ExitPoint;
         Direction = tileFrom.PathDirection;
@@ -154,6 +180,8 @@ public abstract class Enemy : GameBehavior
 
     private void PrepareOutro()
     {
+        //anim.SetTrigger("Exit");
+
         positionTo = tileFrom.transform.localPosition;
         DirectionChange = DirectionChange.None;
         directionAngleTo = Direction.GetAngle();

@@ -12,20 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a06a8e352dd064bab9b6bf5b84988e, type: 3}
   m_Name: StunTileAttribute
   m_EditorClassIdentifier: 
-  Icon: {fileID: 21300000, guid: b05997685cd783d4c8b9f288a8ab05c5, type: 3}
-  Name: StunTrap
-  Description: Stun 0.1/0.2/0.3X seconds. X equal to the tile count before it reached
-    this tile.
-  LevelInfos:
-  - BuffInfos:
-    - EnemyBuffName: 7
-      KeyValue: 0.1
-      Duration: 1
-  - BuffInfos:
-    - EnemyBuffName: 7
-      KeyValue: 0.2
-      Duration: 1
-  - BuffInfos:
-    - EnemyBuffName: 7
-      KeyValue: 0.3
-      Duration: 1
+  Name: c
+  Description: "\u6655\u77291.5\u79D2"
+  TilePrefab: {fileID: 6604616035422911931, guid: 12a5cc0b04e663c4ea6831a0f0960229, type: 3}
+  TrapIcon: {fileID: 21300000, guid: b05997685cd783d4c8b9f288a8ab05c5, type: 3}
+  BuffInfos:
+  - EnemyBuffName: 6
+    KeyValue: 1.5
+    Duration: 0

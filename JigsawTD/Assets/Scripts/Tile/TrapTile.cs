@@ -6,9 +6,10 @@ public class TrapTile : GameTile
 {
     public TrapAttribute m_TrapAttribute = default;
 
-    public int TrapLevel;
+    int damageAnalysis;
+    public int DamageAnalysis { get => damageAnalysis; set => damageAnalysis = value; }
     public override BasicTileType BasicTileType => BasicTileType.Trap;
-
+    bool actived;
     public bool Actived { get => actived; 
         set 
         {
@@ -20,16 +21,20 @@ public class TrapTile : GameTile
         } 
     }
 
-    bool actived;
-
     public override void OnTilePass(Enemy enemy)
     {
         base.OnTilePass(enemy);
-        if (m_TrapAttribute.LevelInfos[TrapLevel].BuffInfos.Count <= 0)
+        if (m_TrapAttribute.BuffInfos.Count <= 0)
             return;
-        foreach (BuffInfo trap in m_TrapAttribute.LevelInfos[TrapLevel].BuffInfos)
+        foreach (BuffInfo trap in m_TrapAttribute.BuffInfos)
         {
             enemy.Buffable.AddBuff(trap);
         }
+    }
+
+    public override void OnUnSpawn()
+    {
+        base.OnUnSpawn();
+        DamageAnalysis = 0;
     }
 }
