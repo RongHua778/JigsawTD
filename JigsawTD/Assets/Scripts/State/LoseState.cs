@@ -7,4 +7,6 @@ public class LoseState : State
     public LoseState(GameManager gameManager) : base(gameManager)
     {
     }
+
+    public override StateName StateName => StateName.LoseState;
 }

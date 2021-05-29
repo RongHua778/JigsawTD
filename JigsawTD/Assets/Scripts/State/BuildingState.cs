@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class BuildingState : State
 {
+
     public BuildingState(GameManager gameManager) : base(gameManager)
     {
     }
+
+    public override StateName StateName => StateName.BuildingState;
 
     public override IEnumerator EnterState()
     {

@@ -57,22 +57,23 @@ public class TurretTips : TileTips
             elementConstruct.gameObject.SetActive(false);
             IntensifyArea.SetActive(true);
             string intensifyType = "";//根据元素及品质设置显示加成效果
+            //intensifyType += "作为合成素材时，使合成塔";
             switch (turret.Element)
             {
                 case Element.Gold:
-                    intensifyType = "攻击+" + StaticData.Instance.GoldAttackIntensify * 100 * turret.Quality + "%";
+                    intensifyType += StaticData.Instance.GoldAttackIntensify * 100 * turret.Quality + "%攻击";
                     break;
                 case Element.Wood:
-                    intensifyType = "攻速+" + StaticData.Instance.WoodSpeedIntensify * 100 * turret.Quality + "%";
+                    intensifyType += StaticData.Instance.WoodSpeedIntensify * 100 * turret.Quality + "%攻速";
                     break;
                 case Element.Water:
-                    intensifyType = "减速效果+" + StaticData.Instance.WaterSlowIntensify * turret.Quality;
+                    intensifyType += StaticData.Instance.WaterSlowIntensify * turret.Quality + "减速效果";
                     break;
                 case Element.Fire:
-                    intensifyType = "暴击率+" + StaticData.Instance.FireCriticalIntensify * 100 * turret.Quality + "%";
+                    intensifyType += StaticData.Instance.FireCriticalIntensify * 100 * turret.Quality + "%暴击率";
                     break;
                 case Element.Dust:
-                    intensifyType = "溅射范围+" + StaticData.Instance.FireCriticalIntensify * turret.Quality;
+                    intensifyType += StaticData.Instance.FireCriticalIntensify * turret.Quality + "溅射范围";
                     break;
                 case Element.None:
                     break;
@@ -199,6 +200,11 @@ public class TurretTips : TileTips
 
     public void CompositeBtnClick()
     {
+        if (GameManager.Instance.State.StateName != StateName.BuildingState)
+        {
+            GameEvents.Instance.Message("战斗中不可合成");
+            return;
+        }
         if (!m_BGrid.BuildAble)
         {
             GameEvents.Instance.Message("缺少必要素材");

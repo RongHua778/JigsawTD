@@ -65,10 +65,6 @@ public abstract class Enemy : GameBehavior
         set
         {
             isDie = value;
-            if (isDie)
-            {
-                StopAllCoroutines();//取消消失动画后的扣血
-            }
         }
     }
     private float maxHealth;
@@ -97,6 +93,7 @@ public abstract class Enemy : GameBehavior
     {
         if (IsDie)
         {
+            StopAllCoroutines();
             GameEvents.Instance.EnemyDie(this);
             ObjectPool.Instance.UnSpawn(this.gameObject);
             return false;

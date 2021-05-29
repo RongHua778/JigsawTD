@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class WaveState : State
 {
+
     public WaveState(GameManager gameManager) : base(gameManager)
     {
     }
+
+    public override StateName StateName => StateName.WaveState;
 
     public override IEnumerator EnterState()
     {
