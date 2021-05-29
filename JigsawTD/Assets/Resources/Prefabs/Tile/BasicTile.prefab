@@ -268,8 +268,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11ea9f238d4509e47a1b8590ee24faa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offsetCoord: {x: 0, y: 0}
-  m_GroundTile: {fileID: 0}
 --- !u!1001 &7357779490475189261
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -324,6 +322,26 @@ PrefabInstance:
     - target: {fileID: 5587558566511084432, guid: d5e8d45a468dafd47ae00a9f2439d1c1, type: 3}
       propertyPath: m_Name
       value: TileBase
+      objectReference: {fileID: 0}
+    - target: {fileID: 5587558566511084432, guid: d5e8d45a468dafd47ae00a9f2439d1c1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884037365235965968, guid: d5e8d45a468dafd47ae00a9f2439d1c1, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884037365235965968, guid: d5e8d45a468dafd47ae00a9f2439d1c1, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884037365235965968, guid: d5e8d45a468dafd47ae00a9f2439d1c1, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884037365235965968, guid: d5e8d45a468dafd47ae00a9f2439d1c1, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5e8d45a468dafd47ae00a9f2439d1c1, type: 3}

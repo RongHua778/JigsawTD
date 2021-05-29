@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: StunTileAttribute
   m_EditorClassIdentifier: 
   Name: c
-  Description: "\u6655\u77291.5\u79D2"
+  Description: "\u4F7F\u7ECF\u8FC7\u6B64\u683C\u7684\u654C\u4EBA\u6655\u77291.5\u79D2."
   TilePrefab: {fileID: 6604616035422911931, guid: 12a5cc0b04e663c4ea6831a0f0960229, type: 3}
-  TrapIcon: {fileID: 21300000, guid: b05997685cd783d4c8b9f288a8ab05c5, type: 3}
+  TrapIcon: {fileID: 21300000, guid: 1a6c80aeba1f2d34995464eb7284cbf8, type: 3}
   BuffInfos:
   - EnemyBuffName: 6
     KeyValue: 1.5
