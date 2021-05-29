@@ -80,7 +80,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
         }
     }
 
-    int lotteryDraw = 100;
+    int lotteryDraw = 2;
     public int LotteryDraw
     {
         get => lotteryDraw;
