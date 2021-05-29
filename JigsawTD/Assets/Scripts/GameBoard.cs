@@ -218,7 +218,7 @@ public class GameBoard : MonoBehaviour
         {
             for (int j = 0; j < groundSize.y; j++)
             {
-                if(i!=0&&j!=0)
+                if(i!=13&&j!=13)
                 tiles.Add(new Vector2(i, j));
             }
         }

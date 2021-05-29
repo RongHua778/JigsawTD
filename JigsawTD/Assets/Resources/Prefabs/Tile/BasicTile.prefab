@@ -268,8 +268,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11ea9f238d4509e47a1b8590ee24faa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offsetCoord: {x: 0, y: 0}
-  m_GroundTile: {fileID: 0}
 --- !u!1001 &7357779490475189261
 PrefabInstance:
   m_ObjectHideFlags: 0

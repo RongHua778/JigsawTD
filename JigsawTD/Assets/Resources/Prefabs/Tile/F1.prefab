@@ -80,7 +80,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -163,7 +163,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -292,10 +292,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3850126010392176229, guid: 98bd253b0342caf4daf35704c5347b27, type: 3}
   Dropped: 0
   targetList: []
-  BaseSprite: {fileID: 0}
-  CannonSprite: {fileID: 3044099392712669338}
-  m_TurretAttribute: {fileID: 11400000, guid: e3e54c1bced6a334b9535d9abfcb8bb5, type: 2}
   Level: 0
+  m_TurretAttribute: {fileID: 11400000, guid: e3e54c1bced6a334b9535d9abfcb8bb5, type: 2}
 --- !u!1 &6195695841050206438
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,9 +455,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5368d84d890b4e94ea653a90fedb4ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offsetCoord: {x: 0, y: 0}
-  m_GroundTile: {fileID: 0}
-  TurretBase: {fileID: 3630730106229569036}
   turret: {fileID: 7713418385657943639}
 --- !u!1 &6764159820211702733
 GameObject:
@@ -541,7 +536,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
