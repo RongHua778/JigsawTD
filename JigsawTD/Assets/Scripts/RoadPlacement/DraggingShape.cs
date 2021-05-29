@@ -11,6 +11,8 @@ public class DraggingShape : DraggingActions
     bool overLapPoint = false;
     bool waitingForPath = false;
     Collider2D[] collideResult = new Collider2D[10];
+    Collider2D[] collideTurretResult = new Collider2D[10];
+
 
     List<Material> tileMaterials = new List<Material>();
     List<Collider2D> detectCollider = new List<Collider2D>();
@@ -19,10 +21,18 @@ public class DraggingShape : DraggingActions
     [SerializeField]
     LayerMask CheckDropLayer = default;
     [SerializeField]
+    LayerMask CheckTurretLayer = default;
+    [SerializeField]
     LayerMask TrapLayer = default;
 
     [SerializeField]
     Color wrongColor, correctColor = default;
+
+    Collider2D turretCollider;
+    Color draggingColor = new Color(1, 1, 1, 0.3f);
+
+
+    public Collider2D TurretCollider { get => turretCollider; set => turretCollider = value; }
 
     public void Initialized()
     {
@@ -42,8 +52,32 @@ public class DraggingShape : DraggingActions
             mat.color = colorToSet;
         }
     }
+    private void SetColor(Color colorToSet,GameTile tile)
+    {
+        tile.tileBase.GetComponent<SpriteRenderer>().material.color = colorToSet;
+    }
+    private void DraggingColor()
+    {
+        foreach (GameTile tile in tileShape.tiles)
+        {
+            Vector3 pos = new Vector3(tile.transform.position.x, tile.transform.position.y, 0);
+            GameTile t = StaticData.Instance.GetTile(pos);
+            if (t != null)
+            {
+               // Debug.LogWarning("*********");
+                if (t.GetComponentInParent<TurretTile>() || t.GetComponentInParent<TrapTile>())
+                {
+                    //Debug.LogWarning("hahahhaahhah");
+                    SetColor(draggingColor, tile);
+                }
+                if (t.GetComponentInParent<BasicTile>())
+                {
+                   // Debug.LogWarning("²Ë¼¦");
 
-
+                }
+            }
+        }
+    }
     public override void OnDraggingInUpdate()
     {
         base.OnDraggingInUpdate();
@@ -53,7 +87,7 @@ public class DraggingShape : DraggingActions
         {
             CheckCanDrop();
             StopAllCoroutines();
-            StartCoroutine(TryFindPath());
+            StartCoroutine(TryFindPath()); 
         }
         lastPos = transform.position;
     }
@@ -84,33 +118,11 @@ public class DraggingShape : DraggingActions
     }
     private bool CheckCanDrop()
     {
-        Physics2D.SyncTransforms();
         canDrop = false;
-        int hits;
-        foreach (Collider2D col in detectCollider)
-        {
-            Vector3 pos = new Vector3(col.transform.position.x, col.transform.position.y, 0);
-            hits = Physics2D.OverlapCircleNonAlloc(pos, 0.51f, collideResult, CheckDropLayer);
-
-            if (hits > 0)
-            {
-                for (int i = 0; i < hits; i++)
-                {
-                    if (collideResult[i].CompareTag("UnDropablePoint"))
-                    {
-                        if (col.OverlapPoint(collideResult[i].transform.position))
-                        {
-                            canDrop = false;
-                            overLapPoint = true;
-                            SetColor(wrongColor);
-                            return false;
-                        }
-                    }
-                }
-                overLapPoint = false;
-                canDrop = true;
-            }
-        }
+        Physics2D.SyncTransforms();
+        canDrop = CheckAttachedDroppable();
+        canDrop = CheckTurretDroppable();
+        canDrop = CheckTrapDroppable();
         if (!canDrop)
         {
             SetColor(wrongColor);
@@ -119,12 +131,82 @@ public class DraggingShape : DraggingActions
         else
         {
             SetColor(correctColor);
+            DraggingColor();
             return true;
         }
 
     }
-
-
+    private bool CheckAttachedDroppable()
+    {
+        bool result=false;
+        int hits;
+        foreach (Collider2D col in detectCollider)
+        {
+            Vector3 pos = new Vector3(col.transform.position.x, col.transform.position.y, 0);
+            hits = Physics2D.OverlapCircleNonAlloc(pos, 0.51f, collideResult, CheckDropLayer);
+            if (hits > 0)
+            {
+                overLapPoint = false;
+                result = true;
+                //CheckDropLayer²»°üÀ¨ÏÝÚåºÍËþ
+                for (int i = 0; i < hits; i++)
+                {
+                    if (collideResult[i].CompareTag("UnDropablePoint"))
+                    {
+                        if (col.OverlapPoint(collideResult[i].transform.position))
+                        {
+                            result = false;
+                            overLapPoint = true;
+                            SetColor(wrongColor);
+                            return result;
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+    private bool CheckTurretDroppable()
+    {
+        Vector3 posTurret = new Vector3(turretCollider.transform.position.x, turretCollider.transform.position.y, 0);
+        int hits = Physics2D.OverlapBoxNonAlloc(posTurret, new Vector2(0.01f, 0.01f), 0, collideTurretResult, CheckDropLayer);
+        if (hits > 0)
+        {
+            for (int i = 0; i < hits; i++)
+            {
+                if (collideTurretResult[i].CompareTag("UnDropableTurret"))
+                {
+                    if (turretCollider.OverlapPoint(collideTurretResult[i].transform.position))
+                    {
+                        canDrop = false;
+                        overLapPoint = true;
+                        SetColor(wrongColor);
+                        return canDrop;
+                    }
+                }
+            }
+        }
+        return canDrop;
+    }
+    private bool CheckTrapDroppable()
+    {
+        Vector3 posTurret = new Vector3(turretCollider.transform.position.x, turretCollider.transform.position.y, 0);
+        int hits = Physics2D.OverlapBoxNonAlloc(posTurret, new Vector2(0.01f, 0.01f), 0, collideTurretResult, TrapLayer);
+        if (hits > 0)
+        {
+            for (int i = 0; i < hits; i++)
+            {
+                    if (turretCollider.OverlapPoint(collideTurretResult[i].transform.position))
+                    {
+                        canDrop = false;
+                        overLapPoint = true;
+                        SetColor(wrongColor);
+                        return canDrop;
+                    }
+            }
+        }
+        return canDrop;
+    }
     private IEnumerator TryFindPath()
     {
         waitingForPath = true;

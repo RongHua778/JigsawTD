@@ -88,9 +88,10 @@ public abstract class GameTile : TileBase
 
     public override void OnUnSpawn()
     {
-        base.OnUnSpawn();
         m_DraggingShape = null;
         gameObject.layer = LayerMask.NameToLayer(StaticData.TempTileMask);
+        //Debug.Log("UNSPAWNed");
+        base.OnUnSpawn();
     }
 
     public void CorrectRotation()

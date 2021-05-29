@@ -699,6 +699,9 @@ MonoBehaviour:
   CheckDropLayer:
     serializedVersion: 2
     m_Bits: 576
+  CheckTurretLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   TrapLayer:
     serializedVersion: 2
     m_Bits: 16384

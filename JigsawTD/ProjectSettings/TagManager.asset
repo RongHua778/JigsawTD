@@ -9,6 +9,7 @@ TagManager:
   - Tile
   - UnDropablePoint
   - Enemy
+  - UnDropableTurret
   layers:
   - Default
   - TransparentFX

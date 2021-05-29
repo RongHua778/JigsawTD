@@ -290,9 +290,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fabd8a971a6159f4c906539bf12103d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_TurretTile: {fileID: 0}
   Dropped: 0
   targetList: []
-  Level: 0
   m_TurretAttribute: {fileID: 11400000, guid: 493c6f7428affb6409f06eaac5d19930, type: 2}
 --- !u!95 &1227599520585100959
 Animator:
@@ -414,7 +414,7 @@ GameObject:
   - component: {fileID: 3568044695007039410}
   m_Layer: 10
   m_Name: Gold
-  m_TagString: UnDropablePoint
+  m_TagString: UnDropableTurret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
