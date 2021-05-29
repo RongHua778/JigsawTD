@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 2245542040433213113}
   m_Layer: 14
   m_Name: SpineTile
-  m_TagString: UnDropablePoint
+  m_TagString: UnDropableTurret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

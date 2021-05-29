@@ -52,6 +52,7 @@ public class TileShape : MonoBehaviour
                     tile = specialTile;
                     Turret turret = ((TurretTile)specialTile).turret;
                     turretName.text = turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].TurretName;
+                    draggingShape.TurretCollider = turret.GetComponentInParent<Collider2D>();
                 }
                 else
                 {

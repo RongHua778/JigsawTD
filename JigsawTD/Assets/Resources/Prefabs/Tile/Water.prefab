@@ -290,9 +290,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ab93fc15e10eeb4ea1b3888f7884787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_TurretTile: {fileID: 0}
   Dropped: 0
   targetList: []
-  Level: 0
   m_TurretAttribute: {fileID: 11400000, guid: 0387619ceeeda7746a7e51b43f234353, type: 2}
 --- !u!95 &666569215639069871
 Animator:
@@ -414,7 +414,7 @@ GameObject:
   - component: {fileID: 3568044695007039410}
   m_Layer: 10
   m_Name: Water
-  m_TagString: UnDropablePoint
+  m_TagString: UnDropableTurret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

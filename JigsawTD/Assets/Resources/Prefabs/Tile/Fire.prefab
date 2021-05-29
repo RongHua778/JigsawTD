@@ -290,9 +290,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c2dd3d6512edb40b9ac96a8fc89a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_TurretTile: {fileID: 0}
   Dropped: 0
   targetList: []
-  Level: 0
   m_TurretAttribute: {fileID: 11400000, guid: 2a0c266b352137f45b20d3723395e650, type: 2}
 --- !u!95 &6814171832871798289
 Animator:
@@ -414,7 +414,7 @@ GameObject:
   - component: {fileID: 3568044695007039410}
   m_Layer: 10
   m_Name: Fire
-  m_TagString: UnDropablePoint
+  m_TagString: UnDropableTurret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

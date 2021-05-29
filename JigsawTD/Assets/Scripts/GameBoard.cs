@@ -36,6 +36,7 @@ public class GameBoard : MonoBehaviour
 
     public static bool FindPath { get => path.vectorPath.Count > 0; }
 
+
     bool showPaths = true;
     public bool ShowPaths
     {
@@ -199,7 +200,7 @@ public class GameBoard : MonoBehaviour
         }
 
     }
-    private void GenerateTrapTiles(Vector2Int groundSize,int trapN,TileFactory t)
+    private void GenerateTrapTiles(Vector2Int groundSize, int trapN, TileFactory t)
     {
         List<Vector2> tiles = new List<Vector2>();
         List<Vector2> traps = new List<Vector2>();
@@ -208,8 +209,8 @@ public class GameBoard : MonoBehaviour
             for (int j = 0; j < groundSize.y; j++)
             {
                 //避免陷阱刷到初始的方块上
-                if(!(i>=11&&i<=13&&j>=11&&j<=13))
-                tiles.Add(new Vector2(i, j));
+                if (!(i >= 11 && i <= 13 && j >= 11 && j <= 13))
+                    tiles.Add(new Vector2(i, j));
             }
         }
         for (int i = 0; i < trapN; i++)
@@ -226,7 +227,7 @@ public class GameBoard : MonoBehaviour
             tiles.Remove(temp);
         }
 
-        foreach(Vector2 trap in traps)
+        foreach (Vector2 trap in traps)
         {
             AddGameTile(t.GetRandomTrap(), new Vector2(trap.x - (groundSize.x - 1) / 2,
                 trap.y - (groundSize.y - 1) / 2));
@@ -239,11 +240,11 @@ public class GameBoard : MonoBehaviour
         {
             for (int x = 0; x < groundSize.x; x++, i++)
             {
-                    GroundTile groundTile = tileFactory.GetGroundTile();
-                    groundTile.transform.localPosition = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
-                    groundTile.transform.localPosition += Vector3.forward * 0.1f;
-                    CorrectTileCoord(groundTile);
-                    groundTiles.Add(groundTile);
+                GroundTile groundTile = tileFactory.GetGroundTile();
+                groundTile.transform.localPosition = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
+                groundTile.transform.localPosition += Vector3.forward * 0.1f;
+                CorrectTileCoord(groundTile);
+                groundTiles.Add(groundTile);
             }
         }
     }
@@ -254,8 +255,20 @@ public class GameBoard : MonoBehaviour
         {
             tile.GetComponent<ReusableObject>().SetBackToParent();
             Vector3 pos = new Vector3(tile.transform.position.x, tile.transform.position.y, 0);
-            RemoveGameTileOnPos(pos);
+            GameTile t = StaticData.Instance.GetTile(pos);
             tile.SetPreviewing(false);
+            if (t != null)
+            {
+                if (t.GetComponentInParent<TurretTile>() || t.GetComponentInParent<TrapTile>())
+                {
+                    ObjectPool.Instance.UnSpawn(tile.gameObject);
+                    continue;
+                }
+                else
+                {
+                    RemoveGameTileOnPos(pos);
+                }
+            }
             AddGameTile(tile, pos);
         }
         foreach (GameTile tile in newTiles)
@@ -337,6 +350,8 @@ public class GameBoard : MonoBehaviour
         }
         return null;
     }
+
+
 }
 
 
