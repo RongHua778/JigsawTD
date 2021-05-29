@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public enum ShapeType
 {
-    J, L, T, O, I, D
+    J, L, T, O, I, Z, S, D
 }
 public class TileShape : MonoBehaviour
 {
