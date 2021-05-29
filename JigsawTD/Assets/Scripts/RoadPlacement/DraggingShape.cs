@@ -36,7 +36,6 @@ public class DraggingShape : DraggingActions
 
     public void Initialized()
     {
-        SetColor(Color.white);
         menuTrans = transform.Find("DragMenu");
         tileShape = this.GetComponent<TileShape>();
         foreach (GameTile tile in tileShape.tiles)

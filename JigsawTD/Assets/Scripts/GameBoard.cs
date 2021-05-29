@@ -261,6 +261,7 @@ public class GameBoard : MonoBehaviour
             {
                 if (t.GetComponentInParent<TurretTile>() || t.GetComponentInParent<TrapTile>())
                 {
+                    tile.tileBase.GetComponent<SpriteRenderer>().material.color = Color.white;
                     ObjectPool.Instance.UnSpawn(tile.gameObject);
                     continue;
                 }
