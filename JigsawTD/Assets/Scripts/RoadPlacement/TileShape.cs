@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
 
 public enum ShapeType
 {
@@ -13,6 +14,7 @@ public class TileShape : MonoBehaviour
     Camera renderCam;
     GameObject bgObj;
     DraggingShape draggingShape;
+    Text turretName;
 
     [HideInInspector]
     public List<GameTile> tiles = new List<GameTile>();
@@ -21,6 +23,7 @@ public class TileShape : MonoBehaviour
 
     private void Awake()
     {
+        turretName = GetComponentInChildren<Text>();
         tilePos = transform.GetComponentsInChildren<TileSlot>();
         renderCam = transform.Find("RenderCam").GetComponent<Camera>();
         bgObj = transform.Find("BG").gameObject;
@@ -47,6 +50,8 @@ public class TileShape : MonoBehaviour
                 if (i == g)
                 {
                     tile = specialTile;
+                    Turret turret = ((TurretTile)specialTile).turret;
+                    turretName.text = turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].TurretName;
                 }
                 else
                 {
@@ -87,10 +92,11 @@ public class TileShape : MonoBehaviour
     public void SetPreviewPlace()
     {
         bgObj.SetActive(false);
+        turretName.transform.parent.gameObject.SetActive(false);
         Vector2 pos = Camera.main.transform.position;
         renderCam.gameObject.SetActive(false);
         transform.position = new Vector3(Mathf.Round(pos.x), Mathf.Round(pos.y), -1f);
-        draggingShape.OnDraggingInUpdate();
+        draggingShape.ShapeSpawned();
         StaticData.holdingShape = draggingShape;
         foreach (GameTile tile in tiles)
         {

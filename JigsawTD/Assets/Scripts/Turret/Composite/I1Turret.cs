@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class I1Turret : Turret
+public class I1Turret : CompositeTurret
 {
-    public override float AttackSpeed => base.AttackSpeed * (1 + RotSpeed / 180);
-    float changeSpeed = 60f;
     float rotSpeed = 0;
-    float RotSpeed { get => rotSpeed; set => rotSpeed = Mathf.Clamp(value, 0, 360); }
+    float RotSpeed { get => Mathf.Min(720, rotSpeed * Mathf.Pow(AttackSpeed, 2)); set => rotSpeed = value; }
     protected override void RotateTowards()
     {
-        //11
+
     }
 
     public override bool GameUpdate()
@@ -24,16 +22,12 @@ public class I1Turret : Turret
     {
         base.InitializeTurret();
         rotTrans.rotation = Quaternion.identity;
-        RotSpeed = 0f;
+        RotSpeed = 10f;
         CheckAngle = 360f;
     }
 
     private void SelfRotateControl()
     {
-        if (Target != null)
-            RotSpeed += changeSpeed * Time.deltaTime;
-        else
-            RotSpeed -= 2 * changeSpeed * Time.deltaTime;
         rotTrans.Rotate(Vector3.forward * RotSpeed * Time.deltaTime, Space.Self);
     }
 

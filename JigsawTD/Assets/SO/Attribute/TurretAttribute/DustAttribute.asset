@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
   m_Name: DustAttribute
   m_EditorClassIdentifier: 
-  Icon: {fileID: 21300000, guid: f288911aca0fdda45b24999f09f1ef35, type: 3}
   Name: Dust
-  Description: "\u53EF\u4EE5\u9020\u6210\u6E85\u5C04\u4F24\u5BB3\u3002\u653B\u51FB\u8303\u56F4\u5706\u578B\u3002"
+  Description: "\u653B\u51FB\u53EF\u4EE5\u9020\u6210\u6E85\u5C04\u4F24\u5BB3\uFF0C\u65E0\u6CD5\u653B\u51FB\u592A\u8FD1\u7684\u76EE\u6807\u3002"
   TilePrefab: {fileID: 6604616035422911931, guid: 4ce61665656640249b97041fdf5b3dce, type: 3}
   RangeType: 1
   element: 4
+  Bullet: {fileID: 3850126010392176229, guid: 93a6638b5f5d3504e81fbaa4958ebe74, type: 3}
+  BulletSpeed: 5
   totalLevel: 0
   elementNumber: 0
   TurretLevels:
@@ -25,10 +26,10 @@ MonoBehaviour:
     ForbidRange: 1
     AttackDamage: 4
     AttackSpeed: 0.5
-    BulletSpeed: 8
-    SputteringRange: 0.2
+    SputteringRange: 0.3
     CriticalRate: 0
-    AttackEffects: []
+    SlowRate: 0
+    TurretEffects: []
     PoloEffects: []
     TurretName: E1
     Icon: {fileID: 21300000, guid: ac34de510b26cac49a880e929f1b49b5, type: 3}
@@ -39,10 +40,10 @@ MonoBehaviour:
     ForbidRange: 1
     AttackDamage: 6
     AttackSpeed: 0.55
-    BulletSpeed: 8
-    SputteringRange: 0.225
+    SputteringRange: 0.35
     CriticalRate: 0
-    AttackEffects: []
+    SlowRate: 0
+    TurretEffects: []
     PoloEffects: []
     TurretName: E2
     Icon: {fileID: 21300000, guid: a31e53d7d5dcd664aadcf0b2c4515240, type: 3}
@@ -53,10 +54,10 @@ MonoBehaviour:
     ForbidRange: 1
     AttackDamage: 8
     AttackSpeed: 0.6
-    BulletSpeed: 8
-    SputteringRange: 0.25
+    SputteringRange: 0.4
     CriticalRate: 0
-    AttackEffects: []
+    SlowRate: 0
+    TurretEffects: []
     PoloEffects: []
     TurretName: E3
     Icon: {fileID: 21300000, guid: 6b1723685bbd25343b0c16b8a9272391, type: 3}
@@ -67,10 +68,10 @@ MonoBehaviour:
     ForbidRange: 1
     AttackDamage: 12
     AttackSpeed: 0.65
-    BulletSpeed: 8
-    SputteringRange: 0.275
+    SputteringRange: 0.45
     CriticalRate: 0
-    AttackEffects: []
+    SlowRate: 0
+    TurretEffects: []
     PoloEffects: []
     TurretName: E4
     Icon: {fileID: 21300000, guid: 5be2b0f7f8fba344aa92ad53ace74a98, type: 3}
@@ -81,10 +82,10 @@ MonoBehaviour:
     ForbidRange: 1
     AttackDamage: 18
     AttackSpeed: 0.7
-    BulletSpeed: 8
-    SputteringRange: 0.3
+    SputteringRange: 0.5
     CriticalRate: 0
-    AttackEffects: []
+    SlowRate: 0
+    TurretEffects: []
     PoloEffects: []
     TurretName: E5
     Icon: {fileID: 21300000, guid: bfd2ab5fab8b5384bbfaf075c5a88131, type: 3}

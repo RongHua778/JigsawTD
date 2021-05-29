@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7955279244983291}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2174224172969267675}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.23, z: 0}
+  m_LocalPosition: {x: 0, y: 0.32, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 173669962325498538}
@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8426196659992694477}
   - component: {fileID: 3044099392712669338}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ SpriteRenderer:
   m_SortingLayerID: -1642744281
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 8f80e93a2eb232148882ac4cec035e4e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: eff3c21f9877e6444b1cb87671f7cbf1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -220,7 +220,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 173669962325498538}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: RotPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -253,7 +253,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9179870020333665588}
   - component: {fileID: 6363686998085508088}
-  m_Layer: 10
+  - component: {fileID: 6814171832871798289}
+  m_Layer: 0
   m_Name: TileType
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,11 +290,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c2dd3d6512edb40b9ac96a8fc89a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 3850126010392176229, guid: 98bd253b0342caf4daf35704c5347b27, type: 3}
   Dropped: 0
   targetList: []
   Level: 0
   m_TurretAttribute: {fileID: 11400000, guid: 2a0c266b352137f45b20d3723395e650, type: 2}
+--- !u!95 &6814171832871798289
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4617212374467823460}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: d936c8e257d17bc4daad3596f19a0a04, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6195695841050206438
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,7 +325,7 @@ GameObject:
   - component: {fileID: 2323391431117371324}
   - component: {fileID: 370413473917423801}
   - component: {fileID: 9149595982355884373}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: TurretRangeCol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -465,7 +484,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3603753279135973792}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: CheckPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

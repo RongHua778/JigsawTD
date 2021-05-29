@@ -65,15 +65,15 @@ public class GameBoard : MonoBehaviour
     {
         GameEvents.Instance.onAddTiles += RePlaceTiles;
         GameEvents.Instance.onSeekPath += SeekPath;
+        GameEvents.Instance.onRemoveGameTile += RemoveGameTile;
 
-        //pathCreator = this.GetComponent<PathCreator>();
-        //pathMeshHolder.sortingLayerName = "UI";
     }
 
     private void OnDisable()
     {
         GameEvents.Instance.onAddTiles -= RePlaceTiles;
         GameEvents.Instance.onSeekPath -= SeekPath;
+        GameEvents.Instance.onRemoveGameTile -= RemoveGameTile;
     }
 
 
@@ -108,7 +108,7 @@ public class GameBoard : MonoBehaviour
                 AddGameTile(tile, pos);
             }
         }
-        GenerateTrapTiles(groundSize,StaticData.trapN,tileFactory);
+        //GenerateTrapTiles(groundSize,StaticData.trapN,tileFactory);
         SeekPath();
     }
 
@@ -132,8 +132,6 @@ public class GameBoard : MonoBehaviour
         {
             //turret的tile加入一个list
             GameManager.Instance.turrets.Add(((TurretTile)tile).turret);
-            //turret加入一个list以检测合成逻辑
-            //GameManager.Instance.turretsElements.Add(tile.GetComponentInChildren<Turret>());
         }
         groundTile.TriggerIntensify();
     }
@@ -193,15 +191,6 @@ public class GameBoard : MonoBehaviour
         {
             ObjectPool.Instance.UnSpawn(pl.gameObject);
         }
-        //for (int i = 1; i < shortestPath.Count; i++)
-        //{
-        //    shortestPath[i - 1].NextTileOnPath = shortestPath[i];
-        //    shortestPath[i - 1].ExitPoint = (shortestPath[i].transform.position + shortestPath[i - 1].transform.position) * 0.5f;
-        //    shortestPath[i - 1].PathDirection = DirectionExtensions.GetDirection(shortestPath[i - 1].transform.position, shortestPath[i - 1].ExitPoint);
-        //    PathLine pathLine = ObjectPool.Instance.Spawn(pathLinePrefab.gameObject).GetComponent<PathLine>();
-        //    pathLine.ShowPath(new Vector3[] { (Vector2)shortestPath[i - 1].transform.position, (Vector2)shortestPath[i].transform.position });
-        //    pathLines.Add(pathLine);
-        //}
         for (int i = 1; i < path.vectorPath.Count; i++)
         {
             PathLine pathLine = ObjectPool.Instance.Spawn(pathLinePrefab.gameObject).GetComponent<PathLine>();
@@ -264,7 +253,7 @@ public class GameBoard : MonoBehaviour
         {
             tile.GetComponent<ReusableObject>().SetBackToParent();
             Vector3 pos = new Vector3(tile.transform.position.x, tile.transform.position.y, 0);
-            RemoveGameTileOnTile(pos);
+            RemoveGameTileOnPos(pos);
             tile.SetPreviewing(false);
             AddGameTile(tile, pos);
         }
@@ -275,7 +264,7 @@ public class GameBoard : MonoBehaviour
         GameEvents.Instance.CheckBluePrint();
     }
 
-    private void RemoveGameTileOnTile(Vector3 pos)
+    private void RemoveGameTileOnPos(Vector3 pos)
     {
         GameTile gameTile = GetTile(pos, LayerMask.GetMask(StaticData.ConcreteTileMask)) as GameTile;
         if (gameTile != null)
@@ -285,7 +274,31 @@ public class GameBoard : MonoBehaviour
                 GameManager.SelectingTile = null;
             ObjectPool.Instance.UnSpawn(gameTile.gameObject);
         }
+        GroundTile groundTile = GetTile(pos, StaticData.GetGroundLayer) as GroundTile;
+        if (groundTile != null)
+        {
+            groundTile.gameObject.layer = LayerMask.NameToLayer(StaticData.GroundTileMask);
+        }
     }
+
+    private void RemoveGameTile(GameTile tile)
+    {
+        if (tiles.Contains(tile))
+        {
+            tiles.Remove(tile);
+            if (GameManager.SelectingTile == tile)
+                GameManager.SelectingTile = null;
+            ObjectPool.Instance.UnSpawn(tile.gameObject);
+
+            GroundTile groundTile = GetTile(tile.transform.position, StaticData.GetGroundLayer) as GroundTile;
+            if (groundTile != null)
+            {
+                groundTile.gameObject.layer = LayerMask.NameToLayer(StaticData.GroundTileMask);
+            }
+        }
+    }
+
+
 
     //private void RemoveGroundTileOnTile(GameTile tile, Vector3 pos)
     //{

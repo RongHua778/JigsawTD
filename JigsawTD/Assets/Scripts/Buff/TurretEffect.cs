@@ -9,17 +9,22 @@ public enum TurretEffectName
     AttackIncreasePerShoot,
     EnemyCountAttackIncrease,
     MultiTarget,
-    RangeBaseSputtering
+    RangeBaseSputtering,
+    SpeedIncreasePerShoot,
+    ChangeCriticalPercentage
 }
 [System.Serializable]
 public class TurretEffectInfo
 {
     public TurretEffectName EffectName;
     public float KeyValue;
+    [TextArea(2, 3)]
+    public string EffectDescription;
 }
 public abstract class TurretEffect
 {
     public abstract TurretEffectName EffectName { get; }
+    public abstract string EffectDescription { get; }
     public Turret turret;
     public Bullet bullet;
     public float KeyValue;
@@ -47,21 +52,30 @@ public abstract class TurretEffect
 
     }
 }
-
+public class SpeedIncreasePerShoot : TurretEffect
+{
+    public override TurretEffectName EffectName => TurretEffectName.SpeedIncreasePerShoot;
+    public override string EffectDescription => "极速过载：每次攻击后，提升本回合攻速" + KeyValue + "。";
+    public override void Shoot()
+    {
+        turret.TurnAdditionalSpeed += KeyValue;
+    }
+}
 public class DistanceBaseDamage : TurretEffect
 {
     public override TurretEffectName EffectName => TurretEffectName.DistanceBaseDamage;
-
+    public override string EffectDescription => "致命瞄准：基于子弹飞行距离提升" + KeyValue * 100 + "%伤害/米。";
     public override void Shoot()
     {
-        float distance = ((Vector2)bullet.transform.position - bullet.Target.Position).magnitude;
-        bullet.Damage *= (1 + distance * KeyValue);
+        bullet.Damage *= (1 + KeyValue * bullet.GetTargetDistance());
+        //Debug.Log(bullet.Damage);
     }
 }
 
 public class MultiTarget : TurretEffect
 {
     public override TurretEffectName EffectName => TurretEffectName.MultiTarget;
+    public override string EffectDescription => "多重射击：可以同时攻击" + KeyValue + "个额外目标。";
 
     public override void Build()
     {
@@ -69,10 +83,21 @@ public class MultiTarget : TurretEffect
     }
 
 }
+public class ChangeCriticalPercentage : TurretEffect
+{
+    public override TurretEffectName EffectName => TurretEffectName.ChangeCriticalPercentage;
+    public override string EffectDescription => "多重射击：可以同时攻击" + KeyValue + "个额外目标。";
 
+    public override void Build()
+    {
+        turret.CriticalPercentage += KeyValue;
+    }
+
+}
 public class RangeBaseSputtering : TurretEffect
 {
     public override TurretEffectName EffectName => TurretEffectName.RangeBaseSputtering;
+    public override string EffectDescription => "定点轰炸：基于子弹飞行距离提升" + KeyValue + "溅射范围/米。";
 
     public override void Shoot()
     {
@@ -84,6 +109,8 @@ public class RangeBaseSputtering : TurretEffect
 public class SlowBullet : TurretEffect
 {
     public override TurretEffectName EffectName => TurretEffectName.SlowBullet;
+    public override string EffectDescription => "减速攻击：攻击造成" + KeyValue + "%减速效果。";
+
     public float Duration = 2f;
     public override void Hit(Enemy target)
     {
@@ -96,6 +123,7 @@ public class SlowBullet : TurretEffect
 public class AttackIncreasePerShoot : TurretEffect
 {
     public override TurretEffectName EffectName => TurretEffectName.AttackIncreasePerShoot;
+    public override string EffectDescription => "愈战愈勇：每次攻击后，提升本回合" + KeyValue + "点攻击力。";
 
     public override void Hit(Enemy target)
     {
@@ -106,6 +134,7 @@ public class AttackIncreasePerShoot : TurretEffect
 public class EnemyCountAttackIncrease : TurretEffect
 {
     public override TurretEffectName EffectName => TurretEffectName.EnemyCountAttackIncrease;
+    public override string EffectDescription => "攻击范围内每有1个敌人，就提升" + KeyValue * 100 + "%攻击力。";
 
     public override void EnemyEnter()
     {

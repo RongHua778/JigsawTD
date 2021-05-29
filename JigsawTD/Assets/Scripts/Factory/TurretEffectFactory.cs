@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-public class AttackEffectFactory
+public class TurretEffectFactory
 {
     public static Dictionary<int, Type> AttackEffectDIC;
 

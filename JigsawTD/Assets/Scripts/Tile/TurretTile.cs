@@ -10,6 +10,7 @@ public class TurretTile : GameTile
     protected override void Awake()
     {
         base.Awake();
+        
     }
     public override void TileDroped()
     {
@@ -23,6 +24,7 @@ public class TurretTile : GameTile
         TurretBase = transform.Find("TileBase/TurretBase").gameObject;
         turret = GetComponentInChildren<Turret>();
         turret.InitializeTurret();
+        turret.m_TurretTile = this;
         TurretBase.layer = LayerMask.NameToLayer(StaticData.TempTurretMask);
     }
 
@@ -42,14 +44,15 @@ public class TurretTile : GameTile
             turret.TriggerPoloEffect(false);
         }
         turret.AttackIntensify = 0;
-        turret.Compositions.Clear();
-        turret.Quality=1;
+        turret.Quality = 1;
         turret.Element = Element.Gold;
         turret.RangeIntensify = 0;
         turret.SpeedIntensify = 0;
         turret.targetList.Clear();
+        turret.CriticalPercentage = 1.5f;
         turret.Dropped = false;
         turret.TargetCount = 1;
+        turret.DamageAnalysis = 0;
         turret.ClearTurnIntensify();
         turret.RecycleRanges();
         //Turret.layer = LayerMask.NameToLayer(StaticData.TempTurretMask);

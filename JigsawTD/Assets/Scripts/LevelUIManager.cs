@@ -8,94 +8,6 @@ using UnityEngine.UI;
 
 public class LevelUIManager : Singleton<LevelUIManager>
 {
-    #region 
-    //888888888测试用88888888888888888888888888888888888888888888
-    //public TurretFactory test;
-    //[SerializeField] Text[] peifangTxt = default;
-    //[SerializeField] Text[] blueprintsTxt = default;
-    //List<Blueprint> blueprints;
-    //Blueprint p1;
-    //Blueprint p2;
-    //Blueprint p3;
-
-    //public void testXiezi(List<Blueprint> l, Text[] txt)
-    //{
-    //    for (int i = 0; i < txt.Length; i++)
-    //    {
-    //        txt[i].text = "";
-    //    }
-    //    for (int j = 0; j < l.Count; j++)
-    //    {
-    //        Blueprint t = l[j];
-    //        string s = "";
-    //        string buildable = "";
-    //        for (int i = 0; i < t.Compositions.Count; i++)
-    //        {
-    //            string b;
-    //            if (t.Compositions[i].obtained)
-    //            {
-    //                b = "已拥有";
-
-    //            }
-    //            else
-    //            {
-    //                b = "没有";
-
-    //            }
-    //            s = s + "配方" + (i + 1).ToString() + "  元素:" + t.Compositions[i].elementRequirement.ToString() +
-    //                "  等级:" + t.Compositions[i].levelRequirement.ToString() + "  状态:" + b + "\n";
-    //        }
-    //        if (t.CheckBuildable())
-    //        {
-    //            buildable = "可建造";
-
-    //        }
-    //        else
-    //        {
-    //            buildable = "不可建造";
-
-    //        }
-    //        txt[j].text = s + " \n" + buildable;
-    //    }
-    //}
-    //public void Test()
-    //{
-    //    //blueprints = GameManager.Instance.playerManager.GetBluePrints(3);
-    //    testXiezi(blueprints, peifangTxt);
-    //    p1 = blueprints[0];
-    //    p2 = blueprints[1];
-    //    p3 = blueprints[2];
-    //}
-
-    //public void test21()
-    //{
-    //    GameManager.Instance.playerManager.BuyBlueprint(p1);
-    //    blueprints.Remove(p1);
-    //    testXiezi(blueprints, peifangTxt);
-    //    testXiezi(GameManager.Instance.playerManager.BlueprintsInPocket, blueprintsTxt);
-    //}
-    //public void test22()
-    //{
-    //    GameManager.Instance.playerManager.BuyBlueprint(p2);
-    //    blueprints.Remove(p2);
-    //    testXiezi(blueprints, peifangTxt);
-    //    testXiezi(GameManager.Instance.playerManager.BlueprintsInPocket, blueprintsTxt);
-    //}
-    //public void test23()
-    //{
-    //    GameManager.Instance.playerManager.BuyBlueprint(p3);
-    //    blueprints.Remove(p3);
-    //    testXiezi(blueprints, peifangTxt);
-    //    testXiezi(GameManager.Instance.playerManager.BlueprintsInPocket, blueprintsTxt);
-    //}
-    //public void testComposition()
-    //{
-    //    GameManager.Instance.playerManager.BlueprintInBuilding = p1;
-    //    GetComposedShape();
-    //}
-    #endregion
-
-
     [SerializeField] TurretTips turretTips = default;
     [SerializeField] GameObject messagePanel = default;
 
@@ -157,7 +69,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
             }
         }
     }
-    int playerLvUpMoney = 50;
+    int playerLvUpMoney = 0;
     public int PlayerLvUpMoney
     {
         get => playerLvUpMoney;
@@ -179,17 +91,29 @@ public class LevelUIManager : Singleton<LevelUIManager>
     }
     //控制每回合加的幸运点数
     public int luckPointsProcess = 0;
-    int luckyPoints = 5;
+    int luckyPoints = 0;
     public int LuckyPoints
     {
         get => luckyPoints;
         set
         {
             luckyPoints = value;
-            luckyPointsTxt.text = "当前幸运点数:" + LuckyPoints.ToString();
+            luckyPointsTxt.text = "幸运点:" + LuckyPoints.ToString();
         }
     }
-    int playerCoin = 1000;
+    bool drawThisTurn = false;
+    public bool DrawThisTurn { get => drawThisTurn;
+        set
+        {
+            drawThisTurn = value;
+            if (drawThisTurn)
+            {
+                luckPointsProcess = 0;//如果抽了卡，清空幸运点进度
+            }
+        } 
+    }
+
+    int playerCoin = 0;
     public int PlayerCoin
     {
         get => playerCoin;
@@ -210,6 +134,8 @@ public class LevelUIManager : Singleton<LevelUIManager>
             healthTxt.text = PlayerHealth.ToString() + "/" + StaticData.Instance.PlayerMaxHealth.ToString();
         }
     }
+
+
     #endregion
 
     void Start()
@@ -223,7 +149,10 @@ public class LevelUIManager : Singleton<LevelUIManager>
         GameEvents.Instance.onShowTurretTips += ShowTurretAttributeTips;
         GameEvents.Instance.onHideTips += HideTips;
 
+        CurrentWave = 0;
         PlayerLevel = 1;
+        PlayerHealth = StaticData.Instance.PlayerMaxHealth;
+        PlayerCoin = StaticData.Instance.StartCoin;
     }
 
     private void OnDisable()
@@ -249,7 +178,6 @@ public class LevelUIManager : Singleton<LevelUIManager>
     }
     private void NewWaveStart(EnemySequence sequence)
     {
-        CurrentWave = sequence.Wave;
         EnemyRemain = sequence.Amount;
     }
 
@@ -280,20 +208,23 @@ public class LevelUIManager : Singleton<LevelUIManager>
     //每回合开始前计算幸运点、抽取模块次数等逻辑。
     public void Preparing()
     {
+        CurrentWave++;
+        //回合收入
+        PlayerCoin += StaticData.Instance.BaseWaveIncome + StaticData.Instance.WaveMultiplyIncome * CurrentWave;
+        //抽取次数及幸运点
+        if (!DrawThisTurn)
+        {
+            LuckyPoints += luckPointsProcess;
+            luckPointsProcess++;
+            if (LuckyPoints >= 10)
+            {
+                LuckyPoints -= 10;
+                LotteryDraw++;
+            }
+        }
+
+        DrawThisTurn = false;
         LotteryDraw++;
-        if (luckPointsProcess < 0) 
-            luckPointsProcess = 0;
-        else
-        {
-            if (luckPointsProcess < 5) 
-                luckPointsProcess++;
-        }
-        LuckyPoints += luckPointsProcess;
-        if (LuckyPoints >= 10)
-        {
-            LuckyPoints -= 10;
-            LotteryDraw++;
-        }
         ShowArea(0);
     }
 
@@ -367,8 +298,12 @@ public class LevelUIManager : Singleton<LevelUIManager>
         if (LotteryDraw > 0)
         {
             LotteryDraw--;
-            luckPointsProcess = -1;
+            DrawThisTurn = true;
             GetNewBuildings();
+        }
+        else
+        {
+            ShowMessage("抽取次数不足");
         }
     }
 

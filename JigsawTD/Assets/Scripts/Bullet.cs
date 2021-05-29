@@ -9,6 +9,8 @@ public enum BulletType
 }
 public abstract class Bullet : GameBehavior
 {
+    [SerializeField] protected GameObject SputteringEffect = default;
+    TrailRenderer trailRenderer;
     protected const int enemyLayerMask = 1 << 11;
     public abstract BulletType BulletType { get; }
     private TargetPoint target;
@@ -16,9 +18,9 @@ public abstract class Bullet : GameBehavior
     Vector2 targetPos;
     [HideInInspector] public Turret turretParent;
     private List<TurretEffect> turretEffects;
-    protected Vector2 TargetPos
+    protected virtual Vector2 TargetPos
     {
-        get => BulletType != BulletType.Target ? targetPos : Target.Position;
+        get => targetPos;
         set => targetPos = value;
     }
 
@@ -35,6 +37,10 @@ public abstract class Bullet : GameBehavior
     private float slowRate;
     public float SlowRate { get => slowRate; set => slowRate = value; }
 
+    private void Awake()
+    {
+        trailRenderer = this.GetComponent<TrailRenderer>();
+    }
     public override void OnSpawn()
     {
         base.OnSpawn();
@@ -46,8 +52,10 @@ public abstract class Bullet : GameBehavior
         base.OnUnSpawn();
     }
 
-    public void Initialize(Turret turret,TargetPoint target=null, Vector2? pos = null)
+    public virtual void Initialize(Turret turret, TargetPoint target = null, Vector2? pos = null)
     {
+        if (trailRenderer != null)
+            trailRenderer.Clear();
         this.turretParent = turret;
         this.Target = target;
         this.TargetPos = pos ?? target.Position;
@@ -91,10 +99,11 @@ public abstract class Bullet : GameBehavior
 
     public override bool GameUpdate()
     {
-        if (Target.Enemy.IsDie || !Target.Enemy.gameObject.activeSelf)
+
+        if (Target != null && (Target.Enemy.IsDie || !Target.Enemy.gameObject.activeSelf))
         {
-            ReclaimBullet();
-            return false;
+            TargetPos = Target.transform.position;
+            Target = null;
         }
         RotateBullet(TargetPos);
         return MoveTowards(TargetPos);
@@ -114,7 +123,7 @@ public abstract class Bullet : GameBehavior
         float distanceToTarget = ((Vector2)transform.position - pos).magnitude;
         if (distanceToTarget < minDistanceToDealDamage)
         {
-            DealDamage();
+            TriggerDamage();
             ReclaimBullet();
             return false;
         }
@@ -132,10 +141,17 @@ public abstract class Bullet : GameBehavior
         ObjectPool.Instance.UnSpawn(this.gameObject);
     }
 
-    protected virtual void DealDamage()
+    protected virtual void TriggerDamage()
     {
 
     }
-
+    protected void DealRealDamage(Enemy enemy)
+    {
+        float damage = UnityEngine.Random.value <= CriticalRate ? Damage * turretParent.CriticalPercentage : Damage;
+        TriggerHitEffect(enemy);
+        float realDamage;
+        enemy.ApplyDamage(damage, out realDamage);
+        turretParent.DamageAnalysis += (int)realDamage;
+    }
 
 }

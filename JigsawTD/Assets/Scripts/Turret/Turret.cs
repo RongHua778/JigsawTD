@@ -3,18 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum TurretType
+{
+    ElementTurret, CompositeTurret
+}
 public abstract class Turret : GameBehavior
 {
-    List<Composition> compositions = new List<Composition>();
-    public List<Composition> Compositions { get => compositions; set => compositions = value; }
+    public virtual TurretType TurretType => TurretType.ElementTurret;
 
+    public TurretTile m_TurretTile;
     private GameObject rangeIndicator;
     private Transform rangeParent;
     private float nextAttackTime;
     private Quaternion look_Rotation;
+    protected Animator turretAnim;
 
     protected RangeType RangeType;
-    [SerializeField] protected GameObject bulletPrefab = default;
+    protected GameObject bulletPrefab = default;
     protected float _rotSpeed = 10f;
     private List<TargetPoint> target = new List<TargetPoint>();
     public List<TargetPoint> Target { get => target; set => target = value; }
@@ -31,16 +36,27 @@ public abstract class Turret : GameBehavior
 
 
     //[Header("美术资源设置")]
-    private SpriteRenderer BaseSprite;
-    private SpriteRenderer CannonSprite;
+    protected SpriteRenderer BaseSprite;
+    protected SpriteRenderer CannonSprite;
     //************
 
-    [Header("TurretAttribute")]
-    public int Level = 0;
-    public TurretAttribute m_TurretAttribute = default;
+    //[Header("TurretAttribute")]
+    //private int level = 0;
+    //public int Level { get => level; set => level = value; }
+
+    [HideInInspector] public TurretAttribute m_TurretAttribute = default;
+    private int damageAnalysis;
+    public int DamageAnalysis { get => damageAnalysis; set => damageAnalysis = value; }
     //塔的品质
     private int quality = 1;
-    public int Quality { get => quality; set => quality = value; }
+    public int Quality
+    {
+        get => quality; set
+        {
+            quality = value;
+            SetGraphic();
+        }
+    }
     //塔的元素属性
     private Element element;
     public Element Element { get => element; set => element = value; }
@@ -48,22 +64,32 @@ public abstract class Turret : GameBehavior
     public virtual float AttackDamage { get => (m_TurretAttribute.TurretLevels[Quality - 1].AttackDamage + TurnAdditionalAttack) * (1 + AttackIntensify); }
     public virtual int AttackRange { get => m_TurretAttribute.TurretLevels[Quality - 1].AttackRange + RangeIntensify; }
     public int ForbidRange { get => m_TurretAttribute.TurretLevels[Quality - 1].ForbidRange; }
-    public virtual float AttackSpeed { get => m_TurretAttribute.TurretLevels[Quality - 1].AttackSpeed * (1 + SpeedIntensify); }
-    public float BulletSpeed { get => m_TurretAttribute.TurretLevels[Quality - 1].BulletSpeed; }
-    public float SputteringRange { get => m_TurretAttribute.TurretLevels[Quality - 1].SputteringRange; }
-    public float CriticalRate { get => m_TurretAttribute.TurretLevels[Quality - 1].CriticalRate; }
-    public float SlowRate { get => m_TurretAttribute.TurretLevels[Quality - 1].SlowRate; }
+    public virtual float AttackSpeed { get => (m_TurretAttribute.TurretLevels[Quality - 1].AttackSpeed + turnAdditionalSpeed) * (1 + SpeedIntensify); }
+    public float BulletSpeed { get => m_TurretAttribute.BulletSpeed; }
+    public virtual float SputteringRange { get => m_TurretAttribute.TurretLevels[Quality - 1].SputteringRange + SputteringIntensify; }
+    public float CriticalRate { get => m_TurretAttribute.TurretLevels[Quality - 1].CriticalRate + CriticalIntensify; }
+    public float SlowRate { get => m_TurretAttribute.TurretLevels[Quality - 1].SlowRate + SlowIntensify; }
+
+    float criticalPercentage = 1.5f;
+    public float CriticalPercentage { get => criticalPercentage; set => criticalPercentage = value; }
 
     int targetCount = 1;
     public int TargetCount { get => targetCount; set => targetCount = value; }
+
+
     //**************回合临时属性
     int turnAddtionalAttack = 0;
     public int TurnAdditionalAttack { get => turnAddtionalAttack; set => turnAddtionalAttack = value; }
+    float turnAdditionalSpeed = 0;
+    public float TurnAdditionalSpeed { get => turnAdditionalSpeed; set => turnAdditionalSpeed = value; }
+
     //*************
+
+
 
     //*************光环加成
     float attackIntensify;
-    public float AttackIntensify { get => attackIntensify; set => attackIntensify = value; }
+    public virtual float AttackIntensify { get => attackIntensify; set => attackIntensify = value; }
     int rangeIntensify;
     public int RangeIntensify
     {
@@ -75,10 +101,20 @@ public abstract class Turret : GameBehavior
         }
     }
     float speedIntensify;
-    public float SpeedIntensify { get => speedIntensify; set => speedIntensify = value; }
+    public virtual float SpeedIntensify { get => speedIntensify; set => speedIntensify = value; }
+
+    float criticalIntensify;
+    public virtual float CriticalIntensify { get => criticalIntensify; set => criticalIntensify = value; }
+    float slowIntensify;
+    public virtual float SlowIntensify { get => slowIntensify; set => slowIntensify = value; }
+    float sputteringIntensify;
+    public virtual float SputteringIntensify { get => sputteringIntensify; set => sputteringIntensify = value; }
+
     //*************
 
-    public List<TurretEffectInfo> TurretEffectInfos => m_TurretAttribute.TurretLevels[Level].AttackEffects;
+    public List<TurretEffectInfo> TurretEffectInfos => m_TurretAttribute.TurretLevels[Quality - 1].TurretEffects;
+
+
     public List<TurretEffect> TurretEffects = new List<TurretEffect>();
 
 
@@ -91,16 +127,18 @@ public abstract class Turret : GameBehavior
         shootPoint = rotTrans.Find("ShootPoint");
         BaseSprite = transform.root.Find("TileBase/TurretBase").GetComponent<SpriteRenderer>();
         CannonSprite = rotTrans.Find("Cannon").GetComponent<SpriteRenderer>();
+        turretAnim = this.GetComponent<Animator>();
 
     }
 
     public virtual void InitializeTurret()
     {
-        GenerateRange();
         rotTrans.localRotation = Quaternion.identity;
         RangeType = m_TurretAttribute.RangeType;
         Element = m_TurretAttribute.element;
+        bulletPrefab = m_TurretAttribute.Bullet;
         SetGraphic();
+        GenerateRange();
         GetTurretEffects();
     }
 
@@ -109,15 +147,16 @@ public abstract class Turret : GameBehavior
         TurretEffects.Clear();
         foreach (TurretEffectInfo info in TurretEffectInfos)
         {
-            TurretEffect effect = AttackEffectFactory.GetEffect((int)info.EffectName);
+            TurretEffect effect = TurretEffectFactory.GetEffect((int)info.EffectName);
             effect.turret = this;
             effect.KeyValue = info.KeyValue;
             TurretEffects.Add(effect);
+            effect.Build();
         }
     }
 
     //设置不同等级的美术资源
-    public void SetGraphic()
+    public virtual void SetGraphic()
     {
         shootPoint.transform.localPosition = m_TurretAttribute.TurretLevels[quality - 1].ShootPointOffset;
         BaseSprite.sprite = m_TurretAttribute.TurretLevels[quality - 1].BaseSprite;
@@ -126,10 +165,10 @@ public abstract class Turret : GameBehavior
 
     public virtual void TriggerPoloEffect(bool value)
     {
-        if (m_TurretAttribute.TurretLevels[Level].PoloEffects.Count > 0)
+        if (m_TurretAttribute.TurretLevels[Quality - 1].PoloEffects.Count > 0)
         {
             List<Vector2> poss = StaticData.GetCirclePoints(AttackRange, ForbidRange);
-            foreach (var polo in m_TurretAttribute.TurretLevels[Level].PoloEffects)
+            foreach (var polo in m_TurretAttribute.TurretLevels[Quality - 1].PoloEffects)
             {
                 switch (polo.EffectType)
                 {
@@ -157,6 +196,7 @@ public abstract class Turret : GameBehavior
     public void AddTarget(TargetPoint target)
     {
         targetList.Add(target);
+        AcquireTarget();
     }
 
     public virtual void RemoveTarget(TargetPoint target)
@@ -195,7 +235,7 @@ public abstract class Turret : GameBehavior
 
     private bool TrackTarget()
     {
-        if (Target == null)
+        if (Target.Count == 0)
         {
             return false;
         }
@@ -209,12 +249,7 @@ public abstract class Turret : GameBehavior
         }
         if (Target.Count == 0)
             return false;
-        //if (!Target.Enemy.gameObject.activeSelf)
-        //{
-        //    targetList.Remove(Target);
-        //    Target = null;
-        //    return false;
-        //}
+
         return true;
     }
     private bool AcquireTarget()
@@ -223,24 +258,20 @@ public abstract class Turret : GameBehavior
             return false;
         else
         {
-            if (TargetCount > 1)
+            if (TargetCount > Target.Count)
             {
-                List<int> returnInt = null;
+                Target.Clear();
+                List<int> returnInt = StaticData.SelectNoRepeat(targetList.Count, TargetCount);
                 foreach (int i in returnInt)
                 {
                     Target.Add(targetList[i]);
                 }
             }
-            else
+            else if (Target.Count <= 0)
             {
                 Target.Add(targetList[UnityEngine.Random.Range(0, targetList.Count - 1)]);
             }
-            //List<int> returnInt = null;
-            //foreach (int i in returnInt)
-            //{
-            //    Target.Add(targetList[i]);
-            //}
-            ////Target = targetList[UnityEngine.Random.Range(0, targetList.Count - 1)];
+
             return false;
         }
     }
@@ -321,6 +352,13 @@ public abstract class Turret : GameBehavior
 
     protected virtual void Shoot()
     {
+        turretAnim.SetTrigger("Attack");
+        foreach (TargetPoint target in Target)
+        {
+            Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
+            bullet.transform.position = shootPoint.position;
+            bullet.Initialize(this, target);
+        }
 
     }
 
@@ -330,15 +368,13 @@ public abstract class Turret : GameBehavior
         Gizmos.color = Color.yellow;
         Vector3 position = transform.position;
         position.z -= 0.1f;
-        //if (Target != null)
-        //{
-        //    Gizmos.DrawLine(position, Target.transform.position);
-        //}
+
     }
 
     public void ClearTurnIntensify()
     {
         TurnAdditionalAttack = 0;
+        TurnAdditionalSpeed = 0;
     }
 
 }

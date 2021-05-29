@@ -5,13 +5,52 @@ using UnityEngine;
 public class Blueprint
 {
     public TurretAttribute CompositeTurretAttribute;
-    //int totalLevel;
-    //int compositionN;
     public bool CanBuild => CheckBuildable();
     List<Composition> compositions = new List<Composition>();
     public List<Composition> Compositions { get => compositions; set => compositions = value; }
-    //public int CompositionN { get => compositionN; set => compositionN = value; }
-    //public int TotalLevel { get => totalLevel; set => totalLevel = value; }
+
+    public float CompositeAttackDamage;
+    public float CompositeAttackSpeed;
+    public float CompositeSlowRate;
+    public float CompositeCriticalRate;
+    public float CompositeSputteringRange;
+
+    public void SetCompositeValues()
+    {
+        CompositeAttackDamage = CompositeAttackSpeed = CompositeSlowRate = CompositeCriticalRate = CompositeSputteringRange = 0;
+        foreach (Composition com in Compositions)
+        {
+            switch ((Element)com.elementRequirement)
+            {
+                case Element.Gold:
+                    CompositeAttackDamage += StaticData.Instance.GoldAttackIntensify * com.levelRequirement;
+                    break;
+                case Element.Wood:
+                    CompositeAttackSpeed += StaticData.Instance.WoodSpeedIntensify * com.levelRequirement;
+                    break;
+                case Element.Water:
+                    CompositeSlowRate += StaticData.Instance.WaterSlowIntensify * com.levelRequirement;
+                    break;
+                case Element.Fire:
+                    CompositeCriticalRate += StaticData.Instance.FireCriticalIntensify * com.levelRequirement;
+                    break;
+                case Element.Dust:
+                    CompositeSputteringRange += StaticData.Instance.DustSputteringIntensify * com.levelRequirement;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    public void BuildBluePrint()
+    {
+        //建造合成塔，移除所有配方
+        foreach(Composition com in Compositions)
+        {
+            GameEvents.Instance.RemoveGameTile(com.turretTile);
+        }
+    }
 
     //检测每个配方是否存在在场上的方法
     public void CheckElement()
@@ -27,6 +66,7 @@ public class Blueprint
                     compositions[i].levelRequirement == turret.Quality)
                 {
                     compositions[i].obtained = true;
+                    compositions[i].turretTile = turret.m_TurretTile;
                     break;
                 }
             }

@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
   m_Name: FireAttribute
   m_EditorClassIdentifier: 
-  Icon: {fileID: 21300000, guid: 0fc4aee69dd71dd4a80c702accbef93c, type: 3}
   Name: Fire
-  Description: "\u6709\u6982\u7387\u66B4\u51FB\u3002\u653B\u51FB\u8303\u56F4\u534A\u5706\u3002"
+  Description: "\u653B\u51FB\u6709\u4E00\u5B9A\u6982\u7387\u66B4\u51FB\u3002"
   TilePrefab: {fileID: 6604616035422911931, guid: 24008486aeb5cc14d9b096b6415a87b8, type: 3}
   RangeType: 1
   element: 3
+  Bullet: {fileID: 3850126010392176229, guid: fec690f128f622c47943dc96ba4cb0a1, type: 3}
+  BulletSpeed: 8
   totalLevel: 0
   elementNumber: 0
   TurretLevels:
@@ -25,10 +26,10 @@ MonoBehaviour:
     ForbidRange: 0
     AttackDamage: 6
     AttackSpeed: 0.5
-    BulletSpeed: 10
     SputteringRange: 0
     CriticalRate: 0.3
-    AttackEffects: []
+    SlowRate: 0
+    TurretEffects: []
     PoloEffects: []
     TurretName: D1
     Icon: {fileID: 21300000, guid: d7d4a84ea7876b04b8cffb3bbf8e2c53, type: 3}
@@ -39,55 +40,55 @@ MonoBehaviour:
     ForbidRange: 0
     AttackDamage: 10
     AttackSpeed: 0.55
-    BulletSpeed: 10
     SputteringRange: 0
     CriticalRate: 0.35
-    AttackEffects: []
+    SlowRate: 0
+    TurretEffects: []
     PoloEffects: []
     TurretName: D2
     Icon: {fileID: 21300000, guid: 5c983e4989d4ca140941530f37b7bd7a, type: 3}
     BaseSprite: {fileID: 21300000, guid: 314e42a0fa19e4141abf677f45f51587, type: 3}
     CannonSprite: {fileID: 21300000, guid: 8f80e93a2eb232148882ac4cec035e4e, type: 3}
-    ShootPointOffset: {x: 0, y: 0.23}
+    ShootPointOffset: {x: 0, y: 0.24}
   - AttackRange: 2
     ForbidRange: 0
     AttackDamage: 14
     AttackSpeed: 0.6
-    BulletSpeed: 10
     SputteringRange: 0
     CriticalRate: 0.4
-    AttackEffects: []
+    SlowRate: 0
+    TurretEffects: []
     PoloEffects: []
     TurretName: D3
     Icon: {fileID: 21300000, guid: ab1c8cb467bf55a42aee77ef4e54d2ec, type: 3}
     BaseSprite: {fileID: 21300000, guid: 314e42a0fa19e4141abf677f45f51587, type: 3}
     CannonSprite: {fileID: 21300000, guid: 1772ccd2addaa654baa7980a624d939e, type: 3}
-    ShootPointOffset: {x: 0, y: 0.23}
+    ShootPointOffset: {x: 0, y: 0.26}
   - AttackRange: 2
     ForbidRange: 0
     AttackDamage: 20
     AttackSpeed: 0.65
-    BulletSpeed: 10
     SputteringRange: 0
     CriticalRate: 0.45
-    AttackEffects: []
+    SlowRate: 0
+    TurretEffects: []
     PoloEffects: []
     TurretName: D4
     Icon: {fileID: 21300000, guid: ed883e1c00aca7047ace2c5f65f93b99, type: 3}
     BaseSprite: {fileID: 21300000, guid: 0fc4aee69dd71dd4a80c702accbef93c, type: 3}
     CannonSprite: {fileID: 21300000, guid: 43154665103206c469442843fd02aebe, type: 3}
-    ShootPointOffset: {x: 0, y: 0.25}
+    ShootPointOffset: {x: 0, y: 0.26}
   - AttackRange: 2
     ForbidRange: 0
     AttackDamage: 30
     AttackSpeed: 0.7
-    BulletSpeed: 10
     SputteringRange: 0
     CriticalRate: 0.5
-    AttackEffects: []
+    SlowRate: 0
+    TurretEffects: []
     PoloEffects: []
     TurretName: D5
     Icon: {fileID: 21300000, guid: d07d028d24dea1044998d319861979b8, type: 3}
     BaseSprite: {fileID: 21300000, guid: 0fc4aee69dd71dd4a80c702accbef93c, type: 3}
     CannonSprite: {fileID: 21300000, guid: eff3c21f9877e6444b1cb87671f7cbf1, type: 3}
-    ShootPointOffset: {x: 0, y: 0.31}
+    ShootPointOffset: {x: 0, y: 0.32}

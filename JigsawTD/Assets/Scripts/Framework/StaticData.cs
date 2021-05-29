@@ -20,6 +20,9 @@ public class StaticData : Singleton<StaticData>
     public static LayerMask RunTimeFindPathLayer = 1 << 7 | 1 << 8;
     public int PlayerMaxLevel;
     public int[] LevelUpMoney;
+    public int StartCoin;
+    public int BaseWaveIncome;
+    public int WaveMultiplyIncome;
     public float[,] LevelChances = new float[6, 5]
     {
         { 0.75f, 0.25f, 0f, 0f, 0f },
@@ -47,24 +50,31 @@ public class StaticData : Singleton<StaticData>
     public int LevelMaxWave;
 
     [Header("ElementAttributes")]
-    public List<TurretAttribute> ElementAttributes = new List<TurretAttribute>();
-    public Dictionary<Element, TurretAttribute> ElementDIC = new Dictionary<Element, TurretAttribute>();
+    public float GoldAttackIntensify;
+    public float WoodSpeedIntensify;
+    public float WaterSlowIntensify;
+    public float FireCriticalIntensify;
+    public float DustSputteringIntensify;
+
 
     [Header("CompositionAttributes")]
-    public List<TurretAttribute> CompositionAttributes = new List<TurretAttribute>();
-    protected override void Awake()
+    public int[,] LevelUpCost = new int[3, 2]//合成塔升级费用
     {
-        base.Awake();
-        InitElementDIC();
-    }
+        { 50, 100 },
+        { 100,200 },
+        { 150,300 }
+    };
+    public float[,] RareChances = new float[6, 3]
+    {
+        { 0.75f,0.25f,0f },
+        { 0.65f,0.3f,0.05f},
+        { 0.45f,0.35f,0.2f },
+        { 0.35f,0.4f,0.3f},
+        { 0.25f,0.35f,0.4f},
+        { 0.2f,0.3f,0.5f},
+    };
 
-    private void InitElementDIC()
-    {
-        foreach (var attribute in ElementAttributes)
-        {
-            ElementDIC.Add(attribute.element, attribute);
-        }
-    }
+
     public void GameSlowDown()
     {
         Time.timeScale = GameSlowDownRate;
@@ -246,26 +256,12 @@ public class StaticData : Singleton<StaticData>
         return result;
     }
 
-    public TurretAttribute GetElementsAttributes(Element element)
-    {
-        if (ElementDIC.ContainsKey(element))
-        {
-            return ElementDIC[element];
-        }
-        Debug.LogWarning(element + "没有对应的元素attribute");
-        return null;
-    }
-
-    public TurretAttribute GetRandomCompositionTurret()
-    {
-        return CompositionAttributes[Random.Range(0, CompositionAttributes.Count)];
-    }
 
     //total是总量，number是想要几个随机数
-    public static List<int> SelectNoRepeat(int total,int number)
+    public static List<int> SelectNoRepeat(int total, int number)
     {
         List<int> data = new List<int>();
-        for(int i = 0; i < total; i++)
+        for (int i = 0; i < total; i++)
         {
             data.Add(i);
         }

@@ -9,11 +9,10 @@ public class TurretInfo
     public int ForbidRange;
     public float AttackDamage;
     public float AttackSpeed;
-    public float BulletSpeed;
     public float SputteringRange;
     public float CriticalRate;
     public float SlowRate;
-    public List<TurretEffectInfo> AttackEffects = new List<TurretEffectInfo>();
+    public List<TurretEffectInfo> TurretEffects = new List<TurretEffectInfo>();
     public List<PoloEffect> PoloEffects = new List<PoloEffect>();
     [Header("美术资源设置")]
     public string TurretName;
@@ -44,6 +43,11 @@ public class TurretAttribute : LevelAttribute
 {
     public RangeType RangeType;
     public Element element;
+    public GameObject Bullet;
+    public float BulletSpeed;
+
+    [Header("合成塔参数")]
+    public int Rare;//稀有度
     public int totalLevel;
     public int elementNumber;
     public List<TurretInfo> TurretLevels = new List<TurretInfo>();

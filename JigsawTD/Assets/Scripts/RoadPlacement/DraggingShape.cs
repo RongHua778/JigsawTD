@@ -58,6 +58,12 @@ public class DraggingShape : DraggingActions
         lastPos = transform.position;
     }
 
+    public void ShapeSpawned()//生成模块后，检查一下可否放置和寻路
+    {
+        CheckCanDrop();
+        StartCoroutine(TryFindPath());
+    }
+
     private void SetGroundForPathFinding()
     {
         Physics2D.SyncTransforms();

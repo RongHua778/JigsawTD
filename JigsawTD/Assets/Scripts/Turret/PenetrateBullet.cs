@@ -5,7 +5,19 @@ using UnityEngine;
 public class PenetrateBullet : Bullet
 {
     public override BulletType BulletType => BulletType.Penetrate;
+    private Vector3 initScale;
+    public override void Initialize(Turret turret, TargetPoint target = null, Vector2? pos = null)
+    {
+        base.Initialize(turret, target, pos);
+        initScale = transform.localScale;
+        transform.localScale = transform.localScale * (1 + SputteringRange);
+    }
 
+    public override void OnUnSpawn()
+    {
+        base.OnUnSpawn();
+        transform.localScale = initScale;
+    }
     public override bool GameUpdate()
     {
         RotateBullet(TargetPos);
@@ -16,8 +28,7 @@ public class PenetrateBullet : Bullet
         if (collision.CompareTag("Enemy"))
         {
             Enemy enemy = collision.GetComponent<TargetPoint>().Enemy;
-            TriggerHitEffect(enemy);
-            enemy.ApplyDamage(Damage);
+            DealRealDamage(enemy);
         }
     }
 }

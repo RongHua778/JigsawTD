@@ -41,12 +41,12 @@ public class BluePrintShop : MonoBehaviour
             return;
         foreach (var grid in ShopBluePrints.ToList())
         {
-            grid.RemoveBuildPrint();
+            RemoveGrid(grid);
         }
         ShopBluePrints.Clear();
         for (int i = 0; i < 3; i++)
         {
-            TurretAttribute compositeTurret = StaticData.Instance.GetRandomCompositionTurret();
+            TurretAttribute compositeTurret = GameManager.Instance.GetRandomCompositeAttributeByLevel();
             Blueprint bluePrint = GameManager.Instance.GetSingleBluePrint(compositeTurret);
             AddBluePrint(bluePrint);
         }
@@ -72,6 +72,27 @@ public class BluePrintShop : MonoBehaviour
         OwnBluePrints.Add(grid);
         ShopBluePrints.Remove(grid);
         grid.transform.SetAsLastSibling();
+    }
+
+    public void CompositeBluePrint(BluePrintGrid grid)
+    {
+        grid.BluePrint.BuildBluePrint();
+        GameManager.Instance.GenerateCompositeShape(grid.BluePrint);
+        RemoveGrid(grid);
+        CheckAllBluePrint();
+    }
+
+    private void RemoveGrid(BluePrintGrid grid)
+    {
+        if (ShopBluePrints.Contains(grid))
+        {
+            ShopBluePrints.Remove(grid);
+        }
+        if (OwnBluePrints.Contains(grid))
+        {
+            OwnBluePrints.Remove(grid);
+        }
+        ObjectPool.Instance.UnSpawn(grid.gameObject);
     }
 
     private void CheckAllBluePrint()

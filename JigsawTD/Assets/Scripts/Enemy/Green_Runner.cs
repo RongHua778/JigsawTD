@@ -6,9 +6,9 @@ public class Green_Runner : Enemy
 {
     public override EnemyType EnemyType => EnemyType.Runner;
 
-    float speedIntensify=0;
+    float speedIntensify = 0;
     public float SpeedIntensify { get => speedIntensify; set => speedIntensify = Mathf.Min(2, value); }
-    public override float Speed { get => StunTime > 0 ? 0 : (speed + SpeedIntensify) * (1 - SlowRate); set => base.Speed = value; }
+    public override float Speed { get => StunTime > 0 ? 0 : (speed + SpeedIntensify) * (1 - SlowRate / (SlowRate + 1)); set => base.Speed = value; }
 
 
     public override DirectionChange DirectionChange
