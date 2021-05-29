@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: K1
   Description: "\u65E0\u6CD5\u653B\u51FB\u8F83\u8FD1\u7684\u76EE\u6807\u3002"
-  TilePrefab: {fileID: 6604616035422911931, guid: b766d396faae99047bf70246c9fb1515, type: 3}
+  TilePrefab: {fileID: 6604616035422911931, guid: 4a9f194fc9e1d3149ac0fa8fbb8dbf17, type: 3}
   RangeType: 1
   element: 5
   Bullet: {fileID: 109416, guid: 6b6f7ed3471abdc40b2b80e4f1eaa7bd, type: 3}
-  BulletSpeed: 10
-  Rare: 2
+  BulletSpeed: 8
+  Rare: 3
   totalLevel: 13
   elementNumber: 4
   TurretLevels:

@@ -30,20 +30,8 @@ public class TurretTips : TileTips
         this.m_Turret = turret;
         Icon.sprite = turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].Icon;
         Name.text = turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].TurretName;
-        string rangeTypeTxt = "";
-        switch (turret.m_TurretAttribute.RangeType)
-        {
-            case RangeType.Circle:
-                rangeTypeTxt = "圆型";
-                break;
-            case RangeType.HalfCircle:
-                rangeTypeTxt = "半圆型";
-                break;
-            case RangeType.Line:
-                rangeTypeTxt = "直线型";
-                break;
-        }
-        this.RangeTypeValue.text = rangeTypeTxt;
+        //设置攻击范围类型
+        SetRangeType(turret.m_TurretAttribute);
         //即时更新攻击，攻速，伤害统计等数据
         UpdateInfo(turret);
         //设置描述文案
@@ -96,6 +84,24 @@ public class TurretTips : TileTips
         AnalysisArea.SetActive(true);
     }
 
+    private void SetRangeType(TurretAttribute attribute)
+    {
+        string rangeTypeTxt = "";
+        switch (attribute.RangeType)
+        {
+            case RangeType.Circle:
+                rangeTypeTxt = "圆型";
+                break;
+            case RangeType.HalfCircle:
+                rangeTypeTxt = "半圆型";
+                break;
+            case RangeType.Line:
+                rangeTypeTxt = "直线型";
+                break;
+        }
+        this.RangeTypeValue.text = rangeTypeTxt;
+    }
+
     private void SetDescription(Turret turret)
     {
         if (turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].TurretEffects.Count > 0)
@@ -134,6 +140,8 @@ public class TurretTips : TileTips
         TurretAttribute attribute = bGrid.BluePrint.CompositeTurretAttribute;
         Icon.sprite = attribute.TurretLevels[0].Icon;
         Name.text = attribute.TurretLevels[0].TurretName;
+
+        SetRangeType(attribute);
 
         string damageIntensify = bGrid.BluePrint.CompositeAttackDamage <= 0 ? "" : "<color=#00ffffff> +" + (attribute.TurretLevels[0].AttackDamage * bGrid.BluePrint.CompositeAttackDamage).ToString() + "</color>";
         AttackValue.text = attribute.TurretLevels[0].AttackDamage.ToString() + damageIntensify;

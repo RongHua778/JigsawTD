@@ -11,6 +11,7 @@ public class ElementGrid : MonoBehaviour
 
     public void SetElement(Composition composition)
     {
+        Debug.Log(composition.levelRequirement - 1);
         TurretAttribute attribute = GameManager.Instance.GetElementAttribute((Element)composition.elementRequirement);
         Img_Icon.sprite = attribute.TurretLevels[composition.levelRequirement - 1].Icon;
         Txt_ElementName.text = attribute.TurretLevels[composition.levelRequirement - 1].TurretName;

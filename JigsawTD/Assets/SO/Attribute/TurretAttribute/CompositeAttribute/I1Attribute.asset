@@ -19,7 +19,7 @@ MonoBehaviour:
   element: 5
   Bullet: {fileID: 1258406917094090, guid: a50675727eaf6274fa6307ec67ee5529, type: 3}
   BulletSpeed: 1
-  Rare: 0
+  Rare: 2
   totalLevel: 8
   elementNumber: 2
   TurretLevels:

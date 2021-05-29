@@ -46,7 +46,7 @@ public class BluePrintShop : MonoBehaviour
         ShopBluePrints.Clear();
         for (int i = 0; i < 3; i++)
         {
-            TurretAttribute compositeTurret = GameManager.Instance.GetRandomCompositeAttribute();
+            TurretAttribute compositeTurret = GameManager.Instance.GetRandomCompositeAttributeByLevel();
             Blueprint bluePrint = GameManager.Instance.GetSingleBluePrint(compositeTurret);
             AddBluePrint(bluePrint);
         }
@@ -77,7 +77,7 @@ public class BluePrintShop : MonoBehaviour
     public void CompositeBluePrint(BluePrintGrid grid)
     {
         grid.BluePrint.BuildBluePrint();
-        GameManager.Instance.GenerateDShape(grid.BluePrint);
+        GameManager.Instance.GenerateCompositeShape(grid.BluePrint);
         RemoveGrid(grid);
         CheckAllBluePrint();
     }

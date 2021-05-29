@@ -10,12 +10,16 @@ public class TurretAttributeFactory : GameObjectFactory
     public List<TurretAttribute> CompositionAttributes;
     public List<TurretAttribute> ElementAttributes;
 
-    private List<TurretAttribute> Rare1Turrets = new List<TurretAttribute>();
-    private List<TurretAttribute> Rare2Turrets = new List<TurretAttribute>();
-    private List<TurretAttribute> Rare3Turrets = new List<TurretAttribute>();
+    private List<TurretAttribute> Rare1Turrets;
+    private List<TurretAttribute> Rare2Turrets;
+    private List<TurretAttribute> Rare3Turrets;
     private Dictionary<Element, TurretAttribute> ElementDIC = new Dictionary<Element, TurretAttribute>();
     public void InitializeFacotory()
     {
+        Rare1Turrets = new List<TurretAttribute>();
+        Rare2Turrets = new List<TurretAttribute>();
+        Rare3Turrets = new List<TurretAttribute>();
+
         foreach (TurretAttribute attribute in CompositionAttributes)
         {
             switch (attribute.Rare)
@@ -52,6 +56,30 @@ public class TurretAttributeFactory : GameObjectFactory
         return CompositionAttributes[Random.Range(0, CompositionAttributes.Count)];
     }
 
+    public TurretAttribute GetRandomCompositionTurretByLevel()
+    {
+        int level = LevelUIManager.Instance.PlayerLevel;
+        float[] rare = new float[3];
+        for (int i = 0; i < 3; i++)
+        {
+            rare[i] = StaticData.Instance.RareChances[level - 1, i];
+        }
+        int final = StaticData.RandomNumber(rare);
+        switch (final)
+        {
+            case 0:
+                return Rare1Turrets[Random.Range(0, Rare1Turrets.Count)];
+            case 1:
+                return Rare2Turrets[Random.Range(0, Rare2Turrets.Count)];
+            case 2:
+                return Rare3Turrets[Random.Range(0, Rare3Turrets.Count)];
+            default:
+                Debug.Log("错误的概率");
+                return null;
+        }
+    }
+
+    //用于测试
     public TurretAttribute TestGetCompositeByName(string name)
     {
         foreach (TurretAttribute attribute in CompositionAttributes)

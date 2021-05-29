@@ -205,6 +205,7 @@ public class GameManager : Singleton<GameManager>
         return bluePrint;
     }
 
+    //生成随机形状，配置随机元素塔
     public TileShape GenerateRandomBasicShape()
     {
         TileShape shape = _shapeFactory.GetBasicShape();
@@ -213,7 +214,8 @@ public class GameManager : Singleton<GameManager>
         return shape;
     }
 
-    public TileShape GenerateDShape(Blueprint bluePrint)//生成合成塔
+    //消耗素材，生成合成塔及DShape供放置
+    public TileShape GenerateCompositeShape(Blueprint bluePrint)
     {
         TileShape shape = _shapeFactory.GetDShape();
         GameTile tile = _tileFactory.GetCompositeTurretTile(bluePrint.CompositeTurretAttribute);
@@ -225,16 +227,7 @@ public class GameManager : Singleton<GameManager>
     }
 
 
-    public void GetTestShape(TurretAttribute compositeAttribute)
-    {
-        TileShape shape = _shapeFactory.GetDShape();
-        GameTile tile = _tileFactory.GetCompositeTurretTile(compositeAttribute);
-        Blueprint bluePrint = _bluePrintFacotry.GetRandomBluePrint(_turretFactory.GetRandomCompositionTurret());
-        Turret turret = ((TurretTile)tile).turret;
-        ((CompositeTurret)turret).CompositeBluePrint = bluePrint;
-        shape.InitializeShape(tile);
-    }
-
+    //测试用，基于元素，等级，获取对应元素塔
     public void GetTestElement(int quality, int element)
     {
         TileShape shape = _shapeFactory.GetDShape();
@@ -242,16 +235,25 @@ public class GameManager : Singleton<GameManager>
         shape.InitializeShape(tile);
     }
 
+    //获取基本元素塔，基于元素类型，用于配置UI等
     public TurretAttribute GetElementAttribute(Element element)
     {
         return _turretFactory.GetElementsAttributes(element);
     }
 
+    //根据玩家等级概率获取对应随机配方
+    public TurretAttribute GetRandomCompositeAttributeByLevel()
+    {
+        return _turretFactory.GetRandomCompositionTurretByLevel();
+    }
+
+    //获取一个随机的配方
     public TurretAttribute GetRandomCompositeAttribute()
     {
         return _turretFactory.GetRandomCompositionTurret();
     }
 
+    //测试用，根据名字生成一个合成塔
     public void GetCompositeAttributeByName(string name)
     {
         TileShape shape = _shapeFactory.GetDShape();
