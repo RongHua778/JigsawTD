@@ -60,7 +60,6 @@ public abstract class GameTile : TileBase
 
     }
 
-
     private void OnMouseDown()
     {
         if (!EventSystem.current.IsPointerOverGameObject())

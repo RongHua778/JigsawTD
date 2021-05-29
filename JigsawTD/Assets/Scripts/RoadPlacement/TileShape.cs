@@ -32,6 +32,7 @@ public class TileShape : MonoBehaviour
     //在shape上面加上塔
     public void InitializeShape(GameTile specialTile, TileFactory tileFactory = null)
     {
+        draggingShape.TurretCollider = specialTile.GetComponentInParent<Collider2D>();
         if (shapeType == ShapeType.D)
         {
             specialTile.transform.position = tilePos[0].transform.position;
@@ -52,7 +53,7 @@ public class TileShape : MonoBehaviour
                     tile = specialTile;
                     Turret turret = ((TurretTile)specialTile).turret;
                     turretName.text = turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].TurretName;
-                    draggingShape.TurretCollider = turret.GetComponentInParent<Collider2D>();
+                   // draggingShape.TurretCollider = turret.GetComponentInParent<Collider2D>();
                 }
                 else
                 {
