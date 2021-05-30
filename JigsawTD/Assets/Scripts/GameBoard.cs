@@ -25,7 +25,7 @@ public class GameBoard : MonoBehaviour
 
 
     List<GameTile> tiles = new List<GameTile>();
-    static List<GameTile> shortestPath = new List<GameTile>();
+    public List<GameTile> shortestPath = new List<GameTile>();
 
     public static Path path;
 
@@ -96,12 +96,12 @@ public class GameBoard : MonoBehaviour
                     continue;
                 if (pos.x == -1 && pos.y == 0)//SpawnPoint
                 {
-                    tile = this.tileFactory.GetBasicTile(BasicTileType.SpawnPoint);
+                    tile = this.tileFactory.GetImportantTile(BasicTileType.SpawnPoint);
                     SpawnPoint = tile;
                 }
                 else if (pos.x == 1 && pos.y == 0)//Destination
                 {
-                    tile = this.tileFactory.GetBasicTile(BasicTileType.Destination);
+                    tile = this.tileFactory.GetImportantTile(BasicTileType.Destination);
                     DestinationPoint = tile;
                 }
                 else

@@ -29,7 +29,7 @@ public class DraggingShape : DraggingActions
     Color wrongColor, correctColor = default;
 
     Collider2D turretCollider;
-    Color draggingColor = new Color(1, 1, 1, 0.3f);
+    Color draggingColor = new Color(1, 1, 1, 0f);
 
 
     public Collider2D TurretCollider { get => turretCollider; set => turretCollider = value; }

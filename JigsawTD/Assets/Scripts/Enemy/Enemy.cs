@@ -95,6 +95,8 @@ public abstract class Enemy : GameBehavior
         if (IsDie)
         {
             StopAllCoroutines();
+            GameObject explosion = ObjectPool.Instance.Spawn(exlposionPrefab);
+            explosion.transform.position = model.transform.position;
             GameEvents.Instance.EnemyDie(this);
             ObjectPool.Instance.UnSpawn(this.gameObject);
             return false;

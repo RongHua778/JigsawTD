@@ -58,6 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f095c504912bcd429aeb9afdd7c1aff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  exlposionPrefab: {fileID: 182438, guid: 846dc44009b18294b9b6a7e51bc55a02, type: 3}
   model: {fileID: 7619665209501119904}
   tileFrom: {fileID: 0}
   tileTo: {fileID: 0}

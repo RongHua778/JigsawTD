@@ -20,14 +20,14 @@ public class TileFactory : GameObjectFactory
     {
 
     }
-    public GameTile GetBasicTile(BasicTileType tileType)
+    public TrapTile GetImportantTile(BasicTileType tileType)
     {
         switch (tileType)
         {
             case BasicTileType.SpawnPoint:
-                return CreateInstance(spawnPoint.gameObject).GetComponent<GameTile>();
+                return CreateInstance(spawnPoint.gameObject).GetComponent<TrapTile>();
             case BasicTileType.Destination:
-                return CreateInstance(destinationTile.gameObject).GetComponent<GameTile>();
+                return CreateInstance(destinationTile.gameObject).GetComponent<TrapTile>();
         }
         return null;
     }

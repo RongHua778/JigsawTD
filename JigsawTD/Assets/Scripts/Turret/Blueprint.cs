@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Blueprint
 {
@@ -55,7 +56,8 @@ public class Blueprint
     //检测每个配方是否存在在场上的方法
     public void CheckElement()
     {
-        List<GameBehavior> temp = GameManager.Instance.turrets.behaviors;
+        List<GameBehavior> temp = GameManager.Instance.turrets.behaviors.ToList();
+        
         for (int i = 0; i < compositions.Count; i++)
         {
             compositions[i].obtained = false;
@@ -67,6 +69,7 @@ public class Blueprint
                 {
                     compositions[i].obtained = true;
                     compositions[i].turretTile = turret.m_TurretTile;
+                    temp.Remove(temp[j]);
                     break;
                 }
             }
