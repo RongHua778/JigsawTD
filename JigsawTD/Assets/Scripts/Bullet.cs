@@ -99,7 +99,6 @@ public abstract class Bullet : GameBehavior
 
     public override bool GameUpdate()
     {
-
         if (Target != null && (Target.Enemy.IsDie || !Target.Enemy.gameObject.activeSelf))
         {
             TargetPos = Target.transform.position;

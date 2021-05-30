@@ -205,7 +205,10 @@ public class GameBoard : MonoBehaviour
     }
     private void GenerateTrapTiles(Vector2Int groundSize, int trapN, TileFactory t)
     {
+
         List<Vector2> tiles = new List<Vector2>();
+        List<Vector2> basicPoss = new List<Vector2>();
+
         List<Vector2> traps = new List<Vector2>();
         for (int i = 0; i < groundSize.x; i++)
         {
@@ -213,7 +216,10 @@ public class GameBoard : MonoBehaviour
             {
                 //避免陷阱刷到初始的方块上
                 if (!(i >= 10 && i <= 14 && j >= 10 && j <= 14))
+                {
                     tiles.Add(new Vector2(i, j));
+                    basicPoss.Add(new Vector2(i, j));
+                }
             }
         }
         for (int i = 0; i < trapN; i++)
@@ -221,13 +227,24 @@ public class GameBoard : MonoBehaviour
             int index = UnityEngine.Random.Range(0, tiles.Count);
             Vector2 temp = tiles[index];
             traps.Add(temp);
-            List<Vector2> neibor = StaticData.GetCirclePoints(6, 0);
+            List<Vector2> neibor = StaticData.GetCirclePoints(5, 0);
             for (int k = 0; k < neibor.Count; k++)
             {
                 neibor[k] = neibor[k] + tiles[index];
             }
             tiles = tiles.Except(neibor).ToList();
             tiles.Remove(temp);
+            basicPoss.Remove(temp);
+        }
+
+        for(int j = 0; j < StaticData.basicN; j++)
+        {
+            int index= UnityEngine.Random.Range(0, basicPoss.Count);
+            Vector2 pos = basicPoss[index];
+            BasicTile tile = t.GetBasicTile();
+
+            AddGameTile(tile, new Vector2(pos.x - (groundSize.x - 1) / 2,
+                pos.y - (groundSize.y - 1) / 2));
         }
 
         foreach (Vector2 trap in traps)
