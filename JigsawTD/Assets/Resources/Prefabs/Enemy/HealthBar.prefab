@@ -235,7 +235,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &3727689228522642995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,6 +268,7 @@ MonoBehaviour:
   healthProgress: {fileID: 3727689228102059129}
   slowIcon: {fileID: 8811797090977339754}
   offset: {x: 0, y: 0.5}
+  jumpDamagePrefab: {fileID: 8946404515464236241, guid: e488d8a0acdca174981e27c01bfe1e36, type: 3}
   followTrans: {fileID: 0}
 --- !u!1 &5757985738362144293
 GameObject:

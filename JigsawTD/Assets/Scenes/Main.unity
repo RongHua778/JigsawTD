@@ -2386,7 +2386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerMaxLevel: 8
-  LevelUpMoney: 00000000280000005000000078000000c80000002c010000c20100005802000020030000
+  LevelUpMoney: 00000000280000005000000078000000c80000002c010000c2010000
   StartCoin: 0
   BaseWaveIncome: 5
   WaveMultiplyIncome: 5

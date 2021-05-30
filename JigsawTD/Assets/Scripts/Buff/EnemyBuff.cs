@@ -197,7 +197,7 @@ public class DamageTarget : TileBuff
     public override void Affect()
     {
         float damageReturn;
-        Target.ApplyDamage(Target.TargetDamageCounter * KeyValue, out damageReturn);
+        Target.ApplyDamage(Target.TargetDamageCounter * KeyValue, out damageReturn, true);
         ((TrapTile)(Target.tileFrom)).DamageAnalysis += (int)damageReturn;
         Target.TargetDamageCounter = 0;
         Debug.Log("TriggerDamageTarget" + damageReturn);

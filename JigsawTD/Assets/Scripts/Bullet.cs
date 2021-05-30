@@ -147,10 +147,11 @@ public abstract class Bullet : GameBehavior
     }
     protected void DealRealDamage(Enemy enemy)
     {
-        float damage = UnityEngine.Random.value <= CriticalRate ? Damage * turretParent.CriticalPercentage : Damage;
+        bool isCritical = UnityEngine.Random.value <= CriticalRate; ;
+        float damage = isCritical ? Damage * turretParent.CriticalPercentage : Damage;
         TriggerHitEffect(enemy);
         float realDamage;
-        enemy.ApplyDamage(damage, out realDamage);
+        enemy.ApplyDamage(damage, out realDamage, isCritical);
         turretParent.DamageAnalysis += (int)realDamage;
     }
 
