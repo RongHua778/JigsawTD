@@ -29,11 +29,13 @@ public class EnemySpawner : MonoBehaviour
         this._enemyFactory = factory;
         float intensify = 1;
         int amount;
-        for (int i = 0; i < 30; i++)
+        float stage = 3;
+        for (int i = 0; i < 50; i++)
         {
             EnemyType type = (EnemyType)UnityEngine.Random.Range(0, 4);
             EnemyAttribute attribute = _enemyFactory.Get(type);
-            intensify = (1+i)*3;
+            intensify =  stage*(0.5f*i+1);
+            if (i % 3 == 0) stage+=2f;
             amount = attribute.InitCount + i / 5 * attribute.CountIncrease;
             EnemySequence sequence = new EnemySequence(i + 1, attribute, intensify, amount);
             LevelSequence.Enqueue(sequence);
