@@ -266,23 +266,22 @@ public abstract class Enemy : GameBehavior
     public virtual void ApplyDamage(float amount, out float realDamage,bool isCritical=false)
     {
         realDamage = amount * 5 / (5 + Shell);
-        CurrentHealth -= realDamage;
-        TargetDamageCounter += realDamage;
         if (isCritical)
         {
             healthBar.ShowJumpDamage((int)realDamage);
         }
+        CurrentHealth -= realDamage;
+        TargetDamageCounter += realDamage;
     }
 
 
     public override void OnSpawn()
     {
-
+        model.localPosition = Vector3.zero;
     }
 
     public override void OnUnSpawn()
     {
-        model.localPosition = Vector3.zero;
         ObjectPool.Instance.UnSpawn(healthBar.gameObject);
         IsDie = false;
         TargetDamageCounter = 0;
