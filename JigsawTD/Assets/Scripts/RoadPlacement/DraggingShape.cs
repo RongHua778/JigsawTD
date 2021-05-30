@@ -20,10 +20,10 @@ public class DraggingShape : DraggingActions
 
     [SerializeField]
     LayerMask CheckDropLayer = default;
-    [SerializeField]
-    LayerMask CheckTurretLayer = default;
-    [SerializeField]
-    LayerMask TrapLayer = default;
+    //[SerializeField]
+    //LayerMask CheckTurretLayer = default;
+    //[SerializeField]
+    //LayerMask TrapLayer = default;
 
     [SerializeField]
     Color wrongColor, correctColor = default;
@@ -191,7 +191,7 @@ public class DraggingShape : DraggingActions
     private bool CheckTrapDroppable()
     {
         Vector3 posTurret = new Vector3(turretCollider.transform.position.x, turretCollider.transform.position.y, 0);
-        int hits = Physics2D.OverlapBoxNonAlloc(posTurret, new Vector2(0.01f, 0.01f), 0, collideTurretResult, TrapLayer);
+        int hits = Physics2D.OverlapBoxNonAlloc(posTurret, new Vector2(0.01f, 0.01f), 0, collideTurretResult, LayerMask.GetMask(StaticData.TrapTileMask));
         if (hits > 0)
         {
             for (int i = 0; i < hits; i++)
@@ -272,12 +272,13 @@ public class DraggingShape : DraggingActions
         foreach (Collider2D col in detectCollider)
         {
             Vector3 pos = new Vector3(col.transform.position.x, col.transform.position.y, 0);
-            int hits = Physics2D.OverlapCircleNonAlloc(pos, 0.51f, collideResult, TrapLayer);
+            int hits = Physics2D.OverlapCircleNonAlloc(pos, 0.51f, collideResult, LayerMask.GetMask(StaticData.TrapTileMask));
             if (hits > 0)
             {
                 for (int i = 0; i < hits; i++)
                 {
-                    collideResult[i].gameObject.GetComponent<TrapTile>().Actived = true;
+                   
+                    collideResult[i].gameObject.GetComponent<GameTile>().Actived = true;
                 }
             }
         }

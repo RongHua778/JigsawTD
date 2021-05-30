@@ -7,7 +7,7 @@ public class RoadPlacement : MonoBehaviour
     [SerializeField]
     TileSelect[] tileSelects = default;
     [SerializeField]
-    GameObject[] areas;
+    GameObject[] areas;//0=放路模式//1=选路模式
 
     public void ShowArea(int exceptId)
     {

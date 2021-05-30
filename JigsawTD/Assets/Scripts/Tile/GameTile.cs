@@ -21,6 +21,20 @@ public abstract class GameTile : TileBase
 
     Direction tileDirection;
 
+    bool actived;
+    public bool Actived
+    {
+        get => actived;
+        set
+        {
+            if (value)
+            {
+                gameObject.layer = LayerMask.NameToLayer(StaticData.ConcreteTileMask);
+                actived = value;
+            }
+        }
+    }
+
     public Vector3 ExitPoint { get; set; }
 
     protected virtual void Awake()

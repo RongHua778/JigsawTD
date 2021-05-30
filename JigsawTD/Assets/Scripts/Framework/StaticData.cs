@@ -45,7 +45,7 @@ public class StaticData : Singleton<StaticData>
     //最大quality
     public static int maxQuality = 5;
     public static int trapN = 15;
-    public static int basicN = 20;
+    public static int basicN = 25;
 
     [Header("ProbabilitySetting")]
     public float[] TileShapeChance = default;

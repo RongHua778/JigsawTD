@@ -304,7 +304,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
     {
         _roadPlacament.ShowArea(id);
     }
-    public void HideArea(int id)
+    public void HideArea()
     {
         _roadPlacament.HideArea();
     }
@@ -329,7 +329,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
 
     public void NextWaveClick()
     {
-        HideArea(1);
+        HideArea();
         GameManager.Instance.TransitionToState(StateName.WaveState);
     }
 

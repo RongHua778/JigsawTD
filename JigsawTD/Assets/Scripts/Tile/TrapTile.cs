@@ -9,17 +9,17 @@ public class TrapTile : GameTile
     int damageAnalysis;
     public int DamageAnalysis { get => damageAnalysis; set => damageAnalysis = value; }
     public override BasicTileType BasicTileType => BasicTileType.Trap;
-    bool actived;
-    public bool Actived { get => actived; 
-        set 
-        {
-            if (value)
-            {
-                gameObject.layer = LayerMask.NameToLayer(StaticData.ConcreteTileMask);
-                actived = value;
-            }
-        } 
-    }
+    //bool actived;
+    //public bool Actived { get => actived; 
+    //    set 
+    //    {
+    //        if (value)
+    //        {
+    //            gameObject.layer = LayerMask.NameToLayer(StaticData.ConcreteTileMask);
+    //            actived = value;
+    //        }
+    //    } 
+    //}
 
     public override void OnTilePass(Enemy enemy)
     {

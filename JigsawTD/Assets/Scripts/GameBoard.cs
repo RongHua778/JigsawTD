@@ -124,11 +124,12 @@ public class GameBoard : MonoBehaviour
             groundTile.TileAbrove = tile;
             groundTile.gameObject.layer = LayerMask.NameToLayer(StaticData.TempGroundMask);
         }
+        tile.gameObject.layer = LayerMask.NameToLayer(StaticData.ConcreteTileMask);
         //只有非陷阱才会改成concreteLayer
-        if (!tile.GetComponent<TrapTile>())
-        {
-            tile.gameObject.layer = LayerMask.NameToLayer(StaticData.ConcreteTileMask);
-        }
+        //if (!tile.GetComponent<TrapTile>())
+        //{
+        //    tile.gameObject.layer = LayerMask.NameToLayer(StaticData.ConcreteTileMask);
+        //}
         tile.transform.localPosition = pos;
         CorrectTileCoord(tile);
         tiles.Add(tile);
@@ -210,9 +211,9 @@ public class GameBoard : MonoBehaviour
         List<Vector2> basicPoss = new List<Vector2>();
 
         List<Vector2> traps = new List<Vector2>();
-        for (int i = 0; i < groundSize.x; i++)
+        for (int i = 1; i < groundSize.x-1; i++)
         {
-            for (int j = 0; j < groundSize.y; j++)
+            for (int j = 1; j < groundSize.y-1; j++)
             {
                 //避免陷阱刷到初始的方块上
                 if (!(i >= 10 && i <= 14 && j >= 10 && j <= 14))
@@ -245,12 +246,15 @@ public class GameBoard : MonoBehaviour
 
             AddGameTile(tile, new Vector2(pos.x - (groundSize.x - 1) / 2,
                 pos.y - (groundSize.y - 1) / 2));
+            //tile.gameObject.layer = LayerMask.NameToLayer(StaticData.TrapTileMask);
         }
 
         foreach (Vector2 trap in traps)
         {
-            AddGameTile(t.GetRandomTrap(), new Vector2(trap.x - (groundSize.x - 1) / 2,
+            TrapTile tile = t.GetRandomTrap();
+            AddGameTile(tile, new Vector2(trap.x - (groundSize.x - 1) / 2,
                 trap.y - (groundSize.y - 1) / 2));
+            tile.gameObject.layer = LayerMask.NameToLayer(StaticData.ConcreteTileMask);
         }
     }
     private void GenerateGroundTiles(Vector2Int groundSize)

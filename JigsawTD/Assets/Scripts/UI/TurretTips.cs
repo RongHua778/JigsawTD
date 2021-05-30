@@ -221,6 +221,7 @@ public class TurretTips : TileTips
             return;
         }
         CloseTips();
+        LevelUIManager.Instance.HideArea();
         m_BGrid.Shop.CompositeBluePrint(m_BGrid);
     }
 
