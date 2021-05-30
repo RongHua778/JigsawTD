@@ -30,7 +30,7 @@ public class EnemySpawner : MonoBehaviour
         float intensify = 1;
         int amount;
         float stage = 3;
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < StaticData.Instance.LevelMaxWave; i++)
         {
             EnemyType type = (EnemyType)UnityEngine.Random.Range(0, 4);
             EnemyAttribute attribute = _enemyFactory.Get(type);
@@ -52,7 +52,8 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
-            Debug.Log("Running Out Of Sequence");
+            
+            Debug.Log("所有波次都生成完了");
         }
 
     }

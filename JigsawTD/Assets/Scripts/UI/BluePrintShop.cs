@@ -100,6 +100,9 @@ public class BluePrintShop : MonoBehaviour
         GameManager.Instance.GenerateCompositeShape(grid.BluePrint);
         RemoveGrid(grid);
         CheckAllBluePrint();
+
+        //设置结算信息
+        GameEndPanel.TotalComposite++;
     }
 
     private void RemoveGrid(BluePrintGrid grid)//移除对应的配方，并清理列表
