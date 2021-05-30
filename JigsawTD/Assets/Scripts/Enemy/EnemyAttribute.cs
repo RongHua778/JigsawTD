@@ -6,7 +6,8 @@ using UnityEngine;
 public class EnemyAttribute : ScriptableObject
 {
     public EnemyType EnemyType;
-    public int CountPerWave;
+    public int InitCount;
+    public int CountIncrease;
     public float Health;
     public float Speed;
     public int Shell;

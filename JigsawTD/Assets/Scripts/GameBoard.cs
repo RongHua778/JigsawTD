@@ -92,7 +92,7 @@ public class GameBoard : MonoBehaviour
 
                 GameTile tile;
                 Vector2 pos = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
-                if (pos.x == 0)
+                if (pos.x == 0 && pos.y != 0)
                     continue;
                 if (pos.x == -1 && pos.y == 0)//SpawnPoint
                 {

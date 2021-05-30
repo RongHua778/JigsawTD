@@ -19,13 +19,14 @@ MonoBehaviour:
   element: 2
   Bullet: {fileID: 3850126010392176229, guid: 9abb303ed4c6ce94bb9edfa94ac411d6, type: 3}
   BulletSpeed: 3
+  Rare: 0
   totalLevel: 0
   elementNumber: 0
   TurretLevels:
-  - AttackRange: 1
+  - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 3
-    AttackSpeed: 0.5
+    AttackDamage: 20
+    AttackSpeed: 0.75
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0.3
@@ -36,10 +37,10 @@ MonoBehaviour:
     BaseSprite: {fileID: 21300000, guid: 5d462925671e636478d63e48fbee3678, type: 3}
     CannonSprite: {fileID: 21300000, guid: 08c2e617391010649aa7de03b85ad5bf, type: 3}
     ShootPointOffset: {x: 0, y: 0.24}
-  - AttackRange: 1
+  - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 5
-    AttackSpeed: 0.55
+    AttackDamage: 50
+    AttackSpeed: 0.75
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0.325
@@ -50,10 +51,10 @@ MonoBehaviour:
     BaseSprite: {fileID: 21300000, guid: 5d462925671e636478d63e48fbee3678, type: 3}
     CannonSprite: {fileID: 21300000, guid: 45a150eaa2efb1b4ab5fbd0aeda7de54, type: 3}
     ShootPointOffset: {x: 0, y: 0.24}
-  - AttackRange: 1
+  - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 7
-    AttackSpeed: 0.6
+    AttackDamage: 120
+    AttackSpeed: 0.75
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0.35
@@ -64,10 +65,10 @@ MonoBehaviour:
     BaseSprite: {fileID: 21300000, guid: 5d462925671e636478d63e48fbee3678, type: 3}
     CannonSprite: {fileID: 21300000, guid: 7860556bcf5ab834c8449433723a78c0, type: 3}
     ShootPointOffset: {x: 0, y: 0.25}
-  - AttackRange: 1
+  - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 10
-    AttackSpeed: 0.65
+    AttackDamage: 300
+    AttackSpeed: 0.75
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0.375
@@ -78,10 +79,10 @@ MonoBehaviour:
     BaseSprite: {fileID: 21300000, guid: c23ca6db87906d64f849ee5566924797, type: 3}
     CannonSprite: {fileID: 21300000, guid: 4ae5b107e2e114c43b26fbdc5e6a22ca, type: 3}
     ShootPointOffset: {x: 0, y: 0.25}
-  - AttackRange: 1
+  - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 15
-    AttackSpeed: 0.7
+    AttackDamage: 750
+    AttackSpeed: 0.75
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0.4

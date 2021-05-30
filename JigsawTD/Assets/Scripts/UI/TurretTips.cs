@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class TurretTips : TileTips
 {
+
     [SerializeField] Text RangeTypeValue = default;
     [SerializeField] Text AttackValue = default;
     [SerializeField] Text SpeedValue = default;
@@ -25,8 +26,13 @@ public class TurretTips : TileTips
     private Turret m_Turret;
     private BluePrintGrid m_BGrid;
     int upgradeCost;
+
+
     public void ReadTurret(Turret turret)//通过场上防御塔查看
     {
+        anim.SetBool("isOpen", true);
+
+
         this.m_Turret = turret;
         Icon.sprite = turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].Icon;
         Name.text = turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].TurretName;
@@ -67,13 +73,13 @@ public class TurretTips : TileTips
                     intensifyType += StaticData.Instance.WoodSpeedIntensify * 100 * turret.Quality + "%攻速";
                     break;
                 case Element.Water:
-                    intensifyType += StaticData.Instance.WaterSlowIntensify * turret.Quality + "减速效果";
+                    intensifyType += StaticData.Instance.WaterSlowIntensify * turret.Quality + "减速";
                     break;
                 case Element.Fire:
                     intensifyType += StaticData.Instance.FireCriticalIntensify * 100 * turret.Quality + "%暴击率";
                     break;
                 case Element.Dust:
-                    intensifyType += StaticData.Instance.FireCriticalIntensify * turret.Quality + "溅射范围";
+                    intensifyType += StaticData.Instance.FireCriticalIntensify * turret.Quality + "溅射";
                     break;
                 case Element.None:
                     break;
@@ -136,6 +142,9 @@ public class TurretTips : TileTips
 
     public void ReadAttribute(BluePrintGrid bGrid)//通过配方查看
     {
+        anim.SetBool("isOpen", true);
+
+
         m_Turret = null;
         m_BGrid = bGrid;
         TurretAttribute attribute = bGrid.BluePrint.CompositeTurretAttribute;
@@ -185,16 +194,17 @@ public class TurretTips : TileTips
         UpgradeArea.SetActive(false);
     }
 
-    public void CloseTips()
-    {
-        this.gameObject.SetActive(false);
-    }
 
     public void BuyBluePrintBtnClick()
     {
         if (LevelUIManager.Instance.ConsumeMoney(StaticData.BuyBluePrintCost))
         {
+            LevelUIManager.Instance.LuckyPoints++;
             m_BGrid.MoveToPocket();
+        }
+        else
+        {
+            GameEvents.Instance.Message("金币不足");
         }
     }
 

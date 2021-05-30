@@ -19,7 +19,7 @@ public class InfoBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         text += "\n  当前等级概率:\n";
         for (int x = 0; x < 5; x++)
         {
-            text += "  等级" + x + ": " + levelChances[x] * 100 + "%\n";
+            text += "  等级" + x + 1 + ": " + levelChances[x] * 100 + "%\n";
         }
         return text;
     }

@@ -101,8 +101,13 @@ public class LevelUIManager : Singleton<LevelUIManager>
         set
         {
             luckyPoints = value;
-            luckyProgress.SetProgress(value);
-            luckyPointsTxt.text = "幸运点:" + LuckyPoints.ToString();
+            if (luckyPoints >= 10)
+            {
+                luckyPoints -= 10;
+                GameEvents.Instance.LuckyFull();
+            }
+            luckyProgress.SetProgress(luckyPoints);
+            luckyPointsTxt.text = "累积点:" + LuckyPoints.ToString();
         }
     }
     bool drawThisTurn = true;
@@ -216,20 +221,16 @@ public class LevelUIManager : Singleton<LevelUIManager>
     public void Preparing()
     {
         CurrentWave++;
+
         //回合收入
-        PlayerCoin += StaticData.Instance.BaseWaveIncome + StaticData.Instance.WaveMultiplyIncome * CurrentWave;
+        PlayerCoin += StaticData.Instance.BaseWaveIncome + StaticData.Instance.WaveMultiplyIncome * (CurrentWave - 1);
         //抽取次数及幸运点
         if (!DrawThisTurn)
         {
             luckPointsProcess++;
             LuckyPoints += luckPointsProcess;
-            if (LuckyPoints >= 10)
-            {
-                LuckyPoints -= 10;
-                LotteryDraw++;
-            }
         }
-        
+
         DrawThisTurn = false;
         LotteryDraw++;
         ShowArea(0);
@@ -274,8 +275,8 @@ public class LevelUIManager : Singleton<LevelUIManager>
 
     public void HideTips()
     {
-        turretTips.gameObject.SetActive(false);
-        trapTips.gameObject.SetActive(false);
+        turretTips.CloseTips();
+        trapTips.CloseTips();
     }
 
     public void ShowTempTips(string text, Vector2 pos)

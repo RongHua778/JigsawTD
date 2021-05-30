@@ -32,8 +32,8 @@ MonoBehaviour:
     SlowRate: 0
     TurretEffects:
     - EffectName: 2
-      KeyValue: 3
-      EffectDescription: "\u6108\u6218\u6108\u52C7\uFF1A\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347\u672C\u56DE\u54083\u70B9\u653B\u51FB\u529B\u3002"
+      KeyValue: 15
+      EffectDescription: "\u6108\u6218\u6108\u52C7\uFF1A\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347\u672C\u56DE\u540815\u70B9\u653B\u51FB\u529B\u3002"
     PoloEffects: []
     TurretName: "F1\u7EC4\u5408\u70AE"
     Icon: {fileID: 21300000, guid: efd7eca78d1a1d44d8b38abd7973113e, type: 3}
@@ -42,15 +42,15 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.27}
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 25
-    AttackSpeed: 1.7
+    AttackDamage: 50
+    AttackSpeed: 15
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
     TurretEffects:
     - EffectName: 2
-      KeyValue: 5
-      EffectDescription: "\u6108\u6218\u6108\u52C7\uFF1A\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347\u672C\u56DE\u54085\u70B9\u653B\u51FB\u529B\u3002"
+      KeyValue: 50
+      EffectDescription: "\u6108\u6218\u6108\u52C7\uFF1A\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347\u672C\u56DE\u540850\u70B9\u653B\u51FB\u529B\u3002"
     PoloEffects: []
     TurretName: "F2\u7EC4\u5408\u70AE"
     Icon: {fileID: 21300000, guid: efd7eca78d1a1d44d8b38abd7973113e, type: 3}
@@ -59,15 +59,15 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.27}
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 40
+    AttackDamage: 120
     AttackSpeed: 2
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
     TurretEffects:
     - EffectName: 0
-      KeyValue: 10
-      EffectDescription: "\u6108\u6218\u6108\u52C7\uFF1A\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347\u672C\u56DE\u540810\u70B9\u653B\u51FB\u529B\u3002"
+      KeyValue: 120
+      EffectDescription: "\u6108\u6218\u6108\u52C7\uFF1A\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347\u672C\u56DE\u5408120\u70B9\u653B\u51FB\u529B\u3002"
     PoloEffects: []
     TurretName: "F3\u7EC4\u5408\u70AE"
     Icon: {fileID: 21300000, guid: efd7eca78d1a1d44d8b38abd7973113e, type: 3}

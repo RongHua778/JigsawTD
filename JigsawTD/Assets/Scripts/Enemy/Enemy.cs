@@ -23,13 +23,13 @@ public abstract class Enemy : GameBehavior
 
     [Header("EnemyAttribute")]
     protected float speed;
-    public virtual float Speed { get => StunTime > 0 ? 0 : speed * (1 - SlowRate); set => speed = value; }
+    public virtual float Speed { get => StunTime > 0 ? 0 : speed * (1 - (SlowRate - PathSlow) / (SlowRate + PathSlow + 0.5f)); set => speed = value; }
     int shell;
     public int Shell { get => Mathf.Max(0, shell - BrokeShell); set => shell = value; }
     float slowRate;
     public float SlowRate
     {
-        get => (PathSlow + slowRate) / (1 + slowRate + PathSlow);
+        get => slowRate;
         //slowRate;// Mathf.Min(0.8f, (PathSlow + slowRate) / (PathSlow + slowRate + 1));
         set
         {
