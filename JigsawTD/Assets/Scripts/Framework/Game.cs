@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(GameEvents))]
-[RequireComponent(typeof(ObjectPool))]
 [RequireComponent(typeof(Sound))]
 public class Game : Singleton<Game>
 {
-    int MaxLevel = 3;
+    public int Difficulty = 1;
     public Animator transition;
     public float transitionTime = 0.8f;
     // Start is called before the first frame update
@@ -19,18 +17,12 @@ public class Game : Singleton<Game>
     }
     public void LoadScene(int index)
     {
-        LoadScene(index);
-        //StartCoroutine(Transition(index));
+        StartCoroutine(Transition(index));
     }
 
     public void LoadNextLevel()
     {
-        if (SceneManager.GetActiveScene().buildIndex + 1 <= MaxLevel)
-            LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        else
-            LoadScene(4);
-
-
+        LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void ReloadScene()
@@ -48,12 +40,11 @@ public class Game : Singleton<Game>
         transition.SetTrigger("End");
 
     }
-    // Update is called once per frame
-    void Update()
+
+
+    public void QuitGame()
     {
-
-
+        Application.Quit();
     }
-
 
 }

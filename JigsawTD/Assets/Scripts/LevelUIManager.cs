@@ -16,6 +16,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
 
     [SerializeField] RoadPlacement _roadPlacament = default;
 
+    [SerializeField] LuckProgress luckyProgress = default;
     [SerializeField] Text messageTxt = default;
     [SerializeField] Text healthTxt = default;
     [SerializeField] Text coinTxt = default;
@@ -24,6 +25,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
     [SerializeField] Text playerLevelUpMoneyTxt = default;
     [SerializeField] Text lotteryDrawTxt = default;
     [SerializeField] Text luckyPointsTxt = default;
+
 
     #region 属性
     int currentWave;
@@ -80,7 +82,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
         }
     }
 
-    int lotteryDraw = 100;
+    int lotteryDraw = 0;
     public int LotteryDraw
     {
         get => lotteryDraw;
@@ -99,10 +101,16 @@ public class LevelUIManager : Singleton<LevelUIManager>
         set
         {
             luckyPoints = value;
-            luckyPointsTxt.text = "幸运点:" + LuckyPoints.ToString();
+            if (luckyPoints >= 10)
+            {
+                luckyPoints -= 10;
+                GameEvents.Instance.LuckyFull();
+            }
+            luckyProgress.SetProgress(luckyPoints);
+            luckyPointsTxt.text = "累积点:" + LuckyPoints.ToString();
         }
     }
-    bool drawThisTurn = false;
+    bool drawThisTurn = true;
     public bool DrawThisTurn
     {
         get => drawThisTurn;
@@ -152,6 +160,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
         GameEvents.Instance.onShowTurretTips += ShowTurretAttributeTips;
         GameEvents.Instance.onHideTips += HideTips;
 
+        LuckyPoints = 0;
         CurrentWave = 0;
         PlayerLevel = 1;
         PlayerHealth = StaticData.Instance.PlayerMaxHealth;
@@ -212,18 +221,14 @@ public class LevelUIManager : Singleton<LevelUIManager>
     public void Preparing()
     {
         CurrentWave++;
+
         //回合收入
-        PlayerCoin += StaticData.Instance.BaseWaveIncome + StaticData.Instance.WaveMultiplyIncome * CurrentWave;
+        PlayerCoin += StaticData.Instance.BaseWaveIncome + StaticData.Instance.WaveMultiplyIncome * (CurrentWave - 1);
         //抽取次数及幸运点
         if (!DrawThisTurn)
         {
-            LuckyPoints += luckPointsProcess;
             luckPointsProcess++;
-            if (LuckyPoints >= 10)
-            {
-                LuckyPoints -= 10;
-                LotteryDraw++;
-            }
+            LuckyPoints += luckPointsProcess;
         }
 
         DrawThisTurn = false;
@@ -270,15 +275,15 @@ public class LevelUIManager : Singleton<LevelUIManager>
 
     public void HideTips()
     {
-        turretTips.gameObject.SetActive(false);
-        trapTips.gameObject.SetActive(false);
+        turretTips.CloseTips();
+        trapTips.CloseTips();
     }
 
     public void ShowTempTips(string text, Vector2 pos)
     {
         tempTips.gameObject.SetActive(true);
         tempTips.SendText(text);
-        tempTips.rect.position = pos + new Vector2(0, tempTips.rect.sizeDelta.y / 2 + 30);
+        tempTips.rect.position = pos + new Vector2(0, tempTips.rect.sizeDelta.y / 2 + 50);
     }
 
     public void HideTempTips()

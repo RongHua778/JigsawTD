@@ -16,10 +16,10 @@ public class InfoBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             levelChances[i] = StaticData.Instance.LevelChances[LevelUIManager.Instance.PlayerLevel - 1, i];
         }
         string text = "";
-        text += "\n当前等级概率:\n";
+        text += "\n  当前等级概率:\n";
         for (int x = 0; x < 5; x++)
         {
-            text += "等级" + x + ":" + levelChances[x] * 100 + "%\n";
+            text += "  等级" + x + 1 + ": " + levelChances[x] * 100 + "%\n";
         }
         return text;
     }

@@ -6,12 +6,18 @@ using UnityEngine.UI;
 
 public class TileTips : MonoBehaviour
 {
+    protected Animator anim;
     [SerializeField] protected Image Icon = default;
     [SerializeField] protected Text Name = default;
     [SerializeField] protected Text Description = default;
-    public virtual void Hide()
+
+    private void Awake()
     {
-        Destroy(this.gameObject);
+        anim = this.GetComponent<Animator>();
+    }
+    public void CloseTips()
+    {
+        anim.SetBool("isOpen", false);
     }
 
 

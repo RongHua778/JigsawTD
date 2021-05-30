@@ -15,18 +15,18 @@ MonoBehaviour:
   Name: G1
   Description: 
   TilePrefab: {fileID: 6604616035422911931, guid: e0be9a425d1514a4ca60817bf85bea92, type: 3}
-  RangeType: 1
+  RangeType: 0
   element: 5
   Bullet: {fileID: 3850126010392176229, guid: b88c1d3ba59ce7b4ea2bd28f6a939d28, type: 3}
   BulletSpeed: 5
   Rare: 1
   totalLevel: 5
-  elementNumber: 2
+  elementNumber: 3
   TurretLevels:
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 10
-    AttackSpeed: 1.5
+    AttackDamage: 40
+    AttackSpeed: 1
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
@@ -42,8 +42,8 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.17}
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 18
-    AttackSpeed: 1.7
+    AttackDamage: 100
+    AttackSpeed: 1
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
@@ -59,8 +59,8 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.17}
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 30
-    AttackSpeed: 2
+    AttackDamage: 250
+    AttackSpeed: 1
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0

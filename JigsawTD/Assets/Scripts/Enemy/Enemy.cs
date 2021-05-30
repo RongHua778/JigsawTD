@@ -6,6 +6,7 @@ public abstract class Enemy : GameBehavior
 {
     public abstract EnemyType EnemyType { get; }
     private Animator anim;
+    [SerializeField] GameObject exlposionPrefab = default;
     public int ReachDamage { get; set; }
     public float TargetDamageCounter { get; set; }
     public int TileStunCounter { get; set; }
@@ -23,13 +24,13 @@ public abstract class Enemy : GameBehavior
 
     [Header("EnemyAttribute")]
     protected float speed;
-    public virtual float Speed { get => StunTime > 0 ? 0 : speed * (1 - SlowRate); set => speed = value; }
+    public virtual float Speed { get => StunTime > 0 ? 0 : speed * (1 - (SlowRate - PathSlow) / (SlowRate + PathSlow + 0.5f)); set => speed = value; }
     int shell;
     public int Shell { get => Mathf.Max(0, shell - BrokeShell); set => shell = value; }
     float slowRate;
     public float SlowRate
     {
-        get => (PathSlow + slowRate) / (1 + slowRate + PathSlow);
+        get => slowRate;
         //slowRate;// Mathf.Min(0.8f, (PathSlow + slowRate) / (PathSlow + slowRate + 1));
         set
         {
@@ -65,10 +66,6 @@ public abstract class Enemy : GameBehavior
         set
         {
             isDie = value;
-            if (isDie)
-            {
-                StopAllCoroutines();//取消消失动画后的扣血
-            }
         }
     }
     private float maxHealth;
@@ -97,6 +94,7 @@ public abstract class Enemy : GameBehavior
     {
         if (IsDie)
         {
+            StopAllCoroutines();
             GameEvents.Instance.EnemyDie(this);
             ObjectPool.Instance.UnSpawn(this.gameObject);
             return false;
@@ -263,11 +261,15 @@ public abstract class Enemy : GameBehavior
         progressFactor = adjust * Speed;
     }
 
-    public virtual void ApplyDamage(float amount, out float realDamage)
+    public virtual void ApplyDamage(float amount, out float realDamage,bool isCritical=false)
     {
         realDamage = amount * 5 / (5 + Shell);
         CurrentHealth -= realDamage;
         TargetDamageCounter += realDamage;
+        if (isCritical)
+        {
+            healthBar.ShowJumpDamage((int)realDamage);
+        }
     }
 
 

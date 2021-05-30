@@ -89,8 +89,11 @@ public class GameBoard : MonoBehaviour
         {
             for (int x = 0; x < size.x; x++, i++)
             {
+
                 GameTile tile;
                 Vector2 pos = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
+                if (pos.x == 0 && pos.y != 0)
+                    continue;
                 if (pos.x == -1 && pos.y == 0)//SpawnPoint
                 {
                     tile = this.tileFactory.GetBasicTile(BasicTileType.SpawnPoint);
@@ -209,7 +212,7 @@ public class GameBoard : MonoBehaviour
             for (int j = 0; j < groundSize.y; j++)
             {
                 //避免陷阱刷到初始的方块上
-                if (!(i >= 11 && i <= 13 && j >= 11 && j <= 13))
+                if (!(i >= 10 && i <= 14 && j >= 10 && j <= 14))
                     tiles.Add(new Vector2(i, j));
             }
         }
@@ -218,7 +221,7 @@ public class GameBoard : MonoBehaviour
             int index = UnityEngine.Random.Range(0, tiles.Count);
             Vector2 temp = tiles[index];
             traps.Add(temp);
-            List<Vector2> neibor = StaticData.GetCirclePoints(3, 0);
+            List<Vector2> neibor = StaticData.GetCirclePoints(6, 0);
             for (int k = 0; k < neibor.Count; k++)
             {
                 neibor[k] = neibor[k] + tiles[index];

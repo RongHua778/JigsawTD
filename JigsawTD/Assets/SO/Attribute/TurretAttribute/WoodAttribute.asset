@@ -19,12 +19,13 @@ MonoBehaviour:
   element: 1
   Bullet: {fileID: 3850126010392176229, guid: f22cf9b0a0803b242aac9b92dc875dc6, type: 3}
   BulletSpeed: 12
+  Rare: 0
   totalLevel: 0
   elementNumber: 0
   TurretLevels:
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 2
+    AttackDamage: 10
     AttackSpeed: 8
     SputteringRange: 0
     CriticalRate: 0
@@ -38,8 +39,8 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.2}
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 3
-    AttackSpeed: 9
+    AttackDamage: 30
+    AttackSpeed: 8
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
@@ -52,8 +53,8 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.2}
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 4
-    AttackSpeed: 10
+    AttackDamage: 75
+    AttackSpeed: 8
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
@@ -66,8 +67,8 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.22}
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 6
-    AttackSpeed: 11
+    AttackDamage: 200
+    AttackSpeed: 8
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
@@ -80,8 +81,8 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.22}
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 9
-    AttackSpeed: 12
+    AttackDamage: 500
+    AttackSpeed: 8
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0

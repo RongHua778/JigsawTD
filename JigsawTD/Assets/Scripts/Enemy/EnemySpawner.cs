@@ -28,13 +28,14 @@ public class EnemySpawner : MonoBehaviour
     {
         this._enemyFactory = factory;
         float intensify = 1;
-        float amountIntensify = 1;
+        int amount;
         for (int i = 0; i < 30; i++)
         {
-            intensify = 0.75f * (i + 1);
-            amountIntensify = 1 + (float)i / 10;
             EnemyType type = (EnemyType)UnityEngine.Random.Range(0, 4);
-            EnemySequence sequence = new EnemySequence(i + 1, _enemyFactory.Get(type), intensify, amountIntensify);
+            EnemyAttribute attribute = _enemyFactory.Get(type);
+            intensify = Mathf.Pow(1.8f, i);
+            amount = attribute.InitCount + i / 3 * attribute.CountIncrease;
+            EnemySequence sequence = new EnemySequence(i + 1, attribute, intensify, amount);
             LevelSequence.Enqueue(sequence);
         }
     }

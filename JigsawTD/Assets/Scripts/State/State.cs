@@ -8,6 +8,7 @@ public enum StateName
 }
 public abstract class State
 {
+    public abstract StateName StateName { get; }
     protected GameManager gameManager;
 
     public State(GameManager gameManager)

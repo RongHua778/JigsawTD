@@ -8,6 +8,7 @@ public class HealthBar : ReusableObject
     [SerializeField] Image healthProgress = default;
     [SerializeField] Image slowIcon = default;
     [SerializeField] Vector2 offset = default;
+    [SerializeField] JumpDamage jumpDamagePrefab = default;
     public Transform followTrans;
     float fillAmount;
 
@@ -43,4 +44,11 @@ public class HealthBar : ReusableObject
             transform.position = (Vector2)followTrans.position + offset;
     }
 
+
+    public void ShowJumpDamage(int amount)
+    {
+        GameObject obj =  ObjectPool.Instance.Spawn(jumpDamagePrefab.gameObject);
+        obj.transform.position = transform.position;
+        obj.GetComponent<JumpDamage>().Jump(amount);
+    }
 }

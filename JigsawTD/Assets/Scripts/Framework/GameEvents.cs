@@ -90,4 +90,10 @@ public class GameEvents : Singleton<GameEvents>
     {
         onRemoveGameTile?.Invoke(tile);
     }
+
+    public event Action onLuckyFull;
+    public void LuckyFull()
+    {
+        onLuckyFull?.Invoke();
+    }
 }

@@ -7,4 +7,6 @@ public class WonState : State
     public WonState(GameManager gameManager) : base(gameManager)
     {
     }
+
+    public override StateName StateName => StateName.WonState;
 }
