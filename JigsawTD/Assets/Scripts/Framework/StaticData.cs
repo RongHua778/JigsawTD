@@ -63,19 +63,18 @@ public class StaticData : Singleton<StaticData>
     [Header("CompositionAttributes")]
     public int[,] LevelUpCost = new int[3, 2]//合成塔升级费用
     {
-        { 50, 100 },
-        { 100,200 },
-        { 150,300 }
+        { 75, 150 },
+        { 150,300 },
+        { 250,500 }
     };
     public float[,] RareChances = new float[6, 3]//配方刷新概率
     {
-        { 0.75f,0.25f,0f },
-        { 0.65f,0.3f,0.1f},
-        { 0.5f,0.35f,0.15f },
+        { 0.9f,0.1f,0f },
+        { 0.75f,0.25f,0f},
+        { 0.6f,0.38f,0.02f },
+        { 0.5f,0.42f,0.8f},
         { 0.4f,0.4f,0.2f},
-        { 0.3f,0.45f,0.3f},
-        { 0.2f,0.4f,0.4f},
-
+        { 0.3f,0.3f,0.4f},
     };
 
 

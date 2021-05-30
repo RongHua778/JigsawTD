@@ -2987,7 +2987,7 @@ MonoBehaviour:
   TileSize: 1
   TileShapeChance: []
   PlayerMaxHealth: 15
-  LevelMaxWave: 30
+  LevelMaxWave: 50
   GoldAttackIntensify: 0.1
   WoodSpeedIntensify: 0.08
   WaterSlowIntensify: 0.2

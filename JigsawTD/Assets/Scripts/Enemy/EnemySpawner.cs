@@ -36,8 +36,9 @@ public class EnemySpawner : MonoBehaviour
             EnemyAttribute attribute = _enemyFactory.Get(type);
             intensify =  stage*(0.5f*i+1);
             if (i % 3 == 0) stage+=2f;
-            amount = attribute.InitCount + i / 5 * attribute.CountIncrease;
-            EnemySequence sequence = new EnemySequence(i + 1, attribute, intensify, amount);
+            amount = attribute.InitCount + i / 4 * attribute.CountIncrease;
+            float coolDown = attribute.CoolDown - i * 0.01f;
+            EnemySequence sequence = new EnemySequence(i + 1, attribute, intensify, amount, coolDown);
             LevelSequence.Enqueue(sequence);
         }
     }

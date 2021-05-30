@@ -14,13 +14,13 @@ public class EnemySequence
     public float CoolDown;
     private float SpawnTimer;
     private int SpawnCounter;
-    public EnemySequence(int wave, EnemyAttribute attribute, float intensify,int amount)
+    public EnemySequence(int wave, EnemyAttribute attribute, float intensify,int amount,float coolDown)
     {
         this.Wave = wave;
         this.EnemyAttribute = attribute;
         this.Amount = amount;
         this.Intensify = intensify;
-        this.CoolDown = attribute.CoolDown;
+        this.CoolDown = coolDown;
         this.SpawnTimer = 0;
         this.SpawnCounter = 0;
     }
