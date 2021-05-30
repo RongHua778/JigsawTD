@@ -247,6 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathLinePrefab: {fileID: 1637904061932472847, guid: e6033176e804ec740b74225190b69115, type: 3}
+  shortestPath: []
 --- !u!1 &10120957
 GameObject:
   m_ObjectHideFlags: 0

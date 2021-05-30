@@ -26,7 +26,7 @@ public class HealthBar : ReusableObject
 
     public override void OnSpawn()
     {
-        
+
     }
 
     public override void OnUnSpawn()
@@ -47,7 +47,7 @@ public class HealthBar : ReusableObject
 
     public void ShowJumpDamage(int amount)
     {
-        GameObject obj =  ObjectPool.Instance.Spawn(jumpDamagePrefab.gameObject);
+        GameObject obj = ObjectPool.Instance.Spawn(jumpDamagePrefab.gameObject);
         obj.transform.position = transform.position;
         obj.GetComponent<JumpDamage>().Jump(amount);
     }

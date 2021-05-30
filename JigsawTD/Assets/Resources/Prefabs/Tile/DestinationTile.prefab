@@ -301,10 +301,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6604616035422911932}
   - component: {fileID: 6317956750879752327}
-  - component: {fileID: 5923658230637393832}
-  m_Layer: 10
+  - component: {fileID: 1509738274765026862}
+  m_Layer: 6
   m_Name: DestinationTile
-  m_TagString: UnDropablePoint
+  m_TagString: UnDropableTurret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -354,7 +354,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.98, y: 0.98}
   m_EdgeRadius: 0
---- !u!114 &5923658230637393832
+--- !u!114 &1509738274765026862
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -363,9 +363,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6604616035422911931}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11ea9f238d4509e47a1b8590ee24faa3, type: 3}
+  m_Script: {fileID: 11500000, guid: d8d2e9ceceded444a9bf889cc0007209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_TrapAttribute: {fileID: 0}
 --- !u!1001 &7478988611910651031
 PrefabInstance:
   m_ObjectHideFlags: 0

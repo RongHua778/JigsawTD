@@ -9,7 +9,7 @@ public class ScaleAndMove : MonoBehaviour
     Vector3 oldPosition;
     Camera cam;
     float moveSpeed = 60f;
-    private int slideSpeed=15;
+    private int slideSpeed=0;
     private float scrollSpeed = 2.5f;
     private float maximum = 10;
     private float minmum = 3;
