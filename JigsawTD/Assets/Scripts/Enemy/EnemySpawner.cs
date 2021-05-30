@@ -33,8 +33,8 @@ public class EnemySpawner : MonoBehaviour
         {
             EnemyType type = (EnemyType)UnityEngine.Random.Range(0, 4);
             EnemyAttribute attribute = _enemyFactory.Get(type);
-            intensify = Mathf.Pow(1.8f, i);
-            amount = attribute.InitCount + i / 3 * attribute.CountIncrease;
+            intensify = (1+i)*3;
+            amount = attribute.InitCount + i / 5 * attribute.CountIncrease;
             EnemySequence sequence = new EnemySequence(i + 1, attribute, intensify, amount);
             LevelSequence.Enqueue(sequence);
         }
