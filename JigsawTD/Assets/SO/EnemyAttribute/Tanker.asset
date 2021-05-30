@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Tanker
   m_EditorClassIdentifier: 
   EnemyType: 3
-  InitCount: 5
-  CountIncrease: 6
+  InitCount: 3
+  CountIncrease: 4
   Health: 10
   Speed: 0.8
   Shell: 0

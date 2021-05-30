@@ -123,6 +123,7 @@ public class DraggingShape : DraggingActions
         canDrop = CheckAttachedDroppable();
         canDrop = CheckTurretDroppable();
         canDrop = CheckTrapDroppable();
+        canDrop = CheckMapEdge();
         if (!canDrop)
         {
             SetColor(wrongColor);
@@ -135,6 +136,24 @@ public class DraggingShape : DraggingActions
             return true;
         }
 
+    }
+    private bool CheckMapEdge()
+    {
+        int maxX =  (GameManager.Instance.GroundSize.x-1)/2;
+        int minX =  -(GameManager.Instance.GroundSize.x-1)/2;
+        int maxY = (GameManager.Instance.GroundSize.y - 1) / 2;
+        int minY = -(GameManager.Instance.GroundSize.y - 1) / 2;
+        foreach (GameTile tile in tileShape.tiles)
+        {
+            if (tile.transform.position.x > maxX||
+                tile.transform.position.x < minX ||
+                tile.transform.position.y > maxY ||
+                tile.transform.position.y < minY )
+            {
+                return false;
+            }
+        }
+        return canDrop;
     }
     private bool CheckAttachedDroppable()
     {

@@ -13,7 +13,7 @@ public class GameManager : Singleton<GameManager>
     //startSize是初始生成的有方块的大小
     [SerializeField]
     Vector2Int _startSize, _groundSize = default;
-
+    public Vector2Int GroundSize { get => _groundSize; set => _groundSize = value; }
 
     //[SerializeField]
     //GameTileContentFactory _contentFactory = default;
@@ -104,7 +104,7 @@ public class GameManager : Singleton<GameManager>
        // _bluePrintFacotry.InitializeFactory();
         _turretFactory.InitializeFacotory();
 
-        Board.Initialize(_startSize, _groundSize, _tileFactory);
+        Board.Initialize(_startSize, GroundSize, _tileFactory);
 
         EnemySpawnHelper = this.GetComponent<EnemySpawner>();
         EnemySpawnHelper.LevelInitialize(_enemyFactory);

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Soilder
   m_EditorClassIdentifier: 
   EnemyType: 0
-  InitCount: 15
-  CountIncrease: 12
+  InitCount: 5
+  CountIncrease: 7
   Health: 5
   Speed: 1
   Shell: 0

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Runner
   m_EditorClassIdentifier: 
   EnemyType: 1
-  InitCount: 10
-  CountIncrease: 7
+  InitCount: 4
+  CountIncrease: 5
   Health: 5
   Speed: 1
   Shell: 0

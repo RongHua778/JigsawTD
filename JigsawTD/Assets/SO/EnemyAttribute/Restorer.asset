@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Restorer
   m_EditorClassIdentifier: 
   EnemyType: 2
-  InitCount: 8
-  CountIncrease: 6
+  InitCount: 4
+  CountIncrease: 5
   Health: 6
   Speed: 0.6
   Shell: 0
