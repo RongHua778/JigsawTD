@@ -9,6 +9,28 @@ public class GameManager : Singleton<GameManager>
     public GameBoard Board = default;
     public BluePrintShop _bluePrintShop = default;
 
+    //游戏速度
+    private float gameSpeed = 1;
+    public float GameSpeed
+    {
+        get => gameSpeed;
+        set
+        {
+            if (value > 3)
+            {
+                gameSpeed = 1;
+            }
+            else
+            {
+                gameSpeed = value;
+            }
+            Time.timeScale = gameSpeed;
+        }
+    }
+    //关卡难度
+    private int difficulty = 1;
+    public int Difficulty { get => difficulty; set => difficulty = value; }
+
     //_groundsize是地图每一边上方块的数量
     //startSize是初始生成的有方块的大小
     [SerializeField]
@@ -32,10 +54,6 @@ public class GameManager : Singleton<GameManager>
     public GameBehaviorCollection nonEnemies = new GameBehaviorCollection();
     public GameBehaviorCollection turrets = new GameBehaviorCollection();
 
-
-    //[SerializeField, Range(0.1f, 10f)]
-    //float spawnSpeed = 100f;
-    //float spawnProgress;
 
     //计算点击选中
     static GameObject selection;
@@ -84,6 +102,7 @@ public class GameManager : Singleton<GameManager>
 
     private void OnDisable()
     {
+        GameSpeed = 1;
         GameEvents.Instance.onTileClick -= TileClick;
         GameEvents.Instance.onTileUp -= TileUp;
     }
@@ -101,7 +120,7 @@ public class GameManager : Singleton<GameManager>
 
         _enemyFactory.InitializeFactory();
         _tileFactory.InitializeFactory();
-       // _bluePrintFacotry.InitializeFactory();
+        // _bluePrintFacotry.InitializeFactory();
         _turretFactory.InitializeFacotory();
 
         Board.Initialize(_startSize, GroundSize, _tileFactory);

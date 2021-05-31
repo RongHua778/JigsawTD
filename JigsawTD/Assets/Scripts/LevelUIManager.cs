@@ -15,7 +15,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
 
 
     [SerializeField] RoadPlacement _roadPlacament = default;
-
+    [SerializeField] GuideBook _guideBoook = default;
     [SerializeField] LuckProgress luckyProgress = default;
     [SerializeField] Text messageTxt = default;
     [SerializeField] Text healthTxt = default;
@@ -26,6 +26,11 @@ public class LevelUIManager : Singleton<LevelUIManager>
     [SerializeField] Text lotteryDrawTxt = default;
     [SerializeField] Text luckyPointsTxt = default;
 
+    //gamespeed
+    [SerializeField] Text speedBtnTxt = default;
+
+    [SerializeField] GameEndPanel _gameEndPanel = default;
+
 
     #region 属性
     int currentWave;
@@ -34,8 +39,8 @@ public class LevelUIManager : Singleton<LevelUIManager>
         get => currentWave;
         set
         {
-            currentWave = Mathf.Clamp(value, 0, StaticData.Instance.LevelMaxWave);
-            waveTxt.text = "WAVE " + currentWave.ToString() + "/" + StaticData.Instance.LevelMaxWave.ToString();
+            currentWave = value;
+            waveTxt.text = "第" + currentWave.ToString() + "/" + StaticData.Instance.LevelMaxWave.ToString() + "波";
         }
     }
 
@@ -49,6 +54,13 @@ public class LevelUIManager : Singleton<LevelUIManager>
             if (enemyRemain <= 0)
             {
                 enemyRemain = 0;
+                if (PlayerHealth <= 0)
+                    return;
+                if (CurrentWave == StaticData.Instance.LevelMaxWave)
+                {
+                    ShowGameWinPanel();
+                    return;
+                }
                 GameManager.Instance.TransitionToState(StateName.BuildingState);
             }
         }
@@ -93,7 +105,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
         }
     }
     //控制每回合加的幸运点数
-    public int luckPointsProcess = 0;
+    private int luckPointsProcess = 1;
     int luckyPoints = 0;
     public int LuckyPoints
     {
@@ -119,7 +131,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
             drawThisTurn = value;
             if (drawThisTurn)
             {
-                luckPointsProcess = 0;//如果抽了卡，清空幸运点进度
+                luckPointsProcess = 1;//如果抽了卡，清空幸运点进度
             }
         }
     }
@@ -141,6 +153,12 @@ public class LevelUIManager : Singleton<LevelUIManager>
         get => playerHealth;
         set
         {
+            if (value <= 0)
+            {
+                _roadPlacament.HideArea();
+                _gameEndPanel.gameObject.SetActive(true);
+                _gameEndPanel.ShowGameEndPanel(false);
+            }
             playerHealth = Mathf.Clamp(value, 0, StaticData.Instance.PlayerMaxHealth);
             healthTxt.text = PlayerHealth.ToString() + "/" + StaticData.Instance.PlayerMaxHealth.ToString();
         }
@@ -194,6 +212,12 @@ public class LevelUIManager : Singleton<LevelUIManager>
         EnemyRemain = sequence.Amount;
     }
 
+    public void OpenGuideBook()
+    {
+        _guideBoook.gameObject.SetActive(true);
+        _guideBoook.ShowBook();
+    }
+
     private void EnemyDie(Enemy enemy)
     {
         EnemyRemain--;
@@ -228,8 +252,8 @@ public class LevelUIManager : Singleton<LevelUIManager>
         //抽取次数及幸运点
         if (!DrawThisTurn)
         {
-            luckPointsProcess++;
             LuckyPoints += luckPointsProcess;
+            luckPointsProcess += 2;
         }
 
         DrawThisTurn = false;
@@ -354,5 +378,19 @@ public class LevelUIManager : Singleton<LevelUIManager>
                 PlayerLevel++;
             }
         }
+    }
+
+    public void GameSpeedBtnClick()
+    {
+        GameManager.Instance.GameSpeed++;
+        speedBtnTxt.text = "游戏速度X" + GameManager.Instance.GameSpeed.ToString();
+    }
+
+    //游戏胜利
+    public void ShowGameWinPanel()
+    {
+        _roadPlacament.HideArea();
+        _gameEndPanel.gameObject.SetActive(true);
+        _gameEndPanel.ShowGameEndPanel(true);
     }
 }

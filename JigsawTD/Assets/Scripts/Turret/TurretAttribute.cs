@@ -45,6 +45,7 @@ public class TurretAttribute : LevelAttribute
     public Element element;
     public GameObject Bullet;
     public float BulletSpeed;
+    public AudioClip ShootSound;
 
     [Header("合成塔参数")]
     public int Rare;//稀有度

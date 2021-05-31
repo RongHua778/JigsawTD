@@ -46,7 +46,7 @@ public class TurretTips : TileTips
         if (turret.TurretType == TurretType.CompositeTurret)
         {
             elementConstruct.gameObject.SetActive(true);
-            elementConstruct.SetElements(((CompositeTurret)turret).CompositeBluePrint.Compositions);
+            elementConstruct.SetElements(((CompositeTurret)turret).CompositeBluePrint);
             IntensifyArea.SetActive(false);
             if (turret.Quality < 3)
             {
@@ -187,7 +187,7 @@ public class TurretTips : TileTips
             Description.text = attribute.Description;
         }
         elementConstruct.gameObject.SetActive(true);
-        elementConstruct.SetElements(bGrid.BluePrint.Compositions);
+        elementConstruct.SetElements(bGrid.BluePrint);
         IntensifyArea.SetActive(false);
         BtnArea.SetActive(true);
         AnalysisArea.SetActive(false);

@@ -4,25 +4,36 @@ using UnityEngine;
 
 public class WoodTurret : Turret
 {
-    private Animator anim;
+    private bool isPlayingAudio = false;
+
     public override float SputteringRange => 0;
     public override void InitializeTurret()
     {
         base.InitializeTurret();
-        anim = this.GetComponent<Animator>();
         _rotSpeed = 0f;
         CheckAngle = 45f;
     }
 
     public override bool GameUpdate()
     {
-        if (Target.Count == 0)
+        if (targetList.Count == 0)
         {
-            anim.SetBool("Attacking", false);
+            turretAnim.SetBool("Attacking", false);
+
+            if (isPlayingAudio)
+            {
+                isPlayingAudio = false;
+                audioSource.Stop();
+            }
         }
         else
         {
-            anim.SetBool("Attacking", true);
+            turretAnim.SetBool("Attacking", true);
+            if (!isPlayingAudio)
+            {
+                isPlayingAudio = true;
+                PlayAudio(ShootClip, true);
+            }
         }
         return base.GameUpdate();
 

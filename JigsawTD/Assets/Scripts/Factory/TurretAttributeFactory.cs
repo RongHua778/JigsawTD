@@ -13,12 +13,13 @@ public class TurretAttributeFactory : GameObjectFactory
     private List<TurretAttribute> Rare1Turrets;
     private List<TurretAttribute> Rare2Turrets;
     private List<TurretAttribute> Rare3Turrets;
-    private Dictionary<Element, TurretAttribute> ElementDIC = new Dictionary<Element, TurretAttribute>();
+    private Dictionary<Element, TurretAttribute> ElementDIC;
     public void InitializeFacotory()
     {
         Rare1Turrets = new List<TurretAttribute>();
         Rare2Turrets = new List<TurretAttribute>();
         Rare3Turrets = new List<TurretAttribute>();
+        ElementDIC = new Dictionary<Element, TurretAttribute>();
 
         foreach (TurretAttribute attribute in CompositionAttributes)
         {
