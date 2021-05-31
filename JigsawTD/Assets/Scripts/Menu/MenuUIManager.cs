@@ -7,6 +7,7 @@ public class MenuUIManager : MonoBehaviour
 {
     [SerializeField] Game m_Game = default;
     [SerializeField] Text difficultyTxt = default;
+    bool gameStart = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +22,12 @@ public class MenuUIManager : MonoBehaviour
 
     public void StartGameBtnClick()
     {
-        Game.Instance.LoadScene(1);
+        if (!gameStart)
+        {
+            Game.Instance.LoadScene(1);
+            gameStart = true;
+        }
+           
     }
 
     public void QuitGameBtnClick()
