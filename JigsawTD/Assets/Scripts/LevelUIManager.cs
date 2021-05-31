@@ -54,6 +54,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
             enemyRemain = value;
             if (enemyRemain <= 0)
             {
+                Sound.Instance.StopBg();
                 enemyRemain = 0;
                 if (PlayerHealth <= 0)
                     return;
@@ -238,6 +239,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
     //每回合开始前计算幸运点、抽取模块次数等逻辑。
     public void Preparing()
     {
+        Sound.Instance.PlayBg("preparing");
         CurrentWave++;
 
         //回合收入
@@ -357,6 +359,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
 
     public void NextWaveClick()
     {
+        Sound.Instance.StopBg();
         HideArea();
         GameManager.Instance.TransitionToState(StateName.WaveState);
     }
