@@ -396,6 +396,8 @@ public class LevelUIManager : Singleton<LevelUIManager>
     //сно╥й╓юШ
     public void ShowGameWinPanel()
     {
+        if (PlayerPrefs.GetInt("MaxPassLevel", 0) <= GameManager.Instance.Difficulty)
+            PlayerPrefs.SetInt("MaxPassLevel", GameManager.Instance.Difficulty + 1);
         _roadPlacament.HideArea();
         _gameEndPanel.gameObject.SetActive(true);
         _gameEndPanel.ShowGameEndPanel(true);
