@@ -101,7 +101,7 @@ public class Sound : Singleton<Sound>
 
     private IEnumerator FadeMusic(AudioClip clip)
     {
-        float startVolume = m_bgSound.volume;
+        float startVolume = 0.5f;
 
         while (m_bgSound.volume > 0)
         {

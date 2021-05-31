@@ -20,7 +20,12 @@ public class MenuUIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            ShowMessage("测试：已清除了存档");
+            Debug.Log("删除了通关记录");
+            PlayerPrefs.DeleteAll();
+        }
     }
 
     public void StartGameBtnClick()
@@ -35,7 +40,7 @@ public class MenuUIManager : MonoBehaviour
             Game.Instance.LoadScene(1);
             gameStart = true;
         }
-           
+
     }
 
     private void ShowMessage(string content)

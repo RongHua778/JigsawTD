@@ -153,11 +153,11 @@ public class GameBoard : MonoBehaviour
     {
         if (!p.error)
         {
-            if (path != null && p.vectorPath.SequenceEqual(path.vectorPath))
-            {
-                //Debug.Log("Found Same Path");
-                return;
-            }
+            //if (path != null && p.vectorPath.SequenceEqual(path.vectorPath))
+            //{
+            //    //Debug.Log("Found Same Path");
+            //    return;
+            //}
             path = p;
             ShowPath(path);
             //Debug.Log("Find Path!");
