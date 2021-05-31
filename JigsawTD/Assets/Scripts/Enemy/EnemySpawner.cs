@@ -24,25 +24,55 @@ public class EnemySpawner : MonoBehaviour
     }
 
 
-    public void LevelInitialize(EnemyFactory factory)
+    public void LevelInitialize(EnemyFactory factory,int difficulty)
     {
         this._enemyFactory = factory;
         float intensify = 1;
         int amount;
-        float stage = 3;
+        float stage = 1f;
         for (int i = 0; i < StaticData.Instance.LevelMaxWave; i++)
         {
             EnemyType type = (EnemyType)UnityEngine.Random.Range(0, 4);
+
             EnemyAttribute attribute = _enemyFactory.Get(type);
             intensify =  stage*(0.5f*i+1);
-            if (i % 3 == 0) stage+=2f;
+            if (i % 3 == 0)
+            {
+                switch (difficulty)
+                {
+                    //简单难度
+                    case 1:
+                        if (i < 10) stage += 0.75f;
+                        else if (i >= 10 && i < 20) stage += 1.25f;
+                        else if (i >= 20 && i < 30) stage += 1.75f;
+                        else if (i >= 30) stage += 2.5f;
+                        break;
+                    //普通难度
+                    case 2:
+                        if (i < 10) stage += 1.5f;
+                        else if (i >= 10 && i < 20) stage += 2f;
+                        else if (i >= 20 && i < 30) stage += 2.5f;
+                        else if (i >= 30) stage += 3f;
+                        break;
+                    //专家难度
+                    case 3:
+                        if (i < 10) stage += 2f;
+                        else if (i >= 10 && i < 20) stage += 2.5f;
+                        else if (i >= 20 && i < 30) stage += 3f;
+                        else if (i >= 30) stage += 4f;
+                        break;
+                    default:
+                        Debug.LogAssertion("难度参数错误");
+                        break;
+                }
+            }
             amount = attribute.InitCount + i / 4 * attribute.CountIncrease;
             //每4回合
             float coolDown= attribute.CoolDown;
             //Tanker越来越肉
                 if (type == EnemyType.Tanker)
                 {
-                    intensify = intensify + i*0.3f *stage;
+                    intensify = intensify + i*0.5f *stage;
                 }
                coolDown = attribute.CoolDown - i * 0.01f;
                 //soldier出来的越来越多
@@ -51,7 +81,7 @@ public class EnemySpawner : MonoBehaviour
                     coolDown = coolDown - i / 4 * 0.015f;
                 }
 
-            if (i < 5) 
+            if (i < 4) 
             {
                 coolDown = 2.5f;
                 intensify = 1f;

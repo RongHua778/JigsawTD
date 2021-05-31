@@ -28,7 +28,7 @@ public class GameManager : Singleton<GameManager>
         }
     }
     //关卡难度
-    private int difficulty = 1;
+    private int difficulty = 2;
     public int Difficulty { get => difficulty; set => difficulty = value; }
 
     //_groundsize是地图每一边上方块的数量
@@ -126,7 +126,7 @@ public class GameManager : Singleton<GameManager>
         Board.Initialize(_startSize, GroundSize, _tileFactory);
 
         EnemySpawnHelper = this.GetComponent<EnemySpawner>();
-        EnemySpawnHelper.LevelInitialize(_enemyFactory);
+        EnemySpawnHelper.LevelInitialize(_enemyFactory,GameManager.Instance.difficulty);
     }
 
     private void TileClick()
