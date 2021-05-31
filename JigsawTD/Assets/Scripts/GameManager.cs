@@ -108,6 +108,8 @@ public class GameManager : Singleton<GameManager>
     }
     void Start()
     {
+        Sound.Instance.BgVolume = 0.3f;
+
         GameEvents.Instance.onTileClick += TileClick;
         GameEvents.Instance.onTileUp += TileUp;
 
