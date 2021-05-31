@@ -106,6 +106,13 @@ public class GameManager : Singleton<GameManager>
         GameEvents.Instance.onTileClick -= TileClick;
         GameEvents.Instance.onTileUp -= TileUp;
     }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        if (Game.Instance != null)
+            Difficulty = Game.Instance.Difficulty;
+    }
     void Start()
     {
         GameEvents.Instance.onTileClick += TileClick;
@@ -126,7 +133,7 @@ public class GameManager : Singleton<GameManager>
         Board.Initialize(_startSize, GroundSize, _tileFactory);
 
         EnemySpawnHelper = this.GetComponent<EnemySpawner>();
-        EnemySpawnHelper.LevelInitialize(_enemyFactory,GameManager.Instance.difficulty);
+        EnemySpawnHelper.LevelInitialize(_enemyFactory, GameManager.Instance.difficulty);
     }
 
     private void TileClick()
