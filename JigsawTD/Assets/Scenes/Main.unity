@@ -3298,6 +3298,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ResourceDir: Music
+  SoilderClip: {fileID: 0}
+  RestorerClip: {fileID: 0}
+  TankerClip: {fileID: 0}
+  RunnerClip: {fileID: 0}
 --- !u!1 &308920745
 GameObject:
   m_ObjectHideFlags: 0

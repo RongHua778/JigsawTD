@@ -10,7 +10,7 @@ public class ScaleAndMove : MonoBehaviour
 
     bool canMove = false;
     Camera cam;
-    float moveSpeed = 30f;
+    float moveSpeed = 20f;
     private int slideSpeed = 0;
     private float scrollSpeed = 2.5f;
     private float maximum = 10;

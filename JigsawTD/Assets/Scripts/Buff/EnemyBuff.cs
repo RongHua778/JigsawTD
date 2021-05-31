@@ -115,11 +115,19 @@ public class DirectionSlow : TileBuff
     {
         //Debug.Log("SlowDown");
         if (Target.Direction == Target.tileFrom.GetTileDirection())
+        {
             Target.PathSlow += KeyValue;
+            Debug.Log("SlowDown");
+        }
+        else
+        {
+            Debug.Log("NotMatch");
+        }
     }
     public override void End()
     {
-        Target.PathSlow -= KeyValue;
+        Target.PathSlow = 0;
+        Debug.Log("End");
     }
 }
 
