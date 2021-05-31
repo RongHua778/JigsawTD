@@ -39,35 +39,41 @@ public class EnemySpawner : MonoBehaviour
 
             EnemyAttribute attribute = _enemyFactory.Get(type);
             intensify = stage * (0.5f * i + 1);
-            if (i % 3 == 0)
+            switch (difficulty)
             {
-                switch (difficulty)
-                {
-                    //简单难度
-                    case 1:
+                //简单难度
+                case 1:
+                    if (i % 3 == 0)
+                    {
                         if (i < 10) stage += 0.75f;
                         else if (i >= 10 && i < 20) stage += 1.25f;
                         else if (i >= 20 && i < 30) stage += 1.75f;
                         else if (i >= 30) stage += 2.5f;
-                        break;
-                    //普通难度
-                    case 2:
+                    }
+                    break;
+                //普通难度
+                case 2:
+                    if (i % 3 == 0)
+                    {
                         if (i < 10) stage += 1.5f;
                         else if (i >= 10 && i < 20) stage += 2f;
-                        else if (i >= 20 && i < 30) stage += 2.5f;
-                        else if (i >= 30) stage += 3f;
-                        break;
-                    //专家难度
-                    case 3:
-                        if (i < 10) stage += 2f;
-                        else if (i >= 10 && i < 20) stage += 2.5f;
                         else if (i >= 20 && i < 30) stage += 3f;
                         else if (i >= 30) stage += 4f;
-                        break;
-                    default:
-                        Debug.LogAssertion("难度参数错误");
-                        break;
-                }
+                    }
+                    break;
+                //专家难度
+                case 3:
+                    if (i % 2 == 0)
+                    {
+                        if (i < 10) stage += 1.5f;
+                        else if (i >= 10 && i < 20) stage += 2f;
+                        else if (i >= 20 && i < 30) stage += 3f;
+                        else if (i >= 30) stage += 4f;
+                    }
+                    break;
+                default:
+                    Debug.LogAssertion("难度参数错误");
+                    break;
             }
             amount = attribute.InitCount + i / 4 * attribute.CountIncrease;
             //每4回合
@@ -75,7 +81,7 @@ public class EnemySpawner : MonoBehaviour
             //Tanker越来越肉
             if (type == EnemyType.Tanker)
             {
-                intensify = intensify + i * 0.5f * stage;
+                intensify = intensify + i * 0.6f * stage;
             }
             coolDown = attribute.CoolDown - i * 0.01f;
             //soldier出来的越来越多
