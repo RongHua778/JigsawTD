@@ -28,7 +28,7 @@ public class GameManager : Singleton<GameManager>
         }
     }
     //关卡难度
-    private int difficulty = 2;
+    private int difficulty = 3;
     public int Difficulty { get => difficulty; set => difficulty = value; }
 
     //_groundsize是地图每一边上方块的数量
