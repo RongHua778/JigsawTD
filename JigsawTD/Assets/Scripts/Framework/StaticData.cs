@@ -22,9 +22,10 @@ public class StaticData : Singleton<StaticData>
     public int PlayerMaxLevel;
     public int[] LevelUpMoney;
     public int StartCoin;
+    public int StartLotteryDraw;
     public int BaseWaveIncome;
     public int WaveMultiplyIncome;
-    public float[,] LevelChances = new float[6, 5]
+    public float[,] LevelChances = new float[7, 5]
     {
         { 1f, 0f, 0f, 0f, 0f },
         { 0.6f, 0.3f, 0.1f, 0f, 0f },
@@ -32,7 +33,7 @@ public class StaticData : Singleton<StaticData>
         { 0.3f, 0.35f, 0.2f, 0.125f, 0.025f },
         { 0.2f, 0.3f, 0.3f, 0.2f, 0.1f },
         { 0.1f, 0.2f, 0.25f, 0.3f, 0.15f },
-
+        { 0.1f, 0.15f, 0.20f, 0.3f, 0.25f }
     };
     public static int BuyBluePrintCost = 20;
     [Header("GameSetting")]
@@ -68,13 +69,14 @@ public class StaticData : Singleton<StaticData>
         { 150,300 },
         { 250,500 }
     };
-    public float[,] RareChances = new float[6, 3]//配方刷新概率
+    public float[,] RareChances = new float[7, 3]//配方刷新概率
     {
         { 0.9f,0.1f,0f },
         { 0.75f,0.25f,0f},
         { 0.6f,0.38f,0.02f },
         { 0.5f,0.42f,0.8f},
         { 0.4f,0.4f,0.2f},
+        { 0.35f,0.35f,0.3f},
         { 0.3f,0.3f,0.4f},
     };
 
