@@ -166,7 +166,7 @@ public abstract class Turret : GameBehavior
         }
     }
 
-    private void GetTurretEffects()
+    public void GetTurretEffects()//获取并激活效果
     {
         TurretEffects.Clear();
         foreach (TurretEffectInfo info in TurretEffectInfos)

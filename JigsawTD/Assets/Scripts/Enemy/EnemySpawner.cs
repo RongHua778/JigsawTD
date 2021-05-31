@@ -12,19 +12,22 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private EnemySequence runningSequence;
     public Queue<EnemySequence> LevelSequence = new Queue<EnemySequence>();
+
+    public EnemySequence RunningSequence { get => runningSequence; set => runningSequence = value; }
+
     public void GameUpdate()
     {
-        if (runningSequence != null)
+        if (RunningSequence != null)
         {
-            if (!runningSequence.Progress())
+            if (!RunningSequence.Progress())
             {
-                runningSequence = null;
+                RunningSequence = null;
             }
         }
     }
 
 
-    public void LevelInitialize(EnemyFactory factory,int difficulty)
+    public void LevelInitialize(EnemyFactory factory, int difficulty)
     {
         this._enemyFactory = factory;
         float intensify = 1;
@@ -35,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
             EnemyType type = (EnemyType)UnityEngine.Random.Range(0, 4);
 
             EnemyAttribute attribute = _enemyFactory.Get(type);
-            intensify =  stage*(0.5f*i+1);
+            intensify = stage * (0.5f * i + 1);
             if (i % 3 == 0)
             {
                 switch (difficulty)
@@ -68,20 +71,20 @@ public class EnemySpawner : MonoBehaviour
             }
             amount = attribute.InitCount + i / 4 * attribute.CountIncrease;
             //每4回合
-            float coolDown= attribute.CoolDown;
+            float coolDown = attribute.CoolDown;
             //Tanker越来越肉
-                if (type == EnemyType.Tanker)
-                {
-                    intensify = intensify + i*0.5f *stage;
-                }
-               coolDown = attribute.CoolDown - i * 0.01f;
-                //soldier出来的越来越多
-                if (type == EnemyType.Soilder)
-                {
-                    coolDown = coolDown - i / 4 * 0.015f;
-                }
+            if (type == EnemyType.Tanker)
+            {
+                intensify = intensify + i * 0.5f * stage;
+            }
+            coolDown = attribute.CoolDown - i * 0.01f;
+            //soldier出来的越来越多
+            if (type == EnemyType.Soilder)
+            {
+                coolDown = coolDown - i / 4 * 0.015f;
+            }
 
-            if (i < 4) 
+            if (i < 4)
             {
                 coolDown = 2.5f;
                 intensify = 1f;
@@ -95,12 +98,12 @@ public class EnemySpawner : MonoBehaviour
     {
         if (LevelSequence.Count > 0)
         {
-            runningSequence = LevelSequence.Dequeue();
-            GameEvents.Instance.StartNewWave(runningSequence);
+            RunningSequence = LevelSequence.Dequeue();
+            GameEvents.Instance.StartNewWave(RunningSequence);
         }
         else
         {
-            
+
             Debug.Log("所有波次都生成完了");
         }
 

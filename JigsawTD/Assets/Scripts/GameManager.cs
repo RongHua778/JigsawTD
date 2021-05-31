@@ -115,13 +115,12 @@ public class GameManager : Singleton<GameManager>
     }
     void Start()
     {
-        Sound.Instance.BgVolume = 0.3f;
 
         GameEvents.Instance.onTileClick += TileClick;
         GameEvents.Instance.onTileUp += TileUp;
 
         selection = transform.Find("Selection").gameObject;
-
+        Sound.Instance.BgVolume = 0.5f;
         buildingState = new BuildingState(this);
         waveState = new WaveState(this);
         state = buildingState;

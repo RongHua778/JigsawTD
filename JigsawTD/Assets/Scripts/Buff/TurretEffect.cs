@@ -58,7 +58,7 @@ public class SpeedIncreasePerShoot : TurretEffect
     public override string EffectDescription => "极速过载：每次攻击后，提升本回合攻速" + KeyValue + "。";
     public override void Shoot()
     {
-        if (turret.TurnAdditionalSpeed > KeyValue * 10)
+        if (turret.TurnAdditionalSpeed > KeyValue * 100)
             return;
         turret.TurnAdditionalSpeed += KeyValue;
     }

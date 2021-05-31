@@ -241,6 +241,7 @@ public class TurretTips : TileTips
         if (LevelUIManager.Instance.ConsumeMoney(upgradeCost))
         {
             m_Turret.Quality++;
+            m_Turret.GetTurretEffects();//更新BUILD效果
             if (m_Turret.Quality > 2)
             {
                 UpgradeArea.SetActive(false);
