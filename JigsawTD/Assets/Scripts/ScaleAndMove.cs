@@ -16,10 +16,10 @@ public class ScaleAndMove : MonoBehaviour
     private float maximum = 10;
     private float minmum = 3;
 
-    private float maxUp = 11;
-    private float maxDown = -11;
-    private float maxLeft = -9;
-    private float maxRight = 9;
+    private float maxUp = 20;
+    private float maxDown = -20;
+    private float maxLeft = -20;
+    private float maxRight = 20;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,9 +34,18 @@ public class ScaleAndMove : MonoBehaviour
     {
         //MobileInput();
         if (canMove)
-            DesktopInput();
-        //RTSView();
-    }
+        {
+                DesktopInput();
+        }
+        if (transform.localPosition.x < maxLeft ||
+    transform.localPosition.x > maxRight ||
+    transform.localPosition.y > maxUp ||
+    transform.localPosition.y < maxDown)
+        {
+            transform.position = new Vector3(0, 0, -10);
+        }
+            //RTSView();
+        }
 
     void SetCanMove()
     {

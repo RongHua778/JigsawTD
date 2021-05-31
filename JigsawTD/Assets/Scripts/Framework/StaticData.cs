@@ -52,8 +52,18 @@ public class StaticData : Singleton<StaticData>
     [Header("ProbabilitySetting")]
     public float[] TileShapeChance = default;
     public int PlayerMaxHealth;
-    public int LevelMaxWave;
-    public int LevelMaxWaveForBegginer;
+    [SerializeField] int levelMaxWave;
+    [SerializeField] int levelMaxWaveForBegginer;
+    public int LevelMaxWave 
+    {
+        get
+        {
+            if (GameManager.Instance.Difficulty == 1) return levelMaxWaveForBegginer;
+            else return levelMaxWave;
+        }
+    }
+
+
 
     [Header("ElementAttributes")]
     public float GoldAttackIntensify;
