@@ -36,6 +36,7 @@ public class StaticData : Singleton<StaticData>
     };
     public static int BuyBluePrintCost = 20;
     [Header("GameSetting")]
+    public float EnvrionmentBaseVolume = .25f;
     public float GameSlowDownRate = default;
     public float TileSize = default;
     //塔的最大等级
@@ -61,11 +62,12 @@ public class StaticData : Singleton<StaticData>
 
 
     [Header("CompositionAttributes")]
-    public int[,] LevelUpCost = new int[3, 2]//合成塔升级费用
+    public int[,] LevelUpCost = new int[4, 2]//合成塔升级费用
     {
         { 75, 150 },
         { 150,300 },
-        { 250,500 }
+        { 250,500 },
+         { 250,500 }//临时
     };
     public float[,] RareChances = new float[7, 3]//配方刷新概率
     {
@@ -217,7 +219,7 @@ public class StaticData : Singleton<StaticData>
     //给定一个总等级，返回若干个随机数的方法
     public static int[] GetSomeRandoms(int totalLevel, int number)
     {
-        if ((totalLevel / number )> maxLevel)
+        if ((totalLevel / number) > maxLevel)
         {
             Debug.LogWarning("配方等级输错了，菜鸡");
             int[] errorRandom = new int[number];
@@ -257,7 +259,7 @@ public class StaticData : Singleton<StaticData>
             {
                 int max = Mathf.Min(totalLevel - (number - 1), maxLevel);
                 int min = 1;
-                while (totalLevel - min > maxLevel*(number-1))
+                while (totalLevel - min > maxLevel * (number - 1))
                 {
                     min++;
                 }

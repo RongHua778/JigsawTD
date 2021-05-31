@@ -19,6 +19,7 @@ MonoBehaviour:
   element: 0
   Bullet: {fileID: 3850126010392176229, guid: 98bd253b0342caf4daf35704c5347b27, type: 3}
   BulletSpeed: 6
+  ShootSound: {fileID: 8300000, guid: 9753322f428c5e34582fcf6067589c81, type: 3}
   Rare: 0
   totalLevel: 0
   elementNumber: 0

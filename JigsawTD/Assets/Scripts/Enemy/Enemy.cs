@@ -5,7 +5,11 @@ using UnityEngine;
 public abstract class Enemy : GameBehavior
 {
     public abstract EnemyType EnemyType { get; }
+
     private Animator anim;
+    private AudioSource enemyAudio;
+    private AudioClip explosionClip;
+
     [SerializeField] GameObject exlposionPrefab = default;
     public int ReachDamage { get; set; }
     public float TargetDamageCounter { get; set; }
@@ -88,6 +92,9 @@ public abstract class Enemy : GameBehavior
     private void Awake()
     {
         anim = this.GetComponent<Animator>();
+        //enemyAudio = this.gameObject.AddComponent<AudioSource>();
+        //enemyAudio.spatialBlend = 1;
+        explosionClip = Resources.Load<AudioClip>("Music/Sound_EnemyExplosion");
     }
 
     public override bool GameUpdate()
@@ -96,6 +103,8 @@ public abstract class Enemy : GameBehavior
         {
             StopAllCoroutines();
             GameObject explosion = ObjectPool.Instance.Spawn(exlposionPrefab);
+            Sound.Instance.PlayEffect(explosionClip, StaticData.Instance.EnvrionmentBaseVolume);
+            //PlayAudio(explosionClip);
             explosion.transform.position = model.transform.position;
             GameEvents.Instance.EnemyDie(this);
             ObjectPool.Instance.UnSpawn(this.gameObject);
@@ -131,6 +140,11 @@ public abstract class Enemy : GameBehavior
         return true;
     }
 
+    private void PlayAudio(AudioClip clip)
+    {
+        enemyAudio.volume = StaticData.Instance.EnvrionmentBaseVolume;
+        enemyAudio.PlayOneShot(clip);
+    }
 
     private IEnumerator ExitCor()
     {
@@ -263,7 +277,7 @@ public abstract class Enemy : GameBehavior
         progressFactor = adjust * Speed;
     }
 
-    public virtual void ApplyDamage(float amount, out float realDamage,bool isCritical=false)
+    public virtual void ApplyDamage(float amount, out float realDamage, bool isCritical = false)
     {
         realDamage = amount * 5 / (5 + Shell);
         if (isCritical)
