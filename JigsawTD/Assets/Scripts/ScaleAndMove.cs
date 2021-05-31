@@ -7,52 +7,60 @@ public class ScaleAndMove : MonoBehaviour
 {
     Vector2 m_ScreenPos = new Vector2();
     Vector3 oldPosition;
+
+    bool canMove = false;
     Camera cam;
-    float moveSpeed = 60f;
-    private int slideSpeed=0;
+    float moveSpeed = 30f;
+    private int slideSpeed = 0;
     private float scrollSpeed = 2.5f;
     private float maximum = 10;
     private float minmum = 3;
 
-    private float maxUp=11;
-    private float maxDown =-11;
-    private float maxLeft =-9;
-    private float maxRight =9;
+    private float maxUp = 11;
+    private float maxDown = -11;
+    private float maxLeft = -9;
+    private float maxRight = 9;
     // Start is called before the first frame update
     void Start()
     {
         cam = this.GetComponent<Camera>();
         oldPosition = cam.transform.position;
         Input.multiTouchEnabled = true;
+        Invoke("SetCanMove", 1f);
     }
 
     // Update is called once per frame
     void Update()
     {
-            MobileInput();
+        //MobileInput();
+        if (canMove)
             DesktopInput();
-            RTSView();
+        //RTSView();
     }
 
+    void SetCanMove()
+    {
+        canMove = true;
+    }
     private void RTSView()
     {
-        Vector3 speedHorizon=new Vector3(0,0,0);
+        Vector3 speedHorizon = new Vector3(0, 0, 0);
         Vector3 speedVertical = new Vector3(0, 0, 0);
         Vector3 speed = new Vector3(0, 0, 0);
         Vector3 v1 = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-        if (v1.x < 0.05f&& transform.localPosition.x >maxLeft)
+        if (v1.x < 0.05f && transform.localPosition.x > maxLeft)
         {
             speedHorizon = Vector3.left * slideSpeed * Time.deltaTime;
         }
-    if (v1.x > 1 - 0.05f&& transform.localPosition.x < maxRight)
+        if (v1.x > 1 - 0.05f && transform.localPosition.x < maxRight)
         {
             speedHorizon = Vector3.right * slideSpeed * Time.deltaTime;
         }
-    if (v1.y < 0.05f&& transform.localPosition.y>maxDown)
+        if (v1.y < 0.05f && transform.localPosition.y > maxDown)
         {
             speedVertical = Vector3.down * slideSpeed * Time.deltaTime;
         }
-    if (v1.y > 1 - 0.05f&& transform.localPosition.y < maxUp)
+        if (v1.y > 1 - 0.05f && transform.localPosition.y < maxUp)
         {
             speedVertical = Vector3.up * slideSpeed * Time.deltaTime;
         }
