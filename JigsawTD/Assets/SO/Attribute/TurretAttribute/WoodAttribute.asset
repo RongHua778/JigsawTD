@@ -23,9 +23,9 @@ MonoBehaviour:
   totalLevel: 0
   elementNumber: 0
   TurretLevels:
-  - AttackRange: 2
+  - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 10
+    AttackDamage: 8
     AttackSpeed: 8
     SputteringRange: 0
     CriticalRate: 0
@@ -37,9 +37,9 @@ MonoBehaviour:
     BaseSprite: {fileID: 21300000, guid: 46ef006f93358d546964463ecd4b0f48, type: 3}
     CannonSprite: {fileID: 21300000, guid: e30d6c51d114d974f9c771d6963b0195, type: 3}
     ShootPointOffset: {x: 0, y: 0.2}
-  - AttackRange: 2
+  - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 15
+    AttackDamage: 12
     AttackSpeed: 8
     SputteringRange: 0
     CriticalRate: 0
@@ -51,9 +51,9 @@ MonoBehaviour:
     BaseSprite: {fileID: 21300000, guid: 46ef006f93358d546964463ecd4b0f48, type: 3}
     CannonSprite: {fileID: 21300000, guid: 0551f7b92e03be340a733b3098e8938e, type: 3}
     ShootPointOffset: {x: 0, y: 0.2}
-  - AttackRange: 2
+  - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 25
+    AttackDamage: 20
     AttackSpeed: 8
     SputteringRange: 0
     CriticalRate: 0
@@ -65,9 +65,9 @@ MonoBehaviour:
     BaseSprite: {fileID: 21300000, guid: 46ef006f93358d546964463ecd4b0f48, type: 3}
     CannonSprite: {fileID: 21300000, guid: 1e2373d6a1c3c794c82742b633114d43, type: 3}
     ShootPointOffset: {x: 0, y: 0.22}
-  - AttackRange: 3
+  - AttackRange: 4
     ForbidRange: 0
-    AttackDamage: 40
+    AttackDamage: 30
     AttackSpeed: 8
     SputteringRange: 0
     CriticalRate: 0
@@ -79,9 +79,9 @@ MonoBehaviour:
     BaseSprite: {fileID: 21300000, guid: 96c03dd35664a4b4c8498a29b89ec736, type: 3}
     CannonSprite: {fileID: 21300000, guid: b8455ebf3d7e3d64da4b7991380c8b72, type: 3}
     ShootPointOffset: {x: 0, y: 0.22}
-  - AttackRange: 3
+  - AttackRange: 4
     ForbidRange: 0
-    AttackDamage: 60
+    AttackDamage: 45
     AttackSpeed: 8
     SputteringRange: 0
     CriticalRate: 0

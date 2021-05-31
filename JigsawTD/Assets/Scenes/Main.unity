@@ -2981,6 +2981,7 @@ MonoBehaviour:
   PlayerMaxLevel: 7
   LevelUpMoney: 000000002800000050000000a00000002c010000f4010000ee0200000f270000
   StartCoin: 0
+  StartLotteryDraw: 2
   BaseWaveIncome: 5
   WaveMultiplyIncome: 5
   GameSlowDownRate: 0
@@ -11396,7 +11397,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1383652722
 RectTransform:
   m_ObjectHideFlags: 0

@@ -22,6 +22,7 @@ public class StaticData : Singleton<StaticData>
     public int PlayerMaxLevel;
     public int[] LevelUpMoney;
     public int StartCoin;
+    public int StartLotteryDraw;
     public int BaseWaveIncome;
     public int WaveMultiplyIncome;
     public float[,] LevelChances = new float[7, 5]

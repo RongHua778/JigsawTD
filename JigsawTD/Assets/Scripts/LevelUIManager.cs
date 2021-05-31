@@ -165,6 +165,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
         PlayerLevel = 1;
         PlayerHealth = StaticData.Instance.PlayerMaxHealth;
         PlayerCoin = StaticData.Instance.StartCoin;
+        LotteryDraw = StaticData.Instance.StartLotteryDraw;
     }
 
     private void OnDisable()
