@@ -9,6 +9,11 @@ public class Sound : Singleton<Sound>
     AudioSource m_effectSound;
     public string ResourceDir = "";
 
+    public AudioClip SoilderClip;
+    public AudioClip RestorerClip;
+    public AudioClip TankerClip;
+    public AudioClip RunnerClip;
+
     protected override void Awake()
     {
         base.Awake();
@@ -29,6 +34,20 @@ public class Sound : Singleton<Sound>
     {
         get { return m_effectSound.volume; }
         set { m_effectSound.volume = value; }
+    }
+
+    public void PlayBg(AudioClip clip)
+    {
+        if (m_bgSound.clip != null)
+        {
+            StopAllCoroutines();
+            StartCoroutine(FadeMusic(clip));
+        }
+        else
+        {
+            m_bgSound.clip = clip;
+            m_bgSound.Play();
+        }
     }
     //播放音乐
     public void PlayBg(string audioName)

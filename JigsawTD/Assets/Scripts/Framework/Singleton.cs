@@ -14,7 +14,10 @@ public abstract class Singleton<T> : MonoBehaviour
     protected virtual void Awake()
     {
         if (Instance != null)
-            Debug.Log("已经创建了相同singleton实例");
+        {
+            Destroy(this);
+            Debug.Log(this.name + "已经创建了相同singleton实例");
+        }
         else
             m_instance = this as T;
     }
