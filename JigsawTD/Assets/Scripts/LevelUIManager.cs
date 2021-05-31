@@ -57,10 +57,23 @@ public class LevelUIManager : Singleton<LevelUIManager>
                 enemyRemain = 0;
                 if (PlayerHealth <= 0)
                     return;
-                if (CurrentWave == StaticData.Instance.LevelMaxWave)
+                if (GameManager.Instance.Difficulty == 1)  
                 {
-                    ShowGameWinPanel();
-                    return;
+
+                    if (CurrentWave == StaticData.Instance.LevelMaxWaveForBegginer)
+                    {
+                        ShowGameWinPanel();
+                        return;
+                    }
+                }
+                else
+                {
+
+                    if (CurrentWave == StaticData.Instance.LevelMaxWave)
+                    {
+                        ShowGameWinPanel();
+                        return;
+                    }
                 }
                 GameManager.Instance.TransitionToState(StateName.BuildingState);
             }

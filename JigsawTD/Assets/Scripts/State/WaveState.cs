@@ -24,7 +24,7 @@ public class WaveState : State
             switch (sequence.EnemyAttribute.EnemyType)
             {
                 case EnemyType.Soilder:
-                    Sound.Instance.PlayBg("soilder");
+                    Sound.Instance.PlayBg("soldier");
                     break;
                 case EnemyType.Runner:
                     Sound.Instance.PlayBg("runner");

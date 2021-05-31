@@ -53,6 +53,7 @@ public class StaticData : Singleton<StaticData>
     public float[] TileShapeChance = default;
     public int PlayerMaxHealth;
     public int LevelMaxWave;
+    public int LevelMaxWaveForBegginer;
 
     [Header("ElementAttributes")]
     public float GoldAttackIntensify;

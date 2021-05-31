@@ -98,7 +98,6 @@ public class Sound : Singleton<Sound>
         }
 
     }
-
     //停止音乐
     public void StopBg()
     {

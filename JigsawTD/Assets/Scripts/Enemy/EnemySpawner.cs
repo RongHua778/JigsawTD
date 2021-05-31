@@ -33,7 +33,19 @@ public class EnemySpawner : MonoBehaviour
         float intensify = 1;
         int amount;
         float stage = 1f;
-        for (int i = 0; i < StaticData.Instance.LevelMaxWave; i++)
+        int levelMax=40;
+        if (difficulty == 1)
+        {
+            levelMax = StaticData.Instance.LevelMaxWaveForBegginer;
+        }else if (difficulty == 2 || difficulty == 3)
+        {
+            levelMax = StaticData.Instance.LevelMaxWave;
+        }
+        else
+        {
+            Debug.LogAssertion("难度参数错误！");
+        }
+        for (int i = 0; i < levelMax; i++)
         {
             EnemyType type = (EnemyType)UnityEngine.Random.Range(0, 4);
 
@@ -47,8 +59,7 @@ public class EnemySpawner : MonoBehaviour
                     {
                         if (i < 10) stage += 0.75f;
                         else if (i >= 10 && i < 20) stage += 1.25f;
-                        else if (i >= 20 && i < 30) stage += 1.75f;
-                        else if (i >= 30) stage += 2.5f;
+                        else if (i >= 20) stage += 1.75f;
                     }
                     break;
                 //普通难度
