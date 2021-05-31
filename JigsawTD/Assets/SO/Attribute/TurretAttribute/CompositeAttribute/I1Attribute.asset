@@ -34,7 +34,7 @@ MonoBehaviour:
     TurretEffects:
     - EffectName: 6
       KeyValue: 0.15
-      EffectDescription: "\u6781\u901F\u8FC7\u8F7D\uFF1A\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347\u672C\u56DE\u5408\u653B\u901F0.15\u3002"
+      EffectDescription: "\u6781\u901F\u8FC7\u8F7D\uFF1A\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347\u672C\u56DE\u5408\u653B\u901F0.15\u3002\uFF08\u4E0A\u965015\uFF09"
     PoloEffects: []
     TurretName: "I1\u8F6E\u8F6C\u70AE"
     Icon: {fileID: 21300000, guid: 77bba78c11fc4c04d81f21b26c4c433f, type: 3}
@@ -50,8 +50,8 @@ MonoBehaviour:
     SlowRate: 0
     TurretEffects:
     - EffectName: 6
-      KeyValue: 0.2
-      EffectDescription: "\u6781\u901F\u8FC7\u8F7D\uFF1A\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347\u672C\u56DE\u5408\u653B\u901F0.2\u3002"
+      KeyValue: 0.17
+      EffectDescription: "\u6781\u901F\u8FC7\u8F7D\uFF1A\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347\u672C\u56DE\u5408\u653B\u901F0.17\u3002\uFF08\u4E0A\u965017\uFF09"
     PoloEffects: []
     TurretName: "I2\u8F6E\u8F6C\u70AE"
     Icon: {fileID: 21300000, guid: 77bba78c11fc4c04d81f21b26c4c433f, type: 3}
@@ -67,8 +67,8 @@ MonoBehaviour:
     SlowRate: 0
     TurretEffects:
     - EffectName: 6
-      KeyValue: 0.25
-      EffectDescription: "\u6781\u901F\u8FC7\u8F7D\uFF1A\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347\u672C\u56DE\u5408\u653B\u901F0.25\u3002"
+      KeyValue: 0.2
+      EffectDescription: "\u6781\u901F\u8FC7\u8F7D\uFF1A\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347\u672C\u56DE\u5408\u653B\u901F0.2\u3002(\u4E0A\u965020)"
     PoloEffects: []
     TurretName: "I3\u8F6E\u8F6C\u70AE"
     Icon: {fileID: 21300000, guid: 77bba78c11fc4c04d81f21b26c4c433f, type: 3}

@@ -5111,6 +5111,7 @@ MonoBehaviour:
   UpgradeCostValue: {fileID: 5979496603015834990}
   UpgradeArea: {fileID: 1223337588749068032}
   BtnArea: {fileID: 6030200085263075469}
+  BuyBtn: {fileID: 7794111847516124751}
   IntensifyArea: {fileID: 3873196845415134752}
   AnalysisArea: {fileID: 2830715346529025986}
   elementConstruct: {fileID: 1009784397881732197}

@@ -17,8 +17,9 @@ public class BluePrintShop : MonoBehaviour
 
     int nextRefreshTrun = 0;
     public int NextRefreshTrun //下次自动刷新回合
-    { get => nextRefreshTrun; 
-        set 
+    {
+        get => nextRefreshTrun;
+        set
         {
             nextRefreshTrun = value;
             if (nextRefreshTrun <= 0)
@@ -27,13 +28,13 @@ public class BluePrintShop : MonoBehaviour
                 RefreshShop(0);
             }
             NextRefreshTurnsTxt.text = nextRefreshTrun + "回合后刷新";
-        } 
+        }
     }
 
     private void Start()
     {
         NextRefreshTrun = 4;
-        
+
         GameEvents.Instance.onCheckBluePrint += CheckAllBluePrint;
         GameEvents.Instance.onLuckyFull += GetARandomBluePrintToPocket;
 
@@ -59,11 +60,11 @@ public class BluePrintShop : MonoBehaviour
         {
             TurretAttribute compositeTurret = GameManager.Instance.GetRandomCompositeAttributeByLevel();
             Blueprint bluePrint = GameManager.Instance.GetSingleBluePrint(compositeTurret);
-            AddBluePrint(bluePrint,true);
+            AddBluePrint(bluePrint, true);
         }
     }
 
-    public void AddBluePrint(Blueprint bluePrint,bool isShopBluePrint)//增加蓝图，isShopblueprint判断加入商店还是拥有
+    public void AddBluePrint(Blueprint bluePrint, bool isShopBluePrint)//增加蓝图，isShopblueprint判断加入商店还是拥有
     {
         GameObject bluePrintObj = ObjectPool.Instance.Spawn(bluePrintGridPrefab.gameObject);
         bluePrintObj.transform.SetParent(shopContent);
@@ -72,12 +73,12 @@ public class BluePrintShop : MonoBehaviour
         if (isShopBluePrint)
         {
             bluePrintObj.transform.SetAsFirstSibling();
+            grid.InShop = true;
             ShopBluePrints.Add(grid);
         }
         else
         {
-            bluePrintObj.transform.SetAsLastSibling();
-            OwnBluePrints.Add(grid);
+            MoveBluePrintToPocket(grid);
         }
     }
 
@@ -89,10 +90,16 @@ public class BluePrintShop : MonoBehaviour
 
     public void MoveBluePrintToPocket(BluePrintGrid grid)//把商店配方移入拥有
     {
+        grid.InShop = false;
+        grid.transform.SetAsLastSibling();
         OwnBluePrints.Add(grid);
-        ShopBluePrints.Remove(grid);
+        if (ShopBluePrints.Contains(grid))
+            ShopBluePrints.Remove(grid);
         grid.transform.SetAsLastSibling();
     }
+
+
+
 
     public void CompositeBluePrint(BluePrintGrid grid)//合成对应的配方
     {
@@ -120,7 +127,7 @@ public class BluePrintShop : MonoBehaviour
 
     private void CheckAllBluePrint()//检查所有配方是否达成合成条件
     {
-        foreach(var bluePrint in ShopBluePrints)
+        foreach (var bluePrint in ShopBluePrints)
         {
             bluePrint.CheckElements();
         }
@@ -134,7 +141,7 @@ public class BluePrintShop : MonoBehaviour
     {
         TurretAttribute compositeTurret = GameManager.Instance.GetRandomCompositeAttributeByLevel();
         Blueprint bluePrint = GameManager.Instance.GetSingleBluePrint(compositeTurret);
-        AddBluePrint(bluePrint,false);
+        AddBluePrint(bluePrint, false);
     }
 
 }

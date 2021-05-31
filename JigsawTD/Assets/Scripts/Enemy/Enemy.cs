@@ -28,7 +28,7 @@ public abstract class Enemy : GameBehavior
 
     [Header("EnemyAttribute")]
     protected float speed;
-    public virtual float Speed { get => StunTime > 0 ? 0 : speed * (1 - (SlowRate - PathSlow) / (SlowRate + PathSlow + 1f)); set => speed = value; }
+    public virtual float Speed { get => StunTime > 0 ? 0 : speed * (1 - (SlowRate - PathSlow) / (SlowRate + PathSlow + 0.7f)); set => speed = value; }
     int shell;
     public int Shell { get => Mathf.Max(0, shell - BrokeShell); set => shell = value; }
     float slowRate;

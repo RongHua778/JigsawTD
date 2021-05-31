@@ -13,23 +13,12 @@ public class G1Turret : CompositeTurret
     //同时攻击多个目标
     protected override void Shoot()
     {
-        //turretAnim.SetTrigger("Attack");
-        //PlayAudio(ShootClip, false);
-        //foreach (TargetPoint target in Target)
-        //{
-        //    Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
-        //    bullet.transform.position = shootDir ? shootPoint1.position : shootPoint2.position;
-        //    shootDir = !shootDir;
-        //    bullet.Initialize(this, target);
-        //}
+
         StartCoroutine(ShootCor());
     }
 
     IEnumerator ShootCor()
     {
-        //turretAnim.SetTrigger("Attack");
-        //PlayAudio(ShootClip, false);
-
         foreach (TargetPoint target in Target.ToList())
         {
             if (!target.gameObject.activeSelf)
