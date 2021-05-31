@@ -39,12 +39,10 @@ public class EnemySpawner : MonoBehaviour
             amount = attribute.InitCount + i / 4 * attribute.CountIncrease;
             //每4回合
             float coolDown= attribute.CoolDown;
-            if (i % 4 == 0) 
-            {
-                //Tanker越来越肉
+            //Tanker越来越肉
                 if (type == EnemyType.Tanker)
                 {
-                    intensify = intensify + i / 4 *stage* 1000f;
+                    intensify = intensify + i*0.3f *stage;
                 }
                coolDown = attribute.CoolDown - i * 0.01f;
                 //soldier出来的越来越多
@@ -53,8 +51,11 @@ public class EnemySpawner : MonoBehaviour
                     coolDown = coolDown - i / 4 * 0.015f;
                 }
 
-            } 
-
+            if (i < 5) 
+            {
+                coolDown = 2.5f;
+                intensify = 1f;
+            }
             EnemySequence sequence = new EnemySequence(i + 1, attribute, intensify, amount, coolDown);
             LevelSequence.Enqueue(sequence);
         }

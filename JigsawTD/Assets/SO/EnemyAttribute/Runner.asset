@@ -16,8 +16,9 @@ MonoBehaviour:
   InitCount: 4
   CountIncrease: 5
   Health: 5
-  Speed: 1
+  Speed: 1.1
   Shell: 0
   CoolDown: 1
   Prefab: {fileID: 2303344070539863949, guid: b8d466535f2566a4cb8cf786b9a7d19f, type: 3}
   ReachDamage: 1
+  extraHealth: 0
