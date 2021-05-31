@@ -3199,7 +3199,7 @@ MonoBehaviour:
   PlayerMaxLevel: 7
   LevelUpMoney: 000000002800000050000000a00000002c010000f4010000ee0200000f270000
   StartCoin: 0
-  StartLotteryDraw: 2
+  StartLotteryDraw: 0
   BaseWaveIncome: 5
   WaveMultiplyIncome: 5
   EnvrionmentBaseVolume: 0.25
