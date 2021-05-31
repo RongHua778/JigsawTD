@@ -39,13 +39,4 @@ public class I1Turret : CompositeTurret
         bullet.Initialize(this, null, targetPos);
     }
 
-    protected override void OnDrawGizmos()
-    {
-        base.OnDrawGizmos();
-        Gizmos.color = Color.blue;
-        Vector3 position = transform.position;
-        position.z -= 0.1f;
-        Gizmos.DrawWireSphere(position, SputteringRange);
-    }
-
 }

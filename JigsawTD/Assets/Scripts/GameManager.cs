@@ -237,9 +237,9 @@ public class GameManager : Singleton<GameManager>
     public TileShape GenerateCompositeShape(Blueprint bluePrint)
     {
         TileShape shape = _shapeFactory.GetDShape();
-        GameTile tile = _tileFactory.GetCompositeTurretTile(bluePrint.CompositeTurretAttribute);
+        TurretTile tile = _tileFactory.GetCompositeTurretTile(bluePrint.CompositeTurretAttribute);
         //将蓝图赋值给合成塔turret
-        Turret turret = ((TurretTile)tile).turret;
+        Turret turret = tile.turret;
         ((CompositeTurret)turret).CompositeBluePrint = bluePrint;
         shape.InitializeShape(tile);
         return shape;

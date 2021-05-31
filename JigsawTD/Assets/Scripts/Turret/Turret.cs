@@ -135,6 +135,7 @@ public abstract class Turret : GameBehavior
         CannonSprite = rotTrans.Find("Cannon").GetComponent<SpriteRenderer>();
         turretAnim = this.GetComponent<Animator>();
         audioSource = this.gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
         //audioSource.spatialBlend = 1;
     }
 
@@ -386,13 +387,25 @@ public abstract class Turret : GameBehavior
 
     }
 
-
-    protected virtual void OnDrawGizmos()
+    public void ClearTurret()
     {
-        Gizmos.color = Color.yellow;
-        Vector3 position = transform.position;
-        position.z -= 0.1f;
-
+        if (Dropped)
+        {
+            TriggerPoloEffect(false);
+        }
+        AttackIntensify = 0;
+        Quality = 1;
+        Element = Element.Gold;
+        RangeIntensify = 0;
+        SpeedIntensify = 0;
+        targetList.Clear();
+        CriticalPercentage = 1.5f;
+        Dropped = false;
+        TargetCount = 1;
+        DamageAnalysis = 0;
+        GameManager.Instance.turrets.behaviors.Remove(this);//´ÓÁÐ±íÒÆ³ý
+        ClearTurnIntensify();
+        RecycleRanges();
     }
 
     public void ClearTurnIntensify()

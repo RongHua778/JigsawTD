@@ -45,13 +45,4 @@ public class Shock : Turret
         //bullet.Initialize(this, targetPos);
     }
 
-    protected override void OnDrawGizmos()
-    {
-        base.OnDrawGizmos();
-        Gizmos.color = Color.blue;
-        Vector3 position = transform.position;
-        position.z -= 0.1f;
-        Gizmos.DrawWireSphere(position, SputteringRange);
-    }
-
 }

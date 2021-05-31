@@ -69,14 +69,13 @@ public class TileFactory : GameObjectFactory
 
     //******************turrettile²¿·Ö**************
 
-    public GameTile GetBasicTurret(int quality, int element)
+    public TurretTile GetBasicTurret(int quality, int element)
     {
         TurretAttribute attribute = GameManager.Instance.GetElementAttribute((Element)element);
         GameObject temp = CreateInstance(attribute.TilePrefab);
         TurretTile tile = temp.GetComponent<TurretTile>();
-        tile.turret.m_TurretAttribute = attribute;
-        tile.turret.Quality = quality;
-        return temp.GetComponent<GameTile>();
+        tile.Initialize(attribute,quality);
+        return tile;
     }
     public GameTile GetRandomElementTile()
     {
@@ -92,10 +91,12 @@ public class TileFactory : GameObjectFactory
         return temp;
     }
 
-    public GameTile GetCompositeTurretTile(TurretAttribute attribute)
+    public TurretTile GetCompositeTurretTile(TurretAttribute attribute)
     {
         GameObject temp = CreateInstance(attribute.TilePrefab);
-        return temp.GetComponent<TurretTile>();
+        TurretTile tile = temp.GetComponent<TurretTile>();
+        tile.Initialize(attribute, 1);
+        return tile;
     }
 
 }
