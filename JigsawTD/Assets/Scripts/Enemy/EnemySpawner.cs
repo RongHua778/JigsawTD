@@ -52,6 +52,7 @@ public class EnemySpawner : MonoBehaviour
                 {
                     coolDown = coolDown - i / 4 * 0.015f;
                 }
+
             } 
 
             EnemySequence sequence = new EnemySequence(i + 1, attribute, intensify, amount, coolDown);
