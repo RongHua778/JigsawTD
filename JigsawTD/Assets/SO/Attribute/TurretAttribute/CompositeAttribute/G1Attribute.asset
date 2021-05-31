@@ -19,6 +19,7 @@ MonoBehaviour:
   element: 5
   Bullet: {fileID: 3850126010392176229, guid: b88c1d3ba59ce7b4ea2bd28f6a939d28, type: 3}
   BulletSpeed: 5
+  ShootSound: {fileID: 8300000, guid: 7ec8b8a56410f2a48a2d440114e962b8, type: 3}
   Rare: 1
   totalLevel: 5
   elementNumber: 3

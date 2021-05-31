@@ -62,7 +62,7 @@ public class StaticData : Singleton<StaticData>
 
 
     [Header("CompositionAttributes")]
-    public int[,] LevelUpCost = new int[4, 2]//合成塔升级费用
+    public int[,] LevelUpCost = new int[3, 2]//合成塔升级费用
     {
         { 75, 150 },
         { 150,300 },

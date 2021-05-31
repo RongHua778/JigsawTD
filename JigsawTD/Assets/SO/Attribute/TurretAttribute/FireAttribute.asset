@@ -66,7 +66,7 @@ MonoBehaviour:
     BaseSprite: {fileID: 21300000, guid: 314e42a0fa19e4141abf677f45f51587, type: 3}
     CannonSprite: {fileID: 21300000, guid: 1772ccd2addaa654baa7980a624d939e, type: 3}
     ShootPointOffset: {x: 0, y: 0.26}
-  - AttackRange: 2
+  - AttackRange: 3
     ForbidRange: 0
     AttackDamage: 100
     AttackSpeed: 0.5
@@ -80,7 +80,7 @@ MonoBehaviour:
     BaseSprite: {fileID: 21300000, guid: 0fc4aee69dd71dd4a80c702accbef93c, type: 3}
     CannonSprite: {fileID: 21300000, guid: 43154665103206c469442843fd02aebe, type: 3}
     ShootPointOffset: {x: 0, y: 0.26}
-  - AttackRange: 2
+  - AttackRange: 3
     ForbidRange: 0
     AttackDamage: 150
     AttackSpeed: 0.5
