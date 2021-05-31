@@ -87,4 +87,10 @@ public class Sound : Singleton<Sound>
         m_effectSound.PlayOneShot(clip);
 
     }
+
+    public void PlayEffect(AudioClip clip, float volume = 1)
+    {
+        m_effectSound.volume = volume;
+        m_effectSound.PlayOneShot(clip,0.5f);
+    }
 }

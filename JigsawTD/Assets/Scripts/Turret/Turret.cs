@@ -16,7 +16,12 @@ public abstract class Turret : GameBehavior
     private Transform rangeParent;
     private float nextAttackTime;
     private Quaternion look_Rotation;
+
+
+    //**********动画及音效
     protected Animator turretAnim;
+    protected AudioSource audioSource;
+
 
     protected RangeType RangeType;
     protected GameObject bulletPrefab = default;
@@ -38,6 +43,7 @@ public abstract class Turret : GameBehavior
     //[Header("美术资源设置")]
     protected SpriteRenderer BaseSprite;
     protected SpriteRenderer CannonSprite;
+    protected AudioClip ShootClip;
     //************
 
     //[Header("TurretAttribute")]
@@ -128,7 +134,8 @@ public abstract class Turret : GameBehavior
         BaseSprite = transform.root.Find("TileBase/TurretBase").GetComponent<SpriteRenderer>();
         CannonSprite = rotTrans.Find("Cannon").GetComponent<SpriteRenderer>();
         turretAnim = this.GetComponent<Animator>();
-
+        audioSource = this.gameObject.AddComponent<AudioSource>();
+        //audioSource.spatialBlend = 1;
     }
 
     public virtual void InitializeTurret()
@@ -137,9 +144,25 @@ public abstract class Turret : GameBehavior
         RangeType = m_TurretAttribute.RangeType;
         Element = m_TurretAttribute.element;
         bulletPrefab = m_TurretAttribute.Bullet;
+        ShootClip = m_TurretAttribute.ShootSound;
         SetGraphic();
         GenerateRange();
         GetTurretEffects();
+    }
+
+    protected virtual void PlayAudio(AudioClip clip, bool isAuto)
+    {
+        audioSource.volume = StaticData.Instance.EnvrionmentBaseVolume;
+        audioSource.clip = clip;
+        if (isAuto)
+        {
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+        else
+        {
+            audioSource.PlayOneShot(clip);
+        }
     }
 
     private void GetTurretEffects()
@@ -353,6 +376,7 @@ public abstract class Turret : GameBehavior
     protected virtual void Shoot()
     {
         turretAnim.SetTrigger("Attack");
+        PlayAudio(ShootClip, false);
         foreach (TargetPoint target in Target)
         {
             Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
