@@ -66,8 +66,7 @@ public class StaticData : Singleton<StaticData>
     {
         { 75, 150 },
         { 150,300 },
-        { 250,500 },
-         { 250,500 }//临时
+        { 250,500 }
     };
     public float[,] RareChances = new float[6, 3]//配方刷新概率
     {

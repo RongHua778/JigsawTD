@@ -200,7 +200,7 @@ public class DamageTarget : TileBuff
         Target.ApplyDamage(Target.TargetDamageCounter * KeyValue, out damageReturn, true);
         ((TrapTile)(Target.tileFrom)).DamageAnalysis += (int)damageReturn;
         Target.TargetDamageCounter = 0;
-        Debug.Log("TriggerDamageTarget" + damageReturn);
+        //Debug.Log("TriggerDamageTarget" + damageReturn);
 
     }
 

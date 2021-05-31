@@ -51,7 +51,7 @@ public class TurretTips : TileTips
             if (turret.Quality < 3)
             {
                 UpgradeArea.SetActive(true);
-                upgradeCost = StaticData.Instance.LevelUpCost[turret.m_TurretAttribute.Rare, turret.Quality - 1];
+                upgradeCost = StaticData.Instance.LevelUpCost[turret.m_TurretAttribute.Rare - 1, turret.Quality - 1];
                 UpgradeCostValue.text = upgradeCost.ToString();
             }
             else
