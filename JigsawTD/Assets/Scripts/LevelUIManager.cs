@@ -54,7 +54,6 @@ public class LevelUIManager : Singleton<LevelUIManager>
             enemyRemain = value;
             if (enemyRemain <= 0)
             {
-                Sound.Instance.StopBg();
                 enemyRemain = 0;
                 if (PlayerHealth <= 0)
                     return;
@@ -117,7 +116,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
             luckyPoints = value;
             if (luckyPoints >= 10)
             {
-                luckyPoints -= 10;
+                luckyPoints = 0;
                 GameEvents.Instance.LuckyFull();
             }
             luckyProgress.SetProgress(luckyPoints);
@@ -133,7 +132,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
             drawThisTurn = value;
             if (drawThisTurn)
             {
-                luckPointsProcess = 1;//如果抽了卡，清空幸运点进度
+                LuckPointsProcess = 1;//如果抽了卡，清空幸运点进度
             }
         }
     }
@@ -165,6 +164,8 @@ public class LevelUIManager : Singleton<LevelUIManager>
             healthTxt.text = PlayerHealth.ToString() + "/" + StaticData.Instance.PlayerMaxHealth.ToString();
         }
     }
+
+    public int LuckPointsProcess { get => luckPointsProcess; set { luckPointsProcess = Math.Min(5, value); } }
 
 
     #endregion
@@ -247,8 +248,8 @@ public class LevelUIManager : Singleton<LevelUIManager>
         //抽取次数及幸运点
         if (!DrawThisTurn)
         {
-            LuckyPoints += luckPointsProcess;
-            luckPointsProcess += 2;
+            LuckyPoints += LuckPointsProcess;
+            LuckPointsProcess += 2;
         }
 
         DrawThisTurn = false;
@@ -359,7 +360,6 @@ public class LevelUIManager : Singleton<LevelUIManager>
 
     public void NextWaveClick()
     {
-        Sound.Instance.StopBg();
         HideArea();
         GameManager.Instance.TransitionToState(StateName.WaveState);
     }

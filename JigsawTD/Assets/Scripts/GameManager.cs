@@ -106,15 +106,21 @@ public class GameManager : Singleton<GameManager>
         GameEvents.Instance.onTileClick -= TileClick;
         GameEvents.Instance.onTileUp -= TileUp;
     }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        if (Game.Instance != null)
+            Difficulty = Game.Instance.Difficulty;
+    }
     void Start()
     {
-        Sound.Instance.BgVolume = 0.3f;
 
         GameEvents.Instance.onTileClick += TileClick;
         GameEvents.Instance.onTileUp += TileUp;
 
         selection = transform.Find("Selection").gameObject;
-
+        Sound.Instance.BgVolume = 0.5f;
         buildingState = new BuildingState(this);
         waveState = new WaveState(this);
         state = buildingState;
@@ -128,7 +134,7 @@ public class GameManager : Singleton<GameManager>
         Board.Initialize(_startSize, GroundSize, _tileFactory);
 
         EnemySpawnHelper = this.GetComponent<EnemySpawner>();
-        EnemySpawnHelper.LevelInitialize(_enemyFactory,GameManager.Instance.difficulty);
+        EnemySpawnHelper.LevelInitialize(_enemyFactory, GameManager.Instance.difficulty);
     }
 
     private void TileClick()

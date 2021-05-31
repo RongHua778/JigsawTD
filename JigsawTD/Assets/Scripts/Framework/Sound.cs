@@ -33,6 +33,22 @@ public class Sound : Singleton<Sound>
     //播放音乐
     public void PlayBg(string audioName)
     {
+        if (m_bgSound.clip != null)
+        {
+            string path;
+            if (string.IsNullOrEmpty(ResourceDir))
+                path = "";
+            else
+                path = ResourceDir + "/" + audioName;
+            //加载音乐文件
+            AudioClip clip = Resources.Load<AudioClip>(path);
+            if (clip != null)
+            {
+                StopAllCoroutines();
+                StartCoroutine(FadeMusic(clip));
+            }
+            return;
+        }
         //当前正在播放的音乐文件
         string oldName;
         if (m_bgSound.clip == null)
@@ -62,9 +78,27 @@ public class Sound : Singleton<Sound>
                 m_bgSound.Play();
             }
         }
+    }
 
+    private IEnumerator FadeMusic(AudioClip clip)
+    {
+        float startVolume = m_bgSound.volume;
+
+        while (m_bgSound.volume > 0)
+        {
+            m_bgSound.volume -= startVolume * Time.deltaTime / 2f;
+            yield return null;
+        }
+        m_bgSound.clip = clip;
+        m_bgSound.Play();
+        while (m_bgSound.volume <= startVolume)
+        {
+            m_bgSound.volume += startVolume * Time.deltaTime / 2f;
+            yield return null;
+        }
 
     }
+
     //停止音乐
     public void StopBg()
     {

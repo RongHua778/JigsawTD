@@ -10,7 +10,7 @@ public class MenuUIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        Sound.Instance.PlayBg("menu");
     }
 
     // Update is called once per frame
