@@ -289,10 +289,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be54f24d1265fb54f9925a1974644955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 2213642736673116852}
+  m_TurretTile: {fileID: 0}
   Dropped: 0
   targetList: []
-  Level: 0
   m_TurretAttribute: {fileID: 11400000, guid: 49b78835926160f46b82645449e248b6, type: 2}
 --- !u!1 &6195695841050206438
 GameObject:
@@ -395,7 +394,7 @@ GameObject:
   - component: {fileID: 3568044695007039410}
   m_Layer: 10
   m_Name: L1
-  m_TagString: Untagged
+  m_TagString: UnDropableTurret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

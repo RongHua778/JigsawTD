@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class BluePrintGrid : MonoBehaviour
 {
     public static BluePrintGrid SelectingBluePrint = null;
+    private bool inShop=false;
+    public bool InShop { get => inShop; set => inShop = value; }
 
     [SerializeField] Text compositeName = default;
     [SerializeField] Image compositeIcon = default;
@@ -18,6 +20,7 @@ public class BluePrintGrid : MonoBehaviour
 
     public Blueprint BluePrint { get => m_BluePrint; set => m_BluePrint = value; }
     public BluePrintShop Shop { get => m_Shop; set => m_Shop = value; }
+
 
     public void SetElements(BluePrintShop shop, ToggleGroup group, Blueprint bluePrint)
     {

@@ -18,6 +18,7 @@ public class TurretTips : TileTips
     [SerializeField] Text UpgradeCostValue = default;
     [SerializeField] GameObject UpgradeArea = default;//合成塔升级区
     [SerializeField] GameObject BtnArea = default;//购买/合成按钮区
+    [SerializeField] GameObject BuyBtn = default;//购买按钮
     [SerializeField] GameObject IntensifyArea = default;//元素塔加成效果区
     [SerializeField] GameObject AnalysisArea = default;//伤害统计区
     [SerializeField] TipsElementConstruct elementConstruct = default;//合成塔组成元素区
@@ -31,7 +32,7 @@ public class TurretTips : TileTips
     public void ReadTurret(Turret turret)//通过场上防御塔查看
     {
         anim.SetBool("isOpen", true);
-
+        Sound.Instance.PlayEffect("Sound_Click");
 
         this.m_Turret = turret;
         Icon.sprite = turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].Icon;
@@ -143,6 +144,7 @@ public class TurretTips : TileTips
     public void ReadAttribute(BluePrintGrid bGrid)//通过配方查看
     {
         anim.SetBool("isOpen", true);
+        Sound.Instance.PlayEffect("Sound_Click");
 
 
         m_Turret = null;
@@ -189,6 +191,9 @@ public class TurretTips : TileTips
         elementConstruct.gameObject.SetActive(true);
         elementConstruct.SetElements(bGrid.BluePrint);
         IntensifyArea.SetActive(false);
+
+        //关闭购买按钮，如果是在口袋里
+        BuyBtn.SetActive(bGrid.InShop);
         BtnArea.SetActive(true);
         AnalysisArea.SetActive(false);
         UpgradeArea.SetActive(false);
@@ -200,6 +205,7 @@ public class TurretTips : TileTips
         if (LevelUIManager.Instance.ConsumeMoney(StaticData.BuyBluePrintCost))
         {
             LevelUIManager.Instance.LuckyPoints++;
+            BuyBtn.SetActive(false);
             m_BGrid.MoveToPocket();
         }
         else
@@ -210,6 +216,11 @@ public class TurretTips : TileTips
 
     public void CompositeBtnClick()
     {
+        if (RoadPlacement.PlaceState != PlacementState.Default)
+        {
+            GameEvents.Instance.Message("需先放置抽取模块");
+            return;
+        }
         if (GameManager.Instance.State.StateName != StateName.BuildingState)
         {
             GameEvents.Instance.Message("战斗中不可合成");
@@ -236,7 +247,7 @@ public class TurretTips : TileTips
                 return;
             }
             SetDescription(m_Turret);
-            upgradeCost = StaticData.Instance.LevelUpCost[m_Turret.m_TurretAttribute.Rare, m_Turret.Quality - 1];
+            upgradeCost = StaticData.Instance.LevelUpCost[m_Turret.m_TurretAttribute.Rare-1, m_Turret.Quality - 1];
             UpgradeCostValue.text = upgradeCost.ToString();
         }
     }

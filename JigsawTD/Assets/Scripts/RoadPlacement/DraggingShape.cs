@@ -270,6 +270,7 @@ public class DraggingShape : DraggingActions
                 GameEvents.Instance.Message("必须有道路连接起点和终点");
                 return;
             }
+            Sound.Instance.PlayEffect("Sound_ConfirmShape");
             EnableGroundColliders();
             GameEvents.Instance.AddTiles(tileShape.tiles);
             SetTrapActived();

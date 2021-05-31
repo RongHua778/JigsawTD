@@ -30,6 +30,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
     [SerializeField] Text speedBtnTxt = default;
 
     [SerializeField] GameEndPanel _gameEndPanel = default;
+    [SerializeField] PausePanel _pausePanel = default;
 
 
     #region 属性
@@ -198,15 +199,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
         GameEvents.Instance.onHideTips -= HideTips;
     }
 
-    //合成界面显示配方塔TIPS
-    private void ShowTurretAttributeTips(BluePrintGrid bGrid)
-    {
-        turretTips.gameObject.SetActive(true);
-        Vector2 size = turretTips.GetComponent<RectTransform>().sizeDelta;
-        Vector2 pos = new Vector2(size.x / 2 + 500, Screen.height / 2);
-        turretTips.transform.position = pos;
-        turretTips.ReadAttribute(bGrid);
-    }
+
     private void NewWaveStart(EnemySequence sequence)
     {
         EnemyRemain = sequence.Amount;
@@ -296,6 +289,16 @@ public class LevelUIManager : Singleton<LevelUIManager>
             default:
                 break;
         }
+    }
+
+    //合成界面显示配方塔TIPS
+    private void ShowTurretAttributeTips(BluePrintGrid bGrid)
+    {
+        turretTips.gameObject.SetActive(true);
+        Vector2 size = turretTips.GetComponent<RectTransform>().sizeDelta;
+        Vector2 pos = new Vector2(size.x / 2 + 500, Screen.height / 2);
+        turretTips.transform.position = pos;
+        turretTips.ReadAttribute(bGrid);
     }
 
     public void HideTips()
@@ -392,5 +395,10 @@ public class LevelUIManager : Singleton<LevelUIManager>
         _roadPlacament.HideArea();
         _gameEndPanel.gameObject.SetActive(true);
         _gameEndPanel.ShowGameEndPanel(true);
+    }
+
+    public void PauseBtnClick()
+    {
+        _pausePanel.gameObject.SetActive(true);
     }
 }
