@@ -30,17 +30,18 @@ public class MenuUIManager : MonoBehaviour
 
     public void StartGameBtnClick()
     {
-        if (PlayerPrefs.GetInt("MaxPassLevel", 1) < Game.Instance.Difficulty)
-        {
-            ShowMessage("需先通关上一级难度");
-            return;
-        }
-        if (!gameStart)
-        {
-            Game.Instance.LoadScene(1);
-            gameStart = true;
-        }
-
+        //if (PlayerPrefs.GetInt("MaxPassLevel", 1) < Game.Instance.Difficulty)
+        //{
+        //    ShowMessage("需先通关上一级难度");
+        //    return;
+        //}
+        //if (!gameStart)
+        //{
+        //    Game.Instance.LoadScene(1);
+        //    gameStart = true;
+        //}
+        Game.Instance.LoadScene(1);
+        gameStart = true;
     }
 
     private void ShowMessage(string content)
