@@ -6,12 +6,12 @@ public enum StateName
 {
     BuildingState, WaveState, WonState, LoseState
 }
-public abstract class State
+public abstract class BattleOperationState
 {
     public abstract StateName StateName { get; }
     protected GameManager gameManager;
 
-    public State(GameManager gameManager)
+    public BattleOperationState(GameManager gameManager)
     {
         this.gameManager = gameManager;
     }
@@ -20,7 +20,7 @@ public abstract class State
         yield break;
     }
 
-    public virtual IEnumerator ExitState(State newState)
+    public virtual IEnumerator ExitState(BattleOperationState newState)
     {
         yield break;
     }

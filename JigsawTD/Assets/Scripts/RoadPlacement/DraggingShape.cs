@@ -265,7 +265,7 @@ public class DraggingShape : DraggingActions
         }
         if (canDrop)
         {
-            if (!GameBoard.FindPath)
+            if (!BoardSystem.FindPath)
             {
                 GameEvents.Instance.Message("必须有道路连接起点和终点");
                 return;

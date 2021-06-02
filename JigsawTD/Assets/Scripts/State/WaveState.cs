@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveState : State
+public class WaveState : BattleOperationState
 {
 
     public WaveState(GameManager gameManager) : base(gameManager)
@@ -40,7 +40,7 @@ public class WaveState : State
         yield break;
     }
 
-    public override IEnumerator ExitState(State newState)
+    public override IEnumerator ExitState(BattleOperationState newState)
     {
         gameManager.EnterNewState(newState);
         yield break;

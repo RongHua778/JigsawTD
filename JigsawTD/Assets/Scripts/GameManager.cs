@@ -6,7 +6,9 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    public GameBoard Board = default;
+    //版图系统
+    [SerializeField] private BoardSystem m_Board = default;
+
     public BluePrintShop _bluePrintShop = default;
 
     //游戏速度
@@ -27,8 +29,9 @@ public class GameManager : Singleton<GameManager>
             Time.timeScale = gameSpeed;
         }
     }
+
     //关卡难度
-    private int difficulty = 3;
+    private int difficulty = 2;
     public int Difficulty { get => difficulty; set => difficulty = value; }
 
     //_groundsize是地图每一边上方块的数量
@@ -55,105 +58,58 @@ public class GameManager : Singleton<GameManager>
     public GameBehaviorCollection turrets = new GameBehaviorCollection();
 
 
-    //计算点击选中
-    static GameObject selection;
-    static float pressCounter = 0;
-    public bool IsPressingTile = false;
-    public bool IsLongPress { get => pressCounter >= 0.3f; }
-    private static GameTile selectingTile;
-    public static GameTile SelectingTile
-    {
-        get => selectingTile;
-        set
-        {
-            if (selectingTile != null)
-            {
-                if (selectingTile.BasicTileType == BasicTileType.Turret)
-                {
-                    ((TurretTile)selectingTile).ShowTurretRange(false);
-                }
-                selectingTile = selectingTile == value ? null : value;
-            }
-            else
-            {
-                selectingTile = value;
-            }
-            if (selectingTile != null)
-            {
-                if (selectingTile.BasicTileType == BasicTileType.Turret)
-                {
-                    ((TurretTile)selectingTile).ShowTurretRange(true);
-                }
-                LevelUIManager.Instance.ShowTileTips(selectingTile);
-                selection.transform.position = selectingTile.transform.position;
-            }
-            selection.SetActive(selectingTile != null);
-        }
 
-    }
     public EnemySpawner EnemySpawnHelper;
 
-    //State
-    private State state;
-    public State State { get => state; }
+    //*********战斗中流程State
+    private BattleOperationState operationState;
+    public BattleOperationState OperationState { get => operationState; }
 
-    public BuildingState buildingState;
-    public WaveState waveState;
+    private BuildingState buildingState;
+    private WaveState waveState;
+    //************
 
-    private void OnDisable()
+
+    //初始化设定
+    public void Initinal()
     {
+        //基本参数设置
         GameSpeed = 1;
-        GameEvents.Instance.onTileClick -= TileClick;
-        GameEvents.Instance.onTileUp -= TileUp;
-    }
+        Difficulty = Game.Instance.Difficulty;
+ 
+        m_Board.Initialize(this);//版图系统
 
-    protected override void Awake()
-    {
-        base.Awake();
-        if (Game.Instance != null)
-            Difficulty = Game.Instance.Difficulty;
-    }
-    void Start()
-    {
 
-        GameEvents.Instance.onTileClick += TileClick;
-        GameEvents.Instance.onTileUp += TileUp;
-
-        selection = transform.Find("Selection").gameObject;
-        Sound.Instance.BgVolume = 0.5f;
-        buildingState = new BuildingState(this);
-        waveState = new WaveState(this);
-        state = buildingState;
-        StartCoroutine(state.EnterState());
+        
 
         _enemyFactory.InitializeFactory();
         _tileFactory.InitializeFactory();
         // _bluePrintFacotry.InitializeFactory();
         _turretFactory.InitializeFacotory();
 
-        Board.Initialize(_startSize, GroundSize, _tileFactory);
+        m_Board.SetGameBoard(_startSize, GroundSize, _tileFactory);
 
         EnemySpawnHelper = this.GetComponent<EnemySpawner>();
         EnemySpawnHelper.LevelInitialize(_enemyFactory, GameManager.Instance.difficulty);
+        _bluePrintShop.RefreshShop(0);
+
+        buildingState = new BuildingState(this, m_Board);
+        waveState = new WaveState(this);
+        EnterNewState(buildingState);
     }
 
-    private void TileClick()
+    //释放游戏系统
+    public void Release()
     {
-        IsPressingTile = true;
+        GameSpeed = 1;
+        m_Board.Release();
     }
 
-    private void TileUp(GameTile tile)
-    {
-        if (!IsLongPress)
-        {
-            LevelUIManager.Instance.HideTips();
-            SelectingTile = tile;
-        }
-        IsPressingTile = false;
-    }
 
-    void Update()
+
+    public void GameUpdate()
     {
+        m_Board.GameUpdate();
         EnemySpawnHelper.GameUpdate();
         enemies.GameUpdate();
         Physics2D.SyncTransforms();
@@ -165,38 +121,12 @@ public class GameManager : Singleton<GameManager>
             StaticData.holdingShape.RotateShape();
         }
 
-
-        if (IsPressingTile && Input.GetMouseButton(0))
-        {
-            pressCounter += Time.deltaTime;
-        }
-        else
-        {
-            pressCounter = 0;
-        }
-
-
-        if (SelectingTile != null)
-        {
-            selection.SetActive(true);
-            selection.transform.position = SelectingTile.transform.position;
-        }
-        else
-        {
-            selection.SetActive(false);
-        }
-
-    }
-
-    public void HideSelection()
-    {
-        selection.SetActive(false);
     }
 
     public void SpawnEnemy(EnemySequence sequence)
     {
         Enemy enemy = EnemySpawnHelper.SpawnEnemy(sequence.EnemyAttribute, sequence.Intensify);
-        GameTile tile = Board.SpawnPoint;
+        GameTile tile = m_Board.SpawnPoint;
         enemy.SpawnOn(tile);
         enemies.Add(enemy);
     }
@@ -206,10 +136,10 @@ public class GameManager : Singleton<GameManager>
         switch (stateName)
         {
             case StateName.BuildingState:
-                StartCoroutine(this.state.ExitState(buildingState));
+                StartCoroutine(OperationState.ExitState(buildingState));
                 break;
             case StateName.WaveState:
-                StartCoroutine(this.state.ExitState(waveState));
+                StartCoroutine(OperationState.ExitState(waveState));
                 break;
             case StateName.WonState:
                 break;
@@ -218,10 +148,10 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public void EnterNewState(State newState)
+    public void EnterNewState(BattleOperationState newState)
     {
-        this.state = newState;
-        StartCoroutine(this.state.EnterState());
+        this.operationState = newState;
+        StartCoroutine(this.operationState.EnterState());
     }
 
 

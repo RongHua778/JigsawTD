@@ -39,7 +39,7 @@ public class BluePrintShop : MonoBehaviour
         GameEvents.Instance.onLuckyFull += GetARandomBluePrintToPocket;
 
         anim = this.GetComponent<Animator>();
-        RefreshShop(0);
+        //RefreshShop(0);
     }
 
     private void OnDisable()

@@ -221,7 +221,7 @@ public class TurretTips : TileTips
             GameEvents.Instance.Message("需先放置抽取模块");
             return;
         }
-        if (GameManager.Instance.State.StateName != StateName.BuildingState)
+        if (GameManager.Instance.OperationState.StateName != StateName.BuildingState)
         {
             GameEvents.Instance.Message("战斗中不可合成");
             return;

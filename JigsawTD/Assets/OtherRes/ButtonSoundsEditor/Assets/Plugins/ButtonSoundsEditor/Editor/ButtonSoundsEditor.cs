@@ -37,6 +37,7 @@ namespace Assets.Plugins.ButtonSoundsEditor.Editor
 			_candidates.Add(CandidatesTypeFilter.EventTriggers, new List<GameObject>());
 		}
 
+		[Obsolete]
 		[MenuItem("Window/Utils/Button sounds editor")]
 		public static void OpenEditor()
 		{
@@ -46,6 +47,7 @@ namespace Assets.Plugins.ButtonSoundsEditor.Editor
 			window.Show();
 		}
 
+		[Obsolete]
 		private void Initialize()
 		{
 			RefreshCandidates();
@@ -73,6 +75,7 @@ namespace Assets.Plugins.ButtonSoundsEditor.Editor
 
 		#endregion
 
+		[Obsolete]
 		private void RefreshCandidates()
 		{
 			_candidates.Values.ToList().ForEach(_ => _.Clear());
@@ -106,6 +109,7 @@ namespace Assets.Plugins.ButtonSoundsEditor.Editor
 			return GetTransformPath(x.transform).CompareTo(GetTransformPath(y.transform));
 		}
 
+		[Obsolete]
 		public void OnGUI()
 		{
 			RefreshCandidates();

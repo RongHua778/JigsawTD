@@ -6,8 +6,47 @@ using System;
 using System.Linq;
 using PathCreation;
 
-public class GameBoard : MonoBehaviour
+public class BoardSystem : IGameSystem
 {
+    //计算点击选中
+    #region 选择Tile高亮
+    static GameObject selection;
+    static float pressCounter = 0;
+    public bool IsPressingTile = false;
+    public bool IsLongPress { get => pressCounter >= 0.3f; }
+    private static GameTile selectingTile;
+    public static GameTile SelectingTile
+    {
+        get => selectingTile;
+        set
+        {
+            if (selectingTile != null)
+            {
+                if (selectingTile.BasicTileType == BasicTileType.Turret)
+                {
+                    ((TurretTile)selectingTile).ShowTurretRange(false);
+                }
+                selectingTile = selectingTile == value ? null : value;
+            }
+            else
+            {
+                selectingTile = value;
+            }
+            if (selectingTile != null)
+            {
+                if (selectingTile.BasicTileType == BasicTileType.Turret)
+                {
+                    ((TurretTile)selectingTile).ShowTurretRange(true);
+                }
+                LevelUIManager.Instance.ShowTileTips(selectingTile);
+                selection.transform.position = selectingTile.transform.position;
+            }
+            selection.SetActive(selectingTile != null);
+        }
+
+    }
+    #endregion
+
     int[,] traps = new int[25, 25];
 
     [SerializeField] PathLine pathLinePrefab = default;
@@ -38,6 +77,9 @@ public class GameBoard : MonoBehaviour
 
 
     bool showPaths = true;
+
+
+
     public bool ShowPaths
     {
         get => showPaths;
@@ -62,24 +104,70 @@ public class GameBoard : MonoBehaviour
     }
 
 
-    private void Start()
+    public  override void Initialize(GameManager gameManager)
     {
+        base.Initialize(gameManager);
+
+        selection = transform.Find("Selection").gameObject;
+
         GameEvents.Instance.onAddTiles += RePlaceTiles;
         GameEvents.Instance.onSeekPath += SeekPath;
         GameEvents.Instance.onRemoveGameTile += RemoveGameTile;
 
+        GameEvents.Instance.onTileClick += TileClick;
+        GameEvents.Instance.onTileUp += TileUp;
     }
 
-    private void OnDisable()
+    public override void Release()
     {
         GameEvents.Instance.onAddTiles -= RePlaceTiles;
         GameEvents.Instance.onSeekPath -= SeekPath;
         GameEvents.Instance.onRemoveGameTile -= RemoveGameTile;
+
+        GameEvents.Instance.onTileClick -= TileClick;
+        GameEvents.Instance.onTileUp -= TileUp;
     }
 
 
 
-    public void Initialize(Vector2Int size, Vector2Int groundSize, TileFactory tileFactory)
+    public void GameUpdate()
+    {
+
+
+        if (IsPressingTile && Input.GetMouseButton(0))
+        {
+            pressCounter += Time.deltaTime;
+        }
+        else
+        {
+            pressCounter = 0;
+        }
+        if (SelectingTile != null)
+        {
+            selection.SetActive(true);
+            selection.transform.position = SelectingTile.transform.position;
+        }
+        else
+        {
+            selection.SetActive(false);
+        }
+    }
+    private void TileClick()
+    {
+        IsPressingTile = true;
+    }
+
+    private void TileUp(GameTile tile)
+    {
+        if (!IsLongPress)
+        {
+            LevelUIManager.Instance.HideTips();
+            SelectingTile = tile;
+        }
+        IsPressingTile = false;
+    }
+
+    public void SetGameBoard(Vector2Int size, Vector2Int groundSize, TileFactory tileFactory)
     {
         this.tileFactory = tileFactory;
         GenerateGroundTiles(groundSize);
@@ -309,8 +397,8 @@ public class GameBoard : MonoBehaviour
         if (gameTile != null)
         {
             tiles.Remove(gameTile);
-            if (GameManager.SelectingTile == gameTile)
-                GameManager.SelectingTile = null;
+            if (SelectingTile == gameTile)
+                SelectingTile = null;
             ObjectPool.Instance.UnSpawn(gameTile.gameObject);
         }
         GroundTile groundTile = GetTile(pos, StaticData.GetGroundLayer) as GroundTile;
@@ -325,8 +413,8 @@ public class GameBoard : MonoBehaviour
         if (tiles.Contains(tile))
         {
             tiles.Remove(tile);
-            if (GameManager.SelectingTile == tile)
-                GameManager.SelectingTile = null;
+            if (SelectingTile == tile)
+                SelectingTile = null;
             ObjectPool.Instance.UnSpawn(tile.gameObject);
 
             GroundTile groundTile = GetTile(tile.transform.position, StaticData.GetGroundLayer) as GroundTile;
