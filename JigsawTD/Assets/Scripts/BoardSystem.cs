@@ -104,7 +104,7 @@ public class BoardSystem : IGameSystem
     }
 
 
-    public  override void Initialize(GameManager gameManager)
+    public override void Initialize(GameManager gameManager)
     {
         base.Initialize(gameManager);
 
@@ -202,6 +202,7 @@ public class BoardSystem : IGameSystem
         }
         GenerateTrapTiles(groundSize, StaticData.trapN, tileFactory);
         SeekPath();
+        ShowPath(path);
     }
 
     private void AddGameTile(GameTile tile, Vector2 pos)
@@ -213,11 +214,8 @@ public class BoardSystem : IGameSystem
             groundTile.gameObject.layer = LayerMask.NameToLayer(StaticData.TempGroundMask);
         }
         tile.gameObject.layer = LayerMask.NameToLayer(StaticData.ConcreteTileMask);
-        //只有非陷阱才会改成concreteLayer
-        //if (!tile.GetComponent<TrapTile>())
-        //{
-        //    tile.gameObject.layer = LayerMask.NameToLayer(StaticData.ConcreteTileMask);
-        //}
+
+
         tile.transform.localPosition = pos;
         CorrectTileCoord(tile);
         tiles.Add(tile);
@@ -241,11 +239,11 @@ public class BoardSystem : IGameSystem
     {
         if (!p.error)
         {
-            //if (path != null && p.vectorPath.SequenceEqual(path.vectorPath))
-            //{
-            //    //Debug.Log("Found Same Path");
-            //    return;
-            //}
+            if (path != null && p.vectorPath.SequenceEqual(path.vectorPath))
+            {
+                //Debug.Log("Found Same Path");
+                return;
+            }
             path = p;
             ShowPath(path);
             //Debug.Log("Find Path!");
@@ -299,9 +297,9 @@ public class BoardSystem : IGameSystem
         List<Vector2> basicPoss = new List<Vector2>();
 
         List<Vector2> traps = new List<Vector2>();
-        for (int i = 1; i < groundSize.x-1; i++)
+        for (int i = 1; i < groundSize.x - 1; i++)
         {
-            for (int j = 1; j < groundSize.y-1; j++)
+            for (int j = 1; j < groundSize.y - 1; j++)
             {
                 //避免陷阱刷到初始的方块上
                 if (!(i >= 10 && i <= 14 && j >= 10 && j <= 14))
@@ -326,9 +324,9 @@ public class BoardSystem : IGameSystem
             basicPoss.Remove(temp);
         }
 
-        for(int j = 0; j < StaticData.basicN; j++)
+        for (int j = 0; j < StaticData.basicN; j++)
         {
-            int index= UnityEngine.Random.Range(0, basicPoss.Count);
+            int index = UnityEngine.Random.Range(0, basicPoss.Count);
             Vector2 pos = basicPoss[index];
             BasicTile tile = t.GetBasicTile();
 
@@ -365,24 +363,33 @@ public class BoardSystem : IGameSystem
     {
         foreach (GameTile tile in newTiles)
         {
-            tile.GetComponent<ReusableObject>().SetBackToParent();
-            Vector3 pos = new Vector3(tile.transform.position.x, tile.transform.position.y, 0);
-            GameTile t = StaticData.Instance.GetTile(pos);
+            tile.SetBackToParent();
+            Vector2 pos = tile.transform.position;
+            Collider2D col = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.ConcreteTileMask));
             tile.SetPreviewing(false);
-            if (t != null)
+            if (col != null)
             {
-                if (t.GetComponentInParent<TurretTile>() || t.GetComponentInParent<TrapTile>())
-                {
-                    tile.tileBase.GetComponent<SpriteRenderer>().material.color = Color.white;
+                if (tile.TileContent == null)
                     ObjectPool.Instance.UnSpawn(tile.gameObject);
-                    continue;
-                }
                 else
                 {
                     RemoveGameTileOnPos(pos);
+                    AddGameTile(tile, pos);
                 }
+                //if (col.GetComponentInParent<TurretTile>() || col.GetComponentInParent<TrapTile>())
+                //{
+                //    ObjectPool.Instance.UnSpawn(tile.gameObject);
+                //    continue;
+                //}
+                //else
+                //{
+                //    RemoveGameTileOnPos(pos);
+                //}
             }
-            AddGameTile(tile, pos);
+            else
+            {
+                AddGameTile(tile, pos);
+            }
         }
         foreach (GameTile tile in newTiles)
         {

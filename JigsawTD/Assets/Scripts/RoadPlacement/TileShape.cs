@@ -14,7 +14,7 @@ public class TileShape : MonoBehaviour
     Camera renderCam;
     GameObject bgObj;
     DraggingShape draggingShape;
-    Text turretName;
+    Text turretNameTxt;
 
     [HideInInspector]
     public List<GameTile> tiles = new List<GameTile>();
@@ -23,7 +23,7 @@ public class TileShape : MonoBehaviour
 
     private void Awake()
     {
-        turretName = GetComponentInChildren<Text>();
+        turretNameTxt = transform.GetComponentInChildren<Text>();
         tilePos = transform.GetComponentsInChildren<TileSlot>();
         renderCam = transform.Find("RenderCam").GetComponent<Camera>();
         bgObj = transform.Find("BG").gameObject;
@@ -32,14 +32,13 @@ public class TileShape : MonoBehaviour
     //在shape上面加上塔
     public void InitializeShape(GameTile specialTile, TileFactory tileFactory = null)
     {
-        draggingShape.TurretCollider = specialTile.GetComponentInParent<Collider2D>();
         if (shapeType == ShapeType.D)
         {
             specialTile.transform.position = tilePos[0].transform.position;
             specialTile.transform.SetParent(this.transform);
-            specialTile.m_DraggingShape = this.GetComponent<DraggingShape>();
+            specialTile.m_DraggingShape = draggingShape;
             tiles.Add(specialTile);
-            draggingShape.Initialized();
+            draggingShape.Initialized(this);
             SetPreviewPlace();
         }
         else
@@ -52,8 +51,7 @@ public class TileShape : MonoBehaviour
                 {
                     tile = specialTile;
                     Turret turret = ((TurretTile)specialTile).turret;
-                    turretName.text = turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].TurretName;
-                   // draggingShape.TurretCollider = turret.GetComponentInParent<Collider2D>();
+                    turretNameTxt.text = turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].TurretName;
                 }
                 else
                 {
@@ -62,10 +60,10 @@ public class TileShape : MonoBehaviour
                 tile.transform.position = tilePos[i].transform.position;
                 tile.tileType.rotation = DirectionExtensions.GetRandomRotation();
                 tile.transform.SetParent(this.transform);
-                tile.m_DraggingShape = this.GetComponent<DraggingShape>();
+                tile.m_DraggingShape = draggingShape;
                 tiles.Add(tile);
             }
-            draggingShape.Initialized();
+            draggingShape.Initialized(this);
         }
 
     }
@@ -94,7 +92,7 @@ public class TileShape : MonoBehaviour
     public void SetPreviewPlace()
     {
         bgObj.SetActive(false);
-        turretName.transform.parent.gameObject.SetActive(false);
+        turretNameTxt.transform.parent.gameObject.SetActive(false);
         Vector2 pos = Camera.main.transform.position;
         renderCam.gameObject.SetActive(false);
         transform.position = new Vector3(Mathf.Round(pos.x), Mathf.Round(pos.y), -1f);

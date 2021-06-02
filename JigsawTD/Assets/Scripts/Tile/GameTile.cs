@@ -9,6 +9,11 @@ public abstract class GameTile : TileBase
     public abstract BasicTileType BasicTileType { get; }
     public DraggingShape m_DraggingShape { get; set; }
 
+    private GameObject tileContent;
+    public GameObject TileContent { get => tileContent; set => tileContent = value; }
+
+    [HideInInspector] public Material BaseMaterial;
+
     GameObject previewGlow;
     Transform directionCheckPoint;
     public Transform tileBase { get; set; }
@@ -37,10 +42,12 @@ public abstract class GameTile : TileBase
 
     public Vector3 ExitPoint { get; set; }
 
+
     protected virtual void Awake()
     {
         previewGlow = transform.Find("PreviewGlow").gameObject;
         tileBase = transform.Find("TileBase");
+        BaseMaterial = tileBase.GetComponent<SpriteRenderer>().material;
         tileType = transform.Find("TileType");
         directionCheckPoint = tileType.Find("CheckPoint");
         GetTileDirection();
@@ -103,6 +110,7 @@ public abstract class GameTile : TileBase
     {
         m_DraggingShape = null;
         gameObject.layer = LayerMask.NameToLayer(StaticData.TempTileMask);
+        BaseMaterial.color = Color.white;
         //Debug.Log("UNSPAWNed");
         base.OnUnSpawn();
     }

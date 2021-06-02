@@ -54,7 +54,7 @@ public class StaticData : Singleton<StaticData>
     public int PlayerMaxHealth;
     [SerializeField] int levelMaxWave;
     [SerializeField] int levelMaxWaveForBegginer;
-    public int LevelMaxWave 
+    public int LevelMaxWave
     {
         get
         {
@@ -312,6 +312,17 @@ public class StaticData : Singleton<StaticData>
             }
             return result;
         }
+    }
+
+    public static Collider2D RaycastCollider(Vector2 pos, LayerMask layer)
+    {
+        RaycastHit2D hit;
+        hit = Physics2D.Raycast(pos, Vector3.forward, Mathf.Infinity, layer);
+        if (hit.collider != null)
+        {
+            return hit.collider;
+        }
+        return null;
     }
 
     public GameTile GetTile(Vector3 origin)

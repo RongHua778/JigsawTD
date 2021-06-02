@@ -18,8 +18,8 @@ public class GameTileContentFactory : GameObjectFactory
 
     public void Reclaim(GameTileContent content)
     {
-        Debug.Assert(content.OriginFactory == this, "Wrong factory reclaimed!");
-        content.OriginFactory = null;
+        //Debug.Assert(content.OriginFactory == this, "Wrong factory reclaimed!");
+        //content.OriginFactory = null;
         ObjectPool.Instance.UnSpawn(content.gameObject);
     }
 
@@ -45,7 +45,7 @@ public class GameTileContentFactory : GameObjectFactory
     GameTileContent Get(GameTileContent prefab)
     {
         GameTileContent instance = CreateInstance(prefab.gameObject).GetComponent<GameTileContent>();
-        instance.OriginFactory = this;
+        //instance.OriginFactory = this;
         return instance;
     }
 

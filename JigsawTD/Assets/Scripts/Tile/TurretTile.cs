@@ -11,6 +11,7 @@ public class TurretTile : GameTile
     protected override void Awake()
     {
         base.Awake();
+        TileContent = turret.gameObject;
         
     }
     public override void TileDroped()

@@ -4,72 +4,46 @@ using UnityEngine;
 
 public class DraggingShape : DraggingActions
 {
-    Vector3 lastPos;
+    Vector2 lastPos;
     Transform menuTrans;
     TileShape tileShape;
+    public TileShape TileShape { get => tileShape; set => tileShape = value; }
 
     bool canDrop = false;
     bool overLapPoint = false;
     bool waitingForPath = false;
 
     Collider2D[] attachedResult = new Collider2D[10];
-
-    List<Material> tileMaterials = new List<Material>();
-    List<Collider2D> detectCollider = new List<Collider2D>();
-    List<Collider2D> groundTileList = new List<Collider2D>();
-
+    List<Collider2D> groundColliders = new List<Collider2D>();
 
     [SerializeField]
     Color wrongColor, correctColor, transparentColor = default;
 
-    Collider2D turretCollider;
-    public Collider2D TurretCollider { get => turretCollider; set => turretCollider = value; }
-
-    public void Initialized()
+    public void Initialized(TileShape shape)
     {
         menuTrans = transform.Find("DragMenu");
-        tileShape = this.GetComponent<TileShape>();
-        foreach (GameTile tile in tileShape.tiles)
-        {
-            tileMaterials.Add(tile.tileBase.GetComponent<SpriteRenderer>().material);
-            detectCollider.Add(tile.GetComponent<Collider2D>());
-        }
+        TileShape = shape;
     }
 
     private void SetAllColor(Color colorToSet)
     {
-        foreach (Material mat in tileMaterials)
+        foreach (GameTile tile in TileShape.tiles)
         {
-            mat.color = colorToSet;
+            tile.BaseMaterial.color = colorToSet;
         }
     }
 
     private void SetTileColor(Color colorToSet, GameTile tile)
     {
-        tile.tileBase.GetComponent<SpriteRenderer>().material.color = colorToSet;
+        tile.BaseMaterial.color = colorToSet;
     }
 
-    private void SetTransparent()//设为透明
-    {
-        foreach (GameTile tile in tileShape.tiles)
-        {
-            Vector3 pos = new Vector3(tile.transform.position.x, tile.transform.position.y, 0);
-            GameTile t = StaticData.Instance.GetTile(pos);
-            if (t != null)
-            {
-                if (t.GetComponentInParent<TurretTile>() || t.GetComponentInParent<TrapTile>())
-                {
-                    SetTileColor(transparentColor, tile);
-                }
-            }
-        }
-    }
     public override void OnDraggingInUpdate()
     {
         base.OnDraggingInUpdate();
         Vector3 mousePos = MouseInWorldCoords();
         transform.position = new Vector3(Mathf.Round(mousePos.x + pointerOffset.x), Mathf.Round(mousePos.y + pointerOffset.y), transform.position.z);
-        if (transform.position != lastPos)
+        if ((Vector2)transform.position != lastPos)
         {
             CheckCanDrop();
             StopAllCoroutines();
@@ -88,14 +62,13 @@ public class DraggingShape : DraggingActions
     {
         Physics2D.SyncTransforms();
         EnableGroundColliders();
-        RaycastHit2D hitInfo;
-        foreach (Collider2D col in detectCollider)
+        foreach (GameTile tile in TileShape.tiles)
         {
-            hitInfo = Physics2D.Raycast(col.transform.position, Vector3.forward, Mathf.Infinity, LayerMask.GetMask(StaticData.GroundTileMask));
-            if (hitInfo.collider != null)
-                groundTileList.Add(hitInfo.collider);
+            Collider2D colHit = StaticData.RaycastCollider(tile.transform.position, LayerMask.GetMask(StaticData.GroundTileMask));
+            if (colHit != null)
+                groundColliders.Add(colHit);
         }
-        foreach (var groundTile in groundTileList)
+        foreach (var groundTile in groundColliders)
         {
             groundTile.enabled = false;
         }
@@ -103,13 +76,11 @@ public class DraggingShape : DraggingActions
     }
     private bool CheckCanDrop()
     {
-        canDrop = false;
+        canDrop = true;
         Physics2D.SyncTransforms();
-        CheckAttached();
+        //CheckAttached();
         CheckOverLap();
-
-        //canDrop = CheckTrapDroppable();
-        //canDrop = CheckMapEdge();
+        CheckMapEdge();
         if (!canDrop)
         {
             SetAllColor(wrongColor);
@@ -117,36 +88,36 @@ public class DraggingShape : DraggingActions
         }
         else
         {
-            SetAllColor(correctColor);
-            SetTransparent();
+            //SetAllColor(correctColor);
             return true;
         }
 
     }
-    private bool CheckMapEdge()
+    private void CheckMapEdge()
     {
-        int maxX = (GameManager.Instance.GroundSize.x - 1) / 2;
-        int minX = -(GameManager.Instance.GroundSize.x - 1) / 2;
-        int maxY = (GameManager.Instance.GroundSize.y - 1) / 2;
-        int minY = -(GameManager.Instance.GroundSize.y - 1) / 2;
-        foreach (GameTile tile in tileShape.tiles)
+        Vector2Int groundSize = GameManager.Instance.GroundSize;
+        int maxX = (groundSize.x - 1) / 2;
+        int minX = -(groundSize.x - 1) / 2;
+        int maxY = (groundSize.y - 1) / 2;
+        int minY = -(groundSize.y - 1) / 2;
+        foreach (GameTile tile in TileShape.tiles)
         {
             if (tile.transform.position.x > maxX ||
                 tile.transform.position.x < minX ||
                 tile.transform.position.y > maxY ||
                 tile.transform.position.y < minY)
             {
-                return false;
+                canDrop = false;
+                break;
             }
         }
-        return canDrop;
     }
     private void CheckAttached()//检查是否相连
     {
         int hits;
-        foreach (Collider2D col in detectCollider)
+        foreach (GameTile tile in TileShape.tiles)
         {
-            Vector2 pos = col.transform.position;
+            Vector2 pos = tile.transform.position;
             hits = Physics2D.OverlapCircleNonAlloc(pos, 0.51f, attachedResult, LayerMask.GetMask(StaticData.ConcreteTileMask));
             if (hits > 0)
             {
@@ -157,13 +128,33 @@ public class DraggingShape : DraggingActions
     }
     private void CheckOverLap()
     {
-        Vector2 pos = TurretCollider.transform.position;
-        RaycastHit2D hit = Physics2D.Raycast(pos, Vector3.forward, Mathf.Infinity, LayerMask.GetMask(StaticData.ConcreteTileMask));
-        if (hit.collider != null && hit.collider.CompareTag("UnDropablePoint"))
+        foreach (GameTile tile in TileShape.tiles)
         {
-            canDrop = false;
-            overLapPoint = true;
+            Collider2D col = StaticData.RaycastCollider(tile.transform.position, LayerMask.GetMask(StaticData.ConcreteTileMask));
+            if (col == null)
+            {
+                SetTileColor(correctColor, tile);//没有下层TILE，设为正常
+                continue;
+            }
+            if (tile.TileContent != null)//如果是有防御塔的，就比对冲突
+            {
+                if (col.CompareTag("UnDropablePoint"))//冲突，返回，所有颜色被设为红色
+                {
+                    canDrop = false;
+                    overLapPoint = true;
+                    break;
+                }
+                else
+                {
+                    SetTileColor(correctColor, tile);//不冲突，正常色
+                }
+            }
+            else
+            {
+                SetTileColor(transparentColor, tile);//其他TILE，设为透明
+            }
         }
+
     }
 
     private IEnumerator TryFindPath()
@@ -171,7 +162,7 @@ public class DraggingShape : DraggingActions
         waitingForPath = true;
         yield return new WaitForSeconds(0.1f);
         SetGroundForPathFinding();
-        //Debug.Log("Try FindPath");
+
         GameEvents.Instance.SeekPath();
         yield return new WaitForSeconds(0.1f);
         waitingForPath = false;
@@ -181,7 +172,7 @@ public class DraggingShape : DraggingActions
     {
         transform.Rotate(0, 0, -90f);
         menuTrans.Rotate(0, 0, 90f);
-        foreach (GameTile tile in tileShape.tiles)
+        foreach (GameTile tile in TileShape.tiles)
         {
             tile.CorrectRotation();
         }
@@ -190,17 +181,12 @@ public class DraggingShape : DraggingActions
         StartCoroutine(TryFindPath());
     }
 
-    public void ResetRotation()
-    {
-        transform.rotation = Quaternion.identity;
-        menuTrans.rotation = Quaternion.identity;
-    }
 
     public void ConfirmShape()
     {
         if (waitingForPath)
         {
-            GameEvents.Instance.Message("你点的太快了，道路判定中>>>");
+            GameEvents.Instance.Message("你点的太快了");
             return;
         }
         if (canDrop)
@@ -212,47 +198,27 @@ public class DraggingShape : DraggingActions
             }
             Sound.Instance.PlayEffect("Sound_ConfirmShape");
             EnableGroundColliders();
-            GameEvents.Instance.AddTiles(tileShape.tiles);
-            SetTrapActived();
+            GameEvents.Instance.AddTiles(TileShape.tiles);
             StaticData.holdingShape = null;
             Destroy(this.gameObject);
         }
         else if (overLapPoint)
         {
-            GameEvents.Instance.Message("不可覆盖起点或终点");
+            GameEvents.Instance.Message("防御塔不可与特殊地形重叠");
         }
         else
         {
-            GameEvents.Instance.Message("必须覆盖或与已有区域相连");
+            GameEvents.Instance.Message("必须与已有区域相连");
         }
     }
-    //取消选择当前模块，返回模块选择界面
-    private void SetTrapActived()
-    {
-        foreach (Collider2D col in detectCollider)
-        {
-            Vector3 pos = new Vector3(col.transform.position.x, col.transform.position.y, 0);
-            int hits = Physics2D.OverlapCircleNonAlloc(pos, 0.51f, attachedResult, LayerMask.GetMask(StaticData.TrapTileMask));
-            if (hits > 0)
-            {
-                for (int i = 0; i < hits; i++)
-                {
 
-                    attachedResult[i].gameObject.GetComponent<GameTile>().Actived = true;
-                }
-            }
-        }
-    }
     private void EnableGroundColliders()
     {
-        if (groundTileList.Count > 0)
+        foreach (var groundCol in groundColliders)
         {
-            foreach (var groundTile in groundTileList)
-            {
-                groundTile.enabled = true;
-            }
-            groundTileList.Clear();
+            groundCol.enabled = true;
         }
+        groundColliders.Clear();
     }
 
     public void StartDragging()
