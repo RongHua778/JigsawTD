@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 1065283022250296622}
   m_Layer: 14
   m_Name: Explosion
-  m_TagString: UnDropableTurret
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -157,7 +157,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TrapAttribute: {fileID: 11400000, guid: 0c2811512d8e2c347af8dec98aa3165e, type: 2}
-  TrapLevel: 0
 --- !u!1 &7927276109108995915
 GameObject:
   m_ObjectHideFlags: 0

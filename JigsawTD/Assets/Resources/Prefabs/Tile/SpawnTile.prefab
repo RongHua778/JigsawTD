@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 3158819955239405747}
   m_Layer: 6
   m_Name: SpawnTile
-  m_TagString: UnDropableTurret
+  m_TagString: UnDropablePoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -44,25 +44,6 @@ public abstract class DraggingActions : MonoBehaviour
 
 
 
-    private void OnMouseDown()
-    {
-        isDragging = true;
-        _draggingThis = this;
-        pointerOffset = transform.position - MouseInWorldCoords();
-        pointerOffset.z = 0;
-        OnStartDrag();
-    }
-
-    private void OnMouseUp()
-    {
-        if (isDragging)
-        {
-            isDragging = false;
-            _draggingThis = null;
-            OnEndDrag();
-        }
-    }
-
     protected Vector3 MouseInWorldCoords()
     {
         var screenMousePos = Input.mousePosition;

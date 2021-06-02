@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 1065283022250296622}
   m_Layer: 14
   m_Name: StunTile
-  m_TagString: UnDropableTurret
+  m_TagString: UnDropablePoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

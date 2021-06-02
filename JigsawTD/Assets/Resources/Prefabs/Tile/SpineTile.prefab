@@ -269,7 +269,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TrapAttribute: {fileID: 11400000, guid: ff2d6060582da1b48a5ac45759d6b105, type: 2}
-  TrapLevel: 0
 --- !u!1 &8383059541034112253
 GameObject:
   m_ObjectHideFlags: 0

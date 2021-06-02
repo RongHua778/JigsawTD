@@ -7,31 +7,22 @@ public class DraggingShape : DraggingActions
     Vector3 lastPos;
     Transform menuTrans;
     TileShape tileShape;
+
     bool canDrop = false;
     bool overLapPoint = false;
     bool waitingForPath = false;
-    Collider2D[] collideResult = new Collider2D[10];
-    Collider2D[] collideTurretResult = new Collider2D[10];
 
+    Collider2D[] attachedResult = new Collider2D[10];
 
     List<Material> tileMaterials = new List<Material>();
     List<Collider2D> detectCollider = new List<Collider2D>();
     List<Collider2D> groundTileList = new List<Collider2D>();
 
-    [SerializeField]
-    LayerMask CheckDropLayer = default;
-    //[SerializeField]
-    //LayerMask CheckTurretLayer = default;
-    //[SerializeField]
-    //LayerMask TrapLayer = default;
 
     [SerializeField]
-    Color wrongColor, correctColor = default;
+    Color wrongColor, correctColor, transparentColor = default;
 
     Collider2D turretCollider;
-    Color draggingColor = new Color(1, 1, 1, 0f);
-
-
     public Collider2D TurretCollider { get => turretCollider; set => turretCollider = value; }
 
     public void Initialized()
@@ -45,18 +36,20 @@ public class DraggingShape : DraggingActions
         }
     }
 
-    private void SetColor(Color colorToSet)
+    private void SetAllColor(Color colorToSet)
     {
         foreach (Material mat in tileMaterials)
         {
             mat.color = colorToSet;
         }
     }
-    private void SetColor(Color colorToSet,GameTile tile)
+
+    private void SetTileColor(Color colorToSet, GameTile tile)
     {
         tile.tileBase.GetComponent<SpriteRenderer>().material.color = colorToSet;
     }
-    private void DraggingColor()
+
+    private void SetTransparent()//设为透明
     {
         foreach (GameTile tile in tileShape.tiles)
         {
@@ -64,16 +57,9 @@ public class DraggingShape : DraggingActions
             GameTile t = StaticData.Instance.GetTile(pos);
             if (t != null)
             {
-               // Debug.LogWarning("*********");
                 if (t.GetComponentInParent<TurretTile>() || t.GetComponentInParent<TrapTile>())
                 {
-                    //Debug.LogWarning("hahahhaahhah");
-                    SetColor(draggingColor, tile);
-                }
-                if (t.GetComponentInParent<BasicTile>())
-                {
-                   // Debug.LogWarning("菜鸡");
-
+                    SetTileColor(transparentColor, tile);
                 }
             }
         }
@@ -87,7 +73,7 @@ public class DraggingShape : DraggingActions
         {
             CheckCanDrop();
             StopAllCoroutines();
-            StartCoroutine(TryFindPath()); 
+            StartCoroutine(TryFindPath());
         }
         lastPos = transform.position;
     }
@@ -105,14 +91,13 @@ public class DraggingShape : DraggingActions
         RaycastHit2D hitInfo;
         foreach (Collider2D col in detectCollider)
         {
-            hitInfo = Physics2D.Raycast(col.transform.position, Vector3.forward, Mathf.Infinity, StaticData.RunTimeFindPathLayer);
+            hitInfo = Physics2D.Raycast(col.transform.position, Vector3.forward, Mathf.Infinity, LayerMask.GetMask(StaticData.GroundTileMask));
             if (hitInfo.collider != null)
                 groundTileList.Add(hitInfo.collider);
         }
         foreach (var groundTile in groundTileList)
         {
             groundTile.enabled = false;
-            //groundTile.gameObject.layer=LayerMask.NameToLayer(StaticData.TempGroundMask);
         }
 
     }
@@ -120,112 +105,67 @@ public class DraggingShape : DraggingActions
     {
         canDrop = false;
         Physics2D.SyncTransforms();
-        canDrop = CheckAttachedDroppable();
-        canDrop = CheckTurretDroppable();
-        canDrop = CheckTrapDroppable();
-        canDrop = CheckMapEdge();
+        CheckAttached();
+        CheckOverLap();
+
+        //canDrop = CheckTrapDroppable();
+        //canDrop = CheckMapEdge();
         if (!canDrop)
         {
-            SetColor(wrongColor);
+            SetAllColor(wrongColor);
             return false;
         }
         else
         {
-            SetColor(correctColor);
-            DraggingColor();
+            SetAllColor(correctColor);
+            SetTransparent();
             return true;
         }
 
     }
     private bool CheckMapEdge()
     {
-        int maxX =  (GameManager.Instance.GroundSize.x-1)/2;
-        int minX =  -(GameManager.Instance.GroundSize.x-1)/2;
+        int maxX = (GameManager.Instance.GroundSize.x - 1) / 2;
+        int minX = -(GameManager.Instance.GroundSize.x - 1) / 2;
         int maxY = (GameManager.Instance.GroundSize.y - 1) / 2;
         int minY = -(GameManager.Instance.GroundSize.y - 1) / 2;
         foreach (GameTile tile in tileShape.tiles)
         {
-            if (tile.transform.position.x > maxX||
+            if (tile.transform.position.x > maxX ||
                 tile.transform.position.x < minX ||
                 tile.transform.position.y > maxY ||
-                tile.transform.position.y < minY )
+                tile.transform.position.y < minY)
             {
                 return false;
             }
         }
         return canDrop;
     }
-    private bool CheckAttachedDroppable()
+    private void CheckAttached()//检查是否相连
     {
-        bool result=false;
         int hits;
         foreach (Collider2D col in detectCollider)
         {
-            Vector3 pos = new Vector3(col.transform.position.x, col.transform.position.y, 0);
-            hits = Physics2D.OverlapCircleNonAlloc(pos, 0.51f, collideResult, CheckDropLayer);
+            Vector2 pos = col.transform.position;
+            hits = Physics2D.OverlapCircleNonAlloc(pos, 0.51f, attachedResult, LayerMask.GetMask(StaticData.ConcreteTileMask));
             if (hits > 0)
             {
-                overLapPoint = false;
-                result = true;
-                //CheckDropLayer不包括陷阱和塔
-                for (int i = 0; i < hits; i++)
-                {
-                    if (collideResult[i].CompareTag("UnDropablePoint"))
-                    {
-                        if (col.OverlapPoint(collideResult[i].transform.position))
-                        {
-                            result = false;
-                            overLapPoint = true;
-                            SetColor(wrongColor);
-                            return result;
-                        }
-                    }
-                }
+                canDrop = true;
+                break;
             }
         }
-        return result;
     }
-    private bool CheckTurretDroppable()
+    private void CheckOverLap()
     {
-        Vector3 posTurret = new Vector3(turretCollider.transform.position.x, turretCollider.transform.position.y, 0);
-        int hits = Physics2D.OverlapBoxNonAlloc(posTurret, new Vector2(0.01f, 0.01f), 0, collideTurretResult, CheckDropLayer);
-        if (hits > 0)
+        Vector2 pos = TurretCollider.transform.position;
+        RaycastHit2D hit = Physics2D.Raycast(pos, Vector3.forward, Mathf.Infinity, LayerMask.GetMask(StaticData.ConcreteTileMask));
+        if (hit.collider != null && hit.collider.CompareTag("UnDropablePoint"))
         {
-            for (int i = 0; i < hits; i++)
-            {
-                if (collideTurretResult[i].CompareTag("UnDropableTurret"))
-                {
-                    if (turretCollider.OverlapPoint(collideTurretResult[i].transform.position))
-                    {
-                        canDrop = false;
-                        overLapPoint = true;
-                        SetColor(wrongColor);
-                        return canDrop;
-                    }
-                }
-            }
+            canDrop = false;
+            overLapPoint = true;
         }
-        return canDrop;
     }
-    private bool CheckTrapDroppable()
-    {
-        Vector3 posTurret = new Vector3(turretCollider.transform.position.x, turretCollider.transform.position.y, 0);
-        int hits = Physics2D.OverlapBoxNonAlloc(posTurret, new Vector2(0.01f, 0.01f), 0, collideTurretResult, LayerMask.GetMask(StaticData.TrapTileMask));
-        if (hits > 0)
-        {
-            for (int i = 0; i < hits; i++)
-            {
-                    if (turretCollider.OverlapPoint(collideTurretResult[i].transform.position))
-                    {
-                        canDrop = false;
-                        overLapPoint = true;
-                        SetColor(wrongColor);
-                        return canDrop;
-                    }
-            }
-        }
-        return canDrop;
-    }
+
     private IEnumerator TryFindPath()
     {
         waitingForPath = true;
@@ -241,7 +181,7 @@ public class DraggingShape : DraggingActions
     {
         transform.Rotate(0, 0, -90f);
         menuTrans.Rotate(0, 0, 90f);
-        foreach(GameTile tile in tileShape.tiles)
+        foreach (GameTile tile in tileShape.tiles)
         {
             tile.CorrectRotation();
         }
@@ -292,13 +232,13 @@ public class DraggingShape : DraggingActions
         foreach (Collider2D col in detectCollider)
         {
             Vector3 pos = new Vector3(col.transform.position.x, col.transform.position.y, 0);
-            int hits = Physics2D.OverlapCircleNonAlloc(pos, 0.51f, collideResult, LayerMask.GetMask(StaticData.TrapTileMask));
+            int hits = Physics2D.OverlapCircleNonAlloc(pos, 0.51f, attachedResult, LayerMask.GetMask(StaticData.TrapTileMask));
             if (hits > 0)
             {
                 for (int i = 0; i < hits; i++)
                 {
-                   
-                    collideResult[i].gameObject.GetComponent<GameTile>().Actived = true;
+
+                    attachedResult[i].gameObject.GetComponent<GameTile>().Actived = true;
                 }
             }
         }

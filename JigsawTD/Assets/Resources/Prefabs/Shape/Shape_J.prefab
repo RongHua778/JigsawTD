@@ -663,17 +663,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cffe450cef4814d438cc92c3af5a08fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CheckDropLayer:
-    serializedVersion: 2
-    m_Bits: 576
-  CheckTurretLayer:
-    serializedVersion: 2
-    m_Bits: 1024
-  TrapLayer:
-    serializedVersion: 2
-    m_Bits: 16384
   wrongColor: {r: 1, g: 0, b: 0, a: 0.49019608}
   correctColor: {r: 1, g: 1, b: 1, a: 1}
+  transparentColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &6889555364187642330
 GameObject:
   m_ObjectHideFlags: 0

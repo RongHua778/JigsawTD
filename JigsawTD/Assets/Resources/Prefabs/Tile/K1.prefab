@@ -416,7 +416,7 @@ GameObject:
   - component: {fileID: 3568044695007039410}
   m_Layer: 10
   m_Name: K1
-  m_TagString: UnDropableTurret
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

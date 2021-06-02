@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 1509738274765026862}
   m_Layer: 6
   m_Name: DestinationTile
-  m_TagString: UnDropableTurret
+  m_TagString: UnDropablePoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
