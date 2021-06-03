@@ -9,8 +9,8 @@ public class GameManager : Singleton<GameManager>
     //版图系统
     [SerializeField] private BoardSystem m_BoardSystem = default;
 
-    //形状系统
-    [SerializeField] private ShapeSystem m_ShapeSystem = default;
+    //建造系统
+    [SerializeField] private BuildingSystem m_BuildingSystem = default;
 
 
     public BluePrintShop _bluePrintShop = default;
@@ -45,11 +45,19 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     BlueprintFactory _bluePrintFacotry = default;
     [SerializeField]
-    TileShapeFactory _shapeFactory = default;
-    [SerializeField]
     TurretAttributeFactory _turretFactory = default;
-    [SerializeField]
-    TileFactory _tileFactory = default;
+
+
+    [SerializeField] TileFactory _tileFactory = default;
+    public TileFactory TileFactory { get => _tileFactory; }
+
+    [SerializeField] GameTileContentFactory _contentFactory = default;
+    public GameTileContentFactory ContentFactory { get => _contentFactory; }
+
+    [SerializeField] TileShapeFactory _shapeFactory = default;
+    public TileShapeFactory ShapeFactory { get => _shapeFactory; }
+
+
     [SerializeField]
     EnemyFactory _enemyFactory = default;
 
@@ -65,6 +73,7 @@ public class GameManager : Singleton<GameManager>
     private BattleOperationState operationState;
     public BattleOperationState OperationState { get => operationState; }
 
+
     private BuildingState buildingState;
     private WaveState waveState;
     //************
@@ -76,9 +85,15 @@ public class GameManager : Singleton<GameManager>
         //基本参数设置
         GameSpeed = 1;
         Difficulty = Game.Instance.Difficulty;
- 
+
+        //初始化工厂
+        TileFactory.Initialize();
+        ContentFactory.Initialize();
+        ShapeFactory.Initialize();
+
+        //初始化系统
         m_BoardSystem.Initialize(this);//版图系统
-        //m_ShapeSystem.Initialize(this);//形状系统
+        m_BuildingSystem.Initialize(this);//形状系统
 
         
 
@@ -123,6 +138,8 @@ public class GameManager : Singleton<GameManager>
 
     }
 
+
+
     public void SpawnEnemy(EnemySequence sequence)
     {
         Enemy enemy = EnemySpawnHelper.SpawnEnemy(sequence.EnemyAttribute, sequence.Intensify);
@@ -165,9 +182,9 @@ public class GameManager : Singleton<GameManager>
     //生成随机形状，配置随机元素塔
     public TileShape GenerateRandomBasicShape()
     {
-        TileShape shape = _shapeFactory.GetBasicShape();
-        GameTile randomElementTile = _tileFactory.GetRandomElementTile();
-        shape.InitializeShape(randomElementTile, _tileFactory);
+        TileShape shape = _shapeFactory.GetRandomShape();
+        GameTile randomElementTile = TileFactory.GetRandomElementTile();
+        shape.InitializeShape(randomElementTile);
         return shape;
     }
 
@@ -175,7 +192,7 @@ public class GameManager : Singleton<GameManager>
     public TileShape GenerateCompositeShape(Blueprint bluePrint)
     {
         TileShape shape = _shapeFactory.GetDShape();
-        TurretTile tile = _tileFactory.GetCompositeTurretTile(bluePrint.CompositeTurretAttribute);
+        TurretTile tile = TileFactory.GetCompositeTurretTile(bluePrint.CompositeTurretAttribute);
         //将蓝图赋值给合成塔turret
         Turret turret = tile.turret;
         ((CompositeTurret)turret).CompositeBluePrint = bluePrint;
@@ -188,7 +205,7 @@ public class GameManager : Singleton<GameManager>
     public void GetTestElement(int quality, int element)
     {
         TileShape shape = _shapeFactory.GetDShape();
-        GameTile tile = _tileFactory.GetBasicTurret(quality, element);
+        GameTile tile = TileFactory.GetBasicTurret(quality, element);
         shape.InitializeShape(tile);
     }
 
@@ -215,7 +232,7 @@ public class GameManager : Singleton<GameManager>
     {
         TileShape shape = _shapeFactory.GetDShape();
         TurretAttribute attribute = _turretFactory.TestGetCompositeByName(name);
-        GameTile tile = _tileFactory.GetCompositeTurretTile(attribute);
+        GameTile tile = TileFactory.GetCompositeTurretTile(attribute);
         Blueprint bluePrint = _bluePrintFacotry.GetRandomBluePrint(attribute);
         Turret turret = ((TurretTile)tile).turret;
         ((CompositeTurret)turret).CompositeBluePrint = bluePrint;
@@ -226,7 +243,7 @@ public class GameManager : Singleton<GameManager>
     public void GetTrapByName(string name)
     {
         TileShape shape = _shapeFactory.GetDShape();
-        GameTile tile = _tileFactory.GetTrapByName(name);
+        GameTile tile = TileFactory.GetTrapByName(name);
         shape.InitializeShape(tile);
     }
 }

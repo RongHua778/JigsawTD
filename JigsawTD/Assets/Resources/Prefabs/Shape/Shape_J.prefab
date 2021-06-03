@@ -650,7 +650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tiles: []
-  shapeType: 1
+  shapeType: 0
 --- !u!114 &6889555363922204875
 MonoBehaviour:
   m_ObjectHideFlags: 0

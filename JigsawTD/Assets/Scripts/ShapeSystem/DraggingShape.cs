@@ -95,7 +95,7 @@ public class DraggingShape : DraggingActions
     }
     private void CheckMapEdge()
     {
-        Vector2Int groundSize = GameManager.Instance.GroundSize;
+        Vector2Int groundSize = BoardSystem._groundSize;
         int maxX = (groundSize.x - 1) / 2;
         int minX = -(groundSize.x - 1) / 2;
         int maxY = (groundSize.y - 1) / 2;
@@ -201,7 +201,7 @@ public class DraggingShape : DraggingActions
             GameEvents.Instance.ConfirmShape();
             foreach(GameTile tile in TileShape.tiles)
             {
-                tile.TileDroped();
+                tile.TileLanded();
             }
             GameEvents.Instance.CheckBluePrint();
 

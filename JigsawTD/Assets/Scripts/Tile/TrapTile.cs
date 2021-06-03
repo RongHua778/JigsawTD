@@ -10,9 +10,9 @@ public class TrapTile : GameTile
     public int DamageAnalysis { get => damageAnalysis; set => damageAnalysis = value; }
     public override BasicTileType BasicTileType => BasicTileType.Trap;
 
-    public override void TileDroped()
+    public override void TileLanded()
     {
-        base.TileDroped();
+        base.TileLanded();
         SetGroundTile();
     }
 

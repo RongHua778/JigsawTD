@@ -3386,14 +3386,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49946d735f8555e4d9e63060f97c1c32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Board: {fileID: 8398349}
+  m_BoardSystem: {fileID: 8398349}
+  m_BuildingSystem: {fileID: 1064182619}
   _bluePrintShop: {fileID: 878872113}
-  _startSize: {x: 3, y: 3}
-  _groundSize: {x: 25, y: 25}
   _bluePrintFacotry: {fileID: 11400000, guid: 328a3a7240180f7409f1f8d5a3654b4f, type: 2}
-  _shapeFactory: {fileID: 11400000, guid: e561f9a0ed33f674284817e826a7cb56, type: 2}
   _turretFactory: {fileID: 11400000, guid: a7462b451c9a2e34993f437b96292d0d, type: 2}
   _tileFactory: {fileID: 11400000, guid: d1395574e706e2d4b9a5223f53bc89fa, type: 2}
+  _contentFactory: {fileID: 11400000, guid: e9b28f73aa8e8a840beba1e769ed0c70, type: 2}
+  _shapeFactory: {fileID: 11400000, guid: e561f9a0ed33f674284817e826a7cb56, type: 2}
   _enemyFactory: {fileID: 11400000, guid: 49641aa71a9726d44b89676d62fd4df1, type: 2}
   enemies:
     behaviors: []
@@ -3467,6 +3467,9 @@ MonoBehaviour:
   PlayerMaxHealth: 15
   levelMaxWave: 40
   levelMaxWaveForBegginer: 25
+  SpawnPointAtt: {fileID: 11400000, guid: 0263469d903409a46837ef1fb50628ce, type: 2}
+  DestinationPointAtt: {fileID: 0}
+  EmptyAtt: {fileID: 0}
   GoldAttackIntensify: 0.1
   WoodSpeedIntensify: 0.1
   WaterSlowIntensify: 0.2
@@ -7019,9 +7022,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1576089492}
-        m_TargetAssemblyTypeName: LevelUIManager, Assembly-CSharp
-        m_MethodName: ExtraDrawClick
+      - m_Target: {fileID: 1064182619}
+        m_TargetAssemblyTypeName: BuildingSystem, Assembly-CSharp
+        m_MethodName: DrawBtnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10607,7 +10610,7 @@ GameObject:
   - component: {fileID: 1064182618}
   - component: {fileID: 1064182619}
   m_Layer: 5
-  m_Name: RoadPlacement
+  m_Name: BuildingSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10654,6 +10657,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ccba5d3a287ef249b4a4a0a991db588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DrawBtnTxt: {fileID: 395549260}
+  LevelUpBtnTxt: {fileID: 881587328}
+  LuckPointTxt: {fileID: 219744387}
   tileSelects:
   - {fileID: 1831176236}
   - {fileID: 29417398}
@@ -12911,7 +12917,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1311986532}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -12924,7 +12930,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.3025556}
-  m_AnchoredPosition: {x: 0, y: -0.39086914}
+  m_AnchoredPosition: {x: 0, y: -0.39093018}
   m_SizeDelta: {x: 0, y: -0.7816162}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1311986534
@@ -17596,7 +17602,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1790075747}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -17609,8 +17615,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -426.82144}
-  m_SizeDelta: {x: 0, y: -853.6429}
+  m_AnchoredPosition: {x: 0, y: -426.8214}
+  m_SizeDelta: {x: 0, y: -853.64294}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1792996730
 GameObject:

@@ -30,7 +30,7 @@ public class TileShape : MonoBehaviour
         draggingShape = this.GetComponent<DraggingShape>();
     }
     //在shape上面加上塔
-    public void InitializeShape(GameTile specialTile, TileFactory tileFactory = null)
+    public void InitializeShape(GameTile specialTile)
     {
         if (shapeType == ShapeType.D)
         {
@@ -50,12 +50,12 @@ public class TileShape : MonoBehaviour
                 if (i == g)
                 {
                     tile = specialTile;
-                    Turret turret = ((TurretTile)specialTile).turret;
-                    turretNameTxt.text = turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].TurretName;
+                    //Turret turret = ((TurretTile)specialTile).turret;
+                    //turretNameTxt.text = turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].TurretName;
                 }
                 else
                 {
-                    tile = tileFactory.GetBasicTile();
+                    tile = GameManager.Instance.TileFactory.BuildNormalTile(GameTileContentType.Empty);
                 }
                 tile.transform.position = tilePos[i].transform.position;
                 tile.tileType.rotation = DirectionExtensions.GetRandomRotation();

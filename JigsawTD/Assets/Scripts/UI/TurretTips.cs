@@ -216,7 +216,7 @@ public class TurretTips : TileTips
 
     public void CompositeBtnClick()
     {
-        if (ShapeSystem.PlaceState != PlacementState.Default)
+        if (BuildingSystem.BuildingState != BuiidingState.Default)
         {
             GameEvents.Instance.Message("需先放置抽取模块");
             return;

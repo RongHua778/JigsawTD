@@ -8,9 +8,9 @@ public class TurretTile : GameTile
 
     public override BasicTileType BasicTileType => BasicTileType.Turret;
 
-    public override void TileDroped()
+    public override void TileLanded()
     {
-        base.TileDroped();
+        base.TileLanded();
 
         SetGroundTile();
         turret.Dropped = true;

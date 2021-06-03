@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Factory/ContentFactory", fileName = "GameContentFactory")]
-public class GameTileContentFactory : GameObjectFactory
+public class GameTileContentFactory: GameObjectFactory
 {
-    [SerializeField]
-    ContentAttribute emptyAtt = default;
-    [SerializeField]
-    ContentAttribute destinationAtt = default;
-    [SerializeField]
-    ContentAttribute spawnPointAtt = default;
+
+    [SerializeField] ContentAttribute emptyAtt;
+    [SerializeField] ContentAttribute spawnPointAtt;
+    [SerializeField] ContentAttribute destinationAtt;
+    //[SerializeField]
+    //ContentAttribute destinationAtt = default;
+    //[SerializeField]
+    //ContentAttribute spawnPointAtt = default;
 
     [SerializeField]
     TurretAttribute[] elementTurrets = default;
@@ -19,8 +21,40 @@ public class GameTileContentFactory : GameObjectFactory
     [SerializeField]
     TrapAttribute[] trapAtts = default;
 
+    private Dictionary<Element, TurretAttribute> ElementDIC;
+    private List<TurretAttribute> Rare1Turrets;
+    private List<TurretAttribute> Rare2Turrets;
+    private List<TurretAttribute> Rare3Turrets;
 
-    public GameTileContent GetNormalContent(GameTileContentType type)
+
+    public void Initialize()
+    {
+        Rare1Turrets = new List<TurretAttribute>();
+        Rare2Turrets = new List<TurretAttribute>();
+        Rare3Turrets = new List<TurretAttribute>();
+        ElementDIC = new Dictionary<Element, TurretAttribute>();
+        foreach (TurretAttribute attribute in compositeTurrets)
+        {
+            switch (attribute.Rare)
+            {
+                case 1:
+                    Rare1Turrets.Add(attribute);
+                    break;
+                case 2:
+                    Rare2Turrets.Add(attribute);
+                    break;
+                case 3:
+                    Rare3Turrets.Add(attribute);
+                    break;
+            }
+        }
+        foreach (var attribute in elementTurrets)
+        {
+            ElementDIC.Add(attribute.element, attribute);
+        }
+    }
+
+    public GameTileContent GetBasicContent(GameTileContentType type)
     {
         switch (type)
         {
@@ -39,7 +73,7 @@ public class GameTileContentFactory : GameObjectFactory
 
     GameTileContent Get(GameObject prefab)
     {
-        GameTileContent instance = CreateInstance(prefab).GetComponent<GameTileContent>();
+        GameTileContent instance = ObjectPool.Instance.Spawn(prefab).GetComponent<GameTileContent>();
         return instance;
     }
 

@@ -25,7 +25,6 @@ public class TrapInfo
 [CreateAssetMenu(menuName = "Attribute/TrapAttribute", fileName = "TrapAttribute")]
 public class TrapAttribute : ContentAttribute
 {
-    public Sprite TrapIcon;
     public List<BuffInfo> BuffInfos = new List<BuffInfo>();
     //public List<TrapInfo> LevelInfos = new List<TrapInfo>();
 }

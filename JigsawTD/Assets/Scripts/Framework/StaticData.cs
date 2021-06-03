@@ -61,6 +61,10 @@ public class StaticData : Singleton<StaticData>
         }
     }
 
+    [Header("ContentAtts")]
+    public ContentAttribute SpawnPointAtt;
+    public ContentAttribute DestinationPointAtt;
+    public ContentAttribute EmptyAtt;
 
 
     [Header("ElementAttributes")]
@@ -69,6 +73,7 @@ public class StaticData : Singleton<StaticData>
     public float WaterSlowIntensify;
     public float FireCriticalIntensify;
     public float DustSputteringIntensify;
+    
 
 
     [Header("CompositionAttributes")]

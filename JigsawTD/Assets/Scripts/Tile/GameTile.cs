@@ -8,8 +8,10 @@ public abstract class GameTile : TileBase
 {
     public abstract BasicTileType BasicTileType { get; }
     public DraggingShape m_DraggingShape { get; set; }
-
     [HideInInspector] public Material BaseMaterial;
+
+    private GameTileContent content;
+    public GameTileContent Content { get => content; set => content = value; }
 
     GameObject previewGlow;
     Transform directionCheckPoint;
@@ -64,12 +66,16 @@ public abstract class GameTile : TileBase
         return tileDirection;
     }
 
-    public virtual void TileDroped()
+    public virtual void TileLanded()
     {
-        Collider2D col = StaticData.RaycastCollider(transform.position, LayerMask.GetMask(StaticData.ConcreteTileMask));
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-        TileDropCheck(col);
         SetBackToParent();
+        if(Content!=null)
+            Content.OnContentLanded();
+
+        Collider2D col = StaticData.RaycastCollider(transform.position, LayerMask.GetMask(StaticData.ConcreteTileMask));
+        TileDropCheck(col);
+
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         Previewing = false;
         IsActive = true;
     }
@@ -112,11 +118,12 @@ public abstract class GameTile : TileBase
 
     public override void OnUnSpawn()
     {
+        base.OnUnSpawn();
+        ObjectPool.Instance.UnSpawn(Content.gameObject);
+        Content = null;
         m_DraggingShape = null;
         IsActive = false;
         BaseMaterial.color = Color.white;
-        //Debug.Log("UNSPAWNed");
-        base.OnUnSpawn();
     }
 
     public void CorrectRotation()

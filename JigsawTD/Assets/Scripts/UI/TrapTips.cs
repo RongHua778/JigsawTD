@@ -10,7 +10,7 @@ public class TrapTips : TileTips
         anim.SetBool("isOpen", true);
         Sound.Instance.PlayEffect("Sound_Click");
 
-        Icon.sprite = trapTile.m_TrapAttribute.TrapIcon;
+        Icon.sprite = trapTile.m_TrapAttribute.Icon;
         Name.text = trapTile.m_TrapAttribute.Name;
         Description.text = trapTile.m_TrapAttribute.Description;
     }

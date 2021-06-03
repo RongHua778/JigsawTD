@@ -22,6 +22,7 @@ MonoBehaviour:
   - 0.2
   - 0.2
   - 0.2
+  basicTilePrefab: {fileID: 6604616035422911931, guid: 557a00bbb39db9146a95b084ae54a7cb, type: 3}
   trapAttributes:
   - {fileID: 11400000, guid: 201af454a56b147428bcc12e84b17d0b, type: 2}
   - {fileID: 11400000, guid: c09d9ab69fe482743be7a990ad9a6fcd, type: 2}

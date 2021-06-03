@@ -10,5 +10,5 @@ public abstract class GameObjectFactory : ScriptableObject
         return instance;
     }
 
-    
+
 }

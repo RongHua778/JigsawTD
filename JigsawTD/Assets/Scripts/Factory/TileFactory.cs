@@ -9,17 +9,45 @@ public enum BasicTileType
 [CreateAssetMenu(menuName = "Factory/TileFactory", fileName = "TileFactory")]
 public class TileFactory : GameObjectFactory
 {
+    private GameTileContentFactory m_ContentFactory;
+
     [SerializeField] GameObject ground;
     [SerializeField] GroundTile groundTile = default;
     [SerializeField] GameTile spawnPoint = default;
     [SerializeField] GameTile destinationTile = default;
     [SerializeField] float[] elementTileChance;
 
+    [SerializeField] GameObject basicTilePrefab = default;
+
     [SerializeField] TrapAttribute[] trapAttributes;
-    public void InitializeFactory()
+
+
+    public void Initialize()
     {
+        m_ContentFactory = GameManager.Instance.ContentFactory;
+    }
+
+    public GameTile BuildNormalTile(GameTileContentType contentType)
+    {
+        BasicTile basicTile = ObjectPool.Instance.Spawn(basicTilePrefab).GetComponent<BasicTile>();
+        GameTileContent content = m_ContentFactory.GetBasicContent(contentType);
+        content.transform.SetParent(basicTile.transform);
+        basicTile.Content = content;
+        return basicTile;
+    }
+
+
+    public GameTile BuildTrapTile()
+    {
+        return null;
+    }
+
+    public GameTile BuildTurretTile()
+    {
+        return null;
 
     }
+
     public TrapTile GetImportantTile(BasicTileType tileType)
     {
         switch (tileType)

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7a06a8e352dd064bab9b6bf5b84988e, type: 3}
-  m_Name: DestinationPoint
+  m_Name: EmptyContent
   m_EditorClassIdentifier: 
-  Name: "\u7EC8\u70B9"
-  Icon: {fileID: 21300000, guid: bd6f3bec81b446c43abdcfb8fcf80763, type: 3}
-  Description: "\u654C\u4EBA\u5C06\u8981\u524D\u5F80\u7684\u76EE\u6807\uFF0C\u5FC5\u987B\u786E\u4FDD\u6709\u8DEF\u7EBF\u8FDE\u63A5\u8D77\u70B9\u3002"
-  ContentPrefab: {fileID: 6364243078880216868, guid: dc1f79158d8f5fe4a81f6b23af2e0b81, type: 3}
+  Name: "\u57FA\u672C\u683C"
+  Icon: {fileID: 21300000, guid: c18808b650cc1984baab9e69a1dd72fa, type: 3}
+  Description: "\u654C\u4EBA\u53EF\u4EE5\u9700\u8981\u901A\u8FC7\u57FA\u672C\u683C\u884C\u8D70\u3002"
+  ContentPrefab: {fileID: 2463578425013558856, guid: d601f0165e672d24e85bc7977e090fba, type: 3}
   BuffInfos: []

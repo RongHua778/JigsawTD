@@ -49,10 +49,8 @@ public class BoardSystem : IGameSystem
     //_groundsize是地图每一边上方块的数量
     //startSize是初始生成的有方块的大小
 
-    [SerializeField] TileFactory _tempTileFactory = default;
-    [SerializeField]
-    Vector2Int _startSize, _groundSize = default;
-    public Vector2Int GroundSize { get => _groundSize; set => _groundSize = value; }
+    public static Vector2Int _startSize = new Vector2Int(3, 3);
+    public static Vector2Int _groundSize = new Vector2Int(25, 25);
 
     [SerializeField] PathLine pathLinePrefab = default;
     List<PathLine> pathLines = new List<PathLine>();
@@ -75,7 +73,8 @@ public class BoardSystem : IGameSystem
     public override void Initialize(GameManager gameManager)
     {
         base.Initialize(gameManager);
-        SetGameBoard(_startSize, _groundSize, _tempTileFactory);
+        this.tileFactory = gameManager.TileFactory;
+        SetGameBoard(_startSize, _groundSize);
 
         selection = transform.Find("Selection").gameObject;
 
@@ -127,9 +126,8 @@ public class BoardSystem : IGameSystem
         IsPressingTile = false;
     }
 
-    public void SetGameBoard(Vector2Int size, Vector2Int groundSize, TileFactory tileFactory)
+    public void SetGameBoard(Vector2Int size, Vector2Int groundSize)
     {
-        this.tileFactory = tileFactory;
         Vector2 sizeOffset = new Vector2((size.x - 1) * 0.5f, (size.y - 1) * 0.5f) * StaticData.Instance.TileSize;
         Vector2 groundOffset = new Vector2((groundSize.x - 1) * 0.5f, (groundSize.y - 1) * 0.5f) * StaticData.Instance.TileSize;
         GenerateGroundTiles(groundOffset, groundSize);
@@ -152,20 +150,20 @@ public class BoardSystem : IGameSystem
                     continue;
                 if (pos.x == -1 && pos.y == 0)//SpawnPoint
                 {
-                    tile = this.tileFactory.GetImportantTile(BasicTileType.SpawnPoint);
+                    tile = tileFactory.BuildNormalTile(GameTileContentType.SpawnPoint);
                     SpawnPoint = tile;
                 }
                 else if (pos.x == 1 && pos.y == 0)//Destination
                 {
-                    tile = this.tileFactory.GetImportantTile(BasicTileType.Destination);
+                    tile = tileFactory.BuildNormalTile(GameTileContentType.Destination);
                     DestinationPoint = tile;
                 }
-                else
+                else//空格子
                 {
-                    tile = this.tileFactory.GetBasicTile();
+                    tile = tileFactory.BuildNormalTile(GameTileContentType.Empty);
                 }
                 tile.transform.position = pos;
-                tile.TileDroped();
+                tile.TileLanded();
                 Physics2D.SyncTransforms();
             }
         }
@@ -284,7 +282,7 @@ public class BoardSystem : IGameSystem
         {
             TrapTile tile = t.GetRandomTrap();
             tile.transform.position = pos;
-            tile.TileDroped();
+            tile.TileLanded();
             //AddGameTile(tile, pos);
         }
     }
