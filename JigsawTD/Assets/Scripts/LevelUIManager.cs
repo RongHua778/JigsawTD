@@ -176,7 +176,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
         GameEvents.Instance.onMessage += ShowMessage;
         GameEvents.Instance.onEnemyReach += EnemyReachDamge;
         GameEvents.Instance.onStartNewWave += NewWaveStart;
-        GameEvents.Instance.onAddTiles += ConfirmShape;
+        GameEvents.Instance.onConfirmShape += ConfirmShape;
         GameEvents.Instance.onEnemyDie += EnemyDie;
         GameEvents.Instance.onShowTileTips += ShowTileTips;
         GameEvents.Instance.onShowTurretTips += ShowTurretAttributeTips;
@@ -195,7 +195,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
         GameEvents.Instance.onMessage -= ShowMessage;
         GameEvents.Instance.onEnemyReach -= EnemyReachDamge;
         GameEvents.Instance.onStartNewWave -= NewWaveStart;
-        GameEvents.Instance.onAddTiles -= ConfirmShape;
+        GameEvents.Instance.onConfirmShape -= ConfirmShape;
         GameEvents.Instance.onEnemyDie -= EnemyDie;
         GameEvents.Instance.onShowTileTips -= ShowTileTips;
         GameEvents.Instance.onShowTurretTips -= ShowTurretAttributeTips;
@@ -340,7 +340,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
     {
         _roadPlacament.HideArea();
     }
-    private void ConfirmShape(List<GameTile> tiles)
+    private void ConfirmShape()
     {
         ShowArea(0);
     }

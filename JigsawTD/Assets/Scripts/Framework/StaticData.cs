@@ -11,10 +11,8 @@ public class StaticData : Singleton<StaticData>
     public static DraggingShape holdingShape;
     public static LayerMask PathLayer = 1 << 6 | 1 << 10;
     public static string ConcreteTileMask = "ConcreteTile";
-    public static string TrapTileMask = "TrapTile";
     public static string GroundTileMask = "GroundTile";
     public static string TempTileMask = "TempTile";
-    public static string TurretMask = "Turret";
     public static string TempTurretMask = "TempTurret";
     public static string TempGroundMask = "TempGround";
     public static LayerMask GetGroundLayer = 1 << 8 | 1 << 12;
@@ -325,33 +323,4 @@ public class StaticData : Singleton<StaticData>
         return null;
     }
 
-    public GameTile GetTile(Vector3 origin)
-    {
-
-        RaycastHit2D hit;
-        hit = Physics2D.Raycast(origin, Vector3.forward, Mathf.Infinity, LayerMask.GetMask(ConcreteTileMask));
-        if (hit.collider != null)
-        {
-            GameTile hitTile = hit.collider.GetComponentInParent<GameTile>();
-            if (hitTile != null)
-            {
-                return hitTile;
-            }
-            hitTile = hit.collider.GetComponentInParent<TurretTile>();
-            if (hitTile != null)
-            {
-                return hitTile;
-            }
-        }
-        RaycastHit2D hit2 = Physics2D.Raycast(origin, Vector3.forward, Mathf.Infinity, LayerMask.GetMask(TrapTileMask));
-        if (hit2.collider != null)
-        {
-            GameTile hitTile = hit2.collider.GetComponentInParent<GameTile>();
-            if (hitTile != null)
-            {
-                return hitTile;
-            }
-        }
-        return null;
-    }
 }

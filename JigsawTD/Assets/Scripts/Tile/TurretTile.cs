@@ -8,18 +8,28 @@ public class TurretTile : GameTile
 
     public override BasicTileType BasicTileType => BasicTileType.Turret;
 
-    protected override void Awake()
-    {
-        base.Awake();
-        TileContent = turret.gameObject;
-        
-    }
     public override void TileDroped()
     {
         base.TileDroped();
+
+        SetGroundTile();
         turret.Dropped = true;
         turret.TriggerPoloEffect(true);
-        TurretBase.layer = LayerMask.NameToLayer(StaticData.TurretMask);
+        GameManager.Instance.turrets.Add(turret);
+    }
+
+    protected override void TileDropCheck(Collider2D col)
+    {
+        base.TileDropCheck(col);
+        if (col != null)
+        {
+            GameTile tile = col.GetComponent<GameTile>();
+            if (tile == BoardSystem.SelectingTile)
+            {
+                BoardSystem.SelectingTile = null;
+            }
+            ObjectPool.Instance.UnSpawn(tile.gameObject);
+        }
     }
 
     public void ShowTurretRange(bool show)
@@ -34,23 +44,6 @@ public class TurretTile : GameTile
     {
         base.OnUnSpawn();
         turret.ClearTurret();
-        //if (turret.Dropped)
-        //{
-        //    turret.TriggerPoloEffect(false);
-        //}
-        //turret.AttackIntensify = 0;
-        //turret.Quality = 1;
-        //turret.Element = Element.Gold;
-        //turret.RangeIntensify = 0;
-        //turret.SpeedIntensify = 0;
-        //turret.targetList.Clear();
-        //turret.CriticalPercentage = 1.5f;
-        //turret.Dropped = false;
-        //turret.TargetCount = 1;
-        //turret.DamageAnalysis = 0;
-        //GameManager.Instance.turrets.behaviors.Remove(turret);//´ÓÁÐ±íÒÆ³ý
-        //turret.ClearTurnIntensify();
-        //turret.RecycleRanges();
     }
 
     public void Initialize(TurretAttribute attribute,int quality)

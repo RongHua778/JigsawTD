@@ -100,7 +100,7 @@ public class TileShape : MonoBehaviour
         StaticData.holdingShape = draggingShape;
         foreach (GameTile tile in tiles)
         {
-            tile.SetPreviewing(true);
+            tile.Previewing = true;
         }
     }
 

@@ -17,10 +17,10 @@ public class GameEvents : Singleton<GameEvents>
         onMessage?.Invoke(content);
     }
 
-    public event Action<List<GameTile>> onAddTiles;
-    public void AddTiles(List<GameTile> tiles)
+    public event Action onConfirmShape;
+    public void ConfirmShape()
     {
-        onAddTiles?.Invoke(tiles);
+        onConfirmShape?.Invoke();
     }
 
 

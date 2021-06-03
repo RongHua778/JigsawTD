@@ -7,7 +7,7 @@ public enum PlacementState
     Default, Picking, None
 }
 
-public class RoadPlacement : MonoBehaviour
+public class RoadPlacement : MonoBehaviour//需要独立为一个系统，控制形状，阶段
 {
     private static PlacementState placeState = PlacementState.Default;
 

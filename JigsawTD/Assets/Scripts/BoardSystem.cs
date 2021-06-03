@@ -47,23 +47,12 @@ public class BoardSystem : IGameSystem
     }
     #endregion
 
-    int[,] traps = new int[25, 25];
-
     [SerializeField] PathLine pathLinePrefab = default;
     List<PathLine> pathLines = new List<PathLine>();
-
-    //private PathCreator pathCreator;
-    //public MeshRenderer pathMeshHolder;
-
     TileFactory tileFactory;
 
-    //地板上的空tile
-    List<GroundTile> groundTiles = new List<GroundTile>();
-    //生成的陷阱
-    List<TrapTile> trapTiles = new List<TrapTile>();
-
-
     List<GameTile> tiles = new List<GameTile>();
+
     public List<GameTile> shortestPath = new List<GameTile>();
 
     public static Path path;
@@ -76,41 +65,12 @@ public class BoardSystem : IGameSystem
     public static bool FindPath { get => path.vectorPath.Count > 0; }
 
 
-    bool showPaths = true;
-
-
-
-    public bool ShowPaths
-    {
-        get => showPaths;
-        set
-        {
-            showPaths = value;
-            if (!showPaths)
-            {
-                foreach (PathLine line in pathLines)
-                {
-                    line.HidePath();
-                }
-            }
-            else
-            {
-                foreach (PathLine line in pathLines)
-                {
-                    line.ShowPath();
-                }
-            }
-        }
-    }
-
-
     public override void Initialize(GameManager gameManager)
     {
         base.Initialize(gameManager);
 
         selection = transform.Find("Selection").gameObject;
 
-        GameEvents.Instance.onAddTiles += RePlaceTiles;
         GameEvents.Instance.onSeekPath += SeekPath;
         GameEvents.Instance.onRemoveGameTile += RemoveGameTile;
 
@@ -120,7 +80,6 @@ public class BoardSystem : IGameSystem
 
     public override void Release()
     {
-        GameEvents.Instance.onAddTiles -= RePlaceTiles;
         GameEvents.Instance.onSeekPath -= SeekPath;
         GameEvents.Instance.onRemoveGameTile -= RemoveGameTile;
 
@@ -132,8 +91,6 @@ public class BoardSystem : IGameSystem
 
     public void GameUpdate()
     {
-
-
         if (IsPressingTile && Input.GetMouseButton(0))
         {
             pressCounter += Time.deltaTime;
@@ -144,12 +101,7 @@ public class BoardSystem : IGameSystem
         }
         if (SelectingTile != null)
         {
-            selection.SetActive(true);
             selection.transform.position = SelectingTile.transform.position;
-        }
-        else
-        {
-            selection.SetActive(false);
         }
     }
     private void TileClick()
@@ -170,14 +122,22 @@ public class BoardSystem : IGameSystem
     public void SetGameBoard(Vector2Int size, Vector2Int groundSize, TileFactory tileFactory)
     {
         this.tileFactory = tileFactory;
-        GenerateGroundTiles(groundSize);
+        Vector2 sizeOffset = new Vector2((size.x - 1) * 0.5f, (size.y - 1) * 0.5f) * StaticData.Instance.TileSize;
+        Vector2 groundOffset = new Vector2((groundSize.x - 1) * 0.5f, (groundSize.y - 1) * 0.5f) * StaticData.Instance.TileSize;
+        GenerateGroundTiles(groundOffset, groundSize);
         Physics2D.SyncTransforms();
-        Vector2 offset = new Vector2((size.x - 1) * 0.5f, (size.y - 1) * 0.5f) * StaticData.Instance.TileSize;
+        GenerateStartTiles(size, sizeOffset);
+        GenerateTrapTiles(groundOffset, groundSize, tileFactory);
+        SeekPath();
+        ShowPath(path);
+    }
+
+    private void GenerateStartTiles(Vector2Int size, Vector2 offset)
+    {
         for (int i = 0, y = 0; y < size.y; y++)
         {
             for (int x = 0; x < size.x; x++, i++)
             {
-
                 GameTile tile;
                 Vector2 pos = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
                 if (pos.x == 0 && pos.y != 0)
@@ -196,35 +156,11 @@ public class BoardSystem : IGameSystem
                 {
                     tile = this.tileFactory.GetBasicTile();
                 }
-                //RemoveGroundTileOnTile(tile, pos);
-                AddGameTile(tile, pos);
+                tile.transform.position = pos;
+                tile.TileDroped();
+                Physics2D.SyncTransforms();
             }
         }
-        GenerateTrapTiles(groundSize, StaticData.trapN, tileFactory);
-        SeekPath();
-        ShowPath(path);
-    }
-
-    private void AddGameTile(GameTile tile, Vector2 pos)
-    {
-        GroundTile groundTile = GetTile(pos, StaticData.GetGroundLayer) as GroundTile;
-        if (groundTile != null)
-        {
-            groundTile.TileAbrove = tile;
-            groundTile.gameObject.layer = LayerMask.NameToLayer(StaticData.TempGroundMask);
-        }
-        tile.gameObject.layer = LayerMask.NameToLayer(StaticData.ConcreteTileMask);
-
-
-        tile.transform.localPosition = pos;
-        CorrectTileCoord(tile);
-        tiles.Add(tile);
-        if (tile.BasicTileType == BasicTileType.Turret)
-        {
-            //turret的tile加入一个list
-            GameManager.Instance.turrets.Add(((TurretTile)tile).turret);
-        }
-        groundTile.TriggerIntensify();
     }
 
     private void SeekPath()
@@ -265,7 +201,8 @@ public class BoardSystem : IGameSystem
         shortestPath.Clear();
         for (int i = 0; i < path.vectorPath.Count; i++)
         {
-            GameTile tile = GetTile(path.vectorPath[i], StaticData.PathLayer) as GameTile;
+            Collider2D col = StaticData.RaycastCollider(path.vectorPath[i], LayerMask.GetMask(StaticData.ConcreteTileMask));
+            GameTile tile = col.GetComponent<GameTile>();
             shortestPath.Add(tile);
         }
         for (int i = 1; i < shortestPath.Count; i++)
@@ -290,26 +227,26 @@ public class BoardSystem : IGameSystem
         }
 
     }
-    private void GenerateTrapTiles(Vector2Int groundSize, int trapN, TileFactory t)
+    private void GenerateTrapTiles(Vector2 offset, Vector2Int size, TileFactory t)
     {
 
         List<Vector2> tiles = new List<Vector2>();
-        List<Vector2> basicPoss = new List<Vector2>();
+        //List<Vector2> basicPoss = new List<Vector2>();
 
         List<Vector2> traps = new List<Vector2>();
-        for (int i = 1; i < groundSize.x - 1; i++)
+        for (int y = 0; y < size.y; y++)
         {
-            for (int j = 1; j < groundSize.y - 1; j++)
+            for (int x = 0; x < size.x; x++)
             {
-                //避免陷阱刷到初始的方块上
-                if (!(i >= 10 && i <= 14 && j >= 10 && j <= 14))
+                Vector2 pos = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
+                if (!(pos.x >= -2 && pos.x <= 2 && pos.y >= -2 && pos.y <= 2))
                 {
-                    tiles.Add(new Vector2(i, j));
-                    basicPoss.Add(new Vector2(i, j));
+                    tiles.Add(pos);
+                    //basicPoss.Add(pos);
                 }
             }
         }
-        for (int i = 0; i < trapN; i++)
+        for (int i = 0; i < StaticData.trapN; i++)
         {
             int index = UnityEngine.Random.Range(0, tiles.Count);
             Vector2 temp = tiles[index];
@@ -321,101 +258,43 @@ public class BoardSystem : IGameSystem
             }
             tiles = tiles.Except(neibor).ToList();
             tiles.Remove(temp);
-            basicPoss.Remove(temp);
+            //basicPoss.Remove(temp);
         }
 
-        for (int j = 0; j < StaticData.basicN; j++)
-        {
-            int index = UnityEngine.Random.Range(0, basicPoss.Count);
-            Vector2 pos = basicPoss[index];
-            BasicTile tile = t.GetBasicTile();
+        //for (int j = 0; j < StaticData.basicN; j++)
+        //{
+        //    int index = UnityEngine.Random.Range(0, basicPoss.Count);
+        //    Vector2 pos = basicPoss[index];
+        //    BasicTile tile = t.GetBasicTile();
 
-            AddGameTile(tile, new Vector2(pos.x - (groundSize.x - 1) / 2,
-                pos.y - (groundSize.y - 1) / 2));
-            //tile.gameObject.layer = LayerMask.NameToLayer(StaticData.TrapTileMask);
-        }
+        //    AddGameTile(tile, new Vector2(pos.x - (groundSize.x - 1) / 2,
+        //        pos.y - (groundSize.y - 1) / 2));
+        //    //tile.gameObject.layer = LayerMask.NameToLayer(StaticData.TrapTileMask);
+        //}
 
-        foreach (Vector2 trap in traps)
+        foreach (Vector2 pos in traps)
         {
             TrapTile tile = t.GetRandomTrap();
-            AddGameTile(tile, new Vector2(trap.x - (groundSize.x - 1) / 2,
-                trap.y - (groundSize.y - 1) / 2));
-            tile.gameObject.layer = LayerMask.NameToLayer(StaticData.ConcreteTileMask);
+            tile.transform.position = pos;
+            tile.TileDroped();
+            //AddGameTile(tile, pos);
         }
     }
-    private void GenerateGroundTiles(Vector2Int groundSize)
+    private void GenerateGroundTiles(Vector2 offset, Vector2Int groundSize)
     {
-        Vector2 offset = new Vector2((groundSize.x - 1) * 0.5f, (groundSize.y - 1) * 0.5f) * StaticData.Instance.TileSize;
         for (int i = 0, y = 0; y < groundSize.y; y++)
         {
             for (int x = 0; x < groundSize.x; x++, i++)
             {
                 GroundTile groundTile = tileFactory.GetGroundTile();
-                groundTile.transform.localPosition = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
-                groundTile.transform.localPosition += Vector3.forward * 0.1f;
+                groundTile.transform.position = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
+                groundTile.transform.position += Vector3.forward * 0.1f;
                 CorrectTileCoord(groundTile);
-                groundTiles.Add(groundTile);
             }
         }
     }
 
-    private void RePlaceTiles(List<GameTile> newTiles)
-    {
-        foreach (GameTile tile in newTiles)
-        {
-            tile.SetBackToParent();
-            Vector2 pos = tile.transform.position;
-            Collider2D col = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.ConcreteTileMask));
-            tile.SetPreviewing(false);
-            if (col != null)
-            {
-                if (tile.TileContent == null)
-                    ObjectPool.Instance.UnSpawn(tile.gameObject);
-                else
-                {
-                    RemoveGameTileOnPos(pos);
-                    AddGameTile(tile, pos);
-                }
-                //if (col.GetComponentInParent<TurretTile>() || col.GetComponentInParent<TrapTile>())
-                //{
-                //    ObjectPool.Instance.UnSpawn(tile.gameObject);
-                //    continue;
-                //}
-                //else
-                //{
-                //    RemoveGameTileOnPos(pos);
-                //}
-            }
-            else
-            {
-                AddGameTile(tile, pos);
-            }
-        }
-        foreach (GameTile tile in newTiles)
-        {
-            tile.TileDroped();
-        }
-        GameEvents.Instance.CheckBluePrint();
-    }
-
-    private void RemoveGameTileOnPos(Vector3 pos)
-    {
-        GameTile gameTile = GetTile(pos, LayerMask.GetMask(StaticData.ConcreteTileMask)) as GameTile;
-        if (gameTile != null)
-        {
-            tiles.Remove(gameTile);
-            if (SelectingTile == gameTile)
-                SelectingTile = null;
-            ObjectPool.Instance.UnSpawn(gameTile.gameObject);
-        }
-        GroundTile groundTile = GetTile(pos, StaticData.GetGroundLayer) as GroundTile;
-        if (groundTile != null)
-        {
-            groundTile.gameObject.layer = LayerMask.NameToLayer(StaticData.GroundTileMask);
-        }
-    }
-
-    private void RemoveGameTile(GameTile tile)
+    private void RemoveGameTile(GameTile tile)//合成清除TILE
     {
         if (tiles.Contains(tile))
         {
@@ -424,27 +303,11 @@ public class BoardSystem : IGameSystem
                 SelectingTile = null;
             ObjectPool.Instance.UnSpawn(tile.gameObject);
 
-            GroundTile groundTile = GetTile(tile.transform.position, StaticData.GetGroundLayer) as GroundTile;
-            if (groundTile != null)
-            {
-                groundTile.gameObject.layer = LayerMask.NameToLayer(StaticData.GroundTileMask);
-            }
+            Collider2D col = StaticData.RaycastCollider(tile.transform.position, LayerMask.GetMask(StaticData.TempGroundMask));
+            GroundTile groundTile = col.GetComponent<GroundTile>();
+            groundTile.IsActive = true;
         }
     }
-
-
-
-    //private void RemoveGroundTileOnTile(GameTile tile, Vector3 pos)
-    //{
-    //    GroundTile groundTile = GetTile(pos, LayerMask.GetMask(StaticData.GroundTileMask)) as GroundTile;
-    //    if (groundTile != null)
-    //    {
-    //        //groundTiles.Remove(groundTile);
-    //        groundTile.TileAbrove = tile;
-    //        groundTile.gameObject.layer = LayerMask.NameToLayer(StaticData.TempGroundMask);
-    //        //ObjectPool.Instance.UnSpawn(groundTile.gameObject);
-    //    }
-    //}
 
     private void CorrectTileCoord(TileBase tile)
     {
@@ -455,21 +318,6 @@ public class BoardSystem : IGameSystem
     }
 
 
-
-    public static TileBase GetTile(Vector3 origin, LayerMask layer)
-    {
-        RaycastHit2D hit;
-        hit = Physics2D.Raycast(origin, Vector3.forward, Mathf.Infinity, layer);
-        if (hit.collider != null)
-        {
-            TileBase hitTile = hit.collider.GetComponent<TileBase>();
-            if (hitTile != null)
-            {
-                return hitTile;
-            }
-        }
-        return null;
-    }
 
 
 }

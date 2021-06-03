@@ -9,17 +9,27 @@ public class TrapTile : GameTile
     int damageAnalysis;
     public int DamageAnalysis { get => damageAnalysis; set => damageAnalysis = value; }
     public override BasicTileType BasicTileType => BasicTileType.Trap;
-    //bool actived;
-    //public bool Actived { get => actived; 
-    //    set 
-    //    {
-    //        if (value)
-    //        {
-    //            gameObject.layer = LayerMask.NameToLayer(StaticData.ConcreteTileMask);
-    //            actived = value;
-    //        }
-    //    } 
-    //}
+
+    public override void TileDroped()
+    {
+        base.TileDroped();
+        SetGroundTile();
+    }
+
+    protected override void TileDropCheck(Collider2D col)
+    {
+        base.TileDropCheck(col);
+        //if (col != null)
+        //{
+        //    GameTile tile = col.GetComponent<GameTile>();
+        //    if (tile == BoardSystem.SelectingTile)
+        //    {
+        //        BoardSystem.SelectingTile = null;
+        //    }
+        //    ObjectPool.Instance.UnSpawn(tile.gameObject);
+        //}
+    }
+
 
     public override void OnTilePass(Enemy enemy)
     {

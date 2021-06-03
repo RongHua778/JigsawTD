@@ -4,10 +4,23 @@ using UnityEngine;
 using TMPro;
 public class GroundTile : TileBase
 {
+    public override bool IsActive
+    {
+        get => base.IsActive;
+        set
+        {
+            base.IsActive = value;
+            gameObject.layer = value ? LayerMask.NameToLayer(StaticData.GroundTileMask) : LayerMask.NameToLayer(StaticData.TempGroundMask);
+        }
+    }
+
+
     int rangeIntensify;
 
     public GameTile TileAbrove;
     public int RangeIntensify { get => rangeIntensify; set { rangeIntensify = value; txt.text = value.ToString(); } }
+
+
     public float AttackIntensify;
     public float SpeedIntensify;
     [SerializeField] TextMeshPro txt = default;
@@ -24,6 +37,8 @@ public class GroundTile : TileBase
             turret.SpeedIntensify = SpeedIntensify;
         }
     }
+
+
 
 
     public override void OnSpawn()

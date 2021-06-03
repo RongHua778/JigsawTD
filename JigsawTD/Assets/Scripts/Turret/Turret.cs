@@ -199,7 +199,7 @@ public abstract class Turret : GameBehavior
                     case PoloEffectType.RangeIntensify:
                         foreach (var pos in poss)
                         {
-                            GroundTile groungTile = BoardSystem.GetTile(pos + (Vector2)transform.position, StaticData.GetGroundLayer) as GroundTile;
+                            GroundTile groungTile = StaticData.RaycastCollider(pos + (Vector2)transform.position, StaticData.GetGroundLayer).GetComponent<GroundTile>();
                             groungTile.RangeIntensify += value ? (int)polo.KeyValue : -(int)polo.KeyValue;
                             groungTile.TriggerIntensify();
                         }
@@ -207,7 +207,7 @@ public abstract class Turret : GameBehavior
                     case PoloEffectType.AttackIntensify:
                         foreach (var pos in poss)
                         {
-                            GroundTile groungTile = BoardSystem.GetTile(pos + (Vector2)transform.position, StaticData.GetGroundLayer) as GroundTile;
+                            GroundTile groungTile = StaticData.RaycastCollider(pos + (Vector2)transform.position, StaticData.GetGroundLayer).GetComponent<GroundTile>();
                             groungTile.AttackIntensify += value ? polo.KeyValue : -polo.KeyValue;
                             groungTile.TriggerIntensify();
                         }

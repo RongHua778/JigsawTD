@@ -9,9 +9,6 @@ public abstract class GameTile : TileBase
     public abstract BasicTileType BasicTileType { get; }
     public DraggingShape m_DraggingShape { get; set; }
 
-    private GameObject tileContent;
-    public GameObject TileContent { get => tileContent; set => tileContent = value; }
-
     [HideInInspector] public Material BaseMaterial;
 
     GameObject previewGlow;
@@ -21,22 +18,30 @@ public abstract class GameTile : TileBase
 
     Direction pathDirection;
     public Direction PathDirection { get => pathDirection; set => pathDirection = value; }
+
     GameTile nextOnPath;
     public GameTile NextTileOnPath { get => nextOnPath; set => nextOnPath = value; }
 
     Direction tileDirection;
 
-    bool actived;
-    public bool Actived
+    public override bool IsActive
     {
-        get => actived;
+        get => base.IsActive;
         set
         {
-            if (value)
-            {
-                gameObject.layer = LayerMask.NameToLayer(StaticData.ConcreteTileMask);
-                actived = value;
-            }
+            base.IsActive = value;
+            gameObject.layer = value ? LayerMask.NameToLayer(StaticData.ConcreteTileMask) : LayerMask.NameToLayer(StaticData.TempTileMask);
+        }
+    }
+
+    bool previewing;
+    public bool Previewing
+    {
+        get => previewing;
+        set
+        {
+            previewing = value;
+            previewGlow.SetActive(value);
         }
     }
 
@@ -61,19 +66,18 @@ public abstract class GameTile : TileBase
 
     public virtual void TileDroped()
     {
-
+        Collider2D col = StaticData.RaycastCollider(transform.position, LayerMask.GetMask(StaticData.ConcreteTileMask));
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        TileDropCheck(col);
+        SetBackToParent();
+        Previewing = false;
+        IsActive = true;
     }
 
-    public void SetPreviewing(bool isPreviewing)
+
+    protected virtual void TileDropCheck(Collider2D col)
     {
-        if (isPreviewing)
-        {
-            previewGlow.SetActive(true);
-        }
-        else
-        {
-            previewGlow.SetActive(false);
-        }
+
     }
 
     public virtual void OnTilePass(Enemy enemy)
@@ -109,7 +113,7 @@ public abstract class GameTile : TileBase
     public override void OnUnSpawn()
     {
         m_DraggingShape = null;
-        gameObject.layer = LayerMask.NameToLayer(StaticData.TempTileMask);
+        IsActive = false;
         BaseMaterial.color = Color.white;
         //Debug.Log("UNSPAWNed");
         base.OnUnSpawn();
@@ -120,5 +124,14 @@ public abstract class GameTile : TileBase
         tileBase.rotation = Quaternion.identity;
     }
 
-
+    protected void SetGroundTile()
+    {
+        Collider2D col = StaticData.RaycastCollider(transform.position, LayerMask.GetMask(StaticData.GroundTileMask));//ÐÞ¸Ägroundtile²ã
+        if (col != null)
+        {
+            GroundTile groundTile = col.GetComponent<GroundTile>();
+            groundTile.TileAbrove = this;
+            groundTile.IsActive = false;
+        }
+    }
 }
