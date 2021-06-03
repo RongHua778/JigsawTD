@@ -46,7 +46,7 @@ public class TileFactory : GameObjectFactory
     public TrapTile GetRandomTrap()
     {
         int index = Random.Range(0,trapAttributes.Length);
-        TrapTile trap = CreateInstance(trapAttributes[index].TilePrefab).GetComponent<TrapTile>();
+        TrapTile trap = CreateInstance(trapAttributes[index].ContentPrefab).GetComponent<TrapTile>();
         trap.tileType.rotation = DirectionExtensions.GetRandomRotation();
         return trap;
     }
@@ -57,7 +57,7 @@ public class TileFactory : GameObjectFactory
         {
             if (attribute.Name == name)
             {
-                TrapTile trap = CreateInstance(attribute.TilePrefab).GetComponent<TrapTile>();
+                TrapTile trap = CreateInstance(attribute.ContentPrefab).GetComponent<TrapTile>();
                 trap.tileType.rotation = DirectionExtensions.GetRandomRotation();
                 return trap;
             }
@@ -72,7 +72,7 @@ public class TileFactory : GameObjectFactory
     public TurretTile GetBasicTurret(int quality, int element)
     {
         TurretAttribute attribute = GameManager.Instance.GetElementAttribute((Element)element);
-        GameObject temp = CreateInstance(attribute.TilePrefab);
+        GameObject temp = CreateInstance(attribute.ContentPrefab);
         TurretTile tile = temp.GetComponent<TurretTile>();
         tile.Initialize(attribute,quality);
         return tile;
@@ -93,7 +93,7 @@ public class TileFactory : GameObjectFactory
 
     public TurretTile GetCompositeTurretTile(TurretAttribute attribute)
     {
-        GameObject temp = CreateInstance(attribute.TilePrefab);
+        GameObject temp = CreateInstance(attribute.ContentPrefab);
         TurretTile tile = temp.GetComponent<TurretTile>();
         tile.Initialize(attribute, 1);
         return tile;

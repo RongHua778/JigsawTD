@@ -19,15 +19,7 @@ public class TrapTile : GameTile
     protected override void TileDropCheck(Collider2D col)
     {
         base.TileDropCheck(col);
-        //if (col != null)
-        //{
-        //    GameTile tile = col.GetComponent<GameTile>();
-        //    if (tile == BoardSystem.SelectingTile)
-        //    {
-        //        BoardSystem.SelectingTile = null;
-        //    }
-        //    ObjectPool.Instance.UnSpawn(tile.gameObject);
-        //}
+
     }
 
 

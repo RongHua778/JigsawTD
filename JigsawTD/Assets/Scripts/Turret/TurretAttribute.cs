@@ -39,7 +39,7 @@ public enum RangeType
 }
 
 [CreateAssetMenu(menuName = "Attribute/TurretAttribute", fileName = "TurretAttribute")]
-public class TurretAttribute : LevelAttribute
+public class TurretAttribute : ContentAttribute
 {
     public RangeType RangeType;
     public Element element;

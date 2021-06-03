@@ -46,6 +46,13 @@ public class BoardSystem : IGameSystem
 
     }
     #endregion
+    //_groundsize是地图每一边上方块的数量
+    //startSize是初始生成的有方块的大小
+
+    [SerializeField] TileFactory _tempTileFactory = default;
+    [SerializeField]
+    Vector2Int _startSize, _groundSize = default;
+    public Vector2Int GroundSize { get => _groundSize; set => _groundSize = value; }
 
     [SerializeField] PathLine pathLinePrefab = default;
     List<PathLine> pathLines = new List<PathLine>();
@@ -68,6 +75,7 @@ public class BoardSystem : IGameSystem
     public override void Initialize(GameManager gameManager)
     {
         base.Initialize(gameManager);
+        SetGameBoard(_startSize, _groundSize, _tempTileFactory);
 
         selection = transform.Find("Selection").gameObject;
 
@@ -127,7 +135,7 @@ public class BoardSystem : IGameSystem
         GenerateGroundTiles(groundOffset, groundSize);
         Physics2D.SyncTransforms();
         GenerateStartTiles(size, sizeOffset);
-        GenerateTrapTiles(groundOffset, groundSize, tileFactory);
+        //GenerateTrapTiles(groundOffset, groundSize, tileFactory);
         SeekPath();
         ShowPath(path);
     }

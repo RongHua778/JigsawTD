@@ -7,6 +7,7 @@ TagManager:
   - UnDropablePoint
   - Enemy
   - UnDropableTurret
+  - Tile
   layers:
   - Default
   - TransparentFX
@@ -15,14 +16,14 @@ TagManager:
   - Water
   - UI
   - ConcreteTile
-  - Turret
+  - 
   - GroundTile
-  - ImportantPoint
+  - 
   - TempTile
   - Enemy
   - TempGround
   - TempTurret
-  - TrapTile
+  - 
   - 
   - 
   - 

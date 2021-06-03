@@ -14,7 +14,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
     [SerializeField] GameObject messagePanel = default;
 
 
-    [SerializeField] RoadPlacement _roadPlacament = default;
+    [SerializeField] ShapeSystem _roadPlacament = default;
     [SerializeField] GuideBook _guideBoook = default;
     [SerializeField] LuckProgress luckyProgress = default;
     [SerializeField] Text messageTxt = default;

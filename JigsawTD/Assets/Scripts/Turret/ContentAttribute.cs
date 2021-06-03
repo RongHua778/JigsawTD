@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class LevelAttribute : ScriptableObject
+public class ContentAttribute : ScriptableObject
 {
     public string Name;
+    public Sprite Icon;
     [TextArea(3,4)]
     public string Description;
-    public GameObject TilePrefab;
+    public GameObject ContentPrefab;
     public virtual void Upgrade()
     {
 

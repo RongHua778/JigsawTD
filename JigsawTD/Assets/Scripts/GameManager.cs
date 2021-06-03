@@ -7,7 +7,11 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     //版图系统
-    [SerializeField] private BoardSystem m_Board = default;
+    [SerializeField] private BoardSystem m_BoardSystem = default;
+
+    //形状系统
+    [SerializeField] private ShapeSystem m_ShapeSystem = default;
+
 
     public BluePrintShop _bluePrintShop = default;
 
@@ -34,11 +38,7 @@ public class GameManager : Singleton<GameManager>
     private int difficulty = 2;
     public int Difficulty { get => difficulty; set => difficulty = value; }
 
-    //_groundsize是地图每一边上方块的数量
-    //startSize是初始生成的有方块的大小
-    [SerializeField]
-    Vector2Int _startSize, _groundSize = default;
-    public Vector2Int GroundSize { get => _groundSize; set => _groundSize = value; }
+
 
     //[SerializeField]
     //GameTileContentFactory _contentFactory = default;
@@ -77,23 +77,23 @@ public class GameManager : Singleton<GameManager>
         GameSpeed = 1;
         Difficulty = Game.Instance.Difficulty;
  
-        m_Board.Initialize(this);//版图系统
-
+        m_BoardSystem.Initialize(this);//版图系统
+        //m_ShapeSystem.Initialize(this);//形状系统
 
         
 
-        _enemyFactory.InitializeFactory();
-        _tileFactory.InitializeFactory();
-        // _bluePrintFacotry.InitializeFactory();
-        _turretFactory.InitializeFacotory();
+        //_enemyFactory.InitializeFactory();
+        //_tileFactory.InitializeFactory();
+        //// _bluePrintFacotry.InitializeFactory();
+        //_turretFactory.InitializeFacotory();
 
-        m_Board.SetGameBoard(_startSize, GroundSize, _tileFactory);
+        //m_BoardSystem.SetGameBoard(_startSize, GroundSize, _tileFactory);
 
-        EnemySpawnHelper = this.GetComponent<EnemySpawner>();
-        EnemySpawnHelper.LevelInitialize(_enemyFactory, GameManager.Instance.difficulty);
-        _bluePrintShop.RefreshShop(0);
+        //EnemySpawnHelper = this.GetComponent<EnemySpawner>();
+        //EnemySpawnHelper.LevelInitialize(_enemyFactory, GameManager.Instance.difficulty);
+        //_bluePrintShop.RefreshShop(0);
 
-        buildingState = new BuildingState(this, m_Board);
+        buildingState = new BuildingState(this, m_BoardSystem);
         waveState = new WaveState(this);
         EnterNewState(buildingState);
     }
@@ -102,14 +102,14 @@ public class GameManager : Singleton<GameManager>
     public void Release()
     {
         GameSpeed = 1;
-        m_Board.Release();
+        m_BoardSystem.Release();
     }
 
 
 
     public void GameUpdate()
     {
-        m_Board.GameUpdate();
+        m_BoardSystem.GameUpdate();
         EnemySpawnHelper.GameUpdate();
         enemies.GameUpdate();
         Physics2D.SyncTransforms();
@@ -126,7 +126,7 @@ public class GameManager : Singleton<GameManager>
     public void SpawnEnemy(EnemySequence sequence)
     {
         Enemy enemy = EnemySpawnHelper.SpawnEnemy(sequence.EnemyAttribute, sequence.Intensify);
-        GameTile tile = m_Board.SpawnPoint;
+        GameTile tile = m_BoardSystem.SpawnPoint;
         enemy.SpawnOn(tile);
         enemies.Add(enemy);
     }

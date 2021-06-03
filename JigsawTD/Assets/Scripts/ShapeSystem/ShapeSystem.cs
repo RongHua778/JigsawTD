@@ -7,16 +7,20 @@ public enum PlacementState
     Default, Picking, None
 }
 
-public class RoadPlacement : MonoBehaviour//需要独立为一个系统，控制形状，阶段
+public class ShapeSystem : IGameSystem//需要独立为一个系统，控制形状，阶段
 {
-    private static PlacementState placeState = PlacementState.Default;
+    static PlacementState placeState = PlacementState.Default;
+    public static PlacementState PlaceState { get => placeState; set => placeState = value; }
 
     [SerializeField]
     TileSelect[] tileSelects = default;
     [SerializeField]
     GameObject[] areas;//0=放路模式//1=选路模式
 
-    public static PlacementState PlaceState { get => placeState; set => placeState = value; }
+    public override void Initialize(GameManager gameManager)
+    {
+        base.Initialize(gameManager);
+    }
 
     public void ShowArea(int exceptId)
     {
