@@ -63,10 +63,10 @@ public class EnemySpawner : MonoBehaviour
                 case 3:
                     if (i % 2 == 0)
                     {
-                        if (i < 10) stage += 1.5f;
-                        else if (i >= 10 && i < 20) stage += 3f;
-                        else if (i >= 20 && i < 30) stage += 4.5f;
-                        else if (i >= 30) stage += 6f;
+                        if (i < 10) stage += 1.75f;
+                        else if (i >= 10 && i < 20) stage += 2f;
+                        else if (i >= 20 && i < 30) stage += 3f;
+                        else if (i >= 30) stage += 4f;
                     }
                     break;
                 default:
