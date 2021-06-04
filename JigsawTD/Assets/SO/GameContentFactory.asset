@@ -15,3 +15,11 @@ MonoBehaviour:
   emptyAtt: {fileID: 11400000, guid: 4c8da1e145ab6214c944bcc43fad4205, type: 2}
   spawnPointAtt: {fileID: 11400000, guid: 0263469d903409a46837ef1fb50628ce, type: 2}
   destinationAtt: {fileID: 11400000, guid: 132429f84cc3e32449aabf043aee0234, type: 2}
+  elementTurrets:
+  - {fileID: 11400000, guid: 493c6f7428affb6409f06eaac5d19930, type: 2}
+  - {fileID: 11400000, guid: 6c3131e68b56a9b4db13891b470a159b, type: 2}
+  - {fileID: 11400000, guid: 0387619ceeeda7746a7e51b43f234353, type: 2}
+  - {fileID: 11400000, guid: 2a0c266b352137f45b20d3723395e650, type: 2}
+  - {fileID: 11400000, guid: 8b69e55deebc49d44b73c6e458a12794, type: 2}
+  compositeTurrets: []
+  trapAtts: []

@@ -56,19 +56,19 @@ public class Blueprint
     //检测每个配方是否存在在场上的方法
     public void CheckElement()
     {
-        List<GameBehavior> temp = GameManager.Instance.turrets.behaviors.ToList();
+        List<IGameBehavior> temp = GameManager.Instance.turrets.behaviors.ToList();
         
         for (int i = 0; i < compositions.Count; i++)
         {
             compositions[i].obtained = false;
             for (int j = 0; j < temp.Count; j++)
             {
-                Turret turret = temp[j] as Turret;
+                ElementTurret turret = temp[j] as ElementTurret;
                 if (compositions[i].elementRequirement == (int)turret.Element &&
                     compositions[i].levelRequirement == turret.Quality)
                 {
                     compositions[i].obtained = true;
-                    compositions[i].turretTile = turret.m_TurretTile;
+                    compositions[i].turretTile = turret.m_GameTile;
                     temp.Remove(temp[j]);
                     break;
                 }

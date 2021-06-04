@@ -20,7 +20,7 @@ public class BuildingState : BattleOperationState
         //重置所有防御塔的回合临时加成
         foreach (var turret in gameManager.turrets.behaviors)
         {
-            ((Turret)turret).ClearTurnIntensify();
+            ((TurretContent)turret).ClearTurnIntensify();
         }
         yield break;
     }

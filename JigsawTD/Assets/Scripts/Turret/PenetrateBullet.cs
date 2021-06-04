@@ -6,7 +6,7 @@ public class PenetrateBullet : Bullet
 {
     public override BulletType BulletType => BulletType.Penetrate;
     private Vector3 initScale;
-    public override void Initialize(Turret turret, TargetPoint target = null, Vector2? pos = null)
+    public override void Initialize(TurretContent turret, TargetPoint target = null, Vector2? pos = null)
     {
         base.Initialize(turret, target, pos);
         initScale = transform.localScale;

@@ -25,7 +25,7 @@ public abstract class TurretEffect
 {
     public abstract TurretEffectName EffectName { get; }
     public abstract string EffectDescription { get; }
-    public Turret turret;
+    public TurretContent turret;
     public Bullet bullet;
     public float KeyValue;
 

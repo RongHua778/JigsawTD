@@ -176,7 +176,6 @@ public class LevelUIManager : Singleton<LevelUIManager>
         GameEvents.Instance.onMessage += ShowMessage;
         GameEvents.Instance.onEnemyReach += EnemyReachDamge;
         GameEvents.Instance.onStartNewWave += NewWaveStart;
-        GameEvents.Instance.onConfirmShape += ConfirmShape;
         GameEvents.Instance.onEnemyDie += EnemyDie;
         GameEvents.Instance.onShowTileTips += ShowTileTips;
         GameEvents.Instance.onShowTurretTips += ShowTurretAttributeTips;
@@ -195,7 +194,6 @@ public class LevelUIManager : Singleton<LevelUIManager>
         GameEvents.Instance.onMessage -= ShowMessage;
         GameEvents.Instance.onEnemyReach -= EnemyReachDamge;
         GameEvents.Instance.onStartNewWave -= NewWaveStart;
-        GameEvents.Instance.onConfirmShape -= ConfirmShape;
         GameEvents.Instance.onEnemyDie -= EnemyDie;
         GameEvents.Instance.onShowTileTips -= ShowTileTips;
         GameEvents.Instance.onShowTurretTips -= ShowTurretAttributeTips;
@@ -229,13 +227,13 @@ public class LevelUIManager : Singleton<LevelUIManager>
         PlayerHealth += value;
     }
 
-    public void GetNewBuildings()
-    {
-        DisplayShape(0, GameManager.Instance.GenerateRandomBasicShape());
-        DisplayShape(1, GameManager.Instance.GenerateRandomBasicShape());
-        DisplayShape(2, GameManager.Instance.GenerateRandomBasicShape());
-        ShowArea(1);
-    }
+    //public void GetNewBuildings()
+    //{
+    //    DisplayShape(0, GameManager.Instance.GenerateRandomBasicShape());
+    //    DisplayShape(1, GameManager.Instance.GenerateRandomBasicShape());
+    //    DisplayShape(2, GameManager.Instance.GenerateRandomBasicShape());
+    //    ShowArea(1);
+    //}
 
 
     //每回合开始前计算幸运点、抽取模块次数等逻辑。
@@ -272,27 +270,27 @@ public class LevelUIManager : Singleton<LevelUIManager>
     {
         Vector2 size;
         Vector2 pos;
-        switch (tile.BasicTileType)
-        {
-            case BasicTileType.SpawnPoint:
-            case BasicTileType.Destination:
-            case BasicTileType.Trap:
-                trapTips.gameObject.SetActive(true);
-                size = trapTips.GetComponent<RectTransform>().sizeDelta;
-                pos = new Vector2(size.x / 2 + 50, Screen.height / 2);
-                trapTips.transform.position = pos;
-                trapTips.ReadAttribute(((TrapTile)tile));
-                break;
-            case BasicTileType.Turret:
-                turretTips.gameObject.SetActive(true);
-                size = turretTips.GetComponent<RectTransform>().sizeDelta;
-                pos = new Vector2(size.x / 2, Screen.height / 2);
-                turretTips.transform.position = pos;
-                turretTips.ReadTurret(((TurretTile)tile).turret);
-                break;
-            default:
-                break;
-        }
+        //switch (tile.BasicTileType)
+        //{
+        //    case BasicTileType.SpawnPoint:
+        //    case BasicTileType.Destination:
+        //    case BasicTileType.Trap:
+        //        trapTips.gameObject.SetActive(true);
+        //        size = trapTips.GetComponent<RectTransform>().sizeDelta;
+        //        pos = new Vector2(size.x / 2 + 50, Screen.height / 2);
+        //        trapTips.transform.position = pos;
+        //        trapTips.ReadAttribute(((TrapTile)tile));
+        //        break;
+        //    case BasicTileType.Turret:
+        //        turretTips.gameObject.SetActive(true);
+        //        size = turretTips.GetComponent<RectTransform>().sizeDelta;
+        //        pos = new Vector2(size.x / 2, Screen.height / 2);
+        //        turretTips.transform.position = pos;
+        //        turretTips.ReadTurret(((TurretTile)tile).turret);
+        //        break;
+        //    default:
+        //        break;
+        //}
     }
 
     //合成界面显示配方塔TIPS
@@ -340,10 +338,6 @@ public class LevelUIManager : Singleton<LevelUIManager>
     {
         _roadPlacament.HideArea();
     }
-    private void ConfirmShape()
-    {
-        ShowArea(0);
-    }
 
     public void ExtraDrawClick()
     {
@@ -351,7 +345,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
         {
             LotteryDraw--;
             DrawThisTurn = true;
-            GetNewBuildings();
+            //GetNewBuildings();
         }
         else
         {

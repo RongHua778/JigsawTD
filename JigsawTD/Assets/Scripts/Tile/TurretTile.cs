@@ -4,9 +4,8 @@ using UnityEngine;
 public class TurretTile : GameTile
 {
     private GameObject TurretBase = default;
-    [HideInInspector] public Turret turret;
+    [HideInInspector] public TurretContent turret;
 
-    public override BasicTileType BasicTileType => BasicTileType.Turret;
 
     public override void TileLanded()
     {
@@ -14,23 +13,10 @@ public class TurretTile : GameTile
 
         SetGroundTile();
         turret.Dropped = true;
-        turret.TriggerPoloEffect(true);
+        //turret.TriggerPoloEffect(true);
         GameManager.Instance.turrets.Add(turret);
     }
 
-    protected override void TileDropCheck(Collider2D col)
-    {
-        base.TileDropCheck(col);
-        if (col != null)
-        {
-            GameTile tile = col.GetComponent<GameTile>();
-            if (tile == BoardSystem.SelectingTile)
-            {
-                BoardSystem.SelectingTile = null;
-            }
-            ObjectPool.Instance.UnSpawn(tile.gameObject);
-        }
-    }
 
     public void ShowTurretRange(bool show)
     {
@@ -43,7 +29,7 @@ public class TurretTile : GameTile
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
-        turret.ClearTurret();
+        //turret.ClearTurret();
     }
 
     public void Initialize(TurretAttribute attribute,int quality)
@@ -51,10 +37,10 @@ public class TurretTile : GameTile
         TurretBase = transform.Find("TileBase/TurretBase").gameObject;
         TurretBase.layer = LayerMask.NameToLayer(StaticData.TempTurretMask);
 
-        turret = this.GetComponentInChildren<Turret>();
+        turret = this.GetComponentInChildren<TurretContent>();
         turret.m_TurretAttribute = attribute;
-        turret.Quality = quality;
-        turret.InitializeTurret();
-        turret.m_TurretTile = this;
+        //turret.Quality = quality;
+        //turret.InitializeTurret();
+        //turret.m_TurretTile = this;
     }
 }

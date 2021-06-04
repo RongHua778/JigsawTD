@@ -5,9 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class GameBehaviorCollection
 {
-    public List<GameBehavior> behaviors = new List<GameBehavior>();
+    public List<IGameBehavior> behaviors = new List<IGameBehavior>();
 
-    public void Add(GameBehavior behavior)
+    public void Add(IGameBehavior behavior)
     {
         behaviors.Add(behavior);
     }

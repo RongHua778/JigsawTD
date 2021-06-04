@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Snow : Turret
+public class Snow : TurretContent
 {
-    public override void InitializeTurret()
+    public override void OnSpawn()
     {
-        base.InitializeTurret();
+        base.OnSpawn();
         _rotSpeed = 0f;
         CheckAngle = 45f;
     }

@@ -24,12 +24,12 @@ public class TurretTips : TileTips
     [SerializeField] TipsElementConstruct elementConstruct = default;//合成塔组成元素区
     //合成塔升级区
 
-    private Turret m_Turret;
+    private TurretContent m_Turret;
     private BluePrintGrid m_BGrid;
     int upgradeCost;
 
 
-    public void ReadTurret(Turret turret)//通过场上防御塔查看
+    public void ReadTurret(TurretContent turret)//通过场上防御塔查看
     {
         anim.SetBool("isOpen", true);
         Sound.Instance.PlayEffect("Sound_Click");
@@ -44,50 +44,50 @@ public class TurretTips : TileTips
         //设置描述文案
         SetDescription(turret);
         //控制区块显示
-        if (turret.TurretType == TurretType.CompositeTurret)
-        {
-            elementConstruct.gameObject.SetActive(true);
-            elementConstruct.SetElements(((CompositeTurret)turret).CompositeBluePrint);
-            IntensifyArea.SetActive(false);
-            if (turret.Quality < 3)
-            {
-                UpgradeArea.SetActive(true);
-                upgradeCost = StaticData.Instance.LevelUpCost[turret.m_TurretAttribute.Rare - 1, turret.Quality - 1];
-                UpgradeCostValue.text = upgradeCost.ToString();
-            }
-            else
-                UpgradeArea.SetActive(false);
+        //if (turret.TurretType == TurretType.CompositeTurret)
+        //{
+        //    elementConstruct.gameObject.SetActive(true);
+        //    elementConstruct.SetElements(((CompositeTurret)turret).CompositeBluePrint);
+        //    IntensifyArea.SetActive(false);
+        //    if (turret.Quality < 3)
+        //    {
+        //        UpgradeArea.SetActive(true);
+        //        upgradeCost = StaticData.Instance.LevelUpCost[turret.m_TurretAttribute.Rare - 1, turret.Quality - 1];
+        //        UpgradeCostValue.text = upgradeCost.ToString();
+        //    }
+        //    else
+        //        UpgradeArea.SetActive(false);
 
-        }
-        else
-        {
-            elementConstruct.gameObject.SetActive(false);
-            IntensifyArea.SetActive(true);
-            string intensifyType = "";//根据元素及品质设置显示加成效果
-            //intensifyType += "作为合成素材时，使合成塔";
-            switch (turret.Element)
-            {
-                case Element.Gold:
-                    intensifyType += StaticData.Instance.GoldAttackIntensify * 100 * turret.Quality + "%攻击";
-                    break;
-                case Element.Wood:
-                    intensifyType += StaticData.Instance.WoodSpeedIntensify * 100 * turret.Quality + "%攻速";
-                    break;
-                case Element.Water:
-                    intensifyType += StaticData.Instance.WaterSlowIntensify * turret.Quality + "减速";
-                    break;
-                case Element.Fire:
-                    intensifyType += StaticData.Instance.FireCriticalIntensify * 100 * turret.Quality + "%暴击率";
-                    break;
-                case Element.Dust:
-                    intensifyType += StaticData.Instance.FireCriticalIntensify * turret.Quality + "溅射";
-                    break;
-                case Element.None:
-                    break;
-            }
-            IntensifyValue.text = intensifyType;
-            UpgradeArea.SetActive(false);
-        }
+        //}
+        //else
+        //{
+        //    elementConstruct.gameObject.SetActive(false);
+        //    IntensifyArea.SetActive(true);
+        //    string intensifyType = "";//根据元素及品质设置显示加成效果
+        //    //intensifyType += "作为合成素材时，使合成塔";
+        //    switch (turret.Element)
+        //    {
+        //        case Element.Gold:
+        //            intensifyType += StaticData.Instance.GoldAttackIntensify * 100 * turret.Quality + "%攻击";
+        //            break;
+        //        case Element.Wood:
+        //            intensifyType += StaticData.Instance.WoodSpeedIntensify * 100 * turret.Quality + "%攻速";
+        //            break;
+        //        case Element.Water:
+        //            intensifyType += StaticData.Instance.WaterSlowIntensify * turret.Quality + "减速";
+        //            break;
+        //        case Element.Fire:
+        //            intensifyType += StaticData.Instance.FireCriticalIntensify * 100 * turret.Quality + "%暴击率";
+        //            break;
+        //        case Element.Dust:
+        //            intensifyType += StaticData.Instance.FireCriticalIntensify * turret.Quality + "溅射";
+        //            break;
+        //        case Element.None:
+        //            break;
+        //    }
+        //    IntensifyValue.text = intensifyType;
+        //    UpgradeArea.SetActive(false);
+        //}
         BtnArea.SetActive(false);
         AnalysisArea.SetActive(true);
     }
@@ -110,7 +110,7 @@ public class TurretTips : TileTips
         this.RangeTypeValue.text = rangeTypeTxt;
     }
 
-    private void SetDescription(Turret turret)
+    private void SetDescription(TurretContent turret)
     {
         if (turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].TurretEffects.Count > 0)
         {
@@ -130,7 +130,7 @@ public class TurretTips : TileTips
         }
     }
 
-    private void UpdateInfo(Turret turret)
+    private void UpdateInfo(TurretContent turret)
     {
         AttackValue.text = turret.AttackDamage.ToString();
         SpeedValue.text = turret.AttackSpeed.ToString();

@@ -3,16 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Factory/ContentFactory", fileName = "GameContentFactory")]
-public class GameTileContentFactory: GameObjectFactory
+public class GameTileContentFactory : GameObjectFactory
 {
 
-    [SerializeField] ContentAttribute emptyAtt;
-    [SerializeField] ContentAttribute spawnPointAtt;
-    [SerializeField] ContentAttribute destinationAtt;
-    //[SerializeField]
-    //ContentAttribute destinationAtt = default;
-    //[SerializeField]
-    //ContentAttribute spawnPointAtt = default;
+    [SerializeField] ContentAttribute emptyAtt = default;
+    [SerializeField] ContentAttribute spawnPointAtt = default;
+    [SerializeField] ContentAttribute destinationAtt = default;
 
     [SerializeField]
     TurretAttribute[] elementTurrets = default;
@@ -70,10 +66,33 @@ public class GameTileContentFactory: GameObjectFactory
     }
 
 
-
-    GameTileContent Get(GameObject prefab)
+    public ElementTurret GetRandomElementTurret()
     {
-        GameTileContent instance = ObjectPool.Instance.Spawn(prefab).GetComponent<GameTileContent>();
+        int element = Random.Range(0, 5);
+        float[] qualityC = new float[5];
+        for (int i = 0; i < 5; i++)
+        {
+            qualityC[i] = StaticData.Instance.QualityChances[ResourcesManager.Instance.PlayerLevel - 1, i];
+        }
+        int quality = StaticData.RandomNumber(qualityC) + 1;
+        TurretAttribute attribute = ElementDIC[(Element)element];
+        ElementTurret content= Get(attribute.ContentPrefab) as ElementTurret;
+        content.Quality = quality;
+        return content;
+    }
+
+    public ElementTurret GetElementTurret(Element element,int quality)
+    {
+        TurretAttribute attribute = ElementDIC[element];
+        ElementTurret content = Get(attribute.ContentPrefab) as ElementTurret;
+        content.Quality = quality;
+        return content;
+    }
+
+
+    private GameTileContent Get(GameObject prefab)
+    {
+        GameTileContent instance = CreateInstance(prefab).GetComponent<GameTileContent>();
         return instance;
     }
 

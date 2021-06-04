@@ -18,9 +18,9 @@ public class I1Turret : CompositeTurret
         return true;
     }
 
-    public override void InitializeTurret()
+    public override void OnSpawn()
     {
-        base.InitializeTurret();
+        base.OnSpawn();
         rotTrans.rotation = Quaternion.identity;
         RotSpeed = 10f;
         CheckAngle = 360f;

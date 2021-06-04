@@ -58,9 +58,9 @@ public class BluePrintShop : MonoBehaviour
         ShopBluePrints.Clear();
         for (int i = 0; i < 3; i++)
         {
-            TurretAttribute compositeTurret = GameManager.Instance.GetRandomCompositeAttributeByLevel();
-            Blueprint bluePrint = GameManager.Instance.GetSingleBluePrint(compositeTurret);
-            AddBluePrint(bluePrint, true);
+            //TurretAttribute compositeTurret = GameManager.Instance.GetRandomCompositeAttributeByLevel();
+            //Blueprint bluePrint = GameManager.Instance.GetSingleBluePrint(compositeTurret);
+            //AddBluePrint(bluePrint, true);
         }
     }
 
@@ -103,13 +103,13 @@ public class BluePrintShop : MonoBehaviour
 
     public void CompositeBluePrint(BluePrintGrid grid)//合成对应的配方
     {
-        grid.BluePrint.BuildBluePrint();
-        GameManager.Instance.GenerateCompositeShape(grid.BluePrint);
-        RemoveGrid(grid);
-        CheckAllBluePrint();
+        //grid.BluePrint.BuildBluePrint();
+        //GameManager.Instance.GenerateCompositeShape(grid.BluePrint);
+        //RemoveGrid(grid);
+        //CheckAllBluePrint();
 
-        //设置结算信息
-        GameEndPanel.TotalComposite++;
+        ////设置结算信息
+        //GameEndPanel.TotalComposite++;
     }
 
     private void RemoveGrid(BluePrintGrid grid)//移除对应的配方，并清理列表
@@ -139,9 +139,9 @@ public class BluePrintShop : MonoBehaviour
 
     private void GetARandomBluePrintToPocket()//幸运值满，随机获得一个配方
     {
-        TurretAttribute compositeTurret = GameManager.Instance.GetRandomCompositeAttributeByLevel();
-        Blueprint bluePrint = GameManager.Instance.GetSingleBluePrint(compositeTurret);
-        AddBluePrint(bluePrint, false);
+        //TurretAttribute compositeTurret = GameManager.Instance.GetRandomCompositeAttributeByLevel();
+        //Blueprint bluePrint = GameManager.Instance.GetSingleBluePrint(compositeTurret);
+        //AddBluePrint(bluePrint, false);
     }
 
 }

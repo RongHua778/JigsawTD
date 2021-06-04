@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class GameBehavior : ReusableObject
+public interface IGameBehavior
 {
-    public virtual bool GameUpdate() => true;
+    bool GameUpdate();
 
 
 }

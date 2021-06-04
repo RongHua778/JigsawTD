@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : GameBehavior
+public abstract class Enemy :ReusableObject, IGameBehavior
 {
     public abstract EnemyType EnemyType { get; }
 
@@ -97,7 +97,7 @@ public abstract class Enemy : GameBehavior
         explosionClip = Resources.Load<AudioClip>("Music/Sound_EnemyExplosion");
     }
 
-    public override bool GameUpdate()
+    public virtual bool GameUpdate()
     {
         if (IsDie)
         {

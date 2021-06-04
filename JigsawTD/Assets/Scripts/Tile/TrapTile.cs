@@ -8,7 +8,6 @@ public class TrapTile : GameTile
 
     int damageAnalysis;
     public int DamageAnalysis { get => damageAnalysis; set => damageAnalysis = value; }
-    public override BasicTileType BasicTileType => BasicTileType.Trap;
 
     public override void TileLanded()
     {
@@ -16,11 +15,7 @@ public class TrapTile : GameTile
         SetGroundTile();
     }
 
-    protected override void TileDropCheck(Collider2D col)
-    {
-        base.TileDropCheck(col);
 
-    }
 
 
     public override void OnTilePass(Enemy enemy)

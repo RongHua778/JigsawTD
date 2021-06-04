@@ -23,7 +23,7 @@ public class StaticData : Singleton<StaticData>
     public int StartLotteryDraw;
     public int BaseWaveIncome;
     public int WaveMultiplyIncome;
-    public float[,] LevelChances = new float[7, 5]
+    public float[,] QualityChances = new float[7, 5]
     {
         { 1f, 0f, 0f, 0f, 0f },
         { 0.6f, 0.3f, 0.1f, 0f, 0f },

@@ -11,13 +11,13 @@ public class ElementGrid : MonoBehaviour
 
     public void SetElement(Composition composition)
     {
-        TurretAttribute attribute = GameManager.Instance.GetElementAttribute((Element)composition.elementRequirement);
-        Img_Icon.sprite = attribute.TurretLevels[composition.levelRequirement - 1].Icon;
-        Txt_ElementName.text = attribute.TurretLevels[composition.levelRequirement - 1].TurretName;
-        if (composition.obtained)
-            Img_Icon.color = Color.white;
-        else
-            Img_Icon.color = UnobtainColor;
+        //TurretAttribute attribute = GameManager.Instance.GetElementAttribute((Element)composition.elementRequirement);
+        //Img_Icon.sprite = attribute.TurretLevels[composition.levelRequirement - 1].Icon;
+        //Txt_ElementName.text = attribute.TurretLevels[composition.levelRequirement - 1].TurretName;
+        //if (composition.obtained)
+        //    Img_Icon.color = Color.white;
+        //else
+        //    Img_Icon.color = UnobtainColor;
     }
 
 }

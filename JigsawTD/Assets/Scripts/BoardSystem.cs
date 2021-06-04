@@ -22,10 +22,11 @@ public class BoardSystem : IGameSystem
         {
             if (selectingTile != null)
             {
-                if (selectingTile.BasicTileType == BasicTileType.Turret)
-                {
-                    ((TurretTile)selectingTile).ShowTurretRange(false);
-                }
+                //if (selectingTile.BasicTileType == BasicTileType.Turret)
+                //{
+                //    ((TurretTile)selectingTile).ShowTurretRange(false);
+                //}
+                selectingTile.Content.OnContentSelected(false);
                 selectingTile = selectingTile == value ? null : value;
             }
             else
@@ -34,11 +35,12 @@ public class BoardSystem : IGameSystem
             }
             if (selectingTile != null)
             {
-                if (selectingTile.BasicTileType == BasicTileType.Turret)
-                {
-                    ((TurretTile)selectingTile).ShowTurretRange(true);
-                }
-                LevelUIManager.Instance.ShowTileTips(selectingTile);
+                //if (selectingTile.BasicTileType == BasicTileType.Turret)
+                //{
+                //    ((TurretTile)selectingTile).ShowTurretRange(true);
+                //}
+                //LevelUIManager.Instance.ShowTileTips(selectingTile);
+                selectingTile.Content.OnContentSelected(true);
                 selection.transform.position = selectingTile.transform.position;
             }
             selection.SetActive(selectingTile != null);
@@ -54,7 +56,6 @@ public class BoardSystem : IGameSystem
 
     [SerializeField] PathLine pathLinePrefab = default;
     List<PathLine> pathLines = new List<PathLine>();
-    TileFactory tileFactory;
 
     List<GameTile> tiles = new List<GameTile>();
 
@@ -73,7 +74,6 @@ public class BoardSystem : IGameSystem
     public override void Initialize(GameManager gameManager)
     {
         base.Initialize(gameManager);
-        this.tileFactory = gameManager.TileFactory;
         SetGameBoard(_startSize, _groundSize);
 
         selection = transform.Find("Selection").gameObject;
@@ -140,33 +140,42 @@ public class BoardSystem : IGameSystem
 
     private void GenerateStartTiles(Vector2Int size, Vector2 offset)
     {
+        List<GameTile> tiles = new List<GameTile>();
         for (int i = 0, y = 0; y < size.y; y++)
         {
             for (int x = 0; x < size.x; x++, i++)
             {
-                GameTile tile;
+                GameTile tile = null;
                 Vector2 pos = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
                 if (pos.x == 0 && pos.y != 0)
                     continue;
                 if (pos.x == -1 && pos.y == 0)//SpawnPoint
                 {
-                    tile = tileFactory.BuildNormalTile(GameTileContentType.SpawnPoint);
+                    tile = ConstructHelper.GetNormalTile(GameTileContentType.SpawnPoint);
                     SpawnPoint = tile;
+                    tile.transform.position = pos;
+                    tiles.Add(tile);
                 }
                 else if (pos.x == 1 && pos.y == 0)//Destination
                 {
-                    tile = tileFactory.BuildNormalTile(GameTileContentType.Destination);
+                    tile = ConstructHelper.GetNormalTile(GameTileContentType.Destination);
                     DestinationPoint = tile;
                 }
                 else//¿Õ¸ñ×Ó
                 {
-                    tile = tileFactory.BuildNormalTile(GameTileContentType.Empty);
+                    tile = ConstructHelper.GetNormalTile(GameTileContentType.Empty);
                 }
                 tile.transform.position = pos;
                 tile.TileLanded();
                 Physics2D.SyncTransforms();
+                //tiles.Add(tile);
             }
         }
+        //Physics2D.SyncTransforms();
+        //foreach (GameTile tile in tiles)
+        //{
+        //    tile.TileLanded();
+        //}
     }
 
     private void SeekPath()
@@ -278,13 +287,13 @@ public class BoardSystem : IGameSystem
         //    //tile.gameObject.layer = LayerMask.NameToLayer(StaticData.TrapTileMask);
         //}
 
-        foreach (Vector2 pos in traps)
-        {
-            TrapTile tile = t.GetRandomTrap();
-            tile.transform.position = pos;
-            tile.TileLanded();
-            //AddGameTile(tile, pos);
-        }
+        //foreach (Vector2 pos in traps)
+        //{
+        //    TrapTile tile = t.GetRandomTrap();
+        //    tile.transform.position = pos;
+        //    tile.TileLanded();
+        //    //AddGameTile(tile, pos);
+        //}
     }
     private void GenerateGroundTiles(Vector2 offset, Vector2Int groundSize)
     {
@@ -292,7 +301,7 @@ public class BoardSystem : IGameSystem
         {
             for (int x = 0; x < groundSize.x; x++, i++)
             {
-                GroundTile groundTile = tileFactory.GetGroundTile();
+                GroundTile groundTile = ConstructHelper.GetGroundTile();
                 groundTile.transform.position = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
                 groundTile.transform.position += Vector3.forward * 0.1f;
                 CorrectTileCoord(groundTile);
@@ -311,7 +320,7 @@ public class BoardSystem : IGameSystem
 
             Collider2D col = StaticData.RaycastCollider(tile.transform.position, LayerMask.GetMask(StaticData.TempGroundMask));
             GroundTile groundTile = col.GetComponent<GroundTile>();
-            groundTile.IsActive = true;
+            groundTile.IsLanded = true;
         }
     }
 

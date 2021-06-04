@@ -15,66 +15,32 @@ public class BuildingSystem : IGameSystem//控制形状，升级
 
     bool drawThisTurn=false;
 
-    private int drawRemain = 1;
-    public int DrawRemain
-    {
-        get => drawRemain;
-        set
-        {
-            drawRemain = value;
-            DrawBtnTxt.text = "抽取模块X" + drawRemain.ToString();
-        }
-    }
-
-    private int playerLevel = 1;
-    public int PlayerLevel 
-    {
-        get => playerLevel; 
-        set => playerLevel = value; 
-    }
-
-    private int luckPoint;
-    public int LuckPoint
-    {
-        get => luckPoint;
-        set
-        {
-            luckPoint = value;
-            LuckPointTxt.text = "累积点:" + luckPoint.ToString();
-        }
-    }
-
-    private int luckProgress;
-    public int LuckProgress { get => luckProgress; set => luckProgress = value; }
-
-    //UI
-    [SerializeField] Text DrawBtnTxt = default;
-    [SerializeField] Text LevelUpBtnTxt = default;
-    [SerializeField] Text LuckPointTxt = default;
-
-    [SerializeField]
-    TileSelect[] tileSelects = default;
-    [SerializeField]
-    GameObject[] areas;//0=放路模式//1=选路模式
+    [SerializeField] TileSelect[] tileSelects = default;
+    [SerializeField] GameObject[] areas;//0=放路模式//1=选路模式
 
     public override void Initialize(GameManager gameManager)
     {
         base.Initialize(gameManager);
+        GameEvents.Instance.onConfirmShape += ConfirmShape;
+    }
+
+    private void ConfirmShape()
+    {
+        ShowArea(0);
     }
 
     //**********按钮回调
     public void DrawBtnClick()
     {
-        if (DrawRemain > 0)
+        if (ResourcesManager.Instance.DrawRemain > 0)
         {
-            DrawRemain--;
+            ResourcesManager.Instance.DrawRemain--;
             drawThisTurn = true;
             ShowArea(1);
             for(int i = 0; i < tileSelects.Length; i++)
             {
-                TileShape shape = GameManager.Instance.ShapeFactory.GetRandomShape();
-                GameTile specialTile = GameManager.Instance.TileFactory.BuildNormalTile(GameTileContentType.Empty);
-                shape.InitializeShape(specialTile);
+
+                TileShape shape = ConstructHelper.GetRandomShapeByLevel();
                 tileSelects[i].InitializeDisplay(i, shape);
             }
         }

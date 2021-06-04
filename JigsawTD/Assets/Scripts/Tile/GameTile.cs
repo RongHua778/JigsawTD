@@ -6,17 +6,19 @@ using UnityEngine.EventSystems;
 
 public abstract class GameTile : TileBase
 {
-    public abstract BasicTileType BasicTileType { get; }
-    public DraggingShape m_DraggingShape { get; set; }
-    [HideInInspector] public Material BaseMaterial;
-
-    private GameTileContent content;
-    public GameTileContent Content { get => content; set => content = value; }
-
     GameObject previewGlow;
     Transform directionCheckPoint;
-    public Transform tileBase { get; set; }
-    public Transform tileType { get; set; }
+    Transform tileBase;
+    public DraggingShape m_DraggingShape { get; set; }
+    public SpriteRenderer BaseRenderer { get; set; }
+    public Vector3 ExitPoint { get; set; }
+
+    private GameTileContent content;
+    public GameTileContent Content
+    {
+        get => content;
+        set => content = value;
+    }
 
     Direction pathDirection;
     public Direction PathDirection { get => pathDirection; set => pathDirection = value; }
@@ -26,12 +28,12 @@ public abstract class GameTile : TileBase
 
     Direction tileDirection;
 
-    public override bool IsActive
+    public override bool IsLanded
     {
-        get => base.IsActive;
+        get => base.IsLanded;
         set
         {
-            base.IsActive = value;
+            base.IsLanded = value;
             gameObject.layer = value ? LayerMask.NameToLayer(StaticData.ConcreteTileMask) : LayerMask.NameToLayer(StaticData.TempTileMask);
         }
     }
@@ -47,17 +49,13 @@ public abstract class GameTile : TileBase
         }
     }
 
-    public Vector3 ExitPoint { get; set; }
-
 
     protected virtual void Awake()
     {
         previewGlow = transform.Find("PreviewGlow").gameObject;
         tileBase = transform.Find("TileBase");
-        BaseMaterial = tileBase.GetComponent<SpriteRenderer>().material;
-        tileType = transform.Find("TileType");
-        directionCheckPoint = tileType.Find("CheckPoint");
-        GetTileDirection();
+        BaseRenderer = tileBase.GetComponent<SpriteRenderer>();
+        directionCheckPoint = transform.Find("CheckPoint");
     }
 
     public Direction GetTileDirection()
@@ -66,27 +64,16 @@ public abstract class GameTile : TileBase
         return tileDirection;
     }
 
-    public virtual void TileLanded()
+    public virtual void TileLanded()//tile被放入版图时
     {
         SetBackToParent();
-        if(Content!=null)
-            Content.OnContentLanded();
-
-        Collider2D col = StaticData.RaycastCollider(transform.position, LayerMask.GetMask(StaticData.ConcreteTileMask));
-        TileDropCheck(col);
-
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         Previewing = false;
-        IsActive = true;
+        Content.ContentLanded();//这个可能会回收自身
+        IsLanded = true;//这个必须在CONTENTLANDED下面，否则会导致回收自己
     }
 
-
-    protected virtual void TileDropCheck(Collider2D col)
-    {
-
-    }
-
-    public virtual void OnTilePass(Enemy enemy)
+    public virtual void OnTilePass(Enemy enemy)//经过触发特殊效果
     {
 
     }
@@ -116,19 +103,30 @@ public abstract class GameTile : TileBase
         }
     }
 
+    public override void OnSpawn()
+    {
+        base.OnSpawn();
+        IsLanded = false;//这个必须在生成时设置
+    }
+
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
         ObjectPool.Instance.UnSpawn(Content.gameObject);
+        gameObject.tag = "Untagged";
         Content = null;
         m_DraggingShape = null;
-        IsActive = false;
-        BaseMaterial.color = Color.white;
+        BaseRenderer.color = Color.white;
+        if (BoardSystem.SelectingTile == this)
+        {
+            BoardSystem.SelectingTile = null;
+        }
     }
 
     public void CorrectRotation()
     {
         tileBase.rotation = Quaternion.identity;
+        Content.CorretRotation();
     }
 
     protected void SetGroundTile()
@@ -138,7 +136,17 @@ public abstract class GameTile : TileBase
         {
             GroundTile groundTile = col.GetComponent<GroundTile>();
             groundTile.TileAbrove = this;
-            groundTile.IsActive = false;
+            groundTile.IsLanded = false;
         }
     }
+
+    public void SetContent(GameTileContent content)
+    {
+        content.transform.SetParent(this.transform);
+        content.transform.position = transform.position;
+        content.m_GameTile = this;
+        Content = content;
+    }
+
+
 }

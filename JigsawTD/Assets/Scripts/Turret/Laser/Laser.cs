@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Laser : Turret
+public class Laser : TurretContent
 {
     public override float AttackSpeed => base.AttackSpeed * (1 + SpeedUp);
     float speedUp;
@@ -17,9 +17,9 @@ public class Laser : Turret
         return true;
     }
 
-    public override void InitializeTurret()
+    public override void OnSpawn()
     {
-        base.InitializeTurret();
+        base.OnSpawn();
         CheckAngle = 10f;
         lineSR.positionCount = 2;
 

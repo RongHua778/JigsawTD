@@ -13,7 +13,7 @@ public class InfoBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         float[] levelChances = new float[5];
         for (int i = 0; i < 5; i++)
         {
-            levelChances[i] = StaticData.Instance.LevelChances[LevelUIManager.Instance.PlayerLevel - 1, i];
+            levelChances[i] = StaticData.Instance.QualityChances[LevelUIManager.Instance.PlayerLevel - 1, i];
         }
         string text = "";
         text += "\n  当前等级概率:\n";

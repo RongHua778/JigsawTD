@@ -7,7 +7,7 @@ public enum BulletType
 {
     Ground, Target, Penetrate
 }
-public abstract class Bullet : GameBehavior
+public abstract class Bullet :ReusableObject, IGameBehavior
 {
     [SerializeField] protected GameObject SputteringEffect = default;
     TrailRenderer trailRenderer;
@@ -16,7 +16,7 @@ public abstract class Bullet : GameBehavior
     private TargetPoint target;
     public TargetPoint Target { get => target; set => target = value; }
     Vector2 targetPos;
-    [HideInInspector] public Turret turretParent;
+    [HideInInspector] public TurretContent turretParent;
     private List<TurretEffect> turretEffects;
     protected virtual Vector2 TargetPos
     {
@@ -52,7 +52,7 @@ public abstract class Bullet : GameBehavior
         base.OnUnSpawn();
     }
 
-    public virtual void Initialize(Turret turret, TargetPoint target = null, Vector2? pos = null)
+    public virtual void Initialize(TurretContent turret, TargetPoint target = null, Vector2? pos = null)
     {
         if (trailRenderer != null)
             trailRenderer.Clear();
@@ -97,7 +97,7 @@ public abstract class Bullet : GameBehavior
         }
     }
 
-    public override bool GameUpdate()
+    public virtual bool GameUpdate()
     {
         if (Target != null && (Target.Enemy.IsDie || !Target.Enemy.gameObject.activeSelf))
         {

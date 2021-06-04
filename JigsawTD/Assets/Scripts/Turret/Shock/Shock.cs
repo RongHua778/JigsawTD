@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shock : Turret
+public class Shock : TurretContent
 {
     public override float AttackSpeed => base.AttackSpeed * (1 + RotSpeed / 180);
     float changeSpeed = 60f;
     float rotSpeed = 0;
     float RotSpeed { get => rotSpeed; set => rotSpeed = Mathf.Clamp(value, 0, 360); }
+
+    public override GameTileContentType ContentType => throw new System.NotImplementedException();
+
     protected override void RotateTowards()
     {
 
@@ -20,9 +23,9 @@ public class Shock : Turret
         return true;
     }
 
-    public override void InitializeTurret()
+    public override void OnSpawn()
     {
-        base.InitializeTurret();
+        base.OnSpawn();
         rotTrans.rotation = Quaternion.identity;
         RotSpeed = 0f;
         CheckAngle = 360f;

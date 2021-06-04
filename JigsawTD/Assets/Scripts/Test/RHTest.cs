@@ -32,19 +32,19 @@ public class RHTest : MonoBehaviour
         LevelUIManager.Instance.LotteryDraw += int.Parse(drawInputField.text);
     }
 
-    public void GetCompositeClick()
-    {
-        GameManager.Instance.GetCompositeAttributeByName(compositeInputField.text);
-    }
+    //public void GetCompositeClick()
+    //{
+    //    GameManager.Instance.GetCompositeAttributeByName(compositeInputField.text);
+    //}
 
-    public void GetElementClick()
-    {
-        GameManager.Instance.GetTestElement(int.Parse(qualityInputField.text), int.Parse(elementInputField.text));
-    }
+    //public void GetElementClick()
+    //{
+    //    GameManager.Instance.GetTestElement(int.Parse(qualityInputField.text), int.Parse(elementInputField.text));
+    //}
 
-    public void GetTrapClick()
-    {
-        GameManager.Instance.GetTrapByName(trapInputField.text);
+    //public void GetTrapClick()
+    //{
+    //    GameManager.Instance.GetTrapByName(trapInputField.text);
 
-    }
+    //}
 }

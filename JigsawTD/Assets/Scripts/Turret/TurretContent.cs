@@ -3,31 +3,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TurretType
-{
-    ElementTurret, CompositeTurret
-}
-public abstract class Turret : GameBehavior
-{
-    public virtual TurretType TurretType => TurretType.ElementTurret;
 
-    public TurretTile m_TurretTile;
+public abstract class TurretContent : GameTileContent,IGameBehavior
+{
+    public override GameTileContentType ContentType => GameTileContentType.Turret;
+    public bool Dropped { get; set; }
+    public TurretAttribute m_TurretAttribute;
+    public List<TargetPoint> targetList = new List<TargetPoint>();
+
+
     private GameObject rangeIndicator;
     private Transform rangeParent;
     private float nextAttackTime;
     private Quaternion look_Rotation;
-
-
-    //**********动画及音效
-    protected Animator turretAnim;
-    protected AudioSource audioSource;
-
+    protected float _rotSpeed = 10f;
 
     protected RangeType RangeType;
-    protected GameObject bulletPrefab = default;
-    protected float _rotSpeed = 10f;
+    protected GameObject bulletPrefab;
+
+    //**********美术，动画及音效
+    protected Animator turretAnim;
+    protected AudioSource audioSource;
+    protected SpriteRenderer BaseSprite;
+    protected SpriteRenderer CannonSprite;
+    protected AudioClip ShootClip;
+    //**********
+
     private List<TargetPoint> target = new List<TargetPoint>();
     public List<TargetPoint> Target { get => target; set => target = value; }
+
     protected List<RangeIndicator> rangeIndicators = new List<RangeIndicator>();
     protected CompositeCollider2D detectCollider;
     protected bool ShowingRange = false;
@@ -35,46 +39,28 @@ public abstract class Turret : GameBehavior
     protected Transform shootPoint;
     protected float CheckAngle = 10f;
 
-    [HideInInspector] public bool Dropped = false;
-
-    public List<TargetPoint> targetList = new List<TargetPoint>();
-
-
-    //[Header("美术资源设置")]
-    protected SpriteRenderer BaseSprite;
-    protected SpriteRenderer CannonSprite;
-    protected AudioClip ShootClip;
-    //************
-
-    //[Header("TurretAttribute")]
-    //private int level = 0;
-    //public int Level { get => level; set => level = value; }
-
-    [HideInInspector] public TurretAttribute m_TurretAttribute = default;
-    private int damageAnalysis;
-    public int DamageAnalysis { get => damageAnalysis; set => damageAnalysis = value; }
-    //塔的品质
     private int quality = 1;
     public int Quality
     {
-        get => quality; set
+        get => quality; 
+        set
         {
             quality = value;
             SetGraphic();
         }
     }
-    //塔的元素属性
-    private Element element;
-    public Element Element { get => element; set => element = value; }
 
-    public virtual float AttackDamage { get => (m_TurretAttribute.TurretLevels[Quality - 1].AttackDamage + TurnAdditionalAttack) * (1 + AttackIntensify); }
-    public virtual int AttackRange { get => m_TurretAttribute.TurretLevels[Quality - 1].AttackRange + RangeIntensify; }
-    public int ForbidRange { get => m_TurretAttribute.TurretLevels[Quality - 1].ForbidRange; }
-    public virtual float AttackSpeed { get => (m_TurretAttribute.TurretLevels[Quality - 1].AttackSpeed + turnAdditionalSpeed) * (1 + SpeedIntensify); }
+    private int damageAnalysis;
+    public int DamageAnalysis { get => damageAnalysis; set => damageAnalysis = value; }
+
+    public virtual float AttackDamage { get => (m_TurretAttribute.TurretLevels[1 - 1].AttackDamage + TurnAdditionalAttack) * (1 + AttackIntensify); }
+    public virtual int AttackRange { get => m_TurretAttribute.TurretLevels[1 - 1].AttackRange + RangeIntensify; }
+    public int ForbidRange { get => m_TurretAttribute.TurretLevels[1 - 1].ForbidRange; }
+    public virtual float AttackSpeed { get => (m_TurretAttribute.TurretLevels[1 - 1].AttackSpeed + turnAdditionalSpeed) * (1 + SpeedIntensify); }
     public float BulletSpeed { get => m_TurretAttribute.BulletSpeed; }
-    public virtual float SputteringRange { get => m_TurretAttribute.TurretLevels[Quality - 1].SputteringRange + SputteringIntensify; }
-    public float CriticalRate { get => m_TurretAttribute.TurretLevels[Quality - 1].CriticalRate + CriticalIntensify; }
-    public float SlowRate { get => m_TurretAttribute.TurretLevels[Quality - 1].SlowRate + SlowIntensify; }
+    public virtual float SputteringRange { get => m_TurretAttribute.TurretLevels[1 - 1].SputteringRange + SputteringIntensify; }
+    public float CriticalRate { get => m_TurretAttribute.TurretLevels[1 - 1].CriticalRate + CriticalIntensify; }
+    public float SlowRate { get => m_TurretAttribute.TurretLevels[1 - 1].SlowRate + SlowIntensify; }
 
     float criticalPercentage = 1.5f;
     public float CriticalPercentage { get => criticalPercentage; set => criticalPercentage = value; }
@@ -118,7 +104,7 @@ public abstract class Turret : GameBehavior
 
     //*************
 
-    public List<TurretEffectInfo> TurretEffectInfos => m_TurretAttribute.TurretLevels[Quality - 1].TurretEffects;
+    public List<TurretEffectInfo> TurretEffectInfos => m_TurretAttribute.TurretLevels[1 - 1].TurretEffects;
 
 
     public List<TurretEffect> TurretEffects = new List<TurretEffect>();
@@ -131,25 +117,15 @@ public abstract class Turret : GameBehavior
         detectCollider = rangeParent.GetComponent<CompositeCollider2D>();
         rotTrans = transform.Find("RotPoint");
         shootPoint = rotTrans.Find("ShootPoint");
-        BaseSprite = transform.root.Find("TileBase/TurretBase").GetComponent<SpriteRenderer>();
+        BaseSprite = transform.Find("TurretBase").GetComponent<SpriteRenderer>();
         CannonSprite = rotTrans.Find("Cannon").GetComponent<SpriteRenderer>();
         turretAnim = this.GetComponent<Animator>();
         audioSource = this.gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
-        //audioSource.spatialBlend = 1;
+        Debug.Log("Awake");
+
     }
 
-    public virtual void InitializeTurret()
-    {
-        rotTrans.localRotation = Quaternion.identity;
-        RangeType = m_TurretAttribute.RangeType;
-        Element = m_TurretAttribute.element;
-        bulletPrefab = m_TurretAttribute.Bullet;
-        ShootClip = m_TurretAttribute.ShootSound;
-        SetGraphic();
-        GenerateRange();
-        GetTurretEffects();
-    }
 
     protected virtual void PlayAudio(AudioClip clip, bool isAuto)
     {
@@ -182,40 +158,40 @@ public abstract class Turret : GameBehavior
     //设置不同等级的美术资源
     public virtual void SetGraphic()
     {
-        shootPoint.transform.localPosition = m_TurretAttribute.TurretLevels[quality - 1].ShootPointOffset;
-        BaseSprite.sprite = m_TurretAttribute.TurretLevels[quality - 1].BaseSprite;
-        CannonSprite.sprite = m_TurretAttribute.TurretLevels[quality - 1].CannonSprite;
+        shootPoint.transform.localPosition = m_TurretAttribute.TurretLevels[Quality - 1].ShootPointOffset;
+        BaseSprite.sprite = m_TurretAttribute.TurretLevels[Quality - 1].BaseSprite;
+        CannonSprite.sprite = m_TurretAttribute.TurretLevels[Quality - 1].CannonSprite;
     }
 
-    public virtual void TriggerPoloEffect(bool value)
-    {
-        if (m_TurretAttribute.TurretLevels[Quality - 1].PoloEffects.Count > 0)
-        {
-            List<Vector2> poss = StaticData.GetCirclePoints(AttackRange, ForbidRange);
-            foreach (var polo in m_TurretAttribute.TurretLevels[Quality - 1].PoloEffects)
-            {
-                switch (polo.EffectType)
-                {
-                    case PoloEffectType.RangeIntensify:
-                        foreach (var pos in poss)
-                        {
-                            GroundTile groungTile = StaticData.RaycastCollider(pos + (Vector2)transform.position, StaticData.GetGroundLayer).GetComponent<GroundTile>();
-                            groungTile.RangeIntensify += value ? (int)polo.KeyValue : -(int)polo.KeyValue;
-                            groungTile.TriggerIntensify();
-                        }
-                        break;
-                    case PoloEffectType.AttackIntensify:
-                        foreach (var pos in poss)
-                        {
-                            GroundTile groungTile = StaticData.RaycastCollider(pos + (Vector2)transform.position, StaticData.GetGroundLayer).GetComponent<GroundTile>();
-                            groungTile.AttackIntensify += value ? polo.KeyValue : -polo.KeyValue;
-                            groungTile.TriggerIntensify();
-                        }
-                        break;
-                }
-            }
-        }
-    }
+    //public virtual void TriggerPoloEffect(bool value)
+    //{
+    //    if (m_TurretAttribute.TurretLevels[Quality - 1].PoloEffects.Count > 0)
+    //    {
+    //        List<Vector2> poss = StaticData.GetCirclePoints(AttackRange, ForbidRange);
+    //        foreach (var polo in m_TurretAttribute.TurretLevels[Quality - 1].PoloEffects)
+    //        {
+    //            switch (polo.EffectType)
+    //            {
+    //                case PoloEffectType.RangeIntensify:
+    //                    foreach (var pos in poss)
+    //                    {
+    //                        GroundTile groungTile = StaticData.RaycastCollider(pos + (Vector2)transform.position, StaticData.GetGroundLayer).GetComponent<GroundTile>();
+    //                        groungTile.RangeIntensify += value ? (int)polo.KeyValue : -(int)polo.KeyValue;
+    //                        groungTile.TriggerIntensify();
+    //                    }
+    //                    break;
+    //                case PoloEffectType.AttackIntensify:
+    //                    foreach (var pos in poss)
+    //                    {
+    //                        GroundTile groungTile = StaticData.RaycastCollider(pos + (Vector2)transform.position, StaticData.GetGroundLayer).GetComponent<GroundTile>();
+    //                        groungTile.AttackIntensify += value ? polo.KeyValue : -polo.KeyValue;
+    //                        groungTile.TriggerIntensify();
+    //                    }
+    //                    break;
+    //            }
+    //        }
+    //    }
+    //}
 
     public void AddTarget(TargetPoint target)
     {
@@ -245,7 +221,7 @@ public abstract class Turret : GameBehavior
         rangeIndicators.Clear();
     }
 
-    public override bool GameUpdate()
+    public virtual bool GameUpdate()
     {
         if (!Dropped)
             return false;
@@ -387,18 +363,47 @@ public abstract class Turret : GameBehavior
 
     }
 
-    public void ClearTurret()
+    //content类重载*************
+
+    public override void ContentLanded()
     {
-        if (Dropped)
-        {
-            TriggerPoloEffect(false);
-        }
+        base.ContentLanded();
+    }
+    public override void OnContentSelected(bool value)
+    {
+        base.OnContentSelected(value);
+        ShowRange(value);
+    }
+    public override void CorretRotation()
+    {
+        base.CorretRotation();
+        BaseSprite.transform.rotation = Quaternion.identity;
+    }
+
+    //*************
+
+    public override void OnSpawn()
+    {
+        base.OnSpawn();
+        rotTrans.localRotation = Quaternion.identity;
+        RangeType = m_TurretAttribute.RangeType;
+        bulletPrefab = m_TurretAttribute.Bullet;
+        ShootClip = m_TurretAttribute.ShootSound;
+        SetGraphic();
+        GenerateRange();
+        GetTurretEffects();
+    }
+
+    public override void OnUnSpawn()
+    {
+        //if (Dropped)
+        //{
+        //    TriggerPoloEffect(false);
+        //}
+        targetList.Clear();
         AttackIntensify = 0;
-        Quality = 1;
-        Element = Element.Gold;
         RangeIntensify = 0;
         SpeedIntensify = 0;
-        targetList.Clear();
         CriticalPercentage = 1.5f;
         Dropped = false;
         TargetCount = 1;

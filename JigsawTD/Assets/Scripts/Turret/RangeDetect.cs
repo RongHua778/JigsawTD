@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class RangeDetect : MonoBehaviour
 {
-    Turret Turret; 
+    TurretContent Turret; 
     private void Awake()
     {
-        Turret = this.transform.root.GetComponentInChildren<Turret>();
+        Turret = this.transform.root.GetComponentInChildren<TurretContent>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

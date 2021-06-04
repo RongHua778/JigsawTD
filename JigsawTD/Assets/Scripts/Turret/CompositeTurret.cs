@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CompositeTurret : Turret
+public class CompositeTurret : TurretContent
 {
-    public override TurretType TurretType => TurretType.CompositeTurret;
     public Blueprint CompositeBluePrint;
 
     public override float AttackIntensify { get => base.AttackIntensify + CompositeBluePrint.CompositeAttackDamage; set => base.AttackIntensify = value; }
@@ -13,5 +12,5 @@ public class CompositeTurret : Turret
     public override float SlowIntensify { get => base.SlowIntensify + CompositeBluePrint.CompositeSlowRate; set => base.SlowIntensify = value; }
     public override float SputteringIntensify { get => base.SputteringIntensify + CompositeBluePrint.CompositeSputteringRange; set => base.SputteringIntensify = value; }
 
-
+    public override GameTileContentType ContentType => throw new System.NotImplementedException();
 }

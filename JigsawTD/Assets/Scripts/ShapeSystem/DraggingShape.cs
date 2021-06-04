@@ -29,13 +29,13 @@ public class DraggingShape : DraggingActions
     {
         foreach (GameTile tile in TileShape.tiles)
         {
-            tile.BaseMaterial.color = colorToSet;
+            tile.BaseRenderer.color = colorToSet;
         }
     }
 
     private void SetTileColor(Color colorToSet, GameTile tile)
     {
-        tile.BaseMaterial.color = colorToSet;
+        tile.BaseRenderer.color = colorToSet;
     }
 
     public override void OnDraggingInUpdate()
@@ -136,7 +136,7 @@ public class DraggingShape : DraggingActions
                 SetTileColor(correctColor, tile);//没有下层TILE，设为正常
                 continue;
             }
-            if (tile.BasicTileType == BasicTileType.Turret)//如果是有防御塔的，就比对冲突
+            if (tile.Content.ContentType != GameTileContentType.Empty)//如果是有防御塔的，就比对冲突
             {
                 if (col.CompareTag("UnDropablePoint"))//冲突，返回，所有颜色被设为红色
                 {
@@ -199,7 +199,7 @@ public class DraggingShape : DraggingActions
             Sound.Instance.PlayEffect("Sound_ConfirmShape");
             EnableGroundColliders();
             GameEvents.Instance.ConfirmShape();
-            foreach(GameTile tile in TileShape.tiles)
+            foreach (GameTile tile in TileShape.tiles)
             {
                 tile.TileLanded();
             }

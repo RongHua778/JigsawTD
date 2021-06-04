@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WoodTurret : Turret
+public class WoodTurret : ElementTurret
 {
     private bool isPlayingAudio = false;
 
     public override float SputteringRange => 0;
-    public override void InitializeTurret()
+    public override void OnSpawn()
     {
-        base.InitializeTurret();
+        base.OnSpawn();
         _rotSpeed = 0f;
         CheckAngle = 45f;
     }

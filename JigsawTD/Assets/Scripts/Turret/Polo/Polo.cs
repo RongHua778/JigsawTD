@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Polo : Turret
+public class Polo : TurretContent
 {
     public override int AttackRange => 1;
+
+    public override GameTileContentType ContentType => throw new System.NotImplementedException();
+
     float selfRotSpeed = 10f;
 
     public override bool GameUpdate()

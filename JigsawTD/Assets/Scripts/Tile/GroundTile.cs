@@ -4,12 +4,12 @@ using UnityEngine;
 using TMPro;
 public class GroundTile : TileBase
 {
-    public override bool IsActive
+    public override bool IsLanded
     {
-        get => base.IsActive;
+        get => base.IsLanded;
         set
         {
-            base.IsActive = value;
+            base.IsLanded = value;
             gameObject.layer = value ? LayerMask.NameToLayer(StaticData.GroundTileMask) : LayerMask.NameToLayer(StaticData.TempGroundMask);
         }
     }
@@ -29,13 +29,13 @@ public class GroundTile : TileBase
     {
         if (TileAbrove == null)
             return;
-        if (TileAbrove.BasicTileType == BasicTileType.Turret)
-        {
-            Turret turret = ((TurretTile)TileAbrove).turret;
-            turret.RangeIntensify = RangeIntensify;
-            turret.AttackIntensify = AttackIntensify;
-            turret.SpeedIntensify = SpeedIntensify;
-        }
+        //if (TileAbrove.BasicTileType == BasicTileType.Turret)
+        //{
+        //    TurretContent turret = ((TurretTile)TileAbrove).turret;
+        //    turret.RangeIntensify = RangeIntensify;
+        //    turret.AttackIntensify = AttackIntensify;
+        //    turret.SpeedIntensify = SpeedIntensify;
+        //}
     }
 
 
