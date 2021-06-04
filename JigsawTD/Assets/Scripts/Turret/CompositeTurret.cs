@@ -12,5 +12,4 @@ public class CompositeTurret : TurretContent
     public override float SlowIntensify { get => base.SlowIntensify + CompositeBluePrint.CompositeSlowRate; set => base.SlowIntensify = value; }
     public override float SputteringIntensify { get => base.SputteringIntensify + CompositeBluePrint.CompositeSputteringRange; set => base.SputteringIntensify = value; }
 
-    public override GameTileContentType ContentType => throw new System.NotImplementedException();
 }

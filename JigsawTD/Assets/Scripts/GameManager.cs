@@ -10,29 +10,16 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private BoardSystem m_BoardSystem = default;
 
     //建造系统
-    [SerializeField] private BuildingSystem m_BuildingSystem = default;
+    [SerializeField] private ShapeSelectUI m_ShapeSelectUI = default;
+
+    [SerializeField] private MainUI m_MainUI = default;
+    [SerializeField] private FuncUI m_FuncUI = default;
+
+    //波次系统
+    [SerializeField] private WaveSystem m_WaveSystem = default;
 
 
     public BluePrintShop _bluePrintShop = default;
-
-    //游戏速度
-    private float gameSpeed = 1;
-    public float GameSpeed
-    {
-        get => gameSpeed;
-        set
-        {
-            if (value > 3)
-            {
-                gameSpeed = 1;
-            }
-            else
-            {
-                gameSpeed = value;
-            }
-            Time.timeScale = gameSpeed;
-        }
-    }
 
     //关卡难度
     private int difficulty = 2;
@@ -45,13 +32,13 @@ public class GameManager : Singleton<GameManager>
 
 
     [SerializeField] TileFactory _tileFactory = default;
-    [SerializeField] GameTileContentFactory _contentFactory = default;
+    [SerializeField] TileContentFactory _contentFactory = default;
     [SerializeField] TileShapeFactory _shapeFactory = default;
-
-
-
-    [SerializeField]
-    EnemyFactory _enemyFactory = default;
+    [SerializeField] EnemyFactory _enemyFactory = default;
+    public TileFactory TileFactory { get => _tileFactory; }
+    public TileContentFactory ContentFactory { get => _contentFactory; }
+    public TileShapeFactory ShapeFactory { get => _shapeFactory; }
+    public EnemyFactory EnemyFactory { get => _enemyFactory; }
 
     public GameBehaviorCollection enemies = new GameBehaviorCollection();
     public GameBehaviorCollection nonEnemies = new GameBehaviorCollection();
@@ -59,13 +46,10 @@ public class GameManager : Singleton<GameManager>
 
 
 
-    public EnemySpawner EnemySpawnHelper;
 
     //*********战斗中流程State
     private BattleOperationState operationState;
     public BattleOperationState OperationState { get => operationState; }
-
-
     private BuildingState buildingState;
     private WaveState waveState;
     //************
@@ -75,42 +59,45 @@ public class GameManager : Singleton<GameManager>
     public void Initinal()
     {
         //基本参数设置
-        GameSpeed = 1;
         Difficulty = Game.Instance.Difficulty;
 
         //初始化工厂
-        _tileFactory.Initialize();
-        _contentFactory.Initialize();
-        _shapeFactory.Initialize();
+        TileFactory.Initialize();
+        ContentFactory.Initialize();
+        ShapeFactory.Initialize();
+        _enemyFactory.InitializeFactory();
 
-        //初始化建造外观模式
-        ConstructHelper.Initialize(_tileFactory, _shapeFactory, _contentFactory);
+        //形状生成外观类
+        ConstructHelper.Initialize();
 
         //初始化系统
         m_BoardSystem.Initialize(this);//版图系统
-        m_BuildingSystem.Initialize(this);//建造系统
+        m_WaveSystem.Initialize(this);//波次系统
 
 
+        m_MainUI.Initialize(this);//主界面顶部UI
+        m_FuncUI.Initialize(this);//主界面功能UI
+        m_ShapeSelectUI.Initialize(this);//抽模块UI
 
-        //_enemyFactory.InitializeFactory();
-        //_tileFactory.InitializeFactory();
         //// _bluePrintFacotry.InitializeFactory();
-        //_turretFactory.InitializeFacotory();
-
-        //EnemySpawnHelper = this.GetComponent<EnemySpawner>();
-        //EnemySpawnHelper.LevelInitialize(_enemyFactory, GameManager.Instance.difficulty);
         //_bluePrintShop.RefreshShop(0);
+
+        SetGameBoard();//初始化版图
 
         buildingState = new BuildingState(this, m_BoardSystem);
         waveState = new WaveState(this);
         EnterNewState(buildingState);
+
+
     }
+
 
     //释放游戏系统
     public void Release()
     {
-        GameSpeed = 1;
         m_BoardSystem.Release();
+        m_ShapeSelectUI.Release();
+        m_WaveSystem.Release();
     }
 
 
@@ -118,24 +105,70 @@ public class GameManager : Singleton<GameManager>
     public void GameUpdate()
     {
         m_BoardSystem.GameUpdate();
-        EnemySpawnHelper.GameUpdate();
+        m_WaveSystem.GameUpdate();
         enemies.GameUpdate();
         Physics2D.SyncTransforms();
         turrets.GameUpdate();
         nonEnemies.GameUpdate();
+    }
 
-        if (Input.GetKeyDown(KeyCode.R) && StaticData.holdingShape != null)
+    public void SetGameBoard()
+    {
+        m_BoardSystem.SetGameBoard();
+    }
+
+    public void StartNewWave()
+    {
+        m_WaveSystem.GetSequence();
+        m_FuncUI.Hide();
+        TransitionToState(StateName.WaveState);
+    }
+
+
+    public void PlayerDie()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void DrawShapes()
+    {
+        //SHAPESELECTUI打开并配置3个随机形状供选择
+        m_FuncUI.Hide();
+        m_ShapeSelectUI.Show();
+        m_ShapeSelectUI.ShowThreeShapes(m_FuncUI.PlayerLevel);
+    }
+
+    public void SelectShape()//选择了一个模块
+    {
+        m_ShapeSelectUI.ClearAllSelections();
+        m_ShapeSelectUI.Hide();
+    }
+
+    public void ConfirmShape()//放下了一个模块
+    {
+        m_FuncUI.Show();
+    }
+
+
+    public void PrepareNextWave()
+    {
+        //_bluePrintShop.NextRefreshTrun--;
+        //ResourcesManager.Instance.PrepareNextWave(m_WaveSystem.CurrentWave, m_BuildingSystem.DrawThisTurn);
+        m_MainUI.PrepareNextWave();
+        m_FuncUI.Show();
+        //重置所有防御塔的回合临时加成
+        foreach (var turret in turrets.behaviors)
         {
-            StaticData.holdingShape.RotateShape();
+            ((TurretContent)turret).ClearTurnIntensify();
         }
-
+        Sound.Instance.PlayBg("preparing");
     }
 
 
 
     public void SpawnEnemy(EnemySequence sequence)
     {
-        Enemy enemy = EnemySpawnHelper.SpawnEnemy(sequence.EnemyAttribute, sequence.Intensify);
+        Enemy enemy = m_WaveSystem.SpawnEnemy(sequence.EnemyAttribute, sequence.Intensify);
         GameTile tile = m_BoardSystem.SpawnPoint;
         enemy.SpawnOn(tile);
         enemies.Add(enemy);

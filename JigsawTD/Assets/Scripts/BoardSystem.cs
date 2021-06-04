@@ -74,8 +74,6 @@ public class BoardSystem : IGameSystem
     public override void Initialize(GameManager gameManager)
     {
         base.Initialize(gameManager);
-        SetGameBoard(_startSize, _groundSize);
-
         selection = transform.Find("Selection").gameObject;
 
         GameEvents.Instance.onSeekPath += SeekPath;
@@ -126,13 +124,13 @@ public class BoardSystem : IGameSystem
         IsPressingTile = false;
     }
 
-    public void SetGameBoard(Vector2Int size, Vector2Int groundSize)
+    public void SetGameBoard()
     {
-        Vector2 sizeOffset = new Vector2((size.x - 1) * 0.5f, (size.y - 1) * 0.5f) * StaticData.Instance.TileSize;
-        Vector2 groundOffset = new Vector2((groundSize.x - 1) * 0.5f, (groundSize.y - 1) * 0.5f) * StaticData.Instance.TileSize;
-        GenerateGroundTiles(groundOffset, groundSize);
+        Vector2 sizeOffset = new Vector2((_startSize.x - 1) * 0.5f, (_startSize.y - 1) * 0.5f) * StaticData.Instance.TileSize;
+        Vector2 groundOffset = new Vector2((_groundSize.x - 1) * 0.5f, (_groundSize.y - 1) * 0.5f) * StaticData.Instance.TileSize;
+        GenerateGroundTiles(groundOffset, _groundSize);
         Physics2D.SyncTransforms();
-        GenerateStartTiles(size, sizeOffset);
+        GenerateStartTiles(_startSize, sizeOffset);
         //GenerateTrapTiles(groundOffset, groundSize, tileFactory);
         SeekPath();
         ShowPath(path);

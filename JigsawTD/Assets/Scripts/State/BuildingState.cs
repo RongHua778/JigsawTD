@@ -11,17 +11,10 @@ public class BuildingState : BattleOperationState
         m_Board = gameBoard;
     }
 
-
     public override IEnumerator EnterState()
     {
         yield return new WaitForSeconds(0.5f);
-        LevelUIManager.Instance.Preparing();
-        gameManager._bluePrintShop.NextRefreshTrun--;
-        //重置所有防御塔的回合临时加成
-        foreach (var turret in gameManager.turrets.behaviors)
-        {
-            ((TurretContent)turret).ClearTurnIntensify();
-        }
+        gameManager.PrepareNextWave();
         yield break;
     }
 

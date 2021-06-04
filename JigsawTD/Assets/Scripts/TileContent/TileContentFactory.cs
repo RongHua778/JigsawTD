@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Factory/ContentFactory", fileName = "GameContentFactory")]
-public class GameTileContentFactory : GameObjectFactory
+public class TileContentFactory : GameObjectFactory
 {
 
     [SerializeField] ContentAttribute emptyAtt = default;
@@ -66,13 +66,13 @@ public class GameTileContentFactory : GameObjectFactory
     }
 
 
-    public ElementTurret GetRandomElementTurret()
+    public ElementTurret GetRandomElementTurret(int playerLevel)
     {
         int element = Random.Range(0, 5);
         float[] qualityC = new float[5];
         for (int i = 0; i < 5; i++)
         {
-            qualityC[i] = StaticData.Instance.QualityChances[ResourcesManager.Instance.PlayerLevel - 1, i];
+            qualityC[i] = StaticData.Instance.QualityChances[playerLevel - 1, i];
         }
         int quality = StaticData.RandomNumber(qualityC) + 1;
         TurretAttribute attribute = ElementDIC[(Element)element];

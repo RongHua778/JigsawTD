@@ -11,8 +11,7 @@ public abstract class TurretContent : GameTileContent,IGameBehavior
     public TurretAttribute m_TurretAttribute;
     public List<TargetPoint> targetList = new List<TargetPoint>();
 
-
-    private GameObject rangeIndicator;
+    [SerializeField] private GameObject rangeIndicator;
     private Transform rangeParent;
     private float nextAttackTime;
     private Quaternion look_Rotation;
@@ -39,6 +38,7 @@ public abstract class TurretContent : GameTileContent,IGameBehavior
     protected Transform shootPoint;
     protected float CheckAngle = 10f;
 
+    //品质
     private int quality = 1;
     public int Quality
     {
@@ -77,8 +77,6 @@ public abstract class TurretContent : GameTileContent,IGameBehavior
 
     //*************
 
-
-
     //*************光环加成
     float attackIntensify;
     public virtual float AttackIntensify { get => attackIntensify; set => attackIntensify = value; }
@@ -112,7 +110,6 @@ public abstract class TurretContent : GameTileContent,IGameBehavior
 
     private void Awake()
     {
-        rangeIndicator = Resources.Load<GameObject>("Prefabs/RangeIndicator");
         rangeParent = transform.Find("TurretRangeCol");
         detectCollider = rangeParent.GetComponent<CompositeCollider2D>();
         rotTrans = transform.Find("RotPoint");
@@ -120,10 +117,7 @@ public abstract class TurretContent : GameTileContent,IGameBehavior
         BaseSprite = transform.Find("TurretBase").GetComponent<SpriteRenderer>();
         CannonSprite = rotTrans.Find("Cannon").GetComponent<SpriteRenderer>();
         turretAnim = this.GetComponent<Animator>();
-        audioSource = this.gameObject.AddComponent<AudioSource>();
-        audioSource.playOnAwake = false;
-        Debug.Log("Awake");
-
+        audioSource = this.GetComponent<AudioSource>();
     }
 
 
@@ -284,7 +278,7 @@ public abstract class TurretContent : GameTileContent,IGameBehavior
             indicator.ShowSprite(show);
         }
     }
-    private void GenerateRange()
+    public void GenerateRange()
     {
         if (rangeIndicators.Count > 0)
         {
@@ -368,6 +362,8 @@ public abstract class TurretContent : GameTileContent,IGameBehavior
     public override void ContentLanded()
     {
         base.ContentLanded();
+        GameManager.Instance.turrets.Add(this);
+        Dropped = true;
     }
     public override void OnContentSelected(bool value)
     {
@@ -396,19 +392,15 @@ public abstract class TurretContent : GameTileContent,IGameBehavior
 
     public override void OnUnSpawn()
     {
-        //if (Dropped)
-        //{
-        //    TriggerPoloEffect(false);
-        //}
+        Dropped = false;
         targetList.Clear();
         AttackIntensify = 0;
         RangeIntensify = 0;
         SpeedIntensify = 0;
         CriticalPercentage = 1.5f;
-        Dropped = false;
         TargetCount = 1;
         DamageAnalysis = 0;
-        GameManager.Instance.turrets.behaviors.Remove(this);//从列表移除
+        GameManager.Instance.turrets.Remove(this);//从列表移除
         ClearTurnIntensify();
         RecycleRanges();
     }

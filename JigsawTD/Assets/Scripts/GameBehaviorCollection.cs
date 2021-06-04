@@ -12,6 +12,11 @@ public class GameBehaviorCollection
         behaviors.Add(behavior);
     }
 
+    public void Remove(IGameBehavior behavior)
+    {
+        behaviors.Remove(behavior);
+    }
+
     public void GameUpdate()
     {
         for(int i = 0; i < behaviors.Count; i++)

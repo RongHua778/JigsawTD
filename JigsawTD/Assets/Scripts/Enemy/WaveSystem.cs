@@ -2,9 +2,37 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class EnemySpawner : MonoBehaviour
+public class WaveSystem : IGameSystem
 {
+
+    int enemyRemain = 0;
+    public int EnemyRemain
+    {
+        get => enemyRemain;
+        set
+        {
+            enemyRemain = value;
+            if (enemyRemain <= 0)
+            {
+                enemyRemain = 0;
+                //if (PlayerHealth <= 0)
+                //    return;
+                //if (CurrentWave == StaticData.Instance.LevelMaxWave)
+                //{
+                //    ShowGameWinPanel();
+                //    return;
+                //}
+
+                GameManager.Instance.PrepareNextWave();
+            }
+        }
+    }
+
+    [SerializeField] Text waveTxt = default;
+
+
     [SerializeField]
     float pathOffset = 0.3f;
     [SerializeField] HealthBar healthBarPrefab = default;
@@ -14,6 +42,33 @@ public class EnemySpawner : MonoBehaviour
     public Queue<EnemySequence> LevelSequence = new Queue<EnemySequence>();
 
     public EnemySequence RunningSequence { get => runningSequence; set => runningSequence = value; }
+
+
+    public override void Initialize(GameManager gameManager)
+    {
+        base.Initialize(gameManager);
+        this._enemyFactory = gameManager.EnemyFactory;
+        LevelInitialize(gameManager.Difficulty);
+        GameEvents.Instance.onEnemyReach += EnemyReach;
+        GameEvents.Instance.onEnemyDie += EnemyDie;
+    }
+
+    public override void Release()
+    {
+        base.Release();
+        GameEvents.Instance.onEnemyReach -= EnemyReach;
+        GameEvents.Instance.onEnemyDie -= EnemyDie;
+    }
+
+    private void EnemyReach(Enemy enemy)
+    {
+        EnemyRemain--;
+    }
+
+    private void EnemyDie(Enemy enemy)
+    {
+        EnemyRemain--;
+    }
 
     public void GameUpdate()
     {
@@ -27,9 +82,8 @@ public class EnemySpawner : MonoBehaviour
     }
 
 
-    public void LevelInitialize(EnemyFactory factory, int difficulty)
+    public void LevelInitialize( int difficulty)
     {
-        this._enemyFactory = factory;
         float intensify = 1;
         int amount;
         float stage = 1f;
@@ -98,12 +152,39 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+
     public void GetSequence()
     {
         if (LevelSequence.Count > 0)
         {
             RunningSequence = LevelSequence.Dequeue();
-            GameEvents.Instance.StartNewWave(RunningSequence);
+
+            //参数设置
+            EnemyRemain = RunningSequence.Amount;
+
+            //背景音乐设置
+            if (RunningSequence.Wave == StaticData.Instance.LevelMaxWave)
+            {
+                Sound.Instance.PlayBg("lastwave");
+            }
+            else
+            {
+                switch (RunningSequence.EnemyAttribute.EnemyType)
+                {
+                    case EnemyType.Soilder:
+                        Sound.Instance.PlayBg("soldier");
+                        break;
+                    case EnemyType.Runner:
+                        Sound.Instance.PlayBg("runner");
+                        break;
+                    case EnemyType.Restorer:
+                        Sound.Instance.PlayBg("restorer");
+                        break;
+                    case EnemyType.Tanker:
+                        Sound.Instance.PlayBg("tanker");
+                        break;
+                }
+            }
         }
         else
         {

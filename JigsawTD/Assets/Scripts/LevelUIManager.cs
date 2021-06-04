@@ -14,7 +14,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
     [SerializeField] GameObject messagePanel = default;
 
 
-    [SerializeField] BuildingSystem _roadPlacament = default;
+    [SerializeField] ShapeSelectUI _roadPlacament = default;
     [SerializeField] GuideBook _guideBoook = default;
     [SerializeField] LuckProgress luckyProgress = default;
     [SerializeField] Text messageTxt = default;
@@ -63,7 +63,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
                         return;
                     }
 
-                GameManager.Instance.TransitionToState(StateName.BuildingState);
+                //GameManager.Instance.TransitionToState(StateName.BuildingState);
             }
         }
     }
@@ -157,7 +157,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
         {
             if (value <= 0)
             {
-                _roadPlacament.HideArea();
+                //_roadPlacament.HideArea();
                 _gameEndPanel.gameObject.SetActive(true);
                 _gameEndPanel.ShowGameEndPanel(false);
             }
@@ -174,9 +174,9 @@ public class LevelUIManager : Singleton<LevelUIManager>
     void Start()
     {
         GameEvents.Instance.onMessage += ShowMessage;
-        GameEvents.Instance.onEnemyReach += EnemyReachDamge;
-        GameEvents.Instance.onStartNewWave += NewWaveStart;
-        GameEvents.Instance.onEnemyDie += EnemyDie;
+        //GameEvents.Instance.onEnemyReach += EnemyReachDamge;
+        //GameEvents.Instance.onStartNewWave += NewWaveStart;
+        //GameEvents.Instance.onEnemyDie += EnemyDie;
         GameEvents.Instance.onShowTileTips += ShowTileTips;
         GameEvents.Instance.onShowTurretTips += ShowTurretAttributeTips;
         GameEvents.Instance.onHideTips += HideTips;
@@ -192,16 +192,16 @@ public class LevelUIManager : Singleton<LevelUIManager>
     private void OnDisable()
     {
         GameEvents.Instance.onMessage -= ShowMessage;
-        GameEvents.Instance.onEnemyReach -= EnemyReachDamge;
-        GameEvents.Instance.onStartNewWave -= NewWaveStart;
-        GameEvents.Instance.onEnemyDie -= EnemyDie;
+        //GameEvents.Instance.onEnemyReach -= EnemyReachDamge;
+        //GameEvents.Instance.onStartNewWave -= NewWaveStart;
+        //GameEvents.Instance.onEnemyDie -= EnemyDie;
         GameEvents.Instance.onShowTileTips -= ShowTileTips;
         GameEvents.Instance.onShowTurretTips -= ShowTurretAttributeTips;
         GameEvents.Instance.onHideTips -= HideTips;
     }
 
 
-    private void NewWaveStart(EnemySequence sequence)
+    public void NewWaveStart(EnemySequence sequence)
     {
         EnemyRemain = sequence.Amount;
     }
@@ -237,24 +237,24 @@ public class LevelUIManager : Singleton<LevelUIManager>
 
 
     //每回合开始前计算幸运点、抽取模块次数等逻辑。
-    public void Preparing()
-    {
-        Sound.Instance.PlayBg("preparing");
-        CurrentWave++;
+    //public void Preparing()
+    //{
+    //    Sound.Instance.PlayBg("preparing");
+    //    CurrentWave++;
 
-        //回合收入
-        PlayerCoin += StaticData.Instance.BaseWaveIncome + StaticData.Instance.WaveMultiplyIncome * (CurrentWave - 1);
-        //抽取次数及幸运点
-        if (!DrawThisTurn)
-        {
-            LuckyPoints += LuckPointsProcess;
-            LuckPointsProcess += 2;
-        }
+    //    //回合收入
+    //    PlayerCoin += StaticData.Instance.BaseWaveIncome + StaticData.Instance.WaveMultiplyIncome * (CurrentWave - 1);
+    //    //抽取次数及幸运点
+    //    if (!DrawThisTurn)
+    //    {
+    //        LuckyPoints += LuckPointsProcess;
+    //        LuckPointsProcess += 2;
+    //    }
 
-        DrawThisTurn = false;
-        LotteryDraw++;
-        ShowArea(0);
-    }
+    //    DrawThisTurn = false;
+    //    LotteryDraw++;
+    //    ShowArea(0);
+    //}
 
     public void DisplayShape(int displayID, TileShape shape)
     {
@@ -330,14 +330,14 @@ public class LevelUIManager : Singleton<LevelUIManager>
         messageTxt.text = "";
     }
 
-    public void ShowArea(int id)
-    {
-        _roadPlacament.ShowArea(id);
-    }
-    public void HideArea()
-    {
-        _roadPlacament.HideArea();
-    }
+    //public void ShowArea(int id)
+    //{
+    //    _roadPlacament.ShowArea(id);
+    //}
+    //public void HideArea()
+    //{
+    //    _roadPlacament.HideArea();
+    //}
 
     public void ExtraDrawClick()
     {
@@ -355,8 +355,8 @@ public class LevelUIManager : Singleton<LevelUIManager>
 
     public void NextWaveClick()
     {
-        HideArea();
-        GameManager.Instance.TransitionToState(StateName.WaveState);
+        //HideArea();
+        //GameManager.Instance.TransitionToState(StateName.WaveState);
     }
 
     public bool ConsumeMoney(int amount)
@@ -381,18 +381,12 @@ public class LevelUIManager : Singleton<LevelUIManager>
         }
     }
 
-    public void GameSpeedBtnClick()
-    {
-        GameManager.Instance.GameSpeed++;
-        speedBtnTxt.text = "游戏速度X" + GameManager.Instance.GameSpeed.ToString();
-    }
-
     //游戏胜利
     public void ShowGameWinPanel()
     {
         if (PlayerPrefs.GetInt("MaxPassLevel", 0) <= GameManager.Instance.Difficulty)
             PlayerPrefs.SetInt("MaxPassLevel", GameManager.Instance.Difficulty + 1);
-        _roadPlacament.HideArea();
+        //_roadPlacament.HideArea();
         _gameEndPanel.gameObject.SetActive(true);
         _gameEndPanel.ShowGameEndPanel(true);
     }

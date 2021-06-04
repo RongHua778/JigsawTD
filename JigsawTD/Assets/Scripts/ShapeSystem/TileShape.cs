@@ -10,6 +10,7 @@ public enum ShapeType
 }
 public class TileShape : MonoBehaviour
 {
+    public bool IsPreviewing = false;
     TileSlot[] tilePos;
     Camera renderCam;
     GameObject bgObj;
@@ -85,6 +86,7 @@ public class TileShape : MonoBehaviour
 
     public void SetUIDisplay(int displayID, RenderTexture texture)
     {
+        IsPreviewing = false;
         transform.position = new Vector3(1000f + 10f * displayID, 0, -12f);
         renderCam.targetTexture = texture;
         renderCam.gameObject.SetActive(true);
@@ -93,6 +95,8 @@ public class TileShape : MonoBehaviour
 
     public void SetPreviewPlace()
     {
+        IsPreviewing = true;
+
         bgObj.SetActive(false);
         turretNameTxt.transform.parent.gameObject.SetActive(false);
         Vector2 pos = Camera.main.transform.position;

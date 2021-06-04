@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7604165204156061317}
   - component: {fileID: 3987487245710385362}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 9070110070258525223}
   - component: {fileID: 797325527939194004}
   - component: {fileID: 8244551958528966504}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: TurretBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,7 +255,7 @@ GameObject:
   - component: {fileID: 4419982813173313524}
   - component: {fileID: 1750580662948382961}
   - component: {fileID: 7174607837279088925}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TurretRangeCol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -342,7 +342,9 @@ GameObject:
   - component: {fileID: 7065520975459640700}
   - component: {fileID: 3830102932677347064}
   - component: {fileID: 6524487967244621157}
-  m_Layer: 0
+  - component: {fileID: 5328605036076082734}
+  - component: {fileID: -4452151466765460351}
+  m_Layer: 13
   m_Name: Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -379,10 +381,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fb6d081fcb7f87448a492ce05e717ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TurretTile: {fileID: 0}
-  Dropped: 0
-  targetList: []
   m_TurretAttribute: {fileID: 11400000, guid: 6c3131e68b56a9b4db13891b470a159b, type: 2}
+  targetList: []
+  rangeIndicator: {fileID: 5148764045994468596, guid: d8a2a921f17ca0e46b801451269a7676, type: 3}
 --- !u!95 &6524487967244621157
 Animator:
   serializedVersion: 3
@@ -402,6 +403,118 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!58 &5328605036076082734
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6736000688718372652}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.001
+--- !u!82 &-4452151466765460351
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6736000688718372652}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7457417527178826533
 GameObject:
   m_ObjectHideFlags: 0

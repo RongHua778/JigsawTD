@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RangeDetect : MonoBehaviour
 {
-    TurretContent Turret; 
+    TurretContent Turret;
     private void Awake()
     {
         Turret = this.transform.root.GetComponentInChildren<TurretContent>();
@@ -12,28 +12,22 @@ public class RangeDetect : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
-        {
-            TargetPoint target = collision.GetComponent<TargetPoint>();
-            foreach(var effect in Turret.TurretEffects)
-            {
-                effect.EnemyEnter();
-            }
-            Turret.AddTarget(target);
-        }
+        TargetPoint target = collision.GetComponent<TargetPoint>();
+        //foreach (var effect in Turret.TurretEffects)
+        //{
+        //    effect.EnemyEnter();
+        //}
+        Turret.AddTarget(target);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
-        {
-            TargetPoint target = collision.GetComponent<TargetPoint>();
-            foreach (var effect in Turret.TurretEffects)
-            {
-                effect.EnemyExit();
-            }
-            Turret.RemoveTarget(target);
-        }
+        TargetPoint target = collision.GetComponent<TargetPoint>();
+        //foreach (var effect in Turret.TurretEffects)
+        //{
+        //    effect.EnemyExit();
+        //}
+        Turret.RemoveTarget(target);
     }
 
 }

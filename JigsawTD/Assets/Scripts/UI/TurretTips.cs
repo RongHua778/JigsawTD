@@ -216,11 +216,11 @@ public class TurretTips : TileTips
 
     public void CompositeBtnClick()
     {
-        if (BuildingSystem.BuildingState != BuiidingState.Default)
-        {
-            GameEvents.Instance.Message("需先放置抽取模块");
-            return;
-        }
+        //if (ShapeSelectUI.BuildingState != BuiidingState.Default)
+        //{
+        //    GameEvents.Instance.Message("需先放置抽取模块");
+        //    return;
+        //}
         if (GameManager.Instance.OperationState.StateName != StateName.BuildingState)
         {
             GameEvents.Instance.Message("战斗中不可合成");
@@ -232,7 +232,7 @@ public class TurretTips : TileTips
             return;
         }
         CloseTips();
-        LevelUIManager.Instance.HideArea();
+        //LevelUIManager.Instance.HideArea();
         m_BGrid.Shop.CompositeBluePrint(m_BGrid);
     }
 

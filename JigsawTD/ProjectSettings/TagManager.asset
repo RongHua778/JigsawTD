@@ -16,13 +16,13 @@ TagManager:
   - Water
   - UI
   - ConcreteTile
-  - 
+  - RangeDetect
   - GroundTile
-  - 
+  - Bullet
   - TempTile
   - Enemy
   - TempGround
-  - TempTurret
+  - Turret
   - 
   - 
   - 

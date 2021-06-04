@@ -2,24 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class ConstructHelper//建造外观模式
+public static class ConstructHelper
 {
-
-    static TileShapeFactory m_ShapeFactory;
     static TileFactory m_TileFactory;
-    static GameTileContentFactory m_ContentFactory;
-    public static void Initialize(TileFactory tileFactory,TileShapeFactory shapeFactory,GameTileContentFactory contentFactory)
+    static TileShapeFactory m_ShapeFactory;
+    static TileContentFactory m_ContentFactory;
+
+    public static void Initialize()
     {
-        m_TileFactory = tileFactory;
-        m_ShapeFactory = shapeFactory;
-        m_ContentFactory = contentFactory;
+        m_TileFactory = GameManager.Instance.TileFactory;
+        m_ShapeFactory = GameManager.Instance.ShapeFactory;
+        m_ContentFactory = GameManager.Instance.ContentFactory;
+
     }
 
-    public static TileShape GetRandomShapeByLevel()
+
+    public static TileShape GetRandomShapeByLevel(int playerLevel)
     {
         TileShape shape = m_ShapeFactory.GetRandomShape();
         GameTile specialTile = m_TileFactory.GetBasicTile();
-        GameTileContent content = m_ContentFactory.GetRandomElementTurret();
+        GameTileContent content = m_ContentFactory.GetRandomElementTurret(playerLevel);
         specialTile.SetContent(content);
         shape.SetTile(specialTile);
         return shape;
@@ -37,5 +39,4 @@ public static class ConstructHelper//建造外观模式
     {
         return m_TileFactory.GetGroundTile();
     }
-
 }

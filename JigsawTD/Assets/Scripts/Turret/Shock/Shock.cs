@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Shock : TurretContent
 {
-    public override float AttackSpeed => base.AttackSpeed * (1 + RotSpeed / 180);
+    //public override float AttackSpeed => base.AttackSpeed * (1 + RotSpeed / 180);
     float changeSpeed = 60f;
     float rotSpeed = 0;
     float RotSpeed { get => rotSpeed; set => rotSpeed = Mathf.Clamp(value, 0, 360); }

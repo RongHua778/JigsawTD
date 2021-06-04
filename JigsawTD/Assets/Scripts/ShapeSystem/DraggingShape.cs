@@ -38,6 +38,15 @@ public class DraggingShape : DraggingActions
         tile.BaseRenderer.color = colorToSet;
     }
 
+    protected override void Update()
+    {
+        base.Update();
+        if (tileShape.IsPreviewing && Input.GetKeyDown(KeyCode.R))
+        {
+            RotateShape();
+        }
+    }
+
     public override void OnDraggingInUpdate()
     {
         base.OnDraggingInUpdate();
@@ -50,6 +59,7 @@ public class DraggingShape : DraggingActions
             StartCoroutine(TryFindPath());
         }
         lastPos = transform.position;
+
     }
 
     public void ShapeSpawned()//生成模块后，检查一下可否放置和寻路
@@ -198,11 +208,11 @@ public class DraggingShape : DraggingActions
             }
             Sound.Instance.PlayEffect("Sound_ConfirmShape");
             EnableGroundColliders();
-            GameEvents.Instance.ConfirmShape();
             foreach (GameTile tile in TileShape.tiles)
             {
                 tile.TileLanded();
             }
+            GameManager.Instance.ConfirmShape();
             GameEvents.Instance.CheckBluePrint();
 
             StaticData.holdingShape = null;

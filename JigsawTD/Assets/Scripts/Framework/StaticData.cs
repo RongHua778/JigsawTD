@@ -61,10 +61,6 @@ public class StaticData : Singleton<StaticData>
         }
     }
 
-    [Header("ContentAtts")]
-    public ContentAttribute SpawnPointAtt;
-    public ContentAttribute DestinationPointAtt;
-    public ContentAttribute EmptyAtt;
 
 
     [Header("ElementAttributes")]

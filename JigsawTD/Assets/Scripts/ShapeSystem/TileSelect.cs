@@ -19,6 +19,7 @@ public class TileSelect : MonoBehaviour
     {
         m_Shape.SetPreviewPlace();
         m_Shape = null;
+        GameManager.Instance.SelectShape();
     }
 
     public void ClearShape()

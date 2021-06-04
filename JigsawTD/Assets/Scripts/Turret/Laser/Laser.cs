@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Laser : TurretContent
 {
-    public override float AttackSpeed => base.AttackSpeed * (1 + SpeedUp);
+    //public override float AttackSpeed => base.AttackSpeed * (1 + SpeedUp);
     float speedUp;
     float SpeedUp { get => speedUp; set => speedUp = Mathf.Min(3, value); }
     float SpeedPerSecond = .5f;
