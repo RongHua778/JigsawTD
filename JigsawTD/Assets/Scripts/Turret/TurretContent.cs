@@ -22,7 +22,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     //**********美术，动画及音效
     protected Animator turretAnim;
     protected AudioSource audioSource;
-    protected SpriteRenderer BaseSprite;
+    protected SpriteRenderer TurretBaseSprite;
     protected SpriteRenderer CannonSprite;
     protected AudioClip ShootClip;
     //**********
@@ -105,7 +105,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         detectCollider = rangeParent.GetComponent<CompositeCollider2D>();
         rotTrans = transform.Find("RotPoint");
         shootPoint = rotTrans.Find("ShootPoint");
-        BaseSprite = transform.Find("TurretBase").GetComponent<SpriteRenderer>();
+        TurretBaseSprite = transform.Find("TurretBase").GetComponent<SpriteRenderer>();
         CannonSprite = rotTrans.Find("Cannon").GetComponent<SpriteRenderer>();
         turretAnim = this.GetComponent<Animator>();
         audioSource = this.GetComponent<AudioSource>();
@@ -144,7 +144,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     public virtual void SetGraphic()
     {
         shootPoint.transform.localPosition = m_TurretAttribute.TurretLevels[Quality - 1].ShootPointOffset;
-        BaseSprite.sprite = m_TurretAttribute.TurretLevels[Quality - 1].BaseSprite;
+        TurretBaseSprite.sprite = m_TurretAttribute.TurretLevels[Quality - 1].BaseSprite;
         CannonSprite.sprite = m_TurretAttribute.TurretLevels[Quality - 1].CannonSprite;
     }
 
@@ -364,16 +364,12 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         {
             GameManager.Instance.ShowTurretTips(this);
         }
-        //else
-        //{
-        //    GameManager.Instance.ShowTurretTips(this);
 
-        //}
     }
     public override void CorretRotation()
     {
         base.CorretRotation();
-        BaseSprite.transform.rotation = Quaternion.identity;
+        TurretBaseSprite.transform.rotation = Quaternion.identity;
     }
 
     //*************

@@ -86,7 +86,7 @@ public class WaveSystem : IGameSystem
     {
         float intensify = 1;
         int amount;
-        float stage = 1f;
+        float stage = 100f;
         for (int i = 0; i < StaticData.Instance.LevelMaxWave; i++)
         {
             EnemyType type = (EnemyType)UnityEngine.Random.Range(0, 4);
@@ -142,11 +142,11 @@ public class WaveSystem : IGameSystem
                 coolDown = coolDown - i / 4 * 0.015f;
             }
 
-            if (i < 4)
-            {
-                coolDown = 2.5f;
-                intensify = 1f;
-            }
+            //if (i < 4)
+            //{
+            //    coolDown = 2.5f;
+            //    intensify = 1f;
+            //}
             EnemySequence sequence = new EnemySequence(i + 1, attribute, intensify, amount, coolDown);
             LevelSequence.Enqueue(sequence);
         }

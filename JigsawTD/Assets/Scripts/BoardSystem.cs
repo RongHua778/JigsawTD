@@ -49,7 +49,7 @@ public class BoardSystem : IGameSystem
     [SerializeField] PathLine pathLinePrefab = default;
     List<PathLine> pathLines = new List<PathLine>();
 
-    List<GameTile> tiles = new List<GameTile>();
+    List<Vector2> tilePoss = new List<Vector2>();
 
     public List<GameTile> shortestPath = new List<GameTile>();
 
@@ -70,7 +70,6 @@ public class BoardSystem : IGameSystem
 
         GameEvents.Instance.onSeekPath += SeekPath;
         GameEvents.Instance.onRemoveGameTile += RemoveGameTile;
-
         GameEvents.Instance.onTileClick += TileClick;
         GameEvents.Instance.onTileUp += TileUp;
     }
@@ -79,7 +78,6 @@ public class BoardSystem : IGameSystem
     {
         GameEvents.Instance.onSeekPath -= SeekPath;
         GameEvents.Instance.onRemoveGameTile -= RemoveGameTile;
-
         GameEvents.Instance.onTileClick -= TileClick;
         GameEvents.Instance.onTileUp -= TileUp;
     }
@@ -110,7 +108,7 @@ public class BoardSystem : IGameSystem
     {
         if (!IsLongPress)
         {
-           // LevelUIManager.Instance.HideTips();
+            // LevelUIManager.Instance.HideTips();
             SelectingTile = tile;
         }
         IsPressingTile = false;
@@ -123,14 +121,13 @@ public class BoardSystem : IGameSystem
         GenerateGroundTiles(groundOffset, _groundSize);
         Physics2D.SyncTransforms();
         GenerateStartTiles(_startSize, sizeOffset);
-        //GenerateTrapTiles(groundOffset, groundSize, tileFactory);
+        GenerateTrapTiles(sizeOffset, _startSize);
         SeekPath();
         ShowPath(path);
     }
 
     private void GenerateStartTiles(Vector2Int size, Vector2 offset)
     {
-        List<GameTile> tiles = new List<GameTile>();
         for (int i = 0, y = 0; y < size.y; y++)
         {
             for (int x = 0; x < size.x; x++, i++)
@@ -144,7 +141,6 @@ public class BoardSystem : IGameSystem
                     tile = ConstructHelper.GetNormalTile(GameTileContentType.SpawnPoint);
                     SpawnPoint = tile;
                     tile.transform.position = pos;
-                    tiles.Add(tile);
                 }
                 else if (pos.x == 1 && pos.y == 0)//Destination
                 {
@@ -158,14 +154,8 @@ public class BoardSystem : IGameSystem
                 tile.transform.position = pos;
                 tile.TileLanded();
                 Physics2D.SyncTransforms();
-                //tiles.Add(tile);
             }
         }
-        //Physics2D.SyncTransforms();
-        //foreach (GameTile tile in tiles)
-        //{
-        //    tile.TileLanded();
-        //}
     }
 
     private void SeekPath()
@@ -232,58 +222,37 @@ public class BoardSystem : IGameSystem
         }
 
     }
-    private void GenerateTrapTiles(Vector2 offset, Vector2Int size, TileFactory t)
+    private void GenerateTrapTiles(Vector2 offset, Vector2Int size)
     {
-
-        List<Vector2> tiles = new List<Vector2>();
-        //List<Vector2> basicPoss = new List<Vector2>();
-
         List<Vector2> traps = new List<Vector2>();
+        List<Vector2> tempPoss = tilePoss.ToList();
         for (int y = 0; y < size.y; y++)
         {
             for (int x = 0; x < size.x; x++)
             {
                 Vector2 pos = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
-                if (!(pos.x >= -2 && pos.x <= 2 && pos.y >= -2 && pos.y <= 2))
-                {
-                    tiles.Add(pos);
-                    //basicPoss.Add(pos);
-                }
+                tempPoss.Remove(pos);
             }
         }
         for (int i = 0; i < StaticData.trapN; i++)
         {
-            int index = UnityEngine.Random.Range(0, tiles.Count);
-            Vector2 temp = tiles[index];
+            int index = UnityEngine.Random.Range(0, tempPoss.Count);
+            Vector2 temp = tempPoss[index];
             traps.Add(temp);
             List<Vector2> neibor = StaticData.GetCirclePoints(5, 0);
             for (int k = 0; k < neibor.Count; k++)
             {
-                neibor[k] = neibor[k] + tiles[index];
+                neibor[k] = neibor[k] + tempPoss[index];
             }
-            tiles = tiles.Except(neibor).ToList();
-            tiles.Remove(temp);
-            //basicPoss.Remove(temp);
+            tempPoss = tempPoss.Except(neibor).ToList();
+            tempPoss.Remove(temp);
         }
-
-        //for (int j = 0; j < StaticData.basicN; j++)
-        //{
-        //    int index = UnityEngine.Random.Range(0, basicPoss.Count);
-        //    Vector2 pos = basicPoss[index];
-        //    BasicTile tile = t.GetBasicTile();
-
-        //    AddGameTile(tile, new Vector2(pos.x - (groundSize.x - 1) / 2,
-        //        pos.y - (groundSize.y - 1) / 2));
-        //    //tile.gameObject.layer = LayerMask.NameToLayer(StaticData.TrapTileMask);
-        //}
-
-        //foreach (Vector2 pos in traps)
-        //{
-        //    TrapTile tile = t.GetRandomTrap();
-        //    tile.transform.position = pos;
-        //    tile.TileLanded();
-        //    //AddGameTile(tile, pos);
-        //}
+        foreach (Vector2 pos in traps)
+        {
+            GameTile tile = ConstructHelper.GetRandomTrap();
+            tile.transform.position = pos;
+            tile.TileLanded();
+        }
     }
     private void GenerateGroundTiles(Vector2 offset, Vector2Int groundSize)
     {
@@ -292,26 +261,18 @@ public class BoardSystem : IGameSystem
             for (int x = 0; x < groundSize.x; x++, i++)
             {
                 GroundTile groundTile = ConstructHelper.GetGroundTile();
-                groundTile.transform.position = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
+                Vector2 pos = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
+                groundTile.transform.position = pos;
                 groundTile.transform.position += Vector3.forward * 0.1f;
                 CorrectTileCoord(groundTile);
+                tilePoss.Add(pos);
             }
         }
     }
 
     private void RemoveGameTile(GameTile tile)//ºÏ³ÉÇå³ýTILE
     {
-        if (tiles.Contains(tile))
-        {
-            tiles.Remove(tile);
-            if (SelectingTile == tile)
-                SelectingTile = null;
-            ObjectPool.Instance.UnSpawn(tile.gameObject);
-
-            Collider2D col = StaticData.RaycastCollider(tile.transform.position, LayerMask.GetMask(StaticData.TempGroundMask));
-            GroundTile groundTile = col.GetComponent<GroundTile>();
-            groundTile.IsLanded = true;
-        }
+        ObjectPool.Instance.UnSpawn(tile.gameObject);
     }
 
     private void CorrectTileCoord(TileBase tile)

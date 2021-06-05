@@ -69,6 +69,27 @@ public class MainUI : IUserInterface
     [SerializeField] Text speedBtnTxt = default;
     [SerializeField] Text waveTxt = default;
 
+    public override void Initialize(GameManager gameManager)
+    {
+        base.Initialize(gameManager);
+        GameEvents.Instance.onEnemyReach += EnemyReach;
+        GameSpeed = 1;
+        CurrentWave = 1;
+    }
+
+    public override void Release()
+    {
+        base.Release();
+        GameEvents.Instance.onEnemyReach -= EnemyReach;
+    }
+
+    private void EnemyReach(Enemy enemy)
+    {
+        Life--;
+    }
+
+
+
     public void PrepareNextWave()
     {
         CurrentWave++;
@@ -108,7 +129,7 @@ public class MainUI : IUserInterface
 
     public void GameSpeedBtnClick()
     {
-
+        GameSpeed++;
     }
 
 

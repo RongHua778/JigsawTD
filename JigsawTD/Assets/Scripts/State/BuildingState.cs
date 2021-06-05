@@ -14,7 +14,7 @@ public class BuildingState : BattleOperationState
     public override IEnumerator EnterState()
     {
         yield return new WaitForSeconds(0.5f);
-        gameManager.PrepareNextWave();
+        Sound.Instance.PlayBg("preparing");
         yield break;
     }
 

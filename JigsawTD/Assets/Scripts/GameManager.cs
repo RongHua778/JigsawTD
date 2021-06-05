@@ -20,6 +20,7 @@ public class GameManager : Singleton<GameManager>
 
     //防御塔TIPS
     [SerializeField] private TurretTips m_TurretTips = default;
+    [SerializeField] private TrapTips m_TrapTips = default;
 
 
     public BluePrintShop _bluePrintShop = default;
@@ -88,7 +89,7 @@ public class GameManager : Singleton<GameManager>
         SetGameBoard();//初始化版图
 
         buildingState = new BuildingState(this, m_BoardSystem);
-        waveState = new WaveState(this);
+        waveState = new WaveState(this, m_WaveSystem);
         EnterNewState(buildingState);
 
 
@@ -122,7 +123,6 @@ public class GameManager : Singleton<GameManager>
 
     public void StartNewWave()
     {
-        m_WaveSystem.GetSequence();
         m_FuncUI.Hide();
         TransitionToState(StateName.WaveState);
     }
@@ -156,7 +156,6 @@ public class GameManager : Singleton<GameManager>
     public void PrepareNextWave()
     {
         //_bluePrintShop.NextRefreshTrun--;
-        //ResourcesManager.Instance.PrepareNextWave(m_WaveSystem.CurrentWave, m_BuildingSystem.DrawThisTurn);
         m_MainUI.PrepareNextWave();
         m_FuncUI.Show();
         //重置所有防御塔的回合临时加成
@@ -164,7 +163,7 @@ public class GameManager : Singleton<GameManager>
         {
             ((TurretContent)turret).ClearTurnIntensify();
         }
-        Sound.Instance.PlayBg("preparing");
+        TransitionToState(StateName.BuildingState);
     }
 
     public bool ConsumeMoney(int cost)
@@ -176,16 +175,20 @@ public class GameManager : Singleton<GameManager>
     {
         m_TurretTips.ReadTurret(turret);
         m_TurretTips.Show();
+        m_TrapTips.Hide();
     }
 
-    public void ShowTrapTips()
+    public void ShowTrapTips(TrapContent trap)
     {
+        m_TrapTips.ReadTrap(trap);
         m_TurretTips.Hide();
+        m_TrapTips.Show();
     }
 
     public void HideTileTips()
     {
         m_TurretTips.Hide();
+        m_TrapTips.Hide();
     }
 
     public void SpawnEnemy(EnemySequence sequence)

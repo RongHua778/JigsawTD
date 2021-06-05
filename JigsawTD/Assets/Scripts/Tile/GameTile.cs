@@ -75,7 +75,7 @@ public abstract class GameTile : TileBase
 
     public virtual void OnTilePass(Enemy enemy)//经过触发特殊效果
     {
-
+        Content.OnContentPass(enemy);
     }
 
     private void OnMouseDown()
@@ -129,16 +129,6 @@ public abstract class GameTile : TileBase
         Content.CorretRotation();
     }
 
-    protected void SetGroundTile()
-    {
-        Collider2D col = StaticData.RaycastCollider(transform.position, LayerMask.GetMask(StaticData.GroundTileMask));//修改groundtile层
-        if (col != null)
-        {
-            GroundTile groundTile = col.GetComponent<GroundTile>();
-            groundTile.TileAbrove = this;
-            groundTile.IsLanded = false;
-        }
-    }
 
     public void SetContent(GameTileContent content)
     {

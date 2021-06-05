@@ -117,17 +117,11 @@ public class DirectionSlow : TileBuff
         if (Target.Direction == Target.tileFrom.GetTileDirection())
         {
             Target.PathSlow += KeyValue;
-            Debug.Log("SlowDown");
-        }
-        else
-        {
-            Debug.Log("NotMatch");
         }
     }
     public override void End()
     {
         Target.PathSlow = 0;
-        Debug.Log("End");
     }
 }
 
@@ -162,7 +156,6 @@ public class BreakShell : TileBuff
     public override void Affect()
     {
         Target.BrokeShell += (int)KeyValue;
-        Debug.Log("BreakShell" + (int)KeyValue);
 
     }
 
@@ -183,8 +176,6 @@ public class HealthBaseDamage : TileBuff
     public override void Affect()
     {
         float damage = KeyValue * (Target.MaxHealth - Target.CurrentHealth);
-        Debug.Log("Deal HelathBase Damge=" + damage);
-        //Target.ApplyDamage(damage);
     }
 
     public override void End()
@@ -206,9 +197,8 @@ public class DamageTarget : TileBuff
     {
         float damageReturn;
         Target.ApplyDamage(Target.TargetDamageCounter * KeyValue, out damageReturn, true);
-        ((TrapTile)(Target.tileFrom)).DamageAnalysis += (int)damageReturn;
+        ((TrapContent)(Target.tileFrom.Content)).DamageAnalysis += (int)damageReturn;
         Target.TargetDamageCounter = 0;
-        //Debug.Log("TriggerDamageTarget" + damageReturn);
 
     }
 
@@ -250,7 +240,6 @@ public class Stun : TimeBuff
     public override void Affect()
     {
         Target.StunTime += KeyValue;
-        Debug.Log("TargetSutn" + KeyValue);
     }
 
     public override void End()

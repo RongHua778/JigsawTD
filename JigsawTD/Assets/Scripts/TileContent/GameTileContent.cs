@@ -51,6 +51,11 @@ public abstract class GameTileContent : ReusableObject
 
     }
 
+    public virtual void OnContentPass(Enemy enemy)
+    {
+
+    }
+
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();

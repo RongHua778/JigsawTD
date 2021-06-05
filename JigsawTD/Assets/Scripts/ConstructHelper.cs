@@ -39,4 +39,22 @@ public static class ConstructHelper
     {
         return m_TileFactory.GetGroundTile();
     }
+
+    public static GameTile GetRandomTrap()
+    {
+        GameTile tile = m_TileFactory.GetBasicTile();
+        GameTileContent content = m_ContentFactory.GetRandomTrapContent();
+        tile.SetContent(content);
+        return tile;
+    }
+
+    public static TileShape GetTrapByName(string name)//测试用，生成一个随意放置的陷阱
+    {
+        TileShape shape = m_ShapeFactory.GetDShape();
+        GameTile tile = m_TileFactory.GetBasicTile();
+        GameTileContent content = m_ContentFactory.GetRandomTrapContent();
+        tile.SetContent(content);
+        shape.SetTile(tile);
+        return shape;
+    }
 }

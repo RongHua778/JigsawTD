@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class ReusableObject : MonoBehaviour,IResuable
 {
-
+    [HideInInspector]
     public Transform ParentObj = null;
     public virtual void OnSpawn()
     {
