@@ -10,5 +10,5 @@ public abstract class IGameSystem : MonoBehaviour
         m_GameManager = gameManager;
     }
     public virtual void Release() { }
-    public virtual void Update() { }
+    public virtual void GameUpdate() { }
 }

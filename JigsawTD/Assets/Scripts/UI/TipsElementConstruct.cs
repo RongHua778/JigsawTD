@@ -55,11 +55,11 @@ public class TipsElementConstruct : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-         LevelUIManager.Instance.ShowTempTips(GetInfo(), transform.position);
+         GameManager.Instance.ShowTempTips(GetInfo(), transform.position);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        LevelUIManager.Instance.HideTempTips();
+        GameManager.Instance.HideTempTips();
     }
 }

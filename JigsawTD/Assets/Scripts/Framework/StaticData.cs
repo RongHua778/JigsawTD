@@ -8,15 +8,17 @@ public class StaticData : Singleton<StaticData>
 {
 
     [Header("LevelSetting")]
-    public static DraggingShape holdingShape;
-    public static LayerMask PathLayer = 1 << 6 | 1 << 10;
+    [SerializeField] private int difficulty = 2;
+    public int Difficulty { get => difficulty; set => difficulty = value; }
+
+    //public static LayerMask PathLayer = 1 << 6 | 1 << 10;
     public static string ConcreteTileMask = "ConcreteTile";
     public static string GroundTileMask = "GroundTile";
     public static string TempTileMask = "TempTile";
     public static string TempTurretMask = "TempTurret";
     public static string TempGroundMask = "TempGround";
     public static LayerMask GetGroundLayer = 1 << 8 | 1 << 12;
-    public static LayerMask RunTimeFindPathLayer = 1 << 8;// 1 << 7 |
+    //public static LayerMask RunTimeFindPathLayer = 1 << 8;
     public int PlayerMaxLevel;
     public int[] LevelUpMoney;
     public int StartCoin;
@@ -56,13 +58,10 @@ public class StaticData : Singleton<StaticData>
     {
         get
         {
-            if (GameManager.Instance.Difficulty == 1) return levelMaxWaveForBegginer;
+            if (Difficulty == 1) return levelMaxWaveForBegginer;
             else return levelMaxWave;
         }
     }
-
-
-
     //元素加成
     public static float GoldAttackIntensify = 0.1f;
     public static float WoodSpeedIntensify = 0.1f;
@@ -70,7 +69,25 @@ public class StaticData : Singleton<StaticData>
     public static float FireCriticalIntensify = 0.1f;
     public static float DustSputteringIntensify = 0.1f;
 
+    //tips信息
+    public delegate string InfoCallBack();
+    public static Dictionary<string, InfoCallBack> TipsInfoDIC;
 
+
+    private void Start()
+    {
+        InitializeInfoDIC();
+        Difficulty = Game.Instance.Difficulty;
+    }
+
+    private void InitializeInfoDIC()
+    {
+        TipsInfoDIC = new Dictionary<string, InfoCallBack>();
+        InfoCallBack levelInfo = GetLevelInfo;
+        TipsInfoDIC.Add("LevelInfo", levelInfo);
+        InfoCallBack luckInfo = GetLuckyInfo;
+        TipsInfoDIC.Add("LuckyInfo", luckInfo);
+    }
 
     [Header("CompositionAttributes")]
     public int[,] LevelUpCost = new int[3, 2]//合成塔升级费用
@@ -90,16 +107,6 @@ public class StaticData : Singleton<StaticData>
         { 0.3f,0.3f,0.4f},
     };
 
-
-    public void GameSlowDown()
-    {
-        Time.timeScale = GameSlowDownRate;
-    }
-
-    public void GameSpeedResume()
-    {
-        Time.timeScale = 1;
-    }
 
     public static int RandomNumber(float[] pros)
     {
@@ -365,5 +372,30 @@ public class StaticData : Singleton<StaticData>
             }
         }
         return finalDes;
+    }
+
+    public static string GetLevelInfo()
+    {
+        float[] levelChances = new float[5];
+        for (int i = 0; i < 5; i++)
+        {
+            levelChances[i] = StaticData.Instance.QualityChances[LevelUIManager.Instance.PlayerLevel - 1, i];
+        }
+        string text = "";
+        text += "\n  当前等级概率:\n";
+        for (int x = 0; x < 5; x++)
+        {
+            text += "  等级" + (x + 1).ToString() + ": " + levelChances[x] * 100 + "%\n";
+        }
+        return text;
+    }
+
+    public static string GetLuckyInfo()
+    {
+        string text = 
+            "1.当前回合没有抽取时，获得1点累积点。\n" +
+            "2.连续不抽取时，会获得额外累积点。\n" +
+            "3.累积点每达到10点，获得1个随机配方。";
+        return text;
     }
 }

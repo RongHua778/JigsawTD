@@ -103,7 +103,6 @@ public class TileShape : MonoBehaviour
         renderCam.gameObject.SetActive(false);
         transform.position = new Vector3(Mathf.Round(pos.x), Mathf.Round(pos.y), -1f);
         draggingShape.ShapeSpawned();
-        StaticData.holdingShape = draggingShape;
         foreach (GameTile tile in tiles)
         {
             tile.Previewing = true;

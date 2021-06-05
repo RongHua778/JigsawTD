@@ -6,37 +6,23 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    //版图系统
-    [SerializeField] private BoardSystem m_BoardSystem = default;
+    //系统
+    [SerializeField] private BoardSystem m_BoardSystem = default;//版图系统
+    [SerializeField] private WaveSystem m_WaveSystem = default;//波次系统
 
-    //建造系统
+    //UI
     [SerializeField] private ShapeSelectUI m_ShapeSelectUI = default;
-
     [SerializeField] private MainUI m_MainUI = default;
     [SerializeField] private FuncUI m_FuncUI = default;
     [SerializeField] private GameEndUI m_GameEndUI = default;
+    [SerializeField] private MessageUI m_MessageUI = default;
 
-
-    //波次系统
-    [SerializeField] private WaveSystem m_WaveSystem = default;
-
-    //防御塔TIPS
+    //TIPS
     [SerializeField] private TurretTips m_TurretTips = default;
+    [SerializeField] private TempTips m_TempTips = default;
     [SerializeField] private TrapTips m_TrapTips = default;
 
-
-    public BluePrintShop _bluePrintShop = default;
-
-    //关卡难度
-    private int difficulty = 2;
-    public int Difficulty { get => difficulty; set => difficulty = value; }
-
-    [SerializeField]
-    BlueprintFactory _bluePrintFacotry = default;
-    [SerializeField]
-    TurretAttributeFactory _turretFactory = default;
-
-
+    //工厂
     [SerializeField] TileFactory _tileFactory = default;
     [SerializeField] TileContentFactory _contentFactory = default;
     [SerializeField] TileShapeFactory _shapeFactory = default;
@@ -46,14 +32,20 @@ public class GameManager : Singleton<GameManager>
     public TileShapeFactory ShapeFactory { get => _shapeFactory; }
     public EnemyFactory EnemyFactory { get => _enemyFactory; }
 
+
+    public BluePrintShop _bluePrintShop = default;
+
+    //Behavior集合
     public GameBehaviorCollection enemies = new GameBehaviorCollection();
     public GameBehaviorCollection nonEnemies = new GameBehaviorCollection();
     public GameBehaviorCollection turrets = new GameBehaviorCollection();
 
 
+    [SerializeField]
+    BlueprintFactory _bluePrintFacotry = default;
 
 
-    //*********战斗中流程State
+    //流程
     private BattleOperationState operationState;
     public BattleOperationState OperationState { get => operationState; }
     private BuildingState buildingState;
@@ -64,9 +56,6 @@ public class GameManager : Singleton<GameManager>
     //初始化设定
     public void Initinal()
     {
-        //基本参数设置
-        Difficulty = Game.Instance.Difficulty;
-
         //初始化工厂
         TileFactory.Initialize();
         ContentFactory.Initialize();
@@ -87,11 +76,10 @@ public class GameManager : Singleton<GameManager>
         m_GameEndUI.Initialize(this);//游戏结束UI
         m_TrapTips.Initialize(this);//防御塔TIPS
         m_TurretTips.Initialize(this);//陷阱及其他TIPS
+        m_MessageUI.Initialize(this);
 
         //// _bluePrintFacotry.InitializeFactory();
         //_bluePrintShop.RefreshShop(0);
-
-        SetGameBoard();//初始化版图
 
         buildingState = new BuildingState(this, m_BoardSystem);
         waveState = new WaveState(this, m_WaveSystem);
@@ -99,7 +87,6 @@ public class GameManager : Singleton<GameManager>
 
 
     }
-
 
     //释放游戏系统
     public void Release()
@@ -113,9 +100,10 @@ public class GameManager : Singleton<GameManager>
         m_GameEndUI.Release();
         m_TrapTips.Release();
         m_TurretTips.Release();
+        m_MessageUI.Release();
+
+        Instance = null;
     }
-
-
 
     public void GameUpdate()
     {
@@ -127,41 +115,15 @@ public class GameManager : Singleton<GameManager>
         nonEnemies.GameUpdate();
     }
 
-    public void SetGameBoard()
-    {
-        m_BoardSystem.SetGameBoard();
-    }
-
+    #region 阶段控制
     public void StartNewWave()
     {
         m_FuncUI.Hide();
         TransitionToState(StateName.WaveState);
     }
-
-    public void DrawShapes()
-    {
-        //SHAPESELECTUI打开并配置3个随机形状供选择
-        m_FuncUI.Hide();
-        m_ShapeSelectUI.Show();
-        m_ShapeSelectUI.ShowThreeShapes(m_FuncUI.PlayerLevel);
-    }
-
-    public void SelectShape()//选择了一个模块
-    {
-        m_ShapeSelectUI.ClearAllSelections();
-        m_ShapeSelectUI.Hide();
-    }
-
-    public void ConfirmShape()//放下了一个模块
-    {
-        m_FuncUI.Show();
-    }
-
-
     public void PrepareNextWave()
     {
         //_bluePrintShop.NextRefreshTrun--;
-
         if (m_MainUI.Life <= 0)//游戏失败
         {
             GameEnd(true);
@@ -172,10 +134,8 @@ public class GameManager : Singleton<GameManager>
             GameEnd(false);
             return;
         }
-
         m_MainUI.PrepareNextWave();
         m_FuncUI.Show();
-
         //重置所有防御塔的回合临时加成
         foreach (var turret in turrets.behaviors)
         {
@@ -184,48 +144,11 @@ public class GameManager : Singleton<GameManager>
         TransitionToState(StateName.BuildingState);
     }
 
-    public bool ConsumeMoney(int cost)
-    {
-        return m_MainUI.ConsumeMoney(cost);
-    }
-
-    public void ShowTurretTips(TurretContent turret)
-    {
-        m_TurretTips.ReadTurret(turret);
-        m_TurretTips.Show();
-        m_TrapTips.Hide();
-    }
-
-    public void ShowTrapTips(TrapContent trap)
-    {
-        m_TrapTips.ReadTrap(trap);
-        m_TurretTips.Hide();
-        m_TrapTips.Show();
-    }
-
-    public void HideTileTips()
-    {
-        m_TurretTips.Hide();
-        m_TrapTips.Hide();
-    }
-
     public void GameEnd(bool win)
     {
         m_GameEndUI.Show();
         m_GameEndUI.SetGameResult(win);
     }
-
-
-
-    public void SpawnEnemy(EnemySequence sequence)
-    {
-        Enemy enemy = m_WaveSystem.SpawnEnemy(sequence.EnemyAttribute, sequence.Intensify);
-        GameTile tile = m_BoardSystem.SpawnPoint;
-        enemy.SpawnOn(tile);
-        enemies.Add(enemy);
-    }
-
-
 
     public void TransitionToState(StateName stateName)
     {
@@ -249,6 +172,89 @@ public class GameManager : Singleton<GameManager>
         this.operationState = newState;
         StartCoroutine(this.operationState.EnterState());
     }
+
+    #endregion
+
+    #region 形状控制
+    public void DrawShapes()
+    {
+        m_FuncUI.Hide();
+        m_ShapeSelectUI.Show();
+        m_ShapeSelectUI.ShowThreeShapes(m_FuncUI.PlayerLevel);
+    }
+
+    public void SelectShape()//选择了一个模块
+    {
+        m_ShapeSelectUI.ClearAllSelections();
+        m_ShapeSelectUI.Hide();
+    }
+
+    public void ConfirmShape()//放下了一个模块
+    {
+        m_FuncUI.Show();
+    }
+    #endregion
+
+    #region 通用功能
+    public bool ConsumeMoney(int cost)
+    {
+        return m_MainUI.ConsumeMoney(cost);
+    }
+
+    public void ShowMessage(string text)
+    {
+        m_MessageUI.SetText(text);
+    }
+    #endregion
+
+    #region TIPS
+    public void ShowTurretTips(TurretContent turret)
+    {
+        m_TurretTips.ReadTurret(turret);
+        m_TurretTips.Show();
+        m_TrapTips.Hide();
+    }
+
+    public void ShowTrapTips(TrapContent trap)
+    {
+        m_TrapTips.ReadTrap(trap);
+        m_TurretTips.Hide();
+        m_TrapTips.Show();
+    }
+
+    public void ShowTempTips(string text,Vector2 pos)
+    {
+        m_TempTips.gameObject.SetActive(true);
+        m_TempTips.SendText(text);
+        m_TempTips.SetPos(pos);
+    }
+    public void HideTempTips()
+    {
+        m_TempTips.gameObject.SetActive(false);
+    }
+
+    public void HideTileTips()
+    {
+        m_TurretTips.Hide();
+        m_TrapTips.Hide();
+    }
+
+    #endregion
+
+
+
+
+    public void SpawnEnemy(EnemySequence sequence)
+    {
+        Enemy enemy = m_WaveSystem.SpawnEnemy(sequence.EnemyAttribute, sequence.Intensify);
+        GameTile tile = m_BoardSystem.SpawnPoint;
+        enemy.SpawnOn(tile);
+        enemies.Add(enemy);
+    }
+
+
+
+
 
 
     //***************工厂中介者服务区

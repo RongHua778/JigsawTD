@@ -9,13 +9,14 @@ public abstract class Singleton<T> : MonoBehaviour
     public static T Instance
     {
         get { return m_instance; }
+        set => m_instance = value;
     }
 
     protected virtual void Awake()
     {
         if (Instance != null)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
             Debug.Log(this.name + "已经创建了相同singleton实例");
         }
         else

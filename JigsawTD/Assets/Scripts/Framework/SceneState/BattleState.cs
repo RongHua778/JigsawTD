@@ -24,12 +24,7 @@ public class BattleState : ISceneState
 	// ¸üĞÂ
 	public override void StateUpdate()
 	{
-		// ß[‘òß‰İ‹
 		GameManager.Instance.GameUpdate();
-
-		// ß[‘òÊÇ·ñ½YÊø
-		//if (GameManager.Instance.ThisGameIsOver())
-		//	m_Controller.SetState(new MainMenuState(m_Controller), "MainMenuScene");
 	}
 
 }

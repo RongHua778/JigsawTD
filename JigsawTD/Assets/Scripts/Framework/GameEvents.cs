@@ -11,11 +11,7 @@ public class GameEvents : Singleton<GameEvents>
     //     if (onEventName != null)
     //         onEventName(para);
     // }
-    public event Action<string> onMessage;
-    public void Message(string content)
-    {
-        onMessage?.Invoke(content);
-    }
+
 
     public event Action onConfirmShape;
     public void ConfirmShape()

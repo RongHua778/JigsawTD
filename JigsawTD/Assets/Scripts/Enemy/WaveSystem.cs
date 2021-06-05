@@ -40,7 +40,7 @@ public class WaveSystem : IGameSystem
     {
         base.Initialize(gameManager);
         this._enemyFactory = gameManager.EnemyFactory;
-        LevelInitialize(gameManager.Difficulty);
+        LevelInitialize(StaticData.Instance.Difficulty);
         GameEvents.Instance.onEnemyReach += EnemyReach;
         GameEvents.Instance.onEnemyDie += EnemyDie;
     }

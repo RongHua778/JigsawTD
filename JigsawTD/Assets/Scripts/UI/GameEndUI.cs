@@ -19,7 +19,7 @@ public class GameEndUI : IUserInterface
     {
         if (win)
         {
-            title.text = "通关难度" + GameManager.Instance.Difficulty;
+            title.text = "通关难度" + StaticData.Instance.Difficulty;
         }
         else
         {

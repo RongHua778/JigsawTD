@@ -25,7 +25,6 @@ public class ScaleAndMove : MonoBehaviour
         cam = this.GetComponent<Camera>();
         oldPosition = cam.transform.position;
         Input.multiTouchEnabled = true;
-        Invoke("SetCanMove", 1f);
     }
 
     // Update is called once per frame

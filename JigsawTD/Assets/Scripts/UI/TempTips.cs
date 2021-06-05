@@ -52,6 +52,11 @@ public class TempTips : MonoBehaviour
         StartCoroutine(AdjustSize());
     }
 
+    public void SetPos(Vector2 pos)
+    {
+        rect.position = pos + new Vector2(0, rect.sizeDelta.y / 2 + 30);
+    }
+
     IEnumerator AdjustSize()
     {
         yield return new WaitForEndOfFrame();

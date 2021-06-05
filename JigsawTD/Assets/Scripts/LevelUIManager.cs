@@ -173,7 +173,6 @@ public class LevelUIManager : Singleton<LevelUIManager>
 
     void Start()
     {
-        GameEvents.Instance.onMessage += ShowMessage;
         //GameEvents.Instance.onEnemyReach += EnemyReachDamge;
         //GameEvents.Instance.onStartNewWave += NewWaveStart;
         //GameEvents.Instance.onEnemyDie += EnemyDie;
@@ -191,7 +190,6 @@ public class LevelUIManager : Singleton<LevelUIManager>
 
     private void OnDisable()
     {
-        GameEvents.Instance.onMessage -= ShowMessage;
         //GameEvents.Instance.onEnemyReach -= EnemyReachDamge;
         //GameEvents.Instance.onStartNewWave -= NewWaveStart;
         //GameEvents.Instance.onEnemyDie -= EnemyDie;
@@ -374,8 +372,8 @@ public class LevelUIManager : Singleton<LevelUIManager>
     //ÓÎÏ·Ê¤Àû
     public void ShowGameWinPanel()
     {
-        if (PlayerPrefs.GetInt("MaxPassLevel", 0) <= GameManager.Instance.Difficulty)
-            PlayerPrefs.SetInt("MaxPassLevel", GameManager.Instance.Difficulty + 1);
+        if (PlayerPrefs.GetInt("MaxPassLevel", 0) <= StaticData.Instance.Difficulty)
+            PlayerPrefs.SetInt("MaxPassLevel", StaticData.Instance.Difficulty + 1);
         //_roadPlacament.HideArea();
         _gameEndPanel.gameObject.SetActive(true);
         _gameEndPanel.SetGameResult(true);

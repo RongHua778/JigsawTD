@@ -196,14 +196,14 @@ public class DraggingShape : DraggingActions
     {
         if (waitingForPath)
         {
-            GameEvents.Instance.Message("你点的太快了");
+            GameManager.Instance.ShowMessage("你点的太快了");
             return;
         }
         if (canDrop)
         {
             if (!BoardSystem.FindPath)
             {
-                GameEvents.Instance.Message("必须有道路连接起点和终点");
+                GameManager.Instance.ShowMessage("必须有道路连接起点和终点");
                 return;
             }
             Sound.Instance.PlayEffect("Sound_ConfirmShape");
@@ -215,16 +215,15 @@ public class DraggingShape : DraggingActions
             GameManager.Instance.ConfirmShape();
             GameEvents.Instance.CheckBluePrint();
 
-            StaticData.holdingShape = null;
             Destroy(this.gameObject);
         }
         else if (overLapPoint)
         {
-            GameEvents.Instance.Message("防御塔不可与特殊地形重叠");
+            GameManager.Instance.ShowMessage("防御塔不可与特殊地形重叠");
         }
         else
         {
-            GameEvents.Instance.Message("必须与已有区域相连");
+            GameManager.Instance.ShowMessage("必须与已有区域相连");
         }
     }
 

@@ -114,7 +114,7 @@ public class MainUI : IUserInterface
         }
         else
         {
-            GameEvents.Instance.Message("拥有的金币不足");
+            GameManager.Instance.ShowMessage("拥有的金币不足");
             return false;
         }
     }

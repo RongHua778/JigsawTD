@@ -5,35 +5,16 @@ using UnityEngine.EventSystems;
 
 public class InfoBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [TextArea(3, 4)]
-    [SerializeField] string tipsInfo = default;
-    [SerializeField] bool isLevelInfo = default;
-    private string GetLevelInfo()
-    {
-        float[] levelChances = new float[5];
-        for (int i = 0; i < 5; i++)
-        {
-            levelChances[i] = StaticData.Instance.QualityChances[LevelUIManager.Instance.PlayerLevel - 1, i];
-        }
-        string text = "";
-        text += "\n  当前等级概率:\n";
-        for (int x = 0; x < 5; x++)
-        {
-            text += "  等级" + (x + 1).ToString() + ": " + levelChances[x] * 100 + "%\n";
-        }
-        return text;
-    }
+    [SerializeField] string infoKey = default;
+
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (isLevelInfo)
-            LevelUIManager.Instance.ShowTempTips(GetLevelInfo(), transform.position);
-        else
-            LevelUIManager.Instance.ShowTempTips(tipsInfo, transform.position);
+        GameManager.Instance.ShowTempTips(StaticData.TipsInfoDIC[infoKey](), transform.position);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        LevelUIManager.Instance.HideTempTips();
+        GameManager.Instance.HideTempTips();
     }
 
 

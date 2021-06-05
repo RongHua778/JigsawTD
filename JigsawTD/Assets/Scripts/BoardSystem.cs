@@ -11,7 +11,7 @@ public class BoardSystem : IGameSystem
     //计算点击选中
     #region 选择Tile高亮
     static GameObject selection;
-    static float pressCounter = 0;
+    float pressCounter = 0;
     public bool IsPressingTile = false;
     public bool IsLongPress { get => pressCounter >= 0.3f; }
     private static GameTile selectingTile;
@@ -72,6 +72,8 @@ public class BoardSystem : IGameSystem
         GameEvents.Instance.onRemoveGameTile += RemoveGameTile;
         GameEvents.Instance.onTileClick += TileClick;
         GameEvents.Instance.onTileUp += TileUp;
+
+        SetGameBoard();
     }
 
     public override void Release()
@@ -82,9 +84,7 @@ public class BoardSystem : IGameSystem
         GameEvents.Instance.onTileUp -= TileUp;
     }
 
-
-
-    public void GameUpdate()
+    public override void GameUpdate()
     {
         if (IsPressingTile && Input.GetMouseButton(0))
         {
@@ -108,7 +108,6 @@ public class BoardSystem : IGameSystem
     {
         if (!IsLongPress)
         {
-            // LevelUIManager.Instance.HideTips();
             SelectingTile = tile;
         }
         IsPressingTile = false;

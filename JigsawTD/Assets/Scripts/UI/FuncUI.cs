@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class FuncUI : IUserInterface
 {
+    [SerializeField] Text LuckPointTxt = default;
+    [SerializeField] Text DrawBtnTxt = default;
+    [SerializeField] Text LevelUpTxt = default;
+    [SerializeField] Text PlayerLevelTxt = default;
+
     bool drawThisTurn = false;
     public bool DrawThisTurn { get => drawThisTurn; set => drawThisTurn = value; }
 
@@ -68,15 +73,12 @@ public class FuncUI : IUserInterface
         }
     }
 
-    [SerializeField] Text LuckPointTxt = default;
-    [SerializeField] Text DrawBtnTxt = default;
-    [SerializeField] Text LevelUpTxt = default;
-    [SerializeField] Text PlayerLevelTxt = default;
 
     public override void Initialize(GameManager gameManager)
     {
         base.Initialize(gameManager);
         DrawRemain = StaticData.Instance.StartLotteryDraw;
+        PlayerLevel = 1;
     }
     public void DrawBtnClick()
     {
@@ -88,7 +90,7 @@ public class FuncUI : IUserInterface
         }
         else
         {
-            GameEvents.Instance.Message("抽取次数不足");
+            GameManager.Instance.ShowMessage("抽取次数不足");
         }
     }
 
@@ -106,5 +108,16 @@ public class FuncUI : IUserInterface
     public void NextWaveBtnClick()
     {
         m_GameManager.StartNewWave();
+    }
+
+    public void LevelUpBtnClick()
+    {
+        if (PlayerLevel < StaticData.Instance.PlayerMaxLevel)
+        {
+            if (GameManager.Instance.ConsumeMoney(PlayerLvUpMoney))
+            {
+                PlayerLevel++;
+            }
+        }
     }
 }

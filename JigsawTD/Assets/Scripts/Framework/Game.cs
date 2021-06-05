@@ -46,11 +46,6 @@ public class Game : Singleton<Game>
     //根据ID读取场景
     public void LoadScene(int index)
     {
-        if (index == SceneManager.GetActiveScene().buildIndex)
-        {
-            //DebugLog.Logger("请求跳转到了相同场景");
-            return;
-        }
         StartCoroutine(Transition(index));
     }
 
@@ -62,14 +57,10 @@ public class Game : Singleton<Game>
     IEnumerator Transition(int index)
     {
         transition.SetTrigger("Start");
+        m_SceneStateController.EndState();
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(index, LoadSceneMode.Single);
-        while (SceneManager.GetActiveScene().buildIndex != index)
-        {
-            Debug.Log("loading scene......");
-            yield return null;
-        }
-
+        yield return SceneManager.LoadSceneAsync(index);
         switch (index)
         {
             case 0://Menu
