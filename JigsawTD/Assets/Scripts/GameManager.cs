@@ -14,6 +14,8 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField] private MainUI m_MainUI = default;
     [SerializeField] private FuncUI m_FuncUI = default;
+    [SerializeField] private GameEndUI m_GameEndUI = default;
+
 
     //波次系统
     [SerializeField] private WaveSystem m_WaveSystem = default;
@@ -82,6 +84,9 @@ public class GameManager : Singleton<GameManager>
         m_MainUI.Initialize(this);//主界面顶部UI
         m_FuncUI.Initialize(this);//主界面功能UI
         m_ShapeSelectUI.Initialize(this);//抽模块UI
+        m_GameEndUI.Initialize(this);//游戏结束UI
+        m_TrapTips.Initialize(this);//防御塔TIPS
+        m_TurretTips.Initialize(this);//陷阱及其他TIPS
 
         //// _bluePrintFacotry.InitializeFactory();
         //_bluePrintShop.RefreshShop(0);
@@ -100,8 +105,14 @@ public class GameManager : Singleton<GameManager>
     public void Release()
     {
         m_BoardSystem.Release();
-        m_ShapeSelectUI.Release();
         m_WaveSystem.Release();
+
+        m_MainUI.Release();
+        m_FuncUI.Release();
+        m_ShapeSelectUI.Release();
+        m_GameEndUI.Release();
+        m_TrapTips.Release();
+        m_TurretTips.Release();
     }
 
 
@@ -127,12 +138,6 @@ public class GameManager : Singleton<GameManager>
         TransitionToState(StateName.WaveState);
     }
 
-
-    public void PlayerDie()
-    {
-        throw new NotImplementedException();
-    }
-
     public void DrawShapes()
     {
         //SHAPESELECTUI打开并配置3个随机形状供选择
@@ -156,8 +161,21 @@ public class GameManager : Singleton<GameManager>
     public void PrepareNextWave()
     {
         //_bluePrintShop.NextRefreshTrun--;
+
+        if (m_MainUI.Life <= 0)//游戏失败
+        {
+            GameEnd(true);
+            return;
+        }
+        else if (m_MainUI.CurrentWave >= StaticData.Instance.LevelMaxWave)//游戏胜利
+        {
+            GameEnd(false);
+            return;
+        }
+
         m_MainUI.PrepareNextWave();
         m_FuncUI.Show();
+
         //重置所有防御塔的回合临时加成
         foreach (var turret in turrets.behaviors)
         {
@@ -191,6 +209,14 @@ public class GameManager : Singleton<GameManager>
         m_TrapTips.Hide();
     }
 
+    public void GameEnd(bool win)
+    {
+        m_GameEndUI.Show();
+        m_GameEndUI.SetGameResult(win);
+    }
+
+
+
     public void SpawnEnemy(EnemySequence sequence)
     {
         Enemy enemy = m_WaveSystem.SpawnEnemy(sequence.EnemyAttribute, sequence.Intensify);
@@ -198,6 +224,8 @@ public class GameManager : Singleton<GameManager>
         enemy.SpawnOn(tile);
         enemies.Add(enemy);
     }
+
+
 
     public void TransitionToState(StateName stateName)
     {

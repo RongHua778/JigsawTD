@@ -7,8 +7,6 @@ public class ScaleAndMove : MonoBehaviour
 {
     Vector2 m_ScreenPos = new Vector2();
     Vector3 oldPosition;
-
-    bool canMove = false;
     Camera cam;
     float moveSpeed = 20f;
     private int slideSpeed = 0;
@@ -20,6 +18,7 @@ public class ScaleAndMove : MonoBehaviour
     private float maxDown = -20;
     private float maxLeft = -20;
     private float maxRight = 20;
+    Vector2 CamMovement;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,24 +32,21 @@ public class ScaleAndMove : MonoBehaviour
     void Update()
     {
         //MobileInput();
-        if (canMove)
-        {
-                DesktopInput();
-        }
+        DesktopInput();
+        //RTSView();
+    }
+
+    private void FixedUpdate()
+    {
         if (transform.localPosition.x < maxLeft ||
-    transform.localPosition.x > maxRight ||
-    transform.localPosition.y > maxUp ||
-    transform.localPosition.y < maxDown)
+            transform.localPosition.x > maxRight ||
+            transform.localPosition.y > maxUp ||
+            transform.localPosition.y < maxDown)
         {
             transform.position = new Vector3(0, 0, -10);
         }
-            //RTSView();
-        }
-
-    void SetCanMove()
-    {
-        canMove = true;
     }
+
     private void RTSView()
     {
         Vector3 speedHorizon = new Vector3(0, 0, 0);
@@ -88,10 +84,19 @@ public class ScaleAndMove : MonoBehaviour
             return;
         if (DraggingActions.DraggingThis == null && Input.GetMouseButton(0))
         {
-            transform.Translate(Vector3.left * Input.GetAxis("Mouse X") * moveSpeed * Time.deltaTime);
-            transform.Translate(Vector3.up * Input.GetAxis("Mouse Y") * -moveSpeed * Time.deltaTime);
+            CamMovement = Vector3.left * Input.GetAxis("Mouse X") + Vector3.down * Input.GetAxis("Mouse Y");
+        }
+        else
+        {
+            CamMovement = Vector2.zero;
+
         }
 
+    }
+
+    private void LateUpdate()
+    {
+        transform.Translate(CamMovement * moveSpeed * Time.deltaTime);
     }
 
     private void MobileInput()

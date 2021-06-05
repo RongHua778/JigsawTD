@@ -26,10 +26,10 @@ public class Game : Singleton<Game>
         switch (currentSceneIndex)
         {
             case 0://menu
-                m_SceneStateController.SetState(new MenuState(m_SceneStateController), "MenuState");
+                m_SceneStateController.SetState(new MenuState(m_SceneStateController));
                 break;
             case 1://battle
-                m_SceneStateController.SetState(new BattleState(m_SceneStateController), "BattleState");
+                m_SceneStateController.SetState(new BattleState(m_SceneStateController));
                 break;
         }
         Sound.Instance.BgVolume = 0.5f;
@@ -43,17 +43,6 @@ public class Game : Singleton<Game>
 
 
     #region 场景读取及转场动画
-    //根据名字读取场景
-    public void LoadScene(string sceneName)
-    {
-        if (sceneName == SceneManager.GetActiveScene().name)
-        {
-            //DebugLog.Logger("请求跳转到了相同场景");
-            return;
-        }
-
-        StartCoroutine(Transition(sceneName));
-    }
     //根据ID读取场景
     public void LoadScene(int index)
     {
@@ -75,14 +64,21 @@ public class Game : Singleton<Game>
         transition.SetTrigger("Start");
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(index, LoadSceneMode.Single);
-        transition.SetTrigger("End");
+        while (SceneManager.GetActiveScene().buildIndex != index)
+        {
+            Debug.Log("loading scene......");
+            yield return null;
+        }
 
-    }
-    IEnumerator Transition(string sceneName)
-    {
-        transition.SetTrigger("Start");
-        yield return new WaitForSeconds(transitionTime);
-        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+        switch (index)
+        {
+            case 0://Menu
+                m_SceneStateController.SetState(new MenuState(m_SceneStateController));
+                break;
+            case 1://Battle
+                m_SceneStateController.SetState(new BattleState(m_SceneStateController));
+                break;
+        }
         transition.SetTrigger("End");
 
     }

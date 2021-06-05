@@ -14301,3 +14301,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdff7c402c8e53e4f9b53e72ada898fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ParentObj: {fileID: 0}
+  m_TrapAttribute: {fileID: 11400000, guid: 132429f84cc3e32449aabf043aee0234, type: 2}

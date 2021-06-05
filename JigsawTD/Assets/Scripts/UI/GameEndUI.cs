@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameEndPanel : MonoBehaviour
+public class GameEndUI : IUserInterface
 {
     [SerializeField] Text title = default;
     [SerializeField] Text totalCompositeTxt = default;
@@ -15,7 +15,7 @@ public class GameEndPanel : MonoBehaviour
     public static int TotalComposite { get => totalComposite; set => totalComposite = value; }
     public static int TotalDamage { get => totalDamage; set => totalDamage = value; }
 
-    public void ShowGameEndPanel(bool win)
+    public void SetGameResult(bool win)
     {
         if (win)
         {
@@ -27,7 +27,6 @@ public class GameEndPanel : MonoBehaviour
         }
         totalCompositeTxt.text = TotalComposite.ToString();
         totalDamageTxt.text = TotalDamage.ToString();
-
     }
 
     public void ReturnToMenu()

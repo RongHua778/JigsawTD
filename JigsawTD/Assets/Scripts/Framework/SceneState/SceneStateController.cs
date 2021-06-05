@@ -8,20 +8,17 @@ public class SceneStateController
     private ISceneState m_State;
     private bool m_RunBegin = false;
     public SceneStateController() { }
-    public void SetState(ISceneState state, string LoadSceneName)
+    public void SetState(ISceneState state)
     {
         DebugLog.Logger("EnterSceneState" + state.StateName);
         m_RunBegin = false;
-
-        // 載入場景
-        Game.Instance.LoadScene(LoadSceneName);
-
         // 通知前一個State結束
         if (m_State != null)
             m_State.StateEnd();
 
         // 設定
         m_State = state;
+        m_State.StateBegin();
     }
 
     private void LoadScene(string LoadSceneName)
@@ -33,20 +30,7 @@ public class SceneStateController
 
     public void StateUpdate()
     {
-        // 是否還在載入
-
-        //if (!SceneManager.LoadSceneAsync(m_State.StateName, LoadSceneMode.Single).isDone)
-        //    return;
-
-        // 通知新的State開始
-        if (m_State != null && m_RunBegin == false)
-        {
-            m_State.StateBegin();
-            m_RunBegin = true;
-        }
-
-        if (m_State != null)
-            m_State.StateUpdate();
+        m_State.StateUpdate();
     }
 
     //private IEnumerator StartLoading(string sceneName)

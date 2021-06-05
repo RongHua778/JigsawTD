@@ -5,6 +5,15 @@ using UnityEngine.UI;
 
 public class MainUI : IUserInterface
 {
+
+    //UI
+    [SerializeField] Text PlayerLifeTxt = default;
+    [SerializeField] Text coinTxt = default;
+    [SerializeField] Text speedBtnTxt = default;
+    [SerializeField] Text waveTxt = default;
+
+    [SerializeField] PausePanel m_PausePanel = default;
+    [SerializeField] GuideBook m_GuideBook = default;
     private int coin = 0;
     public int Coin
     {
@@ -16,7 +25,7 @@ public class MainUI : IUserInterface
         }
     }
 
-    private int life = 15;
+    private int life;
     public int Life
     {
         get => life;
@@ -24,10 +33,7 @@ public class MainUI : IUserInterface
         {
             if (value <= 0)
             {
-                //_roadPlacament.HideArea();
-                //_gameEndPanel.gameObject.SetActive(true);
-                //_gameEndPanel.ShowGameEndPanel(false);
-                GameManager.Instance.PlayerDie();
+                m_GameManager.GameEnd(false);
             }
             life = Mathf.Clamp(value, 0, StaticData.Instance.PlayerMaxHealth);
             PlayerLifeTxt.text = life.ToString() + "/" + StaticData.Instance.PlayerMaxHealth.ToString();
@@ -63,11 +69,7 @@ public class MainUI : IUserInterface
             Time.timeScale = gameSpeed;
         }
     }
-    //UI
-    [SerializeField] Text PlayerLifeTxt = default;
-    [SerializeField] Text coinTxt = default;
-    [SerializeField] Text speedBtnTxt = default;
-    [SerializeField] Text waveTxt = default;
+
 
     public override void Initialize(GameManager gameManager)
     {
@@ -75,11 +77,17 @@ public class MainUI : IUserInterface
         GameEvents.Instance.onEnemyReach += EnemyReach;
         GameSpeed = 1;
         CurrentWave = 1;
+        Life = StaticData.Instance.PlayerMaxHealth;
+        Coin = StaticData.Instance.StartCoin;
+
+        m_PausePanel.Initialize(m_GameManager);
+        m_GuideBook.Initialize(m_GameManager);
     }
 
     public override void Release()
     {
         base.Release();
+        GameSpeed = 1;
         GameEvents.Instance.onEnemyReach -= EnemyReach;
     }
 
@@ -94,12 +102,7 @@ public class MainUI : IUserInterface
     {
         CurrentWave++;
         Coin += StaticData.Instance.BaseWaveIncome + StaticData.Instance.WaveMultiplyIncome * (CurrentWave - 1);
-        //if (!drawLastTurn)
-        //{
-        //    LuckPoint += LuckProgress;
-        //    LuckProgress += 2;
-        //}
-        //DrawRemain++;
+
     }
 
     public bool ConsumeMoney(int cost)
@@ -119,12 +122,12 @@ public class MainUI : IUserInterface
 
     public void GuideBookBtnClick()
     {
-
+        m_GuideBook.Show();
     }
 
     public void PauseBtnClick()
     {
-
+        m_PausePanel.Show();
     }
 
     public void GameSpeedBtnClick()

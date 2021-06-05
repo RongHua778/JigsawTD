@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PausePanel : MonoBehaviour
+public class PausePanel : IUserInterface
 {
 
-    public void ContinueClick()
+    public void RestartBtnClick()
     {
-        this.gameObject.SetActive(false);
+
     }
 
     public void ExitClick()

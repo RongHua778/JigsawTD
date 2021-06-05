@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DestinationPoint
   m_EditorClassIdentifier: 
   Name: "\u7EC8\u70B9"
-  Icon: {fileID: 21300000, guid: bd6f3bec81b446c43abdcfb8fcf80763, type: 3}
+  Icon: {fileID: 21300000, guid: 37f1e388083a788438ac15ab7bc73d61, type: 3}
   Description: "\u654C\u4EBA\u5C06\u8981\u524D\u5F80\u7684\u76EE\u6807\uFF0C\u5FC5\u987B\u786E\u4FDD\u6709\u8DEF\u7EBF\u8FDE\u63A5\u8D77\u70B9\u3002"
   ContentPrefab: {fileID: 6364243078880216868, guid: dc1f79158d8f5fe4a81f6b23af2e0b81, type: 3}
   BuffInfos: []

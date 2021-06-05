@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SpawnPoint
   m_EditorClassIdentifier: 
   Name: "\u8D77\u70B9"
-  Icon: {fileID: 21300000, guid: edb33e511ba3bef43bfe05b35973a1ee, type: 3}
+  Icon: {fileID: 21300000, guid: 4089cc3f97151664cabbcac5d7f83145, type: 3}
   Description: "\u654C\u4EBA\u7684\u51FA\u751F\u70B9\uFF0C\u5FC5\u987B\u786E\u4FDD\u6709\u8DEF\u7EBF\u8FDE\u63A5\u7EC8\u70B9\u3002"
   ContentPrefab: {fileID: 4773989656283262914, guid: d8f1fb0847b1f1347ba6041df5ab0bbf, type: 3}
   BuffInfos: []

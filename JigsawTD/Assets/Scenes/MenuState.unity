@@ -769,6 +769,7 @@ MonoBehaviour:
   RestorerClip: {fileID: 8300000, guid: bfcf0b2a6f216774da65d638181b0dd4, type: 3}
   TankerClip: {fileID: 8300000, guid: 188da35399dc9ef48a643fb957ef2232, type: 3}
   RunnerClip: {fileID: 8300000, guid: a76990daf7985944e924f5398a2c73b9, type: 3}
+  LastWaveClip: {fileID: 8300000, guid: 3f110b3a19f34674893021ac60752e6f, type: 3}
 --- !u!4 &356425826
 Transform:
   m_ObjectHideFlags: 0

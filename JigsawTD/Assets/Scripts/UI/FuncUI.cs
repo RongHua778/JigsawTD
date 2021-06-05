@@ -59,6 +59,11 @@ public class FuncUI : IUserInterface
         set
         {
             luckPoint = value;
+            if (luckPoint >= 10)
+            {
+                luckPoint = 0;
+                DrawRemain++;
+            }
             LuckPointTxt.text = "累积点:" + luckPoint.ToString();
         }
     }
@@ -71,19 +76,31 @@ public class FuncUI : IUserInterface
     public override void Initialize(GameManager gameManager)
     {
         base.Initialize(gameManager);
-        DrawRemain = 100;
+        DrawRemain = StaticData.Instance.StartLotteryDraw;
     }
     public void DrawBtnClick()
     {
         if (DrawRemain > 0)
         {
             DrawRemain--;
+            DrawThisTurn = true;
             m_GameManager.DrawShapes();
         }
         else
         {
             GameEvents.Instance.Message("抽取次数不足");
         }
+    }
+
+    public void PrepareNextWave()
+    {
+        if (!DrawThisTurn)
+        {
+            LuckPoint += LuckProgress;
+            LuckProgress += 2;
+        }
+        DrawThisTurn = false;
+        DrawRemain++;
     }
 
     public void NextWaveBtnClick()

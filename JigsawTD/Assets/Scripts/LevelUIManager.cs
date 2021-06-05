@@ -29,7 +29,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
     //gamespeed
     [SerializeField] Text speedBtnTxt = default;
 
-    [SerializeField] GameEndPanel _gameEndPanel = default;
+    [SerializeField] GameEndUI _gameEndPanel = default;
     [SerializeField] PausePanel _pausePanel = default;
 
 
@@ -159,7 +159,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
             {
                 //_roadPlacament.HideArea();
                 _gameEndPanel.gameObject.SetActive(true);
-                _gameEndPanel.ShowGameEndPanel(false);
+                _gameEndPanel.SetGameResult(false);
             }
             playerHealth = Mathf.Clamp(value, 0, StaticData.Instance.PlayerMaxHealth);
             healthTxt.text = PlayerHealth.ToString() + "/" + StaticData.Instance.PlayerMaxHealth.ToString();
@@ -206,11 +206,6 @@ public class LevelUIManager : Singleton<LevelUIManager>
         EnemyRemain = sequence.Amount;
     }
 
-    public void OpenGuideBook()
-    {
-        _guideBoook.gameObject.SetActive(true);
-        _guideBoook.ShowBook();
-    }
 
     private void EnemyDie(Enemy enemy)
     {
@@ -383,7 +378,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
             PlayerPrefs.SetInt("MaxPassLevel", GameManager.Instance.Difficulty + 1);
         //_roadPlacament.HideArea();
         _gameEndPanel.gameObject.SetActive(true);
-        _gameEndPanel.ShowGameEndPanel(true);
+        _gameEndPanel.SetGameResult(true);
     }
 
     public void PauseBtnClick()

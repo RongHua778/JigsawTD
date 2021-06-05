@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class IUserInterface : MonoBehaviour
 {
     protected GameManager m_GameManager;
-    [SerializeField] protected GameObject m_RootUI;
+    protected GameObject m_RootUI;
     protected bool m_Active = true;
 
     public virtual void Initialize(GameManager gameManager)

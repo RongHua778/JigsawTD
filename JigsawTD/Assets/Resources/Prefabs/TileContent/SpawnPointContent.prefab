@@ -4759,6 +4759,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ff67d661fd10b46a873af41b00c2ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ParentObj: {fileID: 0}
+  m_TrapAttribute: {fileID: 11400000, guid: 0263469d903409a46837ef1fb50628ce, type: 2}
 --- !u!1 &4773989656283269626
 GameObject:
   m_ObjectHideFlags: 0

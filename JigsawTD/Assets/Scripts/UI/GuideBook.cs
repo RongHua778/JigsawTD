@@ -2,22 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GuideBook : MonoBehaviour
+public class GuideBook : IUserInterface
 {
 
     [SerializeField] GameObject[] pages = default;
     private int currentIndex = 0;
-
-    public void ShowBook()
+    public override void Show()
     {
+        base.Show();
         currentIndex = 0;
         ShowPage(currentIndex);
     }
 
-    public void CloseBook()
-    {
-        this.gameObject.SetActive(false);
-    }
+
     private void ShowPage(int index)
     {
         foreach (var page in pages)

@@ -13,6 +13,7 @@ public class Sound : Singleton<Sound>
     public AudioClip RestorerClip;
     public AudioClip TankerClip;
     public AudioClip RunnerClip;
+    public AudioClip LastWaveClip;
 
     protected override void Awake()
     {

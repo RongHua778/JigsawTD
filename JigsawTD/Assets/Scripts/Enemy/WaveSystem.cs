@@ -17,14 +17,6 @@ public class WaveSystem : IGameSystem
             if (enemyRemain <= 0)
             {
                 enemyRemain = 0;
-                //if (PlayerHealth <= 0)
-                //    return;
-                //if (CurrentWave == StaticData.Instance.LevelMaxWave)
-                //{
-                //    ShowGameWinPanel();
-                //    return;
-                //}
-
                 GameManager.Instance.PrepareNextWave();
             }
         }
@@ -165,23 +157,23 @@ public class WaveSystem : IGameSystem
             //±³¾°ÒôÀÖÉèÖÃ
             if (RunningSequence.Wave == StaticData.Instance.LevelMaxWave)
             {
-                Sound.Instance.PlayBg("lastwave");
+                Sound.Instance.PlayBg(Sound.Instance.LastWaveClip);
             }
             else
             {
                 switch (RunningSequence.EnemyAttribute.EnemyType)
                 {
                     case EnemyType.Soilder:
-                        Sound.Instance.PlayBg("soldier");
+                        Sound.Instance.PlayBg(Sound.Instance.SoilderClip);
                         break;
                     case EnemyType.Runner:
-                        Sound.Instance.PlayBg("runner");
+                        Sound.Instance.PlayBg(Sound.Instance.RunnerClip);
                         break;
                     case EnemyType.Restorer:
-                        Sound.Instance.PlayBg("restorer");
+                        Sound.Instance.PlayBg(Sound.Instance.RestorerClip);
                         break;
                     case EnemyType.Tanker:
-                        Sound.Instance.PlayBg("tanker");
+                        Sound.Instance.PlayBg(Sound.Instance.TankerClip);
                         break;
                 }
             }

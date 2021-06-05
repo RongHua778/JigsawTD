@@ -287,7 +287,7 @@ public abstract class Enemy :ReusableObject, IGameBehavior
         CurrentHealth -= realDamage;
         TargetDamageCounter += realDamage;
 
-        GameEndPanel.TotalDamage += (int)realDamage;
+        GameEndUI.TotalDamage += (int)realDamage;
     }
 
 
