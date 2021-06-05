@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CompositeTurret : TurretContent
 {
+    public override GameTileContentType ContentType => GameTileContentType.CompositeTurret;
+
+
     public Blueprint CompositeBluePrint;
 
     public override float AttackIntensify { get => base.AttackIntensify + CompositeBluePrint.CompositeAttackDamage; set => base.AttackIntensify = value; }

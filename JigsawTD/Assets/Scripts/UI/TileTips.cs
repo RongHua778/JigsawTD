@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class TileTips : MonoBehaviour
+public class TileTips : IUserInterface
 {
     [SerializeField] protected Animator anim;
     [SerializeField] protected Image Icon = default;
@@ -12,11 +12,16 @@ public class TileTips : MonoBehaviour
     [SerializeField] protected Text Description = default;
 
 
-    public void CloseTips()
+    public override void Show()
     {
-        if (gameObject.activeSelf)
-            anim.SetBool("isOpen", false);
+        Sound.Instance.PlayEffect("Sound_Click");
+        anim.SetBool("isOpen", true);
     }
 
+
+    public override void Hide()
+    {
+        anim.SetBool("isOpen", false);
+    }
 
 }

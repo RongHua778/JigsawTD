@@ -18,6 +18,9 @@ public class GameManager : Singleton<GameManager>
     //²¨´ÎÏµÍ³
     [SerializeField] private WaveSystem m_WaveSystem = default;
 
+    //·ÀÓùËþTIPS
+    [SerializeField] private TurretTips m_TurretTips = default;
+
 
     public BluePrintShop _bluePrintShop = default;
 
@@ -164,7 +167,26 @@ public class GameManager : Singleton<GameManager>
         Sound.Instance.PlayBg("preparing");
     }
 
+    public bool ConsumeMoney(int cost)
+    {
+        return m_MainUI.ConsumeMoney(cost);
+    }
 
+    public void ShowTurretTips(TurretContent turret)
+    {
+        m_TurretTips.ReadTurret(turret);
+        m_TurretTips.Show();
+    }
+
+    public void ShowTrapTips()
+    {
+        m_TurretTips.Hide();
+    }
+
+    public void HideTileTips()
+    {
+        m_TurretTips.Hide();
+    }
 
     public void SpawnEnemy(EnemySequence sequence)
     {

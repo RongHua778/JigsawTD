@@ -22,12 +22,9 @@ public class BoardSystem : IGameSystem
         {
             if (selectingTile != null)
             {
-                //if (selectingTile.BasicTileType == BasicTileType.Turret)
-                //{
-                //    ((TurretTile)selectingTile).ShowTurretRange(false);
-                //}
                 selectingTile.Content.OnContentSelected(false);
                 selectingTile = selectingTile == value ? null : value;
+                GameManager.Instance.HideTileTips();
             }
             else
             {
@@ -35,11 +32,6 @@ public class BoardSystem : IGameSystem
             }
             if (selectingTile != null)
             {
-                //if (selectingTile.BasicTileType == BasicTileType.Turret)
-                //{
-                //    ((TurretTile)selectingTile).ShowTurretRange(true);
-                //}
-                //LevelUIManager.Instance.ShowTileTips(selectingTile);
                 selectingTile.Content.OnContentSelected(true);
                 selection.transform.position = selectingTile.transform.position;
             }
@@ -118,7 +110,7 @@ public class BoardSystem : IGameSystem
     {
         if (!IsLongPress)
         {
-            LevelUIManager.Instance.HideTips();
+           // LevelUIManager.Instance.HideTips();
             SelectingTile = tile;
         }
         IsPressingTile = false;

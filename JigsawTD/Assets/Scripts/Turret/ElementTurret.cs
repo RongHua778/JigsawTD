@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ElementTurret : TurretContent
 {
-
+    public override GameTileContentType ContentType => GameTileContentType.ElementTurret;
     //ËþµÄÔªËØÊôÐÔ
     private Element element;
     public Element Element { get => element; set => element = value; }

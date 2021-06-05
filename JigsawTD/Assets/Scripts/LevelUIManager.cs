@@ -179,7 +179,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
         //GameEvents.Instance.onEnemyDie += EnemyDie;
         GameEvents.Instance.onShowTileTips += ShowTileTips;
         GameEvents.Instance.onShowTurretTips += ShowTurretAttributeTips;
-        GameEvents.Instance.onHideTips += HideTips;
+        //GameEvents.Instance.onHideTips += HideTips;
 
         LuckyPoints = 0;
         CurrentWave = 0;
@@ -197,7 +197,7 @@ public class LevelUIManager : Singleton<LevelUIManager>
         //GameEvents.Instance.onEnemyDie -= EnemyDie;
         GameEvents.Instance.onShowTileTips -= ShowTileTips;
         GameEvents.Instance.onShowTurretTips -= ShowTurretAttributeTips;
-        GameEvents.Instance.onHideTips -= HideTips;
+        //GameEvents.Instance.onHideTips -= HideTips;
     }
 
 
@@ -300,14 +300,9 @@ public class LevelUIManager : Singleton<LevelUIManager>
         Vector2 size = turretTips.GetComponent<RectTransform>().sizeDelta;
         Vector2 pos = new Vector2(size.x / 2 + 500, Screen.height / 2);
         turretTips.transform.position = pos;
-        turretTips.ReadAttribute(bGrid);
+        //turretTips.ReadAttribute(bGrid);
     }
 
-    public void HideTips()
-    {
-        turretTips.CloseTips();
-        trapTips.CloseTips();
-    }
 
     public void ShowTempTips(string text, Vector2 pos)
     {

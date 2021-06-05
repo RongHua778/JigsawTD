@@ -63,13 +63,13 @@ public class StaticData : Singleton<StaticData>
 
 
 
-    [Header("ElementAttributes")]
-    public float GoldAttackIntensify;
-    public float WoodSpeedIntensify;
-    public float WaterSlowIntensify;
-    public float FireCriticalIntensify;
-    public float DustSputteringIntensify;
-    
+    //元素加成
+    public static float GoldAttackIntensify = 0.1f;
+    public static float WoodSpeedIntensify = 0.1f;
+    public static float WaterSlowIntensify = 0.2f;
+    public static float FireCriticalIntensify = 0.1f;
+    public static float DustSputteringIntensify = 0.1f;
+
 
 
     [Header("CompositionAttributes")]
@@ -324,4 +324,46 @@ public class StaticData : Singleton<StaticData>
         return null;
     }
 
+    public static string GetElementIntensifyText(Element element, int quality)
+    {
+        string intensifyTxt = "+";//根据元素及品质设置显示加成效果
+        switch (element)
+        {
+            case Element.Gold:
+                intensifyTxt += GoldAttackIntensify * 100 * quality + "%攻击";
+                break;
+            case Element.Wood:
+                intensifyTxt += WoodSpeedIntensify * 100 * quality + "%攻速";
+                break;
+            case Element.Water:
+                intensifyTxt += WaterSlowIntensify * quality + "减速";
+                break;
+            case Element.Fire:
+                intensifyTxt += FireCriticalIntensify * 100 * quality + "%暴击率";
+                break;
+            case Element.Dust:
+                intensifyTxt += FireCriticalIntensify * quality + "溅射";
+                break;
+            default:
+                Debug.Log("错误的元素，无法配置加成");
+                break;
+        }
+        return intensifyTxt;
+    }
+
+    public static string GetTurretDes(TurretAttribute attribute,int quality)
+    {
+        string finalDes = "";
+        if (attribute.Description != "")
+            finalDes += attribute.Description + "\n";
+        if (attribute.TurretLevels[quality - 1].TurretEffects.Count > 0)
+        {
+            foreach (TurretEffectInfo effect in attribute.TurretLevels[quality - 1].TurretEffects)
+            {
+                finalDes += effect.EffectDescription;
+                finalDes += "\n";
+            }
+        }
+        return finalDes;
+    }
 }

@@ -81,6 +81,21 @@ public class MainUI : IUserInterface
         //DrawRemain++;
     }
 
+    public bool ConsumeMoney(int cost)
+    {
+        if (Coin >= cost)
+        {
+            Coin -= cost;
+            return true;
+        }
+        else
+        {
+            GameEvents.Instance.Message("拥有的金币不足");
+            return false;
+        }
+    }
+
+
     public void GuideBookBtnClick()
     {
 

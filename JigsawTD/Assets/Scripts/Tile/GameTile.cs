@@ -112,15 +112,15 @@ public abstract class GameTile : TileBase
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
-        ObjectPool.Instance.UnSpawn(Content.gameObject);
-        gameObject.tag = "Untagged";
-        Content = null;
-        m_DraggingShape = null;
-        BaseRenderer.color = Color.white;
         if (BoardSystem.SelectingTile == this)
         {
             BoardSystem.SelectingTile = null;
         }
+        ObjectPool.Instance.UnSpawn(Content.gameObject);
+        gameObject.tag = "Untagged";
+        m_DraggingShape = null;
+        BaseRenderer.color = Color.white;
+        Content = null;
     }
 
     public void CorrectRotation()

@@ -439,7 +439,7 @@ GameObject:
   - component: {fileID: 2535714263384812999}
   - component: {fileID: 445024676008381122}
   - component: {fileID: 9076749498205041454}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: TurretRangeCol
   m_TagString: Untagged
   m_Icon: {fileID: 0}

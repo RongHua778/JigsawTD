@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum GameTileContentType
 {
-    Empty, Destination, SpawnPoint, Turret, Trap
+    Empty, Destination, SpawnPoint, ElementTurret, CompositeTurret, Trap
 }
 public abstract class GameTileContent : ReusableObject
 {
@@ -23,13 +23,13 @@ public abstract class GameTileContent : ReusableObject
 
     public virtual void OnContentSelected(bool value)
     {
-        //showtips
+        
     }
 
     protected virtual void ContentLandedCheck(Collider2D col)//根据下方已有坚固格的类型决定自己的行为
     {
         m_GameTile.tag = "UnDropablePoint";
-        
+
         if (col != null)
         {
             GameTile tile = col.GetComponent<GameTile>();
@@ -48,7 +48,7 @@ public abstract class GameTileContent : ReusableObject
 
     public virtual void CorretRotation()
     {
-        
+
     }
 
     public override void OnUnSpawn()

@@ -4,9 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public abstract class TurretContent : GameTileContent,IGameBehavior
+public abstract class TurretContent : GameTileContent, IGameBehavior
 {
-    public override GameTileContentType ContentType => GameTileContentType.Turret;
     public bool Dropped { get; set; }
     public TurretAttribute m_TurretAttribute;
     public List<TargetPoint> targetList = new List<TargetPoint>();
@@ -42,7 +41,7 @@ public abstract class TurretContent : GameTileContent,IGameBehavior
     private int quality = 1;
     public int Quality
     {
-        get => quality; 
+        get => quality;
         set
         {
             quality = value;
@@ -81,15 +80,7 @@ public abstract class TurretContent : GameTileContent,IGameBehavior
     float attackIntensify;
     public virtual float AttackIntensify { get => attackIntensify; set => attackIntensify = value; }
     int rangeIntensify;
-    public int RangeIntensify
-    {
-        get => rangeIntensify;
-        set
-        {
-            rangeIntensify = value;
-            GenerateRange();
-        }
-    }
+    public int RangeIntensify { get => rangeIntensify; set => rangeIntensify = value; }
     float speedIntensify;
     public virtual float SpeedIntensify { get => speedIntensify; set => speedIntensify = value; }
 
@@ -369,6 +360,15 @@ public abstract class TurretContent : GameTileContent,IGameBehavior
     {
         base.OnContentSelected(value);
         ShowRange(value);
+        if (value)
+        {
+            GameManager.Instance.ShowTurretTips(this);
+        }
+        //else
+        //{
+        //    GameManager.Instance.ShowTurretTips(this);
+
+        //}
     }
     public override void CorretRotation()
     {
@@ -392,6 +392,7 @@ public abstract class TurretContent : GameTileContent,IGameBehavior
 
     public override void OnUnSpawn()
     {
+        base.OnUnSpawn();
         Dropped = false;
         targetList.Clear();
         AttackIntensify = 0;
@@ -402,7 +403,7 @@ public abstract class TurretContent : GameTileContent,IGameBehavior
         DamageAnalysis = 0;
         GameManager.Instance.turrets.Remove(this);//´ÓÁÐ±íÒÆ³ý
         ClearTurnIntensify();
-        RecycleRanges();
+        //RecycleRanges();
     }
 
     public void ClearTurnIntensify()
