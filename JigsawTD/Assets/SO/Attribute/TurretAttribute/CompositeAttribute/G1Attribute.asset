@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: G1Attribute
   m_EditorClassIdentifier: 
   Name: G1
+  Icon: {fileID: 21300000, guid: 00a54f1e9a5dc594f92df5235b551bd3, type: 3}
   Description: 
-  TilePrefab: {fileID: 6604616035422911931, guid: e0be9a425d1514a4ca60817bf85bea92, type: 3}
+  ContentPrefab: {fileID: 3858250528476968079, guid: da3c56fe5fd034e4eade45627187e825, type: 3}
   RangeType: 0
   element: 5
   Bullet: {fileID: 3850126010392176229, guid: b88c1d3ba59ce7b4ea2bd28f6a939d28, type: 3}

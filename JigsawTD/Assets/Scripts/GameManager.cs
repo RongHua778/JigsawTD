@@ -6,11 +6,11 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    //系统
+    [Header("系统")]
     [SerializeField] private BoardSystem m_BoardSystem = default;//版图系统
     [SerializeField] private WaveSystem m_WaveSystem = default;//波次系统
 
-    //UI
+    [Header("UI")]
     [SerializeField] private BluePrintShopUI m_BluePrintShopUI = default;
     [SerializeField] private ShapeSelectUI m_ShapeSelectUI = default;
     [SerializeField] private MainUI m_MainUI = default;
@@ -18,12 +18,13 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameEndUI m_GameEndUI = default;
     [SerializeField] private MessageUI m_MessageUI = default;
 
-    //TIPS
+    [Header("TIPS")]
     [SerializeField] private TurretTips m_TurretTips = default;
     [SerializeField] private TempTips m_TempTips = default;
     [SerializeField] private TrapTips m_TrapTips = default;
+    [SerializeField] private BluePrintTips m_BluePrintTips = default;
 
-    //工厂
+    [Header("工厂")]
     [SerializeField] TileFactory _tileFactory = default;
     [SerializeField] TileContentFactory _contentFactory = default;
     [SerializeField] TileShapeFactory _shapeFactory = default;
@@ -35,18 +36,17 @@ public class GameManager : Singleton<GameManager>
     public EnemyFactory EnemyFactory { get => _enemyFactory; }
     public BlueprintFactory BluePrintFactory { get => _bluePrintFacotry; }
 
-    //Behavior集合
+    [Header("集合")]
     public GameBehaviorCollection enemies = new GameBehaviorCollection();
     public GameBehaviorCollection nonEnemies = new GameBehaviorCollection();
-    public GameBehaviorCollection turrets = new GameBehaviorCollection();
+    public GameBehaviorCollection elementTurrets = new GameBehaviorCollection();
+    public GameBehaviorCollection compositeTurrets = new GameBehaviorCollection();
 
-    //流程
+    [Header("流程")]
     private BattleOperationState operationState;
     public BattleOperationState OperationState { get => operationState; }
     private BuildingState buildingState;
     private WaveState waveState;
-    //************
-
 
     //初始化设定
     public void Initinal()
@@ -107,7 +107,8 @@ public class GameManager : Singleton<GameManager>
         m_WaveSystem.GameUpdate();
         enemies.GameUpdate();
         Physics2D.SyncTransforms();
-        turrets.GameUpdate();
+        elementTurrets.GameUpdate();
+        compositeTurrets.GameUpdate();
         nonEnemies.GameUpdate();
     }
 
@@ -119,21 +120,21 @@ public class GameManager : Singleton<GameManager>
     }
     public void PrepareNextWave()
     {
-        //_bluePrintShop.NextRefreshTrun--;
         if (m_MainUI.Life <= 0)//游戏失败
-        {
-            GameEnd(true);
-            return;
-        }
-        else if (m_MainUI.CurrentWave >= StaticData.Instance.LevelMaxWave)//游戏胜利
         {
             GameEnd(false);
             return;
         }
+        else if (m_MainUI.CurrentWave >= StaticData.Instance.LevelMaxWave)//游戏胜利
+        {
+            GameEnd(true);
+            return;
+        }
+        m_BluePrintShopUI.NextRefreshTrun--;
         m_MainUI.PrepareNextWave();
         m_FuncUI.Show();
         //重置所有防御塔的回合临时加成
-        foreach (var turret in turrets.behaviors)
+        foreach (var turret in elementTurrets.behaviors)
         {
             ((TurretContent)turret).ClearTurnIntensify();
         }
@@ -188,6 +189,21 @@ public class GameManager : Singleton<GameManager>
     public void ConfirmShape()//放下了一个模块
     {
         m_FuncUI.Show();
+        m_BluePrintShopUI.CheckAllBluePrint();
+    }
+
+    public void CompositeShape(BluePrintGrid grid)//合成了一个防御塔
+    {
+        m_BluePrintShopUI.CompositeBluePrint(grid);
+    }
+
+    public void BuyBluePrint(BluePrintGrid grid,int cost)
+    {
+        if (ConsumeMoney(cost))
+        {
+            m_FuncUI.LuckPoint++;
+            m_BluePrintShopUI.MoveBluePrintToPocket(grid);
+        }
     }
     #endregion
 
@@ -219,7 +235,10 @@ public class GameManager : Singleton<GameManager>
 
     public void RefreshShop(int cost)
     {
-        m_BluePrintShopUI.RefreshShop(m_FuncUI.PlayerLevel,cost);
+        if (ConsumeMoney(cost))
+        {
+            m_BluePrintShopUI.RefreshShop(m_FuncUI.PlayerLevel, cost);
+        }
     }
 
     public void GetRandomBluePrint()
@@ -234,6 +253,7 @@ public class GameManager : Singleton<GameManager>
         m_TurretTips.ReadTurret(turret);
         m_TurretTips.Show();
         m_TrapTips.Hide();
+        m_BluePrintTips.Hide();
     }
 
     public void ShowTrapTips(TrapContent trap)
@@ -241,6 +261,7 @@ public class GameManager : Singleton<GameManager>
         m_TrapTips.ReadTrap(trap);
         m_TurretTips.Hide();
         m_TrapTips.Show();
+        m_BluePrintTips.Hide();
     }
 
     public void ShowTempTips(string text, Vector2 pos)
@@ -249,86 +270,25 @@ public class GameManager : Singleton<GameManager>
         m_TempTips.SendText(text);
         m_TempTips.SetPos(pos);
     }
+
+    public void ShowBluePrintTips(BluePrintGrid grid)
+    {
+        m_TrapTips.Hide();
+        m_TurretTips.Hide();
+        m_BluePrintTips.ReadBluePrint(grid);
+        m_BluePrintTips.Show();
+    }
     public void HideTempTips()
     {
         m_TempTips.gameObject.SetActive(false);
     }
 
-    public void HideTileTips()
+    public void HideTips()
     {
         m_TurretTips.Hide();
         m_TrapTips.Hide();
+        m_BluePrintTips.Hide();
     }
 
     #endregion
-
-
-
-    ////生成随机形状，配置随机元素塔
-    //public TileShape GenerateRandomBasicShape()
-    //{
-    //    TileShape shape = _shapeFactory.GetRandomShape();
-    //    GameTile randomElementTile = TileFactory.GetRandomElementTile();
-    //    shape.SetTile(randomElementTile);
-    //    return shape;
-    //}
-
-    ////消耗素材，生成合成塔及DShape供放置
-    //public TileShape GenerateCompositeShape(Blueprint bluePrint)
-    //{
-    //    TileShape shape = _shapeFactory.GetDShape();
-    //    TurretTile tile = TileFactory.GetCompositeTurretTile(bluePrint.CompositeTurretAttribute);
-    //    //将蓝图赋值给合成塔turret
-    //    Turret turret = tile.turret;
-    //    ((CompositeTurret)turret).CompositeBluePrint = bluePrint;
-    //    shape.SetTile(tile);
-    //    return shape;
-    //}
-
-
-    ////测试用，基于元素，等级，获取对应元素塔
-    //public void GetTestElement(int quality, int element)
-    //{
-    //    TileShape shape = _shapeFactory.GetDShape();
-    //    GameTile tile = TileFactory.GetBasicTurret(quality, element);
-    //    shape.SetTile(tile);
-    //}
-
-    ////获取基本元素塔，基于元素类型，用于配置UI等
-    //public TurretAttribute GetElementAttribute(Element element)
-    //{
-    //    return _turretFactory.GetElementsAttributes(element);
-    //}
-
-    ////根据玩家等级概率获取对应随机配方
-    //public TurretAttribute GetRandomCompositeAttributeByLevel()
-    //{
-    //    return _turretFactory.GetRandomCompositionTurretByLevel();
-    //}
-
-    ////获取一个随机的配方
-    //public TurretAttribute GetRandomCompositeAttribute()
-    //{
-    //    return _turretFactory.GetRandomCompositionTurret();
-    //}
-
-    ////测试用，根据名字生成一个合成塔
-    //public void GetCompositeAttributeByName(string name)
-    //{
-    //    TileShape shape = _shapeFactory.GetDShape();
-    //    TurretAttribute attribute = _turretFactory.TestGetCompositeByName(name);
-    //    GameTile tile = TileFactory.GetCompositeTurretTile(attribute);
-    //    Blueprint bluePrint = _bluePrintFacotry.GetRandomBluePrint(attribute);
-    //    Turret turret = ((TurretTile)tile).turret;
-    //    ((CompositeTurret)turret).CompositeBluePrint = bluePrint;
-    //    shape.SetTile(tile);
-    //}
-
-    ////测试用，根据名字生成一个陷阱
-    //public void GetTrapByName(string name)
-    //{
-    //    TileShape shape = _shapeFactory.GetDShape();
-    //    GameTile tile = TileFactory.GetTrapByName(name);
-    //    shape.SetTile(tile);
-    //}
 }

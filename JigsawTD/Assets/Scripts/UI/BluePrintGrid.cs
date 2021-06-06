@@ -13,17 +13,13 @@ public class BluePrintGrid : MonoBehaviour
     [SerializeField] Image compositeIcon = default;
     [SerializeField] ElementGrid[] elementGrids = default;
     private Toggle toggle;
-
     private Blueprint m_BluePrint;
-    private BluePrintShopUI m_Shop;
 
     public Blueprint BluePrint { get => m_BluePrint; set => m_BluePrint = value; }
-    public BluePrintShopUI Shop { get => m_Shop; set => m_Shop = value; }
 
 
-    public void SetElements(BluePrintShopUI shop, ToggleGroup group, Blueprint bluePrint)
+    public void SetElements(ToggleGroup group, Blueprint bluePrint)
     {
-        Shop = shop;
         toggle = this.GetComponent<Toggle>();
         BluePrint = bluePrint;
         BluePrint.CheckElement();
@@ -52,10 +48,6 @@ public class BluePrintGrid : MonoBehaviour
         compositeIcon.color = BluePrint.CheckBuildable() ? Color.white : Color.gray;
     }
 
-    public void MoveToPocket()
-    {
-        Shop.MoveBluePrintToPocket(this);
-    }
 
     public void OnBluePrintSelect()
     {
@@ -64,7 +56,7 @@ public class BluePrintGrid : MonoBehaviour
             if (SelectingBluePrint != null)
                 SelectingBluePrint.OnBluePrintDeselect();
             SelectingBluePrint = this;
-            GameEvents.Instance.ShowTurretTips(this);
+            GameManager.Instance.ShowBluePrintTips(this);
         }
         else
         {
@@ -76,12 +68,8 @@ public class BluePrintGrid : MonoBehaviour
 
     public void OnBluePrintDeselect()
     {
-        GameEvents.Instance.HideTips();
+        GameManager.Instance.HideTips();
     }
-
-
-
-
 
     public void CheckElements()
     {

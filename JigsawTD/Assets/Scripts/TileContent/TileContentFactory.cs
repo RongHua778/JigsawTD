@@ -76,6 +76,7 @@ public class TileContentFactory : GameObjectFactory
         return null;
     }
 
+    //元素塔*******************
 
     public ElementTurret GetRandomElementTurret(int playerLevel)
     {
@@ -100,9 +101,17 @@ public class TileContentFactory : GameObjectFactory
         return content;
     }
 
-    public CompositeTurret GetCompositeTurret(TurretAttribute atttribute)
+    public TurretAttribute GetElementAttribute(Element element)
     {
-        CompositeTurret content = Get(atttribute.ContentPrefab) as CompositeTurret;
+        TurretAttribute attribute = ElementDIC[element];
+        return attribute;
+    }
+
+    //合成塔***********
+    public CompositeTurret GetCompositeTurret(Blueprint bluePrint)
+    {
+        CompositeTurret content = Get(bluePrint.CompositeTurretAttribute.ContentPrefab) as CompositeTurret;
+        content.CompositeBluePrint = bluePrint;
         return content;
 
     }
@@ -117,7 +126,32 @@ public class TileContentFactory : GameObjectFactory
         return null;
     }
 
+    public TurretAttribute GetRandomCompositeAttributeByLevel(int level)
+    {
+        TurretAttribute attributeToReturn = null;
+        float[] chances = new float[3];
+        for (int i = 0; i < 3; i++)
+        {
+            chances[i] = StaticData.Instance.RareChances[level - 1, i];
+        }
+        int random = StaticData.RandomNumber(chances);
+        switch (random)
+        {
+            case 0:
+                attributeToReturn = Rare1Turrets[Random.Range(0, Rare1Turrets.Count - 1)];
+                break;
+            case 1:
+                attributeToReturn = Rare2Turrets[Random.Range(0, Rare2Turrets.Count - 1)];
+                break;
+            case 2:
+                attributeToReturn = Rare3Turrets[Random.Range(0, Rare3Turrets.Count - 1)];
+                break;
+        }
+        Debug.Assert(attributeToReturn != null, "传入了错误的等级");
+        return attributeToReturn;
+    }
 
+    //陷阱*************
 
     public TrapContent GetTrapContentByName(string name)
     {
@@ -144,30 +178,7 @@ public class TileContentFactory : GameObjectFactory
         return instance;
     }
 
-    public TurretAttribute GetRandomCompositeAttributeByLevel(int level)
-    {
-        TurretAttribute attributeToReturn = null;
-        float[] chances = new float[3];
-        for (int i = 0; i < 3; i++)
-        {
-            chances[i] = StaticData.Instance.RareChances[level, i];
-        }
-        int random = StaticData.RandomNumber(chances);
-        switch (random)
-        {
-            case 1:
-                attributeToReturn = Rare1Turrets[Random.Range(0, Rare1Turrets.Count - 1)];
-                break;
-            case 2:
-                attributeToReturn = Rare2Turrets[Random.Range(0, Rare2Turrets.Count - 1)];
-                break;
-            case 3:
-                attributeToReturn = Rare3Turrets[Random.Range(0, Rare3Turrets.Count - 1)];
-                break;
-        }
-        Debug.Assert(attributeToReturn == null, "传入了错误的等级");
-        return attributeToReturn;
-    }
+
 
 
 }

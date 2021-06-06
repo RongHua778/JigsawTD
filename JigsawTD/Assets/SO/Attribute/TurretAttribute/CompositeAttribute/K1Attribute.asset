@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: K1Attribute
   m_EditorClassIdentifier: 
   Name: K1
+  Icon: {fileID: 0}
   Description: 
-  TilePrefab: {fileID: 6604616035422911931, guid: 4a9f194fc9e1d3149ac0fa8fbb8dbf17, type: 3}
+  ContentPrefab: {fileID: 5901820128415079746, guid: ac415d48924f27348b2ad7abc05a61ca, type: 3}
   RangeType: 0
   element: 5
   Bullet: {fileID: 109416, guid: 6b6f7ed3471abdc40b2b80e4f1eaa7bd, type: 3}
   BulletSpeed: 8
+  ShootSound: {fileID: 0}
   Rare: 3
   totalLevel: 14
   elementNumber: 4

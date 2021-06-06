@@ -18,7 +18,6 @@ public class TurretTips : TileTips
     [SerializeField] Text UpgradeCostValue = default;
     [SerializeField] GameObject UpgradeArea = default;//合成塔升级区
     [SerializeField] GameObject IntensifyArea = default;//元素塔加成效果区
-    [SerializeField] GameObject AnalysisArea = default;//伤害统计区
     [SerializeField] TipsElementConstruct elementConstruct = default;//合成塔组成元素区
     //合成塔升级区
 

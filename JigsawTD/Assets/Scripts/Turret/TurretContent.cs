@@ -354,7 +354,6 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     public override void ContentLanded()
     {
         base.ContentLanded();
-        GameManager.Instance.turrets.Add(this);
         Dropped = true;
     }
     public override void OnContentSelected(bool value)
@@ -398,7 +397,6 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         CriticalPercentage = 1.5f;
         TargetCount = 1;
         DamageAnalysis = 0;
-        GameManager.Instance.turrets.Remove(this);//´ÓÁÐ±íÒÆ³ý
         ClearTurnIntensify();
         //RecycleRanges();
     }

@@ -24,7 +24,7 @@ public class BoardSystem : IGameSystem
             {
                 selectingTile.Content.OnContentSelected(false);
                 selectingTile = selectingTile == value ? null : value;
-                GameManager.Instance.HideTileTips();
+                GameManager.Instance.HideTips();
             }
             else
             {

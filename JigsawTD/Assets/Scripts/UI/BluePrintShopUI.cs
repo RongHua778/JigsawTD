@@ -36,20 +36,11 @@ public class BluePrintShopUI : IUserInterface
     {
         base.Initialize(gameManager);
         anim = this.GetComponent<Animator>();
-        NextRefreshTrun = 4;
-        GameEvents.Instance.onCheckBluePrint += CheckAllBluePrint;
-    }
-
-    public override void Release()
-    {
-        base.Release();
-        GameEvents.Instance.onCheckBluePrint -= CheckAllBluePrint;
+        NextRefreshTrun = 3;
     }
 
     public void RefreshShop(int level, int cost)//刷新商店
     {
-        if (!GameManager.Instance.ConsumeMoney(cost))
-            return;
         foreach (var grid in ShopBluePrints.ToList())
         {
             RemoveGrid(grid);
@@ -67,7 +58,7 @@ public class BluePrintShopUI : IUserInterface
         GameObject bluePrintObj = ObjectPool.Instance.Spawn(bluePrintGridPrefab.gameObject);
         bluePrintObj.transform.SetParent(shopContent);
         BluePrintGrid grid = bluePrintObj.GetComponent<BluePrintGrid>();
-        grid.SetElements(this, shopContent.GetComponent<ToggleGroup>(), bluePrint);
+        grid.SetElements(shopContent.GetComponent<ToggleGroup>(), bluePrint);
         if (isShopBluePrint)
         {
             bluePrintObj.transform.SetAsFirstSibling();
@@ -83,7 +74,20 @@ public class BluePrintShopUI : IUserInterface
     public void ShopBtnClick()//播放商店界面打开动画
     {
         Showing = !Showing;
-        anim.SetBool("Showing", Showing);
+        if (Showing)
+            Show();
+        else
+            Hide();
+    }
+
+    public override void Hide()
+    {
+        anim.SetBool("Showing", false);
+    }
+
+    public override void Show()
+    {
+        anim.SetBool("Showing", true);
     }
 
     public void MoveBluePrintToPocket(BluePrintGrid grid)//把商店配方移入拥有
@@ -96,18 +100,31 @@ public class BluePrintShopUI : IUserInterface
         grid.transform.SetAsLastSibling();
     }
 
+    public void RefreshBtnClick()
+    {
+        GameManager.Instance.RefreshShop(20);
+    }
 
 
 
     public void CompositeBluePrint(BluePrintGrid grid)//合成对应的配方
     {
-        //grid.BluePrint.BuildBluePrint();
-        //GameManager.Instance.GenerateCompositeShape(grid.BluePrint);
-        //RemoveGrid(grid);
-        //CheckAllBluePrint();
+        if (grid.BluePrint.CheckBuildable())
+        {
+            grid.BluePrint.BuildBluePrint();
+            ConstructHelper.GetCompositeTurretByBluePrint(grid.BluePrint);
+            RemoveGrid(grid);
+            CheckAllBluePrint();
+            Hide();
+            GameManager.Instance.HideTips();
+            //设置结算信息
+            //GameEndPanel.TotalComposite++;
+        }
+        else
+        {
+            GameManager.Instance.ShowMessage("合成所需素材不足");
+        }
 
-        ////设置结算信息
-        //GameEndPanel.TotalComposite++;
     }
 
     private void RemoveGrid(BluePrintGrid grid)//移除对应的配方，并清理列表
@@ -123,7 +140,7 @@ public class BluePrintShopUI : IUserInterface
         ObjectPool.Instance.UnSpawn(grid.gameObject);
     }
 
-    private void CheckAllBluePrint()//检查所有配方是否达成合成条件
+    public void CheckAllBluePrint()//检查所有配方是否达成合成条件
     {
         foreach (var bluePrint in ShopBluePrints)
         {

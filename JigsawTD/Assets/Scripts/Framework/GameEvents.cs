@@ -13,11 +13,6 @@ public class GameEvents : Singleton<GameEvents>
     // }
 
 
-    public event Action onConfirmShape;
-    public void ConfirmShape()
-    {
-        onConfirmShape?.Invoke();
-    }
 
 
     public event Action onSeekPath;
@@ -57,29 +52,6 @@ public class GameEvents : Singleton<GameEvents>
         onStartNewWave?.Invoke(sequence);
     }
 
-    public event Action<GameTile> onShowTileTips;
-    public void ShowTileTips(GameTile tile)
-    {
-        onShowTileTips?.Invoke(tile);
-    }
-
-    public event Action<BluePrintGrid> onShowTurretTips;
-    public void ShowTurretTips(BluePrintGrid bGrid)
-    {
-        onShowTurretTips?.Invoke(bGrid);
-    }
-
-    public event Action onHideTips;
-    public void HideTips()
-    {
-        onHideTips?.Invoke();
-    }
-
-    public event Action onCheckBluePrint;
-    public void CheckBluePrint()
-    {
-        onCheckBluePrint?.Invoke();
-    }
 
     public event Action<GameTile> onRemoveGameTile;
     public void RemoveGameTile(GameTile tile)

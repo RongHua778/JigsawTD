@@ -7,6 +7,9 @@ public class WoodTurret : ElementTurret
     private bool isPlayingAudio = false;
 
     public override float SputteringRange => 0;
+
+    public override Element Element => Element.Wood;
+
     public override void OnSpawn()
     {
         base.OnSpawn();

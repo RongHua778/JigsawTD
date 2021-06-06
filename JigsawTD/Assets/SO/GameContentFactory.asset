@@ -21,7 +21,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0387619ceeeda7746a7e51b43f234353, type: 2}
   - {fileID: 11400000, guid: 2a0c266b352137f45b20d3723395e650, type: 2}
   - {fileID: 11400000, guid: 8b69e55deebc49d44b73c6e458a12794, type: 2}
-  compositeTurrets: []
+  compositeTurrets:
+  - {fileID: 11400000, guid: e3e54c1bced6a334b9535d9abfcb8bb5, type: 2}
+  - {fileID: 11400000, guid: 5b4fc6b2f1f50624a9801389b31a9dfb, type: 2}
+  - {fileID: 11400000, guid: 2c1b05c440668c94abe59b6953c69310, type: 2}
+  - {fileID: 11400000, guid: 33e33721f8e10504dba35cde5c1041e0, type: 2}
+  - {fileID: 11400000, guid: 5f7cf3a0a6511714ca19786b2b7f5b48, type: 2}
+  - {fileID: 11400000, guid: 9061b9baec821234b8474f052693dc8b, type: 2}
   trapAtts:
   - {fileID: 11400000, guid: 201af454a56b147428bcc12e84b17d0b, type: 2}
   - {fileID: 11400000, guid: 7fe6d72c40d904b40b1e5e27ef4f12b6, type: 2}

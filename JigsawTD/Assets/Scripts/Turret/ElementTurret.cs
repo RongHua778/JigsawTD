@@ -2,23 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ElementTurret : TurretContent
+public abstract class ElementTurret : TurretContent
 {
     public override GameTileContentType ContentType => GameTileContentType.ElementTurret;
     //ËþµÄÔªËØÊôÐÔ
-    private Element element;
-    public Element Element { get => element; set => element = value; }
+    //private Element element;
+    public abstract Element Element { get; }
 
-    public override void OnSpawn()
+    public override void ContentLanded()
     {
-        base.OnSpawn();
-        Element = m_TurretAttribute.element;
-
+        base.ContentLanded();
+        GameManager.Instance.elementTurrets.Add(this);
     }
+
+
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
+        GameManager.Instance.elementTurrets.Remove(this);
         Quality = 1;
-        Element = Element.Gold;
     }
 }

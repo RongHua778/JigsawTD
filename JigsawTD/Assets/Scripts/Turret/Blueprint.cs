@@ -55,7 +55,7 @@ public class Blueprint
     //检测每个配方是否存在在场上的方法
     public void CheckElement()
     {
-        List<IGameBehavior> temp = GameManager.Instance.turrets.behaviors.ToList();
+        List<IGameBehavior> temp = GameManager.Instance.elementTurrets.behaviors.ToList();
         
         for (int i = 0; i < compositions.Count; i++)
         {

@@ -42,6 +42,13 @@ public static class ConstructHelper
         return m_TileFactory.GetGroundTile();
     }
 
+    //ÔªËØËþ
+    public static TurretAttribute GetElementAttribute(Element element)
+    {
+        return m_ContentFactory.GetElementAttribute(element);
+    }
+
+
     //ÏÝÚå
     public static GameTile GetRandomTrap()
     {
@@ -62,7 +69,7 @@ public static class ConstructHelper
     {
         TileShape shape = m_ShapeFactory.GetDShape();
         GameTile tile = m_TileFactory.GetBasicTile();
-        CompositeTurret content = m_ContentFactory.GetCompositeTurret(bluePrint.CompositeTurretAttribute);
+        CompositeTurret content = m_ContentFactory.GetCompositeTurret(bluePrint);
         tile.SetContent(content);
         shape.SetTile(tile);
         return shape;

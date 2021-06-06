@@ -213,7 +213,6 @@ public class DraggingShape : DraggingActions
                 tile.TileLanded();
             }
             GameManager.Instance.ConfirmShape();
-            GameEvents.Instance.CheckBluePrint();
 
             Destroy(this.gameObject);
         }
