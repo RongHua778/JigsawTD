@@ -46,20 +46,22 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         {
             quality = value;
             SetGraphic();
+            GenerateRange();
+            GetTurretEffects();
         }
     }
 
     private int damageAnalysis;
     public int DamageAnalysis { get => damageAnalysis; set => damageAnalysis = value; }
 
-    public virtual float AttackDamage { get => (m_TurretAttribute.TurretLevels[1 - 1].AttackDamage + TurnAdditionalAttack) * (1 + AttackIntensify); }
-    public virtual int AttackRange { get => m_TurretAttribute.TurretLevels[1 - 1].AttackRange + RangeIntensify; }
-    public int ForbidRange { get => m_TurretAttribute.TurretLevels[1 - 1].ForbidRange; }
-    public virtual float AttackSpeed { get => (m_TurretAttribute.TurretLevels[1 - 1].AttackSpeed + turnAdditionalSpeed) * (1 + SpeedIntensify); }
+    public virtual float AttackDamage { get => (m_TurretAttribute.TurretLevels[Quality - 1].AttackDamage + TurnAdditionalAttack) * (1 + AttackIntensify); }
+    public virtual int AttackRange { get => m_TurretAttribute.TurretLevels[Quality - 1].AttackRange + RangeIntensify; }
+    public int ForbidRange { get => m_TurretAttribute.TurretLevels[Quality - 1].ForbidRange; }
+    public virtual float AttackSpeed { get => (m_TurretAttribute.TurretLevels[Quality - 1].AttackSpeed + turnAdditionalSpeed) * (1 + SpeedIntensify); }
     public float BulletSpeed { get => m_TurretAttribute.BulletSpeed; }
-    public virtual float SputteringRange { get => m_TurretAttribute.TurretLevels[1 - 1].SputteringRange + SputteringIntensify; }
-    public float CriticalRate { get => m_TurretAttribute.TurretLevels[1 - 1].CriticalRate + CriticalIntensify; }
-    public float SlowRate { get => m_TurretAttribute.TurretLevels[1 - 1].SlowRate + SlowIntensify; }
+    public virtual float SputteringRange { get => m_TurretAttribute.TurretLevels[Quality - 1].SputteringRange + SputteringIntensify; }
+    public float CriticalRate { get => m_TurretAttribute.TurretLevels[Quality - 1].CriticalRate + CriticalIntensify; }
+    public float SlowRate { get => m_TurretAttribute.TurretLevels[Quality - 1].SlowRate + SlowIntensify; }
 
     float criticalPercentage = 1.5f;
     public float CriticalPercentage { get => criticalPercentage; set => criticalPercentage = value; }
@@ -93,7 +95,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
 
     //*************
 
-    public List<TurretEffectInfo> TurretEffectInfos => m_TurretAttribute.TurretLevels[1 - 1].TurretEffects;
+    public List<TurretEffectInfo> TurretEffectInfos => m_TurretAttribute.TurretLevels[Quality - 1].TurretEffects;
 
 
     public List<TurretEffect> TurretEffects = new List<TurretEffect>();
@@ -199,9 +201,10 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
 
     public void RecycleRanges()
     {
-        foreach (var range in rangeIndicators)
+        var ranges = rangeIndicators.GetEnumerator();
+        while (ranges.MoveNext())
         {
-            ObjectPool.Instance.UnSpawn(range.gameObject);
+            ObjectPool.Instance.UnSpawn(ranges.Current.gameObject);
         }
         rangeIndicators.Clear();
     }
@@ -265,9 +268,10 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     public void ShowRange(bool show)
     {
         ShowingRange = show;
-        foreach (var indicator in rangeIndicators)
+        var ranges = rangeIndicators.GetEnumerator();
+        while (ranges.MoveNext())
         {
-            indicator.ShowSprite(show);
+            ranges.Current.ShowSprite(show);
         }
     }
     public void GenerateRange()
@@ -340,12 +344,19 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     {
         turretAnim.SetTrigger("Attack");
         PlayAudio(ShootClip, false);
-        foreach (TargetPoint target in Target)
+        var targets = Target.GetEnumerator();
+        while (targets.MoveNext())
         {
             Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
             bullet.transform.position = shootPoint.position;
-            bullet.Initialize(this, target);
+            bullet.Initialize(this, targets.Current);
         }
+        //foreach (TargetPoint target in Target)
+        //{
+        //    Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
+        //    bullet.transform.position = shootPoint.position;
+        //    bullet.Initialize(this, target);
+        //}
 
     }
 
@@ -381,10 +392,9 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         RangeType = m_TurretAttribute.RangeType;
         bulletPrefab = m_TurretAttribute.Bullet;
         ShootClip = m_TurretAttribute.ShootSound;
-        SetGraphic();
-        GenerateRange();
-        GetTurretEffects();
     }
+
+
 
     public override void OnUnSpawn()
     {
@@ -398,7 +408,6 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         TargetCount = 1;
         DamageAnalysis = 0;
         ClearTurnIntensify();
-        //RecycleRanges();
     }
 
     public void ClearTurnIntensify()

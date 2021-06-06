@@ -112,6 +112,7 @@ public class TileContentFactory : GameObjectFactory
     {
         CompositeTurret content = Get(bluePrint.CompositeTurretAttribute.ContentPrefab) as CompositeTurret;
         content.CompositeBluePrint = bluePrint;
+        content.Quality = 1;
         return content;
 
     }

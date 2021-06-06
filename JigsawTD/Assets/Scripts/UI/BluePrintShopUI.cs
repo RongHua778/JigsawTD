@@ -118,7 +118,7 @@ public class BluePrintShopUI : IUserInterface
             Hide();
             GameManager.Instance.HideTips();
             //设置结算信息
-            //GameEndPanel.TotalComposite++;
+            GameEndUI.TotalComposite++;
         }
         else
         {

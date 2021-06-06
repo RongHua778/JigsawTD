@@ -38,7 +38,6 @@ public class StaticData : Singleton<StaticData>
     public static int BuyBluePrintCost = 20;
     [Header("GameSetting")]
     public float EnvrionmentBaseVolume = .25f;
-    public float GameSlowDownRate = default;
     public float TileSize = default;
     //塔的最大等级
     public static int maxLevel = 5;

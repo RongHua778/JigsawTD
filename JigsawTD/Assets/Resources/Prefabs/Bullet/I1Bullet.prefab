@@ -4749,7 +4749,7 @@ GameObject:
   - component: {fileID: 82723163243150482}
   - component: {fileID: 8239960043577045739}
   - component: {fileID: 3036737263589404745}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: I1Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9601,6 +9601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8da4001dcb25ad244beae3cf98d317b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ParentObj: {fileID: 0}
   SputteringEffect: {fileID: 0}
   turretParent: {fileID: 0}
 --- !u!58 &3036737263589404745

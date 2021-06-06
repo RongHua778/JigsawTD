@@ -132,9 +132,14 @@ public class GameManager : Singleton<GameManager>
         }
         m_BluePrintShopUI.NextRefreshTrun--;
         m_MainUI.PrepareNextWave();
+        m_FuncUI.PrepareNextWave();
         m_FuncUI.Show();
         //重置所有防御塔的回合临时加成
         foreach (var turret in elementTurrets.behaviors)
+        {
+            ((TurretContent)turret).ClearTurnIntensify();
+        }
+        foreach (var turret in compositeTurrets.behaviors)
         {
             ((TurretContent)turret).ClearTurnIntensify();
         }

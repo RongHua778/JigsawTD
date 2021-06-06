@@ -32,19 +32,18 @@ public class RHTest : MonoBehaviour
         GameManager.Instance.GainDraw(int.Parse(drawInputField.text));
     }
 
-    //public void GetCompositeClick()
-    //{
-    //    GameManager.Instance.GetCompositeAttributeByName(compositeInputField.text);
-    //}
+    public void GetCompositeClick()
+    {
+        ConstructHelper.GetCompositeTurretByName(compositeInputField.text);
+    }
 
-    //public void GetElementClick()
-    //{
-    //    GameManager.Instance.GetTestElement(int.Parse(qualityInputField.text), int.Parse(elementInputField.text));
-    //}
+    public void GetElementClick()
+    {
+        ConstructHelper.GetElementTurretByQualityAndElement((Element)int.Parse(elementInputField.text), int.Parse(qualityInputField.text));
+    }
 
-    //public void GetTrapClick()
-    //{
-    //    GameManager.Instance.GetTrapByName(trapInputField.text);
-
-    //}
+    public void GetTrapClick()
+    {
+        ConstructHelper.GetTrapByName(trapInputField.text);
+    }
 }

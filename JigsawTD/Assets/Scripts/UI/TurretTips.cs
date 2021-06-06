@@ -114,7 +114,8 @@ public class TurretTips : TileTips
         if (GameManager.Instance.ConsumeMoney(upgradeCost))
         {
             m_Turret.Quality++;
-            m_Turret.GetTurretEffects();//更新BUILD效果
+            Icon.sprite = m_Turret.m_TurretAttribute.TurretLevels[m_Turret.Quality - 1].Icon;
+            Name.text = m_Turret.m_TurretAttribute.TurretLevels[m_Turret.Quality - 1].TurretName;
             if (m_Turret.Quality > 2)
             {
                 UpgradeArea.SetActive(false);

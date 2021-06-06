@@ -12,7 +12,6 @@ public class BluePrintTips : TileTips
     [SerializeField] Text CriticalValue = default;
     [SerializeField] Text SputteringValue = default;
     [SerializeField] Text SlowRateValue = default;
-    [SerializeField] GameObject BuyBtnArea = default;
     [SerializeField] TipsElementConstruct elementConstruct = default;//合成塔组成元素区
 
     private BluePrintGrid m_Grid;

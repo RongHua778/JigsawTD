@@ -7,7 +7,6 @@ public abstract class Enemy :ReusableObject, IGameBehavior
     public abstract EnemyType EnemyType { get; }
 
     private Animator anim;
-    private AudioSource enemyAudio;
     private AudioClip explosionClip;
 
     [SerializeField] GameObject exlposionPrefab = default;
@@ -92,8 +91,6 @@ public abstract class Enemy :ReusableObject, IGameBehavior
     private void Awake()
     {
         anim = this.GetComponent<Animator>();
-        //enemyAudio = this.gameObject.AddComponent<AudioSource>();
-        //enemyAudio.spatialBlend = 1;
         explosionClip = Resources.Load<AudioClip>("Music/Sound_EnemyExplosion");
     }
 
@@ -104,7 +101,6 @@ public abstract class Enemy :ReusableObject, IGameBehavior
             StopAllCoroutines();
             GameObject explosion = ObjectPool.Instance.Spawn(exlposionPrefab);
             Sound.Instance.PlayEffect(explosionClip, StaticData.Instance.EnvrionmentBaseVolume);
-            //PlayAudio(explosionClip);
             explosion.transform.position = model.transform.position;
             GameEvents.Instance.EnemyDie(this);
             ObjectPool.Instance.UnSpawn(this.gameObject);
@@ -138,12 +134,6 @@ public abstract class Enemy :ReusableObject, IGameBehavior
             transform.localRotation = Quaternion.Euler(0f, 0f, angle);
         }
         return true;
-    }
-
-    private void PlayAudio(AudioClip clip)
-    {
-        enemyAudio.volume = StaticData.Instance.EnvrionmentBaseVolume;
-        enemyAudio.PlayOneShot(clip);
     }
 
     private IEnumerator ExitCor()

@@ -23,7 +23,7 @@ public abstract class GameTileContent : ReusableObject
 
     public virtual void OnContentSelected(bool value)
     {
-        
+
     }
 
     protected virtual void ContentLandedCheck(Collider2D col)//根据下方已有坚固格的类型决定自己的行为
@@ -38,7 +38,7 @@ public abstract class GameTileContent : ReusableObject
     }
     protected void SetGroundTile(bool value)
     {
-        Collider2D col = StaticData.RaycastCollider(transform.position, LayerMask.GetMask(StaticData.GroundTileMask));//修改groundtile层
+        Collider2D col = StaticData.RaycastCollider(transform.position, StaticData.GetGroundLayer);//修改groundtile层
         if (col != null)
         {
             GroundTile groundTile = col.GetComponent<GroundTile>();
@@ -61,7 +61,5 @@ public abstract class GameTileContent : ReusableObject
         base.OnUnSpawn();
         SetGroundTile(true);
         m_GameTile = null;
-
-
     }
 }

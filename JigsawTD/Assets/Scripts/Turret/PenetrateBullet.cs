@@ -10,7 +10,7 @@ public class PenetrateBullet : Bullet
     {
         base.Initialize(turret, target, pos);
         initScale = transform.localScale;
-        transform.localScale = transform.localScale * (1 + SputteringRange);
+        transform.localScale = transform.localScale * (1 + 2f * SputteringRange);
     }
 
     public override void OnUnSpawn()
