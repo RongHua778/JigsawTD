@@ -294,12 +294,12 @@ public abstract class Enemy :ReusableObject, IGameBehavior
     public override void OnSpawn()
     {
         model.localPosition = Vector3.zero;
+        IsDie = false;
     }
 
     public override void OnUnSpawn()
     {
         ObjectPool.Instance.UnSpawn(healthBar.gameObject);
-        IsDie = false;
         TargetDamageCounter = 0;
         TileStunCounter = 0;
         PathSlow = 0;

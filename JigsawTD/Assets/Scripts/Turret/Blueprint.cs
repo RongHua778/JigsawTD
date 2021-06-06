@@ -6,7 +6,6 @@ using System.Linq;
 public class Blueprint
 {
     public TurretAttribute CompositeTurretAttribute;
-    public bool CanBuild => CheckBuildable();
     List<Composition> compositions = new List<Composition>();
     public List<Composition> Compositions { get => compositions; set => compositions = value; }
 
@@ -16,7 +15,7 @@ public class Blueprint
     public float CompositeCriticalRate;
     public float CompositeSputteringRange;
 
-    public void SetCompositeValues()
+    public void SetBluePrintIntensify()
     {
         CompositeAttackDamage = CompositeAttackSpeed = CompositeSlowRate = CompositeCriticalRate = CompositeSputteringRange = 0;
         foreach (Composition com in Compositions)
@@ -49,7 +48,7 @@ public class Blueprint
         //建造合成塔，移除所有配方
         foreach(Composition com in Compositions)
         {
-            GameEvents.Instance.RemoveGameTile(com.turretTile);
+            ObjectPool.Instance.UnSpawn(com.turretTile.gameObject);
         }
     }
 

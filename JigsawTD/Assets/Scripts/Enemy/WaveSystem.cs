@@ -62,7 +62,7 @@ public class WaveSystem : IGameSystem
         EnemyRemain--;
     }
 
-    public void GameUpdate()
+    public override void GameUpdate()
     {
         if (RunningSequence != null)
         {
@@ -186,12 +186,15 @@ public class WaveSystem : IGameSystem
 
     }
 
-    public Enemy SpawnEnemy(EnemyAttribute attribute, float intensify)
+    public void SpawnEnemy(GameTile spawnTile)
     {
+        EnemyAttribute attribute = RunningSequence.EnemyAttribute;
+        float intensify = RunningSequence.Intensify;
         Enemy enemy = ObjectPool.Instance.Spawn(attribute.Prefab.gameObject).GetComponent<Enemy>();
         HealthBar healthBar = ObjectPool.Instance.Spawn(healthBarPrefab.gameObject).GetComponent<HealthBar>();
         enemy.Initialize(attribute, UnityEngine.Random.Range(-pathOffset, pathOffset), healthBar, intensify);
-        return enemy;
+        enemy.SpawnOn(spawnTile);
+        GameManager.Instance.enemies.Add(enemy);
     }
 
 

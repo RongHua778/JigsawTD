@@ -24,12 +24,12 @@ public class RHTest : MonoBehaviour
 
     public void GetMoneyClick()
     {
-        LevelUIManager.Instance.PlayerCoin += int.Parse(moneyInputField.text);
+        GameManager.Instance.GainMoney(int.Parse(moneyInputField.text));
     }
 
     public void GetDrawClick()
     {
-        LevelUIManager.Instance.LotteryDraw += int.Parse(drawInputField.text);
+        GameManager.Instance.GainDraw(int.Parse(drawInputField.text));
     }
 
     //public void GetCompositeClick()

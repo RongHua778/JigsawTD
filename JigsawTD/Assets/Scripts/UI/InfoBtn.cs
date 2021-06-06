@@ -5,11 +5,15 @@ using UnityEngine.EventSystems;
 
 public class InfoBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] string infoKey = default;
+    string content;
 
+    public void SetContent(string content)
+    {
+        this.content = content;
+    }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        GameManager.Instance.ShowTempTips(StaticData.TipsInfoDIC[infoKey](), transform.position);
+        GameManager.Instance.ShowTempTips(content, transform.position);
     }
 
     public void OnPointerExit(PointerEventData eventData)

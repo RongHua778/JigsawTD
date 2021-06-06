@@ -36,7 +36,7 @@ public class EnemySequence
                 return false;
             }
             SpawnCounter += 1;
-            GameManager.Instance.SpawnEnemy(this);
+            GameManager.Instance.SpawnEnemy();
         }
         return true;
     }

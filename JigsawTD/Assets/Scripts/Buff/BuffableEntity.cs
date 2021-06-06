@@ -24,14 +24,23 @@ public class BuffableEntity : MonoBehaviour
 
     private void TimeTick()
     {
-        foreach (var effect in TimeBuffs.ToList())
+        var effects = TimeBuffs.ToList().GetEnumerator();
+        while (effects.MoveNext())
         {
-            effect.Tick(Time.deltaTime);
-            if (effect.IsFinished)
+            effects.Current.Tick(Time.deltaTime);
+            if (effects.Current.IsFinished)
             {
-                TimeBuffs.Remove(effect);
+                TimeBuffs.Remove(effects.Current);
             }
         }
+        //foreach (var effect in TimeBuffs.ToList())
+        //{
+        //    effect.Tick(Time.deltaTime);
+        //    if (effect.IsFinished)
+        //    {
+        //        TimeBuffs.Remove(effect);
+        //    }
+        //}
     }
 
     public void TileTick()

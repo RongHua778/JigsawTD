@@ -15,14 +15,13 @@ public class BluePrintGrid : MonoBehaviour
     private Toggle toggle;
 
     private Blueprint m_BluePrint;
-    private BluePrintShop m_Shop;
-    public bool BuildAble = false;
+    private BluePrintShopUI m_Shop;
 
     public Blueprint BluePrint { get => m_BluePrint; set => m_BluePrint = value; }
-    public BluePrintShop Shop { get => m_Shop; set => m_Shop = value; }
+    public BluePrintShopUI Shop { get => m_Shop; set => m_Shop = value; }
 
 
-    public void SetElements(BluePrintShop shop, ToggleGroup group, Blueprint bluePrint)
+    public void SetElements(BluePrintShopUI shop, ToggleGroup group, Blueprint bluePrint)
     {
         Shop = shop;
         toggle = this.GetComponent<Toggle>();
@@ -50,8 +49,7 @@ public class BluePrintGrid : MonoBehaviour
                 elementGrids[i].gameObject.SetActive(false);
             }
         }
-        BuildAble = BluePrint.CanBuild;
-        compositeIcon.color = BuildAble ? Color.white : Color.gray;
+        compositeIcon.color = BluePrint.CheckBuildable() ? Color.white : Color.gray;
     }
 
     public void MoveToPocket()

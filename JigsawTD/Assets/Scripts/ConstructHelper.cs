@@ -7,13 +7,15 @@ public static class ConstructHelper
     static TileFactory m_TileFactory;
     static TileShapeFactory m_ShapeFactory;
     static TileContentFactory m_ContentFactory;
+    static BlueprintFactory m_BlurPrintFactory;
+
 
     public static void Initialize()
     {
         m_TileFactory = GameManager.Instance.TileFactory;
         m_ShapeFactory = GameManager.Instance.ShapeFactory;
         m_ContentFactory = GameManager.Instance.ContentFactory;
-
+        m_BlurPrintFactory = GameManager.Instance.BluePrintFactory;
     }
 
 
@@ -40,6 +42,7 @@ public static class ConstructHelper
         return m_TileFactory.GetGroundTile();
     }
 
+    //陷阱
     public static GameTile GetRandomTrap()
     {
         GameTile tile = m_TileFactory.GetBasicTile();
@@ -48,13 +51,41 @@ public static class ConstructHelper
         return tile;
     }
 
-    public static TileShape GetTrapByName(string name)//测试用，生成一个随意放置的陷阱
+    //合成塔
+    public static Blueprint GetRandomBluePrintByLevel(int level)
+    {
+        TurretAttribute attribute = m_ContentFactory.GetRandomCompositeAttributeByLevel(level);
+        return m_BlurPrintFactory.GetRandomBluePrint(attribute);
+    }
+
+    public static TileShape GetCompositeTurretByBluePrint(Blueprint bluePrint)
     {
         TileShape shape = m_ShapeFactory.GetDShape();
         GameTile tile = m_TileFactory.GetBasicTile();
-        GameTileContent content = m_ContentFactory.GetRandomTrapContent();
+        CompositeTurret content = m_ContentFactory.GetCompositeTurret(bluePrint.CompositeTurretAttribute);
         tile.SetContent(content);
         shape.SetTile(tile);
         return shape;
     }
+
+
+    //测试用
+    public static TileShape GetTrapByName(string name)//测试用，生成一个随意放置的陷阱
+    {
+        TileShape shape = m_ShapeFactory.GetDShape();
+        GameTile tile = m_TileFactory.GetBasicTile();
+        GameTileContent content = m_ContentFactory.GetTrapContentByName(name);
+        tile.SetContent(content);
+        shape.SetTile(tile);
+        return shape;
+    }
+
+    public static TileShape GetCompositeTurretByName(string name)//测试用，生成一个指定合成塔搭配随机配方
+    {
+        TurretAttribute attribute = m_ContentFactory.GetCompositeTurretByName(name);
+        Blueprint bluePrint = m_BlurPrintFactory.GetRandomBluePrint(attribute);
+        TileShape shape= GetCompositeTurretByBluePrint(bluePrint);
+        return shape;
+    }
+
 }

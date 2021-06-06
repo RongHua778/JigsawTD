@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
-public class BluePrintShop : MonoBehaviour
+public class BluePrintShopUI : IUserInterface
 {
     bool Showing = false;//控制动画
     Animator anim;
@@ -15,6 +15,7 @@ public class BluePrintShop : MonoBehaviour
     public List<BluePrintGrid> ShopBluePrints = new List<BluePrintGrid>();//商店配方表
     public List<BluePrintGrid> OwnBluePrints = new List<BluePrintGrid>();//拥有配方表
 
+    int shopCapacity = 3;
     int nextRefreshTrun = 0;
     public int NextRefreshTrun //下次自动刷新回合
     {
@@ -25,42 +26,39 @@ public class BluePrintShop : MonoBehaviour
             if (nextRefreshTrun <= 0)
             {
                 nextRefreshTrun = 3;
-                RefreshShop(0);
+                GameManager.Instance.RefreshShop(0);
             }
             NextRefreshTurnsTxt.text = nextRefreshTrun + "回合后刷新";
         }
     }
 
-    private void Start()
+    public override void Initialize(GameManager gameManager)
     {
-        NextRefreshTrun = 4;
-
-        GameEvents.Instance.onCheckBluePrint += CheckAllBluePrint;
-        GameEvents.Instance.onLuckyFull += GetARandomBluePrintToPocket;
-
+        base.Initialize(gameManager);
         anim = this.GetComponent<Animator>();
-        //RefreshShop(0);
+        NextRefreshTrun = 4;
+        GameEvents.Instance.onCheckBluePrint += CheckAllBluePrint;
     }
 
-    private void OnDisable()
+    public override void Release()
     {
+        base.Release();
         GameEvents.Instance.onCheckBluePrint -= CheckAllBluePrint;
-        GameEvents.Instance.onLuckyFull -= GetARandomBluePrintToPocket;
     }
-    public void RefreshShop(int cost)//刷新商店
+
+    public void RefreshShop(int level, int cost)//刷新商店
     {
-        if (!LevelUIManager.Instance.ConsumeMoney(cost))
+        if (!GameManager.Instance.ConsumeMoney(cost))
             return;
         foreach (var grid in ShopBluePrints.ToList())
         {
             RemoveGrid(grid);
         }
         ShopBluePrints.Clear();
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < shopCapacity; i++)
         {
-            //TurretAttribute compositeTurret = GameManager.Instance.GetRandomCompositeAttributeByLevel();
-            //Blueprint bluePrint = GameManager.Instance.GetSingleBluePrint(compositeTurret);
-            //AddBluePrint(bluePrint, true);
+            Blueprint bluePrint = ConstructHelper.GetRandomBluePrintByLevel(level);
+            AddBluePrint(bluePrint, true);
         }
     }
 
@@ -137,11 +135,10 @@ public class BluePrintShop : MonoBehaviour
         }
     }
 
-    private void GetARandomBluePrintToPocket()//幸运值满，随机获得一个配方
+    public void GetARandomBluePrintToPocket(int level)//幸运值满，随机获得一个配方
     {
-        //TurretAttribute compositeTurret = GameManager.Instance.GetRandomCompositeAttributeByLevel();
-        //Blueprint bluePrint = GameManager.Instance.GetSingleBluePrint(compositeTurret);
-        //AddBluePrint(bluePrint, false);
+        Blueprint bluePrint = ConstructHelper.GetRandomBluePrintByLevel(level);
+        AddBluePrint(bluePrint, false);
     }
 
 }

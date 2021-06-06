@@ -11,6 +11,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private WaveSystem m_WaveSystem = default;//波次系统
 
     //UI
+    [SerializeField] private BluePrintShopUI m_BluePrintShopUI = default;
     [SerializeField] private ShapeSelectUI m_ShapeSelectUI = default;
     [SerializeField] private MainUI m_MainUI = default;
     [SerializeField] private FuncUI m_FuncUI = default;
@@ -27,23 +28,17 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] TileContentFactory _contentFactory = default;
     [SerializeField] TileShapeFactory _shapeFactory = default;
     [SerializeField] EnemyFactory _enemyFactory = default;
+    [SerializeField] BlueprintFactory _bluePrintFacotry = default;
     public TileFactory TileFactory { get => _tileFactory; }
     public TileContentFactory ContentFactory { get => _contentFactory; }
     public TileShapeFactory ShapeFactory { get => _shapeFactory; }
     public EnemyFactory EnemyFactory { get => _enemyFactory; }
-
-
-    public BluePrintShop _bluePrintShop = default;
+    public BlueprintFactory BluePrintFactory { get => _bluePrintFacotry; }
 
     //Behavior集合
     public GameBehaviorCollection enemies = new GameBehaviorCollection();
     public GameBehaviorCollection nonEnemies = new GameBehaviorCollection();
     public GameBehaviorCollection turrets = new GameBehaviorCollection();
-
-
-    [SerializeField]
-    BlueprintFactory _bluePrintFacotry = default;
-
 
     //流程
     private BattleOperationState operationState;
@@ -69,23 +64,23 @@ public class GameManager : Singleton<GameManager>
         m_BoardSystem.Initialize(this);//版图系统
         m_WaveSystem.Initialize(this);//波次系统
 
-
+        //初始化UI
         m_MainUI.Initialize(this);//主界面顶部UI
         m_FuncUI.Initialize(this);//主界面功能UI
+        m_BluePrintShopUI.Initialize(this);//配方系统UI
         m_ShapeSelectUI.Initialize(this);//抽模块UI
         m_GameEndUI.Initialize(this);//游戏结束UI
         m_TrapTips.Initialize(this);//防御塔TIPS
         m_TurretTips.Initialize(this);//陷阱及其他TIPS
-        m_MessageUI.Initialize(this);
+        m_MessageUI.Initialize(this);//提示系统UI
 
-        //// _bluePrintFacotry.InitializeFactory();
-        //_bluePrintShop.RefreshShop(0);
-
+        //设置操作流程
         buildingState = new BuildingState(this, m_BoardSystem);
         waveState = new WaveState(this, m_WaveSystem);
         EnterNewState(buildingState);
 
-
+        //初始化商店
+        RefreshShop(0);
     }
 
     //释放游戏系统
@@ -96,6 +91,7 @@ public class GameManager : Singleton<GameManager>
 
         m_MainUI.Release();
         m_FuncUI.Release();
+        m_BluePrintShopUI.Release();
         m_ShapeSelectUI.Release();
         m_GameEndUI.Release();
         m_TrapTips.Release();
@@ -205,6 +201,31 @@ public class GameManager : Singleton<GameManager>
     {
         m_MessageUI.SetText(text);
     }
+
+    public void GainMoney(int amount)
+    {
+        m_MainUI.Coin += amount;
+    }
+
+    public void GainDraw(int amount)
+    {
+        m_FuncUI.DrawRemain += amount;
+    }
+
+    public void SpawnEnemy()
+    {
+        m_WaveSystem.SpawnEnemy(m_BoardSystem.SpawnPoint);
+    }
+
+    public void RefreshShop(int cost)
+    {
+        m_BluePrintShopUI.RefreshShop(m_FuncUI.PlayerLevel,cost);
+    }
+
+    public void GetRandomBluePrint()
+    {
+        m_BluePrintShopUI.GetARandomBluePrintToPocket(m_FuncUI.PlayerLevel);
+    }
     #endregion
 
     #region TIPS
@@ -222,7 +243,7 @@ public class GameManager : Singleton<GameManager>
         m_TrapTips.Show();
     }
 
-    public void ShowTempTips(string text,Vector2 pos)
+    public void ShowTempTips(string text, Vector2 pos)
     {
         m_TempTips.gameObject.SetActive(true);
         m_TempTips.SendText(text);
@@ -242,27 +263,6 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
 
-
-
-    public void SpawnEnemy(EnemySequence sequence)
-    {
-        Enemy enemy = m_WaveSystem.SpawnEnemy(sequence.EnemyAttribute, sequence.Intensify);
-        GameTile tile = m_BoardSystem.SpawnPoint;
-        enemy.SpawnOn(tile);
-        enemies.Add(enemy);
-    }
-
-
-
-
-
-
-    //***************工厂中介者服务区
-    public Blueprint GetSingleBluePrint(TurretAttribute attribute)
-    {
-        Blueprint bluePrint = _bluePrintFacotry.GetRandomBluePrint(attribute);
-        return bluePrint;
-    }
 
     ////生成随机形状，配置随机元素塔
     //public TileShape GenerateRandomBasicShape()

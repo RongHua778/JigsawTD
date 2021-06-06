@@ -7,18 +7,6 @@ using System.Linq;
 [CreateAssetMenu(menuName = "Factory/BlueprintFactory", fileName = "blueprintFactory")]
 public class BlueprintFactory : GameObjectFactory
 {
-    //private List<TurretAttribute> compositeTurrets = new List<TurretAttribute>();
-
-    //public void InitializeFactory()
-    //{
-    //    compositeTurrets = StaticData.Instance.CompositionAttributes.ToList();
-    //}
-
-    //public Blueprint GetRandomBluePrint()
-    //{
-    //    return GetRandomBluePrint(compositeTurrets[Random.Range(0, compositeTurrets.Count)]);
-    //}
-
     public Blueprint GetRandomBluePrint(TurretAttribute attribute)
     {
         Blueprint blueprint = new Blueprint();
@@ -29,7 +17,7 @@ public class BlueprintFactory : GameObjectFactory
             Composition c = new Composition(compositionLevel[i], Random.Range(0, StaticData.elementN));
             blueprint.Compositions.Add(c);
         }
-        blueprint.SetCompositeValues();
+        blueprint.SetBluePrintIntensify();
         return blueprint;
     }
 

@@ -226,7 +226,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         }
         for (int i = 0; i < Target.Count; i++)
         {
-            if (!Target[i].Enemy.gameObject.activeSelf)
+            if (Target[i].Enemy.IsDie)
             {
                 targetList.Remove(Target[i]);
                 Target.Remove(Target[i]);
@@ -247,9 +247,10 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
             {
                 Target.Clear();
                 List<int> returnInt = StaticData.SelectNoRepeat(targetList.Count, TargetCount);
-                foreach (int i in returnInt)
+                var ints = returnInt.GetEnumerator();
+                while (ints.MoveNext())
                 {
-                    Target.Add(targetList[i]);
+                    Target.Add(targetList[ints.Current]);
                 }
             }
             else if (Target.Count <= 0)

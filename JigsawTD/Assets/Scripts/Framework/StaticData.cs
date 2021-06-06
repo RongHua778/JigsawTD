@@ -25,7 +25,7 @@ public class StaticData : Singleton<StaticData>
     public int StartLotteryDraw;
     public int BaseWaveIncome;
     public int WaveMultiplyIncome;
-    public float[,] QualityChances = new float[7, 5]
+    public static float[,] QualityChances = new float[7, 5]
     {
         { 1f, 0f, 0f, 0f, 0f },
         { 0.6f, 0.3f, 0.1f, 0f, 0f },
@@ -70,8 +70,7 @@ public class StaticData : Singleton<StaticData>
     public static float DustSputteringIntensify = 0.1f;
 
     //tips信息
-    public delegate string InfoCallBack();
-    public static Dictionary<string, InfoCallBack> TipsInfoDIC;
+    public static Dictionary<string, string> TipsInfoDIC;
 
 
     private void Start()
@@ -82,11 +81,8 @@ public class StaticData : Singleton<StaticData>
 
     private void InitializeInfoDIC()
     {
-        TipsInfoDIC = new Dictionary<string, InfoCallBack>();
-        InfoCallBack levelInfo = GetLevelInfo;
-        TipsInfoDIC.Add("LevelInfo", levelInfo);
-        InfoCallBack luckInfo = GetLuckyInfo;
-        TipsInfoDIC.Add("LuckyInfo", luckInfo);
+        TipsInfoDIC = new Dictionary<string, string>();
+        TipsInfoDIC.Add("LuckyInfo", GetLuckyInfo());
     }
 
     [Header("CompositionAttributes")]
@@ -374,12 +370,12 @@ public class StaticData : Singleton<StaticData>
         return finalDes;
     }
 
-    public static string GetLevelInfo()
+    public static string GetLevelInfo(int level)
     {
         float[] levelChances = new float[5];
         for (int i = 0; i < 5; i++)
         {
-            levelChances[i] = StaticData.Instance.QualityChances[LevelUIManager.Instance.PlayerLevel - 1, i];
+            levelChances[i] = QualityChances[level - 1, i];
         }
         string text = "";
         text += "\n  当前等级概率:\n";

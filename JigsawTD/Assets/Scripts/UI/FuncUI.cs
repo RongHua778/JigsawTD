@@ -9,6 +9,9 @@ public class FuncUI : IUserInterface
     [SerializeField] Text DrawBtnTxt = default;
     [SerializeField] Text LevelUpTxt = default;
     [SerializeField] Text PlayerLevelTxt = default;
+    [SerializeField] InfoBtn m_LuckInfo = default;
+    [SerializeField] InfoBtn m_LevelInfo = default;
+    [SerializeField] LuckProgress m_LuckProgress = default;
 
     bool drawThisTurn = false;
     public bool DrawThisTurn { get => drawThisTurn; set => drawThisTurn = value; }
@@ -44,6 +47,7 @@ public class FuncUI : IUserInterface
             {
                 LevelUpTxt.text = "已满级";
             }
+            m_LevelInfo.SetContent(StaticData.GetLevelInfo(playerLevel));
         }
     }
 
@@ -67,9 +71,10 @@ public class FuncUI : IUserInterface
             if (luckPoint >= 10)
             {
                 luckPoint = 0;
-                DrawRemain++;
+                GameManager.Instance.GetRandomBluePrint();
             }
             LuckPointTxt.text = "累积点:" + luckPoint.ToString();
+            m_LuckProgress.SetProgress(luckPoint);
         }
     }
 
@@ -78,7 +83,9 @@ public class FuncUI : IUserInterface
     {
         base.Initialize(gameManager);
         DrawRemain = StaticData.Instance.StartLotteryDraw;
+        LuckPoint = 0;
         PlayerLevel = 1;
+        m_LuckInfo.SetContent(StaticData.GetLuckyInfo());
     }
     public void DrawBtnClick()
     {
