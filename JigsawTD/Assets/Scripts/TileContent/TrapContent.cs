@@ -10,6 +10,12 @@ public class TrapContent : GameTileContent
     int damageAnalysis;
     public int DamageAnalysis { get => damageAnalysis; set => damageAnalysis = value; }
 
+
+    public override void ContentLanded()
+    {
+        base.ContentLanded();
+        StaticData.SetNodeWalkable(m_GameTile, true);
+    }
     public override void OnContentPass(Enemy enemy)
     {
         base.OnContentPass(enemy);

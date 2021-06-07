@@ -60,7 +60,7 @@ public class BoardSystem : IGameSystem
     GameTile destinationPoint;
     public GameTile DestinationPoint { get => destinationPoint; set => destinationPoint = value; }
 
-    public static bool FindPath { get => path.vectorPath.Count > 0; }
+    public static bool FindPath { get; set; }
 
 
     public override void Initialize(GameManager gameManager)
@@ -116,30 +116,33 @@ public class BoardSystem : IGameSystem
     public void SetGameBoard()
     {
         Vector2Int sizeOffset = new Vector2Int((int)((_startSize.x - 1) * 0.5f), (int)((_startSize.y - 1) * 0.5f));
-        Vector2Int groundOffset = new Vector2Int((int)((_groundSize.x - 1) * 0.5f), (int)((_groundSize.y - 1) * 0.5f));
-        GenerateGroundTiles(groundOffset, _groundSize);
-        Physics2D.SyncTransforms();
+        StaticData.BoardOffset = new Vector2Int((int)((_groundSize.x - 1) * 0.5f), (int)((_groundSize.y - 1) * 0.5f));
+        
+        GenerateGroundTiles(_groundSize);
+        Physics2D.SyncTransforms();//涉及物理检测前，需要调用
+        AstarPath.active.Scan();
+
         GenerateStartTiles(_startSize, sizeOffset);
         GenerateTrapTiles(sizeOffset, _startSize);
+        Physics2D.SyncTransforms();
         SeekPath();
         ShowPath(path);
     }
 
-    private void GenerateStartTiles(Vector2Int size, Vector2 offset)
+    private void GenerateStartTiles(Vector2Int size, Vector2Int offset)
     {
         for (int i = 0, y = 0; y < size.y; y++)
         {
             for (int x = 0; x < size.x; x++, i++)
             {
                 GameTile tile = null;
-                Vector2 pos = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
+                Vector2Int pos = new Vector2Int(x, y) - offset;
                 if (pos.x == 0 && pos.y != 0)
                     continue;
                 if (pos.x == -1 && pos.y == 0)//SpawnPoint
                 {
                     tile = ConstructHelper.GetNormalTile(GameTileContentType.SpawnPoint);
                     SpawnPoint = tile;
-                    tile.transform.position = pos;
                 }
                 else if (pos.x == 1 && pos.y == 0)//Destination
                 {
@@ -150,7 +153,7 @@ public class BoardSystem : IGameSystem
                 {
                     tile = ConstructHelper.GetNormalTile(GameTileContentType.Empty);
                 }
-                tile.transform.position = pos;
+                tile.transform.position = (Vector3Int)pos;
                 tile.TileLanded();
                 Physics2D.SyncTransforms();
             }
@@ -159,34 +162,38 @@ public class BoardSystem : IGameSystem
 
     private void SeekPath()
     {
-        Physics2D.SyncTransforms();
-        AstarPath.active.Scan();
+        // Physics2D.SyncTransforms();
+        //AstarPath.active.Scan();
         var p = ABPath.Construct(SpawnPoint.transform.position, DestinationPoint.transform.position, OnPathComplete);
         AstarPath.StartPath(p);
         AstarPath.BlockUntilCalculated(p);
     }
+
     private void OnPathComplete(Path p)
     {
         if (!p.error)
         {
+            FindPath = true;
             if (path != null && p.vectorPath.SequenceEqual(path.vectorPath))
             {
                 //Debug.Log("Found Same Path");
                 return;
             }
             path = p;
-           // ShowPath(path);
+            GetPathTiles();
+            // ShowPath(path);
             //Debug.Log("Find Path!");
         }
         else
         {
-            path = p;
-            foreach (PathLine pl in pathLines)
-            {
-                ObjectPool.Instance.UnSpawn(pl.gameObject);
-            }
+            //path = p;
+            //foreach (PathLine pl in pathLines)
+            //{
+            //    ObjectPool.Instance.UnSpawn(pl.gameObject);
+            //}
             shortestPath.Clear();
-            //Debug.LogError("No Path Found");
+            // Debug.LogError("No Path Found");
+            FindPath = false;
         }
     }
 
@@ -195,7 +202,8 @@ public class BoardSystem : IGameSystem
         shortestPath.Clear();
         for (int i = 0; i < path.vectorPath.Count; i++)
         {
-            Collider2D col = StaticData.RaycastCollider(path.vectorPath[i], LayerMask.GetMask(StaticData.ConcreteTileMask));
+            //Collider2D col = StaticData.RaycastCollider(path.vectorPath[i], LayerMask.GetMask(StaticData.ConcreteTileMask));
+            Collider2D col = StaticData.RaycastCollider(path.vectorPath[i], StaticData.PathLayer);
             GameTile tile = col.GetComponent<GameTile>();
             shortestPath.Add(tile);
         }
@@ -253,17 +261,17 @@ public class BoardSystem : IGameSystem
             tile.TileLanded();
         }
     }
-    private void GenerateGroundTiles(Vector2Int offset, Vector2Int groundSize)
+    private void GenerateGroundTiles(Vector2Int groundSize)
     {
         for (int i = 0, y = 0; y < groundSize.y; y++)
         {
             for (int x = 0; x < groundSize.x; x++, i++)
             {
                 GroundTile groundTile = ConstructHelper.GetGroundTile();
-                Vector2Int pos = new Vector2Int(x, y) - offset;
+                Vector2Int pos = new Vector2Int(x, y) - StaticData.BoardOffset;
                 groundTile.transform.position = (Vector3Int)pos;
                 groundTile.transform.position += Vector3.forward * 0.1f;
-                CorrectTileCoord(groundTile);
+                StaticData.CorrectTileCoord(groundTile);
                 tilePoss.Add(pos);
             }
         }
@@ -274,13 +282,7 @@ public class BoardSystem : IGameSystem
         ObjectPool.Instance.UnSpawn(tile.gameObject);
     }
 
-    private void CorrectTileCoord(TileBase tile)
-    {
-        Vector2 coord = tile.transform.localPosition;
-        float newX = coord.x / StaticData.Instance.TileSize;
-        float newY = coord.y / StaticData.Instance.TileSize;
-        tile.OffsetCoord = new Vector2(newX, newY);
-    }
+
 
 
 

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-
+using System;
+using Pathfinding;
 
 public class StaticData : Singleton<StaticData>
 {
@@ -11,7 +12,7 @@ public class StaticData : Singleton<StaticData>
     [SerializeField] private int difficulty = 2;
     public int Difficulty { get => difficulty; set => difficulty = value; }
 
-    //public static LayerMask PathLayer = 1 << 6 | 1 << 10;
+    public static LayerMask PathLayer = 1 << 6 | 1 << 10;
     public static string ConcreteTileMask = "ConcreteTile";
     public static string GroundTileMask = "GroundTile";
     public static string TempTileMask = "TempTile";
@@ -37,6 +38,7 @@ public class StaticData : Singleton<StaticData>
     };
     public static int BuyBluePrintCost = 20;
     [Header("GameSetting")]
+    public static Vector2Int BoardOffset;
     public float EnvrionmentBaseVolume = .25f;
     public float TileSize = default;
     //塔的最大等级
@@ -110,7 +112,7 @@ public class StaticData : Singleton<StaticData>
         {
             total += elem;
         }
-        float randomPoint = Random.value * total;
+        float randomPoint = UnityEngine.Random.value * total;
         for (int i = 0; i < pros.Length; i++)
         {
             if (randomPoint < pros[i])
@@ -138,7 +140,7 @@ public class StaticData : Singleton<StaticData>
         int end = total - 1;
         for (int i = 0; i < count; i++)
         {
-            int num = Random.Range(0, end + 1);
+            int num = UnityEngine.Random.Range(0, end + 1);
             output[i] = sequence[num];
             sequence[num] = sequence[end];
             end--;
@@ -263,7 +265,7 @@ public class StaticData : Singleton<StaticData>
                 {
                     min++;
                 }
-                result[0] = Random.Range(min, totalLevel - min + 1);
+                result[0] = UnityEngine.Random.Range(min, totalLevel - min + 1);
                 result[1] = totalLevel - result[0];
                 number--;
             }
@@ -275,7 +277,7 @@ public class StaticData : Singleton<StaticData>
                 {
                     min++;
                 }
-                int a = Random.Range(min, max + 1);
+                int a = UnityEngine.Random.Range(min, max + 1);
                 totalLevel -= a;
                 result[number - 1] = a;
                 number--;
@@ -307,7 +309,7 @@ public class StaticData : Singleton<StaticData>
             List<int> result = new List<int>();
             for (int i = 0; i < number; i++)
             {
-                int index = Random.Range(0, data.Count);
+                int index = UnityEngine.Random.Range(0, data.Count);
                 result.Add(data[index]);
                 data.RemoveAt(index);
             }
@@ -353,7 +355,7 @@ public class StaticData : Singleton<StaticData>
         return intensifyTxt;
     }
 
-    public static string GetTurretDes(TurretAttribute attribute,int quality)
+    public static string GetTurretDes(TurretAttribute attribute, int quality)
     {
         string finalDes = "";
         if (attribute.Description != "")
@@ -387,10 +389,33 @@ public class StaticData : Singleton<StaticData>
 
     public static string GetLuckyInfo()
     {
-        string text = 
+        string text =
             "1.当前回合没有抽取时，获得1点累积点。\n" +
             "2.连续不抽取时，会获得额外累积点。\n" +
             "3.累积点每达到10点，获得1个随机配方。";
         return text;
+    }
+
+    public static void CorrectTileCoord(TileBase tile)
+    {
+        Vector2Int coord = new Vector2Int(Convert.ToInt32(tile.transform.position.x), Convert.ToInt32(tile.transform.position.y));
+        int newX = coord.x + BoardOffset.x;
+        int newY = coord.y + BoardOffset.y;
+        tile.OffsetCoord = new Vector2Int(newX, newY);
+    }
+
+    public static void SetNodeWalkable(GameTile tile, bool walkable, bool changeAble = true)
+    {
+        
+
+        var grid = AstarPath.active.data.gridGraph;
+        int p = tile.OffsetCoord.x;
+        int q = tile.OffsetCoord.y;
+
+        GridNodeBase node = grid.nodes[q * grid.width + p];
+
+        node.Walkable = walkable;
+        node.ChangeAbleNode = changeAble;
+        grid.CalculateConnectionsForCellAndNeighbours(p, q);
     }
 }

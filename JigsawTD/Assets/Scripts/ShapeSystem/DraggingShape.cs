@@ -1,3 +1,5 @@
+using Pathfinding;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -45,7 +47,20 @@ public class DraggingShape : DraggingActions
         {
             RotateShape();
         }
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            foreach (var tile in tileShape.tiles)
+            {
+                Debug.Log(tile.transform.position);
+            }
+            foreach (var node in ChangeNodes)
+            {
+                Debug.Log("node:x" + node.XCoordinateInGrid + " y" + node.ZCoordinateInGrid);
+            }
+        }
     }
+
+
 
     public override void OnDraggingInUpdate()
     {
@@ -54,36 +69,42 @@ public class DraggingShape : DraggingActions
         transform.position = new Vector3(Mathf.Round(mousePos.x + pointerOffset.x), Mathf.Round(mousePos.y + pointerOffset.y), transform.position.z);
         if ((Vector2)transform.position != lastPos)
         {
-            CheckCanDrop();
-            StopAllCoroutines();
-            StartCoroutine(TryFindPath());
+            if (CheckCanDrop())
+            {
+                StopAllCoroutines();
+                StartCoroutine(TryFindPath());
+            }
         }
         lastPos = transform.position;
 
     }
 
+
+
     public void ShapeSpawned()//生成模块后，检查一下可否放置和寻路
     {
-        CheckCanDrop();
-        StartCoroutine(TryFindPath());
+        if (CheckCanDrop())
+        {
+            StartCoroutine(TryFindPath());
+        }
     }
 
-    private void SetGroundForPathFinding()
-    {
-        Physics2D.SyncTransforms();
-        EnableGroundColliders();
-        foreach (GameTile tile in TileShape.tiles)
-        {
-            Collider2D colHit = StaticData.RaycastCollider(tile.transform.position, LayerMask.GetMask(StaticData.GroundTileMask));
-            if (colHit != null)
-                groundColliders.Add(colHit);
-        }
-        foreach (var groundTile in groundColliders)
-        {
-            groundTile.enabled = false;
-        }
+    //private void SetGroundForPathFinding()
+    //{
+    //    Physics2D.SyncTransforms();
+    //    EnableGroundColliders();
+    //    foreach (GameTile tile in TileShape.tiles)
+    //    {
+    //        Collider2D colHit = StaticData.RaycastCollider(tile.transform.position, LayerMask.GetMask(StaticData.GroundTileMask));
+    //        if (colHit != null)
+    //            groundColliders.Add(colHit);
+    //    }
+    //    foreach (var groundTile in groundColliders)
+    //    {
+    //        groundTile.enabled = false;
+    //    }
 
-    }
+    //}
     private bool CheckCanDrop()
     {
         canDrop = true;
@@ -138,7 +159,7 @@ public class DraggingShape : DraggingActions
     }
     private void CheckOverLap()
     {
-        foreach (GameTile tile in TileShape.tiles)
+        foreach (var tile in TileShape.tiles)
         {
             Collider2D col = StaticData.RaycastCollider(tile.transform.position, LayerMask.GetMask(StaticData.ConcreteTileMask));
             if (col == null)
@@ -171,24 +192,61 @@ public class DraggingShape : DraggingActions
     {
         waitingForPath = true;
         yield return new WaitForSeconds(0.1f);
-        SetGroundForPathFinding();
-
+        
+        ChangeAstarPath();
+        yield return new WaitForSeconds(0.1f);
         GameEvents.Instance.SeekPath();
         yield return new WaitForSeconds(0.1f);
         waitingForPath = false;
+    }
+    List<GridNodeBase> ChangeNodes = new List<GridNodeBase>();
+
+    private void ChangeAstarPath()
+    {
+        var grid = AstarPath.active.data.gridGraph;
+        foreach (var node in ChangeNodes)
+        {
+            node.Walkable = !node.Walkable;
+            grid.CalculateConnectionsForCellAndNeighbours(node.XCoordinateInGrid, node.ZCoordinateInGrid);
+        }
+        ChangeNodes.Clear();
+        foreach (var tile in TileShape.tiles)
+        {
+            StaticData.CorrectTileCoord(tile);
+
+            AstarPath.active.AddWorkItem(ctx =>
+            {
+                int x = tile.OffsetCoord.x;
+                int z = tile.OffsetCoord.y;
+
+                GridNodeBase node = grid.nodes[z * grid.width + x];
+
+                if (!node.ChangeAbleNode)
+                    return;
+                if (node.Walkable != tile.isWalkable)
+                {
+                    node.Walkable = !node.Walkable;
+                    ChangeNodes.Add(node);
+                    grid.CalculateConnectionsForCellAndNeighbours(x, z);
+                }
+            });
+        }
     }
 
     public void RotateShape()
     {
         transform.Rotate(0, 0, -90f);
         menuTrans.Rotate(0, 0, 90f);
+
         foreach (GameTile tile in TileShape.tiles)
         {
             tile.CorrectRotation();
         }
-        CheckCanDrop();
-        StopAllCoroutines();
-        StartCoroutine(TryFindPath());
+        if (CheckCanDrop())
+        {
+            StopAllCoroutines();
+            StartCoroutine(TryFindPath());
+        }
     }
 
 
@@ -207,7 +265,7 @@ public class DraggingShape : DraggingActions
                 return;
             }
             Sound.Instance.PlayEffect("Sound_ConfirmShape");
-            EnableGroundColliders();
+           // EnableGroundColliders();
             foreach (GameTile tile in TileShape.tiles)
             {
                 tile.TileLanded();
@@ -226,14 +284,14 @@ public class DraggingShape : DraggingActions
         }
     }
 
-    private void EnableGroundColliders()
-    {
-        foreach (var groundCol in groundColliders)
-        {
-            groundCol.enabled = true;
-        }
-        groundColliders.Clear();
-    }
+    //private void EnableGroundColliders()
+    //{
+    //    foreach (var groundCol in groundColliders)
+    //    {
+    //        groundCol.enabled = true;
+    //    }
+    //    groundColliders.Clear();
+    //}
 
     public void StartDragging()
     {

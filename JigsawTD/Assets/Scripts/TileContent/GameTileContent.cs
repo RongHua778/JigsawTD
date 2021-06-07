@@ -9,6 +9,8 @@ public enum GameTileContentType
 }
 public abstract class GameTileContent : ReusableObject
 {
+
+    public virtual bool IsWalkable { get => true; }
     public virtual GameTileContentType ContentType { get; }
 
     private GameTile m_gameTile;
@@ -16,9 +18,7 @@ public abstract class GameTileContent : ReusableObject
 
     public virtual void ContentLanded()//该content放在地上时触发
     {
-        Collider2D col = StaticData.RaycastCollider(transform.position, LayerMask.GetMask(StaticData.ConcreteTileMask));
-        ContentLandedCheck(col);
-        SetGroundTile(false);
+        m_GameTile.tag = "UnDropablePoint";//EMPTY会改写此方法
     }
 
     public virtual void OnContentSelected(bool value)
@@ -28,23 +28,17 @@ public abstract class GameTileContent : ReusableObject
 
     protected virtual void ContentLandedCheck(Collider2D col)//根据下方已有坚固格的类型决定自己的行为
     {
-        m_GameTile.tag = "UnDropablePoint";
 
-        if (col != null)
-        {
-            GameTile tile = col.GetComponent<GameTile>();
-            ObjectPool.Instance.UnSpawn(tile.gameObject);
-        }
     }
-    protected void SetGroundTile(bool value)
-    {
-        Collider2D col = StaticData.RaycastCollider(transform.position, StaticData.GetGroundLayer);//修改groundtile层
-        if (col != null)
-        {
-            GroundTile groundTile = col.GetComponent<GroundTile>();
-            groundTile.IsLanded = value;
-        }
-    }
+    //protected void SetGroundTile(bool value)
+    //{
+    //    Collider2D col = StaticData.RaycastCollider(transform.position, StaticData.GetGroundLayer);//修改groundtile层
+    //    if (col != null)
+    //    {
+    //        GroundTile groundTile = col.GetComponent<GroundTile>();
+    //        groundTile.IsLanded = value;
+    //    }
+    //}
 
     public virtual void CorretRotation()
     {
@@ -59,7 +53,7 @@ public abstract class GameTileContent : ReusableObject
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
-        SetGroundTile(true);
+        //SetGroundTile(true);
         m_GameTile = null;
     }
 }

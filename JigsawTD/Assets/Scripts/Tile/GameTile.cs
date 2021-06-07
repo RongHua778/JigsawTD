@@ -1,3 +1,4 @@
+using Pathfinding;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +10,8 @@ public abstract class GameTile : TileBase
     GameObject previewGlow;
     Transform directionCheckPoint;
     Transform tileBase;
+
+    public bool isWalkable { get => Content.IsWalkable; }
     public DraggingShape m_DraggingShape { get; set; }
     public SpriteRenderer BaseRenderer { get; set; }
     public Vector3 ExitPoint { get; set; }
@@ -68,7 +71,9 @@ public abstract class GameTile : TileBase
     {
         SetBackToParent();
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        StaticData.CorrectTileCoord(this);
         Previewing = false;
+
         Content.ContentLanded();//这个可能会回收自身
         IsLanded = true;//这个必须在CONTENTLANDED下面，否则会导致回收自己
     }
@@ -106,7 +111,7 @@ public abstract class GameTile : TileBase
     public override void OnSpawn()
     {
         base.OnSpawn();
-        IsLanded = false;//这个必须在生成时设置
+        IsLanded = false;//这个必须在生成时设置,Gameboard生成tile时
     }
 
     public override void OnUnSpawn()
@@ -121,6 +126,7 @@ public abstract class GameTile : TileBase
         m_DraggingShape = null;
         BaseRenderer.color = Color.white;
         Content = null;
+
     }
 
     public void CorrectRotation()

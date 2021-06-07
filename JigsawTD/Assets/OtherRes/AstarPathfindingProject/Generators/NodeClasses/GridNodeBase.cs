@@ -4,6 +4,10 @@ using Pathfinding.Serialization;
 namespace Pathfinding {
 	/// <summary>Base class for GridNode and LevelGridNode</summary>
 	public abstract class GridNodeBase : GraphNode {
+
+		//RH¼ÓµÄ
+		public bool ChangeAbleNode = true;
+
 		protected GridNodeBase (AstarPath astar) : base(astar) {
 		}
 

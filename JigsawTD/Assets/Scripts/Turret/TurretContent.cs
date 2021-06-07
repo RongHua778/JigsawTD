@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-
+using Pathfinding;
 
 public abstract class TurretContent : GameTileContent, IGameBehavior
 {
+    public override bool IsWalkable => false;
     public bool Dropped { get; set; }
     public TurretAttribute m_TurretAttribute;
     public List<TargetPoint> targetList = new List<TargetPoint>();
@@ -313,18 +314,6 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
             currentRangetors.Add(rangeIndicators[i]);
         }
 
-        //foreach (var point in points)
-        //{
-
-
-        //    if (!rangeSpawned.ContainsKey(point))
-        //    {
-        //        RangeIndicator rangeObj = Instantiate(rangeIndicator, rangeParent);
-        //        rangeObj.transform.localPosition = (Vector3Int)point;
-        //        rangeIndicators.Add(rangeObj);
-        //        rangeSpawned.Add(point, rangeObj);
-        //    }
-        //}
         detectCollider.GenerateGeometry();
         currentRange = AttackRange;
         ShowRange(ShowingRange);
@@ -394,8 +383,15 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     public override void ContentLanded()
     {
         base.ContentLanded();
+        Collider2D col = StaticData.RaycastCollider(transform.position, LayerMask.GetMask(StaticData.ConcreteTileMask));
+        ContentLandedCheck(col);
+
         Dropped = true;
+        StaticData.SetNodeWalkable(m_GameTile, false, false);
+
+
     }
+
     public override void OnContentSelected(bool value)
     {
         base.OnContentSelected(value);
@@ -412,8 +408,16 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         TurretBaseSprite.transform.rotation = Quaternion.identity;
     }
 
-    //*************
+    protected override void ContentLandedCheck(Collider2D col)
+    {
+        if (col != null)
+        {
+            GameTile tile = col.GetComponent<GameTile>();
+            ObjectPool.Instance.UnSpawn(tile.gameObject);
+        }
+    }
 
+    //*************
     public override void OnSpawn()
     {
         base.OnSpawn();
@@ -423,11 +427,11 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         ShootClip = m_TurretAttribute.ShootSound;
     }
 
-
-
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
+        if (Dropped)
+            StaticData.SetNodeWalkable(m_GameTile, false, true);
         Dropped = false;
         targetList.Clear();
         AttackIntensify = 0;
