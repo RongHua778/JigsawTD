@@ -34,14 +34,6 @@ public abstract class TurretEffect
 
     }
 
-    public virtual void EnemyEnter()
-    {
-
-    }
-    public virtual void EnemyExit()
-    {
-
-    }
     public virtual void Shoot()
     {
 
@@ -70,7 +62,6 @@ public class DistanceBaseDamage : TurretEffect
     public override void Shoot()
     {
         bullet.Damage *= (1 + KeyValue * bullet.GetTargetDistance());
-        //Debug.Log(bullet.Damage);
     }
 }
 
@@ -125,13 +116,13 @@ public class SlowBullet : TurretEffect
 public class AttackIncreasePerShoot : TurretEffect
 {
     public override TurretEffectName EffectName => TurretEffectName.AttackIncreasePerShoot;
-    public override string EffectDescription => "愈战愈勇：每次攻击后，提升本回合" + KeyValue + "点攻击力。";
+    public override string EffectDescription => "愈战愈勇：每次攻击后，提升本回合" + KeyValue + "%攻击力。";
 
     public override void Hit(Enemy target)
     {
-        if (bullet.turretParent.TurnAdditionalAttack >= (int)KeyValue * 20)
+        if (bullet.turretParent.TurnAttackIntensify > KeyValue * 9.5f)
             return;
-        bullet.turretParent.TurnAdditionalAttack += (int)KeyValue;
+        bullet.turretParent.TurnAttackIntensify += KeyValue;
     }
 }
 
@@ -140,14 +131,6 @@ public class EnemyCountAttackIncrease : TurretEffect
     public override TurretEffectName EffectName => TurretEffectName.EnemyCountAttackIncrease;
     public override string EffectDescription => "攻击范围内每有1个敌人，就提升" + KeyValue * 100 + "%攻击力。";
 
-    public override void EnemyEnter()
-    {
-        turret.AttackIntensify += KeyValue;
-    }
 
-    public override void EnemyExit()
-    {
-        turret.AttackIntensify -= KeyValue;
-    }
 
 }

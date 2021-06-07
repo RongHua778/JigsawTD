@@ -6,7 +6,7 @@ public class ObjectPool : Singleton<ObjectPool>
 {
     public string ResourceDir = "";
     Dictionary<string, SubPool> m_pools = new Dictionary<string, SubPool>();
-    Dictionary<SubPool, GameObject> m_pools_parent = new Dictionary<SubPool, GameObject>();
+    Dictionary<SubPool, Transform> m_pools_parent = new Dictionary<SubPool, Transform>();
 
     public void ClearPools()
     {
@@ -72,7 +72,7 @@ public class ObjectPool : Singleton<ObjectPool>
         m_pools.Add(pool.Name, pool);
 
         GameObject container = new GameObject($"Pool-{name}");
-        m_pools_parent.Add(pool, container);
+        m_pools_parent.Add(pool, container.transform);
     }
 
     void RegisterNew(GameObject obj)
@@ -83,6 +83,6 @@ public class ObjectPool : Singleton<ObjectPool>
         m_pools.Add(pool.Name, pool);
 
         GameObject container = new GameObject($"Pool-{obj.name}");
-        m_pools_parent.Add(pool, container);
+        m_pools_parent.Add(pool, container.transform);
     }
 }

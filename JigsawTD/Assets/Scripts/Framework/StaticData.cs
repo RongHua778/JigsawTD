@@ -146,29 +146,29 @@ public class StaticData : Singleton<StaticData>
         return output;
     }
 
-    public static List<Vector2> GetCirclePoints(int range, int forbidRange = 0)
+    public static List<Vector2Int> GetCirclePoints(int range, int forbidRange = 0)
     {
-        List<Vector2> pointsToRetrun = new List<Vector2>();
+        List<Vector2Int> pointsToRetrun = new List<Vector2Int>();
         for (int x = -range; x <= range; x++)
         {
             for (int y = -(range - Mathf.Abs(x)); y <= range - Mathf.Abs(x); y++)
             {
                 if (x == 0 && y == 0)
                     continue;
-                Vector2 pos = new Vector2(x, y);
+                Vector2Int pos = new Vector2Int(x, y);
                 pointsToRetrun.Add(pos);
             }
         }
         if (forbidRange > 0)
         {
-            List<Vector2> pointsToExcept = new List<Vector2>();
+            List<Vector2Int> pointsToExcept = new List<Vector2Int>();
             for (int x = -forbidRange; x <= forbidRange; x++)
             {
                 for (int y = -(forbidRange - Mathf.Abs(x)); y <= forbidRange - Mathf.Abs(x); y++)
                 {
                     if (x == 0 && y == 0)
                         continue;
-                    Vector2 pos = new Vector2(x, y);
+                    Vector2Int pos = new Vector2Int(x, y);
                     pointsToExcept.Add(pos);
                 }
             }
@@ -177,29 +177,29 @@ public class StaticData : Singleton<StaticData>
         return pointsToRetrun;
     }
 
-    public static List<Vector2> GetHalfCirclePoints(int range, int forbidRange = 0)
+    public static List<Vector2Int> GetHalfCirclePoints(int range, int forbidRange = 0)
     {
-        List<Vector2> pointsToRetrun = new List<Vector2>();
+        List<Vector2Int> pointsToRetrun = new List<Vector2Int>();
         for (int x = -range; x <= range; x++)
         {
             for (int y = 0; y <= range - Mathf.Abs(x); y++)
             {
                 if (x == 0 && y == 0)
                     continue;
-                Vector2 pos = new Vector2(x, y);
+                Vector2Int pos = new Vector2Int(x, y);
                 pointsToRetrun.Add(pos);
             }
         }
         if (forbidRange > 0)
         {
-            List<Vector2> pointsToExcept = new List<Vector2>();
+            List<Vector2Int> pointsToExcept = new List<Vector2Int>();
             for (int x = -forbidRange; x <= forbidRange; x++)
             {
                 for (int y = 0; y <= forbidRange - Mathf.Abs(x); y++)
                 {
                     if (x == 0 && y == 0)
                         continue;
-                    Vector2 pos = new Vector2(x, y);
+                    Vector2Int pos = new Vector2Int(x, y);
                     pointsToExcept.Add(pos);
                 }
             }
@@ -208,20 +208,20 @@ public class StaticData : Singleton<StaticData>
         return pointsToRetrun;
     }
 
-    public static List<Vector2> GetLinePoints(int range, int forbidRange = 0)
+    public static List<Vector2Int> GetLinePoints(int range, int forbidRange = 0)
     {
-        List<Vector2> pointsToRetrun = new List<Vector2>();
+        List<Vector2Int> pointsToRetrun = new List<Vector2Int>();
         for (int i = 1; i <= range; i++)
         {
-            Vector2 pos = new Vector2(0, i);
+            Vector2Int pos = new Vector2Int(0, i);
             pointsToRetrun.Add(pos);
         }
         if (forbidRange > 0)
         {
-            List<Vector2> pointsToExcept = new List<Vector2>();
+            List<Vector2Int> pointsToExcept = new List<Vector2Int>();
             for (int i = 1; i <= forbidRange; i++)
             {
-                Vector2 pos = new Vector2(0, i);
+                Vector2Int pos = new Vector2Int(0, i);
                 pointsToExcept.Add(pos);
             }
             return pointsToRetrun.Except(pointsToExcept).ToList();

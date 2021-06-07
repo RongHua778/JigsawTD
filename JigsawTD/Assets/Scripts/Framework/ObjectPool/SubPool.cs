@@ -20,7 +20,7 @@ public class SubPool
 
 
 
-    public GameObject Spawn(GameObject container)
+    public GameObject Spawn(Transform container)
     {
         GameObject go = null;
         foreach (GameObject obj in m_objects)
@@ -37,7 +37,6 @@ public class SubPool
             go = GameObject.Instantiate<GameObject>(m_prefab);
             m_objects.Add(go);
             go.transform.SetParent(container.transform);
-
             if (go.GetComponent<ReusableObject>() != null)
                 go.GetComponent<ReusableObject>().ParentObj = container.transform;
         }

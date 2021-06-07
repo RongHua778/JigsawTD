@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 
 public abstract class TurretContent : GameTileContent, IGameBehavior
@@ -10,7 +11,10 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     public TurretAttribute m_TurretAttribute;
     public List<TargetPoint> targetList = new List<TargetPoint>();
 
-    [SerializeField] private GameObject rangeIndicator;
+    private RangeIndicator rangeIndicator;
+    protected List<RangeIndicator> rangeIndicators;
+    protected List<RangeIndicator> currentRangetors;
+
     private Transform rangeParent;
     private float nextAttackTime;
     private Quaternion look_Rotation;
@@ -30,7 +34,6 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     private List<TargetPoint> target = new List<TargetPoint>();
     public List<TargetPoint> Target { get => target; set => target = value; }
 
-    protected List<RangeIndicator> rangeIndicators = new List<RangeIndicator>();
     protected CompositeCollider2D detectCollider;
     protected bool ShowingRange = false;
     protected Transform rotTrans;
@@ -38,7 +41,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     protected float CheckAngle = 10f;
 
     //品质
-    private int quality = 1;
+    private int quality = 0;
     public int Quality
     {
         get => quality;
@@ -50,6 +53,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
             GetTurretEffects();
         }
     }
+    private int currentRange = 0;//为检测范围变化时的Rangeindicator修改
 
     private int damageAnalysis;
     public int DamageAnalysis { get => damageAnalysis; set => damageAnalysis = value; }
@@ -73,6 +77,10 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     //**************回合临时属性
     int turnAddtionalAttack = 0;
     public int TurnAdditionalAttack { get => turnAddtionalAttack; set => turnAddtionalAttack = value; }
+
+    float turnAttackIntensify = 0;
+    public float TurnAttackIntensify { get => turnAttackIntensify; set => turnAttackIntensify = value; }
+
     float turnAdditionalSpeed = 0;
     public float TurnAdditionalSpeed { get => turnAdditionalSpeed; set => turnAdditionalSpeed = value; }
 
@@ -80,7 +88,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
 
     //*************光环加成
     float attackIntensify;
-    public virtual float AttackIntensify { get => attackIntensify; set => attackIntensify = value; }
+    public virtual float AttackIntensify { get => attackIntensify + TurnAttackIntensify; set => attackIntensify = value; }
     int rangeIntensify;
     public int RangeIntensify { get => rangeIntensify; set => rangeIntensify = value; }
     float speedIntensify;
@@ -98,11 +106,15 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     public List<TurretEffectInfo> TurretEffectInfos => m_TurretAttribute.TurretLevels[Quality - 1].TurretEffects;
 
 
+
     public List<TurretEffect> TurretEffects = new List<TurretEffect>();
 
 
     private void Awake()
     {
+        rangeIndicators = new List<RangeIndicator>();
+        currentRangetors = new List<RangeIndicator>();
+        rangeIndicator = Resources.Load<RangeIndicator>("Prefabs/RangeIndicator");
         rangeParent = transform.Find("TurretRangeCol");
         detectCollider = rangeParent.GetComponent<CompositeCollider2D>();
         rotTrans = transform.Find("RotPoint");
@@ -199,15 +211,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         }
     }
 
-    public void RecycleRanges()
-    {
-        var ranges = rangeIndicators.GetEnumerator();
-        while (ranges.MoveNext())
-        {
-            ObjectPool.Instance.UnSpawn(ranges.Current.gameObject);
-        }
-        rangeIndicators.Clear();
-    }
+
 
     public virtual bool GameUpdate()
     {
@@ -268,7 +272,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     public void ShowRange(bool show)
     {
         ShowingRange = show;
-        var ranges = rangeIndicators.GetEnumerator();
+        var ranges = currentRangetors.GetEnumerator();
         while (ranges.MoveNext())
         {
             ranges.Current.ShowSprite(show);
@@ -276,11 +280,11 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     }
     public void GenerateRange()
     {
-        if (rangeIndicators.Count > 0)
-        {
+        if (AttackRange == currentRange)
+            return;
+        if (currentRangetors.Count > 0)
             RecycleRanges();
-        }
-        List<Vector2> points = null;
+        List<Vector2Int> points = null;
         switch (RangeType)
         {
             case RangeType.Circle:
@@ -293,15 +297,47 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
                 points = StaticData.GetLinePoints(AttackRange, ForbidRange);
                 break;
         }
-        foreach (Vector2 point in points)
+        if (points.Count > rangeIndicators.Count)
         {
-            GameObject rangeObj = ObjectPool.Instance.Spawn(rangeIndicator);
-            rangeObj.transform.SetParent(rangeParent);
-            rangeObj.transform.localPosition = point;
-            rangeIndicators.Add(rangeObj.GetComponent<RangeIndicator>());
+            int amount = points.Count - rangeIndicators.Count;
+            for (int i = 0; i < amount; i++)
+            {
+                RangeIndicator rangeObj = Instantiate(rangeIndicator, rangeParent);
+                rangeIndicators.Add(rangeObj);
+            }
         }
+        for (int i = 0; i < points.Count; i++)
+        {
+            rangeIndicators[i].SetCol(true);
+            rangeIndicators[i].transform.localPosition = (Vector3Int)points[i];
+            currentRangetors.Add(rangeIndicators[i]);
+        }
+
+        //foreach (var point in points)
+        //{
+
+
+        //    if (!rangeSpawned.ContainsKey(point))
+        //    {
+        //        RangeIndicator rangeObj = Instantiate(rangeIndicator, rangeParent);
+        //        rangeObj.transform.localPosition = (Vector3Int)point;
+        //        rangeIndicators.Add(rangeObj);
+        //        rangeSpawned.Add(point, rangeObj);
+        //    }
+        //}
         detectCollider.GenerateGeometry();
+        currentRange = AttackRange;
         ShowRange(ShowingRange);
+    }
+
+    public void RecycleRanges()
+    {
+        var ranges = currentRangetors.GetEnumerator();
+        while (ranges.MoveNext())
+        {
+            ranges.Current.SetCol(false);
+        }
+        currentRangetors.Clear();
     }
 
     protected virtual void RotateTowards()
@@ -351,13 +387,6 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
             bullet.transform.position = shootPoint.position;
             bullet.Initialize(this, targets.Current);
         }
-        //foreach (TargetPoint target in Target)
-        //{
-        //    Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
-        //    bullet.transform.position = shootPoint.position;
-        //    bullet.Initialize(this, target);
-        //}
-
     }
 
     //content类重载*************
@@ -407,6 +436,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         CriticalPercentage = 1.5f;
         TargetCount = 1;
         DamageAnalysis = 0;
+        ShowRange(false);
         ClearTurnIntensify();
     }
 
@@ -414,6 +444,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     {
         TurnAdditionalAttack = 0;
         TurnAdditionalSpeed = 0;
+        TurnAttackIntensify = 0;
     }
 
 }

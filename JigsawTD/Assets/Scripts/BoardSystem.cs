@@ -49,7 +49,7 @@ public class BoardSystem : IGameSystem
     [SerializeField] PathLine pathLinePrefab = default;
     List<PathLine> pathLines = new List<PathLine>();
 
-    List<Vector2> tilePoss = new List<Vector2>();
+    List<Vector2Int> tilePoss = new List<Vector2Int>();
 
     public List<GameTile> shortestPath = new List<GameTile>();
 
@@ -115,8 +115,8 @@ public class BoardSystem : IGameSystem
 
     public void SetGameBoard()
     {
-        Vector2 sizeOffset = new Vector2((_startSize.x - 1) * 0.5f, (_startSize.y - 1) * 0.5f) * StaticData.Instance.TileSize;
-        Vector2 groundOffset = new Vector2((_groundSize.x - 1) * 0.5f, (_groundSize.y - 1) * 0.5f) * StaticData.Instance.TileSize;
+        Vector2Int sizeOffset = new Vector2Int((int)((_startSize.x - 1) * 0.5f), (int)((_startSize.y - 1) * 0.5f));
+        Vector2Int groundOffset = new Vector2Int((int)((_groundSize.x - 1) * 0.5f), (int)((_groundSize.y - 1) * 0.5f));
         GenerateGroundTiles(groundOffset, _groundSize);
         Physics2D.SyncTransforms();
         GenerateStartTiles(_startSize, sizeOffset);
@@ -175,7 +175,7 @@ public class BoardSystem : IGameSystem
                 return;
             }
             path = p;
-            ShowPath(path);
+           // ShowPath(path);
             //Debug.Log("Find Path!");
         }
         else
@@ -221,24 +221,24 @@ public class BoardSystem : IGameSystem
         }
 
     }
-    private void GenerateTrapTiles(Vector2 offset, Vector2Int size)
+    private void GenerateTrapTiles(Vector2Int offset, Vector2Int size)
     {
-        List<Vector2> traps = new List<Vector2>();
-        List<Vector2> tempPoss = tilePoss.ToList();
+        List<Vector2Int> traps = new List<Vector2Int>();
+        List<Vector2Int> tempPoss = tilePoss.ToList();
         for (int y = 0; y < size.y; y++)
         {
             for (int x = 0; x < size.x; x++)
             {
-                Vector2 pos = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
+                Vector2Int pos = new Vector2Int(x, y) - offset;
                 tempPoss.Remove(pos);
             }
         }
         for (int i = 0; i < StaticData.trapN; i++)
         {
             int index = UnityEngine.Random.Range(0, tempPoss.Count);
-            Vector2 temp = tempPoss[index];
+            Vector2Int temp = tempPoss[index];
             traps.Add(temp);
-            List<Vector2> neibor = StaticData.GetCirclePoints(5, 0);
+            List<Vector2Int> neibor = StaticData.GetCirclePoints(5, 0);
             for (int k = 0; k < neibor.Count; k++)
             {
                 neibor[k] = neibor[k] + tempPoss[index];
@@ -246,22 +246,22 @@ public class BoardSystem : IGameSystem
             tempPoss = tempPoss.Except(neibor).ToList();
             tempPoss.Remove(temp);
         }
-        foreach (Vector2 pos in traps)
+        foreach (Vector2Int pos in traps)
         {
             GameTile tile = ConstructHelper.GetRandomTrap();
-            tile.transform.position = pos;
+            tile.transform.position = (Vector3Int)pos;
             tile.TileLanded();
         }
     }
-    private void GenerateGroundTiles(Vector2 offset, Vector2Int groundSize)
+    private void GenerateGroundTiles(Vector2Int offset, Vector2Int groundSize)
     {
         for (int i = 0, y = 0; y < groundSize.y; y++)
         {
             for (int x = 0; x < groundSize.x; x++, i++)
             {
                 GroundTile groundTile = ConstructHelper.GetGroundTile();
-                Vector2 pos = new Vector2(x, y) * StaticData.Instance.TileSize - offset;
-                groundTile.transform.position = pos;
+                Vector2Int pos = new Vector2Int(x, y) - offset;
+                groundTile.transform.position = (Vector3Int)pos;
                 groundTile.transform.position += Vector3.forward * 0.1f;
                 CorrectTileCoord(groundTile);
                 tilePoss.Add(pos);

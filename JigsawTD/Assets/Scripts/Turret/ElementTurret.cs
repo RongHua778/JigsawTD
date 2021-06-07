@@ -20,6 +20,5 @@ public abstract class ElementTurret : TurretContent
     {
         base.OnUnSpawn();
         GameManager.Instance.elementTurrets.Remove(this);
-        Quality = 1;
     }
 }

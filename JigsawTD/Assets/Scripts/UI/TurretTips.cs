@@ -116,12 +116,12 @@ public class TurretTips : TileTips
             m_Turret.Quality++;
             Icon.sprite = m_Turret.m_TurretAttribute.TurretLevels[m_Turret.Quality - 1].Icon;
             Name.text = m_Turret.m_TurretAttribute.TurretLevels[m_Turret.Quality - 1].TurretName;
+            Description.text = StaticData.GetTurretDes(m_Turret.m_TurretAttribute, m_Turret.Quality);
             if (m_Turret.Quality > 2)
             {
                 UpgradeArea.SetActive(false);
                 return;
             }
-            Description.text = StaticData.GetTurretDes(m_Turret.m_TurretAttribute, m_Turret.Quality);
             upgradeCost = StaticData.Instance.LevelUpCost[m_Turret.m_TurretAttribute.Rare - 1, m_Turret.Quality - 1];
             UpgradeCostValue.text = upgradeCost.ToString();
         }

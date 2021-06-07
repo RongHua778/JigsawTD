@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,16 @@ public abstract class Enemy :ReusableObject, IGameBehavior
     public int ReachDamage { get; set; }
     public float TargetDamageCounter { get; set; }
     public int TileStunCounter { get; set; }
-    public float StunTime { get; set; }
+    private float stunTime;
+    public float StunTime 
+    { 
+        get=>stunTime; 
+        set 
+        {
+            stunTime = value;
+            progressFactor = Speed * adjust;
+        } 
+    }
     Direction direction;
     public Direction Direction { get => direction; set => direction = value; }
     DirectionChange directionChange;
@@ -34,12 +44,11 @@ public abstract class Enemy :ReusableObject, IGameBehavior
     public float SlowRate
     {
         get => slowRate;
-        //slowRate;// Mathf.Min(0.8f, (PathSlow + slowRate) / (PathSlow + slowRate + 1));
         set
         {
             slowRate = value;
             progressFactor = Speed * adjust;//子弹减速即时更新速度
-            healthBar.ShowSlowIcon(slowRate > 0);
+            healthBar.ShowSlowIcon(slowRate > 0.01f);
         }
     }
     float pathSlow;
@@ -113,6 +122,10 @@ public abstract class Enemy :ReusableObject, IGameBehavior
                 progressFactor = Speed * adjust;
         }
         progress += Time.deltaTime * progressFactor;
+        if (!tileEffectTriigger && progress >= 0.5f)
+        {
+            TriggetTileEffect();
+        }
         while (progress >= 1f)
         {
             if (tileTo == null)
@@ -120,9 +133,9 @@ public abstract class Enemy :ReusableObject, IGameBehavior
                 StartCoroutine(ExitCor());
                 return false;
             }
-            progress = (progress - 1f) / progressFactor;
+            progress = 0;
+            tileEffectTriigger = false;
             PrepareNextState();
-            progress *= progressFactor;
         }
         if (DirectionChange == DirectionChange.None)
         {
@@ -134,6 +147,15 @@ public abstract class Enemy :ReusableObject, IGameBehavior
             transform.localRotation = Quaternion.Euler(0f, 0f, angle);
         }
         return true;
+    }
+
+    bool tileEffectTriigger = false;
+    private void TriggetTileEffect()
+    {
+        Buffable.TileTick();//先移除BUFF再加BUFF//放在Prepare前面，因为要提前改变Path速度
+        tileFrom.OnTilePass(this);
+        tileEffectTriigger = true;
+        
     }
 
     private IEnumerator ExitCor()
@@ -184,8 +206,6 @@ public abstract class Enemy :ReusableObject, IGameBehavior
 
     private void PrepareOutro()
     {
-        //anim.SetTrigger("Exit");
-
         positionTo = tileFrom.transform.localPosition;
         DirectionChange = DirectionChange.None;
         directionAngleTo = Direction.GetAngle();
@@ -211,8 +231,7 @@ public abstract class Enemy :ReusableObject, IGameBehavior
         directionAngleFrom = directionAngleTo;
 
         TileStunCounter++;
-        Buffable.TileTick();//先移除BUFF再加BUFF//放在Prepare前面，因为要提前改变Path速度
-        tileFrom.OnTilePass(this);
+
 
         switch (DirectionChange)
         {

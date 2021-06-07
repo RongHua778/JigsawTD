@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TargetPoint : MonoBehaviour
 {
+
     public Enemy Enemy { get; set; }
     public Vector2 Position => transform.position;
     private void Awake()

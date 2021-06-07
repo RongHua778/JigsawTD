@@ -153,4 +153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86b428a484abdbe49bbf35cea8b4f214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ParentObj: {fileID: 0}
   sprite: {fileID: 6323452567571772622}
+  m_Col: {fileID: 5645001161735264067}
