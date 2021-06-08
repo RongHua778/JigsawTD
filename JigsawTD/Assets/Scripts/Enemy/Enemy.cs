@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy :ReusableObject, IGameBehavior
+public abstract class Enemy :PathFollower, IGameBehavior
 {
     public abstract EnemyType EnemyType { get; }
 
     private Animator anim;
     private AudioClip explosionClip;
 
-    [SerializeField] GameObject exlposionPrefab = default;
+    [SerializeField] ReusableObject exlposionPrefab = default;
     public int ReachDamage { get; set; }
     public float TargetDamageCounter { get; set; }
     public int TileStunCounter { get; set; }
@@ -24,20 +24,8 @@ public abstract class Enemy :ReusableObject, IGameBehavior
             progressFactor = Speed * adjust;
         } 
     }
-    Direction direction;
-    public Direction Direction { get => direction; set => direction = value; }
-    DirectionChange directionChange;
-    public virtual DirectionChange DirectionChange { get => directionChange; set => directionChange = value; }
-    [SerializeField] Transform model = default;
-    [HideInInspector] public GameTile tileFrom, tileTo;
-    Vector3 positionFrom, positionTo;
-    float progress, progressFactor, adjust;
-    float directionAngleFrom, directionAngleTo;
-    float pathOffset;
 
-    [Header("EnemyAttribute")]
-    protected float speed;
-    public virtual float Speed { get => StunTime > 0 ? 0 : speed * (1 - (SlowRate + PathSlow) / (SlowRate + PathSlow + 0.7f)); set => speed = value; }
+    public override float Speed { get => StunTime > 0 ? 0 : speed * (1 - (SlowRate + PathSlow) / (SlowRate + PathSlow + 0.7f)); set => speed = value; }
     int shell;
     public int Shell { get => Mathf.Max(0, shell - BrokeShell); set => shell = value; }
     float slowRate;
@@ -102,17 +90,21 @@ public abstract class Enemy :ReusableObject, IGameBehavior
         anim = this.GetComponent<Animator>();
         explosionClip = Resources.Load<AudioClip>("Music/Sound_EnemyExplosion");
     }
+    protected override void Update()
+    {
+
+    }
 
     public virtual bool GameUpdate()
     {
         if (IsDie)
         {
             StopAllCoroutines();
-            GameObject explosion = ObjectPool.Instance.Spawn(exlposionPrefab);
+            ReusableObject explosion = ObjectPool.Instance.Spawn(exlposionPrefab);
             Sound.Instance.PlayEffect(explosionClip, StaticData.Instance.EnvrionmentBaseVolume);
             explosion.transform.position = model.transform.position;
             GameEvents.Instance.EnemyDie(this);
-            ObjectPool.Instance.UnSpawn(this.gameObject);
+            ObjectPool.Instance.UnSpawn(this);
             return false;
         }
         if (StunTime >= 0)
@@ -163,7 +155,7 @@ public abstract class Enemy :ReusableObject, IGameBehavior
         anim.SetTrigger("Exit");
         yield return new WaitForSeconds(0.5f);
         GameEvents.Instance.EnemyReach(this);
-        ObjectPool.Instance.UnSpawn(this.gameObject);
+        ObjectPool.Instance.UnSpawn(this);
     }
     public void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify)
     {
@@ -179,29 +171,13 @@ public abstract class Enemy :ReusableObject, IGameBehavior
     }
 
 
-    public void SpawnOn(GameTile tile)
-    {
-        Debug.Assert(tile.NextTileOnPath != null, "No where to go", this);
-        tileFrom = tile;
-        tileTo = tileFrom.NextTileOnPath;
-        progress = 0f;
-        PrepareIntro();
-    }
 
-    private void PrepareIntro()
+    protected override void PrepareIntro()
     {
+        base.PrepareIntro();
         anim.Play("Default");
         anim.SetTrigger("Enter");
 
-        positionFrom = tileFrom.transform.localPosition;
-        positionTo = tileFrom.ExitPoint;
-        Direction = tileFrom.PathDirection;
-        DirectionChange = DirectionChange.None;
-        model.localPosition = new Vector3(pathOffset, 0);
-        directionAngleFrom = directionAngleTo = Direction.GetAngle();
-        transform.localRotation = tileFrom.PathDirection.GetRotation();
-        adjust = 2f;
-        progressFactor = adjust * Speed;
     }
 
     private void PrepareOutro()
@@ -215,76 +191,6 @@ public abstract class Enemy :ReusableObject, IGameBehavior
         progressFactor = adjust * Speed;
     }
 
-    private void PrepareNextState()
-    {
-        tileFrom = tileTo;
-        tileTo = tileTo.NextTileOnPath;
-        positionFrom = positionTo;
-        if (tileTo == null)
-        {
-            PrepareOutro();
-            return;
-        }
-        positionTo = tileFrom.ExitPoint;
-        DirectionChange = Direction.GetDirectionChangeTo(tileFrom.PathDirection);
-        Direction = tileFrom.PathDirection;
-        directionAngleFrom = directionAngleTo;
-
-        TileStunCounter++;
-
-
-        switch (DirectionChange)
-        {
-            case DirectionChange.None:
-                PrepareForward();
-                break;
-            case DirectionChange.TurnRight:
-                PrepareTurnRight();
-                break;
-            case DirectionChange.TurnLeft:
-                PrepareTurnLeft();
-                break;
-            case DirectionChange.TurnAround:
-                PrepareTurnAround();
-                break;
-        }
-
-
-    }
-
-    void PrepareForward()
-    {
-        transform.localRotation = Direction.GetRotation();
-        directionAngleTo = Direction.GetAngle();
-        model.localPosition = new Vector3(pathOffset, 0f);
-        adjust = 1f;
-        progressFactor = adjust * Speed;
-    }
-
-    void PrepareTurnRight()
-    {
-        directionAngleTo = directionAngleFrom - 90f;
-        model.localPosition = new Vector3(pathOffset - 0.5f, 0f);
-        transform.localPosition = positionFrom + Direction.GetHalfVector();
-        adjust = 1 / (Mathf.PI * 0.5f * (0.5f - pathOffset));
-        progressFactor = adjust * Speed;
-    }
-    void PrepareTurnLeft()
-    {
-        directionAngleTo = directionAngleFrom + 90f;
-        model.localPosition = new Vector3(pathOffset + 0.5f, 0f);
-        transform.localPosition = positionFrom + Direction.GetHalfVector();
-        adjust = 1 / (Mathf.PI * 0.5f * (0.5f + pathOffset));
-        progressFactor = adjust * Speed;
-    }
-    void PrepareTurnAround()
-    {
-        directionAngleTo = directionAngleFrom + (pathOffset < 0f ? 180f : -180f);
-        model.localPosition = new Vector3(pathOffset, 0);
-        transform.localPosition = positionFrom;
-        adjust = 1 / (Mathf.PI * Mathf.Max(Mathf.Abs(pathOffset), 0.2f));
-        progressFactor = adjust * Speed;
-    }
 
     public virtual void ApplyDamage(float amount, out float realDamage, bool isCritical = false)
     {
@@ -302,13 +208,13 @@ public abstract class Enemy :ReusableObject, IGameBehavior
 
     public override void OnSpawn()
     {
-        model.localPosition = Vector3.zero;
+        base.OnUnSpawn();
         IsDie = false;
     }
 
     public override void OnUnSpawn()
     {
-        ObjectPool.Instance.UnSpawn(healthBar.gameObject);
+        ObjectPool.Instance.UnSpawn(healthBar);
         TargetDamageCounter = 0;
         TileStunCounter = 0;
         PathSlow = 0;

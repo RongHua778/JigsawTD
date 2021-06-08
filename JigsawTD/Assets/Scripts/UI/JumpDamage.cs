@@ -22,7 +22,7 @@ public class JumpDamage : ReusableObject
     public void RecycleObject()
     {
         transform.localScale = Vector3.one;
-        ObjectPool.Instance.UnSpawn(this.gameObject);
+        ObjectPool.Instance.UnSpawn(this);
     }
 
 }

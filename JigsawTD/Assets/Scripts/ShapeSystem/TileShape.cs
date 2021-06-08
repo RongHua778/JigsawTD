@@ -79,7 +79,7 @@ public class TileShape : MonoBehaviour
     {
         foreach (GameTile tile in tiles)
         {
-            ObjectPool.Instance.UnSpawn(tile.gameObject);
+            ObjectPool.Instance.UnSpawn(tile);
         }
     }
 

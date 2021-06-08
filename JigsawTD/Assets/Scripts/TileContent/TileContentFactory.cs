@@ -173,9 +173,9 @@ public class TileContentFactory : GameObjectFactory
 
 
 
-    private GameTileContent Get(GameObject prefab)
+    private GameTileContent Get(GameTileContent prefab)
     {
-        GameTileContent instance = CreateInstance(prefab).GetComponent<GameTileContent>();
+        GameTileContent instance = CreateInstance(prefab) as GameTileContent;
         return instance;
     }
 

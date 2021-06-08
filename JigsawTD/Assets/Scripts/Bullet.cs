@@ -9,7 +9,7 @@ public enum BulletType
 }
 public abstract class Bullet :ReusableObject, IGameBehavior
 {
-    [SerializeField] protected GameObject SputteringEffect = default;
+    [SerializeField] protected ParticalControl SputteringEffect = default;
     TrailRenderer trailRenderer;
     protected const int enemyLayerMask = 1 << 11;
     public abstract BulletType BulletType { get; }
@@ -137,7 +137,7 @@ public abstract class Bullet :ReusableObject, IGameBehavior
 
     private void ReclaimBullet()
     {
-        ObjectPool.Instance.UnSpawn(this.gameObject);
+        ObjectPool.Instance.UnSpawn(this);
     }
 
     protected virtual void TriggerDamage()

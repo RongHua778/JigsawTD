@@ -253,8 +253,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2928826827273700537}
   - component: {fileID: 4419982813173313524}
-  - component: {fileID: 1750580662948382961}
   - component: {fileID: 7174607837279088925}
+  - component: {fileID: 7811781132511134579}
   m_Layer: 2
   m_Name: TurretRangeCol
   m_TagString: Untagged
@@ -297,28 +297,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!66 &1750580662948382961
-CompositeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5229592086419912878}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_GeometryType: 1
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths: []
-  m_CompositePaths:
-    m_Paths: []
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
 --- !u!114 &7174607837279088925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,6 +309,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8cf58385fe4af842a06208f099b6d6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!61 &7811781132511134579
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5229592086419912878}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &6736000688718372652
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,8 +346,8 @@ GameObject:
   - component: {fileID: 7065520975459640700}
   - component: {fileID: 3830102932677347064}
   - component: {fileID: 6524487967244621157}
-  - component: {fileID: 5328605036076082734}
   - component: {fileID: -4452151466765460351}
+  - component: {fileID: 4954238733900854409}
   m_Layer: 13
   m_Name: Wood
   m_TagString: Untagged
@@ -381,9 +385,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fb6d081fcb7f87448a492ce05e717ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ParentObj: {fileID: 0}
   m_TurretAttribute: {fileID: 11400000, guid: 6c3131e68b56a9b4db13891b470a159b, type: 2}
   targetList: []
-  rangeIndicator: {fileID: 5148764045994468596, guid: d8a2a921f17ca0e46b801451269a7676, type: 3}
 --- !u!95 &6524487967244621157
 Animator:
   serializedVersion: 3
@@ -403,22 +407,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!58 &5328605036076082734
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6736000688718372652}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.001
 --- !u!82 &-4452151466765460351
 AudioSource:
   m_ObjectHideFlags: 0
@@ -515,6 +503,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!58 &4954238733900854409
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6736000688718372652}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.001
 --- !u!1 &7457417527178826533
 GameObject:
   m_ObjectHideFlags: 0

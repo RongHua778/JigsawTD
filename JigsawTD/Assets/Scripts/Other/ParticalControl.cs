@@ -14,8 +14,13 @@ public class ParticalControl : ReusableObject
     {
         if (!ps.IsAlive())
         {
-            ObjectPool.Instance.UnSpawn(this.gameObject);                     
+            ObjectPool.Instance.UnSpawn(this);                     
         }
+    }
+
+    public void PlayEffect()
+    {
+        ps.Play();
     }
 
 }

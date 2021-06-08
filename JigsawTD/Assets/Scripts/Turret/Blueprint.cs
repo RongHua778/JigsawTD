@@ -48,7 +48,7 @@ public class Blueprint
         //建造合成塔，移除所有配方
         foreach(Composition com in Compositions)
         {
-            ObjectPool.Instance.UnSpawn(com.turretTile.gameObject);
+            ObjectPool.Instance.UnSpawn(com.turretTile);
         }
     }
 

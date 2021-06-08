@@ -9,8 +9,8 @@ public enum BasicTileType
 [CreateAssetMenu(menuName = "Factory/TileFactory", fileName = "TileFactory")]
 public class TileFactory : GameObjectFactory
 {
-    [SerializeField] GameObject groundTile = default;
-    [SerializeField] GameObject basicTilePrefab = default;
+    [SerializeField] GroundTile groundTile = default;
+    [SerializeField] GameTile basicTilePrefab = default;
 
     public void Initialize()
     {
@@ -19,12 +19,12 @@ public class TileFactory : GameObjectFactory
 
     public GameTile GetBasicTile()
     {
-        BasicTile basicTile = CreateInstance(basicTilePrefab).GetComponent<BasicTile>();
+        BasicTile basicTile = CreateInstance(basicTilePrefab) as BasicTile;
         return basicTile;
     }
     public GroundTile GetGroundTile()
     {
-        return CreateInstance(groundTile).GetComponent<GroundTile>();
+        return CreateInstance(groundTile) as GroundTile;
 
     }
 

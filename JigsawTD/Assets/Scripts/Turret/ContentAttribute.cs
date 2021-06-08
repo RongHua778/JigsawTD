@@ -9,7 +9,7 @@ public class ContentAttribute : ScriptableObject
     public Sprite Icon;
     [TextArea(3,4)]
     public string Description;
-    public GameObject ContentPrefab;
+    public GameTileContent ContentPrefab;
     public virtual void Upgrade()
     {
 

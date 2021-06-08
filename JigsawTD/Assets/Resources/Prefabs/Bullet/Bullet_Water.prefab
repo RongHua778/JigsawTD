@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: 4adeaf2d2b1c7417e89f026626d8264f, type: 3}
-  m_Color: {r: 1, g: 0.98954016, b: 0.66415095, a: 1}
+  m_Color: {r: 0.6627451, g: 1, b: 0.9838139, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -127,7 +127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e11c71b178a694e448979f0fae09425c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SputteringEffect: {fileID: 0}
+  ParentObj: {fileID: 0}
+  SputteringEffect: {fileID: 3494240544614092349, guid: eb6cba38b10cbae4595d14d7b62081a8, type: 3}
   turretParent: {fileID: 0}
 --- !u!96 &134762492602489568
 TrailRenderer:

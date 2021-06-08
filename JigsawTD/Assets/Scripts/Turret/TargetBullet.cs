@@ -24,10 +24,10 @@ public class TargetBullet : Bullet
         {
             if (SputteringEffect != null)
             {
-                GameObject effect = ObjectPool.Instance.Spawn(SputteringEffect);
+                ParticalControl effect = ObjectPool.Instance.Spawn(SputteringEffect) as ParticalControl;
                 effect.transform.position = transform.position;
                 effect.transform.localScale = Vector3.one * SputteringRange * 2;
-                effect.GetComponent<ParticleSystem>().Play();
+                effect.PlayEffect();
             }
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, SputteringRange, enemyLayerMask);
             foreach (Collider2D hit in hits)

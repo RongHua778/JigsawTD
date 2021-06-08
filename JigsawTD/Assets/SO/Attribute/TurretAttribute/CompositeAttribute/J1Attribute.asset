@@ -26,7 +26,7 @@ MonoBehaviour:
   elementNumber: 3
   TurretLevels:
   - AttackRange: 5
-    ForbidRange: 1
+    ForbidRange: 0
     AttackDamage: 400
     AttackSpeed: 0.35
     SputteringRange: 0
@@ -43,7 +43,7 @@ MonoBehaviour:
     CannonSprite: {fileID: 21300000, guid: 6225416df5e6766408884d4da0f7a471, type: 3}
     ShootPointOffset: {x: 0, y: 0.28}
   - AttackRange: 5
-    ForbidRange: 1
+    ForbidRange: 0
     AttackDamage: 750
     AttackSpeed: 0.35
     SputteringRange: 0
@@ -60,7 +60,7 @@ MonoBehaviour:
     CannonSprite: {fileID: 21300000, guid: 6225416df5e6766408884d4da0f7a471, type: 3}
     ShootPointOffset: {x: 0, y: 0.28}
   - AttackRange: 5
-    ForbidRange: 1
+    ForbidRange: 0
     AttackDamage: 1500
     AttackSpeed: 0.35
     SputteringRange: 0

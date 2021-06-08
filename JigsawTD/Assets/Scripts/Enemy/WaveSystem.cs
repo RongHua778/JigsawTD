@@ -186,8 +186,8 @@ public class WaveSystem : IGameSystem
     {
         EnemyAttribute attribute = RunningSequence.EnemyAttribute;
         float intensify = RunningSequence.Intensify;
-        Enemy enemy = ObjectPool.Instance.Spawn(attribute.Prefab.gameObject).GetComponent<Enemy>();
-        HealthBar healthBar = ObjectPool.Instance.Spawn(healthBarPrefab.gameObject).GetComponent<HealthBar>();
+        Enemy enemy = ObjectPool.Instance.Spawn(attribute.Prefab) as Enemy;
+        HealthBar healthBar = ObjectPool.Instance.Spawn(healthBarPrefab) as HealthBar;
         enemy.Initialize(attribute, UnityEngine.Random.Range(-pathOffset, pathOffset), healthBar, intensify);
         enemy.SpawnOn(spawnTile);
         GameManager.Instance.enemies.Add(enemy);

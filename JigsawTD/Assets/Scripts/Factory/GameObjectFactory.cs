@@ -4,9 +4,9 @@ using UnityEngine;
 
 public abstract class GameObjectFactory : ScriptableObject
 {
-    protected GameObject CreateInstance(GameObject prefab)
+    protected ReusableObject CreateInstance(ReusableObject prefab)
     {
-        GameObject instance = ObjectPool.Instance.Spawn(prefab);
+        ReusableObject instance = ObjectPool.Instance.Spawn(prefab);
         return instance;
     }
 

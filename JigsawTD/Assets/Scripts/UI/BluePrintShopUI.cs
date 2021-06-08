@@ -55,19 +55,18 @@ public class BluePrintShopUI : IUserInterface
 
     public void AddBluePrint(Blueprint bluePrint, bool isShopBluePrint)//增加蓝图，isShopblueprint判断加入商店还是拥有
     {
-        GameObject bluePrintObj = ObjectPool.Instance.Spawn(bluePrintGridPrefab.gameObject);
-        bluePrintObj.transform.SetParent(shopContent);
-        BluePrintGrid grid = bluePrintObj.GetComponent<BluePrintGrid>();
-        grid.SetElements(shopContent.GetComponent<ToggleGroup>(), bluePrint);
+        BluePrintGrid bluePrintGrid = ObjectPool.Instance.Spawn(bluePrintGridPrefab) as BluePrintGrid;
+        bluePrintGrid.transform.SetParent(shopContent);
+        bluePrintGrid.SetElements(shopContent.GetComponent<ToggleGroup>(), bluePrint);
         if (isShopBluePrint)
         {
-            bluePrintObj.transform.SetAsFirstSibling();
-            grid.InShop = true;
-            ShopBluePrints.Add(grid);
+            bluePrintGrid.transform.SetAsFirstSibling();
+            bluePrintGrid.InShop = true;
+            ShopBluePrints.Add(bluePrintGrid);
         }
         else
         {
-            MoveBluePrintToPocket(grid);
+            MoveBluePrintToPocket(bluePrintGrid);
         }
     }
 
@@ -137,7 +136,7 @@ public class BluePrintShopUI : IUserInterface
         {
             OwnBluePrints.Remove(grid);
         }
-        ObjectPool.Instance.UnSpawn(grid.gameObject);
+        ObjectPool.Instance.UnSpawn(grid);
     }
 
     public void CheckAllBluePrint()//检查所有配方是否达成合成条件

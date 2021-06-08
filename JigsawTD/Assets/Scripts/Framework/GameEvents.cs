@@ -53,11 +53,6 @@ public class GameEvents : Singleton<GameEvents>
     }
 
 
-    public event Action<GameTile> onRemoveGameTile;
-    public void RemoveGameTile(GameTile tile)
-    {
-        onRemoveGameTile?.Invoke(tile);
-    }
 
     public event Action onLuckyFull;
     public void LuckyFull()

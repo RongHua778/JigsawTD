@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BluePrintGrid : MonoBehaviour
+public class BluePrintGrid : ReusableObject
 {
     public static BluePrintGrid SelectingBluePrint = null;
     private bool inShop=false;

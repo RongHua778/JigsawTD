@@ -253,8 +253,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2740897426492541635}
   - component: {fileID: 3745368883856449934}
-  - component: {fileID: 1650454923384620683}
   - component: {fileID: 7871592876702351207}
+  - component: {fileID: 7620249855226834191}
   m_Layer: 2
   m_Name: TurretRangeCol
   m_TagString: Untagged
@@ -271,7 +271,7 @@ Transform:
   m_GameObject: {fileID: 5062021375847757524}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 7827557628216716038}
   m_RootOrder: 2
@@ -297,28 +297,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!66 &1650454923384620683
-CompositeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5062021375847757524}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_GeometryType: 1
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths: []
-  m_CompositePaths:
-    m_Paths: []
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
 --- !u!114 &7871592876702351207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,6 +309,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8cf58385fe4af842a06208f099b6d6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!60 &7620249855226834191
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5062021375847757524}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1, y: 0}
+      - {x: 0, y: 1}
+      - {x: -1, y: 0}
 --- !u!1 &5628231320989539839
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,9 +417,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c2dd3d6512edb40b9ac96a8fc89a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ParentObj: {fileID: 0}
   m_TurretAttribute: {fileID: 11400000, guid: 2a0c266b352137f45b20d3723395e650, type: 2}
   targetList: []
-  rangeIndicator: {fileID: 5148764045994468596, guid: d8a2a921f17ca0e46b801451269a7676, type: 3}
 --- !u!95 &5572267997599666211
 Animator:
   serializedVersion: 3

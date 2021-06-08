@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class SubPool
 {
-    GameObject m_prefab;
+    ReusableObject m_prefab;
     string m_Name;
-    List<GameObject> m_objects = new List<GameObject>();
+    List<ReusableObject> m_objects = new List<ReusableObject>();
     public string Name
     {
         //get { return m_prefab.name; }
         get { return m_Name; }
     }
-    public SubPool(string name, GameObject prefab)
+    public SubPool(string name, ReusableObject prefab)
     {
         this.m_prefab = prefab;
         m_Name = name;
@@ -20,12 +20,12 @@ public class SubPool
 
 
 
-    public GameObject Spawn(Transform container)
+    public ReusableObject Spawn(Transform container)
     {
-        GameObject go = null;
-        foreach (GameObject obj in m_objects)
+        ReusableObject go = null;
+        foreach (ReusableObject obj in m_objects)
         {
-            if (!obj.activeSelf)
+            if (!obj.gameObject.activeSelf)
             {
                 go = obj;
                 break;
@@ -34,40 +34,39 @@ public class SubPool
 
         if (go == null)
         {
-            go = GameObject.Instantiate<GameObject>(m_prefab);
+            go = GameObject.Instantiate<ReusableObject>(m_prefab);
             m_objects.Add(go);
             go.transform.SetParent(container.transform);
-            if (go.GetComponent<ReusableObject>() != null)
-                go.GetComponent<ReusableObject>().ParentObj = container.transform;
+            go.ParentObj = container.transform;
         }
 
-        go.SetActive(true);
-        go.SendMessage("OnSpawn", SendMessageOptions.DontRequireReceiver);
+        go.gameObject.SetActive(true);
+        go.OnSpawn();
         return go;
     }
 
     //回收对象
-    public void UnSpawn(GameObject go)
+    public void UnSpawn(ReusableObject go)
     {
         if (Contains(go))
         {
-            go.SendMessage("OnUnSpawn", SendMessageOptions.DontRequireReceiver);
-            go.SetActive(false);
+            go.OnUnSpawn();
+            go.gameObject.SetActive(false);
         }
     }
 
     public void UnSpawnAll()
     {
-        foreach (GameObject item in m_objects)
+        foreach (ReusableObject item in m_objects)
         {
-            if (item.activeSelf)
+            if (item.gameObject.activeSelf)
             {
                 UnSpawn(item);
             }
         }
     }
 
-    public bool Contains(GameObject go)
+    public bool Contains(ReusableObject go)
     {
         return m_objects.Contains(go);
     }

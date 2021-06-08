@@ -46,8 +46,8 @@ public class BoardSystem : IGameSystem
     public static Vector2Int _startSize = new Vector2Int(3, 3);
     public static Vector2Int _groundSize = new Vector2Int(25, 25);
 
-    [SerializeField] PathLine pathLinePrefab = default;
-    List<PathLine> pathLines = new List<PathLine>();
+    [SerializeField] PathFollower pathFollowerPrefab = default;
+    List<PathFollower> pathFollowers = new List<PathFollower>();
 
     List<Vector2Int> tilePoss = new List<Vector2Int>();
 
@@ -69,7 +69,6 @@ public class BoardSystem : IGameSystem
         selection = transform.Find("Selection").gameObject;
 
         GameEvents.Instance.onSeekPath += SeekPath;
-        GameEvents.Instance.onRemoveGameTile += RemoveGameTile;
         GameEvents.Instance.onTileClick += TileClick;
         GameEvents.Instance.onTileUp += TileUp;
 
@@ -79,7 +78,6 @@ public class BoardSystem : IGameSystem
     public override void Release()
     {
         GameEvents.Instance.onSeekPath -= SeekPath;
-        GameEvents.Instance.onRemoveGameTile -= RemoveGameTile;
         GameEvents.Instance.onTileClick -= TileClick;
         GameEvents.Instance.onTileUp -= TileUp;
     }
@@ -126,7 +124,6 @@ public class BoardSystem : IGameSystem
         GenerateTrapTiles(sizeOffset, _startSize);
         Physics2D.SyncTransforms();
         SeekPath();
-        ShowPath(path);
     }
 
     private void GenerateStartTiles(Vector2Int size, Vector2Int offset)
@@ -176,23 +173,20 @@ public class BoardSystem : IGameSystem
             FindPath = true;
             if (path != null && p.vectorPath.SequenceEqual(path.vectorPath))
             {
-                //Debug.Log("Found Same Path");
+                Debug.Log("Found Same Path");
                 return;
             }
             path = p;
             GetPathTiles();
-            // ShowPath(path);
-            //Debug.Log("Find Path!");
+            ShowPath();
+            Debug.Log("Find Path!");
         }
         else
         {
-            //path = p;
-            //foreach (PathLine pl in pathLines)
-            //{
-            //    ObjectPool.Instance.UnSpawn(pl.gameObject);
-            //}
+            path = p;
+            HidePath();
             shortestPath.Clear();
-            // Debug.LogError("No Path Found");
+            Debug.LogError("No Path Found");
             FindPath = false;
         }
     }
@@ -210,24 +204,33 @@ public class BoardSystem : IGameSystem
         for (int i = 1; i < shortestPath.Count; i++)
         {
             shortestPath[i - 1].NextTileOnPath = shortestPath[i];
+            shortestPath[i].NextTileOnPath = null;
             shortestPath[i - 1].ExitPoint = (shortestPath[i].transform.position + shortestPath[i - 1].transform.position) * 0.5f;
             shortestPath[i - 1].PathDirection = DirectionExtensions.GetDirection(shortestPath[i - 1].transform.position, shortestPath[i - 1].ExitPoint);
         }
     }
 
-    private void ShowPath(Path path)
+    private void ShowPath()
     {
-        foreach (PathLine pl in pathLines)
+        HidePath();
+        for (int i = 0; i < shortestPath.Count-1; i++)
         {
-            ObjectPool.Instance.UnSpawn(pl.gameObject);
-        }
-        for (int i = 1; i < path.vectorPath.Count; i++)
-        {
-            PathLine pathLine = ObjectPool.Instance.Spawn(pathLinePrefab.gameObject).GetComponent<PathLine>();
-            pathLine.ShowPath(new Vector3[] { (Vector2)path.vectorPath[i - 1], (Vector2)path.vectorPath[i] });
-            pathLines.Add(pathLine);
+            PathFollower follower = ObjectPool.Instance.Spawn(pathFollowerPrefab) as PathFollower;
+            follower.SpawnPoint = shortestPath[0];
+            follower.SpawnOn(shortestPath[i]);
+            //pathLine.ShowPath(new Vector3[] { (Vector2)path.vectorPath[i - 1], (Vector2)path.vectorPath[i] });
+            pathFollowers.Add(follower);
         }
 
+    }
+
+    private void HidePath()
+    {
+        foreach (PathFollower pl in pathFollowers)
+        {
+            ObjectPool.Instance.UnSpawn(pl);
+        }
+        pathFollowers.Clear();
     }
     private void GenerateTrapTiles(Vector2Int offset, Vector2Int size)
     {
@@ -276,12 +279,6 @@ public class BoardSystem : IGameSystem
             }
         }
     }
-
-    private void RemoveGameTile(GameTile tile)//ºÏ³ÉÇå³ýTILE
-    {
-        ObjectPool.Instance.UnSpawn(tile.gameObject);
-    }
-
 
 
 

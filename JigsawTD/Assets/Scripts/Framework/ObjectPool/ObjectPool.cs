@@ -14,7 +14,7 @@ public class ObjectPool : Singleton<ObjectPool>
     }
 
     //取对象
-    public GameObject Spawn(string name)
+    public ReusableObject Spawn(string name)
     {
         if (!m_pools.ContainsKey(name))
             RegisterNew(name);
@@ -24,7 +24,7 @@ public class ObjectPool : Singleton<ObjectPool>
 
     }
 
-    public GameObject Spawn(GameObject gameObj)
+    public ReusableObject Spawn(ReusableObject gameObj)
     {
         if (!m_pools.ContainsKey(gameObj.name))
             RegisterNew(gameObj);
@@ -33,7 +33,7 @@ public class ObjectPool : Singleton<ObjectPool>
         return pool.Spawn(m_pools_parent[pool]);
     }
     //回收对象
-    public void UnSpawn(GameObject go)
+    public void UnSpawn(ReusableObject go)
     {
         SubPool pool = null;
         foreach (SubPool p in m_pools.Values)
@@ -65,7 +65,7 @@ public class ObjectPool : Singleton<ObjectPool>
             path = ResourceDir + "/" + name;
 
         //加载预设
-        GameObject prefab = Resources.Load<GameObject>(path);
+        ReusableObject prefab = Resources.Load<ReusableObject>(path);
 
         //创建子对象池
         SubPool pool = new SubPool(name, prefab);
@@ -75,9 +75,9 @@ public class ObjectPool : Singleton<ObjectPool>
         m_pools_parent.Add(pool, container.transform);
     }
 
-    void RegisterNew(GameObject obj)
+    void RegisterNew(ReusableObject obj)
     {
-        GameObject prefab = obj;
+        ReusableObject prefab = obj;
 
         SubPool pool = new SubPool(obj.name, prefab);
         m_pools.Add(pool.Name, pool);

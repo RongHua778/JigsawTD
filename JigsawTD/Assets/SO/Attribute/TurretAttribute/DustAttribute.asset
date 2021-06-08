@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Dust
   Icon: {fileID: 0}
-  Description: "\u653B\u51FB\u53EF\u4EE5\u9020\u6210\u6E85\u5C04\u4F24\u5BB3\uFF0C\u65E0\u6CD5\u653B\u51FB\u592A\u8FD1\u7684\u76EE\u6807\u3002"
+  Description: "\u653B\u51FB\u53EF\u4EE5\u9020\u6210\u6E85\u5C04\u4F24\u5BB3\u3002"
   ContentPrefab: {fileID: 4836110305764302111, guid: 8574fb7c958d9084199e76f94ed13f80, type: 3}
   RangeType: 0
   element: 4
@@ -25,8 +25,8 @@ MonoBehaviour:
   totalLevel: 0
   elementNumber: 0
   TurretLevels:
-  - AttackRange: 3
-    ForbidRange: 1
+  - AttackRange: 2
+    ForbidRange: 0
     AttackDamage: 20
     AttackSpeed: 0.4
     SputteringRange: 0.3
@@ -39,8 +39,8 @@ MonoBehaviour:
     BaseSprite: {fileID: 21300000, guid: 43b7a67ba6a63734da9a23d66e32260b, type: 3}
     CannonSprite: {fileID: 21300000, guid: 30b97992a8f4b8f45ad54352342ea039, type: 3}
     ShootPointOffset: {x: 0, y: 0.17}
-  - AttackRange: 3
-    ForbidRange: 1
+  - AttackRange: 2
+    ForbidRange: 0
     AttackDamage: 30
     AttackSpeed: 0.4
     SputteringRange: 0.35
@@ -53,8 +53,8 @@ MonoBehaviour:
     BaseSprite: {fileID: 21300000, guid: 43b7a67ba6a63734da9a23d66e32260b, type: 3}
     CannonSprite: {fileID: 21300000, guid: b7cecf2a985e3cb479ed5cf43c383244, type: 3}
     ShootPointOffset: {x: 0, y: 0.17}
-  - AttackRange: 3
-    ForbidRange: 1
+  - AttackRange: 2
+    ForbidRange: 0
     AttackDamage: 45
     AttackSpeed: 0.4
     SputteringRange: 0.4
@@ -67,8 +67,8 @@ MonoBehaviour:
     BaseSprite: {fileID: 21300000, guid: 43b7a67ba6a63734da9a23d66e32260b, type: 3}
     CannonSprite: {fileID: 21300000, guid: 40f5c5b9f330fcd41820e5c1b46820b9, type: 3}
     ShootPointOffset: {x: 0, y: 0.17}
-  - AttackRange: 4
-    ForbidRange: 1
+  - AttackRange: 3
+    ForbidRange: 0
     AttackDamage: 70
     AttackSpeed: 0.4
     SputteringRange: 0.45
@@ -81,8 +81,8 @@ MonoBehaviour:
     BaseSprite: {fileID: 21300000, guid: 537e57241659f504488d2a4c4c44f314, type: 3}
     CannonSprite: {fileID: 21300000, guid: 0f81c2932deb122448a84990848b5bc3, type: 3}
     ShootPointOffset: {x: 0, y: 0.17}
-  - AttackRange: 4
-    ForbidRange: 1
+  - AttackRange: 3
+    ForbidRange: 0
     AttackDamage: 100
     AttackSpeed: 0.4
     SputteringRange: 0.5

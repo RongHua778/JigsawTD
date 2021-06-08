@@ -43,7 +43,7 @@ public class TurretAttribute : ContentAttribute
 {
     public RangeType RangeType;
     public Element element;
-    public GameObject Bullet;
+    public Bullet Bullet;
     public float BulletSpeed;
     public AudioClip ShootSound;
 

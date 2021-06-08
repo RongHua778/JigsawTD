@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPressingTile: 0
-  pathLinePrefab: {fileID: 1637904061932472847, guid: e6033176e804ec740b74225190b69115, type: 3}
+  pathFollowerPrefab: {fileID: 4098264077395697447, guid: c235ccf052277ce49bbe97163407cdc3, type: 3}
   shortestPath: []
 --- !u!1 &23230966
 GameObject:

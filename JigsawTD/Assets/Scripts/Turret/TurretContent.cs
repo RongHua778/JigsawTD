@@ -22,7 +22,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     protected float _rotSpeed = 10f;
 
     protected RangeType RangeType;
-    protected GameObject bulletPrefab;
+    protected Bullet bulletPrefab;
 
     //**********美术，动画及音效
     protected Animator turretAnim;
@@ -35,7 +35,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     private List<TargetPoint> target = new List<TargetPoint>();
     public List<TargetPoint> Target { get => target; set => target = value; }
 
-    protected CompositeCollider2D detectCollider;
+    protected Collider2D detectCollider;
     protected bool ShowingRange = false;
     protected Transform rotTrans;
     protected Transform shootPoint;
@@ -117,7 +117,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         currentRangetors = new List<RangeIndicator>();
         rangeIndicator = Resources.Load<RangeIndicator>("Prefabs/RangeIndicator");
         rangeParent = transform.Find("TurretRangeCol");
-        detectCollider = rangeParent.GetComponent<CompositeCollider2D>();
+        detectCollider = rangeParent.GetComponent<Collider2D>();
         rotTrans = transform.Find("RotPoint");
         shootPoint = rotTrans.Find("ShootPoint");
         TurretBaseSprite = transform.Find("TurretBase").GetComponent<SpriteRenderer>();
@@ -289,32 +289,35 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         switch (RangeType)
         {
             case RangeType.Circle:
-                points = StaticData.GetCirclePoints(AttackRange, ForbidRange);
+                points = StaticData.GetCirclePoints(AttackRange);
+                ((BoxCollider2D)detectCollider).size = Vector2.one * (2 * AttackRange + 1) * Mathf.Cos(45 * Mathf.Deg2Rad);
                 break;
             case RangeType.HalfCircle:
-                points = StaticData.GetHalfCirclePoints(AttackRange, ForbidRange);
+                points = StaticData.GetHalfCirclePoints(AttackRange);
+                detectCollider.transform.localScale = Vector2.one * (AttackRange + 0.5f);
                 break;
             case RangeType.Line:
-                points = StaticData.GetLinePoints(AttackRange, ForbidRange);
+                points = StaticData.GetLinePoints(AttackRange);
+                ((BoxCollider2D)detectCollider).size = new Vector2(1, AttackRange);
+                detectCollider.offset = new Vector2(0, 1 + 0.5f * (AttackRange - 1));
                 break;
         }
-        if (points.Count > rangeIndicators.Count)
+        int m = rangeIndicators.Count;
+        for (int i = 0; i < points.Count; i++, m++)
         {
-            int amount = points.Count - rangeIndicators.Count;
-            for (int i = 0; i < amount; i++)
+            if (i >= m)
             {
-                RangeIndicator rangeObj = Instantiate(rangeIndicator, rangeParent);
-                rangeIndicators.Add(rangeObj);
+                RangeIndicator rangeIndecator = Instantiate(rangeIndicator, transform);
+                rangeIndecator.transform.localPosition = (Vector3Int)points[i];
+                rangeIndicators.Add(rangeIndecator);
+                currentRangetors.Add(rangeIndecator);
+            }
+            else
+            {
+                rangeIndicators[i].transform.localPosition = (Vector3Int)points[i];
+                currentRangetors.Add(rangeIndicators[i]);
             }
         }
-        for (int i = 0; i < points.Count; i++)
-        {
-            rangeIndicators[i].SetCol(true);
-            rangeIndicators[i].transform.localPosition = (Vector3Int)points[i];
-            currentRangetors.Add(rangeIndicators[i]);
-        }
-
-        detectCollider.GenerateGeometry();
         currentRange = AttackRange;
         ShowRange(ShowingRange);
     }
@@ -324,7 +327,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         var ranges = currentRangetors.GetEnumerator();
         while (ranges.MoveNext())
         {
-            ranges.Current.SetCol(false);
+            ranges.Current.ShowSprite(false);
         }
         currentRangetors.Clear();
     }
@@ -372,7 +375,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         var targets = Target.GetEnumerator();
         while (targets.MoveNext())
         {
-            Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
+            Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab) as Bullet;
             bullet.transform.position = shootPoint.position;
             bullet.Initialize(this, targets.Current);
         }
@@ -413,7 +416,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         if (col != null)
         {
             GameTile tile = col.GetComponent<GameTile>();
-            ObjectPool.Instance.UnSpawn(tile.gameObject);
+            ObjectPool.Instance.UnSpawn(tile);
         }
     }
 
