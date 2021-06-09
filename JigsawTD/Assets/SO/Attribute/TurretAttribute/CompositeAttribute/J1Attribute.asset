@@ -25,9 +25,9 @@ MonoBehaviour:
   totalLevel: 12
   elementNumber: 3
   TurretLevels:
-  - AttackRange: 5
+  - AttackRange: 6
     ForbidRange: 0
-    AttackDamage: 400
+    AttackDamage: 250
     AttackSpeed: 0.35
     SputteringRange: 0
     CriticalRate: 0
@@ -42,9 +42,9 @@ MonoBehaviour:
     BaseSprite: {fileID: 21300000, guid: cfc4a480c7295054ebb4cfc6d03633ce, type: 3}
     CannonSprite: {fileID: 21300000, guid: 6225416df5e6766408884d4da0f7a471, type: 3}
     ShootPointOffset: {x: 0, y: 0.28}
-  - AttackRange: 5
+  - AttackRange: 6
     ForbidRange: 0
-    AttackDamage: 750
+    AttackDamage: 500
     AttackSpeed: 0.35
     SputteringRange: 0
     CriticalRate: 0
@@ -59,9 +59,9 @@ MonoBehaviour:
     BaseSprite: {fileID: 21300000, guid: cfc4a480c7295054ebb4cfc6d03633ce, type: 3}
     CannonSprite: {fileID: 21300000, guid: 6225416df5e6766408884d4da0f7a471, type: 3}
     ShootPointOffset: {x: 0, y: 0.28}
-  - AttackRange: 5
+  - AttackRange: 6
     ForbidRange: 0
-    AttackDamage: 1500
+    AttackDamage: 1000
     AttackSpeed: 0.35
     SputteringRange: 0
     CriticalRate: 0

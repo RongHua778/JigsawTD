@@ -139,13 +139,13 @@ public class TileContentFactory : GameObjectFactory
         switch (random)
         {
             case 0:
-                attributeToReturn = Rare1Turrets[Random.Range(0, Rare1Turrets.Count - 1)];
+                attributeToReturn = Rare1Turrets[Random.Range(0, Rare1Turrets.Count)];
                 break;
             case 1:
-                attributeToReturn = Rare2Turrets[Random.Range(0, Rare2Turrets.Count - 1)];
+                attributeToReturn = Rare2Turrets[Random.Range(0, Rare2Turrets.Count)];
                 break;
             case 2:
-                attributeToReturn = Rare3Turrets[Random.Range(0, Rare3Turrets.Count - 1)];
+                attributeToReturn = Rare3Turrets[Random.Range(0, Rare3Turrets.Count)];
                 break;
         }
         Debug.Assert(attributeToReturn != null, "传入了错误的等级");

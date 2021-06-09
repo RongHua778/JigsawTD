@@ -16,8 +16,8 @@ public class FuncUI : IUserInterface
     bool drawThisTurn = false;
     public bool DrawThisTurn { get => drawThisTurn; set => drawThisTurn = value; }
 
-    private int luckProgress = 0;
-    public int LuckProgress { get => luckProgress; set => luckProgress = value; }
+    private int luckProgress = 1;
+    public int LuckProgress { get => Mathf.Min(5, luckProgress); set => luckProgress = value; }
 
     private int drawRemain = 1;
     public int DrawRemain
@@ -34,7 +34,7 @@ public class FuncUI : IUserInterface
     public int PlayerLevel
     {
         get => playerLevel;
-        set 
+        set
         {
             playerLevel = value;
             PlayerLevelTxt.text = "当前等级：" + PlayerLevel.ToString();
@@ -106,7 +106,11 @@ public class FuncUI : IUserInterface
         if (!DrawThisTurn)
         {
             LuckPoint += LuckProgress;
-            LuckProgress += 2;
+            LuckProgress += 1;
+        }
+        else
+        {
+            LuckProgress = 1;
         }
         DrawThisTurn = false;
         DrawRemain++;

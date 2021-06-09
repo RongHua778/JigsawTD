@@ -281,7 +281,6 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     public void GenerateRange()
     {
         int m = rangeIndicators.Count;
-        Debug.Log(m);
         if (AttackRange == currentRange)
             return;
         if (currentRangetors.Count > 0)
