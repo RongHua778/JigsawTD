@@ -126,4 +126,5 @@ public class Sound : Singleton<Sound>
         m_effectSound.volume = volume;
         m_effectSound.PlayOneShot(clip,0.5f);
     }
+
 }

@@ -8,7 +8,7 @@ public class PathManager : MonoBehaviour
     Transform[] wayPoints;
 
     [SerializeField]
-    PathPoint pathPoint = default;
+    PahtDot pathPoint = default;
 
     List<Vector2> path;
 
@@ -29,7 +29,7 @@ public class PathManager : MonoBehaviour
 
         for (int i = 0; i < wayPoints.Length - 1; i++)
         {
-            PathPoint pathpoint = Instantiate(pathPoint, wayPoints[i].position, Quaternion.identity);
+            PahtDot pathpoint = Instantiate(pathPoint, wayPoints[i].position, Quaternion.identity);
             pathpoint.m_Path = path;
             pathpoint.index = i;
         }

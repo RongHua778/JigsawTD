@@ -18,7 +18,7 @@ public class DraggingShape : DraggingActions
     Collider2D[] attachedResult = new Collider2D[10];
 
     [SerializeField]
-    Color wrongColor, correctColor, transparentColor,holdColor,dropColor = default;
+    Color wrongColor, correctColor, transparentColor, holdColor, dropColor = default;
 
     public void Initialized(TileShape shape)
     {
@@ -76,6 +76,7 @@ public class DraggingShape : DraggingActions
         transform.position = new Vector3(Mathf.Round(mousePos.x + pointerOffset.x), Mathf.Round(mousePos.y + pointerOffset.y), transform.position.z);
         if ((Vector2)transform.position != lastPos)
         {
+
             if (CheckCanDrop())
             {
                 StopAllCoroutines();
@@ -85,7 +86,6 @@ public class DraggingShape : DraggingActions
         lastPos = transform.position;
 
     }
-
 
 
     public void ShapeSpawned()//生成模块后，检查一下可否放置和寻路
@@ -108,12 +108,7 @@ public class DraggingShape : DraggingActions
             SetAllColor(wrongColor);
             return false;
         }
-        else
-        {
-            //SetAllColor(correctColor);
-            return true;
-        }
-
+        return true;
     }
     private void CheckMapEdge()
     {
@@ -183,8 +178,9 @@ public class DraggingShape : DraggingActions
     {
         waitingForPath = true;
         yield return new WaitForSeconds(0.1f);
+        Sound.Instance.PlayEffect("Sound_Shape");
         ChangeAstarPath();
-        yield return new WaitForSeconds(0.1f);
+        //yield return new WaitForSeconds(0.05f);
         GameEvents.Instance.SeekPath();
         yield return new WaitForSeconds(0.1f);
         waitingForPath = false;
@@ -229,13 +225,15 @@ public class DraggingShape : DraggingActions
         menuTrans.Rotate(0, 0, 90f);
         foreach (GameTile tile in TileShape.tiles)
         {
-            tile.SetRandomRotation();
+            tile.CorrectRotation();
         }
         if (CheckCanDrop())
         {
             StopAllCoroutines();
             StartCoroutine(TryFindPath());
+            SetPreviewColor(dropColor);
         }
+
     }
 
 
@@ -254,7 +252,7 @@ public class DraggingShape : DraggingActions
                 return;
             }
             Sound.Instance.PlayEffect("Sound_ConfirmShape");
-           // EnableGroundColliders();
+            // EnableGroundColliders();
             foreach (GameTile tile in TileShape.tiles)
             {
                 tile.TileLanded();
@@ -288,9 +286,12 @@ public class DraggingShape : DraggingActions
     {
         if (isDragging)
         {
+            if(CheckCanDrop())
+                SetPreviewColor(dropColor);
+            else
+                SetPreviewColor(wrongColor);
             isDragging = false;
             DraggingThis = null;
-            SetPreviewColor(dropColor);
             OnEndDrag();
         }
     }

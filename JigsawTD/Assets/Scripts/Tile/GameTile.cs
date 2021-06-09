@@ -24,11 +24,11 @@ public abstract class GameTile : TileBase
         set => content = value;
     }
 
-    Direction pathDirection;
-    public Direction PathDirection { get => pathDirection; set => pathDirection = value; }
+    //Direction pathDirection;
+    //public Direction PathDirection { get => pathDirection; set => pathDirection = value; }
 
-    GameTile nextOnPath;
-    public GameTile NextTileOnPath { get => nextOnPath; set => nextOnPath = value; }
+    //GameTile nextOnPath;
+    //public GameTile NextTileOnPath { get => nextOnPath; set => nextOnPath = value; }
 
     Direction tileDirection;
     public Direction TileDirection { get => tileDirection; set => tileDirection = value; }
@@ -63,13 +63,6 @@ public abstract class GameTile : TileBase
         tileBase = transform.Find("TileBase");
         BaseRenderer = tileBase.GetComponent<SpriteRenderer>();
         directionCheckPoint = transform.Find("CheckPoint");
-    }
-
-    public Direction GetTileDirection()
-    {
-        TileDirection = Direction.down;
-            //DirectionExtensions.GetDirection(transform.position, directionCheckPoint.position);
-        return TileDirection;
     }
 
     public virtual void TileLanded()//tile被放入版图时
@@ -139,6 +132,11 @@ public abstract class GameTile : TileBase
         int randomDir = UnityEngine.Random.Range(0, 4);
         TileDirection = DirectionExtensions.GetDirection(randomDir);
         transform.rotation = TileDirection.GetRotation();
+        CorrectRotation();
+    }
+
+    public void CorrectRotation()
+    {
         tileBase.rotation = Quaternion.identity;
         Content.CorretRotation();
     }
@@ -153,4 +151,8 @@ public abstract class GameTile : TileBase
     }
 
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        collision.GetComponent<TargetPoint>().Enemy.CurrentTile = this;
+    }
 }

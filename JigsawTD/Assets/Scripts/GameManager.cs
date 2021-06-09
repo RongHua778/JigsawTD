@@ -202,13 +202,18 @@ public class GameManager : Singleton<GameManager>
         m_BluePrintShopUI.CompositeBluePrint(grid);
     }
 
-    public void BuyBluePrint(BluePrintGrid grid,int cost)
+    public void BuyBluePrint(BluePrintGrid grid, int cost)
     {
         if (ConsumeMoney(cost))
         {
             m_FuncUI.LuckPoint++;
             m_BluePrintShopUI.MoveBluePrintToPocket(grid);
         }
+    }
+
+    public void PreviewComposition(bool value, Element element = Element.Dust, int quality = 1)
+    {
+        m_BluePrintShopUI.PreviewComposition(value, element, quality);
     }
     #endregion
 
@@ -235,7 +240,7 @@ public class GameManager : Singleton<GameManager>
 
     public void SpawnEnemy()
     {
-        m_WaveSystem.SpawnEnemy(m_BoardSystem.SpawnPoint);
+        m_WaveSystem.SpawnEnemy(m_BoardSystem);
     }
 
     public void RefreshShop(int cost)
@@ -273,8 +278,8 @@ public class GameManager : Singleton<GameManager>
     public void ShowTempTips(string text, Vector2 pos)
     {
         m_TempTips.gameObject.SetActive(true);
-        m_TempTips.SendText(text);
-        m_TempTips.SetPos(pos);
+        m_TempTips.SendText(text,pos);
+        //m_TempTips.SetPos(pos);
     }
 
     public void ShowBluePrintTips(BluePrintGrid grid)

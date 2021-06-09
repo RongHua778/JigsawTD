@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class TileSelect : MonoBehaviour
+public class TileSelect : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
 {
 
     [SerializeField] RenderTexture renderTexture;
@@ -19,6 +20,7 @@ public class TileSelect : MonoBehaviour
     {
         m_Shape.SetPreviewPlace();
         m_Shape = null;
+        GameManager.Instance.PreviewComposition(false);
         GameManager.Instance.SelectShape();
     }
 
@@ -31,5 +33,13 @@ public class TileSelect : MonoBehaviour
         m_Shape = null;
     }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        GameManager.Instance.PreviewComposition(true,m_Shape.m_ElementTurret.Element, m_Shape.m_ElementTurret.Quality);
+    }
 
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        GameManager.Instance.PreviewComposition(false);
+    }
 }

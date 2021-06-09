@@ -4,7 +4,20 @@ using UnityEngine;
 using Pathfinding;
 using System;
 using System.Linq;
-using PathCreation;
+
+[Serializable]
+public struct PathPoint
+{
+    public Vector2 PathPos;
+    public Direction PathDirection;
+    public Vector2 ExitPoint;
+    public PathPoint(Vector2 pos, Direction dir, Vector2 exit)
+    {
+        PathPos = pos;
+        PathDirection = dir;
+        ExitPoint = exit;
+    }
+}
 
 public class BoardSystem : IGameSystem
 {
@@ -44,12 +57,14 @@ public class BoardSystem : IGameSystem
     public static Vector2Int _startSize = new Vector2Int(3, 3); //初始大小
     public static Vector2Int _groundSize = new Vector2Int(25, 25); //地图大小
 
-    [SerializeField] PathFollower pathFollowerPrefab = default;
+    [SerializeField] PathFollower PathFollowerPrefab = default;
     private GameBehaviorCollection followers = new GameBehaviorCollection();
 
     List<Vector2Int> tilePoss = new List<Vector2Int>();
 
     public List<GameTile> shortestPath = new List<GameTile>();
+
+    public List<PathPoint> shortestPoints = new List<PathPoint>();
 
     public static Path path;
 
@@ -174,8 +189,10 @@ public class BoardSystem : IGameSystem
                 return;
             }
             path = p;
-            GetPathTiles();
+            GetPathPoints();
             ShowPath();
+            //GetPathTiles();
+            //ShowPath();
             //Debug.Log("Find Path!");
         }
         else
@@ -188,36 +205,31 @@ public class BoardSystem : IGameSystem
         }
     }
 
-    public void GetPathTiles()
+    public void GetPathPoints()
     {
-        shortestPath.Clear();
+        shortestPoints.Clear();
         for (int i = 0; i < path.vectorPath.Count; i++)
         {
-            Collider2D col = StaticData.RaycastCollider(path.vectorPath[i], StaticData.PathLayer);
-            GameTile tile = col.GetComponent<GameTile>();
-            shortestPath.Add(tile);
-        }
-        for (int i = 1; i < shortestPath.Count; i++)
-        {
-            shortestPath[i - 1].NextTileOnPath = shortestPath[i];
-            shortestPath[i].NextTileOnPath = null;
-            shortestPath[i - 1].PathDirection = DirectionExtensions.GetDirection(shortestPath[i - 1].OffsetCoord, shortestPath[i].OffsetCoord);
-            shortestPath[i - 1].ExitPoint = shortestPath[i - 1].transform.position + shortestPath[i - 1].PathDirection.GetHalfVector();
+            Direction dir = Direction.up;
+            if (i < path.vectorPath.Count - 1)
+                dir = DirectionExtensions.GetDirection(path.vectorPath[i], path.vectorPath[i + 1]);
+            PathPoint point = new PathPoint(path.vectorPath[i], dir, path.vectorPath[i] + dir.GetHalfVector());
+            shortestPoints.Add(point);
         }
     }
+
 
     private void ShowPath()
     {
         HidePath();
-        for (int i = 0; i < shortestPath.Count - 1; i++)
+        for (int i = 0; i < shortestPoints.Count - 1; i++)
         {
-            PathFollower follower = ObjectPool.Instance.Spawn(pathFollowerPrefab) as PathFollower;
-            follower.SpawnPoint = shortestPath[0];
-            follower.SpawnOn(shortestPath[i]);
+            PathFollower follower = ObjectPool.Instance.Spawn(PathFollowerPrefab) as PathFollower;
+            follower.SpawnOn(i, shortestPoints);
             followers.Add(follower);
         }
-
     }
+
 
     private void HidePath()
     {
@@ -276,8 +288,38 @@ public class BoardSystem : IGameSystem
         }
     }
 
+    //待弃用方法0609
 
+    //private void GetPathTiles()
+    //{
+    //    shortestPath.Clear();
+    //    for (int i = 0; i < path.vectorPath.Count; i++)
+    //    {
+    //        Collider2D col = StaticData.RaycastCollider(path.vectorPath[i], StaticData.PathLayer);
+    //        GameTile tile = col.GetComponent<GameTile>();
+    //        shortestPath.Add(tile);
+    //    }
+    //    for (int i = 1; i < shortestPath.Count; i++)
+    //    {
+    //        shortestPath[i - 1].NextTileOnPath = shortestPath[i];
+    //        shortestPath[i].NextTileOnPath = null;
+    //        shortestPath[i - 1].PathDirection = DirectionExtensions.GetDirection(shortestPath[i - 1].OffsetCoord, shortestPath[i].OffsetCoord);
+    //        shortestPath[i - 1].ExitPoint = shortestPath[i - 1].transform.position + shortestPath[i - 1].PathDirection.GetHalfVector();
+    //    }
+    //}
 
+    //private void ShowPath()
+    //{
+    //    HidePath();
+    //    for (int i = 0; i < shortestPath.Count - 1; i++)
+    //    {
+    //        PathFollowerOld follower = ObjectPool.Instance.Spawn(pathFollowerPrefab) as PathFollowerOld;
+    //        follower.SpawnPoint = shortestPath[0];
+    //        follower.SpawnOn(shortestPath[i]);
+    //        followers.Add(follower);
+    //    }
+
+    //}
 
 
 }

@@ -2,8 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
-using Pathfinding;
+
 
 public abstract class TurretContent : GameTileContent, IGameBehavior
 {
@@ -281,6 +280,8 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     }
     public void GenerateRange()
     {
+        int m = rangeIndicators.Count;
+        Debug.Log(m);
         if (AttackRange == currentRange)
             return;
         if (currentRangetors.Count > 0)
@@ -302,8 +303,8 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
                 detectCollider.offset = new Vector2(0, 1 + 0.5f * (AttackRange - 1));
                 break;
         }
-        int m = rangeIndicators.Count;
-        for (int i = 0; i < points.Count; i++, m++)
+        
+        for (int i = 0; i < points.Count; i++)
         {
             if (i >= m)
             {

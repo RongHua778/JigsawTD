@@ -20,8 +20,7 @@ public class BuildingState : BattleOperationState
 
     public override IEnumerator ExitState(BattleOperationState newState)
     {
-        m_Board.GetPathTiles();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         gameManager.EnterNewState(newState);
         yield break;
     }

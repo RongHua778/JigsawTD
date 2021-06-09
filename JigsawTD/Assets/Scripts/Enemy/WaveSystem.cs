@@ -132,7 +132,7 @@ public class WaveSystem : IGameSystem
             }
             if (i < 4)
             {
-                coolDown = 2.5f - 0.1f * i;
+                coolDown = 2.5f - 0.5f * i;
             }
             EnemySequence sequence = new EnemySequence(i + 1, attribute, intensify, amount, coolDown);
             LevelSequence.Enqueue(sequence);
@@ -181,14 +181,14 @@ public class WaveSystem : IGameSystem
 
     }
 
-    public void SpawnEnemy(GameTile spawnTile)
+    public void SpawnEnemy(BoardSystem board)
     {
         EnemyAttribute attribute = RunningSequence.EnemyAttribute;
         float intensify = RunningSequence.Intensify;
         Enemy enemy = ObjectPool.Instance.Spawn(attribute.Prefab) as Enemy;
         HealthBar healthBar = ObjectPool.Instance.Spawn(healthBarPrefab) as HealthBar;
         enemy.Initialize(attribute, UnityEngine.Random.Range(-pathOffset, pathOffset), healthBar, intensify);
-        enemy.SpawnOn(spawnTile);
+        enemy.SpawnOn(0,board.shortestPoints);
         GameManager.Instance.enemies.Add(enemy);
     }
 

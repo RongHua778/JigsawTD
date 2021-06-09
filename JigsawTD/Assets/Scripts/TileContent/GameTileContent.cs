@@ -44,6 +44,6 @@ public abstract class GameTileContent : ReusableObject
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
-        m_GameTile = null;
+        //m_GameTile = null;
     }
 }

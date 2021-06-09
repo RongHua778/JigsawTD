@@ -386,7 +386,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -212, y: 128}
+  m_AnchoredPosition: {x: -212, y: 172}
   m_SizeDelta: {x: 135, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &958790234690018960
@@ -465,7 +465,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6889555362419343914
@@ -731,8 +731,8 @@ MonoBehaviour:
   wrongColor: {r: 1, g: 0, b: 0, a: 0.49019608}
   correctColor: {r: 1, g: 1, b: 1, a: 1}
   transparentColor: {r: 1, g: 1, b: 1, a: 0}
-  holdColor: {r: 0, g: 0.94946814, b: 1, a: 1}
-  dropColor: {r: 0.2679245, g: 0.69789815, b: 1, a: 0.78431374}
+  holdColor: {r: 1, g: 1, b: 1, a: 1}
+  dropColor: {r: 0.48490566, g: 1, b: 0.53602576, a: 0.78431374}
 --- !u!1 &6889555364187642330
 GameObject:
   m_ObjectHideFlags: 0

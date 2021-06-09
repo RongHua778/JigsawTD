@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PathPoint : MonoBehaviour
+public class PahtDot : MonoBehaviour
 {
     public List<Vector2> m_Path;
 

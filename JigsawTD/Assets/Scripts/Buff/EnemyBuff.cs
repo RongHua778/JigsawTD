@@ -113,11 +113,11 @@ public class DirectionSlow : TileBuff
 
     public override void Affect()
     {
-        //Debug.Log("SlowDown");
-        if (Target.Direction == Target.tileFrom.TileDirection)
+        if (Target.Direction == Target.CurrentTile.TileDirection)
         {
             Target.PathSlow += KeyValue;
         }
+
     }
     public override void End()
     {
@@ -197,7 +197,7 @@ public class DamageTarget : TileBuff
     {
         float damageReturn;
         Target.ApplyDamage(Target.TargetDamageCounter * KeyValue, out damageReturn, true);
-        ((TrapContent)(Target.tileFrom.Content)).DamageAnalysis += (int)damageReturn;
+        ((TrapContent)(Target.CurrentTile.Content)).DamageAnalysis += (int)damageReturn;
         Target.TargetDamageCounter = 0;
 
     }

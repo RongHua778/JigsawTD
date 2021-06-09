@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -212, y: 182}
+  m_AnchoredPosition: {x: -110, y: 182}
   m_SizeDelta: {x: 135, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6676523125844681191
@@ -89,7 +89,7 @@ GameObject:
   m_Layer: 0
   m_Name: TilePos1
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -288,7 +288,7 @@ GameObject:
   m_Layer: 0
   m_Name: TilePos2
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -331,7 +331,7 @@ GameObject:
   m_Layer: 0
   m_Name: TilePos4
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -399,7 +399,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6889555362419343914
@@ -498,7 +498,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 91, y: -246}
+  m_AnchoredPosition: {x: 91, y: -300}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6889555362938998043
@@ -664,8 +664,8 @@ MonoBehaviour:
   wrongColor: {r: 1, g: 0, b: 0, a: 0.49019608}
   correctColor: {r: 1, g: 1, b: 1, a: 1}
   transparentColor: {r: 1, g: 1, b: 1, a: 0}
-  holdColor: {r: 0, g: 0.94946814, b: 1, a: 1}
-  dropColor: {r: 0.2679245, g: 0.69789815, b: 1, a: 0.78431374}
+  holdColor: {r: 1, g: 1, b: 1, a: 1}
+  dropColor: {r: 0.48490566, g: 1, b: 0.53602576, a: 0.78431374}
 --- !u!1 &6889555364187642330
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,7 +701,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -89.00003, y: -246.00003}
+  m_AnchoredPosition: {x: -89.00003, y: -300}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6889555364187642326
@@ -811,7 +811,7 @@ GameObject:
   m_Layer: 0
   m_Name: TilePos3
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

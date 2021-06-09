@@ -26,7 +26,7 @@ public class Green_Runner : Enemy
     public override bool GameUpdate()
     {
         if (StunTime <= 0)
-            SpeedIntensify += 0.5f * Time.deltaTime;
+            SpeedIntensify += 1f * Time.deltaTime;
         return base.GameUpdate();
     }
 

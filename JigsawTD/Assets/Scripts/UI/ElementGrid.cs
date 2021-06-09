@@ -8,16 +8,40 @@ public class ElementGrid : MonoBehaviour
     [SerializeField] Image Img_Icon = default;
     [SerializeField] Text Txt_ElementName = default;
     [SerializeField] Color UnobtainColor = default;
+    [SerializeField] GameObject previewGlow = default;
+    private Element element;
+    private int quality;
 
     public void SetElement(Composition composition)
     {
-        TurretAttribute attribute = ConstructHelper.GetElementAttribute((Element)composition.elementRequirement);
-        Img_Icon.sprite = attribute.TurretLevels[composition.levelRequirement - 1].Icon;
-        Txt_ElementName.text = attribute.TurretLevels[composition.levelRequirement - 1].TurretName;
+        element = (Element)composition.elementRequirement;
+        quality = composition.levelRequirement;
+        TurretAttribute attribute = ConstructHelper.GetElementAttribute(element);
+        Img_Icon.sprite = attribute.TurretLevels[quality - 1].Icon;
+        Txt_ElementName.text = attribute.TurretLevels[quality - 1].TurretName;
         if (composition.obtained)
             Img_Icon.color = Color.white;
         else
             Img_Icon.color = UnobtainColor;
+    }
+
+
+
+    public void SetPreview(bool value, Element element,int quality)
+    {
+        if (!value)
+        {
+            previewGlow.SetActive(false);
+            return;
+        }
+        if (this.element == element && this.quality == quality)
+        {
+            previewGlow.SetActive(true);
+        }
+        else
+        {
+            previewGlow.SetActive(false);
+        }
     }
 
 }

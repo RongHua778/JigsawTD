@@ -31,6 +31,14 @@ public class BluePrintGrid : ReusableObject
 
     }
 
+    public void PreviewElement(bool value, Element element,int quality)
+    {
+        foreach(var elementGrid in elementGrids)
+        {
+            elementGrid.SetPreview(value, element, quality);
+        }
+    }
+
     private void RefreshElementsSprite()
     {
         for (int i = 0; i < elementGrids.Length; i++)

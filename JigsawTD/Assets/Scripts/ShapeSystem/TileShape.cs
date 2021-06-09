@@ -16,6 +16,7 @@ public class TileShape : MonoBehaviour
     GameObject bgObj;
     DraggingShape draggingShape;
     Text turretNameTxt;
+    public ElementTurret m_ElementTurret { get; private set; }
 
     [HideInInspector]
     public List<GameTile> tiles = new List<GameTile>();
@@ -33,6 +34,10 @@ public class TileShape : MonoBehaviour
     //在shape上面加上塔
     public void SetTile(GameTile specialTile)
     {
+        if (specialTile.Content.ContentType == GameTileContentType.ElementTurret)
+        {
+            m_ElementTurret = specialTile.Content as ElementTurret;//预览配方功能
+        }
         if (shapeType == ShapeType.D)
         {
             specialTile.transform.position = tilePos[0].transform.position;

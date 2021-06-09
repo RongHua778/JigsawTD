@@ -10,6 +10,8 @@ public abstract class Enemy :PathFollower
     private Animator anim;
     private AudioClip explosionClip;
 
+    public GameTile CurrentTile;
+    bool trapTriggered = false;
     [SerializeField] ReusableObject exlposionPrefab = default;
     public int ReachDamage { get; set; }
     public float TargetDamageCounter { get; set; }
@@ -51,11 +53,7 @@ public abstract class Enemy :PathFollower
     }
     int brokeShell;
     public int BrokeShell { get => brokeShell; set => brokeShell = value; }
-
-
     public BuffableEntity Buffable { get; private set; }
-
-
 
     [Header("HealthSetting")]
     HealthBar healthBar;
@@ -110,19 +108,21 @@ public abstract class Enemy :PathFollower
                 progressFactor = Speed * adjust;
         }
         progress += Time.deltaTime * progressFactor;
-        if (!tileEffectTriigger && progress >= 0.5f)
+
+        if (!trapTriggered && progress >= 0.5f)
         {
-            TriggetTileEffect();
+            TriigerTrap();
         }
+
         while (progress >= 1f)
         {
-            if (tileTo == null)
+            if (PointIndex == pathPoints.Count - 1)
             {
                 StartCoroutine(ExitCor());
                 return false;
             }
+            trapTriggered = false;
             progress = 0;
-            tileEffectTriigger = false;
             PrepareNextState();
         }
         if (DirectionChange == DirectionChange.None)
@@ -137,13 +137,10 @@ public abstract class Enemy :PathFollower
         return true;
     }
 
-    bool tileEffectTriigger = false;
-    private void TriggetTileEffect()
+    private void TriigerTrap()
     {
-        Buffable.TileTick();//先移除BUFF再加BUFF//放在Prepare前面，因为要提前改变Path速度
-        tileFrom.OnTilePass(this);
-        tileEffectTriigger = true;
-        
+        CurrentTile.OnTilePass(this);
+        trapTriggered = true;
     }
 
     private IEnumerator ExitCor()
@@ -166,26 +163,13 @@ public abstract class Enemy :PathFollower
 
     }
 
-
-
     protected override void PrepareIntro()
     {
         base.PrepareIntro();
         anim.Play("Default");
         anim.SetTrigger("Enter");
-
     }
 
-    private void PrepareOutro()
-    {
-        positionTo = tileFrom.transform.localPosition;
-        DirectionChange = DirectionChange.None;
-        directionAngleTo = Direction.GetAngle();
-        model.localPosition = new Vector3(pathOffset, 0);
-        transform.localRotation = Direction.GetRotation();
-        adjust = 2f;
-        progressFactor = adjust * Speed;
-    }
 
 
     public virtual void ApplyDamage(float amount, out float realDamage, bool isCritical = false)
@@ -217,6 +201,7 @@ public abstract class Enemy :PathFollower
         SlowRate = 0;
         BrokeShell = 0;
         StunTime = 0;
+        CurrentTile = null;
         Buffable.RemoveAllBuffs();
     }
 }

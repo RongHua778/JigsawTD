@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using System;
+
 public class BluePrintShopUI : IUserInterface
 {
     bool Showing = false;//¿ØÖÆ¶¯»­
@@ -57,6 +59,8 @@ public class BluePrintShopUI : IUserInterface
     {
         BluePrintGrid bluePrintGrid = ObjectPool.Instance.Spawn(bluePrintGridPrefab) as BluePrintGrid;
         bluePrintGrid.transform.SetParent(shopContent);
+        bluePrintGrid.transform.localScale = Vector3.one;
+        bluePrintGrid.transform.localPosition = Vector3.zero;
         bluePrintGrid.SetElements(shopContent.GetComponent<ToggleGroup>(), bluePrint);
         if (isShopBluePrint)
         {
@@ -157,4 +161,16 @@ public class BluePrintShopUI : IUserInterface
         AddBluePrint(bluePrint, false);
     }
 
+    public void PreviewComposition(bool value, Element element, int quality)
+    {
+        foreach (var blueprint in ShopBluePrints)
+        {
+            blueprint.PreviewElement(value, element, quality);
+        }
+        foreach (var blueprint in OwnBluePrints)
+        {
+            blueprint.PreviewElement(value, element, quality);
+        }
+
+    }
 }

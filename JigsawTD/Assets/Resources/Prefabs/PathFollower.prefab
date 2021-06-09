@@ -91,7 +91,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4306034605515326888}
-  - component: {fileID: 4098264077395697447}
+  - component: {fileID: 3714282437959497519}
   m_Layer: 0
   m_Name: PathFollower
   m_TagString: Untagged
@@ -114,7 +114,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4098264077395697447
+--- !u!114 &3714282437959497519
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,10 +123,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8520904584259741755}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be7af24809bfd45409a56422c556112d, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a0543a149a39614d92e0e43e5a2ac09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
+  PointIndex: 0
   model: {fileID: 2194822630672348227}
-  tileFrom: {fileID: 0}
-  tileTo: {fileID: 0}
