@@ -15,10 +15,10 @@ MonoBehaviour:
   Name: H1
   Icon: {fileID: 21300000, guid: 210ece2c2e01aab46860c56550dc1802, type: 3}
   Description: 
-  ContentPrefab: {fileID: 2617014339280059507, guid: 1222c5c9d6ecf7a4195b038a25c2816f, type: 3}
+  ContentPrefab: {fileID: 4967710668388058910, guid: 1222c5c9d6ecf7a4195b038a25c2816f, type: 3}
   RangeType: 1
   element: 0
-  Bullet: {fileID: 1258406917094090, guid: 24e8073ca955e014ca83e6c13d5fd3b8, type: 3}
+  Bullet: {fileID: 7928837241985267758, guid: 24e8073ca955e014ca83e6c13d5fd3b8, type: 3}
   BulletSpeed: 6
   ShootSound: {fileID: 8300000, guid: 99adc41eefed7204a8a273742e148342, type: 3}
   Rare: 2

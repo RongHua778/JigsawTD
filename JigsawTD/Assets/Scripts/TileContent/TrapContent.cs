@@ -6,6 +6,7 @@ public class TrapContent : GameTileContent
 {
     public override GameTileContentType ContentType => GameTileContentType.Trap;
     public TrapAttribute m_TrapAttribute;
+    public bool needReset = false;//是否需要重置朝向
 
     int damageAnalysis;
     public int DamageAnalysis { get => damageAnalysis; set => damageAnalysis = value; }
@@ -15,6 +16,15 @@ public class TrapContent : GameTileContent
     {
         base.ContentLanded();
         StaticData.SetNodeWalkable(m_GameTile, true);
+    }
+
+    public override void CorretRotation()
+    {
+        base.CorretRotation();
+        if (needReset)
+        {
+            transform.rotation = Quaternion.identity;
+        }
     }
     public override void OnContentPass(Enemy enemy)
     {

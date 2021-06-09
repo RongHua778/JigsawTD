@@ -58,10 +58,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2054c22f6594c0347b7914fb56976128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exlposionPrefab: {fileID: 140474, guid: 4e0fb001820c21e478aa0f3793ea4dc5, type: 3}
+  ParentObj: {fileID: 0}
   model: {fileID: 7619665209501119904}
   tileFrom: {fileID: 0}
   tileTo: {fileID: 0}
+  exlposionPrefab: {fileID: 8507433306958389465, guid: 4e0fb001820c21e478aa0f3793ea4dc5, type: 3}
 --- !u!95 &8228902068761863343
 Animator:
   serializedVersion: 3

@@ -15,10 +15,10 @@ MonoBehaviour:
   Name: Fire
   Icon: {fileID: 0}
   Description: "\u653B\u51FB\u6709\u4E00\u5B9A\u6982\u7387\u66B4\u51FB\u3002"
-  ContentPrefab: {fileID: 6041511987317182806, guid: ebaafe7a79a077f42aa6b5b2ab6852c6, type: 3}
+  ContentPrefab: {fileID: 5446042232708124106, guid: ebaafe7a79a077f42aa6b5b2ab6852c6, type: 3}
   RangeType: 1
   element: 3
-  Bullet: {fileID: 3850126010392176229, guid: fec690f128f622c47943dc96ba4cb0a1, type: 3}
+  Bullet: {fileID: 2245073835532274941, guid: fec690f128f622c47943dc96ba4cb0a1, type: 3}
   BulletSpeed: 8
   ShootSound: {fileID: 8300000, guid: c82bf2ede8bdfce46926b781ce73b678, type: 3}
   Rare: 0

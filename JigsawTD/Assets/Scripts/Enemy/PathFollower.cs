@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PathFollower : ReusableObject
+public class PathFollower : ReusableObject,IGameBehavior
 {
     Direction direction;
     public Direction Direction { get => direction; set => direction = value; }
@@ -20,7 +20,7 @@ public class PathFollower : ReusableObject
 
     protected float speed=0.8f;
     public virtual float Speed { get => speed; set => speed = value; }
-    protected virtual void Update()
+    public virtual bool GameUpdate()
     {
         progress += Time.deltaTime * progressFactor;
         while (progress >= 1f)
@@ -28,7 +28,7 @@ public class PathFollower : ReusableObject
             if (tileTo == null)
             {
                 SpawnOn(SpawnPoint);
-                return;
+                return true;
             }
             progress = 0;
             PrepareNextState();
@@ -42,6 +42,7 @@ public class PathFollower : ReusableObject
             float angle = Mathf.LerpUnclamped(directionAngleFrom, directionAngleTo, progress);
             transform.localRotation = Quaternion.Euler(0f, 0f, angle);
         }
+        return true;
     }
 
     public void SpawnOn(GameTile tile)

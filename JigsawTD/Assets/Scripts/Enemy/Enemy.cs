@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy :PathFollower, IGameBehavior
+public abstract class Enemy :PathFollower
 {
     public abstract EnemyType EnemyType { get; }
 
@@ -88,14 +88,10 @@ public abstract class Enemy :PathFollower, IGameBehavior
     private void Awake()
     {
         anim = this.GetComponent<Animator>();
-        explosionClip = Resources.Load<AudioClip>("Music/Sound_EnemyExplosion");
-    }
-    protected override void Update()
-    {
-
+        explosionClip = Resources.Load<AudioClip>("Music/Effects/Sound_EnemyExplosion");
     }
 
-    public virtual bool GameUpdate()
+    public override bool GameUpdate()
     {
         if (IsDie)
         {

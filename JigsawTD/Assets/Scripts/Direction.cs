@@ -92,13 +92,13 @@ public static class DirectionExtensions
         return (Direction)index;
     }
 
-    public static Direction GetDirection(Vector3 center, Vector3 exit)
+    public static Direction GetDirection(Vector2Int center, Vector2Int exit)
     {
-        if (exit.x > center.x + 0.2f)
+        if (exit.x > center.x)
             return Direction.right;
-        else if (exit.x + 0.2f < center.x)
+        else if (exit.x < center.x)
             return Direction.left;
-        else if (exit.y + 0.2f < center.y)
+        else if (exit.y < center.y)
             return Direction.down;
         else
             return Direction.up;

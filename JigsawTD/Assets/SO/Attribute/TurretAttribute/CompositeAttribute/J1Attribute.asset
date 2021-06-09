@@ -15,10 +15,10 @@ MonoBehaviour:
   Name: J1
   Icon: {fileID: 0}
   Description: 
-  ContentPrefab: {fileID: 6929830470538143664, guid: 05869ddac62aff043bf7e0106d00bc2e, type: 3}
+  ContentPrefab: {fileID: 1494963813994468761, guid: 05869ddac62aff043bf7e0106d00bc2e, type: 3}
   RangeType: 1
   element: 0
-  Bullet: {fileID: 109416, guid: 8b0f785d86e656e4b869f98dfb4932ac, type: 3}
+  Bullet: {fileID: -5057139048159150032, guid: 8b0f785d86e656e4b869f98dfb4932ac, type: 3}
   BulletSpeed: 10
   ShootSound: {fileID: 8300000, guid: d219934a001042144970c13012229363, type: 3}
   Rare: 3

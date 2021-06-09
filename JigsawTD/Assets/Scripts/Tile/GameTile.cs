@@ -14,6 +14,7 @@ public abstract class GameTile : TileBase
     public bool isWalkable { get => Content.IsWalkable; }
     public DraggingShape m_DraggingShape { get; set; }
     public SpriteRenderer BaseRenderer { get; set; }
+    public SpriteRenderer PreviewRenderer { get; set; }
     public Vector3 ExitPoint { get; set; }
 
     private GameTileContent content;
@@ -30,6 +31,7 @@ public abstract class GameTile : TileBase
     public GameTile NextTileOnPath { get => nextOnPath; set => nextOnPath = value; }
 
     Direction tileDirection;
+    public Direction TileDirection { get => tileDirection; set => tileDirection = value; }
 
     public override bool IsLanded
     {
@@ -53,9 +55,11 @@ public abstract class GameTile : TileBase
     }
 
 
+
     protected virtual void Awake()
     {
         previewGlow = transform.Find("PreviewGlow").gameObject;
+        PreviewRenderer = previewGlow.GetComponent<SpriteRenderer>();
         tileBase = transform.Find("TileBase");
         BaseRenderer = tileBase.GetComponent<SpriteRenderer>();
         directionCheckPoint = transform.Find("CheckPoint");
@@ -63,8 +67,9 @@ public abstract class GameTile : TileBase
 
     public Direction GetTileDirection()
     {
-        tileDirection = DirectionExtensions.GetDirection(transform.position, directionCheckPoint.position);
-        return tileDirection;
+        TileDirection = Direction.down;
+            //DirectionExtensions.GetDirection(transform.position, directionCheckPoint.position);
+        return TileDirection;
     }
 
     public virtual void TileLanded()//tile被放入版图时
@@ -129,8 +134,11 @@ public abstract class GameTile : TileBase
 
     }
 
-    public void CorrectRotation()
+    public void SetRandomRotation()
     {
+        int randomDir = UnityEngine.Random.Range(0, 4);
+        TileDirection = DirectionExtensions.GetDirection(randomDir);
+        transform.rotation = TileDirection.GetRotation();
         tileBase.rotation = Quaternion.identity;
         Content.CorretRotation();
     }

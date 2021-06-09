@@ -756,6 +756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d58923b7a91e19c48a95f0f1067417d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsPreviewing: 0
   tiles: []
   shapeType: 4
 --- !u!114 &6889555363922204875
@@ -773,6 +774,8 @@ MonoBehaviour:
   wrongColor: {r: 1, g: 0, b: 0, a: 0.49019608}
   correctColor: {r: 1, g: 1, b: 1, a: 1}
   transparentColor: {r: 1, g: 1, b: 1, a: 0}
+  holdColor: {r: 0, g: 0.94946814, b: 1, a: 1}
+  dropColor: {r: 0.2679245, g: 0.69789815, b: 1, a: 0.78431374}
 --- !u!1 &6889555364187642330
 GameObject:
   m_ObjectHideFlags: 0

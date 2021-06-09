@@ -15,10 +15,10 @@ MonoBehaviour:
   Name: Water
   Icon: {fileID: 0}
   Description: "\u653B\u51FB\u4F1A\u9020\u6210\u51CF\u901F\u3002"
-  ContentPrefab: {fileID: 7166719727753464123, guid: 7f1d6c8bb2abcd24cb8c0be64e9e5722, type: 3}
+  ContentPrefab: {fileID: 2536179373517759500, guid: 7f1d6c8bb2abcd24cb8c0be64e9e5722, type: 3}
   RangeType: 0
   element: 2
-  Bullet: {fileID: 3850126010392176229, guid: 9abb303ed4c6ce94bb9edfa94ac411d6, type: 3}
+  Bullet: {fileID: 2245073835532274941, guid: d8c223bd6ddec2942a32f275089f10ba, type: 3}
   BulletSpeed: 3
   ShootSound: {fileID: 8300000, guid: b20d1189bbbcc8f4e9ad88221adae5b6, type: 3}
   Rare: 0

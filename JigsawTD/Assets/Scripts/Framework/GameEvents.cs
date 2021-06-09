@@ -46,17 +46,4 @@ public class GameEvents : Singleton<GameEvents>
         onEnemyDie?.Invoke(enemy);
     }
 
-    public event Action<EnemySequence> onStartNewWave;
-    public void StartNewWave(EnemySequence sequence)
-    {
-        onStartNewWave?.Invoke(sequence);
-    }
-
-
-
-    public event Action onLuckyFull;
-    public void LuckyFull()
-    {
-        onLuckyFull?.Invoke();
-    }
 }

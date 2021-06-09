@@ -128,3 +128,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
   m_TrapAttribute: {fileID: 11400000, guid: 7fe6d72c40d904b40b1e5e27ef4f12b6, type: 2}
+  needReset: 1

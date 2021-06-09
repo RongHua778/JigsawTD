@@ -40,14 +40,12 @@ public class BoardSystem : IGameSystem
 
     }
     #endregion
-    //_groundsize是地图每一边上方块的数量
-    //startSize是初始生成的有方块的大小
 
-    public static Vector2Int _startSize = new Vector2Int(3, 3);
-    public static Vector2Int _groundSize = new Vector2Int(25, 25);
+    public static Vector2Int _startSize = new Vector2Int(3, 3); //初始大小
+    public static Vector2Int _groundSize = new Vector2Int(25, 25); //地图大小
 
     [SerializeField] PathFollower pathFollowerPrefab = default;
-    List<PathFollower> pathFollowers = new List<PathFollower>();
+    private GameBehaviorCollection followers = new GameBehaviorCollection();
 
     List<Vector2Int> tilePoss = new List<Vector2Int>();
 
@@ -84,6 +82,7 @@ public class BoardSystem : IGameSystem
 
     public override void GameUpdate()
     {
+        followers.GameUpdate();
         if (IsPressingTile && Input.GetMouseButton(0))
         {
             pressCounter += Time.deltaTime;
@@ -115,7 +114,7 @@ public class BoardSystem : IGameSystem
     {
         Vector2Int sizeOffset = new Vector2Int((int)((_startSize.x - 1) * 0.5f), (int)((_startSize.y - 1) * 0.5f));
         StaticData.BoardOffset = new Vector2Int((int)((_groundSize.x - 1) * 0.5f), (int)((_groundSize.y - 1) * 0.5f));
-        
+
         GenerateGroundTiles(_groundSize);
         Physics2D.SyncTransforms();//涉及物理检测前，需要调用
         AstarPath.active.Scan();
@@ -159,8 +158,6 @@ public class BoardSystem : IGameSystem
 
     private void SeekPath()
     {
-        // Physics2D.SyncTransforms();
-        //AstarPath.active.Scan();
         var p = ABPath.Construct(SpawnPoint.transform.position, DestinationPoint.transform.position, OnPathComplete);
         AstarPath.StartPath(p);
         AstarPath.BlockUntilCalculated(p);
@@ -173,20 +170,20 @@ public class BoardSystem : IGameSystem
             FindPath = true;
             if (path != null && p.vectorPath.SequenceEqual(path.vectorPath))
             {
-                Debug.Log("Found Same Path");
+                //Debug.Log("Found Same Path");
                 return;
             }
             path = p;
             GetPathTiles();
             ShowPath();
-            Debug.Log("Find Path!");
+            //Debug.Log("Find Path!");
         }
         else
         {
             path = p;
             HidePath();
             shortestPath.Clear();
-            Debug.LogError("No Path Found");
+            //Debug.LogError("No Path Found");
             FindPath = false;
         }
     }
@@ -196,7 +193,6 @@ public class BoardSystem : IGameSystem
         shortestPath.Clear();
         for (int i = 0; i < path.vectorPath.Count; i++)
         {
-            //Collider2D col = StaticData.RaycastCollider(path.vectorPath[i], LayerMask.GetMask(StaticData.ConcreteTileMask));
             Collider2D col = StaticData.RaycastCollider(path.vectorPath[i], StaticData.PathLayer);
             GameTile tile = col.GetComponent<GameTile>();
             shortestPath.Add(tile);
@@ -205,32 +201,31 @@ public class BoardSystem : IGameSystem
         {
             shortestPath[i - 1].NextTileOnPath = shortestPath[i];
             shortestPath[i].NextTileOnPath = null;
-            shortestPath[i - 1].ExitPoint = (shortestPath[i].transform.position + shortestPath[i - 1].transform.position) * 0.5f;
-            shortestPath[i - 1].PathDirection = DirectionExtensions.GetDirection(shortestPath[i - 1].transform.position, shortestPath[i - 1].ExitPoint);
+            shortestPath[i - 1].PathDirection = DirectionExtensions.GetDirection(shortestPath[i - 1].OffsetCoord, shortestPath[i].OffsetCoord);
+            shortestPath[i - 1].ExitPoint = shortestPath[i - 1].transform.position + shortestPath[i - 1].PathDirection.GetHalfVector();
         }
     }
 
     private void ShowPath()
     {
         HidePath();
-        for (int i = 0; i < shortestPath.Count-1; i++)
+        for (int i = 0; i < shortestPath.Count - 1; i++)
         {
             PathFollower follower = ObjectPool.Instance.Spawn(pathFollowerPrefab) as PathFollower;
             follower.SpawnPoint = shortestPath[0];
             follower.SpawnOn(shortestPath[i]);
-            //pathLine.ShowPath(new Vector3[] { (Vector2)path.vectorPath[i - 1], (Vector2)path.vectorPath[i] });
-            pathFollowers.Add(follower);
+            followers.Add(follower);
         }
 
     }
 
     private void HidePath()
     {
-        foreach (PathFollower pl in pathFollowers)
+        foreach (PathFollower pl in followers.behaviors)
         {
             ObjectPool.Instance.UnSpawn(pl);
         }
-        pathFollowers.Clear();
+        followers.behaviors.Clear();
     }
     private void GenerateTrapTiles(Vector2Int offset, Vector2Int size)
     {
@@ -262,6 +257,7 @@ public class BoardSystem : IGameSystem
             GameTile tile = ConstructHelper.GetRandomTrap();
             tile.transform.position = (Vector3Int)pos;
             tile.TileLanded();
+            tile.SetRandomRotation();
         }
     }
     private void GenerateGroundTiles(Vector2Int groundSize)

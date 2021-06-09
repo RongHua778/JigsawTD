@@ -30,15 +30,6 @@ public abstract class GameTileContent : ReusableObject
     {
 
     }
-    //protected void SetGroundTile(bool value)
-    //{
-    //    Collider2D col = StaticData.RaycastCollider(transform.position, StaticData.GetGroundLayer);//ÐÞ¸Ägroundtile²ã
-    //    if (col != null)
-    //    {
-    //        GroundTile groundTile = col.GetComponent<GroundTile>();
-    //        groundTile.IsLanded = value;
-    //    }
-    //}
 
     public virtual void CorretRotation()
     {
@@ -53,7 +44,6 @@ public abstract class GameTileContent : ReusableObject
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
-        //SetGroundTile(true);
         m_GameTile = null;
     }
 }

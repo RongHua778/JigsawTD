@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bb392d5c0c76a340a988e90a0e2f2fa, type: 3}
   m_Name: TileFactory
   m_EditorClassIdentifier: 
-  groundTile: {fileID: 5525049204990745042, guid: 616c0c537063af4489540002ccbcbb03, type: 3}
-  basicTilePrefab: {fileID: 6604616035422911931, guid: 557a00bbb39db9146a95b084ae54a7cb, type: 3}
+  groundTile: {fileID: 458233090153635530, guid: 616c0c537063af4489540002ccbcbb03, type: 3}
+  basicTilePrefab: {fileID: 1381369290962742139, guid: 557a00bbb39db9146a95b084ae54a7cb, type: 3}

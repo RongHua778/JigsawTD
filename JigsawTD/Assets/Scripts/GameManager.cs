@@ -250,6 +250,7 @@ public class GameManager : Singleton<GameManager>
     {
         m_BluePrintShopUI.GetARandomBluePrintToPocket(m_FuncUI.PlayerLevel);
     }
+
     #endregion
 
     #region TIPS

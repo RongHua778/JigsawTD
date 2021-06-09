@@ -114,7 +114,7 @@ public class DirectionSlow : TileBuff
     public override void Affect()
     {
         //Debug.Log("SlowDown");
-        if (Target.Direction == Target.tileFrom.GetTileDirection())
+        if (Target.Direction == Target.tileFrom.TileDirection)
         {
             Target.PathSlow += KeyValue;
         }

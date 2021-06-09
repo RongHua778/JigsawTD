@@ -16,10 +16,9 @@ public class DraggingShape : DraggingActions
     bool waitingForPath = false;
 
     Collider2D[] attachedResult = new Collider2D[10];
-    List<Collider2D> groundColliders = new List<Collider2D>();
 
     [SerializeField]
-    Color wrongColor, correctColor, transparentColor = default;
+    Color wrongColor, correctColor, transparentColor,holdColor,dropColor = default;
 
     public void Initialized(TileShape shape)
     {
@@ -27,11 +26,19 @@ public class DraggingShape : DraggingActions
         TileShape = shape;
     }
 
-    private void SetAllColor(Color colorToSet)
+    private void SetAllColor(Color colorToSet)//底图效果调整
     {
         foreach (GameTile tile in TileShape.tiles)
         {
             tile.BaseRenderer.color = colorToSet;
+        }
+    }
+
+    private void SetPreviewColor(Color colorToSet)//外发光效果调整
+    {
+        foreach (GameTile tile in TileShape.tiles)
+        {
+            tile.PreviewRenderer.color = colorToSet;
         }
     }
 
@@ -89,22 +96,6 @@ public class DraggingShape : DraggingActions
         }
     }
 
-    //private void SetGroundForPathFinding()
-    //{
-    //    Physics2D.SyncTransforms();
-    //    EnableGroundColliders();
-    //    foreach (GameTile tile in TileShape.tiles)
-    //    {
-    //        Collider2D colHit = StaticData.RaycastCollider(tile.transform.position, LayerMask.GetMask(StaticData.GroundTileMask));
-    //        if (colHit != null)
-    //            groundColliders.Add(colHit);
-    //    }
-    //    foreach (var groundTile in groundColliders)
-    //    {
-    //        groundTile.enabled = false;
-    //    }
-
-    //}
     private bool CheckCanDrop()
     {
         canDrop = true;
@@ -192,7 +183,6 @@ public class DraggingShape : DraggingActions
     {
         waitingForPath = true;
         yield return new WaitForSeconds(0.1f);
-        
         ChangeAstarPath();
         yield return new WaitForSeconds(0.1f);
         GameEvents.Instance.SeekPath();
@@ -237,10 +227,9 @@ public class DraggingShape : DraggingActions
     {
         transform.Rotate(0, 0, -90f);
         menuTrans.Rotate(0, 0, 90f);
-
         foreach (GameTile tile in TileShape.tiles)
         {
-            tile.CorrectRotation();
+            tile.SetRandomRotation();
         }
         if (CheckCanDrop())
         {
@@ -284,14 +273,6 @@ public class DraggingShape : DraggingActions
         }
     }
 
-    //private void EnableGroundColliders()
-    //{
-    //    foreach (var groundCol in groundColliders)
-    //    {
-    //        groundCol.enabled = true;
-    //    }
-    //    groundColliders.Clear();
-    //}
 
     public void StartDragging()
     {
@@ -299,6 +280,7 @@ public class DraggingShape : DraggingActions
         DraggingThis = this;
         pointerOffset = transform.position - MouseInWorldCoords();
         pointerOffset.z = 0;
+        SetPreviewColor(holdColor);
         OnStartDrag();
     }
 
@@ -308,6 +290,7 @@ public class DraggingShape : DraggingActions
         {
             isDragging = false;
             DraggingThis = null;
+            SetPreviewColor(dropColor);
             OnEndDrag();
         }
     }

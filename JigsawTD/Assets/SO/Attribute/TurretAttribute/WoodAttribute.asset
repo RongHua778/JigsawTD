@@ -15,10 +15,10 @@ MonoBehaviour:
   Name: Wood
   Icon: {fileID: 0}
   Description: "\u53EA\u80FD\u653B\u51FB\u524D\u65B9\uFF0C\u4F46\u662F\u53EF\u4EE5\u9020\u6210\u7A7F\u900F\u4F24\u5BB3\u3002"
-  ContentPrefab: {fileID: 6736000688718372652, guid: 24c7518827485fc418d3132bf749252c, type: 3}
+  ContentPrefab: {fileID: 3830102932677347064, guid: 24c7518827485fc418d3132bf749252c, type: 3}
   RangeType: 2
   element: 1
-  Bullet: {fileID: 3850126010392176229, guid: f22cf9b0a0803b242aac9b92dc875dc6, type: 3}
+  Bullet: {fileID: 8751158320438164632, guid: f22cf9b0a0803b242aac9b92dc875dc6, type: 3}
   BulletSpeed: 12
   ShootSound: {fileID: 8300000, guid: 7beeb22321a77294388c2f63f545b420, type: 3}
   Rare: 0

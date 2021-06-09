@@ -15,10 +15,10 @@ MonoBehaviour:
   Name: Dust
   Icon: {fileID: 0}
   Description: "\u653B\u51FB\u53EF\u4EE5\u9020\u6210\u6E85\u5C04\u4F24\u5BB3\u3002"
-  ContentPrefab: {fileID: 4836110305764302111, guid: 8574fb7c958d9084199e76f94ed13f80, type: 3}
+  ContentPrefab: {fileID: 900867221070031195, guid: 8574fb7c958d9084199e76f94ed13f80, type: 3}
   RangeType: 0
   element: 4
-  Bullet: {fileID: 3850126010392176229, guid: 93a6638b5f5d3504e81fbaa4958ebe74, type: 3}
+  Bullet: {fileID: 2245073835532274941, guid: 93a6638b5f5d3504e81fbaa4958ebe74, type: 3}
   BulletSpeed: 5
   ShootSound: {fileID: 8300000, guid: 649069b7d6a9bce41930cf6d0c4e821d, type: 3}
   Rare: 0

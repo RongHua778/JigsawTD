@@ -74,7 +74,7 @@ public class WaveSystem : IGameSystem
     {
         float intensify = 1;
         int amount;
-        float stage = 100f;
+        float stage = 1f;
         for (int i = 0; i < StaticData.Instance.LevelMaxWave; i++)
         {
             EnemyType type = (EnemyType)UnityEngine.Random.Range(0, 4);
@@ -115,7 +115,7 @@ public class WaveSystem : IGameSystem
                     Debug.LogAssertion("难度参数错误");
                     break;
             }
-            
+
             amount = attribute.InitCount + i / 4 * attribute.CountIncrease;
             //每4回合
             float coolDown = attribute.CoolDown;
@@ -130,11 +130,10 @@ public class WaveSystem : IGameSystem
             {
                 coolDown = coolDown - i / 4 * 0.015f;
             }
-            //if (i < 4)
-            //{
-            //    coolDown = 2.5f;
-            //    intensify = 1f + 0.5f * i;
-            //}
+            if (i < 4)
+            {
+                coolDown = 2.5f - 0.1f * i;
+            }
             EnemySequence sequence = new EnemySequence(i + 1, attribute, intensify, amount, coolDown);
             LevelSequence.Enqueue(sequence);
         }
@@ -153,23 +152,23 @@ public class WaveSystem : IGameSystem
             //背景音乐设置
             if (RunningSequence.Wave == StaticData.Instance.LevelMaxWave)
             {
-                Sound.Instance.PlayBg(Sound.Instance.LastWaveClip);
+                Sound.Instance.PlayBg("lastwave");
             }
             else
             {
                 switch (RunningSequence.EnemyAttribute.EnemyType)
                 {
                     case EnemyType.Soilder:
-                        Sound.Instance.PlayBg(Sound.Instance.SoilderClip);
+                        Sound.Instance.PlayBg("soldier");
                         break;
                     case EnemyType.Runner:
-                        Sound.Instance.PlayBg(Sound.Instance.RunnerClip);
+                        Sound.Instance.PlayBg("runner");
                         break;
                     case EnemyType.Restorer:
-                        Sound.Instance.PlayBg(Sound.Instance.RestorerClip);
+                        Sound.Instance.PlayBg("restorer");
                         break;
                     case EnemyType.Tanker:
-                        Sound.Instance.PlayBg(Sound.Instance.TankerClip);
+                        Sound.Instance.PlayBg("tanker");
                         break;
                 }
             }
