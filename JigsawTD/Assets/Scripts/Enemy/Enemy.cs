@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy :PathFollower
+public abstract class Enemy : PathFollower
 {
     public abstract EnemyType EnemyType { get; }
 
@@ -17,17 +17,17 @@ public abstract class Enemy :PathFollower
     public float TargetDamageCounter { get; set; }
     public int TileStunCounter { get; set; }
     private float stunTime;
-    public float StunTime 
-    { 
-        get=>stunTime; 
-        set 
+    public float StunTime
+    {
+        get => stunTime;
+        set
         {
             stunTime = value;
             progressFactor = Speed * adjust;
-        } 
+        }
     }
 
-    public override float Speed { get => StunTime > 0 ? 0 : speed * (1 - (SlowRate + PathSlow) / (SlowRate + PathSlow + 0.7f)); set => speed = value; }
+    public override float Speed { get => Mathf.Max(0.2f, StunTime > 0 ? 0 : speed * (1 - (SlowRate + PathSlow) / (SlowRate + PathSlow + 0.8f))); set => speed = value; }
     int shell;
     public int Shell { get => Mathf.Max(0, shell - BrokeShell); set => shell = value; }
     float slowRate;

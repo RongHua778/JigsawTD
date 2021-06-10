@@ -26,6 +26,12 @@ public class MenuUIManager : MonoBehaviour
             Debug.Log("删除了通关记录");
             PlayerPrefs.DeleteAll();
         }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            ShowMessage("测试：已解锁全部难度");
+            Debug.Log("删除了通关记录");
+            PlayerPrefs.SetInt("MaxPassLevel", 3);
+        }
     }
 
     public void StartGameBtnClick()

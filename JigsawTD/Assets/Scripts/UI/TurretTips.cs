@@ -98,7 +98,7 @@ public class TurretTips : TileTips
     private void UpdateInfo(TurretContent turret)
     {
         AttackValue.text = turret.AttackDamage.ToString("f0");
-        SpeedValue.text = turret.AttackSpeed.ToString("f0");
+        SpeedValue.text = turret.AttackSpeed.ToString("f1");
         RangeValue.text = turret.AttackRange.ToString();
         CriticalValue.text = (turret.CriticalRate * 100).ToString() + "%";
         SputteringValue.text = turret.SputteringRange.ToString();

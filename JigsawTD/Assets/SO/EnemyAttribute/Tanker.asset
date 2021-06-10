@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Tanker
   m_EditorClassIdentifier: 
   EnemyType: 3
-  InitCount: 3
+  InitCount: 2
   CountIncrease: 1
-  Health: 10
+  Health: 35
   Speed: 0.6
   Shell: 0
-  CoolDown: 2
+  CoolDown: 2.5
   Prefab: {fileID: 8538428539047822095, guid: f7b1c5b6e3f289240b40cfb7e17d87e4, type: 3}
   ReachDamage: 1
   extraHealth: 0

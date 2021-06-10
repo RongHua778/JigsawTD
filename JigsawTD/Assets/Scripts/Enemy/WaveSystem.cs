@@ -36,7 +36,7 @@ public class WaveSystem : IGameSystem
     {
         base.Initialize(gameManager);
         this._enemyFactory = gameManager.EnemyFactory;
-        LevelInitialize(StaticData.Instance.Difficulty);
+        LevelInitialize(Game.Instance.Difficulty);
         GameEvents.Instance.onEnemyReach += EnemyReach;
         GameEvents.Instance.onEnemyDie += EnemyDie;
     }
@@ -120,19 +120,19 @@ public class WaveSystem : IGameSystem
             //每4回合
             float coolDown = attribute.CoolDown;
             //Tanker越来越肉
-            if (type == EnemyType.Tanker)
-            {
-                intensify = intensify + i * 0.6f * stage;
-            }
+            //if (type == EnemyType.Tanker)
+            //{
+            //    intensify = intensify + i * 0.6f * stage;
+            //}
             coolDown = attribute.CoolDown - i * 0.01f;
             //soldier出来的越来越多
             if (type == EnemyType.Soilder)
             {
-                coolDown = coolDown - i / 4 * 0.015f;
+                coolDown = coolDown - i / 4 * 0.05f;
             }
             if (i < 4)
             {
-                coolDown = 2.5f - 0.5f * i;
+                coolDown = 2.5f;
             }
             EnemySequence sequence = new EnemySequence(i + 1, attribute, intensify, amount, coolDown);
             LevelSequence.Enqueue(sequence);
@@ -172,6 +172,7 @@ public class WaveSystem : IGameSystem
                         break;
                 }
             }
+            Debug.Log("Currentwave Intensify=" + RunningSequence.Intensify);
         }
         else
         {
@@ -188,7 +189,7 @@ public class WaveSystem : IGameSystem
         Enemy enemy = ObjectPool.Instance.Spawn(attribute.Prefab) as Enemy;
         HealthBar healthBar = ObjectPool.Instance.Spawn(healthBarPrefab) as HealthBar;
         enemy.Initialize(attribute, UnityEngine.Random.Range(-pathOffset, pathOffset), healthBar, intensify);
-        enemy.SpawnOn(0,board.shortestPoints);
+        enemy.SpawnOn(0, board.shortestPoints);
         GameManager.Instance.enemies.Add(enemy);
     }
 

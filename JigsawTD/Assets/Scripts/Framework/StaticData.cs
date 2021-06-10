@@ -9,8 +9,8 @@ public class StaticData : Singleton<StaticData>
 {
 
     [Header("LevelSetting")]
-    [SerializeField] private int difficulty = 2;
-    public int Difficulty { get => difficulty; set => difficulty = value; }
+    //[SerializeField] private int difficulty = 2;
+    //public int Difficulty { get => difficulty; set => difficulty = value; }
 
     public static LayerMask PathLayer = 1 << 6 | 1 << 10;
     public static string ConcreteTileMask = "ConcreteTile";
@@ -53,14 +53,12 @@ public class StaticData : Singleton<StaticData>
     [Header("ProbabilitySetting")]
     public float[] TileShapeChance = default;
     public int PlayerMaxHealth;
-    [SerializeField] int levelMaxWave;
-    [SerializeField] int levelMaxWaveForBegginer;
+    [SerializeField] int[] difficutyWave;
     public int LevelMaxWave
     {
         get
         {
-            if (Difficulty == 1) return levelMaxWaveForBegginer;
-            else return levelMaxWave;
+            return difficutyWave[Game.Instance.Difficulty - 1];
         }
     }
     //元素加成
@@ -77,7 +75,7 @@ public class StaticData : Singleton<StaticData>
     private void Start()
     {
         InitializeInfoDIC();
-        Difficulty = Game.Instance.Difficulty;
+        //Difficulty = Game.Instance.Difficulty;
     }
 
     private void InitializeInfoDIC()
@@ -406,7 +404,7 @@ public class StaticData : Singleton<StaticData>
 
     public static void SetNodeWalkable(GameTile tile, bool walkable, bool changeAble = true)
     {
-        
+
 
         var grid = AstarPath.active.data.gridGraph;
         int p = tile.OffsetCoord.x;

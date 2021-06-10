@@ -7,7 +7,7 @@ public class G1Turret : CompositeTurret
 {
     private const float ShootPointSideOffset = 0.14f;
     private const float ShootInterval = 0.12f;
-    [SerializeField] Transform shootPoint1=default;
+    [SerializeField] Transform shootPoint1 = default;
     [SerializeField] Transform shootPoint2 = default;
     bool shootDir = false;
     //同时攻击多个目标
