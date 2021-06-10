@@ -4,10 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum BuiidingState
-{
-    Default, Picking, None
-}
 
 public class ShapeSelectUI : IUserInterface//控制形状生成
 {

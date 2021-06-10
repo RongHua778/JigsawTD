@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum StateName
 {
-    BuildingState, WaveState, WonState, LoseState
+    BuildingState, WaveState, PickingState,WonState, LoseState
 }
 public abstract class BattleOperationState
 {

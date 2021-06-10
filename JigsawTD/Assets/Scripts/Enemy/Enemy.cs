@@ -27,7 +27,7 @@ public abstract class Enemy : PathFollower
         }
     }
 
-    public override float Speed { get => Mathf.Max(0.2f, StunTime > 0 ? 0 : speed * (1 - (SlowRate + PathSlow) / (SlowRate + PathSlow + 0.8f))); set => speed = value; }
+    public override float Speed { get => StunTime > 0 ? 0 :Mathf.Max(0.2f, speed * (1 - (SlowRate + PathSlow) / (SlowRate + PathSlow + 0.8f))); set => speed = value; }
     int shell;
     public int Shell { get => Mathf.Max(0, shell - BrokeShell); set => shell = value; }
     float slowRate;

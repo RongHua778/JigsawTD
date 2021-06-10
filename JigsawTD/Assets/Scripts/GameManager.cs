@@ -46,6 +46,7 @@ public class GameManager : Singleton<GameManager>
     private BattleOperationState operationState;
     public BattleOperationState OperationState { get => operationState; }
     private BuildingState buildingState;
+    private PickingState pickingState;
     private WaveState waveState;
 
     //初始化设定
@@ -77,6 +78,7 @@ public class GameManager : Singleton<GameManager>
         //设置操作流程
         buildingState = new BuildingState(this, m_BoardSystem);
         waveState = new WaveState(this, m_WaveSystem);
+        pickingState = new PickingState(this);
         EnterNewState(buildingState);
 
         //初始化商店
@@ -162,6 +164,9 @@ public class GameManager : Singleton<GameManager>
             case StateName.WaveState:
                 StartCoroutine(OperationState.ExitState(waveState));
                 break;
+            case StateName.PickingState:
+                StartCoroutine(OperationState.ExitState(pickingState));
+                break;
             case StateName.WonState:
                 break;
             case StateName.LoseState:
@@ -180,6 +185,7 @@ public class GameManager : Singleton<GameManager>
     #region 形状控制
     public void DrawShapes()
     {
+        EnterNewState(pickingState);
         m_FuncUI.Hide();
         m_ShapeSelectUI.Show();
         m_ShapeSelectUI.ShowThreeShapes(m_FuncUI.PlayerLevel);
@@ -193,13 +199,21 @@ public class GameManager : Singleton<GameManager>
 
     public void ConfirmShape()//放下了一个模块
     {
+        EnterNewState(buildingState);
         m_FuncUI.Show();
         m_BluePrintShopUI.CheckAllBluePrint();
     }
 
     public void CompositeShape(BluePrintGrid grid)//合成了一个防御塔
     {
+        if (operationState.StateName != StateName.BuildingState)
+        {
+            ShowMessage("必须在非战斗或放置阶段合成");
+            return;
+        }
+        EnterNewState(pickingState);
         m_BluePrintShopUI.CompositeBluePrint(grid);
+        m_FuncUI.Hide();
     }
 
     public void BuyBluePrint(BluePrintGrid grid, int cost)

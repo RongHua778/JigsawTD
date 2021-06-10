@@ -8,7 +8,7 @@ public class Green_Runner : Enemy
 
     float speedIntensify = 0;
     public float SpeedIntensify { get => speedIntensify; set => speedIntensify = Mathf.Min(2, value); }
-    public override float Speed { get => StunTime > 0 ? 0 : (speed + SpeedIntensify) * (1 - SlowRate / (SlowRate + 1)); set => base.Speed = value; }
+    public override float Speed { get => StunTime > 0 ? 0 : Mathf.Max(0.2f, (speed + SpeedIntensify) * (1 - (SlowRate + PathSlow) / (SlowRate + PathSlow + 0.8f))); set => base.Speed = value; }
 
 
     public override DirectionChange DirectionChange
