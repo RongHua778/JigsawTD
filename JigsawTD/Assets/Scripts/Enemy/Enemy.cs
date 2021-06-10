@@ -141,6 +141,7 @@ public abstract class Enemy : PathFollower
     {
         CurrentTile.OnTilePass(this);
         trapTriggered = true;
+        Buffable.TileTick();
     }
 
     private IEnumerator ExitCor()

@@ -112,22 +112,14 @@ public class BluePrintShopUI : IUserInterface
 
     public void CompositeBluePrint(BluePrintGrid grid)//合成对应的配方
     {
-        if (grid.BluePrint.CheckBuildable())
-        {
-            grid.BluePrint.BuildBluePrint();
-            ConstructHelper.GetCompositeTurretByBluePrint(grid.BluePrint);
-            RemoveGrid(grid);
-            CheckAllBluePrint();
-            Hide();
-            GameManager.Instance.HideTips();
-            //设置结算信息
-            GameEndUI.TotalComposite++;
-        }
-        else
-        {
-            GameManager.Instance.ShowMessage("合成所需素材不足");
-        }
-
+        grid.BluePrint.BuildBluePrint();
+        ConstructHelper.GetCompositeTurretByBluePrint(grid.BluePrint);
+        RemoveGrid(grid);
+        CheckAllBluePrint();
+        Hide();
+        GameManager.Instance.HideTips();
+        //设置结算信息
+        GameEndUI.TotalComposite++;
     }
 
     private void RemoveGrid(BluePrintGrid grid)//移除对应的配方，并清理列表

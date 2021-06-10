@@ -41,8 +41,8 @@ public class Sound : Singleton<Sound>
             BGmusic.Add(clip.name, clip);
         }
 
-        AudioClip[] effects = Resources.LoadAll<AudioClip>(ResourceDir+"/Effects");
-        foreach(var clip in effects)
+        AudioClip[] effects = Resources.LoadAll<AudioClip>(ResourceDir + "/Effects");
+        foreach (var clip in effects)
         {
             EffectMusic.Add(clip.name, clip);
         }
@@ -67,6 +67,10 @@ public class Sound : Singleton<Sound>
         if (!BGmusic.ContainsKey(audioName))
         {
             Debug.Log("使用了错误的音乐名");
+            return;
+        }
+        if (m_bgSound.clip != null && audioName == m_bgSound.clip.name)
+        {
             return;
         }
         AudioClip clip = BGmusic[audioName];
@@ -124,7 +128,7 @@ public class Sound : Singleton<Sound>
     public void PlayEffect(AudioClip clip, float volume = 1)
     {
         m_effectSound.volume = volume;
-        m_effectSound.PlayOneShot(clip,0.5f);
+        m_effectSound.PlayOneShot(clip, 0.5f);
     }
 
 }

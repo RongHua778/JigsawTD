@@ -172,7 +172,7 @@ public class WaveSystem : IGameSystem
                         break;
                 }
             }
-            Debug.Log("Currentwave Intensify=" + RunningSequence.Intensify);
+            //Debug.Log("Currentwave Intensify=" + RunningSequence.Intensify);
         }
         else
         {

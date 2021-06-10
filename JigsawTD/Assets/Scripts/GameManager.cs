@@ -211,9 +211,17 @@ public class GameManager : Singleton<GameManager>
             ShowMessage("必须在非战斗或放置阶段合成");
             return;
         }
-        EnterNewState(pickingState);
-        m_BluePrintShopUI.CompositeBluePrint(grid);
-        m_FuncUI.Hide();
+        if (grid.BluePrint.CheckBuildable())
+        {
+            EnterNewState(pickingState);
+            m_BluePrintShopUI.CompositeBluePrint(grid);
+            m_FuncUI.Hide();
+        }
+        else
+        {
+            ShowMessage("合成所需素材不足");
+        }
+
     }
 
     public void BuyBluePrint(BluePrintGrid grid, int cost)

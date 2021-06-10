@@ -13,6 +13,7 @@ public class BluePrintTips : TileTips
     [SerializeField] Text SputteringValue = default;
     [SerializeField] Text SlowRateValue = default;
     [SerializeField] TipsElementConstruct elementConstruct = default;//合成塔组成元素区
+    [SerializeField] GameObject BuyBtn = default;
 
     private BluePrintGrid m_Grid;
 
@@ -26,6 +27,8 @@ public class BluePrintTips : TileTips
     {
         this.m_Grid = grid;
         TurretAttribute attribute = grid.BluePrint.CompositeTurretAttribute;
+
+        BuyBtn.SetActive(grid.InShop);
 
         Icon.sprite = attribute.TurretLevels[0].Icon;
         Name.text = attribute.TurretLevels[0].TurretName;
@@ -83,6 +86,7 @@ public class BluePrintTips : TileTips
     public void BuyBluePrintBtnClick() 
     {
         GameManager.Instance.BuyBluePrint(m_Grid, StaticData.BuyBluePrintCost);
+        BuyBtn.SetActive(m_Grid.InShop);
     }
 
     public void CompositeBtnClick()
