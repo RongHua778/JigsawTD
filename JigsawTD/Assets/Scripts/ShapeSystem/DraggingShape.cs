@@ -258,7 +258,7 @@ public class DraggingShape : DraggingActions
                 tile.TileLanded();
             }
             GameManager.Instance.ConfirmShape();
-
+            GameManager.Instance.TriggerGuide(4);
             Destroy(this.gameObject);
         }
         else if (overLapPoint)

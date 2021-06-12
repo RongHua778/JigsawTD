@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class FuncUI : IUserInterface
 {
+    public GameObject DrawBtnObj;
+    public GameObject LuckyObj;
+    public GameObject NextBtnObj;
+    public GameObject LevelBtnObj;
+
+
     [SerializeField] Text LuckPointTxt = default;
     [SerializeField] Text DrawBtnTxt = default;
     [SerializeField] Text LevelUpTxt = default;
@@ -12,6 +18,7 @@ public class FuncUI : IUserInterface
     [SerializeField] InfoBtn m_LuckInfo = default;
     [SerializeField] InfoBtn m_LevelInfo = default;
     [SerializeField] LuckProgress m_LuckProgress = default;
+    Animator m_Anim;
 
     bool drawThisTurn = false;
     public bool DrawThisTurn { get => drawThisTurn; set => drawThisTurn = value; }
@@ -86,7 +93,28 @@ public class FuncUI : IUserInterface
         LuckPoint = 0;
         PlayerLevel = 1;
         m_LuckInfo.SetContent(StaticData.GetLuckyInfo());
+        m_Anim = this.GetComponent<Animator>();
     }
+
+    public void PrepareForGuide()
+    {
+        DrawBtnObj.SetActive(false);
+        NextBtnObj.SetActive(false);
+        LuckyObj.SetActive(false);
+        LevelBtnObj.SetActive(false);
+    }
+
+    public override void Show()
+    {
+        m_Anim.SetBool("Show", true);
+    }
+
+    public override void Hide()
+    {
+        m_Anim.SetBool("Show", false);
+    }
+
+
     public void DrawBtnClick()
     {
         if (DrawRemain > 0)

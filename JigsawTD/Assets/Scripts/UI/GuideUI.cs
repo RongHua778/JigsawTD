@@ -13,13 +13,14 @@ public class Dialogue
 public class GuideUI : IUserInterface
 {
     //存放所有需要控制的UI
+    private FuncUI m_FuncUI;
+    private MainUI m_MainUI;
     //触发条件：点击指定格子，按钮
     //当满足条件时，控制各UI的显示动画
     [SerializeField] Dialogue[] dialogues = default;
     [SerializeField] GameObject backBtn = default;
     private Dialogue currentDialogue;
     private bool typingSentence = false;
-
 
     private Queue<string> wordQueue;
 
@@ -28,14 +29,17 @@ public class GuideUI : IUserInterface
     [SerializeField] Text newContent = default;
     [SerializeField] Text oldContent = default;
 
-    public override void Initialize(GameManager gameManager)
+
+    public void Initialize(GameManager gameManager,FuncUI funcUI,MainUI mainUI)
     {
-        base.Initialize(gameManager);
-        GameEvents.Instance.onGuideTrigger += GuideControl;
+        Initialize(gameManager);
+        m_FuncUI = funcUI;
+        m_MainUI = mainUI;
+        GameEvents.Instance.onGuideTrigger += GuideTrigger;
         wordQueue = new Queue<string>();
         if (Game.Instance.Difficulty == 1)
         {
-            GuideControl(0);
+            GuideTrigger(0);
         }
         else
         {
@@ -58,6 +62,11 @@ public class GuideUI : IUserInterface
 
     private void DisplayNextSentence()
     {
+        if (wordQueue.Count == 0)
+        {
+            EndDialogue();
+            return;
+        }
         oldContent.text += "\n" + newContent.text;
         string word = wordQueue.Dequeue();
         StopAllCoroutines();
@@ -68,6 +77,33 @@ public class GuideUI : IUserInterface
     private void EndDialogue()
     {
         backBtn.SetActive(false);
+        switch (currentGuideIndex)//具体每个教程做什么
+        {
+            case 0://鼠标移动视角教程
+                ScaleAndMove.MoveTurorial = true;
+                ScaleAndMove.CanControl = true;
+                break;
+            case 1://鼠标放大教程
+                ScaleAndMove.SizeTutorial = true;
+                ScaleAndMove.CanControl = true;
+                break;
+            case 2://抽取模块教程
+                m_FuncUI.DrawBtnObj.SetActive(true);
+                m_FuncUI.Show();
+                break;
+            case 3://摆放模块教程
+                m_GameManager.ShowGuideVideo(0);
+                break;
+            case 4://显示上方UI,波次和血量
+                m_MainUI.WaveObj.SetActive(true);
+                m_MainUI.LifeObj.SetActive(true);
+                m_MainUI.Show();
+                GuideTrigger(5);
+                break;
+            case 5://显示下一波按钮
+                m_FuncUI.NextBtnObj.SetActive(true);
+                break;
+        }
         currentGuideIndex++;
     }
 
@@ -88,7 +124,7 @@ public class GuideUI : IUserInterface
     }
 
 
-    private void GuideControl(int index)
+    public void GuideTrigger(int index)
     {
         StartCoroutine(GuideCor(index));
     }
@@ -98,24 +134,12 @@ public class GuideUI : IUserInterface
         yield return new WaitForSeconds(1f);
         if (index == currentGuideIndex)
         {
-            switch (index)//具体每个教程做什么
-            {
-                case 0:
-                    Show();
-                    StartDialogue(0);
-                    ScaleAndMove.MoveTurorial = true;
-                    ScaleAndMove.CanControl = true;
-                    break;
-                case 1:
-                    Show();
-                    StartDialogue(1);
-                    ScaleAndMove.SizeTutorial = true;
-                    ScaleAndMove.CanControl = true;
-                    break;
-                case 2:
-                    StartDialogue(2);
-                    break;
-            }
+            Show();
+            StartDialogue(index);
+        }
+        else
+        {
+            Debug.LogWarning("错误的教程触发时机:"+index);
         }
     }
 

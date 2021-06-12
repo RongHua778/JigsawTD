@@ -12,12 +12,6 @@ public class Sound : Singleton<Sound>
     AudioSource m_effectSound;
     public string ResourceDir = "";
 
-    public AudioClip SoilderClip;
-    public AudioClip RestorerClip;
-    public AudioClip TankerClip;
-    public AudioClip RunnerClip;
-    public AudioClip LastWaveClip;
-
     protected override void Awake()
     {
         base.Awake();

@@ -5,7 +5,12 @@ using UnityEngine.UI;
 
 public class MainUI : IUserInterface
 {
-
+    public GameObject LifeObj;
+    public GameObject MoneyObj;
+    public GameObject SpeedBtnObj;
+    public GameObject GuideVideoBtnObj;
+    public GameObject WaveObj;
+    private Animator m_Anim;
     //UI
     [SerializeField] Text PlayerLifeTxt = default;
     [SerializeField] Text coinTxt = default;
@@ -14,6 +19,7 @@ public class MainUI : IUserInterface
 
     [SerializeField] PausePanel m_PausePanel = default;
     [SerializeField] GuideBook m_GuideBook = default;
+
     private int coin = 0;
     public int Coin
     {
@@ -82,6 +88,8 @@ public class MainUI : IUserInterface
 
         m_PausePanel.Initialize(m_GameManager);
         m_GuideBook.Initialize(m_GameManager);
+        m_Anim = this.GetComponent<Animator>();
+
     }
 
     public override void Release()
@@ -89,6 +97,25 @@ public class MainUI : IUserInterface
         base.Release();
         GameSpeed = 1;
         GameEvents.Instance.onEnemyReach -= EnemyReach;
+    }
+
+    public void PrepareForGuide()
+    {
+        MoneyObj.SetActive(false);
+        SpeedBtnObj.SetActive(false);
+        GuideVideoBtnObj.SetActive(false);
+        LifeObj.SetActive(false);
+        WaveObj.SetActive(false);
+    }
+
+    public override void Show()
+    {
+        m_Anim.SetBool("Show", true);
+    }
+
+    public void PlayAnim(string key,bool value)
+    {
+        m_Anim.SetBool(key, value);
     }
 
     private void EnemyReach(Enemy enemy)

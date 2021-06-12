@@ -18,6 +18,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GuideUI m_GuideUI = default;
     [SerializeField] private GameEndUI m_GameEndUI = default;
     [SerializeField] private MessageUI m_MessageUI = default;
+    [SerializeField] private GuideVideo m_GuideVideo = default;
 
     [Header("TIPS")]
     [SerializeField] private TurretTips m_TurretTips = default;
@@ -69,13 +70,14 @@ public class GameManager : Singleton<GameManager>
         //初始化UI
         m_MainUI.Initialize(this);//主界面顶部UI
         m_FuncUI.Initialize(this);//主界面功能UI
-        m_GuideUI.Initialize(this);//教学系统UI
+        m_GuideUI.Initialize(this, m_FuncUI, m_MainUI);//教学系统UI
         m_BluePrintShopUI.Initialize(this);//配方系统UI
         m_ShapeSelectUI.Initialize(this);//抽模块UI
         m_GameEndUI.Initialize(this);//游戏结束UI
         m_TrapTips.Initialize(this);//防御塔TIPS
         m_TurretTips.Initialize(this);//陷阱及其他TIPS
         m_MessageUI.Initialize(this);//提示系统UI
+        m_GuideVideo.Initialize(this);//教程视频UI
 
         //设置操作流程
         buildingState = new BuildingState(this, m_BoardSystem);
@@ -85,6 +87,18 @@ public class GameManager : Singleton<GameManager>
 
         //初始化商店
         RefreshShop(0);
+        //初始化教程
+        if (Game.Instance.Difficulty == 1)
+        {
+            m_FuncUI.PrepareForGuide();
+            m_MainUI.PrepareForGuide();
+
+            TriggerGuide(0);
+        }
+        else
+        {
+            ScaleAndMove.CanControl = true;//默认为锁镜头
+        }
     }
 
     //释放游戏系统
@@ -102,6 +116,7 @@ public class GameManager : Singleton<GameManager>
         m_TrapTips.Release();
         m_TurretTips.Release();
         m_MessageUI.Release();
+        m_GuideVideo.Release();
 
         Instance = null;
     }
@@ -177,6 +192,8 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+
+
     public void EnterNewState(BattleOperationState newState)
     {
         this.operationState = newState;
@@ -205,6 +222,7 @@ public class GameManager : Singleton<GameManager>
         EnterNewState(buildingState);
         m_FuncUI.Show();
         m_BluePrintShopUI.CheckAllBluePrint();
+        
     }
 
     public void CompositeShape(BluePrintGrid grid)//合成了一个防御塔
@@ -281,6 +299,16 @@ public class GameManager : Singleton<GameManager>
         m_BluePrintShopUI.GetARandomBluePrintToPocket(m_FuncUI.PlayerLevel);
     }
 
+    public void ShowGuideVideo(int index)
+    {
+        m_GuideVideo.Show();
+        m_GuideVideo.ShowPage(index);
+    }
+
+    public void TriggerGuide(int index)
+    {
+        m_GuideUI.GuideTrigger(index);
+    }
     #endregion
 
     #region TIPS
@@ -303,7 +331,7 @@ public class GameManager : Singleton<GameManager>
     public void ShowTempTips(string text, Vector2 pos)
     {
         m_TempTips.gameObject.SetActive(true);
-        m_TempTips.SendText(text,pos);
+        m_TempTips.SendText(text, pos);
         //m_TempTips.SetPos(pos);
     }
 
