@@ -46,4 +46,10 @@ public class GameEvents : Singleton<GameEvents>
         onEnemyDie?.Invoke(enemy);
     }
 
+
+    public event Action<int> onGuideTrigger;
+    public void GuideTrigger(int index)
+    {
+        onGuideTrigger?.Invoke(index);
+    }
 }

@@ -15,6 +15,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private ShapeSelectUI m_ShapeSelectUI = default;
     [SerializeField] private MainUI m_MainUI = default;
     [SerializeField] private FuncUI m_FuncUI = default;
+    [SerializeField] private GuideUI m_GuideUI = default;
     [SerializeField] private GameEndUI m_GameEndUI = default;
     [SerializeField] private MessageUI m_MessageUI = default;
 
@@ -68,6 +69,7 @@ public class GameManager : Singleton<GameManager>
         //初始化UI
         m_MainUI.Initialize(this);//主界面顶部UI
         m_FuncUI.Initialize(this);//主界面功能UI
+        m_GuideUI.Initialize(this);//教学系统UI
         m_BluePrintShopUI.Initialize(this);//配方系统UI
         m_ShapeSelectUI.Initialize(this);//抽模块UI
         m_GameEndUI.Initialize(this);//游戏结束UI
@@ -93,6 +95,7 @@ public class GameManager : Singleton<GameManager>
 
         m_MainUI.Release();
         m_FuncUI.Release();
+        m_GuideUI.Release();
         m_BluePrintShopUI.Release();
         m_ShapeSelectUI.Release();
         m_GameEndUI.Release();

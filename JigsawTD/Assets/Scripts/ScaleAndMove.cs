@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
 public class ScaleAndMove : MonoBehaviour
 {
+
     Vector2 m_ScreenPos = new Vector2();
     Vector3 oldPosition;
     Camera cam;
@@ -20,9 +22,22 @@ public class ScaleAndMove : MonoBehaviour
     private float maxRight = 20;
     Vector2 CamMovement;
     // Start is called before the first frame update
+
+    //新手引导
+    Vector3 CamInitialPos;
+    float CamInitialSize;
+    public static bool MoveTurorial = false;
+    public static bool SizeTutorial = false;
+    float moveTime = 0;
+    float sizeDistance = 0;
+    public static bool CanControl = false;
+    //
+
     void Start()
     {
         cam = this.GetComponent<Camera>();
+        CamInitialPos = cam.transform.position;
+        CamInitialSize = cam.orthographicSize;
         oldPosition = cam.transform.position;
         Input.multiTouchEnabled = true;
     }
@@ -30,9 +45,37 @@ public class ScaleAndMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //MobileInput();
+
         DesktopInput();
+        TutorialCounter();
         //RTSView();
+    }
+
+    private void TutorialCounter()
+    {
+        if (MoveTurorial)
+        {
+            if (CamMovement != Vector2.zero)
+            {
+                moveTime += Time.deltaTime;
+                if (moveTime > 1.5f)
+                {
+                    MoveTurorial = false;
+                    CamMovement = Vector2.zero;
+                    cam.transform.DOMove(CamInitialPos, 1f);
+                    CanControl = false;
+                    GameEvents.Instance.GuideTrigger(1);
+                }
+            }
+        }
+        if (SizeTutorial)
+        {
+            if (Mathf.Abs(cam.orthographicSize - CamInitialSize) > 1f)
+            {
+                SizeTutorial = false;
+                GameEvents.Instance.GuideTrigger(2);
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -73,6 +116,8 @@ public class ScaleAndMove : MonoBehaviour
     }
     private void DesktopInput()
     {
+        if (!CanControl)
+            return;
         if (Input.GetAxis("Mouse ScrollWheel") != 0)
         {
             cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minmum, maximum);
@@ -88,7 +133,6 @@ public class ScaleAndMove : MonoBehaviour
         else
         {
             CamMovement = Vector2.zero;
-
         }
 
     }
