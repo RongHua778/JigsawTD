@@ -16,7 +16,8 @@ public class MainUI : IUserInterface
     [SerializeField] Text coinTxt = default;
     [SerializeField] Text speedBtnTxt = default;
     [SerializeField] Text waveTxt = default;
-
+    [SerializeField] Image enemyIcon = default;
+    [SerializeField] InfoBtn enemyInfo = default;
     [SerializeField] PausePanel m_PausePanel = default;
     [SerializeField] GuideBook m_GuideBook = default;
 
@@ -82,7 +83,7 @@ public class MainUI : IUserInterface
         base.Initialize(gameManager);
         GameEvents.Instance.onEnemyReach += EnemyReach;
         GameSpeed = 1;
-        CurrentWave = 1;
+        CurrentWave = 0;
         Life = StaticData.Instance.PlayerMaxHealth;
         Coin = StaticData.Instance.StartCoin;
 
@@ -125,11 +126,12 @@ public class MainUI : IUserInterface
 
 
 
-    public void PrepareNextWave()
+    public void PrepareNextWave(EnemySequence sequence)
     {
         CurrentWave++;
         Coin += StaticData.Instance.BaseWaveIncome + StaticData.Instance.WaveMultiplyIncome * (CurrentWave - 1);
-
+        enemyIcon.sprite = sequence.EnemyAttribute.EnemyIcon;
+        enemyInfo.SetContent(sequence.EnemyAttribute.Description);
     }
 
     public bool ConsumeMoney(int cost)

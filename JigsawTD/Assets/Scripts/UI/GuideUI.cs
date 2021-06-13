@@ -16,6 +16,7 @@ public class GuideUI : IUserInterface
     //存放所有需要控制的UI
     private FuncUI m_FuncUI;
     private MainUI m_MainUI;
+    private BluePrintShopUI m_ShopUI;
     //触发条件：点击指定格子，按钮
     //当满足条件时，控制各UI的显示动画
     [SerializeField] Dialogue[] dialogues = default;
@@ -31,11 +32,12 @@ public class GuideUI : IUserInterface
     [SerializeField] Text oldContent = default;
 
 
-    public void Initialize(GameManager gameManager, FuncUI funcUI, MainUI mainUI)
+    public void Initialize(GameManager gameManager, FuncUI funcUI, MainUI mainUI,BluePrintShopUI shopUI)
     {
         Initialize(gameManager);
         m_FuncUI = funcUI;
         m_MainUI = mainUI;
+        m_ShopUI = shopUI;
         wordQueue = new Queue<string>();
         if (Game.Instance.Difficulty == 1)
         {
@@ -82,8 +84,11 @@ public class GuideUI : IUserInterface
                 m_MainUI.MoneyObj.SetActive(true);
                 m_MainUI.PlayAnim("ShowMoney", true);
                 break;
+            case 8:
+                m_ShopUI.ShopBtnObj.SetActive(true);
+                break;
             case 9:
-                m_GameManager.ShowGuideVideo(1);
+                m_GameManager.ShowGuideVideo(2);
                 break;
 
         }
@@ -128,10 +133,13 @@ public class GuideUI : IUserInterface
                 break;
 
             case 9://end
+                m_MainUI.SpeedBtnObj.SetActive(true);
+                m_MainUI.GuideVideoBtnObj.SetActive(true);
                 m_MainUI.PlayAnim("ShowOther", true);
                 break;
             case 10:
                 Hide();
+                Game.Instance.Tutorial = false;
                 break;
         }
 

@@ -70,7 +70,7 @@ public class GameManager : Singleton<GameManager>
         //初始化UI
         m_MainUI.Initialize(this);//主界面顶部UI
         m_FuncUI.Initialize(this);//主界面功能UI
-        m_GuideUI.Initialize(this, m_FuncUI, m_MainUI);//教学系统UI
+        m_GuideUI.Initialize(this, m_FuncUI, m_MainUI,m_BluePrintShopUI);//教学系统UI
         m_BluePrintShopUI.Initialize(this);//配方系统UI
         m_ShapeSelectUI.Initialize(this);//抽模块UI
         m_GameEndUI.Initialize(this);//游戏结束UI
@@ -83,15 +83,16 @@ public class GameManager : Singleton<GameManager>
         buildingState = new BuildingState(this, m_BoardSystem);
         waveState = new WaveState(this, m_WaveSystem);
         pickingState = new PickingState(this);
-        EnterNewState(buildingState);
+        PrepareNextWave();
 
         //初始化商店
         RefreshShop(0);
         //初始化教程
-        if (Game.Instance.Difficulty == 1)
+        if (Game.Instance.Tutorial)
         {
             m_FuncUI.PrepareForGuide();
             m_MainUI.PrepareForGuide();
+            m_BluePrintShopUI.ShopBtnObj.SetActive(false);
             m_GuideUI.Show();
             TriggerGuide(0);
         }
@@ -151,8 +152,9 @@ public class GameManager : Singleton<GameManager>
             GameEnd(true);
             return;
         }
+        m_WaveSystem.GetSequence();
         m_BluePrintShopUI.NextRefreshTrun--;
-        m_MainUI.PrepareNextWave();
+        m_MainUI.PrepareNextWave(m_WaveSystem.RunningSequence);
         m_FuncUI.PrepareNextWave();
         m_FuncUI.Show();
 
@@ -179,38 +181,46 @@ public class GameManager : Singleton<GameManager>
 
     public void TransitionToState(StateName stateName)
     {
+        BattleOperationState state=null;
         switch (stateName)
         {
             case StateName.BuildingState:
-                StartCoroutine(OperationState.ExitState(buildingState));
+                state = buildingState;
                 break;
             case StateName.WaveState:
-                StartCoroutine(OperationState.ExitState(waveState));
+                state = waveState;
                 break;
             case StateName.PickingState:
-                StartCoroutine(OperationState.ExitState(pickingState));
+                state = pickingState;
                 break;
             case StateName.WonState:
                 break;
             case StateName.LoseState:
                 break;
         }
+        if (operationState == null)
+        {
+            operationState = state;
+            StartCoroutine(operationState.EnterState());
+        }
+        else
+            StartCoroutine(OperationState.ExitState(state));
     }
 
 
 
-    public void EnterNewState(BattleOperationState newState)
-    {
-        this.operationState = newState;
-        StartCoroutine(this.operationState.EnterState());
-    }
+    //public void EnterNewState(BattleOperationState newState)
+    //{
+    //    this.operationState = newState;
+    //    StartCoroutine(this.operationState.EnterState());
+    //}
 
     #endregion
 
     #region 形状控制
     public void DrawShapes()
     {
-        EnterNewState(pickingState);
+        TransitionToState(StateName.PickingState);
         m_FuncUI.Hide();
         m_ShapeSelectUI.Show();
         m_ShapeSelectUI.ShowThreeShapes(m_FuncUI.PlayerLevel);
@@ -224,7 +234,8 @@ public class GameManager : Singleton<GameManager>
 
     public void ConfirmShape()//放下了一个模块
     {
-        EnterNewState(buildingState);
+        TransitionToState(StateName.BuildingState);
+
         m_FuncUI.Show();
         m_BluePrintShopUI.CheckAllBluePrint();
 
@@ -239,7 +250,7 @@ public class GameManager : Singleton<GameManager>
         }
         if (grid.BluePrint.CheckBuildable())
         {
-            EnterNewState(pickingState);
+            TransitionToState(StateName.PickingState);
             m_BluePrintShopUI.CompositeBluePrint(grid);
             m_FuncUI.Hide();
         }
@@ -312,7 +323,7 @@ public class GameManager : Singleton<GameManager>
 
     public void TriggerGuide(int index)
     {
-        if (Game.Instance.Difficulty == 1)
+        if (Game.Instance.Tutorial)
             m_GuideUI.GuideTrigger(index);
     }
     #endregion

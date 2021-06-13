@@ -13,7 +13,7 @@ public class BuildingState : BattleOperationState
 
     public override IEnumerator EnterState()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         Sound.Instance.PlayBg("preparing");
         yield break;
     }
@@ -21,7 +21,7 @@ public class BuildingState : BattleOperationState
     public override IEnumerator ExitState(BattleOperationState newState)
     {
         yield return new WaitForSeconds(0.5f);
-        gameManager.EnterNewState(newState);
+        gameManager.StartCoroutine(newState.EnterState());
         yield break;
     }
 }

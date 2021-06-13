@@ -9,6 +9,7 @@ public class BluePrintShopUI : IUserInterface
 {
     bool Showing = false;//¿ØÖÆ¶¯»­
     Animator anim;
+    public GameObject ShopBtnObj;
 
     [SerializeField] BluePrintGrid bluePrintGridPrefab = default;
     [SerializeField] Text NextRefreshTurnsTxt = default;

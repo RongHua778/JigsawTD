@@ -18,7 +18,7 @@ public class PickingState : BattleOperationState
 
     public override IEnumerator ExitState(BattleOperationState newState)
     {
-        gameManager.EnterNewState(newState);
+        gameManager.StartCoroutine(newState.EnterState());
         yield break;
     }
 }

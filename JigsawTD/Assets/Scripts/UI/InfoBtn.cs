@@ -7,6 +7,7 @@ public class InfoBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     Camera mainCam;
     string content;
+    [SerializeField] Vector3 offset = default;
 
     private void Start()
     {
@@ -18,7 +19,7 @@ public class InfoBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        GameManager.Instance.ShowTempTips(content, mainCam.WorldToScreenPoint(transform.position));
+        GameManager.Instance.ShowTempTips(content, mainCam.WorldToScreenPoint(transform.position + offset));
     }
 
     public void OnPointerExit(PointerEventData eventData)

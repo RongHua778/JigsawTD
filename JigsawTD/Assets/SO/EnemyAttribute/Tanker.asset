@@ -22,3 +22,5 @@ MonoBehaviour:
   Prefab: {fileID: 8538428539047822095, guid: f7b1c5b6e3f289240b40cfb7e17d87e4, type: 3}
   ReachDamage: 1
   extraHealth: 0
+  EnemyIcon: {fileID: 21300000, guid: 132e9a3c321bc384c9b43b0213ec2a85, type: 3}
+  Description: "\u6D77\u660E\u5A01\uFF08\u8089\u76FE\u578B\uFF09\uFF0C\u751F\u547D\u503C\u8F83\u9AD8\u4F46\u79FB\u52A8\u7F13\u6162\u3002"

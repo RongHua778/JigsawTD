@@ -20,13 +20,13 @@ public class FuncUI : IUserInterface
     [SerializeField] LuckProgress m_LuckProgress = default;
     Animator m_Anim;
 
-    bool drawThisTurn = false;
+    bool drawThisTurn = true;
     public bool DrawThisTurn { get => drawThisTurn; set => drawThisTurn = value; }
 
     private int luckProgress = 1;
     public int LuckProgress { get => Mathf.Min(5, luckProgress); set => luckProgress = value; }
 
-    private int drawRemain = 1;
+    private int drawRemain = 0;
     public int DrawRemain
     {
         get => drawRemain;
@@ -78,7 +78,8 @@ public class FuncUI : IUserInterface
             if (luckPoint >= 10)
             {
                 luckPoint = 0;
-                GameManager.Instance.GetRandomBluePrint();
+                DrawRemain++;
+                //GameManager.Instance.GetRandomBluePrint();
             }
             LuckPointTxt.text = "ÀÛ»ýµã:" + luckPoint.ToString();
             m_LuckProgress.SetProgress(luckPoint);

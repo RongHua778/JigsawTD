@@ -29,7 +29,6 @@ public class ScaleAndMove : MonoBehaviour
     public static bool MoveTurorial = false;
     public static bool SizeTutorial = false;
     float moveTime = 0;
-    float sizeDistance = 0;
     public static bool CanControl = false;
     //
 

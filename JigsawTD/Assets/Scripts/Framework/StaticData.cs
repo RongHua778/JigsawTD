@@ -380,7 +380,7 @@ public class StaticData : Singleton<StaticData>
         text += "\n  当前等级概率:\n";
         for (int x = 0; x < 5; x++)
         {
-            text += "  等级" + (x + 1).ToString() + ": " + levelChances[x] * 100 + "%\n";
+            text += "  品质" + (x + 1).ToString() + ": " + levelChances[x] * 100 + "%\n";
         }
         return text;
     }
@@ -390,7 +390,7 @@ public class StaticData : Singleton<StaticData>
         string text =
             "1.当前回合没有抽取时，获得1点累积点。\n" +
             "2.连续不抽取时，会获得额外累积点。\n" +
-            "3.累积点每达到10点，获得1个随机配方。";
+            "3.累积点每达到10点，获得1次额外抽取次数。";
         return text;
     }
 

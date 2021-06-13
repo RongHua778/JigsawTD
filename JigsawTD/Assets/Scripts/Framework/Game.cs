@@ -11,6 +11,7 @@ public class Game : Singleton<Game>
     public int Difficulty = 1;
     public Animator transition;
     public float transitionTime = 0.8f;
+    public bool Tutorial = false;
 
 
     protected override void Awake()

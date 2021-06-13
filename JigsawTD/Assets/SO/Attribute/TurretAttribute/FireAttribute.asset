@@ -27,7 +27,7 @@ MonoBehaviour:
   TurretLevels:
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 30
+    AttackDamage: 40
     AttackSpeed: 0.5
     SputteringRange: 0
     CriticalRate: 0.3
@@ -41,7 +41,7 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.23}
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 45
+    AttackDamage: 60
     AttackSpeed: 0.5
     SputteringRange: 0
     CriticalRate: 0.35
@@ -55,7 +55,7 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.24}
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 70
+    AttackDamage: 100
     AttackSpeed: 0.5
     SputteringRange: 0
     CriticalRate: 0.4
@@ -69,7 +69,7 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.26}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 100
+    AttackDamage: 160
     AttackSpeed: 0.5
     SputteringRange: 0
     CriticalRate: 0.45
@@ -83,7 +83,7 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.26}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 150
+    AttackDamage: 260
     AttackSpeed: 0.5
     SputteringRange: 0
     CriticalRate: 0.5

@@ -31,12 +31,12 @@ public class EnemySequence
         if (SpawnTimer >= CoolDown)
         {
             SpawnTimer = 0;
+            SpawnCounter += 1;
+            GameManager.Instance.SpawnEnemy();
             if (SpawnCounter >= Amount)
             {
                 return false;
             }
-            SpawnCounter += 1;
-            GameManager.Instance.SpawnEnemy();
         }
         return true;
     }

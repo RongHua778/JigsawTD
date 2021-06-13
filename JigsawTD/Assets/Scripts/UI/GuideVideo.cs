@@ -6,6 +6,18 @@ using UnityEngine.UI;
 public class GuideVideo :IUserInterface
 {
     [SerializeField] Toggle[] tabs = default;
+    Animator anim;
+
+    public override void Initialize(GameManager gameManager)
+    {
+        base.Initialize(gameManager);
+        anim = this.GetComponent<Animator>();
+    }
+    public override void Show()
+    {
+        base.Show();
+        anim.SetBool("isOpen", true);
+    }
 
     public void ShowPage(int index)
     {
@@ -15,7 +27,7 @@ public class GuideVideo :IUserInterface
 
     public override void Hide()
     {
-        base.Hide();
+        anim.SetBool("isOpen", false);
         GameManager.Instance.TriggerGuide(10);
     }
 

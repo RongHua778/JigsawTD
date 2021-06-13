@@ -59,7 +59,7 @@ public class TempTips : MonoBehaviour
 
         Vector2 newPos;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(myCanvas.transform as RectTransform, pos, myCanvas.worldCamera, out newPos);
-        transform.position = myCanvas.transform.TransformPoint(newPos + new Vector2(0, rect.sizeDelta.y / 2 + 30));
+        transform.position = myCanvas.transform.TransformPoint(newPos);
     }
 
     IEnumerator AdjustSize(Vector2 pos)

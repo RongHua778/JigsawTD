@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class WaveSystem : IGameSystem
 {
-
+    public bool Running = false;
     int enemyRemain = 0;
     public int EnemyRemain
     {
@@ -60,11 +60,12 @@ public class WaveSystem : IGameSystem
 
     public override void GameUpdate()
     {
-        if (RunningSequence != null)
+        if (Running)
         {
             if (!RunningSequence.Progress())
             {
-                RunningSequence = null;
+
+                Running = false;
             }
         }
     }
@@ -88,14 +89,15 @@ public class WaveSystem : IGameSystem
                     if (i % 3 == 0)
                     {
                         if (i < 10) stage += 0.75f;
-                        else if (i >= 10) stage += 1.5f;
+                        else if (i >= 10 && i < 20) stage += 1.5f;
+                        else if (i >= 20) stage += 2.25f;
                     }
                     break;
                 //普通难度
                 case 2:
                     if (i % 3 == 0)
                     {
-                        if (i < 10) stage += 1.5f;
+                        if (i < 10) stage += 1f;
                         else if (i >= 10 && i < 20) stage += 2f;
                         else if (i >= 20 && i < 30) stage += 3f;
                         else if (i >= 30) stage += 4f;
@@ -105,7 +107,7 @@ public class WaveSystem : IGameSystem
                 case 3:
                     if (i % 2 == 0)
                     {
-                        if (i < 10) stage += 1.5f;
+                        if (i < 10) stage += 1f;
                         else if (i >= 10 && i < 20) stage += 2f;
                         else if (i >= 20 && i < 30) stage += 3f;
                         else if (i >= 30) stage += 4f;
@@ -149,34 +151,9 @@ public class WaveSystem : IGameSystem
             //参数设置
             EnemyRemain = RunningSequence.Amount;
 
-            //背景音乐设置
-            if (RunningSequence.Wave == StaticData.Instance.LevelMaxWave)
-            {
-                Sound.Instance.PlayBg("lastwave");
-            }
-            else
-            {
-                switch (RunningSequence.EnemyAttribute.EnemyType)
-                {
-                    case EnemyType.Soilder:
-                        Sound.Instance.PlayBg("soldier");
-                        break;
-                    case EnemyType.Runner:
-                        Sound.Instance.PlayBg("runner");
-                        break;
-                    case EnemyType.Restorer:
-                        Sound.Instance.PlayBg("restorer");
-                        break;
-                    case EnemyType.Tanker:
-                        Sound.Instance.PlayBg("tanker");
-                        break;
-                }
-            }
-            //Debug.Log("Currentwave Intensify=" + RunningSequence.Intensify);
         }
         else
         {
-
             Debug.Log("所有波次都生成完了");
         }
 
