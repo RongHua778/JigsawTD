@@ -20,6 +20,11 @@ public class GameEndUI : IUserInterface
         if (win)
         {
             title.text = "通关难度" + Game.Instance.Difficulty;
+            int passLevel = PlayerPrefs.GetInt("MaxPassLevel", 0);
+            if (Game.Instance.Difficulty > passLevel)
+            {
+                PlayerPrefs.SetInt("MaxPassLevel", Game.Instance.Difficulty);
+            }
         }
         else
         {
@@ -38,6 +43,6 @@ public class GameEndUI : IUserInterface
         Debug.LogWarning("GAME不存在");
     }
 
-    
+
 
 }

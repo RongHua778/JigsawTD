@@ -37,7 +37,7 @@ public class MenuUIManager : MonoBehaviour
 
     public void StartGameBtnClick()
     {
-        if (PlayerPrefs.GetInt("MaxPassLevel", 1) < Game.Instance.Difficulty)
+        if (PlayerPrefs.GetInt("MaxPassLevel", 0) < Game.Instance.Difficulty - 1)
         {
             ShowMessage("需先通关上一级难度");
             return;
@@ -91,5 +91,5 @@ public class MenuUIManager : MonoBehaviour
         difficultyTxt.text = "难度" + Game.Instance.Difficulty;
     }
 
-    
+
 }

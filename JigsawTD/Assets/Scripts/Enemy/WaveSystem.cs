@@ -98,19 +98,19 @@ public class WaveSystem : IGameSystem
                     if (i % 3 == 0)
                     {
                         if (i < 10) stage += 1f;
-                        else if (i >= 10 && i < 20) stage += 2f;
-                        else if (i >= 20 && i < 30) stage += 3f;
-                        else if (i >= 30) stage += 4f;
+                        else if (i >= 10 && i < 20) stage += 2.5f;
+                        else if (i >= 20 && i < 30) stage += 4f;
+                        else if (i >= 30) stage += 5.5f;
                     }
                     break;
                 //专家难度
                 case 3:
                     if (i % 2 == 0)
                     {
-                        if (i < 10) stage += 1f;
-                        else if (i >= 10 && i < 20) stage += 2f;
-                        else if (i >= 20 && i < 30) stage += 3f;
-                        else if (i >= 30) stage += 4f;
+                        if (i < 10) stage += 2f;
+                        else if (i >= 10 && i < 20) stage += 3.5f;
+                        else if (i >= 20 && i < 30) stage += 5f;
+                        else if (i >= 30) stage += 6.5f;
                     }
                     break;
                 default:

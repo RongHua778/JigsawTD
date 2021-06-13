@@ -19676,7 +19676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8834c8b736c85524bb85789591747753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Difficulty: 2
+  Difficulty: 3
   transition: {fileID: 231277384}
   transitionTime: 1
   Tutorial: 0
@@ -21706,7 +21706,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.41018522}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 269.90277}
+  m_AnchoredPosition: {x: 0, y: 269.90314}
   m_SizeDelta: {x: 415.24323, y: 451.58368}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2045961315
@@ -23407,7 +23407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ec38afce91633147af92b5cae9c7168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 1.5, z: 0}
 --- !u!114 &444307041049831258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25161,7 +25161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ec38afce91633147af92b5cae9c7168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 1.5, z: 0}
 --- !u!1 &2464421377606329427
 GameObject:
   m_ObjectHideFlags: 0

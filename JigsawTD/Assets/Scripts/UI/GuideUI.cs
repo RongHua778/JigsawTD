@@ -123,6 +123,7 @@ public class GuideUI : IUserInterface
             case 1://鼠标放大教程
                 ScaleAndMove.SizeTutorial = true;
                 ScaleAndMove.CanControl = true;
+                m_FuncUI.Hide();//先收起来，默认被prepareNextwave给SHOW了
                 break;
             case 2://抽取模块教程
                 m_FuncUI.DrawBtnObj.SetActive(true);

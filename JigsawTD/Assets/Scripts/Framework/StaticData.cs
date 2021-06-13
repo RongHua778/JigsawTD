@@ -388,9 +388,9 @@ public class StaticData : Singleton<StaticData>
     public static string GetLuckyInfo()
     {
         string text =
-            "1.当前回合没有抽取时，获得1点累积点。\n" +
+            "\n1.当前回合没有抽取时，获得1点累积点。\n" +
             "2.连续不抽取时，会获得额外累积点。\n" +
-            "3.累积点每达到10点，获得1次额外抽取次数。";
+            "3.累积点每达到10点，获得1次额外抽取次数。\n";
         return text;
     }
 

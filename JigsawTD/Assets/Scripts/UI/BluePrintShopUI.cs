@@ -117,7 +117,6 @@ public class BluePrintShopUI : IUserInterface
         ConstructHelper.GetCompositeTurretByBluePrint(grid.BluePrint);
         RemoveGrid(grid);
         CheckAllBluePrint();
-        Hide();
         GameManager.Instance.HideTips();
         //设置结算信息
         GameEndUI.TotalComposite++;
