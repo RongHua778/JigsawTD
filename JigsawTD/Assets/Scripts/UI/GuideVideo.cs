@@ -13,4 +13,10 @@ public class GuideVideo :IUserInterface
         tabs[index].isOn = true;
     }
 
+    public override void Hide()
+    {
+        base.Hide();
+        GameManager.Instance.TriggerGuide(10);
+    }
+
 }

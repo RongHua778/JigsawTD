@@ -47,9 +47,4 @@ public class GameEvents : Singleton<GameEvents>
     }
 
 
-    public event Action<int> onGuideTrigger;
-    public void GuideTrigger(int index)
-    {
-        onGuideTrigger?.Invoke(index);
-    }
 }

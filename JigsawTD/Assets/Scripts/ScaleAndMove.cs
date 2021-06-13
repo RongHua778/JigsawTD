@@ -64,7 +64,7 @@ public class ScaleAndMove : MonoBehaviour
                     CamMovement = Vector2.zero;
                     cam.transform.DOMove(CamInitialPos, 1f);
                     CanControl = false;
-                    GameEvents.Instance.GuideTrigger(1);
+                    GameManager.Instance.TriggerGuide(1);
                 }
             }
         }
@@ -73,7 +73,8 @@ public class ScaleAndMove : MonoBehaviour
             if (Mathf.Abs(cam.orthographicSize - CamInitialSize) > 1f)
             {
                 SizeTutorial = false;
-                GameEvents.Instance.GuideTrigger(2);
+                cam.transform.DOMove(CamInitialPos, 1f);
+                GameManager.Instance.TriggerGuide(2);
             }
         }
     }

@@ -149,7 +149,7 @@ public class MainUI : IUserInterface
 
     public void GuideBookBtnClick()
     {
-        m_GuideBook.Show();
+        m_GameManager.ShowGuideVideo(0);
     }
 
     public void PauseBtnClick()

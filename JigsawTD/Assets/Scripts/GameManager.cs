@@ -92,11 +92,12 @@ public class GameManager : Singleton<GameManager>
         {
             m_FuncUI.PrepareForGuide();
             m_MainUI.PrepareForGuide();
-
+            m_GuideUI.Show();
             TriggerGuide(0);
         }
         else
         {
+
             ScaleAndMove.CanControl = true;//默认为锁镜头
         }
     }
@@ -154,6 +155,10 @@ public class GameManager : Singleton<GameManager>
         m_MainUI.PrepareNextWave();
         m_FuncUI.PrepareNextWave();
         m_FuncUI.Show();
+
+        TriggerGuide(6);
+        TriggerGuide(7);
+        TriggerGuide(8);
         //重置所有防御塔的回合临时加成
         foreach (var turret in elementTurrets.behaviors)
         {
@@ -222,7 +227,7 @@ public class GameManager : Singleton<GameManager>
         EnterNewState(buildingState);
         m_FuncUI.Show();
         m_BluePrintShopUI.CheckAllBluePrint();
-        
+
     }
 
     public void CompositeShape(BluePrintGrid grid)//合成了一个防御塔
@@ -307,7 +312,8 @@ public class GameManager : Singleton<GameManager>
 
     public void TriggerGuide(int index)
     {
-        m_GuideUI.GuideTrigger(index);
+        if (Game.Instance.Difficulty == 1)
+            m_GuideUI.GuideTrigger(index);
     }
     #endregion
 

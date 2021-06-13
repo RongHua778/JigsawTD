@@ -9,6 +9,7 @@ public class Dialogue
     public string Name;
     [TextArea(2, 3)]
     public string[] Words;
+    public bool DontNeedClickEnd;
 }
 public class GuideUI : IUserInterface
 {
@@ -30,12 +31,11 @@ public class GuideUI : IUserInterface
     [SerializeField] Text oldContent = default;
 
 
-    public void Initialize(GameManager gameManager,FuncUI funcUI,MainUI mainUI)
+    public void Initialize(GameManager gameManager, FuncUI funcUI, MainUI mainUI)
     {
         Initialize(gameManager);
         m_FuncUI = funcUI;
         m_MainUI = mainUI;
-        GameEvents.Instance.onGuideTrigger += GuideTrigger;
         wordQueue = new Queue<string>();
         if (Game.Instance.Difficulty == 1)
         {
@@ -57,6 +57,38 @@ public class GuideUI : IUserInterface
         {
             wordQueue.Enqueue(word);
         }
+
+        switch (index)//教程开始时做什么
+        {
+            case 3://摆放模块教程、触发是绑定在外面按钮上的
+                m_GameManager.ShowGuideVideo(1);
+                m_GameManager.ShowGuideVideo(0);
+                m_FuncUI.NextBtnObj.SetActive(true);
+                break;
+            case 4://血量
+                GameManager.Instance.HideTips();
+                m_MainUI.LifeObj.SetActive(true);
+                m_MainUI.PlayAnim("ShowLife", true);
+                break;
+            case 5:
+                m_MainUI.WaveObj.SetActive(true);
+                m_MainUI.PlayAnim("ShowWave", true);
+                break;
+            case 6:
+                m_FuncUI.LuckyObj.SetActive(true);
+                break;
+            case 7:
+                m_FuncUI.LevelBtnObj.SetActive(true);
+                m_MainUI.MoneyObj.SetActive(true);
+                m_MainUI.PlayAnim("ShowMoney", true);
+                break;
+            case 9:
+                m_GameManager.ShowGuideVideo(1);
+                break;
+
+        }
+
+
         DisplayNextSentence();
     }
 
@@ -77,7 +109,7 @@ public class GuideUI : IUserInterface
     private void EndDialogue()
     {
         backBtn.SetActive(false);
-        switch (currentGuideIndex)//具体每个教程做什么
+        switch (currentGuideIndex - 1)//具体每个教程做什么，比正常的index-1
         {
             case 0://鼠标移动视角教程
                 ScaleAndMove.MoveTurorial = true;
@@ -91,20 +123,18 @@ public class GuideUI : IUserInterface
                 m_FuncUI.DrawBtnObj.SetActive(true);
                 m_FuncUI.Show();
                 break;
-            case 3://摆放模块教程
-                m_GameManager.ShowGuideVideo(0);
+            case 4:
+                GameManager.Instance.TriggerGuide(5);
                 break;
-            case 4://显示上方UI,波次和血量
-                m_MainUI.WaveObj.SetActive(true);
-                m_MainUI.LifeObj.SetActive(true);
-                m_MainUI.Show();
-                GuideTrigger(5);
+
+            case 9://end
+                m_MainUI.PlayAnim("ShowOther", true);
                 break;
-            case 5://显示下一波按钮
-                m_FuncUI.NextBtnObj.SetActive(true);
+            case 10:
+                Hide();
                 break;
         }
-        currentGuideIndex++;
+
     }
 
     private IEnumerator TypeSentence(string word)
@@ -119,28 +149,27 @@ public class GuideUI : IUserInterface
         typingSentence = false;
         if (wordQueue.Count == 0)
         {
-            EndDialogue();
+            if (currentDialogue.DontNeedClickEnd)
+                EndDialogue();
         }
     }
 
 
     public void GuideTrigger(int index)
     {
-        StartCoroutine(GuideCor(index));
+        if (index == currentGuideIndex)
+        {
+            //currentGuideIndex++;
+            StartCoroutine(GuideCor(index));
+        }
+            //StartCoroutine(GuideCor(index));
     }
 
     IEnumerator GuideCor(int index)
     {
-        yield return new WaitForSeconds(1f);
-        if (index == currentGuideIndex)
-        {
-            Show();
-            StartDialogue(index);
-        }
-        else
-        {
-            Debug.LogWarning("错误的教程触发时机:"+index);
-        }
+        yield return new WaitForSeconds(0.1f);
+        currentGuideIndex++;
+        StartDialogue(index);
     }
 
     public void NextBtnClick()
