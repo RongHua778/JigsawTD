@@ -20,7 +20,7 @@ public class BuildingState : BattleOperationState
 
     public override IEnumerator ExitState(BattleOperationState newState)
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         gameManager.StartCoroutine(newState.EnterState());
         yield break;
     }

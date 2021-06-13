@@ -621,18 +621,6 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1064182619}
         m_TargetAssemblyTypeName: RoadPlacement, Assembly-CSharp
-        m_MethodName: HideArea
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1064182619}
-        m_TargetAssemblyTypeName: RoadPlacement, Assembly-CSharp
         m_MethodName: ClearAllSelections
         m_Mode: 1
         m_Arguments:
@@ -9513,8 +9501,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 781, y: -237}
-  m_SizeDelta: {x: 200, y: 100}
+  m_AnchoredPosition: {x: 771, y: -227.8}
+  m_SizeDelta: {x: 220, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &954782017
 MonoBehaviour:
@@ -10374,18 +10362,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1013494184}
         m_TargetAssemblyTypeName: TileSelect, Assembly-CSharp
         m_MethodName: OnShapeClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1064182619}
-        m_TargetAssemblyTypeName: RoadPlacement, Assembly-CSharp
-        m_MethodName: HideArea
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14224,7 +14200,7 @@ MonoBehaviour:
     Words:
     - "\u6700\u540E\u4ECB\u7ECD\u4E00\u9879\u91CD\u6784\u6D4B\u8BD5\u7684\u91CD\u8981\u529F\u80FD---\u5408\u6210\uFF0C\u5B83\u4F1A\u6781\u5927\u63D0\u5347\u4F60\u7684\u9632\u5FA1\u9635\u7EBF\u3002"
     - "\u70B9\u51FB\u5C4F\u5E55\u5DE6\u4FA7\u7684\u914D\u65B9\u6309\u94AE\uFF0C\u6253\u5F00\u914D\u65B9\u9762\u677F\uFF0C\u6211\u5C06\u4E3A\u4F60\u4ECB\u7ECD\u5408\u6210\u7CFB\u7EDF\u3002"
-    DontNeedClickEnd: 0
+    DontNeedClickEnd: 1
   - Name: "\u5EB7\u5FB7"
     Words: []
     DontNeedClickEnd: 1
@@ -19609,18 +19585,6 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1064182619}
         m_TargetAssemblyTypeName: RoadPlacement, Assembly-CSharp
-        m_MethodName: HideArea
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1064182619}
-        m_TargetAssemblyTypeName: RoadPlacement, Assembly-CSharp
         m_MethodName: ClearAllSelections
         m_Mode: 1
         m_Arguments:
@@ -19715,6 +19679,7 @@ MonoBehaviour:
   Difficulty: 2
   transition: {fileID: 231277384}
   transitionTime: 1
+  Tutorial: 0
 --- !u!114 &1834551531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21741,7 +21706,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.41018522}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 269.90244}
+  m_AnchoredPosition: {x: 0, y: 269.90277}
   m_SizeDelta: {x: 415.24323, y: 451.58368}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2045961315

@@ -16,7 +16,7 @@ public class TileShape : MonoBehaviour
     GameObject bgObj;
     DraggingShape draggingShape;
     Text turretNameTxt;
-    public ElementTurret m_ElementTurret { get; private set; }
+    public ElementTurret m_ElementTurret;
 
     [HideInInspector]
     public List<GameTile> tiles = new List<GameTile>();

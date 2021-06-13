@@ -46,7 +46,7 @@ public class GameManager : Singleton<GameManager>
 
     [Header("流程")]
     private BattleOperationState operationState;
-    public BattleOperationState OperationState { get => operationState; }
+    public BattleOperationState OperationState { get => operationState; set => operationState = value; }
     private BuildingState buildingState;
     private PickingState pickingState;
     private WaveState waveState;
@@ -204,7 +204,10 @@ public class GameManager : Singleton<GameManager>
             StartCoroutine(operationState.EnterState());
         }
         else
+        {
             StartCoroutine(OperationState.ExitState(state));
+            operationState = state;
+        }
     }
 
 
@@ -243,9 +246,14 @@ public class GameManager : Singleton<GameManager>
 
     public void CompositeShape(BluePrintGrid grid)//合成了一个防御塔
     {
-        if (operationState.StateName != StateName.BuildingState)
+        if (operationState.StateName == StateName.PickingState)
         {
-            ShowMessage("必须在非战斗或放置阶段合成");
+            ShowMessage("请先放置抽取模块");
+            return;
+        }
+        if (operationState.StateName == StateName.WaveState)
+        {
+            ShowMessage("必须在非战斗阶段合成");
             return;
         }
         if (grid.BluePrint.CheckBuildable())

@@ -24,7 +24,7 @@ public class FuncUI : IUserInterface
     public bool DrawThisTurn { get => drawThisTurn; set => drawThisTurn = value; }
 
     private int luckProgress = 1;
-    public int LuckProgress { get => Mathf.Min(5, luckProgress); set => luckProgress = value; }
+    public int LuckProgress { get => Mathf.Min(4, luckProgress); set => luckProgress = value; }
 
     private int drawRemain = 0;
     public int DrawRemain
