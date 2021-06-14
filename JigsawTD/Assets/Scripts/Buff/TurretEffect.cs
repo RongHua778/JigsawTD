@@ -120,7 +120,7 @@ public class AttackIncreasePerShoot : TurretEffect
 
     public override void Hit(Enemy target)
     {
-        if (bullet.turretParent.TurnAttackIntensify > KeyValue * 9.5f)
+        if (bullet.turretParent.TurnAttackIntensify > KeyValue * 19.5f)
             return;
         bullet.turretParent.TurnAttackIntensify += KeyValue;
     }

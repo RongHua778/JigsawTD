@@ -27,15 +27,15 @@ MonoBehaviour:
   TurretLevels:
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 50
-    AttackSpeed: 1
+    AttackDamage: 40
+    AttackSpeed: 1.5
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
     TurretEffects:
     - EffectName: 2
       KeyValue: 0.1
-      EffectDescription: "\u6108\u6218\u6108\u52C7\uFF1A\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347\u672C\u56DE\u540810%\u653B\u51FB\u529B\uFF0C\u4E0A\u9650100%\u3002"
+      EffectDescription: "\u6108\u6218\u6108\u52C7\uFF1A\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347\u672C\u56DE\u540810%\u653B\u51FB\u529B\uFF0C\u4E0A\u9650200%\u3002"
     PoloEffects: []
     TurretName: "F1\u7EC4\u5408\u70AE"
     Icon: {fileID: 21300000, guid: efd7eca78d1a1d44d8b38abd7973113e, type: 3}
@@ -44,15 +44,15 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.27}
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 80
-    AttackSpeed: 1
+    AttackDamage: 70
+    AttackSpeed: 1.5
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
     TurretEffects:
     - EffectName: 2
-      KeyValue: 0.2
-      EffectDescription: "\u6108\u6218\u6108\u52C7\uFF1A\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347\u672C\u56DE\u540820%\u653B\u51FB\u529B\uFF0C\u4E0A\u9650200%\u3002"
+      KeyValue: 0.15
+      EffectDescription: "\u6108\u6218\u6108\u52C7\uFF1A\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347\u672C\u56DE\u540815%\u653B\u51FB\u529B\uFF0C\u4E0A\u9650300%\u3002"
     PoloEffects: []
     TurretName: "F2\u7EC4\u5408\u70AE"
     Icon: {fileID: 21300000, guid: efd7eca78d1a1d44d8b38abd7973113e, type: 3}
@@ -61,15 +61,15 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.27}
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 140
-    AttackSpeed: 1
+    AttackDamage: 120
+    AttackSpeed: 1.5
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
     TurretEffects:
     - EffectName: 2
-      KeyValue: 0.3
-      EffectDescription: "\u6108\u6218\u6108\u52C7\uFF1A\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347\u672C\u56DE\u540830%\u653B\u51FB\u529B\uFF0C\u4E0A\u9650300%\u3002"
+      KeyValue: 0.2
+      EffectDescription: "\u6108\u6218\u6108\u52C7\uFF1A\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347\u672C\u56DE\u540820%\u653B\u51FB\u529B\uFF0C\u4E0A\u9650400%\u3002"
     PoloEffects: []
     TurretName: "F3\u7EC4\u5408\u70AE"
     Icon: {fileID: 21300000, guid: efd7eca78d1a1d44d8b38abd7973113e, type: 3}
