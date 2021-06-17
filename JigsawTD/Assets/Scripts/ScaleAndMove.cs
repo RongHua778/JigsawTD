@@ -10,16 +10,16 @@ public class ScaleAndMove : MonoBehaviour
     Vector2 m_ScreenPos = new Vector2();
     Vector3 oldPosition;
     Camera cam;
-    float moveSpeed = 20f;
-    private int slideSpeed = 0;
+    float moveSpeed = 15f;
+    private int slideSpeed = 5;
     private float scrollSpeed = 2.5f;
     private float maximum = 10;
     private float minmum = 3;
 
-    private float maxUp = 20;
-    private float maxDown = -20;
-    private float maxLeft = -20;
-    private float maxRight = 20;
+    private float maxUp = 13;
+    private float maxDown = -13;
+    private float maxLeft = -13;
+    private float maxRight = 13;
     Vector2 CamMovement;
     // Start is called before the first frame update
 
@@ -45,9 +45,9 @@ public class ScaleAndMove : MonoBehaviour
     void Update()
     {
 
-        DesktopInput();
+        //DesktopInput();
         TutorialCounter();
-        //RTSView();
+        RTSView();
     }
 
     private void TutorialCounter()
@@ -80,34 +80,42 @@ public class ScaleAndMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (transform.localPosition.x < maxLeft ||
-            transform.localPosition.x > maxRight ||
-            transform.localPosition.y > maxUp ||
-            transform.localPosition.y < maxDown)
-        {
-            transform.position = new Vector3(0, 0, -10);
-        }
+        //if (transform.localPosition.x < maxLeft ||
+        //    transform.localPosition.x > maxRight ||
+        //    transform.localPosition.y > maxUp ||
+        //    transform.localPosition.y < maxDown)
+        //{
+        //    transform.position = new Vector3(0, 0, -10);
+        //}
     }
 
     private void RTSView()
     {
+        if (!CanControl)
+            return;
+        if (Input.GetAxis("Mouse ScrollWheel") != 0)
+        {
+            cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minmum, maximum);
+            cam.orthographicSize += Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
+        }
+
         Vector3 speedHorizon = new Vector3(0, 0, 0);
         Vector3 speedVertical = new Vector3(0, 0, 0);
         Vector3 speed = new Vector3(0, 0, 0);
         Vector3 v1 = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-        if (v1.x < 0.05f && transform.localPosition.x > maxLeft)
+        if (v1.x < 0.01f && transform.localPosition.x > maxLeft)
         {
             speedHorizon = Vector3.left * slideSpeed * Time.deltaTime;
         }
-        if (v1.x > 1 - 0.05f && transform.localPosition.x < maxRight)
+        if (v1.x > 1 - 0.01f && transform.localPosition.x < maxRight)
         {
             speedHorizon = Vector3.right * slideSpeed * Time.deltaTime;
         }
-        if (v1.y < 0.05f && transform.localPosition.y > maxDown)
+        if (v1.y < 0.01f && transform.localPosition.y > maxDown)
         {
             speedVertical = Vector3.down * slideSpeed * Time.deltaTime;
         }
-        if (v1.y > 1 - 0.05f && transform.localPosition.y < maxUp)
+        if (v1.y > 1 - 0.01f && transform.localPosition.y < maxUp)
         {
             speedVertical = Vector3.up * slideSpeed * Time.deltaTime;
         }
@@ -125,7 +133,10 @@ public class ScaleAndMove : MonoBehaviour
 
         }
         if (EventSystem.current.IsPointerOverGameObject())
+        {
+            CamMovement = Vector2.zero;
             return;
+        }
         if (DraggingActions.DraggingThis == null && Input.GetMouseButton(0))
         {
             CamMovement = Vector3.left * Input.GetAxis("Mouse X") + Vector3.down * Input.GetAxis("Mouse Y");

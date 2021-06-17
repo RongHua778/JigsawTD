@@ -89,7 +89,8 @@ public class TileContentFactory : GameObjectFactory
         int quality = StaticData.RandomNumber(qualityC) + 1;
         TurretAttribute attribute = ElementDIC[(Element)element];
         ElementTurret content = Get(attribute.ContentPrefab) as ElementTurret;
-        content.Quality = quality;
+        content.InitializeTurret(attribute, quality);
+        //content.Quality = quality;
         return content;
     }
 
@@ -97,7 +98,7 @@ public class TileContentFactory : GameObjectFactory
     {
         TurretAttribute attribute = ElementDIC[element];
         ElementTurret content = Get(attribute.ContentPrefab) as ElementTurret;
-        content.Quality = quality;
+        content.InitializeTurret(attribute, quality);
         return content;
     }
 
@@ -112,7 +113,7 @@ public class TileContentFactory : GameObjectFactory
     {
         CompositeTurret content = Get(bluePrint.CompositeTurretAttribute.ContentPrefab) as CompositeTurret;
         content.CompositeBluePrint = bluePrint;
-        content.Quality = 1;
+        content.InitializeTurret(bluePrint.CompositeTurretAttribute, 1);
         return content;
 
     }

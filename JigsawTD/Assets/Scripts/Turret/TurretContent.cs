@@ -8,7 +8,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
 {
     public override bool IsWalkable => false;
     public bool Dropped { get; set; }
-    public TurretAttribute m_TurretAttribute;
+    [HideInInspector] public TurretAttribute m_TurretAttribute;
     public List<TargetPoint> targetList = new List<TargetPoint>();
 
     private RangeIndicator rangeIndicator;
@@ -55,6 +55,9 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     }
     private int currentRange = 0;//为检测范围变化时的Rangeindicator修改
 
+
+
+    //公开属性
     private int damageAnalysis;
     public int DamageAnalysis { get => damageAnalysis; set => damageAnalysis = value; }
 
@@ -64,54 +67,56 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     public virtual float AttackSpeed { get => (m_TurretAttribute.TurretLevels[Quality - 1].AttackSpeed) * (1 + SpeedIntensify); }
     public float BulletSpeed { get => m_TurretAttribute.BulletSpeed; }
     public virtual float SputteringRange { get => m_TurretAttribute.TurretLevels[Quality - 1].SputteringRange + SputteringIntensify; }
-
-    float sputteringRate = 0.5f;
-    public float SputteringRate { get => sputteringRate; set => sputteringRate = value; }
-
     public float CriticalRate { get => m_TurretAttribute.TurretLevels[Quality - 1].CriticalRate + CriticalIntensify; }
     public float SlowRate { get => m_TurretAttribute.TurretLevels[Quality - 1].SlowRate + SlowIntensify; }
 
-    float criticalPercentage = 1.5f;
+    //隐藏属性
+    float sputteringRate = 0.5f;//溅射伤害率
+    public float SputteringRate { get => sputteringRate; set => sputteringRate = value; }
+
+    float criticalPercentage = 1.5f;//暴击伤害率
     public float CriticalPercentage { get => criticalPercentage; set => criticalPercentage = value; }
 
-    int targetCount = 1;
+    int targetCount = 1;//目标数
     public int TargetCount { get => targetCount; set => targetCount = value; }
 
 
-    //**************回合临时属性
 
-    float turnAttackIntensify = 0;
+    //攻击力加成
+    public virtual float AttackIntensify { get => TileAttackIntensify + TurnAttackIntensify; }//最终攻击加成
+
+    float turnAttackIntensify;//回合临时加成
     public float TurnAttackIntensify { get => turnAttackIntensify; set => turnAttackIntensify = value; }
 
-    float turnSpeedIntensify = 0;
-    public float TurnSpeedIntensify { get => turnSpeedIntensify; set => turnSpeedIntensify = value; }
-
-    //*************光环加成
-    public virtual float AttackIntensify { get => TileAttackIntensify + TurnAttackIntensify; }
     float tileAttackIntensify;//地形加成
     public float TileAttackIntensify { get => tileAttackIntensify; set => tileAttackIntensify = value; }
 
-    float baseAttackIntensify;//基础修正
+    float baseAttackIntensify;//基础修正，只加成基础攻击
     public float BaseAttackIntensify { get => baseAttackIntensify; set => baseAttackIntensify = value; }
+    //********************
 
-    int rangeIntensify;
-    public int RangeIntensify { get => rangeIntensify; set => rangeIntensify = value; }
-    float speedIntensify;
-    public virtual float SpeedIntensify { get => speedIntensify + TurnSpeedIntensify; set => speedIntensify = value; }
+    //范围加成
+    public int RangeIntensify { get => TileRangeIntensify; }//最终范围加成
+    int tileRangeIntensify;//地形加成
+    public int TileRangeIntensify { get => tileRangeIntensify; set => tileRangeIntensify = value; }
+    //********************
 
-    float criticalIntensify;
-    public virtual float CriticalIntensify { get => criticalIntensify; set => criticalIntensify = value; }
-    float slowIntensify;
-    public virtual float SlowIntensify { get => slowIntensify; set => slowIntensify = value; }
-    float sputteringIntensify;
-    public virtual float SputteringIntensify { get => sputteringIntensify; set => sputteringIntensify = value; }
+    //攻速加成
+    public virtual float SpeedIntensify { get => TurnSpeedIntensify; }
 
-    //*************
+    float turnSpeedIntensify;
+    public float TurnSpeedIntensify { get => turnSpeedIntensify; set => turnSpeedIntensify = value; }
+    //*********************
 
-    public List<TurretEffectInfo> TurretEffectInfos => m_TurretAttribute.TurretLevels[Quality - 1].TurretEffects;
+    //暴击率加成
+    public virtual float CriticalIntensify { get; }
+    //减速效果加成
+    public virtual float SlowIntensify { get; }
+    //溅射范围加成
+    public virtual float SputteringIntensify { get; }
 
 
-
+    private List<TurretEffectInfo> TurretEffectInfos => m_TurretAttribute.TurretLevels[Quality - 1].TurretEffects;
     public List<TurretEffect> TurretEffects = new List<TurretEffect>();
 
 
@@ -129,6 +134,17 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         turretAnim = this.GetComponent<Animator>();
         audioSource = this.GetComponent<AudioSource>();
     }
+
+    public void InitializeTurret(TurretAttribute attribute, int quality)
+    {
+        m_TurretAttribute = attribute;
+        RangeType = m_TurretAttribute.RangeType;
+        Quality = quality;
+        rotTrans.localRotation = Quaternion.identity;
+        bulletPrefab = m_TurretAttribute.Bullet;
+        ShootClip = m_TurretAttribute.ShootSound;
+    }
+
 
 
     protected virtual void PlayAudio(AudioClip clip, bool isAuto)
@@ -425,16 +441,6 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         }
     }
 
-    //*************
-    public override void OnSpawn()
-    {
-        base.OnSpawn();
-        rotTrans.localRotation = Quaternion.identity;
-        RangeType = m_TurretAttribute.RangeType;
-        bulletPrefab = m_TurretAttribute.Bullet;
-        ShootClip = m_TurretAttribute.ShootSound;
-    }
-
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
@@ -449,11 +455,9 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
 
     private void ClearIntensify()
     {
+        TileAttackIntensify = 0;
         BaseAttackIntensify = 0;
-        RangeIntensify = 0;
-        SpeedIntensify = 0;
-        SlowIntensify = 0;
-        SputteringIntensify = 0;
+        TileRangeIntensify = 0;
         CriticalPercentage = 1.5f;
         TargetCount = 1;
         DamageAnalysis = 0;
