@@ -65,8 +65,13 @@ public class BluePrintTips : TileTips
     private void UpdateInfo(Blueprint bluePrint)
     {
         TurretAttribute attribute = bluePrint.CompositeTurretAttribute;
-        AttackValue.text = attribute.TurretLevels[0].AttackDamage.ToString() + (bluePrint.CompositeAttackDamage > 0 ?
-            "<color=cyan>+" + attribute.TurretLevels[0].AttackDamage * bluePrint.CompositeAttackDamage + "</color>" : "");
+        float damage = attribute.TurretLevels[0].AttackDamage;
+        if (attribute.Name == "G1")
+        {
+            damage *= 0.5f;//G1¹¥»÷Á¦¼õ°ë
+        }
+        AttackValue.text = damage.ToString() + (bluePrint.CompositeAttackDamage > 0 ?
+            "<color=cyan>+" + damage * bluePrint.CompositeAttackDamage + "</color>" : "");
 
         SpeedValue.text = attribute.TurretLevels[0].AttackSpeed.ToString() + (bluePrint.CompositeAttackSpeed > 0 ?
             "<color=cyan>+" + attribute.TurretLevels[0].AttackSpeed * bluePrint.CompositeAttackSpeed + "</color>" : "");

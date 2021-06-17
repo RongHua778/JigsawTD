@@ -58,12 +58,16 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     private int damageAnalysis;
     public int DamageAnalysis { get => damageAnalysis; set => damageAnalysis = value; }
 
-    public virtual float AttackDamage { get => (m_TurretAttribute.TurretLevels[Quality - 1].AttackDamage + TurnAdditionalAttack) * (1 + AttackIntensify); }
+    public virtual float AttackDamage { get => (m_TurretAttribute.TurretLevels[Quality - 1].AttackDamage) * (1 + BaseAttackIntensify) * (1 + AttackIntensify); }
     public virtual int AttackRange { get => m_TurretAttribute.TurretLevels[Quality - 1].AttackRange + RangeIntensify; }
     public int ForbidRange { get => m_TurretAttribute.TurretLevels[Quality - 1].ForbidRange; }
-    public virtual float AttackSpeed { get => (m_TurretAttribute.TurretLevels[Quality - 1].AttackSpeed + turnAdditionalSpeed) * (1 + SpeedIntensify); }
+    public virtual float AttackSpeed { get => (m_TurretAttribute.TurretLevels[Quality - 1].AttackSpeed) * (1 + SpeedIntensify); }
     public float BulletSpeed { get => m_TurretAttribute.BulletSpeed; }
     public virtual float SputteringRange { get => m_TurretAttribute.TurretLevels[Quality - 1].SputteringRange + SputteringIntensify; }
+
+    float sputteringRate = 0.5f;
+    public float SputteringRate { get => sputteringRate; set => sputteringRate = value; }
+
     public float CriticalRate { get => m_TurretAttribute.TurretLevels[Quality - 1].CriticalRate + CriticalIntensify; }
     public float SlowRate { get => m_TurretAttribute.TurretLevels[Quality - 1].SlowRate + SlowIntensify; }
 
@@ -75,24 +79,25 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
 
 
     //**************回合临时属性
-    int turnAddtionalAttack = 0;
-    public int TurnAdditionalAttack { get => turnAddtionalAttack; set => turnAddtionalAttack = value; }
 
     float turnAttackIntensify = 0;
     public float TurnAttackIntensify { get => turnAttackIntensify; set => turnAttackIntensify = value; }
 
-    float turnAdditionalSpeed = 0;
-    public float TurnAdditionalSpeed { get => turnAdditionalSpeed; set => turnAdditionalSpeed = value; }
-
-    //*************
+    float turnSpeedIntensify = 0;
+    public float TurnSpeedIntensify { get => turnSpeedIntensify; set => turnSpeedIntensify = value; }
 
     //*************光环加成
-    float attackIntensify;
-    public virtual float AttackIntensify { get => attackIntensify + TurnAttackIntensify; set => attackIntensify = value; }
+    public virtual float AttackIntensify { get => TileAttackIntensify + TurnAttackIntensify; }
+    float tileAttackIntensify;//地形加成
+    public float TileAttackIntensify { get => tileAttackIntensify; set => tileAttackIntensify = value; }
+
+    float baseAttackIntensify;//基础修正
+    public float BaseAttackIntensify { get => baseAttackIntensify; set => baseAttackIntensify = value; }
+
     int rangeIntensify;
     public int RangeIntensify { get => rangeIntensify; set => rangeIntensify = value; }
     float speedIntensify;
-    public virtual float SpeedIntensify { get => speedIntensify; set => speedIntensify = value; }
+    public virtual float SpeedIntensify { get => speedIntensify + TurnSpeedIntensify; set => speedIntensify = value; }
 
     float criticalIntensify;
     public virtual float CriticalIntensify { get => criticalIntensify; set => criticalIntensify = value; }
@@ -302,7 +307,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
                 detectCollider.offset = new Vector2(0, 1 + 0.5f * (AttackRange - 1));
                 break;
         }
-        
+
         for (int i = 0; i < points.Count; i++)
         {
             if (i >= m)
@@ -437,20 +442,26 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
             StaticData.SetNodeWalkable(m_GameTile, false, true);
         Dropped = false;
         targetList.Clear();
-        AttackIntensify = 0;
-        RangeIntensify = 0;
-        SpeedIntensify = 0;
-        CriticalPercentage = 1.5f;
-        TargetCount = 1;
-        DamageAnalysis = 0;
+        ClearIntensify();
         ShowRange(false);
         ClearTurnIntensify();
     }
 
+    private void ClearIntensify()
+    {
+        BaseAttackIntensify = 0;
+        RangeIntensify = 0;
+        SpeedIntensify = 0;
+        SlowIntensify = 0;
+        SputteringIntensify = 0;
+        CriticalPercentage = 1.5f;
+        TargetCount = 1;
+        DamageAnalysis = 0;
+    }
+
     public void ClearTurnIntensify()
     {
-        TurnAdditionalAttack = 0;
-        TurnAdditionalSpeed = 0;
+        TurnSpeedIntensify = 0;
         TurnAttackIntensify = 0;
     }
 

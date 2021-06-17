@@ -7,7 +7,7 @@ public enum BulletType
 {
     Ground, Target, Penetrate
 }
-public abstract class Bullet :ReusableObject, IGameBehavior
+public abstract class Bullet : ReusableObject, IGameBehavior
 {
     [SerializeField] protected ParticalControl SputteringEffect = default;
     TrailRenderer trailRenderer;
@@ -32,8 +32,14 @@ public abstract class Bullet :ReusableObject, IGameBehavior
     private float sputteringRange;
     public float SputteringRange { get => sputteringRange; set => sputteringRange = value; }
 
+    private float sputteringRate;
+    public float SputteringRate { get => sputteringRate; set => sputteringRate = value; }
+
     private float criticalRate;
     public float CriticalRate { get => criticalRate; set => criticalRate = value; }
+
+    private float criticalPercentage;//溢出的暴击率转为暴击伤害
+    public float CriticalPercentage { get => criticalPercentage + Mathf.Max(0, CriticalRate - 1); set => criticalPercentage = value; }
     private float slowRate;
     public float SlowRate { get => slowRate; set => slowRate = value; }
 
@@ -63,8 +69,10 @@ public abstract class Bullet :ReusableObject, IGameBehavior
         this.bulletSpeed = turret.BulletSpeed;
         this.SputteringRange = turret.SputteringRange;
         this.CriticalRate = turret.CriticalRate;
+        this.CriticalPercentage = turret.CriticalPercentage;
         this.turretEffects = turret.TurretEffects;
         this.SlowRate = turret.SlowRate;
+        this.SputteringRate = turret.SputteringRate;
         TriggerShootEffect();
     }
 
@@ -144,13 +152,13 @@ public abstract class Bullet :ReusableObject, IGameBehavior
     {
 
     }
-    protected void DealRealDamage(Enemy enemy)
+    protected void DealRealDamage(Enemy enemy, float damage)
     {
         bool isCritical = UnityEngine.Random.value <= CriticalRate; ;
-        float damage = isCritical ? Damage * turretParent.CriticalPercentage : Damage;
+        float finalDamage = isCritical ? damage * CriticalPercentage : damage;
         TriggerHitEffect(enemy);
         float realDamage;
-        enemy.ApplyDamage(damage, out realDamage, isCritical);
+        enemy.ApplyDamage(finalDamage, out realDamage, isCritical);
         turretParent.DamageAnalysis += (int)realDamage;
     }
 

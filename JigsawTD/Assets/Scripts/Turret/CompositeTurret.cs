@@ -9,7 +9,9 @@ public class CompositeTurret : TurretContent
 
     public Blueprint CompositeBluePrint;
 
-    public override float AttackIntensify { get => base.AttackIntensify + CompositeBluePrint.CompositeAttackDamage; set => base.AttackIntensify = value; }
+
+
+    public override float AttackIntensify { get => base.AttackIntensify + CompositeBluePrint.CompositeAttackDamage; }
     public override float SpeedIntensify { get => base.SpeedIntensify + CompositeBluePrint.CompositeAttackSpeed; set => base.SpeedIntensify = value; }
     public override float CriticalIntensify { get => base.CriticalIntensify + CompositeBluePrint.CompositeCriticalRate; set => base.CriticalIntensify = value; }
     public override float SlowIntensify { get => base.SlowIntensify + CompositeBluePrint.CompositeSlowRate; set => base.SlowIntensify = value; }

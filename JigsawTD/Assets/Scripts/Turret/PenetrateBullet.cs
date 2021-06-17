@@ -26,6 +26,6 @@ public class PenetrateBullet : Bullet
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Enemy enemy = collision.GetComponent<TargetPoint>().Enemy;
-        DealRealDamage(enemy);
+        DealRealDamage(enemy, Damage);
     }
 }

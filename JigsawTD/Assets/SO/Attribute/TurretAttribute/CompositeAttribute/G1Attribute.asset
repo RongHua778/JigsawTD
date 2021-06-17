@@ -34,8 +34,8 @@ MonoBehaviour:
     SlowRate: 0
     TurretEffects:
     - EffectName: 4
-      KeyValue: 2
-      EffectDescription: "\u591A\u91CD\u5C04\u51FB\uFF1A\u53EF\u4EE5\u989D\u5916\u653B\u51FB2\u4E2A\u76EE\u6807"
+      KeyValue: 1
+      EffectDescription: "\u591A\u91CD\u5C04\u51FB\uFF1A\u57FA\u7840\u653B\u51FB\u964D\u4F4E50%\uFF0C\u53EF\u4EE5\u989D\u5916\u653B\u51FB1\u4E2A\u76EE\u6807"
     PoloEffects: []
     TurretName: "G1\u6563\u5C04\u70AE"
     Icon: {fileID: 21300000, guid: 00a54f1e9a5dc594f92df5235b551bd3, type: 3}
@@ -51,8 +51,8 @@ MonoBehaviour:
     SlowRate: 0
     TurretEffects:
     - EffectName: 4
-      KeyValue: 3
-      EffectDescription: "\u591A\u91CD\u5C04\u51FB\uFF1A\u53EF\u4EE5\u989D\u5916\u653B\u51FB3\u4E2A\u76EE\u6807"
+      KeyValue: 2
+      EffectDescription: "\u591A\u91CD\u5C04\u51FB\uFF1A\u57FA\u7840\u653B\u51FB\u964D\u4F4E50%\uFF0C\u53EF\u4EE5\u989D\u5916\u653B\u51FB2\u4E2A\u76EE\u6807"
     PoloEffects: []
     TurretName: "G2\u6563\u5C04\u70AE"
     Icon: {fileID: 21300000, guid: 00a54f1e9a5dc594f92df5235b551bd3, type: 3}
@@ -68,8 +68,8 @@ MonoBehaviour:
     SlowRate: 0
     TurretEffects:
     - EffectName: 4
-      KeyValue: 4
-      EffectDescription: "\u591A\u91CD\u5C04\u51FB\uFF1A\u53EF\u4EE5\u989D\u5916\u653B\u51FB4\u4E2A\u76EE\u6807"
+      KeyValue: 3
+      EffectDescription: "\u591A\u91CD\u5C04\u51FB\uFF1A\u57FA\u7840\u653B\u51FB\u964D\u4F4E50%\uFF0C\u53EF\u4EE5\u989D\u5916\u653B\u51FB3\u4E2A\u76EE\u6807"
     PoloEffects: []
     TurretName: "G3\u6563\u5C04\u70AE"
     Icon: {fileID: 21300000, guid: 00a54f1e9a5dc594f92df5235b551bd3, type: 3}

@@ -17,6 +17,10 @@ public class RHTest : MonoBehaviour
 
     [SerializeField] InputField trapInputField = default;
 
+    [SerializeField] InputField waveStateField = default;
+    [SerializeField] InputField waveCoolDownField = default;
+    [SerializeField] WaveSystem waveSystem = default;
+
     public void MenuBtnClick()
     {
         panel.SetActive(!panel.activeSelf);
@@ -46,4 +50,13 @@ public class RHTest : MonoBehaviour
     {
         ConstructHelper.GetTrapByName(trapInputField.text);
     }
+
+    public void SetWaveBtnClick()
+    {
+        waveSystem.waveStage = float.Parse(waveStateField.text);
+        waveSystem.waveCoolDown = float.Parse(waveCoolDownField.text);
+        waveSystem.LevelInitialize();
+        GameManager.Instance.PrepareNextWave();
+    }
+
 }

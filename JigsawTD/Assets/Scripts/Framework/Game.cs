@@ -17,6 +17,7 @@ public class Game : Singleton<Game>
     protected override void Awake()
     {
         base.Awake();
+        Application.runInBackground = true;
         GameObject.DontDestroyOnLoad(this.gameObject);
     }
 

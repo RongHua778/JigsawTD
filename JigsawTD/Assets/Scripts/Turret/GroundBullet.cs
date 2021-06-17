@@ -9,15 +9,15 @@ public class GroundBullet : Bullet
 
     protected override void TriggerDamage()
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, SputteringRange, enemyLayerMask);
-        foreach (Collider2D hit in hits)
-        {
-            TargetPoint target = hit.GetComponent<TargetPoint>();
-            if (target != null)
-            {
-                DealRealDamage(target.Enemy);
-            }
-        }
+        //Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, SputteringRange, enemyLayerMask);
+        //foreach (Collider2D hit in hits)
+        //{
+        //    TargetPoint target = hit.GetComponent<TargetPoint>();
+        //    if (target != null)
+        //    {
+        //        DealRealDamage(target.Enemy);
+        //    }
+        //}
 
     }
 

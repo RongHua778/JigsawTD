@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class WaveSystem : IGameSystem
 {
+    public float waveStage = 1f;
+    public float waveCoolDown = 2.5f;
     public bool Running = false;
     int enemyRemain = 0;
     public int EnemyRemain
@@ -36,7 +38,7 @@ public class WaveSystem : IGameSystem
     {
         base.Initialize(gameManager);
         this._enemyFactory = gameManager.EnemyFactory;
-        LevelInitialize(Game.Instance.Difficulty);
+        LevelInitialize();
         GameEvents.Instance.onEnemyReach += EnemyReach;
         GameEvents.Instance.onEnemyDie += EnemyDie;
     }
@@ -71,11 +73,13 @@ public class WaveSystem : IGameSystem
     }
 
 
-    public void LevelInitialize(int difficulty)
+    public void LevelInitialize()
     {
+        LevelSequence.Clear();
+        int difficulty = Game.Instance.Difficulty;
         float intensify = 1;
         int amount;
-        float stage = 1f;
+        float stage = waveStage;
         for (int i = 0; i < StaticData.Instance.LevelMaxWave; i++)
         {
             EnemyType type = (EnemyType)UnityEngine.Random.Range(0, 4);
@@ -119,13 +123,7 @@ public class WaveSystem : IGameSystem
             }
 
             amount = attribute.InitCount + i / 4 * attribute.CountIncrease;
-            //每4回合
             float coolDown = attribute.CoolDown;
-            //Tanker越来越肉
-            //if (type == EnemyType.Tanker)
-            //{
-            //    intensify = intensify + i * 0.6f * stage;
-            //}
             coolDown = attribute.CoolDown - i * 0.01f;
             //soldier出来的越来越多
             if (type == EnemyType.Soilder)
@@ -134,7 +132,7 @@ public class WaveSystem : IGameSystem
             }
             if (i < 4)
             {
-                coolDown = 2.5f;
+                coolDown = waveCoolDown;//2.5
             }
             EnemySequence sequence = new EnemySequence(i + 1, attribute, intensify, amount, coolDown);
             LevelSequence.Enqueue(sequence);

@@ -33,9 +33,13 @@ public class TargetBullet : Bullet
             foreach (Collider2D hit in hits)
             {
                 TargetPoint target = hit.GetComponent<TargetPoint>();
-                if (target != null)
+                if (target == Target)
                 {
-                    DealRealDamage(target.Enemy);
+                    DealRealDamage(target.Enemy, Damage);
+                }
+                else
+                {
+                    DealRealDamage(target.Enemy, SputteringRate * Damage);
                 }
             }
         }
@@ -43,7 +47,7 @@ public class TargetBullet : Bullet
         {
             if (Target == null)
                 return;
-            DealRealDamage(Target.Enemy);
+            DealRealDamage(Target.Enemy,Damage);
         }
 
     }

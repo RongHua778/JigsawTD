@@ -23,19 +23,19 @@ public class Blueprint
             switch ((Element)com.elementRequirement)
             {
                 case Element.Gold:
-                    CompositeAttackDamage += StaticData.GoldAttackIntensify * com.levelRequirement;
+                    CompositeAttackDamage += StaticData.GoldAttackIntensify * com.qualityRequeirement;
                     break;
                 case Element.Wood:
-                    CompositeAttackSpeed += StaticData.WoodSpeedIntensify * com.levelRequirement;
+                    CompositeAttackSpeed += StaticData.WoodSpeedIntensify * com.qualityRequeirement;
                     break;
                 case Element.Water:
-                    CompositeSlowRate += StaticData.WaterSlowIntensify * com.levelRequirement;
+                    CompositeSlowRate += StaticData.WaterSlowIntensify * com.qualityRequeirement;
                     break;
                 case Element.Fire:
-                    CompositeCriticalRate += StaticData.FireCriticalIntensify * com.levelRequirement;
+                    CompositeCriticalRate += StaticData.FireCriticalIntensify * com.qualityRequeirement;
                     break;
                 case Element.Dust:
-                    CompositeSputteringRange += StaticData.DustSputteringIntensify * com.levelRequirement;
+                    CompositeSputteringRange += StaticData.DustSputteringIntensify * com.qualityRequeirement;
                     break;
                 default:
                     break;
@@ -64,7 +64,7 @@ public class Blueprint
             {
                 ElementTurret turret = temp[j] as ElementTurret;
                 if (compositions[i].elementRequirement == (int)turret.Element &&
-                    compositions[i].levelRequirement == turret.Quality)
+                    compositions[i].qualityRequeirement == turret.Quality)
                 {
                     compositions[i].obtained = true;
                     compositions[i].turretTile = turret.m_GameTile;

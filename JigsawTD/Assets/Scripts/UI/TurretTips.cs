@@ -73,6 +73,7 @@ public class TurretTips : TileTips
                 Debug.Log("´íÎóµÄCONTENTÀàĞÍ");
                 break;
         }
+
     }
 
     private void SetRangeType(TurretAttribute attribute)

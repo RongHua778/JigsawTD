@@ -16,7 +16,7 @@ public class PathFollower : ReusableObject, IGameBehavior
     protected Vector3 positionFrom, positionTo;
     protected float progress, progressFactor, adjust;
     protected float directionAngleFrom, directionAngleTo;
-    protected float pathOffset;
+    protected float pathOffset = 0;
     // Start is called before the first frame update
 
     protected float speed = 0.8f;
