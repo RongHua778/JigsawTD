@@ -797,7 +797,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.053000003}
   m_AnchorMax: {x: 1, y: 0.87741977}
-  m_AnchoredPosition: {x: -9.481384, y: -1.0899963}
+  m_AnchoredPosition: {x: -9.481384, y: -1.0900879}
   m_SizeDelta: {x: -78.21, y: 1.6700001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &47271106
@@ -14732,7 +14732,7 @@ MonoBehaviour:
     - "\u539F\u578B\u673AS66666\u53F7\uFF0C\u7B2C\u4E00\u6B21\u53CD\u56FE\u7075\u6D4B\u8BD5\u542F\u52A8\u2026\u2026"
     - "\u6B22\u8FCE\u5F00\u59CB\u4F60\u7684\u7B2C\u4E00\u6B21\u6D4B\u8BD5\uFF0C\u4E3A\u4E86\u8BA9\u6D4B\u8BD5\u987A\u5229\u8FDB\u884C\uFF0C\u6211\u5C06\u4E3A\u4F60\u4ECB\u7ECD\u57FA\u672C\u89C4\u5219\u3002"
     - "\u90A3\u4E48\uFF0C\u8BA9\u6211\u4EEC\u5148\u4ECE\u57FA\u7840\u7684\u64CD\u4F5C\u5F00\u59CB\u5427\u3002"
-    - "\u5C1D\u8BD5\u6309\u4F4F\u5E76\u62D6\u52A8\u9F20\u6807\u4EE5\u79FB\u52A8\u89C6\u89D2\u3002"
+    - "\u5C1D\u8BD5\u5C06\u9F20\u6807\u79FB\u52A8\u5230\u5C4F\u5E55\u8FB9\u7F18\u4EE5\u79FB\u52A8\u89C6\u89D2\u3002"
     DontNeedClickEnd: 1
   - Name: "\u5EB7\u5FB7"
     Words:
@@ -15106,7 +15106,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1383652722
 RectTransform:
   m_ObjectHideFlags: 0

@@ -54,17 +54,13 @@ public class ScaleAndMove : MonoBehaviour
     {
         if (MoveTurorial)
         {
-            if (CamMovement != Vector2.zero)
+            if (Vector2.Distance(transform.position, oldPosition) > 4f)
             {
-                moveTime += Time.deltaTime;
-                if (moveTime > 1.5f)
-                {
-                    MoveTurorial = false;
-                    CamMovement = Vector2.zero;
-                    cam.transform.DOMove(CamInitialPos, 1f);
-                    CanControl = false;
-                    GameManager.Instance.TriggerGuide(1);
-                }
+                MoveTurorial = false;
+                CamMovement = Vector2.zero;
+                cam.transform.DOMove(CamInitialPos, 1f);
+                CanControl = false;
+                GameManager.Instance.TriggerGuide(1);
             }
         }
         if (SizeTutorial)

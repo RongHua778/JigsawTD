@@ -11,7 +11,8 @@ public enum TurretEffectName
     MultiTarget,
     SputteringRateIncrease,
     SpeedIncreasePerShoot,
-    ChangeCriticalPercentage
+    ChangeCriticalPercentage,
+    CurrentHealthBaseDamage
 }
 [System.Serializable]
 public class TurretEffectInfo
@@ -24,7 +25,7 @@ public class TurretEffectInfo
 public abstract class TurretEffect
 {
     public abstract TurretEffectName EffectName { get; }
-    public abstract string EffectDescription { get; }
+    public virtual string EffectDescription { get; }
     public TurretContent turret;
     public Bullet bullet;
     public float KeyValue;
@@ -138,4 +139,18 @@ public class EnemyCountAttackIncrease : TurretEffect
 
 
 
+}
+
+public class CurrentHealthBaseDmage : TurretEffect
+{
+    public override TurretEffectName EffectName => TurretEffectName.CurrentHealthBaseDamage;
+
+    public override void Hit(Enemy target)
+    {
+        float realDamage;
+        float extraDamage = target.CurrentHealth * KeyValue;
+        target.ApplyDamage(extraDamage,out realDamage);
+        turret.DamageAnalysis += (int)realDamage;
+        Debug.Log("DealHealthBaseDamage:" + extraDamage);
+    }
 }
