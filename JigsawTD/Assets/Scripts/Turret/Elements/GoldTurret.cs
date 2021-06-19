@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GoldTurret : ElementTurret
 {
-    public override Element Element => Element.Gold;
 
     protected override void Shoot()
     {

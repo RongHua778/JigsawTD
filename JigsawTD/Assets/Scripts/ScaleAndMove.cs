@@ -28,7 +28,6 @@ public class ScaleAndMove : MonoBehaviour
     float CamInitialSize;
     public static bool MoveTurorial = false;
     public static bool SizeTutorial = false;
-    float moveTime = 0;
     public static bool CanControl = false;
     //
 
@@ -48,6 +47,12 @@ public class ScaleAndMove : MonoBehaviour
         //DesktopInput();
         TutorialCounter();
         RTSView();
+        //TEST
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            CanControl = !CanControl;
+        }
+
     }
 
     private void TutorialCounter()

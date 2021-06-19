@@ -21,44 +21,36 @@ public class TurretTips : TileTips
     [SerializeField] TipsElementConstruct elementConstruct = default;//合成塔组成元素区
     //合成塔升级区
 
-    private TurretContent m_Turret;
+    private BasicStrategy m_Strategy;
     int upgradeCost;
 
     public override void Hide()
     {
         base.Hide();
-        m_Turret = null;
+        m_Strategy = null;
     }
 
-    public void ReadTurret(TurretContent turret)//通过场上防御塔查看
+    public void ReadTurret(BasicStrategy Strategy)//通过场上防御塔查看
     {
-        this.m_Turret = turret;
-        Icon.sprite = turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].Icon;
-        Name.text = turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].TurretName;
-
-        //设置攻击范围类型
-        SetRangeType(turret.m_TurretAttribute);
+        BasicInfo(Strategy);
 
         //即时更新攻击，攻速，伤害统计等数据
-        UpdateInfo(turret);
-
-        //设置描述文案
-        Description.text = StaticData.GetTurretDes(turret.m_TurretAttribute, turret.Quality);
+        UpdateInfo();
 
         //根据防御塔类型显示
-        switch (turret.ContentType)
+        switch (Strategy.strategyType)
         {
-            case GameTileContentType.ElementTurret:
+            case StrategyType.Element:
                 UpgradeArea.SetActive(false);
                 IntensifyArea.SetActive(true);
                 elementConstruct.gameObject.SetActive(false);
-                IntensifyValue.text = StaticData.GetElementIntensifyText(((ElementTurret)turret).Element, turret.Quality);
+                IntensifyValue.text = StaticData.GetElementIntensifyText(((ElementStrategy)Strategy).Element, Strategy.Quality);
                 break;
-            case GameTileContentType.CompositeTurret:
-                if (turret.Quality < 3)
+            case StrategyType.Composite:
+                if (Strategy.Quality < 3)
                 {
                     UpgradeArea.SetActive(true);
-                    upgradeCost = StaticData.Instance.LevelUpCost[turret.m_TurretAttribute.Rare - 1, turret.Quality - 1];
+                    upgradeCost = StaticData.Instance.LevelUpCost[Strategy.m_Att.Rare - 1, Strategy.Quality - 1];
                     UpgradeCostValue.text = upgradeCost.ToString();
                 }
                 else
@@ -67,7 +59,7 @@ public class TurretTips : TileTips
                 }
                 IntensifyArea.SetActive(false);
                 elementConstruct.gameObject.SetActive(true);
-                elementConstruct.SetElements(((CompositeTurret)turret).CompositeBluePrint);
+                elementConstruct.SetElements(((CompositeStrategy)Strategy).CompositeBluePrint);
                 break;
             default:
                 Debug.Log("错误的CONTENT类型");
@@ -76,10 +68,21 @@ public class TurretTips : TileTips
 
     }
 
-    private void SetRangeType(TurretAttribute attribute)
+    public void ReadBluePrint(BasicStrategy strategy)
     {
+        TurretAttribute attribute = strategy.m_Att;
+        BasicInfo(strategy);
+        UpdateBluePrintInfo();
+
+    }
+
+    private void BasicInfo(BasicStrategy Strategy)
+    {
+        this.m_Strategy = Strategy;
+        Icon.sprite = Strategy.m_Att.TurretLevels[Strategy.Quality - 1].Icon;
+        Name.text = Strategy.m_Att.TurretLevels[Strategy.Quality - 1].TurretName;
         string rangeTypeTxt = "";
-        switch (attribute.RangeType)
+        switch (Strategy.m_Att.RangeType)
         {
             case RangeType.Circle:
                 rangeTypeTxt = "圆型";
@@ -92,45 +95,63 @@ public class TurretTips : TileTips
                 break;
         }
         this.RangeTypeValue.text = rangeTypeTxt;
+        //设置描述文案
+        Description.text = StaticData.GetTurretDes(Strategy.m_Att, Strategy.Quality);
     }
 
 
 
-    private void UpdateInfo(TurretContent turret)
+
+
+
+
+    private void UpdateInfo()
     {
-        AttackValue.text = turret.AttackDamage.ToString("f0");
-        SpeedValue.text = turret.AttackSpeed.ToString("f2");
-        RangeValue.text = turret.AttackRange.ToString();
-        CriticalValue.text = (turret.CriticalRate * 100).ToString() + "%";
-        SputteringValue.text = turret.SputteringRange.ToString();
-        SlowRateValue.text = turret.SlowRate.ToString();
-        AnalysisValue.text = turret.DamageAnalysis.ToString();
+        AttackValue.text = m_Strategy.AttackDamage.ToString("f0");
+        SpeedValue.text = m_Strategy.AttackSpeed.ToString("f2");
+        RangeValue.text = m_Strategy.AttackRange.ToString();
+        CriticalValue.text = (m_Strategy.CriticalRate * 100).ToString() + "%";
+        SputteringValue.text = m_Strategy.SputteringRange.ToString();
+        SlowRateValue.text = m_Strategy.SlowRate.ToString();
+        AnalysisValue.text = m_Strategy.DamageAnalysis.ToString();
     }
 
+    private void UpdateBluePrintInfo()
+    {
+        CompositeStrategy strategy = m_Strategy as CompositeStrategy;
+        AttackValue.text = strategy.AttackDamage.ToString() + (strategy.CompositeBluePrint.CompositeAttackDamage > 0 ?
+            "<color=cyan>(+" + strategy.m_Att.TurretLevels[0].AttackDamage * strategy.CompositeBluePrint.CompositeAttackDamage + ")</color>" : "");
 
+    }
+
+    private void UpdateLevelUpInfo()
+    {
+
+    }
 
 
     public void UpgradeBtnClick()
     {
         if (GameManager.Instance.ConsumeMoney(upgradeCost))
         {
-            m_Turret.Quality++;
-            Icon.sprite = m_Turret.m_TurretAttribute.TurretLevels[m_Turret.Quality - 1].Icon;
-            Name.text = m_Turret.m_TurretAttribute.TurretLevels[m_Turret.Quality - 1].TurretName;
-            Description.text = StaticData.GetTurretDes(m_Turret.m_TurretAttribute, m_Turret.Quality);
-            if (m_Turret.Quality > 2)
+            m_Strategy.Quality++;
+            //m_Turret.SetQuality(m_Turret.Quality);
+            Icon.sprite = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].Icon;
+            Name.text = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].TurretName;
+            Description.text = StaticData.GetTurretDes(m_Strategy.m_Att, m_Strategy.Quality);
+            if (m_Strategy.Quality > 2)
             {
                 UpgradeArea.SetActive(false);
                 return;
             }
-            upgradeCost = StaticData.Instance.LevelUpCost[m_Turret.m_TurretAttribute.Rare - 1, m_Turret.Quality - 1];
+            upgradeCost = StaticData.Instance.LevelUpCost[m_Strategy.m_Att.Rare - 1, m_Strategy.Quality - 1];
             UpgradeCostValue.text = upgradeCost.ToString();
         }
     }
     private void FixedUpdate()
     {
-        if (m_Turret != null)
-            UpdateInfo(m_Turret);
+        if (m_Strategy != null)
+            UpdateInfo();
     }
 
 }

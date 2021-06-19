@@ -31,6 +31,8 @@ public class TileShape : MonoBehaviour
         bgObj = transform.Find("BG").gameObject;
         draggingShape = this.GetComponent<DraggingShape>();
     }
+
+
     //在shape上面加上塔
     public void SetTile(GameTile specialTile)
     {
@@ -57,7 +59,7 @@ public class TileShape : MonoBehaviour
                 {
                     tile = specialTile;
                     ElementTurret turret = tile.Content as ElementTurret;
-                    turretNameTxt.text = turret.m_TurretAttribute.TurretLevels[turret.Quality - 1].TurretName;
+                    turretNameTxt.text = turret.Strategy.m_Att.TurretLevels[turret.Strategy.Quality - 1].TurretName;
                 }
                 else
                 {

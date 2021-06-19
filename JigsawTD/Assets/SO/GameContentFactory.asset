@@ -28,6 +28,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 33e33721f8e10504dba35cde5c1041e0, type: 2}
   - {fileID: 11400000, guid: 5f7cf3a0a6511714ca19786b2b7f5b48, type: 2}
   - {fileID: 11400000, guid: 9061b9baec821234b8474f052693dc8b, type: 2}
+  - {fileID: 11400000, guid: 49b78835926160f46b82645449e248b6, type: 2}
   trapAtts:
   - {fileID: 11400000, guid: 201af454a56b147428bcc12e84b17d0b, type: 2}
   - {fileID: 11400000, guid: 7fe6d72c40d904b40b1e5e27ef4f12b6, type: 2}

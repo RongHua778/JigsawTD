@@ -164,11 +164,11 @@ public class GameManager : Singleton<GameManager>
         //重置所有防御塔的回合临时加成
         foreach (var turret in elementTurrets.behaviors)
         {
-            ((TurretContent)turret).ClearTurnIntensify();
+            ((TurretContent)turret).Strategy.ClearTurnIntensify();
         }
         foreach (var turret in compositeTurrets.behaviors)
         {
-            ((TurretContent)turret).ClearTurnIntensify();
+            ((TurretContent)turret).Strategy.ClearTurnIntensify();
         }
         TransitionToState(StateName.BuildingState);
     }
@@ -337,9 +337,9 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region TIPS
-    public void ShowTurretTips(TurretContent turret)
+    public void ShowTurretTips(BasicStrategy strategy)
     {
-        m_TurretTips.ReadTurret(turret);
+        m_TurretTips.ReadTurret(strategy);
         m_TurretTips.Show();
         m_TrapTips.Hide();
         m_BluePrintTips.Hide();

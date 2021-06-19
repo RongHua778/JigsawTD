@@ -24,7 +24,6 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         set => targetPos = value;
     }
 
-
     protected float bulletSpeed;
     protected readonly float minDistanceToDealDamage = .1f;
     private float damage;
@@ -65,14 +64,24 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         this.turretParent = turret;
         this.Target = target;
         this.TargetPos = pos ?? target.Position;
-        this.Damage = turret.AttackDamage;
-        this.bulletSpeed = turret.BulletSpeed;
-        this.SputteringRange = turret.SputteringRange;
-        this.CriticalRate = turret.CriticalRate;
-        this.CriticalPercentage = turret.CriticalPercentage;
-        this.turretEffects = turret.TurretEffects;
-        this.SlowRate = turret.SlowRate;
-        this.SputteringRate = turret.SputteringRate;
+        //this.Damage = turret.AttackDamage;
+        //this.bulletSpeed = turret.BulletSpeed;
+        //this.SputteringRange = turret.SputteringRange;
+        //this.CriticalRate = turret.CriticalRate;
+        //this.CriticalPercentage = turret.CriticalPercentage;
+        //this.turretEffects = turret.TurretEffects;
+        //this.SlowRate = turret.SlowRate;
+        //this.SputteringRate = turret.SputteringRate;
+
+        this.Damage = turret.Strategy.AttackDamage;
+        this.bulletSpeed = turret.Strategy.BulletSpeed;
+        this.SputteringRange = turret.Strategy.SputteringRange;
+        this.CriticalRate = turret.Strategy.CriticalRate;
+        this.CriticalPercentage = turret.Strategy.CriticalPercentage;
+        this.turretEffects = turret.Strategy.TurretEffects;
+        this.SlowRate = turret.Strategy.SlowRate;
+        this.SputteringRate = turret.Strategy.SputteringRate;
+
         TriggerShootEffect();
     }
 
@@ -159,7 +168,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         TriggerHitEffect(enemy);
         float realDamage;
         enemy.ApplyDamage(finalDamage, out realDamage, isCritical);
-        turretParent.DamageAnalysis += (int)realDamage;
+        turretParent.Strategy.DamageAnalysis += (int)realDamage;
     }
 
 }
