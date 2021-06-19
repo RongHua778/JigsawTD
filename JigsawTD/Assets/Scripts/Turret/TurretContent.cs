@@ -8,7 +8,6 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
 {
     //**********塔是否被激活，如果未激活则不会动
     private bool activated;
-    private float inActivatedTime;
     //**********
     public override bool IsWalkable => false;
     public bool Dropped { get; set; }
@@ -162,11 +161,10 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     //在不激活的时候调用
     public virtual void InActivate(float time) 
     {
-        inActivatedTime = time;
         activated = false;
         SpriteRenderer s = GetComponentInChildren<SpriteRenderer>();
         s.material.color = Color.blue;
-        Invoke("Activate", inActivatedTime); 
+        Invoke("Activate", time); 
     }
 
 
