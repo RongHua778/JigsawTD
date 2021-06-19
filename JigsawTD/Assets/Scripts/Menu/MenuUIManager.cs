@@ -37,11 +37,11 @@ public class MenuUIManager : MonoBehaviour
 
     public void StartGameBtnClick()
     {
-        if (PlayerPrefs.GetInt("MaxPassLevel", 0) < Game.Instance.Difficulty - 1)
-        {
-            ShowMessage("需先通关上一级难度");
-            return;
-        }
+        //if (PlayerPrefs.GetInt("MaxPassLevel", 0) < Game.Instance.Difficulty - 1)
+        //{
+        //    ShowMessage("需先通关上一级难度");
+        //    return;
+        //}
         if (!gameStart)
         {
             if (Game.Instance.Difficulty == 1)
@@ -80,13 +80,13 @@ public class MenuUIManager : MonoBehaviour
     public void DifficultBtnClick(int value)
     {
         Game.Instance.Difficulty += value;
-        if (Game.Instance.Difficulty > 3)
+        if (Game.Instance.Difficulty > Game.Instance.MaxDifficulty)
         {
             Game.Instance.Difficulty = 1;
         }
         else if (Game.Instance.Difficulty < 1)
         {
-            Game.Instance.Difficulty = 3;
+            Game.Instance.Difficulty = Game.Instance.MaxDifficulty;
         }
         difficultyTxt.text = "难度" + Game.Instance.Difficulty;
     }

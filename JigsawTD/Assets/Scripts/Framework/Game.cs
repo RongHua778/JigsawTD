@@ -9,6 +9,9 @@ public class Game : Singleton<Game>
     SceneStateController m_SceneStateController = new SceneStateController();
 
     public int Difficulty = 1;
+    //******** 增加了一个新难度用来测试关卡
+    public int MaxDifficulty = 4;
+
     public Animator transition;
     public float transitionTime = 0.8f;
     public bool Tutorial = false;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum EnemyType
 {
-    Soilder, Runner, Restorer, Tanker
+    Soilder, Runner, Restorer, Tanker, SelfExplosion
 }
 [CreateAssetMenu(menuName = "Factory/EnemyFactory", fileName = "EnemyFactory")]
 public class EnemyFactory : ScriptableObject
@@ -39,5 +39,7 @@ public class EnemyFactory : ScriptableObject
         //    Debug.LogWarning("使用了未定义的敌人类型");
         //}
     }
+
+  
 
 }

@@ -6,6 +6,10 @@ using UnityEngine;
 
 public abstract class TurretContent : GameTileContent, IGameBehavior
 {
+    //**********塔是否被激活，如果未激活则不会动
+    private bool activated;
+    private float inActivatedTime;
+    //**********
     public override bool IsWalkable => false;
     public bool Dropped { get; set; }
     [HideInInspector] public TurretAttribute m_TurretAttribute;
@@ -117,6 +121,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
 
 
     private List<TurretEffectInfo> TurretEffectInfos => m_TurretAttribute.TurretLevels[Quality - 1].TurretEffects;
+
     public List<TurretEffect> TurretEffects = new List<TurretEffect>();
 
 
@@ -143,8 +148,26 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         rotTrans.localRotation = Quaternion.identity;
         bulletPrefab = m_TurretAttribute.Bullet;
         ShootClip = m_TurretAttribute.ShootSound;
+        Activate();
     }
 
+    //在激活的时候调用
+    public virtual void Activate()
+    {
+        SpriteRenderer s = GetComponentInChildren<SpriteRenderer>();
+        s.material.color = Color.white;
+        activated = true;
+    }
+
+    //在不激活的时候调用
+    public virtual void InActivate(float time) 
+    {
+        inActivatedTime = time;
+        activated = false;
+        SpriteRenderer s = GetComponentInChildren<SpriteRenderer>();
+        s.material.color = Color.blue;
+        Invoke("Activate", inActivatedTime); 
+    }
 
 
     protected virtual void PlayAudio(AudioClip clip, bool isAuto)
@@ -232,17 +255,25 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         }
     }
 
-
-
-    public virtual bool GameUpdate()
+    //在塔被激活后每一帧都会调用的方法
+    public virtual void OnActivating()
     {
-        if (!Dropped)
-            return false;
         if (TrackTarget() || AcquireTarget())
         {
             RotateTowards();
             FireProjectile();
         }
+    }
+
+    public virtual bool GameUpdate()
+    {
+        if (!Dropped)
+            return false;
+        if (activated)
+        {
+            OnActivating();
+        }
+
         return true;
     }
 
