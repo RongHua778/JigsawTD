@@ -6,6 +6,7 @@ using System.Linq;
 public class Blueprint
 {
     public TurretAttribute CompositeTurretAttribute;
+    public CompositeStrategy ComStrategy;
     List<Composition> compositions = new List<Composition>();
     public List<Composition> Compositions { get => compositions; set => compositions = value; }
 

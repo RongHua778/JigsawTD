@@ -10,69 +10,69 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
-  m_Name: T13
+  m_Name: T23
   m_EditorClassIdentifier: 
-  Name: T13
-  Icon: {fileID: 21300000, guid: 0313e8a830a8757458ebfaed99058ff8, type: 3}
+  Name: T23
+  Icon: {fileID: 21300000, guid: 8e83712f39bdf9e4db0b0de438c2e4b2, type: 3}
   Description: 
-  ContentPrefab: {fileID: 1405721755924127496, guid: d71b8f03e81b3ab45b0b1062d0c191df, type: 3}
-  RangeType: 1
+  ContentPrefab: {fileID: 3184344065496086193, guid: ec76f05b1efa1874b8faa449cea6300a, type: 3}
+  RangeType: 2
   element: 0
-  Bullet: {fileID: 4724693461310116490, guid: a9493812ac22c404785be715057de17d, type: 3}
-  BulletSpeed: 8
+  Bullet: {fileID: 8751158320438164632, guid: ed2a76e55e6526f43970f0b98ff1a7e3, type: 3}
+  BulletSpeed: 2
   ShootSound: {fileID: 8300000, guid: 4ed1e1b069a2797408e854b01ab7ce17, type: 3}
-  Rare: 1
-  totalLevel: 4
+  Rare: 2
+  totalLevel: 9
   elementNumber: 4
   TurretLevels:
-  - AttackRange: 3
+  - AttackRange: 4
     ForbidRange: 0
-    AttackDamage: 10
-    AttackSpeed: 3
+    AttackDamage: 50
+    AttackSpeed: 0.25
     SputteringRange: 0
     CriticalRate: 0
-    SlowRate: 0
+    SlowRate: 0.2
     TurretEffects:
-    - EffectName: 8
-      KeyValue: 0.05
-      EffectDescription: "\u7A7F\u900F\u5B50\u5F39\uFF1A\u9020\u6210\u76EE\u68075%\u5F53\u524D\u751F\u547D\u503C\u7684\u989D\u5916\u4F24\u5BB3\u3002"
+    - EffectName: 9
+      KeyValue: 0.5
+      EffectDescription: "\u52A0\u901F\u51B7\u5374\uFF1A\u4F7F\u654C\u4EBA\u5F53\u524D\u7684\u52A0\u901F\u6548\u679C\u63D0\u9AD850%\u3002"
     PoloEffects: []
-    TurretName: "T13\u6025\u5C04\u70AE"
-    Icon: {fileID: 21300000, guid: 0313e8a830a8757458ebfaed99058ff8, type: 3}
+    TurretName: "T23\u96EA\u7403\u70AE"
+    Icon: {fileID: 21300000, guid: 8e83712f39bdf9e4db0b0de438c2e4b2, type: 3}
     BaseSprite: {fileID: 21300000, guid: cfc4a480c7295054ebb4cfc6d03633ce, type: 3}
-    CannonSprite: {fileID: 21300000, guid: 00672f898a42c2448b722a04b20823ec, type: 3}
-    ShootPointOffset: {x: 0, y: 0.19}
-  - AttackRange: 3
+    CannonSprite: {fileID: 21300000, guid: 9a923fdc983dd95488576aab112f9eb3, type: 3}
+    ShootPointOffset: {x: 0, y: 0.12}
+  - AttackRange: 4
     ForbidRange: 0
-    AttackDamage: 20
-    AttackSpeed: 3
+    AttackDamage: 80
+    AttackSpeed: 0.25
     SputteringRange: 0
     CriticalRate: 0
-    SlowRate: 0
+    SlowRate: 0.2
     TurretEffects:
-    - EffectName: 8
-      KeyValue: 0.08
-      EffectDescription: "\u7A7F\u900F\u5B50\u5F39\uFF1A\u9020\u6210\u76EE\u68078%\u5F53\u524D\u751F\u547D\u503C\u7684\u989D\u5916\u4F24\u5BB3\u3002"
+    - EffectName: 9
+      KeyValue: 0.75
+      EffectDescription: "\u52A0\u901F\u51B7\u5374\uFF1A\u4F7F\u654C\u4EBA\u5F53\u524D\u7684\u52A0\u901F\u6548\u679C\u63D0\u9AD875%\u3002"
     PoloEffects: []
-    TurretName: "T13\u6025\u5C04\u70AE"
-    Icon: {fileID: 21300000, guid: 0313e8a830a8757458ebfaed99058ff8, type: 3}
+    TurretName: "T23\u96EA\u7403\u70AE"
+    Icon: {fileID: 21300000, guid: 8e83712f39bdf9e4db0b0de438c2e4b2, type: 3}
     BaseSprite: {fileID: 21300000, guid: cfc4a480c7295054ebb4cfc6d03633ce, type: 3}
-    CannonSprite: {fileID: 21300000, guid: 00672f898a42c2448b722a04b20823ec, type: 3}
-    ShootPointOffset: {x: 0, y: 0.19}
-  - AttackRange: 3
+    CannonSprite: {fileID: 21300000, guid: 9a923fdc983dd95488576aab112f9eb3, type: 3}
+    ShootPointOffset: {x: 0, y: 0.12}
+  - AttackRange: 4
     ForbidRange: 0
-    AttackDamage: 30
-    AttackSpeed: 3
+    AttackDamage: 120
+    AttackSpeed: 0.25
     SputteringRange: 0
     CriticalRate: 0
-    SlowRate: 0
+    SlowRate: 0.2
     TurretEffects:
-    - EffectName: 8
-      KeyValue: 0.12
-      EffectDescription: "\u7A7F\u900F\u5B50\u5F39\uFF1A\u9020\u6210\u76EE\u680712%\u5F53\u524D\u751F\u547D\u503C\u7684\u989D\u5916\u4F24\u5BB3\u3002"
+    - EffectName: 9
+      KeyValue: 1
+      EffectDescription: "\u52A0\u901F\u51B7\u5374\uFF1A\u4F7F\u654C\u4EBA\u5F53\u524D\u7684\u52A0\u901F\u6548\u679C\u63D0\u9AD8100%\u3002"
     PoloEffects: []
-    TurretName: "T13\u6025\u5C04\u70AE"
-    Icon: {fileID: 21300000, guid: 0313e8a830a8757458ebfaed99058ff8, type: 3}
+    TurretName: "T23\u96EA\u7403\u70AE"
+    Icon: {fileID: 21300000, guid: 8e83712f39bdf9e4db0b0de438c2e4b2, type: 3}
     BaseSprite: {fileID: 21300000, guid: cfc4a480c7295054ebb4cfc6d03633ce, type: 3}
-    CannonSprite: {fileID: 21300000, guid: 00672f898a42c2448b722a04b20823ec, type: 3}
-    ShootPointOffset: {x: 0, y: 0.19}
+    CannonSprite: {fileID: 21300000, guid: 9a923fdc983dd95488576aab112f9eb3, type: 3}
+    ShootPointOffset: {x: 0, y: 0.12}

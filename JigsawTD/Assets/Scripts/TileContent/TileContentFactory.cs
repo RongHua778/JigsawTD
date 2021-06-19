@@ -113,7 +113,7 @@ public class TileContentFactory : GameObjectFactory
     public CompositeTurret GetCompositeTurret(Blueprint bluePrint)
     {
         CompositeTurret content = Get(bluePrint.CompositeTurretAttribute.ContentPrefab) as CompositeTurret;
-        content.Strategy = new CompositeStrategy(bluePrint.CompositeTurretAttribute, bluePrint, 1);
+        content.Strategy = bluePrint.ComStrategy;
         content.InitializeTurret();
         return content;
 

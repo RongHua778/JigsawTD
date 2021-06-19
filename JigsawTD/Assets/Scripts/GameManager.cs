@@ -24,7 +24,6 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private TurretTips m_TurretTips = default;
     [SerializeField] private TempTips m_TempTips = default;
     [SerializeField] private TrapTips m_TrapTips = default;
-    [SerializeField] private BluePrintTips m_BluePrintTips = default;
 
     [Header("¹¤³§")]
     [SerializeField] TileFactory _tileFactory = default;
@@ -342,7 +341,6 @@ public class GameManager : Singleton<GameManager>
         m_TurretTips.ReadTurret(strategy);
         m_TurretTips.Show();
         m_TrapTips.Hide();
-        m_BluePrintTips.Hide();
     }
 
     public void ShowTrapTips(TrapContent trap)
@@ -350,22 +348,19 @@ public class GameManager : Singleton<GameManager>
         m_TrapTips.ReadTrap(trap);
         m_TurretTips.Hide();
         m_TrapTips.Show();
-        m_BluePrintTips.Hide();
     }
 
     public void ShowTempTips(string text, Vector2 pos)
     {
         m_TempTips.gameObject.SetActive(true);
         m_TempTips.SendText(text, pos);
-        //m_TempTips.SetPos(pos);
     }
 
     public void ShowBluePrintTips(BluePrintGrid grid)
     {
         m_TrapTips.Hide();
-        m_TurretTips.Hide();
-        m_BluePrintTips.ReadBluePrint(grid);
-        m_BluePrintTips.Show();
+        m_TurretTips.ReadBluePrint(grid);
+        m_TurretTips.Show();
     }
     public void HideTempTips()
     {
@@ -376,7 +371,6 @@ public class GameManager : Singleton<GameManager>
     {
         m_TurretTips.Hide();
         m_TrapTips.Hide();
-        m_BluePrintTips.Hide();
     }
 
     #endregion
