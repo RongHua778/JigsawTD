@@ -84,10 +84,10 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         rotTrans.localRotation = Quaternion.identity;
         bulletPrefab = Strategy.m_Att.Bullet;
         ShootClip = Strategy.m_Att.ShootSound;
-
         SetGraphic();
         GenerateRange();
         Strategy.GetTurretEffects();
+        Activate();
     }
 
 
