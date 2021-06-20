@@ -6,6 +6,8 @@ using UnityEngine;
 
 public abstract class TurretContent : GameTileContent, IGameBehavior
 {
+    private bool activated;
+
     public BasicStrategy Strategy;//数值计算规则
 
     public override bool IsWalkable => false;
@@ -173,17 +175,39 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
             targetList.Remove(target);
         }
     }
+    public virtual void Activate()
+    {
+        SpriteRenderer s = GetComponentInChildren<SpriteRenderer>();
+        s.material.color = Color.white;
+        activated = true;
+    }
 
+    public virtual void InActivate(float time)
+    {
+        activated = false;
+        SpriteRenderer s = GetComponentInChildren<SpriteRenderer>();
+        s.material.color = Color.blue;
+        Invoke("Activate", time);
+    }
+
+    //在塔被激活后每一帧都会调用的方法
+    public virtual void OnActivating()
+    {
+        if (TrackTarget() || AcquireTarget())
+        {
+            RotateTowards();
+            FireProjectile();
+        }
+    }
 
 
     public virtual bool GameUpdate()
     {
         if (!Dropped)
             return false;
-        if (TrackTarget() || AcquireTarget())
+        if (activated)
         {
-            RotateTowards();
-            FireProjectile();
+            OnActivating();
         }
         return true;
     }
