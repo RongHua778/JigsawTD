@@ -4,7 +4,15 @@ using UnityEngine;
 
 public enum EnemyBuffName
 {
-    SlowDown, DealDamage, BreakShell, DirectionSlow, HealthBaseDamage, DamageTarget, Stun, TileStun
+    SlowDown, 
+    DealDamage, 
+    BreakShell, 
+    DirectionSlow, 
+    HealthBaseDamage, 
+    DamageTarget, 
+    Stun, 
+    TileStun,
+    DamageIntensify
 }
 public abstract class EnemyBuff
 {
@@ -91,6 +99,22 @@ public class SlowBuff : TimeBuff
     public override void End()
     {
         Target.SlowRate -= KeyValue;
+    }
+}
+
+public class DamageIntensifyBuff : TimeBuff
+{
+    public override EnemyBuffName BuffName => EnemyBuffName.DamageIntensify;
+    public override bool IsStackable => true;
+    public override bool IsTimeBase => true;
+
+    public override void Affect()
+    {
+        Target.DamageIntensify += KeyValue;
+    }
+    public override void End()
+    {
+        Target.DamageIntensify -= KeyValue;
     }
 }
 

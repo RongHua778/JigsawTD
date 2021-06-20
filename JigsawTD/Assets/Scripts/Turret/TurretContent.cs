@@ -6,12 +6,10 @@ using UnityEngine;
 
 public abstract class TurretContent : GameTileContent, IGameBehavior
 {
-    //**********塔是否被激活，如果未激活则不会动
-    private bool activated;
-    //**********
+    public BasicStrategy Strategy;//数值计算规则
+
     public override bool IsWalkable => false;
     public bool Dropped { get; set; }
-    [HideInInspector] public TurretAttribute m_TurretAttribute;
     public List<TargetPoint> targetList = new List<TargetPoint>();
 
     private RangeIndicator rangeIndicator;
@@ -44,84 +42,22 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     protected float CheckAngle = 10f;
 
     //品质
-    private int quality = 0;
-    public int Quality
-    {
-        get => quality;
-        set
-        {
-            quality = value;
-            SetGraphic();
-            GenerateRange();
-            GetTurretEffects();
-        }
-    }
+    //private int quality = 0;
+    //public int Quality
+    //{
+    //    get => quality;
+    //    set
+    //    {
+    //        quality = value;
+    //        SetGraphic();
+    //        GenerateRange();
+    //        Strategy.GetTurretEffects();
+    //    }
+    //}
     private int currentRange = 0;//为检测范围变化时的Rangeindicator修改
 
 
 
-    //公开属性
-    private int damageAnalysis;
-    public int DamageAnalysis { get => damageAnalysis; set => damageAnalysis = value; }
-
-    public virtual float AttackDamage { get => (m_TurretAttribute.TurretLevels[Quality - 1].AttackDamage) * (1 + BaseAttackIntensify) * (1 + AttackIntensify); }
-    public virtual int AttackRange { get => m_TurretAttribute.TurretLevels[Quality - 1].AttackRange + RangeIntensify; }
-    public int ForbidRange { get => m_TurretAttribute.TurretLevels[Quality - 1].ForbidRange; }
-    public virtual float AttackSpeed { get => (m_TurretAttribute.TurretLevels[Quality - 1].AttackSpeed) * (1 + SpeedIntensify); }
-    public float BulletSpeed { get => m_TurretAttribute.BulletSpeed; }
-    public virtual float SputteringRange { get => m_TurretAttribute.TurretLevels[Quality - 1].SputteringRange + SputteringIntensify; }
-    public float CriticalRate { get => m_TurretAttribute.TurretLevels[Quality - 1].CriticalRate + CriticalIntensify; }
-    public float SlowRate { get => m_TurretAttribute.TurretLevels[Quality - 1].SlowRate + SlowIntensify; }
-
-    //隐藏属性
-    float sputteringRate = 0.5f;//溅射伤害率
-    public float SputteringRate { get => sputteringRate; set => sputteringRate = value; }
-
-    float criticalPercentage = 1.5f;//暴击伤害率
-    public float CriticalPercentage { get => criticalPercentage; set => criticalPercentage = value; }
-
-    int targetCount = 1;//目标数
-    public int TargetCount { get => targetCount; set => targetCount = value; }
-
-
-
-    //攻击力加成
-    public virtual float AttackIntensify { get => TileAttackIntensify + TurnAttackIntensify; }//最终攻击加成
-
-    float turnAttackIntensify;//回合临时加成
-    public float TurnAttackIntensify { get => turnAttackIntensify; set => turnAttackIntensify = value; }
-
-    float tileAttackIntensify;//地形加成
-    public float TileAttackIntensify { get => tileAttackIntensify; set => tileAttackIntensify = value; }
-
-    float baseAttackIntensify;//基础修正，只加成基础攻击
-    public float BaseAttackIntensify { get => baseAttackIntensify; set => baseAttackIntensify = value; }
-    //********************
-
-    //范围加成
-    public int RangeIntensify { get => TileRangeIntensify; }//最终范围加成
-    int tileRangeIntensify;//地形加成
-    public int TileRangeIntensify { get => tileRangeIntensify; set => tileRangeIntensify = value; }
-    //********************
-
-    //攻速加成
-    public virtual float SpeedIntensify { get => TurnSpeedIntensify; }
-
-    float turnSpeedIntensify;
-    public float TurnSpeedIntensify { get => turnSpeedIntensify; set => turnSpeedIntensify = value; }
-    //*********************
-
-    //暴击率加成
-    public virtual float CriticalIntensify { get; }
-    //减速效果加成
-    public virtual float SlowIntensify { get; }
-    //溅射范围加成
-    public virtual float SputteringIntensify { get; }
-
-
-    private List<TurretEffectInfo> TurretEffectInfos => m_TurretAttribute.TurretLevels[Quality - 1].TurretEffects;
-
-    public List<TurretEffect> TurretEffects = new List<TurretEffect>();
 
 
     private void Awake()
@@ -137,34 +73,19 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         CannonSprite = rotTrans.Find("Cannon").GetComponent<SpriteRenderer>();
         turretAnim = this.GetComponent<Animator>();
         audioSource = this.GetComponent<AudioSource>();
+
     }
 
-    public void InitializeTurret(TurretAttribute attribute, int quality)
+    public virtual void InitializeTurret()
     {
-        m_TurretAttribute = attribute;
-        RangeType = m_TurretAttribute.RangeType;
-        Quality = quality;
+        RangeType = Strategy.m_Att.RangeType;
         rotTrans.localRotation = Quaternion.identity;
-        bulletPrefab = m_TurretAttribute.Bullet;
-        ShootClip = m_TurretAttribute.ShootSound;
-        Activate();
-    }
+        bulletPrefab = Strategy.m_Att.Bullet;
+        ShootClip = Strategy.m_Att.ShootSound;
 
-    //在激活的时候调用
-    public virtual void Activate()
-    {
-        SpriteRenderer s = GetComponentInChildren<SpriteRenderer>();
-        s.material.color = Color.white;
-        activated = true;
-    }
-
-    //在不激活的时候调用
-    public virtual void InActivate(float time) 
-    {
-        activated = false;
-        SpriteRenderer s = GetComponentInChildren<SpriteRenderer>();
-        s.material.color = Color.blue;
-        Invoke("Activate", time); 
+        SetGraphic();
+        GenerateRange();
+        Strategy.GetTurretEffects();
     }
 
 
@@ -183,25 +104,25 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         }
     }
 
-    public void GetTurretEffects()//获取并激活效果
-    {
-        TurretEffects.Clear();
-        foreach (TurretEffectInfo info in TurretEffectInfos)
-        {
-            TurretEffect effect = TurretEffectFactory.GetEffect((int)info.EffectName);
-            effect.turret = this;
-            effect.KeyValue = info.KeyValue;
-            TurretEffects.Add(effect);
-            effect.Build();
-        }
-    }
+    //public void GetTurretEffects()//获取并激活效果
+    //{
+    //    TurretEffects.Clear();
+    //    foreach (TurretEffectInfo info in TurretEffectInfos)
+    //    {
+    //        TurretEffect effect = TurretEffectFactory.GetEffect((int)info.EffectName);
+    //        effect.turret = this;
+    //        effect.KeyValue = info.KeyValue;
+    //        TurretEffects.Add(effect);
+    //        effect.Build();
+    //    }
+    //}
 
     //设置不同等级的美术资源
     public virtual void SetGraphic()
     {
-        shootPoint.transform.localPosition = m_TurretAttribute.TurretLevels[Quality - 1].ShootPointOffset;
-        TurretBaseSprite.sprite = m_TurretAttribute.TurretLevels[Quality - 1].BaseSprite;
-        CannonSprite.sprite = m_TurretAttribute.TurretLevels[Quality - 1].CannonSprite;
+        shootPoint.transform.localPosition = Strategy.m_Att.TurretLevels[Strategy.Quality - 1].ShootPointOffset;
+        TurretBaseSprite.sprite = Strategy.m_Att.TurretLevels[Strategy.Quality - 1].BaseSprite;
+        CannonSprite.sprite = Strategy.m_Att.TurretLevels[Strategy.Quality - 1].CannonSprite;
     }
 
     //public virtual void TriggerPoloEffect(bool value)
@@ -253,25 +174,17 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         }
     }
 
-    //在塔被激活后每一帧都会调用的方法
-    public virtual void OnActivating()
-    {
-        if (TrackTarget() || AcquireTarget())
-        {
-            RotateTowards();
-            FireProjectile();
-        }
-    }
+
 
     public virtual bool GameUpdate()
     {
         if (!Dropped)
             return false;
-        if (activated)
+        if (TrackTarget() || AcquireTarget())
         {
-            OnActivating();
+            RotateTowards();
+            FireProjectile();
         }
-
         return true;
     }
 
@@ -300,10 +213,10 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
             return false;
         else
         {
-            if (TargetCount > Target.Count)
+            if (Strategy.TargetCount > Target.Count)
             {
                 Target.Clear();
-                List<int> returnInt = StaticData.SelectNoRepeat(targetList.Count, TargetCount);
+                List<int> returnInt = StaticData.SelectNoRepeat(targetList.Count, Strategy.TargetCount);
                 var ints = returnInt.GetEnumerator();
                 while (ints.MoveNext())
                 {
@@ -331,7 +244,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     public void GenerateRange()
     {
         int m = rangeIndicators.Count;
-        if (AttackRange == currentRange)
+        if (Strategy.AttackRange == currentRange)
             return;
         if (currentRangetors.Count > 0)
             RecycleRanges();
@@ -339,17 +252,17 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         switch (RangeType)
         {
             case RangeType.Circle:
-                points = StaticData.GetCirclePoints(AttackRange);
-                ((BoxCollider2D)detectCollider).size = Vector2.one * (2 * AttackRange + 1) * Mathf.Cos(45 * Mathf.Deg2Rad);
+                points = StaticData.GetCirclePoints(Strategy.AttackRange);
+                ((BoxCollider2D)detectCollider).size = Vector2.one * (2 * Strategy.AttackRange + 1) * Mathf.Cos(45 * Mathf.Deg2Rad);
                 break;
             case RangeType.HalfCircle:
-                points = StaticData.GetHalfCirclePoints(AttackRange);
-                detectCollider.transform.localScale = Vector2.one * (AttackRange + 0.5f);
+                points = StaticData.GetHalfCirclePoints(Strategy.AttackRange);
+                detectCollider.transform.localScale = Vector2.one * (Strategy.AttackRange + 0.5f);
                 break;
             case RangeType.Line:
-                points = StaticData.GetLinePoints(AttackRange);
-                ((BoxCollider2D)detectCollider).size = new Vector2(1, AttackRange);
-                detectCollider.offset = new Vector2(0, 1 + 0.5f * (AttackRange - 1));
+                points = StaticData.GetLinePoints(Strategy.AttackRange);
+                ((BoxCollider2D)detectCollider).size = new Vector2(1, Strategy.AttackRange);
+                detectCollider.offset = new Vector2(0, 1 + 0.5f * (Strategy.AttackRange - 1));
                 break;
         }
 
@@ -368,7 +281,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
                 currentRangetors.Add(rangeIndicators[i]);
             }
         }
-        currentRange = AttackRange;
+        currentRange = Strategy.AttackRange;
         ShowRange(ShowingRange);
     }
 
@@ -404,7 +317,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
 
     protected virtual void FireProjectile()
     {
-        if (Time.time - nextAttackTime > 1 / AttackSpeed)
+        if (Time.time - nextAttackTime > 1 / Strategy.AttackSpeed)
         {
             if (Target != null && AngleCheck())
             {
@@ -451,7 +364,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         ShowRange(value);
         if (value)
         {
-            GameManager.Instance.ShowTurretTips(this);
+            GameManager.Instance.ShowTurretTips(this.Strategy);
         }
 
     }
@@ -477,25 +390,9 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
             StaticData.SetNodeWalkable(m_GameTile, false, true);
         Dropped = false;
         targetList.Clear();
-        ClearIntensify();
+        Strategy = null;
         ShowRange(false);
-        ClearTurnIntensify();
-    }
-
-    private void ClearIntensify()
-    {
-        TileAttackIntensify = 0;
-        BaseAttackIntensify = 0;
-        TileRangeIntensify = 0;
-        CriticalPercentage = 1.5f;
-        TargetCount = 1;
-        DamageAnalysis = 0;
-    }
-
-    public void ClearTurnIntensify()
-    {
-        TurnSpeedIntensify = 0;
-        TurnAttackIntensify = 0;
+        
     }
 
 }

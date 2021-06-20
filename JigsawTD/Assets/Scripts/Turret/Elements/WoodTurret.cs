@@ -6,9 +6,7 @@ public class WoodTurret : ElementTurret
 {
     private bool isPlayingAudio = false;
 
-    public override float SputteringRange => 0;
-
-    public override Element Element => Element.Wood;
+    //public override float SputteringRange => 0;
 
     public override void OnSpawn()
     {
@@ -49,7 +47,7 @@ public class WoodTurret : ElementTurret
             float offset = Random.Range(-0.02f, 0.02f);
             bullet.transform.position = shootPoint.position + offset * shootPoint.right;
             Vector2 dir = bullet.transform.position - transform.position;
-            Vector2 pos = (Vector2)shootPoint.position + dir.normalized * AttackRange;
+            Vector2 pos = (Vector2)shootPoint.position + dir.normalized * Strategy.AttackRange;
             bullet.Initialize(this, target, pos);
         }
     }

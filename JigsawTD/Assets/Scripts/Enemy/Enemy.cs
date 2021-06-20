@@ -27,9 +27,9 @@ public abstract class Enemy : PathFollower
         }
     }
 
-    public override float Speed { get => StunTime > 0 ? 0 :Mathf.Max(0.2f, speed * (1 - (SlowRate + PathSlow) / (SlowRate + PathSlow + 0.8f))); set => speed = value; }
-    int shell;
-    public int Shell { get => Mathf.Max(0, shell - BrokeShell); set => shell = value; }
+    public override float Speed { get => StunTime > 0 ? 0 : Mathf.Max(0.1f, speed * (1 - (SlowRate + PathSlow) / (SlowRate + PathSlow + 0.8f))); set => speed = value; }
+    float damageIntensify;
+    public float DamageIntensify { get => damageIntensify; set => damageIntensify = value; }
     float slowRate;
     public float SlowRate
     {
@@ -159,7 +159,7 @@ public abstract class Enemy : PathFollower
         Buffable = this.GetComponent<BuffableEntity>();
         CurrentHealth = MaxHealth = Mathf.RoundToInt(attribute.Health * intensify);
         Speed = attribute.Speed;
-        Shell = attribute.Shell;
+        DamageIntensify = attribute.Shell;
         ReachDamage = attribute.ReachDamage;
 
     }
@@ -175,7 +175,7 @@ public abstract class Enemy : PathFollower
 
     public virtual void ApplyDamage(float amount, out float realDamage, bool isCritical = false)
     {
-        realDamage = amount * 5 / (5 + Shell);
+        realDamage = amount * (1 + DamageIntensify);
         if (isCritical)
         {
             healthBar.ShowJumpDamage((int)realDamage);
@@ -198,6 +198,7 @@ public abstract class Enemy : PathFollower
         ObjectPool.Instance.UnSpawn(healthBar);
         TargetDamageCounter = 0;
         TileStunCounter = 0;
+        DamageIntensify = 0;
         PathSlow = 0;
         SlowRate = 0;
         BrokeShell = 0;
