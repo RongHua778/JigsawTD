@@ -42,6 +42,8 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     private float slowRate;
     public float SlowRate { get => slowRate; set => slowRate = value; }
 
+    //用来判断是否击中护甲，如果击中则子弹被挡掉
+    public bool hit;
     private void Awake()
     {
         trailRenderer = this.GetComponent<TrailRenderer>();
@@ -50,6 +52,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     {
         base.OnSpawn();
         GameManager.Instance.nonEnemies.Add(this);
+        hit = false;
     }
 
     public override void OnUnSpawn()
@@ -116,13 +119,18 @@ public abstract class Bullet : ReusableObject, IGameBehavior
 
     public virtual bool GameUpdate()
     {
-        if (Target != null && (Target.Enemy.IsDie || !Target.Enemy.gameObject.activeSelf))
+        if (!hit)
         {
-            TargetPos = Target.transform.position;
-            Target = null;
+            if (Target != null && (Target.Object.IsDie || !Target.Object.gameObject.activeSelf))
+            {
+                TargetPos = Target.transform.position;
+                Target = null;
+            }
+            RotateBullet(TargetPos);
+            return MoveTowards(TargetPos);
         }
-        RotateBullet(TargetPos);
-        return MoveTowards(TargetPos);
+        return false;
+
     }
 
     protected void RotateBullet(Vector2 pos)
@@ -137,7 +145,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         transform.position = Vector2.MoveTowards(transform.position,
             pos, bulletSpeed * Time.deltaTime);
         float distanceToTarget = ((Vector2)transform.position - pos).magnitude;
-        if (distanceToTarget < minDistanceToDealDamage)
+        if ((distanceToTarget < minDistanceToDealDamage))
         {
             TriggerDamage();
             ReclaimBullet();
@@ -152,7 +160,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         return distanceToTarget;
     }
 
-    private void ReclaimBullet()
+    public void ReclaimBullet()
     {
         ObjectPool.Instance.UnSpawn(this);
     }

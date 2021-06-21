@@ -153,6 +153,7 @@ public abstract class GameTile : TileBase
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.GetComponent<TargetPoint>().Enemy.CurrentTile = this;
+        if(collision.GetComponent<TargetPoint>())
+        collision.GetComponent<TargetPoint>().Object.CurrentTile = this;
     }
 }

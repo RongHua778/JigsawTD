@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum EnemyType
 {
-    Soilder, Runner, Restorer, Tanker, SelfExplosion
+    Soilder, Runner, Restorer, Tanker, BossSelfExplosion, BossRotatingArmor
 }
 [CreateAssetMenu(menuName = "Factory/EnemyFactory", fileName = "EnemyFactory")]
 public class EnemyFactory : ScriptableObject

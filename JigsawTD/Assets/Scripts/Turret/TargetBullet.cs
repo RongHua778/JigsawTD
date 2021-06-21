@@ -30,16 +30,20 @@ public class TargetBullet : Bullet
                 effect.PlayEffect();
             }
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, SputteringRange, enemyLayerMask);
-            foreach (Collider2D hit in hits)
+            for (int i=0;i<hits.Length;i++)
             {
-                TargetPoint target = hit.GetComponent<TargetPoint>();
+                TargetPoint target = hits[i].GetComponent<TargetPoint>();
+                if (target.Object.Type == ObjectType.Armor)
+                {
+                    DealRealDamage(target.Object, Damage);
+                }
                 if (target == Target)
                 {
-                    DealRealDamage(target.Enemy, Damage);
+                    DealRealDamage(target.Object, Damage);
                 }
                 else
                 {
-                    DealRealDamage(target.Enemy, SputteringRate * Damage);
+                    DealRealDamage(target.Object, SputteringRate * Damage);
                 }
             }
         }
@@ -47,12 +51,27 @@ public class TargetBullet : Bullet
         {
             if (Target == null)
                 return;
-            DealRealDamage(Target.Enemy,Damage);
+            DealRealDamage(Target.Object,Damage);
         }
 
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<TargetPoint>())
+        {
+            hit = true;
 
+            Enemy enemy = collision.GetComponent<TargetPoint>().Object;
+            DealRealDamage(enemy, Damage);
+            if (enemy.Type == ObjectType.Armor)
+            {
+                ReclaimBullet();
+                //hit = true;
+                //Target = null;
+            }
+        }
+    }
 
     private void OnDrawGizmos()
     {

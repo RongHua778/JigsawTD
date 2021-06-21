@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PenetrateBullet : Bullet
 {
+
     public override BulletType BulletType => BulletType.Penetrate;
     public override void Initialize(TurretContent turret, TargetPoint target = null, Vector2? pos = null)
     {
@@ -21,8 +22,12 @@ public class PenetrateBullet : Bullet
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Enemy enemy = collision.GetComponent<TargetPoint>().Enemy;
-        DealRealDamage(enemy, Damage);
+        if (collision.GetComponent<TargetPoint>())
+        {
+            Enemy enemy = collision.GetComponent<TargetPoint>().Object;
+            DealRealDamage(enemy, Damage);
+        }
+
     }
 
     protected override void TriggerDamage()
@@ -40,7 +45,7 @@ public class PenetrateBullet : Bullet
             foreach (Collider2D hit in hits)
             {
                 TargetPoint target = hit.GetComponent<TargetPoint>();
-                DealRealDamage(target.Enemy, SputteringRate * Damage);
+                DealRealDamage(target.Object, SputteringRate * Damage);
             }
         }
 

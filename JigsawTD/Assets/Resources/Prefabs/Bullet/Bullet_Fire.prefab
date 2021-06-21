@@ -93,7 +93,8 @@ GameObject:
   - component: {fileID: 3850126010392176226}
   - component: {fileID: 2245073835532274941}
   - component: {fileID: 134762492602489568}
-  m_Layer: 0
+  - component: {fileID: 1698823777952271384}
+  m_Layer: 9
   m_Name: Bullet_Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,6 +131,7 @@ MonoBehaviour:
   ParentObj: {fileID: 0}
   SputteringEffect: {fileID: 3494240544614092349, guid: eb6cba38b10cbae4595d14d7b62081a8, type: 3}
   turretParent: {fileID: 0}
+  hit: 0
 --- !u!96 &134762492602489568
 TrailRenderer:
   serializedVersion: 2
@@ -237,3 +239,19 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!58 &1698823777952271384
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3850126010392176229}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.05

@@ -19,8 +19,8 @@ public class EnemyDetector : MonoBehaviour
             if (!Turrets.Contains(target))
             {
                 Turrets.Add(target);
-                Debug.Log("got!" + Turrets.Count);
-                Debug.LogWarning("hehe");
+                //Debug.Log("got!" + Turrets.Count);
+                //Debug.LogWarning("hehe");
             }
 
         }
@@ -32,7 +32,7 @@ public class EnemyDetector : MonoBehaviour
         if (target)
         {
             Turrets.Remove(target);
-            Debug.Log("got!" + Turrets.Count);
+            //Debug.Log("got!" + Turrets.Count);
         }
     }
 }

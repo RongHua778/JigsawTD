@@ -59,13 +59,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
+  exlposionPrefab: {fileID: 9093981622819706278, guid: f1ea12073b3170943af71026bb40ecff, type: 3}
+  CurrentTile: {fileID: 0}
   model: {fileID: 7619665209501119904}
   CurrentPoint:
     PathPos: {x: 0, y: 0}
     PathDirection: 0
     ExitPoint: {x: 0, y: 0}
-  CurrentTile: {fileID: 0}
-  exlposionPrefab: {fileID: 9093981622819706278, guid: f1ea12073b3170943af71026bb40ecff, type: 3}
 --- !u!95 &1725995873351553041
 Animator:
   serializedVersion: 3
@@ -229,6 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b287204cbbc96b64ea356ded954df546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 8538428539047822095}
 --- !u!50 &236055208716200946
 Rigidbody2D:
   serializedVersion: 4

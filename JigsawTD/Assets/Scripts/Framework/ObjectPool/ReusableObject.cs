@@ -12,7 +12,7 @@ public abstract class ReusableObject : MonoBehaviour,IResuable
     }
     public virtual void OnUnSpawn()
     {
-        SetBackToParent();
+       SetBackToParent();
     }
 
     public void SetBackToParent()

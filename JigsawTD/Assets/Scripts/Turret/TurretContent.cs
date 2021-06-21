@@ -220,7 +220,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         }
         for (int i = 0; i < Target.Count; i++)
         {
-            if (Target[i].Enemy.IsDie)
+            if (Target[i].Object.IsDie)
             {
                 targetList.Remove(Target[i]);
                 Target.Remove(Target[i]);

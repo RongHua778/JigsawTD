@@ -13,8 +13,7 @@ public class RangeDetect : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         TargetPoint target = collision.GetComponent<TargetPoint>();
-
-        Turret.AddTarget(target);
+        if(target)Turret.AddTarget(target);
     }
 
     private void OnTriggerExit2D(Collider2D collision)

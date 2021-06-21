@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - UnDropableTurret
   - Tile
+  - armor
   layers:
   - Default
   - TransparentFX

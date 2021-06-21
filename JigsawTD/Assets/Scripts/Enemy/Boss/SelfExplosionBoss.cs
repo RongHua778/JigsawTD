@@ -7,7 +7,7 @@ public class SelfExplosionBoss : Enemy
     [SerializeField]
     EnemyDetector detector;
     public float freezeTime;
-    public override EnemyType EnemyType => EnemyType.SelfExplosion;
+    public override EnemyType EnemyType => EnemyType.BossSelfExplosion;
     public override void OnSpawn()
     {
         base.OnSpawn();
