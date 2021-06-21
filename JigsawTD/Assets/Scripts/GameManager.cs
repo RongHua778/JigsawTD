@@ -9,6 +9,8 @@ public class GameManager : Singleton<GameManager>
     [Header("系统")]
     [SerializeField] private BoardSystem m_BoardSystem = default;//版图系统
     [SerializeField] private WaveSystem m_WaveSystem = default;//波次系统
+    public WaveSystem WaveSystem { get => m_WaveSystem; set => m_WaveSystem = value; }
+    public BoardSystem BoardSystem { get => m_BoardSystem; set => m_BoardSystem = value; }
 
     [Header("UI")]
     [SerializeField] private BluePrintShopUI m_BluePrintShopUI = default;
@@ -37,6 +39,7 @@ public class GameManager : Singleton<GameManager>
     public EnemyFactory EnemyFactory { get => _enemyFactory; }
     public BlueprintFactory BluePrintFactory { get => _bluePrintFacotry; }
 
+
     [Header("集合")]
     public GameBehaviorCollection enemies = new GameBehaviorCollection();
     public GameBehaviorCollection nonEnemies = new GameBehaviorCollection();
@@ -46,6 +49,7 @@ public class GameManager : Singleton<GameManager>
     [Header("流程")]
     private BattleOperationState operationState;
     public BattleOperationState OperationState { get => operationState; set => operationState = value; }
+
     private BuildingState buildingState;
     private PickingState pickingState;
     private WaveState waveState;
@@ -63,8 +67,8 @@ public class GameManager : Singleton<GameManager>
         ConstructHelper.Initialize();
 
         //初始化系统
-        m_BoardSystem.Initialize(this);//版图系统
-        m_WaveSystem.Initialize(this);//波次系统
+        BoardSystem.Initialize(this);//版图系统
+        WaveSystem.Initialize(this);//波次系统
 
         //初始化UI
         m_MainUI.Initialize(this);//主界面顶部UI
@@ -79,8 +83,8 @@ public class GameManager : Singleton<GameManager>
         m_GuideVideo.Initialize(this);//教程视频UI
 
         //设置操作流程
-        buildingState = new BuildingState(this, m_BoardSystem);
-        waveState = new WaveState(this, m_WaveSystem);
+        buildingState = new BuildingState(this, BoardSystem);
+        waveState = new WaveState(this, WaveSystem);
         pickingState = new PickingState(this);
         PrepareNextWave();
 
@@ -105,8 +109,8 @@ public class GameManager : Singleton<GameManager>
     //释放游戏系统
     public void Release()
     {
-        m_BoardSystem.Release();
-        m_WaveSystem.Release();
+        BoardSystem.Release();
+        WaveSystem.Release();
 
         m_MainUI.Release();
         m_FuncUI.Release();
@@ -124,8 +128,8 @@ public class GameManager : Singleton<GameManager>
 
     public void GameUpdate()
     {
-        m_BoardSystem.GameUpdate();
-        m_WaveSystem.GameUpdate();
+        BoardSystem.GameUpdate();
+        WaveSystem.GameUpdate();
         enemies.GameUpdate();
         Physics2D.SyncTransforms();
         elementTurrets.GameUpdate();
@@ -151,9 +155,9 @@ public class GameManager : Singleton<GameManager>
             GameEnd(true);
             return;
         }
-        m_WaveSystem.GetSequence();
+        WaveSystem.GetSequence();
         m_BluePrintShopUI.NextRefreshTrun--;
-        m_MainUI.PrepareNextWave(m_WaveSystem.RunningSequence);
+        m_MainUI.PrepareNextWave(WaveSystem.RunningSequence);
         m_FuncUI.PrepareNextWave();
         m_FuncUI.Show();
 
@@ -306,7 +310,7 @@ public class GameManager : Singleton<GameManager>
 
     public void SpawnEnemy()
     {
-        m_WaveSystem.SpawnEnemy(m_BoardSystem);
+        WaveSystem.SpawnEnemy(BoardSystem);
     }
 
     public void RefreshShop(int cost)

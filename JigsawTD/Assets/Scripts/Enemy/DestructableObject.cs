@@ -31,8 +31,8 @@ public abstract class DestructableObject : ReusableObject, IGameBehavior
 
     private float maxHealth;
     public float MaxHealth { get => maxHealth; set => maxHealth = value; }
-    private float currentHealth;
-    public float CurrentHealth
+    protected float currentHealth;
+    public virtual float CurrentHealth
     {
         get => currentHealth;
         set

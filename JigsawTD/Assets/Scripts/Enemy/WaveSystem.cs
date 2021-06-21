@@ -32,7 +32,7 @@ public class WaveSystem : IGameSystem
     public Queue<EnemySequence> LevelSequence = new Queue<EnemySequence>();
 
     public EnemySequence RunningSequence { get => runningSequence; set => runningSequence = value; }
-
+    public HealthBar HealthBarPrefab { get => healthBarPrefab; set => healthBarPrefab = value; }
 
     public override void Initialize(GameManager gameManager)
     {
@@ -119,7 +119,7 @@ public class WaveSystem : IGameSystem
                     break;
                 default:
                     Debug.LogAssertion("难度参数错误");
-                    attribute = _enemyFactory.Get(EnemyType.BossRotatingArmor);
+                    attribute = _enemyFactory.Get(EnemyType.Divider);
                     break;
             }
 
@@ -163,7 +163,7 @@ public class WaveSystem : IGameSystem
         EnemyAttribute attribute = RunningSequence.EnemyAttribute;
         float intensify = RunningSequence.Intensify;
         Enemy enemy = ObjectPool.Instance.Spawn(attribute.Prefab) as Enemy;
-        HealthBar healthBar = ObjectPool.Instance.Spawn(healthBarPrefab) as HealthBar;
+        HealthBar healthBar = ObjectPool.Instance.Spawn(HealthBarPrefab) as HealthBar;
         enemy.Initialize(attribute, UnityEngine.Random.Range(-pathOffset, pathOffset), healthBar, intensify);
         enemy.SpawnOn(0, board.shortestPoints);
         GameManager.Instance.enemies.Add(enemy);

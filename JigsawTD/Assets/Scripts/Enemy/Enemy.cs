@@ -7,7 +7,7 @@ public abstract class Enemy : PathFollower
 {
     public abstract EnemyType EnemyType { get; }
 
-    bool trapTriggered = false;
+    protected bool trapTriggered = false;
     public int ReachDamage { get; set; }
     public int TileStunCounter { get; set; }
     private float stunTime;
@@ -97,14 +97,14 @@ public abstract class Enemy : PathFollower
         return true;
     }
 
-    private void TriigerTrap()
+    protected void TriigerTrap()
     {
         CurrentTile.OnTilePass(this);
         trapTriggered = true;
         Buffable.TileTick();
     }
 
-    private IEnumerator ExitCor()
+    protected IEnumerator ExitCor()
     {
         anim.SetTrigger("Exit");
         yield return new WaitForSeconds(0.5f);

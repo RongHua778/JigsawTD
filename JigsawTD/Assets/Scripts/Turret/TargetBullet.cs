@@ -56,23 +56,6 @@ public class TargetBullet : Bullet
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.GetComponent<TargetPoint>())
-        {
-            hit = true;
-
-            Enemy enemy = collision.GetComponent<TargetPoint>().Object;
-            DealRealDamage(enemy, Damage);
-            if (enemy.Type == ObjectType.Armor)
-            {
-                ReclaimBullet();
-                //hit = true;
-                //Target = null;
-            }
-        }
-    }
-
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
