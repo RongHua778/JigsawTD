@@ -78,7 +78,14 @@ public abstract class Enemy : PathFollower
         {
             if (PointIndex == pathPoints.Count - 1)
             {
-                StartCoroutine(ExitCor());
+                try
+                {
+                    StartCoroutine(ExitCor());
+                }
+                catch
+                {
+                    Debug.LogAssertion("Ïß³Ì¶ªÊ§");
+                }
                 return false;
             }
             trapTriggered = false;

@@ -37,40 +37,7 @@ public class Divider : Enemy
             ObjectPool.Instance.UnSpawn(this);
             return false;
         }
-        if (StunTime >= 0)
-        {
-            StunTime -= Time.deltaTime;
-            if (StunTime < 0)
-                progressFactor = Speed * adjust;
-        }
-        progress += Time.deltaTime * progressFactor;
-
-        if (!trapTriggered && progress >= 0.5f)
-        {
-            TriigerTrap();
-        }
-
-        while (progress >= 1f)
-        {
-            if (PointIndex == pathPoints.Count - 1)
-            {
-                StartCoroutine(ExitCor());
-                return false;
-            }
-            trapTriggered = false;
-            progress = 0;
-            PrepareNextState();
-        }
-        if (DirectionChange == DirectionChange.None)
-        {
-            transform.localPosition = Vector3.LerpUnclamped(positionFrom, positionTo, progress);
-        }
-        else
-        {
-            float angle = Mathf.LerpUnclamped(directionAngleFrom, directionAngleTo, progress);
-            transform.localRotation = Quaternion.Euler(0f, 0f, angle);
-        }
-        return true;
+        return base.GameUpdate();
     }
 
     private void GetSprings()

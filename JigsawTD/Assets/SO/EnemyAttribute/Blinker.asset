@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 614735ba97a8e4b4bbdf8128289355f3, type: 3}
+  m_Name: Blinker
+  m_EditorClassIdentifier: 
+  EnemyType: 7
+  InitCount: 1
+  CountIncrease: 0
+  Health: 1000
+  Speed: 0.3
+  Shell: 0
+  CoolDown: 0.5
+  Prefab: {fileID: 0}
+  ReachDamage: 1
+  extraHealth: 0
+  EnemyIcon: {fileID: 21300000, guid: 05f67270eed774d458305d46c391fd99, type: 3}
+  Description: 
