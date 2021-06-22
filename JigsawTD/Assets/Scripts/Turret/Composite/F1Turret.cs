@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class F1Turret : CompositeTurret
 {
-    [SerializeField] ParticleSystem shootMuzzle = default;
+    //[SerializeField] ParticleSystem shootMuzzle = default;
     protected override void Shoot()
     {
         base.Shoot();
-        shootMuzzle.Play();
+        //shootMuzzle.Play();
     }
 }

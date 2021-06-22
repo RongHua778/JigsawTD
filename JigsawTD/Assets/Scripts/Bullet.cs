@@ -10,6 +10,7 @@ public enum BulletType
 public abstract class Bullet : ReusableObject, IGameBehavior
 {
     [SerializeField] protected ParticalControl SputteringEffect = default;
+    //[SerializeField] protected ParticalControl HitEffect = default;
     TrailRenderer trailRenderer;
     protected const int enemyLayerMask = 1 << 11;
     public abstract BulletType BulletType { get; }
@@ -24,6 +25,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         set => targetPos = value;
     }
 
+    private Vector3 initScale;
     protected float bulletSpeed;
     protected readonly float minDistanceToDealDamage = .1f;
     private float damage;
@@ -47,6 +49,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     private void Awake()
     {
         trailRenderer = this.GetComponent<TrailRenderer>();
+        initScale = transform.localScale;
     }
     public override void OnSpawn()
     {
@@ -58,6 +61,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
+        transform.localScale = initScale;
     }
 
     public virtual void Initialize(TurretContent turret, TargetPoint target = null, Vector2? pos = null)
@@ -167,7 +171,12 @@ public abstract class Bullet : ReusableObject, IGameBehavior
 
     protected virtual void TriggerDamage()
     {
-
+        //if ( HitEffect!= null)
+        //{
+        //    ParticalControl effect = ObjectPool.Instance.Spawn(HitEffect) as ParticalControl;
+        //    effect.transform.position = transform.position;
+        //    effect.PlayEffect();
+        //}
     }
     protected void DealRealDamage(Enemy enemy, float damage)
     {

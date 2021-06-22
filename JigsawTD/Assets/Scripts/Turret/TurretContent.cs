@@ -32,6 +32,8 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     protected SpriteRenderer TurretBaseSprite;
     protected SpriteRenderer CannonSprite;
     protected AudioClip ShootClip;
+
+    [SerializeField] protected ParticleSystem ShootEffect = default;
     //**********
 
     private List<TargetPoint> target = new List<TargetPoint>();
@@ -358,12 +360,14 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     protected virtual void Shoot()
     {
         turretAnim.SetTrigger("Attack");
+        ShootEffect.Play();
         PlayAudio(ShootClip, false);
         var targets = Target.GetEnumerator();
         while (targets.MoveNext())
         {
             Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab) as Bullet;
             bullet.transform.position = shootPoint.position;
+            bullet.transform.localScale += 0.05f * Strategy.Quality * Vector3.one;
             bullet.Initialize(this, targets.Current);
         }
     }

@@ -19,7 +19,7 @@ MonoBehaviour:
   RangeType: 0
   element: 2
   Bullet: {fileID: 2245073835532274941, guid: d8c223bd6ddec2942a32f275089f10ba, type: 3}
-  BulletSpeed: 3
+  BulletSpeed: 4
   ShootSound: {fileID: 8300000, guid: b20d1189bbbcc8f4e9ad88221adae5b6, type: 3}
   Rare: 0
   totalLevel: 0
