@@ -36,9 +36,9 @@ MonoBehaviour:
     PoloEffects: []
     TurretName: D1
     Icon: {fileID: 21300000, guid: d7d4a84ea7876b04b8cffb3bbf8e2c53, type: 3}
-    BaseSprite: {fileID: 21300000, guid: 314e42a0fa19e4141abf677f45f51587, type: 3}
-    CannonSprite: {fileID: 21300000, guid: 5405368772474f54c98e8663c15f6fc2, type: 3}
-    ShootPointOffset: {x: 0, y: 0.23}
+    BaseSprite: {fileID: -1527832347604743927, guid: 6de4522e4ff4399429dddadebe803987, type: 3}
+    CannonSprite: {fileID: -4313575289805417258, guid: 6de4522e4ff4399429dddadebe803987, type: 3}
+    ShootPointOffset: {x: 0, y: 0.16}
   - AttackRange: 2
     ForbidRange: 0
     AttackDamage: 60
@@ -50,9 +50,9 @@ MonoBehaviour:
     PoloEffects: []
     TurretName: D2
     Icon: {fileID: 21300000, guid: 5c983e4989d4ca140941530f37b7bd7a, type: 3}
-    BaseSprite: {fileID: 21300000, guid: 314e42a0fa19e4141abf677f45f51587, type: 3}
-    CannonSprite: {fileID: 21300000, guid: 8f80e93a2eb232148882ac4cec035e4e, type: 3}
-    ShootPointOffset: {x: 0, y: 0.24}
+    BaseSprite: {fileID: -1527832347604743927, guid: 6de4522e4ff4399429dddadebe803987, type: 3}
+    CannonSprite: {fileID: -1273360545368378337, guid: 6de4522e4ff4399429dddadebe803987, type: 3}
+    ShootPointOffset: {x: 0, y: 0.16}
   - AttackRange: 2
     ForbidRange: 0
     AttackDamage: 100
@@ -64,9 +64,9 @@ MonoBehaviour:
     PoloEffects: []
     TurretName: D3
     Icon: {fileID: 21300000, guid: ab1c8cb467bf55a42aee77ef4e54d2ec, type: 3}
-    BaseSprite: {fileID: 21300000, guid: 314e42a0fa19e4141abf677f45f51587, type: 3}
-    CannonSprite: {fileID: 21300000, guid: 1772ccd2addaa654baa7980a624d939e, type: 3}
-    ShootPointOffset: {x: 0, y: 0.26}
+    BaseSprite: {fileID: -1527832347604743927, guid: 6de4522e4ff4399429dddadebe803987, type: 3}
+    CannonSprite: {fileID: 2410075912437142856, guid: 6de4522e4ff4399429dddadebe803987, type: 3}
+    ShootPointOffset: {x: 0, y: 0.16}
   - AttackRange: 3
     ForbidRange: 0
     AttackDamage: 160
@@ -78,9 +78,9 @@ MonoBehaviour:
     PoloEffects: []
     TurretName: D4
     Icon: {fileID: 21300000, guid: ed883e1c00aca7047ace2c5f65f93b99, type: 3}
-    BaseSprite: {fileID: 21300000, guid: 0fc4aee69dd71dd4a80c702accbef93c, type: 3}
-    CannonSprite: {fileID: 21300000, guid: 43154665103206c469442843fd02aebe, type: 3}
-    ShootPointOffset: {x: 0, y: 0.26}
+    BaseSprite: {fileID: -1527832347604743927, guid: 6de4522e4ff4399429dddadebe803987, type: 3}
+    CannonSprite: {fileID: -8558914387365605925, guid: 6de4522e4ff4399429dddadebe803987, type: 3}
+    ShootPointOffset: {x: 0, y: 0.16}
   - AttackRange: 3
     ForbidRange: 0
     AttackDamage: 260
@@ -92,6 +92,6 @@ MonoBehaviour:
     PoloEffects: []
     TurretName: D5
     Icon: {fileID: 21300000, guid: d07d028d24dea1044998d319861979b8, type: 3}
-    BaseSprite: {fileID: 21300000, guid: 0fc4aee69dd71dd4a80c702accbef93c, type: 3}
-    CannonSprite: {fileID: 21300000, guid: eff3c21f9877e6444b1cb87671f7cbf1, type: 3}
-    ShootPointOffset: {x: 0, y: 0.32}
+    BaseSprite: {fileID: -1527832347604743927, guid: 6de4522e4ff4399429dddadebe803987, type: 3}
+    CannonSprite: {fileID: -1705890694204848047, guid: 6de4522e4ff4399429dddadebe803987, type: 3}
+    ShootPointOffset: {x: 0, y: 0.16}

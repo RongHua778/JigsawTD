@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: -1642744281
   m_SortingLayer: 1
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 18a72f0a8fbd9d54b9064d30c97d60d5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8994e1e4ccaea7140a2e742caebbfe29, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.49019608}
   m_FlipX: 0
   m_FlipY: 0
@@ -127,5 +127,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
-  PointIndex: 0
+  exlposionPrefab: {fileID: 0}
+  CurrentTile: {fileID: 0}
   model: {fileID: 2194822630672348227}
+  CurrentPoint:
+    PathPos: {x: 0, y: 0}
+    PathDirection: 0
+    ExitPoint: {x: 0, y: 0}
