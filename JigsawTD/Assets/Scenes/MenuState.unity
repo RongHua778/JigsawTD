@@ -962,6 +962,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Difficulty: 1
+  MaxDifficulty: 4
   transition: {fileID: 1951562040}
   transitionTime: 1
   Tutorial: 0

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 [RequireComponent(typeof(Sound))]
 public class Game : Singleton<Game>
@@ -31,9 +33,11 @@ public class Game : Singleton<Game>
         switch (currentSceneIndex)
         {
             case 0://menu
+                Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(0);
                 m_SceneStateController.SetState(new MenuState(m_SceneStateController));
                 break;
             case 1://battle
+                Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(1);
                 m_SceneStateController.SetState(new BattleState(m_SceneStateController));
                 break;
         }

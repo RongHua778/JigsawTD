@@ -19,19 +19,20 @@ public class WoodTurret : ElementTurret
     {
         if (targetList.Count == 0)
         {
-            turretAnim.SetBool("Attacking", false);
-
             if (isPlayingAudio)
             {
+                turretAnim.SetBool("Attacking", false);
+                ShootEffect.Stop();
                 isPlayingAudio = false;
                 audioSource.Stop();
             }
         }
         else
         {
-            turretAnim.SetBool("Attacking", true);
             if (!isPlayingAudio)
             {
+                ShootEffect.Play();
+                turretAnim.SetBool("Attacking", true);
                 isPlayingAudio = true;
                 PlayAudio(ShootClip, true);
             }
