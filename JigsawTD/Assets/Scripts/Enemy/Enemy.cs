@@ -20,7 +20,7 @@ public abstract class Enemy : PathFollower
             progressFactor = Speed * adjust;
         }
     }
-
+    public float initialSpeed;
     public override float Speed { get => StunTime > 0 ? 0 : Mathf.Max(0.1f, speed * (1 - (SlowRate + PathSlow) / (SlowRate + PathSlow + 0.8f))); set => speed = value; }
 
     float slowRate;
@@ -126,6 +126,7 @@ public abstract class Enemy : PathFollower
         Buffable = this.GetComponent<BuffableEntity>();
         CurrentHealth = MaxHealth = Mathf.RoundToInt(attribute.Health * intensify);
         Speed = attribute.Speed;
+        initialSpeed = attribute.Speed;
         DamageIntensify = attribute.Shell;
         ReachDamage = attribute.ReachDamage;
         Type = ObjectType.Enemy;

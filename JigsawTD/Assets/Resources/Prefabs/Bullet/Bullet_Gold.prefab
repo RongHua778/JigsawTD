@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3850126010392176226}
   - component: {fileID: 2245073835532274941}
+  - component: {fileID: 1293055410048731590}
   m_Layer: 9
   m_Name: Bullet_Gold
   m_TagString: Untagged
@@ -46,9 +47,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
   SputteringEffect: {fileID: 3494240544614092349, guid: eb6cba38b10cbae4595d14d7b62081a8, type: 3}
-  HitEffect: {fileID: 4059634519593426756, guid: 148de083881e7c242ae676e6a70044ae, type: 3}
   turretParent: {fileID: 0}
   hit: 0
+--- !u!58 &1293055410048731590
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3850126010392176229}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.31
 --- !u!1001 &7373935209033251563
 PrefabInstance:
   m_ObjectHideFlags: 0

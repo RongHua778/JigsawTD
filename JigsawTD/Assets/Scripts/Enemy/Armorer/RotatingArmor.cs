@@ -2,16 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotatingArmor:DestructableObject
+public class RotatingArmor:Armor
 {
     [SerializeField] Transform body;
     [SerializeField] RotatingArmorBoss boss;
     public override void Awake()
     {
-        base.Awake();
         MaxHealth = boss.ArmorIntensify;
-        CurrentHealth = MaxHealth;
-        Type = ObjectType.Armor;
+        base.Awake();
     }
 
     public void Update()
@@ -26,7 +24,7 @@ public class RotatingArmor:DestructableObject
         }
         transform.RotateAround(body.transform.position, Vector3.forward, 100 * Time.deltaTime);
     }
-    private void DisArmor()
+    protected override void DisArmor()
     {
         GetComponentInChildren<SpriteRenderer>().material.color = new Color(0, 0, 0, 0);
         GetComponentInChildren<CircleCollider2D>().radius = 0 ;
@@ -34,21 +32,5 @@ public class RotatingArmor:DestructableObject
         Invoke("ReArmor",boss.ArmorCoolDown);
     }
 
-    private void ReArmor()
-    {
-        GetComponentInChildren<SpriteRenderer>().material.color = new Color(1, 1, 1, 1);
-        GetComponentInChildren<CircleCollider2D>().radius = 0.6f;
-        CurrentHealth = MaxHealth;
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.GetComponent<Bullet>())
-        {
-            Bullet bullet = collision.GetComponent<Bullet>();
-            CurrentHealth -= bullet.Damage;
-            bullet.hit = true;
-            bullet.ReclaimBullet();
-        }
-    }
 }

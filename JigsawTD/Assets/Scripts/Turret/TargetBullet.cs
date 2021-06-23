@@ -16,7 +16,7 @@ public class TargetBullet : Bullet
         }
         set => base.TargetPos = value;
     }
-    protected override void TriggerDamage()
+    public override void TriggerDamage()
     {
         base.TriggerDamage();
 
@@ -34,18 +34,18 @@ public class TargetBullet : Bullet
             for (int i = 0; i < hits.Length; i++)
             {
                 TargetPoint target = hits[i].GetComponent<TargetPoint>();
-                if (target.Object.Type == ObjectType.Armor)
+                if (target)
                 {
-                    DealRealDamage(target.Object, Damage);
+                    if (target == Target)
+                    {
+                        DealRealDamage(target.Object, Damage);
+                    }
+                    else
+                    {
+                        DealRealDamage(target.Object, SputteringRate * Damage);
+                    }
                 }
-                if (target == Target)
-                {
-                    DealRealDamage(target.Object, Damage);
-                }
-                else
-                {
-                    DealRealDamage(target.Object, SputteringRate * Damage);
-                }
+
             }
         }
         else

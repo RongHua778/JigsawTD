@@ -169,7 +169,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         ObjectPool.Instance.UnSpawn(this);
     }
 
-    protected virtual void TriggerDamage()
+    public virtual void TriggerDamage()
     {
         //if ( HitEffect!= null)
         //{

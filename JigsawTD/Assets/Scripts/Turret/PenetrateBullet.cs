@@ -39,7 +39,7 @@ public class PenetrateBullet : Bullet
 
     }
 
-    protected override void TriggerDamage()
+    public override void TriggerDamage()
     {
         if (SputteringRange > 0)
         {

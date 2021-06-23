@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3850126010392176226}
   - component: {fileID: 2245073835532274941}
+  - component: {fileID: 5031646068846894157}
   m_Layer: 9
   m_Name: Bullet_Water
   m_TagString: Untagged
@@ -48,6 +49,22 @@ MonoBehaviour:
   SputteringEffect: {fileID: 3494240544614092349, guid: eb6cba38b10cbae4595d14d7b62081a8, type: 3}
   turretParent: {fileID: 0}
   hit: 0
+--- !u!58 &5031646068846894157
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3850126010392176229}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.3
 --- !u!1001 &7508177753251874536
 PrefabInstance:
   m_ObjectHideFlags: 0

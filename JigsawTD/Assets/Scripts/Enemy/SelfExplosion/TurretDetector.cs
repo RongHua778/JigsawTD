@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDetector : MonoBehaviour
+public class TurretDetector : MonoBehaviour
 {
 
     List<TurretContent> turrets = new List<TurretContent>();
@@ -24,6 +24,7 @@ public class EnemyDetector : MonoBehaviour
             }
 
         }
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -34,5 +35,6 @@ public class EnemyDetector : MonoBehaviour
             Turrets.Remove(target);
             //Debug.Log("got!" + Turrets.Count);
         }
+
     }
 }

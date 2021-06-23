@@ -5,7 +5,7 @@ using UnityEngine;
 public class SelfExplosionBoss : Enemy
 {
     [SerializeField]
-    EnemyDetector detector;
+    TurretDetector detector;
     public float freezeTime;
     public override EnemyType EnemyType => EnemyType.BossSelfExplosion;
     public override void OnSpawn()
