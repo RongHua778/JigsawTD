@@ -13,12 +13,15 @@ public class SelfExplosionBoss : Enemy
         base.OnSpawn();
     }
 
-    public override void OnUnSpawn()
+    public override bool GameUpdate()
     {
-        foreach(TurretContent t in detector.Turrets)
+        if (IsDie)
         {
-            t.InActivate(freezeTime);
+            foreach (TurretContent t in detector.Turrets)
+            {
+                t.InActivate(freezeTime);
+            }
         }
-        base.OnUnSpawn();
+        return base.GameUpdate();
     }
 }

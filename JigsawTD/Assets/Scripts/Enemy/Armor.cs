@@ -14,8 +14,12 @@ public class Armor : DestructableObject
         MaxHealth = boss.ArmorIntensify;
         CurrentHealth = MaxHealth;
         Type = ObjectType.Armor;
-        boxColliderX=GetComponent<BoxCollider2D>().size.x;
-        boxColliderY=GetComponent<BoxCollider2D>().size.y;
+        if (GetComponent<BoxCollider2D>())
+        {
+            boxColliderX = GetComponent<BoxCollider2D>().size.x;
+            boxColliderY = GetComponent<BoxCollider2D>().size.y;
+        }
+
     }
 
     protected virtual void Update()

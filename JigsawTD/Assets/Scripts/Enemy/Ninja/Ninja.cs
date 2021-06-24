@@ -16,6 +16,7 @@ public class Ninja : Enemy
         {
             base.CurrentHealth = value;
             Speed = minSpeed + maxSpeed * (1 - CurrentHealth / MaxHealth);
+            progressFactor = Speed * adjust;
             size = 0.8f + CurrentHealth / MaxHealth;
             model.transform.localScale = new Vector3(size,size,1);
         }

@@ -8,9 +8,10 @@ public class RotatingArmor:Armor
 
     protected override void Update()
     {
-        base.Update();
+        //base.Update();
         transform.RotateAround(body.transform.position, Vector3.forward, 100 * Time.deltaTime);
     }
+
     protected override void DisArmor()
     {
         GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
