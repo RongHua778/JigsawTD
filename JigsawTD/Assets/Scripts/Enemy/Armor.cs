@@ -4,23 +4,44 @@ using UnityEngine;
 
 public class Armor : DestructableObject
 {
+    [SerializeField]protected Armorer boss;
+    float boxColliderX;
+    float boxColliderY;
 
     public override void Awake()
     {
         base.Awake();
+        MaxHealth = boss.ArmorIntensify;
         CurrentHealth = MaxHealth;
         Type = ObjectType.Armor;
+        boxColliderX=GetComponent<BoxCollider2D>().size.x;
+        boxColliderY=GetComponent<BoxCollider2D>().size.y;
+    }
+
+    protected virtual void Update()
+    {
+        if (IsDie)
+        {
+            ReusableObject explosion = ObjectPool.Instance.Spawn(exlposionPrefab);
+            Sound.Instance.PlayEffect(explosionClip, StaticData.Instance.EnvrionmentBaseVolume);
+            explosion.transform.position = transform.position;
+            //ObjectPool.Instance.UnSpawn(this);
+            DisArmor();
+            IsDie = false;
+        }
     }
     protected virtual void DisArmor()
     {
         GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
-        GetComponent<CircleCollider2D>().radius = 0;
+        if (GetComponent<CircleCollider2D>()) GetComponent<CircleCollider2D>().radius = 0;
+        if(GetComponent<BoxCollider2D>()) GetComponent<BoxCollider2D>().size=new Vector2(0,0);
     }
 
     protected virtual void ReArmor()
     {
         GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
-        GetComponent<CircleCollider2D>().radius = 0.6f;
+        if (GetComponent<CircleCollider2D>()) GetComponent<CircleCollider2D>().radius = 0.6f;
+        if (GetComponent<BoxCollider2D>()) GetComponent<BoxCollider2D>().size=new Vector2(boxColliderX,boxColliderY);
         CurrentHealth = MaxHealth;
     }
 

@@ -47,6 +47,7 @@ public abstract class Enemy : PathFollower
     int brokeShell;
     public int BrokeShell { get => brokeShell; set => brokeShell = value; }
 
+
     [Header("HealthSetting")]
     HealthBar healthBar;
     public override bool GameUpdate()

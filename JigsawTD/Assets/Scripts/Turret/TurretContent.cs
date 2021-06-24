@@ -6,7 +6,7 @@ using UnityEngine;
 
 public abstract class TurretContent : GameTileContent, IGameBehavior
 {
-    private bool activated;
+    protected bool activated;
 
     public BasicStrategy Strategy;//数值计算规则
 
@@ -45,6 +45,9 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     protected Transform shootPoint;
     protected float CheckAngle = 10f;
 
+    //控制sprite颜色
+    protected List<SpriteRenderer> sprites=new List<SpriteRenderer>();
+    protected List<Color> originalColors=new List<Color>();
     //品质
     //private int quality = 0;
     //public int Quality
@@ -77,7 +80,12 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         CannonSprite = rotTrans.Find("Cannon").GetComponent<SpriteRenderer>();
         turretAnim = this.GetComponent<Animator>();
         audioSource = this.GetComponent<AudioSource>();
-
+        SpriteRenderer[] ss =GetComponentsInChildren<SpriteRenderer>();
+        for (int i = 0; i < ss.Length; i++)
+        {
+            sprites.Add(ss[i]);
+            originalColors.Add(sprites[i].color);
+        }
     }
 
     public virtual void InitializeTurret()
@@ -179,16 +187,20 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     }
     public virtual void Activate()
     {
-        SpriteRenderer s = GetComponentInChildren<SpriteRenderer>();
-        s.material.color = Color.white;
+        for (int i = 0; i < sprites.Count; i++)
+        {
+            sprites[i].color = originalColors[i];
+        }
         activated = true;
     }
 
     public virtual void InActivate(float time)
     {
         activated = false;
-        SpriteRenderer s = GetComponentInChildren<SpriteRenderer>();
-        s.material.color = Color.blue;
+        for (int i = 0; i < sprites.Count; i++)
+        {
+            sprites[i].color = Color.blue;
+        }
         Invoke("Activate", time);
     }
 

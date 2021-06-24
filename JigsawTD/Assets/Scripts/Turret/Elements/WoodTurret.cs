@@ -17,7 +17,30 @@ public class WoodTurret : ElementTurret
 
     public override bool GameUpdate()
     {
-        if (targetList.Count == 0)
+        if (activated)
+        {
+            if (targetList.Count == 0)
+            {
+                if (isPlayingAudio)
+                {
+                    turretAnim.SetBool("Attacking", false);
+                    ShootEffect.Stop();
+                    isPlayingAudio = false;
+                    audioSource.Stop();
+                }
+            }
+            else
+            {
+                if (!isPlayingAudio)
+                {
+                    ShootEffect.Play();
+                    turretAnim.SetBool("Attacking", true);
+                    isPlayingAudio = true;
+                    PlayAudio(ShootClip, true);
+                }
+            }
+        }
+        else
         {
             if (isPlayingAudio)
             {
@@ -25,16 +48,6 @@ public class WoodTurret : ElementTurret
                 ShootEffect.Stop();
                 isPlayingAudio = false;
                 audioSource.Stop();
-            }
-        }
-        else
-        {
-            if (!isPlayingAudio)
-            {
-                ShootEffect.Play();
-                turretAnim.SetBool("Attacking", true);
-                isPlayingAudio = true;
-                PlayAudio(ShootClip, true);
             }
         }
         return base.GameUpdate();
