@@ -17,15 +17,6 @@ TextureImporter:
   - first:
       213: 4799454438761694576
     second: GoldCollection_4
-  - first:
-      213: 7720824659818996400
-    second: GoldCollection_5
-  - first:
-      213: -2620022262601948709
-    second: GoldCollection_6
-  - first:
-      213: -3206996413578162171
-    second: GoldCollection_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -251,69 +242,6 @@ TextureImporter:
       bones: []
       spriteID: 075001a22661b9240800000000000000
       internalID: 4799454438761694576
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: GoldCollection_5
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0b266951f11e52b60800000000000000
-      internalID: 7720824659818996400
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: GoldCollection_6
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bd1eef532afc3abd0800000000000000
-      internalID: -2620022262601948709
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: GoldCollection_7
-      rect:
-        serializedVersion: 2
-        x: 896
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 500d8b4d0c57e73d0800000000000000
-      internalID: -3206996413578162171
       vertices: []
       indices: 
       edges: []

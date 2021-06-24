@@ -133,7 +133,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     public virtual void SetGraphic()
     {
         shootPoint.transform.localPosition = Strategy.m_Att.TurretLevels[Strategy.Quality - 1].ShootPointOffset;
-        TurretBaseSprite.sprite = Strategy.m_Att.TurretLevels[Strategy.Quality - 1].BaseSprite;
+        //TurretBaseSprite.sprite = Strategy.m_Att.TurretLevels[Strategy.Quality - 1].BaseSprite;
         CannonSprite.sprite = Strategy.m_Att.TurretLevels[Strategy.Quality - 1].CannonSprite;
     }
 

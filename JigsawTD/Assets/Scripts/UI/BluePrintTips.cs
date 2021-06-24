@@ -30,7 +30,7 @@ public class BluePrintTips : TileTips
 
         BuyBtn.SetActive(grid.InShop);
 
-        Icon.sprite = attribute.TurretLevels[0].Icon;
+        Icon.sprite = attribute.TurretLevels[0].CannonSprite;
         Name.text = attribute.TurretLevels[0].TurretName;
 
         //…Ë÷√π•ª˜∑∂Œß¿‡–Õ

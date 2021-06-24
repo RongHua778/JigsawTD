@@ -8,7 +8,6 @@ public class TurretTips : TileTips
 
     Camera mainCam;
     [SerializeField] Canvas myCanvas;
-    [SerializeField] Image Icon2 = default;
     [SerializeField] Text RangeTypeValue = default;
     [SerializeField] Text AttackValue = default;
     [SerializeField] Text SpeedValue = default;
@@ -110,8 +109,7 @@ public class TurretTips : TileTips
 
     private void BasicInfo()
     {
-        Icon.sprite = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].BaseSprite;
-        Icon2.sprite = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].CannonSprite;
+        Icon.sprite = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].CannonSprite;
         Name.text = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].TurretName;
         string rangeTypeTxt = "";
         switch (m_Strategy.m_Att.RangeType)
@@ -194,7 +192,7 @@ public class TurretTips : TileTips
         {
             m_Strategy.Quality++;
             //m_Turret.SetQuality(m_Turret.Quality);
-            Icon.sprite = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].Icon;
+            Icon.sprite = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].CannonSprite;
             Name.text = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].TurretName;
             Description.text = StaticData.GetTurretDes(m_Strategy.m_Att, m_Strategy.Quality);
             UpdateInfo();

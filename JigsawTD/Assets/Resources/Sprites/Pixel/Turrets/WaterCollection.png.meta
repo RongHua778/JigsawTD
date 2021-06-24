@@ -17,15 +17,6 @@ TextureImporter:
   - first:
       213: -1776765798511084915
     second: WaterCollection_4
-  - first:
-      213: -1618413099396310983
-    second: WaterCollection_5
-  - first:
-      213: -4183539466061976131
-    second: WaterCollection_6
-  - first:
-      213: 4857358291392891595
-    second: WaterCollection_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -251,69 +242,6 @@ TextureImporter:
       bones: []
       spriteID: d8afea28be8a757e0800000000000000
       internalID: -1776765798511084915
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WaterCollection_5
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 938d4ae5cdd3a89e0800000000000000
-      internalID: -1618413099396310983
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WaterCollection_6
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dbd6c8d550511f5c0800000000000000
-      internalID: -4183539466061976131
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WaterCollection_7
-      rect:
-        serializedVersion: 2
-        x: 896
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bca854171adc86340800000000000000
-      internalID: 4857358291392891595
       vertices: []
       indices: 
       edges: []

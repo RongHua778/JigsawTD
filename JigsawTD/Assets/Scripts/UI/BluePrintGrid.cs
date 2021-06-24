@@ -25,7 +25,7 @@ public class BluePrintGrid : ReusableObject
         BluePrint.CheckElement();
         toggle.group = group;
         compositeName.text = bluePrint.CompositeTurretAttribute.Name;
-        compositeIcon.sprite = bluePrint.CompositeTurretAttribute.TurretLevels[0].Icon;
+        compositeIcon.sprite = bluePrint.CompositeTurretAttribute.TurretLevels[0].CannonSprite;
         //给每一个组件设置图片
         RefreshElementsSprite();
 

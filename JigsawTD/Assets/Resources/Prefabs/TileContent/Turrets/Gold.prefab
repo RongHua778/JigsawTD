@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: -1642744281
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: -3206996413578162171, guid: 768de1dbe1dcb8c45b69b4de6a5821bb, type: 3}
+  m_Sprite: {fileID: 4799454438761694576, guid: 768de1dbe1dcb8c45b69b4de6a5821bb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -106,7 +106,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1719488621650883108}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.459, z: 0}
+  m_LocalPosition: {x: 0, y: 0.446, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3929253023271304040}
@@ -185,12 +185,12 @@ SpriteRenderer:
   m_SortingLayerID: -1642744281
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: -2494827163238398725, guid: 768de1dbe1dcb8c45b69b4de6a5821bb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c6a3065db1fd6db4888109c219a4d9a9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.28, y: 1.28}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -297,7 +297,6 @@ MonoBehaviour:
   ParentObj: {fileID: 0}
   targetList: []
   ShootEffect: {fileID: 3929253023286477454}
-  HitEffect: {fileID: 0}
 --- !u!95 &1799737625181883744
 Animator:
   serializedVersion: 3

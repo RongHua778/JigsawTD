@@ -17,15 +17,6 @@ TextureImporter:
   - first:
       213: -1273360545368378337
     second: FireCollection_4
-  - first:
-      213: 2410075912437142856
-    second: FireCollection_5
-  - first:
-      213: -8558914387365605925
-    second: FireCollection_6
-  - first:
-      213: -1705890694204848047
-    second: FireCollection_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -251,69 +242,6 @@ TextureImporter:
       bones: []
       spriteID: f14f15e945d145ee0800000000000000
       internalID: -1273360545368378337
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireCollection_5
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8459a82f54f427120800000000000000
-      internalID: 2410075912437142856
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireCollection_6
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bddc71636b0a83980800000000000000
-      internalID: -8558914387365605925
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FireCollection_7
-      rect:
-        serializedVersion: 2
-        x: 896
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 158864aa3757358e0800000000000000
-      internalID: -1705890694204848047
       vertices: []
       indices: 
       edges: []

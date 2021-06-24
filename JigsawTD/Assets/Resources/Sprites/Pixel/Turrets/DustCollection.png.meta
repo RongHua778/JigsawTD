@@ -17,15 +17,6 @@ TextureImporter:
   - first:
       213: -8803647767435065335
     second: DustCollection_4
-  - first:
-      213: 7959835098945381121
-    second: DustCollection_5
-  - first:
-      213: -3209763573113462595
-    second: DustCollection_6
-  - first:
-      213: 76175192307178694
-    second: DustCollection_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -251,69 +242,6 @@ TextureImporter:
       bones: []
       spriteID: 9084f5ecff823d580800000000000000
       internalID: -8803647767435065335
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: DustCollection_5
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 103635779d3077e60800000000000000
-      internalID: 7959835098945381121
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: DustCollection_6
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: db0659b4901a473d0800000000000000
-      internalID: -3209763573113462595
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: DustCollection_7
-      rect:
-        serializedVersion: 2
-        x: 896
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6cc9a2e0fe0ae0100800000000000000
-      internalID: 76175192307178694
       vertices: []
       indices: 
       edges: []
