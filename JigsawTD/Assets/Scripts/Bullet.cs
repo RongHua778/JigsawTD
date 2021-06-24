@@ -9,7 +9,7 @@ public enum BulletType
 }
 public abstract class Bullet : ReusableObject, IGameBehavior
 {
-    [SerializeField] protected ParticalControl SputteringEffect = default;
+    [SerializeField] private ParticalControl sputteringEffect = default;
     //[SerializeField] protected ParticalControl HitEffect = default;
     TrailRenderer trailRenderer;
     protected const int enemyLayerMask = 1 << 11;
@@ -43,6 +43,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     public float CriticalPercentage { get => criticalPercentage + Mathf.Max(0, CriticalRate - 1); set => criticalPercentage = value; }
     private float slowRate;
     public float SlowRate { get => slowRate; set => slowRate = value; }
+    public ParticalControl SputteringEffect { get => sputteringEffect; set => sputteringEffect = value; }
 
     //用来判断是否击中护甲，如果击中则子弹被挡掉
     public bool hit;

@@ -26,11 +26,10 @@ public class RotatingArmor:Armor
     }
     protected override void DisArmor()
     {
-        GetComponentInChildren<SpriteRenderer>().material.color = new Color(0, 0, 0, 0);
-        GetComponentInChildren<CircleCollider2D>().radius = 0 ;
+        GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
+        GetComponent<CircleCollider2D>().radius = 0 ;
         IsDie = false;
         Invoke("ReArmor",boss.ArmorCoolDown);
     }
-
 
 }

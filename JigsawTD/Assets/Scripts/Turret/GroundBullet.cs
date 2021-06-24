@@ -7,7 +7,7 @@ public class GroundBullet : Bullet
     public override BulletType BulletType => BulletType.Ground;
 
 
-    protected override void TriggerDamage()
+    public override void TriggerDamage()
     {
         //Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, SputteringRange, enemyLayerMask);
         //foreach (Collider2D hit in hits)

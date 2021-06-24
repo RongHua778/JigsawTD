@@ -119,7 +119,7 @@ public class WaveSystem : IGameSystem
                     break;
                 default:
                     Debug.LogAssertion("难度参数错误");
-                    attribute = _enemyFactory.Get(EnemyType.BossRotatingArmor);
+                    attribute = _enemyFactory.Get(EnemyType.Ninja);
                     break;
             }
 

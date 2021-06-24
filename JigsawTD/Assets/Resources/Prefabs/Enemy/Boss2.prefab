@@ -85,6 +85,7 @@ MonoBehaviour:
     PathPos: {x: 0, y: 0}
     PathDirection: 0
     ExitPoint: {x: 0, y: 0}
+  initialSpeed: 0
   armorIntensify: 100
   armorCoolDown: 1.5
 --- !u!1 &8360252054385358165
@@ -133,7 +134,7 @@ GameObject:
   - component: {fileID: 236055208716200946}
   m_Layer: 11
   m_Name: GFX
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

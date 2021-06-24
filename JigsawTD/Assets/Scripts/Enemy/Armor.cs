@@ -13,25 +13,31 @@ public class Armor : DestructableObject
     }
     protected virtual void DisArmor()
     {
-        GetComponentInChildren<SpriteRenderer>().material.color = new Color(0, 0, 0, 0);
-        GetComponentInChildren<CircleCollider2D>().radius = 0;
+        GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
+        GetComponent<CircleCollider2D>().radius = 0;
     }
 
     protected virtual void ReArmor()
     {
-        GetComponentInChildren<SpriteRenderer>().material.color = new Color(1, 1, 1, 1);
-        GetComponentInChildren<CircleCollider2D>().radius = 0.6f;
+        GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+        GetComponent<CircleCollider2D>().radius = 0.6f;
         CurrentHealth = MaxHealth;
     }
 
-    protected void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<Bullet>())
         {
-            Debug.LogWarning("hit!");
             Bullet bullet = collision.GetComponent<Bullet>();
+            bullet.hit = true;
             CurrentHealth -= bullet.Damage;
-            bullet.TriggerDamage();
+            if (bullet.SputteringEffect != null)
+            {
+                ParticalControl effect = ObjectPool.Instance.Spawn(bullet.SputteringEffect) as ParticalControl;
+                effect.transform.position = transform.position;
+                effect.transform.localScale = Mathf.Max(0.4f, bullet.SputteringRange * 2) * Vector3.one;
+                effect.PlayEffect();
+            }
             bullet.ReclaimBullet();
         }
     }
