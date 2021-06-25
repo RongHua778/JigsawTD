@@ -65,6 +65,7 @@ public class Divider : Enemy
         enemy.scale = scale;
         enemy.MaxHealth = MaxHealth * scale;
         enemy.size.localScale = new Vector3(scale,scale,1);
+        enemy.progress = progress;
         GameManager.Instance.enemies.Add(enemy);
     }
 }

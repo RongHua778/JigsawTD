@@ -5,6 +5,7 @@ using Pathfinding;
 using System;
 using System.Linq;
 
+
 [Serializable]
 public struct PathPoint
 {
@@ -45,13 +46,50 @@ public class BoardSystem : IGameSystem
             }
             if (selectingTile != null)
             {
-                selectingTile.Content.OnContentSelected(true);
                 selection.transform.position = selectingTile.transform.position;
+                selectingTile.Content.OnContentSelected(true);
             }
             selection.SetActive(selectingTile != null);
         }
 
     }
+
+    private static TileBase selectingGround;
+    public static TileBase SelectingGround 
+    {
+        get => selectingGround;
+        set 
+        {
+            if (selectingGround != null)
+            {
+                if (selectingGround == value)
+                {
+                    selectingGround = null;
+                }
+                else
+                {
+                    selectingGround = value;
+                }
+            }
+            else
+            {
+                selectingGround = value;
+            }
+            if (selectingGround != null)
+            {
+                selection.transform.position = selectingGround.transform.position;
+                GameManager.Instance.ShowBuyGroundTips(selectingGround);
+            }
+            else
+            {
+                GameManager.Instance.HideTips();
+            }
+
+            selection.SetActive(selectingGround != null);
+
+        }
+    }
+
     #endregion
 
     public static Vector2Int _startSize = new Vector2Int(3, 3); //≥ı º¥Û–°
@@ -75,7 +113,6 @@ public class BoardSystem : IGameSystem
 
     public static bool FindPath { get; set; }
 
-
     public override void Initialize(GameManager gameManager)
     {
         base.Initialize(gameManager);
@@ -84,7 +121,7 @@ public class BoardSystem : IGameSystem
         GameEvents.Instance.onSeekPath += SeekPath;
         GameEvents.Instance.onTileClick += TileClick;
         GameEvents.Instance.onTileUp += TileUp;
-
+        GameEvents.Instance.onGroundUp += GroundUp;
         SetGameBoard();
     }
 
@@ -93,6 +130,7 @@ public class BoardSystem : IGameSystem
         GameEvents.Instance.onSeekPath -= SeekPath;
         GameEvents.Instance.onTileClick -= TileClick;
         GameEvents.Instance.onTileUp -= TileUp;
+        GameEvents.Instance.onGroundUp -= GroundUp;
     }
 
     public override void GameUpdate()
@@ -106,10 +144,10 @@ public class BoardSystem : IGameSystem
         {
             pressCounter = 0;
         }
-        if (SelectingTile != null)
-        {
-            selection.transform.position = SelectingTile.transform.position;
-        }
+        //if (SelectingTile != null)
+        //{
+        //    selection.transform.position = SelectingTile.transform.position;
+        //}
     }
     private void TileClick()
     {
@@ -123,6 +161,11 @@ public class BoardSystem : IGameSystem
             SelectingTile = tile;
         }
         IsPressingTile = false;
+    }
+
+    private void GroundUp(TileBase tile)
+    {
+        SelectingGround = tile;
     }
 
     public void SetGameBoard()

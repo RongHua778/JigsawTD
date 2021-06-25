@@ -8,12 +8,12 @@ public class Healer : Enemy
     [SerializeField]
     EnemyDetector detector;
     public float speedUp;
-    public override bool GameUpdate()
+    public override void OnUnSpawn()
     {
-        foreach(Enemy e in detector.Enemies)
+        for (int i = 0; i < detector.Enemies.Count; i++)
         {
-            e.Speed = e.initialSpeed + speedUp;
+            detector.Enemies[i].Speed -= speedUp;
         }
-        return base.GameUpdate();
     }
+
 }

@@ -26,6 +26,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private TurretTips m_TurretTips = default;
     [SerializeField] private TempTips m_TempTips = default;
     [SerializeField] private TrapTips m_TrapTips = default;
+    [SerializeField] public BuyGroundTips m_BuyGroundTips = default;
 
     [Header("工厂")]
     [SerializeField] TileFactory _tileFactory = default;
@@ -53,7 +54,16 @@ public class GameManager : Singleton<GameManager>
     private BuildingState buildingState;
     private PickingState pickingState;
     private WaveState waveState;
-
+    //买一块地板多少钱
+    int buyOneGroundMoney = 10;
+    public int BuyOneGroundMoney
+    {
+        get => buyOneGroundMoney;
+        set
+        {
+            buyOneGroundMoney = value;
+        }
+    }
     //初始化设定
     public void Initinal()
     {
@@ -79,6 +89,7 @@ public class GameManager : Singleton<GameManager>
         m_GameEndUI.Initialize(this);//游戏结束UI
         m_TrapTips.Initialize(this);//防御塔TIPS
         m_TurretTips.Initialize(this);//陷阱及其他TIPS
+        m_BuyGroundTips.Initialize(this);//购买地板TIPS
         m_MessageUI.Initialize(this);//提示系统UI
         m_GuideVideo.Initialize(this);//教程视频UI
 
@@ -120,6 +131,7 @@ public class GameManager : Singleton<GameManager>
         m_GameEndUI.Release();
         m_TrapTips.Release();
         m_TurretTips.Release();
+        m_BuyGroundTips.Release();
         m_MessageUI.Release();
         m_GuideVideo.Release();
 
@@ -337,6 +349,20 @@ public class GameManager : Singleton<GameManager>
         if (Game.Instance.Tutorial)
             m_GuideUI.GuideTrigger(index);
     }
+
+    public void BuyOneGround()
+    {
+        m_MainUI.Coin -= buyOneGroundMoney;
+        GameTile tile=_tileFactory.GetBasicTile();
+        GameTileContent content = _contentFactory.GetBasicContent(GameTileContentType.Empty);
+        tile.SetContent(content);
+        tile.transform.position = BoardSystem.SelectingGround.transform.position;
+        tile.TileLanded();
+        Physics2D.SyncTransforms();
+        m_BuyGroundTips.Hide();
+        BuyOneGroundMoney += 10;
+    }
+
     #endregion
 
     #region TIPS
@@ -345,13 +371,23 @@ public class GameManager : Singleton<GameManager>
         m_TurretTips.ReadTurret(strategy);
         m_TurretTips.Show();
         m_TrapTips.Hide();
+        m_BuyGroundTips.Hide();
     }
 
     public void ShowTrapTips(TrapContent trap)
     {
         m_TrapTips.ReadTrap(trap);
         m_TurretTips.Hide();
+        m_BuyGroundTips.Hide();
         m_TrapTips.Show();
+    }
+
+    public void ShowBuyGroundTips(TileBase tile)
+    {
+        m_BuyGroundTips.ReadInfo();
+        m_TurretTips.Hide();
+        m_TrapTips.Hide();
+        m_BuyGroundTips.Show();
     }
 
     public void ShowTempTips(string text, Vector2 pos)
@@ -363,6 +399,7 @@ public class GameManager : Singleton<GameManager>
     public void ShowBluePrintTips(BluePrintGrid grid)
     {
         m_TrapTips.Hide();
+        m_BuyGroundTips.Hide();
         m_TurretTips.ReadBluePrint(grid);
         m_TurretTips.Show();
     }
@@ -375,6 +412,7 @@ public class GameManager : Singleton<GameManager>
     {
         m_TurretTips.Hide();
         m_TrapTips.Hide();
+        m_BuyGroundTips.Hide();
     }
 
     #endregion

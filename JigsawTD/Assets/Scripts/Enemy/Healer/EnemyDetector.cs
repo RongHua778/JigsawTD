@@ -14,7 +14,11 @@ public class EnemyDetector : MonoBehaviour
         Enemy enemy = collision.GetComponentInParent<Enemy>();
         if (enemy)
         {
+            if (enemy.GetInstanceID() != GetComponentInParent<Enemy>().GetInstanceID())
+            {
                 Enemies.Add(enemy);
+                enemy.Speed += healer.speedUp;
+            }
         }
 
     }
@@ -24,8 +28,11 @@ public class EnemyDetector : MonoBehaviour
         Enemy enemy = collision.GetComponentInParent<Enemy>();
         if (enemy)
         {
-            Enemies.Remove(enemy);
-            enemy.Speed = enemy.initialSpeed;
+            if (enemy.GetInstanceID() != GetComponentInParent<Enemy>().GetInstanceID())
+            {
+                Enemies.Remove(enemy);
+                enemy.Speed -= healer.speedUp;
+            }
         }
     }
 

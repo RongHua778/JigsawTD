@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using TMPro;
+
 public class GroundTile : TileBase
 {
     public override bool IsLanded
@@ -38,8 +40,13 @@ public class GroundTile : TileBase
         //}
     }
 
-
-
+    private void OnMouseDown()
+    {
+        if (!EventSystem.current.IsPointerOverGameObject())
+        {
+            GameEvents.Instance.GroundUp(this);
+        }
+    }
 
     public override void OnSpawn()
     {

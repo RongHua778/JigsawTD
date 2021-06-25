@@ -15,10 +15,16 @@ public class Ninja : Enemy
         set
         {
             base.CurrentHealth = value;
-            Speed = minSpeed + maxSpeed * (1 - CurrentHealth / MaxHealth);
-            progressFactor = Speed * adjust;
+
             size = 0.8f + CurrentHealth / MaxHealth;
             model.transform.localScale = new Vector3(size,size,1);
         }
+    }
+
+    public override bool GameUpdate()
+    {
+        Speed = minSpeed + maxSpeed * ((float)PointIndex / (float)pathPoints.Count);
+        progressFactor = Speed * adjust;
+        return base.GameUpdate();
     }
 }

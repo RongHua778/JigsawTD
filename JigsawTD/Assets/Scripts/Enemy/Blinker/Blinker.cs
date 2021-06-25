@@ -41,7 +41,6 @@ public class Blinker : Enemy
         if (stateinfo.IsName("Exit")&&stateinfo.normalizedTime >= 0.95f)
          {
             PointIndex += 2;
-        Debug.Log("gresgsegsegseg:"+PointIndex);
 
             //在终点前不会瞬移
             if (PointIndex < pathPoints.Count - 1)
@@ -55,6 +54,7 @@ public class Blinker : Enemy
                 model.localPosition = new Vector3(pathOffset, 0);
                 directionAngleFrom = directionAngleTo = Direction.GetAngle();
                 transform.localRotation = CurrentPoint.PathDirection.GetRotation();
+                progress = 0;
                 blink -= 1;
             }
             anim.Play("Default") ;
