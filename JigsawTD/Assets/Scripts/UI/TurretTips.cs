@@ -7,7 +7,7 @@ public class TurretTips : TileTips
 {
 
     Camera mainCam;
-    [SerializeField] Canvas myCanvas;
+    [SerializeField] Canvas myCanvas = default;
     [SerializeField] Text RangeTypeValue = default;
     [SerializeField] Text AttackValue = default;
     [SerializeField] Text SpeedValue = default;
@@ -180,7 +180,7 @@ public class TurretTips : TileTips
         SputteringValue.text = strategy.SputteringRange.ToString() + (sputteringIncrease > 0 ?
             "<color=cyan>(+" + sputteringIncrease + ")</color>" : "");
 
-        float slowRateIncrease= strategy.m_Att.TurretLevels[strategy.Quality].SlowRate - strategy.m_Att.TurretLevels[strategy.Quality - 1].SlowRate;
+        float slowRateIncrease = strategy.m_Att.TurretLevels[strategy.Quality].SlowRate - strategy.m_Att.TurretLevels[strategy.Quality - 1].SlowRate;
         SlowRateValue.text = strategy.SlowRate.ToString() + (slowRateIncrease > 0 ?
             "<color=cyan>(+" + slowRateIncrease + ")</color>" : "");
     }
@@ -191,7 +191,8 @@ public class TurretTips : TileTips
         if (GameManager.Instance.ConsumeMoney(upgradeCost))
         {
             m_Strategy.Quality++;
-            //m_Turret.SetQuality(m_Turret.Quality);
+            m_Strategy.GetTurretEffects();
+            m_Strategy.m_Turret.SetGraphic();
             Icon.sprite = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].CannonSprite;
             Name.text = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].TurretName;
             Description.text = StaticData.GetTurretDes(m_Strategy.m_Att, m_Strategy.Quality);

@@ -9,12 +9,15 @@ public enum StrategyType
 public class BasicStrategy
 {
     public virtual StrategyType strategyType => StrategyType.Element;
-    public BasicStrategy(TurretAttribute attribute,int quality)
+    public BasicStrategy(TurretAttribute attribute,int quality,TurretContent turret)
     {
         m_Att = attribute;
         Quality = quality;
+        m_Turret = turret;
+        GetTurretEffects();
     }
 
+    public TurretContent m_Turret;
     public TurretAttribute m_Att;
 
     private int quality = 0;

@@ -6,7 +6,7 @@ public class CompositeStrategy : BasicStrategy
 {
     public override StrategyType strategyType => StrategyType.Composite;
     public Blueprint CompositeBluePrint;
-    public CompositeStrategy(TurretAttribute attribute,  Blueprint bluePrint, int quality) : base(attribute,  quality)
+    public CompositeStrategy(TurretAttribute attribute, Blueprint bluePrint, int quality, TurretContent turret) : base(attribute, quality, turret)
     {
         CompositeBluePrint = bluePrint;
     }
