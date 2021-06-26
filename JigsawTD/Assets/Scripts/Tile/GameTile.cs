@@ -17,12 +17,7 @@ public abstract class GameTile : TileBase
     public SpriteRenderer PreviewRenderer { get; set; }
     public Vector3 ExitPoint { get; set; }
 
-    private GameTileContent content;
-    public GameTileContent Content
-    {
-        get => content;
-        set => content = value;
-    }
+
 
     //Direction pathDirection;
     //public Direction PathDirection { get => pathDirection; set => pathDirection = value; }
@@ -81,29 +76,24 @@ public abstract class GameTile : TileBase
         Content.OnContentPass(enemy);
     }
 
-    private void OnMouseDown()
+    protected override void OnMouseDown()
     {
-        if (!EventSystem.current.IsPointerOverGameObject())
+        base.OnMouseDown();
+        if (m_DraggingShape != null)
         {
-            if (m_DraggingShape != null)
-            {
-                m_DraggingShape.StartDragging();
-            }
-            GameEvents.Instance.TileClick();
+            m_DraggingShape.StartDragging();
         }
     }
 
 
-    private void OnMouseUp()
+    protected override void OnMouseUp()
     {
-        if (!EventSystem.current.IsPointerOverGameObject())
+        base.OnMouseUp();
+        if (m_DraggingShape != null)
         {
-            if (m_DraggingShape != null)
-            {
-                m_DraggingShape.EndDragging();
-            }
-            GameEvents.Instance.TileUp(this);
+            m_DraggingShape.EndDragging();
         }
+
     }
 
     public override void OnSpawn()
@@ -142,13 +132,7 @@ public abstract class GameTile : TileBase
     }
 
 
-    public void SetContent(GameTileContent content)
-    {
-        content.transform.SetParent(this.transform);
-        content.transform.position = transform.position;
-        content.m_GameTile = this;
-        Content = content;
-    }
+
 
 
     private void OnTriggerEnter2D(Collider2D collision)

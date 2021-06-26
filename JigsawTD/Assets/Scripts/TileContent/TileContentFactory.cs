@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Factory/ContentFactory", fileName = "GameContentFactory")]
 public class TileContentFactory : GameObjectFactory
 {
-
+    [SerializeField] ContentAttribute groundAtt = default;
     [SerializeField] ContentAttribute emptyAtt = default;
     [SerializeField] ContentAttribute spawnPointAtt = default;
     [SerializeField] ContentAttribute destinationAtt = default;
@@ -71,6 +71,8 @@ public class TileContentFactory : GameObjectFactory
                 return Get(destinationAtt.ContentPrefab);
             case GameTileContentType.SpawnPoint:
                 return Get(spawnPointAtt.ContentPrefab);
+            case GameTileContentType.Ground:
+                return Get(groundAtt.ContentPrefab);
         }
         Debug.Assert(false, "Unsupported Type" + type);
         return null;

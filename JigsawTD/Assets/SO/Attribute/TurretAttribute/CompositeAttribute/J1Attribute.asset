@@ -38,9 +38,7 @@ MonoBehaviour:
       EffectDescription: "\u81F4\u547D\u7206\u5934\uFF1A\u5B50\u5F39\u4F24\u5BB3\u968F\u98DE\u884C\u8DDD\u79BB\u63D0\u534730%/\u7C73"
     PoloEffects: []
     TurretName: "J1\u72D9\u51FB\u5854"
-    Icon: {fileID: 21300000, guid: 1343cb83955a70747aad1c46bfb9891f, type: 3}
-    BaseSprite: {fileID: 21300000, guid: cfc4a480c7295054ebb4cfc6d03633ce, type: 3}
-    CannonSprite: {fileID: 21300000, guid: 6225416df5e6766408884d4da0f7a471, type: 3}
+    CannonSprite: {fileID: -5442612025329375428, guid: 42957127c2e7aba48a21a85a636cb609, type: 3}
     ShootPointOffset: {x: 0, y: 0.28}
   - AttackRange: 6
     ForbidRange: 0
@@ -55,9 +53,7 @@ MonoBehaviour:
       EffectDescription: "\u81F4\u547D\u7206\u5934\uFF1A\u5B50\u5F39\u4F24\u5BB3\u968F\u98DE\u884C\u8DDD\u79BB\u63D0\u534740%/\u7C73"
     PoloEffects: []
     TurretName: "J2\u72D9\u51FB\u5854"
-    Icon: {fileID: 21300000, guid: 1343cb83955a70747aad1c46bfb9891f, type: 3}
-    BaseSprite: {fileID: 21300000, guid: cfc4a480c7295054ebb4cfc6d03633ce, type: 3}
-    CannonSprite: {fileID: 21300000, guid: 6225416df5e6766408884d4da0f7a471, type: 3}
+    CannonSprite: {fileID: -2004675633971898, guid: 42957127c2e7aba48a21a85a636cb609, type: 3}
     ShootPointOffset: {x: 0, y: 0.28}
   - AttackRange: 6
     ForbidRange: 0
@@ -72,7 +68,5 @@ MonoBehaviour:
       EffectDescription: "\u81F4\u547D\u7206\u5934\uFF1A\u5B50\u5F39\u4F24\u5BB3\u968F\u98DE\u884C\u8DDD\u79BB\u63D0\u534750%/\u7C73"
     PoloEffects: []
     TurretName: "J3\u72D9\u51FB\u5854"
-    Icon: {fileID: 21300000, guid: 1343cb83955a70747aad1c46bfb9891f, type: 3}
-    BaseSprite: {fileID: 21300000, guid: cfc4a480c7295054ebb4cfc6d03633ce, type: 3}
-    CannonSprite: {fileID: 21300000, guid: 6225416df5e6766408884d4da0f7a471, type: 3}
+    CannonSprite: {fileID: 5670319644688947614, guid: 42957127c2e7aba48a21a85a636cb609, type: 3}
     ShootPointOffset: {x: 0, y: 0.28}

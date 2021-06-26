@@ -39,7 +39,10 @@ public static class ConstructHelper
 
     public static GroundTile GetGroundTile()
     {
-        return m_TileFactory.GetGroundTile();
+        GameTileContent content = m_ContentFactory.GetBasicContent(GameTileContentType.Ground);
+        GroundTile tile = m_TileFactory.GetGroundTile();
+        tile.SetContent(content);
+        return tile;
     }
 
     //ÔªËØËþ

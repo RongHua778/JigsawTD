@@ -31,7 +31,7 @@ public class PenetrateBullet : Bullet
             {
                 ParticalControl effect = ObjectPool.Instance.Spawn(SputteringEffect) as ParticalControl;
                 effect.transform.position = transform.position;
-                effect.transform.localScale = 0.3f * Vector3.one;
+                effect.transform.localScale = 0.2f * Vector3.one;
                 effect.PlayEffect();
             }
 

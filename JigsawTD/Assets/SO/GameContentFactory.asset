@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5e7d9a89618bc4dade5c8c8a6427cf, type: 3}
   m_Name: GameContentFactory
   m_EditorClassIdentifier: 
+  groundAtt: {fileID: 11400000, guid: 8259855867d58d741b0ca314a216b901, type: 2}
   emptyAtt: {fileID: 11400000, guid: 4c8da1e145ab6214c944bcc43fad4205, type: 2}
   spawnPointAtt: {fileID: 11400000, guid: 0263469d903409a46837ef1fb50628ce, type: 2}
   destinationAtt: {fileID: 11400000, guid: 132429f84cc3e32449aabf043aee0234, type: 2}

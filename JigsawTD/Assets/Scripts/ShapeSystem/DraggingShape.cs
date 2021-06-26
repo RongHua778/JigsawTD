@@ -54,17 +54,7 @@ public class DraggingShape : DraggingActions
         {
             RotateShape();
         }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            foreach (var tile in tileShape.tiles)
-            {
-                Debug.Log(tile.transform.position);
-            }
-            foreach (var node in ChangeNodes)
-            {
-                Debug.Log("node:x" + node.XCoordinateInGrid + " y" + node.ZCoordinateInGrid);
-            }
-        }
+
     }
 
 

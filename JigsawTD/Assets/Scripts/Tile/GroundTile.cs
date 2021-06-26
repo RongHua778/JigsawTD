@@ -40,13 +40,6 @@ public class GroundTile : TileBase
         //}
     }
 
-    private void OnMouseDown()
-    {
-        if (!EventSystem.current.IsPointerOverGameObject())
-        {
-            GameEvents.Instance.GroundUp(this);
-        }
-    }
 
     public override void OnSpawn()
     {
