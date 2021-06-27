@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614735ba97a8e4b4bbdf8128289355f3, type: 3}
   m_Name: Armorer
   m_EditorClassIdentifier: 
-  EnemyType: 11
-  InitCount: 3
+  EnemyType: 12
+  InitCount: 1
   CountIncrease: 0
-  Health: 1000
-  Speed: 0.2
+  Health: 100
+  Speed: 0.3
   Shell: 0
-  CoolDown: 0
+  CoolDown: 1
   Prefab: {fileID: 1917517731428350432, guid: 5a78956dead208b43bfc7c204565dfe7, type: 3}
-  ReachDamage: 1
+  ReachDamage: 5
   extraHealth: 0
   EnemyIcon: {fileID: 21300000, guid: 05f67270eed774d458305d46c391fd99, type: 3}
   Description: 

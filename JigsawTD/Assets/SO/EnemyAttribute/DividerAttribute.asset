@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614735ba97a8e4b4bbdf8128289355f3, type: 3}
   m_Name: DividerAttribute
   m_EditorClassIdentifier: 
-  EnemyType: 6
+  EnemyType: 8
   InitCount: 1
   CountIncrease: 0
-  Health: 2000
-  Speed: 0.5
+  Health: 150
+  Speed: 0.2
   Shell: 0
   CoolDown: 0.1
   Prefab: {fileID: -4008761052356302502, guid: 74ed77649a912194784c510912c2ef8e, type: 3}

@@ -44,7 +44,7 @@ public class Divider : Enemy
     {
         if (dividingCount < Dividing)
         {
-            scale *= 0.8f;
+            scale *= 0.5f;
             for (int i = 0; i < springs; i++)
             {
                 ws.EnemyRemain += 1;
@@ -61,11 +61,11 @@ public class Divider : Enemy
         HealthBar healthBar = ObjectPool.Instance.Spawn(ws.HealthBarPrefab) as HealthBar;
         enemy.Initialize(attribute, Random.Range(-0.3f, 0.3f), healthBar, intensify) ;
         enemy.Dividing = Dividing-1;
-        enemy.SpawnOn(PointIndex, board.shortestPoints);
         enemy.scale = scale;
         enemy.MaxHealth = MaxHealth * scale;
-        enemy.size.localScale = new Vector3(scale,scale,1);
+        enemy.size.localScale = new Vector3(scale, scale, 1);
         enemy.progress = progress;
+        enemy.SpawnOn(PointIndex, board.shortestPoints);
         GameManager.Instance.enemies.Add(enemy);
     }
 }

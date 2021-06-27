@@ -22,7 +22,7 @@ public class WaveState : BattleOperationState
         }
         else
         {
-            switch (m_WaveSystem.RunningSequence.EnemyAttribute.EnemyType)
+            switch (m_WaveSystem.RunningSequence.EnemyAttribute[0].EnemyType)
             {
                 case EnemyType.Soilder:
                     Sound.Instance.PlayBg("soldier");

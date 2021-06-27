@@ -78,14 +78,16 @@ public class WaveSystem : IGameSystem
         LevelSequence.Clear();
         int difficulty = Game.Instance.Difficulty;
         float intensify = 1;
-        int amount;
         float stage = waveStage;
         for (int i = 0; i < StaticData.Instance.LevelMaxWave; i++)
         {
-            EnemyType type = (EnemyType)UnityEngine.Random.Range(0, 4);
 
-            EnemyAttribute attribute = _enemyFactory.Get(type);
-            intensify = stage * (0.5f * i + 1);
+            //*******************
+            List<EnemyAttribute> attribute = new List<EnemyAttribute>();
+            List<int> amount = new List<int>();
+            List<float> coolDown = new List<float>();
+            EnemyType type=EnemyType.Soilder;
+            //*******************
             switch (difficulty)
             {
                 //简单难度
@@ -119,22 +121,68 @@ public class WaveSystem : IGameSystem
                     break;
                 default:
                     Debug.LogAssertion("难度参数错误");
-                    attribute = _enemyFactory.Get(EnemyType.Ninja);
+                    //attribute = _enemyFactory.Get(EnemyType.Fat);
                     break;
             }
 
-            amount = attribute.InitCount + i / 4 * attribute.CountIncrease;
-            float coolDown = attribute.CoolDown;
-            coolDown = attribute.CoolDown - i * 0.01f;
+            //boss*****
+            if (i == 9)
+            {
+                attribute.Add(_enemyFactory.Get(EnemyType.Fat));
+            }else if (i == 19)
+            {
+                attribute.Add(_enemyFactory.Get(EnemyType.BossRotatingArmor));
+            }
+            else if (i == 29)
+            {
+                attribute.Add(_enemyFactory.Get(EnemyType.Blinker));
+            }
+            else if (i == 39)
+            {
+                attribute.Add(_enemyFactory.Get(EnemyType.Borner));
+            }else if (i == 8|| i == 15|| i == 23|| i == 33)
+            {
+                List<int> types = StaticData.SelectNoRepeat(4, 2);
+                type = (EnemyType)types[0];
+                attribute.Add(_enemyFactory.Get(type));
+                type = (EnemyType)types[1];
+                attribute.Add(_enemyFactory.Get(type));
+            }
+            else if (i == 0 || i == 28 || i == 38)
+            {
+                List<int> types = StaticData.SelectNoRepeat(4, 3);
+                type = (EnemyType)types[0];
+                attribute.Add(_enemyFactory.Get(type));
+                type = (EnemyType)types[1];
+                attribute.Add(_enemyFactory.Get(type));
+                type = (EnemyType)types[2];
+                attribute.Add(_enemyFactory.Get(type));
+            }
+            else
+            {
+                type = (EnemyType)UnityEngine.Random.Range(0,4);
+                attribute.Add(_enemyFactory.Get(type));
+            }
+            //*****
+            intensify = stage * (0.5f * i + 1);
+            for (int j = 0; j < attribute.Count; j++)
+            {
+                amount.Add((attribute[j].InitCount + i / 4 * attribute[j].CountIncrease)/attribute.Count+1);
+                if (i < 4)
+                {
+                    coolDown.Add(waveCoolDown);
+                }
+                else
+                {
+                    coolDown.Add(attribute[j].CoolDown - i * 0.01f);
+                }
+            }
             //soldier出来的越来越多
             if (type == EnemyType.Soilder)
             {
-                coolDown = coolDown - i / 4 * 0.05f;
+                coolDown.Add(attribute[0].CoolDown - i * 0.01f - i / 4 * 0.05f);
             }
-            if (i < 4)
-            {
-                coolDown = waveCoolDown;//2.5
-            }
+
             EnemySequence sequence = new EnemySequence(i + 1, attribute, intensify, amount, coolDown);
             LevelSequence.Enqueue(sequence);
         }
@@ -146,10 +194,8 @@ public class WaveSystem : IGameSystem
         if (LevelSequence.Count > 0)
         {
             RunningSequence = LevelSequence.Dequeue();
-
             //参数设置
-            EnemyRemain = RunningSequence.Amount;
-
+            enemyRemain = runningSequence.index.Count;
         }
         else
         {
@@ -158,9 +204,9 @@ public class WaveSystem : IGameSystem
 
     }
 
-    public void SpawnEnemy(BoardSystem board)
+    public void SpawnEnemy(BoardSystem board,int type)
     {
-        EnemyAttribute attribute = RunningSequence.EnemyAttribute;
+        EnemyAttribute attribute = RunningSequence.EnemyAttribute[type];
         float intensify = RunningSequence.Intensify;
         Enemy enemy = ObjectPool.Instance.Spawn(attribute.Prefab) as Enemy;
         HealthBar healthBar = ObjectPool.Instance.Spawn(HealthBarPrefab) as HealthBar;

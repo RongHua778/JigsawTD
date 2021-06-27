@@ -130,8 +130,8 @@ public class MainUI : IUserInterface
     {
         CurrentWave++;
         Coin += StaticData.Instance.BaseWaveIncome + StaticData.Instance.WaveMultiplyIncome * (CurrentWave - 1);
-        enemyIcon.sprite = sequence.EnemyAttribute.EnemyIcon;
-        enemyInfo.SetContent(sequence.EnemyAttribute.Description);
+        enemyIcon.sprite = sequence.EnemyAttribute[0].EnemyIcon;
+        enemyInfo.SetContent(sequence.EnemyAttribute[0].Description);
     }
 
     public bool ConsumeMoney(int cost)

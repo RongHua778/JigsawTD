@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 19880886}
   - component: {fileID: 19929934}
   - component: {fileID: 6646908559301920769}
-  m_Layer: 0
+  - component: {fileID: 8276982529153045647}
+  m_Layer: 9
   m_Name: G1Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4692,6 +4693,22 @@ MonoBehaviour:
   sputteringEffect: {fileID: 3494240544614092349, guid: eb6cba38b10cbae4595d14d7b62081a8, type: 3}
   turretParent: {fileID: 0}
   hit: 0
+--- !u!58 &8276982529153045647
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109214}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.28
 --- !u!1 &134976
 GameObject:
   m_ObjectHideFlags: 0

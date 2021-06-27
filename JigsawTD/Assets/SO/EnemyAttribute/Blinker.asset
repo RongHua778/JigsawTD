@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614735ba97a8e4b4bbdf8128289355f3, type: 3}
   m_Name: Blinker
   m_EditorClassIdentifier: 
-  EnemyType: 7
+  EnemyType: 9
   InitCount: 1
   CountIncrease: 0
-  Health: 1000
-  Speed: 0.3
+  Health: 200
+  Speed: 0.2
   Shell: 0
-  CoolDown: 0.5
+  CoolDown: 1
   Prefab: {fileID: 6267006511136032490, guid: 6e5bc6ae01d3be54da6c424d1c71c1b7, type: 3}
-  ReachDamage: 1
+  ReachDamage: 5
   extraHealth: 0
   EnemyIcon: {fileID: 21300000, guid: 05f67270eed774d458305d46c391fd99, type: 3}
   Description: 

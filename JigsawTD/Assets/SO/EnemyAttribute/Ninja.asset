@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614735ba97a8e4b4bbdf8128289355f3, type: 3}
   m_Name: Ninja
   m_EditorClassIdentifier: 
-  EnemyType: 8
+  EnemyType: 10
   InitCount: 1
   CountIncrease: 1
   Health: 20000

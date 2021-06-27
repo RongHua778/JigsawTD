@@ -312,9 +312,9 @@ public class GameManager : Singleton<GameManager>
         m_FuncUI.DrawRemain += amount;
     }
 
-    public void SpawnEnemy()
+    public void SpawnEnemy(int type)
     {
-        WaveSystem.SpawnEnemy(BoardSystem);
+        WaveSystem.SpawnEnemy(BoardSystem,type);
     }
 
     public void RefreshShop(int cost)

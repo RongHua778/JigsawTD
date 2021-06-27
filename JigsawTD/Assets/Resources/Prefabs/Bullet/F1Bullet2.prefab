@@ -9500,7 +9500,8 @@ GameObject:
   - component: {fileID: 19879398}
   - component: {fileID: 19995504}
   - component: {fileID: 4724693461310116490}
-  m_Layer: 0
+  - component: {fileID: 1375967487639680133}
+  m_Layer: 9
   m_Name: F1Bullet2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14242,3 +14243,19 @@ MonoBehaviour:
   sputteringEffect: {fileID: 0}
   turretParent: {fileID: 0}
   hit: 0
+--- !u!58 &1375967487639680133
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193226}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.28

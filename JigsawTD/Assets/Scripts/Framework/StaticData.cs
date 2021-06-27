@@ -102,6 +102,17 @@ public class StaticData : Singleton<StaticData>
         { 0.3f,0.3f,0.4f},
     };
 
+    //随机打乱一个int list的方法
+    public static List<T> RandomSort<T>(List<T> list)
+    {
+        var random = new System.Random();
+        var newList = new List<T>();
+        foreach (var item in list)
+        {
+            newList.Insert(random.Next(newList.Count), item);
+        }
+        return newList;
+    }
 
     public static int RandomNumber(float[] pros)
     {

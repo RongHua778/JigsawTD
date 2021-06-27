@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614735ba97a8e4b4bbdf8128289355f3, type: 3}
   m_Name: Healer
   m_EditorClassIdentifier: 
-  EnemyType: 9
+  EnemyType: 4
   InitCount: 2
-  CountIncrease: 0
-  Health: 5000
-  Speed: 0.2
+  CountIncrease: 1
+  Health: 40
+  Speed: 0.4
   Shell: 0
-  CoolDown: 0
+  CoolDown: 2.5
   Prefab: {fileID: 7544039814910962251, guid: aeee3495596b43f45b147c47867bd345, type: 3}
   ReachDamage: 1
   extraHealth: 0

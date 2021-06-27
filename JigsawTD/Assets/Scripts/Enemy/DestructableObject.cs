@@ -38,7 +38,7 @@ public abstract class DestructableObject : ReusableObject, IGameBehavior
         set
         {
             currentHealth = Mathf.Clamp(value, 0, MaxHealth);
-            if (currentHealth <= 0)
+            if (currentHealth <= 0&&maxHealth>0)
             {
                 IsDie = true;
             }

@@ -11,8 +11,6 @@ public class Armor : DestructableObject
     public override void Awake()
     {
         base.Awake();
-        MaxHealth = boss.ArmorIntensify;
-        CurrentHealth = MaxHealth;
         Type = ObjectType.Armor;
         if (GetComponent<BoxCollider2D>())
         {

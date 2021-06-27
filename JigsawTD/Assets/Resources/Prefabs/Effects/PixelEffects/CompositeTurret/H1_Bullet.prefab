@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 19833678}
   - component: {fileID: 19912472}
   - component: {fileID: 7964743809017469607}
+  - component: {fileID: 8817679753117811031}
   m_Layer: 0
   m_Name: H1_Bullet
   m_TagString: Untagged
@@ -4694,6 +4695,22 @@ MonoBehaviour:
   sputteringEffect: {fileID: -2044812277787160197, guid: 0e3a27e0d32d2904f8c5286a6b8287bd, type: 3}
   turretParent: {fileID: 0}
   hit: 0
+--- !u!58 &8817679753117811031
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111302}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.4200003
 --- !u!1 &114782
 GameObject:
   m_ObjectHideFlags: 0

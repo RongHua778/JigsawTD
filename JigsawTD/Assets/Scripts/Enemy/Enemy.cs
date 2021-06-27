@@ -119,7 +119,7 @@ public abstract class Enemy : PathFollower
         GameEvents.Instance.EnemyReach(this);
         ObjectPool.Instance.UnSpawn(this);
     }
-    public void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify)
+    public virtual void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify)
     {
         this.pathOffset = pathOffset;
         this.healthBar = healthBar;

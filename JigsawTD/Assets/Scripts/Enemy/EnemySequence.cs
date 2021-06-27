@@ -7,14 +7,15 @@ using UnityEngine;
 public class EnemySequence
 {
     public int Wave;
-    public EnemyAttribute EnemyAttribute;
-    public int Amount;
+    public List<EnemyAttribute> EnemyAttribute;
+    public List<int> Amount;
     public float AmountIntensify;
     public float Intensify;
-    public float CoolDown;
+    public List<float> CoolDown;
     private float SpawnTimer;
-    private int SpawnCounter;
-    public EnemySequence(int wave, EnemyAttribute attribute, float intensify,int amount,float coolDown)
+
+    public List<int> index=new List<int>();
+    public EnemySequence(int wave, List<EnemyAttribute> attribute, float intensify,List<int> amount,List<float> coolDown)
     {
         this.Wave = wave;
         this.EnemyAttribute = attribute;
@@ -22,21 +23,32 @@ public class EnemySequence
         this.Intensify = intensify;
         this.CoolDown = coolDown;
         this.SpawnTimer = 0;
-        this.SpawnCounter = 0;
+        for(int i = 0; i < amount.Count; i++)
+        {
+            for (int j = 0; j < amount[i]; j++)
+            {
+                index.Add(i);
+            }
+        }
+        index = StaticData.RandomSort<int>(index);
     }
 
     public bool Progress()
     {
-        SpawnTimer += Time.deltaTime;
-        if (SpawnTimer >= CoolDown)
+    SpawnTimer += Time.deltaTime;
+        if (index.Count > 0)
         {
-            SpawnTimer = 0;
-            SpawnCounter += 1;
-            GameManager.Instance.SpawnEnemy();
-            if (SpawnCounter >= Amount)
+            int type = index[0];
+            if (SpawnTimer >= CoolDown[type])
             {
-                return false;
+                SpawnTimer = 0;
+                index.RemoveAt(0);
+                GameManager.Instance.SpawnEnemy(type);
             }
+        }
+        else
+        {
+            return false;
         }
         return true;
     }

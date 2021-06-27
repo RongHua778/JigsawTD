@@ -4014,7 +4014,7 @@ MonoBehaviour:
   TileSize: 1
   TileShapeChance: []
   PlayerMaxHealth: 15
-  difficutyWave: 1e000000230000002800000001000000
+  difficutyWave: 1e00000023000000280000001e000000
 --- !u!1 &306440703
 GameObject:
   m_ObjectHideFlags: 0
@@ -16337,7 +16337,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1383652722
 RectTransform:
   m_ObjectHideFlags: 0

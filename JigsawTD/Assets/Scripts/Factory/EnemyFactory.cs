@@ -4,9 +4,9 @@ using UnityEngine;
 
 public enum EnemyType
 {
-    Soilder, Runner, Restorer, Tanker, 
-    BossSelfExplosion, BossRotatingArmor, Divider,Blinker,
-    Ninja, Healer, Borner, Armorer
+    Soilder, Runner, Restorer, Tanker,  Healer, BossSelfExplosion,
+    Fat, BossRotatingArmor, Divider,Blinker,
+    Ninja,  Borner, Armorer
 }
 [CreateAssetMenu(menuName = "Factory/EnemyFactory", fileName = "EnemyFactory")]
 public class EnemyFactory : ScriptableObject

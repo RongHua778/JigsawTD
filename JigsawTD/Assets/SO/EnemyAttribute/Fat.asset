@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 614735ba97a8e4b4bbdf8128289355f3, type: 3}
-  m_Name: Borner
+  m_Name: Fat
   m_EditorClassIdentifier: 
-  EnemyType: 11
+  EnemyType: 6
   InitCount: 1
   CountIncrease: 0
-  Health: 1000
+  Health: 250
   Speed: 0.2
   Shell: 0
   CoolDown: 1
-  Prefab: {fileID: 3559500654722631785, guid: 310738398761dc541a7590eecd33631f, type: 3}
+  Prefab: {fileID: 1826846765945729799, guid: 64a8a9f56a62f9e4b8d1293799b67f4d, type: 3}
   ReachDamage: 5
   extraHealth: 0
-  EnemyIcon: {fileID: 21300000, guid: 14b98bc7efe9e0148b638b63d0db563d, type: 3}
+  EnemyIcon: {fileID: 21300000, guid: 9ded6d6e3486ba04aa9907b672b4bfba, type: 3}
   Description: 
