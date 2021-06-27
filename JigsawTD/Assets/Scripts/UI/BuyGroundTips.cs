@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BuyGroundTips : TileTips
 {
-    public void ReadInfo()
+    public void ReadInfo(int cost)
     {
-        Name.text = GameManager.Instance.BuyOneGroundMoney.ToString();
+        Name.text = cost.ToString();
         Description.text = "¹ºÂòÒ»¿é¿Õ°×µØ°å";
     }
 }
