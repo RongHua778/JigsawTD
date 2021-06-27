@@ -13,8 +13,4 @@ public class BasicTile : GameTile
 
     }
 
-    private void OnMouseDown()
-    {
-        GameManager.Instance.HideTips();
-    }
 }

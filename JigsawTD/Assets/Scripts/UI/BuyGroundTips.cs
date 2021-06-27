@@ -9,10 +9,4 @@ public class BuyGroundTips : TileTips
         Name.text = GameManager.Instance.BuyOneGroundMoney.ToString();
         Description.text = "¹ºÂòÒ»¿é¿Õ°×µØ°å";
     }
-
-    public override void Hide()
-    {
-        base.Hide();
-        BoardSystem.SelectingGround = null;
-    }
 }
