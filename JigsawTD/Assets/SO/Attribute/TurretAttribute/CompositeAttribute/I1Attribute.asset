@@ -18,7 +18,7 @@ MonoBehaviour:
   ContentPrefab: {fileID: 3473736283192967209, guid: ae3a3ea7c8913984ba274c5376b270bd, type: 3}
   RangeType: 0
   element: 0
-  Bullet: {fileID: 8239960043577045739, guid: a50675727eaf6274fa6307ec67ee5529, type: 3}
+  Bullet: {fileID: -5451000839793556455, guid: 898695e6a84f19b4381f2e5e29e0280c, type: 3}
   BulletSpeed: 1
   ShootSound: {fileID: 8300000, guid: 4f7538d155d5687479b2932c5349bdf2, type: 3}
   Rare: 2
@@ -38,9 +38,7 @@ MonoBehaviour:
       EffectDescription: "\u6781\u901F\u8FC7\u8F7D\uFF1A\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347\u672C\u56DE\u5408\u653B\u901F0.1\u3002\uFF08\u4E0A\u965010\uFF09"
     PoloEffects: []
     TurretName: "I1\u8F6E\u8F6C\u70AE"
-    Icon: {fileID: 21300000, guid: 77bba78c11fc4c04d81f21b26c4c433f, type: 3}
-    BaseSprite: {fileID: 21300000, guid: cfc4a480c7295054ebb4cfc6d03633ce, type: 3}
-    CannonSprite: {fileID: 21300000, guid: 454139224b92b5e419a21ae69372ff27, type: 3}
+    CannonSprite: {fileID: -6186797135952016049, guid: c066612b6f4b1e44d8b5837b75cf8b08, type: 3}
     ShootPointOffset: {x: 0, y: 0}
   - AttackRange: 1
     ForbidRange: 0
@@ -55,9 +53,7 @@ MonoBehaviour:
       EffectDescription: "\u6781\u901F\u8FC7\u8F7D\uFF1A\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347\u672C\u56DE\u5408\u653B\u901F0.12\u3002\uFF08\u4E0A\u965012\uFF09"
     PoloEffects: []
     TurretName: "I2\u8F6E\u8F6C\u70AE"
-    Icon: {fileID: 21300000, guid: 77bba78c11fc4c04d81f21b26c4c433f, type: 3}
-    BaseSprite: {fileID: 21300000, guid: cfc4a480c7295054ebb4cfc6d03633ce, type: 3}
-    CannonSprite: {fileID: 21300000, guid: 454139224b92b5e419a21ae69372ff27, type: 3}
+    CannonSprite: {fileID: -432138986413943803, guid: c066612b6f4b1e44d8b5837b75cf8b08, type: 3}
     ShootPointOffset: {x: 0, y: 0}
   - AttackRange: 1
     ForbidRange: 0
@@ -72,7 +68,5 @@ MonoBehaviour:
       EffectDescription: "\u6781\u901F\u8FC7\u8F7D\uFF1A\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347\u672C\u56DE\u5408\u653B\u901F0.15\u3002(\u4E0A\u965015)"
     PoloEffects: []
     TurretName: "I3\u8F6E\u8F6C\u70AE"
-    Icon: {fileID: 21300000, guid: 77bba78c11fc4c04d81f21b26c4c433f, type: 3}
-    BaseSprite: {fileID: 21300000, guid: cfc4a480c7295054ebb4cfc6d03633ce, type: 3}
-    CannonSprite: {fileID: 21300000, guid: 454139224b92b5e419a21ae69372ff27, type: 3}
+    CannonSprite: {fileID: 8605722687922174138, guid: c066612b6f4b1e44d8b5837b75cf8b08, type: 3}
     ShootPointOffset: {x: 0, y: 0}

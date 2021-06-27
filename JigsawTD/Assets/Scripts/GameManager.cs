@@ -1,3 +1,4 @@
+using Pathfinding;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private TurretTips m_TurretTips = default;
     [SerializeField] private TempTips m_TempTips = default;
     [SerializeField] private TrapTips m_TrapTips = default;
-    [SerializeField] public BuyGroundTips m_BuyGroundTips = default;
+    [SerializeField] private BuyGroundTips m_BuyGroundTips = default;
 
     [Header("工厂")]
     [SerializeField] TileFactory _tileFactory = default;
@@ -54,16 +55,7 @@ public class GameManager : Singleton<GameManager>
     private BuildingState buildingState;
     private PickingState pickingState;
     private WaveState waveState;
-    //买一块地板多少钱
-    int buyOneGroundMoney = 10;
-    public int BuyOneGroundMoney
-    {
-        get => buyOneGroundMoney;
-        set
-        {
-            buyOneGroundMoney = value;
-        }
-    }
+
     //初始化设定
     public void Initinal()
     {
@@ -352,15 +344,16 @@ public class GameManager : Singleton<GameManager>
 
     public void BuyOneGround()
     {
-        m_MainUI.Coin -= buyOneGroundMoney;
-        GameTile tile=_tileFactory.GetBasicTile();
-        GameTileContent content = _contentFactory.GetBasicContent(GameTileContentType.Empty);
-        tile.SetContent(content);
-        tile.transform.position = BoardSystem.SelectingGround.transform.position;
-        tile.TileLanded();
-        Physics2D.SyncTransforms();
-        m_BuyGroundTips.Hide();
-        BuyOneGroundMoney += 10;
+        if (StaticData.GetNodeWalkable(BoardSystem.SelectingTile))
+        {
+            ShowMessage("此处已经有地基");
+            return;
+        }
+        if (ConsumeMoney(m_BoardSystem.BuyOneGroundMoney))
+        {
+            m_BoardSystem.BuyOneEmptyTile();
+            m_BuyGroundTips.Hide();
+        }
     }
 
     #endregion
@@ -382,9 +375,9 @@ public class GameManager : Singleton<GameManager>
         m_TrapTips.Show();
     }
 
-    public void ShowBuyGroundTips(TileBase tile)
+    public void ShowBuyGroundTips()
     {
-        m_BuyGroundTips.ReadInfo();
+        m_BuyGroundTips.ReadInfo(m_BoardSystem.BuyOneGroundMoney);
         m_TurretTips.Hide();
         m_TrapTips.Hide();
         m_BuyGroundTips.Show();

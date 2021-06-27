@@ -18,7 +18,7 @@ MonoBehaviour:
   ContentPrefab: {fileID: 7540347977943103148, guid: d914d163b81634f4c893b72c05177560, type: 3}
   RangeType: 0
   element: 0
-  Bullet: {fileID: 4724693461310116490, guid: ce94163d5bd84504e80394f411a9d070, type: 3}
+  Bullet: {fileID: -8373056630608583431, guid: 3e3b44a6f04ad6148972b255b36a12e7, type: 3}
   BulletSpeed: 8
   ShootSound: {fileID: 8300000, guid: af5ec73dace3dab4489f0b98e8e6098d, type: 3}
   Rare: 1
@@ -38,10 +38,8 @@ MonoBehaviour:
       EffectDescription: "\u6108\u6218\u6108\u52C7\uFF1A\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347\u672C\u56DE\u540810%\u653B\u51FB\u529B\uFF0C\u4E0A\u9650200%\u3002"
     PoloEffects: []
     TurretName: "F1\u7EC4\u5408\u70AE"
-    Icon: {fileID: 21300000, guid: efd7eca78d1a1d44d8b38abd7973113e, type: 3}
-    BaseSprite: {fileID: 21300000, guid: cfc4a480c7295054ebb4cfc6d03633ce, type: 3}
-    CannonSprite: {fileID: 21300000, guid: d14cac682188a64479d99ce0766836ff, type: 3}
-    ShootPointOffset: {x: 0, y: 0.27}
+    CannonSprite: {fileID: -4849019349383934194, guid: 1558cccd561e63b498e46ef6dc096a5d, type: 3}
+    ShootPointOffset: {x: 0, y: 0.4}
   - AttackRange: 2
     ForbidRange: 0
     AttackDamage: 70
@@ -55,10 +53,8 @@ MonoBehaviour:
       EffectDescription: "\u6108\u6218\u6108\u52C7\uFF1A\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347\u672C\u56DE\u540815%\u653B\u51FB\u529B\uFF0C\u4E0A\u9650300%\u3002"
     PoloEffects: []
     TurretName: "F2\u7EC4\u5408\u70AE"
-    Icon: {fileID: 21300000, guid: efd7eca78d1a1d44d8b38abd7973113e, type: 3}
-    BaseSprite: {fileID: 21300000, guid: cfc4a480c7295054ebb4cfc6d03633ce, type: 3}
-    CannonSprite: {fileID: 21300000, guid: d14cac682188a64479d99ce0766836ff, type: 3}
-    ShootPointOffset: {x: 0, y: 0.27}
+    CannonSprite: {fileID: 2752858795648052391, guid: 1558cccd561e63b498e46ef6dc096a5d, type: 3}
+    ShootPointOffset: {x: 0, y: 0.44}
   - AttackRange: 2
     ForbidRange: 0
     AttackDamage: 120
@@ -72,7 +68,5 @@ MonoBehaviour:
       EffectDescription: "\u6108\u6218\u6108\u52C7\uFF1A\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347\u672C\u56DE\u540820%\u653B\u51FB\u529B\uFF0C\u4E0A\u9650400%\u3002"
     PoloEffects: []
     TurretName: "F3\u7EC4\u5408\u70AE"
-    Icon: {fileID: 21300000, guid: efd7eca78d1a1d44d8b38abd7973113e, type: 3}
-    BaseSprite: {fileID: 21300000, guid: cfc4a480c7295054ebb4cfc6d03633ce, type: 3}
-    CannonSprite: {fileID: 21300000, guid: d14cac682188a64479d99ce0766836ff, type: 3}
-    ShootPointOffset: {x: 0, y: 0.27}
+    CannonSprite: {fileID: 6073466923811645465, guid: 1558cccd561e63b498e46ef6dc096a5d, type: 3}
+    ShootPointOffset: {x: 0, y: 0.44}

@@ -9602,8 +9602,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
-  SputteringEffect: {fileID: 3494240544614092349, guid: eb6cba38b10cbae4595d14d7b62081a8, type: 3}
+  sputteringEffect: {fileID: 0}
   turretParent: {fileID: 0}
+  hit: 0
 --- !u!58 &3036737263589404745
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -18,8 +18,8 @@ public class BlueprintFactory : GameObjectFactory
             blueprint.Compositions.Add(c);
         }
         blueprint.SetBluePrintIntensify();
-        CompositeStrategy comStrategy = new CompositeStrategy(attribute, blueprint, 1);
-        blueprint.ComStrategy = comStrategy;
+        CompositeStrategy strategy = new CompositeStrategy(attribute, blueprint, 1, null);
+        blueprint.ComStrategy = strategy;
         return blueprint;
     }
 

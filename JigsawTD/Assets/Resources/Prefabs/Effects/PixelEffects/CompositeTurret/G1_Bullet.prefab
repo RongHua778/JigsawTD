@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 2245073835532274941}
   - component: {fileID: 134762492602489568}
   m_Layer: 0
-  m_Name: Bullet_G1
+  m_Name: G1_Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
-  SputteringEffect: {fileID: 3494240544614092349, guid: eb6cba38b10cbae4595d14d7b62081a8, type: 3}
+  sputteringEffect: {fileID: 3494240544614092349, guid: eb6cba38b10cbae4595d14d7b62081a8, type: 3}
   turretParent: {fileID: 0}
   hit: 0
 --- !u!96 &134762492602489568

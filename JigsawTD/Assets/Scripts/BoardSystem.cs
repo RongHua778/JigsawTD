@@ -28,8 +28,8 @@ public class BoardSystem : IGameSystem
     float pressCounter = 0;
     public bool IsPressingTile = false;
     public bool IsLongPress { get => pressCounter >= 0.3f; }
-    private static GameTile selectingTile;
-    public static GameTile SelectingTile
+    private static TileBase selectingTile;
+    public static TileBase SelectingTile
     {
         get => selectingTile;
         set
@@ -53,43 +53,6 @@ public class BoardSystem : IGameSystem
         }
 
     }
-
-    private static TileBase selectingGround;
-    public static TileBase SelectingGround 
-    {
-        get => selectingGround;
-        set 
-        {
-            if (selectingGround != null)
-            {
-                if (selectingGround == value)
-                {
-                    selectingGround = null;
-                }
-                else
-                {
-                    selectingGround = value;
-                }
-            }
-            else
-            {
-                selectingGround = value;
-            }
-            if (selectingGround != null)
-            {
-                selection.transform.position = selectingGround.transform.position;
-                GameManager.Instance.ShowBuyGroundTips(selectingGround);
-            }
-            else
-            {
-                GameManager.Instance.HideTips();
-            }
-
-            selection.SetActive(selectingGround != null);
-
-        }
-    }
-
     #endregion
 
     public static Vector2Int _startSize = new Vector2Int(3, 3); //初始大小
@@ -111,6 +74,17 @@ public class BoardSystem : IGameSystem
     GameTile destinationPoint;
     public GameTile DestinationPoint { get => destinationPoint; set => destinationPoint = value; }
 
+    //买一块地板多少钱
+    int buyOneGroundMoney = 10;
+    public int BuyOneGroundMoney
+    {
+        get => buyOneGroundMoney;
+        set
+        {
+            buyOneGroundMoney = value;
+        }
+    }
+
     public static bool FindPath { get; set; }
 
     public override void Initialize(GameManager gameManager)
@@ -121,7 +95,6 @@ public class BoardSystem : IGameSystem
         GameEvents.Instance.onSeekPath += SeekPath;
         GameEvents.Instance.onTileClick += TileClick;
         GameEvents.Instance.onTileUp += TileUp;
-        GameEvents.Instance.onGroundUp += GroundUp;
         SetGameBoard();
     }
 
@@ -130,7 +103,6 @@ public class BoardSystem : IGameSystem
         GameEvents.Instance.onSeekPath -= SeekPath;
         GameEvents.Instance.onTileClick -= TileClick;
         GameEvents.Instance.onTileUp -= TileUp;
-        GameEvents.Instance.onGroundUp -= GroundUp;
     }
 
     public override void GameUpdate()
@@ -144,17 +116,13 @@ public class BoardSystem : IGameSystem
         {
             pressCounter = 0;
         }
-        //if (SelectingTile != null)
-        //{
-        //    selection.transform.position = SelectingTile.transform.position;
-        //}
     }
     private void TileClick()
     {
         IsPressingTile = true;
     }
 
-    private void TileUp(GameTile tile)
+    private void TileUp(TileBase tile)
     {
         if (!IsLongPress)
         {
@@ -163,10 +131,7 @@ public class BoardSystem : IGameSystem
         IsPressingTile = false;
     }
 
-    private void GroundUp(TileBase tile)
-    {
-        SelectingGround = tile;
-    }
+
 
     public void SetGameBoard()
     {
@@ -331,6 +296,23 @@ public class BoardSystem : IGameSystem
         }
     }
 
+    public void BuyOneEmptyTile()
+    {
+        GameTile tile = ConstructHelper.GetNormalTile(GameTileContentType.Empty);
+        tile.transform.position = SelectingTile.transform.position;
+        tile.TileLanded();
+        BuyOneGroundMoney += 10;
+        Physics2D.SyncTransforms();
+        SeekPath();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            SeekPath();
+        }
+    }
     //待弃用方法0609
 
     //private void GetPathTiles()

@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Factory/ContentFactory", fileName = "GameContentFactory")]
 public class TileContentFactory : GameObjectFactory
 {
-
+    [SerializeField] ContentAttribute groundAtt = default;
     [SerializeField] ContentAttribute emptyAtt = default;
     [SerializeField] ContentAttribute spawnPointAtt = default;
     [SerializeField] ContentAttribute destinationAtt = default;
@@ -71,6 +71,8 @@ public class TileContentFactory : GameObjectFactory
                 return Get(destinationAtt.ContentPrefab);
             case GameTileContentType.SpawnPoint:
                 return Get(spawnPointAtt.ContentPrefab);
+            case GameTileContentType.Ground:
+                return Get(groundAtt.ContentPrefab);
         }
         Debug.Assert(false, "Unsupported Type" + type);
         return null;
@@ -89,7 +91,7 @@ public class TileContentFactory : GameObjectFactory
         int quality = StaticData.RandomNumber(qualityC) + 1;
         TurretAttribute attribute = ElementDIC[(Element)element];
         ElementTurret content = Get(attribute.ContentPrefab) as ElementTurret;
-        content.Strategy = new ElementStrategy(attribute, quality, (Element)element);
+        content.Strategy = new ElementStrategy(attribute, quality, (Element)element, content);
         content.InitializeTurret();
         return content;
     }
@@ -98,7 +100,7 @@ public class TileContentFactory : GameObjectFactory
     {
         TurretAttribute attribute = ElementDIC[element];
         ElementTurret content = Get(attribute.ContentPrefab) as ElementTurret;
-        content.Strategy = new ElementStrategy(attribute, quality,element);
+        content.Strategy = new ElementStrategy(attribute, quality, element, content);
         content.InitializeTurret();
         return content;
     }
@@ -114,6 +116,7 @@ public class TileContentFactory : GameObjectFactory
     {
         CompositeTurret content = Get(bluePrint.CompositeTurretAttribute.ContentPrefab) as CompositeTurret;
         content.Strategy = bluePrint.ComStrategy;
+        bluePrint.ComStrategy.m_Turret = content;
         content.InitializeTurret();
         return content;
 

@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
-  m_Name: T23
+  m_Name: M1Attribute
   m_EditorClassIdentifier: 
-  Name: T23
+  Name: M1
   Icon: {fileID: 21300000, guid: 8e83712f39bdf9e4db0b0de438c2e4b2, type: 3}
   Description: 
   ContentPrefab: {fileID: 3184344065496086193, guid: ec76f05b1efa1874b8faa449cea6300a, type: 3}
   RangeType: 2
   element: 0
-  Bullet: {fileID: 8751158320438164632, guid: ed2a76e55e6526f43970f0b98ff1a7e3, type: 3}
+  Bullet: {fileID: 6504941539332389289, guid: d783f38712dd14d4e9cc485d051d7b20, type: 3}
   BulletSpeed: 2
   ShootSound: {fileID: 8300000, guid: 4ed1e1b069a2797408e854b01ab7ce17, type: 3}
   Rare: 2
@@ -37,11 +37,9 @@ MonoBehaviour:
       KeyValue: 0.5
       EffectDescription: "\u52A0\u901F\u51B7\u5374\uFF1A\u4F7F\u654C\u4EBA\u5F53\u524D\u7684\u52A0\u901F\u6548\u679C\u63D0\u9AD850%\u3002"
     PoloEffects: []
-    TurretName: "T23\u96EA\u7403\u70AE"
-    Icon: {fileID: 21300000, guid: 8e83712f39bdf9e4db0b0de438c2e4b2, type: 3}
-    BaseSprite: {fileID: 21300000, guid: cfc4a480c7295054ebb4cfc6d03633ce, type: 3}
-    CannonSprite: {fileID: 21300000, guid: 9a923fdc983dd95488576aab112f9eb3, type: 3}
-    ShootPointOffset: {x: 0, y: 0.12}
+    TurretName: "M1\u96EA\u7403\u70AE"
+    CannonSprite: {fileID: -3859780340106055629, guid: 8b08e3a9cd80f52418cdf2897bf78f79, type: 3}
+    ShootPointOffset: {x: 0, y: 0.21}
   - AttackRange: 4
     ForbidRange: 0
     AttackDamage: 80
@@ -54,11 +52,9 @@ MonoBehaviour:
       KeyValue: 0.75
       EffectDescription: "\u52A0\u901F\u51B7\u5374\uFF1A\u4F7F\u654C\u4EBA\u5F53\u524D\u7684\u52A0\u901F\u6548\u679C\u63D0\u9AD875%\u3002"
     PoloEffects: []
-    TurretName: "T23\u96EA\u7403\u70AE"
-    Icon: {fileID: 21300000, guid: 8e83712f39bdf9e4db0b0de438c2e4b2, type: 3}
-    BaseSprite: {fileID: 21300000, guid: cfc4a480c7295054ebb4cfc6d03633ce, type: 3}
-    CannonSprite: {fileID: 21300000, guid: 9a923fdc983dd95488576aab112f9eb3, type: 3}
-    ShootPointOffset: {x: 0, y: 0.12}
+    TurretName: "M2\u96EA\u7403\u70AE"
+    CannonSprite: {fileID: -5207565593283179170, guid: 8b08e3a9cd80f52418cdf2897bf78f79, type: 3}
+    ShootPointOffset: {x: 0, y: 0.23}
   - AttackRange: 4
     ForbidRange: 0
     AttackDamage: 120
@@ -71,8 +67,6 @@ MonoBehaviour:
       KeyValue: 1
       EffectDescription: "\u52A0\u901F\u51B7\u5374\uFF1A\u4F7F\u654C\u4EBA\u5F53\u524D\u7684\u52A0\u901F\u6548\u679C\u63D0\u9AD8100%\u3002"
     PoloEffects: []
-    TurretName: "T23\u96EA\u7403\u70AE"
-    Icon: {fileID: 21300000, guid: 8e83712f39bdf9e4db0b0de438c2e4b2, type: 3}
-    BaseSprite: {fileID: 21300000, guid: cfc4a480c7295054ebb4cfc6d03633ce, type: 3}
-    CannonSprite: {fileID: 21300000, guid: 9a923fdc983dd95488576aab112f9eb3, type: 3}
-    ShootPointOffset: {x: 0, y: 0.12}
+    TurretName: "M3\u96EA\u7403\u70AE"
+    CannonSprite: {fileID: 3606099757945672632, guid: 8b08e3a9cd80f52418cdf2897bf78f79, type: 3}
+    ShootPointOffset: {x: 0, y: 0.28}

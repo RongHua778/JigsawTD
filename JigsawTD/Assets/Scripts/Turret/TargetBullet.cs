@@ -20,13 +20,10 @@ public class TargetBullet : Bullet
     {
         base.TriggerDamage();
 
-        if (SputteringEffect != null)
-        {
-            ParticalControl effect = ObjectPool.Instance.Spawn(SputteringEffect) as ParticalControl;
-            effect.transform.position = transform.position;
-            effect.transform.localScale = Mathf.Max(0.4f, SputteringRange * 2) * Vector3.one;
-            effect.PlayEffect();
-        }
+        ParticalControl effect = ObjectPool.Instance.Spawn(SputteringEffect) as ParticalControl;
+        effect.transform.position = transform.position;
+        effect.transform.localScale = Mathf.Max(0.3f, SputteringRange * 2) * Vector3.one;
+        effect.PlayEffect();
 
         if (SputteringRange > 0)
         {

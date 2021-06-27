@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum GameTileContentType
 {
-    Empty, Destination, SpawnPoint, ElementTurret, CompositeTurret, Trap
+    Empty, Destination, SpawnPoint, ElementTurret, CompositeTurret, Trap, Ground
 }
 public abstract class GameTileContent : ReusableObject
 {
@@ -13,8 +13,8 @@ public abstract class GameTileContent : ReusableObject
     public virtual bool IsWalkable { get => true; }
     public virtual GameTileContentType ContentType { get; }
 
-    private GameTile m_gameTile;
-    public GameTile m_GameTile { get => m_gameTile; set => m_gameTile = value; }
+    private TileBase m_gameTile;
+    public TileBase m_GameTile { get => m_gameTile; set => m_gameTile = value; }
 
     public virtual void ContentLanded()//该content放在地上时触发
     {

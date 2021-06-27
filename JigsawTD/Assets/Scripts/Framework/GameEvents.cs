@@ -28,17 +28,12 @@ public class GameEvents : Singleton<GameEvents>
         onTileClick?.Invoke();
     }
 
-    public event Action<GameTile> onTileUp;
-    public void TileUp(GameTile tile)
+    public event Action<TileBase> onTileUp;
+    public void TileUp(TileBase tile)
     {
         onTileUp?.Invoke(tile);
     }
 
-    public event Action<TileBase> onGroundUp;
-    public void GroundUp(TileBase tile)
-    {
-        onGroundUp?.Invoke(tile);
-    }
 
     public event Action<Enemy> onEnemyReach;
     public void EnemyReach(Enemy enemy)

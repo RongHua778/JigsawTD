@@ -86,7 +86,7 @@ MonoBehaviour:
     PathDirection: 0
     ExitPoint: {x: 0, y: 0}
   initialSpeed: 0
-  armorIntensify: 100
+  armorIntensify: 1
   armorCoolDown: 1.5
 --- !u!1 &8360252054385358165
 GameObject:

@@ -7,7 +7,7 @@ public class ElementStrategy : BasicStrategy
 {
     public override StrategyType strategyType => StrategyType.Element;
     public Element Element;
-    public ElementStrategy(TurretAttribute attribute, int quality,Element element) : base(attribute, quality)
+    public ElementStrategy(TurretAttribute attribute, int quality, Element element, TurretContent turret) : base(attribute, quality, turret)
     {
         this.Element = element;
     }

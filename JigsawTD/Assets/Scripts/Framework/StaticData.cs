@@ -402,10 +402,8 @@ public class StaticData : Singleton<StaticData>
         tile.OffsetCoord = new Vector2Int(newX, newY);
     }
 
-    public static void SetNodeWalkable(GameTile tile, bool walkable, bool changeAble = true)
+    public static void SetNodeWalkable(TileBase tile, bool walkable, bool changeAble = true)
     {
-
-
         var grid = AstarPath.active.data.gridGraph;
         int p = tile.OffsetCoord.x;
         int q = tile.OffsetCoord.y;
@@ -415,5 +413,16 @@ public class StaticData : Singleton<StaticData>
         node.Walkable = walkable;
         node.ChangeAbleNode = changeAble;
         grid.CalculateConnectionsForCellAndNeighbours(p, q);
+    }
+
+    public static bool GetNodeWalkable(TileBase tile)
+    {
+        var grid = AstarPath.active.data.gridGraph;
+        int p = tile.OffsetCoord.x;
+        int q = tile.OffsetCoord.y;
+
+        GridNodeBase node = grid.nodes[q * grid.width + p];
+
+        return node.Walkable;
     }
 }
