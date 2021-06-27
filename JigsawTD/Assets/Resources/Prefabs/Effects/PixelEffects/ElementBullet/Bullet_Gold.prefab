@@ -72,6 +72,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3850126010392176226}
     m_Modifications:
+    - target: {fileID: 121970, guid: 1b802e8474231504599933a3c9b26f5f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 192856, guid: 1b802e8474231504599933a3c9b26f5f, type: 3}
       propertyPath: m_Name
       value: BulletYellow 1

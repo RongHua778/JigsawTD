@@ -97,7 +97,7 @@ public class ScaleAndMove : MonoBehaviour
         if (Input.GetAxis("Mouse ScrollWheel") != 0)
         {
             cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minmum, maximum);
-            cam.orthographicSize += Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
+            cam.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
         }
 
         Vector3 speedHorizon = new Vector3(0, 0, 0);

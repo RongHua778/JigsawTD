@@ -18,7 +18,7 @@ MonoBehaviour:
   ContentPrefab: {fileID: 4967710668388058910, guid: 1222c5c9d6ecf7a4195b038a25c2816f, type: 3}
   RangeType: 1
   element: 0
-  Bullet: {fileID: 7928837241985267758, guid: 24e8073ca955e014ca83e6c13d5fd3b8, type: 3}
+  Bullet: {fileID: 7964743809017469607, guid: bf78bd4c17ef2db429e9853d40118583, type: 3}
   BulletSpeed: 6
   ShootSound: {fileID: 8300000, guid: 99adc41eefed7204a8a273742e148342, type: 3}
   Rare: 2
@@ -54,7 +54,7 @@ MonoBehaviour:
     PoloEffects: []
     TurretName: "H2\u8FEB\u51FB\u70AE"
     CannonSprite: {fileID: 2696707030071803913, guid: 9f8ffabf4348bc14f856b8f7431d5260, type: 3}
-    ShootPointOffset: {x: 0, y: 0.22}
+    ShootPointOffset: {x: 0, y: 0.25}
   - AttackRange: 5
     ForbidRange: 0
     AttackDamage: 500
@@ -69,4 +69,4 @@ MonoBehaviour:
     PoloEffects: []
     TurretName: "H3\u8FEB\u51FB\u70AE"
     CannonSprite: {fileID: -763524890675468239, guid: 9f8ffabf4348bc14f856b8f7431d5260, type: 3}
-    ShootPointOffset: {x: 0, y: 0.22}
+    ShootPointOffset: {x: 0, y: 0.3}

@@ -27,13 +27,10 @@ public class PenetrateBullet : Bullet
             Enemy enemy = collision.GetComponent<TargetPoint>().Object;
             DealRealDamage(enemy, Damage);
 
-            if (SputteringEffect != null)
-            {
-                ParticalControl effect = ObjectPool.Instance.Spawn(SputteringEffect) as ParticalControl;
-                effect.transform.position = transform.position;
-                effect.transform.localScale = 0.2f * Vector3.one;
-                effect.PlayEffect();
-            }
+            ParticalControl effect = ObjectPool.Instance.Spawn(SputteringEffect) as ParticalControl;
+            effect.transform.position = transform.position;
+            effect.transform.localScale = 0.2f * Vector3.one;
+            effect.PlayEffect();
 
         }
 
@@ -43,13 +40,10 @@ public class PenetrateBullet : Bullet
     {
         if (SputteringRange > 0)
         {
-            if (SputteringEffect != null)
-            {
-                ParticalControl effect = ObjectPool.Instance.Spawn(SputteringEffect) as ParticalControl;
-                effect.transform.position = transform.position;
-                effect.transform.localScale = Vector3.one * SputteringRange * 2;
-                effect.PlayEffect();
-            }
+            ParticalControl effect = ObjectPool.Instance.Spawn(SputteringEffect) as ParticalControl;
+            effect.transform.position = transform.position;
+            effect.transform.localScale = Vector3.one * SputteringRange * 2;
+            effect.PlayEffect();
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, SputteringRange, enemyLayerMask);
             foreach (Collider2D hit in hits)
             {
