@@ -27,45 +27,45 @@ MonoBehaviour:
   TurretLevels:
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 10
-    AttackSpeed: 3
+    AttackDamage: 30
+    AttackSpeed: 2
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
     TurretEffects:
     - EffectName: 8
-      KeyValue: 0.05
-      EffectDescription: "\u7A7F\u900F\u5B50\u5F39\uFF1A\u9020\u6210\u76EE\u68075%\u5F53\u524D\u751F\u547D\u503C\u7684\u989D\u5916\u4F24\u5BB3\u3002"
+      KeyValue: 0.02
+      EffectDescription: "\u7A7F\u900F\u5B50\u5F39\uFF1A\u9020\u6210\u76EE\u68072%\u5F53\u524D\u751F\u547D\u503C\u7684\u989D\u5916\u4F24\u5BB3\u3002"
     PoloEffects: []
     TurretName: "L1\u75BE\u5C04\u70AE"
     CannonSprite: {fileID: -1517020906295608978, guid: 366e71c72e7bafa4190a02691b4032a1, type: 3}
     ShootPointOffset: {x: 0, y: 0.19}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 20
-    AttackSpeed: 3
+    AttackDamage: 60
+    AttackSpeed: 2
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
     TurretEffects:
     - EffectName: 8
-      KeyValue: 0.08
-      EffectDescription: "\u7A7F\u900F\u5B50\u5F39\uFF1A\u9020\u6210\u76EE\u68078%\u5F53\u524D\u751F\u547D\u503C\u7684\u989D\u5916\u4F24\u5BB3\u3002"
+      KeyValue: 0.04
+      EffectDescription: "\u7A7F\u900F\u5B50\u5F39\uFF1A\u9020\u6210\u76EE\u68074%\u5F53\u524D\u751F\u547D\u503C\u7684\u989D\u5916\u4F24\u5BB3\u3002"
     PoloEffects: []
     TurretName: "L2\u75BE\u5C04\u70AE"
     CannonSprite: {fileID: 9186318722770319717, guid: 366e71c72e7bafa4190a02691b4032a1, type: 3}
     ShootPointOffset: {x: 0, y: 0.24}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 30
-    AttackSpeed: 3
+    AttackDamage: 90
+    AttackSpeed: 2
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
     TurretEffects:
     - EffectName: 8
-      KeyValue: 0.12
-      EffectDescription: "\u7A7F\u900F\u5B50\u5F39\uFF1A\u9020\u6210\u76EE\u680712%\u5F53\u524D\u751F\u547D\u503C\u7684\u989D\u5916\u4F24\u5BB3\u3002"
+      KeyValue: 0.06
+      EffectDescription: "\u7A7F\u900F\u5B50\u5F39\uFF1A\u9020\u6210\u76EE\u68076%\u5F53\u524D\u751F\u547D\u503C\u7684\u989D\u5916\u4F24\u5BB3\u3002"
     PoloEffects: []
     TurretName: "L3\u75BE\u5C04\u70AE"
     CannonSprite: {fileID: -7401938196994722387, guid: 366e71c72e7bafa4190a02691b4032a1, type: 3}

@@ -68,6 +68,12 @@ public class StaticData : Singleton<StaticData>
     public static float FireCriticalIntensify = 0.1f;
     public static float DustSputteringIntensify = 0.1f;
 
+    public static Color32 RedColor;
+    public static Color32 GreenColor;
+    public static Color32 BlueColor;
+    public static Color32 YellowColor;
+    public static Color32 PurpleColor;
+
     //tips信息
     public static Dictionary<string, string> TipsInfoDIC;
 
@@ -76,6 +82,12 @@ public class StaticData : Singleton<StaticData>
     {
         InitializeInfoDIC();
         //Difficulty = Game.Instance.Difficulty;
+
+        RedColor = new Color32(255, 110, 66,255);
+        GreenColor = new Color32(66, 255, 100, 255);
+        BlueColor = new Color32(66, 223, 255, 255);
+        YellowColor = new Color32(255, 182, 66, 255);
+        PurpleColor = new Color32(255, 100, 237, 255);
     }
 
     private void InitializeInfoDIC()

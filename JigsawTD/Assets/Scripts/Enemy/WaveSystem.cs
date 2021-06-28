@@ -119,15 +119,15 @@ public class WaveSystem : IGameSystem
             //boss*****
             if (i == 9)
             {
-                sequence = new EnemySequence(_enemyFactory,i + 1, stage,EnemyType.Fat);
+                sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Fat);
             }
             else if (i == 16)
             {
-                sequence = new EnemySequence(_enemyFactory,i + 1, stage,EnemyType.BossRotatingArmor);
+                sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.BossRotatingArmor);
             }
             else if (i == 23)
             {
-                sequence = new EnemySequence(_enemyFactory,i + 1, stage,EnemyType.Divider);
+                sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Divider);
             }
             else if (i == 30)
             {
@@ -135,20 +135,27 @@ public class WaveSystem : IGameSystem
             }
             else if (i == 39)
             {
-                sequence = new EnemySequence(_enemyFactory,i + 1, stage,EnemyType.Borner);
+                sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Borner);
             }
-            else if (i%7==0&&i>0)
+            else if (i % 7 == 0 && i > 0)
             {
-                sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random,2);
+                sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random, 2);
             }
-            else if ( i%9==0&&i>0)
+            else if (i % 9 == 0 && i > 0)
             {
                 sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random, 3);
+            }
+            //前三波难度修正
+            else if (i < 3)
+            {
+                stage = (i + 1) * 0.5f;
+                sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random);
             }
             else
             {
                 sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random);
             }
+
             LevelSequence.Enqueue(sequence);
         }
     }
@@ -169,7 +176,7 @@ public class WaveSystem : IGameSystem
 
     }
 
-    public void SpawnEnemy(BoardSystem board,int type)
+    public void SpawnEnemy(BoardSystem board, int type)
     {
         EnemyAttribute attribute = RunningSequence.EnemyAttribute[type];
         float intensify = RunningSequence.Intensify;

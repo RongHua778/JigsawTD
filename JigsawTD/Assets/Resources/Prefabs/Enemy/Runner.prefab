@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
-  exlposionPrefab: {fileID: 550125806612273610, guid: b84b54b7d83a0204ab300a00418ef730, type: 3}
+  exlposionPrefab: {fileID: -6034455848977891584, guid: c563cad02289a8749aacab7b722c9044, type: 3}
   CurrentTile: {fileID: 0}
   model: {fileID: 7619665209501119904}
   CurrentPoint:

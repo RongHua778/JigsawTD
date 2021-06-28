@@ -160,13 +160,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
-  exlposionPrefab: {fileID: 9093981622819706278, guid: f1ea12073b3170943af71026bb40ecff, type: 3}
+  exlposionPrefab: {fileID: -6034455848977891584, guid: c563cad02289a8749aacab7b722c9044, type: 3}
   CurrentTile: {fileID: 0}
   model: {fileID: 7619665209501119904}
   CurrentPoint:
     PathPos: {x: 0, y: 0}
     PathDirection: 0
     ExitPoint: {x: 0, y: 0}
+  initialSpeed: 0
   detector: {fileID: 4357367515785420351}
   freezeTime: 3.07
 --- !u!1 &8360252054385358165
@@ -230,7 +231,7 @@ Transform:
   m_GameObject: {fileID: 8441449879656583668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7619665209501119904}
   m_RootOrder: 0
@@ -275,8 +276,8 @@ SpriteRenderer:
   m_SortingLayerID: -1288343251
   m_SortingLayer: 2
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 132e9a3c321bc384c9b43b0213ec2a85, type: 3}
-  m_Color: {r: 0.9811321, g: 0.4757565, b: 0.4757565, a: 1}
+  m_Sprite: {fileID: -4512359869375799480, guid: f9835346b30cae840a9eff85ed192e6f, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -301,7 +302,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.6
+  m_Radius: 0.3
 --- !u!114 &6941142978531091582
 MonoBehaviour:
   m_ObjectHideFlags: 0

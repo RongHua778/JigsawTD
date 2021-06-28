@@ -14,6 +14,12 @@ TextureImporter:
   - first:
       213: -1992789463179596284
     second: EnemyCollection_3
+  - first:
+      213: -4512359869375799480
+    second: EnemyCollection_4
+  - first:
+      213: 8019492531564915904
+    second: EnemyCollection_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -218,6 +224,48 @@ TextureImporter:
       bones: []
       spriteID: 40ee90f9a803854e0800000000000000
       internalID: -1992789463179596284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyCollection_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84f90273b90e061c0800000000000000
+      internalID: -4512359869375799480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EnemyCollection_5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cc23d6e7f5fa4f60800000000000000
+      internalID: 8019492531564915904
       vertices: []
       indices: 
       edges: []

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TargetTrapAttribute
   m_EditorClassIdentifier: 
   Name: "\u4F24\u5BB3\u6807\u8BB0"
-  Icon: {fileID: 21300000, guid: e43f72fa144c94c4c822eb705ff4db64, type: 3}
+  Icon: {fileID: 5171557775822150397, guid: 7cdac59c1a58c4049b2d1ad53616d6b1, type: 3}
   Description: "\u6807\u8BB0\u7ECF\u8FC7\u7684\u654C\u4EBA\uFF0C\u7ECF\u8FC7\u4E0B\u4E00\u4E2A\u4F24\u5BB3\u6807\u8BB0\u65F6\uFF0C\u9020\u6210\u5176\u671F\u95F4\u6240\u53D7\u4F24\u5BB335%\u7684\u989D\u5916\u4F24\u5BB3\u3002"
   ContentPrefab: {fileID: 1796266474407762984, guid: ff388b9dcb814cf4ba73a8702ab78c3d, type: 3}
   BuffInfos:
