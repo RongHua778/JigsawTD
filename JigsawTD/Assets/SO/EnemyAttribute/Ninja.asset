@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Ninja
   m_EditorClassIdentifier: 
   EnemyType: 10
-  InitCount: 1
-  CountIncrease: 1
+  InitCount: 0
+  CountIncrease: 0
   Health: 20000
   Speed: 0.2
   Shell: 0

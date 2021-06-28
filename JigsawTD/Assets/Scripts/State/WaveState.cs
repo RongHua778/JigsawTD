@@ -36,6 +36,9 @@ public class WaveState : BattleOperationState
                 case EnemyType.Tanker:
                     Sound.Instance.PlayBg("tanker");
                     break;
+                default:
+                    Sound.Instance.PlayBg("lastwave");
+                    break;
             }
         }
         yield break;

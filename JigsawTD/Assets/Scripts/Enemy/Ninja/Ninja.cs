@@ -24,7 +24,7 @@ public class Ninja : Enemy
     public override bool GameUpdate()
     {
         Speed = minSpeed + maxSpeed * ((float)PointIndex / (float)pathPoints.Count);
-        progressFactor = Speed * adjust;
+        ProgressFactor = Speed * Adjust;
         return base.GameUpdate();
     }
 }

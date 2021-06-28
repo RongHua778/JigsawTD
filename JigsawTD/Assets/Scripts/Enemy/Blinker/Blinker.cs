@@ -40,7 +40,7 @@ public class Blinker : Enemy
         AnimatorStateInfo stateinfo = anim.GetCurrentAnimatorStateInfo(0);
         if (stateinfo.IsName("Exit")&&stateinfo.normalizedTime >= 0.95f)
          {
-            PointIndex += 2;
+            PointIndex += 4;
 
             //在终点前不会瞬移
             if (PointIndex < pathPoints.Count - 1)

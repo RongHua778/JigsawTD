@@ -48,7 +48,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.9
+  m_Radius: 1
 --- !u!50 &848161366868032499
 Rigidbody2D:
   serializedVersion: 4
@@ -170,7 +170,7 @@ MonoBehaviour:
     ExitPoint: {x: 0, y: 0}
   initialSpeed: 0
   detector: {fileID: 1745113325744624842}
-  speedUp: 1
+  speedUp: 0.5
 --- !u!1 &8360252054385358165
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,7 +303,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.6
+  m_Radius: 0.27
 --- !u!114 &6941142978531091582
 MonoBehaviour:
   m_ObjectHideFlags: 0

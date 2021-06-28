@@ -4685,7 +4685,7 @@ GameObject:
   - component: {fileID: 19936816}
   - component: {fileID: -8373056630608583431}
   - component: {fileID: 3623257848819073342}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: F1_Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

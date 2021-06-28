@@ -6,7 +6,8 @@ public enum EnemyType
 {
     Soilder, Runner, Restorer, Tanker,  Healer, BossSelfExplosion,
     Fat, BossRotatingArmor, Divider,Blinker,
-    Ninja,  Borner, Armorer
+    Ninja,  Borner, Armorer,
+    Random
 }
 [CreateAssetMenu(menuName = "Factory/EnemyFactory", fileName = "EnemyFactory")]
 public class EnemyFactory : ScriptableObject

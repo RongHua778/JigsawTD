@@ -166,7 +166,7 @@ MonoBehaviour:
     PathDirection: 0
     ExitPoint: {x: 0, y: 0}
   initialSpeed: 0
-  armorIntensify: 100
+  armorIntensify: 30
   armorCoolDown: 99999
 --- !u!114 &4805747800446194494
 MonoBehaviour:
@@ -449,6 +449,10 @@ PrefabInstance:
       propertyPath: boss
       value: 
       objectReference: {fileID: 1339772327}
+    - target: {fileID: 3936075800674979942, guid: 11525621045a1dd439ce35209d1a5062, type: 3}
+      propertyPath: m_Radius
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6781653755455071480, guid: 11525621045a1dd439ce35209d1a5062, type: 3}
       propertyPath: m_Name
       value: Armor (3)
@@ -525,6 +529,10 @@ PrefabInstance:
       propertyPath: boss
       value: 
       objectReference: {fileID: 1339772327}
+    - target: {fileID: 3936075800674979942, guid: 11525621045a1dd439ce35209d1a5062, type: 3}
+      propertyPath: m_Radius
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6781653755455071480, guid: 11525621045a1dd439ce35209d1a5062, type: 3}
       propertyPath: m_Name
       value: Armor (5)
@@ -601,6 +609,10 @@ PrefabInstance:
       propertyPath: boss
       value: 
       objectReference: {fileID: 1339772327}
+    - target: {fileID: 3936075800674979942, guid: 11525621045a1dd439ce35209d1a5062, type: 3}
+      propertyPath: m_Radius
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6781653755455071480, guid: 11525621045a1dd439ce35209d1a5062, type: 3}
       propertyPath: m_Name
       value: Armor (1)
@@ -677,6 +689,10 @@ PrefabInstance:
       propertyPath: boss
       value: 
       objectReference: {fileID: 1339772327}
+    - target: {fileID: 3936075800674979942, guid: 11525621045a1dd439ce35209d1a5062, type: 3}
+      propertyPath: m_Radius
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6781653755455071480, guid: 11525621045a1dd439ce35209d1a5062, type: 3}
       propertyPath: m_Name
       value: Armor (7)
@@ -753,6 +769,10 @@ PrefabInstance:
       propertyPath: boss
       value: 
       objectReference: {fileID: 1339772327}
+    - target: {fileID: 3936075800674979942, guid: 11525621045a1dd439ce35209d1a5062, type: 3}
+      propertyPath: m_Radius
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6781653755455071480, guid: 11525621045a1dd439ce35209d1a5062, type: 3}
       propertyPath: m_Name
       value: Armor (2)
@@ -829,6 +849,10 @@ PrefabInstance:
       propertyPath: boss
       value: 
       objectReference: {fileID: 1339772327}
+    - target: {fileID: 3936075800674979942, guid: 11525621045a1dd439ce35209d1a5062, type: 3}
+      propertyPath: m_Radius
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6781653755455071480, guid: 11525621045a1dd439ce35209d1a5062, type: 3}
       propertyPath: m_Name
       value: Armor (6)
@@ -905,6 +929,10 @@ PrefabInstance:
       propertyPath: boss
       value: 
       objectReference: {fileID: 1339772327}
+    - target: {fileID: 3936075800674979942, guid: 11525621045a1dd439ce35209d1a5062, type: 3}
+      propertyPath: m_Radius
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6781653755455071480, guid: 11525621045a1dd439ce35209d1a5062, type: 3}
       propertyPath: m_Name
       value: Armor
@@ -982,6 +1010,10 @@ PrefabInstance:
       propertyPath: boss
       value: 
       objectReference: {fileID: 1339772327}
+    - target: {fileID: 3936075800674979942, guid: 11525621045a1dd439ce35209d1a5062, type: 3}
+      propertyPath: m_Radius
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6781653755455071480, guid: 11525621045a1dd439ce35209d1a5062, type: 3}
       propertyPath: m_Name
       value: Armor (4)

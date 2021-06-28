@@ -13,7 +13,9 @@ public class Healer : Enemy
         for (int i = 0; i < detector.Enemies.Count; i++)
         {
             detector.Enemies[i].Speed -= speedUp;
+            detector.Enemies[i].ProgressFactor = detector.Enemies[i].Speed * detector.Enemies[i].Adjust;
         }
+        base.OnUnSpawn();
     }
 
 }

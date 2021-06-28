@@ -17,7 +17,7 @@ public abstract class Enemy : PathFollower
         set
         {
             stunTime = value;
-            progressFactor = Speed * adjust;
+            ProgressFactor = Speed * Adjust;
         }
     }
     public float initialSpeed;
@@ -30,7 +30,7 @@ public abstract class Enemy : PathFollower
         set
         {
             slowRate = value;
-            progressFactor = Speed * adjust;//子弹减速即时更新速度
+            ProgressFactor = Speed * Adjust;//子弹减速即时更新速度
             healthBar.ShowSlowIcon(slowRate > 0.01f);
         }
     }
@@ -41,7 +41,7 @@ public abstract class Enemy : PathFollower
         set
         {
             pathSlow = value;
-            progressFactor = Speed * adjust;//子弹减速即时更新速度
+            ProgressFactor = Speed * Adjust;//子弹减速即时更新速度
         }
     }
     int brokeShell;
@@ -66,9 +66,9 @@ public abstract class Enemy : PathFollower
         {
             StunTime -= Time.deltaTime;
             if (StunTime < 0)
-                progressFactor = Speed * adjust;
+                ProgressFactor = Speed * Adjust;
         }
-        progress += Time.deltaTime * progressFactor;
+        progress += Time.deltaTime * ProgressFactor;
 
         if (!trapTriggered && progress >= 0.5f)
         {

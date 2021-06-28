@@ -1403,17 +1403,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveStage: 1
-  waveCoolDown: 2.5
   Running: 0
   pathOffset: 0.1
   healthBarPrefab: {fileID: 904725062044126347, guid: 2362ca59ddd854447ba882941722eec4, type: 3}
   runningSequence:
     Wave: 0
-    EnemyAttribute: {fileID: 0}
-    Amount: 0
+    Stage: 0
+    EnemyAttribute:
+    - {fileID: 0}
+    Amount: 
     AmountIntensify: 0
     Intensify: 0
-    CoolDown: 0
+    CoolDown: []
+    waveCoolDown: 0
+    index: 
 --- !u!4 &107988105
 Transform:
   m_ObjectHideFlags: 0
@@ -4006,8 +4009,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerMaxLevel: 7
   LevelUpMoney: 000000002800000050000000a00000002c010000f4010000ee0200000f270000
-  StartCoin: 10000
-  StartLotteryDraw: 100
+  StartCoin: 0
+  StartLotteryDraw: 0
   BaseWaveIncome: 5
   WaveMultiplyIncome: 5
   EnvrionmentBaseVolume: 0.25
