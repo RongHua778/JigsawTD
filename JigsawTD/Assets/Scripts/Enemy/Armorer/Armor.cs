@@ -67,6 +67,7 @@ public class Armor : MonoBehaviour,IDamageable
     public virtual void ReArmor()
     {
         transform.localScale = Vector3.one;
+        CurrentHealth = MaxHealth;
         //GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
         //if (GetComponent<CircleCollider2D>()) GetComponent<CircleCollider2D>().radius = 0.6f;
         //if (GetComponent<BoxCollider2D>()) GetComponent<BoxCollider2D>().size=new Vector2(boxColliderX,boxColliderY);

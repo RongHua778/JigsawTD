@@ -32,7 +32,7 @@ public class Borner : Enemy
     {
         for (int i = 0; i < enemyOneBorn; i++)
         {
-            int typeInt = Random.Range(0, 4);
+            int typeInt = Random.Range(0, 6);
             SpawnEnemy(bs, (EnemyType)typeInt);
             ws.EnemyRemain++;
         }

@@ -33,6 +33,6 @@ public class Green_Runner : Enemy
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
-        SpeedIntensify = 0;
+        speedIncreased = 0;
     }
 }
