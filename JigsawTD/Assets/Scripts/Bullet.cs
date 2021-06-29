@@ -150,7 +150,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         transform.position = Vector2.MoveTowards(transform.position,
             pos, bulletSpeed * Time.deltaTime);
         float distanceToTarget = ((Vector2)transform.position - pos).magnitude;
-        if ((distanceToTarget < minDistanceToDealDamage))
+        if ((distanceToTarget < minDistanceToDealDamage)&&!hit)
         {
             TriggerDamage();
             ReclaimBullet();
@@ -179,13 +179,12 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         //    effect.PlayEffect();
         //}
     }
-    protected void DealRealDamage(Enemy enemy, float damage)
+    public void DealRealDamage(IDamageable damageable, float damage)
     {
         bool isCritical = UnityEngine.Random.value <= CriticalRate; ;
         float finalDamage = isCritical ? damage * CriticalPercentage : damage;
-        TriggerHitEffect(enemy);
         float realDamage;
-        enemy.ApplyDamage(finalDamage, out realDamage, isCritical);
+        damageable.ApplyDamage(finalDamage, out realDamage, isCritical);
         turretParent.Strategy.DamageAnalysis += (int)realDamage;
     }
 

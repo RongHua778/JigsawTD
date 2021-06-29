@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : PathFollower
+public abstract class Enemy : PathFollower,IDamageable
 {
     [SerializeField] protected ReusableObject exlposionPrefab = default;
     protected AudioClip explosionClip;

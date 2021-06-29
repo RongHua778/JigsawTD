@@ -48,8 +48,6 @@ public class HealthBar : ReusableObject
     public void ShowJumpDamage(int amount)
     {
         JumpDamage obj = ObjectPool.Instance.Spawn(jumpDamagePrefab) as JumpDamage;
-        obj.transform.localScale *= Mathf.Max(0.5f, 0.3f * (Mathf.Log10(amount) + 1));
-        obj.transform.position = followTrans.position;
-        obj.Jump(amount);
+        obj.Jump(amount,transform.position);
     }
 }

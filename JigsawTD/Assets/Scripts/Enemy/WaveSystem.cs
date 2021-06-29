@@ -113,7 +113,7 @@ public class WaveSystem : IGameSystem
                     break;
                 default:
                     //Debug.LogAssertion("难度参数错误");
-                    sequence = new EnemySequence(_enemyFactory, i + 1, 0.1f, EnemyType.Froster);
+                    sequence = new EnemySequence(_enemyFactory, i + 1, 5f, EnemyType.Blinker);
                     break;
             }
             if (difficulty != 4)
@@ -125,7 +125,7 @@ public class WaveSystem : IGameSystem
                 }
                 else if (i == 16)
                 {
-                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.BossRotatingArmor);
+                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.SixArmor);
                 }
                 else if (i == 23)
                 {
@@ -150,7 +150,7 @@ public class WaveSystem : IGameSystem
                 //前三波难度修正
                 else if (i < 3)
                 {
-                    stage = (i + 1) * 0.5f;
+                    stage = (i + 1) * 1999f;
                     sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random);
                 }
                 else

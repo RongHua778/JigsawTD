@@ -19,8 +19,9 @@ public class Armorer : Enemy
         Armor[] armors = GetComponentsInChildren<Armor>();
         for (int i = 0; i < armors.Length; i++)
         {
-            //armors[i].MaxHealth = armor;
-            //armors[i].CurrentHealth = armor;
+            armors[i].MaxHealth = armor;
+            armors[i].CurrentHealth = armor;
+            armors[i].ReArmor();
         }
     }
 }

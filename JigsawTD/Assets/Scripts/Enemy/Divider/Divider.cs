@@ -7,10 +7,12 @@ public class Divider : Enemy
     WaveSystem ws;
     BoardSystem bs;
     int dividingCount;
-    [SerializeField]int dividing;
-    [SerializeField]int springs;
+    [SerializeField] int dividing;
+    [SerializeField] int springs;
     [SerializeField] Transform size;
-    float scale = 1;
+    float DivierIntensify = 1;
+    [SerializeField] Sprite[] dividerSprites = default;
+    [SerializeField] SpriteRenderer EnemySprite = default;
 
 
 
@@ -44,7 +46,7 @@ public class Divider : Enemy
     {
         if (dividingCount < Dividing)
         {
-            scale *= 0.5f;
+            DivierIntensify *= 0.5f;
             for (int i = 0; i < springs; i++)
             {
                 ws.EnemyRemain += 1;
@@ -53,19 +55,28 @@ public class Divider : Enemy
             dividingCount += 1;
         }
     }
-        private void SpawnEnemy(BoardSystem board)
+    private void SpawnEnemy(BoardSystem board)
     {
         EnemyAttribute attribute = GameManager.Instance.EnemyFactory.Get(EnemyType.Divider);
         float intensify = ws.RunningSequence.Intensify;
         Divider enemy = ObjectPool.Instance.Spawn(attribute.Prefab) as Divider;
         HealthBar healthBar = ObjectPool.Instance.Spawn(ws.HealthBarPrefab) as HealthBar;
-        enemy.Initialize(attribute, Random.Range(-0.3f, 0.3f), healthBar, intensify) ;
-        enemy.Dividing = Dividing-1;
-        enemy.scale = scale;
-        enemy.MaxHealth = MaxHealth * scale;
-        enemy.size.localScale = new Vector3(scale, scale, 1);
-        enemy.progress = progress;
+        enemy.Initialize(attribute, Random.Range(-0.3f, 0.3f), healthBar, intensify);
+        enemy.Dividing = Dividing - 1;
+        enemy.EnemySprite.sprite = dividerSprites[Dividing - 1];
+        enemy.DivierIntensify = DivierIntensify;
+        enemy.MaxHealth = MaxHealth * DivierIntensify;
+        enemy.EnemySprite.GetComponent<CircleCollider2D>().radius = 0.4f - 0.1f * (3 - Dividing);
         enemy.SpawnOn(PointIndex, board.shortestPoints);
         GameManager.Instance.enemies.Add(enemy);
+        enemy.progress = Mathf.Clamp((progress + Random.Range(-0.2f, 0.2f)), 0, 1);
+
+    }
+
+    public override void OnUnSpawn()
+    {
+        base.OnUnSpawn();
+        Dividing = 2;
+        dividingCount = 0;
     }
 }

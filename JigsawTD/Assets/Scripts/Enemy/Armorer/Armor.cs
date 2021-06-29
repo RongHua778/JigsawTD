@@ -2,19 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Armor : MonoBehaviour
+public class Armor : MonoBehaviour,IDamageable
 {
-    [SerializeField]protected Armorer boss;
+    [SerializeField] protected Armorer boss;
+
+    [SerializeField] ParticalControl explosionPrefab = default;
+    [SerializeField] JumpDamage jumpDamagePrefab = default;
+    protected AudioClip explosionClip;
     float boxColliderX;
     float boxColliderY;
 
+    float maxHealth;
+    float currentHealth;
+    public float CurrentHealth 
+    { get => currentHealth;
+        set 
+        {
+            currentHealth = value;
+            if (currentHealth <= 0)
+            {
+                ReusableObject explosion = ObjectPool.Instance.Spawn(explosionPrefab);
+                Sound.Instance.PlayEffect(explosionClip, StaticData.Instance.EnvrionmentBaseVolume);
+                explosion.transform.position = transform.position;
+                DisArmor();
+            }
+        } 
+    }
+    public float MaxHealth { get => maxHealth; set => maxHealth = value; }
+
+
     private void Awake()
     {
-        if (GetComponent<BoxCollider2D>())
-        {
-            boxColliderX = GetComponent<BoxCollider2D>().size.x;
-            boxColliderY = GetComponent<BoxCollider2D>().size.y;
-        }
+        boxColliderX = GetComponent<BoxCollider2D>().size.x;
+        boxColliderY = GetComponent<BoxCollider2D>().size.y;
+        explosionClip = Resources.Load<AudioClip>("Music/Effects/Sound_EnemyExplosion");
+        //if (GetComponent<BoxCollider2D>())
+        //{
+        //    boxColliderX = GetComponent<BoxCollider2D>().size.x;
+        //    boxColliderY = GetComponent<BoxCollider2D>().size.y;
+        //}
 
     }
 
@@ -32,16 +58,18 @@ public class Armor : MonoBehaviour
     }
     protected virtual void DisArmor()
     {
-        GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
-        if (GetComponent<CircleCollider2D>()) GetComponent<CircleCollider2D>().radius = 0;
-        if(GetComponent<BoxCollider2D>()) GetComponent<BoxCollider2D>().size=new Vector2(0,0);
+        transform.localScale = Vector3.zero;
+        //GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
+        //if (GetComponent<CircleCollider2D>()) GetComponent<CircleCollider2D>().radius = 0;
+        //if(GetComponent<BoxCollider2D>()) GetComponent<BoxCollider2D>().size=new Vector2(0,0);
     }
 
-    protected virtual void ReArmor()
+    public virtual void ReArmor()
     {
-        GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
-        if (GetComponent<CircleCollider2D>()) GetComponent<CircleCollider2D>().radius = 0.6f;
-        if (GetComponent<BoxCollider2D>()) GetComponent<BoxCollider2D>().size=new Vector2(boxColliderX,boxColliderY);
+        transform.localScale = Vector3.one;
+        //GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+        //if (GetComponent<CircleCollider2D>()) GetComponent<CircleCollider2D>().radius = 0.6f;
+        //if (GetComponent<BoxCollider2D>()) GetComponent<BoxCollider2D>().size=new Vector2(boxColliderX,boxColliderY);
         //CurrentHealth = MaxHealth;
     }
 
@@ -50,16 +78,32 @@ public class Armor : MonoBehaviour
         if (collision.GetComponent<Bullet>())
         {
             Bullet bullet = collision.GetComponent<Bullet>();
+            if (bullet.hit)
+                return;
             bullet.hit = true;
-            //CurrentHealth -= bullet.Damage;
-            if (bullet.SputteringEffect != null)
-            {
-                ParticalControl effect = ObjectPool.Instance.Spawn(bullet.SputteringEffect) as ParticalControl;
-                effect.transform.position = transform.position;
-                effect.transform.localScale = Mathf.Max(0.4f, bullet.SputteringRange * 2) * Vector3.one;
-                effect.PlayEffect();
-            }
+            bullet.DealRealDamage(this, bullet.Damage);
             bullet.ReclaimBullet();
+            ParticalControl effect = ObjectPool.Instance.Spawn(bullet.SputteringEffect) as ParticalControl;
+            effect.transform.position = transform.position;
+            effect.transform.localScale = Vector3.one * 0.3f;
+            effect.PlayEffect();
         }
+
     }
+
+    public void ApplyDamage(float amount, out float realDamage, bool isCritical = false)
+    {
+        realDamage = amount;
+        CurrentHealth -= realDamage;
+        GameEndUI.TotalDamage += (int)realDamage;
+
+        if (isCritical)
+        {
+            JumpDamage obj = ObjectPool.Instance.Spawn(jumpDamagePrefab) as JumpDamage;
+            obj.Jump((int)realDamage, transform.position);
+        }
+
+    }
+
+
 }
