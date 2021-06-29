@@ -54,7 +54,16 @@ public class TrapContent : GameTileContent
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.GetComponent<TargetPoint>().Enemy.CurrentTrap = this;
+        TargetPoint target = collision.GetComponent<TargetPoint>();
+        if (target != null)
+        {
+            target.Enemy.CurrentTrap = this;
+        }
+        else
+        {
+            Debug.LogWarning(collision.name + ":´íÎóµÄÅö×²´¥·¢");
+        }
+
     }
 
 }

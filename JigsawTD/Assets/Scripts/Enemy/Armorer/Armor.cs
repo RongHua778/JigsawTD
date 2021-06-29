@@ -9,8 +9,6 @@ public class Armor : MonoBehaviour,IDamageable
     [SerializeField] ParticalControl explosionPrefab = default;
     [SerializeField] JumpDamage jumpDamagePrefab = default;
     protected AudioClip explosionClip;
-    float boxColliderX;
-    float boxColliderY;
 
     float maxHealth;
     float currentHealth;
@@ -33,45 +31,22 @@ public class Armor : MonoBehaviour,IDamageable
 
     private void Awake()
     {
-        boxColliderX = GetComponent<BoxCollider2D>().size.x;
-        boxColliderY = GetComponent<BoxCollider2D>().size.y;
         explosionClip = Resources.Load<AudioClip>("Music/Effects/Sound_EnemyExplosion");
-        //if (GetComponent<BoxCollider2D>())
-        //{
-        //    boxColliderX = GetComponent<BoxCollider2D>().size.x;
-        //    boxColliderY = GetComponent<BoxCollider2D>().size.y;
-        //}
 
     }
 
-    protected virtual void Update()
-    {
-        //if (IsDie)
-        //{
-        //    ReusableObject explosion = ObjectPool.Instance.Spawn(exlposionPrefab);
-        //    Sound.Instance.PlayEffect(explosionClip, StaticData.Instance.EnvrionmentBaseVolume);
-        //    explosion.transform.position = transform.position;
-        //    //ObjectPool.Instance.UnSpawn(this);
-        //    DisArmor();
-        //    IsDie = false;
-        //}
-    }
+
     protected virtual void DisArmor()
     {
         transform.localScale = Vector3.zero;
-        //GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
-        //if (GetComponent<CircleCollider2D>()) GetComponent<CircleCollider2D>().radius = 0;
-        //if(GetComponent<BoxCollider2D>()) GetComponent<BoxCollider2D>().size=new Vector2(0,0);
+
     }
 
     public virtual void ReArmor()
     {
         transform.localScale = Vector3.one;
         CurrentHealth = MaxHealth;
-        //GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
-        //if (GetComponent<CircleCollider2D>()) GetComponent<CircleCollider2D>().radius = 0.6f;
-        //if (GetComponent<BoxCollider2D>()) GetComponent<BoxCollider2D>().size=new Vector2(boxColliderX,boxColliderY);
-        //CurrentHealth = MaxHealth;
+
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)

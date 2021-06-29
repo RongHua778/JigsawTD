@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614735ba97a8e4b4bbdf8128289355f3, type: 3}
   m_Name: Restorer
   m_EditorClassIdentifier: 
+  EnemyName: "\u5C3C\u91C7\uFF08\u56DE\u590D\u578B\uFF09"
   EnemyType: 2
   InitCount: 3
   CountIncrease: 3
@@ -23,4 +24,4 @@ MonoBehaviour:
   ReachDamage: 1
   extraHealth: 0
   EnemyIcon: {fileID: -1992789463179596284, guid: f9835346b30cae840a9eff85ed192e6f, type: 3}
-  Description: "\u5C3C\u91C7\uFF08\u56DE\u590D\u578B\uFF09\uFF0C\u5F53\u4E00\u5B9A\u65F6\u95F4\u5185\u6CA1\u6709\u53D7\u5230\u4F24\u5BB3\uFF0C\u4F1A\u8FC5\u901F\u56DE\u590D\u751F\u547D\u503C\u3002"
+  Description: "\u5F53\u4E00\u5B9A\u65F6\u95F4\u5185\u6CA1\u6709\u53D7\u5230\u4F24\u5BB3\uFF0C\u4F1A\u8FC5\u901F\u56DE\u590D\u751F\u547D\u503C\u3002"

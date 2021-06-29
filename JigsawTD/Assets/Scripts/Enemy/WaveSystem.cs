@@ -121,21 +121,17 @@ public class WaveSystem : IGameSystem
                 //boss*****
                 if (i == 9)
                 {
-                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Fat);
+                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Divider);
                 }
-                else if (i == 16)
+                else if (i == 19)
                 {
                     sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.SixArmor);
                 }
-                else if (i == 23)
-                {
-                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Divider);
-                }
-                else if (i == 30)
+                else if (i == 29)
                 {
                     sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Blinker);
                 }
-                else if (i == 39)
+                else if (i == 34)
                 {
                     sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Borner);
                 }
@@ -150,7 +146,7 @@ public class WaveSystem : IGameSystem
                 //前三波难度修正
                 else if (i < 3)
                 {
-                    stage = (i + 1) * 1999f;
+                    stage = (i + 1) * 0.5f;
                     sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random);
                 }
                 else
