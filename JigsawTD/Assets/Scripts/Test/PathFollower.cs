@@ -14,7 +14,7 @@ public class PathFollower : ReusableObject,IGameBehavior
     [SerializeField] protected Transform model = default;
     public PathPoint CurrentPoint;
     protected Vector3 positionFrom, positionTo;
-    protected float progress;
+    private float progress;
     protected float directionAngleFrom, directionAngleTo;
     protected float pathOffset = 0;
     // Start is called before the first frame update
@@ -26,27 +26,28 @@ public class PathFollower : ReusableObject,IGameBehavior
     public virtual float Speed { get => speed; set => speed = value; }
     public float Adjust { get => adjust; set => adjust = value; }
     public float ProgressFactor { get => progressFactor; set => progressFactor = value; }
+    public float Progress { get => progress; set => progress = value; }
 
     public virtual bool GameUpdate()
     {
-        progress += Time.deltaTime * ProgressFactor;
-        while (progress >= 1f)
+        Progress += Time.deltaTime * ProgressFactor;
+        while (Progress >= 1f)
         {
             if (PointIndex == pathPoints.Count - 1)
             {
                 SpawnOn(0);
                 return true;
             }
-            progress = 0;
+            Progress = 0;
             PrepareNextState();
         }
         if (DirectionChange == DirectionChange.None)
         {
-            transform.localPosition = Vector3.LerpUnclamped(positionFrom, positionTo, progress);
+            transform.localPosition = Vector3.LerpUnclamped(positionFrom, positionTo, Progress);
         }
         else
         {
-            float angle = Mathf.LerpUnclamped(directionAngleFrom, directionAngleTo, progress);
+            float angle = Mathf.LerpUnclamped(directionAngleFrom, directionAngleTo, Progress);
             transform.localRotation = Quaternion.Euler(0f, 0f, angle);
         }
         return true;
@@ -64,7 +65,7 @@ public class PathFollower : ReusableObject,IGameBehavior
         }
         PointIndex = pointIndex;
         CurrentPoint = pathPoints[PointIndex];
-        progress = 0f;
+        Progress = 0f;
         PrepareIntro();
     }
 

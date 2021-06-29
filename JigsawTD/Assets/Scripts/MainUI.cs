@@ -118,7 +118,7 @@ public class MainUI : IUserInterface
 
     private void EnemyReach(Enemy enemy)
     {
-        Life--;
+        Life-=enemy.ReachDamage;
     }
 
 

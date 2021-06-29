@@ -69,7 +69,7 @@ public class Divider : Enemy
         enemy.EnemySprite.GetComponent<CircleCollider2D>().radius = 0.4f - 0.1f * (3 - Dividing);
         enemy.SpawnOn(PointIndex, board.shortestPoints);
         GameManager.Instance.enemies.Add(enemy);
-        enemy.progress = Mathf.Clamp((progress + Random.Range(-0.2f, 0.2f)), 0, 1);
+        enemy.Progress = Mathf.Clamp((Progress + Random.Range(-0.2f, 0.2f)), 0, 1);
 
     }
 

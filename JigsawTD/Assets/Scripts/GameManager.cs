@@ -355,6 +355,7 @@ public class GameManager : Singleton<GameManager>
         if (ConsumeMoney(m_BoardSystem.BuyOneGroundMoney))
         {
             m_BoardSystem.BuyOneEmptyTile();
+            Sound.Instance.PlayEffect("Sound_ConfirmShape");
             m_BuyGroundTips.Hide();
         }
     }

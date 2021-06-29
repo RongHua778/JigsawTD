@@ -118,14 +118,14 @@ public abstract class Enemy : PathFollower,IDamageable
             if (StunTime < 0)
                 ProgressFactor = Speed * Adjust;
         }
-        progress += Time.deltaTime * ProgressFactor;
+        Progress += Time.deltaTime * ProgressFactor;
 
-        if (!trapTriggered && progress >= 0.5f)
+        if (!trapTriggered && Progress >= 0.5f)
         {
             TriigerTrap();
         }
 
-        while (progress >= 1f)
+        while (Progress >= 1f)
         {
             if (PointIndex == pathPoints.Count - 1)
             {
@@ -140,16 +140,16 @@ public abstract class Enemy : PathFollower,IDamageable
                 return false;
             }
             trapTriggered = false;
-            progress = 0;
+            Progress = 0;
             PrepareNextState();
         }
         if (DirectionChange == DirectionChange.None)
         {
-            transform.localPosition = Vector3.LerpUnclamped(positionFrom, positionTo, progress);
+            transform.localPosition = Vector3.LerpUnclamped(positionFrom, positionTo, Progress);
         }
         else
         {
-            float angle = Mathf.LerpUnclamped(directionAngleFrom, directionAngleTo, progress);
+            float angle = Mathf.LerpUnclamped(directionAngleFrom, directionAngleTo, Progress);
             transform.localRotation = Quaternion.Euler(0f, 0f, angle);
         }
         return true;

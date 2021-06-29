@@ -44,6 +44,7 @@ public class Borner : Enemy
         Enemy enemy = ObjectPool.Instance.Spawn(attribute.Prefab) as Enemy;
         HealthBar healthBar = ObjectPool.Instance.Spawn(ws.HealthBarPrefab) as HealthBar;
         enemy.Initialize(attribute, Random.Range(-0.3f, 0.3f), healthBar, intensify);
+        enemy.Progress=Progress;
         enemy.SpawnOn(PointIndex, board.shortestPoints);
         GameManager.Instance.enemies.Add(enemy);
     }

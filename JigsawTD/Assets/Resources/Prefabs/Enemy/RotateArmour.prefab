@@ -19239,7 +19239,7 @@ MonoBehaviour:
   CurrentTrap: {fileID: 0}
   initialSpeed: 0
   armorIntensify: 15
-  armorCoolDown: 6
+  armorCoolDown: 999999
   rotateObj: {fileID: 8011516457752567327}
 --- !u!50 &4799112398493308357
 Rigidbody2D:

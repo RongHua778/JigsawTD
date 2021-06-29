@@ -56,7 +56,7 @@ public class Blinker : Enemy
                 model.localPosition = new Vector3(pathOffset, 0);
                 directionAngleFrom = directionAngleTo = Direction.GetAngle();
                 transform.localRotation = CurrentPoint.PathDirection.GetRotation();
-                progress = 0;
+                Progress = 0;
                 blink -= 1;
             }
             else
@@ -64,7 +64,7 @@ public class Blinker : Enemy
                 PointIndex = pathPoints.Count - 1;
                 CurrentPoint = pathPoints[PointIndex];
                 transform.localPosition = pathPoints[PointIndex].PathPos;
-                progress = 1;
+                Progress = 1;
             }
             transfering = false;
             anim.Play("Default");
