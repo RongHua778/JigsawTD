@@ -20,4 +20,15 @@ public abstract class ReusableObject : MonoBehaviour,IResuable
         if (ParentObj != null)
             transform.SetParent(ParentObj);
     }
+
+    public void UnspawnAfterTime(float time)
+    {
+        StartCoroutine(UnspawnCor(time));
+    }
+
+    IEnumerator UnspawnCor(float time)
+    {
+        yield return new WaitForSeconds(time);
+        ObjectPool.Instance.UnSpawn(this);
+    }
 }

@@ -14,7 +14,7 @@ public class EnemySequence
     public float Intensify;
     public List<float> CoolDown;
     private float SpawnTimer;
-    public float waveCoolDown = 2.5f;
+    public float waveCoolDown = 1f;
 
     public List<int> index=new List<int>();
     private EnemyFactory enemyFactory;

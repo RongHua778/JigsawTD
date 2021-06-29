@@ -39,7 +39,7 @@ public class BluePrintShopUI : IUserInterface
     {
         base.Initialize(gameManager);
         anim = this.GetComponent<Animator>();
-        NextRefreshTrun = 3;
+        NextRefreshTrun = 4;
     }
 
     public void RefreshShop(int level, int cost)//Ë¢ÐÂÉÌµê

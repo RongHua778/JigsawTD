@@ -17,7 +17,7 @@ public class WoodTurret : ElementTurret
 
     public override bool GameUpdate()
     {
-        if (activated)
+        if (Activated)
         {
             if (targetList.Count == 0)
             {

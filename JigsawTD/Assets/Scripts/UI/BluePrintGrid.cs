@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class BluePrintGrid : ReusableObject
 {
     public static BluePrintGrid SelectingBluePrint = null;
+    [SerializeField] Color UnobtainColor = default;
     private bool inShop=false;
     public bool InShop { get => inShop; set => inShop = value; }
 
@@ -53,7 +54,7 @@ public class BluePrintGrid : ReusableObject
                 elementGrids[i].gameObject.SetActive(false);
             }
         }
-        compositeIcon.color = BluePrint.CheckBuildable() ? Color.white : Color.gray;
+        compositeIcon.color = BluePrint.CheckBuildable() ? Color.white : UnobtainColor;
     }
 
 

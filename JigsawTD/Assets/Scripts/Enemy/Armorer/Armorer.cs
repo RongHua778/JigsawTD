@@ -21,6 +21,7 @@ public class Armorer : Enemy
         {
             armors[i].MaxHealth = armor;
             armors[i].CurrentHealth = armor;
+            armors[i].ReArmor();
         }
     }
 }

@@ -131,13 +131,9 @@ public abstract class GameTile : TileBase
         Content.CorretRotation();
     }
 
-
-
-
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.GetComponent<TargetPoint>())
-        collision.GetComponent<TargetPoint>().Object.CurrentTile = this;
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    //if(collision.GetComponent<TargetPoint>())
+    //    collision.GetComponent<TargetPoint>().Object.CurrentTile = this;
+    //}
 }

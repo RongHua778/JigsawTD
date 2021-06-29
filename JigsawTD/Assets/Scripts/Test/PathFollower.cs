@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PathFollower : DestructableObject
+public class PathFollower : ReusableObject,IGameBehavior
 {
     protected List<PathPoint> pathPoints = new List<PathPoint>();
     protected int PointIndex = 0;
@@ -27,7 +27,7 @@ public class PathFollower : DestructableObject
     public float Adjust { get => adjust; set => adjust = value; }
     public float ProgressFactor { get => progressFactor; set => progressFactor = value; }
 
-    public override bool GameUpdate()
+    public virtual bool GameUpdate()
     {
         progress += Time.deltaTime * ProgressFactor;
         while (progress >= 1f)

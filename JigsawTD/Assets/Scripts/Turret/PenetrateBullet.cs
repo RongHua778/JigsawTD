@@ -24,7 +24,8 @@ public class PenetrateBullet : Bullet
     {
         if (collision.GetComponent<TargetPoint>())
         {
-            Enemy enemy = collision.GetComponent<TargetPoint>().Object;
+            Enemy enemy = collision.GetComponent<TargetPoint>().Enemy;
+            TriggerHitEffect(enemy);
             DealRealDamage(enemy, Damage);
 
             ParticalControl effect = ObjectPool.Instance.Spawn(SputteringEffect) as ParticalControl;
@@ -48,7 +49,8 @@ public class PenetrateBullet : Bullet
             foreach (Collider2D hit in hits)
             {
                 TargetPoint target = hit.GetComponent<TargetPoint>();
-                DealRealDamage(target.Object, SputteringRate * Damage);
+                TriggerHitEffect(target.Enemy);
+                DealRealDamage(target.Enemy, SputteringRate * Damage);
             }
         }
 

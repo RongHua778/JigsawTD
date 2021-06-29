@@ -12,29 +12,17 @@ public class TurretDetector : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         TurretContent target = collision.GetComponent<TurretContent>();
-        if (target)
+        if (!Turrets.Contains(target))
         {
-
-
-            if (!Turrets.Contains(target))
-            {
-                Turrets.Add(target);
-                //Debug.Log("got!" + Turrets.Count);
-                //Debug.LogWarning("hehe");
-            }
-
+            Turrets.Add(target);
         }
+
 
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         TurretContent target = collision.GetComponent<TurretContent>();
-        if (target)
-        {
-            Turrets.Remove(target);
-            //Debug.Log("got!" + Turrets.Count);
-        }
-
+        Turrets.Remove(target);
     }
 }

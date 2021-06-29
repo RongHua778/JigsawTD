@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IDamageable 
 {
-    void TakeDamage(float damageAmount);
+    void ApplyDamage(float amount, out float realDamage, bool isCritical = false);
 }

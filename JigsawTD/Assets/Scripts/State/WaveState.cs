@@ -14,6 +14,7 @@ public class WaveState : BattleOperationState
 
     public override IEnumerator EnterState()
     {
+        yield return new WaitForSeconds(1f);
         m_WaveSystem.Running = true;
         //±≥æ∞“Ù¿÷…Ë÷√
         if (m_WaveSystem.RunningSequence.Wave == StaticData.Instance.LevelMaxWave)

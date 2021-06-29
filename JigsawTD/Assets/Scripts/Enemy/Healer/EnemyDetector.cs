@@ -4,18 +4,24 @@ using UnityEngine;
 
 public class EnemyDetector : MonoBehaviour
 {
+    Enemy enemy;
+    public Enemy Enemy { get => enemy; set => enemy = value; }
     List<Enemy> enemies = new List<Enemy>();
     public List<Enemy> Enemies { get => enemies; set => enemies = value; }
 
-    [SerializeField] Healer healer;
+
+    private void Awake()
+    {
+        Enemy = transform.root.GetComponent<Enemy>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Enemy enemy = collision.GetComponentInParent<Enemy>();
-        if (enemy)
+        Enemy enemy = collision.GetComponent<TargetPoint>().Enemy;
+        if (enemy != this.Enemy)
         {
             Enemies.Add(enemy);
-            enemy.Speed += healer.speedUp;
+            enemy.AffectHealerCount += 1;
             enemy.ProgressFactor = enemy.Speed * enemy.Adjust;
         }
 
@@ -23,11 +29,11 @@ public class EnemyDetector : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Enemy enemy = collision.GetComponentInParent<Enemy>();
-        if (enemy)
+        Enemy enemy = collision.GetComponent<TargetPoint>().Enemy;
+        if (enemy != this.Enemy && enemy.gameObject.activeSelf)
         {
             Enemies.Remove(enemy);
-            enemy.Speed -= healer.speedUp;
+            enemy.AffectHealerCount -= 1;
             enemy.ProgressFactor = enemy.Speed * enemy.Adjust;
         }
     }

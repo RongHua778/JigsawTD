@@ -57,6 +57,13 @@ public class Blinker : Enemy
                 progress = 0;
                 blink -= 1;
             }
+            else
+            {
+                PointIndex = pathPoints.Count - 1;
+                CurrentPoint = pathPoints[PointIndex];
+                transform.localPosition = pathPoints[PointIndex].PathPos;
+                progress = 1;
+            }
             anim.Play("Default") ;
         }
     }
@@ -65,5 +72,11 @@ public class Blinker : Enemy
     {
         anim.Play("Exit");
         StartCoroutine(Blink());
+    }
+
+    public override void OnUnSpawn()
+    {
+        base.OnUnSpawn();
+        blink = 3;
     }
 }
