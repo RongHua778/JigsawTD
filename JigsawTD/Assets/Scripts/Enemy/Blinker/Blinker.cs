@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Blinker : Enemy
 {
     WaveSystem ws;
     BoardSystem bs;
+    [SerializeField] ReusableObject holePrefab = default;
     public override EnemyType EnemyType => EnemyType.Blinker;
-    int blink=3;
+    int blink = 3;
+    bool transfering = false;
     public override void Awake()
     {
         base.Awake();
@@ -16,7 +19,7 @@ public class Blinker : Enemy
     }
     public override bool GameUpdate()
     {
-        if (currentHealth / MaxHealth < 0.75f&&blink>=3)
+        if (currentHealth / MaxHealth < 0.75f && blink >= 3)
         {
             BlinkAfterAnim();
 
@@ -33,13 +36,12 @@ public class Blinker : Enemy
         }
         return base.GameUpdate();
     }
-
-    private IEnumerator Blink()
+    private bool reachEnd = false;
+    private void Blink()
     {
-        yield return null;
         AnimatorStateInfo stateinfo = anim.GetCurrentAnimatorStateInfo(0);
-        if (stateinfo.IsName("Exit")&&stateinfo.normalizedTime >= 0.95f)
-         {
+        if (stateinfo.IsName("Exit") && stateinfo.normalizedTime >= 0.95f)
+        {
             PointIndex += 4;
 
             //在终点前不会瞬移
@@ -64,19 +66,46 @@ public class Blinker : Enemy
                 transform.localPosition = pathPoints[PointIndex].PathPos;
                 progress = 1;
             }
-            anim.Play("Default") ;
+            transfering = false;
+            anim.Play("Default");
         }
+     
+
+
     }
 
-   private void BlinkAfterAnim()
+
+    private void BlinkAfterAnim()
     {
-        anim.Play("Exit");
-        StartCoroutine(Blink());
+        Vector3 targetPos;
+        if (!transfering)
+        {
+
+            targetPos = pathPoints[Mathf.Min(PointIndex + 4,pathPoints.Count-1)].PathPos;
+            SpawnHoleOnPos(transform.position);
+            SpawnHoleOnPos(targetPos);
+            anim.Play("Exit");
+            StunTime += 0.5f;
+            transfering = true;
+        }
+        Blink();
+
+
+    }
+
+    private void SpawnHoleOnPos(Vector3 pos)
+    {
+        ReusableObject hole = ObjectPool.Instance.Spawn(holePrefab);
+        hole.transform.position = pos;
+        hole.transform.localScale = Vector3.one * 0.1f;
+        hole.transform.DOScale(Vector3.one * 0.3f, 1f);
+        hole.UnspawnAfterTime(1f);
     }
 
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
         blink = 3;
+        transfering = false;
     }
 }

@@ -28,6 +28,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private TempTips m_TempTips = default;
     [SerializeField] private TrapTips m_TrapTips = default;
     [SerializeField] private BuyGroundTips m_BuyGroundTips = default;
+    [SerializeField] private EnemyTips m_EnemyTips = default;
 
     [Header("工厂")]
     [SerializeField] TileFactory _tileFactory = default;
@@ -84,6 +85,7 @@ public class GameManager : Singleton<GameManager>
         m_BuyGroundTips.Initialize(this);//购买地板TIPS
         m_MessageUI.Initialize(this);//提示系统UI
         m_GuideVideo.Initialize(this);//教程视频UI
+        m_EnemyTips.Initialize(this);//敌人TIPS
 
         //设置操作流程
         buildingState = new BuildingState(this, BoardSystem);
@@ -126,6 +128,7 @@ public class GameManager : Singleton<GameManager>
         m_BuyGroundTips.Release();
         m_MessageUI.Release();
         m_GuideVideo.Release();
+        m_EnemyTips.Release();
 
         Instance = null;
     }
@@ -399,6 +402,17 @@ public class GameManager : Singleton<GameManager>
     public void HideTempTips()
     {
         m_TempTips.gameObject.SetActive(false);
+    }
+
+    public void ShowEnemyTips()
+    {
+        m_EnemyTips.Show();
+        m_EnemyTips.ReadSequenceInfo(m_WaveSystem);
+    }
+
+    public void HideEnemyTips()
+    {
+        m_EnemyTips.Hide();
     }
 
     public void HideTips()

@@ -113,7 +113,7 @@ public class WaveSystem : IGameSystem
                     break;
                 default:
                     //Debug.LogAssertion("难度参数错误");
-                    sequence = new EnemySequence(_enemyFactory, i + 1, 5f, EnemyType.Blinker);
+                    sequence = new EnemySequence(_enemyFactory, i + 1, 5f, EnemyType.Borner);
                     break;
             }
             if (difficulty != 4)
@@ -131,7 +131,7 @@ public class WaveSystem : IGameSystem
                 {
                     sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Blinker);
                 }
-                else if (i == 39)
+                else if (i == 34)
                 {
                     sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Borner);
                 }

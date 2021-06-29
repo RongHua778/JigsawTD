@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614735ba97a8e4b4bbdf8128289355f3, type: 3}
   m_Name: Soilder
   m_EditorClassIdentifier: 
+  EnemyName: "\u8428\u7279\uFF08\u6570\u91CF\u578B\uFF09"
   EnemyType: 0
   InitCount: 5
   CountIncrease: 8
@@ -23,4 +24,4 @@ MonoBehaviour:
   ReachDamage: 1
   extraHealth: 0
   EnemyIcon: {fileID: 4062577230677641764, guid: f9835346b30cae840a9eff85ed192e6f, type: 3}
-  Description: "\u8428\u7279\uFF08\u6570\u91CF\u578B\uFF09\uFF0C\u6570\u91CF\u8F83\u591A\uFF0C\u96C6\u7FA4\u51FA\u52A8\u3002"
+  Description: "\u6570\u91CF\u8F83\u591A\uFF0C\u96C6\u7FA4\u51FA\u52A8\u3002"

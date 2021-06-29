@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Attribute/EnemyAttribute", fileName = "EnemyAttribute")]
 public class EnemyAttribute : ScriptableObject
 {
+    public string EnemyName;
     public EnemyType EnemyType;
     public int InitCount;
     public int CountIncrease;
