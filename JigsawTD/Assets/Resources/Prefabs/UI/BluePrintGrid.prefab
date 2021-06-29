@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.390566, b: 0.9276895, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -686,7 +686,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 440, y: 110}
+  m_SizeDelta: {x: 440, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7880736186444964223
 CanvasRenderer:
@@ -709,7 +709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
-  UnobtainColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+  UnobtainColor: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
   compositeName: {fileID: 7880736186876840949}
   compositeIcon: {fileID: 7880736186131341294}
   elementGrids:
@@ -949,7 +949,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Img_Icon: {fileID: 7880736186503830902}
   Txt_ElementName: {fileID: 7880736187039143825}
-  UnobtainColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+  UnobtainColor: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
   previewGlow: {fileID: 5815170439858315568}
 --- !u!1 &7880736186587339348
 GameObject:
@@ -1198,7 +1198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Img_Icon: {fileID: 7880736187008495126}
   Txt_ElementName: {fileID: 7880736186451981410}
-  UnobtainColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  UnobtainColor: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
   previewGlow: {fileID: 7707595914270854006}
 --- !u!1 &7880736187033983750
 GameObject:
@@ -1292,7 +1292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Img_Icon: {fileID: 7880736187033983748}
   Txt_ElementName: {fileID: 7880736185523377867}
-  UnobtainColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+  UnobtainColor: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
   previewGlow: {fileID: 3088090320307699436}
 --- !u!1 &7880736187039143827
 GameObject:
@@ -1466,7 +1466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Img_Icon: {fileID: 7880736187190419400}
   Txt_ElementName: {fileID: 7880736185507844767}
-  UnobtainColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+  UnobtainColor: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
   previewGlow: {fileID: 1575384848181413522}
 --- !u!1001 &1574146246730492690
 PrefabInstance:

@@ -5,6 +5,11 @@ using UnityEngine;
 
 public abstract class Enemy : PathFollower
 {
+    [SerializeField] protected ReusableObject exlposionPrefab = default;
+    protected AudioClip explosionClip;
+    protected Animator anim;
+
+    public TrapContent CurrentTrap;
     public abstract EnemyType EnemyType { get; }
 
     protected bool trapTriggered = false;
@@ -20,8 +25,14 @@ public abstract class Enemy : PathFollower
             ProgressFactor = Speed * Adjust;
         }
     }
+
+    int affectHealerCount = 0;
+    public int AffectHealerCount { get => affectHealerCount; set => affectHealerCount = value; }
+    float speedIntensify = 0;
+    public virtual float SpeedIntensify { get => speedIntensify + AffectHealerCount > 0 ? 0.4f : 0; set => speedIntensify = Mathf.Min(2, value); }
+
     public float initialSpeed;
-    public override float Speed { get => StunTime > 0 ? 0 : Mathf.Max(0.1f, speed * (1 - (SlowRate + PathSlow) / (SlowRate + PathSlow + 0.8f))); set => speed = value; }
+    public override float Speed { get => StunTime > 0 ? 0 : Mathf.Max(0.1f, (speed + SpeedIntensify) * (1 - (SlowRate + PathSlow) / (SlowRate + PathSlow + 0.8f))); set => speed = value; }
 
     float slowRate;
     public float SlowRate
@@ -47,9 +58,48 @@ public abstract class Enemy : PathFollower
     int brokeShell;
     public int BrokeShell { get => brokeShell; set => brokeShell = value; }
 
+    public float TargetDamageCounter { get; set; }
+
+    float damageIntensify;
+    public float DamageIntensify { get => damageIntensify; set => damageIntensify = value; }
+    public BuffableEntity Buffable { get; set; }
+
+    private bool isDie = false;
+    public bool IsDie
+    {
+        get => isDie;
+        set
+        {
+            isDie = value;
+        }
+    }
+
+    private float maxHealth;
+    public float MaxHealth { get => maxHealth; set => maxHealth = value; }
+    protected float currentHealth;
+    public virtual float CurrentHealth
+    {
+        get => currentHealth;
+        set
+        {
+            currentHealth = Mathf.Clamp(value, 0, MaxHealth);
+            if (currentHealth <= 0 && maxHealth > 0)
+            {
+                IsDie = true;
+            }
+            healthBar.FillAmount = currentHealth / MaxHealth;
+        }
+    }
 
     [Header("HealthSetting")]
     HealthBar healthBar;
+
+    public virtual void Awake()
+    {
+        anim = this.GetComponent<Animator>();
+        explosionClip = Resources.Load<AudioClip>("Music/Effects/Sound_EnemyExplosion");
+    }
+
     public override bool GameUpdate()
     {
         if (IsDie)
@@ -107,8 +157,15 @@ public abstract class Enemy : PathFollower
 
     protected void TriigerTrap()
     {
-        CurrentTile.OnTilePass(this);
+        if (CurrentTrap != null)
+            CurrentTrap.OnContentPass(this);
+        CurrentTrap = null;
         trapTriggered = true;
+    }
+
+    protected override void PrepareNextState()
+    {
+        base.PrepareNextState();
         Buffable.TileTick();
     }
 
@@ -130,7 +187,6 @@ public abstract class Enemy : PathFollower
         initialSpeed = attribute.Speed;
         DamageIntensify = attribute.Shell;
         ReachDamage = attribute.ReachDamage;
-        Type = ObjectType.Enemy;
     }
 
     protected override void PrepareIntro()
@@ -140,27 +196,40 @@ public abstract class Enemy : PathFollower
         anim.SetTrigger("Enter");
     }
 
-    public override void ApplyDamage(float amount, out float realDamage, bool isCritical = false)
+    public virtual void ApplyDamage(float amount, out float realDamage, bool isCritical = false)
     {
-        base.ApplyDamage(amount, out realDamage,isCritical);
-        healthBar.FillAmount = CurrentHealth / MaxHealth;
+        realDamage = amount * (1 + DamageIntensify);
+        CurrentHealth -= realDamage;
+        TargetDamageCounter += realDamage;
+        GameEndUI.TotalDamage += (int)realDamage;
+
         if (isCritical)
         {
             healthBar.ShowJumpDamage((int)realDamage);
         }
     }
 
+
+    public override void OnSpawn()
+    {
+        base.OnSpawn();
+        IsDie = false;
+    }
+
     public override void OnUnSpawn()
     {
+        base.OnUnSpawn();
         ObjectPool.Instance.UnSpawn(healthBar);
         TargetDamageCounter = 0;
         TileStunCounter = 0;
         DamageIntensify = 0;
+        SpeedIntensify = 0;
+        AffectHealerCount = 0;
         PathSlow = 0;
         SlowRate = 0;
         BrokeShell = 0;
         StunTime = 0;
-        CurrentTile = null;
+        CurrentTrap = null;
         Buffable.RemoveAllBuffs();
     }
 }

@@ -6,7 +6,8 @@ using UnityEngine;
 
 public abstract class TurretContent : GameTileContent, IGameBehavior
 {
-    protected bool activated;
+    private float frostTime = 0;
+    public bool Activated = true;
 
     public BasicStrategy Strategy;//数值计算规则
 
@@ -46,8 +47,8 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     protected float CheckAngle = 10f;
 
     //控制sprite颜色
-    protected List<SpriteRenderer> sprites=new List<SpriteRenderer>();
-    protected List<Color> originalColors=new List<Color>();
+    protected List<SpriteRenderer> sprites = new List<SpriteRenderer>();
+    protected List<Color> originalColors = new List<Color>();
     //品质
     //private int quality = 0;
     //public int Quality
@@ -80,7 +81,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         CannonSprite = rotTrans.Find("Cannon").GetComponent<SpriteRenderer>();
         turretAnim = this.GetComponent<Animator>();
         audioSource = this.GetComponent<AudioSource>();
-        SpriteRenderer[] ss =GetComponentsInChildren<SpriteRenderer>();
+        SpriteRenderer[] ss = GetComponentsInChildren<SpriteRenderer>();
         for (int i = 0; i < ss.Length; i++)
         {
             sprites.Add(ss[i]);
@@ -96,8 +97,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         ShootClip = Strategy.m_Att.ShootSound;
         SetGraphic();
         GenerateRange();
-        //Strategy.GetTurretEffects();
-        Activate();
+        Activated = true;
     }
 
 
@@ -184,23 +184,12 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
             targetList.Remove(target);
         }
     }
-    public virtual void Activate()
-    {
-        for (int i = 0; i < sprites.Count; i++)
-        {
-            sprites[i].color = originalColors[i];
-        }
-        activated = true;
-    }
 
-    public virtual void InActivate(float time)
+
+    public virtual void Frost(float time)
     {
-        activated = false;
-        for (int i = 0; i < sprites.Count; i++)
-        {
-            sprites[i].color = Color.blue;
-        }
-        Invoke("Activate", time);
+        Activated = false;
+        frostTime += time;
     }
 
     //在塔被激活后每一帧都会调用的方法
@@ -218,7 +207,13 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     {
         if (!Dropped)
             return false;
-        if (activated)
+        if (frostTime > 0)
+        {
+            frostTime -= Time.deltaTime;
+            if (frostTime <= 0)
+                Activated = true;
+        }
+        if (Activated)
         {
             OnActivating();
         }
@@ -233,7 +228,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         }
         for (int i = 0; i < Target.Count; i++)
         {
-            if (Target[i].Object.IsDie)
+            if (Target[i].Enemy.IsDie)
             {
                 targetList.Remove(Target[i]);
                 Target.Remove(Target[i]);
@@ -430,8 +425,9 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         Dropped = false;
         targetList.Clear();
         Strategy = null;
+        frostTime = 0;
         ShowRange(false);
-        
+
     }
 
 }

@@ -5,17 +5,5 @@ using UnityEngine;
 public class Healer : Enemy
 {
     public override EnemyType EnemyType => EnemyType.Healer;
-    [SerializeField]
-    EnemyDetector detector;
-    public float speedUp;
-    public override void OnUnSpawn()
-    {
-        for (int i = 0; i < detector.Enemies.Count; i++)
-        {
-            detector.Enemies[i].Speed -= speedUp;
-            detector.Enemies[i].ProgressFactor = detector.Enemies[i].Speed * detector.Enemies[i].Adjust;
-        }
-        base.OnUnSpawn();
-    }
 
 }

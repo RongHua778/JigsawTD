@@ -18,5 +18,5 @@ MonoBehaviour:
   ContentPrefab: {fileID: 6968047598390281921, guid: ee774973d577ef84aab35c8203d62838, type: 3}
   BuffInfos:
   - EnemyBuffName: 3
-    KeyValue: 0.5
+    KeyValue: 0.8
     Duration: 0

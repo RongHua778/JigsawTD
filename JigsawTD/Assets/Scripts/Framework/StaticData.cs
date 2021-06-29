@@ -17,6 +17,7 @@ public class StaticData : Singleton<StaticData>
     public static string GroundTileMask = "GroundTile";
     public static string TempTileMask = "TempTile";
     public static string TempTurretMask = "TempTurret";
+    public static string TurretMask = "Turret";
     public static string TempGroundMask = "TempGround";
     public static LayerMask GetGroundLayer = 1 << 8 | 1 << 12;
     //public static LayerMask RunTimeFindPathLayer = 1 << 8;

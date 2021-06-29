@@ -77,7 +77,7 @@ public class WaveSystem : IGameSystem
         LevelSequence.Clear();
         int difficulty = Game.Instance.Difficulty;
         float stage = waveStage;
-        EnemySequence sequence;
+        EnemySequence sequence=null;
         for (int i = 0; i < StaticData.Instance.LevelMaxWave; i++)
         {
             switch (difficulty)
@@ -112,48 +112,51 @@ public class WaveSystem : IGameSystem
                     }
                     break;
                 default:
-                    Debug.LogAssertion("难度参数错误");
-                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Fat);
+                    //Debug.LogAssertion("难度参数错误");
+                    sequence = new EnemySequence(_enemyFactory, i + 1, 0.1f, EnemyType.Froster);
                     break;
             }
-            //boss*****
-            if (i == 9)
+            if (difficulty != 4)
             {
-                sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Fat);
-            }
-            else if (i == 16)
-            {
-                sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.BossRotatingArmor);
-            }
-            else if (i == 23)
-            {
-                sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Divider);
-            }
-            else if (i == 30)
-            {
-                sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Blinker);
-            }
-            else if (i == 39)
-            {
-                sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Borner);
-            }
-            else if (i % 7 == 0 && i > 0)
-            {
-                sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random, 2);
-            }
-            else if (i % 9 == 0 && i > 0)
-            {
-                sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random, 3);
-            }
-            //前三波难度修正
-            else if (i < 3)
-            {
-                stage = (i + 1) * 0.5f;
-                sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random);
-            }
-            else
-            {
-                sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random);
+                //boss*****
+                if (i == 9)
+                {
+                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Fat);
+                }
+                else if (i == 16)
+                {
+                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.BossRotatingArmor);
+                }
+                else if (i == 23)
+                {
+                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Divider);
+                }
+                else if (i == 30)
+                {
+                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Blinker);
+                }
+                else if (i == 39)
+                {
+                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Borner);
+                }
+                else if (i % 7 == 0 && i > 0)
+                {
+                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random, 2);
+                }
+                else if (i % 9 == 0 && i > 0)
+                {
+                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random, 3);
+                }
+                //前三波难度修正
+                else if (i < 3)
+                {
+                    stage = (i + 1) * 0.5f;
+                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random);
+                }
+                else
+                {
+                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random);
+                }
             }
 
             LevelSequence.Enqueue(sequence);

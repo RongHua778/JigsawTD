@@ -35,11 +35,11 @@ public class TargetBullet : Bullet
                 {
                     if (target == Target)
                     {
-                        DealRealDamage(target.Object, Damage);
+                        DealRealDamage(target.Enemy, Damage);
                     }
                     else
                     {
-                        DealRealDamage(target.Object, SputteringRate * Damage);
+                        DealRealDamage(target.Enemy, SputteringRate * Damage);
                     }
                 }
 
@@ -49,7 +49,7 @@ public class TargetBullet : Bullet
         {
             if (Target == null)
                 return;
-            DealRealDamage(Target.Object, Damage);
+            DealRealDamage(Target.Enemy, Damage);
         }
 
     }

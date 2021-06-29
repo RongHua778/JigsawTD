@@ -39,7 +39,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1142922113525815384}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -191,7 +191,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7135114907690670805}
   - component: {fileID: -1443366368468062987}
-  m_Layer: 14
+  - component: {fileID: 2623551280471278839}
+  m_Layer: 6
   m_Name: StunTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,3 +230,19 @@ MonoBehaviour:
   ParentObj: {fileID: 0}
   m_TrapAttribute: {fileID: 11400000, guid: 7fe6d72c40d904b40b1e5e27ef4f12b6, type: 2}
   needReset: 1
+--- !u!58 &2623551280471278839
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6661901511858102405}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.2

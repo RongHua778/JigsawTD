@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class TargetPoint : MonoBehaviour
 {
-    [SerializeField]Enemy enemy;
+    Enemy enemy;
     public Vector2 Position => transform.position;
 
-    public Enemy Object { get => enemy; set => enemy = value; }
+    public Enemy Enemy { get => enemy; set => enemy = value; }
+
+    private void Awake()
+    {
+        Enemy = transform.root.GetComponent<Enemy>();
+    }
+
+
 }

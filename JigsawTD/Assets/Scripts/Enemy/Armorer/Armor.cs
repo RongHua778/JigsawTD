@@ -2,16 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Armor : DestructableObject
+public class Armor : MonoBehaviour
 {
     [SerializeField]protected Armorer boss;
     float boxColliderX;
     float boxColliderY;
 
-    public override void Awake()
+    private void Awake()
     {
-        base.Awake();
-        Type = ObjectType.Armor;
         if (GetComponent<BoxCollider2D>())
         {
             boxColliderX = GetComponent<BoxCollider2D>().size.x;
@@ -22,15 +20,15 @@ public class Armor : DestructableObject
 
     protected virtual void Update()
     {
-        if (IsDie)
-        {
-            ReusableObject explosion = ObjectPool.Instance.Spawn(exlposionPrefab);
-            Sound.Instance.PlayEffect(explosionClip, StaticData.Instance.EnvrionmentBaseVolume);
-            explosion.transform.position = transform.position;
-            //ObjectPool.Instance.UnSpawn(this);
-            DisArmor();
-            IsDie = false;
-        }
+        //if (IsDie)
+        //{
+        //    ReusableObject explosion = ObjectPool.Instance.Spawn(exlposionPrefab);
+        //    Sound.Instance.PlayEffect(explosionClip, StaticData.Instance.EnvrionmentBaseVolume);
+        //    explosion.transform.position = transform.position;
+        //    //ObjectPool.Instance.UnSpawn(this);
+        //    DisArmor();
+        //    IsDie = false;
+        //}
     }
     protected virtual void DisArmor()
     {
@@ -44,7 +42,7 @@ public class Armor : DestructableObject
         GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
         if (GetComponent<CircleCollider2D>()) GetComponent<CircleCollider2D>().radius = 0.6f;
         if (GetComponent<BoxCollider2D>()) GetComponent<BoxCollider2D>().size=new Vector2(boxColliderX,boxColliderY);
-        CurrentHealth = MaxHealth;
+        //CurrentHealth = MaxHealth;
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
@@ -53,7 +51,7 @@ public class Armor : DestructableObject
         {
             Bullet bullet = collision.GetComponent<Bullet>();
             bullet.hit = true;
-            CurrentHealth -= bullet.Damage;
+            //CurrentHealth -= bullet.Damage;
             if (bullet.SputteringEffect != null)
             {
                 ParticalControl effect = ObjectPool.Instance.Spawn(bullet.SputteringEffect) as ParticalControl;
