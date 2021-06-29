@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class RotatingArmorBoss : Armorer
 {
+    public float turningSpeed;
     public override EnemyType EnemyType => EnemyType.BossRotatingArmor;
+    private void Update()
+    {
 
+    }
 
 }
