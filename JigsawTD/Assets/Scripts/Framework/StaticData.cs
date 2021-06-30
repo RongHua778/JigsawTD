@@ -59,7 +59,7 @@ public class StaticData : Singleton<StaticData>
     {
         get
         {
-            return difficutyWave[Game.Instance.Difficulty - 1];
+            return difficutyWave[Game.Instance.Difficulty-1];
         }
     }
     //元素加成

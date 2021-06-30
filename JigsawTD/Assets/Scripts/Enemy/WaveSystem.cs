@@ -9,6 +9,7 @@ public class WaveSystem : IGameSystem
     public float waveStage = 1f;
     public bool Running = false;
     int enemyRemain = 0;
+ 
     public int EnemyRemain
     {
         get => enemyRemain;
@@ -30,6 +31,8 @@ public class WaveSystem : IGameSystem
     private EnemySequence runningSequence;
     public Queue<EnemySequence> LevelSequence = new Queue<EnemySequence>();
 
+    private List<int[]> BossLevels;
+
     public EnemySequence RunningSequence { get => runningSequence; set => runningSequence = value; }
     public HealthBar HealthBarPrefab { get => healthBarPrefab; set => healthBarPrefab = value; }
 
@@ -37,9 +40,19 @@ public class WaveSystem : IGameSystem
     {
         base.Initialize(gameManager);
         this._enemyFactory = gameManager.EnemyFactory;
+        BossLevels = new List<int[]>();
+        //关卡1的boss关
+        BossLevels.Add(new int[] { 8, 15, 22, 29 });
+        //关卡2的boss关
+        BossLevels.Add(new int[] { 9, 17, 25, 34 });
+        //关卡3的boss关
+        BossLevels.Add(new int[] { 9, 19, 29, 39 });
+        //关卡4的boss关
+        BossLevels.Add(new int[] { 9, 19, 29, 39 });
         LevelInitialize();
         GameEvents.Instance.onEnemyReach += EnemyReach;
         GameEvents.Instance.onEnemyDie += EnemyDie;
+
     }
 
     public override void Release()
@@ -82,8 +95,17 @@ public class WaveSystem : IGameSystem
         {
             switch (difficulty)
             {
-                //简单难度
                 case 1:
+                    if (i % 3 == 0)
+                    {
+                        if (i < 8) stage += 0.75f;
+                        if (i < 15) stage += 1f;
+                        else if (i >= 15 && i < 22) stage += 1.5f;
+                        else if (i >= 22) stage += 2f;
+                    }
+                    break;
+                //简单难度
+                case 2:
                     if (i % 3 == 0)
                     {
                         if (i < 10) stage += 0.75f;
@@ -92,7 +114,7 @@ public class WaveSystem : IGameSystem
                     }
                     break;
                 //普通难度
-                case 2:
+                case 3:
                     if (i % 3 == 0)
                     {
                         if (i < 10) stage += 1f;
@@ -102,7 +124,7 @@ public class WaveSystem : IGameSystem
                     }
                     break;
                 //专家难度
-                case 3:
+                case 4:
                     if (i % 2 == 0)
                     {
                         if (i < 10) stage += 2f;
@@ -116,22 +138,21 @@ public class WaveSystem : IGameSystem
                     sequence = new EnemySequence(_enemyFactory, i + 1, 5f, EnemyType.Blinker);
                     break;
             }
-            if (difficulty != 4)
+            if (difficulty <5)
             {
-                //boss*****
-                if (i == 9)
+                if (i == BossLevels[difficulty - 1][0])
                 {
                     sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Divider);
                 }
-                else if (i == 19)
+                else if(i == BossLevels[difficulty - 1][1])
                 {
                     sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.SixArmor);
                 }
-                else if (i == 29)
+                else if (i == BossLevels[difficulty - 1][2])
                 {
                     sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Blinker);
                 }
-                else if (i == 34)
+                else if (i == BossLevels[difficulty - 1][3])
                 {
                     sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Borner);
                 }

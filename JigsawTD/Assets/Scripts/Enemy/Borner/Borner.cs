@@ -40,7 +40,8 @@ public class Borner : Enemy
     private void SpawnEnemy(BoardSystem board, EnemyType type)
     {
         EnemyAttribute attribute = GameManager.Instance.EnemyFactory.Get(type);
-        float intensify = ws.RunningSequence.Intensify;
+        //减半的敌人强度
+        float intensify = ws.RunningSequence.Intensify/2;
         Enemy enemy = ObjectPool.Instance.Spawn(attribute.Prefab) as Enemy;
         HealthBar healthBar = ObjectPool.Instance.Spawn(ws.HealthBarPrefab) as HealthBar;
         enemy.Initialize(attribute, Random.Range(-0.3f, 0.3f), healthBar, intensify);
