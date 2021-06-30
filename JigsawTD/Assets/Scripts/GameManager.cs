@@ -10,6 +10,7 @@ public class GameManager : Singleton<GameManager>
     [Header("系统")]
     [SerializeField] private BoardSystem m_BoardSystem = default;//版图系统
     [SerializeField] private WaveSystem m_WaveSystem = default;//波次系统
+    [SerializeField] private ScaleAndMove m_CamControl = default;//摄像机控制系统
     public WaveSystem WaveSystem { get => m_WaveSystem; set => m_WaveSystem = value; }
     public BoardSystem BoardSystem { get => m_BoardSystem; set => m_BoardSystem = value; }
 
@@ -72,11 +73,12 @@ public class GameManager : Singleton<GameManager>
         //初始化系统
         BoardSystem.Initialize(this);//版图系统
         WaveSystem.Initialize(this);//波次系统
+        m_CamControl.Initialize(this, m_MainUI);//摄像机控制
 
         //初始化UI
         m_MainUI.Initialize(this);//主界面顶部UI
         m_FuncUI.Initialize(this);//主界面功能UI
-        m_GuideUI.Initialize(this, m_FuncUI, m_MainUI,m_BluePrintShopUI);//教学系统UI
+        m_GuideUI.Initialize(this, m_FuncUI, m_MainUI, m_BluePrintShopUI);//教学系统UI
         m_BluePrintShopUI.Initialize(this);//配方系统UI
         m_ShapeSelectUI.Initialize(this);//抽模块UI
         m_GameEndUI.Initialize(this);//游戏结束UI
@@ -116,6 +118,7 @@ public class GameManager : Singleton<GameManager>
     {
         BoardSystem.Release();
         WaveSystem.Release();
+        m_CamControl.Release();
 
         m_MainUI.Release();
         m_FuncUI.Release();
@@ -135,6 +138,7 @@ public class GameManager : Singleton<GameManager>
 
     public void GameUpdate()
     {
+        m_CamControl.GameUpdate();
         BoardSystem.GameUpdate();
         WaveSystem.GameUpdate();
         enemies.GameUpdate();
@@ -191,7 +195,7 @@ public class GameManager : Singleton<GameManager>
 
     public void TransitionToState(StateName stateName)
     {
-        BattleOperationState state=null;
+        BattleOperationState state = null;
         switch (stateName)
         {
             case StateName.BuildingState:
@@ -295,6 +299,7 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region 通用功能
+
     public bool ConsumeMoney(int cost)
     {
         return m_MainUI.ConsumeMoney(cost);
@@ -317,7 +322,7 @@ public class GameManager : Singleton<GameManager>
 
     public void SpawnEnemy(int type)
     {
-        WaveSystem.SpawnEnemy(BoardSystem,type);
+        WaveSystem.SpawnEnemy(BoardSystem, type);
     }
 
     public void RefreshShop(int cost)

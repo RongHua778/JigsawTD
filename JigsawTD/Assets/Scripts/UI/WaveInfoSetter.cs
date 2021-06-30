@@ -29,9 +29,9 @@ public class WaveInfoSetter : MonoBehaviour,IPointerEnterHandler,IPointerExitHan
                 enemyIcons[2].sprite = sequence.EnemyAttribute[1].EnemyIcon;
                 break;
             case 3:
-                enemyIcons[1].sprite = sequence.EnemyAttribute[0].EnemyIcon;
-                enemyIcons[2].sprite = sequence.EnemyAttribute[1].EnemyIcon;
-                enemyIcons[3].sprite = sequence.EnemyAttribute[2].EnemyIcon;
+                enemyIcons[3].sprite = sequence.EnemyAttribute[0].EnemyIcon;
+                enemyIcons[4].sprite = sequence.EnemyAttribute[1].EnemyIcon;
+                enemyIcons[5].sprite = sequence.EnemyAttribute[2].EnemyIcon;
                 break;
         }
     }
