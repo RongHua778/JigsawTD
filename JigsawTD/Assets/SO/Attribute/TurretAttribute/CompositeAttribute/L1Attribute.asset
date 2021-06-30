@@ -63,7 +63,7 @@ MonoBehaviour:
     CriticalRate: 0
     SlowRate: 0
     TurretEffects:
-    - EffectName: 8
+    - EffectName: 11
       KeyValue: 20
       EffectDescription: "\u805A\u7126\u706B\u529B\uFF1A\u8FDE\u7EED\u653B\u51FB\u540C\u4E00\u76EE\u6807\u65F6\uFF0C\u6BCF\u6B21\u653B\u51FB\u4F24\u5BB3\u63D0\u9AD820\u3002"
     PoloEffects: []

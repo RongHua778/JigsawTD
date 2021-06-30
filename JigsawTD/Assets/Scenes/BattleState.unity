@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 476477}
   - component: {fileID: 476478}
   m_Layer: 5
-  m_Name: EnemyIcon (1)
+  m_Name: EnemyIcon6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,6 +209,7 @@ GameObject:
   - component: {fileID: 2633862}
   - component: {fileID: 2633864}
   - component: {fileID: 2633863}
+  - component: {fileID: 2633865}
   m_Layer: 5
   m_Name: HealthText
   m_TagString: Untagged
@@ -277,6 +278,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2633861}
   m_CullTransparentMesh: 1
+--- !u!114 &2633865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2633861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &8398347
 GameObject:
   m_ObjectHideFlags: 0
@@ -1214,6 +1230,7 @@ GameObject:
   - component: {fileID: 92572662}
   - component: {fileID: 92572664}
   - component: {fileID: 92572663}
+  - component: {fileID: 92572665}
   m_Layer: 5
   m_Name: CoinText
   m_TagString: Untagged
@@ -1282,6 +1299,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 92572661}
   m_CullTransparentMesh: 1
+--- !u!114 &92572665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92572661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &93857363
 GameObject:
   m_ObjectHideFlags: 0
@@ -2360,7 +2392,7 @@ GameObject:
   - component: {fileID: 211653648}
   - component: {fileID: 211653647}
   m_Layer: 5
-  m_Name: EnemyIcon
+  m_Name: EnemyIcon1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4281,6 +4313,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BoardSystem: {fileID: 8398349}
   m_WaveSystem: {fileID: 107988104}
+  m_CamControl: {fileID: 519420030}
   m_BluePrintShopUI: {fileID: 878872113}
   m_ShapeSelectUI: {fileID: 1064182619}
   m_MainUI: {fileID: 895535906}
@@ -6337,7 +6370,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 260.36, y: -3.8754578}
+  m_AnchoredPosition: {x: 242.8, y: -6}
   m_SizeDelta: {x: 111.96, y: 58.12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &466831247
@@ -9530,6 +9563,7 @@ GameObject:
   - component: {fileID: 785419716}
   - component: {fileID: 785419718}
   - component: {fileID: 785419717}
+  - component: {fileID: 785419719}
   m_Layer: 5
   m_Name: WaveText
   m_TagString: Untagged
@@ -9598,6 +9632,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 785419715}
   m_CullTransparentMesh: 1
+--- !u!114 &785419719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785419715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &797891803
 GameObject:
   m_ObjectHideFlags: 0
@@ -15142,7 +15191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.68235296, g: 0.9764706, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -15151,7 +15200,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 27
+    m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -15936,7 +15985,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -17422,7 +17471,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 180, y: -81}
-  m_SizeDelta: {x: 250, y: 120}
+  m_SizeDelta: {x: 200, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1400856150
 MonoBehaviour:
@@ -17514,7 +17563,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5e43b162d38a6b643be4e59173badc90, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 33234e343f8ec6c4889f18102ffc80f7, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -17673,7 +17722,7 @@ GameObject:
   - component: {fileID: 1410460434}
   - component: {fileID: 1410460435}
   m_Layer: 5
-  m_Name: EnemyIcon
+  m_Name: EnemyIcon5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21146,7 +21195,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3ba3a8061026d904dbee4e412a0b8228, type: 3}
+  m_Sprite: {fileID: 3059014591838385069, guid: c541c966c197b46409b9d9869fc4a867, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -22037,7 +22086,7 @@ GameObject:
   - component: {fileID: 1724294270}
   - component: {fileID: 1724294271}
   m_Layer: 5
-  m_Name: EnemyIcon (1)
+  m_Name: EnemyIcon3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23325,7 +23374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8834c8b736c85524bb85789591747753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Difficulty: 2
+  Difficulty: 1
   MaxDifficulty: 4
   transition: {fileID: 231277384}
   transitionTime: 1
@@ -25032,7 +25081,7 @@ GameObject:
   - component: {fileID: 2006145934}
   - component: {fileID: 2006145935}
   m_Layer: 5
-  m_Name: EnemyIcon (2)
+  m_Name: EnemyIcon4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25571,7 +25620,7 @@ GameObject:
   - component: {fileID: 2040358081}
   - component: {fileID: 2040358082}
   m_Layer: 5
-  m_Name: EnemyIcon
+  m_Name: EnemyIcon2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

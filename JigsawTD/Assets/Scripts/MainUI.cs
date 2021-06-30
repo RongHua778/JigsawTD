@@ -55,8 +55,8 @@ public class MainUI : IUserInterface
     }
 
     //ÓÎÏ·ËÙ¶È
-    private float gameSpeed = 1;
-    public float GameSpeed
+    private int gameSpeed = 1;
+    public int GameSpeed
     {
         get => gameSpeed;
         set
@@ -90,6 +90,23 @@ public class MainUI : IUserInterface
 
     }
 
+
+    public override void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            GameSpeed = 1;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            GameSpeed = 2;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            GameSpeed = 3;
+        }
+    }
+
     public override void Release()
     {
         base.Release();
@@ -111,14 +128,14 @@ public class MainUI : IUserInterface
         m_Anim.SetBool("Show", true);
     }
 
-    public void PlayAnim(string key,bool value)
+    public void PlayAnim(string key, bool value)
     {
         m_Anim.SetBool(key, value);
     }
 
     private void EnemyReach(Enemy enemy)
     {
-        Life-=enemy.ReachDamage;
+        Life -= enemy.ReachDamage;
     }
 
 

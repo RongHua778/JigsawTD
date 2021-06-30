@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 
-public class ScaleAndMove : MonoBehaviour
+public class ScaleAndMove : IGameSystem
 {
-
+    MainUI m_MainUI;
     Vector2 m_ScreenPos = new Vector2();
     Vector3 oldPosition;
     Camera cam;
@@ -34,8 +34,20 @@ public class ScaleAndMove : MonoBehaviour
     Vector3 speedVertical = Vector3.zero;
     Vector3 speed = Vector3.zero;
 
-    void Start()
+    //void Start()
+    //{
+    //    cam = this.GetComponent<Camera>();
+    //    CamInitialPos = cam.transform.position;
+    //    CamInitialSize = cam.orthographicSize;
+    //    oldPosition = cam.transform.position;
+    //    Input.multiTouchEnabled = true;
+    //}
+
+
+    public void Initialize(GameManager gamemanager, MainUI mainUI)
     {
+        Initialize(gamemanager);
+        m_MainUI = mainUI;
         cam = this.GetComponent<Camera>();
         CamInitialPos = cam.transform.position;
         CamInitialSize = cam.orthographicSize;
@@ -43,10 +55,8 @@ public class ScaleAndMove : MonoBehaviour
         Input.multiTouchEnabled = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void GameUpdate()
     {
-
         //DesktopInput();
         TutorialCounter();
         RTSView();
@@ -55,8 +65,22 @@ public class ScaleAndMove : MonoBehaviour
         {
             CanControl = !CanControl;
         }
-
     }
+
+    //// Update is called once per frame
+    //void Update()
+    //{
+
+    //    //DesktopInput();
+    //    TutorialCounter();
+    //    RTSView();
+    //    //TEST
+    //    if (Input.GetKeyDown(KeyCode.P))
+    //    {
+    //        CanControl = !CanControl;
+    //    }
+
+    //}
 
     private void TutorialCounter()
     {
@@ -102,7 +126,7 @@ public class ScaleAndMove : MonoBehaviour
             cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minmum, maximum);
             cam.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
         }
-        
+
         speedHorizon = Vector3.zero;
         speedVertical = Vector3.zero;
         speed = Vector3.zero;
@@ -111,23 +135,25 @@ public class ScaleAndMove : MonoBehaviour
         {
             speedHorizon = Vector3.left * slideSpeed * Time.deltaTime;
         }
-        if (v1.x > 1 - 0.01f && transform.localPosition.x < maxRight)
+        else if (v1.x > 1 - 0.01f && transform.localPosition.x < maxRight)
         {
             speedHorizon = Vector3.right * slideSpeed * Time.deltaTime;
         }
-        if (v1.y < 0.01f && transform.localPosition.y > maxDown)
+        else if (v1.y < 0.01f && transform.localPosition.y > maxDown)
         {
             speedVertical = Vector3.down * slideSpeed * Time.deltaTime;
         }
-        if (v1.y > 1 - 0.01f && transform.localPosition.y < maxUp)
+        else if (v1.y > 1 - 0.01f && transform.localPosition.y < maxUp)
         {
             speedVertical = Vector3.up * slideSpeed * Time.deltaTime;
         }
-        
+        else
+        {
+            speedVertical = Input.GetAxisRaw("Horizontal") * Vector3.right * slideSpeed * Time.deltaTime;
+            speedHorizon = Input.GetAxisRaw("Vertical") * Vector3.up * slideSpeed * Time.deltaTime;
+        }
         speed = speedHorizon + speedVertical;
-
-
-        transform.Translate(speed, Space.World);
+        transform.Translate(speed / m_MainUI.GameSpeed, Space.World);
     }
     private void DesktopInput()
     {

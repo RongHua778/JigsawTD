@@ -184,7 +184,6 @@ public class SameTargetDamageIncrease : TurretEffect
         {
             IncreaseDamage += KeyValue;
             bullet.Damage += IncreaseDamage;
-            Debug.Log(bullet.Damage);
         }
         else
         {
