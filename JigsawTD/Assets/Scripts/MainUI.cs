@@ -40,8 +40,8 @@ public class MainUI : IUserInterface
             {
                 m_GameManager.GameEnd(false);
             }
-            life = Mathf.Clamp(value, 0, StaticData.Instance.PlayerMaxHealth);
-            PlayerLifeTxt.text = life.ToString() + "/" + StaticData.Instance.PlayerMaxHealth.ToString();
+            life = Mathf.Clamp(value, 0, StaticData.Instance.PlayerMaxHealth[Game.Instance.Difficulty-1]);
+            PlayerLifeTxt.text = life.ToString() + "/" + StaticData.Instance.PlayerMaxHealth[Game.Instance.Difficulty - 1].ToString();
         }
     }
     int currentWave;
@@ -81,7 +81,7 @@ public class MainUI : IUserInterface
         GameEvents.Instance.onEnemyReach += EnemyReach;
         GameSpeed = 1;
         CurrentWave = 0;
-        Life = StaticData.Instance.PlayerMaxHealth;
+        Life = StaticData.Instance.PlayerMaxHealth[Game.Instance.Difficulty-1];
         Coin = StaticData.Instance.StartCoin;
 
         m_PausePanel.Initialize(m_GameManager);

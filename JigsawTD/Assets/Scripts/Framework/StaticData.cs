@@ -53,7 +53,7 @@ public class StaticData : Singleton<StaticData>
 
     [Header("ProbabilitySetting")]
     public float[] TileShapeChance = default;
-    public int PlayerMaxHealth;
+    public int[] PlayerMaxHealth;
     [SerializeField] int[] difficutyWave;
     public int LevelMaxWave
     {
