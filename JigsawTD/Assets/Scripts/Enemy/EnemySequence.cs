@@ -53,14 +53,14 @@ public class EnemySequence
         for (int j = 0; j < EnemyAttribute.Count; j++)
         {
             Amount.Add((EnemyAttribute[j].InitCount + wave / 4 * EnemyAttribute[j].CountIncrease) / EnemyAttribute.Count + 1);
-            if (wave < 4)
-            {
-                CoolDown.Add(waveCoolDown);
-            }
-            else
-            {
+            //if (wave < 4)
+            //{
+            //    CoolDown.Add(EnemyAttribute[j].CoolDown);
+            //}
+            //else
+            //{
                 CoolDown.Add(EnemyAttribute[j].CoolDown - wave * 0.01f);
-            }
+            //}
         }
         //打乱顺序将敌人按不同类型的编号加入一个列表以便战斗时一个个取出
         for (int i = 0; i < Amount.Count; i++)
