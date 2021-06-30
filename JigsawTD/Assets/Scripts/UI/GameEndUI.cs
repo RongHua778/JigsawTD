@@ -19,7 +19,7 @@ public class GameEndUI : IUserInterface
     {
         if (win)
         {
-            title.text = "通过难度" + Game.Instance.Difficulty;
+            title.text = "通过关卡" + Game.Instance.Difficulty;
             int passLevel = PlayerPrefs.GetInt("MaxPassLevel", 0);
             if (Game.Instance.Difficulty > passLevel)
             {

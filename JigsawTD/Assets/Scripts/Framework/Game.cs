@@ -12,7 +12,7 @@ public class Game : Singleton<Game>
 
     public int Difficulty = 1;
     //******** 增加了一个新难度用来测试关卡
-    public int MaxDifficulty = 4;
+    public int MaxDifficulty = 5;
 
     public Animator transition;
     public float transitionTime = 0.8f;

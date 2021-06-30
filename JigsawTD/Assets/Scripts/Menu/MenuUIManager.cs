@@ -88,7 +88,7 @@ public class MenuUIManager : MonoBehaviour
         {
             Game.Instance.Difficulty = Game.Instance.MaxDifficulty;
         }
-        difficultyTxt.text = "ÄÑ¶È" + Game.Instance.Difficulty;
+        difficultyTxt.text = "¹Ø¿¨" + Game.Instance.Difficulty;
     }
 
 

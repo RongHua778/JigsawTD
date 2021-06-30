@@ -4392,8 +4392,8 @@ MonoBehaviour:
   EnvrionmentBaseVolume: 0.25
   TileSize: 1
   TileShapeChance: []
-  PlayerMaxHealth: 15
-  difficutyWave: 1e00000023000000280000001e000000
+  PlayerMaxHealth: 30
+  difficutyWave: 1e00000023000000280000002800000001000000
 --- !u!1 &306440703
 GameObject:
   m_ObjectHideFlags: 0

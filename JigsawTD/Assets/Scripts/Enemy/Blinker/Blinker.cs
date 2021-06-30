@@ -37,41 +37,40 @@ public class Blinker : Enemy
         return base.GameUpdate();
     }
     private bool reachEnd = false;
-    IEnumerator Blink()
+    private void Blink()
     {
         AnimatorStateInfo stateinfo = anim.GetCurrentAnimatorStateInfo(0);
+        if (stateinfo.IsName("Exit") && stateinfo.normalizedTime >= 0.95f)
+        {
+            PointIndex += 4;
 
-        while (stateinfo.normalizedTime < 0.95f)
-        {
-            stateinfo = anim.GetCurrentAnimatorStateInfo(0);
-            yield return null;
+            //在终点前不会瞬移
+            if (PointIndex < pathPoints.Count - 1)
+            {
+                CurrentPoint = pathPoints[PointIndex];
+                transform.localPosition = pathPoints[PointIndex].PathPos;
+                positionFrom = CurrentPoint.PathPos;
+                positionTo = CurrentPoint.ExitPoint;
+                Direction = CurrentPoint.PathDirection;
+                DirectionChange = DirectionChange.None;
+                model.localPosition = new Vector3(pathOffset, 0);
+                directionAngleFrom = directionAngleTo = Direction.GetAngle();
+                transform.localRotation = CurrentPoint.PathDirection.GetRotation();
+                Progress = 0;
+                blink -= 1;
+            }
+            else
+            {
+                PointIndex = pathPoints.Count - 1;
+                CurrentPoint = pathPoints[PointIndex];
+                transform.localPosition = pathPoints[PointIndex].PathPos;
+                Progress = 1;
+            }
+            transfering = false;
+            anim.Play("Default");
         }
-        PointIndex += 4;
 
-        //在终点前不会瞬移
-        if (PointIndex < pathPoints.Count - 1)
-        {
-            CurrentPoint = pathPoints[PointIndex];
-            transform.localPosition = pathPoints[PointIndex].PathPos;
-            positionFrom = CurrentPoint.PathPos;
-            positionTo = CurrentPoint.ExitPoint;
-            Direction = CurrentPoint.PathDirection;
-            DirectionChange = DirectionChange.None;
-            model.localPosition = new Vector3(pathOffset, 0);
-            directionAngleFrom = directionAngleTo = Direction.GetAngle();
-            transform.localRotation = CurrentPoint.PathDirection.GetRotation();
-            Progress = 0;
-        }
-        else
-        {
-            PointIndex = pathPoints.Count - 1;
-            CurrentPoint = pathPoints[PointIndex];
-            transform.localPosition = pathPoints[PointIndex].PathPos;
-            Progress = 1;
-        }
-        transfering = false;
-        anim.Play("Default");
-        yield return null;
+
 
     }
 
@@ -82,15 +81,16 @@ public class Blinker : Enemy
         if (!transfering)
         {
 
-            targetPos = pathPoints[Mathf.Min(PointIndex + 4,pathPoints.Count-1)].PathPos;
+            targetPos = pathPoints[Mathf.Min(PointIndex + 4, pathPoints.Count - 1)].PathPos;
             SpawnHoleOnPos(transform.position);
             SpawnHoleOnPos(targetPos);
             anim.Play("Exit");
             StunTime += 0.5f;
             transfering = true;
         }
-        blink -= 1;
-        StartCoroutine(Blink());
+        Blink();
+
+
     }
 
     private void SpawnHoleOnPos(Vector3 pos)
