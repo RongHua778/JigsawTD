@@ -42,7 +42,7 @@ public class WaveSystem : IGameSystem
         this._enemyFactory = gameManager.EnemyFactory;
         BossLevels = new List<int[]>();
         //关卡1的boss关
-        BossLevels.Add(new int[] { 8, 15, 22, 29 });
+        BossLevels.Add(new int[] { 9, 16, 22, 29 });
         //关卡2的boss关
         BossLevels.Add(new int[] { 9, 17, 25, 34 });
         //关卡3的boss关
@@ -98,10 +98,10 @@ public class WaveSystem : IGameSystem
                 case 1:
                     if (i % 3 == 0)
                     {
-                        if (i < 8) stage += 0.75f;
-                        if (i < 15) stage += 1f;
-                        else if (i >= 15 && i < 22) stage += 1.5f;
-                        else if (i >= 22) stage += 2f;
+                        if (i < 8) stage += 0.5f;
+                        if (i < 15) stage += 0.75f;
+                        else if (i >= 15 && i < 22) stage += 1.25f;
+                        else if (i >= 22) stage += 1.75f;
                     }
                     break;
                 //简单难度
