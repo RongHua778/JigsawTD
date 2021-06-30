@@ -12,6 +12,14 @@ public class GuideVideo :IUserInterface
     {
         base.Initialize(gameManager);
         anim = this.GetComponent<Animator>();
+        if (Game.Instance.Tutorial)
+        {
+            foreach(var obj in tabs)
+            {
+                obj.gameObject.SetActive(false);
+            }
+            tabs[0].gameObject.SetActive(true);
+        }
     }
     public override void Show()
     {

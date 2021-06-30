@@ -146,6 +146,36 @@ public class GameManager : Singleton<GameManager>
         elementTurrets.GameUpdate();
         compositeTurrets.GameUpdate();
         nonEnemies.GameUpdate();
+
+        KeyboardControl();
+    }
+
+
+    private void KeyboardControl()
+    {
+        if (Game.Instance.Tutorial)
+            return;
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            m_MainUI.GameSpeed = 1;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            m_MainUI.GameSpeed = 2;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            m_MainUI.GameSpeed = 3;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            m_BluePrintShopUI.ShopBtnClick();
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            m_FuncUI.NextWaveBtnClick();
+        }
     }
 
     #region ½×¶Î¿ØÖÆ
