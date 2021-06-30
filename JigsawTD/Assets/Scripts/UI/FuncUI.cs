@@ -97,6 +97,8 @@ public class FuncUI : IUserInterface
         m_Anim = this.GetComponent<Animator>();
     }
 
+
+
     public void PrepareForGuide()
     {
         DrawBtnObj.SetActive(false);

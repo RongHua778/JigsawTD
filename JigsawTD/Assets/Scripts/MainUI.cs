@@ -91,21 +91,6 @@ public class MainUI : IUserInterface
     }
 
 
-    public override void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            GameSpeed = 1;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            GameSpeed = 2;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            GameSpeed = 3;
-        }
-    }
 
     public override void Release()
     {
@@ -131,6 +116,7 @@ public class MainUI : IUserInterface
     public void PlayAnim(string key, bool value)
     {
         m_Anim.SetBool(key, value);
+
     }
 
     private void EnemyReach(Enemy enemy)
