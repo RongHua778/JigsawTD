@@ -14,7 +14,8 @@ public enum TurretEffectName
     ChangeCriticalPercentage,
     CurrentHealthBaseDamage,
     IncreaseSlowRate,
-    IncreaseDamageBuff
+    IncreaseDamageBuff,
+    SameTargetDamageIncrease
 }
 [System.Serializable]
 public class TurretEffectInfo
@@ -168,5 +169,27 @@ public class IncreaseDamageBuff : TurretEffect
     {
         BuffInfo info = new BuffInfo(EnemyBuffName.DamageIntensify, KeyValue, 2f);
         target.Buffable.AddBuff(info);
+    }
+}
+
+public class SameTargetDamageIncrease : TurretEffect
+{
+    public override TurretEffectName EffectName => TurretEffectName.SameTargetDamageIncrease;
+    public float IncreaseDamage;
+    public Enemy LastTarget;
+
+    public override void Hit(Enemy target)
+    {
+        if (target == LastTarget)
+        {
+            IncreaseDamage += KeyValue;
+            bullet.Damage += IncreaseDamage;
+            Debug.Log(bullet.Damage);
+        }
+        else
+        {
+            IncreaseDamage = 0;
+            LastTarget = target;
+        }
     }
 }

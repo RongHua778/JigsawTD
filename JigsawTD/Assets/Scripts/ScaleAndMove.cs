@@ -30,6 +30,9 @@ public class ScaleAndMove : MonoBehaviour
     public static bool SizeTutorial = false;
     public static bool CanControl = false;
     //
+    Vector3 speedHorizon = Vector3.zero;
+    Vector3 speedVertical = Vector3.zero;
+    Vector3 speed = Vector3.zero;
 
     void Start()
     {
@@ -99,10 +102,10 @@ public class ScaleAndMove : MonoBehaviour
             cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minmum, maximum);
             cam.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
         }
-
-        Vector3 speedHorizon = new Vector3(0, 0, 0);
-        Vector3 speedVertical = new Vector3(0, 0, 0);
-        Vector3 speed = new Vector3(0, 0, 0);
+        
+        speedHorizon = Vector3.zero;
+        speedVertical = Vector3.zero;
+        speed = Vector3.zero;
         Vector3 v1 = Camera.main.ScreenToViewportPoint(Input.mousePosition);
         if (v1.x < 0.01f && transform.localPosition.x > maxLeft)
         {
@@ -120,7 +123,10 @@ public class ScaleAndMove : MonoBehaviour
         {
             speedVertical = Vector3.up * slideSpeed * Time.deltaTime;
         }
+        
         speed = speedHorizon + speedVertical;
+
+
         transform.Translate(speed, Space.World);
     }
     private void DesktopInput()

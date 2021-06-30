@@ -35,10 +35,10 @@ MonoBehaviour:
     TurretEffects:
     - EffectName: 9
       KeyValue: 0.5
-      EffectDescription: "\u52A0\u901F\u51B7\u5374\uFF1A\u4F7F\u654C\u4EBA\u5F53\u524D\u7684\u52A0\u901F\u6548\u679C\u63D0\u9AD850%\u3002"
+      EffectDescription: "\u52A0\u901F\u51B7\u5374\uFF1A\u4F7F\u654C\u4EBA\u5F53\u524D\u7684\u51CF\u901F\u6548\u679C\u63D0\u9AD850%\u3002"
     PoloEffects: []
     TurretName: "M1\u96EA\u7403\u70AE"
-    CannonSprite: {fileID: -3859780340106055629, guid: 8b08e3a9cd80f52418cdf2897bf78f79, type: 3}
+    CannonSprite: {fileID: -264787257917623472, guid: bde35e3e9a4d90044ab007465a63e442, type: 3}
     ShootPointOffset: {x: 0, y: 0.21}
   - AttackRange: 4
     ForbidRange: 0
@@ -50,10 +50,10 @@ MonoBehaviour:
     TurretEffects:
     - EffectName: 9
       KeyValue: 0.75
-      EffectDescription: "\u52A0\u901F\u51B7\u5374\uFF1A\u4F7F\u654C\u4EBA\u5F53\u524D\u7684\u52A0\u901F\u6548\u679C\u63D0\u9AD875%\u3002"
+      EffectDescription: "\u52A0\u901F\u51B7\u5374\uFF1A\u4F7F\u654C\u4EBA\u5F53\u524D\u7684\u51CF\u901F\u6548\u679C\u63D0\u9AD875%\u3002"
     PoloEffects: []
     TurretName: "M2\u96EA\u7403\u70AE"
-    CannonSprite: {fileID: -5207565593283179170, guid: 8b08e3a9cd80f52418cdf2897bf78f79, type: 3}
+    CannonSprite: {fileID: -1221509669150334452, guid: bde35e3e9a4d90044ab007465a63e442, type: 3}
     ShootPointOffset: {x: 0, y: 0.23}
   - AttackRange: 4
     ForbidRange: 0
@@ -65,8 +65,8 @@ MonoBehaviour:
     TurretEffects:
     - EffectName: 9
       KeyValue: 1
-      EffectDescription: "\u52A0\u901F\u51B7\u5374\uFF1A\u4F7F\u654C\u4EBA\u5F53\u524D\u7684\u52A0\u901F\u6548\u679C\u63D0\u9AD8100%\u3002"
+      EffectDescription: "\u52A0\u901F\u51B7\u5374\uFF1A\u4F7F\u654C\u4EBA\u5F53\u524D\u7684\u51CF\u901F\u6548\u679C\u63D0\u9AD8100%\u3002"
     PoloEffects: []
     TurretName: "M3\u96EA\u7403\u70AE"
-    CannonSprite: {fileID: 3606099757945672632, guid: 8b08e3a9cd80f52418cdf2897bf78f79, type: 3}
+    CannonSprite: {fileID: 5355383472882469194, guid: bde35e3e9a4d90044ab007465a63e442, type: 3}
     ShootPointOffset: {x: 0, y: 0.28}

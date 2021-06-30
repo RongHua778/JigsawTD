@@ -44,7 +44,7 @@ MonoBehaviour:
     ForbidRange: 0
     AttackDamage: 300
     AttackSpeed: 0.35
-    SputteringRange: 0.5
+    SputteringRange: 0.7
     CriticalRate: 0
     SlowRate: 0
     TurretEffects:
@@ -59,7 +59,7 @@ MonoBehaviour:
     ForbidRange: 0
     AttackDamage: 500
     AttackSpeed: 0.35
-    SputteringRange: 0.5
+    SputteringRange: 0.9
     CriticalRate: 0
     SlowRate: 0
     TurretEffects:

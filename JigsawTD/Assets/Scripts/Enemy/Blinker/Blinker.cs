@@ -81,7 +81,6 @@ public class Blinker : Enemy
         Vector3 targetPos;
         if (!transfering)
         {
-
             targetPos = pathPoints[Mathf.Min(PointIndex + 4,pathPoints.Count-1)].PathPos;
             SpawnHoleOnPos(transform.position);
             SpawnHoleOnPos(targetPos);

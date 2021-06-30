@@ -10,8 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4651974209486003387}
   - component: {fileID: 3909137391539479560}
-  - component: {fileID: 5708920265490843636}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: TurretBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,22 +82,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &5708920265490843636
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1322624399635568344}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.01
 --- !u!1 &1690729529541011413
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,6 +278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
+  Activated: 1
   targetList: []
   ShootEffect: {fileID: 7997848561472414641}
 --- !u!95 &264389707155578375

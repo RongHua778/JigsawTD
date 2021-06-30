@@ -100,6 +100,7 @@ public class BasicStrategy
         BaseAttackIntensify = 0;
         TileRangeIntensify = 0;
         CriticalPercentage = 1.5f;
+        SputteringRate = 0.5f;
         TargetCount = 1;
     }
 

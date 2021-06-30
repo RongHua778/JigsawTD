@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 7135114907690670805}
   - component: {fileID: -1443366368468062987}
   - component: {fileID: 2623551280471278839}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: StunTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,7 +207,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6661901511858102405}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8337023803683179141}

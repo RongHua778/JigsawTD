@@ -33,9 +33,9 @@ MonoBehaviour:
     CriticalRate: 0
     SlowRate: 0
     TurretEffects:
-    - EffectName: 8
-      KeyValue: 0.02
-      EffectDescription: "\u7A7F\u900F\u5B50\u5F39\uFF1A\u9020\u6210\u76EE\u68072%\u5F53\u524D\u751F\u547D\u503C\u7684\u989D\u5916\u4F24\u5BB3\u3002"
+    - EffectName: 11
+      KeyValue: 10
+      EffectDescription: "\u805A\u7126\u706B\u529B\uFF1A\u8FDE\u7EED\u653B\u51FB\u540C\u4E00\u76EE\u6807\u65F6\uFF0C\u6BCF\u6B21\u653B\u51FB\u4F24\u5BB3\u63D0\u9AD810\u3002"
     PoloEffects: []
     TurretName: "L1\u75BE\u5C04\u70AE"
     CannonSprite: {fileID: -1517020906295608978, guid: 366e71c72e7bafa4190a02691b4032a1, type: 3}
@@ -48,9 +48,9 @@ MonoBehaviour:
     CriticalRate: 0
     SlowRate: 0
     TurretEffects:
-    - EffectName: 8
-      KeyValue: 0.04
-      EffectDescription: "\u7A7F\u900F\u5B50\u5F39\uFF1A\u9020\u6210\u76EE\u68074%\u5F53\u524D\u751F\u547D\u503C\u7684\u989D\u5916\u4F24\u5BB3\u3002"
+    - EffectName: 11
+      KeyValue: 15
+      EffectDescription: "\u805A\u7126\u706B\u529B\uFF1A\u8FDE\u7EED\u653B\u51FB\u540C\u4E00\u76EE\u6807\u65F6\uFF0C\u6BCF\u6B21\u653B\u51FB\u4F24\u5BB3\u63D0\u9AD815\u3002"
     PoloEffects: []
     TurretName: "L2\u75BE\u5C04\u70AE"
     CannonSprite: {fileID: 9186318722770319717, guid: 366e71c72e7bafa4190a02691b4032a1, type: 3}
@@ -64,8 +64,8 @@ MonoBehaviour:
     SlowRate: 0
     TurretEffects:
     - EffectName: 8
-      KeyValue: 0.06
-      EffectDescription: "\u7A7F\u900F\u5B50\u5F39\uFF1A\u9020\u6210\u76EE\u68076%\u5F53\u524D\u751F\u547D\u503C\u7684\u989D\u5916\u4F24\u5BB3\u3002"
+      KeyValue: 20
+      EffectDescription: "\u805A\u7126\u706B\u529B\uFF1A\u8FDE\u7EED\u653B\u51FB\u540C\u4E00\u76EE\u6807\u65F6\uFF0C\u6BCF\u6B21\u653B\u51FB\u4F24\u5BB3\u63D0\u9AD820\u3002"
     PoloEffects: []
     TurretName: "L3\u75BE\u5C04\u70AE"
     CannonSprite: {fileID: -7401938196994722387, guid: 366e71c72e7bafa4190a02691b4032a1, type: 3}
