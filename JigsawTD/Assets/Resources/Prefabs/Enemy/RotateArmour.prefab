@@ -19238,7 +19238,7 @@ MonoBehaviour:
   exlposionPrefab: {fileID: 4814509631623709245, guid: ce7784084ac4d8046831643b89f1e650, type: 3}
   CurrentTrap: {fileID: 0}
   initialSpeed: 0
-  armorIntensify: 15
+  armorIntensify: 12
   armorCoolDown: 999999
   rotateObj: {fileID: 8011516457752567327}
 --- !u!50 &4799112398493308357
