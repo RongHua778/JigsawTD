@@ -24,4 +24,4 @@ MonoBehaviour:
   ReachDamage: 5
   extraHealth: 0
   EnemyIcon: {fileID: 5503619113886890817, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
-  Description: "\u6BCF\u9694\u4E00\u6BB5\u65F6\u95F4\u5236\u9020\u51FA\u968F\u673A\u7C7B\u578B\u7684\u654C\u4EBA\u3002"
+  Description: "\u6BCF\u9694\u4E00\u6BB5\u65F6\u95F4\u53EC\u5524\u51FA\u968F\u673A\u7C7B\u578B\u7684\u654C\u4EBA\u3002"
