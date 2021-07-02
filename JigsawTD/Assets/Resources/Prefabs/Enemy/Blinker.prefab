@@ -19125,7 +19125,7 @@ MonoBehaviour:
     PathPos: {x: 0, y: 0}
     PathDirection: 0
     ExitPoint: {x: 0, y: 0}
-  exlposionPrefab: {fileID: 9093981622819706278, guid: f1ea12073b3170943af71026bb40ecff, type: 3}
+  exlposionPrefab: {fileID: 4814509631623709245, guid: ce7784084ac4d8046831643b89f1e650, type: 3}
   CurrentTrap: {fileID: 0}
   initialSpeed: 0
   holePrefab: {fileID: -6697839134482483952, guid: 529ac6622c5b5c6469501f1d2e75fd30, type: 3}

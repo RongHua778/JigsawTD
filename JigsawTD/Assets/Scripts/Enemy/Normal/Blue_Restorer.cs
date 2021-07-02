@@ -12,7 +12,7 @@ public class Blue_Restorer : Enemy
         damagedCounter += Time.deltaTime;
         if (damagedCounter > 1f)
         {
-            CurrentHealth += MaxHealth * 0.1f * Time.deltaTime;
+            CurrentHealth += MaxHealth * 0.05f * Time.deltaTime;
         }
         return base.GameUpdate();
     }

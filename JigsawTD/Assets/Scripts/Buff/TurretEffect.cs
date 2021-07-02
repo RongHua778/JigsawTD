@@ -52,7 +52,7 @@ public class SpeedIncreasePerShoot : TurretEffect
     public override TurretEffectName EffectName => TurretEffectName.SpeedIncreasePerShoot;
     public override void Shoot()
     {
-        if (strategy.TurnSpeedIntensify > KeyValue * 9.5f)
+        if (strategy.TurnSpeedIntensify > KeyValue * 99.5f)
             return;
         strategy.TurnSpeedIntensify += KeyValue;
     }

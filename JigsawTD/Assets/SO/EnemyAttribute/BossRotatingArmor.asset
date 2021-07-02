@@ -16,7 +16,7 @@ MonoBehaviour:
   EnemyType: 7
   InitCount: 0
   CountIncrease: 0
-  Health: 40
+  Health: 35
   Speed: 0.5
   Shell: 0
   CoolDown: 3
