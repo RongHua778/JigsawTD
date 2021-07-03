@@ -5,7 +5,7 @@ using UnityEngine;
 public class I1Turret : CompositeTurret
 {
     float rotSpeed = 0;
-    float RotSpeed { get => Mathf.Min(720, rotSpeed * Mathf.Pow(Strategy.AttackSpeed, 2)); set => rotSpeed = value; }
+    float RotSpeed { get => Mathf.Min(720, rotSpeed * Mathf.Pow(Strategy.FinalSpeed, 2)); set => rotSpeed = value; }
     protected override void RotateTowards()
     {
 
@@ -35,7 +35,7 @@ public class I1Turret : CompositeTurret
     {
         Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
         bullet.transform.position = 0.3f * Random.insideUnitCircle.normalized + (Vector2)transform.position;
-        Vector2 targetPos = (bullet.transform.position - transform.position).normalized * (Strategy.AttackRange + 0.5f) + transform.position;
+        Vector2 targetPos = (bullet.transform.position - transform.position).normalized * (Strategy.FinalRange + 0.5f) + transform.position;
         bullet.Initialize(this, null, targetPos);
     }
 

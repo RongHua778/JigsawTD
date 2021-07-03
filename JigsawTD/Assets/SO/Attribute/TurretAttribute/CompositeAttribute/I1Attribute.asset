@@ -22,8 +22,8 @@ MonoBehaviour:
   BulletSpeed: 1
   ShootSound: {fileID: 8300000, guid: 4f7538d155d5687479b2932c5349bdf2, type: 3}
   Rare: 2
-  totalLevel: 8
-  elementNumber: 2
+  totalLevel: 9
+  elementNumber: 3
   TurretLevels:
   - AttackRange: 1
     ForbidRange: 0

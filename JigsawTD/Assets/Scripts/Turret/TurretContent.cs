@@ -9,7 +9,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     private float frostTime = 0;
     public bool Activated = true;
 
-    public BasicStrategy Strategy;//数值计算规则
+    public StrategyBase Strategy;//数值计算规则
 
     public override bool IsWalkable => false;
     public bool Dropped { get; set; }
@@ -49,23 +49,8 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     //控制sprite颜色
     protected List<SpriteRenderer> sprites = new List<SpriteRenderer>();
     protected List<Color> originalColors = new List<Color>();
-    //品质
-    //private int quality = 0;
-    //public int Quality
-    //{
-    //    get => quality;
-    //    set
-    //    {
-    //        quality = value;
-    //        SetGraphic();
-    //        GenerateRange();
-    //        Strategy.GetTurretEffects();
-    //    }
-    //}
+
     private int currentRange = 0;//为检测范围变化时的Rangeindicator修改
-
-
-
 
 
     private void Awake()
@@ -116,18 +101,6 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         }
     }
 
-    //public void GetTurretEffects()//获取并激活效果
-    //{
-    //    TurretEffects.Clear();
-    //    foreach (TurretEffectInfo info in TurretEffectInfos)
-    //    {
-    //        TurretEffect effect = TurretEffectFactory.GetEffect((int)info.EffectName);
-    //        effect.turret = this;
-    //        effect.KeyValue = info.KeyValue;
-    //        TurretEffects.Add(effect);
-    //        effect.Build();
-    //    }
-    //}
 
     //设置不同等级的美术资源
     public virtual void SetGraphic()
@@ -245,10 +218,10 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
             return false;
         else
         {
-            if (Strategy.TargetCount > Target.Count)
+            if (Strategy.FinalTargetCount > Target.Count)
             {
                 Target.Clear();
-                List<int> returnInt = StaticData.SelectNoRepeat(targetList.Count, Strategy.TargetCount);
+                List<int> returnInt = StaticData.SelectNoRepeat(targetList.Count, Strategy.FinalTargetCount);
                 var ints = returnInt.GetEnumerator();
                 while (ints.MoveNext())
                 {
@@ -276,7 +249,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     public void GenerateRange()
     {
         int m = rangeIndicators.Count;
-        if (Strategy.AttackRange == currentRange)
+        if (Strategy.FinalRange == currentRange)
             return;
         if (currentRangetors.Count > 0)
             RecycleRanges();
@@ -284,17 +257,17 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         switch (RangeType)
         {
             case RangeType.Circle:
-                points = StaticData.GetCirclePoints(Strategy.AttackRange);
-                ((BoxCollider2D)detectCollider).size = Vector2.one * (2 * Strategy.AttackRange + 1) * Mathf.Cos(45 * Mathf.Deg2Rad);
+                points = StaticData.GetCirclePoints(Strategy.FinalRange);
+                ((BoxCollider2D)detectCollider).size = Vector2.one * (2 * Strategy.FinalRange + 1) * Mathf.Cos(45 * Mathf.Deg2Rad);
                 break;
             case RangeType.HalfCircle:
-                points = StaticData.GetHalfCirclePoints(Strategy.AttackRange);
-                detectCollider.transform.localScale = Vector2.one * (Strategy.AttackRange + 0.5f);
+                points = StaticData.GetHalfCirclePoints(Strategy.FinalRange);
+                detectCollider.transform.localScale = Vector2.one * (Strategy.FinalRange + 0.5f);
                 break;
             case RangeType.Line:
-                points = StaticData.GetLinePoints(Strategy.AttackRange);
-                ((BoxCollider2D)detectCollider).size = new Vector2(1, Strategy.AttackRange);
-                detectCollider.offset = new Vector2(0, 1 + 0.5f * (Strategy.AttackRange - 1));
+                points = StaticData.GetLinePoints(Strategy.FinalRange);
+                ((BoxCollider2D)detectCollider).size = new Vector2(1, Strategy.FinalRange);
+                detectCollider.offset = new Vector2(0, 1 + 0.5f * (Strategy.FinalRange - 1));
                 break;
         }
 
@@ -313,7 +286,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
                 currentRangetors.Add(rangeIndicators[i]);
             }
         }
-        currentRange = Strategy.AttackRange;
+        currentRange = Strategy.FinalRange;
         ShowRange(ShowingRange);
     }
 
@@ -349,7 +322,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
 
     protected virtual void FireProjectile()
     {
-        if (Time.time - nextAttackTime > 1 / Strategy.AttackSpeed)
+        if (Time.time - nextAttackTime > 1 / Strategy.FinalSpeed)
         {
             if (Target != null && AngleCheck())
             {

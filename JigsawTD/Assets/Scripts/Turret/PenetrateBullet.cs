@@ -50,7 +50,7 @@ public class PenetrateBullet : Bullet
             {
                 TargetPoint target = hit.GetComponent<TargetPoint>();
                 TriggerHitEffect(target.Enemy);
-                DealRealDamage(target.Enemy, SputteringRate * Damage);
+                DealRealDamage(target.Enemy, SputteringPercentage * Damage);
             }
         }
 

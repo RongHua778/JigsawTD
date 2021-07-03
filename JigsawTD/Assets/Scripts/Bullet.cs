@@ -18,7 +18,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     public TargetPoint Target { get => target; set => target = value; }
     Vector2 targetPos;
     [HideInInspector] public TurretContent turretParent;
-    private List<TurretEffect> turretEffects;
+    private List<TurretSkill> turretEffects;
     protected virtual Vector2 TargetPos
     {
         get => targetPos;
@@ -34,7 +34,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     public float SputteringRange { get => sputteringRange; set => sputteringRange = value; }
 
     private float sputteringRate;
-    public float SputteringRate { get => sputteringRate; set => sputteringRate = value; }
+    public float SputteringPercentage { get => sputteringRate; set => sputteringRate = value; }
 
     private float criticalRate;
     public float CriticalRate { get => criticalRate; set => criticalRate = value; }
@@ -72,23 +72,15 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         this.turretParent = turret;
         this.Target = target;
         this.TargetPos = pos ?? target.Position;
-        //this.Damage = turret.AttackDamage;
-        //this.bulletSpeed = turret.BulletSpeed;
-        //this.SputteringRange = turret.SputteringRange;
-        //this.CriticalRate = turret.CriticalRate;
-        //this.CriticalPercentage = turret.CriticalPercentage;
-        //this.turretEffects = turret.TurretEffects;
-        //this.SlowRate = turret.SlowRate;
-        //this.SputteringRate = turret.SputteringRate;
 
-        this.Damage = turret.Strategy.AttackDamage;
-        this.bulletSpeed = turret.Strategy.BulletSpeed;
-        this.SputteringRange = turret.Strategy.SputteringRange;
-        this.CriticalRate = turret.Strategy.CriticalRate;
-        this.CriticalPercentage = turret.Strategy.CriticalPercentage;
-        this.turretEffects = turret.Strategy.TurretEffects;
-        this.SlowRate = turret.Strategy.SlowRate;
-        this.SputteringRate = turret.Strategy.SputteringRate;
+        this.Damage = turret.Strategy.FinalAttack;
+        this.bulletSpeed = turret.Strategy.m_Att.BulletSpeed;
+        this.SputteringRange = turret.Strategy.FinalSputteringRange;
+        this.CriticalRate = turret.Strategy.FinalCriticalRate;
+        this.CriticalPercentage = turret.Strategy.FinalCriticalPercentage;
+        this.turretEffects = turret.Strategy.TurretSkills;
+        this.SlowRate = turret.Strategy.FinalSlowRate;
+        this.SputteringPercentage = turret.Strategy.FinalSputteringPercentage;
 
         TriggerShootEffect();
     }
@@ -97,7 +89,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     {
         if (turretEffects.Count > 0)
         {
-            foreach (TurretEffect effect in turretEffects)
+            foreach (TurretSkill effect in turretEffects)
             {
                 effect.bullet = this;
                 effect.Shoot();
@@ -114,7 +106,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         }
         if (turretEffects.Count > 0)
         {
-            foreach (TurretEffect effect in turretEffects)
+            foreach (TurretSkill effect in turretEffects)
             {
                 effect.bullet = this;
                 effect.Hit(target);

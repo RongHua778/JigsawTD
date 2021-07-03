@@ -6,7 +6,7 @@ using System.Linq;
 public class Blueprint
 {
     public TurretAttribute CompositeTurretAttribute;
-    public CompositeStrategy ComStrategy;
+    public StrategyComposite ComStrategy;
     List<Composition> compositions = new List<Composition>();
     public List<Composition> Compositions { get => compositions; set => compositions = value; }
 
@@ -64,7 +64,7 @@ public class Blueprint
             for (int j = 0; j < temp.Count; j++)
             {
                 ElementTurret turret = temp[j] as ElementTurret;
-                ElementStrategy strategy = turret.Strategy as ElementStrategy;
+                StrategyElement strategy = turret.Strategy as StrategyElement;
                 if (compositions[i].elementRequirement == (int)(strategy.Element) &&
                     compositions[i].qualityRequeirement == strategy.Quality)
                 {

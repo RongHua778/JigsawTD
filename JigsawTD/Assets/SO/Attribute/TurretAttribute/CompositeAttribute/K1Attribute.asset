@@ -23,7 +23,7 @@ MonoBehaviour:
   ShootSound: {fileID: 8300000, guid: ef86b51ac80ab0b4d91460a149e605f7, type: 3}
   Rare: 3
   totalLevel: 14
-  elementNumber: 4
+  elementNumber: 3
   TurretLevels:
   - AttackRange: 6
     ForbidRange: 0

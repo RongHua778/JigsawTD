@@ -10,9 +10,5 @@ public class ContentAttribute : ScriptableObject
     [TextArea(3,4)]
     public string Description;
     public GameTileContent ContentPrefab;
-    public virtual void Upgrade()
-    {
-
-    }
 
 }

@@ -91,7 +91,8 @@ public class TileContentFactory : GameObjectFactory
         int quality = StaticData.RandomNumber(qualityC) + 1;
         TurretAttribute attribute = ElementDIC[(Element)element];
         ElementTurret content = Get(attribute.ContentPrefab) as ElementTurret;
-        content.Strategy = new ElementStrategy(attribute, quality, (Element)element, content);
+        content.Strategy = new StrategyElement(attribute, quality, (Element)element, content);
+        content.Strategy.SetQualityValue();
         content.InitializeTurret();
         return content;
     }
@@ -100,7 +101,8 @@ public class TileContentFactory : GameObjectFactory
     {
         TurretAttribute attribute = ElementDIC[element];
         ElementTurret content = Get(attribute.ContentPrefab) as ElementTurret;
-        content.Strategy = new ElementStrategy(attribute, quality, element, content);
+        content.Strategy = new StrategyElement(attribute, quality, element, content);
+        content.Strategy.SetQualityValue();
         content.InitializeTurret();
         return content;
     }

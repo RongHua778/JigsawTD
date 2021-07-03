@@ -398,7 +398,7 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region TIPS
-    public void ShowTurretTips(BasicStrategy strategy)
+    public void ShowTurretTips(StrategyBase strategy)
     {
         m_TurretTips.ReadTurret(strategy);
         m_TurretTips.Show();

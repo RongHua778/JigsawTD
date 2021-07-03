@@ -35,7 +35,7 @@ public class TileSelect : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        ElementStrategy strategy = m_Shape.m_ElementTurret.Strategy as ElementStrategy;
+        StrategyElement strategy = m_Shape.m_ElementTurret.Strategy as StrategyElement;
         GameManager.Instance.PreviewComposition(true, strategy.Element, strategy.Quality);
     }
 

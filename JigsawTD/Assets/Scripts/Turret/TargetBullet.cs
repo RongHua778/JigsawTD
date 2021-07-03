@@ -41,7 +41,7 @@ public class TargetBullet : Bullet
                     else
                     {
                         TriggerHitEffect(target.Enemy);
-                        DealRealDamage(target.Enemy, SputteringRate * Damage);
+                        DealRealDamage(target.Enemy, SputteringPercentage * Damage);
                     }
                 }
 

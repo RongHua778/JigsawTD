@@ -382,9 +382,9 @@ public class StaticData : Singleton<StaticData>
         string finalDes = "";
         if (attribute.Description != "")
             finalDes += attribute.Description + "\n";
-        if (attribute.TurretLevels[quality - 1].TurretEffects.Count > 0)
+        if (attribute.TurretEffects.Count > 0)
         {
-            foreach (TurretEffectInfo effect in attribute.TurretLevels[quality - 1].TurretEffects)
+            foreach (TurretSkillInfo effect in attribute.TurretEffects)
             {
                 finalDes += effect.EffectDescription;
                 finalDes += "\n";

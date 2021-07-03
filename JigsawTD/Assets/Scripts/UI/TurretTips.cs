@@ -28,7 +28,7 @@ public class TurretTips : TileTips
     [SerializeField] GameObject BuyBtn = default;
 
 
-    private BasicStrategy m_Strategy;
+    private StrategyBase m_Strategy;
     private BluePrintGrid m_Grid;
     public bool showingTurret = false;
     int upgradeCost;
@@ -47,12 +47,11 @@ public class TurretTips : TileTips
         showingTurret = false;
     }
 
-    public void ReadTurret(BasicStrategy Strategy)//通过场上防御塔查看
+    public void ReadTurret(StrategyBase Strategy)//通过场上防御塔查看
     {
         Vector2 newPos;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(myCanvas.transform as RectTransform, new Vector2(300, Screen.height / 2), myCanvas.worldCamera, out newPos);
         transform.position = myCanvas.transform.TransformPoint(newPos);
-
 
         m_Strategy = Strategy;
         BasicInfo();
@@ -67,7 +66,7 @@ public class TurretTips : TileTips
                 UpgradeArea.SetActive(false);
                 IntensifyArea.SetActive(true);
                 elementConstruct.gameObject.SetActive(false);
-                IntensifyValue.text = StaticData.GetElementIntensifyText(((ElementStrategy)Strategy).Element, Strategy.Quality);
+                IntensifyValue.text = StaticData.GetElementIntensifyText(((StrategyElement)Strategy).Element, Strategy.Quality);
                 break;
             case StrategyType.Composite:
                 if (Strategy.Quality < 3)
@@ -82,7 +81,7 @@ public class TurretTips : TileTips
                 }
                 IntensifyArea.SetActive(false);
                 elementConstruct.gameObject.SetActive(true);
-                elementConstruct.SetElements(((CompositeStrategy)Strategy).CompositeBluePrint);
+                elementConstruct.SetElements(((StrategyComposite)Strategy).CompositeBluePrint);
                 break;
         }
 
@@ -131,57 +130,54 @@ public class TurretTips : TileTips
 
     private void UpdateInfo()
     {
-        AttackValue.text = m_Strategy.AttackDamage.ToString("f0");
-        SpeedValue.text = m_Strategy.AttackSpeed.ToString("f2");
-        RangeValue.text = m_Strategy.AttackRange.ToString();
-        CriticalValue.text = (m_Strategy.CriticalRate * 100).ToString() + "%";
-        SputteringValue.text = m_Strategy.SputteringRange.ToString();
-        SlowRateValue.text = m_Strategy.SlowRate.ToString();
+        AttackValue.text = m_Strategy.FinalAttack.ToString("f0");
+        SpeedValue.text = m_Strategy.FinalSpeed.ToString("f2");
+        RangeValue.text = m_Strategy.FinalRange.ToString();
+        CriticalValue.text = (m_Strategy.FinalCriticalRate * 100).ToString() + "%";
+        SputteringValue.text = m_Strategy.FinalSputteringRange.ToString();
+        SlowRateValue.text = m_Strategy.FinalSlowRate.ToString();
         AnalysisValue.text = m_Strategy.DamageAnalysis.ToString();
     }
 
     private void UpdateBluePrintInfo()
     {
-        CompositeStrategy strategy = m_Strategy as CompositeStrategy;
-        AttackValue.text = strategy.AttackDamage.ToString() + (strategy.CompositeBluePrint.CompositeAttackDamage > 0 ?
-            "<color=cyan>(+" + strategy.m_Att.TurretLevels[0].AttackDamage * strategy.CompositeBluePrint.CompositeAttackDamage + ")</color>" : "");
-        SpeedValue.text = strategy.AttackSpeed.ToString() + (strategy.CompositeBluePrint.CompositeAttackSpeed > 0 ?
-            "<color=cyan>(+" + strategy.m_Att.TurretLevels[0].AttackSpeed * strategy.CompositeBluePrint.CompositeAttackSpeed + ")</color>" : "");
-        RangeValue.text = strategy.AttackRange.ToString();
-        CriticalValue.text = (strategy.CriticalRate * 100).ToString() + (strategy.CompositeBluePrint.CompositeCriticalRate > 0 ?
-            "<color=cyan>(+" + strategy.CompositeBluePrint.CompositeCriticalRate * 100 + ")</color>" : "") + "%";
-        SputteringValue.text = strategy.SputteringRange.ToString() + (strategy.CompositeBluePrint.CompositeSputteringRange > 0 ?
-            "<color=cyan>(+" + strategy.CompositeBluePrint.CompositeSputteringRange + ")</color>" : "");
-        SlowRateValue.text = strategy.SlowRate.ToString() + (strategy.CompositeBluePrint.CompositeSlowRate > 0 ?
-            "<color=cyan>(+" + strategy.CompositeBluePrint.CompositeSlowRate + ")</color>" : "");
+        StrategyComposite strategy = m_Strategy as StrategyComposite;
+        AttackValue.text = strategy.FinalAttack.ToString() + (strategy.BaseAttackIntensify > 0 ?
+            "<color=cyan>(+" + strategy.InitAttack * strategy.BaseAttackIntensify + ")</color>" : "");
+        SpeedValue.text = strategy.FinalSpeed.ToString() + (strategy.BaseSpeedIntensify > 0 ?
+            "<color=cyan>(+" + strategy.InitSpeed * strategy.BaseSpeedIntensify + ")</color>" : "");
+        RangeValue.text = strategy.FinalRange.ToString()+(strategy.BaseRangeIntensify>0?
+            "<color=cyan>(+" + strategy.BaseRangeIntensify + ")</color>" : "");
+        CriticalValue.text = (strategy.FinalCriticalRate * 100).ToString() + (strategy.BaseCriticalRateIntensify > 0 ?
+            "<color=cyan>(+" + strategy.BaseCriticalRateIntensify * 100 + ")</color>" : "") + "%";
+        SputteringValue.text = strategy.FinalSputteringRange.ToString() + (strategy.BaseSputteringRangeIntensify > 0 ?
+            "<color=cyan>(+" + strategy.BaseSputteringRangeIntensify + ")</color>" : "");
+        SlowRateValue.text = strategy.FinalSlowRate.ToString() + (strategy.BaseSlowRateIntensify > 0 ?
+            "<color=cyan>(+" + strategy.BaseSlowRateIntensify + ")</color>" : "");
     }
 
     public void UpdateLevelUpInfo()
     {
-        CompositeStrategy strategy = m_Strategy as CompositeStrategy;
+        StrategyComposite strategy = m_Strategy as StrategyComposite;
 
-        float attackIncrease = strategy.m_Att.TurretLevels[strategy.Quality].AttackDamage - strategy.m_Att.TurretLevels[strategy.Quality - 1].AttackDamage;
-        AttackValue.text = strategy.AttackDamage.ToString() + (attackIncrease > 0 ?
+        float attackIncrease = strategy.NextAttack - strategy.BaseAttack;
+        AttackValue.text = strategy.FinalAttack.ToString() + (attackIncrease > 0 ?
             "<color=cyan>(+" + attackIncrease + ")</color>" : "");
 
-        float speedIncrease = strategy.m_Att.TurretLevels[strategy.Quality].AttackSpeed - strategy.m_Att.TurretLevels[strategy.Quality - 1].AttackSpeed;
-        SpeedValue.text = strategy.AttackSpeed.ToString() + (speedIncrease > 0 ?
+        float speedIncrease = strategy.NextSpeed - strategy.BaseSpeed;
+        SpeedValue.text = strategy.FinalSpeed.ToString() + (speedIncrease > 0 ?
             "<color=cyan>(+" + speedIncrease + ")</color>" : "");
 
-        int rangeIncrease = strategy.m_Att.TurretLevels[strategy.Quality].AttackRange - strategy.m_Att.TurretLevels[strategy.Quality - 1].AttackRange;
-        RangeValue.text = strategy.AttackRange.ToString() + (rangeIncrease > 0 ?
-            "<color=cyan>(+" + rangeIncrease + ")</color>" : "");
-
-        float criticalIncrease = strategy.m_Att.TurretLevels[strategy.Quality].CriticalRate - strategy.m_Att.TurretLevels[strategy.Quality - 1].CriticalRate;
-        CriticalValue.text = (strategy.CriticalRate * 100).ToString() + (criticalIncrease > 0 ?
+        float criticalIncrease = strategy.NextCriticalRate - strategy.BaseCriticalRate;
+        CriticalValue.text = (strategy.FinalCriticalRate * 100).ToString() + (criticalIncrease > 0 ?
             "<color=cyan>(+" + criticalIncrease * 100 + ")</color>" : "") + "%";
 
-        float sputteringIncrease = strategy.m_Att.TurretLevels[strategy.Quality].SputteringRange - strategy.m_Att.TurretLevels[strategy.Quality - 1].SputteringRange;
-        SputteringValue.text = strategy.SputteringRange.ToString() + (sputteringIncrease > 0 ?
+        float sputteringIncrease = strategy.NextSputteringRange - strategy.BaseSputteringRange;
+        SputteringValue.text = strategy.FinalSputteringRange.ToString() + (sputteringIncrease > 0 ?
             "<color=cyan>(+" + sputteringIncrease + ")</color>" : "");
 
-        float slowRateIncrease = strategy.m_Att.TurretLevels[strategy.Quality].SlowRate - strategy.m_Att.TurretLevels[strategy.Quality - 1].SlowRate;
-        SlowRateValue.text = strategy.SlowRate.ToString() + (slowRateIncrease > 0 ?
+        float slowRateIncrease = strategy.NextSlowRate - strategy.BaseSlowRate;
+        SlowRateValue.text = strategy.FinalSlowRate.ToString() + (slowRateIncrease > 0 ?
             "<color=cyan>(+" + slowRateIncrease + ")</color>" : "");
     }
 
@@ -191,7 +187,7 @@ public class TurretTips : TileTips
         if (GameManager.Instance.ConsumeMoney(upgradeCost))
         {
             m_Strategy.Quality++;
-            m_Strategy.GetTurretEffects();
+            m_Strategy.GetTurretSkills();
             m_Strategy.m_Turret.SetGraphic();
             Icon.sprite = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].CannonSprite;
             Name.text = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].TurretName;

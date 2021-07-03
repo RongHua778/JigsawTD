@@ -37,7 +37,7 @@ public class T23Turret : CompositeTurret
             PlayAudio(ShootClip, false);
             Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
             bullet.transform.position = shootPoint.position;
-            Vector2 pos = (Vector2)shootPoint.position + (Vector2)transform.up * Strategy.AttackRange;
+            Vector2 pos = (Vector2)shootPoint.position + (Vector2)transform.up * Strategy.FinalRange;
             bullet.Initialize(this, target, pos);
             yield return new WaitForSeconds(ShootInterval);
         }

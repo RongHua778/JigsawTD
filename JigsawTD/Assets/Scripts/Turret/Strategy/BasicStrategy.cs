@@ -2,10 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum StrategyType
-{
-    Element,Composite
-}
 public class BasicStrategy
 {
     public virtual StrategyType strategyType => StrategyType.Element;
@@ -77,17 +73,17 @@ public class BasicStrategy
     //溅射范围加成
     public virtual float SputteringIntensify { get; }
 
-    public List<TurretEffectInfo> TurretEffectInfos => m_Att.TurretLevels[Quality - 1].TurretEffects;
-    public List<TurretEffect> TurretEffects = new List<TurretEffect>();
+    public List<TurretSkillInfo> TurretEffectInfos => m_Att.TurretEffects;
+    public List<TurretSkill> TurretEffects = new List<TurretSkill>();
 
     public void GetTurretEffects()//获取并激活效果,或更新效果
     {
         TurretEffects.Clear();
         ClearIntensify();
-        foreach (TurretEffectInfo info in TurretEffectInfos)
+        foreach (TurretSkillInfo info in TurretEffectInfos)
         {
-            TurretEffect effect = TurretEffectFactory.GetEffect((int)info.EffectName);
-            effect.strategy = this;
+            TurretSkill effect = TurretEffectFactory.GetEffect((int)info.EffectName);
+            //effect.strategy = this;
             effect.KeyValue = info.KeyValue;
             TurretEffects.Add(effect);
             effect.Build();

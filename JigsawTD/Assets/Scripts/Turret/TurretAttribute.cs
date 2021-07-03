@@ -12,12 +12,8 @@ public class TurretInfo
     public float SputteringRange;
     public float CriticalRate;
     public float SlowRate;
-    public List<TurretEffectInfo> TurretEffects = new List<TurretEffectInfo>();
-    public List<PoloEffect> PoloEffects = new List<PoloEffect>();
     [Header("美术资源设置")]
     public string TurretName;
-    //public Sprite Icon;
-    //public Sprite BaseSprite;
     public Sprite CannonSprite;
     public Vector2 ShootPointOffset;
 }
@@ -41,6 +37,7 @@ public enum RangeType
 [CreateAssetMenu(menuName = "Attribute/TurretAttribute", fileName = "TurretAttribute")]
 public class TurretAttribute : ContentAttribute
 {
+    [Header("基础参数")]
     public RangeType RangeType;
     public Element element;
     public Bullet Bullet;
@@ -51,12 +48,8 @@ public class TurretAttribute : ContentAttribute
     public int Rare;//稀有度
     public int totalLevel;
     public int elementNumber;
+    public List<TurretSkillInfo> TurretEffects = new List<TurretSkillInfo>();
     public List<TurretInfo> TurretLevels = new List<TurretInfo>();
-    public override void Upgrade()
-    {
-        base.Upgrade();
-    }
-
 
 
 }
