@@ -81,7 +81,7 @@ public class TurretTips : TileTips
                 }
                 IntensifyArea.SetActive(false);
                 elementConstruct.gameObject.SetActive(true);
-                elementConstruct.SetElements(((StrategyComposite)Strategy).CompositeBluePrint);
+                elementConstruct.SetElements((StrategyComposite)Strategy);
                 break;
         }
 
@@ -103,7 +103,7 @@ public class TurretTips : TileTips
         IntensifyArea.SetActive(false);
         BluePrintArea.SetActive(true);
         elementConstruct.gameObject.SetActive(true);
-        elementConstruct.SetElements(grid.BluePrint);
+        elementConstruct.SetElements((StrategyComposite)m_Strategy);
     }
 
     private void BasicInfo()
@@ -126,6 +126,7 @@ public class TurretTips : TileTips
         this.RangeTypeValue.text = rangeTypeTxt;
         //ÉèÖÃÃèÊöÎÄ°¸
         Description.text = StaticData.GetTurretDes(m_Strategy.m_Att, m_Strategy.Quality);
+        //StaticData.GetTurretDes(m_Strategy.m_Att, m_Strategy.Quality);
     }
 
     private void UpdateInfo()
@@ -188,11 +189,13 @@ public class TurretTips : TileTips
         {
             m_Strategy.Quality++;
             m_Strategy.SetQualityValue();
-            m_Strategy.GetTurretSkills();
+            m_Strategy.BuildTurretEffects();
             m_Strategy.m_Turret.SetGraphic();
             Icon.sprite = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].CannonSprite;
             Name.text = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].TurretName;
-            Description.text = StaticData.GetTurretDes(m_Strategy.m_Att, m_Strategy.Quality);
+            //Description.text = m_Strategy.m_Att.TurretEffects[0].EffectDescription;
+
+                //StaticData.GetTurretDes(m_Strategy.m_Att, m_Strategy.Quality);
             UpdateInfo();
             if (m_Strategy.Quality > 2)
             {

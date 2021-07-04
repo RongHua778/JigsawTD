@@ -41,6 +41,8 @@ public abstract class StrategyBase
     private float initSputteringPercentage = 0.5f;//溅射伤害率
     private float initCriticalPercentage = 1.5f;//暴击伤害率
     private int initTargetCount = 1;//目标数
+    private float rotSpeed = 10f;//炮塔转速
+    public float RotSpeed { get => rotSpeed; set => rotSpeed = value; }
 
     //基础加成
     private float baseAttackIntensify;
@@ -126,21 +128,22 @@ public abstract class StrategyBase
     public float TurnSlowRateIntensify { get => turnSlowRateIntensify; set => turnSlowRateIntensify = value; }
     #endregion
 
-    private List<TurretSkillInfo> turretSkillInfos = new List<TurretSkillInfo>();
-    public List<TurretSkillInfo> TurretSkillInfos { get => turretSkillInfos; set => turretSkillInfos = value; }
+    protected List<TurretSkillInfo> TurretSkillInfos { get; set; }
+    protected List<ElementSkillInfo> ElementSkillInfos { get; set; }
 
     public List<TurretSkill> TurretSkills = new List<TurretSkill>();
 
-    public void GetTurretSkills()//获取并激活效果,或更新效果
+
+
+    public void BuildTurretEffects()
     {
-        TurretSkills.Clear();
-        foreach (TurretSkillInfo info in TurretSkillInfos)
+        foreach (var skill in TurretSkills)
         {
-            TurretSkill effect = TurretEffectFactory.GetEffect((int)info.EffectName);
-            effect.strategy = this;
-            effect.KeyValue = info.KeyValue;
-            TurretSkills.Add(effect);
-            effect.Build();
+            skill.Build();//前置修正
+        }
+        foreach (var skill in TurretSkills)
+        {
+            skill.BuildEnd();//后置修正
         }
     }
 
@@ -160,6 +163,7 @@ public abstract class StrategyBase
     public void ClearBasicIntensify()
     {
         //基础加成
+        RotSpeed = 10;
         BaseAttackIntensify = 0;
         BaseSpeedIntensify = 0;
         BaseRangeIntensify = 0;

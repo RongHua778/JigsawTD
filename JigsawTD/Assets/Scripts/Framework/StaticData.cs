@@ -356,10 +356,10 @@ public class StaticData : Singleton<StaticData>
         switch (element)
         {
             case Element.Gold:
-                intensifyTxt += GoldAttackIntensify * 100 + "%攻击";
+                intensifyTxt += GoldAttackIntensify * 100 + "%基础攻击";
                 break;
             case Element.Wood:
-                intensifyTxt += WoodSpeedIntensify * 100 + "%攻速";
+                intensifyTxt += WoodSpeedIntensify * 100 + "%基础攻速";
                 break;
             case Element.Water:
                 intensifyTxt += WaterSlowIntensify + "减速";

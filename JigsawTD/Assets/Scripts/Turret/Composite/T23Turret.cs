@@ -6,13 +6,13 @@ using System.Linq;
 public class T23Turret : CompositeTurret
 {
     private const float ShootInterval = 0.15f;
-    public override void OnSpawn()
+
+    public override void InitializeTurret()
     {
-        base.OnSpawn();
-        _rotSpeed = 0f;
+        base.InitializeTurret();
+        Strategy.RotSpeed = 0;
         CheckAngle = 45f;
     }
-
     protected override void Shoot()
     {
         StartCoroutine(ShootCor());

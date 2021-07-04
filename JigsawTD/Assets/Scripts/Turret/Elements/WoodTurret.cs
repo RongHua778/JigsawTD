@@ -6,12 +6,10 @@ public class WoodTurret : ElementTurret
 {
     private bool isPlayingAudio = false;
 
-    //public override float SputteringRange => 0;
-
-    public override void OnSpawn()
+    public override void InitializeTurret()
     {
-        base.OnSpawn();
-        _rotSpeed = 0f;
+        base.InitializeTurret();
+        Strategy.RotSpeed = 0;
         CheckAngle = 45f;
     }
 

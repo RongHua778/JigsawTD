@@ -82,7 +82,7 @@ public class BasicStrategy
         ClearIntensify();
         foreach (TurretSkillInfo info in TurretEffectInfos)
         {
-            TurretSkill effect = TurretEffectFactory.GetEffect((int)info.EffectName);
+            TurretSkill effect = TurretEffectFactory.GetInitialSkill((int)info.EffectName);
             //effect.strategy = this;
             effect.KeyValue = info.KeyValue;
             TurretEffects.Add(effect);

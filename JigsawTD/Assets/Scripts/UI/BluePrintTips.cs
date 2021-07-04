@@ -39,7 +39,7 @@ public class BluePrintTips : TileTips
         //即时更新攻击，攻速，伤害统计等数据
         UpdateInfo(grid.BluePrint);
 
-        elementConstruct.SetElements(grid.BluePrint);
+        elementConstruct.SetElements(grid.BluePrint.ComStrategy);
         //设置描述文案
         Description.text = StaticData.GetTurretDes(attribute, 1);
     }

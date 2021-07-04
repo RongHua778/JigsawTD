@@ -15,7 +15,9 @@ public enum TurretEffectName
     S009CurrentHealthBaseDamage,
     S010IncreaseSlowRate,
     S011IncreaseDamageBuff,
-    S012SameTargetDamageIncrease
+    S012SameTargetDamageIncrease,
+
+    AAA_HeavyCannon
 }
 [System.Serializable]
 public class TurretSkillInfo
@@ -25,9 +27,11 @@ public class TurretSkillInfo
     [TextArea(2, 3)]
     public string EffectDescription;
 }
+
 public abstract class TurretSkill
 {
     public abstract TurretEffectName EffectName { get; }
+    public virtual string SkillDescription { get; set; }
     public StrategyBase strategy;
     public Bullet bullet;
     public float KeyValue;
@@ -35,6 +39,11 @@ public abstract class TurretSkill
     public virtual void Build()
     {
         
+    }
+
+    public virtual void BuildEnd()
+    {
+
     }
 
     public virtual void Shoot()
@@ -47,12 +56,22 @@ public abstract class TurretSkill
 
     }
 
+    public virtual void StartTurn()
+    {
+
+    }
+
     public virtual void EndTurn()
     {
 
     }
 }
-public class SpeedIncreasePerShoot : TurretSkill
+
+public abstract class InitialSkill : TurretSkill
+{
+
+}
+public class SpeedIncreasePerShoot : InitialSkill
 {
     public override TurretEffectName EffectName => TurretEffectName.S007SpeedIncreasePerShoot;
     public override void Shoot()
@@ -62,7 +81,7 @@ public class SpeedIncreasePerShoot : TurretSkill
         strategy.TurnSpeedIntensify += KeyValue;
     }
 }
-public class DistanceBaseDamage : TurretSkill
+public class DistanceBaseDamage : InitialSkill
 {
     public override TurretEffectName EffectName => TurretEffectName.S001DistanceBaseDamage;
     public override void Shoot()
@@ -71,7 +90,7 @@ public class DistanceBaseDamage : TurretSkill
     }
 }
 
-public class MultiTarget : TurretSkill
+public class MultiTarget : InitialSkill
 {
     public override TurretEffectName EffectName => TurretEffectName.S005MultiTarget;
 
@@ -82,7 +101,7 @@ public class MultiTarget : TurretSkill
     }
 
 }
-public class ChangeCriticalPercentage : TurretSkill
+public class ChangeCriticalPercentage : InitialSkill
 {
     public override TurretEffectName EffectName => TurretEffectName.S008ChangeCriticalPercentage;
 
@@ -92,7 +111,7 @@ public class ChangeCriticalPercentage : TurretSkill
     }
 
 }
-public class SputteringRateIncrease : TurretSkill
+public class SputteringRateIncrease : InitialSkill
 {
     public override TurretEffectName EffectName => TurretEffectName.S006SputteringRateIncrease;
 
@@ -104,7 +123,7 @@ public class SputteringRateIncrease : TurretSkill
 }
 
 
-public class SlowBullet : TurretSkill
+public class SlowBullet : InitialSkill
 {
     public override TurretEffectName EffectName => TurretEffectName.S002SlowBullet;
 
@@ -117,7 +136,7 @@ public class SlowBullet : TurretSkill
 
 }
 
-public class AttackIncreasePerShoot : TurretSkill
+public class AttackIncreasePerShoot : InitialSkill
 {
     public override TurretEffectName EffectName => TurretEffectName.S003AttackIncreasePerShoot;
 
@@ -136,7 +155,7 @@ public class AttackIncreasePerShoot : TurretSkill
     }
 }
 
-public class EnemyCountAttackIncrease : TurretSkill
+public class EnemyCountAttackIncrease : InitialSkill
 {
     public override TurretEffectName EffectName => TurretEffectName.S004EnemyCountAttackIncrease;
 
@@ -144,7 +163,7 @@ public class EnemyCountAttackIncrease : TurretSkill
 
 }
 
-public class CurrentHealthBaseDmage : TurretSkill
+public class CurrentHealthBaseDmage : InitialSkill
 {
     public override TurretEffectName EffectName => TurretEffectName.S009CurrentHealthBaseDamage;
 
@@ -158,7 +177,7 @@ public class CurrentHealthBaseDmage : TurretSkill
     }
 }
 
-public class IncreaseSlowRate : TurretSkill
+public class IncreaseSlowRate : InitialSkill
 {
     public override TurretEffectName EffectName => TurretEffectName.S010IncreaseSlowRate;
 
@@ -170,7 +189,7 @@ public class IncreaseSlowRate : TurretSkill
     }
 }
 
-public class IncreaseDamageBuff : TurretSkill
+public class IncreaseDamageBuff : InitialSkill
 {
     public override TurretEffectName EffectName => TurretEffectName.S011IncreaseDamageBuff;
 
@@ -181,7 +200,7 @@ public class IncreaseDamageBuff : TurretSkill
     }
 }
 
-public class SameTargetDamageIncrease : TurretSkill
+public class SameTargetDamageIncrease : InitialSkill
 {
     public override TurretEffectName EffectName => TurretEffectName.S012SameTargetDamageIncrease;
     public float IncreaseDamage;

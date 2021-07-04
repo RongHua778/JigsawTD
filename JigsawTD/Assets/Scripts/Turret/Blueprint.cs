@@ -78,6 +78,11 @@ public class Blueprint
         }
     }
 
+    public void CheckElementSkill()
+    {
+
+    }
+
     //检查是否已满足可以建造的配方条件
     public bool CheckBuildable()
     {
