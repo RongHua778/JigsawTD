@@ -17,7 +17,9 @@ public enum TurretEffectName
     S011IncreaseDamageBuff,
     S012SameTargetDamageIncrease,
 
-    AAA_HeavyCannon
+    AAA_HeavyCannon,
+    BBB_OverloadCartridge,
+    CCC_FrostCore
 }
 [System.Serializable]
 public class TurretSkillInfo
@@ -35,6 +37,8 @@ public abstract class TurretSkill
     public StrategyBase strategy;
     public Bullet bullet;
     public float KeyValue;
+    public float Duration;
+    public bool IsFinish = false;
 
     public virtual void Build()
     {
@@ -52,6 +56,21 @@ public abstract class TurretSkill
     }
 
     public virtual void Hit(Enemy target)
+    {
+
+    }
+
+    public virtual void Tick(float delta)
+    {
+        Duration -= delta;
+        if (Duration <= 0)
+        {
+            TickEnd();
+            IsFinish = true;
+        }
+    }
+
+    public virtual void TickEnd()
     {
 
     }

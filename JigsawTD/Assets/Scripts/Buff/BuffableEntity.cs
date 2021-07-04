@@ -33,14 +33,6 @@ public class BuffableEntity : MonoBehaviour
                 TimeBuffs.Remove(effects.Current);
             }
         }
-        //foreach (var effect in TimeBuffs.ToList())
-        //{
-        //    effect.Tick(Time.deltaTime);
-        //    if (effect.IsFinished)
-        //    {
-        //        TimeBuffs.Remove(effect);
-        //    }
-        //}
     }
 
     public void TileTick()

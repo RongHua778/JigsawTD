@@ -159,6 +159,13 @@ public abstract class StrategyBase
         InitSlowRate = m_Att.TurretLevels[Quality - 1].SlowRate;
     }
 
+    public void StartTurnSkills()
+    {
+        foreach (var skill in TurretSkills)
+        {
+            skill.StartTurn();
+        }
+    }
 
     public void ClearBasicIntensify()
     {

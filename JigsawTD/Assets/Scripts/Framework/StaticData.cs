@@ -50,6 +50,8 @@ public class StaticData : Singleton<StaticData>
     public static int maxQuality = 5;
     public static int trapN = 15;
     public static int basicN = 25;
+    [Header("动态数据")]
+    public static int PerfectElementCount=1;
 
     [Header("ProbabilitySetting")]
     public float[] TileShapeChance = default;

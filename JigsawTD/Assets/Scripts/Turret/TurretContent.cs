@@ -178,8 +178,6 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
 
     public virtual bool GameUpdate()
     {
-        if (!Dropped)
-            return false;
         if (frostTime > 0)
         {
             frostTime -= Time.deltaTime;

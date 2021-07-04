@@ -9,6 +9,16 @@ public class CompositeTurret : TurretContent
 
     public Blueprint CompositeBluePrint;
 
+    public override bool GameUpdate()
+    {
+        foreach (var skill in Strategy.TurretSkills)
+        {
+            if (skill.Duration > 0)
+                skill.Tick(Time.deltaTime);
+        }
+        return base.GameUpdate();
+    }
+
 
     public override void ContentLanded()
     {

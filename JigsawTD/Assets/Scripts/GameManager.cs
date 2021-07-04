@@ -183,6 +183,10 @@ public class GameManager : Singleton<GameManager>
     {
         m_FuncUI.Hide();
         TransitionToState(StateName.WaveState);
+        foreach (var turret in compositeTurrets.behaviors)
+        {
+            ((TurretContent)turret).Strategy.StartTurnSkills();
+        }
     }
     public void PrepareNextWave()
     {
@@ -255,12 +259,6 @@ public class GameManager : Singleton<GameManager>
     }
 
 
-
-    //public void EnterNewState(BattleOperationState newState)
-    //{
-    //    this.operationState = newState;
-    //    StartCoroutine(this.operationState.EnterState());
-    //}
 
     #endregion
 
