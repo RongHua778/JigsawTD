@@ -5417,7 +5417,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4FDD\u7559"
+  m_Text: "\u8D2D\u4E70"
 --- !u!222 &369456258
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11352,7 +11352,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &895401534
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12620,8 +12620,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 278.8966, y: 77.81053}
+  m_AnchoredPosition: {x: 15.22, y: 0}
+  m_SizeDelta: {x: 300, y: 26.999996}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1001606357
 MonoBehaviour:
@@ -12659,7 +12659,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 28
+    m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -16927,7 +16927,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -0.000019073}
-  m_SizeDelta: {x: 106.10526, y: 40}
+  m_SizeDelta: {x: 90.99999, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1296098665
 MonoBehaviour:
@@ -16965,7 +16965,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 28
+    m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -22665,8 +22665,8 @@ MonoBehaviour:
   HorizontalText: {fileID: 1296098666}
   VerticalText: {fileID: 1001606358}
   minFrameWidth: 300
-  maxFrameWidth: 800
-  rowHeight: 40
+  maxFrameWidth: 1200
+  rowHeight: 34
   textColor: {r: 1, g: 1, b: 1, a: 1}
   hideColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!222 &1703365157
@@ -30505,7 +30505,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 18
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1

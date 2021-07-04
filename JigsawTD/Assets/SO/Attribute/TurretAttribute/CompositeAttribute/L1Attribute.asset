@@ -27,7 +27,7 @@ MonoBehaviour:
   TurretEffects:
   - EffectName: 11
     KeyValue: 10
-    EffectDescription: "\u653B\u51FB\u540C\u4E00\u4E2A\u76EE\u6807\u65F6\uFF0C\u6BCF\u6B21\u653B\u51FB\u63D0\u9AD8\u4F24\u5BB310\u70B9\uFF0C\u6700\u591A\u63D0\u9AD8500."
+    EffectDescription: "\u80FD\u91CF\u805A\u7126\uFF1A\u653B\u51FB\u540C\u4E00\u4E2A\u76EE\u6807\u65F6\uFF0C\u6BCF\u6B21\u653B\u51FB\u63D0\u9AD8\u4F24\u5BB310\u70B9\uFF0C\u6700\u591A\u63D0\u9AD8500."
   TurretLevels:
   - AttackRange: 3
     ForbidRange: 0

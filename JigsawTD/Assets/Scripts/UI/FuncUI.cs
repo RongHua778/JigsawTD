@@ -23,8 +23,24 @@ public class FuncUI : IUserInterface
     bool drawThisTurn = true;
     public bool DrawThisTurn { get => drawThisTurn; set => drawThisTurn = value; }
 
-    private int luckProgress = 1;
-    public int LuckProgress { get => Mathf.Min(4, luckProgress); set => luckProgress = value; }
+    private int luckProgress = 0;
+    public int LuckProgress
+    {
+        get => luckProgress;
+        set
+        {
+            if (value > 2)
+            {
+                luckProgress = 0;
+                LuckyCoin++;
+            }
+            else
+            {
+                luckProgress = value;
+            }
+            m_LuckInfo.SetContent(StaticData.GetLuckyInfo(LuckyCoin, LuckProgress));
+        }
+    }
 
     private int drawRemain = 0;
     public int DrawRemain
@@ -82,7 +98,7 @@ public class FuncUI : IUserInterface
             //    //GameManager.Instance.GetRandomBluePrint();
             //}
             //LuckPointTxt.text = "ÀÛ»ýµã:" + luckyCoin.ToString();
-            m_LuckInfo.SetContent(StaticData.GetLuckyInfo(LuckyCoin));
+            m_LuckInfo.SetContent(StaticData.GetLuckyInfo(LuckyCoin,LuckProgress));
             m_LuckProgress.SetProgress(luckyCoin);
         }
     }
@@ -94,7 +110,7 @@ public class FuncUI : IUserInterface
         DrawRemain = StaticData.Instance.StartLotteryDraw;
         LuckyCoin = 1;
         PlayerLevel = 1;
-        
+
         m_Anim = this.GetComponent<Animator>();
     }
 

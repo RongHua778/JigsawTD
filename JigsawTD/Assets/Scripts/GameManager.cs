@@ -313,14 +313,7 @@ public class GameManager : Singleton<GameManager>
 
     }
 
-    public void BuyBluePrint(BluePrintGrid grid, int cost)
-    {
-        if (ConsumeMoney(cost))
-        {
-            m_FuncUI.LuckyCoin++;
-            m_BluePrintShopUI.MoveBluePrintToPocket(grid);
-        }
-    }
+
 
     public void PreviewComposition(bool value, Element element = Element.Dust, int quality = 1)
     {
@@ -366,6 +359,15 @@ public class GameManager : Singleton<GameManager>
     public void GetRandomBluePrint()
     {
         m_BluePrintShopUI.GetARandomBluePrintToPocket(m_FuncUI.PlayerLevel);
+    }
+
+    public void BuyBluePrint(BluePrintGrid grid, int cost)
+    {
+        if (ConsumeMoney(cost))
+        {
+            m_FuncUI.LuckProgress++;
+            m_BluePrintShopUI.MoveBluePrintToPocket(grid);
+        }
     }
 
     public void ShowGuideVideo(int index)

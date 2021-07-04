@@ -84,7 +84,7 @@ public class StaticData : Singleton<StaticData>
         InitializeInfoDIC();
         //Difficulty = Game.Instance.Difficulty;
 
-        RedColor = new Color32(255, 110, 66,255);
+        RedColor = new Color32(255, 110, 66, 255);
         GreenColor = new Color32(66, 255, 100, 255);
         BlueColor = new Color32(66, 223, 255, 255);
         YellowColor = new Color32(255, 182, 66, 255);
@@ -417,14 +417,16 @@ public class StaticData : Singleton<StaticData>
             "3.累积点每达到10点，获得1次额外抽取次数。\n";
         return text;
     }
-    public static string GetLuckyInfo(int luckCoin)
+    public static string GetLuckyInfo(int luckCoin, int luckProgress)
     {
         string text =
            "\n1.当前回合没有抽取时，获得1枚幸运币。\n" +
-           "2.每个幸运币提高战斗金币收入10%。\n" +
-           "3.进行抽取后，幸运币清零。\n" +
-           "(当前收入增加" + "<color=cyan>" + luckCoin * 10 + "%" + "</color>)\n";
-           //"4.每购买3个配方，获得1枚幸运币。\n";
+           "2.每个幸运币提高回合金币收入10%。\n" +
+           "3.抽取后，幸运币清零。\n" +
+           "4.每购买3个配方，获得1枚幸运币。\n" +
+           "(当前收入增加 " + "<color=cyan>" + luckCoin * 10 + "%" + "</color>)\n" +
+           "(已购买配方 " + "<color=cyan>" + luckProgress + "/3</color>)\n\n";
+        //"4.每购买3个配方，获得1枚幸运币。\n";
         return text;
     }
 
