@@ -187,6 +187,7 @@ public class TurretTips : TileTips
         if (GameManager.Instance.ConsumeMoney(upgradeCost))
         {
             m_Strategy.Quality++;
+            m_Strategy.SetQualityValue();
             m_Strategy.GetTurretSkills();
             m_Strategy.m_Turret.SetGraphic();
             Icon.sprite = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].CannonSprite;

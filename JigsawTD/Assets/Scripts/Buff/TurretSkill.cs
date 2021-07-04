@@ -46,13 +46,18 @@ public abstract class TurretSkill
     {
 
     }
+
+    public virtual void EndTurn()
+    {
+
+    }
 }
 public class SpeedIncreasePerShoot : TurretSkill
 {
     public override TurretEffectName EffectName => TurretEffectName.S007SpeedIncreasePerShoot;
     public override void Shoot()
     {
-        if (strategy.TurnSpeedIntensify > KeyValue * 99.5f)
+        if (strategy.TurnSpeedIntensify > KeyValue * 4.95f)
             return;
         strategy.TurnSpeedIntensify += KeyValue;
     }
@@ -73,8 +78,7 @@ public class MultiTarget : TurretSkill
     public override void Build()
     {
         strategy.BaseTargetCountIntensify += (int)KeyValue;
-        Debug.LogWarning("未完成全局伤害减少内容");
-        strategy.BaseAttackIntensify -= 0.5f;
+        strategy.TurnAttackIntensify *= 0.5f;
     }
 
 }
@@ -117,11 +121,18 @@ public class AttackIncreasePerShoot : TurretSkill
 {
     public override TurretEffectName EffectName => TurretEffectName.S003AttackIncreasePerShoot;
 
+    private float intensifyIncreased = 0;
     public override void Shoot()
     {
-        if (strategy.TurnAttackIntensify > KeyValue * 19.5f)
+        if (intensifyIncreased > KeyValue * 19.5f)
             return;
+        intensifyIncreased += KeyValue;
         strategy.TurnAttackIntensify += KeyValue;
+    }
+
+    public override void EndTurn()
+    {
+        intensifyIncreased = 0;
     }
 }
 
@@ -175,11 +186,15 @@ public class SameTargetDamageIncrease : TurretSkill
     public override TurretEffectName EffectName => TurretEffectName.S012SameTargetDamageIncrease;
     public float IncreaseDamage;
     public Enemy LastTarget;
+    private float maxDamageIncrease = 500;
 
     public override void Hit(Enemy target)
     {
+        
         if (target == LastTarget)
         {
+            if (IncreaseDamage > maxDamageIncrease)
+                return;
             IncreaseDamage += KeyValue;
             bullet.Damage += IncreaseDamage;
         }
@@ -188,5 +203,10 @@ public class SameTargetDamageIncrease : TurretSkill
             IncreaseDamage = 0;
             LastTarget = target;
         }
+    }
+
+    public override void EndTurn()
+    {
+        IncreaseDamage = 0;
     }
 }

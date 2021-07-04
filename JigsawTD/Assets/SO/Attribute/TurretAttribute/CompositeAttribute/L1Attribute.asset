@@ -24,49 +24,38 @@ MonoBehaviour:
   Rare: 1
   totalLevel: 3
   elementNumber: 3
+  TurretEffects:
+  - EffectName: 11
+    KeyValue: 10
+    EffectDescription: "\u653B\u51FB\u540C\u4E00\u4E2A\u76EE\u6807\u65F6\uFF0C\u6BCF\u6B21\u653B\u51FB\u63D0\u9AD8\u4F24\u5BB310\u70B9\uFF0C\u6700\u591A\u63D0\u9AD8500."
   TurretLevels:
   - AttackRange: 3
     ForbidRange: 0
     AttackDamage: 30
-    AttackSpeed: 2
+    AttackSpeed: 1
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretEffects:
-    - EffectName: 11
-      KeyValue: 10
-      EffectDescription: "\u805A\u7126\u706B\u529B\uFF1A\u8FDE\u7EED\u653B\u51FB\u540C\u4E00\u76EE\u6807\u65F6\uFF0C\u6BCF\u6B21\u653B\u51FB\u4F24\u5BB3\u63D0\u9AD810\u3002"
-    PoloEffects: []
     TurretName: "L1\u75BE\u5C04\u70AE"
     CannonSprite: {fileID: -1517020906295608978, guid: 366e71c72e7bafa4190a02691b4032a1, type: 3}
     ShootPointOffset: {x: 0, y: 0.19}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 60
-    AttackSpeed: 2
+    AttackDamage: 50
+    AttackSpeed: 1.3
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretEffects:
-    - EffectName: 11
-      KeyValue: 15
-      EffectDescription: "\u805A\u7126\u706B\u529B\uFF1A\u8FDE\u7EED\u653B\u51FB\u540C\u4E00\u76EE\u6807\u65F6\uFF0C\u6BCF\u6B21\u653B\u51FB\u4F24\u5BB3\u63D0\u9AD815\u3002"
-    PoloEffects: []
     TurretName: "L2\u75BE\u5C04\u70AE"
     CannonSprite: {fileID: 9186318722770319717, guid: 366e71c72e7bafa4190a02691b4032a1, type: 3}
     ShootPointOffset: {x: 0, y: 0.24}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 90
-    AttackSpeed: 2
+    AttackDamage: 80
+    AttackSpeed: 1.6
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretEffects:
-    - EffectName: 11
-      KeyValue: 20
-      EffectDescription: "\u805A\u7126\u706B\u529B\uFF1A\u8FDE\u7EED\u653B\u51FB\u540C\u4E00\u76EE\u6807\u65F6\uFF0C\u6BCF\u6B21\u653B\u51FB\u4F24\u5BB3\u63D0\u9AD820\u3002"
-    PoloEffects: []
     TurretName: "L3\u75BE\u5C04\u70AE"
     CannonSprite: {fileID: -7401938196994722387, guid: 366e71c72e7bafa4190a02691b4032a1, type: 3}
     ShootPointOffset: {x: 0, y: 0.26}

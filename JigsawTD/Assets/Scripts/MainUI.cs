@@ -40,7 +40,7 @@ public class MainUI : IUserInterface
             {
                 m_GameManager.GameEnd(false);
             }
-            life = Mathf.Clamp(value, 0, StaticData.Instance.PlayerMaxHealth[Game.Instance.Difficulty-1]);
+            life = Mathf.Clamp(value, 0, StaticData.Instance.PlayerMaxHealth[Game.Instance.Difficulty - 1]);
             PlayerLifeTxt.text = life.ToString() + "/" + StaticData.Instance.PlayerMaxHealth[Game.Instance.Difficulty - 1].ToString();
         }
     }
@@ -81,7 +81,7 @@ public class MainUI : IUserInterface
         GameEvents.Instance.onEnemyReach += EnemyReach;
         GameSpeed = 1;
         CurrentWave = 0;
-        Life = StaticData.Instance.PlayerMaxHealth[Game.Instance.Difficulty-1];
+        Life = StaticData.Instance.PlayerMaxHealth[Game.Instance.Difficulty - 1];
         Coin = StaticData.Instance.StartCoin;
 
         m_PausePanel.Initialize(m_GameManager);
@@ -126,10 +126,11 @@ public class MainUI : IUserInterface
 
 
 
-    public void PrepareNextWave(EnemySequence sequence)
+    public void PrepareNextWave(EnemySequence sequence, int luckCoin)
     {
         CurrentWave++;
-        Coin += StaticData.Instance.BaseWaveIncome + StaticData.Instance.WaveMultiplyIncome * (CurrentWave - 1);
+
+        Coin += (int)((StaticData.Instance.BaseWaveIncome + StaticData.Instance.WaveMultiplyIncome * (CurrentWave - 1)) * (1 + luckCoin * 0.1f));
 
         m_WaveInfoSetter.SetWaveInfo(sequence);
     }

@@ -68,21 +68,22 @@ public class FuncUI : IUserInterface
         }
     }
 
-    private int luckPoint;
-    public int LuckPoint
+    private int luckyCoin;
+    public int LuckyCoin
     {
-        get => luckPoint;
+        get => luckyCoin;
         set
         {
-            luckPoint = value;
-            if (luckPoint >= 10)
-            {
-                luckPoint = 0;
-                DrawRemain++;
-                //GameManager.Instance.GetRandomBluePrint();
-            }
-            LuckPointTxt.text = "累积点:" + luckPoint.ToString();
-            m_LuckProgress.SetProgress(luckPoint);
+            luckyCoin = Mathf.Min(5, value);
+            //if (luckyCoin >= 10)
+            //{
+            //    luckyCoin = 0;
+            //    DrawRemain++;
+            //    //GameManager.Instance.GetRandomBluePrint();
+            //}
+            //LuckPointTxt.text = "累积点:" + luckyCoin.ToString();
+            m_LuckInfo.SetContent(StaticData.GetLuckyInfo(LuckyCoin));
+            m_LuckProgress.SetProgress(luckyCoin);
         }
     }
 
@@ -91,9 +92,9 @@ public class FuncUI : IUserInterface
     {
         base.Initialize(gameManager);
         DrawRemain = StaticData.Instance.StartLotteryDraw;
-        LuckPoint = 0;
+        LuckyCoin = 1;
         PlayerLevel = 1;
-        m_LuckInfo.SetContent(StaticData.GetLuckyInfo());
+        
         m_Anim = this.GetComponent<Animator>();
     }
 
@@ -122,6 +123,7 @@ public class FuncUI : IUserInterface
     {
         if (DrawRemain > 0)
         {
+            LuckyCoin = 0;
             DrawRemain--;
             DrawThisTurn = true;
             m_GameManager.DrawShapes();
@@ -136,12 +138,13 @@ public class FuncUI : IUserInterface
     {
         if (!DrawThisTurn)
         {
-            LuckPoint += LuckProgress;
-            LuckProgress += 1;
+            LuckyCoin += 1;
+            //LuckProgress += 1;
         }
         else
         {
-            LuckProgress = 1;
+            LuckyCoin = 1;
+            //LuckProgress = 1;
         }
         DrawThisTurn = false;
         DrawRemain++;

@@ -24,19 +24,20 @@ public class Blueprint
             switch ((Element)com.elementRequirement)
             {
                 case Element.Gold:
-                    CompositeAttackDamage += StaticData.GoldAttackIntensify * com.qualityRequeirement;
+                    //CompositeAttackDamage += StaticData.GoldAttackIntensify * com.qualityRequeirement;
+                    CompositeAttackDamage += StaticData.GoldAttackIntensify;
                     break;
                 case Element.Wood:
-                    CompositeAttackSpeed += StaticData.WoodSpeedIntensify * com.qualityRequeirement;
+                    CompositeAttackSpeed += StaticData.WoodSpeedIntensify;
                     break;
                 case Element.Water:
-                    CompositeSlowRate += StaticData.WaterSlowIntensify * com.qualityRequeirement;
+                    CompositeSlowRate += StaticData.WaterSlowIntensify;
                     break;
                 case Element.Fire:
-                    CompositeCriticalRate += StaticData.FireCriticalIntensify * com.qualityRequeirement;
+                    CompositeCriticalRate += StaticData.FireCriticalIntensify;
                     break;
                 case Element.Dust:
-                    CompositeSputteringRange += StaticData.DustSputteringIntensify * com.qualityRequeirement;
+                    CompositeSputteringRange += StaticData.DustSputteringIntensify;
                     break;
                 default:
                     break;

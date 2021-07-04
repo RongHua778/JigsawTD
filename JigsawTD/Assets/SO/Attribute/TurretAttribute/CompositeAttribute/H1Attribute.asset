@@ -24,19 +24,18 @@ MonoBehaviour:
   Rare: 2
   totalLevel: 8
   elementNumber: 3
+  TurretEffects:
+  - EffectName: 5
+    KeyValue: 1
+    EffectDescription: "\u6E85\u5C04\u4F24\u5BB3\u63D0\u9AD8100%\uFF08\u9ED8\u8BA4\u4E3A50%\uFF09"
   TurretLevels:
   - AttackRange: 5
     ForbidRange: 0
     AttackDamage: 200
     AttackSpeed: 0.35
-    SputteringRange: 0.5
+    SputteringRange: 0.4
     CriticalRate: 0
     SlowRate: 0
-    TurretEffects:
-    - EffectName: 5
-      KeyValue: 0.5
-      EffectDescription: "\u5B9A\u70B9\u6253\u51FB\uFF1A\u6E85\u5C04\u4F24\u5BB3\u63D0\u9AD850%\u3002"
-    PoloEffects: []
     TurretName: "H1\u8FEB\u51FB\u70AE"
     CannonSprite: {fileID: -1663970100683075234, guid: 9f8ffabf4348bc14f856b8f7431d5260, type: 3}
     ShootPointOffset: {x: 0, y: 0.22}
@@ -47,11 +46,6 @@ MonoBehaviour:
     SputteringRange: 0.7
     CriticalRate: 0
     SlowRate: 0
-    TurretEffects:
-    - EffectName: 5
-      KeyValue: 1
-      EffectDescription: "\u5B9A\u70B9\u6253\u51FB\uFF1A\u6E85\u5C04\u4F24\u5BB3\u63D0\u9AD8100%\u3002"
-    PoloEffects: []
     TurretName: "H2\u8FEB\u51FB\u70AE"
     CannonSprite: {fileID: 2696707030071803913, guid: 9f8ffabf4348bc14f856b8f7431d5260, type: 3}
     ShootPointOffset: {x: 0, y: 0.25}
@@ -59,14 +53,9 @@ MonoBehaviour:
     ForbidRange: 0
     AttackDamage: 500
     AttackSpeed: 0.35
-    SputteringRange: 0.9
+    SputteringRange: 1
     CriticalRate: 0
     SlowRate: 0
-    TurretEffects:
-    - EffectName: 5
-      KeyValue: 1.5
-      EffectDescription: "\u5B9A\u70B9\u6253\u51FB\uFF1A\u6E85\u5C04\u4F24\u5BB3\u63D0\u9AD8150%\u3002"
-    PoloEffects: []
     TurretName: "H3\u8FEB\u51FB\u70AE"
     CannonSprite: {fileID: -763524890675468239, guid: 9f8ffabf4348bc14f856b8f7431d5260, type: 3}
     ShootPointOffset: {x: 0, y: 0.3}

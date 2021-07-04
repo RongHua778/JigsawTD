@@ -63,11 +63,11 @@ public class StaticData : Singleton<StaticData>
         }
     }
     //元素加成
-    public static float GoldAttackIntensify = 0.1f;
-    public static float WoodSpeedIntensify = 0.1f;
-    public static float WaterSlowIntensify = 0.2f;
-    public static float FireCriticalIntensify = 0.1f;
-    public static float DustSputteringIntensify = 0.1f;
+    public static float GoldAttackIntensify = 0.5f;
+    public static float WoodSpeedIntensify = 0.5f;
+    public static float WaterSlowIntensify = 0.5f;
+    public static float FireCriticalIntensify = 0.25f;
+    public static float DustSputteringIntensify = 0.3f;
 
     public static Color32 RedColor;
     public static Color32 GreenColor;
@@ -356,19 +356,19 @@ public class StaticData : Singleton<StaticData>
         switch (element)
         {
             case Element.Gold:
-                intensifyTxt += GoldAttackIntensify * 100 * quality + "%攻击";
+                intensifyTxt += GoldAttackIntensify * 100 + "%攻击";
                 break;
             case Element.Wood:
-                intensifyTxt += WoodSpeedIntensify * 100 * quality + "%攻速";
+                intensifyTxt += WoodSpeedIntensify * 100 + "%攻速";
                 break;
             case Element.Water:
-                intensifyTxt += WaterSlowIntensify * quality + "减速";
+                intensifyTxt += WaterSlowIntensify + "减速";
                 break;
             case Element.Fire:
-                intensifyTxt += FireCriticalIntensify * 100 * quality + "%暴击率";
+                intensifyTxt += FireCriticalIntensify * 100 + "%暴击率";
                 break;
             case Element.Dust:
-                intensifyTxt += FireCriticalIntensify * quality + "溅射";
+                intensifyTxt += FireCriticalIntensify + "溅射";
                 break;
             default:
                 Debug.Log("错误的元素，无法配置加成");
@@ -415,6 +415,16 @@ public class StaticData : Singleton<StaticData>
             "\n1.当前回合没有抽取时，获得1点累积点。\n" +
             "2.连续不抽取时，会获得额外累积点。\n" +
             "3.累积点每达到10点，获得1次额外抽取次数。\n";
+        return text;
+    }
+    public static string GetLuckyInfo(int luckCoin)
+    {
+        string text =
+           "\n1.当前回合没有抽取时，获得1枚幸运币。\n" +
+           "2.每个幸运币提高战斗金币收入10%。\n" +
+           "3.进行抽取后，幸运币清零。\n" +
+           "(当前收入增加" + "<color=cyan>" + luckCoin * 10 + "%" + "</color>)\n";
+           //"4.每购买3个配方，获得1枚幸运币。\n";
         return text;
     }
 

@@ -25,16 +25,16 @@ public abstract class StrategyBase
 
     //基础属性
     private float initAttack;
-    public float InitAttack { get => initAttack; set => initAttack = value; }
     private float initSpeed;
-    public float InitSpeed { get => initSpeed; set => initSpeed = value; }
     private int initRange;
-    public int InitRange { get => initRange; set => initRange = value; }
     private float initCriticalRate;
-    public float InitCriticalRate { get => initCriticalRate; set => initCriticalRate = value; }
     private float initSputteringRange;
-    public float InitSputteringRange { get => initSputteringRange; set => initSputteringRange = value; }
     private float initSlowRate;
+    public float InitAttack { get => initAttack; set => initAttack = value; }
+    public float InitSpeed { get => initSpeed; set => initSpeed = value; }
+    public int InitRange { get => initRange; set => initRange = value; }
+    public float InitCriticalRate { get => initCriticalRate; set => initCriticalRate = value; }
+    public float InitSputteringRange { get => initSputteringRange; set => initSputteringRange = value; }
     public float InitSlowRate { get => initSlowRate; set => initSlowRate = value; }
 
     //二级属性
@@ -81,7 +81,7 @@ public abstract class StrategyBase
     public float FinalSpeed { get => BaseSpeed * TurnSpeedIntensify + TurnFixSpeed; }
     public int FinalRange { get => BaseRange + TurnFixRange; }
     public float FinalCriticalRate { get => BaseCriticalRate * TurnCriticalRateIntensify + TurnFixCriticalRate; }
-    public float FinalCriticalPercentage { get => BaseCriticalPercentage * TurnCriticalRateIntensify + TurnFixCriticalPercentage; }
+    public float FinalCriticalPercentage { get => (BaseCriticalPercentage + FinalCriticalRate) * TurnCriticalRateIntensify + TurnFixCriticalPercentage; }
     public float FinalSputteringRange { get => BaseSputteringRange * TurnSputteringRangeIntensify + TurnFixSputteringRange; }
     public float FinalSputteringPercentage { get => BaseSputteringPercentage * TurnSputteringPercentageIntensify + TurnFixSputteringPercentage; }
     public float FinalSlowRate { get => BaseSlowRate * TurnSlowRateIntensify + TurnFixSlowRate; }
@@ -192,5 +192,11 @@ public abstract class StrategyBase
         TurnSputteringRangeIntensify = 1;
         TurnSputteringPercentageIntensify = 1;
         TurnSlowRateIntensify = 1;
+
+        //回合结束效果
+        foreach (TurretSkill skill in TurretSkills)
+        {
+            skill.EndTurn();
+        }
     }
 }

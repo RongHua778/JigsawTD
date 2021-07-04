@@ -198,7 +198,7 @@ public class GameManager : Singleton<GameManager>
         }
         WaveSystem.GetSequence();
         m_BluePrintShopUI.NextRefreshTrun--;
-        m_MainUI.PrepareNextWave(WaveSystem.RunningSequence);
+        m_MainUI.PrepareNextWave(WaveSystem.RunningSequence,m_FuncUI.LuckyCoin);
         m_FuncUI.PrepareNextWave();
         m_FuncUI.Show();
 
@@ -317,7 +317,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (ConsumeMoney(cost))
         {
-            m_FuncUI.LuckPoint++;
+            m_FuncUI.LuckyCoin++;
             m_BluePrintShopUI.MoveBluePrintToPocket(grid);
         }
     }

@@ -24,6 +24,7 @@ MonoBehaviour:
   Rare: 0
   totalLevel: 0
   elementNumber: 0
+  TurretEffects: []
   TurretLevels:
   - AttackRange: 2
     ForbidRange: 0
@@ -32,20 +33,16 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretEffects: []
-    PoloEffects: []
     TurretName: B1
     CannonSprite: {fileID: 5550528487485531156, guid: b0ab56063522368429e276fb52baa9e7, type: 3}
     ShootPointOffset: {x: 0, y: 0.35}
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 14
+    AttackDamage: 16
     AttackSpeed: 8
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretEffects: []
-    PoloEffects: []
     TurretName: B2
     CannonSprite: {fileID: 2265894132087011927, guid: b0ab56063522368429e276fb52baa9e7, type: 3}
     ShootPointOffset: {x: 0, y: 0.35}
@@ -56,32 +53,26 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretEffects: []
-    PoloEffects: []
     TurretName: B3
     CannonSprite: {fileID: 6932297891388812724, guid: b0ab56063522368429e276fb52baa9e7, type: 3}
     ShootPointOffset: {x: 0, y: 0.41}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 40
+    AttackDamage: 38
     AttackSpeed: 8
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretEffects: []
-    PoloEffects: []
     TurretName: B4
     CannonSprite: {fileID: 1474691046141679077, guid: b0ab56063522368429e276fb52baa9e7, type: 3}
     ShootPointOffset: {x: 0, y: 0.47}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 70
+    AttackDamage: 60
     AttackSpeed: 8
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretEffects: []
-    PoloEffects: []
     TurretName: B5
     CannonSprite: {fileID: -8183647036077134399, guid: b0ab56063522368429e276fb52baa9e7, type: 3}
     ShootPointOffset: {x: 0, y: 0.47}
