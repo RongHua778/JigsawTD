@@ -4,36 +4,42 @@ using UnityEngine;
 
 public class PathFollower : ReusableObject,IGameBehavior
 {
-    protected List<PathPoint> pathPoints = new List<PathPoint>();
-    protected int PointIndex = 0;
+    private List<PathPoint> pathPoints = new List<PathPoint>();
+    public int PointIndex = 0;
     Direction direction;
     public Direction Direction { get => direction; set => direction = value; }
     DirectionChange directionChange;
     public virtual DirectionChange DirectionChange { get => directionChange; set => directionChange = value; }
 
-    [SerializeField] protected Transform model = default;
+    [SerializeField] public Transform model = default;
     public PathPoint CurrentPoint;
     protected Vector3 positionFrom, positionTo;
     private float progress;
     protected float directionAngleFrom, directionAngleTo;
-    protected float pathOffset = 0;
+    private float pathOffset = 0;
     // Start is called before the first frame update
 
     protected float speed = 0.8f;
     private float adjust;
     private float progressFactor;
 
+    public Vector3 PositionFrom { get => positionFrom; set => positionFrom = value; }
+    public Vector3 PositionTo { get => positionTo; set => positionTo = value; }
+    public float DirectionAngleFrom { get => directionAngleFrom; set => directionAngleFrom = value; }
+    public float DirectionAngleTo { get => directionAngleTo; set => directionAngleTo = value; }
     public virtual float Speed { get => speed; set => speed = value; }
     public float Adjust { get => adjust; set => adjust = value; }
     public float ProgressFactor { get => progressFactor; set => progressFactor = value; }
     public float Progress { get => progress; set => progress = value; }
+    public List<PathPoint> PathPoints { get => pathPoints; set => pathPoints = value; }
+    public float PathOffset { get => pathOffset; set => pathOffset = value; }
 
     public virtual bool GameUpdate()
     {
         Progress += Time.deltaTime * ProgressFactor;
         while (Progress >= 1f)
         {
-            if (PointIndex == pathPoints.Count - 1)
+            if (PointIndex == PathPoints.Count - 1)
             {
                 SpawnOn(0);
                 return true;
@@ -57,14 +63,14 @@ public class PathFollower : ReusableObject,IGameBehavior
     {
         if (path != null)
         {
-            pathPoints = path;
+            PathPoints = path;
         }
-        if (pathPoints.Count <= 1)
+        if (PathPoints.Count <= 1)
         {
             Debug.Log("没有路可走");
         }
         PointIndex = pointIndex;
-        CurrentPoint = pathPoints[PointIndex];
+        CurrentPoint = PathPoints[PointIndex];
         Progress = 0f;
         PrepareIntro();
     }
@@ -75,7 +81,7 @@ public class PathFollower : ReusableObject,IGameBehavior
         positionTo = CurrentPoint.ExitPoint;
         Direction = CurrentPoint.PathDirection;
         DirectionChange = DirectionChange.None;
-        model.localPosition = new Vector3(pathOffset, 0);
+        model.localPosition = new Vector3(PathOffset, 0);
         directionAngleFrom = directionAngleTo = Direction.GetAngle();
         transform.localRotation = CurrentPoint.PathDirection.GetRotation();
         Adjust = 2f;
@@ -88,7 +94,7 @@ public class PathFollower : ReusableObject,IGameBehavior
         positionTo = CurrentPoint.PathPos;
         DirectionChange = DirectionChange.None;
         directionAngleTo = Direction.GetAngle();
-        model.localPosition = new Vector3(pathOffset, 0);
+        model.localPosition = new Vector3(PathOffset, 0);
         transform.localRotation = Direction.GetRotation();
         Adjust = 2f;
         ProgressFactor = Adjust * Speed;
@@ -97,8 +103,8 @@ public class PathFollower : ReusableObject,IGameBehavior
     protected virtual void PrepareNextState()
     {
         PointIndex++;
-        CurrentPoint = pathPoints[PointIndex];
-        if (PointIndex >= pathPoints.Count - 1)
+        CurrentPoint = PathPoints[PointIndex];
+        if (PointIndex >= PathPoints.Count - 1)
         {
             PrepareOutro();
             return;
@@ -131,7 +137,7 @@ public class PathFollower : ReusableObject,IGameBehavior
     {
         transform.localRotation = Direction.GetRotation();
         directionAngleTo = Direction.GetAngle();
-        model.localPosition = new Vector3(pathOffset, 0f);
+        model.localPosition = new Vector3(PathOffset, 0f);
         Adjust = 1f;
         ProgressFactor = Adjust * Speed;
     }
@@ -139,25 +145,25 @@ public class PathFollower : ReusableObject,IGameBehavior
     void PrepareTurnRight()
     {
         directionAngleTo = directionAngleFrom - 90f;
-        model.localPosition = new Vector3(pathOffset - 0.5f, 0f);
+        model.localPosition = new Vector3(PathOffset - 0.5f, 0f);
         transform.localPosition = positionFrom + Direction.GetHalfVector();
-        Adjust = 1 / (Mathf.PI * 0.5f * (0.5f - pathOffset));
+        Adjust = 1 / (Mathf.PI * 0.5f * (0.5f - PathOffset));
         ProgressFactor = Adjust * Speed;
     }
     void PrepareTurnLeft()
     {
         directionAngleTo = directionAngleFrom + 90f;
-        model.localPosition = new Vector3(pathOffset + 0.5f, 0f);
+        model.localPosition = new Vector3(PathOffset + 0.5f, 0f);
         transform.localPosition = positionFrom + Direction.GetHalfVector();
-        Adjust = 1 / (Mathf.PI * 0.5f * (0.5f + pathOffset));
+        Adjust = 1 / (Mathf.PI * 0.5f * (0.5f + PathOffset));
         ProgressFactor = Adjust * Speed;
     }
     void PrepareTurnAround()
     {
-        directionAngleTo = directionAngleFrom + (pathOffset < 0f ? 180f : -180f);
-        model.localPosition = new Vector3(pathOffset, 0);
+        directionAngleTo = directionAngleFrom + (PathOffset < 0f ? 180f : -180f);
+        model.localPosition = new Vector3(PathOffset, 0);
         transform.localPosition = positionFrom;
-        Adjust = 1 / (Mathf.PI * Mathf.Max(Mathf.Abs(pathOffset), 0.2f));
+        Adjust = 1 / (Mathf.PI * Mathf.Max(Mathf.Abs(PathOffset), 0.2f));
         ProgressFactor = Adjust * Speed;
     }
 

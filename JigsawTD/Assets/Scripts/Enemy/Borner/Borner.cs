@@ -4,49 +4,17 @@ using UnityEngine;
 
 public class Borner : Enemy
 {
-    WaveSystem ws;
-    BoardSystem bs;
-    [SerializeField] float bornCD;
-    [SerializeField] int enemyOneBorn;
     float bornCounter;
     public override EnemyType EnemyType => EnemyType.Restorer;
-    public override void Awake()
-    {
-        base.Awake();
-        ws = GameManager.Instance.WaveSystem;
-        bs = GameManager.Instance.BoardSystem;
-    }
 
-    public override bool GameUpdate()
+    public override void OnSpawn()
     {
-        bornCounter += Time.deltaTime;
-        if (bornCounter > bornCD)
+        base.OnSpawn();
+        if (EnemySkills == null)
         {
-            Born();
-            bornCounter = 0;
-        }
-        return base.GameUpdate();
-    }
-
-    private void Born()
-    {
-        for (int i = 0; i < enemyOneBorn; i++)
-        {
-            int typeInt = Random.Range(0, 6);
-            SpawnEnemy(bs, (EnemyType)typeInt);
-            ws.EnemyRemain++;
+            EnemySkills = new List<Skill>();
+            EnemySkills.Add(GameManager.Instance.SkillFactory.GetSkill(EnemySkill.Born,this));
         }
     }
-    private void SpawnEnemy(BoardSystem board, EnemyType type)
-    {
-        EnemyAttribute attribute = GameManager.Instance.EnemyFactory.Get(type);
-        //减半的敌人强度
-        float intensify = ws.RunningSequence.Intensify/2;
-        Enemy enemy = ObjectPool.Instance.Spawn(attribute.Prefab) as Enemy;
-        HealthBar healthBar = ObjectPool.Instance.Spawn(ws.HealthBarPrefab) as HealthBar;
-        enemy.Initialize(attribute, Random.Range(-0.3f, 0.3f), healthBar, intensify);
-        enemy.Progress=Progress;
-        enemy.SpawnOn(PointIndex, board.shortestPoints);
-        GameManager.Instance.enemies.Add(enemy);
-    }
+
 }

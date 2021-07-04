@@ -7,7 +7,7 @@ public abstract class Enemy : PathFollower,IDamageable
 {
     [SerializeField] protected ReusableObject exlposionPrefab = default;
     protected AudioClip explosionClip;
-    protected Animator anim;
+    private Animator anim;
 
     public TrapContent CurrentTrap;
     public abstract EnemyType EnemyType { get; }
@@ -91,19 +91,38 @@ public abstract class Enemy : PathFollower,IDamageable
         }
     }
 
+
     [Header("HealthSetting")]
     HealthBar healthBar;
 
+    private List<Skill> enemySkills;
+    public List<Skill> EnemySkills { get => enemySkills; set => enemySkills = value; }
+    public Animator Anim { get => anim; set => anim = value; }
+
     public virtual void Awake()
     {
-        anim = this.GetComponent<Animator>();
+        Anim = this.GetComponent<Animator>();
         explosionClip = Resources.Load<AudioClip>("Music/Effects/Sound_EnemyExplosion");
     }
 
     public override bool GameUpdate()
     {
+        if (EnemySkills != null)
+        {
+            foreach(Skill enemySkill in EnemySkills)
+            {
+                enemySkill.OnGameUpdating();
+            }
+        }
         if (IsDie)
         {
+            if (EnemySkills!=null)
+            {
+                foreach (Skill enemySkill in EnemySkills)
+                {
+                    enemySkill.OnDying();
+                }
+            }
             StopAllCoroutines();
             ReusableObject explosion = ObjectPool.Instance.Spawn(exlposionPrefab);
             Sound.Instance.PlayEffect(explosionClip, StaticData.Instance.EnvrionmentBaseVolume);
@@ -127,7 +146,7 @@ public abstract class Enemy : PathFollower,IDamageable
 
         while (Progress >= 1f)
         {
-            if (PointIndex == pathPoints.Count - 1)
+            if (PointIndex == PathPoints.Count - 1)
             {
                 try
                 {
@@ -171,14 +190,14 @@ public abstract class Enemy : PathFollower,IDamageable
 
     protected IEnumerator ExitCor()
     {
-        anim.SetTrigger("Exit");
+        Anim.SetTrigger("Exit");
         yield return new WaitForSeconds(0.5f);
         GameEvents.Instance.EnemyReach(this);
         ObjectPool.Instance.UnSpawn(this);
     }
     public virtual void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify)
     {
-        this.pathOffset = pathOffset;
+        this.PathOffset = pathOffset;
         this.healthBar = healthBar;
         this.healthBar.followTrans = model;
         Buffable = this.GetComponent<BuffableEntity>();
@@ -192,8 +211,8 @@ public abstract class Enemy : PathFollower,IDamageable
     protected override void PrepareIntro()
     {
         base.PrepareIntro();
-        anim.Play("Default");
-        anim.SetTrigger("Enter");
+        Anim.Play("Default");
+        Anim.SetTrigger("Enter");
     }
 
     public virtual void ApplyDamage(float amount, out float realDamage, bool isCritical = false)
@@ -213,6 +232,13 @@ public abstract class Enemy : PathFollower,IDamageable
     public override void OnSpawn()
     {
         base.OnSpawn();
+        if (EnemySkills != null)
+        {
+            foreach (Skill enemySkill in EnemySkills)
+            {
+                enemySkill.OnBorn();
+            }
+        }
         IsDie = false;
     }
 
@@ -231,5 +257,6 @@ public abstract class Enemy : PathFollower,IDamageable
         StunTime = 0;
         CurrentTrap = null;
         Buffable.RemoveAllBuffs();
+        enemySkills.Clear();
     }
 }
