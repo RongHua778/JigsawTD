@@ -4559,6 +4559,7 @@ MonoBehaviour:
   _shapeFactory: {fileID: 11400000, guid: e561f9a0ed33f674284817e826a7cb56, type: 2}
   _enemyFactory: {fileID: 11400000, guid: 49641aa71a9726d44b89676d62fd4df1, type: 2}
   _bluePrintFacotry: {fileID: 11400000, guid: 328a3a7240180f7409f1f8d5a3654b4f, type: 2}
+  _skillFactory: {fileID: 11400000, guid: 8dfa564f81651544a9e92088070f60c2, type: 2}
 --- !u!4 &286649183
 Transform:
   m_ObjectHideFlags: 0
@@ -4622,7 +4623,7 @@ MonoBehaviour:
   TileSize: 1
   TileShapeChance: []
   PlayerMaxHealth: 1e0000000f0000000f0000000f00000064000000
-  difficutyWave: 1e00000023000000280000002800000001000000
+  difficutyWave: 1e00000023000000280000002800000028000000
 --- !u!1 &306440703
 GameObject:
   m_ObjectHideFlags: 0

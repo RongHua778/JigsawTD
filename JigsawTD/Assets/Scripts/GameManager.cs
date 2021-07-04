@@ -37,11 +37,13 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] TileShapeFactory _shapeFactory = default;
     [SerializeField] EnemyFactory _enemyFactory = default;
     [SerializeField] BlueprintFactory _bluePrintFacotry = default;
+    [SerializeField] SkillFactory _skillFactory = default;
     public TileFactory TileFactory { get => _tileFactory; }
     public TileContentFactory ContentFactory { get => _contentFactory; }
     public TileShapeFactory ShapeFactory { get => _shapeFactory; }
     public EnemyFactory EnemyFactory { get => _enemyFactory; }
     public BlueprintFactory BluePrintFactory { get => _bluePrintFacotry; }
+    public SkillFactory SkillFactory { get => _skillFactory; set => _skillFactory = value; }
 
 
     [Header("集合")]
@@ -61,6 +63,9 @@ public class GameManager : Singleton<GameManager>
     //初始化设定
     public void Initinal()
     {
+        //888888888888
+        Game.Instance.Difficulty = 5;
+        //888888888888
         //初始化工厂
         TileFactory.Initialize();
         ContentFactory.Initialize();
