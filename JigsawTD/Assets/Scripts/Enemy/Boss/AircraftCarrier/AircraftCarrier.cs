@@ -9,10 +9,7 @@ public class AircraftCarrier : Enemy
     public override void OnSpawn()
     {
         base.OnSpawn();
-        if (EnemySkills == null)
-        {
-            EnemySkills = new List<Skill>();
-            EnemySkills.Add(GameManager.Instance.SkillFactory.GetSkill(EnemySkill.Aircraft, this));
-        }
+        EnemySkills = new List<Skill>();
+        EnemySkills.Add(GameManager.Instance.SkillFactory.GetSkill(EnemySkill.Aircraft, this));
     }
 }

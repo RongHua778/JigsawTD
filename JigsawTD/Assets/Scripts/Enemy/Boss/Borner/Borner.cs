@@ -9,11 +9,8 @@ public class Borner : Enemy
     public override void OnSpawn()
     {
         base.OnSpawn();
-        if (EnemySkills == null)
-        {
-            EnemySkills = new List<Skill>();
-            EnemySkills.Add(GameManager.Instance.SkillFactory.GetSkill(EnemySkill.Born,this));
-        }
+        EnemySkills = new List<Skill>();
+        EnemySkills.Add(GameManager.Instance.SkillFactory.GetSkill(EnemySkill.Born, this));
     }
 
 }

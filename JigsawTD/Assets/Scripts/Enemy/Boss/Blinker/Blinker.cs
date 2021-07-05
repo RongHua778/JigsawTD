@@ -11,11 +11,8 @@ public class Blinker : Enemy
     public override void OnSpawn()
     {
         base.OnSpawn();
-        if (EnemySkills == null)
-        {
-            EnemySkills = new List<Skill>();
-            EnemySkills.Add(GameManager.Instance.SkillFactory.GetSkill(EnemySkill.Blink, this));
-        }
+        EnemySkills = new List<Skill>();
+        EnemySkills.Add(GameManager.Instance.SkillFactory.GetSkill(EnemySkill.Blink, this));
     }
 
 }
