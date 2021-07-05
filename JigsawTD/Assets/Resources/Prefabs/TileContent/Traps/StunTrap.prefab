@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8337023803683179141}
-  - component: {fileID: 3638821018155751840}
   - component: {fileID: 2830822464082733894}
   m_Layer: 0
   m_Name: TurretBase
@@ -32,22 +31,6 @@ Transform:
   m_Father: {fileID: 7135114907690670805}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &3638821018155751840
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1142922113525815384}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.01
 --- !u!212 &2830822464082733894
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -192,7 +175,7 @@ GameObject:
   - component: {fileID: 7135114907690670805}
   - component: {fileID: -1443366368468062987}
   - component: {fileID: 2623551280471278839}
-  m_Layer: 2
+  m_Layer: 16
   m_Name: StunTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,6 +213,7 @@ MonoBehaviour:
   ParentObj: {fileID: 0}
   m_TrapAttribute: {fileID: 11400000, guid: 7fe6d72c40d904b40b1e5e27ef4f12b6, type: 2}
   needReset: 1
+  TrapIntensify: 1
 --- !u!58 &2623551280471278839
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -245,4 +229,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 0.3

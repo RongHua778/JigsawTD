@@ -13,6 +13,7 @@ public class StaticData : Singleton<StaticData>
     //public int Difficulty { get => difficulty; set => difficulty = value; }
 
     public static LayerMask PathLayer = 1 << 6 | 1 << 10;
+    public static string TrapMask = "Trap";
     public static string ConcreteTileMask = "ConcreteTile";
     public static string GroundTileMask = "GroundTile";
     public static string TempTileMask = "TempTile";

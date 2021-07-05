@@ -146,6 +146,7 @@ public class BoardSystem : IGameSystem
         GenerateTrapTiles(sizeOffset, _startSize);
         Physics2D.SyncTransforms();
         SeekPath();
+        ShowPath();
     }
 
     private void GenerateStartTiles(Vector2Int size, Vector2Int offset)
@@ -197,10 +198,7 @@ public class BoardSystem : IGameSystem
                 return;
             }
             path = p;
-            GetPathPoints();
             ShowPath();
-            //GetPathTiles();
-            //ShowPath();
             //Debug.Log("Find Path!");
         }
         else
@@ -229,6 +227,7 @@ public class BoardSystem : IGameSystem
 
     private void ShowPath()
     {
+        GetPathPoints();
         HidePath();
         for (int i = 0; i < shortestPoints.Count - 1; i++)
         {

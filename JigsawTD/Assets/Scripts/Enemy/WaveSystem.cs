@@ -168,7 +168,7 @@ public class WaveSystem : IGameSystem
                 else if (i < 3)
                 {
                     stage = (i + 1) * 0.5f;
-                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random);
+                    sequence = new EnemySequence(_enemyFactory, i + 1, 100f, EnemyType.Random);//stage
                 }
                 else
                 {

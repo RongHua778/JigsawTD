@@ -327,5 +327,98 @@ public class BBDBirdShoot : ElementSkill
     {
         criticalRateIncreased = 0;
     }
+}
 
+public class BBETinyCannon : ElementSkill
+{
+    public override List<int> Elements => new List<int> { 1, 1, 4 };
+    public override TurretEffectName EffectName => TurretEffectName.BBB_OverloadCartridge;
+    public override string SkillDescription => "小型炮口:基础攻速提高100%，不可造成暴击";
+
+    public override void Build()
+    {
+        strategy.BaseSpeedIntensify += 1f;
+    }
+
+    public override void Shoot()
+    {
+        bullet.CriticalRate = 0;
+    }
+}
+
+public class BCDHardCore : ElementSkill
+{
+    public override List<int> Elements => new List<int> { 1, 2, 3 };
+    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
+    public override string SkillDescription => "维修工厂：相邻陷阱效果提升50%";
+
+    private List<TrapContent> intensifiedTraps = new List<TrapContent>();
+    public override void Detect()
+    {
+        foreach (var trap in intensifiedTraps)
+        {
+            trap.TrapIntensify -= 0.5f;
+        }
+        intensifiedTraps.Clear();
+        List<Vector2Int> points = StaticData.GetCirclePoints(1);
+        foreach (var point in points)
+        {
+            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
+            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TrapMask));
+            if (hit != null)
+            {
+                TrapContent trap = hit.GetComponent<TrapContent>();
+                trap.TrapIntensify += 0.5f;
+                intensifiedTraps.Add(trap);
+            }
+        }
+    }
+}
+
+
+public class BCEExtraCannon : ElementSkill
+{
+    public override List<int> Elements => new List<int> { 1, 2, 4 };
+    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
+    public override string SkillDescription => "加装炮口：伤害减少50%，额外攻击1个目标";
+
+    public override void Build()
+    {
+        strategy.BaseTargetCountIntensify += 1;
+    }
+
+    public override void StartTurn()
+    {
+        strategy.TurnAttackIntensify *= 0.5f;
+    }
+
+}
+
+public class ADESpeedCore : ElementSkill
+{
+    public override List<int> Elements => new List<int> { 1, 3, 4 };
+    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
+    public override string SkillDescription => "瞄准核心：相邻防御塔的基础攻速提升30%";
+
+    private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
+    public override void Detect()
+    {
+        foreach (var strategy in intensifiedStrategies)
+        {
+            strategy.BaseSpeedIntensify -= 0.3f;
+        }
+        intensifiedStrategies.Clear();
+        List<Vector2Int> points = StaticData.GetCirclePoints(1);
+        foreach (var point in points)
+        {
+            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
+            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
+            if (hit != null)
+            {
+                StrategyBase strategy = hit.GetComponent<TurretContent>().Strategy;
+                strategy.BaseSpeedIntensify += 0.3f;
+                intensifiedStrategies.Add(strategy);
+            }
+        }
+    }
 }

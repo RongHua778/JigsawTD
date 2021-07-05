@@ -19125,6 +19125,7 @@ MonoBehaviour:
     PathPos: {x: 0, y: 0}
     PathDirection: 0
     ExitPoint: {x: 0, y: 0}
+  IsBoss: 0
   exlposionPrefab: {fileID: 4814509631623709245, guid: ce7784084ac4d8046831643b89f1e650, type: 3}
   CurrentTrap: {fileID: 0}
   initialSpeed: 0
@@ -19261,7 +19262,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.02}
   serializedVersion: 2
-  m_Radius: 0.3
+  m_Radius: 0.35
 --- !u!114 &6941142978531091582
 MonoBehaviour:
   m_ObjectHideFlags: 0

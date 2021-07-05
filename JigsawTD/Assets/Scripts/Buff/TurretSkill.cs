@@ -121,6 +121,10 @@ public class MultiTarget : InitialSkill
     public override void Build()
     {
         strategy.BaseTargetCountIntensify += (int)KeyValue;
+    }
+
+    public override void StartTurn()
+    {
         strategy.TurnAttackIntensify *= 0.5f;
     }
 
