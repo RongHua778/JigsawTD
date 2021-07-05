@@ -36,11 +36,16 @@ public class TipsElementConstruct : MonoBehaviour
 
     public void SetIntensifyInfo()
     {
-        string text = "";
-        foreach (var com in m_BluePrint.Compositions)
+        string text = "Ԫ�ؼӳɣ�\n";
+        for(int i = 0; i < m_BluePrint.Compositions.Count; i++)
         {
-            text += StaticData.GetElementIntensifyText((Element)com.elementRequirement, com.qualityRequeirement) + "\n";
+            Composition com = m_BluePrint.Compositions[i];
+            if(i<2)
+                text += StaticData.GetElementIntensifyText((Element)com.elementRequirement, com.qualityRequeirement) + "\n";
+            else
+                text += StaticData.GetElementIntensifyText((Element)com.elementRequirement, com.qualityRequeirement);
         }
+
         m_InfoBtn.SetContent(text);
     }
 

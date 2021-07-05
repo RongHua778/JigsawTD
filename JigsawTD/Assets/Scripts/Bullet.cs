@@ -39,14 +39,15 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     private float criticalRate;
     public float CriticalRate { get => criticalRate; set => criticalRate = value; }
 
-    private float criticalPercentage;//溢出的暴击率转为暴击伤害
-    public float CriticalPercentage { get => criticalPercentage + Mathf.Max(0, CriticalRate - 1); set => criticalPercentage = value; }
+    private float criticalPercentage;
+    public float CriticalPercentage { get => criticalPercentage; set => criticalPercentage = value; }
     private float slowRate;
     public float SlowRate { get => slowRate; set => slowRate = value; }
     public ParticalControl SputteringEffect { get => sputteringEffect; set => sputteringEffect = value; }
 
     //用来判断是否击中护甲，如果击中则子弹被挡掉
     public bool hit;
+    public bool isCritical;
     private void Awake()
     {
         trailRenderer = this.GetComponent<TrailRenderer>();
@@ -142,7 +143,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         transform.position = Vector2.MoveTowards(transform.position,
             pos, bulletSpeed * Time.deltaTime);
         float distanceToTarget = ((Vector2)transform.position - pos).magnitude;
-        if ((distanceToTarget < minDistanceToDealDamage)&&!hit)
+        if ((distanceToTarget < minDistanceToDealDamage))
         {
             TriggerDamage();
             ReclaimBullet();
@@ -164,20 +165,20 @@ public abstract class Bullet : ReusableObject, IGameBehavior
 
     public virtual void TriggerDamage()
     {
-        //if ( HitEffect!= null)
-        //{
-        //    ParticalControl effect = ObjectPool.Instance.Spawn(HitEffect) as ParticalControl;
-        //    effect.transform.position = transform.position;
-        //    effect.PlayEffect();
-        //}
+
     }
     public void DealRealDamage(IDamageable damageable, float damage)
     {
-        bool isCritical = UnityEngine.Random.value <= CriticalRate; ;
-        float finalDamage = isCritical ? damage * CriticalPercentage : damage;
         float realDamage;
-        damageable.ApplyDamage(finalDamage, out realDamage, isCritical);
+        damageable.ApplyDamage(damage, out realDamage, isCritical);
         turretParent.Strategy.DamageAnalysis += (int)realDamage;
     }
 
+    public void EnemyDamageProcess(Enemy target,float damage)
+    {
+        isCritical= UnityEngine.Random.value <= CriticalRate;
+        float finalDamage = isCritical ? damage * CriticalPercentage : damage;
+        TriggerHitEffect(target);
+        DealRealDamage(target,finalDamage);
+    }
 }

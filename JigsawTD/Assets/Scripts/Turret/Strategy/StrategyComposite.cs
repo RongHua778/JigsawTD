@@ -30,8 +30,11 @@ public class StrategyComposite : StrategyBase
     public float NextCriticalRate { get => m_Att.TurretLevels[Quality].CriticalRate + BaseCriticalRateIntensify; }
     public float NextSlowRate { get => m_Att.TurretLevels[Quality].SlowRate + BaseSlowRateIntensify; }
 
+
+
     public ElementSkill ElementSkill1 { get; set; }
     public ElementSkill ElementSkill2 { get; set; }
+
 
     public void GetTurretSkills()//首次获取并激活效果
     {
@@ -59,6 +62,22 @@ public class StrategyComposite : StrategyBase
         }
 
         BuildTurretEffects();
+    }
+
+    public void LandedTurretSkill()
+    {
+        foreach (var skill in TurretSkills)
+        {
+            skill.Detect();//放置效果
+        }
+    }
+
+    public void CompositeSkill()
+    {
+        foreach(var skill in TurretSkills)
+        {
+            skill.Composite();
+        }
     }
 
 

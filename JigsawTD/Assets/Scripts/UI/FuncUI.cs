@@ -11,7 +11,7 @@ public class FuncUI : IUserInterface
     public GameObject LevelBtnObj;
 
 
-    [SerializeField] Text LuckPointTxt = default;
+    //[SerializeField] Text LuckPointTxt = default;
     [SerializeField] Text DrawBtnTxt = default;
     [SerializeField] Text LevelUpTxt = default;
     [SerializeField] Text PlayerLevelTxt = default;
@@ -163,7 +163,7 @@ public class FuncUI : IUserInterface
             //LuckProgress = 1;
         }
         DrawThisTurn = false;
-        DrawRemain++;
+        m_GameManager.GainDraw(1);
     }
 
     public void NextWaveBtnClick()

@@ -14,6 +14,7 @@ public class BluePrintShopUI : IUserInterface
     [SerializeField] BluePrintGrid bluePrintGridPrefab = default;
     [SerializeField] Text NextRefreshTurnsTxt = default;
     [SerializeField] Transform shopContent = default;
+    [SerializeField] Text PerfectElementTxt = default;
 
     public List<BluePrintGrid> ShopBluePrints = new List<BluePrintGrid>();//商店配方表
     public List<BluePrintGrid> OwnBluePrints = new List<BluePrintGrid>();//拥有配方表
@@ -40,6 +41,11 @@ public class BluePrintShopUI : IUserInterface
         base.Initialize(gameManager);
         anim = this.GetComponent<Animator>();
         NextRefreshTrun = 4;
+    }
+
+    public void SetPerfectElementCount(int count)
+    {
+        PerfectElementTxt.text = "拥有万能元素：" + count;
     }
 
     public void RefreshShop(int level, int cost)//刷新商店

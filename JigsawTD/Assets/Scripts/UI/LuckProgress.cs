@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class LuckProgress : MonoBehaviour
 {
-    [SerializeField] Image luckProgress = default;
+    //[SerializeField] Image luckProgress = default;
     [SerializeField] GameObject[] luckSlot = default;
     public void SetProgress(int value)
     {

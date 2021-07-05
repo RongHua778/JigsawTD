@@ -25,16 +25,13 @@ public class PenetrateBullet : Bullet
         if (collision.GetComponent<TargetPoint>())
         {
             Enemy enemy = collision.GetComponent<TargetPoint>().Enemy;
-            TriggerHitEffect(enemy);
-            DealRealDamage(enemy, Damage);
+            EnemyDamageProcess(enemy, Damage);
 
             ParticalControl effect = ObjectPool.Instance.Spawn(SputteringEffect) as ParticalControl;
             effect.transform.position = transform.position;
             effect.transform.localScale = 0.2f * Vector3.one;
             effect.PlayEffect();
-
         }
-
     }
 
     public override void TriggerDamage()
@@ -49,8 +46,7 @@ public class PenetrateBullet : Bullet
             foreach (Collider2D hit in hits)
             {
                 TargetPoint target = hit.GetComponent<TargetPoint>();
-                TriggerHitEffect(target.Enemy);
-                DealRealDamage(target.Enemy, SputteringPercentage * Damage);
+                EnemyDamageProcess(target.Enemy, SputteringPercentage * Damage);
             }
         }
 

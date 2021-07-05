@@ -9,6 +9,7 @@ public class ElementGrid : MonoBehaviour
     [SerializeField] Text Txt_ElementName = default;
     [SerializeField] Color UnobtainColor = default;
     [SerializeField] GameObject previewGlow = default;
+    [SerializeField] GameObject perfectIcon = default;
     private Element element;
     private int quality;
 
@@ -20,24 +21,10 @@ public class ElementGrid : MonoBehaviour
         Img_Icon.sprite = attribute.TurretLevels[quality - 1].CannonSprite;
         Txt_ElementName.text = attribute.TurretLevels[quality - 1].TurretName;
 
-        //switch (element)
-        //{
-        //    case Element.Gold:
-        //        Txt_ElementName.color = StaticData.YellowColor;
-        //        break;
-        //    case Element.Wood:
-        //        Txt_ElementName.color = StaticData.GreenColor;
-        //        break;
-        //    case Element.Water:
-        //        Txt_ElementName.color = StaticData.BlueColor;
-        //        break;
-        //    case Element.Fire:
-        //        Txt_ElementName.color = StaticData.RedColor;
-        //        break;
-        //    case Element.Dust:
-        //        Txt_ElementName.color = StaticData.PurpleColor;
-        //        break;
-        //}
+        if (composition.isPerfect)
+            perfectIcon.SetActive(true);
+        else
+            perfectIcon.SetActive(false);
 
         if (composition.obtained)
             Img_Icon.color = Color.white;

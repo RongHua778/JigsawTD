@@ -22,8 +22,8 @@ public class CompositeTurret : TurretContent
 
     public override void ContentLanded()
     {
-        base.ContentLanded();
         GameManager.Instance.compositeTurrets.Add(this);
+        base.ContentLanded();
     }
     public override void OnUnSpawn()
     {

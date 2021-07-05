@@ -5,6 +5,7 @@ using UnityEngine;
 
 public abstract class Enemy : PathFollower,IDamageable
 {
+    public bool IsBoss = false;
     [SerializeField] protected ReusableObject exlposionPrefab = default;
     protected AudioClip explosionClip;
     protected Animator anim;

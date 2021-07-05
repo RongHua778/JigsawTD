@@ -40,12 +40,17 @@ public abstract class TurretSkill
     public float Duration;
     public bool IsFinish = false;
 
-    public virtual void Build()
+    public virtual void Composite()
     {
-        
+
     }
 
-    public virtual void BuildEnd()
+    public virtual void Detect()
+    {
+
+    }
+
+    public virtual void Build()
     {
 
     }
@@ -146,10 +151,10 @@ public class SlowBullet : InitialSkill
 {
     public override TurretEffectName EffectName => TurretEffectName.S002SlowBullet;
 
-    public float Duration = 2f;
+    private float duration = 2f;
     public override void Hit(Enemy target)
     {
-        BuffInfo info = new BuffInfo(EnemyBuffName.SlowDown, KeyValue, Duration);
+        BuffInfo info = new BuffInfo(EnemyBuffName.SlowDown, KeyValue, duration);
         target.Buffable.AddBuff(info);
     }
 
@@ -189,8 +194,8 @@ public class CurrentHealthBaseDmage : InitialSkill
     public override void Hit(Enemy target)
     {
         float realDamage;
-        float extraDamage = target.CurrentHealth * KeyValue;
-        target.ApplyDamage(extraDamage,out realDamage);
+        float extraDamage = target.CurrentHealth * (target.IsBoss ? 0.01f : 0.04f);
+        target.ApplyDamage(extraDamage, out realDamage);
         strategy.DamageAnalysis += (int)realDamage;
         Debug.Log("DealHealthBaseDamage:" + extraDamage);
     }
@@ -228,7 +233,7 @@ public class SameTargetDamageIncrease : InitialSkill
 
     public override void Hit(Enemy target)
     {
-        
+
         if (target == LastTarget)
         {
             if (IncreaseDamage > maxDamageIncrease)

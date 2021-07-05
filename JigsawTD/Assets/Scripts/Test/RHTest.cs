@@ -22,7 +22,6 @@ public class RHTest : MonoBehaviour
     [SerializeField] InputField trapInputField = default;
 
     [SerializeField] InputField waveStateField = default;
-    [SerializeField] InputField waveCoolDownField = default;
     [SerializeField] WaveSystem waveSystem = default;
 
 
@@ -50,7 +49,6 @@ public class RHTest : MonoBehaviour
 
     public void GetCompositeClick()
     {
-        //ConstructHelper.GetCompositeTurretByName(compositeInputField.text);
         ConstructHelper.GetCompositeTurretByNameAndElement(compositeInputField.text, int.Parse(e1.text), int.Parse(e2.text), int.Parse(e3.text));
     }
 

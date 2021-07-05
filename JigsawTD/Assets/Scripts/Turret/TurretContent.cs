@@ -360,7 +360,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         Dropped = true;
         StaticData.SetNodeWalkable(m_GameTile, false, false);
 
-
+        GameManager.Instance.CheckDetectSkill();//任何一个塔放下来，都要所有防御塔检测一次侦测效果
     }
 
     public override void OnContentSelected(bool value)

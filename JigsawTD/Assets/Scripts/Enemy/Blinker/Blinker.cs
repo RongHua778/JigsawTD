@@ -36,7 +36,6 @@ public class Blinker : Enemy
         }
         return base.GameUpdate();
     }
-    private bool reachEnd = false;
     IEnumerator Blink()
     {
         AnimatorStateInfo stateinfo = anim.GetCurrentAnimatorStateInfo(0);

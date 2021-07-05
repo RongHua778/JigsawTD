@@ -73,6 +73,7 @@ public class TurretTips : TileTips
                 {
                     UpgradeArea.SetActive(true);
                     upgradeCost = StaticData.Instance.LevelUpCost[Strategy.m_Att.Rare - 1, Strategy.Quality - 1];
+                    upgradeCost = (int)(upgradeCost * (1 - m_Strategy.UpgradeDiscount));
                     UpgradeCostValue.text = upgradeCost.ToString();
                 }
                 else
@@ -147,7 +148,7 @@ public class TurretTips : TileTips
             "<color=cyan>(+" + strategy.InitAttack * strategy.BaseAttackIntensify + ")</color>" : "");
         SpeedValue.text = strategy.FinalSpeed.ToString() + (strategy.BaseSpeedIntensify > 0 ?
             "<color=cyan>(+" + strategy.InitSpeed * strategy.BaseSpeedIntensify + ")</color>" : "");
-        RangeValue.text = strategy.FinalRange.ToString()+(strategy.BaseRangeIntensify>0?
+        RangeValue.text = strategy.FinalRange.ToString() + (strategy.BaseRangeIntensify > 0 ?
             "<color=cyan>(+" + strategy.BaseRangeIntensify + ")</color>" : "");
         CriticalValue.text = (strategy.FinalCriticalRate * 100).ToString() + (strategy.BaseCriticalRateIntensify > 0 ?
             "<color=cyan>(+" + strategy.BaseCriticalRateIntensify * 100 + ")</color>" : "") + "%";
@@ -195,7 +196,7 @@ public class TurretTips : TileTips
             Name.text = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].TurretName;
             //Description.text = m_Strategy.m_Att.TurretEffects[0].EffectDescription;
 
-                //StaticData.GetTurretDes(m_Strategy.m_Att, m_Strategy.Quality);
+            //StaticData.GetTurretDes(m_Strategy.m_Att, m_Strategy.Quality);
             UpdateInfo();
             if (m_Strategy.Quality > 2)
             {
@@ -204,6 +205,7 @@ public class TurretTips : TileTips
             }
             UpdateLevelUpInfo();
             upgradeCost = StaticData.Instance.LevelUpCost[m_Strategy.m_Att.Rare - 1, m_Strategy.Quality - 1];
+            upgradeCost = (int)(upgradeCost * (1 - m_Strategy.UpgradeDiscount));
             UpgradeCostValue.text = upgradeCost.ToString();
         }
     }

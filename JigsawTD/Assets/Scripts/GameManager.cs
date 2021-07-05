@@ -71,8 +71,8 @@ public class GameManager : Singleton<GameManager>
         ConstructHelper.Initialize();
 
         //初始化系统
-        BoardSystem.Initialize(this);//版图系统
-        WaveSystem.Initialize(this);//波次系统
+        m_BoardSystem.Initialize(this);//版图系统
+        m_WaveSystem.Initialize(this);//波次系统
         m_CamControl.Initialize(this, m_MainUI);//摄像机控制
 
         //初始化UI
@@ -202,7 +202,7 @@ public class GameManager : Singleton<GameManager>
         }
         WaveSystem.GetSequence();
         m_BluePrintShopUI.NextRefreshTrun--;
-        m_MainUI.PrepareNextWave(WaveSystem.RunningSequence,m_FuncUI.LuckyCoin);
+        m_MainUI.PrepareNextWave(WaveSystem.RunningSequence, m_FuncUI.LuckyCoin);
         m_FuncUI.PrepareNextWave();
         m_FuncUI.Show();
 
@@ -333,7 +333,7 @@ public class GameManager : Singleton<GameManager>
 
     public void GainMoney(int amount)
     {
-        m_MainUI.Coin += amount;
+        m_MainUI.Coin += (int)(amount * (1 + StaticData.OverallMoneyIntensify));
     }
 
     public void GainDraw(int amount)
@@ -458,5 +458,21 @@ public class GameManager : Singleton<GameManager>
         m_BuyGroundTips.Hide();
     }
 
+    #endregion
+
+    #region 待加入功能
+    public void GetPerfectElement(int count)
+    {
+        StaticData.PerfectElementCount += count;
+        m_BluePrintShopUI.SetPerfectElementCount(StaticData.PerfectElementCount);
+    }
+
+    public void CheckDetectSkill()
+    {
+        foreach (var turret in compositeTurrets.behaviors)
+        {
+            ((StrategyComposite)(((TurretContent)turret).Strategy)).LandedTurretSkill();
+        }
+    }
     #endregion
 }

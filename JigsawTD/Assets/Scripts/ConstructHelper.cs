@@ -75,6 +75,7 @@ public static class ConstructHelper
         CompositeTurret content = m_ContentFactory.GetCompositeTurret(bluePrint);
         tile.SetContent(content);
         shape.SetTile(tile);
+        bluePrint.ComStrategy.CompositeSkill();
         return shape;
     }
 
