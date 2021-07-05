@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Borner : Enemy
+public class AircraftCarrier : Enemy
 {
-    float bornCounter;
-    public override EnemyType EnemyType => EnemyType.Restorer;
+    public override EnemyType EnemyType => EnemyType.AircraftCarrier;
 
     public override void OnSpawn()
     {
@@ -13,8 +12,7 @@ public class Borner : Enemy
         if (EnemySkills == null)
         {
             EnemySkills = new List<Skill>();
-            EnemySkills.Add(GameManager.Instance.SkillFactory.GetSkill(EnemySkill.Born,this));
+            EnemySkills.Add(GameManager.Instance.SkillFactory.GetSkill(EnemySkill.Aircraft, this));
         }
     }
-
 }

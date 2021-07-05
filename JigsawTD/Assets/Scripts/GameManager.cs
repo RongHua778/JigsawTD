@@ -38,12 +38,14 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] EnemyFactory _enemyFactory = default;
     [SerializeField] BlueprintFactory _bluePrintFacotry = default;
     [SerializeField] SkillFactory _skillFactory = default;
+    [SerializeField] NonEnemyFactory _nonEnemyFactory = default;
     public TileFactory TileFactory { get => _tileFactory; }
     public TileContentFactory ContentFactory { get => _contentFactory; }
     public TileShapeFactory ShapeFactory { get => _shapeFactory; }
     public EnemyFactory EnemyFactory { get => _enemyFactory; }
     public BlueprintFactory BluePrintFactory { get => _bluePrintFacotry; }
     public SkillFactory SkillFactory { get => _skillFactory; set => _skillFactory = value; }
+    public NonEnemyFactory NonEnemyFactory { get => _nonEnemyFactory; set => _nonEnemyFactory = value; }
 
 
     [Header("¼¯ºÏ")]

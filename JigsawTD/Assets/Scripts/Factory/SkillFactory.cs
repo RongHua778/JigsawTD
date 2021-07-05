@@ -5,7 +5,7 @@ using System.Linq;
 
 public enum EnemySkill
 {
-    Born,Blink,Divide
+    Born,Blink,Divide,Aircraft
 }
 [CreateAssetMenu(menuName = "Factory/SkillFactory", fileName = "skillFactory")]
 public class SkillFactory:GameObjectFactory 
@@ -17,6 +17,8 @@ public class SkillFactory:GameObjectFactory
     [SerializeField]int dividerDividing;
     [SerializeField]int dividerSprings;
     [SerializeField] Sprite[] dividerSprites = default;
+    [SerializeField] float aircraftBornCD = 1f;
+    [SerializeField] int aircraftOneBorn = 1;
     public Skill GetSkill(EnemySkill skill,Enemy enemy)
     {
         switch (skill)
@@ -27,6 +29,8 @@ public class SkillFactory:GameObjectFactory
                 return new BlinkSkill(enemy, blinkerBlink,holePrefab);
             case EnemySkill.Divide:
                 return new DivideSkill(enemy, dividerDividing, dividerSprings,1,dividerSprites);
+            case EnemySkill.Aircraft:
+                return new AircraftSkill(enemy, aircraftBornCD, aircraftOneBorn);
             default:
                 Debug.LogAssertion("技能参数错误！");
                 return null;

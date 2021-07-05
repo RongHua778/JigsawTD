@@ -257,6 +257,9 @@ public abstract class Enemy : PathFollower,IDamageable
         StunTime = 0;
         CurrentTrap = null;
         Buffable.RemoveAllBuffs();
-        enemySkills.Clear();
+        if (enemySkills != null)
+        {
+            enemySkills.Clear();
+        }
     }
 }
