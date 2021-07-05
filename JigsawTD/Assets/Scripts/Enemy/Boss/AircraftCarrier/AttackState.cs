@@ -18,14 +18,9 @@ public class AttackState : FSMState
 
     }
 
-    public override void DoBeforeEntering(Aircraft agent)
+    public override void DoBeforeEntering()
     {
-        base.DoBeforeEntering(agent);
-        Debug.LogWarning("Ready to attack targetsTurret:" + agent.targetTurret);
-        FrostEffect frosteffect = ObjectPool.Instance.Spawn(agent.frostPrefab) as FrostEffect;
-        frosteffect.transform.position = agent.targetTurret.transform.position;
-        frosteffect.UnspawnAfterTime(agent.freezeTime);
-        agent.targetTurret.Frost(agent.freezeTime);
+
 
         //for (int i = 0; i < hits; i++)
         //{

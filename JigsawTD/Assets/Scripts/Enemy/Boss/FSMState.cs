@@ -83,8 +83,8 @@ public abstract class FSMState
     }
 
 
-    public virtual void DoBeforeEntering(Aircraft agent) { }
-    public virtual void DoAfterLeaving(Aircraft agent) { }
+    public virtual void DoBeforeEntering() { }
+    public virtual void DoAfterLeaving() { }
     public abstract void Act(Aircraft agent);
     public abstract void Reason(Aircraft agent);//ÅÐ¶Ï×ª»»Ìõ¼þ
 

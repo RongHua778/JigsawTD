@@ -57,6 +57,7 @@ public class TrapContent : GameTileContent
         TargetPoint target = collision.GetComponent<TargetPoint>();
         if (target != null)
         {
+            if(target.Enemy!=null)
             target.Enemy.CurrentTrap = this;
         }
         else

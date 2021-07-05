@@ -33,6 +33,7 @@ public class AircraftSkill : Skill
         for (int i = 0; i < enemyOneBorn; i++)
         {
             Aircraft aircraft=GameManager.Instance.NonEnemyFactory.GetAircraft();
+            aircraft.transform.localPosition = enemy.transform.localPosition;
             aircraft.Initiate(enemy);
         }
     }

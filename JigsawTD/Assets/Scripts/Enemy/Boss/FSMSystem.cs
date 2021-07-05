@@ -54,7 +54,7 @@ public class FSMSystem
         States.Remove(id);
     }
 
-    public void PerformTransition(Transition trans, Aircraft agent)
+    public void PerformTransition(Transition trans)
     {
         if (trans == Transition.NullTransition)
         {
@@ -75,9 +75,9 @@ public class FSMSystem
         }
 
         FSMState state = States[id];
-        CurrentState.DoAfterLeaving(agent);
+        CurrentState.DoAfterLeaving();
         CurrentState = state;
         CurrentStateID = id;
-        CurrentState.DoBeforeEntering(agent);
+        CurrentState.DoBeforeEntering();
     }
 }
