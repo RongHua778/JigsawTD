@@ -8,6 +8,9 @@ public class DraggingShape : DraggingActions
 {
     Vector2 lastPos;
     Transform menuTrans;
+    private static DraggingShape pickingShape = null;
+    public static DraggingShape PickingShape { get => pickingShape; set => pickingShape = value; }
+
     TileShape tileShape;
     public TileShape TileShape { get => tileShape; set => tileShape = value; }
 
@@ -55,6 +58,7 @@ public class DraggingShape : DraggingActions
             RotateShape();
         }
 
+
     }
 
 
@@ -77,6 +81,10 @@ public class DraggingShape : DraggingActions
 
     }
 
+    public void ShapeFindPath()
+    {
+        StartCoroutine(TryFindPath());
+    }
 
     public void ShapeSpawned()//生成模块后，检查一下可否放置和寻路
     {
@@ -84,6 +92,7 @@ public class DraggingShape : DraggingActions
         {
             StartCoroutine(TryFindPath());
         }
+        PickingShape = this;
     }
 
     private bool CheckCanDrop()
@@ -170,7 +179,6 @@ public class DraggingShape : DraggingActions
         yield return new WaitForSeconds(0.1f);
         Sound.Instance.PlayEffect("Sound_Shape");
         ChangeAstarPath();
-        //yield return new WaitForSeconds(0.05f);
         GameEvents.Instance.SeekPath();
         yield return new WaitForSeconds(0.1f);
         waitingForPath = false;
@@ -249,6 +257,7 @@ public class DraggingShape : DraggingActions
             }
             GameManager.Instance.ConfirmShape();
             GameManager.Instance.TriggerGuide(4);
+            PickingShape = null;
             Destroy(this.gameObject);
         }
         else if (overLapPoint)
@@ -276,7 +285,7 @@ public class DraggingShape : DraggingActions
     {
         if (isDragging)
         {
-            if(CheckCanDrop())
+            if (CheckCanDrop())
                 SetPreviewColor(dropColor);
             else
                 SetPreviewColor(wrongColor);

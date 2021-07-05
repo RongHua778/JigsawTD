@@ -273,11 +273,11 @@ public class BBAProcessImprovement : ElementSkill
 {
     public override List<int> Elements => new List<int> { 1, 1, 0 };
     public override TurretEffectName EffectName => TurretEffectName.BBB_OverloadCartridge;
-    public override string SkillDescription => "改良流程:在每回合开始30秒后，攻速提升60%";
+    public override string SkillDescription => "改良流程：在每回合开始20秒后，攻速提升60%";
 
     public override void StartTurn()
     {
-        Duration += 30;
+        Duration = 20;
     }
 
     public override void TickEnd()
@@ -296,7 +296,7 @@ public class BBCPreciseStrike : ElementSkill
 {
     public override List<int> Elements => new List<int> { 1, 1, 2 };
     public override TurretEffectName EffectName => TurretEffectName.BBB_OverloadCartridge;
-    public override string SkillDescription => "精准打击:攻击造成目标4%当前生命值的额外伤害（对BOSS为1%）";
+    public override string SkillDescription => "精准打击：攻击造成目标4%当前生命值的额外伤害（对BOSS为1%）";
 
     public override void Hit(Enemy target)
     {
@@ -312,15 +312,15 @@ public class BBDBirdShoot : ElementSkill
 {
     public override List<int> Elements => new List<int> { 1, 1, 3 };
     public override TurretEffectName EffectName => TurretEffectName.BBB_OverloadCartridge;
-    public override string SkillDescription => "小鸟盲射:每次攻击后，提升4%暴击率，上限为80%";
+    public override string SkillDescription => "小鸟盲射：每次攻击后，提升5%暴击率，上限为100%";
 
     float criticalRateIncreased;
     public override void Shoot()
     {
-        if (criticalRateIncreased > 0.79f)
+        if (criticalRateIncreased > 0.99f)
             return;
-        strategy.TurnFixCriticalRate += 0.04f;
-        criticalRateIncreased += 0.04f;
+        strategy.TurnFixCriticalRate += 0.05f;
+        criticalRateIncreased += 0.05f;
     }
 
     public override void EndTurn()
@@ -333,7 +333,7 @@ public class BBETinyCannon : ElementSkill
 {
     public override List<int> Elements => new List<int> { 1, 1, 4 };
     public override TurretEffectName EffectName => TurretEffectName.BBB_OverloadCartridge;
-    public override string SkillDescription => "小型炮口:基础攻速提高100%，不可造成暴击";
+    public override string SkillDescription => "小型炮口：基础攻速提高100%，不可造成暴击";
 
     public override void Build()
     {
@@ -398,7 +398,7 @@ public class ADESpeedCore : ElementSkill
 {
     public override List<int> Elements => new List<int> { 1, 3, 4 };
     public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
-    public override string SkillDescription => "瞄准核心：相邻防御塔的基础攻速提升30%";
+    public override string SkillDescription => "加速核心：相邻防御塔的基础攻速提升30%";
 
     private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
     public override void Detect()
@@ -422,3 +422,173 @@ public class ADESpeedCore : ElementSkill
         }
     }
 }
+
+public class CCABlueprint : ElementSkill
+{
+    public override List<int> Elements => new List<int> { 2, 2, 0 };
+    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
+    public override string SkillDescription => "科技蓝图：合成后，获得2个随机配方。";
+
+    public override void Composite()
+    {
+        GameManager.Instance.GetRandomBluePrint();
+        GameManager.Instance.GetRandomBluePrint();
+    }
+}
+public class CCBFrostCore : ElementSkill
+{
+    public override List<int> Elements => new List<int> { 2, 2, 1 };
+    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
+    public override string SkillDescription => "寒冰核心：相邻防御塔+0.3减速";
+
+    private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
+    public override void Detect()
+    {
+        foreach (var strategy in intensifiedStrategies)
+        {
+            strategy.BaseSlowRateIntensify -= 0.3f;
+        }
+        intensifiedStrategies.Clear();
+        List<Vector2Int> points = StaticData.GetCirclePoints(1);
+        foreach (var point in points)
+        {
+            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
+            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
+            if (hit != null)
+            {
+                StrategyBase strategy = hit.GetComponent<TurretContent>().Strategy;
+                strategy.BaseSlowRateIntensify += 0.3f;
+                intensifiedStrategies.Add(strategy);
+            }
+        }
+    }
+}
+
+public class CCDUnstableShaft : ElementSkill
+{
+    public override List<int> Elements => new List<int> { 2, 2, 3 };
+    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
+    public override string SkillDescription => "不稳定轴：暴击造成的减速效果翻倍";
+
+    public override void Hit(Enemy target)
+    {
+        if (bullet.isCritical)
+        {
+            bullet.SlowRate *= 2f;
+        }
+    }
+}
+
+public class CCEIceBomb : ElementSkill
+{
+    public override List<int> Elements => new List<int> { 2, 2, 4 };
+    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
+    public override string SkillDescription => "冰冻炸弹：子弹每0.1溅射范围就提高0.1减速";
+
+    public override void Hit(Enemy target)
+    {
+        bullet.SlowRate += bullet.SputteringRange;
+    }
+}
+
+public class CDETargetCore : ElementSkill
+{
+    public override List<int> Elements => new List<int> { 2, 3, 4 };
+    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
+    public override string SkillDescription => "瞄准核心：相邻防御塔+1范围";
+
+    private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
+    public override void Detect()
+    {
+        foreach (var strategy in intensifiedStrategies)
+        {
+            strategy.BaseRangeIntensify -= 1;
+        }
+        intensifiedStrategies.Clear();
+        List<Vector2Int> points = StaticData.GetCirclePoints(1);
+        foreach (var point in points)
+        {
+            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
+            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
+            if (hit != null)
+            {
+                StrategyBase strategy = hit.GetComponent<TurretContent>().Strategy;
+                strategy.BaseRangeIntensify += 1;
+                strategy.m_Turret.GenerateRange();
+                intensifiedStrategies.Add(strategy);
+            }
+        }
+    }
+}
+
+public class DDASealedCannon : ElementSkill
+{
+    public override List<int> Elements => new List<int> { 3, 3, 0 };
+    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
+    public override string SkillDescription => "尘封大炮：如果暴击率大于100%，则造成的伤害提高200%";
+
+    public override void Hit(Enemy target)
+    {
+        if (bullet.CriticalRate > 1)
+        {
+            bullet.Damage *= 3f;
+        }
+    }
+}
+
+public class DDBFireSuppression : ElementSkill
+{
+    public override List<int> Elements => new List<int> { 3, 3, 1 };
+    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
+    public override string SkillDescription => "火力压制：战斗开始前8秒，暴击率提升100%";
+
+    public override void StartTurn()
+    {
+        Duration = 8f;
+        strategy.TurnFixCriticalRate += 1f;
+    }
+
+    public override void TickEnd()
+    {
+        strategy.TurnFixCriticalRate -= 1f;
+    }
+
+    public override void EndTurn()
+    {
+        Duration = 0;
+    }
+
+}
+
+public class DDCVentureInvestment : ElementSkill
+{
+    public override List<int> Elements => new List<int> { 3, 3, 2 };
+    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
+    public override string SkillDescription => "风险投资：合成时，随机获得50-200金币";
+
+    public override void Composite()
+    {
+        int money = Random.Range(50, 201);
+        GameManager.Instance.GainMoney(money);
+        GameManager.Instance.ShowMessage("获得了" + money + "金币");
+    }
+
+}
+
+public class DDERemoteGuidence : ElementSkill
+{
+    public override List<int> Elements => new List<int> { 3, 3, 4 };
+    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
+    public override string SkillDescription => "远程制导：当攻击距离大于3的敌人时，暴击伤害提高100%";
+
+    public override void Shoot()
+    {
+        if (bullet.GetTargetDistance() > 3f)
+        {
+            bullet.CriticalPercentage += 1f;
+        }
+    }
+
+}
+
+

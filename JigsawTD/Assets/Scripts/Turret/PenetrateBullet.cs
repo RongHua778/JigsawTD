@@ -25,7 +25,7 @@ public class PenetrateBullet : Bullet
         if (collision.GetComponent<TargetPoint>())
         {
             Enemy enemy = collision.GetComponent<TargetPoint>().Enemy;
-            EnemyDamageProcess(enemy, Damage);
+            EnemyDamageProcess(enemy);
 
             ParticalControl effect = ObjectPool.Instance.Spawn(SputteringEffect) as ParticalControl;
             effect.transform.position = transform.position;
@@ -46,7 +46,7 @@ public class PenetrateBullet : Bullet
             foreach (Collider2D hit in hits)
             {
                 TargetPoint target = hit.GetComponent<TargetPoint>();
-                EnemyDamageProcess(target.Enemy, SputteringPercentage * Damage);
+                EnemyDamageProcess(target.Enemy, true);
             }
         }
 

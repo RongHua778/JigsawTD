@@ -33,8 +33,8 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     private float sputteringRange;
     public float SputteringRange { get => sputteringRange; set => sputteringRange = value; }
 
-    private float sputteringRate;
-    public float SputteringPercentage { get => sputteringRate; set => sputteringRate = value; }
+    private float sputteringPercentage;
+    public float SputteringPercentage { get => sputteringPercentage; set => sputteringPercentage = value; }
 
     private float criticalRate;
     public float CriticalRate { get => criticalRate; set => criticalRate = value; }
@@ -100,11 +100,6 @@ public abstract class Bullet : ReusableObject, IGameBehavior
 
     protected void TriggerHitEffect(Enemy target)
     {
-        if (SlowRate > 0)
-        {
-            BuffInfo info = new BuffInfo(EnemyBuffName.SlowDown, SlowRate, 2f);
-            target.Buffable.AddBuff(info);
-        }
         if (turretEffects.Count > 0)
         {
             foreach (TurretSkill effect in turretEffects)
@@ -112,6 +107,11 @@ public abstract class Bullet : ReusableObject, IGameBehavior
                 effect.bullet = this;
                 effect.Hit(target);
             }
+        }
+        if (SlowRate > 0 && !target.IsDie)//技能可能会修改slowrate
+        {
+            BuffInfo info = new BuffInfo(EnemyBuffName.SlowDown, SlowRate, 2f);
+            target.Buffable.AddBuff(info);
         }
     }
 
@@ -174,11 +174,13 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         turretParent.Strategy.DamageAnalysis += (int)realDamage;
     }
 
-    public void EnemyDamageProcess(Enemy target,float damage)
+    public void EnemyDamageProcess(Enemy target,bool isSputtering=false)
     {
-        isCritical= UnityEngine.Random.value <= CriticalRate;
-        float finalDamage = isCritical ? damage * CriticalPercentage : damage;
+        isCritical = UnityEngine.Random.value <= CriticalRate;
         TriggerHitEffect(target);
-        DealRealDamage(target,finalDamage);
+        float finalDamage = isCritical ? Damage * CriticalPercentage : Damage;
+        if (isSputtering)
+            finalDamage *= SputteringPercentage;
+        DealRealDamage(target, finalDamage);
     }
 }

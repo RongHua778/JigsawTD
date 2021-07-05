@@ -35,11 +35,11 @@ public class TargetBullet : Bullet
                 {
                     if (target == Target)
                     {
-                        EnemyDamageProcess(target.Enemy, Damage);
+                        EnemyDamageProcess(target.Enemy);
                     }
                     else
                     {
-                        EnemyDamageProcess(target.Enemy, SputteringPercentage * Damage);
+                        EnemyDamageProcess(target.Enemy, true);
                     }
                 }
 
@@ -49,7 +49,7 @@ public class TargetBullet : Bullet
         {
             if (Target == null)
                 return;
-            EnemyDamageProcess(Target.Enemy, Damage);
+            EnemyDamageProcess(Target.Enemy);
         }
 
     }

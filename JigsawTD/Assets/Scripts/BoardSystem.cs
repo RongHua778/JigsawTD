@@ -302,16 +302,16 @@ public class BoardSystem : IGameSystem
         tile.TileLanded();
         BuyOneGroundMoney += 10;
         Physics2D.SyncTransforms();
-        SeekPath();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
+        if (DraggingShape.PickingShape != null)
+        {
+            DraggingShape.PickingShape.ShapeFindPath();//只有用这个才找的到路
+        }
+        else
         {
             SeekPath();
         }
     }
+
     //待弃用方法0609
 
     //private void GetPathTiles()

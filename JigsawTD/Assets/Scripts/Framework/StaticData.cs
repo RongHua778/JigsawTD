@@ -71,7 +71,7 @@ public class StaticData : Singleton<StaticData>
     public static float GoldAttackIntensify = 0.3f;
     public static float WoodSpeedIntensify = 0.3f;
     public static float WaterSlowIntensify = 0.3f;
-    public static float FireCriticalIntensify = 0.25f;
+    public static float FireCriticalIntensify = 0.51f;
     public static float DustSputteringIntensify = 0.3f;
 
     public static Color32 RedColor;
