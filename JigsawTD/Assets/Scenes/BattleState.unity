@@ -25386,7 +25386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8834c8b736c85524bb85789591747753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Difficulty: 4
+  Difficulty: 3
   MaxDifficulty: 4
   transition: {fileID: 231277384}
   transitionTime: 1

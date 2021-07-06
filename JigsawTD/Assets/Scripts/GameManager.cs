@@ -66,7 +66,7 @@ public class GameManager : Singleton<GameManager>
     public void Initinal()
     {
         //888888888888
-        Game.Instance.Difficulty = 5;
+        //Game.Instance.Difficulty = 5;
         //888888888888
         //初始化工厂
         TileFactory.Initialize();
