@@ -84,9 +84,10 @@ MonoBehaviour:
     PathPos: {x: 0, y: 0}
     PathDirection: 0
     ExitPoint: {x: 0, y: 0}
+  IsBoss: 0
   exlposionPrefab: {fileID: 4814509631623709245, guid: ce7784084ac4d8046831643b89f1e650, type: 3}
-  CurrentTrap: {fileID: 0}
   initialSpeed: 0
+  armorIntensify: 35
 --- !u!1 &8360252054385358165
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,7 +274,7 @@ PrefabInstance:
     - target: {fileID: 3014800429492534932, guid: 3f4b164b244241543ab8992a7aa77762, type: 3}
       propertyPath: boss
       value: 
-      objectReference: {fileID: 2092190268556255278}
+      objectReference: {fileID: 0}
     - target: {fileID: 8170037374753327848, guid: 3f4b164b244241543ab8992a7aa77762, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -343,7 +344,7 @@ PrefabInstance:
     - target: {fileID: 3014800429492534932, guid: 3f4b164b244241543ab8992a7aa77762, type: 3}
       propertyPath: boss
       value: 
-      objectReference: {fileID: 2092190268556255278}
+      objectReference: {fileID: 0}
     - target: {fileID: 8170037374753327848, guid: 3f4b164b244241543ab8992a7aa77762, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -413,7 +414,7 @@ PrefabInstance:
     - target: {fileID: 3014800429492534932, guid: 3f4b164b244241543ab8992a7aa77762, type: 3}
       propertyPath: boss
       value: 
-      objectReference: {fileID: 2092190268556255278}
+      objectReference: {fileID: 0}
     - target: {fileID: 8170037374753327848, guid: 3f4b164b244241543ab8992a7aa77762, type: 3}
       propertyPath: m_RootOrder
       value: 0

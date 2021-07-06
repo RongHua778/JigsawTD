@@ -6,13 +6,18 @@ using UnityEngine;
 public abstract class Enemy : PathFollower,IDamageable
 {
     public bool IsBoss = false;
+    public bool IsEnemy { get => true; }
     [SerializeField] protected ReusableObject exlposionPrefab = default;
     protected AudioClip explosionClip;
     private Animator anim;
+    public Animator Anim { get => anim; set => anim = value; }
 
-    public TrapContent CurrentTrap;
+    private TrapContent currentTrap;
+    public TrapContent CurrentTrap { get => currentTrap; set => currentTrap = value; }
+
     public abstract EnemyType EnemyType { get; }
-
+    private List<Skill> enemySkills;
+    public List<Skill> EnemySkills { get => enemySkills; set => enemySkills = value; }
     protected bool trapTriggered = false;
     public int ReachDamage { get; set; }
     public int TileStunCounter { get; set; }
@@ -96,9 +101,7 @@ public abstract class Enemy : PathFollower,IDamageable
     [Header("HealthSetting")]
     HealthBar healthBar;
 
-    private List<Skill> enemySkills;
-    public List<Skill> EnemySkills { get => enemySkills; set => enemySkills = value; }
-    public Animator Anim { get => anim; set => anim = value; }
+
 
     public virtual void Awake()
     {

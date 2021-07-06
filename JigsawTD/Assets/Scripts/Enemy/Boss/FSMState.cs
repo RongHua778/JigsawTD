@@ -5,8 +5,10 @@ using UnityEngine;
 public enum Transition//转换条件
 {
     NullTransition = 0,
-    WaitingEnough,
-    ReadyForAttack
+    AttackTarget,
+    LureTarget,
+    Attacked,
+    BackToBoss
 }
 
 public enum StateID//状态id
@@ -14,7 +16,8 @@ public enum StateID//状态id
     NullStateID = 0,
     Patrol,
     Track,
-    Attack
+    Back,
+    Lure
 }
 
 //作为基类被其他类继承的有限机状态

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class TargetPoint : MonoBehaviour
 {
-    Enemy enemy;
+    IDamageable enemy;
     public Vector2 Position => transform.position;
 
-    public Enemy Enemy { get => enemy; set => enemy = value; }
+    public IDamageable Enemy { get => enemy; set => enemy = value; }
 
     private void Awake()
     {
-        Enemy = transform.root.GetComponent<Enemy>();
+        Enemy = transform.root.GetComponent<IDamageable>();
     }
 
 

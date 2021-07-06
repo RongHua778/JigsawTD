@@ -10,67 +10,86 @@ public enum Destination
 public class Aircraft : ReusableObject, IDamageable, IGameBehavior
 {
     [SerializeField] ParticalControl explosionPrefab = default;
+    [SerializeField] ParticalControl attackPrefab = default;
     [SerializeField] JumpDamage jumpDamagePrefab = default;
     public FrostEffect frostPrefab = default;
 
-    Enemy boss;
+    public AircraftCarrier boss;
     public TurretContent targetTurret;
 
     Quaternion look_Rotation;
     public float freezeTime = 5f;
     float exploreRange = 10f;
     Collider2D[] attachedResult = new Collider2D[20];
-    public readonly float minDistanceToDealDamage = .1f;
+    public readonly float minDistanceToLure = .1f;
+    public readonly float minDistanceToDealDamage = 0.75f;
     readonly float maxDistanceToReturnToBoss = 5f;
-    float movingSpeed=1f;
+    float movingSpeed=3.5f;
     float rotatingSpeed = 2f;
 
     Vector3 movingDirection;
 
     protected AudioClip explosionClip;
+    public bool IsEnemy { get => false; }
 
-    float maxHealth=10;
+    float maxHealth = 10;
+    public float MaxHealth { get => maxHealth; set => maxHealth = value; }
     float currentHealth;
+
     public float CurrentHealth
     {
         get => currentHealth;
         set
         {
             currentHealth = value;
-            if (currentHealth <= 0)
+            if (currentHealth <= 0&&!IsDie)
             {
                 ReusableObject explosion = ObjectPool.Instance.Spawn(explosionPrefab);
                 Sound.Instance.PlayEffect(explosionClip, StaticData.Instance.EnvrionmentBaseVolume);
                 explosion.transform.position = transform.position;
+                IsDie = true;
+                Reclaim();
             }
         }
     }
-    public float MaxHealth { get => maxHealth; set => maxHealth = value; }
-
+    private bool isDie;
+    public bool IsDie { get => isDie; set => isDie = value; }
+    public BuffableEntity Buffable { get; set; }
+    public TrapContent CurrentTrap { get; set; }
     private FSMSystem fsm;
 
-    public void Initiate(Enemy boss)
+    public void Initiate(AircraftCarrier boss)
     {
-
+        IsDie = false;
+        MaxHealth = boss.Armor;
         CurrentHealth = MaxHealth;
-        this.boss = boss;
+        boss.AddAircraft(this);
+        if (fsm == null)
+        {
+            this.boss = boss;
+            //以下是状态机的初始化
+            fsm = new FSMSystem();
 
-        //以下是状态机的初始化
-        fsm = new FSMSystem();
+            FSMState patrolState = new PatrolState(fsm);
+            patrolState.AddTransition(Transition.AttackTarget, StateID.Track);
+            patrolState.AddTransition(Transition.LureTarget, StateID.Lure);
+            PickRandomDes();
 
-        FSMState patrolState = new PatrolState(fsm);
-        patrolState.AddTransition(Transition.WaitingEnough, StateID.Track);
+            FSMState trackState = new TrackState(fsm);
+            trackState.AddTransition(Transition.Attacked, StateID.Back);
 
-        FSMState trackState = new TrackState(fsm);
-        trackState.AddTransition(Transition.ReadyForAttack, StateID.Attack);
+            FSMState lureState = new LureState(fsm);
+            lureState.AddTransition(Transition.Attacked, StateID.Back);
 
-        FSMState attackState = new AttackState(fsm);
+            FSMState backState = new BackState(fsm);
+            backState.AddTransition(Transition.BackToBoss, StateID.Patrol);
 
-        fsm.AddState(patrolState);
-        fsm.AddState(trackState);
-        fsm.AddState(attackState);
-        GameManager.Instance.nonEnemies.Add(this);
-
+            fsm.AddState(patrolState);
+            fsm.AddState(trackState);
+            fsm.AddState(backState);
+            fsm.AddState(lureState);
+            GameManager.Instance.nonEnemies.Add(this);
+        }
     }
 
     private void Awake()
@@ -98,14 +117,11 @@ public class Aircraft : ReusableObject, IDamageable, IGameBehavior
     }
     public void PickRandomDes()
     {
-        float randomX = Random.Range(boss.transform.position.x,
+        float randomX = Random.Range(boss.transform.position.x - maxDistanceToReturnToBoss,
             boss.transform.position.x + maxDistanceToReturnToBoss);
-        float randomY = Random.Range(boss.transform.position.y,
+        float randomY = Random.Range(boss.transform.position.y - maxDistanceToReturnToBoss,
             boss.transform.position.y + maxDistanceToReturnToBoss);
         movingDirection = new Vector3(randomX,randomY) - transform.position;
-        transform.Translate(Vector3.up * Time.deltaTime * movingSpeed);
-        RotateTowards();
-        transform.Translate(Vector3.up * Time.deltaTime * movingSpeed);
     }
     public void MovingToTarget(Destination des)
     {
@@ -123,8 +139,24 @@ public class Aircraft : ReusableObject, IDamageable, IGameBehavior
                 Debug.LogAssertion("飞行目的地错误！");
                 break;
         }
+
         transform.Translate(Vector3.up * Time.deltaTime * movingSpeed);
         RotateTowards();
+    }
+
+    public void Lure()
+    {
+        float distanceToTarget = ((Vector2)transform.position - (Vector2)targetTurret.transform.position).magnitude;
+        if (distanceToTarget < minDistanceToLure)
+        {
+            movingDirection = targetTurret.transform.position - transform.position + new Vector3(0.5f, 0.5f);
+            MovingToTarget(Destination.Random);
+        }
+        else
+        {
+            movingDirection = targetTurret.transform.position - transform.position;
+            MovingToTarget(Destination.Random);
+        }
     }
 
     private void RotateTowards()
@@ -140,13 +172,32 @@ public class Aircraft : ReusableObject, IDamageable, IGameBehavior
      exploreRange, attachedResult, LayerMask.GetMask(StaticData.TurretMask));
         if (hits > 0)
         {
-            int temp = Random.Range(0, hits);
-            targetTurret = attachedResult[temp].GetComponent<TurretContent>();
-            if (targetTurret != null)
+            List<TurretContent> turrets = new List<TurretContent>();
+            for (int i = 0; i < hits; i++)
             {
-                fsm.PerformTransition(Transition.WaitingEnough);
+                if (attachedResult[i].GetComponent<TurretContent>().Activated)
+                {
+                    turrets.Add(attachedResult[i].GetComponent<TurretContent>());
+                }
+            }
+            if (turrets.Count > 0)
+            {
+                int temp = Random.Range(0, turrets.Count);
+                targetTurret = turrets[temp];
             }
         }
+    }
+
+    public void Attack()
+    {
+        FrostEffect frosteffect = ObjectPool.Instance.Spawn(frostPrefab) as FrostEffect;
+        frosteffect.transform.position = targetTurret.transform.position;
+        frosteffect.UnspawnAfterTime(freezeTime);
+        targetTurret.Frost(freezeTime);
+        ReusableObject explosion = ObjectPool.Instance.Spawn(explosionPrefab);
+        Sound.Instance.PlayEffect(explosionClip, StaticData.Instance.EnvrionmentBaseVolume);
+        explosion.transform.position = targetTurret.transform.position;
+        targetTurret = null;
     }
     public void Reclaim()
     {

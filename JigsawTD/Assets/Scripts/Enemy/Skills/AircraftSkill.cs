@@ -7,13 +7,16 @@ public class AircraftSkill : Skill
     float bornCounter;
     float bornCD;
     int enemyOneBorn;
+    int enemyNumber;
+    int maxEnemyNumber;
+    AircraftCarrier boss;
 
-    public AircraftSkill(Enemy enemy, float bornCD, int enemyOneBorn)
+    public AircraftSkill(AircraftCarrier boss, float bornCD, int enemyOneBorn, int maxEnemyNumber)
     {
-        this.enemy = enemy;
+        this.boss = boss;
         this.bornCD = bornCD;
         this.enemyOneBorn = enemyOneBorn;
-
+        this.maxEnemyNumber = maxEnemyNumber;
     }
 
 
@@ -23,6 +26,7 @@ public class AircraftSkill : Skill
         bornCounter += Time.deltaTime;
         if (bornCounter > bornCD)
         {
+            if(enemyNumber<=maxEnemyNumber)
             Born();
             bornCounter = 0;
         }
@@ -33,8 +37,9 @@ public class AircraftSkill : Skill
         for (int i = 0; i < enemyOneBorn; i++)
         {
             Aircraft aircraft=GameManager.Instance.NonEnemyFactory.GetAircraft();
-            aircraft.transform.localPosition = enemy.transform.localPosition;
-            aircraft.Initiate(enemy);
+            aircraft.transform.localPosition = boss.transform.localPosition;
+            aircraft.Initiate(boss);
+            enemyNumber+=1;
         }
     }
 

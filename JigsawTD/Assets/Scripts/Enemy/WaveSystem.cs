@@ -135,7 +135,7 @@ public class WaveSystem : IGameSystem
                     break;
                 default:
                     //Debug.LogAssertion("难度参数错误");
-                    sequence = new EnemySequence(_enemyFactory, i + 1, 3f, EnemyType.AircraftCarrier);
+                    sequence = new EnemySequence(_enemyFactory, i + 1, 10f, EnemyType.AircraftCarrier);
                     break;
             }
             if (difficulty <5)

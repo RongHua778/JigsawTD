@@ -9,7 +9,12 @@ public class Armor : MonoBehaviour,IDamageable
     [SerializeField] ParticalControl explosionPrefab = default;
     [SerializeField] JumpDamage jumpDamagePrefab = default;
     protected AudioClip explosionClip;
+    public TrapContent CurrentTrap { get; set; }
+    public BuffableEntity Buffable { get; set; }
+    public bool IsEnemy { get => false; }
 
+    private bool isDie;
+    public bool IsDie { get => isDie; set => isDie = value; }
     float maxHealth;
     float currentHealth;
     public float CurrentHealth 

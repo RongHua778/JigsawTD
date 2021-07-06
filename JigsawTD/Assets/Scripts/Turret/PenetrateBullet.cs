@@ -24,8 +24,9 @@ public class PenetrateBullet : Bullet
     {
         if (collision.GetComponent<TargetPoint>())
         {
-            Enemy enemy = collision.GetComponent<TargetPoint>().Enemy;
+            IDamageable enemy = collision.GetComponent<TargetPoint>().Enemy;
             EnemyDamageProcess(enemy);
+            
 
             ParticalControl effect = ObjectPool.Instance.Spawn(SputteringEffect) as ParticalControl;
             effect.transform.position = transform.position;

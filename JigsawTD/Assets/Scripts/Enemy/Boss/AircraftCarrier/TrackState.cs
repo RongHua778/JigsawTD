@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TrackState : FSMState
 {
+    float trackCounter;
+    float maxTrackTime=4f;
     public TrackState(FSMSystem fsm) : base(fsm)
     {
         StateID = StateID.Track;
@@ -17,11 +19,14 @@ public class TrackState : FSMState
         float distanceToTarget = ((Vector2)agent.transform.position - (Vector2)agent.targetTurret.transform.position).magnitude;
         if(distanceToTarget< agent.minDistanceToDealDamage)
         {
-            Debug.LogWarning("Ready to attack targetsTurret:" + agent.targetTurret);
-            FrostEffect frosteffect = ObjectPool.Instance.Spawn(agent.frostPrefab) as FrostEffect;
-            frosteffect.transform.position = agent.targetTurret.transform.position;
-            frosteffect.UnspawnAfterTime(agent.freezeTime);
-            agent.targetTurret.Frost(agent.freezeTime);
+            agent.Attack();
+            fsm.PerformTransition(Transition.Attacked);
+        }
+        trackCounter += Time.deltaTime;
+        if (trackCounter > maxTrackTime)
+        {
+            fsm.PerformTransition(Transition.Attacked);
+            trackCounter = 0;
         }
     }
 

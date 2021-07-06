@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PatrolState : FSMState
 {
+    float LureProb = 0.4f;
     float waitingTime;
+    float searchTargetCD=2.5f+Random.Range(-0.5f,0.5f);
     public PatrolState(FSMSystem fsm):base(fsm)
     {
         StateID = StateID.Patrol;
@@ -13,19 +15,30 @@ public class PatrolState : FSMState
     {
         agent.MovingToTarget(Destination.Random);
         waitingTime += Time.deltaTime;
-        if (waitingTime >2f)
+        if (waitingTime % 2==0)
         {
             agent.PickRandomDes();
-            waitingTime = 0;
         }
     }
     public override void Reason(Aircraft agent)
     {
         waitingTime += Time.deltaTime;
-        if (waitingTime > 10f)
+        if (waitingTime > searchTargetCD)
         {
             agent.SearchTarget();
             waitingTime = 0;
+        }
+        if (agent.targetTurret != null)
+        {
+            float temp = Random.Range(0f, 1f);
+            if (temp < LureProb)
+            {
+                fsm.PerformTransition(Transition.LureTarget);
+            }
+            else
+            {
+                fsm.PerformTransition(Transition.AttackTarget);
+            }
         }
     }
 }

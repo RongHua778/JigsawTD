@@ -10,8 +10,11 @@ public class FSMSystem
 
     public void Update(Aircraft agent)
     {
-        CurrentState.Act(agent);
-        CurrentState.Reason(agent);
+        if (!agent.IsDie)
+        {
+            CurrentState.Act(agent);
+            CurrentState.Reason(agent);
+        }
     }
 
     public void AddState(FSMState s)

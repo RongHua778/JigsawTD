@@ -17,7 +17,7 @@ public class EnemyDetector : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Enemy enemy = collision.GetComponent<TargetPoint>().Enemy;
+        Enemy enemy = (Enemy)collision.GetComponent<TargetPoint>().Enemy;
         if (enemy != this.Enemy)
         {
             Enemies.Add(enemy);
@@ -29,7 +29,7 @@ public class EnemyDetector : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Enemy enemy = collision.GetComponent<TargetPoint>().Enemy;
+        Enemy enemy = (Enemy)collision.GetComponent<TargetPoint>().Enemy;
         if (enemy != this.Enemy && enemy.gameObject.activeSelf)
         {
             Enemies.Remove(enemy);
