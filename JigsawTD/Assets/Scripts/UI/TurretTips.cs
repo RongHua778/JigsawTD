@@ -73,6 +73,7 @@ public class TurretTips : TileTips
                 {
                     UpgradeArea.SetActive(true);
                     upgradeCost = StaticData.Instance.LevelUpCost[Strategy.m_Att.Rare - 1, Strategy.Quality - 1];
+                    upgradeCost = (int)(upgradeCost * (1 - m_Strategy.UpgradeDiscount));
                     UpgradeCostValue.text = upgradeCost.ToString();
                 }
                 else
@@ -81,7 +82,7 @@ public class TurretTips : TileTips
                 }
                 IntensifyArea.SetActive(false);
                 elementConstruct.gameObject.SetActive(true);
-                elementConstruct.SetElements(((StrategyComposite)Strategy).CompositeBluePrint);
+                elementConstruct.SetElements((StrategyComposite)Strategy);
                 break;
         }
 
@@ -103,7 +104,7 @@ public class TurretTips : TileTips
         IntensifyArea.SetActive(false);
         BluePrintArea.SetActive(true);
         elementConstruct.gameObject.SetActive(true);
-        elementConstruct.SetElements(grid.BluePrint);
+        elementConstruct.SetElements((StrategyComposite)m_Strategy);
     }
 
     private void BasicInfo()
@@ -126,6 +127,7 @@ public class TurretTips : TileTips
         this.RangeTypeValue.text = rangeTypeTxt;
         //…Ë÷√√Ë ˆŒƒ∞∏
         Description.text = StaticData.GetTurretDes(m_Strategy.m_Att, m_Strategy.Quality);
+        //StaticData.GetTurretDes(m_Strategy.m_Att, m_Strategy.Quality);
     }
 
     private void UpdateInfo()
@@ -146,7 +148,7 @@ public class TurretTips : TileTips
             "<color=cyan>(+" + strategy.InitAttack * strategy.BaseAttackIntensify + ")</color>" : "");
         SpeedValue.text = strategy.FinalSpeed.ToString() + (strategy.BaseSpeedIntensify > 0 ?
             "<color=cyan>(+" + strategy.InitSpeed * strategy.BaseSpeedIntensify + ")</color>" : "");
-        RangeValue.text = strategy.FinalRange.ToString()+(strategy.BaseRangeIntensify>0?
+        RangeValue.text = strategy.FinalRange.ToString() + (strategy.BaseRangeIntensify > 0 ?
             "<color=cyan>(+" + strategy.BaseRangeIntensify + ")</color>" : "");
         CriticalValue.text = (strategy.FinalCriticalRate * 100).ToString() + (strategy.BaseCriticalRateIntensify > 0 ?
             "<color=cyan>(+" + strategy.BaseCriticalRateIntensify * 100 + ")</color>" : "") + "%";
@@ -188,11 +190,13 @@ public class TurretTips : TileTips
         {
             m_Strategy.Quality++;
             m_Strategy.SetQualityValue();
-            m_Strategy.GetTurretSkills();
+            m_Strategy.BuildTurretEffects();
             m_Strategy.m_Turret.SetGraphic();
             Icon.sprite = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].CannonSprite;
             Name.text = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].TurretName;
-            Description.text = StaticData.GetTurretDes(m_Strategy.m_Att, m_Strategy.Quality);
+            //Description.text = m_Strategy.m_Att.TurretEffects[0].EffectDescription;
+
+            //StaticData.GetTurretDes(m_Strategy.m_Att, m_Strategy.Quality);
             UpdateInfo();
             if (m_Strategy.Quality > 2)
             {
@@ -201,6 +205,7 @@ public class TurretTips : TileTips
             }
             UpdateLevelUpInfo();
             upgradeCost = StaticData.Instance.LevelUpCost[m_Strategy.m_Att.Rare - 1, m_Strategy.Quality - 1];
+            upgradeCost = (int)(upgradeCost * (1 - m_Strategy.UpgradeDiscount));
             UpgradeCostValue.text = upgradeCost.ToString();
         }
     }

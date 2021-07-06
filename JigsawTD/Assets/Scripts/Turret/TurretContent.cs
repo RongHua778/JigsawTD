@@ -22,7 +22,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     private Transform rangeParent;
     private float nextAttackTime;
     private Quaternion look_Rotation;
-    protected float _rotSpeed = 10f;
+
 
     protected RangeType RangeType;
     protected Bullet bulletPrefab;
@@ -178,8 +178,6 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
 
     public virtual bool GameUpdate()
     {
-        if (!Dropped)
-            return false;
         if (frostTime > 0)
         {
             frostTime -= Time.deltaTime;
@@ -307,7 +305,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         var dir = Target[0].transform.position - rotTrans.position;
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
         look_Rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        rotTrans.rotation = Quaternion.Lerp(rotTrans.rotation, look_Rotation, _rotSpeed * Time.deltaTime);
+        rotTrans.rotation = Quaternion.LerpUnclamped(rotTrans.rotation, look_Rotation, Strategy.RotSpeed * Time.deltaTime);
     }
 
     protected bool AngleCheck()
@@ -362,7 +360,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         Dropped = true;
         StaticData.SetNodeWalkable(m_GameTile, false, false);
 
-
+        GameManager.Instance.CheckDetectSkill();//任何一个塔放下来，都要所有防御塔检测一次侦测效果
     }
 
     public override void OnContentSelected(bool value)

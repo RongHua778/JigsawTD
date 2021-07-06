@@ -28,6 +28,7 @@ MonoBehaviour:
   - EffectName: 2
     KeyValue: 0.1
     EffectDescription: "\u6108\u6218\u6108\u52C7\uFF1A\u6BCF\u6B21\u653B\u51FB\u63D0\u534710%\u653B\u51FB\u529B\uFF0C\u4E0A\u9650200%."
+  ElementSkills: []
   TurretLevels:
   - AttackRange: 2
     ForbidRange: 0

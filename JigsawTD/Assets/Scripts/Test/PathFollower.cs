@@ -167,9 +167,11 @@ public class PathFollower : ReusableObject,IGameBehavior
         ProgressFactor = Adjust * Speed;
     }
 
-    public override void OnUnSpawn()
+
+
+    public override void OnSpawn()
     {
-        base.OnUnSpawn();
+        base.OnSpawn();
         model.localPosition = Vector3.zero;
     }
 }

@@ -11,6 +11,10 @@ public class RHTest : MonoBehaviour
     [SerializeField] InputField drawInputField = default;
 
     [SerializeField] InputField compositeInputField = default;
+    [SerializeField] InputField e1 = default;
+    [SerializeField] InputField e2 = default;
+    [SerializeField] InputField e3 = default;
+
 
     [SerializeField] InputField qualityInputField = default;
     [SerializeField] InputField elementInputField = default;
@@ -18,9 +22,16 @@ public class RHTest : MonoBehaviour
     [SerializeField] InputField trapInputField = default;
 
     [SerializeField] InputField waveStateField = default;
-    [SerializeField] InputField waveCoolDownField = default;
     [SerializeField] WaveSystem waveSystem = default;
 
+
+    private void Start()
+    {
+        compositeInputField.text = "F1";
+        e1.text = "0";
+        e2.text = "0";
+        e3.text = "0";
+    }
     public void MenuBtnClick()
     {
         panel.SetActive(!panel.activeSelf);
@@ -38,7 +49,7 @@ public class RHTest : MonoBehaviour
 
     public void GetCompositeClick()
     {
-        ConstructHelper.GetCompositeTurretByName(compositeInputField.text);
+        ConstructHelper.GetCompositeTurretByNameAndElement(compositeInputField.text, int.Parse(e1.text), int.Parse(e2.text), int.Parse(e3.text));
     }
 
     public void GetElementClick()
@@ -54,7 +65,7 @@ public class RHTest : MonoBehaviour
     public void SetWaveBtnClick()
     {
         waveSystem.waveStage = float.Parse(waveStateField.text);
-       // waveSystem.waveCoolDown = float.Parse(waveCoolDownField.text);
+        // waveSystem.waveCoolDown = float.Parse(waveCoolDownField.text);
         waveSystem.LevelInitialize();
         GameManager.Instance.PrepareNextWave();
     }

@@ -6,10 +6,11 @@ using UnityEngine.EventSystems;
 public class InfoBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     Camera mainCam;
-    string content;
+    [TextArea(2,3)]
+    [SerializeField] string content=default;
     [SerializeField] Vector3 offset = default;
 
-    private void Start()
+    private void Awake()
     {
         mainCam = Camera.main;
     }

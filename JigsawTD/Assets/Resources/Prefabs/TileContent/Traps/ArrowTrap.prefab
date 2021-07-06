@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3818537226322725218}
-  - component: {fileID: 3876920027382190078}
   - component: {fileID: 2005802105191110946}
   m_Layer: 0
   m_Name: TurretBase
@@ -32,22 +31,6 @@ Transform:
   m_Father: {fileID: 8318468018590937565}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &3876920027382190078
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 954783202511132641}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.01
 --- !u!212 &2005802105191110946
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -110,7 +93,7 @@ GameObject:
   - component: {fileID: 8318468018590937565}
   - component: {fileID: 6968047598390281921}
   - component: {fileID: 7684558311415652510}
-  m_Layer: 2
+  m_Layer: 16
   m_Name: ArrowTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,6 +131,7 @@ MonoBehaviour:
   ParentObj: {fileID: 0}
   m_TrapAttribute: {fileID: 11400000, guid: 201af454a56b147428bcc12e84b17d0b, type: 2}
   needReset: 0
+  TrapIntensify: 1
 --- !u!58 &7684558311415652510
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -163,7 +147,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 0.3
 --- !u!1 &8809196961676829142
 GameObject:
   m_ObjectHideFlags: 0

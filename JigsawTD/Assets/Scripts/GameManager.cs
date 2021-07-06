@@ -78,8 +78,8 @@ public class GameManager : Singleton<GameManager>
         ConstructHelper.Initialize();
 
         //初始化系统
-        BoardSystem.Initialize(this);//版图系统
-        WaveSystem.Initialize(this);//波次系统
+        m_BoardSystem.Initialize(this);//版图系统
+        m_WaveSystem.Initialize(this);//波次系统
         m_CamControl.Initialize(this, m_MainUI);//摄像机控制
 
         //初始化UI
@@ -190,6 +190,10 @@ public class GameManager : Singleton<GameManager>
     {
         m_FuncUI.Hide();
         TransitionToState(StateName.WaveState);
+        foreach (var turret in compositeTurrets.behaviors)
+        {
+            ((TurretContent)turret).Strategy.StartTurnSkills();
+        }
     }
     public void PrepareNextWave()
     {
@@ -205,7 +209,7 @@ public class GameManager : Singleton<GameManager>
         }
         WaveSystem.GetSequence();
         m_BluePrintShopUI.NextRefreshTrun--;
-        m_MainUI.PrepareNextWave(WaveSystem.RunningSequence,m_FuncUI.LuckyCoin);
+        m_MainUI.PrepareNextWave(WaveSystem.RunningSequence, m_FuncUI.LuckyCoin);
         m_FuncUI.PrepareNextWave();
         m_FuncUI.Show();
 
@@ -263,12 +267,6 @@ public class GameManager : Singleton<GameManager>
 
 
 
-    //public void EnterNewState(BattleOperationState newState)
-    //{
-    //    this.operationState = newState;
-    //    StartCoroutine(this.operationState.EnterState());
-    //}
-
     #endregion
 
     #region 形状控制
@@ -320,14 +318,7 @@ public class GameManager : Singleton<GameManager>
 
     }
 
-    public void BuyBluePrint(BluePrintGrid grid, int cost)
-    {
-        if (ConsumeMoney(cost))
-        {
-            m_FuncUI.LuckyCoin++;
-            m_BluePrintShopUI.MoveBluePrintToPocket(grid);
-        }
-    }
+
 
     public void PreviewComposition(bool value, Element element = Element.Dust, int quality = 1)
     {
@@ -349,7 +340,7 @@ public class GameManager : Singleton<GameManager>
 
     public void GainMoney(int amount)
     {
-        m_MainUI.Coin += amount;
+        m_MainUI.Coin += (int)(amount * (1 + StaticData.OverallMoneyIntensify));
     }
 
     public void GainDraw(int amount)
@@ -375,6 +366,15 @@ public class GameManager : Singleton<GameManager>
         m_BluePrintShopUI.GetARandomBluePrintToPocket(m_FuncUI.PlayerLevel);
     }
 
+    public void BuyBluePrint(BluePrintGrid grid, int cost)
+    {
+        if (ConsumeMoney(cost))
+        {
+            m_FuncUI.LuckProgress++;
+            m_BluePrintShopUI.MoveBluePrintToPocket(grid);
+        }
+    }
+
     public void ShowGuideVideo(int index)
     {
         m_GuideVideo.Show();
@@ -389,17 +389,7 @@ public class GameManager : Singleton<GameManager>
 
     public void BuyOneGround()
     {
-        if (StaticData.GetNodeWalkable(BoardSystem.SelectingTile))
-        {
-            ShowMessage("此处已经有地基");
-            return;
-        }
-        if (ConsumeMoney(m_BoardSystem.BuyOneGroundMoney))
-        {
-            m_BoardSystem.BuyOneEmptyTile();
-            Sound.Instance.PlayEffect("Sound_ConfirmShape");
-            m_BuyGroundTips.Hide();
-        }
+        m_BoardSystem.BuyOneEmptyTile();
     }
 
     #endregion
@@ -423,7 +413,7 @@ public class GameManager : Singleton<GameManager>
 
     public void ShowBuyGroundTips()
     {
-        m_BuyGroundTips.ReadInfo(m_BoardSystem.BuyOneGroundMoney);
+        m_BuyGroundTips.ReadInfo(StaticData.FreeGroundTileCount > 0 ? 0 : m_BoardSystem.BuyOneGroundMoney);
         m_TurretTips.Hide();
         m_TrapTips.Hide();
         m_BuyGroundTips.Show();
@@ -465,5 +455,21 @@ public class GameManager : Singleton<GameManager>
         m_BuyGroundTips.Hide();
     }
 
+    #endregion
+
+    #region 待加入功能
+    public void GetPerfectElement(int count)
+    {
+        StaticData.PerfectElementCount += count;
+        m_BluePrintShopUI.SetPerfectElementCount(StaticData.PerfectElementCount);
+    }
+
+    public void CheckDetectSkill()
+    {
+        foreach (var turret in compositeTurrets.behaviors)
+        {
+            ((StrategyComposite)(((TurretContent)turret).Strategy)).LandedTurretSkill();
+        }
+    }
     #endregion
 }

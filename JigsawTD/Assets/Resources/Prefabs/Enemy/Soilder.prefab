@@ -59,13 +59,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
-  exlposionPrefab: {fileID: 4814509631623709245, guid: cde09d379e3e93f46afc53b515cc5441, type: 3}
-  CurrentTile: {fileID: 0}
   model: {fileID: 7619665209501119904}
   CurrentPoint:
     PathPos: {x: 0, y: 0}
     PathDirection: 0
     ExitPoint: {x: 0, y: 0}
+  IsBoss: 0
+  exlposionPrefab: {fileID: 4814509631623709245, guid: cde09d379e3e93f46afc53b515cc5441, type: 3}
+  CurrentTrap: {fileID: 0}
   initialSpeed: 0
 --- !u!95 &4799993665092760583
 Animator:
@@ -217,7 +218,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.25
+  m_Radius: 0.3
 --- !u!114 &6941142978531091582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,7 +231,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b287204cbbc96b64ea356ded954df546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 496477690780185357}
 --- !u!50 &236055208716200946
 Rigidbody2D:
   serializedVersion: 4

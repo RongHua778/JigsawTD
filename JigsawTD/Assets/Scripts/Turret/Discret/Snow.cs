@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Snow : TurretContent
 {
-    public override void OnSpawn()
+    public override void InitializeTurret()
     {
-        base.OnSpawn();
-        _rotSpeed = 0f;
+        base.InitializeTurret();
+        Strategy.RotSpeed = 0;
         CheckAngle = 45f;
     }
 

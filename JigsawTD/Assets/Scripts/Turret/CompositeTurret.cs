@@ -9,11 +9,21 @@ public class CompositeTurret : TurretContent
 
     public Blueprint CompositeBluePrint;
 
+    public override bool GameUpdate()
+    {
+        foreach (var skill in Strategy.TurretSkills)
+        {
+            if (skill.Duration > 0)
+                skill.Tick(Time.deltaTime);
+        }
+        return base.GameUpdate();
+    }
+
 
     public override void ContentLanded()
     {
-        base.ContentLanded();
         GameManager.Instance.compositeTurrets.Add(this);
+        base.ContentLanded();
     }
     public override void OnUnSpawn()
     {

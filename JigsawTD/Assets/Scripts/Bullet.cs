@@ -33,20 +33,21 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     private float sputteringRange;
     public float SputteringRange { get => sputteringRange; set => sputteringRange = value; }
 
-    private float sputteringRate;
-    public float SputteringPercentage { get => sputteringRate; set => sputteringRate = value; }
+    private float sputteringPercentage;
+    public float SputteringPercentage { get => sputteringPercentage; set => sputteringPercentage = value; }
 
     private float criticalRate;
     public float CriticalRate { get => criticalRate; set => criticalRate = value; }
 
-    private float criticalPercentage;//溢出的暴击率转为暴击伤害
-    public float CriticalPercentage { get => criticalPercentage + Mathf.Max(0, CriticalRate - 1); set => criticalPercentage = value; }
+    private float criticalPercentage;
+    public float CriticalPercentage { get => criticalPercentage; set => criticalPercentage = value; }
     private float slowRate;
     public float SlowRate { get => slowRate; set => slowRate = value; }
     public ParticalControl SputteringEffect { get => sputteringEffect; set => sputteringEffect = value; }
 
     //用来判断是否击中护甲，如果击中则子弹被挡掉
     public bool hit;
+    public bool isCritical;
     private void Awake()
     {
         trailRenderer = this.GetComponent<TrailRenderer>();
@@ -99,11 +100,6 @@ public abstract class Bullet : ReusableObject, IGameBehavior
 
     protected void TriggerHitEffect(Enemy target)
     {
-        if (SlowRate > 0)
-        {
-            BuffInfo info = new BuffInfo(EnemyBuffName.SlowDown, SlowRate, 2f);
-            target.Buffable.AddBuff(info);
-        }
         if (turretEffects.Count > 0)
         {
             foreach (TurretSkill effect in turretEffects)
@@ -111,6 +107,11 @@ public abstract class Bullet : ReusableObject, IGameBehavior
                 effect.bullet = this;
                 effect.Hit(target);
             }
+        }
+        if (SlowRate > 0 && !target.IsDie)//技能可能会修改slowrate
+        {
+            BuffInfo info = new BuffInfo(EnemyBuffName.SlowDown, SlowRate, 2f);
+            target.Buffable.AddBuff(info);
         }
     }
 
@@ -142,7 +143,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         transform.position = Vector2.MoveTowards(transform.position,
             pos, bulletSpeed * Time.deltaTime);
         float distanceToTarget = ((Vector2)transform.position - pos).magnitude;
-        if ((distanceToTarget < minDistanceToDealDamage)&&!hit)
+        if ((distanceToTarget < minDistanceToDealDamage))
         {
             TriggerDamage();
             ReclaimBullet();
@@ -164,20 +165,22 @@ public abstract class Bullet : ReusableObject, IGameBehavior
 
     public virtual void TriggerDamage()
     {
-        //if ( HitEffect!= null)
-        //{
-        //    ParticalControl effect = ObjectPool.Instance.Spawn(HitEffect) as ParticalControl;
-        //    effect.transform.position = transform.position;
-        //    effect.PlayEffect();
-        //}
+
     }
     public void DealRealDamage(IDamageable damageable, float damage)
     {
-        bool isCritical = UnityEngine.Random.value <= CriticalRate; ;
-        float finalDamage = isCritical ? damage * CriticalPercentage : damage;
         float realDamage;
-        damageable.ApplyDamage(finalDamage, out realDamage, isCritical);
+        damageable.ApplyDamage(damage, out realDamage, isCritical);
         turretParent.Strategy.DamageAnalysis += (int)realDamage;
     }
 
+    public void EnemyDamageProcess(Enemy target,bool isSputtering=false)
+    {
+        isCritical = UnityEngine.Random.value <= CriticalRate;
+        TriggerHitEffect(target);
+        float finalDamage = isCritical ? Damage * CriticalPercentage : Damage;
+        if (isSputtering)
+            finalDamage *= SputteringPercentage;
+        DealRealDamage(target, finalDamage);
+    }
 }

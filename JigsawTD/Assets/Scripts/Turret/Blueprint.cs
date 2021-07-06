@@ -48,20 +48,28 @@ public class Blueprint
     public void BuildBluePrint()
     {
         //建造合成塔，移除所有配方
-        foreach(Composition com in Compositions)
+        foreach (Composition com in Compositions)
         {
-            ObjectPool.Instance.UnSpawn(com.turretTile);
+            if (!com.isPerfect)
+                ObjectPool.Instance.UnSpawn(com.turretTile);//同时移除该防御塔的光环效果
+            else
+                GameManager.Instance.GetPerfectElement(-1);
         }
+
+        //所有防御塔重新检查侦测效果
+        GameManager.Instance.CheckDetectSkill();
+
     }
 
     //检测每个配方是否存在在场上的方法
     public void CheckElement()
     {
         List<IGameBehavior> temp = GameManager.Instance.elementTurrets.behaviors.ToList();
-        
+        int perfectCount = StaticData.PerfectElementCount;
         for (int i = 0; i < compositions.Count; i++)
         {
             compositions[i].obtained = false;
+            compositions[i].isPerfect = false;
             for (int j = 0; j < temp.Count; j++)
             {
                 ElementTurret turret = temp[j] as ElementTurret;
@@ -75,8 +83,15 @@ public class Blueprint
                     break;
                 }
             }
+            if (perfectCount > 0 && !compositions[i].obtained)
+            {
+                compositions[i].obtained = true;
+                compositions[i].isPerfect = true;
+                perfectCount--;
+            }
         }
     }
+
 
     //检查是否已满足可以建造的配方条件
     public bool CheckBuildable()

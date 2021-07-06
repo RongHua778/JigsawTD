@@ -146,6 +146,7 @@ public class BoardSystem : IGameSystem
         GenerateTrapTiles(sizeOffset, _startSize);
         Physics2D.SyncTransforms();
         SeekPath();
+        ShowPath();
     }
 
     private void GenerateStartTiles(Vector2Int size, Vector2Int offset)
@@ -197,10 +198,7 @@ public class BoardSystem : IGameSystem
                 return;
             }
             path = p;
-            GetPathPoints();
             ShowPath();
-            //GetPathTiles();
-            //ShowPath();
             //Debug.Log("Find Path!");
         }
         else
@@ -229,6 +227,7 @@ public class BoardSystem : IGameSystem
 
     private void ShowPath()
     {
+        GetPathPoints();
         HidePath();
         for (int i = 0; i < shortestPoints.Count - 1; i++)
         {
@@ -298,21 +297,34 @@ public class BoardSystem : IGameSystem
 
     public void BuyOneEmptyTile()
     {
+        if (StaticData.GetNodeWalkable(SelectingTile))
+        {
+            GameManager.Instance.ShowMessage("此处已经有地板");
+            return;
+        }
+        if (StaticData.FreeGroundTileCount > 0)
+        {
+            StaticData.FreeGroundTileCount--;
+        }
+        else if (!GameManager.Instance.ConsumeMoney(BuyOneGroundMoney))
+        {
+            return;
+        }
         GameTile tile = ConstructHelper.GetNormalTile(GameTileContentType.Empty);
         tile.transform.position = SelectingTile.transform.position;
         tile.TileLanded();
-        BuyOneGroundMoney += 10;
         Physics2D.SyncTransforms();
-        SeekPath();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
+        if (DraggingShape.PickingShape != null)
+        {
+            DraggingShape.PickingShape.ShapeFindPath();//只有用这个才找的到路
+        }
+        else
         {
             SeekPath();
         }
+        GameManager.Instance.HideTips();
     }
+
     //待弃用方法0609
 
     //private void GetPathTiles()

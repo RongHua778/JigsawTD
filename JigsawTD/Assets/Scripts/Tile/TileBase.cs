@@ -21,7 +21,7 @@ public abstract class TileBase : ReusableObject
     public void SetContent(GameTileContent content)
     {
         content.transform.SetParent(this.transform);
-        content.transform.position = transform.position;
+        content.transform.position = transform.position + Vector3.forward * 0.01f;
         content.m_GameTile = this;
         Content = content;
     }

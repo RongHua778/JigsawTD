@@ -9352,7 +9352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
-  sputteringEffect: {fileID: 1772057373484183426, guid: 73f26e776ce20134cab14c0a32729188, type: 3}
+  sputteringEffect: {fileID: 3494240544614092349, guid: eb6cba38b10cbae4595d14d7b62081a8, type: 3}
   turretParent: {fileID: 0}
   hit: 0
 --- !u!58 &3623257848819073342

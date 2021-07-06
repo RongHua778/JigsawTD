@@ -129,9 +129,7 @@ public class MainUI : IUserInterface
     public void PrepareNextWave(EnemySequence sequence, int luckCoin)
     {
         CurrentWave++;
-
-        Coin += (int)((StaticData.Instance.BaseWaveIncome + StaticData.Instance.WaveMultiplyIncome * (CurrentWave - 1)) * (1 + luckCoin * 0.1f));
-
+        m_GameManager.GainMoney((int)((StaticData.Instance.BaseWaveIncome + StaticData.Instance.WaveMultiplyIncome * (CurrentWave - 1)) * (1 + luckCoin * 0.1f)));
         m_WaveInfoSetter.SetWaveInfo(sequence);
     }
 

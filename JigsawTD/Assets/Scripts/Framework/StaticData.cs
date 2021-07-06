@@ -13,6 +13,7 @@ public class StaticData : Singleton<StaticData>
     //public int Difficulty { get => difficulty; set => difficulty = value; }
 
     public static LayerMask PathLayer = 1 << 6 | 1 << 10;
+    public static string TrapMask = "Trap";
     public static string ConcreteTileMask = "ConcreteTile";
     public static string GroundTileMask = "GroundTile";
     public static string TempTileMask = "TempTile";
@@ -51,6 +52,12 @@ public class StaticData : Singleton<StaticData>
     public static int trapN = 15;
     public static int basicN = 25;
 
+    [Header("动态数据")]
+    public static int PerfectElementCount = 0;
+    public static float OverallMoneyIntensify = 0;
+    public static int FreeGroundTileCount = 0;
+
+
     [Header("ProbabilitySetting")]
     public float[] TileShapeChance = default;
     public int[] PlayerMaxHealth;
@@ -63,9 +70,9 @@ public class StaticData : Singleton<StaticData>
         }
     }
     //元素加成
-    public static float GoldAttackIntensify = 0.5f;
-    public static float WoodSpeedIntensify = 0.5f;
-    public static float WaterSlowIntensify = 0.5f;
+    public static float GoldAttackIntensify = 0.3f;
+    public static float WoodSpeedIntensify = 0.3f;
+    public static float WaterSlowIntensify = 0.3f;
     public static float FireCriticalIntensify = 0.25f;
     public static float DustSputteringIntensify = 0.3f;
 
@@ -84,11 +91,12 @@ public class StaticData : Singleton<StaticData>
         InitializeInfoDIC();
         //Difficulty = Game.Instance.Difficulty;
 
-        RedColor = new Color32(255, 110, 66,255);
+        RedColor = new Color32(255, 110, 66, 255);
         GreenColor = new Color32(66, 255, 100, 255);
         BlueColor = new Color32(66, 223, 255, 255);
         YellowColor = new Color32(255, 182, 66, 255);
         PurpleColor = new Color32(255, 100, 237, 255);
+
     }
 
     private void InitializeInfoDIC()
@@ -356,10 +364,10 @@ public class StaticData : Singleton<StaticData>
         switch (element)
         {
             case Element.Gold:
-                intensifyTxt += GoldAttackIntensify * 100 + "%攻击";
+                intensifyTxt += GoldAttackIntensify * 100 + "%基础攻击";
                 break;
             case Element.Wood:
-                intensifyTxt += WoodSpeedIntensify * 100 + "%攻速";
+                intensifyTxt += WoodSpeedIntensify * 100 + "%基础攻速";
                 break;
             case Element.Water:
                 intensifyTxt += WaterSlowIntensify + "减速";
@@ -368,7 +376,7 @@ public class StaticData : Singleton<StaticData>
                 intensifyTxt += FireCriticalIntensify * 100 + "%暴击率";
                 break;
             case Element.Dust:
-                intensifyTxt += FireCriticalIntensify + "溅射";
+                intensifyTxt += DustSputteringIntensify + "溅射";
                 break;
             default:
                 Debug.Log("错误的元素，无法配置加成");
@@ -401,10 +409,13 @@ public class StaticData : Singleton<StaticData>
             levelChances[i] = QualityChances[level - 1, i];
         }
         string text = "";
-        text += "\n  当前等级概率:\n";
+        text += "当前等级概率:\n";
         for (int x = 0; x < 5; x++)
         {
-            text += "  品质" + (x + 1).ToString() + ": " + levelChances[x] * 100 + "%\n";
+            if (x < 4)
+                text += "品质" + (x + 1).ToString() + ": " + levelChances[x] * 100 + "%\n";
+            else
+                text += "品质" + (x + 1).ToString() + ": " + levelChances[x] * 100 + "%";
         }
         return text;
     }
@@ -414,17 +425,19 @@ public class StaticData : Singleton<StaticData>
         string text =
             "\n1.当前回合没有抽取时，获得1点累积点。\n" +
             "2.连续不抽取时，会获得额外累积点。\n" +
-            "3.累积点每达到10点，获得1次额外抽取次数。\n";
+            "3.累积点每达到10点，获得1次额外抽取次数。";
         return text;
     }
-    public static string GetLuckyInfo(int luckCoin)
+    public static string GetLuckyInfo(int luckCoin, int luckProgress)
     {
         string text =
-           "\n1.当前回合没有抽取时，获得1枚幸运币。\n" +
-           "2.每个幸运币提高战斗金币收入10%。\n" +
-           "3.进行抽取后，幸运币清零。\n" +
-           "(当前收入增加" + "<color=cyan>" + luckCoin * 10 + "%" + "</color>)\n";
-           //"4.每购买3个配方，获得1枚幸运币。\n";
+           "1.当前回合没有抽取时，获得1枚幸运币。\n" +
+           "2.每个幸运币提高回合金币收入10%。\n" +
+           "3.抽取后，幸运币清零。\n" +
+           "4.每购买3个配方，获得1枚幸运币。\n" +
+           "(当前收入增加 " + "<color=cyan>" + luckCoin * 10 + "%" + "</color>)\n" +
+           "(已购买配方 " + "<color=cyan>" + luckProgress + "/3</color>)";
+        //"4.每购买3个配方，获得1枚幸运币。\n";
         return text;
     }
 

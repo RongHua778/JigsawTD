@@ -49,6 +49,7 @@ public class TurretAttribute : ContentAttribute
     public int totalLevel;
     public int elementNumber;
     public List<TurretSkillInfo> TurretEffects = new List<TurretSkillInfo>();
+    public List<ElementSkillInfo> ElementSkills = new List<ElementSkillInfo>();
     public List<TurretInfo> TurretLevels = new List<TurretInfo>();
 
 

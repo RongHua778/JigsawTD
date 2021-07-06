@@ -11,6 +11,8 @@ public class TrapContent : GameTileContent
     int damageAnalysis;
     public int DamageAnalysis { get => damageAnalysis; set => damageAnalysis = value; }
 
+    private List<BuffInfo> trapBuffs = new List<BuffInfo>();
+    public float TrapIntensify = 1;
 
     public override void ContentLanded()
     {
@@ -29,11 +31,12 @@ public class TrapContent : GameTileContent
     public override void OnContentPass(Enemy enemy)
     {
         base.OnContentPass(enemy);
+        trapBuffs = m_TrapAttribute.BuffInfos;
         if (m_TrapAttribute.BuffInfos.Count <= 0)
             return;
-        foreach (BuffInfo trap in m_TrapAttribute.BuffInfos)
+        foreach (BuffInfo trap in trapBuffs)
         {
-            enemy.Buffable.AddBuff(trap);
+            enemy.Buffable.AddBuff(trap, TrapIntensify);
         }
     }
 

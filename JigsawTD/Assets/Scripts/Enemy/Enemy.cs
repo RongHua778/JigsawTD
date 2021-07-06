@@ -5,6 +5,7 @@ using UnityEngine;
 
 public abstract class Enemy : PathFollower,IDamageable
 {
+    public bool IsBoss = false;
     [SerializeField] protected ReusableObject exlposionPrefab = default;
     protected AudioClip explosionClip;
     private Animator anim;
@@ -32,7 +33,7 @@ public abstract class Enemy : PathFollower,IDamageable
     public virtual float SpeedIntensify { get => speedIntensify + AffectHealerCount > 0 ? 0.4f : 0; set => speedIntensify = Mathf.Min(2, value); }
 
     public float initialSpeed;
-    public override float Speed { get => StunTime > 0 ? 0 : Mathf.Max(0.1f, (speed + SpeedIntensify) * (1 - (SlowRate + PathSlow) / (SlowRate + PathSlow + 1))); set => speed = value; }
+    public override float Speed { get => StunTime > 0 ? 0 : Mathf.Max(0.05f, (speed + SpeedIntensify) * (1 - (SlowRate + PathSlow) / (SlowRate + PathSlow + 1))); set => speed = value; }
 
     float slowRate;
     public float SlowRate

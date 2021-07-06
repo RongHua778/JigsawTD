@@ -33,14 +33,6 @@ public class BuffableEntity : MonoBehaviour
                 TimeBuffs.Remove(effects.Current);
             }
         }
-        //foreach (var effect in TimeBuffs.ToList())
-        //{
-        //    effect.Tick(Time.deltaTime);
-        //    if (effect.IsFinished)
-        //    {
-        //        TimeBuffs.Remove(effect);
-        //    }
-        //}
     }
 
     public void TileTick()
@@ -55,14 +47,14 @@ public class BuffableEntity : MonoBehaviour
         }
     }
 
-    public void AddBuff(BuffInfo buffInfo)
+    public void AddBuff(BuffInfo buffInfo, float intensify = 1)
     {
         EnemyBuff newBuff = EnemyBuffFactory.GetBuff((int)buffInfo.EnemyBuffName);
         if (newBuff.IsTimeBase)
         {
             if (!newBuff.IsStackable)
             {
-                foreach(var buff in TimeBuffs)
+                foreach (var buff in TimeBuffs)
                 {
                     if (buff.BuffName == newBuff.BuffName)
                     {
@@ -86,7 +78,7 @@ public class BuffableEntity : MonoBehaviour
             }
             TileBuffs.Add(newBuff);
         }
-        newBuff.ApplyBuff(Enemy, buffInfo.KeyValue, buffInfo.Duration);
+        newBuff.ApplyBuff(Enemy, buffInfo.KeyValue * intensify, buffInfo.Duration);
     }
 
     public void RemoveAllBuffs()
