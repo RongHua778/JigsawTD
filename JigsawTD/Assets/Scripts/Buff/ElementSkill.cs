@@ -525,13 +525,13 @@ public class DDASealedCannon : ElementSkill
 {
     public override List<int> Elements => new List<int> { 3, 3, 0 };
     public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
-    public override string SkillDescription => "尘封大炮：如果暴击率大于100%，则造成的伤害提高200%";
+    public override string SkillDescription => "尘封大炮：如果暴击率大于100%，则造成的伤害提高100%";
 
     public override void Hit(Enemy target)
     {
         if (bullet.CriticalRate > 1)
         {
-            bullet.Damage *= 3f;
+            bullet.Damage *= 2f;
         }
     }
 }
@@ -586,6 +586,73 @@ public class DDERemoteGuidence : ElementSkill
         if (bullet.GetTargetDistance() > 3f)
         {
             bullet.CriticalPercentage += 1f;
+        }
+    }
+
+}
+
+public class EEAPowerfulSputtering : ElementSkill
+{
+    public override List<int> Elements => new List<int> { 4, 4, 0 };
+    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
+    public override string SkillDescription => "强力溅射：攻击距离小于3的敌人时，溅射伤害提高50%";
+
+    public override void Shoot()
+    {
+        if (bullet.GetTargetDistance() < 3f)
+        {
+            bullet.SputteringPercentage += 0.5f;
+        }
+    }
+
+}
+public class EEBHeatingBarrel : ElementSkill
+{
+    public override List<int> Elements => new List<int> { 4, 4, 1 };
+    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
+    public override string SkillDescription => "加热炮管：每次攻击后提升0.1溅射范围，上限1.5";
+
+    float sputteringRangeIncreased;
+    public override void Shoot()
+    {
+        if (sputteringRangeIncreased < 1.5f)
+        {
+            sputteringRangeIncreased += 0.1f;
+            strategy.TurnFixSputteringRange += 0.1f;
+        }
+    }
+
+    public override void EndTurn()
+    {
+        sputteringRangeIncreased = 0;
+    }
+
+}
+
+public class EECConcretePouring : ElementSkill
+{
+    public override List<int> Elements => new List<int> { 4, 4, 2 };
+    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
+    public override string SkillDescription => "水泥倾泻：合成后，使下三次购买空白地板价格为0";
+
+    public override void Composite()
+    {
+        StaticData.FreeGroundTileCount += 3;
+    }
+
+}
+
+public class EEDWantonBombing : ElementSkill
+{
+    public override List<int> Elements => new List<int> { 4, 4, 3 };
+    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
+    public override string SkillDescription => "狂轰滥炸：暴击造成的溅射伤害提高50%";
+
+    public override void Hit(Enemy target)
+    {
+        if (bullet.isCritical)
+        {
+            bullet.SputteringPercentage *= 1.5f;
         }
     }
 

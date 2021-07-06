@@ -382,17 +382,7 @@ public class GameManager : Singleton<GameManager>
 
     public void BuyOneGround()
     {
-        if (StaticData.GetNodeWalkable(BoardSystem.SelectingTile))
-        {
-            ShowMessage("此处已经有地基");
-            return;
-        }
-        if (ConsumeMoney(m_BoardSystem.BuyOneGroundMoney))
-        {
-            m_BoardSystem.BuyOneEmptyTile();
-            Sound.Instance.PlayEffect("Sound_ConfirmShape");
-            m_BuyGroundTips.Hide();
-        }
+        m_BoardSystem.BuyOneEmptyTile();
     }
 
     #endregion
@@ -416,7 +406,7 @@ public class GameManager : Singleton<GameManager>
 
     public void ShowBuyGroundTips()
     {
-        m_BuyGroundTips.ReadInfo(m_BoardSystem.BuyOneGroundMoney);
+        m_BuyGroundTips.ReadInfo(StaticData.FreeGroundTileCount > 0 ? 0 : m_BoardSystem.BuyOneGroundMoney);
         m_TurretTips.Hide();
         m_TrapTips.Hide();
         m_BuyGroundTips.Show();

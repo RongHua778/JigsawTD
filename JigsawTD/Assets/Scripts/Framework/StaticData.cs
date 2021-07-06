@@ -55,6 +55,8 @@ public class StaticData : Singleton<StaticData>
     [Header("动态数据")]
     public static int PerfectElementCount = 0;
     public static float OverallMoneyIntensify = 0;
+    public static int FreeGroundTileCount = 0;
+
 
     [Header("ProbabilitySetting")]
     public float[] TileShapeChance = default;
@@ -71,7 +73,7 @@ public class StaticData : Singleton<StaticData>
     public static float GoldAttackIntensify = 0.3f;
     public static float WoodSpeedIntensify = 0.3f;
     public static float WaterSlowIntensify = 0.3f;
-    public static float FireCriticalIntensify = 0.51f;
+    public static float FireCriticalIntensify = 0.25f;
     public static float DustSputteringIntensify = 0.3f;
 
     public static Color32 RedColor;
@@ -95,7 +97,6 @@ public class StaticData : Singleton<StaticData>
         YellowColor = new Color32(255, 182, 66, 255);
         PurpleColor = new Color32(255, 100, 237, 255);
 
-        GameManager.Instance.GetPerfectElement(1);
     }
 
     private void InitializeInfoDIC()

@@ -297,10 +297,22 @@ public class BoardSystem : IGameSystem
 
     public void BuyOneEmptyTile()
     {
+        if (StaticData.GetNodeWalkable(SelectingTile))
+        {
+            GameManager.Instance.ShowMessage("此处已经有地板");
+            return;
+        }
+        if (StaticData.FreeGroundTileCount > 0)
+        {
+            StaticData.FreeGroundTileCount--;
+        }
+        else if (!GameManager.Instance.ConsumeMoney(BuyOneGroundMoney))
+        {
+            return;
+        }
         GameTile tile = ConstructHelper.GetNormalTile(GameTileContentType.Empty);
         tile.transform.position = SelectingTile.transform.position;
         tile.TileLanded();
-        BuyOneGroundMoney += 10;
         Physics2D.SyncTransforms();
         if (DraggingShape.PickingShape != null)
         {
@@ -310,6 +322,7 @@ public class BoardSystem : IGameSystem
         {
             SeekPath();
         }
+        GameManager.Instance.HideTips();
     }
 
     //待弃用方法0609
