@@ -112,13 +112,13 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         }
     }
 
-    protected void TriggerHitEffect(Enemy target)
+    protected void TriggerHitEffect(IDamageable target)
     {
         if (turretEffects.Count > 0)
         {
             foreach (TurretSkill effect in turretEffects)
             {
-                effect.Hit(target);
+                effect.Hit((Enemy)target);
             }
         }
         if (SlowRate > 0 && !target.IsDie)//技能可能会修改slowrate
@@ -132,7 +132,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     {
         if (!hit)
         {
-            if (Target != null && (Target.Enemy.IsDie || !Target.Enemy.gameObject.activeSelf))
+            if (Target != null && (Target.Enemy.IsDie || !Target.gameObject.activeSelf))
             {
                 TargetPos = Target.transform.position;
                 Target = null;
@@ -187,7 +187,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         turretParent.Strategy.DamageAnalysis += (int)realDamage;
     }
 
-    public void EnemyDamageProcess(Enemy target,bool isSputtering=false)
+    public void EnemyDamageProcess(IDamageable target,bool isSputtering=false)
     {
         TriggerHitEffect(target);
         float finalDamage = isCritical ? Damage * CriticalPercentage : Damage;
