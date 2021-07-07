@@ -8,7 +8,16 @@ public class FSMSystem
     private StateID CurrentStateID;
     private FSMState CurrentState;
 
-    public void Update(Aircraft agent)
+    public void Update(AirAttacker agent)
+    {
+        if (!agent.IsDie)
+        {
+            CurrentState.Act(agent);
+            CurrentState.Reason(agent);
+        }
+    }
+
+    public void Update(AirProtector agent)
     {
         if (!agent.IsDie)
         {

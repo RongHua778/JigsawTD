@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f15551aeacf41f047aeb71e1a4f8cfb4, type: 3}
   m_Name: nonEnemyFactory
   m_EditorClassIdentifier: 
-  aircraftPrefab: {fileID: 3014800429492534932, guid: 3f4b164b244241543ab8992a7aa77762, type: 3}
+  aircraftPrefab: {fileID: 3805183255559639336, guid: 3f4b164b244241543ab8992a7aa77762, type: 3}
+  strongerAircraftPrefab: {fileID: 2237003293897850926, guid: cdef39e3391986f4ca168e63dd7db616, type: 3}

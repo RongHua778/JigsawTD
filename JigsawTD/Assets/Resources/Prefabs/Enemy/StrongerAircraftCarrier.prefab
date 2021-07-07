@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4482347274792429065}
   - component: {fileID: 3616903904554418895}
   - component: {fileID: 1725995873351553041}
-  - component: {fileID: 6050365752319345184}
+  - component: {fileID: 8324898011576784853}
   m_Layer: 0
-  m_Name: AircraftCarrier
+  m_Name: StrongerAircraftCarrier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +65,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6050365752319345184
+--- !u!114 &8324898011576784853
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5799880304811824769}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fa3020261fe8ed4ab14d67c3acc784e, type: 3}
+  m_Script: {fileID: 11500000, guid: 0febd688a660aab469d20bf9032ba853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
@@ -84,10 +84,10 @@ MonoBehaviour:
     PathPos: {x: 0, y: 0}
     PathDirection: 0
     ExitPoint: {x: 0, y: 0}
-  IsBoss: 0
+  IsBoss: 1
   exlposionPrefab: {fileID: 4814509631623709245, guid: ce7784084ac4d8046831643b89f1e650, type: 3}
   initialSpeed: 0
-  armorIntensify: 35
+  armorIntensify: 20
 --- !u!1 &8360252054385358165
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,7 +194,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: 1633734841747217399, guid: 268b8018b7cb9f34cafa09f27ec0e24e, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.27494478, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

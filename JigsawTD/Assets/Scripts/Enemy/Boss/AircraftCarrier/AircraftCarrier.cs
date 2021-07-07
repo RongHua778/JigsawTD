@@ -4,17 +4,11 @@ using UnityEngine;
 
 public class AircraftCarrier : Enemy
 {
-    [SerializeField] float armorIntensify;
+    [SerializeField]protected float armorIntensify;
     float armor;
-    List<Aircraft> aircrafts=new List<Aircraft>();
+    protected List<Aircraft> aircrafts=new List<Aircraft>();
     public override EnemyType EnemyType => EnemyType.AircraftCarrier;
     public float Armor { get => armor; set => armor = value; }
-
-    public override void OnSpawn()
-    {
-        base.OnSpawn();
-
-    }
 
     public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify)
     {
@@ -24,7 +18,7 @@ public class AircraftCarrier : Enemy
         EnemySkills.Add(GameManager.Instance.SkillFactory.GetSkill(EnemySkill.Aircraft, this));
     }
 
-    public void AddAircraft(Aircraft a)
+    public virtual void AddAircraft(Aircraft a)
     {
         aircrafts.Add(a);
     }

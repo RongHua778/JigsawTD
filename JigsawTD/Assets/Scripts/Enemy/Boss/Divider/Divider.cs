@@ -11,6 +11,7 @@ public class Divider : Enemy
     public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify)
     {
         base.Initialize(attribute, pathOffset, healthBar, intensify);
+        EnemySprite.sprite = originalSprite;
         EnemySkills = new List<Skill>();
         EnemySkills.Add(GameManager.Instance.SkillFactory.GetSkill(EnemySkill.Divide, this));
     }

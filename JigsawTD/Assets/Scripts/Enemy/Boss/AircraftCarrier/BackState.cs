@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class BackState : FSMState
 {
-    float freezeRange = 10f;
     public BackState(FSMSystem fsm) : base(fsm)
     {
         StateID = StateID.Back;
     }
-    public override void Act(Aircraft agent)
+    public override void Act(AirAttacker agent)
     {
         agent.MovingToTarget(Destination.boss);
     }
-    public override void Reason(Aircraft agent)
+    public override void Reason(AirAttacker agent)
     {
         float distanceToTarget = ((Vector2)agent.transform.position - 
             (Vector2)agent.boss.transform.position).magnitude;

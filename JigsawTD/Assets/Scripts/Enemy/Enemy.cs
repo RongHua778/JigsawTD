@@ -105,7 +105,7 @@ public abstract class Enemy : PathFollower,IDamageable
 
     public virtual void Awake()
     {
-        Anim = this.GetComponent<Animator>();
+        Anim = GetComponent<Animator>();
         explosionClip = Resources.Load<AudioClip>("Music/Effects/Sound_EnemyExplosion");
     }
 

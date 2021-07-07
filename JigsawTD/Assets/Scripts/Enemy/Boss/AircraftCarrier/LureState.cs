@@ -10,11 +10,11 @@ public class LureState : FSMState
     {
         StateID = StateID.Lure;
     }
-    public override void Act(Aircraft agent)
+    public override void Act(AirAttacker agent)
     {
         agent.Lure();
     }
-    public override void Reason(Aircraft agent)
+    public override void Reason(AirAttacker agent)
     {
         waitingTime += Time.deltaTime;
         if (waitingTime > lureTime)

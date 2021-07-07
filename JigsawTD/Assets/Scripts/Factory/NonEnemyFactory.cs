@@ -6,10 +6,17 @@ using System.Linq;
 [CreateAssetMenu(menuName = "Factory/NonEnemyFactory", fileName = "nonEnemyFactory")]
 public class NonEnemyFactory : GameObjectFactory
 {
-    [SerializeField] Aircraft aircraftPrefab;
-    public Aircraft GetAircraft()
+    [SerializeField] AirAttacker aircraftPrefab;
+    [SerializeField] AirProtector strongerAircraftPrefab;
+    public AirAttacker GetAirAttacker()
     {
-        Aircraft aircraft = ObjectPool.Instance.Spawn(aircraftPrefab) as Aircraft;
+        AirAttacker aircraft = ObjectPool.Instance.Spawn(aircraftPrefab) as AirAttacker;
+        return (aircraft);
+    }
+
+    public AirProtector GetAirProtector()
+    {
+        AirProtector aircraft = ObjectPool.Instance.Spawn(strongerAircraftPrefab) as AirProtector;
         return (aircraft);
     }
 }

@@ -24,3 +24,5 @@ MonoBehaviour:
   aircraftBornCD: 4
   aircraftOneBorn: 3
   maxAircrafts: 999
+  strongerAircraftBornCD: 3
+  strongerAircraftOneBorn: 3
