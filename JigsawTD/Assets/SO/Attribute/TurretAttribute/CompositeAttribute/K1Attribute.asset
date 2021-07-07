@@ -24,10 +24,7 @@ MonoBehaviour:
   Rare: 3
   totalLevel: 14
   elementNumber: 3
-  TurretEffects:
-  - EffectName: 7
-    KeyValue: 1
-    EffectDescription: "\u52A0\u5927\u70AE\u5F39\uFF1A\u66B4\u51FB\u4F24\u5BB3\u63D0\u9AD8100%\uFF08\u9ED8\u8BA4\u4E3A150%\uFF09"
+  TurretSkill: 7
   TurretLevels:
   - AttackRange: 6
     ForbidRange: 0
