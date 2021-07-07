@@ -17,22 +17,23 @@ public class BlinkSkill : Skill
     public override void OnBorn()
     {
         base.OnBorn();
+        transfering = false;
         blink = 3;
     }
     //在enemy的gameupdate中调用
     public override void OnGameUpdating()
     {
-        if (enemy.CurrentHealth / enemy.MaxHealth < 0.75f && blink == 3)
+        if (enemy.CurrentHealth / enemy.MaxHealth < 0.75f && blink >= 3)
         {
             BlinkAfterAnim();
 
         }
-        else if (enemy.CurrentHealth / enemy.MaxHealth < 0.5f && blink == 2)
+        else if (enemy.CurrentHealth / enemy.MaxHealth < 0.5f && blink >= 2)
         {
             BlinkAfterAnim();
 
         }
-        else if (enemy.CurrentHealth / enemy.MaxHealth < 0.25f && blink == 1)
+        else if (enemy.CurrentHealth / enemy.MaxHealth < 0.25f && blink >= 1)
         {
             BlinkAfterAnim();
 
@@ -42,8 +43,7 @@ public class BlinkSkill : Skill
     void Blink()
     {
         AnimatorStateInfo stateinfo = enemy.Anim.GetCurrentAnimatorStateInfo(0);
-
-        if (stateinfo.normalizedTime >= 0.95f)
+        if (stateinfo.normalizedTime >= 0.98f&&stateinfo.normalizedTime<=1f)
         {
             enemy.PointIndex += 4;
 
@@ -84,6 +84,7 @@ public class BlinkSkill : Skill
             SpawnHoleOnPos(enemy.transform.position);
             SpawnHoleOnPos(targetPos);
             enemy.Anim.Play("Exit");
+            AnimatorStateInfo stateinfo = enemy.Anim.GetCurrentAnimatorStateInfo(0);
             enemy.StunTime += 0.5f;
             transfering = true;
         }

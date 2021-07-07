@@ -47,11 +47,11 @@ public class DivideSkill : Skill
         Divider enemy = ObjectPool.Instance.Spawn(attribute.Prefab) as Divider;
         HealthBar healthBar = ObjectPool.Instance.Spawn(ws.HealthBarPrefab) as HealthBar;
         DivideSkill ds=new DivideSkill(enemy, dividing-1,springs,DividerIntensify,dividerSprites);
+        enemy.Initialize(attribute, Random.Range(-0.3f, 0.3f), healthBar, intensify);
         enemy.EnemySkills = new List<Skill>();
         enemy.EnemySkills.Add(ds);
         enemy.EnemySprite.sprite = dividerSprites[dividing - 1];
         enemy.MaxHealth = this.enemy.MaxHealth * DividerIntensify;
-        enemy.Initialize(attribute, Random.Range(-0.3f, 0.3f), healthBar, intensify);
         enemy.EnemySprite.GetComponent<CircleCollider2D>().radius = 0.4f - 0.1f * (3 - dividing);
         enemy.SpawnOn(this.enemy.PointIndex, board.shortestPoints);
         GameManager.Instance.enemies.Add(enemy);
