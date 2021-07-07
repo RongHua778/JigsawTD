@@ -2,37 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TurretEffectName
+public enum TurretSkillName
 {
-    S001DistanceBaseDamage,
+    J1SkillDistanceBaseDamage,
     S002SlowBullet,
-    S003AttackIncreasePerShoot,
-    S004EnemyCountAttackIncrease,
-    S005MultiTarget,
-    S006SputteringRateIncrease,
-    S007SpeedIncreasePerShoot,
-    S008ChangeCriticalPercentage,
+    L1Skill,
+    F1Skill,
+    G1SkillMultiTarget,
+    HISkillCountBaseSputteringPercentage,
+    I1SkillSpeedIncreasedPerShoot,
+    K1SkillDoubleCriticalPercentage,
     S009CurrentHealthBaseDamage,
-    S010IncreaseSlowRate,
+    M1SkillDoubleSlowRate,
     S011IncreaseDamageBuff,
     S012SameTargetDamageIncrease,
 
-    AAA_HeavyCannon,
-    BBB_OverloadCartridge,
-    CCC_FrostCore
+    None
 }
-[System.Serializable]
-public class TurretSkillInfo
-{
-    public TurretEffectName EffectName;
-    public float KeyValue;
-    [TextArea(2, 3)]
-    public string EffectDescription;
-}
+
 
 public abstract class TurretSkill
 {
-    public abstract TurretEffectName EffectName { get; }
+    public virtual TurretSkillName EffectName { get; }
     public virtual string SkillDescription { get; set; }
     public StrategyBase strategy;
     public Bullet bullet;
@@ -56,6 +47,10 @@ public abstract class TurretSkill
     }
 
     public virtual void Shoot()
+    {
+
+    }
+    public virtual void PreHit()
     {
 
     }
@@ -95,32 +90,53 @@ public abstract class InitialSkill : TurretSkill
 {
 
 }
-public class SpeedIncreasePerShoot : InitialSkill
+public class I1SkillSpeedIncreasePerShoot : InitialSkill
 {
-    public override TurretEffectName EffectName => TurretEffectName.S007SpeedIncreasePerShoot;
+    public override TurretSkillName EffectName => TurretSkillName.I1SkillSpeedIncreasedPerShoot;
+    public override string SkillDescription => "轮转炮会向周围随机发射能量弹，每次发射都会提升0.1攻速，上限10";
     public override void Shoot()
     {
-        if (strategy.TurnSpeedIntensify > KeyValue * 4.95f)
+        if (strategy.TurnFixSpeed > 9.95f)
             return;
-        strategy.TurnSpeedIntensify += KeyValue;
+        strategy.TurnFixSpeed += 0.1f;
     }
 }
-public class DistanceBaseDamage : InitialSkill
+public class J1SkillDistanceBaseDamage : InitialSkill
 {
-    public override TurretEffectName EffectName => TurretEffectName.S001DistanceBaseDamage;
+    public override TurretSkillName EffectName => TurretSkillName.J1SkillDistanceBaseDamage;
+    public override string SkillDescription => "子弹会随着飞行距离提升30%/格的伤害，相邻每个空格都会使该效果提升10%";
+
+    float increaseRate;
+
+    public override void Detect()
+    {
+        increaseRate = 0f;
+        List<Vector2Int> points = StaticData.GetCirclePoints(1);
+        foreach (var point in points)
+        {
+            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
+            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.GroundTileMask));
+            if (hit != null)
+            {
+                increaseRate += 0.1f;
+            }
+        }
+    }
+
     public override void Shoot()
     {
-        bullet.Damage *= (1 + KeyValue * bullet.GetTargetDistance());
+        bullet.Damage *= (1 + (0.3f + increaseRate) * bullet.GetTargetDistance());
+        Debug.Log(increaseRate);
     }
 }
 
-public class MultiTarget : InitialSkill
+public class G1SkillMultiTarget : InitialSkill
 {
-    public override TurretEffectName EffectName => TurretEffectName.S005MultiTarget;
-
+    public override TurretSkillName EffectName => TurretSkillName.G1SkillMultiTarget;
+    public override string SkillDescription => "散射炮造成的伤害降低50%，但是可以额外攻击3个目标";
     public override void Build()
     {
-        strategy.BaseTargetCountIntensify += (int)KeyValue;
+        strategy.BaseTargetCountIntensify += 3;
     }
 
     public override void StartTurn()
@@ -129,31 +145,36 @@ public class MultiTarget : InitialSkill
     }
 
 }
-public class ChangeCriticalPercentage : InitialSkill
+public class K1SkillDoubleCriticalPercentage : InitialSkill
 {
-    public override TurretEffectName EffectName => TurretEffectName.S008ChangeCriticalPercentage;
+    public override TurretSkillName EffectName => TurretSkillName.K1SkillDoubleCriticalPercentage;
+    public override string SkillDescription => "使所有暴击伤害的提升效果翻倍";
 
-    public override void Build()
+    public override void PreHit()
     {
-        strategy.BaseCriticalPercentageIntensify += KeyValue;
+        float increase = bullet.CriticalPercentage - 1.5f;
+        bullet.CriticalPercentage += increase * 2f;
     }
 
 }
-public class SputteringRateIncrease : InitialSkill
+public class H1SkillCountBaseSputteringPercentage : InitialSkill
 {
-    public override TurretEffectName EffectName => TurretEffectName.S006SputteringRateIncrease;
+    public override TurretSkillName EffectName => TurretSkillName.HISkillCountBaseSputteringPercentage;
+    public override string SkillDescription => "迫击炮的炮弹每溅射到1个敌人，就会使溅射伤害提高30%";
 
-    public override void Build()
+
+    public override void PreHit()
     {
-        strategy.BaseSputteringPercentageIntensify += KeyValue;
+        bullet.SputteringPercentage += bullet.SputteredCount * 0.3f;
     }
+
 
 }
 
 
 public class SlowBullet : InitialSkill
 {
-    public override TurretEffectName EffectName => TurretEffectName.S002SlowBullet;
+    public override TurretSkillName EffectName => TurretSkillName.S002SlowBullet;
 
     private float duration = 2f;
     public override void Hit(Enemy target)
@@ -164,17 +185,18 @@ public class SlowBullet : InitialSkill
 
 }
 
-public class AttackIncreasePerShoot : InitialSkill
+public class L1Skill : InitialSkill
 {
-    public override TurretEffectName EffectName => TurretEffectName.S003AttackIncreasePerShoot;
+    public override TurretSkillName EffectName => TurretSkillName.L1Skill;
+    public override string SkillDescription => "疾射炮每次攻击都会提升自身10%的攻击力，最多叠加20次";
 
     private float intensifyIncreased = 0;
     public override void Shoot()
     {
-        if (intensifyIncreased > KeyValue * 19.5f)
+        if (intensifyIncreased > 1.95f)
             return;
-        intensifyIncreased += KeyValue;
-        strategy.TurnAttackIntensify += KeyValue;
+        intensifyIncreased += 0.1f;
+        strategy.TurnAttackIntensify += 0.1f;
     }
 
     public override void EndTurn()
@@ -183,17 +205,23 @@ public class AttackIncreasePerShoot : InitialSkill
     }
 }
 
-public class EnemyCountAttackIncrease : InitialSkill
+public class F1Skill : InitialSkill
 {
-    public override TurretEffectName EffectName => TurretEffectName.S004EnemyCountAttackIncrease;
+    public override TurretSkillName EffectName => TurretSkillName.F1Skill;
+    public override string SkillDescription => "组合炮的攻击范围内每有1个敌人，造成的伤害就提高10%";
 
+    public override void Shoot()
+    {
+        int count = strategy.m_Turret.targetList.Count;
+        bullet.Damage *= (1 + count * 0.1f);
+    }
 
 
 }
 
 public class CurrentHealthBaseDmage : InitialSkill
 {
-    public override TurretEffectName EffectName => TurretEffectName.S009CurrentHealthBaseDamage;
+    public override TurretSkillName EffectName => TurretSkillName.S009CurrentHealthBaseDamage;
 
     public override void Hit(Enemy target)
     {
@@ -205,13 +233,14 @@ public class CurrentHealthBaseDmage : InitialSkill
     }
 }
 
-public class IncreaseSlowRate : InitialSkill
+public class M1SkillDoubleSlowRate : InitialSkill
 {
-    public override TurretEffectName EffectName => TurretEffectName.S010IncreaseSlowRate;
+    public override TurretSkillName EffectName => TurretSkillName.M1SkillDoubleSlowRate;
 
+    public override string SkillDescription => "发射一个持续直线移动到防御塔或空白区域前停下的雪球，雪球会使敌人当前减速效果翻倍";
     public override void Hit(Enemy target)
     {
-        float increaseSlow = target.SlowRate * KeyValue;
+        float increaseSlow = target.SlowRate * 2f;
         BuffInfo info = new BuffInfo(EnemyBuffName.SlowDown, increaseSlow, 2f);
         target.Buffable.AddBuff(info);
     }
@@ -219,7 +248,7 @@ public class IncreaseSlowRate : InitialSkill
 
 public class IncreaseDamageBuff : InitialSkill
 {
-    public override TurretEffectName EffectName => TurretEffectName.S011IncreaseDamageBuff;
+    public override TurretSkillName EffectName => TurretSkillName.S011IncreaseDamageBuff;
 
     public override void Hit(Enemy target)
     {
@@ -230,7 +259,7 @@ public class IncreaseDamageBuff : InitialSkill
 
 public class SameTargetDamageIncrease : InitialSkill
 {
-    public override TurretEffectName EffectName => TurretEffectName.S012SameTargetDamageIncrease;
+    public override TurretSkillName EffectName => TurretSkillName.S012SameTargetDamageIncrease;
     public float IncreaseDamage;
     public Enemy LastTarget;
     private float maxDamageIncrease = 500;

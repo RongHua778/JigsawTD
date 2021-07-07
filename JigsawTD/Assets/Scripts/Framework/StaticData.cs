@@ -385,18 +385,14 @@ public class StaticData : Singleton<StaticData>
         return intensifyTxt;
     }
 
-    public static string GetTurretDes(TurretAttribute attribute, int quality)
+    public static string GetTurretDes(TurretAttribute attribute, StrategyBase strategy)
     {
         string finalDes = "";
         if (attribute.Description != "")
             finalDes += attribute.Description + "\n";
-        if (attribute.TurretEffects.Count > 0)
+        if (strategy.TurretSkill != null)
         {
-            foreach (TurretSkillInfo effect in attribute.TurretEffects)
-            {
-                finalDes += effect.EffectDescription;
-                finalDes += "\n";
-            }
+            finalDes += strategy.TurretSkill.SkillDescription + "\n";
         }
         return finalDes;
     }

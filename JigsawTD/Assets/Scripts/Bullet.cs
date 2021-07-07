@@ -48,6 +48,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     //用来判断是否击中护甲，如果击中则子弹被挡掉
     public bool hit;
     public bool isCritical;
+    public int SputteredCount;
     private void Awake()
     {
         trailRenderer = this.GetComponent<TrailRenderer>();
@@ -57,13 +58,15 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     {
         base.OnSpawn();
         GameManager.Instance.nonEnemies.Add(this);
-        hit = false;
     }
 
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
         transform.localScale = initScale;
+        SputteredCount = 0;
+        isCritical = false;
+        hit = false;
     }
 
     public virtual void Initialize(TurretContent turret, TargetPoint target = null, Vector2? pos = null)
@@ -82,7 +85,6 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         this.turretEffects = turret.Strategy.TurretSkills;
         this.SlowRate = turret.Strategy.FinalSlowRate;
         this.SputteringPercentage = turret.Strategy.FinalSputteringPercentage;
-
         TriggerShootEffect();
     }
 
@@ -98,13 +100,24 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         }
     }
 
+    protected void TriggerPreHitEffect()
+    {
+        isCritical = UnityEngine.Random.value <= CriticalRate;//在命中敌人前判断是否暴击
+        if (turretEffects.Count > 0)
+        {
+            foreach (TurretSkill effect in turretEffects)
+            {
+                effect.PreHit();
+            }
+        }
+    }
+
     protected void TriggerHitEffect(IDamageable target)
     {
         if (turretEffects.Count > 0)
         {
             foreach (TurretSkill effect in turretEffects)
             {
-                effect.bullet = this;
                 effect.Hit((Enemy)target);
             }
         }
@@ -119,7 +132,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     {
         if (!hit)
         {
-            if (Target != null && (Target.Enemy.IsDie))// || !Target.Enemy.gameObject.activeSelf))
+            if (Target != null && (Target.Enemy.IsDie || !Target.gameObject.activeSelf))
             {
                 TargetPos = Target.transform.position;
                 Target = null;
@@ -176,11 +189,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
 
     public void EnemyDamageProcess(IDamageable target,bool isSputtering=false)
     {
-        isCritical = UnityEngine.Random.value <= CriticalRate;
-        if (target.IsEnemy)
-        {
-            TriggerHitEffect(target);
-        }
+        TriggerHitEffect(target);
         float finalDamage = isCritical ? Damage * CriticalPercentage : Damage;
         if (isSputtering)
             finalDamage *= SputteringPercentage;

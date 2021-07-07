@@ -28,6 +28,8 @@ public class TargetBullet : Bullet
         if (SputteringRange > 0)
         {
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, SputteringRange, enemyLayerMask);
+            SputteredCount = hits.Length;
+            TriggerPreHitEffect();
             for (int i = 0; i < hits.Length; i++)
             {
                 TargetPoint target = hits[i].GetComponent<TargetPoint>();
@@ -49,6 +51,8 @@ public class TargetBullet : Bullet
         {
             if (Target == null)
                 return;
+            SputteredCount = 0;
+            TriggerPreHitEffect();
             EnemyDamageProcess(Target.Enemy);
         }
 

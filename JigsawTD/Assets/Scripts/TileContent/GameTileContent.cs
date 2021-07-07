@@ -18,7 +18,11 @@ public abstract class GameTileContent : ReusableObject
 
     public virtual void ContentLanded()//该content放在地上时触发
     {
-        m_GameTile.tag = "UnDropablePoint";//EMPTY会改写此方法
+        Collider2D col = StaticData.RaycastCollider(transform.position, LayerMask.GetMask(StaticData.GroundTileMask));
+        if (col != null)
+        {
+            col.GetComponent<GroundTile>().IsLanded = false;
+        }
     }
 
     public virtual void OnContentSelected(bool value)
