@@ -9,6 +9,7 @@ public class EmptyContent : GameTileContent
 
     public override void ContentLanded()
     {
+        base.ContentLanded();
         Collider2D col = StaticData.RaycastCollider(transform.position, LayerMask.GetMask(StaticData.ConcreteTileMask));
         ContentLandedCheck(col);
     }

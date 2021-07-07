@@ -19,15 +19,12 @@ MonoBehaviour:
   RangeType: 0
   element: 0
   Bullet: {fileID: -5451000839793556455, guid: 898695e6a84f19b4381f2e5e29e0280c, type: 3}
-  BulletSpeed: 1
+  BulletSpeed: 0.8
   ShootSound: {fileID: 8300000, guid: 4f7538d155d5687479b2932c5349bdf2, type: 3}
   Rare: 2
   totalLevel: 9
   elementNumber: 3
-  TurretEffects:
-  - EffectName: 6
-    KeyValue: 0.1
-    EffectDescription: "\u6781\u901F\u8FC7\u8F7D\uFF1A\u6BCF\u6B21\u653B\u51FB\u540E\u63D0\u534710%\u653B\u901F\uFF0C\u4E0A\u9650500%"
+  TurretSkill: 6
   TurretLevels:
   - AttackRange: 1
     ForbidRange: 0

@@ -7,6 +7,6 @@ public class BuyGroundTips : TileTips
     public void ReadInfo(int cost)
     {
         Name.text = cost.ToString();
-        Description.text = "购买一块空白地板";
+        Description.text = "购买一块基础地板";
     }
 }

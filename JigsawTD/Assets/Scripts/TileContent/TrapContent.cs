@@ -17,6 +17,7 @@ public class TrapContent : GameTileContent
     public override void ContentLanded()
     {
         base.ContentLanded();
+        m_GameTile.tag = "UnDropablePoint";
         StaticData.SetNodeWalkable(m_GameTile, true);
     }
 
