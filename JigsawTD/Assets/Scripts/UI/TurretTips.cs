@@ -126,8 +126,7 @@ public class TurretTips : TileTips
         }
         this.RangeTypeValue.text = rangeTypeTxt;
         //…Ë÷√√Ë ˆŒƒ∞∏
-        Description.text = StaticData.GetTurretDes(m_Strategy.m_Att, m_Strategy.Quality);
-        //StaticData.GetTurretDes(m_Strategy.m_Att, m_Strategy.Quality);
+        Description.text = StaticData.GetTurretDes(m_Strategy.m_Att, m_Strategy);
     }
 
     private void UpdateInfo()

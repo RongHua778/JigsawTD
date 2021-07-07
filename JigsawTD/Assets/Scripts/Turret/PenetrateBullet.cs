@@ -24,6 +24,8 @@ public class PenetrateBullet : Bullet
     {
         if (collision.GetComponent<TargetPoint>())
         {
+            SputteredCount = 0;
+            TriggerPreHitEffect();
             Enemy enemy = collision.GetComponent<TargetPoint>().Enemy;
             EnemyDamageProcess(enemy);
 
@@ -43,6 +45,8 @@ public class PenetrateBullet : Bullet
             effect.transform.localScale = Vector3.one * SputteringRange * 2;
             effect.PlayEffect();
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, SputteringRange, enemyLayerMask);
+            SputteredCount = hits.Length;
+            TriggerPreHitEffect();
             foreach (Collider2D hit in hits)
             {
                 TargetPoint target = hit.GetComponent<TargetPoint>();

@@ -41,7 +41,7 @@ public class BluePrintTips : TileTips
 
         elementConstruct.SetElements(grid.BluePrint.ComStrategy);
         //…Ë÷√√Ë ˆŒƒ∞∏
-        Description.text = StaticData.GetTurretDes(attribute, 1);
+        Description.text = StaticData.GetTurretDes(attribute, grid.BluePrint.ComStrategy);
     }
 
     private void SetRangeType(TurretAttribute attribute)

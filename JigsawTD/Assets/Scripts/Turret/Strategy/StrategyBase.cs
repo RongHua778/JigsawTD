@@ -147,9 +147,7 @@ public abstract class StrategyBase
     public float TurnSlowRateIntensify { get => turnSlowRateIntensify; set => turnSlowRateIntensify = value; }
     #endregion
 
-    protected List<TurretSkillInfo> TurretSkillInfos { get; set; }
-    protected List<ElementSkillInfo> ElementSkillInfos { get; set; }
-
+    public TurretSkill TurretSkill { get; set; }
     public List<TurretSkill> TurretSkills = new List<TurretSkill>();
 
 

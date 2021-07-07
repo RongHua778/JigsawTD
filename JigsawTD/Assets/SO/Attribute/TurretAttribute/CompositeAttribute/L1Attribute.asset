@@ -24,14 +24,11 @@ MonoBehaviour:
   Rare: 1
   totalLevel: 3
   elementNumber: 3
-  TurretEffects:
-  - EffectName: 11
-    KeyValue: 10
-    EffectDescription: "\u80FD\u91CF\u805A\u7126\uFF1A\u653B\u51FB\u540C\u4E00\u4E2A\u76EE\u6807\u65F6\uFF0C\u6BCF\u6B21\u653B\u51FB\u63D0\u9AD8\u4F24\u5BB310\u70B9\uFF0C\u6700\u591A\u63D0\u9AD8500."
+  TurretSkill: 2
   TurretLevels:
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 30
+    AttackDamage: 50
     AttackSpeed: 1
     SputteringRange: 0
     CriticalRate: 0
@@ -41,8 +38,8 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.19}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 50
-    AttackSpeed: 1.3
+    AttackDamage: 80
+    AttackSpeed: 1
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
@@ -51,8 +48,8 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.24}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 80
-    AttackSpeed: 1.6
+    AttackDamage: 120
+    AttackSpeed: 1
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0

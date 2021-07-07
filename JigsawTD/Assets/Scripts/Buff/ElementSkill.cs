@@ -15,7 +15,6 @@ public abstract class ElementSkill : TurretSkill
 public class AAAHeavyCannon : ElementSkill
 {
     public override List<int> Elements => new List<int> { 0, 0, 0 };
-    public override TurretEffectName EffectName => TurretEffectName.AAA_HeavyCannon;
     public override string SkillDescription => "沉重炮口：炮塔转速大幅降低，所有基础攻击力提升效果翻倍";
     public override void Build()
     {
@@ -27,11 +26,10 @@ public class AAAHeavyCannon : ElementSkill
 public class BBBOverloadCartridge : ElementSkill
 {
     public override List<int> Elements => new List<int> { 1, 1, 1 };
-    public override TurretEffectName EffectName => TurretEffectName.BBB_OverloadCartridge;
-    public override string SkillDescription => "过载弹夹：每回合开始前8秒，攻速提升150%";
+    public override string SkillDescription => "过载弹夹：每回合开始前10秒，攻速提升150%";
     public override void StartTurn()
     {
-        Duration += 8;
+        Duration += 10;
         strategy.TurnSpeedIntensify *= 2.5f;
     }
 
@@ -50,7 +48,6 @@ public class BBBOverloadCartridge : ElementSkill
 public class CCCFrostCore : ElementSkill
 {
     public override List<int> Elements => new List<int> { 2, 2, 2 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "霜冻核心：合成后，获得1个万能元素。";
 
     public override void Composite()
@@ -63,19 +60,17 @@ public class CCCFrostCore : ElementSkill
 public class DDDRestlessGunpowder : ElementSkill
 {
     public override List<int> Elements => new List<int> { 3, 3, 3 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "躁动火药：暴击伤害增加-100%到300%的随机浮动";
 
     public override void Shoot()
     {
-        bullet.CriticalPercentage += Random.Range(-1, 3);
+        bullet.CriticalPercentage += Random.Range(-1f, 3f);
     }
 }
 
 public class EEENuclearShell : ElementSkill
 {
     public override List<int> Elements => new List<int> { 4, 4, 4 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "核能炮弹：溅射范围随子弹飞行距离提升0.3/格";
 
     public override void Shoot()
@@ -87,7 +82,6 @@ public class EEENuclearShell : ElementSkill
 public class AABChargedBase : ElementSkill
 {
     public override List<int> Elements => new List<int> { 0, 0, 1 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "充能基座：战斗开始前15秒，攻击力提升50%";
 
     public override void StartTurn()
@@ -110,25 +104,21 @@ public class AABChargedBase : ElementSkill
 public class AACColdBullet : ElementSkill
 {
     public override List<int> Elements => new List<int> { 0, 0, 2 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
-    public override string SkillDescription => "冷却子弹：敌人每有0.1减速就造成额外5%伤害";
+    public override string SkillDescription => "冷却子弹：子弹每造成0.1减速就提高10%额外伤害";
 
-    public override void Hit(Enemy target)
+    public override void PreHit()
     {
-        float increaseDamage = target.SlowRate * 0.5f;
-        bullet.Damage *= (1 + increaseDamage);
-        Debug.Log("coldbulletdamage=" + bullet.Damage);
+        bullet.Damage *= (1 + bullet.SlowRate);
     }
 }
 
 public class AADMetalBullet : ElementSkill
 {
     public override List<int> Elements => new List<int> { 0, 0, 3 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "合金子弹：每次暴击都会提升本回合攻击力10%，最多提高200%";
 
     private float attackIncreased;
-    public override void Hit(Enemy target)
+    public override void PreHit()
     {
         if (bullet.isCritical)
         {
@@ -148,7 +138,6 @@ public class AADMetalBullet : ElementSkill
 public class AAEDetectRadar : ElementSkill
 {
     public override List<int> Elements => new List<int> { 0, 0, 4 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "侦测雷达：相邻每有1个防御塔，就提升20%基础攻击力";
 
     private int adjacentTurretCount = 0;
@@ -171,7 +160,6 @@ public class AAEDetectRadar : ElementSkill
 public class ABCReinforceBase : ElementSkill
 {
     public override List<int> Elements => new List<int> { 0, 1, 2 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "加固底座：防御塔升级费用-50%";
 
     public override void Build()
@@ -183,7 +171,6 @@ public class ABCReinforceBase : ElementSkill
 public class ABDInvestment : ElementSkill
 {
     public override List<int> Elements => new List<int> { 0, 1, 3 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "量化投资：获得的金币提高10%";
 
     public override void Composite()
@@ -195,7 +182,6 @@ public class ABDInvestment : ElementSkill
 public class ABEResourcesAllocation : ElementSkill
 {
     public override List<int> Elements => new List<int> { 0, 1, 4 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "资源配置：每5回合，获得1次额外抽取次数。";
 
     private int turn;
@@ -213,7 +199,6 @@ public class ABEResourcesAllocation : ElementSkill
 public class ACDResourcesRecycle : ElementSkill
 {
     public override List<int> Elements => new List<int> { 0, 2, 3 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "资源回收：合成时，获得2次额外抽取次数。";
 
     public override void Composite()
@@ -225,7 +210,6 @@ public class ACDResourcesRecycle : ElementSkill
 public class ACELonggerBarrel : ElementSkill
 {
     public override List<int> Elements => new List<int> { 0, 2, 4 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "加长炮管：攻速-50%，攻击距离+2。";
 
     public override void Build()
@@ -243,7 +227,6 @@ public class ACELonggerBarrel : ElementSkill
 public class ADEHardCore : ElementSkill
 {
     public override List<int> Elements => new List<int> { 0, 3, 4 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "强击核心：相邻防御塔的基础攻击力提升30%";
 
     private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
@@ -272,7 +255,6 @@ public class ADEHardCore : ElementSkill
 public class BBAProcessImprovement : ElementSkill
 {
     public override List<int> Elements => new List<int> { 1, 1, 0 };
-    public override TurretEffectName EffectName => TurretEffectName.BBB_OverloadCartridge;
     public override string SkillDescription => "改良流程：在每回合开始20秒后，攻速提升60%";
 
     public override void StartTurn()
@@ -295,7 +277,6 @@ public class BBAProcessImprovement : ElementSkill
 public class BBCPreciseStrike : ElementSkill
 {
     public override List<int> Elements => new List<int> { 1, 1, 2 };
-    public override TurretEffectName EffectName => TurretEffectName.BBB_OverloadCartridge;
     public override string SkillDescription => "精准打击：攻击造成目标4%当前生命值的额外伤害（对BOSS为1%）";
 
     public override void Hit(Enemy target)
@@ -311,7 +292,6 @@ public class BBCPreciseStrike : ElementSkill
 public class BBDBirdShoot : ElementSkill
 {
     public override List<int> Elements => new List<int> { 1, 1, 3 };
-    public override TurretEffectName EffectName => TurretEffectName.BBB_OverloadCartridge;
     public override string SkillDescription => "小鸟盲射：每次攻击后，提升5%暴击率，上限为100%";
 
     float criticalRateIncreased;
@@ -332,7 +312,6 @@ public class BBDBirdShoot : ElementSkill
 public class BBETinyCannon : ElementSkill
 {
     public override List<int> Elements => new List<int> { 1, 1, 4 };
-    public override TurretEffectName EffectName => TurretEffectName.BBB_OverloadCartridge;
     public override string SkillDescription => "小型炮口：基础攻速提高100%，不可造成暴击";
 
     public override void Build()
@@ -349,7 +328,6 @@ public class BBETinyCannon : ElementSkill
 public class BCDHardCore : ElementSkill
 {
     public override List<int> Elements => new List<int> { 1, 2, 3 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "维修工厂：相邻陷阱效果提升50%";
 
     private List<TrapContent> intensifiedTraps = new List<TrapContent>();
@@ -379,7 +357,6 @@ public class BCDHardCore : ElementSkill
 public class BCEExtraCannon : ElementSkill
 {
     public override List<int> Elements => new List<int> { 1, 2, 4 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "加装炮口：伤害减少50%，额外攻击1个目标";
 
     public override void Build()
@@ -397,7 +374,6 @@ public class BCEExtraCannon : ElementSkill
 public class ADESpeedCore : ElementSkill
 {
     public override List<int> Elements => new List<int> { 1, 3, 4 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "加速核心：相邻防御塔的基础攻速提升30%";
 
     private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
@@ -426,7 +402,6 @@ public class ADESpeedCore : ElementSkill
 public class CCABlueprint : ElementSkill
 {
     public override List<int> Elements => new List<int> { 2, 2, 0 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "科技蓝图：合成后，获得2个随机配方。";
 
     public override void Composite()
@@ -438,7 +413,6 @@ public class CCABlueprint : ElementSkill
 public class CCBFrostCore : ElementSkill
 {
     public override List<int> Elements => new List<int> { 2, 2, 1 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "寒冰核心：相邻防御塔+0.3减速";
 
     private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
@@ -467,10 +441,9 @@ public class CCBFrostCore : ElementSkill
 public class CCDUnstableShaft : ElementSkill
 {
     public override List<int> Elements => new List<int> { 2, 2, 3 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "不稳定轴：暴击造成的减速效果翻倍";
 
-    public override void Hit(Enemy target)
+    public override void PreHit()
     {
         if (bullet.isCritical)
         {
@@ -482,10 +455,9 @@ public class CCDUnstableShaft : ElementSkill
 public class CCEIceBomb : ElementSkill
 {
     public override List<int> Elements => new List<int> { 2, 2, 4 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "冰冻炸弹：子弹每0.1溅射范围就提高0.1减速";
 
-    public override void Hit(Enemy target)
+    public override void PreHit()
     {
         bullet.SlowRate += bullet.SputteringRange;
     }
@@ -494,7 +466,6 @@ public class CCEIceBomb : ElementSkill
 public class CDETargetCore : ElementSkill
 {
     public override List<int> Elements => new List<int> { 2, 3, 4 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "瞄准核心：相邻防御塔+1范围";
 
     private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
@@ -524,10 +495,9 @@ public class CDETargetCore : ElementSkill
 public class DDASealedCannon : ElementSkill
 {
     public override List<int> Elements => new List<int> { 3, 3, 0 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "尘封大炮：如果暴击率大于100%，则造成的伤害提高100%";
 
-    public override void Hit(Enemy target)
+    public override void PreHit()
     {
         if (bullet.CriticalRate > 1)
         {
@@ -539,7 +509,6 @@ public class DDASealedCannon : ElementSkill
 public class DDBFireSuppression : ElementSkill
 {
     public override List<int> Elements => new List<int> { 3, 3, 1 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "火力压制：战斗开始前8秒，暴击率提升100%";
 
     public override void StartTurn()
@@ -563,7 +532,6 @@ public class DDBFireSuppression : ElementSkill
 public class DDCVentureInvestment : ElementSkill
 {
     public override List<int> Elements => new List<int> { 3, 3, 2 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "风险投资：合成时，随机获得50-200金币";
 
     public override void Composite()
@@ -578,7 +546,6 @@ public class DDCVentureInvestment : ElementSkill
 public class DDERemoteGuidence : ElementSkill
 {
     public override List<int> Elements => new List<int> { 3, 3, 4 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "远程制导：当攻击距离大于3的敌人时，暴击伤害提高100%";
 
     public override void Shoot()
@@ -594,7 +561,6 @@ public class DDERemoteGuidence : ElementSkill
 public class EEAPowerfulSputtering : ElementSkill
 {
     public override List<int> Elements => new List<int> { 4, 4, 0 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "强力溅射：攻击距离小于3的敌人时，溅射伤害提高50%";
 
     public override void Shoot()
@@ -609,7 +575,6 @@ public class EEAPowerfulSputtering : ElementSkill
 public class EEBHeatingBarrel : ElementSkill
 {
     public override List<int> Elements => new List<int> { 4, 4, 1 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "加热炮管：每次攻击后提升0.1溅射范围，上限1.5";
 
     float sputteringRangeIncreased;
@@ -632,7 +597,6 @@ public class EEBHeatingBarrel : ElementSkill
 public class EECConcretePouring : ElementSkill
 {
     public override List<int> Elements => new List<int> { 4, 4, 2 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "水泥倾泻：合成后，使下三次购买空白地板价格为0";
 
     public override void Composite()
@@ -645,14 +609,13 @@ public class EECConcretePouring : ElementSkill
 public class EEDWantonBombing : ElementSkill
 {
     public override List<int> Elements => new List<int> { 4, 4, 3 };
-    public override TurretEffectName EffectName => TurretEffectName.CCC_FrostCore;
     public override string SkillDescription => "狂轰滥炸：暴击造成的溅射伤害提高50%";
 
-    public override void Hit(Enemy target)
+    public override void PreHit()
     {
         if (bullet.isCritical)
         {
-            bullet.SputteringPercentage *= 1.5f;
+            bullet.SputteringPercentage += 0.5f;
         }
     }
 

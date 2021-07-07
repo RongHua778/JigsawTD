@@ -19,8 +19,6 @@ public class StrategyComposite : StrategyBase
         BaseCriticalRateIntensify += CompositeBluePrint.CompositeCriticalRate;
         BaseSputteringRangeIntensify += CompositeBluePrint.CompositeSputteringRange;
         BaseSlowRateIntensify += CompositeBluePrint.CompositeSlowRate;
-        TurretSkillInfos = m_Att.TurretEffects;
-        ElementSkillInfos = m_Att.ElementSkills;
     }
 
     //下一级属性
@@ -31,22 +29,17 @@ public class StrategyComposite : StrategyBase
     public float NextSlowRate { get => m_Att.TurretLevels[Quality].SlowRate + BaseSlowRateIntensify; }
 
 
-
     public ElementSkill ElementSkill1 { get; set; }
     public ElementSkill ElementSkill2 { get; set; }
 
 
     public void GetTurretSkills()//首次获取并激活效果
     {
-
         TurretSkill effect;
-        foreach (TurretSkillInfo info in TurretSkillInfos)
-        {
-            effect = TurretEffectFactory.GetInitialSkill((int)info.EffectName);
-            effect.strategy = this;
-            effect.KeyValue = info.KeyValue;
-            TurretSkills.Add(effect);
-        }
+        effect = TurretEffectFactory.GetInitialSkill((int)m_Att.TurretSkill);
+        effect.strategy = this;
+        TurretSkill = effect;
+        TurretSkills.Add(effect);
 
         List<int> elements = new List<int>();
         foreach(var com in CompositeBluePrint.Compositions)
@@ -59,6 +52,10 @@ public class StrategyComposite : StrategyBase
             effect.strategy = this;
             ElementSkill1 = effect as ElementSkill;
             TurretSkills.Add(effect);
+        }
+        else
+        {
+            Debug.LogWarning("没有该元素技能");
         }
 
         BuildTurretEffects();
