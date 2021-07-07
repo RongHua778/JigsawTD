@@ -87,7 +87,8 @@ MonoBehaviour:
   IsBoss: 1
   exlposionPrefab: {fileID: 4814509631623709245, guid: ce7784084ac4d8046831643b89f1e650, type: 3}
   initialSpeed: 0
-  armorIntensify: 20
+  armorIntensify: 50
+  aircraftQueue: []
 --- !u!1 &8360252054385358165
 GameObject:
   m_ObjectHideFlags: 0

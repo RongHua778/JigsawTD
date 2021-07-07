@@ -17,7 +17,7 @@ public class AirAttacker : Aircraft
             //以下是状态机的初始化
             fsm = new FSMSystem();
 
-            FSMState patrolState = new PatrolState(fsm);
+            FSMState patrolState = new AirAttackerPatrolState(fsm);
             patrolState.AddTransition(Transition.AttackTarget, StateID.Track);
             patrolState.AddTransition(Transition.LureTarget, StateID.Lure);
             PickRandomDes();
@@ -25,7 +25,7 @@ public class AirAttacker : Aircraft
             FSMState trackState = new TrackState(fsm);
             trackState.AddTransition(Transition.Attacked, StateID.Back);
 
-            FSMState lureState = new LureState(fsm);
+            FSMState lureState = new AirAttackerLureState(fsm);
             lureState.AddTransition(Transition.Attacked, StateID.Back);
 
             FSMState backState = new BackState(fsm);
@@ -43,27 +43,6 @@ public class AirAttacker : Aircraft
         fsm.Update(this);
         return base.GameUpdate();
     }
-    public void SearchTarget()
-    {
-        int hits = Physics2D.OverlapCircleNonAlloc(transform.position,
-     exploreRange, attachedResult, LayerMask.GetMask(StaticData.TurretMask));
-        if (hits > 0)
-        {
-            List<TurretContent> turrets = new List<TurretContent>();
-            for (int i = 0; i < hits; i++)
-            {
-                if (attachedResult[i].GetComponent<TurretContent>().Activated)
-                {
-                    turrets.Add(attachedResult[i].GetComponent<TurretContent>());
-                }
-            }
-            if (turrets.Count > 0)
-            {
-                int temp = Random.Range(0, turrets.Count);
-                targetTurret = turrets[temp];
-            }
-        }
-    }
 
     public void Attack()
     {
@@ -77,18 +56,4 @@ public class AirAttacker : Aircraft
         targetTurret = null;
     }
 
-    public void Lure()
-    {
-        float distanceToTarget = ((Vector2)transform.position - (Vector2)targetTurret.transform.position).magnitude;
-        if (distanceToTarget < minDistanceToLure)
-        {
-            movingDirection = targetTurret.transform.position - transform.position + new Vector3(0.5f, 0.5f);
-            MovingToTarget(Destination.Random);
-        }
-        else
-        {
-            movingDirection = targetTurret.transform.position - transform.position;
-            MovingToTarget(Destination.Random);
-        }
-    }
 }

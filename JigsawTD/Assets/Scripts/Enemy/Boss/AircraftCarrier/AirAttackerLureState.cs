@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LureState : FSMState
+public class AirAttackerLureState : FSMState
 {
     float waitingTime;
     float lureTime = 4f + Random.Range(0, 2f);
-    public LureState(FSMSystem fsm) : base(fsm)
+    public AirAttackerLureState(FSMSystem fsm) : base(fsm)
     {
         StateID = StateID.Lure;
     }

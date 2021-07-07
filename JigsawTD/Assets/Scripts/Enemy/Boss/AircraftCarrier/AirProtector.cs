@@ -13,10 +13,20 @@ public class AirProtector : Aircraft
             //以下是状态机的初始化
             fsm = new FSMSystem();
 
-            FSMState protectState = new ProtectState(fsm);
-            protectState.AddTransition(Transition.ProtectBoss, StateID.Protect);
 
+            FSMState patrolState = new AirProtectorPatrolState(fsm);
+            patrolState.AddTransition(Transition.ProtectBoss, StateID.Protect);
+            PickRandomDes();
+
+            FSMState protectState = new ProtectState(fsm);
+            protectState.AddTransition(Transition.LureTarget, StateID.Lure);
+
+            FSMState lureState = new AirProtectorLureState(fsm);
+            lureState.AddTransition(Transition.ProtectBoss, StateID.Protect);
+
+            fsm.AddState(patrolState);
             fsm.AddState(protectState);
+            fsm.AddState(lureState);
 
             GameManager.Instance.nonEnemies.Add(this);
         }
@@ -28,10 +38,13 @@ public class AirProtector : Aircraft
         return base.GameUpdate();
     }
 
+
     public void Protect()
     {
-        if (isLeader)
+        if (isLeader||!isFollowing)
         {
+            movingSpeed = originalMovingSpeed;
+            rotatingSpeed = originalRotatingSpeed;
             float distanceToTarget = ((Vector2)transform.position - (Vector2)boss.transform.position).magnitude;
             if (distanceToTarget < minDistanceToLure)
             {
@@ -41,12 +54,13 @@ public class AirProtector : Aircraft
             {
                 movingDirection = boss.transform.position - transform.position;
             }
+            MovingToTarget(Destination.Random);
         }
         else
         {
-            movingDirection = predecessor.tail.position - transform.position;
+            Follow();
         }
-        MovingToTarget(Destination.Random);
+
     }
 
 

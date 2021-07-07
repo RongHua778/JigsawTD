@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PatrolState : FSMState
+public class AirAttackerPatrolState : FSMState
 {
     float LureProb = 0.4f;
     float attackWaitingTime;
     float directionWaitingTime;
     float searchTargetCD=2.5f+Random.Range(-0.5f,0.5f);
     float directionCD=1.5f+Random.Range(-0.5f,0.5f);
-    public PatrolState(FSMSystem fsm):base(fsm)
+    public AirAttackerPatrolState(FSMSystem fsm):base(fsm)
     {
         StateID = StateID.Patrol;
     }

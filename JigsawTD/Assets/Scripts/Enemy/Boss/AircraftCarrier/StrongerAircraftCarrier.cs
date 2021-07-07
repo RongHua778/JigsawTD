@@ -13,18 +13,4 @@ public class StrongerAircraftCarrier : AircraftCarrier
         EnemySkills = new List<Skill>();
         EnemySkills.Add(GameManager.Instance.SkillFactory.GetSkill(EnemySkill.strongerAircraft, this));
     }
-
-    public override void AddAircraft(Aircraft a)
-    {
-        if (aircrafts.Count > 0)
-        {
-            a.SetPredecessor(aircrafts[aircrafts.Count-1]);
-        }
-        else
-        {
-            a.SetLeader();
-        }
-        base.AddAircraft(a);
-    }
-
 }

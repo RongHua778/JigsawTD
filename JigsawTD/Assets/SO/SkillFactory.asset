@@ -23,6 +23,6 @@ MonoBehaviour:
   - {fileID: 6048167617135722125, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
   aircraftBornCD: 4
   aircraftOneBorn: 3
-  maxAircrafts: 999
-  strongerAircraftBornCD: 3
-  strongerAircraftOneBorn: 3
+  maxAircrafts: 10
+  strongerAircraftBornCD: 1
+  strongerAircraftOneBorn: 1

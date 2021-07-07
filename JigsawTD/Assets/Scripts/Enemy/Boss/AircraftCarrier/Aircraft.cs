@@ -15,10 +15,11 @@ public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
     public AircraftCarrier boss;
     public TurretContent targetTurret;
 
+    public bool isFollowing = true;
     protected bool isLeader;
     protected Aircraft predecessor;
-    
-    public Transform tail;
+    Vector3[] followingPosition=new Vector3[2];
+
 
     Quaternion look_Rotation;
     protected float exploreRange = 10f;
@@ -26,8 +27,10 @@ public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
     public readonly float minDistanceToLure = .1f;
     public readonly float minDistanceToDealDamage = 0.75f;
     readonly float maxDistanceToReturnToBoss = 5f;
-    float movingSpeed=3.5f;
-    float rotatingSpeed = 2f;
+    protected float movingSpeed=3.5f;
+    protected float rotatingSpeed = 2f;
+    protected float originalMovingSpeed = 3.5f;
+    protected float originalRotatingSpeed = 2f;
 
     protected Vector3 movingDirection;
 
@@ -67,16 +70,21 @@ public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
         MaxHealth = boss.Armor;
         CurrentHealth = MaxHealth;
         boss.AddAircraft(this);
+        boss.SetQueue();
     }
 
     void Awake()
     {
-        tail = GetComponentInChildren<Tail>().transform;
         explosionClip = Resources.Load<AudioClip>("Music/Effects/Sound_EnemyExplosion");
     }
 
     public virtual bool GameUpdate()
     {
+        if (predecessor)
+        {
+            followingPosition[1] = followingPosition[0];
+            followingPosition[0] = predecessor.transform.position;
+        }
         return true;
     }
     public void ApplyDamage(float amount, out float realDamage, bool isCritical = false)
@@ -137,8 +145,75 @@ public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
     {
         this.predecessor = predecessor;
     }
+
+    public void Lure()
+    {
+        if (!isFollowing||isLeader)
+        {
+            movingSpeed = originalMovingSpeed;
+            rotatingSpeed = originalRotatingSpeed;
+            float distanceToTarget = ((Vector2)transform.position - (Vector2)targetTurret.transform.position).magnitude;
+            if (distanceToTarget < minDistanceToLure)
+            {
+                movingDirection = targetTurret.transform.position - transform.position + new Vector3(0.5f, 0.5f);
+                MovingToTarget(Destination.Random);
+            }
+            else
+            {
+                movingDirection = targetTurret.transform.position - transform.position;
+                MovingToTarget(Destination.Random);
+            }
+        }
+        else
+        {
+            Follow();
+        }
+
+    }
+
+    public void SearchTarget()
+    {
+        int hits = Physics2D.OverlapCircleNonAlloc(transform.position,
+     exploreRange, attachedResult, LayerMask.GetMask(StaticData.TurretMask));
+        if (hits > 0)
+        {
+            List<TurretContent> turrets = new List<TurretContent>();
+            for (int i = 0; i < hits; i++)
+            {
+                if (attachedResult[i].GetComponent<TurretContent>().Activated)
+                {
+                    turrets.Add(attachedResult[i].GetComponent<TurretContent>());
+                }
+            }
+            if (turrets.Count > 0)
+            {
+                int temp = Random.Range(0, turrets.Count);
+                targetTurret = turrets[temp];
+            }
+        }
+    }
+
+    public void Follow()
+    {
+        float distanceToP = ((Vector2)transform.position - (Vector2)predecessor.transform.position).magnitude;
+        if (distanceToP > 1f)
+        {
+            movingSpeed = 8f + distanceToP * 3f;
+            rotatingSpeed = 5f + distanceToP;
+        }
+        else
+        {
+            movingSpeed = 3f;
+            rotatingSpeed = 2f;
+        }
+        movingDirection = followingPosition[1] - transform.position;
+        MovingToTarget(Destination.Random);
+    }
+
     public virtual void Reclaim()
     {
+        boss.aircraftQueue.Remove(this);
+        boss.SetQueue();
         ObjectPool.Instance.UnSpawn(this);
     }
 }
