@@ -23,6 +23,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameEndUI m_GameEndUI = default;
     [SerializeField] private MessageUI m_MessageUI = default;
     [SerializeField] private GuideVideo m_GuideVideo = default;
+    [SerializeField] private EventUI m_EventUI = default;
 
     [Header("TIPS")]
     [SerializeField] private TurretTips m_TurretTips = default;
@@ -89,6 +90,8 @@ public class GameManager : Singleton<GameManager>
         m_BluePrintShopUI.Initialize(this);//配方系统UI
         m_ShapeSelectUI.Initialize(this);//抽模块UI
         m_GameEndUI.Initialize(this);//游戏结束UI
+        m_EventUI.Initialize(this);//事件系统UI
+
         m_TrapTips.Initialize(this);//防御塔TIPS
         m_TurretTips.Initialize(this);//陷阱及其他TIPS
         m_BuyGroundTips.Initialize(this);//购买地板TIPS
@@ -209,7 +212,7 @@ public class GameManager : Singleton<GameManager>
         }
         WaveSystem.GetSequence();
         m_BluePrintShopUI.NextRefreshTrun--;
-        m_MainUI.PrepareNextWave(WaveSystem.RunningSequence, m_FuncUI.LuckyCoin);
+        m_MainUI.PrepareNextWave(WaveSystem.RunningSequence[0], m_FuncUI.LuckyCoin);
         m_FuncUI.PrepareNextWave();
         m_FuncUI.Show();
 
@@ -348,9 +351,9 @@ public class GameManager : Singleton<GameManager>
         m_FuncUI.DrawRemain += amount;
     }
 
-    public void SpawnEnemy(int type)
+    public void SpawnEnemy(EnemySequence seq, int type)
     {
-        WaveSystem.SpawnEnemy(BoardSystem, type);
+        WaveSystem.SpawnEnemy(seq, BoardSystem, type);
     }
 
     public void RefreshShop(int cost)
@@ -391,6 +394,8 @@ public class GameManager : Singleton<GameManager>
     {
         m_BoardSystem.BuyOneEmptyTile();
     }
+
+
 
     #endregion
 
@@ -470,6 +475,16 @@ public class GameManager : Singleton<GameManager>
         {
             ((StrategyComposite)(((TurretContent)turret).Strategy)).LandedTurretSkill();
         }
+    }
+
+    public void AddSequence(EnemySequence seq)
+    {
+        m_WaveSystem.AddSequence(seq);
+    }
+
+    public void ShowEvent()
+    {
+        m_EventUI.Show();
     }
     #endregion
 }

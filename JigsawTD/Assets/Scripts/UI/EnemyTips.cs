@@ -9,7 +9,7 @@ public class EnemyTips : IUserInterface
 
     public void ReadSequenceInfo(WaveSystem waveSystem)
     {
-        EnemySequence sequence = waveSystem.RunningSequence;
+        EnemySequence sequence = waveSystem.RunningSequence[0];
         for(int i = 0; i < 3; i++)
         {
             if (i >= sequence.EnemyAttribute.Count)

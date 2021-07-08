@@ -17,31 +17,31 @@ public class WaveState : BattleOperationState
         yield return new WaitForSeconds(1f);
         m_WaveSystem.Running = true;
         //±≥æ∞“Ù¿÷…Ë÷√
-        if (m_WaveSystem.RunningSequence.Wave == StaticData.Instance.LevelMaxWave)
-        {
-            Sound.Instance.PlayBg("lastwave");
-        }
-        else
-        {
-            switch (m_WaveSystem.RunningSequence.EnemyAttribute[0].EnemyType)
-            {
-                case EnemyType.Soilder:
-                    Sound.Instance.PlayBg("soldier");
-                    break;
-                case EnemyType.Runner:
-                    Sound.Instance.PlayBg("runner");
-                    break;
-                case EnemyType.Restorer:
-                    Sound.Instance.PlayBg("restorer");
-                    break;
-                case EnemyType.Tanker:
-                    Sound.Instance.PlayBg("tanker");
-                    break;
-                default:
-                    Sound.Instance.PlayBg("lastwave");
-                    break;
-            }
-        }
+        //if (m_WaveSystem.RunningSequence.Wave == StaticData.Instance.LevelMaxWave)
+        //{
+        //    Sound.Instance.PlayBg("lastwave");
+        //}
+        //else
+        //{
+        //    switch (m_WaveSystem.RunningSequence.EnemyAttribute[0].EnemyType)
+        //    {
+        //        case EnemyType.Soilder:
+        //            Sound.Instance.PlayBg("soldier");
+        //            break;
+        //        case EnemyType.Runner:
+        //            Sound.Instance.PlayBg("runner");
+        //            break;
+        //        case EnemyType.Restorer:
+        //            Sound.Instance.PlayBg("restorer");
+        //            break;
+        //        case EnemyType.Tanker:
+        //            Sound.Instance.PlayBg("tanker");
+        //            break;
+        //        default:
+        //            Sound.Instance.PlayBg("lastwave");
+        //            break;
+        //    }
+        //}
         yield break;
     }
 

@@ -130,7 +130,7 @@ public class MainUI : IUserInterface
     {
         CurrentWave++;
         m_GameManager.GainMoney((int)((StaticData.Instance.BaseWaveIncome + StaticData.Instance.WaveMultiplyIncome * (CurrentWave - 1)) * (1 + luckCoin * 0.1f)));
-        m_WaveInfoSetter.SetWaveInfo(sequence);
+        m_WaveInfoSetter.SetWaveInfo(CurrentWave,sequence);
     }
 
     public bool ConsumeMoney(int cost)

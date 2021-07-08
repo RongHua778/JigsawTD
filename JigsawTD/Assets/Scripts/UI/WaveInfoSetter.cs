@@ -10,9 +10,9 @@ public class WaveInfoSetter : MonoBehaviour,IPointerEnterHandler,IPointerExitHan
     [SerializeField] GameObject[] EnemyCountArea = default;
     [SerializeField] Image[] enemyIcons = default;
     [SerializeField] Text waveTxt = default;
-    public void SetWaveInfo(EnemySequence sequence)
+    public void SetWaveInfo(int wave, EnemySequence sequence)
     {
-        waveTxt.text = "µÚ" + sequence.Wave.ToString() + "/" + StaticData.Instance.LevelMaxWave.ToString() + "²¨";
+        waveTxt.text = "µÚ" + wave + "/" + StaticData.Instance.LevelMaxWave.ToString() + "²¨";
         int count = sequence.EnemyAttribute.Count;
         foreach (var obj in EnemyCountArea)
         {

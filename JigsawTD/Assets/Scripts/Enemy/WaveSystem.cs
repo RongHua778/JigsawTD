@@ -6,10 +6,9 @@ using UnityEngine.UI;
 
 public class WaveSystem : IGameSystem
 {
-    public float waveStage = 1f;
     public bool Running = false;
     int enemyRemain = 0;
- 
+
     public int EnemyRemain
     {
         get => enemyRemain;
@@ -28,12 +27,12 @@ public class WaveSystem : IGameSystem
     [SerializeField] HealthBar healthBarPrefab = default;
     private EnemyFactory _enemyFactory;
     [SerializeField]
-    private EnemySequence runningSequence;
+    private List<EnemySequence> runningSequence;
     public Queue<EnemySequence> LevelSequence = new Queue<EnemySequence>();
 
     private List<int[]> BossLevels;
 
-    public EnemySequence RunningSequence { get => runningSequence; set => runningSequence = value; }
+    public List<EnemySequence> RunningSequence { get => runningSequence; set => runningSequence = value; }
     public HealthBar HealthBarPrefab { get => healthBarPrefab; set => healthBarPrefab = value; }
 
     public override void Initialize(GameManager gameManager)
@@ -42,7 +41,7 @@ public class WaveSystem : IGameSystem
         this._enemyFactory = gameManager.EnemyFactory;
         BossLevels = new List<int[]>();
         //关卡1的boss关
-        BossLevels.Add(new int[] { 9, 16, 22, 29 });
+        BossLevels.Add(new int[] { 20, 40 });
         //关卡2的boss关
         BossLevels.Add(new int[] { 9, 17, 25, 34 });
         //关卡3的boss关
@@ -76,11 +75,16 @@ public class WaveSystem : IGameSystem
     {
         if (Running)
         {
-            if (!RunningSequence.Progress())
+            for (int i = 0; i < RunningSequence.Count; i++)
             {
-
-                Running = false;
+                if (!RunningSequence[i].Progress())
+                {
+                    RunningSequence.Remove(RunningSequence[i]);
+                }
             }
+            if (RunningSequence.Count <= 0)
+                Running = false;
+
         }
     }
 
@@ -89,8 +93,8 @@ public class WaveSystem : IGameSystem
     {
         LevelSequence.Clear();
         int difficulty = Game.Instance.Difficulty;
-        float stage = waveStage;
-        EnemySequence sequence=null;
+        float stage = 1;
+        EnemySequence sequence = null;
         for (int i = 0; i < StaticData.Instance.LevelMaxWave; i++)
         {
             switch (difficulty)
@@ -138,32 +142,24 @@ public class WaveSystem : IGameSystem
                     sequence = new EnemySequence(_enemyFactory, i + 1, 10f, EnemyType.AircraftCarrier);
                     break;
             }
-            if (difficulty <5)
+            if (difficulty < 5)
             {
                 if (i == BossLevels[difficulty - 1][0])
                 {
-                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Divider);
+                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Borner);
                 }
-                else if(i == BossLevels[difficulty - 1][1])
-                {
-                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.SixArmor);
-                }
-                else if (i == BossLevels[difficulty - 1][2])
-                {
-                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Blinker);
-                }
-                else if (i == BossLevels[difficulty - 1][3])
+                else if (i == BossLevels[difficulty - 1][1])
                 {
                     sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Borner);
                 }
-                else if (i % 7 == 0 && i > 0)
-                {
-                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random, 2);
-                }
-                else if (i % 9 == 0 && i > 0)
-                {
-                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random, 3);
-                }
+                //else if (i % 7 == 0 && i > 0)
+                //{
+                //    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random, 2);
+                //}
+                //else if (i % 9 == 0 && i > 0)
+                //{
+                //    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random, 3);
+                //}
                 //前三波难度修正
                 else if (i < 3)
                 {
@@ -183,11 +179,10 @@ public class WaveSystem : IGameSystem
 
     public void GetSequence()
     {
+        RunningSequence.Clear();
         if (LevelSequence.Count > 0)
         {
-            RunningSequence = LevelSequence.Dequeue();
-            //参数设置
-            enemyRemain = runningSequence.index.Count;
+            AddSequence(LevelSequence.Dequeue());
         }
         else
         {
@@ -196,10 +191,16 @@ public class WaveSystem : IGameSystem
 
     }
 
-    public void SpawnEnemy(BoardSystem board, int type)
+    public void AddSequence(EnemySequence seq)
     {
-        EnemyAttribute attribute = RunningSequence.EnemyAttribute[type];
-        float intensify = RunningSequence.Intensify;
+        RunningSequence.Add(seq);
+        enemyRemain += seq.Amount[0];
+    }
+
+    public void SpawnEnemy(EnemySequence seq, BoardSystem board, int type)
+    {
+        EnemyAttribute attribute = seq.EnemyAttribute[type];
+        float intensify = seq.Intensify;
         Enemy enemy = ObjectPool.Instance.Spawn(attribute.Prefab) as Enemy;
         HealthBar healthBar = ObjectPool.Instance.Spawn(HealthBarPrefab) as HealthBar;
         enemy.Initialize(attribute, UnityEngine.Random.Range(-pathOffset, pathOffset), healthBar, intensify);

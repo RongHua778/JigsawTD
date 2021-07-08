@@ -14,6 +14,28 @@ public class TrapContent : GameTileContent
     private List<BuffInfo> trapBuffs = new List<BuffInfo>();
     public float TrapIntensify = 1;
 
+
+    public int passTurns;
+
+    public void OnPathPass()
+    {
+        //只有在开始回合时才生效
+        if (passTurns > 0)
+        {
+            passTurns--;
+
+        }
+        //具体操作
+
+
+    }
+
+    public void OnPathPreview()
+    {
+        //道路预览阶段的UI显示
+    }
+
+
     public override void ContentLanded()
     {
         base.ContentLanded();

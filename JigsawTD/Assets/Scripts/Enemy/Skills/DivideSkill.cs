@@ -43,7 +43,7 @@ public class DivideSkill : Skill
     private void SpawnEnemy(BoardSystem board)
     {
         EnemyAttribute attribute = GameManager.Instance.EnemyFactory.Get(EnemyType.Divider);
-        float intensify = ws.RunningSequence.Intensify;
+        float intensify = this.enemy.m_Intensify;
         Divider enemy = ObjectPool.Instance.Spawn(attribute.Prefab) as Divider;
         HealthBar healthBar = ObjectPool.Instance.Spawn(ws.HealthBarPrefab) as HealthBar;
         DivideSkill ds=new DivideSkill(enemy, dividing-1,springs,DividerIntensify,dividerSprites);

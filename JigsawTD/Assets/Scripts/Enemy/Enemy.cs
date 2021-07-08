@@ -97,6 +97,7 @@ public abstract class Enemy : PathFollower,IDamageable
         }
     }
 
+    public float m_Intensify;
 
     [Header("HealthSetting")]
     HealthBar healthBar;
@@ -204,6 +205,7 @@ public abstract class Enemy : PathFollower,IDamageable
         this.PathOffset = pathOffset;
         this.healthBar = healthBar;
         this.healthBar.followTrans = model;
+        m_Intensify = intensify;
         Buffable = this.GetComponent<BuffableEntity>();
         CurrentHealth = MaxHealth = Mathf.RoundToInt(attribute.Health * intensify);
         Speed = attribute.Speed;

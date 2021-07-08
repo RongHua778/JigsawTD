@@ -10,7 +10,6 @@ public class EnemySequence
     public float Stage=1f;
     public List<EnemyAttribute> EnemyAttribute;
     public List<int> Amount;
-    public float AmountIntensify;
     public float Intensify;
     public List<float> CoolDown;
     private float SpawnTimer;
@@ -34,7 +33,7 @@ public class EnemySequence
     {
         if (wave > 10)
         {
-            maxRandom = 6;
+            maxRandom = 4;
         }
         //≥ı ºªØenemytype
         if (enemy!=EnemyType.Random)
@@ -91,7 +90,7 @@ public class EnemySequence
             {
                 SpawnTimer = 0;
                 index.RemoveAt(0);
-                GameManager.Instance.SpawnEnemy(type);
+                GameManager.Instance.SpawnEnemy(this, type);
             }
         }
         else
