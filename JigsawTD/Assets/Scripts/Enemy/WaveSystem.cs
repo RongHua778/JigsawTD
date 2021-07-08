@@ -41,7 +41,7 @@ public class WaveSystem : IGameSystem
         this._enemyFactory = gameManager.EnemyFactory;
         BossLevels = new List<int[]>();
         //关卡1的boss关
-        BossLevels.Add(new int[] { 20, 40 });
+        BossLevels.Add(new int[] { 20, 39 });
         //关卡2的boss关
         BossLevels.Add(new int[] { 9, 17, 25, 34 });
         //关卡3的boss关
@@ -164,7 +164,7 @@ public class WaveSystem : IGameSystem
                 else if (i < 3)
                 {
                     stage = (i + 1) * 0.5f;
-                    sequence = new EnemySequence(_enemyFactory, i + 1, 100f, EnemyType.Random);//stage
+                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random);//stage
                 }
                 else
                 {
@@ -182,7 +182,9 @@ public class WaveSystem : IGameSystem
         RunningSequence.Clear();
         if (LevelSequence.Count > 0)
         {
-            AddSequence(LevelSequence.Dequeue());
+            EnemySequence seq = LevelSequence.Dequeue();
+            RunningSequence.Add(seq);
+            EnemyRemain += seq.Amount[0];
         }
         else
         {
@@ -191,10 +193,16 @@ public class WaveSystem : IGameSystem
 
     }
 
-    public void AddSequence(EnemySequence seq)
+    public void AddSequence(EnemyType type,int amount)
     {
+        EnemySequence seq = new EnemySequence(_enemyFactory, RunningSequence[0].Wave, RunningSequence[0].Stage, type);
+        seq.index.Clear();
+        for (int j = 0; j < amount; j++)
+        {
+            seq.index.Add(0);
+        }
         RunningSequence.Add(seq);
-        enemyRemain += seq.Amount[0];
+        enemyRemain += seq.index.Count;
     }
 
     public void SpawnEnemy(EnemySequence seq, BoardSystem board, int type)

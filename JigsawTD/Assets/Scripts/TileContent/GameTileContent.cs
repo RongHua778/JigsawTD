@@ -22,6 +22,7 @@ public abstract class GameTileContent : ReusableObject
         if (col != null)
         {
             col.GetComponent<GroundTile>().IsLanded = false;
+            col.GetComponent<GroundTile>().OnEventTrigger();
         }
     }
 

@@ -78,6 +78,7 @@ public class GameManager : Singleton<GameManager>
         //形状生成外观类
         ConstructHelper.Initialize();
 
+        m_EventUI.Initialize(this);//事件系统UI
         //初始化系统
         m_BoardSystem.Initialize(this);//版图系统
         m_WaveSystem.Initialize(this);//波次系统
@@ -90,7 +91,6 @@ public class GameManager : Singleton<GameManager>
         m_BluePrintShopUI.Initialize(this);//配方系统UI
         m_ShapeSelectUI.Initialize(this);//抽模块UI
         m_GameEndUI.Initialize(this);//游戏结束UI
-        m_EventUI.Initialize(this);//事件系统UI
 
         m_TrapTips.Initialize(this);//防御塔TIPS
         m_TurretTips.Initialize(this);//陷阱及其他TIPS
@@ -104,7 +104,7 @@ public class GameManager : Singleton<GameManager>
         waveState = new WaveState(this, WaveSystem);
         pickingState = new PickingState(this);
         PrepareNextWave();
-
+        
         //初始化商店
         RefreshShop(0);
         //初始化教程
@@ -215,6 +215,7 @@ public class GameManager : Singleton<GameManager>
         m_MainUI.PrepareNextWave(WaveSystem.RunningSequence[0], m_FuncUI.LuckyCoin);
         m_FuncUI.PrepareNextWave();
         m_FuncUI.Show();
+        m_EventUI.PrepareNextWave();//更新敌人增加事件
 
         TriggerGuide(6);
         TriggerGuide(7);
@@ -477,14 +478,15 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public void AddSequence(EnemySequence seq)
+    public void AddSequence(EnemyType type,int amount)
     {
-        m_WaveSystem.AddSequence(seq);
+        m_WaveSystem.AddSequence(type,amount);
     }
 
-    public void ShowEvent()
+    public void ShowEvent(TileEvent tileEvent)
     {
         m_EventUI.Show();
+        m_EventUI.SetEvent(tileEvent);
     }
     #endregion
 }

@@ -1,11 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using TMPro;
+
 
 public class GroundTile : TileBase
 {
+    [SerializeField] SpriteRenderer eventSprite = default;
+    private TileEvent m_TileEvent;
+    public TileEvent TileEvent { get => m_TileEvent; set => m_TileEvent = value; }
+    [SerializeField] bool eventTriggered = true;
+    public GameTile TileAbrove;
     public override bool IsLanded
     {
         get => base.IsLanded;
@@ -16,7 +21,31 @@ public class GroundTile : TileBase
         }
     }
 
-    public GameTile TileAbrove;
+    public void SetEvent(TileEvent tileEvent)
+    {
+        this.TileEvent = tileEvent;
+        eventSprite.gameObject.SetActive(true);
+        eventTriggered = false;
+        //eventSprite.sprite = tileEvent.EventSprite;
+
+    }
+
+    public void OnEventTrigger()
+    {
+        //if (!eventTriggered && TileEvent != null)
+        //{
+        //    eventTriggered = true;
+        //    //触发事件
+        //    GameManager.Instance.ShowEvent(TileEvent);
+        //}
+
+        if (!eventTriggered)
+        {
+            eventTriggered = true;
+            //触发事件
+            GameManager.Instance.ShowEvent(new ExplosionEnemy());
+        }
+    }
 
     public override void OnSpawn()
     {

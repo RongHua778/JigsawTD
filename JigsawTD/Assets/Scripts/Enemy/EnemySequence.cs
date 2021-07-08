@@ -82,7 +82,7 @@ public class EnemySequence
 
     public bool Progress()
     {
-    SpawnTimer += Time.deltaTime;
+        SpawnTimer += Time.deltaTime;
         if (index.Count > 0)
         {
             int type = index[0];

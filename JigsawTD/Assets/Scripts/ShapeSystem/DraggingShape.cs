@@ -97,9 +97,9 @@ public class DraggingShape : DraggingActions
 
     private bool CheckCanDrop()
     {
-        canDrop = true;
+        //canDrop = true;
         Physics2D.SyncTransforms();
-        //CheckAttached();
+        CheckAttached();
         CheckOverLap();
         CheckMapEdge();
         if (!canDrop)
@@ -131,6 +131,7 @@ public class DraggingShape : DraggingActions
     private void CheckAttached()//检查是否相连
     {
         int hits;
+        canDrop = false;
         foreach (GameTile tile in TileShape.tiles)
         {
             Vector2 pos = tile.transform.position;

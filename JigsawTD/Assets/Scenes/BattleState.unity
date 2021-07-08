@@ -4760,6 +4760,7 @@ MonoBehaviour:
   m_GameEndUI: {fileID: 491704460}
   m_MessageUI: {fileID: 1919595584}
   m_GuideVideo: {fileID: 976930641}
+  m_EventUI: {fileID: 2018697566}
   m_TurretTips: {fileID: 4121497686706873737}
   m_TempTips: {fileID: 1703365156}
   m_TrapTips: {fileID: 5052328056491157623}
@@ -9048,7 +9049,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &651008962
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11012,7 +11013,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 824603341}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2018697566}
+        m_TargetAssemblyTypeName: IUserInterface, Assembly-CSharp
+        m_MethodName: Hide
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &824603341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11818,7 +11831,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 15.53, y: 4.91}
+  m_AnchoredPosition: {x: 15.529999, y: 4.91}
   m_SizeDelta: {x: -31.05, y: -9.82}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &883631984
@@ -15081,7 +15094,7 @@ GameObject:
   - component: {fileID: 1075176744}
   - component: {fileID: 1075176743}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18421,7 +18434,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 14.65, y: 4.91}
+  m_AnchoredPosition: {x: 14.649994, y: 4.91}
   m_SizeDelta: {x: -29.32, y: -9.82}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1309667618
@@ -28300,6 +28313,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2018697564}
   - component: {fileID: 2018697565}
+  - component: {fileID: 2018697566}
   m_Layer: 5
   m_Name: EventUI
   m_TagString: Untagged
@@ -28335,6 +28349,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2018697563}
   m_CullTransparentMesh: 1
+--- !u!114 &2018697566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018697563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 655b01abe3fd3d04780eceeaaa231847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventIcon: {fileID: 1075176743}
+  eventDes: {fileID: 2025953309}
+  eventChoice1Des: {fileID: 1309667618}
+  eventChoice2Des: {fileID: 1458286251}
+  eventChoice3Des: {fileID: 883631984}
+  btn1: {fileID: 1492355145}
+  btn2: {fileID: 1299384192}
 --- !u!1 &2024102919
 GameObject:
   m_ObjectHideFlags: 0
@@ -28424,7 +28457,7 @@ GameObject:
   - component: {fileID: 2025953310}
   - component: {fileID: 2025953309}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Des
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -126,7 +126,6 @@ public class J1SkillDistanceBaseDamage : InitialSkill
     public override void Shoot()
     {
         bullet.Damage *= (1 + (0.3f + increaseRate) * bullet.GetTargetDistance());
-        Debug.Log(increaseRate);
     }
 }
 

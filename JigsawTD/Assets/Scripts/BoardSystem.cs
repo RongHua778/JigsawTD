@@ -62,6 +62,7 @@ public class BoardSystem : IGameSystem
     private GameBehaviorCollection followers = new GameBehaviorCollection();
 
     List<Vector2Int> tilePoss = new List<Vector2Int>();
+    List<GroundTile> groundTiles = new List<GroundTile>();
 
     public List<GameTile> shortestPath = new List<GameTile>();
 
@@ -249,13 +250,16 @@ public class BoardSystem : IGameSystem
     private void GenerateTrapTiles(Vector2Int offset, Vector2Int size)
     {
         List<Vector2Int> traps = new List<Vector2Int>();
+        List<Vector2Int> events = new List<Vector2Int>();
         List<Vector2Int> tempPoss = tilePoss.ToList();
+        List<Vector2Int> tempPoss2 = tilePoss.ToList();
         for (int y = 0; y < size.y; y++)
         {
             for (int x = 0; x < size.x; x++)
             {
                 Vector2Int pos = new Vector2Int(x, y) - offset;
                 tempPoss.Remove(pos);
+                tempPoss2.Remove(pos);
             }
         }
         for (int i = 0; i < StaticData.trapN; i++)
@@ -263,6 +267,7 @@ public class BoardSystem : IGameSystem
             int index = UnityEngine.Random.Range(0, tempPoss.Count);
             Vector2Int temp = tempPoss[index];
             traps.Add(temp);
+
             List<Vector2Int> neibor = StaticData.GetCirclePoints(5, 0);
             for (int k = 0; k < neibor.Count; k++)
             {
@@ -271,12 +276,35 @@ public class BoardSystem : IGameSystem
             tempPoss = tempPoss.Except(neibor).ToList();
             tempPoss.Remove(temp);
         }
+        tempPoss2 = tempPoss2.Except(traps).ToList();
+        for (int i = 0; i < 15; i++)
+        {
+            int index = UnityEngine.Random.Range(0, tempPoss2.Count);
+            Vector2Int temp = tempPoss2[index];
+            events.Add(temp);
+
+            List<Vector2Int> neibor = StaticData.GetCirclePoints(5, 0);
+            for (int k = 0; k < neibor.Count; k++)
+            {
+                neibor[k] = neibor[k] + tempPoss2[index];
+            }
+            tempPoss2 = tempPoss2.Except(neibor).ToList();
+            tempPoss2.Remove(temp);
+        }
+
+
         foreach (Vector2Int pos in traps)
         {
             GameTile tile = ConstructHelper.GetRandomTrap();
             tile.transform.position = (Vector3Int)pos;
             tile.TileLanded();
             tile.SetRandomRotation();
+        }
+
+        foreach (Vector2Int pos in events)
+        {
+            GroundTile tile = groundTiles.Find(tile => tile.OffsetCoord == pos + StaticData.BoardOffset);
+            tile.SetEvent(new ExplosionEnemy());
         }
     }
     private void GenerateGroundTiles(Vector2Int groundSize)
@@ -291,6 +319,7 @@ public class BoardSystem : IGameSystem
                 groundTile.transform.position += Vector3.forward * 0.1f;
                 StaticData.CorrectTileCoord(groundTile);
                 tilePoss.Add(pos);
+                groundTiles.Add(groundTile);
             }
         }
     }
