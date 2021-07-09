@@ -16,10 +16,13 @@ public class TileContentFactory : GameObjectFactory
     TurretAttribute[] compositeTurrets = default;
     [SerializeField]
     List<TrapAttribute> trapAtts = default;
+    [SerializeField]
+    List<TurretBaseAttribute> turretBaseAtts = default;
 
     private Dictionary<Element, TurretAttribute> ElementDIC;
     private Dictionary<string, TurretAttribute> CompositeDIC;
     private Dictionary<string, TrapAttribute> TrapDIC;
+    private Dictionary<string, TurretBaseAttribute> TurretBaseDIC;
 
     private List<TurretAttribute> Rare1Turrets;
     private List<TurretAttribute> Rare2Turrets;
@@ -35,6 +38,7 @@ public class TileContentFactory : GameObjectFactory
         ElementDIC = new Dictionary<Element, TurretAttribute>();
         TrapDIC = new Dictionary<string, TrapAttribute>();
         CompositeDIC = new Dictionary<string, TurretAttribute>();
+        TurretBaseDIC = new Dictionary<string, TurretBaseAttribute>();
         foreach (TurretAttribute attribute in compositeTurrets)
         {
             CompositeDIC.Add(attribute.Name, attribute);
@@ -58,6 +62,10 @@ public class TileContentFactory : GameObjectFactory
         foreach (var attribute in trapAtts)
         {
             TrapDIC.Add(attribute.Name, attribute);
+        }
+        foreach(var attribute in turretBaseAtts)
+        {
+            TurretBaseDIC.Add(attribute.Name, attribute);
         }
     }
 
@@ -165,7 +173,9 @@ public class TileContentFactory : GameObjectFactory
     {
         if (TrapDIC.ContainsKey(name))
         {
-            return Get(TrapDIC[name].ContentPrefab) as TrapContent;
+            TrapContent content = Get(TrapDIC[name].ContentPrefab) as TrapContent;
+            content.m_TrapAttribute = TrapDIC[name];
+            return content;
         }
         Debug.LogWarning("没有对应名字的陷阱");
         return null;
@@ -175,10 +185,31 @@ public class TileContentFactory : GameObjectFactory
     public TrapContent GetRandomTrapContent()
     {
         int index = Random.Range(0, trapAtts.Count);
-        return Get(trapAtts[index].ContentPrefab) as TrapContent;
+        TrapContent content = Get(trapAtts[index].ContentPrefab) as TrapContent;
+        content.m_TrapAttribute = trapAtts[index];
+        return content;
     }
 
 
+    //基座*************
+
+    public TurretBaseContent GetTurretBaseContent(string name)
+    {
+        if (TurretBaseDIC.ContainsKey(name))
+        {
+            return Get(TurretBaseDIC[name].ContentPrefab) as TurretBaseContent;
+        }
+        Debug.LogWarning("没有对应名字的基座");
+        return null;
+    }
+
+    public TurretBaseContent GetRandomTurretBase()
+    {
+        int index = Random.Range(0, turretBaseAtts.Count);
+        TurretBaseContent content = Get(turretBaseAtts[index].ContentPrefab) as TurretBaseContent;
+        content.m_TurretBaseAttribute = turretBaseAtts[index];
+        return content;
+    }
 
     private GameTileContent Get(GameTileContent prefab)
     {

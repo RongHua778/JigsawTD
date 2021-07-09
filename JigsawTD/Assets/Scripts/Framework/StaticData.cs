@@ -49,7 +49,7 @@ public class StaticData : Singleton<StaticData>
     public static int elementN = 5;
     //最大quality
     public static int maxQuality = 5;
-    public static int trapN = 15;
+    public static int trapN = 20;
     public static int basicN = 25;
 
     [Header("动态数据")]

@@ -9,6 +9,7 @@ public class TurretEffectFactory
 {
     public static Dictionary<int, Type> TurretSkillDIC;
     public static Dictionary<List<int>, Type> ElementSkillDIC;
+    public static Dictionary<int, Type> TileSkillDIC;
 
     private static bool isInitialize => TurretSkillDIC != null;
 
@@ -26,6 +27,19 @@ public class TurretEffectFactory
         }
 
         InitialzieElementDIC();
+        InitializeTileSkillDIC();
+    }
+
+    private static void InitializeTileSkillDIC()
+    {
+        var types = Assembly.GetAssembly(typeof(TileSkill)).GetTypes().
+         Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(TileSkill)));
+        TileSkillDIC = new Dictionary<int, Type>();
+        foreach (var type in types)
+        {
+            var effect = Activator.CreateInstance(type) as TileSkill;
+            TileSkillDIC.Add((int)effect.TileSkillName, type);
+        }
     }
 
     private static void InitialzieElementDIC()
@@ -42,11 +56,21 @@ public class TurretEffectFactory
 
     public static InitialSkill GetInitialSkill(int id)
     {
-        Initialize();
         if (TurretSkillDIC.ContainsKey(id))
         {
             Type type = TurretSkillDIC[id];
             InitialSkill effect = Activator.CreateInstance(type) as InitialSkill;
+            return effect;
+        }
+        return null;
+    }
+
+    public static TileSkill GetTileSkill(int id)
+    {
+        if (TileSkillDIC.ContainsKey(id))
+        {
+            Type type = TileSkillDIC[id];
+            TileSkill effect = Activator.CreateInstance(type) as TileSkill;
             return effect;
         }
         return null;
@@ -78,8 +102,6 @@ public class TurretEffectFactory
             }
         }
         Debug.LogWarning("没有这个元素技能");
-        //type = ElementSkillDIC.First().Value;
-        //effect = Activator.CreateInstance(type) as ElementSkill;
         return null;
     }
 

@@ -20,6 +20,11 @@ public abstract class ElementTurret : TurretContent
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
+        Collider2D col = StaticData.RaycastCollider(transform.position, LayerMask.GetMask(StaticData.TempGroundMask));
+        if (col != null)
+        {
+            col.GetComponent<GroundTile>().IsLanded = true;
+        }
         GameManager.Instance.elementTurrets.Remove(this);
     }
 }

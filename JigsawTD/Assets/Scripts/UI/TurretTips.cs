@@ -23,9 +23,22 @@ public class TurretTips : TileTips
     [SerializeField] GameObject IntensifyArea = default;//元素塔加成效果区
     [SerializeField] TipsElementConstruct elementConstruct = default;//合成塔组成元素区
     //合成塔升级区
+
+    //加成值
+    [SerializeField] Text AttackChangeTxt = default;
+    [SerializeField] Text SpeedChangeTxt = default;
+    [SerializeField] Text RangeChangeTxt = default;
+    [SerializeField] Text CriticalChangeTxt = default;
+    [SerializeField] Text SputteringChangeTxt = default;
+    [SerializeField] Text SlowRateChangeTxt = default;
+
     //配方tips
     [SerializeField] GameObject BluePrintArea = default;
     [SerializeField] GameObject BuyBtn = default;
+
+    //地形加成
+    [SerializeField] GameObject TileSkillArea = default;
+    [SerializeField] Text TileSkillTxt = default;
 
 
     private StrategyBase m_Strategy;
@@ -59,6 +72,7 @@ public class TurretTips : TileTips
         showingTurret = true;
         AnalysisArea.SetActive(true);
         BluePrintArea.SetActive(false);
+        TileSkillArea.SetActive(false);
         //根据防御塔类型显示
         switch (Strategy.strategyType)
         {
@@ -83,6 +97,11 @@ public class TurretTips : TileTips
                 IntensifyArea.SetActive(false);
                 elementConstruct.gameObject.SetActive(true);
                 elementConstruct.SetElements((StrategyComposite)Strategy);
+                if (((StrategyComposite)Strategy).TileSkill != null)
+                {
+                    TileSkillArea.SetActive(true);
+                    TileSkillTxt.text = ((StrategyComposite)Strategy).TileSkill.SkillDescription;
+                }
                 break;
         }
 
@@ -99,6 +118,8 @@ public class TurretTips : TileTips
         BasicInfo();
         UpdateBluePrintInfo();
         BuyBtn.SetActive(grid.InShop);
+        TileSkillArea.SetActive(false);
+
         AnalysisArea.SetActive(false);
         UpgradeArea.SetActive(false);
         IntensifyArea.SetActive(false);
@@ -131,30 +152,53 @@ public class TurretTips : TileTips
 
     private void UpdateInfo()
     {
-        AttackValue.text = m_Strategy.FinalAttack.ToString("f0");
-        SpeedValue.text = m_Strategy.FinalSpeed.ToString("f2");
+        AttackValue.text = m_Strategy.FinalAttack.ToString();
+        AttackChangeTxt.text = "";
+
+        SpeedValue.text = m_Strategy.FinalSpeed.ToString();
+        SpeedChangeTxt.text = "";
+
         RangeValue.text = m_Strategy.FinalRange.ToString();
+        RangeChangeTxt.text = "";
+
         CriticalValue.text = (m_Strategy.FinalCriticalRate * 100).ToString() + "%";
+        CriticalChangeTxt.text = "";
+
         SputteringValue.text = m_Strategy.FinalSputteringRange.ToString();
+        SputteringChangeTxt.text = "";
+
         SlowRateValue.text = m_Strategy.FinalSlowRate.ToString();
+        SlowRateChangeTxt.text = "";
+
         AnalysisValue.text = m_Strategy.DamageAnalysis.ToString();
     }
 
     private void UpdateBluePrintInfo()
     {
         StrategyComposite strategy = m_Strategy as StrategyComposite;
-        AttackValue.text = strategy.FinalAttack.ToString() + (strategy.BaseAttackIntensify > 0 ?
-            "<color=cyan>(+" + strategy.InitAttack * strategy.BaseAttackIntensify + ")</color>" : "");
-        SpeedValue.text = strategy.FinalSpeed.ToString() + (strategy.BaseSpeedIntensify > 0 ?
-            "<color=cyan>(+" + strategy.InitSpeed * strategy.BaseSpeedIntensify + ")</color>" : "");
-        RangeValue.text = strategy.FinalRange.ToString() + (strategy.BaseRangeIntensify > 0 ?
-            "<color=cyan>(+" + strategy.BaseRangeIntensify + ")</color>" : "");
-        CriticalValue.text = (strategy.FinalCriticalRate * 100).ToString() + (strategy.BaseCriticalRateIntensify > 0 ?
-            "<color=cyan>(+" + strategy.BaseCriticalRateIntensify * 100 + ")</color>" : "") + "%";
-        SputteringValue.text = strategy.FinalSputteringRange.ToString() + (strategy.BaseSputteringRangeIntensify > 0 ?
-            "<color=cyan>(+" + strategy.BaseSputteringRangeIntensify + ")</color>" : "");
-        SlowRateValue.text = strategy.FinalSlowRate.ToString() + (strategy.BaseSlowRateIntensify > 0 ?
-            "<color=cyan>(+" + strategy.BaseSlowRateIntensify + ")</color>" : "");
+        AttackValue.text = strategy.InitAttack.ToString();
+        AttackChangeTxt.text = (strategy.BaseAttackIntensify > 0 ?
+            "+" + strategy.InitAttack * strategy.BaseAttackIntensify : "");
+
+        SpeedValue.text = strategy.InitSpeed.ToString();
+        SpeedChangeTxt.text = (strategy.BaseSpeedIntensify > 0 ?
+            "+" + strategy.InitSpeed * strategy.BaseSpeedIntensify : "");
+
+        RangeValue.text = strategy.InitRange.ToString();
+        RangeChangeTxt.text = (strategy.BaseRangeIntensify > 0 ?
+            "+" + strategy.BaseRangeIntensify : "");
+
+        CriticalValue.text = (strategy.InitCriticalRate * 100).ToString() + "%";
+        CriticalChangeTxt.text = (strategy.BaseCriticalRateIntensify > 0 ?
+            "+" + strategy.BaseCriticalRateIntensify * 100 : "") + "%";
+
+        SputteringValue.text = strategy.InitSputteringRange.ToString();
+        SputteringChangeTxt.text = (strategy.BaseSputteringRangeIntensify > 0 ?
+            "+" + strategy.BaseSputteringRangeIntensify : "");
+
+        SlowRateValue.text = strategy.InitSlowRate.ToString();
+        SlowRateChangeTxt.text = (strategy.BaseSlowRateIntensify > 0 ?
+            "+" + strategy.BaseSlowRateIntensify : "");
     }
 
     public void UpdateLevelUpInfo()
@@ -162,24 +206,24 @@ public class TurretTips : TileTips
         StrategyComposite strategy = m_Strategy as StrategyComposite;
 
         float attackIncrease = strategy.NextAttack - strategy.BaseAttack;
-        AttackValue.text = strategy.FinalAttack.ToString() + (attackIncrease > 0 ?
-            "<color=cyan>(+" + attackIncrease + ")</color>" : "");
+        AttackValue.text = strategy.FinalAttack.ToString();
+        AttackChangeTxt.text = (attackIncrease > 0 ? "+" + attackIncrease : "");
 
         float speedIncrease = strategy.NextSpeed - strategy.BaseSpeed;
-        SpeedValue.text = strategy.FinalSpeed.ToString() + (speedIncrease > 0 ?
-            "<color=cyan>(+" + speedIncrease + ")</color>" : "");
+        SpeedValue.text = strategy.FinalSpeed.ToString();
+        SpeedChangeTxt.text = (speedIncrease > 0 ? "+" + speedIncrease : "");
 
         float criticalIncrease = strategy.NextCriticalRate - strategy.BaseCriticalRate;
-        CriticalValue.text = (strategy.FinalCriticalRate * 100).ToString() + (criticalIncrease > 0 ?
-            "<color=cyan>(+" + criticalIncrease * 100 + ")</color>" : "") + "%";
+        CriticalValue.text = (strategy.FinalCriticalRate * 100).ToString() + "%";
+        CriticalChangeTxt.text = (criticalIncrease > 0 ? "+" + criticalIncrease * 100 + "%" : "");
 
         float sputteringIncrease = strategy.NextSputteringRange - strategy.BaseSputteringRange;
-        SputteringValue.text = strategy.FinalSputteringRange.ToString() + (sputteringIncrease > 0 ?
-            "<color=cyan>(+" + sputteringIncrease + ")</color>" : "");
+        SputteringValue.text = strategy.FinalSputteringRange.ToString();
+        SputteringChangeTxt.text = (sputteringIncrease > 0 ? "+" + sputteringIncrease : "");
 
         float slowRateIncrease = strategy.NextSlowRate - strategy.BaseSlowRate;
-        SlowRateValue.text = strategy.FinalSlowRate.ToString() + (slowRateIncrease > 0 ?
-            "<color=cyan>(+" + slowRateIncrease + ")</color>" : "");
+        SlowRateValue.text = strategy.FinalSlowRate.ToString();
+        SlowRateChangeTxt.text = (slowRateIncrease > 0 ? "+" + slowRateIncrease : "");
     }
 
 
