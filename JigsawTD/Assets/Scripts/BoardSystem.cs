@@ -250,6 +250,8 @@ public class BoardSystem : IGameSystem
     {
         List<Vector2Int> traps = new List<Vector2Int>();
         List<Vector2Int> tempPoss = tilePoss.ToList();
+
+
         for (int y = 0; y < size.y; y++)
         {
             for (int x = 0; x < size.x; x++)
@@ -273,7 +275,7 @@ public class BoardSystem : IGameSystem
         }
         foreach (Vector2Int pos in traps)
         {
-            GameTile tile = ConstructHelper.GetRandomTrap();
+            GameTile tile = UnityEngine.Random.value > 0.66f ? ConstructHelper.GetRandomTurretBase() : ConstructHelper.GetRandomTrap();
             tile.transform.position = (Vector3Int)pos;
             tile.TileLanded();
             tile.SetRandomRotation();

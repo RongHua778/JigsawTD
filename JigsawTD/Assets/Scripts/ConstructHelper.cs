@@ -61,6 +61,16 @@ public static class ConstructHelper
         return tile;
     }
 
+    //»ù×ù
+    public static GameTile GetRandomTurretBase()
+    {
+        GameTile tile = m_TileFactory.GetBasicTile();
+        GameTileContent content = m_ContentFactory.GetRandomTurretBase();
+        tile.SetContent(content);
+        return tile;
+    }
+
+
     //ºÏ³ÉËþ
     public static Blueprint GetRandomBluePrintByLevel(int level)
     {
@@ -116,5 +126,6 @@ public static class ConstructHelper
         shape.SetTile(tile);
         return shape;
     }
+
 
 }

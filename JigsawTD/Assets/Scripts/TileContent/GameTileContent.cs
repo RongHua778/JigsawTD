@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum GameTileContentType
 {
-    Empty, Destination, SpawnPoint, ElementTurret, CompositeTurret, Trap, Ground
+    Empty, Destination, SpawnPoint, ElementTurret, CompositeTurret, Trap, Ground,TurretBase
 }
 public abstract class GameTileContent : ReusableObject
 {

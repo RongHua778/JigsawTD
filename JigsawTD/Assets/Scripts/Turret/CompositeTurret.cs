@@ -25,6 +25,20 @@ public class CompositeTurret : TurretContent
         GameManager.Instance.compositeTurrets.Add(this);
         base.ContentLanded();
     }
+
+    protected override void ContentLandedCheck(Collider2D col)
+    {
+        if (col != null)
+        {
+            GameTile tile = col.GetComponent<GameTile>();
+            if (tile.Content.ContentType == GameTileContentType.TurretBase)//放在加成地形上时，获得地形技能
+            {
+                TurretBaseContent content = tile.Content as TurretBaseContent;
+                ((StrategyComposite)Strategy).AddTileSkill(content.m_TurretBaseAttribute.tileSkill);
+            }
+            ObjectPool.Instance.UnSpawn(tile);
+        }
+    }
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();

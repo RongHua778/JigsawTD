@@ -30,7 +30,7 @@ public class StrategyComposite : StrategyBase
 
 
     public ElementSkill ElementSkill1 { get; set; }
-    public ElementSkill ElementSkill2 { get; set; }
+    public TileSkill TileSkill { get; set; }
 
 
     public void GetTurretSkills()//首次获取并激活效果
@@ -77,5 +77,18 @@ public class StrategyComposite : StrategyBase
         }
     }
 
+    public void AddTileSkill(TileSkillName skillName)
+    {
+        if (TileSkill != null)
+        {
+            Debug.Log("已经有地形技能了");
+            return;
+        }
+        TileSkill skill = TurretEffectFactory.GetTileSkill((int)skillName);
+        skill.strategy = this;
+        TileSkill = skill;
+        TurretSkills.Add(skill);
+        TileSkill.Build();
+    }
 
 }

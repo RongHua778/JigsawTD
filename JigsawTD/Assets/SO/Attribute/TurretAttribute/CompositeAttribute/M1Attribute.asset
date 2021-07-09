@@ -26,9 +26,9 @@ MonoBehaviour:
   elementNumber: 3
   TurretSkill: 9
   TurretLevels:
-  - AttackRange: 4
+  - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 50
+    AttackDamage: 100
     AttackSpeed: 0.25
     SputteringRange: 0
     CriticalRate: 0
@@ -36,9 +36,9 @@ MonoBehaviour:
     TurretName: "M1\u96EA\u7403\u70AE"
     CannonSprite: {fileID: -264787257917623472, guid: bde35e3e9a4d90044ab007465a63e442, type: 3}
     ShootPointOffset: {x: 0, y: 0.21}
-  - AttackRange: 4
+  - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 80
+    AttackDamage: 200
     AttackSpeed: 0.25
     SputteringRange: 0
     CriticalRate: 0
@@ -46,9 +46,9 @@ MonoBehaviour:
     TurretName: "M2\u96EA\u7403\u70AE"
     CannonSprite: {fileID: -1221509669150334452, guid: bde35e3e9a4d90044ab007465a63e442, type: 3}
     ShootPointOffset: {x: 0, y: 0.23}
-  - AttackRange: 4
+  - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 120
+    AttackDamage: 350
     AttackSpeed: 0.25
     SputteringRange: 0
     CriticalRate: 0

@@ -28,3 +28,5 @@ public class TrapAttribute : ContentAttribute
     public List<BuffInfo> BuffInfos = new List<BuffInfo>();
 
 }
+
+

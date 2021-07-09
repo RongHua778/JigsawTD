@@ -9,6 +9,7 @@ TagManager:
   - UnDropableTurret
   - Tile
   - armor
+  - OnlyCompositeTurret
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - EnemyDetector
   - TurretDectector
   - Trap
-  - 
+  - TurretBase
   - 
   - 
   - 

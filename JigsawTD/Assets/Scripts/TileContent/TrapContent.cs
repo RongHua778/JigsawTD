@@ -5,7 +5,7 @@ using UnityEngine;
 public class TrapContent : GameTileContent
 {
     public override GameTileContentType ContentType => GameTileContentType.Trap;
-    public TrapAttribute m_TrapAttribute;
+    [HideInInspector]public TrapAttribute m_TrapAttribute;
     public bool needReset = false;//是否需要重置朝向
 
     int damageAnalysis;
