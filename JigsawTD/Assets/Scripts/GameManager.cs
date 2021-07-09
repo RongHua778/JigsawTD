@@ -23,6 +23,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameEndUI m_GameEndUI = default;
     [SerializeField] private MessageUI m_MessageUI = default;
     [SerializeField] private GuideVideo m_GuideVideo = default;
+    public MainUI MainUI { get => m_MainUI; set => m_MainUI = value; }
+
 
     [Header("TIPS")]
     [SerializeField] private TurretTips m_TurretTips = default;
@@ -39,6 +41,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] BlueprintFactory _bluePrintFacotry = default;
     [SerializeField] SkillFactory _skillFactory = default;
     [SerializeField] NonEnemyFactory _nonEnemyFactory = default;
+    [SerializeField] TaskFactory _taskFactory = default;
     public TileFactory TileFactory { get => _tileFactory; }
     public TileContentFactory ContentFactory { get => _contentFactory; }
     public TileShapeFactory ShapeFactory { get => _shapeFactory; }
@@ -46,6 +49,7 @@ public class GameManager : Singleton<GameManager>
     public BlueprintFactory BluePrintFactory { get => _bluePrintFacotry; }
     public SkillFactory SkillFactory { get => _skillFactory; set => _skillFactory = value; }
     public NonEnemyFactory NonEnemyFactory { get => _nonEnemyFactory; set => _nonEnemyFactory = value; }
+    public TaskFactory TaskFactory { get => _taskFactory; set => _taskFactory = value; }
 
 
     [Header("集合")]
@@ -65,14 +69,12 @@ public class GameManager : Singleton<GameManager>
     //初始化设定
     public void Initinal()
     {
-        //888888888888
-        //Game.Instance.Difficulty = 5;
-        //888888888888
         //初始化工厂
         TileFactory.Initialize();
         ContentFactory.Initialize();
         ShapeFactory.Initialize();
-        _enemyFactory.InitializeFactory();
+        EnemyFactory.InitializeFactory();
+        TaskFactory.InitializeFactory();
 
         //形状生成外观类
         ConstructHelper.Initialize();
@@ -80,12 +82,12 @@ public class GameManager : Singleton<GameManager>
         //初始化系统
         m_BoardSystem.Initialize(this);//版图系统
         m_WaveSystem.Initialize(this);//波次系统
-        m_CamControl.Initialize(this, m_MainUI);//摄像机控制
+        m_CamControl.Initialize(this, MainUI);//摄像机控制
 
         //初始化UI
-        m_MainUI.Initialize(this);//主界面顶部UI
+        MainUI.Initialize(this);//主界面顶部UI
         m_FuncUI.Initialize(this);//主界面功能UI
-        m_GuideUI.Initialize(this, m_FuncUI, m_MainUI, m_BluePrintShopUI);//教学系统UI
+        m_GuideUI.Initialize(this, m_FuncUI, MainUI, m_BluePrintShopUI);//教学系统UI
         m_BluePrintShopUI.Initialize(this);//配方系统UI
         m_ShapeSelectUI.Initialize(this);//抽模块UI
         m_GameEndUI.Initialize(this);//游戏结束UI
@@ -108,7 +110,7 @@ public class GameManager : Singleton<GameManager>
         if (Game.Instance.Tutorial)
         {
             m_FuncUI.PrepareForGuide();
-            m_MainUI.PrepareForGuide();
+            MainUI.PrepareForGuide();
             m_BluePrintShopUI.ShopBtnObj.SetActive(false);
             m_GuideUI.Show();
             TriggerGuide(0);
@@ -127,7 +129,7 @@ public class GameManager : Singleton<GameManager>
         WaveSystem.Release();
         m_CamControl.Release();
 
-        m_MainUI.Release();
+        MainUI.Release();
         m_FuncUI.Release();
         m_GuideUI.Release();
         m_BluePrintShopUI.Release();
@@ -164,15 +166,15 @@ public class GameManager : Singleton<GameManager>
             return;
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            m_MainUI.GameSpeed = 1;
+            MainUI.GameSpeed = 1;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            m_MainUI.GameSpeed = 2;
+            MainUI.GameSpeed = 2;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            m_MainUI.GameSpeed = 3;
+            MainUI.GameSpeed = 3;
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
@@ -188,6 +190,8 @@ public class GameManager : Singleton<GameManager>
     #region 阶段控制
     public void StartNewWave()
     {
+        //参数设置
+        WaveSystem.EnemyRemain = WaveSystem.RunningSequence.index.Count;
         m_FuncUI.Hide();
         TransitionToState(StateName.WaveState);
         foreach (var turret in compositeTurrets.behaviors)
@@ -197,19 +201,20 @@ public class GameManager : Singleton<GameManager>
     }
     public void PrepareNextWave()
     {
-        if (m_MainUI.Life <= 0)//游戏失败
+        TransitionToState(StateName.BuildingState);
+        if (MainUI.Life <= 0)//游戏失败
         {
             GameEnd(false);
             return;
         }
-        else if (m_MainUI.CurrentWave >= StaticData.Instance.LevelMaxWave)//游戏胜利
+        else if (MainUI.CurrentWave >= StaticData.Instance.LevelMaxWave)//游戏胜利
         {
             GameEnd(true);
             return;
         }
         WaveSystem.GetSequence();
         m_BluePrintShopUI.NextRefreshTrun--;
-        m_MainUI.PrepareNextWave(WaveSystem.RunningSequence, m_FuncUI.LuckyCoin);
+        MainUI.PrepareNextWave(WaveSystem.RunningSequence, m_FuncUI.LuckyCoin);
         m_FuncUI.PrepareNextWave();
         m_FuncUI.Show();
 
@@ -225,7 +230,7 @@ public class GameManager : Singleton<GameManager>
         {
             ((TurretContent)turret).Strategy.ClearTurnIntensify();
         }
-        TransitionToState(StateName.BuildingState);
+        
     }
 
     public void GameEnd(bool win)
@@ -330,7 +335,7 @@ public class GameManager : Singleton<GameManager>
 
     public bool ConsumeMoney(int cost)
     {
-        return m_MainUI.ConsumeMoney(cost);
+        return MainUI.ConsumeMoney(cost);
     }
 
     public void ShowMessage(string text)
@@ -340,7 +345,7 @@ public class GameManager : Singleton<GameManager>
 
     public void GainMoney(int amount)
     {
-        m_MainUI.Coin += (int)(amount * (1 + StaticData.OverallMoneyIntensify));
+        MainUI.Coin += (int)(amount * (1 + StaticData.OverallMoneyIntensify));
     }
 
     public void GainDraw(int amount)

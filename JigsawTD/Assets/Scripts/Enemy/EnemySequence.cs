@@ -6,7 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class EnemySequence
 {
-    public int Wave;
+    int wave;
     public float Stage=1f;
     public List<EnemyAttribute> EnemyAttribute;
     public List<int> Amount;
@@ -18,16 +18,20 @@ public class EnemySequence
 
     public List<int> index=new List<int>();
     private EnemyFactory enemyFactory;
+
+    public int Wave { get => wave; set => wave = value; }
+
     public EnemySequence(EnemyFactory enemyFactory,int wave,float stage,EnemyType enemy,int enemiesN=1)
     {
         EnemyAttribute = new List<EnemyAttribute>();
         Amount = new List<int>();
         CoolDown = new List<float>();
-        Wave = wave;
+        this.Wave = wave;
         Stage = stage;
         SpawnTimer = 0;
         this.enemyFactory = enemyFactory;
         Initiate(wave,enemy,enemiesN);
+
     }
 
     private void Initiate(int wave, EnemyType enemy,int enemiesN=1,int maxRandom=4)
@@ -52,7 +56,7 @@ public class EnemySequence
         //初始化敌人的数量以及cooldown
         for (int j = 0; j < EnemyAttribute.Count; j++)
         {
-            Amount.Add((EnemyAttribute[j].InitCount + wave / 4 * EnemyAttribute[j].CountIncrease) / EnemyAttribute.Count + 1);
+            Amount.Add((EnemyAttribute[j].InitCount + wave / 4 * EnemyAttribute[j].CountIncrease) / EnemyAttribute.Count);
             if (wave < 4)
             {
                 CoolDown.Add(waveCoolDown);
@@ -78,6 +82,21 @@ public class EnemySequence
         }
         //敌人强度提升的计算公式
         Intensify = Stage * (0.5f * wave + 1);
+
+    }
+
+    public void AddEnemy(EnemyType enemyType)
+    {
+        EnemyAttribute.Add(enemyFactory.Get(enemyType));
+        int temp = EnemyAttribute.Count - 1;
+        Amount.Add(EnemyAttribute[temp].InitCount + Wave / 4 * EnemyAttribute[temp].CountIncrease);
+        CoolDown.Add(EnemyAttribute[temp].CoolDown - Wave * 0.01f);
+        for (int j = 0; j < Amount[temp]; j++)
+        {
+            index.Add(temp);
+        }
+
+        index = StaticData.RandomSort(index);
 
     }
 
