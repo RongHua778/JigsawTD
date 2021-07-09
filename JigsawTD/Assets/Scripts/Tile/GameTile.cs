@@ -115,12 +115,6 @@ public abstract class GameTile : TileBase
         BaseRenderer.color = Color.white;
         Content = null;
 
-        Collider2D col = StaticData.RaycastCollider(transform.position, LayerMask.GetMask(StaticData.TempGroundMask));
-        if (col != null)
-        {
-            col.GetComponent<GroundTile>().IsLanded = true;
-        }
-
     }
 
     public void SetRandomRotation()

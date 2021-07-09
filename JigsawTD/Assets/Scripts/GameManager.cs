@@ -30,6 +30,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private TrapTips m_TrapTips = default;
     [SerializeField] private BuyGroundTips m_BuyGroundTips = default;
     [SerializeField] private EnemyTips m_EnemyTips = default;
+    [SerializeField] private TurretBaseTips m_TurretBaseTips = default;
 
     [Header("工厂")]
     [SerializeField] TileFactory _tileFactory = default;
@@ -69,6 +70,7 @@ public class GameManager : Singleton<GameManager>
         //Game.Instance.Difficulty = 5;
         //888888888888
         //初始化工厂
+        TurretEffectFactory.Initialize();
         TileFactory.Initialize();
         ContentFactory.Initialize();
         ShapeFactory.Initialize();
@@ -95,6 +97,7 @@ public class GameManager : Singleton<GameManager>
         m_MessageUI.Initialize(this);//提示系统UI
         m_GuideVideo.Initialize(this);//教程视频UI
         m_EnemyTips.Initialize(this);//敌人TIPS
+        m_TurretBaseTips.Initialize(this);//基座tips
 
         //设置操作流程
         buildingState = new BuildingState(this, BoardSystem);
@@ -397,25 +400,22 @@ public class GameManager : Singleton<GameManager>
     #region TIPS
     public void ShowTurretTips(StrategyBase strategy)
     {
+        HideTips();
         m_TurretTips.ReadTurret(strategy);
         m_TurretTips.Show();
-        m_TrapTips.Hide();
-        m_BuyGroundTips.Hide();
     }
 
     public void ShowTrapTips(TrapContent trap)
     {
+        HideTips();
         m_TrapTips.ReadTrap(trap);
-        m_TurretTips.Hide();
-        m_BuyGroundTips.Hide();
         m_TrapTips.Show();
     }
 
     public void ShowBuyGroundTips()
     {
+        HideTips();
         m_BuyGroundTips.ReadInfo(StaticData.FreeGroundTileCount > 0 ? 0 : m_BoardSystem.BuyOneGroundMoney);
-        m_TurretTips.Hide();
-        m_TrapTips.Hide();
         m_BuyGroundTips.Show();
     }
 
@@ -427,8 +427,7 @@ public class GameManager : Singleton<GameManager>
 
     public void ShowBluePrintTips(BluePrintGrid grid)
     {
-        m_TrapTips.Hide();
-        m_BuyGroundTips.Hide();
+        HideTips();
         m_TurretTips.ReadBluePrint(grid);
         m_TurretTips.Show();
     }
@@ -443,6 +442,13 @@ public class GameManager : Singleton<GameManager>
         m_EnemyTips.ReadSequenceInfo(m_WaveSystem);
     }
 
+    public void ShowTurretBaseTips(TurretBaseContent content)
+    {
+        HideTips();
+        m_TurretBaseTips.Show();
+        m_TurretBaseTips.ReadTurretBase(content);
+    }
+
     public void HideEnemyTips()
     {
         m_EnemyTips.Hide();
@@ -453,6 +459,7 @@ public class GameManager : Singleton<GameManager>
         m_TurretTips.Hide();
         m_TrapTips.Hide();
         m_BuyGroundTips.Hide();
+        m_TurretBaseTips.Hide();
     }
 
     #endregion

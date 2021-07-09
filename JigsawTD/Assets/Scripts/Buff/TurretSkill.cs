@@ -93,7 +93,7 @@ public abstract class InitialSkill : TurretSkill
 public class I1SkillSpeedIncreasePerShoot : InitialSkill
 {
     public override TurretSkillName EffectName => TurretSkillName.I1SkillSpeedIncreasedPerShoot;
-    public override string SkillDescription => "轮转炮会向周围随机发射能量弹，每次发射都会提升0.1攻速，上限10";
+    public override string SkillDescription => "轮转炮会向周围随机发射能量弹，每次发射提升0.1攻速，上限为10";
     public override void Shoot()
     {
         if (strategy.TurnFixSpeed > 9.95f)
@@ -104,7 +104,7 @@ public class I1SkillSpeedIncreasePerShoot : InitialSkill
 public class J1SkillDistanceBaseDamage : InitialSkill
 {
     public override TurretSkillName EffectName => TurretSkillName.J1SkillDistanceBaseDamage;
-    public override string SkillDescription => "子弹会随着飞行距离提升30%/格的伤害，相邻每个空格都会使该效果提升10%";
+    public override string SkillDescription => "子弹随飞行距离提升30%/格的伤害，狙击塔相邻每个空格使该效果提升10%";
 
     float increaseRate;
 
@@ -148,7 +148,7 @@ public class G1SkillMultiTarget : InitialSkill
 public class K1SkillDoubleCriticalPercentage : InitialSkill
 {
     public override TurretSkillName EffectName => TurretSkillName.K1SkillDoubleCriticalPercentage;
-    public override string SkillDescription => "使所有暴击伤害的提升效果翻倍";
+    public override string SkillDescription => "巨炮的所有暴击伤害提升效果翻倍";
 
     public override void PreHit()
     {
@@ -237,7 +237,7 @@ public class M1SkillDoubleSlowRate : InitialSkill
 {
     public override TurretSkillName EffectName => TurretSkillName.M1SkillDoubleSlowRate;
 
-    public override string SkillDescription => "发射一个持续直线移动到防御塔或空白区域前停下的雪球，雪球会使敌人当前减速效果翻倍";
+    public override string SkillDescription => "发射一个移动到直线路径末端的雪球，雪球使敌人的当前减速效果翻倍";
     public override void Hit(Enemy target)
     {
         float increaseSlow = target.SlowRate * 2f;

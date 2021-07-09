@@ -210,7 +210,7 @@ public class ACDResourcesRecycle : ElementSkill
 public class ACELonggerBarrel : ElementSkill
 {
     public override List<int> Elements => new List<int> { 0, 2, 4 };
-    public override string SkillDescription => "¼Ó³¤ÅÚ¹Ü£º¹¥ËÙ-50%£¬¹¥»÷¾àÀë+2¡£";
+    public override string SkillDescription => "¼Ó³¤ÅÚ¹Ü£º¹¥ËÙ-50%£¬¹¥»÷¾àÀë+2";
 
     public override void Build()
     {

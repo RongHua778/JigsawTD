@@ -107,7 +107,11 @@ public class DraggingShape : DraggingActions
             SetAllColor(wrongColor);
             return false;
         }
-        return true;
+        else
+        {
+            SetAllColor(correctColor);
+            return true;
+        }
     }
     private void CheckMapEdge()
     {
@@ -147,31 +151,33 @@ public class DraggingShape : DraggingActions
         foreach (var tile in TileShape.tiles)
         {
             Collider2D col = StaticData.RaycastCollider(tile.transform.position, LayerMask.GetMask(StaticData.ConcreteTileMask));
-            if (col == null)
-            {
-                SetTileColor(correctColor, tile);//没有下层TILE，设为正常
+            if (col == null)//没有下层TILE，正常
                 continue;
-            }
             if (tile.Content.ContentType != GameTileContentType.Empty)//如果是有防御塔的，就比对冲突
             {
+                if (col.CompareTag("OnlyCompositeTurret"))
+                {
+                    if (tile.Content.ContentType == GameTileContentType.CompositeTurret)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        canDrop = false;
+                    }
+                }
                 if (col.CompareTag("UnDropablePoint"))//冲突，返回，所有颜色被设为红色
                 {
                     canDrop = false;
                     overLapPoint = true;
                     break;
                 }
-                else
-                {
-                    SetTileColor(correctColor, tile);//不冲突，正常色
-                }
             }
-            else
-            {
-                SetTileColor(transparentColor, tile);//其他TILE，设为透明
-            }
-        }
 
+        }
     }
+
+
 
     private IEnumerator TryFindPath()
     {
