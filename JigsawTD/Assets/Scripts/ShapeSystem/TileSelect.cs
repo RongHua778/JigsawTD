@@ -1,46 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
-public class TileSelect : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
+public class TileSelect : MonoBehaviour
 {
 
     [SerializeField] RenderTexture renderTexture;
-    TileShape m_Shape;
+    public TileShape Shape { get; set; }
+    [SerializeField] LevelDownSelect m_LevelDownSelect = default;
+
+
 
     public void InitializeDisplay(int displayID, TileShape shape)
     {
-        m_Shape = shape;
+        Shape = shape;
         shape.SetUIDisplay(displayID, renderTexture);
+        StrategyElement strategy = Shape.m_ElementTurret.Strategy as StrategyElement;
+        if (strategy.Quality > 1)
+        {
+            m_LevelDownSelect.SetStrategy((StrategyElement)Shape.m_ElementTurret.Strategy);
+            m_LevelDownSelect.gameObject.SetActive(true);
+        }
+        else
+        {
+            m_LevelDownSelect.gameObject.SetActive(false);
+        }
     }
 
-    public void OnShapeClick()
+    public void OnShapeClick(bool levelDown = false)
     {
-        m_Shape.SetPreviewPlace();
-        m_Shape = null;
+        if (levelDown)//是否为降级选择
+        {
+            Shape.m_ElementTurret.Strategy.Quality -= 1;
+            Shape.m_ElementTurret.Strategy.SetQualityValue();
+            Shape.m_ElementTurret.SetGraphic();
+        }
+        Shape.SetPreviewPlace();
+        Shape = null;
         GameManager.Instance.PreviewComposition(false);
         GameManager.Instance.SelectShape();
     }
 
     public void ClearShape()
     {
-        if (m_Shape == null)
+        if (Shape == null)
             return;
-        m_Shape.ReclaimTiles();
-        Destroy(m_Shape.gameObject);
-        m_Shape = null;
+        Shape.ReclaimTiles();
+        Destroy(Shape.gameObject);
+        Shape = null;
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        StrategyElement strategy = m_Shape.m_ElementTurret.Strategy as StrategyElement;
-        GameManager.Instance.PreviewComposition(true, strategy.Element, strategy.Quality);
-    }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        GameManager.Instance.PreviewComposition(false);
-    }
 }

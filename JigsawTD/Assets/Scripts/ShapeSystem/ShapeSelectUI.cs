@@ -28,9 +28,5 @@ public class ShapeSelectUI : IUserInterface//控制形状生成
         }
     }
 
-    public void DisplayShapeOnTileSelct(int displayID, TileShape shape)
-    {
-        tileSelects[displayID].InitializeDisplay(displayID, shape);
-    }
 
 }
