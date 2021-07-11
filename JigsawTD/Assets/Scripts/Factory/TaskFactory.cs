@@ -10,40 +10,42 @@ public enum TaskDifficulty
 [CreateAssetMenu(menuName = "Factory/TaskFactory", fileName = "taskFactory")]
 public class TaskFactory : GameObjectFactory
 {
+    [SerializeField] Task taskPrefab;
     WaveSystem ws;
     public void InitializeFactory()
     {
         ws = GameManager.Instance.WaveSystem;
     }
-    public Task GetTask(TaskDifficulty difficulty,int periods,EnemyType enemyType)
+    public Task GetTask(TaskDifficulty difficulty,int periods,EnemyType enemyType,int rewardMoney)
     {
-        Task task = new Task(ws,difficulty, periods, enemyType);
+        Task task = CreateInstance(taskPrefab) as Task;
+        task.Initiate(ws, difficulty, periods, enemyType, rewardMoney);
         return task;
     }
 
     public Task GetRandomTask()
     {
         int temp = Random.Range(0,6);
-        Task task = new Task(ws, TaskDifficulty.Easy, 3, EnemyType.Tanker);
+        Task task = CreateInstance(taskPrefab) as Task;
         switch (temp)
         {
             case 0:
-                task = new Task(ws, TaskDifficulty.Easy, 3, EnemyType.Tanker);
+                task.Initiate(ws, TaskDifficulty.Easy, 3, EnemyType.Tanker, 100);
                 break;
             case 1:
-                task = new Task(ws, TaskDifficulty.Easy, 3, EnemyType.Runner);
+                task.Initiate(ws, TaskDifficulty.Easy, 3, EnemyType.Runner, 100);
                 break;
             case 2:
-                task = new Task(ws, TaskDifficulty.Medium, 2, EnemyType.Froster);
+                task.Initiate(ws, TaskDifficulty.Medium, 2, EnemyType.Froster, 175);
                 break;
             case 3:
-                task = new Task(ws, TaskDifficulty.Medium, 2, EnemyType.Healer);
+                task.Initiate(ws, TaskDifficulty.Medium, 2, EnemyType.Healer, 175);
                 break;
             case 4:
-                task = new Task(ws, TaskDifficulty.Difficult, 1, EnemyType.Divider);
+                task.Initiate(ws, TaskDifficulty.Difficult, 1, EnemyType.Divider, 250);
                 break;
             case 5:
-                task = new Task(ws, TaskDifficulty.Difficult, 1, EnemyType.SixArmor);
+                task.Initiate(ws, TaskDifficulty.Difficult, 1, EnemyType.SixArmor, 250);
                 break;
         }
         return task;

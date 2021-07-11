@@ -20,7 +20,8 @@ public class MainUI : IUserInterface
     [SerializeField] GuideBook m_GuideBook = default;
 
 
-    [SerializeField] Text[] taskText= default;
+    [SerializeField] Text[] taskTexts= default;
+    [SerializeField] Button[] taskButtons = default;
 
     List<Task> tasks = new List<Task>();
 
@@ -91,8 +92,11 @@ public class MainUI : IUserInterface
 
         m_PausePanel.Initialize(m_GameManager);
         m_GuideBook.Initialize(m_GameManager);
-        m_Anim = this.GetComponent<Animator>();
-
+        m_Anim = GetComponent<Animator>();
+        for (int i = 0; i < taskButtons.Length; i++)
+        {
+            taskButtons[i].gameObject.SetActive(false);
+        }
     }
 
 
@@ -133,6 +137,7 @@ public class MainUI : IUserInterface
 
     public void PrepareNextWave(EnemySequence sequence, int luckCoin)
     {
+
         CountTasks();
         CurrentWave++;
         m_GameManager.GainMoney((int)((StaticData.Instance.BaseWaveIncome + StaticData.Instance.WaveMultiplyIncome * (CurrentWave - 1)) * (1 + luckCoin * 0.1f)));
@@ -155,9 +160,38 @@ public class MainUI : IUserInterface
 
     private void CountTasks()
     {
-        foreach(Task t in tasks)
+        for (int i = 0; i < tasks.Count; i++)
         {
-            t.CountTask();
+            tasks[i].CountTask();
+            if (tasks[i].TaskComplete)
+            {
+                tasks[i].Reclaim(tasks);
+            }
+        }
+        UpdateTaskInfo();
+    }
+
+    private void UpdateTaskInfo() 
+    {
+        for (int i = 0; i < tasks.Count; i++)
+        {
+            taskTexts[i].text = tasks[i].GetInfo();
+            if (tasks[i].Actived)
+            {
+                taskButtons[i].gameObject.SetActive(false);
+            }
+            else
+            {
+                taskButtons[i].gameObject.SetActive(true);
+            }
+        }
+        if (tasks.Count < 3)
+        {
+            for (int i = tasks.Count; i < 3; i++)
+            {
+                taskTexts[i].text = "¿Õ°×";
+                taskButtons[i].gameObject.SetActive(false);
+            }
         }
     }
 
@@ -176,12 +210,39 @@ public class MainUI : IUserInterface
         GameSpeed++;
     }
 
-    public void GetTask()
+    public void GetTask(Transform t)
     {
         Task task = GameManager.Instance.TaskFactory.GetRandomTask();
+        task.transform.position = t.position;
+        if (tasks.Count < 3)
+        {
+            task.AddTo(tasks);
+            UpdateTaskInfo();
+        }
         //task.PlayTask();
-        //m_WaveInfoSetter.SetWaveInfo(GameManager.Instance.WaveSystem.LevelSequence[0]);
     }
 
+    public void PlayTask1()
+    {
+        tasks[0].PlayTask();
+        taskButtons[0].gameObject.SetActive(false);
+        taskTexts[0].text=tasks[0].GetInfo();
+        m_WaveInfoSetter.SetWaveInfo(GameManager.Instance.WaveSystem.LevelSequence[0]);
+    }
 
+    public void PlayTask2()
+    {
+        tasks[1].PlayTask();
+        taskButtons[1].gameObject.SetActive(false);
+        taskTexts[1].text = tasks[1].GetInfo();
+        m_WaveInfoSetter.SetWaveInfo(GameManager.Instance.WaveSystem.LevelSequence[0]);
+    }
+
+    public void PlayTask3()
+    {
+        tasks[2].PlayTask();
+        taskButtons[2].gameObject.SetActive(false);
+        taskTexts[2].text = tasks[2].GetInfo();
+        m_WaveInfoSetter.SetWaveInfo(GameManager.Instance.WaveSystem.LevelSequence[0]);
+    }
 }

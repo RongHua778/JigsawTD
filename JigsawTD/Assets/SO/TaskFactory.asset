@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 376b1f9d58d93064980ed934449b62b5, type: 3}
   m_Name: TaskFactory
   m_EditorClassIdentifier: 
+  taskPrefab: {fileID: 2599497721748869480, guid: 0d5ea50662ce37e4085a042709aa5fb5, type: 3}

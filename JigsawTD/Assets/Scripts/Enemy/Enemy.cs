@@ -102,7 +102,6 @@ public abstract class Enemy : PathFollower,IDamageable
     HealthBar healthBar;
 
 
-
     public virtual void Awake()
     {
         Anim = GetComponent<Animator>();
@@ -120,6 +119,7 @@ public abstract class Enemy : PathFollower,IDamageable
         }
         if (IsDie)
         {
+            GameManager.Instance.MainUI.GetTask(GetComponentInChildren<TargetPoint>().transform);
             if (EnemySkills!=null)
             {
                 foreach (Skill enemySkill in EnemySkills)
