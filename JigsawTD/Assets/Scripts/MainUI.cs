@@ -23,7 +23,8 @@ public class MainUI : IUserInterface
     [SerializeField] Text[] taskTexts= default;
     [SerializeField] Button[] taskButtons = default;
 
-    List<Task> tasks = new List<Task>();
+    List<Task> taksInPocket = new List<Task>();
+    List<Task> taksOutPocket = new List<Task>();
 
     private int coin = 0;
     public int Coin
@@ -160,23 +161,28 @@ public class MainUI : IUserInterface
 
     private void CountTasks()
     {
-        for (int i = 0; i < tasks.Count; i++)
+        for (int i = 0; i < taksInPocket.Count; i++)
         {
-            tasks[i].CountTask();
-            if (tasks[i].TaskComplete)
+            taksInPocket[i].CountTask();
+            if (taksInPocket[i].TaskComplete)
             {
-                tasks[i].Reclaim(tasks);
+                taksInPocket[i].Reclaim(taksInPocket);
             }
+
+        }
+        foreach(Task t in taksOutPocket)
+        {
+            t.CountDisappear();
         }
         UpdateTaskInfo();
     }
 
     private void UpdateTaskInfo() 
     {
-        for (int i = 0; i < tasks.Count; i++)
+        for (int i = 0; i < taksInPocket.Count; i++)
         {
-            taskTexts[i].text = tasks[i].GetInfo();
-            if (tasks[i].Actived)
+            taskTexts[i].text = taksInPocket[i].GetInfo();
+            if (taksInPocket[i].Actived)
             {
                 taskButtons[i].gameObject.SetActive(false);
             }
@@ -185,9 +191,9 @@ public class MainUI : IUserInterface
                 taskButtons[i].gameObject.SetActive(true);
             }
         }
-        if (tasks.Count < 3)
+        if (taksInPocket.Count < 3)
         {
-            for (int i = tasks.Count; i < 3; i++)
+            for (int i = taksInPocket.Count; i < 3; i++)
             {
                 taskTexts[i].text = "¿Õ°×";
                 taskButtons[i].gameObject.SetActive(false);
@@ -214,9 +220,11 @@ public class MainUI : IUserInterface
     {
         Task task = GameManager.Instance.TaskFactory.GetRandomTask();
         task.transform.position = t.position;
-        if (tasks.Count < 3)
+        taksOutPocket.Add(task);
+        if (taksInPocket.Count < 3)
         {
-            task.AddTo(tasks);
+            taksOutPocket.Remove(task);
+            task.AddTo(taksInPocket);
             UpdateTaskInfo();
         }
         //task.PlayTask();
@@ -224,25 +232,25 @@ public class MainUI : IUserInterface
 
     public void PlayTask1()
     {
-        tasks[0].PlayTask();
+        taksInPocket[0].PlayTask();
         taskButtons[0].gameObject.SetActive(false);
-        taskTexts[0].text=tasks[0].GetInfo();
+        taskTexts[0].text=taksInPocket[0].GetInfo();
         m_WaveInfoSetter.SetWaveInfo(GameManager.Instance.WaveSystem.LevelSequence[0]);
     }
 
     public void PlayTask2()
     {
-        tasks[1].PlayTask();
+        taksInPocket[1].PlayTask();
         taskButtons[1].gameObject.SetActive(false);
-        taskTexts[1].text = tasks[1].GetInfo();
+        taskTexts[1].text = taksInPocket[1].GetInfo();
         m_WaveInfoSetter.SetWaveInfo(GameManager.Instance.WaveSystem.LevelSequence[0]);
     }
 
     public void PlayTask3()
     {
-        tasks[2].PlayTask();
+        taksInPocket[2].PlayTask();
         taskButtons[2].gameObject.SetActive(false);
-        taskTexts[2].text = tasks[2].GetInfo();
+        taskTexts[2].text = taksInPocket[2].GetInfo();
         m_WaveInfoSetter.SetWaveInfo(GameManager.Instance.WaveSystem.LevelSequence[0]);
     }
 }

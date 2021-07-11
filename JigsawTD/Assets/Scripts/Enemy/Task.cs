@@ -25,7 +25,7 @@ public class Task : ReusableObject
         this.enemyType = enemyType;
         this.periods = periods;
         this.rewardMoney = rewardMoney;
-        waitingPeriods= 4;
+        waitingPeriods= 0;
         actived = false;
         taskComplete = false;
         inPocket = false;
@@ -51,17 +51,15 @@ public class Task : ReusableObject
                 TaskComplete = true;
             }
         }
-        else
-        {
-            waitingPeriods -= 1;
-            if (waitingPeriods <= 0)
-            {
-                TaskComplete = true;
-            }
-        }
-
     }
-
+    public void CountDisappear()
+    {
+        waitingPeriods++;
+        if (waitingPeriods >= 3)
+        {
+            ObjectPool.Instance.UnSpawn(this);
+        }
+    }
     public string GetInfo()
     {
         string result;
@@ -91,5 +89,15 @@ public class Task : ReusableObject
         tasks.Add(this);
         inPocket = true;
         transform.localPosition = Vector3.one * 99999999;
+    }
+
+    public override void OnUnSpawn()
+    {
+        base.OnUnSpawn();
+        waitingPeriods = 0;
+        actived = false;
+        taskComplete = false;
+        inPocket = false;
+        periodsPassed = 0;
     }
 }
