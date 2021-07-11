@@ -9,17 +9,23 @@ public class ScaleAndMove : IGameSystem
     MainUI m_MainUI;
     Vector2 m_ScreenPos = new Vector2();
     Vector3 oldPosition;
+
+    private Vector3 Origin;
+    private Vector3 Difference;
+    private float SmoothSpeed = 0.3f;
+    private bool Drag = false;
+
     Camera cam;
-    float moveSpeed = 15f;
+    //float moveSpeed = 15f;
     private int slideSpeed = 5;
     private float scrollSpeed = 2.5f;
     private float maximum = 10;
     private float minmum = 3;
 
-    private float maxUp = 13;
-    private float maxDown = -13;
-    private float maxLeft = -13;
-    private float maxRight = 13;
+    //private float maxUp = 13;
+    //private float maxDown = -13;
+    //private float maxLeft = -13;
+    //private float maxRight = 13;
     Vector2 CamMovement;
     // Start is called before the first frame update
 
@@ -57,7 +63,7 @@ public class ScaleAndMove : IGameSystem
 
     public override void GameUpdate()
     {
-        //DesktopInput();
+        DesktopInput();
         TutorialCounter();
         RTSView();
         //TEST
@@ -121,37 +127,39 @@ public class ScaleAndMove : IGameSystem
     {
         if (!CanControl)
             return;
-        if (Input.GetAxis("Mouse ScrollWheel") != 0)
-        {
-            cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minmum, maximum);
-            cam.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
-        }
+        //if (Input.GetAxis("Mouse ScrollWheel") != 0)
+        //{
+        //    cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minmum, maximum);
+        //    cam.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
+        //}
 
-        speedHorizon = Vector3.zero;
-        speedVertical = Vector3.zero;
-        speed = Vector3.zero;
-        Vector3 v1 = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-        if (v1.x < 0.01f && transform.localPosition.x > maxLeft)
-        {
-            speedHorizon = Vector3.left * slideSpeed * Time.deltaTime;
-        }
-        else if (v1.x > 1 - 0.01f && transform.localPosition.x < maxRight)
-        {
-            speedHorizon = Vector3.right * slideSpeed * Time.deltaTime;
-        }
-        else if (v1.y < 0.01f && transform.localPosition.y > maxDown)
-        {
-            speedVertical = Vector3.down * slideSpeed * Time.deltaTime;
-        }
-        else if (v1.y > 1 - 0.01f && transform.localPosition.y < maxUp)
-        {
-            speedVertical = Vector3.up * slideSpeed * Time.deltaTime;
-        }
-        else
-        {
-            speedVertical = Input.GetAxisRaw("Horizontal") * Vector3.right * slideSpeed * Time.deltaTime;
-            speedHorizon = Input.GetAxisRaw("Vertical") * Vector3.up * slideSpeed * Time.deltaTime;
-        }
+        //speedHorizon = Vector3.zero;
+        //speedVertical = Vector3.zero;
+        //speed = Vector3.zero;
+        //Vector3 v1 = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        //if (v1.x < 0.01f && transform.localPosition.x > maxLeft)
+        //{
+        //    speedHorizon = Vector3.left * slideSpeed * Time.deltaTime;
+        //}
+        //else if (v1.x > 1 - 0.01f && transform.localPosition.x < maxRight)
+        //{
+        //    speedHorizon = Vector3.right * slideSpeed * Time.deltaTime;
+        //}
+        //else if (v1.y < 0.01f && transform.localPosition.y > maxDown)
+        //{
+        //    speedVertical = Vector3.down * slideSpeed * Time.deltaTime;
+        //}
+        //else if (v1.y > 1 - 0.01f && transform.localPosition.y < maxUp)
+        //{
+        //    speedVertical = Vector3.up * slideSpeed * Time.deltaTime;
+        //}
+        //else
+        //{
+        //    speedVertical = Input.GetAxisRaw("Horizontal") * Vector3.right * slideSpeed * Time.deltaTime;
+        //    speedHorizon = Input.GetAxisRaw("Vertical") * Vector3.up * slideSpeed * Time.deltaTime;
+        //}
+        speedVertical = Input.GetAxisRaw("Horizontal") * Vector3.right * slideSpeed * Time.deltaTime;
+        speedHorizon = Input.GetAxisRaw("Vertical") * Vector3.up * slideSpeed * Time.deltaTime;
         speed = speedHorizon + speedVertical;
         transform.Translate(speed / m_MainUI.GameSpeed, Space.World);
     }
@@ -162,7 +170,7 @@ public class ScaleAndMove : IGameSystem
         if (Input.GetAxis("Mouse ScrollWheel") != 0)
         {
             cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minmum, maximum);
-            cam.orthographicSize += Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
+            cam.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
 
         }
         if (EventSystem.current.IsPointerOverGameObject())
@@ -172,19 +180,42 @@ public class ScaleAndMove : IGameSystem
         }
         if (DraggingActions.DraggingThis == null && Input.GetMouseButton(0))
         {
-            CamMovement = Vector3.left * Input.GetAxis("Mouse X") + Vector3.down * Input.GetAxis("Mouse Y");
+            Difference = cam.ScreenToWorldPoint(Input.mousePosition) - cam.transform.position;
+            if (Drag == false)
+            {
+                Drag = true;
+                Origin = cam.ScreenToWorldPoint(Input.mousePosition);
+            }
+
+            //CamMovement = Vector3.left * Input.GetAxis("Mouse X") + Vector3.down * Input.GetAxis("Mouse Y");
         }
         else
         {
-            CamMovement = Vector2.zero;
+            Drag = false;
         }
+        if (Drag)
+        {
+            Vector3 desirePos = Origin - Difference;
+            Vector3 smoothPos = Vector3.Lerp(cam.transform.position, desirePos, SmoothSpeed);
+            cam.transform.position = smoothPos;
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            cam.transform.DOMove(CamInitialPos, 0.6f);
+        }
+        //else
+        //{
+        //    CamMovement = Vector2.zero;
+        //}
 
     }
 
-    private void LateUpdate()
-    {
-        transform.Translate(CamMovement * moveSpeed * Time.deltaTime);
-    }
+    //private void LateUpdate()
+    //{
+        
+
+    //    transform.Translate(CamMovement * moveSpeed * Time.deltaTime);
+    //}
 
     private void MobileInput()
     {

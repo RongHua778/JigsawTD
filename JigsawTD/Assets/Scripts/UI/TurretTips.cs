@@ -190,7 +190,7 @@ public class TurretTips : TileTips
 
         CriticalValue.text = (strategy.InitCriticalRate * 100).ToString() + "%";
         CriticalChangeTxt.text = (strategy.BaseCriticalRateIntensify > 0 ?
-            "+" + strategy.BaseCriticalRateIntensify * 100 : "") + "%";
+            "+" + strategy.BaseCriticalRateIntensify * 100 + "%" : "");
 
         SputteringValue.text = strategy.InitSputteringRange.ToString();
         SputteringChangeTxt.text = (strategy.BaseSputteringRangeIntensify > 0 ?
