@@ -19,6 +19,11 @@ public class MainUI : IUserInterface
     [SerializeField] PausePanel m_PausePanel = default;
     [SerializeField] GuideBook m_GuideBook = default;
 
+
+    [SerializeField] Text[] taskText= default;
+
+    List<Task> tasks = new List<Task>();
+
     private int coin = 0;
     public int Coin
     {
@@ -128,6 +133,7 @@ public class MainUI : IUserInterface
 
     public void PrepareNextWave(EnemySequence sequence, int luckCoin)
     {
+        CountTasks();
         CurrentWave++;
         m_GameManager.GainMoney((int)((StaticData.Instance.BaseWaveIncome + StaticData.Instance.WaveMultiplyIncome * (CurrentWave - 1)) * (1 + luckCoin * 0.1f)));
         m_WaveInfoSetter.SetWaveInfo(sequence);
@@ -147,6 +153,13 @@ public class MainUI : IUserInterface
         }
     }
 
+    private void CountTasks()
+    {
+        foreach(Task t in tasks)
+        {
+            t.CountTask();
+        }
+    }
 
     public void GuideBookBtnClick()
     {
@@ -161,6 +174,13 @@ public class MainUI : IUserInterface
     public void GameSpeedBtnClick()
     {
         GameSpeed++;
+    }
+
+    public void GetTask()
+    {
+        Task task = GameManager.Instance.TaskFactory.GetRandomTask();
+        //task.PlayTask();
+        //m_WaveInfoSetter.SetWaveInfo(GameManager.Instance.WaveSystem.LevelSequence[0]);
     }
 
 

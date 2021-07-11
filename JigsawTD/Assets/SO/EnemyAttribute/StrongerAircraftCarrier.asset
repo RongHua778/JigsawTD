@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyName: 
   EnemyType: 15
-  InitCount: 0
+  InitCount: 1
   CountIncrease: 0
   Health: 1000
   Speed: 0.05

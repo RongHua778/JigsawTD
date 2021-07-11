@@ -19,6 +19,7 @@ public class WaveSystem : IGameSystem
             if (enemyRemain <= 0)
             {
                 enemyRemain = 0;
+                LevelSequence.RemoveAt(0);
                 GameManager.Instance.PrepareNextWave();
             }
         }
@@ -29,7 +30,7 @@ public class WaveSystem : IGameSystem
     private EnemyFactory _enemyFactory;
     [SerializeField]
     private EnemySequence runningSequence;
-    public Queue<EnemySequence> LevelSequence = new Queue<EnemySequence>();
+    public List<EnemySequence> LevelSequence = new List<EnemySequence>();
 
     private List<int[]> BossLevels;
 
@@ -140,35 +141,35 @@ public class WaveSystem : IGameSystem
             }
             if (difficulty <5)
             {
-                if (i == BossLevels[difficulty - 1][0])
-                {
-                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Divider);
-                }
-                else if(i == BossLevels[difficulty - 1][1])
-                {
-                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.SixArmor);
-                }
-                else if (i == BossLevels[difficulty - 1][2])
-                {
-                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Blinker);
-                }
-                else if (i == BossLevels[difficulty - 1][3])
-                {
-                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Borner);
-                }
-                else if (i % 7 == 0 && i > 0)
-                {
-                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random, 2);
-                }
-                else if (i % 9 == 0 && i > 0)
-                {
-                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random, 3);
-                }
+                //if (i == BossLevels[difficulty - 1][0])
+                //{
+                //    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Divider);
+                //}
+                //else if(i == BossLevels[difficulty - 1][1])
+                //{
+                //    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.SixArmor);
+                //}
+                //else if (i == BossLevels[difficulty - 1][2])
+                //{
+                //    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Blinker);
+                //}
+                //else if (i == BossLevels[difficulty - 1][3])
+                //{
+                //    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Borner);
+                //}
+                //else if (i % 7 == 0 && i > 0)
+                //{
+                //    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random, 2);
+                //}
+                //else if (i % 9 == 0 && i > 0)
+                //{
+                //    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random, 3);
+                //}
                 //前三波难度修正
-                else if (i < 3)
+                if (i < 3)
                 {
                     stage = (i + 1) * 0.5f;
-                    sequence = new EnemySequence(_enemyFactory, i + 1, 100f, EnemyType.Random);//stage
+                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random);//stage
                 }
                 else
                 {
@@ -176,7 +177,7 @@ public class WaveSystem : IGameSystem
                 }
             }
 
-            LevelSequence.Enqueue(sequence);
+            LevelSequence.Add(sequence);
         }
     }
 
@@ -185,9 +186,7 @@ public class WaveSystem : IGameSystem
     {
         if (LevelSequence.Count > 0)
         {
-            RunningSequence = LevelSequence.Dequeue();
-            //参数设置
-            enemyRemain = runningSequence.index.Count;
+            RunningSequence = LevelSequence[0];
         }
         else
         {
