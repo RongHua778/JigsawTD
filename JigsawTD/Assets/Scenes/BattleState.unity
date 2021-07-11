@@ -2016,7 +2016,6 @@ MonoBehaviour:
   pathOffset: 0.1
   healthBarPrefab: {fileID: 904725062044126347, guid: 2362ca59ddd854447ba882941722eec4, type: 3}
   runningSequence:
-    Wave: 0
     Stage: 0
     EnemyAttribute:
     - {fileID: 0}
@@ -2026,6 +2025,7 @@ MonoBehaviour:
     CoolDown: []
     waveCoolDown: 0
     index: 
+  LevelSequence: []
 --- !u!4 &107988105
 Transform:
   m_ObjectHideFlags: 0
@@ -3175,7 +3175,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 144.5, y: -51.02899}
+  m_AnchoredPosition: {x: 144.5, y: -51.029053}
   m_SizeDelta: {x: 130, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &215806211
@@ -5172,6 +5172,7 @@ MonoBehaviour:
   _bluePrintFacotry: {fileID: 11400000, guid: 328a3a7240180f7409f1f8d5a3654b4f, type: 2}
   _skillFactory: {fileID: 11400000, guid: 8dfa564f81651544a9e92088070f60c2, type: 2}
   _nonEnemyFactory: {fileID: 11400000, guid: 30f433efbe7ecd14e811dc996935ecb0, type: 2}
+  _taskFactory: {fileID: 11400000, guid: 8e679b45845228943917caaeb5ef9a19, type: 2}
 --- !u!4 &286649183
 Transform:
   m_ObjectHideFlags: 0
@@ -13154,6 +13155,7 @@ MonoBehaviour:
   m_WaveInfoSetter: {fileID: 1492728545}
   m_PausePanel: {fileID: 1383788366}
   m_GuideBook: {fileID: 1305768158}
+  taskText: []
 --- !u!95 &895535907
 Animator:
   serializedVersion: 3
