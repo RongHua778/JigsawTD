@@ -13,3 +13,10 @@ MonoBehaviour:
   m_Name: TaskFactory
   m_EditorClassIdentifier: 
   taskPrefab: {fileID: 2599497721748869480, guid: 0d5ea50662ce37e4085a042709aa5fb5, type: 3}
+  icons:
+  - {fileID: 3188815087764474750, guid: f9835346b30cae840a9eff85ed192e6f, type: 3}
+  - {fileID: 5000823649156328451, guid: f9835346b30cae840a9eff85ed192e6f, type: 3}
+  - {fileID: -4512359869375799480, guid: f9835346b30cae840a9eff85ed192e6f, type: 3}
+  - {fileID: 8019492531564915904, guid: f9835346b30cae840a9eff85ed192e6f, type: 3}
+  - {fileID: -8847467542957845770, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
+  - {fileID: 2497086793369854952, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
