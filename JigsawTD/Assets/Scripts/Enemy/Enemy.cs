@@ -97,6 +97,7 @@ public abstract class Enemy : PathFollower,IDamageable
         }
     }
 
+    float prDropTask=0.1f;
 
     [Header("HealthSetting")]
     HealthBar healthBar;
@@ -119,7 +120,7 @@ public abstract class Enemy : PathFollower,IDamageable
         }
         if (IsDie)
         {
-            GameManager.Instance.MainUI.GetTask(GetComponentInChildren<TargetPoint>().transform);
+            DropTask();
             if (EnemySkills!=null)
             {
                 foreach (Skill enemySkill in EnemySkills)
@@ -232,6 +233,14 @@ public abstract class Enemy : PathFollower,IDamageable
         }
     }
 
+    private void DropTask()
+    {
+        float temp = UnityEngine.Random.Range(0f,1f);
+        if (temp < prDropTask)
+        {
+            GameManager.Instance.MainUI.GetTask(GetComponentInChildren<TargetPoint>().transform);
+        }
+    }
 
     public override void OnSpawn()
     {
