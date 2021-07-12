@@ -240,6 +240,7 @@ public class M1SkillDoubleSlowRate : InitialSkill
     public override string SkillDescription => "发射一个移动到直线路径末端的雪球，雪球使敌人的当前减速效果翻倍";
     public override void Hit(Enemy target)
     {
+        strategy.RotSpeed = 0;
         float increaseSlow = target.SlowRate * 2f;
         BuffInfo info = new BuffInfo(EnemyBuffName.SlowDown, increaseSlow, 2f);
         target.Buffable.AddBuff(info);

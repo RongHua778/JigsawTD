@@ -39,7 +39,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -69.9, y: 17.29996}
-  m_SizeDelta: {x: 70, y: 70}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5945784540612061399
 CanvasRenderer:
@@ -93,7 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Img_Icon: {fileID: 5945784540612061398}
   Txt_ElementName: {fileID: 5945784541988447513}
-  UnobtainColor: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
+  UnobtainColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
   previewGlow: {fileID: 1514702128584183102}
   perfectIcon: {fileID: 9022919288658684670}
 --- !u!1 &5945784541988447519

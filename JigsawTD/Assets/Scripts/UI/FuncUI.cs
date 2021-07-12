@@ -60,15 +60,15 @@ public class FuncUI : IUserInterface
         set
         {
             playerLevel = value;
-            PlayerLevelTxt.text = "当前等级：" + PlayerLevel.ToString();
+            PlayerLevelTxt.text = PlayerLevel.ToString();
             PlayerLvUpMoney = StaticData.Instance.LevelUpMoney[PlayerLevel];
             if (PlayerLevel < StaticData.Instance.PlayerMaxLevel)
             {
-                LevelUpTxt.text = "升级: " + PlayerLvUpMoney.ToString();
+                LevelUpTxt.text = PlayerLvUpMoney.ToString();
             }
             else
             {
-                LevelUpTxt.text = "已满级";
+                LevelUpTxt.text = "MAX";
             }
             m_LevelInfo.SetContent(StaticData.GetLevelInfo(playerLevel));
         }

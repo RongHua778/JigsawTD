@@ -7,14 +7,13 @@ public class MainUI : IUserInterface
 {
     public GameObject LifeObj;
     public GameObject MoneyObj;
-    public GameObject SpeedBtnObj;
-    public GameObject GuideVideoBtnObj;
+    public GameObject TopLeftArea = default;
     public GameObject WaveObj;
     private Animator m_Anim;
     //UI
+    [SerializeField] Image GameSpeedImg = default;
     [SerializeField] Text PlayerLifeTxt = default;
     [SerializeField] Text coinTxt = default;
-    [SerializeField] Text speedBtnTxt = default;
     [SerializeField] WaveInfoSetter m_WaveInfoSetter = default;
     [SerializeField] PausePanel m_PausePanel = default;
     [SerializeField] GuideBook m_GuideBook = default;
@@ -62,6 +61,8 @@ public class MainUI : IUserInterface
         }
     }
 
+
+    [SerializeField] Sprite[] GameSpeedSprites = default;
     //游戏速度
     private int gameSpeed = 1;
     public int GameSpeed
@@ -77,7 +78,7 @@ public class MainUI : IUserInterface
             {
                 gameSpeed = value;
             }
-            speedBtnTxt.text = "游戏速度X" + gameSpeed;
+            GameSpeedImg.sprite = GameSpeedSprites[GameSpeed - 1];
             Time.timeScale = gameSpeed;
         }
     }
@@ -112,9 +113,9 @@ public class MainUI : IUserInterface
 
     public void PrepareForGuide()
     {
+        TopLeftArea.SetActive(false);
         MoneyObj.SetActive(false);
-        SpeedBtnObj.SetActive(false);
-        GuideVideoBtnObj.SetActive(false);
+
         LifeObj.SetActive(false);
         WaveObj.SetActive(false);
     }

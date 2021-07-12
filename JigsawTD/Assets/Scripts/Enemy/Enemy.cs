@@ -97,7 +97,7 @@ public abstract class Enemy : PathFollower,IDamageable
         }
     }
 
-    float prDropTask=0.1f;
+    float prDropTask=0f;
 
     [Header("HealthSetting")]
     HealthBar healthBar;

@@ -36,7 +36,7 @@ public class StaticData : Singleton<StaticData>
         { 0.3f, 0.35f, 0.2f, 0.125f, 0.025f },
         { 0.2f, 0.3f, 0.3f, 0.2f, 0.1f },
         { 0.1f, 0.2f, 0.25f, 0.3f, 0.15f },
-        { 0.1f, 0.15f, 0.20f, 0.3f, 0.25f }
+        { 0f, 0.15f, 0.25f, 0.3f, 0.3f }
     };
     public static int BuyBluePrintCost = 20;
     [Header("GameSetting")]
@@ -49,7 +49,7 @@ public class StaticData : Singleton<StaticData>
     public static int elementN = 5;
     //最大quality
     public static int maxQuality = 5;
-    public static int trapN = 20;
+    public static int trapN = 15;
     public static int basicN = 25;
 
     [Header("动态数据")]
@@ -427,13 +427,12 @@ public class StaticData : Singleton<StaticData>
     public static string GetLuckyInfo(int luckCoin, int luckProgress)
     {
         string text =
-           "1.当前回合没有抽取时，获得1枚幸运币。\n" +
-           "2.每个幸运币提高回合金币收入10%。\n" +
-           "3.抽取后，幸运币清零。\n" +
-           "4.每购买3个配方，获得1枚幸运币。\n" +
+           "1.当前回合没有抽取时，获得1格能量。\n" +
+           "2.每格能量提高回合金币收入10%。\n" +
+           "3.抽取后，能量清零。\n" +
+           "4.每购买3个配方，获得1格能量。\n" +
            "(当前收入增加 " + "<color=cyan>" + luckCoin * 10 + "%" + "</color>)\n" +
            "(已购买配方 " + "<color=cyan>" + luckProgress + "/3</color>)";
-        //"4.每购买3个配方，获得1枚幸运币。\n";
         return text;
     }
 

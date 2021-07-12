@@ -133,8 +133,9 @@ public class GuideUI : IUserInterface
                 GameManager.Instance.TriggerGuide(5);
                 break;
             case 9://end
-                m_MainUI.SpeedBtnObj.SetActive(true);
-                m_MainUI.GuideVideoBtnObj.SetActive(true);
+                m_MainUI.TopLeftArea.SetActive(true);
+                //m_MainUI.SpeedBtnObj.SetActive(true);
+                //m_MainUI.GuideVideoBtnObj.SetActive(true);
                 m_MainUI.PlayAnim("ShowLife", false);
                 m_MainUI.PlayAnim("ShowOther", true);
                 break;
