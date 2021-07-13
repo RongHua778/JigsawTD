@@ -193,14 +193,18 @@ public class GameManager : Singleton<GameManager>
     #region 阶段控制
     public void StartNewWave()
     {
-        //参数设置
-        WaveSystem.EnemyRemain = WaveSystem.RunningSequence.index.Count;
-        m_FuncUI.Hide();
-        TransitionToState(StateName.WaveState);
-        foreach (var turret in compositeTurrets.behaviors)
+        if (OperationState.StateName == StateName.BuildingState)
         {
-            ((TurretContent)turret).Strategy.StartTurnSkills();
+            WaveSystem.EnemyRemain = WaveSystem.RunningSequence.index.Count;
+            m_FuncUI.Hide();
+            TransitionToState(StateName.WaveState);
+            foreach (var turret in compositeTurrets.behaviors)
+            {
+                ((TurretContent)turret).Strategy.StartTurnSkills();
+            }
         }
+        //参数设置
+
     }
     public void PrepareNextWave()
     {

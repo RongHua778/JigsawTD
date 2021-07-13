@@ -78,12 +78,21 @@ public class PathFollower : ReusableObject,IGameBehavior
     protected virtual void PrepareIntro()
     {
         positionFrom = CurrentPoint.PathPos;
-        positionTo = CurrentPoint.ExitPoint;
-        Direction = CurrentPoint.PathDirection;
-        DirectionChange = DirectionChange.None;
-        model.localPosition = new Vector3(PathOffset, 0);
-        directionAngleFrom = directionAngleTo = Direction.GetAngle();
-        transform.localRotation = CurrentPoint.PathDirection.GetRotation();
+        if (PointIndex == PathPoints.Count - 1)
+        {
+            positionTo = CurrentPoint.PathPos;
+            //Direction = PathPoints[PointIndex-2].PathDirection;
+            transform.localRotation = PathPoints[PointIndex - 2].PathDirection.GetRotation();
+        }
+        else
+        {
+            positionTo = CurrentPoint.ExitPoint;
+            Direction = CurrentPoint.PathDirection;
+            DirectionChange = DirectionChange.None;
+            model.localPosition = new Vector3(PathOffset, 0);
+            directionAngleFrom = directionAngleTo = Direction.GetAngle();
+            transform.localRotation = CurrentPoint.PathDirection.GetRotation();
+        }
         Adjust = 2f;
         ProgressFactor = Adjust * Speed;
     }

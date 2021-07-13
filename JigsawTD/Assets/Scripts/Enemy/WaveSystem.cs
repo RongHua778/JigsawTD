@@ -136,35 +136,35 @@ public class WaveSystem : IGameSystem
                     break;
                 default:
                     //Debug.LogAssertion("难度参数错误");
-                    sequence = new EnemySequence(_enemyFactory, i + 1, 3f, EnemyType.StrongerAircraftCarrier);
+                    sequence = new EnemySequence(_enemyFactory, i + 1, 0.01f, EnemyType.Divider);
                     break;
             }
             if (difficulty <5)
             {
-                //if (i == BossLevels[difficulty - 1][0])
-                //{
-                //    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Divider);
-                //}
-                //else if(i == BossLevels[difficulty - 1][1])
-                //{
-                //    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.SixArmor);
-                //}
-                //else if (i == BossLevels[difficulty - 1][2])
-                //{
-                //    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Blinker);
-                //}
-                //else if (i == BossLevels[difficulty - 1][3])
-                //{
-                //    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Borner);
-                //}
-                //else if (i % 7 == 0 && i > 0)
-                //{
-                //    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random, 2);
-                //}
-                //else if (i % 9 == 0 && i > 0)
-                //{
-                //    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random, 3);
-                //}
+                if (i == BossLevels[difficulty - 1][0])
+                {
+                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Divider);
+                }
+                else if (i == BossLevels[difficulty - 1][1])
+                {
+                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.SixArmor);
+                }
+                else if (i == BossLevels[difficulty - 1][2])
+                {
+                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Blinker);
+                }
+                else if (i == BossLevels[difficulty - 1][3])
+                {
+                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Borner);
+                }
+                else if (i % 7 == 0 && i > 0)
+                {
+                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random, 2);
+                }
+                else if (i % 9 == 0 && i > 0)
+                {
+                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random, 3);
+                }
                 //前三波难度修正
                 if (i < 3)
                 {
