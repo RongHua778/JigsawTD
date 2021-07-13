@@ -24,6 +24,7 @@ MonoBehaviour:
   Rare: 0
   totalLevel: 0
   elementNumber: 0
+  TurretSkill: 0
   TurretLevels:
   - AttackRange: 1
     ForbidRange: 0
@@ -32,9 +33,8 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretEffects: []
-    PoloEffects: []
     TurretName: A1
+    TurretIcon: {fileID: -4293952102954766580, guid: 1d42c048b2d65864e8d3e6f8f439d0ba, type: 3}
     CannonSprite: {fileID: -2494827163238398725, guid: 768de1dbe1dcb8c45b69b4de6a5821bb, type: 3}
     ShootPointOffset: {x: 0, y: 0.33}
   - AttackRange: 1
@@ -44,9 +44,8 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretEffects: []
-    PoloEffects: []
     TurretName: A2
+    TurretIcon: {fileID: -7579240340240280150, guid: 1d42c048b2d65864e8d3e6f8f439d0ba, type: 3}
     CannonSprite: {fileID: -5280431197249048325, guid: 768de1dbe1dcb8c45b69b4de6a5821bb, type: 3}
     ShootPointOffset: {x: 0, y: 0.35}
   - AttackRange: 1
@@ -56,9 +55,8 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretEffects: []
-    PoloEffects: []
     TurretName: A3
+    TurretIcon: {fileID: -7641452014064155769, guid: 1d42c048b2d65864e8d3e6f8f439d0ba, type: 3}
     CannonSprite: {fileID: -4889670263694701591, guid: 768de1dbe1dcb8c45b69b4de6a5821bb, type: 3}
     ShootPointOffset: {x: 0, y: 0.38}
   - AttackRange: 2
@@ -68,9 +66,8 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretEffects: []
-    PoloEffects: []
     TurretName: A4
+    TurretIcon: {fileID: -1087002185150558114, guid: 1d42c048b2d65864e8d3e6f8f439d0ba, type: 3}
     CannonSprite: {fileID: 7028729962307703768, guid: 768de1dbe1dcb8c45b69b4de6a5821bb, type: 3}
     ShootPointOffset: {x: 0, y: 0.41}
   - AttackRange: 2
@@ -80,8 +77,7 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretEffects: []
-    PoloEffects: []
     TurretName: A5
+    TurretIcon: {fileID: -5385682246039739975, guid: 1d42c048b2d65864e8d3e6f8f439d0ba, type: 3}
     CannonSprite: {fileID: 4799454438761694576, guid: 768de1dbe1dcb8c45b69b4de6a5821bb, type: 3}
     ShootPointOffset: {x: 0, y: 0.44}

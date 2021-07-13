@@ -24,7 +24,7 @@ public class TipsElementConstruct : MonoBehaviour
             }
             Elements[i].gameObject.SetActive(true);
             TurretAttribute attribute = ConstructHelper.GetElementAttribute((Element)compositions[i].elementRequirement);
-            Elements[i].sprite = attribute.TurretLevels[compositions[i].qualityRequeirement - 1].CannonSprite;
+            Elements[i].sprite = attribute.TurretLevels[compositions[i].qualityRequeirement - 1].TurretIcon;
         }
         SetIntensifyInfo();
         if (strategy.ElementSkill1 != null)

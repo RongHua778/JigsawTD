@@ -34,6 +34,7 @@ MonoBehaviour:
     CriticalRate: 0
     SlowRate: 0
     TurretName: "F1\u7EC4\u5408\u70AE"
+    TurretIcon: {fileID: 6058281127652968510, guid: d9ef5bc7f2e68154eb1935bcb8c3c85e, type: 3}
     CannonSprite: {fileID: -4849019349383934194, guid: 1558cccd561e63b498e46ef6dc096a5d, type: 3}
     ShootPointOffset: {x: 0, y: 0.4}
   - AttackRange: 2
@@ -44,6 +45,7 @@ MonoBehaviour:
     CriticalRate: 0
     SlowRate: 0
     TurretName: "F2\u7EC4\u5408\u70AE"
+    TurretIcon: {fileID: 1138143217412330110, guid: d9ef5bc7f2e68154eb1935bcb8c3c85e, type: 3}
     CannonSprite: {fileID: 2752858795648052391, guid: 1558cccd561e63b498e46ef6dc096a5d, type: 3}
     ShootPointOffset: {x: 0, y: 0.44}
   - AttackRange: 2
@@ -54,5 +56,6 @@ MonoBehaviour:
     CriticalRate: 0
     SlowRate: 0
     TurretName: "F3\u7EC4\u5408\u70AE"
+    TurretIcon: {fileID: 5061518847745216781, guid: d9ef5bc7f2e68154eb1935bcb8c3c85e, type: 3}
     CannonSprite: {fileID: 6073466923811645465, guid: 1558cccd561e63b498e46ef6dc096a5d, type: 3}
     ShootPointOffset: {x: 0, y: 0.44}

@@ -24,10 +24,7 @@ MonoBehaviour:
   Rare: 3
   totalLevel: 12
   elementNumber: 3
-  TurretEffects:
-  - EffectName: 0
-    KeyValue: 0.5
-    EffectDescription: "\u8FDC\u7A0B\u72D9\u51FB\uFF1A\u5B50\u5F39\u7684\u4F24\u5BB3\u968F\u98DE\u884C\u8DDD\u79BB\u63D0\u534750%/\u683C"
+  TurretSkill: 0
   TurretLevels:
   - AttackRange: 7
     ForbidRange: 0
@@ -37,6 +34,7 @@ MonoBehaviour:
     CriticalRate: 0
     SlowRate: 0
     TurretName: "J1\u72D9\u51FB\u5854"
+    TurretIcon: {fileID: -6734541021382769069, guid: c1be13963e61eae42b02687dd1475717, type: 3}
     CannonSprite: {fileID: -5442612025329375428, guid: 42957127c2e7aba48a21a85a636cb609, type: 3}
     ShootPointOffset: {x: 0, y: 0.29}
   - AttackRange: 7
@@ -47,6 +45,7 @@ MonoBehaviour:
     CriticalRate: 0
     SlowRate: 0
     TurretName: "J2\u72D9\u51FB\u5854"
+    TurretIcon: {fileID: -7260088481118571112, guid: c1be13963e61eae42b02687dd1475717, type: 3}
     CannonSprite: {fileID: -2004675633971898, guid: 42957127c2e7aba48a21a85a636cb609, type: 3}
     ShootPointOffset: {x: 0, y: 0.37}
   - AttackRange: 7
@@ -57,5 +56,6 @@ MonoBehaviour:
     CriticalRate: 0
     SlowRate: 0
     TurretName: "J3\u72D9\u51FB\u5854"
+    TurretIcon: {fileID: -1944259913073176082, guid: c1be13963e61eae42b02687dd1475717, type: 3}
     CannonSprite: {fileID: 5670319644688947614, guid: 42957127c2e7aba48a21a85a636cb609, type: 3}
     ShootPointOffset: {x: 0, y: 0.38}

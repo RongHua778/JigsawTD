@@ -18,7 +18,7 @@ public class ElementGrid : MonoBehaviour
         element = (Element)composition.elementRequirement;
         quality = composition.qualityRequeirement;
         TurretAttribute attribute = ConstructHelper.GetElementAttribute(element);
-        Img_Icon.sprite = attribute.TurretLevels[quality - 1].CannonSprite;
+        Img_Icon.sprite = attribute.TurretLevels[quality - 1].TurretIcon;
         Txt_ElementName.text = attribute.TurretLevels[quality - 1].TurretName;
 
         if (composition.isPerfect)

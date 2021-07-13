@@ -130,7 +130,7 @@ public class TurretTips : TileTips
 
     private void BasicInfo()
     {
-        Icon.sprite = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].CannonSprite;
+        Icon.sprite = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].TurretIcon;
         Name.text = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].TurretName;
         string rangeTypeTxt = "";
         switch (m_Strategy.m_Att.RangeType)
@@ -235,7 +235,7 @@ public class TurretTips : TileTips
             m_Strategy.SetQualityValue();
             m_Strategy.BuildTurretEffects();
             m_Strategy.m_Turret.SetGraphic();
-            Icon.sprite = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].CannonSprite;
+            Icon.sprite = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].TurretIcon;
             Name.text = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].TurretName;
             //Description.text = m_Strategy.m_Att.TurretEffects[0].EffectDescription;
 
