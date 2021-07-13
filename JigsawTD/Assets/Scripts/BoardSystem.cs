@@ -325,6 +325,7 @@ public class BoardSystem : IGameSystem
             SeekPath();
         }
         GameManager.Instance.HideTips();
+        BuyOneGroundMoney += 10;
     }
 
     //´ıÆúÓÃ·½·¨0609

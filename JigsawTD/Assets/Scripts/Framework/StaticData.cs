@@ -408,11 +408,9 @@ public class StaticData : Singleton<StaticData>
         text += "当前等级概率:\n";
         for (int x = 0; x < 5; x++)
         {
-            if (x < 4)
-                text += "品质" + (x + 1).ToString() + ": " + levelChances[x] * 100 + "%\n";
-            else
-                text += "品质" + (x + 1).ToString() + ": " + levelChances[x] * 100 + "%";
+            text += "品质" + (x + 1).ToString() + ": " + levelChances[x] * 100 + "%\n";
         }
+        text += "当模块等级达到4和7级时，商店配方数量+1.";
         return text;
     }
 
@@ -430,7 +428,7 @@ public class StaticData : Singleton<StaticData>
            "1.当前回合没有抽取时，获得1格能量。\n" +
            "2.每格能量提高回合金币收入10%。\n" +
            "3.抽取后，能量清零。\n" +
-           "4.每购买3个配方，获得1格能量。\n" +
+           "4.每购买2个配方，获得1格能量。\n" +
            "(当前收入增加 " + "<color=cyan>" + luckCoin * 10 + "%" + "</color>)\n" +
            "(已购买配方 " + "<color=cyan>" + luckProgress + "/3</color>)";
         return text;

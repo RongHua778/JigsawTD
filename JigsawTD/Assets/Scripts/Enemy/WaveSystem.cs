@@ -43,9 +43,9 @@ public class WaveSystem : IGameSystem
         this._enemyFactory = gameManager.EnemyFactory;
         BossLevels = new List<int[]>();
         //关卡1的boss关
-        BossLevels.Add(new int[] { 9, 16, 22, 29 });
+        BossLevels.Add(new int[] { 9, 19, 29, 39 });
         //关卡2的boss关
-        BossLevels.Add(new int[] { 9, 17, 25, 34 });
+        BossLevels.Add(new int[] { 9, 19, 29, 39 });
         //关卡3的boss关
         BossLevels.Add(new int[] { 9, 19, 29, 39 });
         //关卡4的boss关
@@ -128,10 +128,10 @@ public class WaveSystem : IGameSystem
                 case 4:
                     if (i % 2 == 0)
                     {
-                        if (i < 10) stage += 2f;
-                        else if (i >= 10 && i < 20) stage += 3.5f;
-                        else if (i >= 20 && i < 30) stage += 5f;
-                        else if (i >= 30) stage += 6.5f;
+                        if (i < 10) stage += 1f;
+                        else if (i >= 10 && i < 20) stage += 2.5f;
+                        else if (i >= 20 && i < 30) stage += 4f;
+                        else if (i >= 30) stage += 5.5f;
                     }
                     break;
                 default:
@@ -141,7 +141,13 @@ public class WaveSystem : IGameSystem
             }
             if (difficulty <5)
             {
-                if (i == BossLevels[difficulty - 1][0])
+                //前三波难度修正
+                if (i < 3)
+                {
+                    stage = (i + 1) * 0.5f;
+                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random);//stage
+                }
+                else if (i == BossLevels[difficulty - 1][0])
                 {
                     sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Divider);
                 }
@@ -165,16 +171,11 @@ public class WaveSystem : IGameSystem
                 {
                     sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random, 3);
                 }
-                //前三波难度修正
-                if (i < 3)
-                {
-                    stage = (i + 1) * 0.5f;
-                    sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random);//stage
-                }
                 else
                 {
                     sequence = new EnemySequence(_enemyFactory, i + 1, stage, EnemyType.Random);
                 }
+
             }
 
             LevelSequence.Add(sequence);

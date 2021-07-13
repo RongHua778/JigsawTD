@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DustBase
   m_EditorClassIdentifier: 
   Name: "\u6E85\u5C04\u57FA\u5EA7"
-  Icon: {fileID: 21300000, guid: 537e57241659f504488d2a4c4c44f314, type: 3}
+  Icon: {fileID: 6683349771476132449, guid: 8cd652a31bd99b345b5aed8764e5d440, type: 3}
   Description: "\u53EA\u53EF\u4EE5\u653E\u7F6E\u5408\u6210\u5854\uFF1A\u4F7F\u5408\u6210\u5854\u7684\u57FA\u7840\u6E85\u5C04\u52A0\u6210\u7FFB\u500D\u3002"
   ContentPrefab: {fileID: 6825504451496016830, guid: 225a6f4ed6445b24bac7ffbd08e49d8a, type: 3}
   tileSkill: 0

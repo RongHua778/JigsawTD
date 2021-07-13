@@ -20,6 +20,7 @@ public class BluePrintShopUI : IUserInterface
     public List<BluePrintGrid> OwnBluePrints = new List<BluePrintGrid>();//拥有配方表
 
     int shopCapacity = 3;
+    public int ShopCapacity { get => shopCapacity; set => shopCapacity = value; }
     int nextRefreshTrun = 0;
     public int NextRefreshTrun //下次自动刷新回合
     {
@@ -35,6 +36,8 @@ public class BluePrintShopUI : IUserInterface
             NextRefreshTurnsTxt.text = nextRefreshTrun + "回合后刷新";
         }
     }
+
+
 
     public override void Initialize(GameManager gameManager)
     {
@@ -55,7 +58,7 @@ public class BluePrintShopUI : IUserInterface
             RemoveGrid(grid);
         }
         ShopBluePrints.Clear();
-        for (int i = 0; i < shopCapacity; i++)
+        for (int i = 0; i < ShopCapacity; i++)
         {
             Blueprint bluePrint = ConstructHelper.GetRandomBluePrintByLevel(level);
             AddBluePrint(bluePrint, true);

@@ -6,8 +6,6 @@ using UnityEngine.EventSystems;
 
 public class LevelDownSelect :MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-
-    [SerializeField] TileSelect m_TileSelect = default;
     public StrategyElement m_Strategy;
     public void SetStrategy(StrategyElement strategy)
     {

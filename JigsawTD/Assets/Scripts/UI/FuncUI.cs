@@ -23,13 +23,17 @@ public class FuncUI : IUserInterface
     bool drawThisTurn = true;
     public bool DrawThisTurn { get => drawThisTurn; set => drawThisTurn = value; }
 
+
+
+    private int buyShapeCost = 25;
+
     private int luckProgress = 0;
     public int LuckProgress
     {
         get => luckProgress;
         set
         {
-            if (value > 2)
+            if (value > 1)
             {
                 luckProgress = 0;
                 LuckyCoin++;
@@ -49,7 +53,16 @@ public class FuncUI : IUserInterface
         set
         {
             drawRemain = value;
-            DrawBtnTxt.text = "抽取模块X" + drawRemain.ToString();
+            if (drawRemain <= 0)
+            {
+                DrawBtnTxt.text = "抽取模块(金币" + buyShapeCost + ")";
+
+            }
+            else
+            {
+                DrawBtnTxt.text = "抽取模块X" + drawRemain.ToString();
+
+            }
         }
     }
 
@@ -98,7 +111,7 @@ public class FuncUI : IUserInterface
             //    //GameManager.Instance.GetRandomBluePrint();
             //}
             //LuckPointTxt.text = "累积点:" + luckyCoin.ToString();
-            m_LuckInfo.SetContent(StaticData.GetLuckyInfo(LuckyCoin,LuckProgress));
+            m_LuckInfo.SetContent(StaticData.GetLuckyInfo(LuckyCoin, LuckProgress));
             m_LuckProgress.SetProgress(luckyCoin);
         }
     }
@@ -144,10 +157,15 @@ public class FuncUI : IUserInterface
             DrawThisTurn = true;
             m_GameManager.DrawShapes();
         }
-        else
+        else if (GameManager.Instance.ConsumeMoney(buyShapeCost))
         {
-            GameManager.Instance.ShowMessage("抽取次数不足");
+            LuckyCoin = 0;
+            DrawRemain--;
+            DrawThisTurn = true;
+            m_GameManager.DrawShapes();
+            buyShapeCost += 25;
         }
+
     }
 
     public void PrepareNextWave()
@@ -178,6 +196,10 @@ public class FuncUI : IUserInterface
             if (GameManager.Instance.ConsumeMoney(PlayerLvUpMoney))
             {
                 PlayerLevel++;
+                if (PlayerLevel == 4 || PlayerLevel == 7)//4和7级增加一个商店容量
+                {
+                    m_GameManager.IncreaseShopCapacity();
+                }
             }
         }
     }

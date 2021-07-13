@@ -404,6 +404,11 @@ public class GameManager : Singleton<GameManager>
         m_BoardSystem.BuyOneEmptyTile();
     }
 
+    public void IncreaseShopCapacity()
+    {
+        m_BluePrintShopUI.ShopCapacity++;
+    }
+
     #endregion
 
     #region TIPS
