@@ -56,12 +56,10 @@ public class FuncUI : IUserInterface
             if (drawRemain <= 0)
             {
                 DrawBtnTxt.text = "抽取模块(金币" + buyShapeCost + ")";
-
             }
             else
             {
                 DrawBtnTxt.text = "抽取模块X" + drawRemain.ToString();
-
             }
         }
     }
@@ -160,10 +158,10 @@ public class FuncUI : IUserInterface
         else if (GameManager.Instance.ConsumeMoney(buyShapeCost))
         {
             LuckyCoin = 0;
-            DrawRemain--;
             DrawThisTurn = true;
             m_GameManager.DrawShapes();
             buyShapeCost += 25;
+            DrawRemain = 0;
         }
 
     }

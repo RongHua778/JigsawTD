@@ -47,6 +47,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BG
+    uniqueID: 1444185319
+    locked: 0
   - name: GameTile
     uniqueID: 2652223015
     locked: 0
