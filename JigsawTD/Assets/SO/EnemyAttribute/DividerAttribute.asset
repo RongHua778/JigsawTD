@@ -16,12 +16,12 @@ MonoBehaviour:
   EnemyType: 8
   InitCount: 1
   CountIncrease: 0
-  Health: 70
+  Health: 100
   Speed: 0.5
   Shell: 0
   CoolDown: 3
   Prefab: {fileID: -4008761052356302502, guid: 74ed77649a912194784c510912c2ef8e, type: 3}
-  ReachDamage: 1
+  ReachDamage: 0
   extraHealth: 0
   EnemyIcon: {fileID: -8847467542957845770, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
-  Description: "\u6B7B\u4EA1\u540E\u4F1A\u5206\u88C2\u6210\u51E0\u4E2A\u8F83\u5C0F\u7684\u672C\u4F53\u3002"
+  Description: "\u5956\u52B1\u578BBoss\u3002\u4E0D\u4F1A\u9020\u6210\u4F24\u5BB3\uFF0C\u6B7B\u4EA1\u540E\u5206\u88C2\u4E3A\u51E0\u4E2A\u8F83\u5C0F\u7684\u672C\u4F53\uFF0C\u5E76\u6389\u843D\u5927\u91CF\u5956\u52B1\u3002"

@@ -16,7 +16,8 @@ public class RotatingArmorBoss : Armorer
         base.Initialize(attribute, pathOffset, healthBar, intensify);
         Vector3 rot = new Vector3(0, 0, 360);
         tween = rotateObj.DORotate(rot, 6f).SetLoops(-1, LoopType.Incremental).SetEase(Ease.Linear).SetRelative();
-
+        rewardCoin = 500;
+        rewardLuckyDraw = 2;
     }
 
     public override void OnUnSpawn()

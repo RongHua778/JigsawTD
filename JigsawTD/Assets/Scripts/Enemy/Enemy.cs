@@ -5,6 +5,8 @@ using UnityEngine;
 
 public abstract class Enemy : PathFollower,IDamageable
 {
+    public int rewardCoin;
+    public int rewardLuckyDraw;
     public bool IsBoss = false;
     public bool IsEnemy { get => true; }
     [SerializeField] protected ReusableObject exlposionPrefab = default;
@@ -121,6 +123,7 @@ public abstract class Enemy : PathFollower,IDamageable
         if (IsDie)
         {
             DropTask();
+            DropReward();
             if (EnemySkills!=null)
             {
                 foreach (Skill enemySkill in EnemySkills)
@@ -231,6 +234,12 @@ public abstract class Enemy : PathFollower,IDamageable
         {
             healthBar.ShowJumpDamage((int)realDamage);
         }
+    }
+
+    private void DropReward()
+    {
+        GameManager.Instance.MainUI.Coin += rewardCoin;
+        GameManager.Instance.FuncUI.DrawRemain += rewardLuckyDraw;
     }
 
     private void DropTask()

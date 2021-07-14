@@ -12,6 +12,8 @@ public class Divider : Enemy
     {
         base.Initialize(attribute, pathOffset, healthBar, intensify);
         EnemySprite.sprite = originalSprite;
+        rewardCoin = 300;
+        rewardLuckyDraw = 2;
         EnemySkills = new List<Skill>();
         EnemySkills.Add(GameManager.Instance.SkillFactory.GetSkill(EnemySkill.Divide, this));
     }

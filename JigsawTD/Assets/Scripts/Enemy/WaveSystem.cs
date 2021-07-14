@@ -136,7 +136,7 @@ public class WaveSystem : IGameSystem
                     break;
                 default:
                     //Debug.LogAssertion("难度参数错误");
-                    sequence = new EnemySequence(_enemyFactory, i + 1, 0.01f, EnemyType.Divider);
+                    sequence = new EnemySequence(_enemyFactory, i + 1, 100f, EnemyType.SixArmor);
                     break;
             }
             if (difficulty <5)

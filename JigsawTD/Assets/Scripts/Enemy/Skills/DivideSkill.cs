@@ -52,6 +52,8 @@ public class DivideSkill : Skill
         enemy.EnemySkills.Add(ds);
         enemy.EnemySprite.sprite = dividerSprites[dividing - 1];
         enemy.MaxHealth = this.enemy.MaxHealth * DividerIntensify;
+        enemy.rewardLuckyDraw = this.enemy.rewardLuckyDraw - 1;
+        enemy.rewardCoin = this.enemy.rewardCoin - 100;
         enemy.EnemySprite.GetComponent<CircleCollider2D>().radius = 0.4f - 0.1f * (3 - dividing);
         enemy.SpawnOn(this.enemy.PointIndex, board.shortestPoints);
         GameManager.Instance.enemies.Add(enemy);

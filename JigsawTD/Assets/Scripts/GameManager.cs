@@ -23,6 +23,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameEndUI m_GameEndUI = default;
     [SerializeField] private MessageUI m_MessageUI = default;
     [SerializeField] private GuideVideo m_GuideVideo = default;
+    public FuncUI FuncUI { get => m_FuncUI; set => m_FuncUI = value; }
     public MainUI MainUI { get => m_MainUI; set => m_MainUI = value; }
 
 
@@ -88,8 +89,8 @@ public class GameManager : Singleton<GameManager>
 
         //初始化UI
         MainUI.Initialize(this);//主界面顶部UI
-        m_FuncUI.Initialize(this);//主界面功能UI
-        m_GuideUI.Initialize(this, m_FuncUI, MainUI, m_BluePrintShopUI);//教学系统UI
+        FuncUI.Initialize(this);//主界面功能UI
+        m_GuideUI.Initialize(this, FuncUI, MainUI, m_BluePrintShopUI);//教学系统UI
         m_BluePrintShopUI.Initialize(this);//配方系统UI
         m_ShapeSelectUI.Initialize(this);//抽模块UI
         m_GameEndUI.Initialize(this);//游戏结束UI
@@ -112,7 +113,7 @@ public class GameManager : Singleton<GameManager>
         //初始化教程
         if (Game.Instance.Tutorial)
         {
-            m_FuncUI.PrepareForGuide();
+            FuncUI.PrepareForGuide();
             MainUI.PrepareForGuide();
             m_BluePrintShopUI.ShopBtnObj.SetActive(false);
             m_GuideUI.Show();
@@ -133,7 +134,7 @@ public class GameManager : Singleton<GameManager>
         m_CamControl.Release();
 
         MainUI.Release();
-        m_FuncUI.Release();
+        FuncUI.Release();
         m_GuideUI.Release();
         m_BluePrintShopUI.Release();
         m_ShapeSelectUI.Release();
@@ -186,7 +187,7 @@ public class GameManager : Singleton<GameManager>
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            m_FuncUI.NextWaveBtnClick();
+            FuncUI.NextWaveBtnClick();
         }
     }
 
@@ -196,7 +197,7 @@ public class GameManager : Singleton<GameManager>
         if (OperationState.StateName == StateName.BuildingState)
         {
             WaveSystem.EnemyRemain = WaveSystem.RunningSequence.index.Count;
-            m_FuncUI.Hide();
+            FuncUI.Hide();
             TransitionToState(StateName.WaveState);
             foreach (var turret in compositeTurrets.behaviors)
             {
@@ -221,9 +222,9 @@ public class GameManager : Singleton<GameManager>
         }
         WaveSystem.GetSequence();
         m_BluePrintShopUI.NextRefreshTrun--;
-        MainUI.PrepareNextWave(WaveSystem.RunningSequence, m_FuncUI.LuckyCoin);
-        m_FuncUI.PrepareNextWave();
-        m_FuncUI.Show();
+        MainUI.PrepareNextWave(WaveSystem.RunningSequence, FuncUI.LuckyCoin);
+        FuncUI.PrepareNextWave();
+        FuncUI.Show();
 
         TriggerGuide(6);
         TriggerGuide(7);
@@ -285,9 +286,9 @@ public class GameManager : Singleton<GameManager>
     public void DrawShapes()
     {
         TransitionToState(StateName.PickingState);
-        m_FuncUI.Hide();
+        FuncUI.Hide();
         m_ShapeSelectUI.Show();
-        m_ShapeSelectUI.ShowThreeShapes(m_FuncUI.PlayerLevel);
+        m_ShapeSelectUI.ShowThreeShapes(FuncUI.PlayerLevel);
     }
 
     public void SelectShape()//选择了一个模块
@@ -300,7 +301,7 @@ public class GameManager : Singleton<GameManager>
     {
         TransitionToState(StateName.BuildingState);
 
-        m_FuncUI.Show();
+        FuncUI.Show();
         m_BluePrintShopUI.CheckAllBluePrint();
 
     }
@@ -321,7 +322,7 @@ public class GameManager : Singleton<GameManager>
         {
             TransitionToState(StateName.PickingState);
             m_BluePrintShopUI.CompositeBluePrint(grid);
-            m_FuncUI.Hide();
+            FuncUI.Hide();
         }
         else
         {
@@ -357,7 +358,7 @@ public class GameManager : Singleton<GameManager>
 
     public void GainDraw(int amount)
     {
-        m_FuncUI.DrawRemain += amount;
+        FuncUI.DrawRemain += amount;
     }
 
     public void SpawnEnemy(int type)
@@ -369,20 +370,20 @@ public class GameManager : Singleton<GameManager>
     {
         if (ConsumeMoney(cost))
         {
-            m_BluePrintShopUI.RefreshShop(m_FuncUI.PlayerLevel, cost);
+            m_BluePrintShopUI.RefreshShop(FuncUI.PlayerLevel, cost);
         }
     }
 
     public void GetRandomBluePrint()
     {
-        m_BluePrintShopUI.GetARandomBluePrintToPocket(m_FuncUI.PlayerLevel);
+        m_BluePrintShopUI.GetARandomBluePrintToPocket(FuncUI.PlayerLevel);
     }
 
     public void BuyBluePrint(BluePrintGrid grid, int cost)
     {
         if (ConsumeMoney(cost))
         {
-            m_FuncUI.LuckProgress++;
+            FuncUI.LuckProgress++;
             m_BluePrintShopUI.MoveBluePrintToPocket(grid);
         }
     }
