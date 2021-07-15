@@ -32,12 +32,17 @@ public class SkillFactory : GameObjectFactory
                 return new BornSkill(enemy, bornerBornCD, bornerEnemyOneBorn);
             case EnemySkill.Blink:
                 return new BlinkSkill(enemy, blinkerBlink, holePrefab);
-            case EnemySkill.Divide:
-                return new DivideSkill(enemy, dividerDividing, dividerSprings, 1, dividerSprites);
+            //case EnemySkill.Divide:
+            //    return new DivideSkill(enemy, dividerDividing, dividerSprings, 1, dividerSprites);
             default:
                 Debug.LogAssertion("技能参数错误！");
                 return null;
         }
+    }
+
+    public DivideSkill GetDividerSkill(Enemy enemy, int dividing)
+    {
+        return new DivideSkill(enemy, dividing, dividerSprings, dividerSprites);
     }
 
     public Skill GetSkill(EnemySkill skill, AircraftCarrier enemy)

@@ -4,26 +4,17 @@ using UnityEngine;
 
 public class DivideSkill : Skill
 {
-    WaveSystem ws;
-    BoardSystem bs;
-    public int dividing;
+
+    int dividing;
     int springs;
-    float dividerIntensify = 1;
-    public Sprite[] dividerSprites = default;
-    public DivideSkill(Enemy enemy, int dividing, int springs, float dividerIntensify, Sprite[] dividerSprites)
+    Sprite[] dividerSprites;
+    public DivideSkill(Enemy enemy, int dividing, int springs, Sprite[] divideSprites)
     {
         this.enemy = enemy;
         this.dividing = dividing;
         this.springs = springs;
-        this.dividerSprites = dividerSprites;
-        this.dividerIntensify = dividerIntensify;
-
-
-        ws = GameManager.Instance.WaveSystem;
-        bs = GameManager.Instance.BoardSystem;
+        this.dividerSprites = divideSprites;
     }
-
-    public float DividerIntensify { get => dividerIntensify; set => dividerIntensify = value; }
 
     public override void OnDying()
     {
@@ -32,32 +23,42 @@ public class DivideSkill : Skill
 
     private void GetSprings()
     {
-        if (0 < dividing)
+        if (dividing > 1)
         {
-            DividerIntensify *= 0.5f;
             for (int i = 0; i < springs; i++)
             {
-                ws.EnemyRemain += 1;
-                SpawnEnemy(bs);
+                SpawnEnemy();
             }
         }
     }
-    private void SpawnEnemy(BoardSystem board)
+    private void SpawnEnemy()
     {
-        EnemyAttribute attribute = GameManager.Instance.EnemyFactory.Get(EnemyType.Divider);
-        float intensify = ws.RunningSequence.Intensify;
-        Divider enemy = ObjectPool.Instance.Spawn(attribute.Prefab) as Divider;
-        HealthBar healthBar = ObjectPool.Instance.Spawn(ws.HealthBarPrefab) as HealthBar;
-        DivideSkill ds = new DivideSkill(enemy, dividing - 1, springs, DividerIntensify, dividerSprites);
-        enemy.Initialize(attribute, Random.Range(-0.3f, 0.3f), healthBar, intensify);
-        enemy.EnemySkills = new List<Skill>();
-        enemy.EnemySkills.Add(ds);
-        enemy.EnemySprite.sprite = dividerSprites[dividing - 1];
-        enemy.MaxHealth = this.enemy.MaxHealth * DividerIntensify;
-        enemy.EnemySprite.GetComponent<CircleCollider2D>().radius = 0.4f - 0.1f * (3 - dividing);
-        enemy.SpawnOn(this.enemy.PointIndex, board.shortestPoints);
-        GameManager.Instance.enemies.Add(enemy);
-        enemy.Progress = Mathf.Clamp((this.enemy.Progress + Random.Range(-0.2f, 0.2f)), 0, 1);
+        Divider divider = GameManager.Instance.SpawnEnemy(this.enemy.EnemyType, this.enemy.PointIndex) as Divider;
+        divider.dividing = dividing - 1;
+        divider.EnemySkills.Clear();
+        divider.EnemySkills.Add(GameManager.Instance.SkillFactory.GetDividerSkill(divider, divider.dividing));
+        divider.enemySprite.sprite = dividerSprites[divider.dividing-1];
+        divider.Progress = Mathf.Clamp((this.enemy.Progress + Random.Range(-0.2f, 0.2f)), 0, 1);
+        divider.MaxHealth = this.enemy.MaxHealth / 2;
+        divider.enemyCol.radius = 0.4f - 0.1f * (3 - divider.dividing);
+        //enemy.dividing = dividing;
+        //enemy.enemySprite.sprite = dividerSprites[enemy.dividing];
+        //enemy.MaxHealth = this.enemy.MaxHealth / 2;
+        //enemy.enemyCol.radius = 0.4f - 0.1f * (3 - dividing);
+
+        //EnemyAttribute attribute = GameManager.Instance.EnemyFactory.Get(EnemyType.Divider);
+        //float intensify = ws.RunningSequence.Intensify;
+        //Divider enemy = ObjectPool.Instance.Spawn(attribute.Prefab) as Divider;
+        //HealthBar healthBar = ObjectPool.Instance.Spawn(ws.HealthBarPrefab) as HealthBar;
+        //DivideSkill ds = new DivideSkill(enemy, dividing - 1, springs, DividerIntensify, dividerSprites);
+        //enemy.Initialize(attribute, Random.Range(-0.3f, 0.3f), healthBar, intensify);
+        //enemy.EnemySkills = new List<Skill>();
+        //enemy.EnemySkills.Add(ds);
+        //enemy.EnemySprite.sprite = dividerSprites[dividing - 1];
+        //enemy.MaxHealth = this.enemy.MaxHealth * DividerIntensify;
+        //enemy.SpawnOn(this.enemy.PointIndex, board.shortestPoints);
+        //GameManager.Instance.enemies.Add(enemy);
+        //enemy.Progress = Mathf.Clamp((this.enemy.Progress + Random.Range(-0.2f, 0.2f)), 0, 1);
 
 
     }

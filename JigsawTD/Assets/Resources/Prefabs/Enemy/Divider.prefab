@@ -87,10 +87,10 @@ MonoBehaviour:
   IsBoss: 1
   exlposionPrefab: {fileID: 4814509631623709245, guid: da26032d01e11f8489ff266989819e3b, type: 3}
   initialSpeed: 0
-  EnemySprite: {fileID: 1900518670408692583}
-  originalSprite: {fileID: -8847467542957845770, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
-  smallDividerExplosion: {fileID: 4814509631623709245, guid: cde09d379e3e93f46afc53b515cc5441, type: 3}
-  BigDividerExplosion: {fileID: 4814509631623709245, guid: da26032d01e11f8489ff266989819e3b, type: 3}
+  enemySprite: {fileID: 0}
+  enemyCol: {fileID: 0}
+  dividerSprites: []
+  dividing: 3
 --- !u!1 &8360252054385358165
 GameObject:
   m_ObjectHideFlags: 0

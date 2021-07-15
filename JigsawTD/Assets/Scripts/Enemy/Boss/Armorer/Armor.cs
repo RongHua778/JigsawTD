@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class Armor : MonoBehaviour,IDamageable
 {
-    [SerializeField] protected Armorer boss;
 
     [SerializeField] ParticalControl explosionPrefab = default;
     [SerializeField] JumpDamage jumpDamagePrefab = default;
     protected AudioClip explosionClip;
-    public TrapContent CurrentTrap { get; set; }
-    public BuffableEntity Buffable { get; set; }
     public bool IsEnemy { get => false; }
 
     private bool isDie;
@@ -56,19 +53,22 @@ public class Armor : MonoBehaviour,IDamageable
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<Bullet>())
-        {
+        //if (collision.GetComponent<Bullet>())
+        //{
             Bullet bullet = collision.GetComponent<Bullet>();
-            if (bullet.hit)
-                return;
-            bullet.hit = true;
-            bullet.DealRealDamage(this, bullet.Damage);
+            //if (bullet.hit)
+            //    return;
+            //bullet.hit = true;
+            bullet.TriggerPreHitEffect();
+            bullet.DealRealDamage(this);
+            GameManager.Instance.nonEnemies.Remove(bullet);
             bullet.ReclaimBullet();
+
             ParticalControl effect = ObjectPool.Instance.Spawn(bullet.SputteringEffect) as ParticalControl;
             effect.transform.position = transform.position;
             effect.transform.localScale = Vector3.one * 0.3f;
             effect.PlayEffect();
-        }
+        //}
 
     }
 

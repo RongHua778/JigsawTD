@@ -18,6 +18,7 @@ public class EnemySequence
 
     public List<int> index=new List<int>();
     private EnemyFactory enemyFactory;
+    public bool IsEnd;
 
     public int Wave { get => wave; set => wave = value; }
 
@@ -102,15 +103,15 @@ public class EnemySequence
 
     public bool Progress()
     {
-    SpawnTimer += Time.deltaTime;
+        SpawnTimer += Time.deltaTime;
         if (index.Count > 0)
         {
-            int type = index[0];
-            if (SpawnTimer >= CoolDown[type])
+            int typeIndex = index[0];
+            if (SpawnTimer >= CoolDown[typeIndex])
             {
                 SpawnTimer = 0;
                 index.RemoveAt(0);
-                GameManager.Instance.SpawnEnemy(type);
+                GameManager.Instance.SpawnEnemy(EnemyAttribute[typeIndex].EnemyType,0);
             }
         }
         else

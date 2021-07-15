@@ -195,7 +195,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (OperationState.StateName == StateName.BuildingState)
         {
-            WaveSystem.EnemyRemain = WaveSystem.RunningSequence.index.Count;
+            //WaveSystem.EnemyRemain = WaveSystem.RunningSequence.index.Count;
             m_FuncUI.Hide();
             TransitionToState(StateName.WaveState);
             foreach (var turret in compositeTurrets.behaviors)
@@ -360,9 +360,9 @@ public class GameManager : Singleton<GameManager>
         m_FuncUI.DrawRemain += amount;
     }
 
-    public void SpawnEnemy(int type)
+    public Enemy SpawnEnemy(EnemyType type,int pathIndex )
     {
-        WaveSystem.SpawnEnemy(BoardSystem, type);
+        return WaveSystem.SpawnEnemy(BoardSystem, _enemyFactory.Get(type),pathIndex);
     }
 
     public void RefreshShop(int cost)

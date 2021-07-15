@@ -5,13 +5,11 @@ using DG.Tweening;
 
 public class RotatingArmor : Armor
 {
-    [SerializeField] Transform body;
-
 
     protected override void DisArmor()
     {
         base.DisArmor();
-        Invoke("ReArmor", boss.ArmorCoolDown);
+        //Invoke("ReArmor", boss.ArmorCoolDown);
     }
 
 }

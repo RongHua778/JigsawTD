@@ -16,7 +16,7 @@ public class WaveSystem : IGameSystem
         set
         {
             enemyRemain = value;
-            if (enemyRemain <= 0)
+            if (enemyRemain <= 0 && !Running)
             {
                 enemyRemain = 0;
                 LevelSequence.RemoveAt(0);
@@ -79,7 +79,6 @@ public class WaveSystem : IGameSystem
         {
             if (!RunningSequence.Progress())
             {
-
                 Running = false;
             }
         }
@@ -136,7 +135,7 @@ public class WaveSystem : IGameSystem
                     break;
                 default:
                     //Debug.LogAssertion("难度参数错误");
-                    sequence = new EnemySequence(_enemyFactory, i + 1, 0.01f, EnemyType.Divider);
+                    sequence = new EnemySequence(_enemyFactory, i + 1, 5f, EnemyType.Borner);
                     break;
             }
             if (difficulty <5)
@@ -196,15 +195,18 @@ public class WaveSystem : IGameSystem
 
     }
 
-    public void SpawnEnemy(BoardSystem board, int type)
+    public Enemy SpawnEnemy(BoardSystem board, EnemyAttribute attribute,int pathIndex)
     {
-        EnemyAttribute attribute = RunningSequence.EnemyAttribute[type];
+        EnemyRemain++;
+        //EnemyAttribute attribute = EnemyFactory.
+        //    RunningSequence.EnemyAttribute[type];
         float intensify = RunningSequence.Intensify;
         Enemy enemy = ObjectPool.Instance.Spawn(attribute.Prefab) as Enemy;
         HealthBar healthBar = ObjectPool.Instance.Spawn(HealthBarPrefab) as HealthBar;
         enemy.Initialize(attribute, UnityEngine.Random.Range(-pathOffset, pathOffset), healthBar, intensify);
-        enemy.SpawnOn(0, board.shortestPoints);
+        enemy.SpawnOn(pathIndex, board.shortestPoints);
         GameManager.Instance.enemies.Add(enemy);
+        return enemy;
     }
 
 

@@ -19127,8 +19127,10 @@ MonoBehaviour:
     PathDirection: 0
     ExitPoint: {x: 0, y: 0}
   IsBoss: 1
-  exlposionPrefab: {fileID: 4814509631623709245, guid: ce7784084ac4d8046831643b89f1e650, type: 3}
+  exlposionPrefab: {fileID: 4814509631623709245, guid: f67ede64dda110a44a621ef491bab4b5, type: 3}
   initialSpeed: 0
+  enemySprite: {fileID: 0}
+  enemyCol: {fileID: 0}
 --- !u!1 &8360252054385358165
 GameObject:
   m_ObjectHideFlags: 0

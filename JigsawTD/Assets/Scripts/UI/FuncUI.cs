@@ -53,14 +53,15 @@ public class FuncUI : IUserInterface
         set
         {
             drawRemain = value;
-            if (drawRemain <= 0)
-            {
-                DrawBtnTxt.text = "抽取模块(金币" + buyShapeCost + ")";
-            }
-            else
-            {
-                DrawBtnTxt.text = "抽取模块X" + drawRemain.ToString();
-            }
+            DrawBtnTxt.text = "抽取模块X" + drawRemain.ToString();
+            //if (drawRemain <= 0)
+            //{
+            //    DrawBtnTxt.text = "抽取模块(金币" + buyShapeCost + ")";
+            //}
+            //else
+            //{
+            //    DrawBtnTxt.text = "抽取模块X" + drawRemain.ToString();
+            //}
         }
     }
 
@@ -155,14 +156,18 @@ public class FuncUI : IUserInterface
             DrawThisTurn = true;
             m_GameManager.DrawShapes();
         }
-        else if (GameManager.Instance.ConsumeMoney(buyShapeCost))
+        else
         {
-            LuckyCoin = 0;
-            DrawThisTurn = true;
-            m_GameManager.DrawShapes();
-            buyShapeCost += 25;
-            DrawRemain = 0;
+            GameManager.Instance.ShowMessage("抽取次数不足");
         }
+        //else if (GameManager.Instance.ConsumeMoney(buyShapeCost))
+        //{
+        //    LuckyCoin = 0;
+        //    DrawThisTurn = true;
+        //    m_GameManager.DrawShapes();
+        //    buyShapeCost += 25;
+        //    DrawRemain = 0;
+        //}
 
     }
 
