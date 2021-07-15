@@ -13,6 +13,8 @@ public class Divider : Enemy
         base.Initialize(attribute, pathOffset, healthBar, intensify);
         EnemySprite.sprite = originalSprite;
         EnemySkills = new List<Skill>();
-        EnemySkills.Add(GameManager.Instance.SkillFactory.GetSkill(EnemySkill.Divide, this));
+        DivideSkill sk = GameManager.Instance.SkillFactory.GetSkill(EnemySkill.Divide, this) as DivideSkill;
+        EnemySkills.Add(sk);
+
     }
 }

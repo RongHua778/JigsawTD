@@ -6,17 +6,19 @@ public class DivideSkill : Skill
 {
     WaveSystem ws;
     BoardSystem bs;
-    int dividing;
+    public int dividing;
     int springs;
     float dividerIntensify = 1;
-    Sprite[] dividerSprites = default;
-    public DivideSkill(Enemy enemy,int dividing, int springs,float dividerIntensify, Sprite[] dividerSprites)
+    public Sprite[] dividerSprites = default;
+    public DivideSkill(Enemy enemy, int dividing, int springs, float dividerIntensify, Sprite[] dividerSprites)
     {
         this.enemy = enemy;
         this.dividing = dividing;
         this.springs = springs;
         this.dividerSprites = dividerSprites;
         this.dividerIntensify = dividerIntensify;
+
+
         ws = GameManager.Instance.WaveSystem;
         bs = GameManager.Instance.BoardSystem;
     }
@@ -25,7 +27,7 @@ public class DivideSkill : Skill
 
     public override void OnDying()
     {
-       GetSprings();
+        GetSprings();
     }
 
     private void GetSprings()
@@ -46,7 +48,7 @@ public class DivideSkill : Skill
         float intensify = ws.RunningSequence.Intensify;
         Divider enemy = ObjectPool.Instance.Spawn(attribute.Prefab) as Divider;
         HealthBar healthBar = ObjectPool.Instance.Spawn(ws.HealthBarPrefab) as HealthBar;
-        DivideSkill ds=new DivideSkill(enemy, dividing-1,springs,DividerIntensify,dividerSprites);
+        DivideSkill ds = new DivideSkill(enemy, dividing - 1, springs, DividerIntensify, dividerSprites);
         enemy.Initialize(attribute, Random.Range(-0.3f, 0.3f), healthBar, intensify);
         enemy.EnemySkills = new List<Skill>();
         enemy.EnemySkills.Add(ds);
@@ -56,5 +58,7 @@ public class DivideSkill : Skill
         enemy.SpawnOn(this.enemy.PointIndex, board.shortestPoints);
         GameManager.Instance.enemies.Add(enemy);
         enemy.Progress = Mathf.Clamp((this.enemy.Progress + Random.Range(-0.2f, 0.2f)), 0, 1);
+
+
     }
 }

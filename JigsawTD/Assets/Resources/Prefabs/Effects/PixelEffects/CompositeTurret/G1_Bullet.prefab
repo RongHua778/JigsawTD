@@ -69,7 +69,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -513789213
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 70b04b97606ff4c498905d1fed58c3c6, type: 3}
   m_Color: {r: 1, g: 0.57924527, b: 0.6274217, a: 1}
@@ -133,6 +133,8 @@ MonoBehaviour:
   sputteringEffect: {fileID: 3494240544614092349, guid: eb6cba38b10cbae4595d14d7b62081a8, type: 3}
   turretParent: {fileID: 0}
   hit: 0
+  isCritical: 0
+  SputteredCount: 0
 --- !u!96 &134762492602489568
 TrailRenderer:
   serializedVersion: 2
@@ -172,7 +174,7 @@ TrailRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -513789213
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Time: 0.1
   m_Parameters:

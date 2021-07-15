@@ -19,7 +19,7 @@ public class AAAHeavyCannon : ElementSkill
     public override void Build()
     {
         strategy.BaseAttackIntensifyModify += 1;
-        strategy.RotSpeed *= 0.05f;
+        strategy.RotSpeed =0.5f;
     }
 }
 

@@ -4802,7 +4802,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1288343251
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_RenderMode: 4
   m_SortMode: 0
@@ -9600,7 +9600,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1288343251
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_RenderMode: 4
   m_SortMode: 0
@@ -19052,7 +19052,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1288343251
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_RenderMode: 1
   m_SortMode: 0
@@ -19230,14 +19230,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
+  PointIndex: 0
   model: {fileID: 7619665209501119904}
   CurrentPoint:
     PathPos: {x: 0, y: 0}
     PathDirection: 0
     ExitPoint: {x: 0, y: 0}
-  IsBoss: 0
+  IsBoss: 1
   exlposionPrefab: {fileID: 4814509631623709245, guid: ce7784084ac4d8046831643b89f1e650, type: 3}
-  CurrentTrap: {fileID: 0}
   initialSpeed: 0
   armorIntensify: 15
   armorCoolDown: 999999
@@ -19458,7 +19458,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1288343251
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_Sprite: {fileID: 2497086793369854952, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

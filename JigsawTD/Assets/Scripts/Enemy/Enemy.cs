@@ -7,7 +7,7 @@ public abstract class Enemy : PathFollower,IDamageable
 {
     public bool IsBoss = false;
     public bool IsEnemy { get => true; }
-    [SerializeField] protected ReusableObject exlposionPrefab = default;
+    public ReusableObject exlposionPrefab = default;
     protected AudioClip explosionClip;
     private Animator anim;
     public Animator Anim { get => anim; set => anim = value; }
@@ -106,7 +106,14 @@ public abstract class Enemy : PathFollower,IDamageable
     public virtual void Awake()
     {
         Anim = GetComponent<Animator>();
-        explosionClip = Resources.Load<AudioClip>("Music/Effects/Sound_EnemyExplosion");
+        if (IsBoss)
+        {
+            explosionClip = Resources.Load<AudioClip>("Music/Effects/Sound_BossExplosion");
+        }
+        else
+        {
+            explosionClip = Resources.Load<AudioClip>("Music/Effects/Sound_EnemyExplosion");
+        }
     }
 
     public override bool GameUpdate()

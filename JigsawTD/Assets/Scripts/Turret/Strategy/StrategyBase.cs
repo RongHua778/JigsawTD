@@ -185,7 +185,6 @@ public abstract class StrategyBase
     {
         UpgradeDiscount = 0;
         //»ù´¡¼Ó³É
-        RotSpeed = 10;
         BaseAttackIntensify = 0;
         BaseSpeedIntensify = 0;
         BaseRangeIntensify = 0;
