@@ -30,17 +30,17 @@ public class DoubleGoldElement : TileSkill
     public override string SkillDescription => "攻击基座：合成塔的基础攻击加成效果翻倍";
     public override void Build()
     {
-        strategy.BaseAttackIntensifyModify *= 2f;
+        strategy.AllAttackIntensifyModify *= 2f;
     }
 }
 
 public class DoubleWoodElement : TileSkill
 {
     public override TileSkillName TileSkillName => TileSkillName.DoubleWoodElement;
-    public override string SkillDescription => "攻速基座：合成塔的基础攻速加成效果翻倍";
+    public override string SkillDescription => "攻速基座：合成塔的所有攻速加成效果翻倍";
     public override void Build()
     {
-        strategy.BaseSpeedIntensifyModify *= 2f;
+        strategy.AllSpeedIntensifyModify +=1;
     }
 }
 

@@ -221,7 +221,7 @@ public class GameManager : Singleton<GameManager>
         }
         WaveSystem.GetSequence();
         m_BluePrintShopUI.NextRefreshTrun--;
-        MainUI.PrepareNextWave(WaveSystem.RunningSequence, m_FuncUI.LuckyCoin);
+        MainUI.PrepareNextWave(WaveSystem.RunningSequence);
         m_FuncUI.PrepareNextWave();
         m_FuncUI.Show();
 
@@ -237,7 +237,7 @@ public class GameManager : Singleton<GameManager>
         {
             ((TurretContent)turret).Strategy.ClearTurnIntensify();
         }
-        
+
     }
 
     public void GameEnd(bool win)
@@ -360,9 +360,9 @@ public class GameManager : Singleton<GameManager>
         m_FuncUI.DrawRemain += amount;
     }
 
-    public Enemy SpawnEnemy(EnemyType type,int pathIndex )
+    public Enemy SpawnEnemy(EnemyType type, int pathIndex)
     {
-        return WaveSystem.SpawnEnemy(BoardSystem, _enemyFactory.Get(type),pathIndex);
+        return WaveSystem.SpawnEnemy(BoardSystem, _enemyFactory.Get(type), pathIndex);
     }
 
     public void RefreshShop(int cost)
@@ -373,16 +373,15 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public void GetRandomBluePrint()
+    public void GetRandomBluePrint(bool isIntensify = false)
     {
-        m_BluePrintShopUI.GetARandomBluePrintToPocket(m_FuncUI.PlayerLevel);
+        m_BluePrintShopUI.GetARandomBluePrintToPocket(m_FuncUI.PlayerLevel, isIntensify);
     }
 
     public void BuyBluePrint(BluePrintGrid grid, int cost)
     {
         if (ConsumeMoney(cost))
         {
-            m_FuncUI.LuckProgress++;
             m_BluePrintShopUI.MoveBluePrintToPocket(grid);
         }
     }

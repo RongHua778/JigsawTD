@@ -101,13 +101,25 @@ public class EnemySequence
 
     }
 
+    bool first = true;
     public bool Progress()
     {
         SpawnTimer += Time.deltaTime;
         if (index.Count > 0)
         {
             int typeIndex = index[0];
-            if (SpawnTimer >= CoolDown[typeIndex])
+            float coolDown;
+            if (first)//第一只出怪冷却为0
+            {
+                first = false;
+                coolDown = 0;
+            }
+            else
+            {
+                coolDown = CoolDown[typeIndex];
+
+            }
+            if (SpawnTimer >= coolDown)
             {
                 SpawnTimer = 0;
                 index.RemoveAt(0);
@@ -116,6 +128,7 @@ public class EnemySequence
         }
         else
         {
+            first = true;
             return false;
         }
         return true;

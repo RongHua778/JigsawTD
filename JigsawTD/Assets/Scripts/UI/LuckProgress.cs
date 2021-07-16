@@ -5,11 +5,10 @@ using UnityEngine.UI;
 
 public class LuckProgress : MonoBehaviour
 {
-    //[SerializeField] Image luckProgress = default;
     [SerializeField] GameObject[] luckSlot = default;
     public void SetProgress(int value)
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < luckSlot.Length; i++)
         {
             if (i < value)
             {
@@ -20,6 +19,5 @@ public class LuckProgress : MonoBehaviour
                 luckSlot[i].SetActive(false);
             }
         }
-        //luckProgress.fillAmount = (float)value / 10f;
     }
 }

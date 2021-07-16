@@ -138,9 +138,9 @@ public class G1SkillMultiTarget : InitialSkill
         strategy.BaseTargetCountIntensify += 3;
     }
 
-    public override void StartTurn()
+    public override void Hit(Enemy target)
     {
-        strategy.TurnAttackIntensify *= 0.5f;
+        bullet.Damage *= 0.5f;
     }
 
 }

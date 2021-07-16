@@ -7,9 +7,15 @@ using System.Linq;
 [CreateAssetMenu(menuName = "Factory/BlueprintFactory", fileName = "blueprintFactory")]
 public class BlueprintFactory : GameObjectFactory
 {
-    public Blueprint GetRandomBluePrint(TurretAttribute attribute)
+    public Blueprint GetRandomBluePrint(TurretAttribute attribute,bool intensify = false)
     {
         Blueprint blueprint = new Blueprint();
+        blueprint.IntensifyBluePrint = intensify;
+        return SetBluePrint(attribute, blueprint);
+    }
+
+    private Blueprint SetBluePrint(TurretAttribute attribute, Blueprint blueprint)
+    {
         blueprint.CompositeTurretAttribute = attribute;
         int[] compositionLevel = StaticData.GetSomeRandoms(attribute.totalLevel, attribute.elementNumber);
         for (int i = 0; i < attribute.elementNumber; i++)

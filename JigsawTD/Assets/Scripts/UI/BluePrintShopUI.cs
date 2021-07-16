@@ -105,6 +105,14 @@ public class BluePrintShopUI : IUserInterface
 
     public void MoveBluePrintToPocket(BluePrintGrid grid)//把商店配方移入拥有
     {
+        if (StaticData.NextBuyIntensifyBlueprint > 0)
+        {
+            StaticData.NextBuyIntensifyBlueprint--;
+            grid.BluePrint.IntensifyBluePrint = true;
+            grid.BluePrint.SetBluePrintIntensify();
+            grid.BluePrint.ComStrategy.SetQualityValue();
+            grid.BluePrint.ComStrategy.GetTurretSkills();
+        }
         grid.InShop = false;
         grid.transform.SetAsLastSibling();
         OwnBluePrints.Add(grid);
@@ -156,9 +164,9 @@ public class BluePrintShopUI : IUserInterface
         }
     }
 
-    public void GetARandomBluePrintToPocket(int level)//幸运值满，随机获得一个配方
+    public void GetARandomBluePrintToPocket(int level, bool isIntensify = false)//幸运值满，随机获得一个配方
     {
-        Blueprint bluePrint = ConstructHelper.GetRandomBluePrintByLevel(level);
+        Blueprint bluePrint = ConstructHelper.GetRandomBluePrintByLevel(level, isIntensify);
         AddBluePrint(bluePrint, false);
     }
 

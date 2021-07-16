@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyName: "\u5EB7\u5FB7\uFF08\u901F\u5EA6\u578B\uFF09"
   EnemyType: 1
-  InitCount: 4
-  CountIncrease: 4
-  Health: 8
+  InitCount: 3
+  CountIncrease: 3
+  Health: 12
   Speed: 1
   Shell: 0
   CoolDown: 1

@@ -193,9 +193,6 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     public void EnemyDamageProcess(IDamageable target,bool isSputtering=false)
     {
         TriggerHitEffect((Enemy)target);
-        //float finalDamage = isCritical ? Damage * CriticalPercentage : Damage;
-        //if (isSputtering)
-        //    finalDamage *= SputteringPercentage;
         DealRealDamage(target,isSputtering);
     }
 }
