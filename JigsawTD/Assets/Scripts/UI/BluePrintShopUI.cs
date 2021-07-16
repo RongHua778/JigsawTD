@@ -115,7 +115,7 @@ public class BluePrintShopUI : IUserInterface
 
     public void RefreshBtnClick()
     {
-        GameManager.Instance.RefreshShop(20);
+        GameManager.Instance.RefreshShop(30);
     }
 
 

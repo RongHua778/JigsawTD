@@ -20,12 +20,20 @@ public class FuncUI : IUserInterface
     [SerializeField] LuckProgress m_LuckProgress = default;
     Animator m_Anim;
 
+    private int drawCost;
+
+    public int DrawCost 
+    { 
+        get => drawCost;
+        set 
+        { 
+            drawCost = value;
+            DrawBtnTxt.text = "抽取模块(金币" + drawCost + ")";
+        }
+    }
+
     bool drawThisTurn = true;
     public bool DrawThisTurn { get => drawThisTurn; set => drawThisTurn = value; }
-
-
-
-    private int buyShapeCost = 25;
 
     private int luckProgress = 0;
     public int LuckProgress
@@ -119,7 +127,8 @@ public class FuncUI : IUserInterface
     public override void Initialize(GameManager gameManager)
     {
         base.Initialize(gameManager);
-        DrawRemain = StaticData.Instance.StartLotteryDraw;
+        //DrawRemain = StaticData.Instance.StartLotteryDraw;
+        DrawCost = StaticData.Instance.BasicDrawCost;
         LuckyCoin = 1;
         PlayerLevel = 1;
 
@@ -149,17 +158,25 @@ public class FuncUI : IUserInterface
 
     public void DrawBtnClick()
     {
-        if (DrawRemain > 0)
+        if (GameManager.Instance.ConsumeMoney(DrawCost))
         {
             LuckyCoin = 0;
             DrawRemain--;
             DrawThisTurn = true;
+            DrawCost += StaticData.Instance.DrawCostOffset;
             m_GameManager.DrawShapes();
         }
-        else
-        {
-            GameManager.Instance.ShowMessage("抽取次数不足");
-        }
+        //if (DrawRemain > 0)
+        //{
+        //    LuckyCoin = 0;
+        //    DrawRemain--;
+        //    DrawThisTurn = true;
+        //    m_GameManager.DrawShapes();
+        //}
+        //else
+        //{
+        //    GameManager.Instance.ShowMessage("抽取次数不足");
+        //}
         //else if (GameManager.Instance.ConsumeMoney(buyShapeCost))
         //{
         //    LuckyCoin = 0;
@@ -184,7 +201,7 @@ public class FuncUI : IUserInterface
             //LuckProgress = 1;
         }
         DrawThisTurn = false;
-        m_GameManager.GainDraw(1);
+        //m_GameManager.GainDraw(1);
     }
 
     public void NextWaveBtnClick()

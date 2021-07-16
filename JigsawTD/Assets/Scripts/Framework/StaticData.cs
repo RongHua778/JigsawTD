@@ -22,12 +22,20 @@ public class StaticData : Singleton<StaticData>
     public static string TempGroundMask = "TempGround";
     public static LayerMask GetGroundLayer = 1 << 8 | 1 << 12;
     //public static LayerMask RunTimeFindPathLayer = 1 << 8;
+
+    [Header("基本配置")]
     public int PlayerMaxLevel;
     public int[] LevelUpMoney;
     public int StartCoin;
     public int StartLotteryDraw;
     public int BaseWaveIncome;
     public int WaveMultiplyIncome;
+    public int BuyBluePrintCost;
+    public int RefreashShopCost;
+    public int BasicDrawCost;
+    public int DrawCostOffset;
+
+
     public static float[,] QualityChances = new float[7, 5]
     {
         { 1f, 0f, 0f, 0f, 0f },
@@ -38,7 +46,6 @@ public class StaticData : Singleton<StaticData>
         { 0.1f, 0.2f, 0.25f, 0.3f, 0.15f },
         { 0f, 0.15f, 0.25f, 0.3f, 0.3f }
     };
-    public static int BuyBluePrintCost = 20;
     [Header("GameSetting")]
     public static Vector2Int BoardOffset;
     public float EnvrionmentBaseVolume = .25f;

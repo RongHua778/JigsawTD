@@ -3162,7 +3162,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 20
+  m_Text: 30
 --- !u!222 &128272528
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5952,10 +5952,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerMaxLevel: 7
   LevelUpMoney: 000000002800000050000000a00000002c010000f4010000ee0200000f270000
-  StartCoin: 0
+  StartCoin: 25
   StartLotteryDraw: 0
-  BaseWaveIncome: 5
-  WaveMultiplyIncome: 5
+  BaseWaveIncome: 0
+  WaveMultiplyIncome: 25
+  BuyBluePrintCost: 30
+  RefreashShopCost: 20
+  BasicDrawCost: 25
+  DrawCostOffset: 25
   EnvrionmentBaseVolume: 0.25
   TileSize: 1
   TileShapeChance: []
@@ -23825,7 +23829,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 20
+  m_Text: '30
+
+'
 --- !u!222 &1461328972
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -27455,7 +27461,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 241.19, y: -22.590027}
+  m_AnchoredPosition: {x: 241.19, y: -22.590088}
   m_SizeDelta: {x: 482.38, y: -45.17}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1657879873
@@ -30287,7 +30293,7 @@ MonoBehaviour:
   MaxDifficulty: 5
   transition: {fileID: 231277384}
   transitionTime: 1
-  Tutorial: 1
+  Tutorial: 0
 --- !u!114 &1834551531
 MonoBehaviour:
   m_ObjectHideFlags: 0
