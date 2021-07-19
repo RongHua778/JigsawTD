@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkillFactory
   m_EditorClassIdentifier: 
   bornerBornCD:
-  - 4.5
+  - 5
   - 0.4
   - 0.6
   bornerEnemyOneBorn: 030000000100000001000000
