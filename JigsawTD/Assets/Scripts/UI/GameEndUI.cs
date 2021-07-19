@@ -8,6 +8,7 @@ public class GameEndUI : IUserInterface
     [SerializeField] Text title = default;
     [SerializeField] Text totalCompositeTxt = default;
     [SerializeField] Text totalDamageTxt = default;
+    [SerializeField] Text levelHighScore = default;
 
     private static int totalComposite = 0;
     private static int totalDamage = 0;
@@ -15,21 +16,15 @@ public class GameEndUI : IUserInterface
     public static int TotalComposite { get => totalComposite; set => totalComposite = value; }
     public static int TotalDamage { get => totalDamage; set => totalDamage = value; }
 
-    public void SetGameResult(bool win)
+    public void SetGameResult(int turn)
     {
-        if (win)
+        title.text = "通过" + turn + "波";
+        int maxLevel = LevelManager.Instance.LevelMaxTurn;
+        if (turn > maxLevel)
         {
-            title.text = "通过关卡" + Game.Instance.Difficulty;
-            int passLevel = PlayerPrefs.GetInt("MaxPassLevel", 0);
-            if (Game.Instance.Difficulty > passLevel)
-            {
-                PlayerPrefs.SetInt("MaxPassLevel", Game.Instance.Difficulty);
-            }
+            LevelManager.Instance.LevelMaxTurn = turn;
         }
-        else
-        {
-            title.text = "结束";
-        }
+        levelHighScore.text = LevelManager.Instance.LevelMaxTurn.ToString();
         totalCompositeTxt.text = TotalComposite.ToString();
         totalDamageTxt.text = TotalDamage.ToString();
     }

@@ -33,7 +33,7 @@ public class WaveSystem : IGameSystem
 
     //private List<int[]> BossLevels;
 
-    [SerializeField] LevelAttribute LevelAttribute = default;
+    LevelAttribute LevelAttribute;
     [SerializeField] private List<EnemySequence> runningSequence;
     public List<EnemySequence> RunningSequence { get => runningSequence; set => runningSequence = value; }
     public HealthBar HealthBarPrefab { get => healthBarPrefab; set => healthBarPrefab = value; }
@@ -41,6 +41,7 @@ public class WaveSystem : IGameSystem
     public override void Initialize(GameManager gameManager)
     {
         base.Initialize(gameManager);
+        LevelAttribute = LevelManager.Instance.CurrentLevel;
         this._enemyFactory = gameManager.EnemyFactory;
         //BossLevels = new List<int[]>();
         ////¹Ø¿¨1µÄboss¹Ø

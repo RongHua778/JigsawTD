@@ -208,17 +208,17 @@ public class GameManager : Singleton<GameManager>
     }
     public void PrepareNextWave()
     {
-        TransitionToState(StateName.BuildingState);
         if (MainUI.Life <= 0)//游戏失败
         {
-            GameEnd(false);
+            //GameEnd(m_MainUI.CurrentWave);
             return;
         }
-        else if (MainUI.CurrentWave >= StaticData.Instance.LevelMaxWave)//游戏胜利
-        {
-            GameEnd(true);
-            return;
-        }
+        TransitionToState(StateName.BuildingState);
+        //else if (MainUI.CurrentWave >= StaticData.Instance.LevelMaxWave)//游戏胜利
+        //{
+        //    GameEnd(m_MainUI.CurrentWave);
+        //    return;
+        //}
         WaveSystem.GetSequence();
         m_BluePrintShopUI.NextRefreshTrun--;
         MainUI.PrepareNextWave(WaveSystem.RunningSequence);
@@ -240,10 +240,10 @@ public class GameManager : Singleton<GameManager>
 
     }
 
-    public void GameEnd(bool win)
+    public void GameEnd(int turn)
     {
         m_GameEndUI.Show();
-        m_GameEndUI.SetGameResult(win);
+        m_GameEndUI.SetGameResult(turn);
     }
 
     public void TransitionToState(StateName stateName)

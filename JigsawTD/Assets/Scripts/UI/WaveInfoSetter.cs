@@ -7,12 +7,20 @@ using UnityEngine.EventSystems;
 
 public class WaveInfoSetter : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
 {
-    //[SerializeField] GameObject[] EnemyCountArea = default;
     [SerializeField] Image[] enemyIcons = default;
     [SerializeField] Text waveTxt = default;
     public void SetWaveInfo(int wave, List<EnemySequence> sequences)
     {
-        waveTxt.text = "µÚ" + wave + "²¨";
+        string lang = PlayerPrefs.GetString("_language");
+        switch (lang)
+        {
+            case "ch":
+                waveTxt.text = GameMultiLang.GetTraduction("NUM") + wave + GameMultiLang.GetTraduction("WAVE");
+                break;
+            case "en":
+                waveTxt.text = GameMultiLang.GetTraduction("WAVE") + wave;
+                break;
+        }
         foreach (var obj in enemyIcons)
         {
             obj.gameObject.SetActive(false);
@@ -23,22 +31,6 @@ public class WaveInfoSetter : MonoBehaviour,IPointerEnterHandler,IPointerExitHan
             EnemyAttribute attribute = GameManager.Instance.EnemyFactory.Get(sequences[i].EnemyType);
             enemyIcons[i].sprite = attribute.EnemyIcon;
         }
-        //EnemyCountArea[count - 1].SetActive(true);
-        //switch (count)
-        //{
-        //    case 1:
-        //        enemyIcons[0].sprite = sequence.EnemyAttribute[0].EnemyIcon;
-        //        break;
-        //    case 2:
-        //        enemyIcons[1].sprite = sequence.EnemyAttribute[0].EnemyIcon;
-        //        enemyIcons[2].sprite = sequence.EnemyAttribute[1].EnemyIcon;
-        //        break;
-        //    case 3:
-        //        enemyIcons[3].sprite = sequence.EnemyAttribute[0].EnemyIcon;
-        //        enemyIcons[4].sprite = sequence.EnemyAttribute[1].EnemyIcon;
-        //        enemyIcons[5].sprite = sequence.EnemyAttribute[2].EnemyIcon;
-        //        break;
-        //}
     }
 
     public void OnPointerEnter(PointerEventData eventData)

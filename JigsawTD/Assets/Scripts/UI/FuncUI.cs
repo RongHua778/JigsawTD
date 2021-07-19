@@ -53,7 +53,7 @@ public class FuncUI : IUserInterface
         set
         {
             drawRemain = value;
-            DrawBtnTxt.text = "抽取模块X" + drawRemain.ToString();
+            DrawBtnTxt.text = GameMultiLang.GetTraduction("DRAWMODULE") + "X" + drawRemain.ToString();
             //if (drawRemain <= 0)
             //{
             //    DrawBtnTxt.text = "抽取模块(金币" + buyShapeCost + ")";
