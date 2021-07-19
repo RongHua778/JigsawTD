@@ -142,10 +142,9 @@ public class WaveSystem : IGameSystem
             //        break;
             //    default:
             //        //Debug.LogAssertion("难度参数错误");
-            //        sequences = GenerateSpecificSequence(EnemyType.Soilder, stage, i);
             //        break;
             //}
-            if (i % 2 == 0)
+            if (i % 3 == 0)
             {
                 stage += ((i / 10) + 1) * LevelAttribute.LevelIntensify;
             }
@@ -188,6 +187,7 @@ public class WaveSystem : IGameSystem
             }
 
             // }
+            sequences = GenerateSpecificSequence(EnemyType.Borner, 5f, i);
 
             LevelSequence.Add(sequences);
         }

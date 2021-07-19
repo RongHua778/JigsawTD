@@ -11,6 +11,6 @@ public class LevelAttribute : ScriptableObject
     public List<EnemyAttribute> Boss;
     [TextArea(2, 3)]
     public string LevelInfo;
-
+    public int bossForm;
 
 }

@@ -7,12 +7,11 @@ using UnityEngine;
 public class EnemySequence
 {
     //int wave;
-    float Stage;
+    public float Intensify;
     public EnemyType EnemyType;
 
     public int Amount;
     public float AmountIntensify;
-    public float Intensify;
     public float CoolDown;
     private float SpawnTimer;
     //public float waveCoolDown = 2.5f;
@@ -21,12 +20,12 @@ public class EnemySequence
     //public bool IsEnd;
     //public int Wave { get => wave; set => wave = value; }
 
-    public EnemySequence(EnemyType type, int amount, float cooldown, float stage)
+    public EnemySequence(EnemyType type, int amount, float cooldown, float intensify)
     {
         EnemyType = type;
         Amount = amount;
         CoolDown = cooldown;
-        Stage = stage;
+        Intensify = intensify;
         SpawnTimer = 0;
         //Initiate(wave,enemy,enemiesN);
 
@@ -119,7 +118,7 @@ public class EnemySequence
             {
                 SpawnTimer = 0;
                 Amount--;
-                GameManager.Instance.SpawnEnemy(EnemyType, 0, Stage);
+                GameManager.Instance.SpawnEnemy(EnemyType, 0, Intensify);
             }
         }
         else

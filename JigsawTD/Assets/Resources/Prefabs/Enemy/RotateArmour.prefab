@@ -19201,7 +19201,7 @@ MonoBehaviour:
   exlposionPrefab: {fileID: 4814509631623709245, guid: 80e6008c99b83d843b0e50f70653018f, type: 3}
   enemySprite: {fileID: 0}
   enemyCol: {fileID: 0}
-  armorIntensify: 15
+  armorIntensify: 25
   armorCoolDown: 999999
   rotateObj: {fileID: 8011516457752567327}
 --- !u!1 &8360252054385358165

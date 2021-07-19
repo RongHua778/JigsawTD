@@ -10,8 +10,8 @@ public enum EnemySkill
 [CreateAssetMenu(menuName = "Factory/SkillFactory", fileName = "skillFactory")]
 public class SkillFactory : GameObjectFactory
 {
-    [SerializeField] float bornerBornCD = 4.5f;
-    [SerializeField] int bornerEnemyOneBorn = 3;
+    [SerializeField] float[] bornerBornCD;
+    [SerializeField] int[] bornerEnemyOneBorn;
     [SerializeField] int blinkerBlink = 3;
     [SerializeField] ReusableObject holePrefab = default;
     [SerializeField] int dividerDividing;
@@ -28,8 +28,6 @@ public class SkillFactory : GameObjectFactory
     {
         switch (skill)
         {
-            case EnemySkill.Born:
-                return new BornSkill(enemy, bornerBornCD, bornerEnemyOneBorn);
             case EnemySkill.Blink:
                 return new BlinkSkill(enemy, blinkerBlink, holePrefab);
             //case EnemySkill.Divide:
@@ -38,6 +36,11 @@ public class SkillFactory : GameObjectFactory
                 Debug.LogAssertion("技能参数错误！");
                 return null;
         }
+    }
+
+    public BornSkill GetBornSkill(Enemy enemy,int form)
+    {
+        return new BornSkill(enemy, bornerBornCD, bornerEnemyOneBorn, form);
     }
 
     public DivideSkill GetDividerSkill(Enemy enemy, int dividing)

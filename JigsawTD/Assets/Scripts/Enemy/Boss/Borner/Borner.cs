@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Borner : Enemy
 {
-    public override EnemyType EnemyType => EnemyType.Restorer;
+    public int form;
+    public override EnemyType EnemyType => EnemyType.Borner;
 
     public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify)
     {
         base.Initialize(attribute, pathOffset, healthBar, intensify);
         EnemySkills = new List<Skill>();
-        EnemySkills.Add(GameManager.Instance.SkillFactory.GetSkill(EnemySkill.Born, this));
+        EnemySkills.Add(GameManager.Instance.SkillFactory.GetBornSkill(this, form));
     }
 
 }
