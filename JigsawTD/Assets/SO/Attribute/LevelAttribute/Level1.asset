@@ -14,5 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelID: 0
   LevelIntensify: 1
-  NormalEnemies: 000000000100000002000000030000000400000005000000
-  Boss: 0800000007000000090000000b000000
+  NormalEnemies:
+  - {fileID: 11400000, guid: a2fa830bad8e11c448623ce28354a1bd, type: 2}
+  - {fileID: 11400000, guid: a6b4f2578a98cf54caf0ac3718b54059, type: 2}
+  - {fileID: 11400000, guid: 52077df3b03c9b446a10d3ec4b279ff5, type: 2}
+  - {fileID: 11400000, guid: 8efd383e225b02844a5ac997f1e5f924, type: 2}
+  - {fileID: 11400000, guid: 0a577738dc20fea45a9af16979f88841, type: 2}
+  - {fileID: 11400000, guid: 4414d8fdced55104fb97c2c6ed6ec11a, type: 2}
+  Boss:
+  - {fileID: 11400000, guid: f9558f1a6cffea245a720e078208fccf, type: 2}
+  - {fileID: 11400000, guid: 4868c66738024d74285c7f2ac26477ad, type: 2}
+  - {fileID: 11400000, guid: 69f15236ccf6c8d468d1e830d7746cd6, type: 2}
+  - {fileID: 11400000, guid: dbb0595b1b4e1be4599c5c9d1e97b9e3, type: 2}
+  LevelInfo: "\u8FD9\u662F\u539F\u578B\u673A\u8FDB\u5165\u91CD\u6784\u6A21\u7EC4\u7684\u9996\u6B21\u8D44\u683C\u6D4B\u8BD5\uFF0C\u88AB\u6DD8\u6C70\u7684\u65B0\u4EBA\u8B66\u544A\u4F60\u8FD9\u91CC\u7684\u9996\u9886\u4F1A\u4E0D\u65AD\u5236\u9020\u5927\u91CF\u654C\u4EBA\u6765\u51B2\u51FB\u4F60\u7684\u9632\u7EBF\uFF0C\u5F53\u7136\u4F60\u5F97\u575A\u6301\u8DB3\u591F\u591A\u7684\u56DE\u5408\u624D\u80FD\u89C1\u5230\u5B83\u3002"

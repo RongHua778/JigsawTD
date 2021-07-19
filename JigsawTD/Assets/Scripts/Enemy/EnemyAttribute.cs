@@ -17,6 +17,7 @@ public class EnemyAttribute : ScriptableObject
     public int ReachDamage;
     public float extraHealth;
     public Sprite EnemyIcon;
+    public Sprite EnemyEmptyIcon;
     [TextArea(2,3)]
     public string Description;
 }

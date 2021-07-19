@@ -14,7 +14,7 @@ public class TurretBaseContent : GameTileContent
     {
         base.ContentLanded();
         m_GameTile.tag = "OnlyCompositeTurret";
-        StaticData.SetNodeWalkable(m_GameTile, false);
+        StaticData.SetNodeWalkable(m_GameTile, false, false);
     }
 
     public override void OnContentSelected(bool value)

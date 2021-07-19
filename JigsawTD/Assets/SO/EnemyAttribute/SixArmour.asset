@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 614735ba97a8e4b4bbdf8128289355f3, type: 3}
-  m_Name: BossRotatingArmor
+  m_Name: SixArmour
   m_EditorClassIdentifier: 
   EnemyName: "\u514B\u5C14\u51EF\u90ED\u5C14\uFF08Boss\uFF09"
   EnemyType: 7
@@ -24,4 +24,5 @@ MonoBehaviour:
   ReachDamage: 5
   extraHealth: 0
   EnemyIcon: {fileID: 2497086793369854952, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
+  EnemyEmptyIcon: {fileID: 9054047721523705475, guid: 57e00b28c7ddb744eab6e4415c7c879a, type: 3}
   Description: "\u5468\u8EAB\u73AF\u7ED5\u7740\u80FD\u62B5\u6321\u4F24\u5BB3\u7684\u62A4\u7532\u3002"

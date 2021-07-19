@@ -7,8 +7,10 @@ public class LevelAttribute : ScriptableObject
 {
     public int LevelID;
     public float LevelIntensify;
-    public List<EnemyType> NormalEnemies;
-    public List<EnemyType> Boss;
+    public List<EnemyAttribute> NormalEnemies;
+    public List<EnemyAttribute> Boss;
+    [TextArea(2, 3)]
+    public string LevelInfo;
 
 
 }

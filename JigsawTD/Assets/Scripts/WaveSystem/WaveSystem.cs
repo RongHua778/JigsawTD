@@ -98,95 +98,96 @@ public class WaveSystem : IGameSystem
     public void LevelInitialize()
     {
         LevelSequence.Clear();
-        int difficulty = Game.Instance.Difficulty;
+        //int difficulty = Game.Instance.Difficulty;
         float stage = waveStage;
         List<EnemySequence> sequences = null;
         for (int i = 0; i < StaticData.Instance.LevelMaxWave; i++)
         {
-            switch (difficulty)
+            //switch (difficulty)
+            //{
+            //    case 1:
+            //        if (i % 3 == 0)
+            //        {
+            //            if (i < 8) stage += 0.5f;
+            //            if (i < 15) stage += 0.75f;
+            //            else if (i >= 15 && i < 22) stage += 1.25f;
+            //            else if (i >= 22) stage += 1.75f;
+            //        }
+            //        break;
+            //    //简单难度
+            //    case 2:
+            //        if (i % 3 == 0)
+            //        {
+            //            if (i < 10) stage += 0.75f;
+            //            else if (i >= 10 && i < 20) stage += 1.5f;
+            //            else if (i >= 20) stage += 2.25f;
+            //        }
+            //        break;
+            //    //普通难度
+            //    case 3:
+            //        if (i % 3 == 0)
+            //        {
+            //            if (i < 10) stage += 1.5f;
+            //            else if (i >= 10 && i < 20) stage += 2.5f;
+            //            else if (i >= 20 && i < 30) stage += 4f;
+            //            else if (i >= 30) stage += 5f;
+            //        }
+            //        break;
+            //    //专家难度
+            //    case 4:
+            //        if (i % 2 == 0)
+            //        {
+            //            stage += ((i / 10) + 1) * LevelAttribute.LevelIntensify;
+            //        }
+            //        break;
+            //    default:
+            //        //Debug.LogAssertion("难度参数错误");
+            //        sequences = GenerateSpecificSequence(EnemyType.Soilder, stage, i);
+            //        break;
+            //}
+            if (i % 2 == 0)
             {
-                case 1:
-                    if (i % 3 == 0)
-                    {
-                        if (i < 8) stage += 0.5f;
-                        if (i < 15) stage += 0.75f;
-                        else if (i >= 15 && i < 22) stage += 1.25f;
-                        else if (i >= 22) stage += 1.75f;
-                    }
-                    break;
-                //简单难度
-                case 2:
-                    if (i % 3 == 0)
-                    {
-                        if (i < 10) stage += 0.75f;
-                        else if (i >= 10 && i < 20) stage += 1.5f;
-                        else if (i >= 20) stage += 2.25f;
-                    }
-                    break;
-                //普通难度
-                case 3:
-                    if (i % 3 == 0)
-                    {
-                        if (i < 10) stage += 1.5f;
-                        else if (i >= 10 && i < 20) stage += 2.5f;
-                        else if (i >= 20 && i < 30) stage += 4f;
-                        else if (i >= 30) stage += 5f;
-                    }
-                    break;
-                //专家难度
-                case 4:
-                    if (i % 2 == 0)
-                    {
-                        stage += ((i / 10) + 1) * LevelAttribute.LevelIntensify;
-                        //if (i < 10) stage += 2f;
-                        //else if (i >= 10 && i < 20) stage += 3f;
-                        //else if (i >= 20 && i < 30) stage += 4f;
-                        //else if (i >= 30) stage += 5f;
-                    }
-                    break;
-                default:
-                    //Debug.LogAssertion("难度参数错误");
-                    sequences = GenerateSpecificSequence(EnemyType.Soilder, stage, i);
-                    break;
+                stage += ((i / 10) + 1) * LevelAttribute.LevelIntensify;
             }
-            if (difficulty < 5)
-            {
-                //前三波难度修正
-                if (i < 3)
-                {
-                    stage = (i + 1) * 0.5f;
-                    sequences = GenerateRandomSequence(1, stage, i);
-                }
-                else if (i == 9)
-                {
-                    sequences = GenerateSpecificSequence(LevelAttribute.Boss[0], stage, i);
-                }
-                else if (i == 19)
-                {
-                    sequences = GenerateSpecificSequence(LevelAttribute.Boss[1], stage, i);
-                }
-                else if (i == 29)
-                {
-                    sequences = GenerateSpecificSequence(LevelAttribute.Boss[2], stage, i);
-                }
-                else if ((i + 1) % 10 == 0)
-                {
-                    sequences = GenerateSpecificSequence(LevelAttribute.Boss[3], stage, i);
-                }
-                else if (i % 7 == 0 && i > 0)
-                {
-                    sequences = GenerateRandomSequence(2, stage, i);
-                }
-                else if (i % 9 == 0 && i > 0)
-                {
-                    sequences = GenerateRandomSequence(3, stage, i);
-                }
-                else
-                {
-                    sequences = GenerateRandomSequence(1, stage, i);
-                }
+            //if (difficulty < 5)
+            //{
 
+            //前三波难度修正
+            if (i < 3)
+            {
+                stage = (i + 1) * 0.5f;
+                sequences = GenerateRandomSequence(1, stage, i);
             }
+            else if (i == 9)
+            {
+                sequences = GenerateSpecificSequence(LevelAttribute.Boss[0].EnemyType, stage, i);
+            }
+            else if (i == 19)
+            {
+                sequences = GenerateSpecificSequence(LevelAttribute.Boss[1].EnemyType, stage, i);
+            }
+            else if (i == 29)
+            {
+                sequences = GenerateSpecificSequence(LevelAttribute.Boss[2].EnemyType, stage, i);
+            }
+            else if ((i + 1) % 10 == 0)
+            {
+                sequences = GenerateSpecificSequence(LevelAttribute.Boss[3].EnemyType, stage, i);
+            }
+            else if (i % 7 == 0 && i > 0)
+            {
+                sequences = GenerateRandomSequence(2, stage, i);
+            }
+            else if (i % 9 == 0 && i > 0)
+            {
+                sequences = GenerateRandomSequence(3, stage, i);
+            }
+            else
+            {
+                sequences = GenerateRandomSequence(1, stage, i);
+            }
+
+            // }
 
             LevelSequence.Add(sequences);
         }
@@ -197,10 +198,11 @@ public class WaveSystem : IGameSystem
     {
         int maxRandom = wave > 9 ? 6 : 4;
         List<EnemySequence> sequencesToReturn = new List<EnemySequence>();
-        List<int> types = StaticData.SelectNoRepeat(maxRandom, genres);
-        foreach (int type in types)
+        List<int> indexs = StaticData.SelectNoRepeat(maxRandom, genres);
+        foreach (int index in indexs)
         {
-            EnemySequence sequence = SequenceInfoSet(genres, stage, wave, (EnemyType)type);
+            EnemyType type = LevelAttribute.NormalEnemies[index].EnemyType;
+            EnemySequence sequence = SequenceInfoSet(genres, stage, wave, type);
             sequencesToReturn.Add(sequence);
         }
         return sequencesToReturn;
