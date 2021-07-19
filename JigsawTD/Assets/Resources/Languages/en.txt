@@ -1,0 +1,40 @@
+SCENE1=Scene1
+SCENE2=Scene2
+
+
+STARTGAME=START GAME
+BLUEPRINT=BLUEPRINT
+SETTING=SETTING
+QUIT=QUIT
+LEVELSTART=START LEVEL
+
+TEST1=Test:Clear all save data
+TEST2=Test:Unlock all difficulties
+
+LEVEL1NAME=TEST LEVEL
+LEVELOTHER=MORE INCOMING
+LEVELINFO=DESCRIPTION
+BOSSINFO=BOSS
+HIGHSCORE=High Score
+WAVE=Wave
+NUM=
+
+LEVEL1INFO=This is the first qualification test of the Refactor, the boss here will constantly creates tons of enemies to take down your defenses, but of course you have to stick around for enough waves to face him.
+
+NEXTWAVE=Next Wave[Space]
+DRAWMODULE=Draw Module
+SHOPBLUEPRINT=Shop
+OWNBLUEPRINT=Owned
+
+ATTACK=Attack
+RANGE=Range
+SPEED=FireRate
+CRITICAL=Critical
+SPUTTERING=Splash
+SLOW=Slow
+RANGETYPE1=Circle
+RANGETYPE2=Semicircle
+RANGETYPE3=Line
+TURRETSKILL=Basic Skill
+ELEMENTSKILL=Element Benefit
+TILESKILL=Tile Benefit

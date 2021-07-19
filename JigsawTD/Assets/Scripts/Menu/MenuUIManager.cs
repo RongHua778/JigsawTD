@@ -8,7 +8,6 @@ public class MenuUIManager : MonoBehaviour
     [SerializeField] GameObject messagePanel = default;
     [SerializeField] Text messageTxt = default;
     [SerializeField] UILevelSelect levelPanel = default;
-    [SerializeField] Text difficultyTxt = default;
     Animator m_Anim;
 
 
@@ -26,38 +25,18 @@ public class MenuUIManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            ShowMessage("测试：已清除了存档");
-            Debug.Log("删除了通关记录");
+            ShowMessage(GameMultiLang.GetTraduction("TEST1"));
             PlayerPrefs.DeleteAll();
         }
         if (Input.GetKeyDown(KeyCode.J))
         {
-            ShowMessage("测试：已解锁全部难度");
-            Debug.Log("删除了通关记录");
+            ShowMessage(GameMultiLang.GetTraduction("TEST2"));
             PlayerPrefs.SetInt("MaxPassLevel", 3);
         }
     }
 
     public void StartGameBtnClick()
     {
-        //if (PlayerPrefs.GetInt("MaxPassLevel", 0) < Game.Instance.Difficulty - 1)
-        //{
-        //    ShowMessage("需先通关上一级难度");
-        //    return;
-        //}
-        //if (!gameStart)
-        //{
-        //    if (Game.Instance.Difficulty == 1)
-        //    {
-        //        tutorialPanel.SetActive(true);
-        //        gameStart = true;
-        //    }
-        //    else
-        //    {
-        //        Game.Instance.LoadScene(1);
-        //        gameStart = true;
-        //    }
-        //}
         m_Anim.SetBool("OpenLevel", true);
         levelPanel.SetLevelInfo();
     }
@@ -96,19 +75,18 @@ public class MenuUIManager : MonoBehaviour
         Game.Instance.QuitGame();
     }
 
-    public void DifficultBtnClick(int value)
-    {
-        Game.Instance.Difficulty += value;
-        if (Game.Instance.Difficulty > Game.Instance.MaxDifficulty)
-        {
-            Game.Instance.Difficulty = 1;
-        }
-        else if (Game.Instance.Difficulty < 1)
-        {
-            Game.Instance.Difficulty = Game.Instance.MaxDifficulty;
-        }
-        difficultyTxt.text = "关卡" + Game.Instance.Difficulty;
-    }
+    //public void DifficultBtnClick(int value)
+    //{
+    //    Game.Instance.Difficulty += value;
+    //    if (Game.Instance.Difficulty > Game.Instance.MaxDifficulty)
+    //    {
+    //        Game.Instance.Difficulty = 1;
+    //    }
+    //    else if (Game.Instance.Difficulty < 1)
+    //    {
+    //        Game.Instance.Difficulty = Game.Instance.MaxDifficulty;
+    //    }
+    //}
 
 
 }

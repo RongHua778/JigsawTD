@@ -106,10 +106,10 @@ public class TurretTips : TileTips
                     TileSkillTxt.text = ((StrategyComposite)Strategy).TileSkill.SkillDescription;
                 }
 
-                if (((StrategyComposite)m_Strategy).CompositeBluePrint.IntensifyBluePrint)
-                {
-                    Name.text += "(强化)";
-                }
+                //if (((StrategyComposite)m_Strategy).CompositeBluePrint.IntensifyBluePrint)
+                //{
+                //    Name.text += "(强化)";
+                //}
                 break;
         }
 
@@ -137,10 +137,10 @@ public class TurretTips : TileTips
         elementConstruct.gameObject.SetActive(true);
         elementConstruct.SetElements((StrategyComposite)m_Strategy);
 
-        if (((StrategyComposite)m_Strategy).CompositeBluePrint.IntensifyBluePrint)
-        {
-            Name.text += "(强化)";
-        }
+        //if (((StrategyComposite)m_Strategy).CompositeBluePrint.IntensifyBluePrint)
+        //{
+        //    Name.text += "(强化)";
+        //}
     }
 
     private void BasicInfo()
@@ -151,13 +151,13 @@ public class TurretTips : TileTips
         switch (m_Strategy.m_Att.RangeType)
         {
             case RangeType.Circle:
-                rangeTypeTxt = "圆型";
+                rangeTypeTxt = GameMultiLang.GetTraduction("RANGETYPE1");
                 break;
             case RangeType.HalfCircle:
-                rangeTypeTxt = "半圆型";
+                rangeTypeTxt = GameMultiLang.GetTraduction("RANGETYPE2");
                 break;
             case RangeType.Line:
-                rangeTypeTxt = "直线型";
+                rangeTypeTxt = GameMultiLang.GetTraduction("RANGETYPE3");
                 break;
         }
         this.RangeTypeValue.text = rangeTypeTxt;

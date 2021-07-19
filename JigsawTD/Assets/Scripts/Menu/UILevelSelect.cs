@@ -15,8 +15,8 @@ public class UILevelSelect : MonoBehaviour
     {
         LevelAttribute attribute = LevelManager.Instance.CurrentLevel;
         int maxPass = LevelManager.Instance.LevelMaxTurn;
-        levelInfo.text = attribute.LevelInfo;
-        highScore.text = "×î¸ß¼ÇÂ¼£º" + maxPass + "²¨";
+        levelInfo.text = GameMultiLang.GetTraduction(attribute.LevelInfo);
+        highScore.text = GameMultiLang.GetTraduction("HIGHSCORE")+":" + maxPass + GameMultiLang.GetTraduction("WAVE");
         for (int i = 0; i < bossSlots.Length; i++)
         {
             bossSlots[i].SetBossInfo(attribute.Boss[i], maxPass, (i + 1) * 10);
