@@ -12,7 +12,7 @@ public class ScaleAndMove : IGameSystem
 
     private Vector3 Origin;
     private Vector3 Difference;
-    private float SmoothSpeed = 0.3f;
+    private float SmoothSpeed = 0.6f;
     private bool Drag = false;
 
     Camera cam;

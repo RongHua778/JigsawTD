@@ -27,7 +27,11 @@ public class BoardSystem : IGameSystem
     static GameObject selection;
     float pressCounter = 0;
     public bool IsPressingTile = false;
-    public bool IsLongPress { get => pressCounter >= 0.3f; }
+    public bool IsLongPress { get => pressCounter >= 0.2f; }
+    private Camera mainCam;
+    private float moveDis;
+    private Vector3 startPos;
+
     private static TileBase selectingTile;
     public static TileBase SelectingTile
     {
@@ -91,7 +95,7 @@ public class BoardSystem : IGameSystem
     {
         base.Initialize(gameManager);
         selection = transform.Find("Selection").gameObject;
-
+        mainCam = Camera.main;
         GameEvents.Instance.onSeekPath += SeekPath;
         GameEvents.Instance.onTileClick += TileClick;
         GameEvents.Instance.onTileUp += TileUp;
@@ -120,11 +124,13 @@ public class BoardSystem : IGameSystem
     private void TileClick()
     {
         IsPressingTile = true;
+        startPos = Input.mousePosition;
     }
 
     private void TileUp(TileBase tile)
     {
-        if (!IsLongPress)
+        moveDis = Vector2.SqrMagnitude(Input.mousePosition - startPos);
+        if (moveDis < 0.1f)
         {
             SelectingTile = tile;
         }
@@ -134,7 +140,7 @@ public class BoardSystem : IGameSystem
 
     private void OnApplicationFocus(bool focus)
     {
-        if(FindPath)
+        if (FindPath)
             ShowPath();
     }
 
@@ -281,7 +287,7 @@ public class BoardSystem : IGameSystem
         }
         foreach (Vector2Int pos in traps)
         {
-            GameTile tile = UnityEngine.Random.value > 0.66f ? ConstructHelper.GetRandomTurretBase() : ConstructHelper.GetRandomTrap();
+            GameTile tile = UnityEngine.Random.value > 0.75f ? ConstructHelper.GetRandomTurretBase() : ConstructHelper.GetRandomTrap();
             tile.transform.position = (Vector3Int)pos;
             tile.TileLanded();
             tile.SetRandomRotation();
@@ -334,38 +340,7 @@ public class BoardSystem : IGameSystem
         BuyOneGroundMoney += 10;
     }
 
-    //´ýÆúÓÃ·½·¨0609
 
-    //private void GetPathTiles()
-    //{
-    //    shortestPath.Clear();
-    //    for (int i = 0; i < path.vectorPath.Count; i++)
-    //    {
-    //        Collider2D col = StaticData.RaycastCollider(path.vectorPath[i], StaticData.PathLayer);
-    //        GameTile tile = col.GetComponent<GameTile>();
-    //        shortestPath.Add(tile);
-    //    }
-    //    for (int i = 1; i < shortestPath.Count; i++)
-    //    {
-    //        shortestPath[i - 1].NextTileOnPath = shortestPath[i];
-    //        shortestPath[i].NextTileOnPath = null;
-    //        shortestPath[i - 1].PathDirection = DirectionExtensions.GetDirection(shortestPath[i - 1].OffsetCoord, shortestPath[i].OffsetCoord);
-    //        shortestPath[i - 1].ExitPoint = shortestPath[i - 1].transform.position + shortestPath[i - 1].PathDirection.GetHalfVector();
-    //    }
-    //}
-
-    //private void ShowPath()
-    //{
-    //    HidePath();
-    //    for (int i = 0; i < shortestPath.Count - 1; i++)
-    //    {
-    //        PathFollowerOld follower = ObjectPool.Instance.Spawn(pathFollowerPrefab) as PathFollowerOld;
-    //        follower.SpawnPoint = shortestPath[0];
-    //        follower.SpawnOn(shortestPath[i]);
-    //        followers.Add(follower);
-    //    }
-
-    //}
 
 
 }

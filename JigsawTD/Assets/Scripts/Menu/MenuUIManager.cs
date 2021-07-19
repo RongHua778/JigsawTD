@@ -9,12 +9,14 @@ public class MenuUIManager : MonoBehaviour
     [SerializeField] Text messageTxt = default;
     [SerializeField] UILevelSelect levelPanel = default;
     [SerializeField] Text difficultyTxt = default;
+    Animator m_Anim;
 
 
     bool gameStart = false;
     // Start is called before the first frame update
     void Start()
     {
+        m_Anim = this.GetComponent<Animator>();
         Sound.Instance.PlayBg("menu");
         Game.Instance.Difficulty = 1;
     }
@@ -56,9 +58,23 @@ public class MenuUIManager : MonoBehaviour
         //        gameStart = true;
         //    }
         //}
-        levelPanel.gameObject.SetActive(true);
+        m_Anim.SetBool("OpenLevel", true);
         levelPanel.SetLevelInfo();
+    }
 
+    public void LevelBackClick()
+    {
+        m_Anim.SetBool("OpenLevel", false);
+    }
+
+    public void BluePrintBtnClick()
+    {
+        ShowMessage("暂未开放");
+    }
+
+    public void SettingBtnClick()
+    {
+        ShowMessage("暂未开放");
     }
 
     private void ShowMessage(string content)

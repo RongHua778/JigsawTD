@@ -45,7 +45,7 @@ public class MainUI : IUserInterface
         {
             if (value <= 0)
             {
-                m_GameManager.GameEnd(false);
+                m_GameManager.GameEnd(CurrentWave);
             }
             life = Mathf.Clamp(value, 0, StaticData.Instance.PlayerMaxHealth[Game.Instance.Difficulty - 1]);
             PlayerLifeTxt.text = life.ToString() + "/" + StaticData.Instance.PlayerMaxHealth[Game.Instance.Difficulty - 1].ToString();

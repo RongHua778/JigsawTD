@@ -105,6 +105,11 @@ public class TurretTips : TileTips
                     TileSkillArea.SetActive(true);
                     TileSkillTxt.text = ((StrategyComposite)Strategy).TileSkill.SkillDescription;
                 }
+
+                if (((StrategyComposite)m_Strategy).CompositeBluePrint.IntensifyBluePrint)
+                {
+                    Name.text += "(强化)";
+                }
                 break;
         }
 
@@ -131,6 +136,11 @@ public class TurretTips : TileTips
         BluePrintArea.SetActive(true);
         elementConstruct.gameObject.SetActive(true);
         elementConstruct.SetElements((StrategyComposite)m_Strategy);
+
+        if (((StrategyComposite)m_Strategy).CompositeBluePrint.IntensifyBluePrint)
+        {
+            Name.text += "(强化)";
+        }
     }
 
     private void BasicInfo()
