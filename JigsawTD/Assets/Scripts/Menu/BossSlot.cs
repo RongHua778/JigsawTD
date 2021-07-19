@@ -11,6 +11,6 @@ public class BossSlot : MonoBehaviour
     public void SetBossInfo(EnemyAttribute attribute, int pass, int turn)
     {
         bossIcon.sprite = pass > turn ? attribute.EnemyIcon : attribute.EnemyEmptyIcon;
-        turnTxt.text = "µÚ" + turn + "²¨";
+        turnTxt.text = GameMultiLang.GetTraduction("NUM") + turn + GameMultiLang.GetTraduction("WAVE");
     }
 }

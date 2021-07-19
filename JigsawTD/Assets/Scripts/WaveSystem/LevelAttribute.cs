@@ -9,7 +9,6 @@ public class LevelAttribute : ScriptableObject
     public float LevelIntensify;
     public List<EnemyAttribute> NormalEnemies;
     public List<EnemyAttribute> Boss;
-    [TextArea(2, 3)]
     public string LevelInfo;
 
 

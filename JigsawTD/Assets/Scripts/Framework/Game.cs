@@ -34,11 +34,11 @@ public class Game : Singleton<Game>
         switch (currentSceneIndex)
         {
             case 0://menu
-                Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(1);
+                //Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(1);
                 m_SceneStateController.SetState(new MenuState(m_SceneStateController));
                 break;
             case 1://battle
-                Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(0);
+                //Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(0);
                 m_SceneStateController.SetState(new BattleState(m_SceneStateController));
                 break;
         }
@@ -75,11 +75,11 @@ public class Game : Singleton<Game>
         switch (index)
         {
             case 0://Menu
-                Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(1);
+                //Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(1);
                 m_SceneStateController.SetState(new MenuState(m_SceneStateController));
                 break;
             case 1://Battle
-                Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(0);
+                //Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(0);
                 m_SceneStateController.SetState(new BattleState(m_SceneStateController));
                 break;
         }
