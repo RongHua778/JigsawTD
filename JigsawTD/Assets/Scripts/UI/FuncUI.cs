@@ -23,23 +23,27 @@ public class FuncUI : IUserInterface
     bool drawThisTurn = true;
     public bool DrawThisTurn { get => drawThisTurn; set => drawThisTurn = value; }
 
-    private int luckProgress = 0;
-    public int LuckProgress
+
+
+    private int buyShapeCost = 25;
+
+    private int energyProgress = 0;
+    public int EnergyProgress
     {
-        get => luckProgress;
-        set
-        {
-            if (value > 2)
-            {
-                luckProgress = 0;
-                LuckyCoin++;
-            }
-            else
-            {
-                luckProgress = value;
-            }
-            m_LuckInfo.SetContent(StaticData.GetLuckyInfo(LuckyCoin, LuckProgress));
-        }
+        get => energyProgress;
+        set => energyProgress = Mathf.Min(5, value);
+        //{
+        //    if (value > 1)
+        //    {
+        //        energyProgress = 0;
+        //        Energy++;
+        //    }
+        //    else
+        //    {
+        //        energyProgress = value;
+        //    }
+        //    m_LuckInfo.SetContent(StaticData.GetLuckyInfo(Energy, EnergyProgress));
+        //}
     }
 
     private int drawRemain = 0;
@@ -50,6 +54,14 @@ public class FuncUI : IUserInterface
         {
             drawRemain = value;
             DrawBtnTxt.text = "抽取模块X" + drawRemain.ToString();
+            //if (drawRemain <= 0)
+            //{
+            //    DrawBtnTxt.text = "抽取模块(金币" + buyShapeCost + ")";
+            //}
+            //else
+            //{
+            //    DrawBtnTxt.text = "抽取模块X" + drawRemain.ToString();
+            //}
         }
     }
 
@@ -84,22 +96,21 @@ public class FuncUI : IUserInterface
         }
     }
 
-    private int luckyCoin;
-    public int LuckyCoin
+    private int energy;
+    public int Energy
     {
-        get => luckyCoin;
+        get => energy;
         set
         {
-            luckyCoin = Mathf.Min(5, value);
-            //if (luckyCoin >= 10)
-            //{
-            //    luckyCoin = 0;
-            //    DrawRemain++;
-            //    //GameManager.Instance.GetRandomBluePrint();
-            //}
-            //LuckPointTxt.text = "累积点:" + luckyCoin.ToString();
-            m_LuckInfo.SetContent(StaticData.GetLuckyInfo(LuckyCoin,LuckProgress));
-            m_LuckProgress.SetProgress(luckyCoin);
+            energy = Mathf.Min(10, value);
+            if (energy >= 10)
+            {
+                energy = 0;
+                DrawRemain++;
+                //GameManager.Instance.GetRandomBluePrint();
+            }
+            m_LuckInfo.SetContent(StaticData.GetLuckyInfo(Energy, EnergyProgress));
+            m_LuckProgress.SetProgress(energy);
         }
     }
 
@@ -108,7 +119,7 @@ public class FuncUI : IUserInterface
     {
         base.Initialize(gameManager);
         DrawRemain = StaticData.Instance.StartLotteryDraw;
-        LuckyCoin = 1;
+        Energy = 0;
         PlayerLevel = 1;
 
         m_Anim = this.GetComponent<Animator>();
@@ -139,7 +150,7 @@ public class FuncUI : IUserInterface
     {
         if (DrawRemain > 0)
         {
-            LuckyCoin = 0;
+            Energy = 0;
             DrawRemain--;
             DrawThisTurn = true;
             m_GameManager.DrawShapes();
@@ -148,20 +159,28 @@ public class FuncUI : IUserInterface
         {
             GameManager.Instance.ShowMessage("抽取次数不足");
         }
+        //else if (GameManager.Instance.ConsumeMoney(buyShapeCost))
+        //{
+        //    LuckyCoin = 0;
+        //    DrawThisTurn = true;
+        //    m_GameManager.DrawShapes();
+        //    buyShapeCost += 25;
+        //    DrawRemain = 0;
+        //}
+
     }
 
     public void PrepareNextWave()
     {
         if (!DrawThisTurn)
         {
-            LuckyCoin += 1;
-            //LuckProgress += 1;
+            EnergyProgress++;
         }
         else
         {
-            LuckyCoin = 1;
-            //LuckProgress = 1;
+            EnergyProgress = 1;
         }
+        Energy += EnergyProgress;
         DrawThisTurn = false;
         m_GameManager.GainDraw(1);
     }
@@ -178,6 +197,10 @@ public class FuncUI : IUserInterface
             if (GameManager.Instance.ConsumeMoney(PlayerLvUpMoney))
             {
                 PlayerLevel++;
+                if (PlayerLevel == 4 || PlayerLevel == 7)//4和7级增加一个商店容量
+                {
+                    m_GameManager.IncreaseShopCapacity();
+                }
             }
         }
     }

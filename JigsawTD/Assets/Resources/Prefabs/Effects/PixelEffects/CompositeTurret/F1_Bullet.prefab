@@ -4645,7 +4645,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -513789213
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
@@ -9312,7 +9312,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -513789213
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
@@ -9355,6 +9355,8 @@ MonoBehaviour:
   sputteringEffect: {fileID: 3494240544614092349, guid: eb6cba38b10cbae4595d14d7b62081a8, type: 3}
   turretParent: {fileID: 0}
   hit: 0
+  isCritical: 0
+  SputteredCount: 0
 --- !u!58 &3623257848819073342
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -14142,7 +14144,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -513789213
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0

@@ -35,6 +35,7 @@ public class StrategyComposite : StrategyBase
 
     public void GetTurretSkills()//首次获取并激活效果
     {
+        TurretSkills.Clear();
         TurretSkill effect;
         effect = TurretEffectFactory.GetInitialSkill((int)m_Att.TurretSkill);
         effect.strategy = this;

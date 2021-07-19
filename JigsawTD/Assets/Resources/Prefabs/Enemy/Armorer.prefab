@@ -17,7 +17,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.5, y: 0.5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -38,10 +38,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05f8dba3c4b092a4ea2333373a462b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ParentObj: {fileID: 0}
-  exlposionPrefab: {fileID: 5066620312272629520, guid: 846dc44009b18294b9b6a7e51bc55a02, type: 3}
-  CurrentTile: {fileID: 0}
   boss: {fileID: 1917517731428350432}
+  explosionPrefab: {fileID: 0}
+  jumpDamagePrefab: {fileID: 0}
 --- !u!1 &5799880304811824769
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,13 +119,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
-  exlposionPrefab: {fileID: 9093981622819706278, guid: f1ea12073b3170943af71026bb40ecff, type: 3}
-  CurrentTile: {fileID: 0}
+  PointIndex: 0
   model: {fileID: 7619665209501119904}
   CurrentPoint:
     PathPos: {x: 0, y: 0}
     PathDirection: 0
     ExitPoint: {x: 0, y: 0}
+  IsBoss: 1
+  exlposionPrefab: {fileID: 9093981622819706278, guid: f1ea12073b3170943af71026bb40ecff, type: 3}
   initialSpeed: 0
   armorIntensify: 500
   armorCoolDown: 0
@@ -235,7 +235,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1288343251
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 132e9a3c321bc384c9b43b0213ec2a85, type: 3}
   m_Color: {r: 0.75485456, g: 0.3339622, b: 1, a: 1}
@@ -276,7 +276,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b287204cbbc96b64ea356ded954df546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 1917517731428350432}
 --- !u!50 &236055208716200946
 Rigidbody2D:
   serializedVersion: 4
@@ -315,7 +314,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.5, y: 0.5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -336,10 +335,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05f8dba3c4b092a4ea2333373a462b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ParentObj: {fileID: 0}
-  exlposionPrefab: {fileID: 5066620312272629520, guid: 846dc44009b18294b9b6a7e51bc55a02, type: 3}
-  CurrentTile: {fileID: 0}
   boss: {fileID: 1917517731428350432}
+  explosionPrefab: {fileID: 0}
+  jumpDamagePrefab: {fileID: 0}
 --- !u!1001 &2814757641781141088
 PrefabInstance:
   m_ObjectHideFlags: 0

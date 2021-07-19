@@ -21,6 +21,9 @@ public class EmptyContent : GameTileContent
             ObjectPool.Instance.UnSpawn(m_GameTile);
             return;
         }
-        StaticData.SetNodeWalkable(m_GameTile, true);
+        else
+        {
+            StaticData.SetNodeWalkable(m_GameTile, true);
+        }
     }
 }

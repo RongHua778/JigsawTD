@@ -23,7 +23,6 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameEndUI m_GameEndUI = default;
     [SerializeField] private MessageUI m_MessageUI = default;
     [SerializeField] private GuideVideo m_GuideVideo = default;
-    public FuncUI FuncUI { get => m_FuncUI; set => m_FuncUI = value; }
     public MainUI MainUI { get => m_MainUI; set => m_MainUI = value; }
 
 
@@ -89,8 +88,8 @@ public class GameManager : Singleton<GameManager>
 
         //初始化UI
         MainUI.Initialize(this);//主界面顶部UI
-        FuncUI.Initialize(this);//主界面功能UI
-        m_GuideUI.Initialize(this, FuncUI, MainUI, m_BluePrintShopUI);//教学系统UI
+        m_FuncUI.Initialize(this);//主界面功能UI
+        m_GuideUI.Initialize(this, m_FuncUI, MainUI, m_BluePrintShopUI);//教学系统UI
         m_BluePrintShopUI.Initialize(this);//配方系统UI
         m_ShapeSelectUI.Initialize(this);//抽模块UI
         m_GameEndUI.Initialize(this);//游戏结束UI
@@ -113,7 +112,7 @@ public class GameManager : Singleton<GameManager>
         //初始化教程
         if (Game.Instance.Tutorial)
         {
-            FuncUI.PrepareForGuide();
+            m_FuncUI.PrepareForGuide();
             MainUI.PrepareForGuide();
             m_BluePrintShopUI.ShopBtnObj.SetActive(false);
             m_GuideUI.Show();
@@ -134,7 +133,7 @@ public class GameManager : Singleton<GameManager>
         m_CamControl.Release();
 
         MainUI.Release();
-        FuncUI.Release();
+        m_FuncUI.Release();
         m_GuideUI.Release();
         m_BluePrintShopUI.Release();
         m_ShapeSelectUI.Release();
@@ -187,7 +186,7 @@ public class GameManager : Singleton<GameManager>
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            FuncUI.NextWaveBtnClick();
+            m_FuncUI.NextWaveBtnClick();
         }
     }
 
@@ -196,8 +195,8 @@ public class GameManager : Singleton<GameManager>
     {
         if (OperationState.StateName == StateName.BuildingState)
         {
-            WaveSystem.EnemyRemain = WaveSystem.RunningSequence.index.Count;
-            FuncUI.Hide();
+            //WaveSystem.EnemyRemain = WaveSystem.RunningSequence.index.Count;
+            m_FuncUI.Hide();
             TransitionToState(StateName.WaveState);
             foreach (var turret in compositeTurrets.behaviors)
             {
@@ -222,9 +221,9 @@ public class GameManager : Singleton<GameManager>
         }
         WaveSystem.GetSequence();
         m_BluePrintShopUI.NextRefreshTrun--;
-        MainUI.PrepareNextWave(WaveSystem.RunningSequence, FuncUI.LuckyCoin);
-        FuncUI.PrepareNextWave();
-        FuncUI.Show();
+        MainUI.PrepareNextWave(WaveSystem.RunningSequence);
+        m_FuncUI.PrepareNextWave();
+        m_FuncUI.Show();
 
         TriggerGuide(6);
         TriggerGuide(7);
@@ -238,7 +237,7 @@ public class GameManager : Singleton<GameManager>
         {
             ((TurretContent)turret).Strategy.ClearTurnIntensify();
         }
-        
+
     }
 
     public void GameEnd(bool win)
@@ -286,9 +285,9 @@ public class GameManager : Singleton<GameManager>
     public void DrawShapes()
     {
         TransitionToState(StateName.PickingState);
-        FuncUI.Hide();
+        m_FuncUI.Hide();
         m_ShapeSelectUI.Show();
-        m_ShapeSelectUI.ShowThreeShapes(FuncUI.PlayerLevel);
+        m_ShapeSelectUI.ShowThreeShapes(m_FuncUI.PlayerLevel);
     }
 
     public void SelectShape()//选择了一个模块
@@ -301,7 +300,7 @@ public class GameManager : Singleton<GameManager>
     {
         TransitionToState(StateName.BuildingState);
 
-        FuncUI.Show();
+        m_FuncUI.Show();
         m_BluePrintShopUI.CheckAllBluePrint();
 
     }
@@ -322,7 +321,7 @@ public class GameManager : Singleton<GameManager>
         {
             TransitionToState(StateName.PickingState);
             m_BluePrintShopUI.CompositeBluePrint(grid);
-            FuncUI.Hide();
+            m_FuncUI.Hide();
         }
         else
         {
@@ -358,32 +357,31 @@ public class GameManager : Singleton<GameManager>
 
     public void GainDraw(int amount)
     {
-        FuncUI.DrawRemain += amount;
+        m_FuncUI.DrawRemain += amount;
     }
 
-    public void SpawnEnemy(int type)
+    public Enemy SpawnEnemy(EnemyType type, int pathIndex, float intensify)
     {
-        WaveSystem.SpawnEnemy(BoardSystem, type);
+        return WaveSystem.SpawnEnemy(BoardSystem, EnemyFactory.Get(type), pathIndex, intensify);
     }
 
     public void RefreshShop(int cost)
     {
         if (ConsumeMoney(cost))
         {
-            m_BluePrintShopUI.RefreshShop(FuncUI.PlayerLevel, cost);
+            m_BluePrintShopUI.RefreshShop(m_FuncUI.PlayerLevel, cost);
         }
     }
 
-    public void GetRandomBluePrint()
+    public void GetRandomBluePrint(bool isIntensify = false)
     {
-        m_BluePrintShopUI.GetARandomBluePrintToPocket(FuncUI.PlayerLevel);
+        m_BluePrintShopUI.GetARandomBluePrintToPocket(m_FuncUI.PlayerLevel, isIntensify);
     }
 
     public void BuyBluePrint(BluePrintGrid grid, int cost)
     {
         if (ConsumeMoney(cost))
         {
-            FuncUI.LuckProgress++;
             m_BluePrintShopUI.MoveBluePrintToPocket(grid);
         }
     }
@@ -403,6 +401,11 @@ public class GameManager : Singleton<GameManager>
     public void BuyOneGround()
     {
         m_BoardSystem.BuyOneEmptyTile();
+    }
+
+    public void IncreaseShopCapacity()
+    {
+        m_BluePrintShopUI.ShopCapacity++;
     }
 
     #endregion
@@ -449,7 +452,7 @@ public class GameManager : Singleton<GameManager>
     public void ShowEnemyTips()
     {
         m_EnemyTips.Show();
-        m_EnemyTips.ReadSequenceInfo(m_WaveSystem);
+        m_EnemyTips.ReadSequenceInfo(m_WaveSystem.RunningSequence);
     }
 
     public void ShowTurretBaseTips(TurretBaseContent content)

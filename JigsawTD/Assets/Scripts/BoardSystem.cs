@@ -132,6 +132,12 @@ public class BoardSystem : IGameSystem
     }
 
 
+    private void OnApplicationFocus(bool focus)
+    {
+        if(FindPath)
+            ShowPath();
+    }
+
 
     public void SetGameBoard()
     {
@@ -325,6 +331,7 @@ public class BoardSystem : IGameSystem
             SeekPath();
         }
         GameManager.Instance.HideTips();
+        BuyOneGroundMoney += 10;
     }
 
     //´ýÆúÓÃ·½·¨0609

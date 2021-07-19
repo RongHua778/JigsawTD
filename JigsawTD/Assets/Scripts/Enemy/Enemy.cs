@@ -3,13 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : PathFollower,IDamageable
+public abstract class Enemy : PathFollower, IDamageable
 {
-    public int rewardCoin;
-    public int rewardLuckyDraw;
     public bool IsBoss = false;
     public bool IsEnemy { get => true; }
-    [SerializeField] protected ReusableObject exlposionPrefab = default;
+    public ReusableObject exlposionPrefab = default;
     protected AudioClip explosionClip;
     private Animator anim;
     public Animator Anim { get => anim; set => anim = value; }
@@ -38,8 +36,6 @@ public abstract class Enemy : PathFollower,IDamageable
     public int AffectHealerCount { get => affectHealerCount; set => affectHealerCount = value; }
     float speedIntensify = 0;
     public virtual float SpeedIntensify { get => speedIntensify + AffectHealerCount > 0 ? 0.4f : 0; set => speedIntensify = Mathf.Min(2, value); }
-
-    public float initialSpeed;
     public override float Speed { get => StunTime > 0 ? 0 : Mathf.Max(0.05f, (speed + SpeedIntensify) * (1 - (SlowRate + PathSlow) / (SlowRate + PathSlow + 1))); set => speed = value; }
 
     float slowRate;
@@ -83,7 +79,13 @@ public abstract class Enemy : PathFollower,IDamageable
     }
 
     private float maxHealth;
-    public float MaxHealth { get => maxHealth; set => maxHealth = value; }
+    public float MaxHealth { get => maxHealth; 
+        set 
+        { 
+            maxHealth = value;
+            CurrentHealth = maxHealth;
+        } 
+    }
     protected float currentHealth;
     public virtual float CurrentHealth
     {
@@ -99,23 +101,34 @@ public abstract class Enemy : PathFollower,IDamageable
         }
     }
 
-    float prDropTask=0f;
+    float prDropTask = 0f;
 
-    [Header("HealthSetting")]
+    [Header("OtherSetting")]
     HealthBar healthBar;
+    [HideInInspector] public SpriteRenderer enemySprite;
+    [HideInInspector] public CircleCollider2D enemyCol;
 
 
     public virtual void Awake()
     {
+        enemySprite = transform.Find("Model").Find("GFX").GetComponent<SpriteRenderer>();
+        enemyCol = enemySprite.GetComponent<CircleCollider2D>();
         Anim = GetComponent<Animator>();
-        explosionClip = Resources.Load<AudioClip>("Music/Effects/Sound_EnemyExplosion");
+        if (IsBoss)
+        {
+            explosionClip = Resources.Load<AudioClip>("Music/Effects/Sound_BossExplosion");
+        }
+        else
+        {
+            explosionClip = Resources.Load<AudioClip>("Music/Effects/Sound_EnemyExplosion");
+        }
     }
 
     public override bool GameUpdate()
     {
         if (EnemySkills != null)
         {
-            foreach(Skill enemySkill in EnemySkills)
+            foreach (Skill enemySkill in EnemySkills)
             {
                 enemySkill.OnGameUpdating();
             }
@@ -123,8 +136,7 @@ public abstract class Enemy : PathFollower,IDamageable
         if (IsDie)
         {
             DropTask();
-            DropReward();
-            if (EnemySkills!=null)
+            if (EnemySkills != null)
             {
                 foreach (Skill enemySkill in EnemySkills)
                 {
@@ -209,9 +221,8 @@ public abstract class Enemy : PathFollower,IDamageable
         this.healthBar = healthBar;
         this.healthBar.followTrans = model;
         Buffable = this.GetComponent<BuffableEntity>();
-        CurrentHealth = MaxHealth = Mathf.RoundToInt(attribute.Health * intensify);
+        MaxHealth = Mathf.RoundToInt(attribute.Health * intensify);
         Speed = attribute.Speed;
-        initialSpeed = attribute.Speed;
         DamageIntensify = attribute.Shell;
         ReachDamage = attribute.ReachDamage;
     }
@@ -236,15 +247,9 @@ public abstract class Enemy : PathFollower,IDamageable
         }
     }
 
-    private void DropReward()
-    {
-        GameManager.Instance.MainUI.Coin += rewardCoin;
-        GameManager.Instance.FuncUI.DrawRemain += rewardLuckyDraw;
-    }
-
     private void DropTask()
     {
-        float temp = UnityEngine.Random.Range(0f,1f);
+        float temp = UnityEngine.Random.Range(0f, 1f);
         if (temp < prDropTask)
         {
             GameManager.Instance.MainUI.GetTask(GetComponentInChildren<TargetPoint>().transform);

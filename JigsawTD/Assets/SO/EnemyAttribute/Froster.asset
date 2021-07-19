@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 614735ba97a8e4b4bbdf8128289355f3, type: 3}
+  m_Name: Froster
+  m_EditorClassIdentifier: 
+  EnemyName: "\u9ED1\u683C\u5C14\uFF08\u5E73\u8861\u578B\uFF09"
+  EnemyType: 5
+  InitCount: 3
+  CountIncrease: 3
+  Health: 20
+  Speed: 0.7
+  Shell: 0
+  CoolDown: 1.5
+  Prefab: {fileID: 8425249393752721173, guid: db9a50174f5434e48a77f2d501819d68, type: 3}
+  ReachDamage: 1
+  extraHealth: 0
+  EnemyIcon: {fileID: -4512359869375799480, guid: f9835346b30cae840a9eff85ed192e6f, type: 3}
+  EnemyEmptyIcon: {fileID: 0}
+  Description: "\u6B7B\u4EA1\u540E\u51BB\u7ED3\u5468\u56F4\u7684\u5854\u4E00\u5B9A\u7684\u65F6\u95F4\u3002"

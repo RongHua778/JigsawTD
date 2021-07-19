@@ -9,9 +9,6 @@ public class StaticData : Singleton<StaticData>
 {
 
     [Header("LevelSetting")]
-    //[SerializeField] private int difficulty = 2;
-    //public int Difficulty { get => difficulty; set => difficulty = value; }
-
     public static LayerMask PathLayer = 1 << 6 | 1 << 10;
     public static string TrapMask = "Trap";
     public static string ConcreteTileMask = "ConcreteTile";
@@ -56,6 +53,7 @@ public class StaticData : Singleton<StaticData>
     public static int PerfectElementCount = 0;
     public static float OverallMoneyIntensify = 0;
     public static int FreeGroundTileCount = 0;
+    public static int NextBuyIntensifyBlueprint = 0;
 
 
     [Header("ProbabilitySetting")]
@@ -89,7 +87,6 @@ public class StaticData : Singleton<StaticData>
     private void Start()
     {
         InitializeInfoDIC();
-        //Difficulty = Game.Instance.Difficulty;
 
         RedColor = new Color32(255, 110, 66, 255);
         GreenColor = new Color32(66, 255, 100, 255);
@@ -114,13 +111,13 @@ public class StaticData : Singleton<StaticData>
     };
     public float[,] RareChances = new float[7, 3]//配方刷新概率
     {
-        { 0.9f,0.1f,0f },
-        { 0.75f,0.25f,0f},
-        { 0.6f,0.38f,0.02f },
-        { 0.5f,0.42f,0.8f},
+        { 1f,0f,0f },
+        { 0.8f,0.2f,0f},
+        { 0.6f,0.35f,0.05f },
+        { 0.5f,0.4f,0.1f},
         { 0.4f,0.4f,0.2f},
-        { 0.35f,0.35f,0.3f},
-        { 0.3f,0.3f,0.4f},
+        { 0.3f,0.35f,0.35f},
+        { 0.2f,0.35f,0.45f},
     };
 
     //随机打乱一个int list的方法
@@ -385,6 +382,17 @@ public class StaticData : Singleton<StaticData>
         return intensifyTxt;
     }
 
+    public static string GetBluePrintIntensify(Blueprint bluePrint)
+    {
+        string intensifyTxt = "元素加成：\n";//根据元素及品质设置显示加成效果
+        intensifyTxt += bluePrint.CompositeAttackDamage > 0 ? "+" + bluePrint.CompositeAttackDamage * 100 + "%基础攻击\n" : "";
+        intensifyTxt += bluePrint.CompositeAttackSpeed > 0 ? "+" + bluePrint.CompositeAttackSpeed * 100 + "%基础攻速\n" : "";
+        intensifyTxt += bluePrint.CompositeSlowRate > 0 ? "+" + bluePrint.CompositeSlowRate + "减速\n" : "";
+        intensifyTxt += bluePrint.CompositeCriticalRate > 0 ? "+" + bluePrint.CompositeCriticalRate * 100 + "%暴击率\n" : "";
+        intensifyTxt += bluePrint.CompositeSputteringRange > 0 ? "+" + bluePrint.CompositeSputteringRange + "溅射" : "";
+        return intensifyTxt;
+    }
+
     public static string GetTurretDes(TurretAttribute attribute, StrategyBase strategy)
     {
         string finalDes = "";
@@ -408,11 +416,9 @@ public class StaticData : Singleton<StaticData>
         text += "当前等级概率:\n";
         for (int x = 0; x < 5; x++)
         {
-            if (x < 4)
-                text += "品质" + (x + 1).ToString() + ": " + levelChances[x] * 100 + "%\n";
-            else
-                text += "品质" + (x + 1).ToString() + ": " + levelChances[x] * 100 + "%";
+            text += "品质" + (x + 1).ToString() + ": " + levelChances[x] * 100 + "%\n";
         }
+        text += "当模块等级达到4和7级时，商店配方数量+1.";
         return text;
     }
 
@@ -427,12 +433,15 @@ public class StaticData : Singleton<StaticData>
     public static string GetLuckyInfo(int luckCoin, int luckProgress)
     {
         string text =
-           "1.当前回合没有抽取时，获得1格能量。\n" +
-           "2.每格能量提高回合金币收入10%。\n" +
-           "3.抽取后，能量清零。\n" +
-           "4.每购买3个配方，获得1格能量。\n" +
-           "(当前收入增加 " + "<color=cyan>" + luckCoin * 10 + "%" + "</color>)\n" +
-           "(已购买配方 " + "<color=cyan>" + luckProgress + "/3</color>)";
+            "1.当前回合没有抽取时，获得1格能量\n" +
+            "2.每个连续不抽取的回合都会使能量获取额外+1，上限为5\n" +
+            "3.当能量满10点时，获得1次额外的抽取次数";
+        //"1.当前回合没有抽取时，获得1格能量。\n" +
+        //"2.每格能量提高回合金币收入10%。\n" +
+        //"3.抽取后，能量清零。\n" +
+        //"4.每购买2个配方，获得1格能量。\n" +
+        //"(当前收入增加 " + "<color=cyan>" + luckCoin * 10 + "%" + "</color>)\n" +
+        //"(已购买配方 " + "<color=cyan>" + luckProgress + "/3</color>)";
         return text;
     }
 

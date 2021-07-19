@@ -126,7 +126,6 @@ public class J1SkillDistanceBaseDamage : InitialSkill
     public override void Shoot()
     {
         bullet.Damage *= (1 + (0.3f + increaseRate) * bullet.GetTargetDistance());
-        Debug.Log(increaseRate);
     }
 }
 
@@ -139,9 +138,9 @@ public class G1SkillMultiTarget : InitialSkill
         strategy.BaseTargetCountIntensify += 3;
     }
 
-    public override void StartTurn()
+    public override void Hit(Enemy target)
     {
-        strategy.TurnAttackIntensify *= 0.5f;
+        bullet.Damage *= 0.5f;
     }
 
 }

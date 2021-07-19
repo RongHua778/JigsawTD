@@ -5,6 +5,7 @@ using System.Linq;
 
 public class Blueprint
 {
+    public bool IntensifyBluePrint = false;
     public TurretAttribute CompositeTurretAttribute;
     public StrategyComposite ComStrategy;
     List<Composition> compositions = new List<Composition>();
@@ -25,19 +26,19 @@ public class Blueprint
             {
                 case Element.Gold:
                     //CompositeAttackDamage += StaticData.GoldAttackIntensify * com.qualityRequeirement;
-                    CompositeAttackDamage += StaticData.GoldAttackIntensify;
+                    CompositeAttackDamage += StaticData.GoldAttackIntensify * (IntensifyBluePrint ? 3 : 1);
                     break;
                 case Element.Wood:
-                    CompositeAttackSpeed += StaticData.WoodSpeedIntensify;
+                    CompositeAttackSpeed += StaticData.WoodSpeedIntensify * (IntensifyBluePrint ? 3 : 1);
                     break;
                 case Element.Water:
-                    CompositeSlowRate += StaticData.WaterSlowIntensify;
+                    CompositeSlowRate += StaticData.WaterSlowIntensify * (IntensifyBluePrint ? 3 : 1);
                     break;
                 case Element.Fire:
-                    CompositeCriticalRate += StaticData.FireCriticalIntensify;
+                    CompositeCriticalRate += StaticData.FireCriticalIntensify * (IntensifyBluePrint ? 3 : 1);
                     break;
                 case Element.Dust:
-                    CompositeSputteringRange += StaticData.DustSputteringIntensify;
+                    CompositeSputteringRange += StaticData.DustSputteringIntensify * (IntensifyBluePrint ? 3 : 1);
                     break;
                 default:
                     break;

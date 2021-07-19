@@ -62,7 +62,7 @@ public class TrapContent : GameTileContent
         if (target != null)
         {
             if (target.Enemy != null) 
-            target.Enemy.CurrentTrap = this;
+            ((Enemy)target.Enemy).CurrentTrap = this;
         }
         else
         {

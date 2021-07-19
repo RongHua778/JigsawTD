@@ -84,11 +84,13 @@ MonoBehaviour:
     PathPos: {x: 0, y: 0}
     PathDirection: 0
     ExitPoint: {x: 0, y: 0}
-  exlposionPrefab: {fileID: 4814509631623709245, guid: cde09d379e3e93f46afc53b515cc5441, type: 3}
-  CurrentTrap: {fileID: 0}
+  IsBoss: 1
+  exlposionPrefab: {fileID: 4814509631623709245, guid: da26032d01e11f8489ff266989819e3b, type: 3}
   initialSpeed: 0
-  EnemySprite: {fileID: 1900518670408692583}
-  originalSprite: {fileID: -8847467542957845770, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
+  enemySprite: {fileID: 0}
+  enemyCol: {fileID: 0}
+  dividerSprites: []
+  dividing: 3
 --- !u!1 &8360252054385358165
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,7 +195,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1288343251
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_Sprite: {fileID: -8847467542957845770, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

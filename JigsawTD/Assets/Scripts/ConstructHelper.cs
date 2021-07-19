@@ -25,6 +25,7 @@ public static class ConstructHelper
         GameTile specialTile = m_TileFactory.GetBasicTile();
         GameTileContent content = m_ContentFactory.GetRandomElementTurret(playerLevel);
         specialTile.SetContent(content);
+        ((BasicTile)specialTile).SetBaseSprite(1);
         shape.SetTile(specialTile);
         return shape;
     }
@@ -58,6 +59,7 @@ public static class ConstructHelper
         GameTile tile = m_TileFactory.GetBasicTile();
         GameTileContent content = m_ContentFactory.GetRandomTrapContent();
         tile.SetContent(content);
+        ((BasicTile)tile).SetBaseSprite(1);
         return tile;
     }
 
@@ -67,15 +69,16 @@ public static class ConstructHelper
         GameTile tile = m_TileFactory.GetBasicTile();
         GameTileContent content = m_ContentFactory.GetRandomTurretBase();
         tile.SetContent(content);
+        ((BasicTile)tile).SetBaseSprite(1);
         return tile;
     }
 
 
     //ºÏ³ÉËþ
-    public static Blueprint GetRandomBluePrintByLevel(int level)
+    public static Blueprint GetRandomBluePrintByLevel(int level, bool isIntensify = false)
     {
         TurretAttribute attribute = m_ContentFactory.GetRandomCompositeAttributeByLevel(level);
-        return m_BlurPrintFactory.GetRandomBluePrint(attribute);
+        return m_BlurPrintFactory.GetRandomBluePrint(attribute, isIntensify);
     }
 
     public static TileShape GetCompositeTurretByBluePrint(Blueprint bluePrint)
@@ -84,6 +87,7 @@ public static class ConstructHelper
         GameTile tile = m_TileFactory.GetBasicTile();
         CompositeTurret content = m_ContentFactory.GetCompositeTurret(bluePrint);
         tile.SetContent(content);
+        ((BasicTile)tile).SetBaseSprite(2);
         shape.SetTile(tile);
         bluePrint.ComStrategy.CompositeSkill();
         return shape;
@@ -97,6 +101,7 @@ public static class ConstructHelper
         GameTile tile = m_TileFactory.GetBasicTile();
         GameTileContent content = m_ContentFactory.GetTrapContentByName(name);
         tile.SetContent(content);
+        ((BasicTile)tile).SetBaseSprite(1);
         shape.SetTile(tile);
         return shape;
     }
@@ -105,24 +110,25 @@ public static class ConstructHelper
     {
         TurretAttribute attribute = m_ContentFactory.GetCompositeTurretByName(name);
         Blueprint bluePrint = m_BlurPrintFactory.GetRandomBluePrint(attribute);
-        TileShape shape= GetCompositeTurretByBluePrint(bluePrint);
-        return shape;
-    }
-
-    public static TileShape GetCompositeTurretByNameAndElement(string name, int e1,int e2,int e3)
-    {
-        TurretAttribute attribute = m_ContentFactory.GetCompositeTurretByName(name);
-        Blueprint bluePrint = m_BlurPrintFactory.GetSpecificBluePrint(attribute,e1,e2,e3);
         TileShape shape = GetCompositeTurretByBluePrint(bluePrint);
         return shape;
     }
 
-    public static TileShape GetElementTurretByQualityAndElement(Element element,int quality)
+    public static TileShape GetCompositeTurretByNameAndElement(string name, int e1, int e2, int e3)
+    {
+        TurretAttribute attribute = m_ContentFactory.GetCompositeTurretByName(name);
+        Blueprint bluePrint = m_BlurPrintFactory.GetSpecificBluePrint(attribute, e1, e2, e3);
+        TileShape shape = GetCompositeTurretByBluePrint(bluePrint);
+        return shape;
+    }
+
+    public static TileShape GetElementTurretByQualityAndElement(Element element, int quality)
     {
         TileShape shape = m_ShapeFactory.GetDShape();
         GameTile tile = m_TileFactory.GetBasicTile();
         GameTileContent content = m_ContentFactory.GetElementTurret(element, quality);
         tile.SetContent(content);
+        ((BasicTile)tile).SetBaseSprite(1);
         shape.SetTile(tile);
         return shape;
     }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 999380c325c746741864205bb47f54ec, type: 3}
   m_Name: SkillFactory
   m_EditorClassIdentifier: 
-  bornerBornCD: 4.5
+  bornerBornCD: 5
   bornerEnemyOneBorn: 3
   blinkerBlink: 3
   holePrefab: {fileID: -6697839134482483952, guid: 529ac6622c5b5c6469501f1d2e75fd30, type: 3}
@@ -21,6 +21,7 @@ MonoBehaviour:
   dividerSprites:
   - {fileID: -8360756241666586474, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
   - {fileID: 6048167617135722125, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
+  - {fileID: -8847467542957845770, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
   aircraftBornCD: 4
   aircraftOneBorn: 3
   maxAircrafts: 10

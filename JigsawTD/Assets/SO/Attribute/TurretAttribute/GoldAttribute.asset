@@ -33,7 +33,7 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: A1
+    TurretName: "A1\u6B8B\u7F3A\u91D1\u7ED3\u6784"
     TurretIcon: {fileID: -4293952102954766580, guid: 1d42c048b2d65864e8d3e6f8f439d0ba, type: 3}
     CannonSprite: {fileID: -2494827163238398725, guid: 768de1dbe1dcb8c45b69b4de6a5821bb, type: 3}
     ShootPointOffset: {x: 0, y: 0.33}
@@ -44,7 +44,7 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: A2
+    TurretName: "A2\u6B21\u7B49\u91D1\u7ED3\u6784"
     TurretIcon: {fileID: -7579240340240280150, guid: 1d42c048b2d65864e8d3e6f8f439d0ba, type: 3}
     CannonSprite: {fileID: -5280431197249048325, guid: 768de1dbe1dcb8c45b69b4de6a5821bb, type: 3}
     ShootPointOffset: {x: 0, y: 0.35}
@@ -55,7 +55,7 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: A3
+    TurretName: "A3\u7A33\u56FA\u91D1\u7ED3\u6784"
     TurretIcon: {fileID: -7641452014064155769, guid: 1d42c048b2d65864e8d3e6f8f439d0ba, type: 3}
     CannonSprite: {fileID: -4889670263694701591, guid: 768de1dbe1dcb8c45b69b4de6a5821bb, type: 3}
     ShootPointOffset: {x: 0, y: 0.38}
@@ -66,7 +66,7 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: A4
+    TurretName: "A4\u575A\u5B9E\u91D1\u7ED3\u6784"
     TurretIcon: {fileID: -1087002185150558114, guid: 1d42c048b2d65864e8d3e6f8f439d0ba, type: 3}
     CannonSprite: {fileID: 7028729962307703768, guid: 768de1dbe1dcb8c45b69b4de6a5821bb, type: 3}
     ShootPointOffset: {x: 0, y: 0.41}
@@ -77,7 +77,7 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: A5
+    TurretName: "A5\u5B8C\u7F8E\u91D1\u7ED3\u6784"
     TurretIcon: {fileID: -5385682246039739975, guid: 1d42c048b2d65864e8d3e6f8f439d0ba, type: 3}
     CannonSprite: {fileID: 4799454438761694576, guid: 768de1dbe1dcb8c45b69b4de6a5821bb, type: 3}
     ShootPointOffset: {x: 0, y: 0.44}

@@ -59,7 +59,7 @@ public class TileShape : MonoBehaviour
                 {
                     tile = specialTile;
                     ElementTurret turret = tile.Content as ElementTurret;
-                    turretNameTxt.text = turret.Strategy.m_Att.TurretLevels[turret.Strategy.Quality - 1].TurretName;
+                    turretNameTxt.text = turret.Strategy.m_Att.TurretLevels[turret.Strategy.Quality - 1].TurretName.Substring(0, 2);
                 }
                 else
                 {

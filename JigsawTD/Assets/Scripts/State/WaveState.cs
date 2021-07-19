@@ -5,7 +5,7 @@ using UnityEngine;
 public class WaveState : BattleOperationState
 {
     WaveSystem m_WaveSystem;
-    public WaveState(GameManager gameManager,WaveSystem waveSystem) : base(gameManager)
+    public WaveState(GameManager gameManager, WaveSystem waveSystem) : base(gameManager)
     {
         m_WaveSystem = waveSystem;
     }
@@ -14,34 +14,36 @@ public class WaveState : BattleOperationState
 
     public override IEnumerator EnterState()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         m_WaveSystem.Running = true;
-        //±≥æ∞“Ù¿÷…Ë÷√
-        if (m_WaveSystem.RunningSequence.Wave == StaticData.Instance.LevelMaxWave)
+        switch (m_WaveSystem.RunningSequence[0].EnemyType)
         {
-            Sound.Instance.PlayBg("lastwave");
+            case EnemyType.Soilder:
+                Sound.Instance.PlayBg("soldier");
+                break;
+            case EnemyType.Runner:
+                Sound.Instance.PlayBg("runner");
+                break;
+            case EnemyType.Restorer:
+                Sound.Instance.PlayBg("restorer");
+                break;
+            case EnemyType.Tanker:
+                Sound.Instance.PlayBg("tanker");
+                break;
+            case EnemyType.Borner:
+                Sound.Instance.PlayBg("Borner");
+                break;
+            case EnemyType.Froster:
+                Sound.Instance.PlayBg("Froster");
+                break;
+            case EnemyType.Healer:
+                Sound.Instance.PlayBg("Healer");
+                break;
+            default:
+                Sound.Instance.PlayBg("lastwave");
+                break;
         }
-        else
-        {
-            switch (m_WaveSystem.RunningSequence.EnemyAttribute[0].EnemyType)
-            {
-                case EnemyType.Soilder:
-                    Sound.Instance.PlayBg("soldier");
-                    break;
-                case EnemyType.Runner:
-                    Sound.Instance.PlayBg("runner");
-                    break;
-                case EnemyType.Restorer:
-                    Sound.Instance.PlayBg("restorer");
-                    break;
-                case EnemyType.Tanker:
-                    Sound.Instance.PlayBg("tanker");
-                    break;
-                default:
-                    Sound.Instance.PlayBg("lastwave");
-                    break;
-            }
-        }
+
         yield break;
     }
 

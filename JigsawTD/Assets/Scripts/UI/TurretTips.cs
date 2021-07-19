@@ -44,6 +44,7 @@ public class TurretTips : TileTips
     private StrategyBase m_Strategy;
     private BluePrintGrid m_Grid;
     public bool showingTurret = false;
+    bool showingBlueprint = false;
     int upgradeCost;
 
     public override void Initialize(GameManager gameManager)
@@ -57,6 +58,7 @@ public class TurretTips : TileTips
         base.Hide();
         m_Grid = null;
         m_Strategy = null;
+        showingBlueprint = false;
         showingTurret = false;
     }
 
@@ -70,6 +72,7 @@ public class TurretTips : TileTips
         BasicInfo();
         UpdateInfo();
         showingTurret = true;
+
         AnalysisArea.SetActive(true);
         BluePrintArea.SetActive(false);
         TileSkillArea.SetActive(false);
@@ -112,6 +115,8 @@ public class TurretTips : TileTips
         Vector2 newPos;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(myCanvas.transform as RectTransform, new Vector2(800, Screen.height / 2), myCanvas.worldCamera, out newPos);
         transform.position = myCanvas.transform.TransformPoint(newPos);
+
+        showingBlueprint = true;
 
         m_Grid = grid;
         m_Strategy = grid.BluePrint.ComStrategy;
@@ -255,7 +260,13 @@ public class TurretTips : TileTips
     private void FixedUpdate()
     {
         if (showingTurret)
+        {
             UpdateInfo();
+        }
+        if (showingBlueprint)
+        {
+            UpdateBluePrintInfo();
+        }
     }
 
     public void BuyBluePrintBtnClick()

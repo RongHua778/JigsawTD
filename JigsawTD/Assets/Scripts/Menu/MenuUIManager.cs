@@ -7,9 +7,10 @@ public class MenuUIManager : MonoBehaviour
 {
     [SerializeField] GameObject messagePanel = default;
     [SerializeField] Text messageTxt = default;
-    [SerializeField] GameObject tutorialPanel = default;
-    //[SerializeField] Game m_Game = default;
+    [SerializeField] UILevelSelect levelPanel = default;
     [SerializeField] Text difficultyTxt = default;
+
+
     bool gameStart = false;
     // Start is called before the first frame update
     void Start()
@@ -37,24 +38,26 @@ public class MenuUIManager : MonoBehaviour
 
     public void StartGameBtnClick()
     {
-        if (PlayerPrefs.GetInt("MaxPassLevel", 0) < Game.Instance.Difficulty - 1)
-        {
-            ShowMessage("需先通关上一级难度");
-            return;
-        }
-        if (!gameStart)
-        {
-            if (Game.Instance.Difficulty == 1)
-            {
-                tutorialPanel.SetActive(true);
-                gameStart = true;
-            }
-            else
-            {
-                Game.Instance.LoadScene(1);
-                gameStart = true;
-            }
-        }
+        //if (PlayerPrefs.GetInt("MaxPassLevel", 0) < Game.Instance.Difficulty - 1)
+        //{
+        //    ShowMessage("需先通关上一级难度");
+        //    return;
+        //}
+        //if (!gameStart)
+        //{
+        //    if (Game.Instance.Difficulty == 1)
+        //    {
+        //        tutorialPanel.SetActive(true);
+        //        gameStart = true;
+        //    }
+        //    else
+        //    {
+        //        Game.Instance.LoadScene(1);
+        //        gameStart = true;
+        //    }
+        //}
+        levelPanel.gameObject.SetActive(true);
+        levelPanel.SetLevelInfo();
 
     }
 

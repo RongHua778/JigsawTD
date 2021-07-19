@@ -19,7 +19,7 @@ public class MainUI : IUserInterface
     [SerializeField] GuideBook m_GuideBook = default;
 
 
-    [SerializeField] Text[] taskTexts= default;
+    [SerializeField] Text[] taskTexts = default;
     [SerializeField] Button[] taskButtons = default;
 
     List<Task> tasksInPocket = new List<Task>();
@@ -138,13 +138,12 @@ public class MainUI : IUserInterface
 
 
 
-    public void PrepareNextWave(EnemySequence sequence, int luckCoin)
+    public void PrepareNextWave(List<EnemySequence> sequences)
     {
-
         CountTasks();
         CurrentWave++;
-        m_GameManager.GainMoney((int)((StaticData.Instance.BaseWaveIncome + StaticData.Instance.WaveMultiplyIncome * (CurrentWave - 1)) * (1 + luckCoin * 0.1f)));
-        m_WaveInfoSetter.SetWaveInfo(sequence);
+        m_GameManager.GainMoney((StaticData.Instance.BaseWaveIncome + StaticData.Instance.WaveMultiplyIncome * (CurrentWave - 1)));
+        m_WaveInfoSetter.SetWaveInfo(CurrentWave, sequences);
     }
 
     public bool ConsumeMoney(int cost)
@@ -172,7 +171,7 @@ public class MainUI : IUserInterface
             }
 
         }
-        foreach(Task t in taksOutPocket)
+        foreach (Task t in taksOutPocket)
         {
             t.CountDisappear();
         }
@@ -180,7 +179,7 @@ public class MainUI : IUserInterface
         clickedTask = null;
     }
 
-    private void UpdateTaskInfo() 
+    private void UpdateTaskInfo()
     {
         for (int i = 0; i < tasksInPocket.Count; i++)
         {
@@ -237,7 +236,7 @@ public class MainUI : IUserInterface
     {
         if (clickedTask != null)
         {
-            clickedTask.Replace(tasksInPocket,i);
+            clickedTask.Replace(tasksInPocket, i);
             clickedTask = null;
             UpdateTaskInfo();
         }
@@ -247,7 +246,7 @@ public class MainUI : IUserInterface
     {
         tasksInPocket[i].PlayTask();
         taskButtons[i].gameObject.SetActive(false);
-        taskTexts[i].text=tasksInPocket[0].GetInfo();
-        m_WaveInfoSetter.SetWaveInfo(GameManager.Instance.WaveSystem.LevelSequence[0]);
+        taskTexts[i].text = tasksInPocket[0].GetInfo();
+        //m_WaveInfoSetter.SetWaveInfo(GameManager.Instance.WaveSystem.LevelSequence[0]);
     }
 }

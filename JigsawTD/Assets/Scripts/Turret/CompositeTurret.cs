@@ -35,6 +35,7 @@ public class CompositeTurret : TurretContent
             {
                 TurretBaseContent content = tile.Content as TurretBaseContent;
                 ((StrategyComposite)Strategy).AddTileSkill(content.m_TurretBaseAttribute.tileSkill);
+                ((BasicTile)m_GameTile).SetDeco(content.m_TurretBaseAttribute.Icon);
             }
             ObjectPool.Instance.UnSpawn(tile);
         }
