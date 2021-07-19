@@ -44,10 +44,10 @@ public class BornSkill : Skill
     {
         EnemyAttribute attribute = GameManager.Instance.EnemyFactory.Get(type);
         //减半的敌人强度
-        float intensify = ws.RunningSequence.Intensify / 2;
+       // float intensify = ws.RunningSequence.Intensify / 2;
         Enemy enemy = ObjectPool.Instance.Spawn(attribute.Prefab) as Enemy;
         HealthBar healthBar = ObjectPool.Instance.Spawn(ws.HealthBarPrefab) as HealthBar;
-        enemy.Initialize(attribute, Random.Range(-0.3f, 0.3f), healthBar, intensify);
+        enemy.Initialize(attribute, Random.Range(-0.3f, 0.3f), healthBar, 1);
         enemy.Progress = this.enemy.Progress;
         enemy.SpawnOn(this.enemy.PointIndex, board.shortestPoints);
         GameManager.Instance.enemies.Add(enemy);

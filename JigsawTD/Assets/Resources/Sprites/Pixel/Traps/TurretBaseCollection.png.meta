@@ -3,20 +3,20 @@ guid: 8cd652a31bd99b345b5aed8764e5d440
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7132121176335741257
-    second: TurretBaseCollection_0
+      213: -8003383045076704052
+    second: TurretbaseCollection_0
   - first:
-      213: 2219362761703447931
-    second: TurretBaseCollection_1
+      213: -5082994840122261101
+    second: TurretbaseCollection_1
   - first:
-      213: -2751177121866005933
-    second: TurretBaseCollection_2
+      213: -146997729014233276
+    second: TurretbaseCollection_2
   - first:
-      213: -8779982314315162744
-    second: TurretBaseCollection_3
+      213: -4208345184491496116
+    second: TurretbaseCollection_3
   - first:
-      213: 6683349771476132449
-    second: TurretBaseCollection_4
+      213: -8825570841334758053
+    second: TurretbaseCollection_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -142,7 +142,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TurretBaseCollection_0
+      name: TurretbaseCollection_0
       rect:
         serializedVersion: 2
         x: 0
@@ -156,14 +156,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7be8775e39d950d90800000000000000
-      internalID: -7132121176335741257
+      spriteID: cc4a1d436854ee090800000000000000
+      internalID: -8003383045076704052
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TurretBaseCollection_1
+      name: TurretbaseCollection_1
       rect:
         serializedVersion: 2
         x: 128
@@ -177,14 +177,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7d501f4ca2ccce10800000000000000
-      internalID: 2219362761703447931
+      spriteID: 3918e5faf139579b0800000000000000
+      internalID: -5082994840122261101
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TurretBaseCollection_2
+      name: TurretbaseCollection_2
       rect:
         serializedVersion: 2
         x: 256
@@ -198,14 +198,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 352cef8ebfad1d9d0800000000000000
-      internalID: -2751177121866005933
+      spriteID: 44741532852c5fdf0800000000000000
+      internalID: -146997729014233276
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TurretBaseCollection_3
+      name: TurretbaseCollection_3
       rect:
         serializedVersion: 2
         x: 384
@@ -219,14 +219,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 88b580d7a9c372680800000000000000
-      internalID: -8779982314315162744
+      spriteID: c4d982af954f895c0800000000000000
+      internalID: -4208345184491496116
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TurretBaseCollection_4
+      name: TurretbaseCollection_4
       rect:
         serializedVersion: 2
         x: 512
@@ -240,8 +240,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 162e58e053700cc50800000000000000
-      internalID: 6683349771476132449
+      spriteID: b5542366416458580800000000000000
+      internalID: -8825570841334758053
       vertices: []
       indices: 
       edges: []

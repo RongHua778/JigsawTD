@@ -79,7 +79,13 @@ public abstract class Enemy : PathFollower, IDamageable
     }
 
     private float maxHealth;
-    public float MaxHealth { get => maxHealth; set => maxHealth = value; }
+    public float MaxHealth { get => maxHealth; 
+        set 
+        { 
+            maxHealth = value;
+            CurrentHealth = maxHealth;
+        } 
+    }
     protected float currentHealth;
     public virtual float CurrentHealth
     {
@@ -215,7 +221,7 @@ public abstract class Enemy : PathFollower, IDamageable
         this.healthBar = healthBar;
         this.healthBar.followTrans = model;
         Buffable = this.GetComponent<BuffableEntity>();
-        CurrentHealth = MaxHealth = Mathf.RoundToInt(attribute.Health * intensify);
+        MaxHealth = Mathf.RoundToInt(attribute.Health * intensify);
         Speed = attribute.Speed;
         DamageIntensify = attribute.Shell;
         ReachDamage = attribute.ReachDamage;

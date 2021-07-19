@@ -53,7 +53,7 @@ public class Task : ReusableObject
         Actived = true;
         for (int i = 0; i < Periods; i++)
         {
-        ws.LevelSequence[i].AddEnemy(enemyType);
+        //ws.LevelSequence[i].AddEnemy(enemyType);
         }
     }
     public void CountTask()

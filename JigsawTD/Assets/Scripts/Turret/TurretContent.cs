@@ -30,7 +30,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     //**********美术，动画及音效
     protected Animator turretAnim;
     protected AudioSource audioSource;
-    protected SpriteRenderer TurretBaseSprite;
+    //protected SpriteRenderer TurretBaseSprite;
     protected SpriteRenderer CannonSprite;
     protected AudioClip ShootClip;
 
@@ -62,7 +62,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         detectCollider = rangeParent.GetComponent<Collider2D>();
         rotTrans = transform.Find("RotPoint");
         shootPoint = rotTrans.Find("ShootPoint");
-        TurretBaseSprite = transform.Find("TurretBase").GetComponent<SpriteRenderer>();
+        //TurretBaseSprite = transform.Find("TurretBase").GetComponent<SpriteRenderer>();
         CannonSprite = rotTrans.Find("Cannon").GetComponent<SpriteRenderer>();
         turretAnim = this.GetComponent<Animator>();
         audioSource = this.GetComponent<AudioSource>();
@@ -374,11 +374,11 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         }
 
     }
-    public override void CorretRotation()
-    {
-        base.CorretRotation();
-        TurretBaseSprite.transform.rotation = Quaternion.identity;
-    }
+    //public override void CorretRotation()
+    //{
+    //    base.CorretRotation();
+    //    TurretBaseSprite.transform.rotation = Quaternion.identity;
+    //}
 
     protected override void ContentLandedCheck(Collider2D col)
     {

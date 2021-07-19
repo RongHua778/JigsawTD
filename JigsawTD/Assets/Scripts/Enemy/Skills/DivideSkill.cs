@@ -33,11 +33,11 @@ public class DivideSkill : Skill
     }
     private void SpawnEnemy()
     {
-        Divider divider = GameManager.Instance.SpawnEnemy(this.enemy.EnemyType, this.enemy.PointIndex) as Divider;
+        Divider divider = GameManager.Instance.SpawnEnemy(this.enemy.EnemyType, this.enemy.PointIndex, 1) as Divider;
         divider.dividing = dividing - 1;
         divider.EnemySkills.Clear();
         divider.EnemySkills.Add(GameManager.Instance.SkillFactory.GetDividerSkill(divider, divider.dividing));
-        divider.enemySprite.sprite = dividerSprites[divider.dividing-1];
+        divider.enemySprite.sprite = dividerSprites[divider.dividing - 1];
         divider.Progress = Mathf.Clamp((this.enemy.Progress + Random.Range(-0.2f, 0.2f)), 0, 1);
         divider.MaxHealth = this.enemy.MaxHealth / 2;
         divider.enemyCol.radius = 0.4f - 0.1f * (3 - divider.dividing);

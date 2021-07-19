@@ -360,9 +360,9 @@ public class GameManager : Singleton<GameManager>
         m_FuncUI.DrawRemain += amount;
     }
 
-    public Enemy SpawnEnemy(EnemyType type, int pathIndex)
+    public Enemy SpawnEnemy(EnemyType type, int pathIndex, float intensify)
     {
-        return WaveSystem.SpawnEnemy(BoardSystem, _enemyFactory.Get(type), pathIndex);
+        return WaveSystem.SpawnEnemy(BoardSystem, EnemyFactory.Get(type), pathIndex, intensify);
     }
 
     public void RefreshShop(int cost)
@@ -452,7 +452,7 @@ public class GameManager : Singleton<GameManager>
     public void ShowEnemyTips()
     {
         m_EnemyTips.Show();
-        m_EnemyTips.ReadSequenceInfo(m_WaveSystem);
+        m_EnemyTips.ReadSequenceInfo(m_WaveSystem.RunningSequence);
     }
 
     public void ShowTurretBaseTips(TurretBaseContent content)

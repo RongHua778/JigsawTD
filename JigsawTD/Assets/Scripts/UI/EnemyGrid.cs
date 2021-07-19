@@ -9,8 +9,9 @@ public class EnemyGrid : MonoBehaviour
     [SerializeField] Text enemyName = default;
     [SerializeField] Text enemyDes = default;
 
-    public void SetEnemyInfo(EnemyAttribute attribute)
+    public void SetEnemyInfo(EnemySequence sequence)
     {
+        EnemyAttribute attribute = GameManager.Instance.EnemyFactory.Get(sequence.EnemyType);
         enemyIcon.sprite = attribute.EnemyIcon;
         enemyName.text = attribute.EnemyName;
         enemyDes.text = attribute.Description;

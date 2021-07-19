@@ -2298,18 +2298,8 @@ MonoBehaviour:
   Running: 0
   pathOffset: 0.1
   healthBarPrefab: {fileID: 904725062044126347, guid: 2362ca59ddd854447ba882941722eec4, type: 3}
-  runningSequence:
-    Stage: 0
-    EnemyAttribute:
-    - {fileID: 0}
-    Amount: 
-    AmountIntensify: 0
-    Intensify: 0
-    CoolDown: []
-    waveCoolDown: 0
-    index: 
-    IsEnd: 0
-  LevelSequence: []
+  LevelAttribute: {fileID: 11400000, guid: 3db901bc7ef15e646a5ab9b664f6c01b, type: 2}
+  runningSequence: []
 --- !u!4 &107988105
 Transform:
   m_ObjectHideFlags: 0
@@ -5951,7 +5941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerMaxLevel: 7
-  LevelUpMoney: 000000002800000050000000a00000002c010000f4010000ee0200000f270000
+  LevelUpMoney: 000000003200000064000000c80000005e01000026020000200300000f270000
   StartCoin: 0
   StartLotteryDraw: 0
   BaseWaveIncome: 0
@@ -5960,7 +5950,7 @@ MonoBehaviour:
   TileSize: 1
   TileShapeChance: []
   PlayerMaxHealth: 1e0000000f0000000f0000006400000064000000
-  difficutyWave: 2800000028000000280000002800000028000000
+  difficutyWave: c8000000c8000000c8000000c8000000c8000000
 --- !u!1 &288904573
 GameObject:
   m_ObjectHideFlags: 0
@@ -8722,6 +8712,7 @@ GameObject:
   - component: {fileID: 476660424}
   - component: {fileID: 476660426}
   - component: {fileID: 476660425}
+  - component: {fileID: 476660427}
   m_Layer: 5
   m_Name: Critical
   m_TagString: Untagged
@@ -8790,6 +8781,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 476660423}
   m_CullTransparentMesh: 1
+--- !u!114 &476660427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476660423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ec38afce91633147af92b5cae9c7168, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  content: "\u6BCF1%\u66B4\u51FB\u7387=1%\u989D\u5916\u66B4\u51FB\u4F24\u5BB3\uFF0C\u57FA\u7840\u66B4\u51FB\u4F24\u5BB3\u4E3A150%"
+  offset: {x: 0, y: 1, z: 0}
 --- !u!1 &485144351
 GameObject:
   m_ObjectHideFlags: 0
@@ -13554,7 +13559,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &871098092
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20497,6 +20502,7 @@ GameObject:
   - component: {fileID: 1276694866}
   - component: {fileID: 1276694868}
   - component: {fileID: 1276694867}
+  - component: {fileID: 1276694869}
   m_Layer: 5
   m_Name: Sputtering
   m_TagString: Untagged
@@ -20565,6 +20571,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1276694865}
   m_CullTransparentMesh: 1
+--- !u!114 &1276694869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276694865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ec38afce91633147af92b5cae9c7168, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  content: "\u6E85\u5C04\u534A\u5F84\uFF0C\u57FA\u7840\u6E85\u5C04\u4F24\u5BB3\u4E3A50%"
+  offset: {x: 0, y: 1, z: 0}
 --- !u!1 &1280955935
 GameObject:
   m_ObjectHideFlags: 0
@@ -24436,14 +24456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3385e313c83bf9d48b58113358ba8d1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyCountArea:
-  - {fileID: 725607794}
-  - {fileID: 1292246565}
-  - {fileID: 871098091}
   enemyIcons:
-  - {fileID: 211653647}
-  - {fileID: 2040358082}
-  - {fileID: 1724294271}
   - {fileID: 2006145935}
   - {fileID: 1410460435}
   - {fileID: 476478}
@@ -30408,6 +30421,7 @@ MonoBehaviour:
   transition: {fileID: 231277384}
   transitionTime: 1
   Tutorial: 0
+  SeletecedLevel: 1
 --- !u!114 &1834551531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38375,8 +38389,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 29.22, y: -57.699997}
-  m_SizeDelta: {x: 165.1, y: 37.79}
+  m_AnchoredPosition: {x: 52.29, y: -57.699997}
+  m_SizeDelta: {x: 211.25, y: 37.79}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7154940297086514280
 CanvasRenderer:
@@ -39239,7 +39253,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5143\u7D20\u6280\u80FD"
+  m_Text: "\u5143\u7D20\u52A0\u6210"
 --- !u!222 &8495919064954701072
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -109,7 +109,7 @@ public class DraggingShape : DraggingActions
         }
         else
         {
-            SetAllColor(correctColor);
+            //SetAllColor(correctColor);
             return true;
         }
     }
@@ -152,18 +152,23 @@ public class DraggingShape : DraggingActions
         {
             Collider2D col = StaticData.RaycastCollider(tile.transform.position, LayerMask.GetMask(StaticData.ConcreteTileMask));
             if (col == null)//没有下层TILE，正常
+            {
+                SetTileColor(correctColor, tile);
                 continue;
+            }
             if (tile.Content.ContentType != GameTileContentType.Empty)//如果是有防御塔的，就比对冲突
             {
                 if (col.CompareTag("OnlyCompositeTurret"))
                 {
                     if (tile.Content.ContentType == GameTileContentType.CompositeTurret)
                     {
+                        SetTileColor(correctColor, tile);
                         continue;
                     }
                     else
                     {
                         canDrop = false;
+                        break;
                     }
                 }
                 if (col.CompareTag("UnDropablePoint"))//冲突，返回，所有颜色被设为红色
@@ -172,6 +177,11 @@ public class DraggingShape : DraggingActions
                     overLapPoint = true;
                     break;
                 }
+                SetTileColor(correctColor, tile);
+            }
+            else
+            {
+                SetTileColor(transparentColor, tile);
             }
 
         }

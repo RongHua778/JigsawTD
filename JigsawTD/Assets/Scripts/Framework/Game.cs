@@ -17,6 +17,7 @@ public class Game : Singleton<Game>
     public Animator transition;
     public float transitionTime = 0.8f;
     public bool Tutorial = false;
+    public int SeletecedLevel = 1;
 
 
     protected override void Awake()
