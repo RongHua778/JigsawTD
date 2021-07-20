@@ -262,7 +262,7 @@ public class DraggingShape : DraggingActions
         {
             if (!BoardSystem.FindPath)
             {
-                GameManager.Instance.ShowMessage("必须有道路连接起点和终点");
+                GameManager.Instance.ShowMessage(GameMultiLang.GetTraduction("NOROUTE"));
                 return;
             }
             Sound.Instance.PlayEffect("Sound_ConfirmShape");
@@ -278,12 +278,12 @@ public class DraggingShape : DraggingActions
         }
         else if (overLapPoint)
         {
-            GameManager.Instance.ShowMessage("防御塔不可与特殊地形重叠");
+            GameManager.Instance.ShowMessage(GameMultiLang.GetTraduction("NOOVERLAP"));
         }
-        else
-        {
-            GameManager.Instance.ShowMessage("必须与已有区域相连");
-        }
+        //else
+        //{
+        //    GameManager.Instance.ShowMessage("必须与已有区域相连");
+        //}
     }
 
 

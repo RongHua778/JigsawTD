@@ -7,6 +7,10 @@ BLUEPRINT=BLUEPRINT
 SETTING=SETTING
 QUIT=QUIT
 LEVELSTART=START LEVEL
+CONTINUE=Coninue
+RESTART=Restart
+RETURNTOMENU=Return to menu
+QUIT2=Quit
 
 TEST1=Test:Clear all save data
 TEST2=Test:Unlock all difficulties
@@ -26,6 +30,19 @@ LACKMONEY=You don't have eneugh coins
 LACKMATERIAL=You don't have materials needed
 PUTFIRST=Please place the drawed module first
 NOTBUILDSTATE=Can not composite during battle state
+NOROUTE=Make sure there are a route available
+NOOVERLAP=Turret cannot overlap with special tile
+
+//guidevideo
+PLACERULE=Placement Rule
+PLANROUTE=Plan a Route
+COMPOSITERULE=Composition Rule
+GUIDEVIDEO01=Each module consists of three basic tile and a turret. The basic tile can serves as path while the turret can act as a obstacle.
+GUIDEVIDEO02=Note: Turret can only be placed on empty space or basic tile while the basic tile can be placed anywhere.
+GUIDEVIDEO03=When you want to extend the route, you need to place the basic tile on the planned route in advance, and then place turret as an obstacle.
+GUIDEVIDEO04=Tip: You can also buy a single basic tile by clicking on a empty grid.
+GUIDEVIDEO05=When you have all the elements of a blueprint, you can composite a turret. Composite turret have different effects depending on it's elements.
+GUIDEVIDEO06=Tip: The store refreshes every 3 waves. Buy the blueprint to increase your chance of composition.
 
 
 //func
@@ -190,3 +207,84 @@ EEB=Heating Gun: Increases splash range by 0.1 per shoot( up to 1.5).
 EEC=Steady Core: Increase adjacent turrets' splash by 0.5.
 EED=Bombardment: Splash damage increased by 100% if it is a critical hit.
 
+//Enemy
+SOILDER=Sartre
+RUNNER=Kant
+TANKER=Hemingway
+RESTORER=Nietzsche
+FROSTER=Hegel
+HEALER=Schopenhauer
+
+SOILDERINFO=There are more of them.
+RUNNERINFO=When it's moving in a straight line, it's moving faster.
+TANKERINFO=High health but move slow.
+RESTORERINFO=It will quickly restore health if no damage is taken for a while.
+FROSTERINFO=Freezes the turrets around it while it die.
+HEALERINFO=Increased the nearby enemies' speed.
+
+//boss
+DIVIDER=Hidegger (Boss)
+SIXARMOUR=Kierkegaard (Boss)
+BLINKER=Descartes (Boss)
+BORNER=Aristotle (Boss)
+
+DIVIDERINFO=Splits into several smaller bodies while it die.
+SIXARMOURINFO=Surrounded by armors that protects against damage.
+BLINKERINFO=Flashes forward a certain distance while it takes a certain amount of damage.
+BORNERINFO=Summon a large amount of enemies every once in a while.
+
+//Trap
+STUNTRAP=Stun Trap
+ARROWTRAP=Slow Arrow
+DAMAGETRAP=Damage Marker
+SPAWNPOINT=Start Point
+DESTINATION=End Point
+
+STUNTRAPINFO=Enemies passing through this tile will be stunned for 1.5 seconds.
+ARROWTRAPINFO=Enemies passing through this tile with the same direction of the arrow will be slowed down until they turn.
+DAMAGETRAPINFO=Each time an enemy passes this tile, deals damge equal to 20% of the damage taken during last period.
+SPAWNPOINTINFO=Enemy borns here, make sure there is a route to the end point.
+DESTINATIONINFO=Enemy's destination, make sure there is a route to the start point.
+
+//TurretBase
+ATTACKBASE=Attack Base
+SPEEDBASE=Firerate Base
+CRITICALBASE=Critical Base
+SPUTTERINGBASE=Splash Base
+SLOWBASE=Slow Base
+
+ATTACKBASEINFO=Only Composite Tuttet can be placed: The benefit to Element A is doubled.
+SPEEDBASEINFO=Only Composite Tuttet can be placed: The benefit to Element B is doubled.
+CRITICALBASEINFO=Only Composite Tuttet can be placed: The benefit to Element C is doubled.
+SPUTTERINGBASEINFO=Only Composite Tuttet can be placed: The benefit to Element D is doubled.
+SLOWBASEINFO=Only Composite Tuttet can be placed: The benefit to Element E is doubled.
+
+//Guide
+GuideName=Kant
+Guide01=Welcome, Prototype S66666, your first Refactor Test is initializing...
+Guide02=Welcome to your first test, and I'll walk you through the ground rules.
+Guide03=First, try dragging with the mouse to move the view.
+Guide04=Good.
+Guide05=Try using the mouse wheel to zoom in and out.
+Guide06=Great.
+Guide07=In the center of the grid, there is a start point and an end point, and moving blue arrows mark the enemy's path.
+Guide08=Your mission is to destory them before they reach the end point.
+Guide09=Before entering the battle state, let's place some defenses.
+Guide10=Click the draw module button in the lower right corner, choose one and I will show you how to place them.
+Guide11=At the top left corner, it shows your remaining health, you will lose 1 HP for each enemy reach the end point.
+Guide12=No HP,test failed.
+Guide13=At the top right corner, shows your current wave and the type of enemy.
+Guide14=Pay attention to the info of the enemy, targeted defense against them.
+Guide15=When you are ready, click the Next Wave button at the bottom to start the battle state.
+Guide16=Above the draw module button is your energy slot.
+Guide17=If you don't draw this turn, you gain energy.Each time you accumulate 10 energy can gain an additional draw.
+Guide18=Now you can choose to draw module to strengthen your defense, or save the draw and start next wave.
+Guide19=Every time you survive a wave, you receive some coin reward that appears on the top left corner.
+Guide20=Coin can be used for many purposes, such as upgrading your modular system.
+Guide21=On right side shows your current module system level. The higher the level, the higher the quality of the turret you can draw.
+Guide22=When you're ready, start the next wave.
+Guide23=Finally, an important feature of Refactor Test --- Composition, it will greatly improve your defense.
+Guide24=Click the shop button on the left side and I will introduce you to the composition system.
+Guide25=Okay, so you know all the rules of Refactor.
+Guide26=So far, few prototypes have passed the Refactoror Test, which is not what Dr James wanted.
+Guide27=I hope you are an exception and good luck.
