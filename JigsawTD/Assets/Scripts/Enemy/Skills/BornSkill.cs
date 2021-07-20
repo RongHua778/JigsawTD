@@ -48,8 +48,8 @@ public class BornSkill : Skill
     private void SpawnEnemy(BoardSystem board, EnemyType type)
     {
         EnemyAttribute attribute = GameManager.Instance.EnemyFactory.Get(type);
-        //减半的敌人强度
-        float intensify = ws.LevelSequence[GameManager.Instance.MainUI.CurrentWave][0].Intensify / 4;
+        //生出来的敌人强度下降
+        float intensify = ws.LevelSequence[GameManager.Instance.MainUI.CurrentWave][0].Intensify / 8;
         Enemy enemy = ObjectPool.Instance.Spawn(attribute.Prefab) as Enemy;
         HealthBar healthBar = ObjectPool.Instance.Spawn(ws.HealthBarPrefab) as HealthBar;
         enemy.Initialize(attribute, Random.Range(-0.3f, 0.3f), healthBar, intensify);
@@ -62,7 +62,7 @@ public class BornSkill : Skill
     {
         if (enemy.CurrentHealth / enemy.MaxHealth <= 0.7f && form == 2)
         {
-            enemy.DamageIntensify = -0.7f;
+            enemy.DamageIntensify = -0.8f;
             level = 2;
             enemy.StunTime += 10f;
             form = 1;
@@ -70,7 +70,7 @@ public class BornSkill : Skill
         }
         if (enemy.CurrentHealth / enemy.MaxHealth<= 0.3f&&form==1)
         {
-            enemy.DamageIntensify = -0.7f;
+            enemy.DamageIntensify = -0.8f;
             level = 1;
             enemy.StunTime += 10f;
             form = 0;
