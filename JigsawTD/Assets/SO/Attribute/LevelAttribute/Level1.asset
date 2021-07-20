@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: 
   LevelID: 0
-  LevelIntensify: 1
+  LevelIntensify: 1.25
   NormalEnemies:
   - {fileID: 11400000, guid: a2fa830bad8e11c448623ce28354a1bd, type: 2}
   - {fileID: 11400000, guid: a6b4f2578a98cf54caf0ac3718b54059, type: 2}
@@ -27,3 +27,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 69f15236ccf6c8d468d1e830d7746cd6, type: 2}
   - {fileID: 11400000, guid: dbb0595b1b4e1be4599c5c9d1e97b9e3, type: 2}
   LevelInfo: LEVEL1INFO
+  bossForm: 0

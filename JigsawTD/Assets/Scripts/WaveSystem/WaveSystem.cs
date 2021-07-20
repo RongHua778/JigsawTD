@@ -188,7 +188,7 @@ public class WaveSystem : IGameSystem
             }
 
             // }
-            //sequences = GenerateSpecificSequence(EnemyType.Borner, 10f, i);
+            sequences = GenerateSpecificSequence(EnemyType.Froster, 3f, i);
 
             LevelSequence.Add(sequences);
         }

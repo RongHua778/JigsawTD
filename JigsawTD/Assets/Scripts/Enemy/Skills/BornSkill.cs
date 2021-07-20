@@ -64,7 +64,7 @@ public class BornSkill : Skill
         {
             enemy.DamageIntensify = -0.8f;
             level = 2;
-            enemy.StunTime += 10f;
+            enemy.StunTime += 6f;
             form = 1;
             castleCounter = 0;
         }
@@ -72,13 +72,13 @@ public class BornSkill : Skill
         {
             enemy.DamageIntensify = -0.8f;
             level = 1;
-            enemy.StunTime += 10f;
+            enemy.StunTime += 6f;
             form = 0;
             castleCounter = 0;
         }
         castleCounter += Time.deltaTime;
 
-        if (castleCounter > 10f)
+        if (castleCounter > 6f)
         {
             enemy.DamageIntensify = 0f;
             level = 0;
