@@ -130,7 +130,7 @@ public class BoardSystem : IGameSystem
     private void TileUp(TileBase tile)
     {
         moveDis = Vector2.SqrMagnitude(Input.mousePosition - startPos);
-        if (moveDis < 0.1f)
+        if (moveDis < 0.2f)
         {
             SelectingTile = tile;
         }

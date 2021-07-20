@@ -26,6 +26,7 @@ public class BlueprintFactory : GameObjectFactory
         blueprint.SetBluePrintIntensify();
         StrategyComposite strategy = new StrategyComposite(attribute, blueprint, 1, null);
         strategy.SetQualityValue();
+        strategy.GetComIntensify();
         strategy.GetTurretSkills();
         blueprint.ComStrategy = strategy;
         return blueprint;
@@ -44,6 +45,7 @@ public class BlueprintFactory : GameObjectFactory
         blueprint.SetBluePrintIntensify();
         StrategyComposite strategy = new StrategyComposite(attribute, blueprint, 1, null);
         strategy.SetQualityValue();
+        strategy.GetComIntensify();
         strategy.GetTurretSkills();
         blueprint.ComStrategy = strategy;
         return blueprint;

@@ -163,7 +163,7 @@ public abstract class StrategyBase
 
     public virtual void SetQualityValue()
     {
-        ClearBasicIntensify();
+        //ClearBasicIntensify();
         InitAttack = m_Att.TurretLevels[Quality - 1].AttackDamage;
         InitSpeed = m_Att.TurretLevels[Quality - 1].AttackSpeed;
         InitRange = m_Att.TurretLevels[Quality - 1].AttackRange;

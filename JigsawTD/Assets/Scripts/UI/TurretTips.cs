@@ -40,6 +40,10 @@ public class TurretTips : TileTips
     [SerializeField] GameObject TileSkillArea = default;
     [SerializeField] Text TileSkillTxt = default;
 
+    //infoBtn
+    [SerializeField] InfoBtn CriticalInfo = default;
+    [SerializeField] InfoBtn SplashInfo = default;
+
 
     private StrategyBase m_Strategy;
     private BluePrintGrid m_Grid;
@@ -51,6 +55,8 @@ public class TurretTips : TileTips
     {
         base.Initialize(gameManager);
         mainCam = Camera.main;
+        CriticalInfo.SetContent(GameMultiLang.GetTraduction("CRITICALINFO"));
+        SplashInfo.SetContent(GameMultiLang.GetTraduction("SPLASHINFO"));
     }
 
     public override void Hide()
@@ -106,10 +112,6 @@ public class TurretTips : TileTips
                     TileSkillTxt.text = ((StrategyComposite)Strategy).TileSkill.SkillDescription;
                 }
 
-                //if (((StrategyComposite)m_Strategy).CompositeBluePrint.IntensifyBluePrint)
-                //{
-                //    Name.text += "(强化)";
-                //}
                 break;
         }
 
@@ -137,16 +139,12 @@ public class TurretTips : TileTips
         elementConstruct.gameObject.SetActive(true);
         elementConstruct.SetElements((StrategyComposite)m_Strategy);
 
-        //if (((StrategyComposite)m_Strategy).CompositeBluePrint.IntensifyBluePrint)
-        //{
-        //    Name.text += "(强化)";
-        //}
     }
 
     private void BasicInfo()
     {
         Icon.sprite = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].TurretIcon;
-        Name.text = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].TurretName;
+        Name.text = GameMultiLang.GetTraduction(m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].TurretName);
         string rangeTypeTxt = "";
         switch (m_Strategy.m_Att.RangeType)
         {
@@ -248,13 +246,10 @@ public class TurretTips : TileTips
         {
             m_Strategy.Quality++;
             m_Strategy.SetQualityValue();
-            m_Strategy.BuildTurretEffects();
+            //m_Strategy.BuildTurretEffects();
             m_Strategy.m_Turret.SetGraphic();
             Icon.sprite = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].TurretIcon;
             Name.text = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].TurretName;
-            //Description.text = m_Strategy.m_Att.TurretEffects[0].EffectDescription;
-
-            //StaticData.GetTurretDes(m_Strategy.m_Att, m_Strategy.Quality);
             UpdateInfo();
             if (m_Strategy.Quality > 2)
             {

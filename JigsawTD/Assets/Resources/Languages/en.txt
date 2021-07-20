@@ -21,11 +21,30 @@ NUM=
 
 LEVEL1INFO=This is the first qualification test of the Refactor, the boss here will constantly creates tons of enemies to take down your defenses, but of course you have to stick around for enough waves to face him.
 
+//tips
+LACKMONEY=You don't have eneugh coins
+LACKMATERIAL=You don't have materials needed
+PUTFIRST=Please place the drawed module first
+NOTBUILDSTATE=Can not composite during battle state
+
+
+//func
 NEXTWAVE=Next Wave[Space]
 DRAWMODULE=Draw Module
+MODULELEVELINFO1=Current level probability
+MODULELEVELINFO2=Level
+MODULELEVELINFO3=Shop blueprint +1 when module level reaches 4 and 7
+ENERGYINFO=1. Gain 1 energy if you haven't drawed last wave\n2. Gain additional energy if you keep not drawing \n3. Gain 1 extra draw while energy reach 10.
+
+//shop
 SHOPBLUEPRINT=Shop
 OWNBLUEPRINT=Owned
+NEXTREFRESH=Refresh after
+OWNPERFECT=Perfect Element
+PERFECTINFO=Perfect element can served as any material for composition
 
+//turretips
+DAMAGEANLYSIS=Total Damage
 ATTACK=Attack
 RANGE=Range
 SPEED=FireRate
@@ -38,3 +57,136 @@ RANGETYPE3=Line
 TURRETSKILL=Basic Skill
 ELEMENTSKILL=Element Benefit
 TILESKILL=Tile Benefit
+CRITICALINFO= Each 1% critical = 1% extra critical damage. Defacult critical damage is 150%
+SPLASHINFO=Splash radius. Default splash damage is 50%
+ATTACKUP=% Basic Attack
+SPEEDUP=% Basic FireRate
+CRITICALUP=% Critical
+SPUTTERINGUP= Splash
+SLOWUP= Slow
+COMINTENSIFY=As a composite material
+BUY=Buy
+COMPOSITE=Composite
+UPGRADE=Upgrade
+
+//towername
+F1=F1 Constructor
+G1=G1 Scatter
+H1=H1 Mortar
+I1=I1 Rotary
+J1=J1 Sniper
+K1=K1 UltraCannon
+L1=L1 RapidFirer
+M1=M1 SnowBall
+
+F2=F2 Constructor
+G2=G2 Scatter
+H2=H2 Mortar
+I2=I2 Rotary
+J2=J2 Sniper
+K2=K2 UltraCannon
+L2=L2 RapidFirer
+M2=M2 SnowBall
+
+F3=F3 Constructor
+G3=G3 Scatter
+H3=H3 Mortar
+I3=I3 Rotary
+J3=J3 Sniper
+K3=K3 UltraCannon
+L3=L3 RapidFirer
+M3=M3 SnowBall
+
+A1=A1
+A2=A2
+A3=A3
+A4=A4
+A5=A5
+
+B1=B1
+B2=B2
+B3=B3
+B4=B4
+B5=B5
+
+C1=C1
+C2=C2
+C3=C3
+C4=C4
+C5=C5
+
+D1=D1
+D2=D2
+D3=D3
+D4=D4
+D5=D5
+
+E1=E1
+E2=E2
+E3=E3
+E4=E4
+E5=E5
+
+//turretskill
+ASKILL=Stable and practical defense tower.
+BSKILL=Attacks can deal penetration damage, can only attack front side.
+CSKILL=Attacks cause a slowdown effect.
+DSKILL=Attacks have a chance to cause critical damage.
+ESKILL=Attacks deal splash area damage.
+
+F1SKILL=Damage increased by 10% for each enemy in range.
+G1SKILL=Deals 50% less damage, but can attack an additional 3 targets.
+H1SKILL=Bullet's splash damage increased by 30% for each enemy it hit.
+L1SKILL=Each shoot increases attack by 10% (up to 200%).
+I1SKILL=Randomly shoot energy bullets around, and each shoot increases attack speed by 0.1(up to 10).
+J1SKILL=Bullet damage increased by 30%/block it travelled.
+K1SKILL=Double the increased critical damage.
+M1SKILL=Fire a snowball that moves to the end of a straight path and doubles the enemy's current slow rate.
+
+AAA=Heavy Cannon: greatly reduced rotate speed and double all increased attack.
+BBB=Overload Magazine: Firerate increased by 200% for the first 10 seconds each wave.
+CCC=Forst Core: Gain 1 perfect element while composite.
+DDD=Restless Powder: Critical damage randomly increased by -100% to 400%.
+EEE=Nuclear Projectile: Bullet's splash range increased by 0.3/block it travalled.
+
+AAB=Charged Base: Attack increased by 100% for the first 15 seconds each wave.
+AAC=Extended Barrel: Range +2.
+AAD=Metal Bullet: Each critical hit increases attack by 10% during this wave(up to 200%).
+AAE=Detector Radar:Basic attack increased by 50% for each adjacent turret.
+
+ABC=Reinforcement base: Upgrade cost -50%.
+ABD=Quantitative Investment: Coin earned increased by 15%.
+ABE=Resource allocation: Get an extra draw every 5 waves.
+
+ACD=Recycling: Gain 3 draws while composite.
+ACE=Urgent Refactoring: Enhanced the next blueprint you bought.
+
+ADE=Hardcore: Increase acjacent turrets' basic attack by 50%.
+
+BBA=Improved Flow: Firerate increased by 60% after 20 seconds of each wave.
+BBC=Accurate Strike: Bullet deal extra damage equal to 4% of the target's current health(1% of boss).
+BBD=Blind Bird: Critical increased by 5% per shoot(up to 200%).
+BBE=Miniature muzzle: Double all firerate increased. No critical anymore.
+
+BCD=Mint Factory: This turret gives you 1 coin each time it deals a critical hit.
+BCE=Repair factory: Increased the adjacent traps' effect by 100%.
+
+BDE=Accelerated Core: Increase adjacent turrets' basic firerate by 50%.
+
+CCA=Technical Blueprint: Gain a random enhanced blueprint while composite.
+CCB=Ice Core: Increase adjacent turrets' slow by 0.5.
+CCD=Unstable Axis: Double bullet's slow if it is a critical hit.
+CCE=Extra Muzzle: Damage reduced by 50%. Attacks 2 additional targets.
+
+CDE=Aimed Core: Increase adjacent turrets' range by 1.
+
+DDA=Sealed Cannon: If critical is greater than 100%, increase bullet's damage by 100%.
+DDB=Suppression: Critical increased by 100% for the first 15 seconds each wave.
+DDC=Flame Core: Increase adjacent turrets' critical by 30%.
+DDE=Range Guidance: Critical damage is increased by 100% while target's distance greater than 3.
+
+EEA=Powerful Splash: Splash damage is increased by 100% when target's distance less than 3.
+EEB=Heating Gun: Increases splash range by 0.1 per shoot( up to 1.5).
+EEC=Steady Core: Increase adjacent turrets' splash by 0.5.
+EED=Bombardment: Splash damage increased by 100% if it is a critical hit.
+

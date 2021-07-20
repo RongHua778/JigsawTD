@@ -93,7 +93,7 @@ public abstract class InitialSkill : TurretSkill
 public class I1SkillSpeedIncreasePerShoot : InitialSkill
 {
     public override TurretSkillName EffectName => TurretSkillName.I1SkillSpeedIncreasedPerShoot;
-    public override string SkillDescription => "轮转炮会向周围随机发射能量弹，每次发射提升0.1攻速，上限为10";
+    public override string SkillDescription => "I1SKILL";
     public override void Shoot()
     {
         if (strategy.TurnFixSpeed > 9.95f)
@@ -104,35 +104,35 @@ public class I1SkillSpeedIncreasePerShoot : InitialSkill
 public class J1SkillDistanceBaseDamage : InitialSkill
 {
     public override TurretSkillName EffectName => TurretSkillName.J1SkillDistanceBaseDamage;
-    public override string SkillDescription => "子弹随飞行距离提升30%/格的伤害，狙击塔相邻每个空格使该效果提升10%";
+    public override string SkillDescription => "J1SKILL";
 
-    float increaseRate;
+    float increaseRate = 0.3f;
 
-    public override void Detect()
-    {
-        increaseRate = 0f;
-        List<Vector2Int> points = StaticData.GetCirclePoints(1);
-        foreach (var point in points)
-        {
-            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
-            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.GroundTileMask));
-            if (hit != null)
-            {
-                increaseRate += 0.1f;
-            }
-        }
-    }
+    //public override void Detect()
+    //{
+    //    increaseRate = 0f;
+    //    List<Vector2Int> points = StaticData.GetCirclePoints(1);
+    //    foreach (var point in points)
+    //    {
+    //        Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
+    //        Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.GroundTileMask));
+    //        if (hit != null)
+    //        {
+    //            increaseRate += 0.1f;
+    //        }
+    //    }
+    //}
 
     public override void Shoot()
     {
-        bullet.Damage *= (1 + (0.3f + increaseRate) * bullet.GetTargetDistance());
+        bullet.Damage *= 1 + (increaseRate * bullet.GetTargetDistance());
     }
 }
 
 public class G1SkillMultiTarget : InitialSkill
 {
     public override TurretSkillName EffectName => TurretSkillName.G1SkillMultiTarget;
-    public override string SkillDescription => "散射炮造成的伤害降低50%，但是可以额外攻击3个目标";
+    public override string SkillDescription => "G1SKILL";
     public override void Build()
     {
         strategy.BaseTargetCountIntensify += 3;
@@ -147,7 +147,7 @@ public class G1SkillMultiTarget : InitialSkill
 public class K1SkillDoubleCriticalPercentage : InitialSkill
 {
     public override TurretSkillName EffectName => TurretSkillName.K1SkillDoubleCriticalPercentage;
-    public override string SkillDescription => "巨炮的所有暴击伤害提升效果翻倍";
+    public override string SkillDescription => "K1SKILL";
 
     public override void PreHit()
     {
@@ -159,7 +159,7 @@ public class K1SkillDoubleCriticalPercentage : InitialSkill
 public class H1SkillCountBaseSputteringPercentage : InitialSkill
 {
     public override TurretSkillName EffectName => TurretSkillName.HISkillCountBaseSputteringPercentage;
-    public override string SkillDescription => "迫击炮的炮弹每溅射到1个敌人，就会使溅射伤害提高30%";
+    public override string SkillDescription => "H1SKILL";
 
 
     public override void PreHit()
@@ -187,7 +187,7 @@ public class SlowBullet : InitialSkill
 public class L1Skill : InitialSkill
 {
     public override TurretSkillName EffectName => TurretSkillName.L1Skill;
-    public override string SkillDescription => "疾射炮每次攻击都会提升自身10%的攻击力，最多叠加20次";
+    public override string SkillDescription => "L1SKILL";
 
     private float intensifyIncreased = 0;
     public override void Shoot()
@@ -207,7 +207,7 @@ public class L1Skill : InitialSkill
 public class F1Skill : InitialSkill
 {
     public override TurretSkillName EffectName => TurretSkillName.F1Skill;
-    public override string SkillDescription => "组合炮的攻击范围内每有1个敌人，造成的伤害就提高10%";
+    public override string SkillDescription => "F1SKILL";
 
     public override void Shoot()
     {
@@ -236,7 +236,7 @@ public class M1SkillDoubleSlowRate : InitialSkill
 {
     public override TurretSkillName EffectName => TurretSkillName.M1SkillDoubleSlowRate;
 
-    public override string SkillDescription => "发射一个移动到直线路径末端的雪球，雪球使敌人的当前减速效果翻倍";
+    public override string SkillDescription => "M1SKILL";
     public override void Hit(Enemy target)
     {
         strategy.RotSpeed = 0;

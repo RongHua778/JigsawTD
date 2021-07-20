@@ -15,6 +15,7 @@ public class BluePrintShopUI : IUserInterface
     [SerializeField] Text NextRefreshTurnsTxt = default;
     [SerializeField] Transform shopContent = default;
     [SerializeField] Text PerfectElementTxt = default;
+    [SerializeField] InfoBtn PerfectInfo = default;
 
     public List<BluePrintGrid> ShopBluePrints = new List<BluePrintGrid>();//商店配方表
     public List<BluePrintGrid> OwnBluePrints = new List<BluePrintGrid>();//拥有配方表
@@ -33,7 +34,7 @@ public class BluePrintShopUI : IUserInterface
                 nextRefreshTrun = 3;
                 GameManager.Instance.RefreshShop(0);
             }
-            NextRefreshTurnsTxt.text = nextRefreshTrun + "回合后刷新";
+            NextRefreshTurnsTxt.text = GameMultiLang.GetTraduction("NEXTREFRESH")+":"+nextRefreshTrun + GameMultiLang.GetTraduction("WAVE");
         }
     }
 
@@ -44,11 +45,13 @@ public class BluePrintShopUI : IUserInterface
         base.Initialize(gameManager);
         anim = this.GetComponent<Animator>();
         NextRefreshTrun = 4;
+        SetPerfectElementCount(0);
+        PerfectInfo.SetContent(GameMultiLang.GetTraduction("PERFECTINFO"));
     }
 
     public void SetPerfectElementCount(int count)
     {
-        PerfectElementTxt.text = "拥有万能元素：" + count;
+        PerfectElementTxt.text = GameMultiLang.GetTraduction("OWNPERFECT") + ":" + count;
     }
 
     public void RefreshShop(int level, int cost)//刷新商店
@@ -105,12 +108,14 @@ public class BluePrintShopUI : IUserInterface
 
     public void MoveBluePrintToPocket(BluePrintGrid grid)//把商店配方移入拥有
     {
-        if (StaticData.NextBuyIntensifyBlueprint > 0)
+        if (StaticData.NextBuyIntensifyBlueprint > 0)//下一个购买的是强化配方
         {
             StaticData.NextBuyIntensifyBlueprint--;
             grid.BluePrint.IntensifyBluePrint = true;
             grid.BluePrint.SetBluePrintIntensify();
+            grid.BluePrint.ComStrategy.ClearBasicIntensify();
             grid.BluePrint.ComStrategy.SetQualityValue();
+            grid.BluePrint.ComStrategy.GetComIntensify();
             grid.BluePrint.ComStrategy.GetTurretSkills();
         }
         grid.InShop = false;
