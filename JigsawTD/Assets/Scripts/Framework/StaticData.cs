@@ -99,7 +99,7 @@ public class StaticData : Singleton<StaticData>
     private void InitializeInfoDIC()
     {
         TipsInfoDIC = new Dictionary<string, string>();
-        TipsInfoDIC.Add("LuckyInfo", GetLuckyInfo());
+        TipsInfoDIC.Add("LuckyInfo", GetEnergyInfo());
     }
 
     [Header("CompositionAttributes")]
@@ -361,19 +361,19 @@ public class StaticData : Singleton<StaticData>
         switch (element)
         {
             case Element.Gold:
-                intensifyTxt += GoldAttackIntensify * 100 + "%基础攻击";
+                intensifyTxt += GoldAttackIntensify * 100 + GameMultiLang.GetTraduction("ATTACKUP");
                 break;
             case Element.Wood:
-                intensifyTxt += WoodSpeedIntensify * 100 + "%基础攻速";
+                intensifyTxt += WoodSpeedIntensify * 100 + GameMultiLang.GetTraduction("SPEEDUP");
                 break;
             case Element.Water:
-                intensifyTxt += WaterSlowIntensify + "减速";
+                intensifyTxt += WaterSlowIntensify + GameMultiLang.GetTraduction("SLOWUP");
                 break;
             case Element.Fire:
-                intensifyTxt += FireCriticalIntensify * 100 + "%暴击率";
+                intensifyTxt += FireCriticalIntensify * 100 + GameMultiLang.GetTraduction("CRITICALUP");
                 break;
             case Element.Dust:
-                intensifyTxt += DustSputteringIntensify + "溅射";
+                intensifyTxt += DustSputteringIntensify + GameMultiLang.GetTraduction("SPUTTERINGUP");
                 break;
             default:
                 Debug.Log("错误的元素，无法配置加成");
@@ -384,12 +384,12 @@ public class StaticData : Singleton<StaticData>
 
     public static string GetBluePrintIntensify(Blueprint bluePrint)
     {
-        string intensifyTxt = "元素加成：\n";//根据元素及品质设置显示加成效果
-        intensifyTxt += bluePrint.CompositeAttackDamage > 0 ? "+" + bluePrint.CompositeAttackDamage * 100 + "%基础攻击\n" : "";
-        intensifyTxt += bluePrint.CompositeAttackSpeed > 0 ? "+" + bluePrint.CompositeAttackSpeed * 100 + "%基础攻速\n" : "";
-        intensifyTxt += bluePrint.CompositeSlowRate > 0 ? "+" + bluePrint.CompositeSlowRate + "减速\n" : "";
-        intensifyTxt += bluePrint.CompositeCriticalRate > 0 ? "+" + bluePrint.CompositeCriticalRate * 100 + "%暴击率\n" : "";
-        intensifyTxt += bluePrint.CompositeSputteringRange > 0 ? "+" + bluePrint.CompositeSputteringRange + "溅射" : "";
+        string intensifyTxt = GameMultiLang.GetTraduction("ELEMENTSKILL")+":";//根据元素及品质设置显示加成效果
+        intensifyTxt += bluePrint.CompositeAttackDamage > 0 ? "\n+" + bluePrint.CompositeAttackDamage * 100 + GameMultiLang.GetTraduction("ATTACKUP") : "";
+        intensifyTxt += bluePrint.CompositeAttackSpeed > 0 ? "\n+" + bluePrint.CompositeAttackSpeed * 100 + GameMultiLang.GetTraduction("SPEEDUP") : "";
+        intensifyTxt += bluePrint.CompositeSlowRate > 0 ? "\n+" + bluePrint.CompositeSlowRate + GameMultiLang.GetTraduction("SLOWUP") : "";
+        intensifyTxt += bluePrint.CompositeCriticalRate > 0 ? "\n+" + bluePrint.CompositeCriticalRate * 100 + GameMultiLang.GetTraduction("CRITICALUP") : "";
+        intensifyTxt += bluePrint.CompositeSputteringRange > 0 ? "\n+" + bluePrint.CompositeSputteringRange + GameMultiLang.GetTraduction("SPUTTERINGUP") : "";
         return intensifyTxt;
     }
 
@@ -397,10 +397,10 @@ public class StaticData : Singleton<StaticData>
     {
         string finalDes = "";
         if (attribute.Description != "")
-            finalDes += attribute.Description + "\n";
+            finalDes += GameMultiLang.GetTraduction(attribute.Description) + "\n";
         if (strategy.TurretSkill != null)
         {
-            finalDes += strategy.TurretSkill.SkillDescription + "\n";
+            finalDes += GameMultiLang.GetTraduction(strategy.TurretSkill.SkillDescription);
         }
         return finalDes;
     }
@@ -413,29 +413,29 @@ public class StaticData : Singleton<StaticData>
             levelChances[i] = QualityChances[level - 1, i];
         }
         string text = "";
-        text += "当前等级概率:\n";
+        text += GameMultiLang.GetTraduction("MODULELEVELINFO1") + ":\n";
         for (int x = 0; x < 5; x++)
         {
-            text += "品质" + (x + 1).ToString() + ": " + levelChances[x] * 100 + "%\n";
+            text += GameMultiLang.GetTraduction("MODULELEVELINFO2") + (x + 1).ToString() + ": " + levelChances[x] * 100 + "%\n";
         }
-        text += "当模块等级达到4和7级时，商店配方数量+1.";
+        text += GameMultiLang.GetTraduction("MODULELEVELINFO3");
         return text;
     }
 
-    public static string GetLuckyInfo()
+    //public static string GetLuckyInfo()
+    //{
+    //    string text = GameMultiLang.GetTraduction("ENERGYINFO");
+    //        //"\n1.当前回合没有抽取时，获得1点累积点。\n" +
+    //        //"2.连续不抽取时，会获得额外累积点。\n" +
+    //        //"3.累积点每达到10点，获得1次额外抽取次数。";
+    //    return text;
+    //}
+    public static string GetEnergyInfo()
     {
-        string text =
-            "\n1.当前回合没有抽取时，获得1点累积点。\n" +
-            "2.连续不抽取时，会获得额外累积点。\n" +
-            "3.累积点每达到10点，获得1次额外抽取次数。";
-        return text;
-    }
-    public static string GetLuckyInfo(int luckCoin, int luckProgress)
-    {
-        string text =
-            "1.当前回合没有抽取时，获得1格能量\n" +
-            "2.每个连续不抽取的回合都会使能量获取额外+1，上限为5\n" +
-            "3.当能量满10点时，获得1次额外的抽取次数";
+        string text = GameMultiLang.GetTraduction("ENERGYINFO");
+        //"1.当前回合没有抽取时，获得1格能量\n" +
+        //    "2.每个连续不抽取的回合都会使能量获取额外+1，上限为5\n" +
+        //    "3.当能量满10点时，获得1次额外的抽取次数";
         //"1.当前回合没有抽取时，获得1格能量。\n" +
         //"2.每格能量提高回合金币收入10%。\n" +
         //"3.抽取后，能量清零。\n" +

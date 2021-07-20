@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class Dialogue
 {
     public string Name;
-    [TextArea(2, 3)]
     public string[] Words;
     public bool DontNeedClickEnd;
 }
@@ -55,8 +54,9 @@ public class GuideUI : IUserInterface
         backBtn.SetActive(true);
         currentDialogue = dialogues[index];
         wordQueue.Clear();
-        foreach (var word in currentDialogue.Words)
+        foreach (var key in currentDialogue.Words)
         {
+            string word = GameMultiLang.GetTraduction(key);
             wordQueue.Enqueue(word);
         }
 
@@ -150,11 +150,11 @@ public class GuideUI : IUserInterface
     private IEnumerator TypeSentence(string word)
     {
         typingSentence = true;
-        newContent.text = "<color=yellow>" + currentDialogue.Name + ":</color>";
+        newContent.text = "<color=yellow>" +GameMultiLang.GetTraduction(currentDialogue.Name) + ":</color>";
         foreach (char letter in word.ToCharArray())
         {
             newContent.text += letter;
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.03f);
         }
         typingSentence = false;
         if (wordQueue.Count == 0)
@@ -172,7 +172,6 @@ public class GuideUI : IUserInterface
             //currentGuideIndex++;
             StartCoroutine(GuideCor(index));
         }
-            //StartCoroutine(GuideCor(index));
     }
 
     IEnumerator GuideCor(int index)
@@ -188,11 +187,5 @@ public class GuideUI : IUserInterface
             DisplayNextSentence();
     }
 
-
-
-    public override void Update()
-    {
-
-    }
 
 }

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be65f51c4a5a6ea44b5cf7221cb93ba8, type: 3}
   m_Name: WaterBase
   m_EditorClassIdentifier: 
-  Name: "\u51CF\u901F\u57FA\u5EA7"
+  Name: SLOWBASE
   Icon: {fileID: -5082994840122261101, guid: 8cd652a31bd99b345b5aed8764e5d440, type: 3}
-  Description: "\u53EA\u53EF\u4EE5\u653E\u7F6E\u5408\u6210\u5854\uFF1A\u4F7F\u5408\u6210\u5854\u7684\u57FA\u7840\u51CF\u901F\u52A0\u6210\u7FFB\u500D\u3002"
+  Description: SLOWBASEINFO
   ContentPrefab: {fileID: 6825504451496016830, guid: 16af81bb4e7ca6043b6e6caca974a7d2, type: 3}
   tileSkill: 2

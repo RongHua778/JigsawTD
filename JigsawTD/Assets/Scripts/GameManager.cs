@@ -210,15 +210,10 @@ public class GameManager : Singleton<GameManager>
     {
         if (MainUI.Life <= 0)//游戏失败
         {
-            //GameEnd(m_MainUI.CurrentWave);
             return;
         }
         TransitionToState(StateName.BuildingState);
-        //else if (MainUI.CurrentWave >= StaticData.Instance.LevelMaxWave)//游戏胜利
-        //{
-        //    GameEnd(m_MainUI.CurrentWave);
-        //    return;
-        //}
+
         WaveSystem.GetSequence();
         m_BluePrintShopUI.NextRefreshTrun--;
         MainUI.PrepareNextWave(WaveSystem.RunningSequence);
@@ -309,12 +304,12 @@ public class GameManager : Singleton<GameManager>
     {
         if (operationState.StateName == StateName.PickingState)
         {
-            ShowMessage("请先放置抽取模块");
+            ShowMessage(GameMultiLang.GetTraduction("PUTFIRST"));
             return;
         }
         if (operationState.StateName == StateName.WaveState)
         {
-            ShowMessage("必须在非战斗阶段合成");
+            ShowMessage(GameMultiLang.GetTraduction("NOTBUILDSTATE"));
             return;
         }
         if (grid.BluePrint.CheckBuildable())
@@ -325,7 +320,7 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
-            ShowMessage("合成所需素材不足");
+            ShowMessage(GameMultiLang.GetTraduction("LACKMATERIAL"));
         }
 
     }

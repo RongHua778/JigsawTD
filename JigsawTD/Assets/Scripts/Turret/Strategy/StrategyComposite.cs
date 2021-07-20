@@ -11,9 +11,9 @@ public class StrategyComposite : StrategyBase
         CompositeBluePrint = bluePrint;
     }
 
-    public override void SetQualityValue()
+
+    public void GetComIntensify()
     {
-        base.SetQualityValue();
         BaseAttackIntensify += CompositeBluePrint.CompositeAttackDamage;
         BaseSpeedIntensify += CompositeBluePrint.CompositeAttackSpeed;
         BaseCriticalRateIntensify += CompositeBluePrint.CompositeCriticalRate;

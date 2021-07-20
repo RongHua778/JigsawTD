@@ -28,7 +28,7 @@ public class TipsElementConstruct : MonoBehaviour
         }
         SetIntensifyInfo();
         if (strategy.ElementSkill1 != null)
-            elementSkillDes.text = strategy.ElementSkill1.SkillDescription;
+            elementSkillDes.text = GameMultiLang.GetTraduction(strategy.ElementSkill1.SkillDescription);
         else
             Debug.LogWarning("没有这个元素技能显示TIPS");
 

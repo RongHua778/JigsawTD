@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a06a8e352dd064bab9b6bf5b84988e, type: 3}
   m_Name: StunTrapAttribute
   m_EditorClassIdentifier: 
-  Name: "\u6655\u7729\u9677\u9631"
+  Name: STUNTRAP
   Icon: {fileID: 1123063040376734126, guid: 7cdac59c1a58c4049b2d1ad53616d6b1, type: 3}
-  Description: "\u7ECF\u8FC7\u6B64\u683C\u7684\u654C\u4EBA\u4F1A\u88AB\u6655\u77291.5\u79D2\u3002"
+  Description: STUNTRAPINFO
   ContentPrefab: {fileID: -1443366368468062987, guid: c62c48ec4f6ca9d4bbc81ab93eb771d7, type: 3}
   BuffInfos:
   - EnemyBuffName: 6

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614735ba97a8e4b4bbdf8128289355f3, type: 3}
   m_Name: Blinker
   m_EditorClassIdentifier: 
-  EnemyName: "\u7B1B\u5361\u5C14\uFF08Boss\uFF09"
+  EnemyName: BLINKER
   EnemyType: 9
   InitCount: 1
   CountIncrease: 0
@@ -25,4 +25,4 @@ MonoBehaviour:
   extraHealth: 0
   EnemyIcon: {fileID: 8416707249335404551, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
   EnemyEmptyIcon: {fileID: -549220935215467548, guid: 57e00b28c7ddb744eab6e4415c7c879a, type: 3}
-  Description: "\u6BCF\u5F53\u53D7\u5230\u4E00\u5B9A\u4F24\u5BB3\u540E\u4F1A\u5411\u524D\u95EA\u73B0\u4E00\u6BB5\u8DDD\u79BB\u3002"
+  Description: BLINKERINFO

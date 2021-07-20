@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Wood
   Icon: {fileID: 0}
-  Description: "\u53EA\u80FD\u653B\u51FB\u524D\u65B9\uFF0C\u4F46\u662F\u53EF\u4EE5\u9020\u6210\u7A7F\u900F\u4F24\u5BB3\u3002"
+  Description: BSKILL
   ContentPrefab: {fileID: 3830102932677347064, guid: 24c7518827485fc418d3132bf749252c, type: 3}
   RangeType: 2
   element: 1
@@ -24,7 +24,7 @@ MonoBehaviour:
   Rare: 0
   totalLevel: 0
   elementNumber: 0
-  TurretSkill: 0
+  TurretSkill: 12
   TurretLevels:
   - AttackRange: 2
     ForbidRange: 0
@@ -33,7 +33,7 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: "B1\u6B8B\u7F3A\u6728\u7ED3\u6784"
+    TurretName: B1
     TurretIcon: {fileID: 2571443558420675432, guid: 170dc2e643d4d3d46bc6b1fdd1cd28d0, type: 3}
     CannonSprite: {fileID: 5550528487485531156, guid: b0ab56063522368429e276fb52baa9e7, type: 3}
     ShootPointOffset: {x: 0, y: 0.35}
@@ -44,7 +44,7 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: "B2\u6B21\u7B49\u6728\u7ED3\u6784"
+    TurretName: B2
     TurretIcon: {fileID: 8134750897822888972, guid: 170dc2e643d4d3d46bc6b1fdd1cd28d0, type: 3}
     CannonSprite: {fileID: 2265894132087011927, guid: b0ab56063522368429e276fb52baa9e7, type: 3}
     ShootPointOffset: {x: 0, y: 0.35}
@@ -55,7 +55,7 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: "B3\u7A33\u56FA\u6728\u7ED3\u6784"
+    TurretName: B3
     TurretIcon: {fileID: -5162238023950050135, guid: 170dc2e643d4d3d46bc6b1fdd1cd28d0, type: 3}
     CannonSprite: {fileID: 6932297891388812724, guid: b0ab56063522368429e276fb52baa9e7, type: 3}
     ShootPointOffset: {x: 0, y: 0.41}
@@ -66,7 +66,7 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: "B4\u575A\u5B9E\u6728\u7ED3\u6784"
+    TurretName: B4
     TurretIcon: {fileID: -8749453646720632882, guid: 170dc2e643d4d3d46bc6b1fdd1cd28d0, type: 3}
     CannonSprite: {fileID: 1474691046141679077, guid: b0ab56063522368429e276fb52baa9e7, type: 3}
     ShootPointOffset: {x: 0, y: 0.47}
@@ -77,7 +77,7 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: "B5\u5B8C\u7F8E\u6728\u7ED3\u6784"
+    TurretName: B5
     TurretIcon: {fileID: 5015630989428296150, guid: 170dc2e643d4d3d46bc6b1fdd1cd28d0, type: 3}
     CannonSprite: {fileID: -8183647036077134399, guid: b0ab56063522368429e276fb52baa9e7, type: 3}
     ShootPointOffset: {x: 0, y: 0.47}

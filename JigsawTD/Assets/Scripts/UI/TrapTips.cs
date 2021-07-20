@@ -10,8 +10,8 @@ public class TrapTips : TileTips
     public void ReadTrap(TrapContent trapContent)
     {
         Icon.sprite = trapContent.m_TrapAttribute.Icon;
-        Name.text = trapContent.m_TrapAttribute.Name;
-        Description.text = trapContent.m_TrapAttribute.Description;
+        Name.text = GameMultiLang.GetTraduction(trapContent.m_TrapAttribute.Name);
+        Description.text = GameMultiLang.GetTraduction(trapContent.m_TrapAttribute.Description);
         if (trapContent.DamageAnalysis > 0)
         {
             AnalysisArea.SetActive(true);

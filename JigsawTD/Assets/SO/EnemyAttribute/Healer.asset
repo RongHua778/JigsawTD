@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614735ba97a8e4b4bbdf8128289355f3, type: 3}
   m_Name: Healer
   m_EditorClassIdentifier: 
-  EnemyName: "\u53D4\u672C\u534E\uFF08\u8089\u76FE\u578B\uFF09"
+  EnemyName: HEALER
   EnemyType: 4
   InitCount: 1
   CountIncrease: 1
@@ -24,4 +24,5 @@ MonoBehaviour:
   ReachDamage: 1
   extraHealth: 0
   EnemyIcon: {fileID: 8019492531564915904, guid: f9835346b30cae840a9eff85ed192e6f, type: 3}
-  Description: "\u5728\u5176\u4E00\u5B9A\u8303\u56F4\u5185\u7684\u654C\u4EBA\u63D0\u9AD8\u79FB\u52A8\u901F\u5EA6\u3002"
+  EnemyEmptyIcon: {fileID: 0}
+  Description: HEALERINFO

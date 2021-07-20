@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614735ba97a8e4b4bbdf8128289355f3, type: 3}
   m_Name: Tanker
   m_EditorClassIdentifier: 
-  EnemyName: "\u6D77\u660E\u5A01\uFF08\u8089\u76FE\u578B\uFF09"
+  EnemyName: TANKER
   EnemyType: 3
   InitCount: 1
   CountIncrease: 1
@@ -24,4 +24,5 @@ MonoBehaviour:
   ReachDamage: 1
   extraHealth: 0
   EnemyIcon: {fileID: 3188815087764474750, guid: f9835346b30cae840a9eff85ed192e6f, type: 3}
-  Description: "\u751F\u547D\u503C\u8F83\u9AD8\u4F46\u79FB\u52A8\u7F13\u6162\u3002"
+  EnemyEmptyIcon: {fileID: 0}
+  Description: TANKERINFO

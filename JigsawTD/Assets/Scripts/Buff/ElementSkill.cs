@@ -15,7 +15,7 @@ public abstract class ElementSkill : TurretSkill
 public class AAAHeavyCannon : ElementSkill
 {
     public override List<int> Elements => new List<int> { 0, 0, 0 };
-    public override string SkillDescription => "沉重炮口：炮塔转速大幅降低，所有攻击力提升效果翻倍";
+    public override string SkillDescription => "AAA";
     public override void Build()
     {
         strategy.AllAttackIntensifyModify += 1;
@@ -26,7 +26,7 @@ public class AAAHeavyCannon : ElementSkill
 public class BBBOverloadCartridge : ElementSkill
 {
     public override List<int> Elements => new List<int> { 1, 1, 1 };
-    public override string SkillDescription => "过载弹夹：每回合开始前10秒，攻速提升200%";
+    public override string SkillDescription => "BBB";
     public override void StartTurn()
     {
         Duration += 10;
@@ -48,7 +48,7 @@ public class BBBOverloadCartridge : ElementSkill
 public class CCCFrostCore : ElementSkill
 {
     public override List<int> Elements => new List<int> { 2, 2, 2 };
-    public override string SkillDescription => "霜冻核心：合成后，获得1个万能元素。";
+    public override string SkillDescription => "CCC";
 
     public override void Composite()
     {
@@ -60,7 +60,7 @@ public class CCCFrostCore : ElementSkill
 public class DDDRestlessGunpowder : ElementSkill
 {
     public override List<int> Elements => new List<int> { 3, 3, 3 };
-    public override string SkillDescription => "躁动火药：暴击伤害增加-100%到400%的随机浮动";
+    public override string SkillDescription => "DDD";
 
     public override void Shoot()
     {
@@ -71,7 +71,7 @@ public class DDDRestlessGunpowder : ElementSkill
 public class EEENuclearShell : ElementSkill
 {
     public override List<int> Elements => new List<int> { 4, 4, 4 };
-    public override string SkillDescription => "核能炮弹：溅射范围随子弹飞行距离提升0.3/格";
+    public override string SkillDescription => "EEE";
 
     public override void Shoot()
     {
@@ -82,7 +82,7 @@ public class EEENuclearShell : ElementSkill
 public class AABChargedBase : ElementSkill
 {
     public override List<int> Elements => new List<int> { 0, 0, 1 };
-    public override string SkillDescription => "充能基座：战斗开始前15秒，攻击力提升100%";
+    public override string SkillDescription => "AAB";
 
     public override void StartTurn()
     {
@@ -104,7 +104,7 @@ public class AABChargedBase : ElementSkill
 public class AACLonggerCannon : ElementSkill
 {
     public override List<int> Elements => new List<int> { 0, 0, 2 };
-    public override string SkillDescription => "加长炮管：防御塔攻击距离+2";
+    public override string SkillDescription => "AAC";
 
     public override void Build()
     {
@@ -120,7 +120,7 @@ public class AACLonggerCannon : ElementSkill
 public class AADMetalBullet : ElementSkill
 {
     public override List<int> Elements => new List<int> { 0, 0, 3 };
-    public override string SkillDescription => "合金子弹：每次暴击都会提升本回合攻击力10%，最多提高200%";
+    public override string SkillDescription => "AAD";
 
     private float attackIncreased;
     public override void PreHit()
@@ -143,7 +143,7 @@ public class AADMetalBullet : ElementSkill
 public class AAEDetectRadar : ElementSkill
 {
     public override List<int> Elements => new List<int> { 0, 0, 4 };
-    public override string SkillDescription => "侦测雷达：相邻每有1个防御塔，就提升50%基础攻击力";
+    public override string SkillDescription => "AAE";
 
     private int adjacentTurretCount = 0;
     public override void Detect()
@@ -165,7 +165,7 @@ public class AAEDetectRadar : ElementSkill
 public class ABCReinforceBase : ElementSkill
 {
     public override List<int> Elements => new List<int> { 0, 1, 2 };
-    public override string SkillDescription => "加固底座：防御塔升级费用-50%";
+    public override string SkillDescription => "ABC";
 
     public override void Build()
     {
@@ -176,7 +176,7 @@ public class ABCReinforceBase : ElementSkill
 public class ABDInvestment : ElementSkill
 {
     public override List<int> Elements => new List<int> { 0, 1, 3 };
-    public override string SkillDescription => "量化投资：获得的金币提高15%";
+    public override string SkillDescription => "ABD";
 
     public override void Composite()
     {
@@ -187,7 +187,7 @@ public class ABDInvestment : ElementSkill
 public class ABEResourcesAllocation : ElementSkill
 {
     public override List<int> Elements => new List<int> { 0, 1, 4 };
-    public override string SkillDescription => "资源配置：每5回合，获得1次额外抽取次数";
+    public override string SkillDescription => "ABE";
 
     private int turn;
     public override void EndTurn()
@@ -204,7 +204,7 @@ public class ABEResourcesAllocation : ElementSkill
 public class ACDResourcesRecycle : ElementSkill
 {
     public override List<int> Elements => new List<int> { 0, 2, 3 };
-    public override string SkillDescription => "资源回收：合成时，获得3次额外抽取次数";
+    public override string SkillDescription => "ACD";
 
     public override void Composite()
     {
@@ -215,7 +215,7 @@ public class ACDResourcesRecycle : ElementSkill
 public class ACELonggerBarrel : ElementSkill
 {
     public override List<int> Elements => new List<int> { 0, 2, 4 };
-    public override string SkillDescription => "紧急重构：使你下一个购买的配方变为强化配方";
+    public override string SkillDescription => "ACE";
 
     public override void Composite()
     {
@@ -226,7 +226,7 @@ public class ACELonggerBarrel : ElementSkill
 public class ADEHardCore : ElementSkill
 {
     public override List<int> Elements => new List<int> { 0, 3, 4 };
-    public override string SkillDescription => "强击核心：相邻防御塔的基础攻击力提升50%";
+    public override string SkillDescription => "ADE";
 
     private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
     public override void Detect()
@@ -254,7 +254,7 @@ public class ADEHardCore : ElementSkill
 public class BBAProcessImprovement : ElementSkill
 {
     public override List<int> Elements => new List<int> { 1, 1, 0 };
-    public override string SkillDescription => "改良流程：在每回合开始20秒后，攻速提升60%";
+    public override string SkillDescription => "BBA";
 
     public override void StartTurn()
     {
@@ -276,7 +276,7 @@ public class BBAProcessImprovement : ElementSkill
 public class BBCPreciseStrike : ElementSkill
 {
     public override List<int> Elements => new List<int> { 1, 1, 2 };
-    public override string SkillDescription => "精准打击：攻击造成目标4%当前生命值的额外伤害（对BOSS为1%）";
+    public override string SkillDescription => "BBC";
 
     public override void Hit(Enemy target)
     {
@@ -291,7 +291,7 @@ public class BBCPreciseStrike : ElementSkill
 public class BBDBirdShoot : ElementSkill
 {
     public override List<int> Elements => new List<int> { 1, 1, 3 };
-    public override string SkillDescription => "小鸟盲射：每次攻击后，提升5%暴击率，上限为200%";
+    public override string SkillDescription => "BBD";
 
     float criticalRateIncreased;
     public override void Shoot()
@@ -311,7 +311,7 @@ public class BBDBirdShoot : ElementSkill
 public class BBETinyCannon : ElementSkill
 {
     public override List<int> Elements => new List<int> { 1, 1, 4 };
-    public override string SkillDescription => "小型炮口：所有攻速提升效果翻倍，不可造成暴击";
+    public override string SkillDescription => "BBE";
 
     public override void Build()
     {
@@ -327,7 +327,7 @@ public class BBETinyCannon : ElementSkill
 public class BCDMoneyFactory : ElementSkill
 {
     public override List<int> Elements => new List<int> { 1, 2, 3 };
-    public override string SkillDescription => "铸币工厂：防御塔每次造成暴击，都会使你获得1金币";
+    public override string SkillDescription => "BCD";
 
     public override void Hit(Enemy target)
     {
@@ -342,7 +342,7 @@ public class BCDMoneyFactory : ElementSkill
 public class BCERepairFactory : ElementSkill
 {
     public override List<int> Elements => new List<int> { 1, 2, 4 };
-    public override string SkillDescription => "维修工厂：相邻陷阱效果提升100%";
+    public override string SkillDescription => "BCE";
 
     private List<TrapContent> intensifiedTraps = new List<TrapContent>();
     public override void Detect()
@@ -372,7 +372,7 @@ public class BCERepairFactory : ElementSkill
 public class ADESpeedCore : ElementSkill
 {
     public override List<int> Elements => new List<int> { 1, 3, 4 };
-    public override string SkillDescription => "加速核心：相邻防御塔的基础攻速提升50%";
+    public override string SkillDescription => "BDE";
 
     private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
     public override void Detect()
@@ -400,7 +400,7 @@ public class ADESpeedCore : ElementSkill
 public class CCABlueprint : ElementSkill
 {
     public override List<int> Elements => new List<int> { 2, 2, 0 };
-    public override string SkillDescription => "科技蓝图：合成后，随机获得一个强化配方";
+    public override string SkillDescription => "CCA";
 
     public override void Composite()
     {
@@ -410,7 +410,7 @@ public class CCABlueprint : ElementSkill
 public class CCBFrostCore : ElementSkill
 {
     public override List<int> Elements => new List<int> { 2, 2, 1 };
-    public override string SkillDescription => "寒冰核心：相邻防御塔+0.5减速";
+    public override string SkillDescription => "CCB";
 
     private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
     public override void Detect()
@@ -438,7 +438,7 @@ public class CCBFrostCore : ElementSkill
 public class CCDUnstableShaft : ElementSkill
 {
     public override List<int> Elements => new List<int> { 2, 2, 3 };
-    public override string SkillDescription => "不稳定轴：暴击造成的减速效果翻倍";
+    public override string SkillDescription => "CCD";
 
     public override void Hit(Enemy target)
     {
@@ -452,7 +452,7 @@ public class CCDUnstableShaft : ElementSkill
 public class CCEIceBomb : ElementSkill
 {
     public override List<int> Elements => new List<int> { 2, 2, 4 };
-    public override string SkillDescription => "加装炮口：造成的伤害减少50%，额外攻击2个目标";
+    public override string SkillDescription => "CCE";
 
     public override void Build()
     {
@@ -468,7 +468,7 @@ public class CCEIceBomb : ElementSkill
 public class CDETargetCore : ElementSkill
 {
     public override List<int> Elements => new List<int> { 2, 3, 4 };
-    public override string SkillDescription => "瞄准核心：相邻防御塔+1范围";
+    public override string SkillDescription => "CDE";
 
     private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
     public override void Detect()
@@ -497,7 +497,7 @@ public class CDETargetCore : ElementSkill
 public class DDASealedCannon : ElementSkill
 {
     public override List<int> Elements => new List<int> { 3, 3, 0 };
-    public override string SkillDescription => "尘封大炮：如果暴击率大于100%，则造成的伤害提高100%";
+    public override string SkillDescription => "DDA";
 
     public override void PreHit()
     {
@@ -511,7 +511,7 @@ public class DDASealedCannon : ElementSkill
 public class DDBFireSuppression : ElementSkill
 {
     public override List<int> Elements => new List<int> { 3, 3, 1 };
-    public override string SkillDescription => "火力压制：战斗开始前15秒，暴击率提升100%";
+    public override string SkillDescription => "DDB";
 
     public override void StartTurn()
     {
@@ -534,7 +534,7 @@ public class DDBFireSuppression : ElementSkill
 public class DDCVentureInvestment : ElementSkill
 {
     public override List<int> Elements => new List<int> { 3, 3, 2 };
-    public override string SkillDescription => "烈焰核心：相邻防御塔的暴击率+30%";
+    public override string SkillDescription => "DDC";
 
     private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
     public override void Detect()
@@ -564,7 +564,7 @@ public class DDCVentureInvestment : ElementSkill
 public class DDERemoteGuidence : ElementSkill
 {
     public override List<int> Elements => new List<int> { 3, 3, 4 };
-    public override string SkillDescription => "远程制导：当攻击距离大于3的敌人时，暴击伤害提高100%";
+    public override string SkillDescription => "DDE";
 
     public override void Shoot()
     {
@@ -579,7 +579,7 @@ public class DDERemoteGuidence : ElementSkill
 public class EEAPowerfulSputtering : ElementSkill
 {
     public override List<int> Elements => new List<int> { 4, 4, 0 };
-    public override string SkillDescription => "强力溅射：攻击距离小于3的敌人时，溅射伤害提高100%";
+    public override string SkillDescription => "EEA";
 
     public override void Shoot()
     {
@@ -593,7 +593,7 @@ public class EEAPowerfulSputtering : ElementSkill
 public class EEBHeatingBarrel : ElementSkill
 {
     public override List<int> Elements => new List<int> { 4, 4, 1 };
-    public override string SkillDescription => "加热炮管：每次攻击后提升0.1溅射范围，上限1.5";
+    public override string SkillDescription => "EEB";
 
     float sputteringRangeIncreased;
     public override void Shoot()
@@ -615,7 +615,7 @@ public class EEBHeatingBarrel : ElementSkill
 public class EECConcretePouring : ElementSkill
 {
     public override List<int> Elements => new List<int> { 4, 4, 2 };
-    public override string SkillDescription => "稳固核心：相邻防御塔的溅射范围+0.5";
+    public override string SkillDescription => "EEC";
 
     private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
     public override void Detect()
@@ -645,7 +645,7 @@ public class EECConcretePouring : ElementSkill
 public class EEDWantonBombing : ElementSkill
 {
     public override List<int> Elements => new List<int> { 4, 4, 3 };
-    public override string SkillDescription => "狂轰滥炸：暴击造成的溅射伤害提高100%";
+    public override string SkillDescription => "EED";
 
     public override void PreHit()
     {

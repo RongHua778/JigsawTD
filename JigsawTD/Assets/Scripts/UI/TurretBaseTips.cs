@@ -7,8 +7,8 @@ public class TurretBaseTips : TileTips
     public void ReadTurretBase(TurretBaseContent trapContent)
     {
         Icon.sprite = trapContent.m_TurretBaseAttribute.Icon;
-        Name.text = trapContent.m_TurretBaseAttribute.Name;
-        Description.text = trapContent.m_TurretBaseAttribute.Description;
+        Name.text = GameMultiLang.GetTraduction(trapContent.m_TurretBaseAttribute.Name);
+        Description.text = GameMultiLang.GetTraduction(trapContent.m_TurretBaseAttribute.Description);
     }
 
 

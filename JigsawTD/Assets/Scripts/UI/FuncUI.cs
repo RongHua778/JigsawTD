@@ -109,7 +109,7 @@ public class FuncUI : IUserInterface
                 DrawRemain++;
                 //GameManager.Instance.GetRandomBluePrint();
             }
-            m_LuckInfo.SetContent(StaticData.GetLuckyInfo(Energy, EnergyProgress));
+            m_LuckInfo.SetContent(StaticData.GetEnergyInfo());
             m_LuckProgress.SetProgress(energy);
         }
     }

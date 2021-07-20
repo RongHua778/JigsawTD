@@ -96,10 +96,10 @@ public class MainUI : IUserInterface
         m_PausePanel.Initialize(m_GameManager);
         m_GuideBook.Initialize(m_GameManager);
         m_Anim = GetComponent<Animator>();
-        for (int i = 0; i < taskButtons.Length; i++)
-        {
-            taskButtons[i].gameObject.SetActive(false);
-        }
+        //for (int i = 0; i < taskButtons.Length; i++)
+        //{
+        //    taskButtons[i].gameObject.SetActive(false);
+        //}
     }
 
 
@@ -140,9 +140,9 @@ public class MainUI : IUserInterface
 
     public void PrepareNextWave(List<EnemySequence> sequences)
     {
-        CountTasks();
+        //CountTasks();
         CurrentWave++;
-        m_GameManager.GainMoney((StaticData.Instance.BaseWaveIncome + StaticData.Instance.WaveMultiplyIncome * (CurrentWave - 1)));
+        m_GameManager.GainMoney((StaticData.Instance.BaseWaveIncome + StaticData.Instance.WaveMultiplyIncome * (CurrentWave - 1)));//最多一回合获得200金币
         m_WaveInfoSetter.SetWaveInfo(CurrentWave, sequences);
     }
 
@@ -155,7 +155,7 @@ public class MainUI : IUserInterface
         }
         else
         {
-            GameManager.Instance.ShowMessage("拥有的金币不足");
+            GameManager.Instance.ShowMessage(GameMultiLang.GetTraduction("LACKMONEY"));
             return false;
         }
     }
