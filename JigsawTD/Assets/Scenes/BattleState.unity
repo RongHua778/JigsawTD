@@ -5988,7 +5988,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerMaxLevel: 7
   LevelUpMoney: 000000003200000064000000c80000005e01000026020000200300000f270000
-  StartCoin: 0
+  StartCoin: 5
   StartLotteryDraw: 0
   BaseWaveIncome: 0
   WaveMultiplyIncome: 5
@@ -37848,7 +37848,7 @@ RectTransform:
   m_GameObject: {fileID: 243250748130638744}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 1, z: 1}
   m_Children:
   - {fileID: 7154940297032716074}
   - {fileID: 7653543270409233647}

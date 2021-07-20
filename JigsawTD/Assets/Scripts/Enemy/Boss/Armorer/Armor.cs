@@ -53,9 +53,9 @@ public class Armor : MonoBehaviour,IDamageable
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        //if (collision.GetComponent<Bullet>())
-        //{
-            Bullet bullet = collision.GetComponent<Bullet>();
+        Bullet bullet = collision.GetComponent<Bullet>();
+        if (bullet!=null)
+        {
             //if (bullet.hit)
             //    return;
             //bullet.hit = true;
@@ -68,7 +68,7 @@ public class Armor : MonoBehaviour,IDamageable
             effect.transform.position = transform.position;
             effect.transform.localScale = Vector3.one * 0.3f;
             effect.PlayEffect();
-        //}
+        }
 
     }
 
