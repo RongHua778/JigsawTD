@@ -23,10 +23,6 @@ public class FuncUI : IUserInterface
     bool drawThisTurn = true;
     public bool DrawThisTurn { get => drawThisTurn; set => drawThisTurn = value; }
 
-
-
-    private int buyShapeCost = 25;
-
     private int energyProgress = 0;
     public int EnergyProgress
     {

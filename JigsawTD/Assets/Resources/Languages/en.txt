@@ -1,7 +1,7 @@
 SCENE1=Scene1
 SCENE2=Scene2
 
-
+//Menu
 STARTGAME=START GAME
 BLUEPRINT=BLUEPRINT
 SETTING=SETTING
@@ -22,6 +22,11 @@ BOSSINFO=BOSS
 HIGHSCORE=High Score
 WAVE=Wave
 NUM=
+
+TUTORIAL=Do you want to start a tutorial?
+YES=YES
+NO=NO
+
 
 LEVEL1INFO=This is the first qualification test of the Refactor, the boss here will constantly creates tons of enemies to take down your defenses, but of course you have to stick around for enough waves to face him.
 
@@ -58,7 +63,7 @@ SHOPBLUEPRINT=Shop
 OWNBLUEPRINT=Owned
 NEXTREFRESH=Refresh after
 OWNPERFECT=Perfect Element
-PERFECTINFO=Perfect element can served as any material for composition
+PERFECTINFO=Perfect element can served as any element for composition
 
 //turretips
 DAMAGEANLYSIS=Total Damage
@@ -74,17 +79,20 @@ RANGETYPE3=Line
 TURRETSKILL=Basic Skill
 ELEMENTSKILL=Element Benefit
 TILESKILL=Tile Benefit
-CRITICALINFO= Each 1% critical = 1% extra critical damage. Defacult critical damage is 150%
+CRITICALINFO=Each 1% critical = 1% extra critical damage. Defacult critical damage is 150%
 SPLASHINFO=Splash radius. Default splash damage is 50%
-ATTACKUP=% Basic Attack
-SPEEDUP=% Basic FireRate
+ATTACKUP=% Attack
+SPEEDUP=% FireRate
 CRITICALUP=% Critical
 SPUTTERINGUP= Splash
 SLOWUP= Slow
-COMINTENSIFY=As a composite material
+COMINTENSIFY=Composite Benefit
 BUY=Buy
 COMPOSITE=Composite
 UPGRADE=Upgrade
+
+//Groundtips
+BUYGROUND=Buy a basic tile?
 
 //towername
 F1=F1 Constructor
@@ -255,9 +263,9 @@ SLOWBASE=Slow Base
 
 ATTACKBASEINFO=Only Composite Tuttet can be placed: The benefit to Element A is doubled.
 SPEEDBASEINFO=Only Composite Tuttet can be placed: The benefit to Element B is doubled.
-CRITICALBASEINFO=Only Composite Tuttet can be placed: The benefit to Element C is doubled.
-SPUTTERINGBASEINFO=Only Composite Tuttet can be placed: The benefit to Element D is doubled.
-SLOWBASEINFO=Only Composite Tuttet can be placed: The benefit to Element E is doubled.
+CRITICALBASEINFO=Only Composite Tuttet can be placed: The benefit to Element D is doubled.
+SPUTTERINGBASEINFO=Only Composite Tuttet can be placed: The benefit to Element E is doubled.
+SLOWBASEINFO=Only Composite Tuttet can be placed: The benefit to Element C is doubled.
 
 //Guide
 GuideName=Kant

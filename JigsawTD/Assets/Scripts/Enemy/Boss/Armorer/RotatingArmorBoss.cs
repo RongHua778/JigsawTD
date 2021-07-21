@@ -8,7 +8,7 @@ public class RotatingArmorBoss : Armorer
     public override EnemyType EnemyType => EnemyType.SixArmor;
     private Tween tween;
 
-    [SerializeField] Transform rotateObj = default;
+   // [SerializeField] Transform rotateObj = default;
 
 
     public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify)

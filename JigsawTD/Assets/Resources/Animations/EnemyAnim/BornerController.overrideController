@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BornerController
+  m_Controller: {fileID: 9100000, guid: 4e3c7cd0b78a0c749bd35f70f4ca72a1, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: a5b5462fd13bc5548bd3bb9695f164e7, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a5b5462fd13bc5548bd3bb9695f164e7, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: b846ee6bcb0f43d4ca85a73a56f716e1, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: b846ee6bcb0f43d4ca85a73a56f716e1, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 1685d78ad2b55d142aa3268848ff2b81, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 1685d78ad2b55d142aa3268848ff2b81, type: 2}

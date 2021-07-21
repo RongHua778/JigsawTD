@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: SkillFactory
   m_EditorClassIdentifier: 
   bornerBornCD:
-  - 5
-  - 0.2
-  - 0.4
+  - 6
+  - 0.25
+  - 0.5
   bornerEnemyOneBorn: 020000000100000001000000
   blinkerBlink: 3
   holePrefab: {fileID: -6697839134482483952, guid: 529ac6622c5b5c6469501f1d2e75fd30, type: 3}

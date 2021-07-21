@@ -10,8 +10,6 @@ public class MenuUIManager : MonoBehaviour
     [SerializeField] UILevelSelect levelPanel = default;
     Animator m_Anim;
 
-
-    bool gameStart = false;
     // Start is called before the first frame update
     void Start()
     {

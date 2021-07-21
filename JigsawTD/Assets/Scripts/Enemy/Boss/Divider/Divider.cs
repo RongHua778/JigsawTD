@@ -6,7 +6,6 @@ public class Divider : Enemy
 {
     //[SerializeField] public SpriteRenderer EnemySprite = default;
     //[SerializeField] Sprite originalSprite = default;
-    [SerializeField] Sprite[] dividerSprites = default;
     public int dividing;
     public override EnemyType EnemyType => EnemyType.Divider;
 

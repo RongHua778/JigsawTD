@@ -8,6 +8,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
 {
     private float frostTime = 0;
     public bool Activated = true;
+    private FrostEffect m_FrostEffect;
 
     public StrategyBase Strategy;//数值计算规则
 
@@ -159,17 +160,31 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     }
 
 
-    public virtual void Frost(float time)
+    public virtual void Frost(float time, FrostEffect effect = null)
     {
         Activated = false;
-        frostTime += time;
+        frostTime = time;
+        if (effect != null)
+            m_FrostEffect = effect;
     }
 
     //在塔被激活后每一帧都会调用的方法
     public virtual void OnActivating()
     {
+        if (frostTime > 0)
+        {
+            frostTime -= Time.deltaTime;
+            if (frostTime <= 0)
+            {
+                Activated = true;
+                ObjectPool.Instance.UnSpawn(m_FrostEffect);
+                m_FrostEffect = null;
+            }
+        }
         if (TrackTarget() || AcquireTarget())
         {
+            if (!Activated)
+                return;
             RotateTowards();
             FireProjectile();
         }
@@ -178,16 +193,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
 
     public virtual bool GameUpdate()
     {
-        if (frostTime > 0)
-        {
-            frostTime -= Time.deltaTime;
-            if (frostTime <= 0)
-                Activated = true;
-        }
-        if (Activated)
-        {
-            OnActivating();
-        }
+        OnActivating();
         return true;
     }
 

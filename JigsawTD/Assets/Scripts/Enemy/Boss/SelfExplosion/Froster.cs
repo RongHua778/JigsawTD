@@ -32,13 +32,16 @@ public class Froster : Enemy
         partical.transform.position = transform.position;
         partical.transform.localScale = Vector3.one * freezeRange;
         int hits = Physics2D.OverlapCircleNonAlloc(transform.position, freezeRange, attachedResult, LayerMask.GetMask(StaticData.TurretMask));
-        for(int i = 0; i < hits; i++)
+        for (int i = 0; i < hits; i++)
         {
             TurretContent turret = attachedResult[i].GetComponent<TurretContent>();
-            FrostEffect frosteffect = ObjectPool.Instance.Spawn(frostPrefab) as FrostEffect;
-            frosteffect.transform.position = attachedResult[i].transform.position;
-            frosteffect.UnspawnAfterTime(freezeTime);
-            turret.Frost(freezeTime);
+            FrostEffect frosteffect = null;
+            if (turret.Activated)
+            {
+                frosteffect = ObjectPool.Instance.Spawn(frostPrefab) as FrostEffect;
+                frosteffect.transform.position = attachedResult[i].transform.position;
+            }
+            turret.Frost(freezeTime, frosteffect);
         }
     }
 }

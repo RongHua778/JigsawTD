@@ -45,6 +45,11 @@ public class BornSkill : Skill
             ws.EnemyRemain++;
         }
     }
+
+    //public override void OnDying()
+    //{
+    //    enemy.Anim.Play("TransformBack", 0, 1f);
+    //}
     private void SpawnEnemy(BoardSystem board, EnemyType type)
     {
         EnemyAttribute attribute = GameManager.Instance.EnemyFactory.Get(type);
@@ -53,7 +58,7 @@ public class BornSkill : Skill
         Enemy enemy = ObjectPool.Instance.Spawn(attribute.Prefab) as Enemy;
         HealthBar healthBar = ObjectPool.Instance.Spawn(ws.HealthBarPrefab) as HealthBar;
         enemy.Initialize(attribute, Random.Range(-0.3f, 0.3f), healthBar, intensify);
-        enemy.Progress = this.enemy.Progress;
+        enemy.Progress = 1;
         enemy.SpawnOn(this.enemy.PointIndex, board.shortestPoints);
         GameManager.Instance.enemies.Add(enemy);
     }
@@ -67,6 +72,7 @@ public class BornSkill : Skill
             enemy.StunTime += 6f;
             form = 1;
             castleCounter = 0;
+            enemy.Anim.SetBool("Transform", true);
         }
         if (enemy.CurrentHealth / enemy.MaxHealth<= 0.3f&&form==1)
         {
@@ -75,13 +81,17 @@ public class BornSkill : Skill
             enemy.StunTime += 6f;
             form = 0;
             castleCounter = 0;
+            enemy.Anim.SetBool("Transform", true);
+
         }
+
         castleCounter += Time.deltaTime;
 
         if (castleCounter > 6f)
         {
             enemy.DamageIntensify = 0f;
             level = 0;
+            enemy.Anim.SetBool("Transform", false);
         }
 
     }

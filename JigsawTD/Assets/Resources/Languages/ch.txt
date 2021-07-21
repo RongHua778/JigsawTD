@@ -1,6 +1,7 @@
 SCENE1=Scene1
 SCENE2=Scene2
 
+//Menu
 STARTGAME=开始游戏
 BLUEPRINT=配方管理
 SETTING=游戏设置
@@ -22,6 +23,10 @@ BOSSINFO=关卡BOSS
 HIGHSCORE=最高记录
 WAVE=波
 NUM=第
+
+TUTORIAL=Do you want to start a tutorial?
+YES=YES
+NO=NO
 
 LEVEL1INFO=这是原型机进入重构模组的首次资格测试，被淘汰的新人警告你这里的首领会不断制造大量敌人来冲击你的防线，当然你得坚持足够多的回合才能见到它。
 
@@ -85,6 +90,8 @@ BUY=购买
 COMPOSITE=合成
 UPGRADE=升级
 
+//Groundtips
+BUYGROUND=购买一块基础格
 
 
 //towername
@@ -257,9 +264,9 @@ SLOWBASE=减速基座
 
 ATTACKBASEINFO=只可放置合成塔：A元素加成效果翻倍。
 SPEEDBASEINFO=只可放置合成塔：B元素加成效果翻倍。
-CRITICALBASEINFO=只可放置合成塔：C元素加成效果翻倍。
-SPUTTERINGBASEINFO=只可放置合成塔：D元素加成效果翻倍。
-SLOWBASEINFO=只可放置合成塔：E元素加成效果翻倍。
+CRITICALBASEINFO=只可放置合成塔：D元素加成效果翻倍。
+SPUTTERINGBASEINFO=只可放置合成塔：E元素加成效果翻倍。
+SLOWBASEINFO=只可放置合成塔：C元素加成效果翻倍。
 
 //Guide
 GuideName=康德

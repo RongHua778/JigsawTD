@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 1841331}
   - component: {fileID: 1841333}
   - component: {fileID: 1841332}
+  - component: {fileID: 1841334}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -202,6 +203,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1841330}
   m_CullTransparentMesh: 1
+--- !u!114 &1841334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a1c8a755ebe1841816e3a5b3aca1ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: YES
 --- !u!4 &12207117 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f716b9ec27206ab4187bdf5f637ca584, type: 3}
@@ -2264,6 +2278,7 @@ GameObject:
   - component: {fileID: 668890265}
   - component: {fileID: 668890267}
   - component: {fileID: 668890266}
+  - component: {fileID: 668890268}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -2332,6 +2347,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 668890264}
   m_CullTransparentMesh: 1
+--- !u!114 &668890268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668890264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a1c8a755ebe1841816e3a5b3aca1ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: NO
 --- !u!4 &710181738 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f716b9ec27206ab4187bdf5f637ca584, type: 3}
@@ -2555,6 +2583,7 @@ GameObject:
   - component: {fileID: 806502409}
   - component: {fileID: 806502411}
   - component: {fileID: 806502410}
+  - component: {fileID: 806502412}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -2623,6 +2652,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 806502408}
   m_CullTransparentMesh: 1
+--- !u!114 &806502412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 806502408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a1c8a755ebe1841816e3a5b3aca1ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: TUTORIAL
 --- !u!4 &810162834 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f716b9ec27206ab4187bdf5f637ca584, type: 3}
@@ -7295,8 +7337,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -670, y: -245}
-  m_SizeDelta: {x: 825.6682, y: 516.0425}
+  m_AnchoredPosition: {x: -508.04, y: -159}
+  m_SizeDelta: {x: 903.9265, y: 286.9967}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1953933990
 MonoBehaviour:
@@ -7318,7 +7360,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 824f0f8a3030eb641aba876697dedb9a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6466fb14f206a114fbb7f0f83c2fe623, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

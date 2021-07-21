@@ -22,10 +22,10 @@ public class ScaleAndMove : IGameSystem
     private float maximum = 10;
     private float minmum = 3;
 
-    //private float maxUp = 13;
-    //private float maxDown = -13;
-    //private float maxLeft = -13;
-    //private float maxRight = 13;
+    private float maxY = 13;
+    private float minY = -13;
+    private float minX = -13;
+    private float maxX = 13;
     Vector2 CamMovement;
     // Start is called before the first frame update
 
@@ -66,27 +66,15 @@ public class ScaleAndMove : IGameSystem
         DesktopInput();
         TutorialCounter();
         RTSView();
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, minX, maxX), Mathf.Clamp(transform.position.y, minY, maxY), transform.position.z);
+
         //TEST
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            CanControl = !CanControl;
-        }
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    CanControl = !CanControl;
+        //}
     }
 
-    //// Update is called once per frame
-    //void Update()
-    //{
-
-    //    //DesktopInput();
-    //    TutorialCounter();
-    //    RTSView();
-    //    //TEST
-    //    if (Input.GetKeyDown(KeyCode.P))
-    //    {
-    //        CanControl = !CanControl;
-    //    }
-
-    //}
 
     private void TutorialCounter()
     {
