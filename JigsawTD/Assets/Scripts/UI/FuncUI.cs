@@ -153,7 +153,7 @@ public class FuncUI : IUserInterface
         }
         else
         {
-            GameManager.Instance.ShowMessage("抽取次数不足");
+            GameManager.Instance.ShowMessage(GameMultiLang.GetTraduction("NOENOUGHDRAW"));
         }
         //else if (GameManager.Instance.ConsumeMoney(buyShapeCost))
         //{

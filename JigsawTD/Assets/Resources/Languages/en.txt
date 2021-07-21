@@ -37,6 +37,9 @@ PUTFIRST=Please place the drawed module first
 NOTBUILDSTATE=Can not composite during battle state
 NOROUTE=Make sure there are a route available
 NOOVERLAP=Turret cannot overlap with special tile
+NOTBATTLESTATE=Can not buy during battle state
+ALREADYGROUND=There are already a tile
+NOENOUGHDRAW=You have no draw point
 
 //guidevideo
 PLACERULE=Placement Rule
@@ -64,6 +67,12 @@ OWNBLUEPRINT=Owned
 NEXTREFRESH=Refresh after
 OWNPERFECT=Perfect Element
 PERFECTINFO=Perfect element can served as any element for composition
+
+//gameEndPanel
+PASSLEVEL=You have pass 
+TOTALDAMAGE=Total Damage
+COMPOSITECOUNT=Composite Turret
+THANKSINFO=Thank you for playing the DEMO of Refactor\nYou can whishlist it on Steam or send your feedback to 13500006441@163.com
 
 //turretips
 DAMAGEANLYSIS=Total Damage

@@ -18,11 +18,11 @@ public class GameEndUI : IUserInterface
 
     public void SetGameResult(int turn)
     {
-        title.text = "Í¨¹ý" + turn + "²¨";
+        title.text = GameMultiLang.GetTraduction("PASSLEVEL") + (turn - 1) + GameMultiLang.GetTraduction("WAVE");
         int maxLevel = LevelManager.Instance.LevelMaxTurn;
-        if (turn > maxLevel)
+        if ((turn - 1) > maxLevel)
         {
-            LevelManager.Instance.LevelMaxTurn = turn;
+            LevelManager.Instance.LevelMaxTurn = turn - 1;
         }
         levelHighScore.text = LevelManager.Instance.LevelMaxTurn.ToString();
         totalCompositeTxt.text = TotalComposite.ToString();

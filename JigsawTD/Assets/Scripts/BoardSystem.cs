@@ -311,9 +311,14 @@ public class BoardSystem : IGameSystem
 
     public void BuyOneEmptyTile()
     {
+        if (GameManager.Instance.OperationState.StateName == StateName.WaveState)
+        {
+            GameManager.Instance.ShowMessage(GameMultiLang.GetTraduction("NOTBATTLESTATE"));
+            return;
+        }
         if (StaticData.GetNodeWalkable(SelectingTile))
         {
-            GameManager.Instance.ShowMessage("此处已经有地板");
+            GameManager.Instance.ShowMessage(GameMultiLang.GetTraduction("ALREADYGROUND"));
             return;
         }
         if (StaticData.FreeGroundTileCount > 0)

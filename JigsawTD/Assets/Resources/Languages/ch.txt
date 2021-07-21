@@ -37,6 +37,9 @@ PUTFIRST=请先放置抽取模块
 NOTBUILDSTATE=只可以在非战斗阶段合成
 NOROUTE=必须有道路连接起点和终点
 NOOVERLAP=防御塔不可与特殊地形重叠
+NOTBATTLESTATE=战斗中不可购买
+ALREADYGROUND=此处已经有格子
+NOENOUGHDRAW=抽取次数不足
 
 //guidevideo
 PLACERULE=摆放规则
@@ -63,6 +66,12 @@ OWNBLUEPRINT=拥有配方
 NEXTREFRESH=下次刷新
 OWNPERFECT=拥有万能元素
 PERFECTINFO=万能元素可以作为任意合成素材使用
+
+//gameEndPanel
+PASSLEVEL=你通过了
+TOTALDAMAGE=造成总伤害
+COMPOSITECOUNT=合成防御塔
+THANKSINFO=感谢您体验《重构》游戏DEMO，游戏仍在开发中\n欢迎加入反馈QQ群809891580！
 
 //turretips
 DAMAGEANLYSIS=伤害统计

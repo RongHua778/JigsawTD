@@ -6,6 +6,8 @@ using UnityEngine;
 public abstract class Enemy : PathFollower, IDamageable
 {
     public bool IsBoss = false;
+    public float Intensify;
+    protected bool isOutTroing = false;
     public bool IsEnemy { get => true; }
     public ReusableObject exlposionPrefab = default;
     protected AudioClip explosionClip;
@@ -79,12 +81,14 @@ public abstract class Enemy : PathFollower, IDamageable
     }
 
     private float maxHealth;
-    public float MaxHealth { get => maxHealth; 
-        set 
-        { 
+    public float MaxHealth
+    {
+        get => maxHealth;
+        set
+        {
             maxHealth = value;
             CurrentHealth = maxHealth;
-        } 
+        }
     }
     protected float currentHealth;
     public virtual float CurrentHealth
@@ -101,18 +105,23 @@ public abstract class Enemy : PathFollower, IDamageable
         }
     }
 
-    float prDropTask = 0f;
+    public SpriteRenderer EnemySprite
+    {
+        get => enemySprite; 
+        set=> enemySprite = value;
+    }
+
 
     [Header("OtherSetting")]
     HealthBar healthBar;
-    [HideInInspector] public SpriteRenderer enemySprite;
+    [HideInInspector] private SpriteRenderer enemySprite;
     [HideInInspector] public CircleCollider2D enemyCol;
 
 
     public virtual void Awake()
     {
-        enemySprite = transform.Find("Model").Find("GFX").GetComponent<SpriteRenderer>();
-        enemyCol = enemySprite.GetComponent<CircleCollider2D>();
+        EnemySprite = transform.Find("Model").Find("GFX").GetComponent<SpriteRenderer>();
+        enemyCol = EnemySprite.GetComponent<CircleCollider2D>();
         Anim = GetComponent<Animator>();
         if (IsBoss)
         {
@@ -135,7 +144,6 @@ public abstract class Enemy : PathFollower, IDamageable
         }
         if (IsDie)
         {
-            DropTask();
             if (EnemySkills != null)
             {
                 foreach (Skill enemySkill in EnemySkills)
@@ -143,6 +151,7 @@ public abstract class Enemy : PathFollower, IDamageable
                     enemySkill.OnDying();
                 }
             }
+            OnDie();
             StopAllCoroutines();
             ReusableObject explosion = ObjectPool.Instance.Spawn(exlposionPrefab);
             Sound.Instance.PlayEffect(explosionClip);
@@ -168,14 +177,8 @@ public abstract class Enemy : PathFollower, IDamageable
         {
             if (PointIndex == PathPoints.Count - 1)
             {
-                try
-                {
-                    StartCoroutine(ExitCor());
-                }
-                catch
-                {
-                    Debug.LogAssertion("Ïß³Ì¶ªÊ§");
-                }
+                isOutTroing = true;
+                StartCoroutine(ExitCor());
                 return false;
             }
             trapTriggered = false;
@@ -192,6 +195,11 @@ public abstract class Enemy : PathFollower, IDamageable
             transform.localRotation = Quaternion.Euler(0f, 0f, angle);
         }
         return true;
+    }
+
+    protected virtual void OnDie()
+    {
+
     }
 
     protected void TriigerTrap()
@@ -220,6 +228,7 @@ public abstract class Enemy : PathFollower, IDamageable
         this.PathOffset = pathOffset;
         this.healthBar = healthBar;
         this.healthBar.followTrans = model;
+        this.Intensify = intensify;
         Buffable = this.GetComponent<BuffableEntity>();
         MaxHealth = Mathf.RoundToInt(attribute.Health * intensify);
         Speed = attribute.Speed;
@@ -247,14 +256,6 @@ public abstract class Enemy : PathFollower, IDamageable
         }
     }
 
-    private void DropTask()
-    {
-        float temp = UnityEngine.Random.Range(0f, 1f);
-        if (temp < prDropTask)
-        {
-            GameManager.Instance.MainUI.GetTask(GetComponentInChildren<TargetPoint>().transform);
-        }
-    }
 
     public override void OnSpawn()
     {
@@ -272,6 +273,7 @@ public abstract class Enemy : PathFollower, IDamageable
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
+        isOutTroing = false;
         ObjectPool.Instance.UnSpawn(healthBar);
         TargetDamageCounter = 0;
         TileStunCounter = 0;

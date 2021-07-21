@@ -88,10 +88,6 @@ public class WaveSystem : IGameSystem
                         Running = false;
                 }
             }
-            //if (!RunningSequence.Progress())
-            //{
-            //    Running = false;
-            //}
         }
     }
 
@@ -188,7 +184,7 @@ public class WaveSystem : IGameSystem
             }
 
             // }
-            sequences = GenerateSpecificSequence(EnemyType.Borner, 3f, i);
+            sequences = GenerateSpecificSequence(EnemyType.Tanker, 100f, i);
 
             LevelSequence.Add(sequences);
         }

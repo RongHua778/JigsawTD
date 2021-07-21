@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public enum BulletType
 {
@@ -94,8 +95,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         {
             foreach (TurretSkill effect in turretEffects)
             {
-                effect.bullet = this;
-                effect.Shoot();
+                effect.Shoot(this);
             }
         }
     }
@@ -107,7 +107,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         {
             foreach (TurretSkill effect in turretEffects)
             {
-                effect.PreHit();
+                effect.PreHit(this);
             }
         }
     }
@@ -118,7 +118,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         {
             foreach (TurretSkill effect in turretEffects)
             {
-                effect.Hit(target);
+                effect.Hit(target,this);
             }
         }
         if (SlowRate > 0 && !target.IsDie)//技能可能会修改slowrate
@@ -132,13 +132,13 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     {
         //if (!hit)
         //{
-            if (Target != null && (Target.Enemy.IsDie || !Target.gameObject.activeSelf))
-            {
-                TargetPos = Target.transform.position;
-                Target = null;
-            }
-            RotateBullet(TargetPos);
-            return MoveTowards(TargetPos);
+        if (Target != null && (Target.Enemy.IsDie || !Target.gameObject.activeSelf))
+        {
+            TargetPos = Target.transform.position;
+            Target = null;
+        }
+        RotateBullet(TargetPos);
+        return MoveTowards(TargetPos);
         //}
         //return false;
 
@@ -180,7 +180,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     {
 
     }
-    public void DealRealDamage(IDamageable damageable, bool isSputtering=false)
+    public void DealRealDamage(IDamageable damageable, bool isSputtering = false)
     {
         float finalDamage = isCritical ? Damage * CriticalPercentage : Damage;
         if (isSputtering)
@@ -190,9 +190,9 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         turretParent.Strategy.DamageAnalysis += (int)realDamage;
     }
 
-    public void EnemyDamageProcess(IDamageable target,bool isSputtering=false)
+    public void EnemyDamageProcess(IDamageable target, bool isSputtering = false)
     {
         TriggerHitEffect((Enemy)target);
-        DealRealDamage(target,isSputtering);
+        DealRealDamage(target, isSputtering);
     }
 }

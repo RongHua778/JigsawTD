@@ -62,7 +62,7 @@ public class DDDRestlessGunpowder : ElementSkill
     public override List<int> Elements => new List<int> { 3, 3, 3 };
     public override string SkillDescription => "DDD";
 
-    public override void Shoot()
+    public override void Shoot(Bullet bullet = null)
     {
         bullet.CriticalPercentage += Random.Range(-1f, 4f);
     }
@@ -73,7 +73,7 @@ public class EEENuclearShell : ElementSkill
     public override List<int> Elements => new List<int> { 4, 4, 4 };
     public override string SkillDescription => "EEE";
 
-    public override void Shoot()
+    public override void Shoot(Bullet bullet = null)
     {
         bullet.SputteringRange += bullet.GetTargetDistance() * 0.3f;
     }
@@ -123,7 +123,7 @@ public class AADMetalBullet : ElementSkill
     public override string SkillDescription => "AAD";
 
     private float attackIncreased;
-    public override void PreHit()
+    public override void PreHit(Bullet bullet = null)
     {
         if (bullet.isCritical)
         {
@@ -278,7 +278,7 @@ public class BBCPreciseStrike : ElementSkill
     public override List<int> Elements => new List<int> { 1, 1, 2 };
     public override string SkillDescription => "BBC";
 
-    public override void Hit(Enemy target)
+    public override void Hit(Enemy target,Bullet bullet = null)
     {
         float realDamage;
         float extraDamage = target.CurrentHealth * (target.IsBoss ? 0.01f : 0.04f);
@@ -294,7 +294,7 @@ public class BBDBirdShoot : ElementSkill
     public override string SkillDescription => "BBD";
 
     float criticalRateIncreased;
-    public override void Shoot()
+    public override void Shoot(Bullet bullet = null)
     {
         if (criticalRateIncreased > 1.99f)
             return;
@@ -318,7 +318,7 @@ public class BBETinyCannon : ElementSkill
         strategy.AllSpeedIntensifyModify += 1;
     }
 
-    public override void Shoot()
+    public override void Shoot(Bullet bullet = null)
     {
         bullet.CriticalRate = 0;
     }
@@ -329,7 +329,7 @@ public class BCDMoneyFactory : ElementSkill
     public override List<int> Elements => new List<int> { 1, 2, 3 };
     public override string SkillDescription => "BCD";
 
-    public override void Hit(Enemy target)
+    public override void Hit(Enemy target, Bullet bullet = null)
     {
         if (bullet.isCritical)
         {
@@ -440,7 +440,7 @@ public class CCDUnstableShaft : ElementSkill
     public override List<int> Elements => new List<int> { 2, 2, 3 };
     public override string SkillDescription => "CCD";
 
-    public override void Hit(Enemy target)
+    public override void Hit(Enemy target, Bullet bullet = null)
     {
         if (bullet.isCritical)
         {
@@ -459,7 +459,7 @@ public class CCEIceBomb : ElementSkill
         strategy.BaseTargetCountIntensify += 2;
     }
 
-    public override void Hit(Enemy target)
+    public override void Hit(Enemy target, Bullet bullet = null)
     {
         bullet.Damage *= 0.5f;
     }
@@ -499,7 +499,7 @@ public class DDASealedCannon : ElementSkill
     public override List<int> Elements => new List<int> { 3, 3, 0 };
     public override string SkillDescription => "DDA";
 
-    public override void PreHit()
+    public override void PreHit(Bullet bullet = null)
     {
         if (bullet.CriticalRate > 1)
         {
@@ -566,7 +566,7 @@ public class DDERemoteGuidence : ElementSkill
     public override List<int> Elements => new List<int> { 3, 3, 4 };
     public override string SkillDescription => "DDE";
 
-    public override void Shoot()
+    public override void Shoot(Bullet bullet = null)
     {
         if (bullet.GetTargetDistance() > 3f)
         {
@@ -581,7 +581,7 @@ public class EEAPowerfulSputtering : ElementSkill
     public override List<int> Elements => new List<int> { 4, 4, 0 };
     public override string SkillDescription => "EEA";
 
-    public override void Shoot()
+    public override void Shoot(Bullet bullet = null)
     {
         if (bullet.GetTargetDistance() < 3f)
         {
@@ -596,7 +596,7 @@ public class EEBHeatingBarrel : ElementSkill
     public override string SkillDescription => "EEB";
 
     float sputteringRangeIncreased;
-    public override void Shoot()
+    public override void Shoot(Bullet bullet = null)
     {
         if (sputteringRangeIncreased < 1.5f)
         {
@@ -647,7 +647,7 @@ public class EEDWantonBombing : ElementSkill
     public override List<int> Elements => new List<int> { 4, 4, 3 };
     public override string SkillDescription => "EED";
 
-    public override void PreHit()
+    public override void PreHit(Bullet bullet = null)
     {
         if (bullet.isCritical)
         {
