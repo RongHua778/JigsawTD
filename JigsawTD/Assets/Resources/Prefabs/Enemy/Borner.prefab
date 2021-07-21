@@ -19381,6 +19381,26 @@ PrefabInstance:
       propertyPath: InitialModule.startSize.scalar
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 19942868, guid: 2045260557cf4dc45b90334bc4653638, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 19967724, guid: 2045260557cf4dc45b90334bc4653638, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 19983368, guid: 2045260557cf4dc45b90334bc4653638, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19983368, guid: 2045260557cf4dc45b90334bc4653638, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 19983368, guid: 2045260557cf4dc45b90334bc4653638, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1288343251
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2045260557cf4dc45b90334bc4653638, type: 3}
 --- !u!4 &2658593951923576624 stripped

@@ -22,7 +22,7 @@ public class Armor : MonoBehaviour,IDamageable
             if (currentHealth <= 0)
             {
                 ReusableObject explosion = ObjectPool.Instance.Spawn(explosionPrefab);
-                Sound.Instance.PlayEffect(explosionClip, StaticData.Instance.EnvrionmentBaseVolume);
+                Sound.Instance.PlayEffect(explosionClip);
                 explosion.transform.position = transform.position;
                 DisArmor();
             }

@@ -177,7 +177,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
             if (frostTime <= 0)
             {
                 Activated = true;
-                ObjectPool.Instance.UnSpawn(m_FrostEffect);
+                m_FrostEffect.Broke();
                 m_FrostEffect = null;
             }
         }

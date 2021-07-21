@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2742209535472066695}
   - component: {fileID: 5648245433110678259}
   - component: {fileID: 6979043889180068788}
+  - component: {fileID: 1711010841078590731}
   m_Layer: 0
   m_Name: FrostEffect
   m_TagString: Untagged
@@ -70,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -513789213
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 3ba6e30266336f6449a0e45c669a11bc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -96,3 +97,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
+--- !u!95 &1711010841078590731
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913656234992200430}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 471e33ba0b9609d45b10ddb9733f1202, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

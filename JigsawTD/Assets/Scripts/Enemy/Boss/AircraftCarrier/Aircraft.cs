@@ -50,7 +50,7 @@ public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
             if (currentHealth <= 0&&!IsDie)
             {
                 ReusableObject explosion = ObjectPool.Instance.Spawn(explosionPrefab);
-                Sound.Instance.PlayEffect(explosionClip, StaticData.Instance.EnvrionmentBaseVolume);
+                Sound.Instance.PlayEffect(explosionClip);
                 explosion.transform.position = transform.position;
                 IsDie = true;
                 Reclaim();

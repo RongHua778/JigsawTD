@@ -51,7 +51,7 @@ public class AirAttacker : Aircraft
         frosteffect.UnspawnAfterTime(freezeTime);
         targetTurret.Frost(freezeTime);
         ReusableObject explosion = ObjectPool.Instance.Spawn(attackPrefab);
-        Sound.Instance.PlayEffect(explosionClip, StaticData.Instance.EnvrionmentBaseVolume);
+        Sound.Instance.PlayEffect(explosionClip);
         explosion.transform.position = targetTurret.transform.position;
         targetTurret = null;
     }

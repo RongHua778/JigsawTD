@@ -145,7 +145,7 @@ public abstract class Enemy : PathFollower, IDamageable
             }
             StopAllCoroutines();
             ReusableObject explosion = ObjectPool.Instance.Spawn(exlposionPrefab);
-            Sound.Instance.PlayEffect(explosionClip, StaticData.Instance.EnvrionmentBaseVolume);
+            Sound.Instance.PlayEffect(explosionClip);
             explosion.transform.position = model.transform.position;
             GameEvents.Instance.EnemyDie(this);
             ObjectPool.Instance.UnSpawn(this);

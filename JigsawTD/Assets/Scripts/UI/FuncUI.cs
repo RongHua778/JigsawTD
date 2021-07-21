@@ -49,7 +49,7 @@ public class FuncUI : IUserInterface
         set
         {
             drawRemain = value;
-            DrawBtnTxt.text = GameMultiLang.GetTraduction("DRAWMODULE") + "X" + drawRemain.ToString();
+            DrawBtnTxt.text = /*GameMultiLang.GetTraduction("DRAWMODULE")*/ "X" + drawRemain.ToString();
             //if (drawRemain <= 0)
             //{
             //    DrawBtnTxt.text = "³éÈ¡Ä£¿é(½ð±Ò" + buyShapeCost + ")";

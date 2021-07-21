@@ -4,7 +4,18 @@ using UnityEngine;
 
 public class Sound : Singleton<Sound>
 {
-
+    //音乐大小
+    public float BgVolume
+    {
+        get { return m_bgSound.volume; }
+        set { m_bgSound.volume = value; }
+    }
+    //音效大小
+    public float EffectVolume
+    {
+        get { return m_effectSound.volume; }
+        set { m_effectSound.volume = value; }
+    }
     private Dictionary<string, AudioClip> BGmusic;
     private Dictionary<string, AudioClip> EffectMusic;
 
@@ -16,12 +27,13 @@ public class Sound : Singleton<Sound>
     {
         base.Awake();
         InitializeMusicDIC();
-
+        
         m_bgSound = this.gameObject.AddComponent<AudioSource>();
         m_bgSound.playOnAwake = false;
         m_bgSound.loop = true;
 
         m_effectSound = this.gameObject.AddComponent<AudioSource>();
+        EffectVolume = 0.5f;
     }
 
     private void InitializeMusicDIC()
@@ -42,18 +54,7 @@ public class Sound : Singleton<Sound>
         }
     }
 
-    //音乐大小
-    public float BgVolume
-    {
-        get { return m_bgSound.volume; }
-        set { m_bgSound.volume = value; }
-    }
-    //音效大小
-    public float EffectVolume
-    {
-        get { return m_effectSound.volume; }
-        set { m_effectSound.volume = value; }
-    }
+
 
     //播放音乐
     public void PlayBg(string audioName)
@@ -119,9 +120,9 @@ public class Sound : Singleton<Sound>
 
     }
 
-    public void PlayEffect(AudioClip clip, float volume = 1)
+    public void PlayEffect(AudioClip clip)
     {
-        m_effectSound.volume = volume;
+        //m_effectSound.volume = volume;
         m_effectSound.PlayOneShot(clip, 0.5f);
     }
 

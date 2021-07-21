@@ -13,7 +13,7 @@ public class BornSkill : Skill
     int form;
     float castleCounter;
 
-    public BornSkill(Enemy enemy,float[] bornCD,int[] enemyOneBorn, int form)
+    public BornSkill(Enemy enemy, float[] bornCD, int[] enemyOneBorn, int form)
     {
         this.enemy = enemy;
         this.bornCD = bornCD;
@@ -73,8 +73,9 @@ public class BornSkill : Skill
             form = 1;
             castleCounter = 0;
             enemy.Anim.SetBool("Transform", true);
+            Sound.Instance.PlayEffect("Sound_BornerTransform");
         }
-        if (enemy.CurrentHealth / enemy.MaxHealth<= 0.3f&&form==1)
+        if (enemy.CurrentHealth / enemy.MaxHealth <= 0.3f && form == 1)
         {
             enemy.DamageIntensify = -0.8f;
             level = 1;
@@ -82,16 +83,19 @@ public class BornSkill : Skill
             form = 0;
             castleCounter = 0;
             enemy.Anim.SetBool("Transform", true);
+            Sound.Instance.PlayEffect("Sound_BornerTransform");
 
         }
 
         castleCounter += Time.deltaTime;
 
-        if (castleCounter > 6f)
+        if (castleCounter > 6f && level != 0)
         {
             enemy.DamageIntensify = 0f;
             level = 0;
             enemy.Anim.SetBool("Transform", false);
+            Sound.Instance.PlayEffect("Sound_BornerTransform");
+
         }
 
     }
