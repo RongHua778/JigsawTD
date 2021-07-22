@@ -43,7 +43,7 @@ public class BlinkSkill : Skill
     void Blink()
     {
         AnimatorStateInfo stateinfo = enemy.Anim.GetCurrentAnimatorStateInfo(0);
-        if (stateinfo.normalizedTime >= 0.98f&&stateinfo.normalizedTime<=1f)
+        if (stateinfo.normalizedTime >= 0.98f/*&&stateinfo.normalizedTime<=1f*/)
         {
             enemy.PointIndex += 4;
 
@@ -84,7 +84,6 @@ public class BlinkSkill : Skill
             SpawnHoleOnPos(enemy.transform.position);
             SpawnHoleOnPos(targetPos);
             enemy.Anim.Play("Exit");
-            AnimatorStateInfo stateinfo = enemy.Anim.GetCurrentAnimatorStateInfo(0);
             enemy.StunTime += 0.5f;
             transfering = true;
         }

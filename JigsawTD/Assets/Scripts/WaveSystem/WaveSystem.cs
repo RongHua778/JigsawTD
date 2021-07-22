@@ -136,7 +136,7 @@ public class WaveSystem : IGameSystem
             }
             if (i > 39)
             {
-                int number = 2;
+                float number = 0.5f;
                 stage += ((i / 10) + 1) * LevelAttribute.LevelIntensify * number;
             }
             //if (difficulty < 5)
@@ -178,7 +178,7 @@ public class WaveSystem : IGameSystem
             }
 
             // }
-            //sequences = GenerateSpecificSequence(EnemyType.Tanker, 100f, i);
+            sequences = GenerateSpecificSequence(EnemyType.Blinker, 3f, i);
 
             LevelSequence.Add(sequences);
         }

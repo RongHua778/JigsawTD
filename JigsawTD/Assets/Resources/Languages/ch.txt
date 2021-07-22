@@ -44,7 +44,7 @@ NOENOUGHDRAW=抽取次数不足
 //guidevideo
 PLACERULE=摆放规则
 PLANROUTE=规划路线
-COMPOSITERULE=合成规划
+COMPOSITERULE=合成规则
 GUIDEVIDEO01=每个模块由三格基本格和一格防御塔组成。放置模块时需要确保起点和终点之间能够通过基本格相连，而防御塔可以作为障碍。
 GUIDEVIDEO02=注意：防御塔只可以放置在空格或基本格上，而基本格可以放置在任何位置。
 GUIDEVIDEO03=当希望延长路线时，需要提前在规划好的路线上摆放基本格，然后利用防御塔作为障碍延长路线。
