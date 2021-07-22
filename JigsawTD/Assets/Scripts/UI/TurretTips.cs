@@ -109,7 +109,7 @@ public class TurretTips : TileTips
                 if (((StrategyComposite)Strategy).TileSkill != null)
                 {
                     TileSkillArea.SetActive(true);
-                    TileSkillTxt.text = ((StrategyComposite)Strategy).TileSkill.SkillDescription;
+                    TileSkillTxt.text = GameMultiLang.GetTraduction(((StrategyComposite)Strategy).TileSkill.SkillDescription);
                 }
 
                 break;

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class WaveSystem : IGameSystem
 {
@@ -30,9 +31,6 @@ public class WaveSystem : IGameSystem
     private EnemyFactory _enemyFactory;
 
     public List<List<EnemySequence>> LevelSequence = new List<List<EnemySequence>>();
-
-    //private List<int[]> BossLevels;
-
     LevelAttribute LevelAttribute;
     [SerializeField] private List<EnemySequence> runningSequence;
     public List<EnemySequence> RunningSequence { get => runningSequence; set => runningSequence = value; }
@@ -43,15 +41,6 @@ public class WaveSystem : IGameSystem
         base.Initialize(gameManager);
         LevelAttribute = LevelManager.Instance.CurrentLevel;
         this._enemyFactory = gameManager.EnemyFactory;
-        //BossLevels = new List<int[]>();
-        ////关卡1的boss关
-        //BossLevels.Add(new int[] { 9, 19, 29, 39 });
-        ////关卡2的boss关
-        //BossLevels.Add(new int[] { 9, 19, 29, 39 });
-        ////关卡3的boss关
-        //BossLevels.Add(new int[] { 9, 19, 29, 39 });
-        ////关卡4的boss关
-        //BossLevels.Add(new int[] { 9, 19, 29, 39 });
         LevelInitialize();
         GameEvents.Instance.onEnemyReach += EnemyReach;
         GameEvents.Instance.onEnemyDie += EnemyDie;
@@ -145,6 +134,11 @@ public class WaveSystem : IGameSystem
             {
                 stage += ((i / 10) + 1) * LevelAttribute.LevelIntensify;
             }
+            if (i > 39)
+            {
+                int number = 2;
+                stage += ((i / 10) + 1) * LevelAttribute.LevelIntensify * number;
+            }
             //if (difficulty < 5)
             //{
 
@@ -184,7 +178,7 @@ public class WaveSystem : IGameSystem
             }
 
             // }
-            sequences = GenerateSpecificSequence(EnemyType.Tanker, 100f, i);
+            //sequences = GenerateSpecificSequence(EnemyType.Tanker, 100f, i);
 
             LevelSequence.Add(sequences);
         }
@@ -228,7 +222,7 @@ public class WaveSystem : IGameSystem
     {
         if (LevelSequence.Count > 0)
         {
-            RunningSequence = LevelSequence[0];
+            RunningSequence = LevelSequence[0].ToList();
         }
         else
         {

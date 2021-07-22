@@ -69,14 +69,14 @@ public abstract class StrategyBase
     #region 所有加成二次修正
     private float allAttackIntensifyModify = 1;
     private float allSpeedIntensifyModify = 1;
-    private float baseCriticalRateIntensifyModify = 1;
+    private float allCriticalIntensifyModify = 1;
     private float baseSputteringRangeIntensifyModify = 1;
     private float baseSputteringPercentageIntensifyModify = 1;
     private float baseSlowRateIntensifyModify = 1;
     private float baseCriticalPercentageIntensifyModify = 1;
     public float AllAttackIntensifyModify { get => allAttackIntensifyModify; set => allAttackIntensifyModify = value; }
     public float AllSpeedIntensifyModify { get => allSpeedIntensifyModify; set => allSpeedIntensifyModify = value; }
-    public float BaseCriticalRateIntensifyModify { get => baseCriticalRateIntensifyModify; set => baseCriticalRateIntensifyModify = value; }
+    public float AllCriticalIntensifyModify { get => allCriticalIntensifyModify; set => allCriticalIntensifyModify = value; }
     public float BaseSputteringRangeIntensifyModify { get => baseSputteringRangeIntensifyModify; set => baseSputteringRangeIntensifyModify = value; }
     public float BaseSputteringPercentageIntensifyModify { get => baseSputteringPercentageIntensifyModify; set => baseSputteringPercentageIntensifyModify = value; }
     public float BaseSlowRateIntensifyModify { get => baseSlowRateIntensifyModify; set => baseSlowRateIntensifyModify = value; }
@@ -89,7 +89,7 @@ public abstract class StrategyBase
     public float BaseAttack { get => InitAttack * (1 + BaseAttackIntensify * AllAttackIntensifyModify); }
     public float BaseSpeed { get => InitSpeed * (1 + BaseSpeedIntensify * AllSpeedIntensifyModify); }
     public int BaseRange { get => InitRange + BaseRangeIntensify; }
-    public float BaseCriticalRate { get => InitCriticalRate + BaseCriticalRateIntensify * BaseCriticalRateIntensifyModify; }
+    public float BaseCriticalRate { get => InitCriticalRate + BaseCriticalRateIntensify * AllCriticalIntensifyModify; }
     public float BaseCriticalPercentage { get => initCriticalPercentage + BaseCriticalPercentageIntensify * BaseCriticalPercentageIntensifyModify; }
     public float BaseSputteringRange { get => InitSputteringRange + BaseSputteringRangeIntensify * BaseSputteringRangeIntensifyModify; }
     public float BaseSputteringPercentage { get => initSputteringPercentage + BaseSputteringPercentageIntensify * BaseSputteringPercentageIntensifyModify; }
@@ -100,7 +100,7 @@ public abstract class StrategyBase
     public float FinalAttack { get => BaseAttack * (1 + (TurnAttackIntensify - 1) * AllAttackIntensifyModify) + TurnFixAttack * AllAttackIntensifyModify; }
     public float FinalSpeed { get => BaseSpeed * (1 + (TurnSpeedIntensify - 1) * AllSpeedIntensifyModify) + TurnFixSpeed * AllSpeedIntensifyModify; }
     public int FinalRange { get => BaseRange + TurnFixRange; }
-    public float FinalCriticalRate { get => BaseCriticalRate * TurnCriticalRateIntensify + TurnFixCriticalRate; }
+    public float FinalCriticalRate { get => BaseCriticalRate * (1 + (TurnCriticalRateIntensify - 1) * AllCriticalIntensifyModify) + TurnFixCriticalRate * AllCriticalIntensifyModify; }
     public float FinalCriticalPercentage { get => (BaseCriticalPercentage + FinalCriticalRate) * TurnCriticalRateIntensify + TurnFixCriticalPercentage; }
     public float FinalSputteringRange { get => BaseSputteringRange * TurnSputteringRangeIntensify + TurnFixSputteringRange; }
     public float FinalSputteringPercentage { get => BaseSputteringPercentage * TurnSputteringPercentageIntensify + TurnFixSputteringPercentage; }
@@ -197,7 +197,7 @@ public abstract class StrategyBase
         //基础加成二次修正
         AllAttackIntensifyModify = 1;
         AllSpeedIntensifyModify = 1;
-        BaseCriticalRateIntensifyModify = 1;
+        AllCriticalIntensifyModify = 1;
         BaseCriticalPercentageIntensifyModify = 1;
         BaseSputteringRangeIntensifyModify = 1;
         BaseSputteringPercentageIntensifyModify = 1;

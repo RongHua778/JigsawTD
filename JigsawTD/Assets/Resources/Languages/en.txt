@@ -270,11 +270,11 @@ CRITICALBASE=Critical Base
 SPUTTERINGBASE=Splash Base
 SLOWBASE=Slow Base
 
-ATTACKBASEINFO=Only Composite Tuttet can be placed: The benefit to Element A is doubled.
-SPEEDBASEINFO=Only Composite Tuttet can be placed: The benefit to Element B is doubled.
-CRITICALBASEINFO=Only Composite Tuttet can be placed: The benefit to Element D is doubled.
-SPUTTERINGBASEINFO=Only Composite Tuttet can be placed: The benefit to Element E is doubled.
-SLOWBASEINFO=Only Composite Tuttet can be placed: The benefit to Element C is doubled.
+ATTACKBASEINFO=Attack Base: Only Composite Tuttet can be placed, double all attack increased.
+SPEEDBASEINFO=Firerate Base: Only Composite Tuttet can be placed, double all firerate increased.
+CRITICALBASEINFO=Critical Base: Only Composite Tuttet can be placed, double all critical increased.
+SPUTTERINGBASEINFO=Splash Base: Only Composite Tuttet can be placed, splash+1.
+SLOWBASEINFO=Slow Base: Only Composite Tuttet can be placed, slow+1.
 
 //Guide
 GuideName=Kant

@@ -37,7 +37,7 @@ public class GameMultiLang : MonoBehaviour
 		Fields.Clear ();
 
 		string lang = PlayerPrefs.GetString ("_language", defaultLang);
-
+		PlayerPrefs.SetString("_language", defaultLang);
 
 		if (PlayerPrefs.GetInt ("_language_index", -1) == -1)
 			PlayerPrefs.SetInt ("_language_index", 0);

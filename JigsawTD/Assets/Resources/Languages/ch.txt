@@ -271,11 +271,11 @@ CRITICALBASE=暴击基座
 SPUTTERINGBASE=溅射基座
 SLOWBASE=减速基座
 
-ATTACKBASEINFO=只可放置合成塔：A元素加成效果翻倍。
-SPEEDBASEINFO=只可放置合成塔：B元素加成效果翻倍。
-CRITICALBASEINFO=只可放置合成塔：D元素加成效果翻倍。
-SPUTTERINGBASEINFO=只可放置合成塔：E元素加成效果翻倍。
-SLOWBASEINFO=只可放置合成塔：C元素加成效果翻倍。
+ATTACKBASEINFO=攻击基座：只可放置合成塔，所有攻击加成效果翻倍
+SPEEDBASEINFO=攻速基座：只可放置合成塔，所有攻速加成翻倍
+CRITICALBASEINFO=暴击基座：只可放置合成塔，所有暴击加成翻倍
+SPUTTERINGBASEINFO=溅射基座：只可放置合成塔，溅射+1
+SLOWBASEINFO=减速基座：只可放置合成塔，减速+1
 
 //Guide
 GuideName=康德

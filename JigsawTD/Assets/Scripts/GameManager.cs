@@ -447,7 +447,7 @@ public class GameManager : Singleton<GameManager>
     public void ShowEnemyTips()
     {
         m_EnemyTips.Show();
-        m_EnemyTips.ReadSequenceInfo(m_WaveSystem.RunningSequence);
+        m_EnemyTips.ReadSequenceInfo(m_WaveSystem.LevelSequence[0]);
     }
 
     public void ShowTurretBaseTips(TurretBaseContent content)
