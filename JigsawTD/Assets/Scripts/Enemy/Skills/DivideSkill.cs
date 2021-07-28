@@ -37,13 +37,13 @@ public class DivideSkill : Skill
         divider.dividing = dividing - 1;
         divider.EnemySkills.Clear();
         divider.EnemySkills.Add(GameManager.Instance.SkillFactory.GetDividerSkill(divider, divider.dividing));
-        divider.EnemySprite.sprite = dividerSprites[divider.dividing - 1];
+        //divider.EnemySprite.sprite = dividerSprites[divider.dividing - 1];
         //divider.StartCoroutine(SetSprite(divider, dividerSprites[divider.dividing - 1]));
         //Debug.Log("Dividing=" + (divider.dividing - 1));
         //Debug.Log(dividerSprites[divider.dividing - 1].name);
         divider.Progress = Mathf.Clamp((this.enemy.Progress + Random.Range(-0.2f, 0.2f)), 0, 1);
         divider.MaxHealth = this.enemy.MaxHealth / 2;
-        divider.enemyCol.radius = 0.4f - 0.1f * (3 - divider.dividing);
+        //divider.enemyCol.radius = 0.4f - 0.1f * (3 - divider.dividing);
         //enemy.dividing = dividing;
         //enemy.enemySprite.sprite = dividerSprites[enemy.dividing];
         //enemy.MaxHealth = this.enemy.MaxHealth / 2;

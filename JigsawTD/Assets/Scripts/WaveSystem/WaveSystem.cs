@@ -7,10 +7,9 @@ using System.Linq;
 
 public class WaveSystem : IGameSystem
 {
-    public float waveStage = 1f;
+    [SerializeField] EnemyType TestType = default;
     public bool Running = false;
     int enemyRemain = 0;
-
     public int EnemyRemain
     {
         get => enemyRemain;
@@ -25,22 +24,17 @@ public class WaveSystem : IGameSystem
             }
         }
     }
-    [SerializeField]
-    float pathOffset = 0.3f;
+    [SerializeField] float pathOffset = 0.3f;
     [SerializeField] HealthBar healthBarPrefab = default;
-    private EnemyFactory _enemyFactory;
-
     public List<List<EnemySequence>> LevelSequence = new List<List<EnemySequence>>();
     LevelAttribute LevelAttribute;
     [SerializeField] private List<EnemySequence> runningSequence;
     public List<EnemySequence> RunningSequence { get => runningSequence; set => runningSequence = value; }
-    public HealthBar HealthBarPrefab { get => healthBarPrefab; set => healthBarPrefab = value; }
 
     public override void Initialize(GameManager gameManager)
     {
         base.Initialize(gameManager);
         LevelAttribute = LevelManager.Instance.CurrentLevel;
-        this._enemyFactory = gameManager.EnemyFactory;
         LevelInitialize();
         GameEvents.Instance.onEnemyReach += EnemyReach;
         GameEvents.Instance.onEnemyDie += EnemyDie;
@@ -84,65 +78,21 @@ public class WaveSystem : IGameSystem
     public void LevelInitialize()
     {
         LevelSequence.Clear();
-        //int difficulty = Game.Instance.Difficulty;
-        float stage = waveStage;
+        float stage = 1;
         List<EnemySequence> sequences = null;
         for (int i = 0; i < StaticData.Instance.LevelMaxWave; i++)
         {
-            //switch (difficulty)
-            //{
-            //    case 1:
-            //        if (i % 3 == 0)
-            //        {
-            //            if (i < 8) stage += 0.5f;
-            //            if (i < 15) stage += 0.75f;
-            //            else if (i >= 15 && i < 22) stage += 1.25f;
-            //            else if (i >= 22) stage += 1.75f;
-            //        }
-            //        break;
-            //    //简单难度
-            //    case 2:
-            //        if (i % 3 == 0)
-            //        {
-            //            if (i < 10) stage += 0.75f;
-            //            else if (i >= 10 && i < 20) stage += 1.5f;
-            //            else if (i >= 20) stage += 2.25f;
-            //        }
-            //        break;
-            //    //普通难度
-            //    case 3:
-            //        if (i % 3 == 0)
-            //        {
-            //            if (i < 10) stage += 1.5f;
-            //            else if (i >= 10 && i < 20) stage += 2.5f;
-            //            else if (i >= 20 && i < 30) stage += 4f;
-            //            else if (i >= 30) stage += 5f;
-            //        }
-            //        break;
-            //    //专家难度
-            //    case 4:
-            //        if (i % 2 == 0)
-            //        {
-            //            stage += ((i / 10) + 1) * LevelAttribute.LevelIntensify;
-            //        }
-            //        break;
-            //    default:
-            //        //Debug.LogAssertion("难度参数错误");
-            //        break;
-            //}
+            
             if (i % 3 == 0)
             {
                 stage += ((i / 10) + 1) * LevelAttribute.LevelIntensify;
             }
             if (i > 39)
             {
-                float number = 0.5f;
+                float number = 2f;
                 stage += ((i / 10) + 1) * LevelAttribute.LevelIntensify * number;
             }
-            //if (difficulty < 5)
-            //{
 
-            //前三波难度修正
             if (i < 3)
             {
                 stage = (i + 1) * 0.5f;
@@ -177,9 +127,10 @@ public class WaveSystem : IGameSystem
                 sequences = GenerateRandomSequence(1, stage, i);
             }
 
-            // }
-            sequences = GenerateSpecificSequence(EnemyType.Blinker, 3f, i);
-
+            if (TestType != EnemyType.None)//测试特定敌人用
+            {
+                sequences = GenerateSpecificSequence(TestType, 3f, i);
+            }
             LevelSequence.Add(sequences);
         }
     }
@@ -209,7 +160,7 @@ public class WaveSystem : IGameSystem
 
     private EnemySequence SequenceInfoSet(int genres, float stage, int wave, EnemyType type)
     {
-        EnemyAttribute attribute = _enemyFactory.Get(type);
+        EnemyAttribute attribute = GameManager.Instance.EnemyFactory.Get(type);
         float intensify = stage * (0.5f * wave + 1);
         int amount = Mathf.RoundToInt(attribute.InitCount + ((float)wave / 5) * (float)attribute.CountIncrease / genres);
         float coolDown = (float)(5f + wave / 2) / (float)amount;
@@ -236,7 +187,7 @@ public class WaveSystem : IGameSystem
         EnemyRemain++;
         //float intensify = RunningSequence.Intensify;
         Enemy enemy = ObjectPool.Instance.Spawn(attribute.Prefab) as Enemy;
-        HealthBar healthBar = ObjectPool.Instance.Spawn(HealthBarPrefab) as HealthBar;
+        HealthBar healthBar = ObjectPool.Instance.Spawn(healthBarPrefab) as HealthBar;
         enemy.Initialize(attribute, UnityEngine.Random.Range(-pathOffset, pathOffset), healthBar, intensify);
         enemy.SpawnOn(pathIndex, board.shortestPoints);
         GameManager.Instance.enemies.Add(enemy);

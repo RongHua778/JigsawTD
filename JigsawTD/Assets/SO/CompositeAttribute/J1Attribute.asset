@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
+  m_Name: J1Attribute
+  m_EditorClassIdentifier: 
+  Name: J1
+  Icon: {fileID: 0}
+  Description: 
+  ContentPrefab: {fileID: 1494963813994468761, guid: 05869ddac62aff043bf7e0106d00bc2e, type: 3}
+  RangeType: 1
+  element: 0
+  Bullet: {fileID: 3228400359097999329, guid: 8cff4d87089bb6d43bd9304c1e2efd03, type: 3}
+  BulletSpeed: 14
+  ShootSound: {fileID: 8300000, guid: d219934a001042144970c13012229363, type: 3}
+  Rare: 3
+  totalLevel: 12
+  elementNumber: 3
+  TurretSkill: 0
+  TurretLevels:
+  - AttackRange: 7
+    ForbidRange: 0
+    AttackDamage: 500
+    AttackSpeed: 0.35
+    SputteringRange: 0
+    CriticalRate: 0
+    SlowRate: 0
+    TurretName: J1
+    TurretIcon: {fileID: -6734541021382769069, guid: c1be13963e61eae42b02687dd1475717, type: 3}
+    CannonSprite: {fileID: -5442612025329375428, guid: 42957127c2e7aba48a21a85a636cb609, type: 3}
+    ShootPointOffset: {x: 0, y: 0.29}
+  - AttackRange: 7
+    ForbidRange: 0
+    AttackDamage: 750
+    AttackSpeed: 0.35
+    SputteringRange: 0
+    CriticalRate: 0
+    SlowRate: 0
+    TurretName: J2
+    TurretIcon: {fileID: -7260088481118571112, guid: c1be13963e61eae42b02687dd1475717, type: 3}
+    CannonSprite: {fileID: -2004675633971898, guid: 42957127c2e7aba48a21a85a636cb609, type: 3}
+    ShootPointOffset: {x: 0, y: 0.37}
+  - AttackRange: 7
+    ForbidRange: 0
+    AttackDamage: 1300
+    AttackSpeed: 0.35
+    SputteringRange: 0
+    CriticalRate: 0
+    SlowRate: 0
+    TurretName: J3
+    TurretIcon: {fileID: -1944259913073176082, guid: c1be13963e61eae42b02687dd1475717, type: 3}
+    CannonSprite: {fileID: 5670319644688947614, guid: 42957127c2e7aba48a21a85a636cb609, type: 3}
+    ShootPointOffset: {x: 0, y: 0.38}

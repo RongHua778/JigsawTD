@@ -4,10 +4,11 @@ using UnityEngine;
 
 public enum EnemyType
 {
-    Soilder, Runner, Restorer, Tanker,  Healer, Froster,
-    Fat, SixArmor, Divider,Blinker,
-    Ninja,  Borner, Armorer,
-    Random, AircraftCarrier,StrongerAircraftCarrier
+    Soilder, Runner, Restorer, Tanker, Healer, Froster,
+    Fat, SixArmor, Divider, Blinker,
+    Ninja, Borner, Armorer,
+    Random, AircraftCarrier, StrongerAircraftCarrier
+        , None
 }
 [CreateAssetMenu(menuName = "Factory/EnemyFactory", fileName = "EnemyFactory")]
 public class EnemyFactory : ScriptableObject
@@ -31,18 +32,8 @@ public class EnemyFactory : ScriptableObject
         }
         Debug.Log("使用了未定义的敌人类型");
         return null;
-        //if (EnemyDIC.ContainsKey(type))
-        //{
-        //    instance = CreateInstance(EnemyDIC[type].gameObject).GetComponent<Enemy>();
-        //    HealthBar healthInstance = CreateInstance(healthBarPrefab.gameObject).GetComponent<HealthBar>();
-        //    instance.Initialize(Random.Range(-pathOffset, pathOffset), healthInstance);
-        //}
-        //else
-        //{
-        //    Debug.LogWarning("使用了未定义的敌人类型");
-        //}
     }
 
-  
+
 
 }

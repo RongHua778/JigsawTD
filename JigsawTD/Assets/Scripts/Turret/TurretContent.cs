@@ -58,7 +58,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     {
         rangeIndicators = new List<RangeIndicator>();
         currentRangetors = new List<RangeIndicator>();
-        rangeIndicator = Resources.Load<RangeIndicator>("Prefabs/RangeIndicator");
+        rangeIndicator = Resources.Load<RangeIndicator>("Prefabs/Other/RangeIndicator");
         rangeParent = transform.Find("TurretRangeCol");
         detectCollider = rangeParent.GetComponent<Collider2D>();
         rotTrans = transform.Find("RotPoint");

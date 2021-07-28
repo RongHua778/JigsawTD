@@ -34,7 +34,7 @@ public class Divider : Enemy
 
     private void LateUpdate()
     {
-        EnemySprite.sprite = DividerSprites[dividing];
+        enemySprite.sprite = DividerSprites[dividing];
     }
     private void SpawnEnemy()
     {

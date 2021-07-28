@@ -16,7 +16,7 @@ public class TaskFactory : GameObjectFactory
     WaveSystem ws;
     public void InitializeFactory()
     {
-        ws = GameManager.Instance.WaveSystem;
+        //ws = GameManager.Instance.WaveSystem;
     }
     public Task GetTask(TaskDifficulty difficulty,int periods,EnemyType enemyType,int rewardMoney)
     {

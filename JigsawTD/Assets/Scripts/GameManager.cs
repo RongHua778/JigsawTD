@@ -11,8 +11,6 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private BoardSystem m_BoardSystem = default;//版图系统
     [SerializeField] private WaveSystem m_WaveSystem = default;//波次系统
     [SerializeField] private ScaleAndMove m_CamControl = default;//摄像机控制系统
-    public WaveSystem WaveSystem { get => m_WaveSystem; set => m_WaveSystem = value; }
-    public BoardSystem BoardSystem { get => m_BoardSystem; set => m_BoardSystem = value; }
 
     [Header("UI")]
     [SerializeField] private BluePrintShopUI m_BluePrintShopUI = default;
@@ -23,7 +21,6 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameEndUI m_GameEndUI = default;
     [SerializeField] private MessageUI m_MessageUI = default;
     [SerializeField] private GuideVideo m_GuideVideo = default;
-    public MainUI MainUI { get => m_MainUI; set => m_MainUI = value; }
 
 
     [Header("TIPS")]
@@ -84,12 +81,12 @@ public class GameManager : Singleton<GameManager>
         //初始化系统
         m_BoardSystem.Initialize(this);//版图系统
         m_WaveSystem.Initialize(this);//波次系统
-        m_CamControl.Initialize(this, MainUI);//摄像机控制
+        m_CamControl.Initialize(this, m_MainUI);//摄像机控制
 
         //初始化UI
-        MainUI.Initialize(this);//主界面顶部UI
+        m_MainUI.Initialize(this);//主界面顶部UI
         m_FuncUI.Initialize(this);//主界面功能UI
-        m_GuideUI.Initialize(this, m_FuncUI, MainUI, m_BluePrintShopUI);//教学系统UI
+        m_GuideUI.Initialize(this, m_FuncUI, m_MainUI, m_BluePrintShopUI);//教学系统UI
         m_BluePrintShopUI.Initialize(this);//配方系统UI
         m_ShapeSelectUI.Initialize(this);//抽模块UI
         m_GameEndUI.Initialize(this);//游戏结束UI
@@ -102,9 +99,11 @@ public class GameManager : Singleton<GameManager>
         m_TurretBaseTips.Initialize(this);//基座tips
 
         //设置操作流程
-        buildingState = new BuildingState(this, BoardSystem);
-        waveState = new WaveState(this, WaveSystem);
+        buildingState = new BuildingState(this, m_BoardSystem);
+        waveState = new WaveState(this, m_WaveSystem);
         pickingState = new PickingState(this);
+
+        //开局准备下一波
         PrepareNextWave();
 
         //初始化商店
@@ -113,8 +112,8 @@ public class GameManager : Singleton<GameManager>
         if (Game.Instance.Tutorial)
         {
             m_FuncUI.PrepareForGuide();
-            MainUI.PrepareForGuide();
-            m_BluePrintShopUI.ShopBtnObj.SetActive(false);
+            m_MainUI.PrepareForGuide();
+            m_BluePrintShopUI.PrepareForGuide();
             m_GuideUI.Show();
             TriggerGuide(0);
         }
@@ -128,11 +127,11 @@ public class GameManager : Singleton<GameManager>
     //释放游戏系统
     public void Release()
     {
-        BoardSystem.Release();
-        WaveSystem.Release();
+        m_BoardSystem.Release();
+        m_WaveSystem.Release();
         m_CamControl.Release();
 
-        MainUI.Release();
+        m_MainUI.Release();
         m_FuncUI.Release();
         m_GuideUI.Release();
         m_BluePrintShopUI.Release();
@@ -151,8 +150,8 @@ public class GameManager : Singleton<GameManager>
     public void GameUpdate()
     {
         m_CamControl.GameUpdate();
-        BoardSystem.GameUpdate();
-        WaveSystem.GameUpdate();
+        m_BoardSystem.GameUpdate();
+        m_WaveSystem.GameUpdate();
         enemies.GameUpdate();
         Physics2D.SyncTransforms();
         elementTurrets.GameUpdate();
@@ -169,15 +168,15 @@ public class GameManager : Singleton<GameManager>
             return;
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            MainUI.GameSpeed = 1;
+            m_MainUI.GameSpeed = 1;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            MainUI.GameSpeed = 2;
+            m_MainUI.GameSpeed = 2;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            MainUI.GameSpeed = 3;
+            m_MainUI.GameSpeed = 3;
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
@@ -195,7 +194,6 @@ public class GameManager : Singleton<GameManager>
     {
         if (OperationState.StateName == StateName.BuildingState)
         {
-            //WaveSystem.EnemyRemain = WaveSystem.RunningSequence.index.Count;
             m_FuncUI.Hide();
             TransitionToState(StateName.WaveState);
             foreach (var turret in compositeTurrets.behaviors)
@@ -208,17 +206,16 @@ public class GameManager : Singleton<GameManager>
     }
     public void PrepareNextWave()
     {
-        if (MainUI.Life <= 0)//游戏失败
+        if (m_MainUI.Life <= 0)//游戏失败
         {
             return;
         }
         TransitionToState(StateName.BuildingState);
 
-        WaveSystem.GetSequence();
+        m_WaveSystem.GetSequence();
         m_BluePrintShopUI.NextRefreshTrun--;
-        MainUI.PrepareNextWave(WaveSystem.RunningSequence);
+        m_MainUI.PrepareNextWave(m_WaveSystem.RunningSequence);
         m_FuncUI.PrepareNextWave();
-        m_FuncUI.Show();
 
         TriggerGuide(6);
         TriggerGuide(7);
@@ -271,9 +268,6 @@ public class GameManager : Singleton<GameManager>
             operationState = state;
         }
     }
-
-
-
     #endregion
 
     #region 形状控制
@@ -281,14 +275,12 @@ public class GameManager : Singleton<GameManager>
     {
         TransitionToState(StateName.PickingState);
         m_FuncUI.Hide();
-        m_ShapeSelectUI.Show();
         m_ShapeSelectUI.ShowThreeShapes(m_FuncUI.PlayerLevel);
     }
 
     public void SelectShape()//选择了一个模块
     {
         m_ShapeSelectUI.ClearAllSelections();
-        m_ShapeSelectUI.Hide();
     }
 
     public void ConfirmShape()//放下了一个模块
@@ -297,7 +289,6 @@ public class GameManager : Singleton<GameManager>
 
         m_FuncUI.Show();
         m_BluePrintShopUI.CheckAllBluePrint();
-
     }
 
     public void CompositeShape(BluePrintGrid grid)//合成了一个防御塔
@@ -325,8 +316,6 @@ public class GameManager : Singleton<GameManager>
 
     }
 
-
-
     public void PreviewComposition(bool value, Element element = Element.Dust, int quality = 1)
     {
         m_BluePrintShopUI.PreviewComposition(value, element, quality);
@@ -337,7 +326,7 @@ public class GameManager : Singleton<GameManager>
 
     public bool ConsumeMoney(int cost)
     {
-        return MainUI.ConsumeMoney(cost);
+        return m_MainUI.ConsumeMoney(cost);
     }
 
     public void ShowMessage(string text)
@@ -347,7 +336,7 @@ public class GameManager : Singleton<GameManager>
 
     public void GainMoney(int amount)
     {
-        MainUI.Coin += (int)(amount * (1 + StaticData.OverallMoneyIntensify));
+        m_MainUI.Coin += (int)(amount * (1 + StaticData.OverallMoneyIntensify));
     }
 
     public void GainDraw(int amount)
@@ -357,7 +346,7 @@ public class GameManager : Singleton<GameManager>
 
     public Enemy SpawnEnemy(EnemyType type, int pathIndex, float intensify)
     {
-        return WaveSystem.SpawnEnemy(BoardSystem, EnemyFactory.Get(type), pathIndex, intensify);
+        return m_WaveSystem.SpawnEnemy(m_BoardSystem, EnemyFactory.Get(type), pathIndex, intensify);
     }
 
     public void RefreshShop(int cost)
@@ -402,7 +391,19 @@ public class GameManager : Singleton<GameManager>
     {
         m_BluePrintShopUI.ShopCapacity++;
     }
+    public void GetPerfectElement(int count)
+    {
+        StaticData.PerfectElementCount += count;
+        m_BluePrintShopUI.SetPerfectElementCount(StaticData.PerfectElementCount);
+    }
 
+    public void CheckDetectSkill()
+    {
+        foreach (var turret in compositeTurrets.behaviors)
+        {
+            ((StrategyComposite)(((TurretContent)turret).Strategy)).LandedTurretSkill();
+        }
+    }
     #endregion
 
     #region TIPS
@@ -473,18 +474,7 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region 待加入功能
-    public void GetPerfectElement(int count)
-    {
-        StaticData.PerfectElementCount += count;
-        m_BluePrintShopUI.SetPerfectElementCount(StaticData.PerfectElementCount);
-    }
 
-    public void CheckDetectSkill()
-    {
-        foreach (var turret in compositeTurrets.behaviors)
-        {
-            ((StrategyComposite)(((TurretContent)turret).Strategy)).LandedTurretSkill();
-        }
-    }
+
     #endregion
 }

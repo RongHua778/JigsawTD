@@ -19,12 +19,12 @@ public class MainUI : IUserInterface
     [SerializeField] GuideBook m_GuideBook = default;
 
 
-    [SerializeField] Text[] taskTexts = default;
-    [SerializeField] Button[] taskButtons = default;
+    //[SerializeField] Text[] taskTexts = default;
+    //[SerializeField] Button[] taskButtons = default;
 
-    List<Task> tasksInPocket = new List<Task>();
-    List<Task> taksOutPocket = new List<Task>();
-    public Task clickedTask;
+    //List<Task> tasksInPocket = new List<Task>();
+    //List<Task> taksOutPocket = new List<Task>();
+    //public Task clickedTask;
 
     private int coin = 0;
     public int Coin
@@ -160,48 +160,48 @@ public class MainUI : IUserInterface
         }
     }
 
-    private void CountTasks()
-    {
-        for (int i = 0; i < tasksInPocket.Count; i++)
-        {
-            tasksInPocket[i].CountTask();
-            if (tasksInPocket[i].TaskComplete)
-            {
-                tasksInPocket[i].Reclaim(tasksInPocket);
-            }
+    //private void CountTasks()
+    //{
+    //    for (int i = 0; i < tasksInPocket.Count; i++)
+    //    {
+    //        tasksInPocket[i].CountTask();
+    //        if (tasksInPocket[i].TaskComplete)
+    //        {
+    //            tasksInPocket[i].Reclaim(tasksInPocket);
+    //        }
 
-        }
-        foreach (Task t in taksOutPocket)
-        {
-            t.CountDisappear();
-        }
-        UpdateTaskInfo();
-        clickedTask = null;
-    }
+    //    }
+    //    foreach (Task t in taksOutPocket)
+    //    {
+    //        t.CountDisappear();
+    //    }
+    //    UpdateTaskInfo();
+    //    clickedTask = null;
+    //}
 
-    private void UpdateTaskInfo()
-    {
-        for (int i = 0; i < tasksInPocket.Count; i++)
-        {
-            taskTexts[i].text = tasksInPocket[i].GetInfo();
-            if (tasksInPocket[i].Actived)
-            {
-                taskButtons[i].gameObject.SetActive(false);
-            }
-            else
-            {
-                taskButtons[i].gameObject.SetActive(true);
-            }
-        }
-        if (tasksInPocket.Count < 3)
-        {
-            for (int i = tasksInPocket.Count; i < 3; i++)
-            {
-                taskTexts[i].text = "¿Õ°×";
-                taskButtons[i].gameObject.SetActive(false);
-            }
-        }
-    }
+    //private void UpdateTaskInfo()
+    //{
+    //    for (int i = 0; i < tasksInPocket.Count; i++)
+    //    {
+    //        taskTexts[i].text = tasksInPocket[i].GetInfo();
+    //        if (tasksInPocket[i].Actived)
+    //        {
+    //            taskButtons[i].gameObject.SetActive(false);
+    //        }
+    //        else
+    //        {
+    //            taskButtons[i].gameObject.SetActive(true);
+    //        }
+    //    }
+    //    if (tasksInPocket.Count < 3)
+    //    {
+    //        for (int i = tasksInPocket.Count; i < 3; i++)
+    //        {
+    //            taskTexts[i].text = "¿Õ°×";
+    //            taskButtons[i].gameObject.SetActive(false);
+    //        }
+    //    }
+    //}
 
     public void GuideBookBtnClick()
     {
@@ -218,35 +218,35 @@ public class MainUI : IUserInterface
         GameSpeed++;
     }
 
-    public void GetTask(Transform t)
-    {
-        Task task = GameManager.Instance.TaskFactory.GetRandomTask();
-        task.transform.position = t.position;
-        taksOutPocket.Add(task);
-        if (tasksInPocket.Count < 3)
-        {
-            taksOutPocket.Remove(task);
-            task.AddTo(tasksInPocket);
-            UpdateTaskInfo();
-        }
-        //task.PlayTask();
-    }
+    //public void GetTask(Transform t)
+    //{
+    //    Task task = GameManager.Instance.TaskFactory.GetRandomTask();
+    //    task.transform.position = t.position;
+    //    taksOutPocket.Add(task);
+    //    if (tasksInPocket.Count < 3)
+    //    {
+    //        taksOutPocket.Remove(task);
+    //        task.AddTo(tasksInPocket);
+    //        UpdateTaskInfo();
+    //    }
+    //    //task.PlayTask();
+    //}
 
-    public void ReplaceTask(int i)
-    {
-        if (clickedTask != null)
-        {
-            clickedTask.Replace(tasksInPocket, i);
-            clickedTask = null;
-            UpdateTaskInfo();
-        }
-    }
+    //public void ReplaceTask(int i)
+    //{
+    //    if (clickedTask != null)
+    //    {
+    //        clickedTask.Replace(tasksInPocket, i);
+    //        clickedTask = null;
+    //        UpdateTaskInfo();
+    //    }
+    //}
 
-    public void PlayTask(int i)
-    {
-        tasksInPocket[i].PlayTask();
-        taskButtons[i].gameObject.SetActive(false);
-        taskTexts[i].text = tasksInPocket[0].GetInfo();
-        //m_WaveInfoSetter.SetWaveInfo(GameManager.Instance.WaveSystem.LevelSequence[0]);
-    }
+    //public void PlayTask(int i)
+    //{
+    //    tasksInPocket[i].PlayTask();
+    //    taskButtons[i].gameObject.SetActive(false);
+    //    taskTexts[i].text = tasksInPocket[0].GetInfo();
+    //    //m_WaveInfoSetter.SetWaveInfo(GameManager.Instance.WaveSystem.LevelSequence[0]);
+    //}
 }

@@ -17,7 +17,7 @@ public class ScaleAndMove : IGameSystem
 
     Camera cam;
     //float moveSpeed = 15f;
-    private int slideSpeed = 5;
+    private int slideSpeed = 6;
     private float scrollSpeed = 2.5f;
     private float maximum = 10;
     private float minmum = 3;
@@ -65,7 +65,7 @@ public class ScaleAndMove : IGameSystem
     {
         DesktopInput();
         TutorialCounter();
-        RTSView();
+        //RTSView();
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, minX, maxX), Mathf.Clamp(transform.position.y, minY, maxY), transform.position.z);
 
         //TEST
@@ -115,39 +115,39 @@ public class ScaleAndMove : IGameSystem
     {
         if (!CanControl)
             return;
-        //if (Input.GetAxis("Mouse ScrollWheel") != 0)
-        //{
-        //    cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minmum, maximum);
-        //    cam.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
-        //}
+        if (Input.GetAxis("Mouse ScrollWheel") != 0)
+        {
+            cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minmum, maximum);
+            cam.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * scrollSpeed;
+        }
 
-        //speedHorizon = Vector3.zero;
-        //speedVertical = Vector3.zero;
-        //speed = Vector3.zero;
-        //Vector3 v1 = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-        //if (v1.x < 0.01f && transform.localPosition.x > maxLeft)
-        //{
-        //    speedHorizon = Vector3.left * slideSpeed * Time.deltaTime;
-        //}
-        //else if (v1.x > 1 - 0.01f && transform.localPosition.x < maxRight)
-        //{
-        //    speedHorizon = Vector3.right * slideSpeed * Time.deltaTime;
-        //}
-        //else if (v1.y < 0.01f && transform.localPosition.y > maxDown)
-        //{
-        //    speedVertical = Vector3.down * slideSpeed * Time.deltaTime;
-        //}
-        //else if (v1.y > 1 - 0.01f && transform.localPosition.y < maxUp)
-        //{
-        //    speedVertical = Vector3.up * slideSpeed * Time.deltaTime;
-        //}
-        //else
-        //{
-        //    speedVertical = Input.GetAxisRaw("Horizontal") * Vector3.right * slideSpeed * Time.deltaTime;
-        //    speedHorizon = Input.GetAxisRaw("Vertical") * Vector3.up * slideSpeed * Time.deltaTime;
-        //}
-        speedVertical = Input.GetAxisRaw("Horizontal") * Vector3.right * slideSpeed * Time.deltaTime;
-        speedHorizon = Input.GetAxisRaw("Vertical") * Vector3.up * slideSpeed * Time.deltaTime;
+        speedHorizon = Vector3.zero;
+        speedVertical = Vector3.zero;
+        speed = Vector3.zero;
+        Vector3 v1 = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        if (v1.x < 0.01f && transform.localPosition.x > minX)
+        {
+            speedHorizon = Vector3.left * slideSpeed * Time.deltaTime;
+        }
+        else if (v1.x > 1 - 0.01f && transform.localPosition.x < maxX)
+        {
+            speedHorizon = Vector3.right * slideSpeed * Time.deltaTime;
+        }
+        else if (v1.y < 0.01f && transform.localPosition.y > minY)
+        {
+            speedVertical = Vector3.down * slideSpeed * Time.deltaTime;
+        }
+        else if (v1.y > 1 - 0.01f && transform.localPosition.y < maxY)
+        {
+            speedVertical = Vector3.up * slideSpeed * Time.deltaTime;
+        }
+        else
+        {
+            speedVertical = Input.GetAxisRaw("Horizontal") * Vector3.right * slideSpeed * Time.deltaTime;
+            speedHorizon = Input.GetAxisRaw("Vertical") * Vector3.up * slideSpeed * Time.deltaTime;
+        }
+        //speedVertical = Input.GetAxisRaw("Horizontal") * Vector3.right * slideSpeed * Time.deltaTime;
+        //speedHorizon = Input.GetAxisRaw("Vertical") * Vector3.up * slideSpeed * Time.deltaTime;
         speed = speedHorizon + speedVertical;
         transform.Translate(speed / m_MainUI.GameSpeed, Space.World);
     }
