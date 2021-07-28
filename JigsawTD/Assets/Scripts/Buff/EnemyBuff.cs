@@ -179,13 +179,13 @@ public class BreakShell : TileBuff
 
     public override void Affect()
     {
-        Target.BrokeShell += (int)KeyValue;
+        //Target.BrokeShell += (int)KeyValue;
 
     }
 
     public override void End()
     {
-        Target.BrokeShell -= (int)KeyValue;
+        //Target.BrokeShell -= (int)KeyValue;
     }
 }
 
@@ -242,9 +242,9 @@ public class TileStun : TileBuff
 
     public override void Affect()
     {
-        BuffInfo info = new BuffInfo(EnemyBuffName.Stun, Target.TileStunCounter * KeyValue, 0);
-        Target.Buffable.AddBuff(info);
-        Target.TileStunCounter = 0;
+        //BuffInfo info = new BuffInfo(EnemyBuffName.Stun, Target.TileStunCounter * KeyValue, 0);
+        //Target.Buffable.AddBuff(info);
+        //Target.TileStunCounter = 0;
     }
 
     public override void End()

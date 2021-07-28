@@ -56,18 +56,18 @@ public class Task : ReusableObject
         //ws.LevelSequence[i].AddEnemy(enemyType);
         }
     }
-    public void CountTask()
-    {
-        if (Actived)
-        {
-            periodsPassed += 1;
-            if (periodsPassed >= Periods)
-            {
-                GameManager.Instance.MainUI.Coin += rewardMoney;
-                TaskComplete = true;
-            }
-        }
-    }
+    //public void CountTask()
+    //{
+    //    if (Actived)
+    //    {
+    //        periodsPassed += 1;
+    //        if (periodsPassed >= Periods)
+    //        {
+    //            GameManager.Instance.MainUI.Coin += rewardMoney;
+    //            TaskComplete = true;
+    //        }
+    //    }
+    //}
     public void CountDisappear()
     {
         waitingPeriods++;
@@ -133,10 +133,10 @@ public class Task : ReusableObject
         tasktips.Hide();
     }
 
-    public void OnMouseDown()
-    {
-        GameManager.Instance.MainUI.clickedTask = this;
-    }
+    //public void OnMouseDown()
+    //{
+    //    GameManager.Instance.MainUI.clickedTask = this;
+    //}
 
     public override void OnUnSpawn()
     {

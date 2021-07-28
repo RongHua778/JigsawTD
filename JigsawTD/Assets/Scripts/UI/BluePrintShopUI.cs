@@ -49,6 +49,11 @@ public class BluePrintShopUI : IUserInterface
         PerfectInfo.SetContent(GameMultiLang.GetTraduction("PERFECTINFO"));
     }
 
+    public void PrepareForGuide()
+    {
+        ShopBtnObj.SetActive(false);
+    }
+
     public void SetPerfectElementCount(int count)
     {
         PerfectElementTxt.text = GameMultiLang.GetTraduction("OWNPERFECT") + ":" + count;

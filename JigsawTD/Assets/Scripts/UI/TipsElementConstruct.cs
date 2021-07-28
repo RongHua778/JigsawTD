@@ -10,6 +10,7 @@ public class TipsElementConstruct : MonoBehaviour
     Blueprint m_BluePrint;
     [SerializeField] InfoBtn m_InfoBtn = default;
     [SerializeField] Text elementSkillDes = default;
+    [SerializeField] Image intensifyImg = default;
 
     public void SetElements(StrategyComposite strategy)
     {
@@ -27,6 +28,9 @@ public class TipsElementConstruct : MonoBehaviour
             Elements[i].sprite = attribute.TurretLevels[compositions[i].qualityRequeirement - 1].TurretIcon;
         }
         SetIntensifyInfo();
+
+        intensifyImg.gameObject.SetActive(strategy.CompositeBluePrint.IntensifyBluePrint);
+
         if (strategy.ElementSkill1 != null)
             elementSkillDes.text = GameMultiLang.GetTraduction(strategy.ElementSkill1.SkillDescription);
         else

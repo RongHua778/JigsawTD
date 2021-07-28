@@ -28,8 +28,8 @@ public class SkillFactory : GameObjectFactory
     {
         switch (skill)
         {
-            case EnemySkill.Blink:
-                return new BlinkSkill(enemy, blinkerBlink, holePrefab);
+            //case EnemySkill.Blink:
+            //    return new BlinkSkill(enemy, blinkerBlink, holePrefab);
             //case EnemySkill.Divide:
             //    return new DivideSkill(enemy, dividerDividing, dividerSprings, 1, dividerSprites);
             default:
@@ -38,10 +38,10 @@ public class SkillFactory : GameObjectFactory
         }
     }
 
-    public BornSkill GetBornSkill(Enemy enemy,int form)
-    {
-        return new BornSkill(enemy, bornerBornCD, bornerEnemyOneBorn, form);
-    }
+    //public BornSkill GetBornSkill(Enemy enemy,int form)
+    //{
+    //    return new BornSkill(enemy, bornerBornCD, bornerEnemyOneBorn, form);
+    //}
 
     public DivideSkill GetDividerSkill(Enemy enemy, int dividing)
     {

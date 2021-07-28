@@ -5,11 +5,22 @@ using UnityEngine;
 
 public abstract class Enemy : PathFollower, IDamageable
 {
+    [Header("基本配置")]
     public bool IsBoss = false;
+    protected HealthBar healthBar;
+    protected SpriteRenderer enemySprite;
+    protected CircleCollider2D enemyCol;
+
+    //状态配置
     public float Intensify;
-    protected bool isOutTroing = false;
+    protected bool isOutTroing = false;//正在消失
+    protected bool trapTriggered = false;
     public bool IsEnemy { get => true; }
-    public ReusableObject exlposionPrefab = default;
+    public abstract EnemyType EnemyType { get; }
+
+
+    [Header("资源配置")]
+    [SerializeField] protected ReusableObject exlposionPrefab = default;
     protected AudioClip explosionClip;
     private Animator anim;
     public Animator Anim { get => anim; set => anim = value; }
@@ -17,14 +28,12 @@ public abstract class Enemy : PathFollower, IDamageable
     private TrapContent currentTrap;
     public TrapContent CurrentTrap { get => currentTrap; set => currentTrap = value; }
 
-    public abstract EnemyType EnemyType { get; }
     private List<Skill> enemySkills;
     public List<Skill> EnemySkills { get => enemySkills; set => enemySkills = value; }
-    protected bool trapTriggered = false;
     public int ReachDamage { get; set; }
-    public int TileStunCounter { get; set; }
+
     private float stunTime;
-    public float StunTime
+    public float StunTime//眩晕时间
     {
         get => stunTime;
         set
@@ -34,11 +43,11 @@ public abstract class Enemy : PathFollower, IDamageable
         }
     }
 
-    int affectHealerCount = 0;
+    private int affectHealerCount = 0;
     public int AffectHealerCount { get => affectHealerCount; set => affectHealerCount = value; }
     float speedIntensify = 0;
     public virtual float SpeedIntensify { get => speedIntensify + AffectHealerCount > 0 ? 0.4f : 0; set => speedIntensify = Mathf.Min(2, value); }
-    public override float Speed { get => StunTime > 0 ? 0 : Mathf.Max(0.05f, (speed + SpeedIntensify) * (1 - (SlowRate + PathSlow) / (SlowRate + PathSlow + 1))); set => speed = value; }
+    public override float Speed { get => StunTime > 0 ? 0 : Mathf.Max(0.1f, (speed + SpeedIntensify) * (1 - (SlowRate + PathSlow) / (SlowRate + PathSlow + 1))); set => speed = value; }
 
     float slowRate;
     public float SlowRate
@@ -61,8 +70,6 @@ public abstract class Enemy : PathFollower, IDamageable
             ProgressFactor = Speed * Adjust;//子弹减速即时更新速度
         }
     }
-    int brokeShell;
-    public int BrokeShell { get => brokeShell; set => brokeShell = value; }
 
     public float TargetDamageCounter { get; set; }
 
@@ -105,23 +112,12 @@ public abstract class Enemy : PathFollower, IDamageable
         }
     }
 
-    public SpriteRenderer EnemySprite
-    {
-        get => enemySprite; 
-        set=> enemySprite = value;
-    }
-
-
-    [Header("OtherSetting")]
-    HealthBar healthBar;
-    [HideInInspector] private SpriteRenderer enemySprite;
-    [HideInInspector] public CircleCollider2D enemyCol;
 
 
     public virtual void Awake()
     {
-        EnemySprite = transform.Find("Model").Find("GFX").GetComponent<SpriteRenderer>();
-        enemyCol = EnemySprite.GetComponent<CircleCollider2D>();
+        enemySprite = transform.Find("Model").Find("GFX").GetComponent<SpriteRenderer>();
+        enemyCol = enemySprite.GetComponent<CircleCollider2D>();
         Anim = GetComponent<Animator>();
         if (IsBoss)
         {
@@ -135,13 +131,14 @@ public abstract class Enemy : PathFollower, IDamageable
 
     public override bool GameUpdate()
     {
-        if (EnemySkills != null)
-        {
-            foreach (Skill enemySkill in EnemySkills)
-            {
-                enemySkill.OnGameUpdating();
-            }
-        }
+        //if (EnemySkills != null)
+        //{
+        //    foreach (Skill enemySkill in EnemySkills)
+        //    {
+        //        enemySkill.OnGameUpdating();
+        //    }
+        //}
+        OnEnemyUpdate();
         if (IsDie)
         {
             if (EnemySkills != null)
@@ -197,6 +194,10 @@ public abstract class Enemy : PathFollower, IDamageable
         return true;
     }
 
+    protected virtual void OnEnemyUpdate()
+    {
+
+    }
     protected virtual void OnDie()
     {
 
@@ -276,13 +277,11 @@ public abstract class Enemy : PathFollower, IDamageable
         isOutTroing = false;
         ObjectPool.Instance.UnSpawn(healthBar);
         TargetDamageCounter = 0;
-        TileStunCounter = 0;
         DamageIntensify = 0;
         SpeedIntensify = 0;
         AffectHealerCount = 0;
         PathSlow = 0;
         SlowRate = 0;
-        BrokeShell = 0;
         StunTime = 0;
         CurrentTrap = null;
         Buffable.RemoveAllBuffs();

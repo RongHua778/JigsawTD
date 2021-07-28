@@ -4,14 +4,75 @@ using UnityEngine;
 
 public class Borner : Enemy
 {
-    public int form=2;
     public override EnemyType EnemyType => EnemyType.Borner;
-
+    [SerializeField] float[] bornCD;
+    [SerializeField] int[] enemyOneBorn;
+    int level;
+    int form;
+    float castleCounter;
+    float bornCounter;
     public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify)
     {
         base.Initialize(attribute, pathOffset, healthBar, intensify);
-        EnemySkills = new List<Skill>();
-        EnemySkills.Add(GameManager.Instance.SkillFactory.GetBornSkill(this, 2));
+        level = 0;
+        form = 0;
     }
 
+    protected override void OnEnemyUpdate()
+    {
+        bornCounter += Time.deltaTime;
+        if (bornCounter > bornCD[level])
+        {
+            Born();
+            bornCounter = 0;
+        }
+        Castle();
+    }
+
+    private void Born()
+    {
+        for (int i = 0; i < enemyOneBorn[level]; i++)
+        {
+            int typeInt = Random.Range(0, 6);
+            GameManager.Instance.SpawnEnemy((EnemyType)typeInt, PointIndex, Intensify / 2);
+        }
+    }
+
+
+    private void Castle()
+    {
+        if (CurrentHealth / MaxHealth <= 0.7f && form == 0)
+        {
+            DamageIntensify = -0.7f;
+            level = 1;
+            form = 1;
+            StunTime += 7f;
+            castleCounter = 7f;
+            Anim.SetBool("Transform", true);
+            Sound.Instance.PlayEffect("Sound_BornerTransform");
+        }
+        if (CurrentHealth / MaxHealth <= 0.3f && form == 1)
+        {
+            DamageIntensify = -0.7f;
+            level = 2;
+            form = 2;
+            StunTime += 7f;
+            castleCounter = 7f;
+            Anim.SetBool("Transform", true);
+            Sound.Instance.PlayEffect("Sound_BornerTransform");
+
+        }
+        if (castleCounter > 0)
+        {
+            castleCounter -= Time.deltaTime;
+            level = 0;
+            if (castleCounter <= 0f)
+            {
+                DamageIntensify = 0f;
+                Anim.SetBool("Transform", false);
+                Sound.Instance.PlayEffect("Sound_BornerTransform");
+            }
+        }
+
+    }
 }

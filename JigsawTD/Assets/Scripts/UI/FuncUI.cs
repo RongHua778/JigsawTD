@@ -103,7 +103,6 @@ public class FuncUI : IUserInterface
             {
                 energy = 0;
                 DrawRemain++;
-                //GameManager.Instance.GetRandomBluePrint();
             }
             m_LuckInfo.SetContent(StaticData.GetEnergyInfo());
             m_LuckProgress.SetProgress(energy);
@@ -168,6 +167,7 @@ public class FuncUI : IUserInterface
 
     public void PrepareNextWave()
     {
+        Show();
         if (!DrawThisTurn)
         {
             EnergyProgress++;

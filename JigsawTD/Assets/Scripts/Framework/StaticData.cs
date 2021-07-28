@@ -7,7 +7,6 @@ using Pathfinding;
 
 public class StaticData : Singleton<StaticData>
 {
-
     [Header("LevelSetting")]
     public static LayerMask PathLayer = 1 << 6 | 1 << 10;
     public static string TrapMask = "Trap";
@@ -50,10 +49,10 @@ public class StaticData : Singleton<StaticData>
     public static int basicN = 25;
 
     [Header("动态数据")]
-    public static int PerfectElementCount = 0;
-    public static float OverallMoneyIntensify = 0;
-    public static int FreeGroundTileCount = 0;
-    public static int NextBuyIntensifyBlueprint = 0;
+    public static int PerfectElementCount = 0;//完美元素数量
+    public static float OverallMoneyIntensify = 0;//金币加成
+    public static int FreeGroundTileCount = 0;//免费地板数量
+    public static int NextBuyIntensifyBlueprint = 0;//下一次购买是加强配方数量
 
 
     [Header("ProbabilitySetting")]
@@ -80,13 +79,8 @@ public class StaticData : Singleton<StaticData>
     public static Color32 YellowColor;
     public static Color32 PurpleColor;
 
-    //tips信息
-    public static Dictionary<string, string> TipsInfoDIC;
-
-
     private void Start()
     {
-        InitializeInfoDIC();
 
         RedColor = new Color32(255, 110, 66, 255);
         GreenColor = new Color32(66, 255, 100, 255);
@@ -94,12 +88,6 @@ public class StaticData : Singleton<StaticData>
         YellowColor = new Color32(255, 182, 66, 255);
         PurpleColor = new Color32(255, 100, 237, 255);
 
-    }
-
-    private void InitializeInfoDIC()
-    {
-        TipsInfoDIC = new Dictionary<string, string>();
-        TipsInfoDIC.Add("LuckyInfo", GetEnergyInfo());
     }
 
     [Header("CompositionAttributes")]
@@ -422,26 +410,9 @@ public class StaticData : Singleton<StaticData>
         return text;
     }
 
-    //public static string GetLuckyInfo()
-    //{
-    //    string text = GameMultiLang.GetTraduction("ENERGYINFO");
-    //        //"\n1.当前回合没有抽取时，获得1点累积点。\n" +
-    //        //"2.连续不抽取时，会获得额外累积点。\n" +
-    //        //"3.累积点每达到10点，获得1次额外抽取次数。";
-    //    return text;
-    //}
     public static string GetEnergyInfo()
     {
         string text = GameMultiLang.GetTraduction("ENERGYINFO");
-        //"1.当前回合没有抽取时，获得1格能量\n" +
-        //    "2.每个连续不抽取的回合都会使能量获取额外+1，上限为5\n" +
-        //    "3.当能量满10点时，获得1次额外的抽取次数";
-        //"1.当前回合没有抽取时，获得1格能量。\n" +
-        //"2.每格能量提高回合金币收入10%。\n" +
-        //"3.抽取后，能量清零。\n" +
-        //"4.每购买2个配方，获得1格能量。\n" +
-        //"(当前收入增加 " + "<color=cyan>" + luckCoin * 10 + "%" + "</color>)\n" +
-        //"(已购买配方 " + "<color=cyan>" + luckProgress + "/3</color>)";
         return text;
     }
 

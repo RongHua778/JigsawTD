@@ -12,6 +12,7 @@ public class ShapeSelectUI : IUserInterface//控制形状生成
 
     public void ShowThreeShapes(int level)
     {
+        Show();
         for (int i = 0; i < tileSelects.Length; i++)
         {
             TileShape shape = ConstructHelper.GetRandomShapeByLevel(level);
@@ -26,6 +27,7 @@ public class ShapeSelectUI : IUserInterface//控制形状生成
         {
             select.ClearShape();
         }
+        Hide();
     }
 
 

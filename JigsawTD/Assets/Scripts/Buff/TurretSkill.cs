@@ -164,7 +164,7 @@ public class H1SkillCountBaseSputteringPercentage : InitialSkill
 
     public override void PreHit(Bullet bullet = null)
     {
-        bullet.SputteringPercentage += bullet.SputteredCount * 0.3f;
+        bullet.SputteringPercentage += bullet.SputteredCount * 0.25f;
     }
 
 

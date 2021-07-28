@@ -64,7 +64,7 @@ public class RHTest : MonoBehaviour
 
     public void SetWaveBtnClick()
     {
-        waveSystem.waveStage = float.Parse(waveStateField.text);
+        //waveSystem.waveStage = float.Parse(waveStateField.text);
         // waveSystem.waveCoolDown = float.Parse(waveCoolDownField.text);
         waveSystem.LevelInitialize();
         GameManager.Instance.PrepareNextWave();

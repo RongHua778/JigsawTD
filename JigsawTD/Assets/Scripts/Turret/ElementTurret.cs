@@ -5,9 +5,6 @@ using UnityEngine;
 public abstract class ElementTurret : TurretContent
 {
     public override GameTileContentType ContentType => GameTileContentType.ElementTurret;
-    //ËşµÄÔªËØÊôĞÔ
-    //private Element element;
-    //public abstract Element Element { get; }
 
 
     public override void ContentLanded()
