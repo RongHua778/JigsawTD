@@ -339,6 +339,11 @@ public class GameManager : Singleton<GameManager>
         m_MainUI.Coin += (int)(amount * (1 + StaticData.OverallMoneyIntensify));
     }
 
+    public void GainInterest()
+    {
+        m_MainUI.Coin = (int)(m_MainUI.Coin* (1 + StaticData.Instance.CoinInterest));
+    }
+
     public void GainDraw(int amount)
     {
         m_FuncUI.DrawRemain += amount;

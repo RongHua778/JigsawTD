@@ -42,6 +42,8 @@ public class FuncUI : IUserInterface
         //}
     }
 
+    int buyShapeCost=25;
+
     private int drawRemain = 0;
     public int DrawRemain
     {
@@ -49,7 +51,7 @@ public class FuncUI : IUserInterface
         set
         {
             drawRemain = value;
-            DrawBtnTxt.text = /*GameMultiLang.GetTraduction("DRAWMODULE")*/ "X" + drawRemain.ToString();
+            //DrawBtnTxt.text = /*GameMultiLang.GetTraduction("DRAWMODULE")*/ drawRemain.ToString();
             //if (drawRemain <= 0)
             //{
             //    DrawBtnTxt.text = "³éÈ¡Ä£¿é(½ð±Ò" + buyShapeCost + ")";
@@ -109,11 +111,21 @@ public class FuncUI : IUserInterface
         }
     }
 
+    public int BuyShapeCost 
+    {   
+        get => buyShapeCost; 
+        set 
+        {
+            buyShapeCost = value;
+            DrawBtnTxt.text = /*GameMultiLang.GetTraduction("DRAWMODULE")*/ buyShapeCost.ToString();
+        }
+    }
 
     public override void Initialize(GameManager gameManager)
     {
         base.Initialize(gameManager);
-        DrawRemain = StaticData.Instance.StartLotteryDraw;
+        //DrawRemain = StaticData.Instance.StartLotteryDraw;
+        BuyShapeCost = StaticData.Instance.BaseShapeCost;
         Energy = 0;
         PlayerLevel = 1;
 
@@ -143,25 +155,24 @@ public class FuncUI : IUserInterface
 
     public void DrawBtnClick()
     {
-        if (DrawRemain > 0)
-        {
-            Energy = 0;
-            DrawRemain--;
-            DrawThisTurn = true;
-            m_GameManager.DrawShapes();
-        }
-        else
-        {
-            GameManager.Instance.ShowMessage(GameMultiLang.GetTraduction("NOENOUGHDRAW"));
-        }
-        //else if (GameManager.Instance.ConsumeMoney(buyShapeCost))
+        //if (DrawRemain > 0)
         //{
-        //    LuckyCoin = 0;
+        //    Energy = 0;
+        //    DrawRemain--;
         //    DrawThisTurn = true;
         //    m_GameManager.DrawShapes();
-        //    buyShapeCost += 25;
-        //    DrawRemain = 0;
         //}
+        //else
+        //{
+        //    GameManager.Instance.ShowMessage(GameMultiLang.GetTraduction("NOENOUGHDRAW"));
+        //}
+        if(m_GameManager.ConsumeMoney(BuyShapeCost))
+        {
+            //DrawThisTurn = true;
+            m_GameManager.DrawShapes();
+            BuyShapeCost += StaticData.Instance.MultipleShapeCost;
+            //DrawRemain = 0;
+        }
 
     }
 

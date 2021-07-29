@@ -79,7 +79,7 @@ public class BoardSystem : IGameSystem
     public GameTile DestinationPoint { get => destinationPoint; set => destinationPoint = value; }
 
     //买一块地板多少钱
-    int buyOneGroundMoney = 10;
+    int buyOneGroundMoney = 20;
     public int BuyOneGroundMoney
     {
         get => buyOneGroundMoney;
@@ -342,7 +342,7 @@ public class BoardSystem : IGameSystem
             SeekPath();
         }
         GameManager.Instance.HideTips();
-        BuyOneGroundMoney += 10;
+        BuyOneGroundMoney += 20;
     }
 
 

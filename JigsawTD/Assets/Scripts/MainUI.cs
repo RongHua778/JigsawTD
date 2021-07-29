@@ -142,7 +142,9 @@ public class MainUI : IUserInterface
     {
         //CountTasks();
         CurrentWave++;
-        m_GameManager.GainMoney((StaticData.Instance.BaseWaveIncome + StaticData.Instance.WaveMultiplyIncome * (CurrentWave - 1)));//最多一回合获得200金币
+        m_GameManager.GainInterest();
+        m_GameManager.GainMoney((StaticData.Instance.BaseWaveIncome +
+            StaticData.Instance.WaveMultiplyIncome * (CurrentWave - 1)));//最多一回合获得200金币
         m_WaveInfoSetter.SetWaveInfo(CurrentWave, sequences);
     }
 

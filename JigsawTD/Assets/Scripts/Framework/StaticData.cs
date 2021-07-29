@@ -24,6 +24,11 @@ public class StaticData : Singleton<StaticData>
     public int StartLotteryDraw;
     public int BaseWaveIncome;
     public int WaveMultiplyIncome;
+    public int BuyBluePrintCost;
+    public int ShopRefreshCost;
+    public float CoinInterest;
+    public int BaseShapeCost;
+    public int MultipleShapeCost;
     public static float[,] QualityChances = new float[7, 5]
     {
         { 1f, 0f, 0f, 0f, 0f },
@@ -34,7 +39,6 @@ public class StaticData : Singleton<StaticData>
         { 0.1f, 0.2f, 0.25f, 0.3f, 0.15f },
         { 0f, 0.15f, 0.25f, 0.3f, 0.3f }
     };
-    public static int BuyBluePrintCost = 20;
     [Header("GameSetting")]
     public static Vector2Int BoardOffset;
     public float EnvrionmentBaseVolume = .25f;
