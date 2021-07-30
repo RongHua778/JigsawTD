@@ -13,7 +13,7 @@ public class GameMultiLang : MonoBehaviour
 
 	public static Dictionary<String, String> Fields;
 
-	[SerializeField] string defaultLang = "en";
+	[SerializeField] string defaultLang = default;
 
 
 	void Awake ()
@@ -36,9 +36,8 @@ public class GameMultiLang : MonoBehaviour
 			Fields = new Dictionary<string, string> ();
 		
 		Fields.Clear ();
-
-		string lang = PlayerPrefs.GetString ("_language", defaultLang);
 		PlayerPrefs.SetString("_language", defaultLang);
+		string lang = PlayerPrefs.GetString ("_language", defaultLang);
 
 		if (PlayerPrefs.GetInt ("_language_index", -1) == -1)
 			PlayerPrefs.SetInt ("_language_index", 0);

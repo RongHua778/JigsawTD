@@ -5798,13 +5798,13 @@ MonoBehaviour:
   LevelUpMoney: 000000003200000064000000c80000005e01000026020000200300000f270000
   StartCoin: 5
   StartLotteryDraw: 0
-  BaseWaveIncome: 20
-  WaveMultiplyIncome: 5
+  BaseWaveIncome: 10
+  WaveMultiplyIncome: 3
   BuyBluePrintCost: 20
   ShopRefreshCost: 20
-  CoinInterest: 0.2
-  BaseShapeCost: 20
-  MultipleShapeCost: 5
+  CoinInterest: 0
+  BaseShapeCost: 10
+  MultipleShapeCost: 3
   EnvrionmentBaseVolume: 0.5
   TileSize: 1
   TileShapeChance: []
@@ -26481,7 +26481,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114177733606087622, guid: fdce7a722c35906468292c084d7fc8c5, type: 3}
       propertyPath: defaultLang
-      value: en
+      value: ch
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdce7a722c35906468292c084d7fc8c5, type: 3}

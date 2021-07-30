@@ -43,6 +43,15 @@ public class FuncUI : IUserInterface
     }
 
     int buyShapeCost=25;
+    public int BuyShapeCost
+    {
+        get => buyShapeCost;
+        set
+        {
+            buyShapeCost = value;
+            DrawBtnTxt.text = /*GameMultiLang.GetTraduction("DRAWMODULE")*/ buyShapeCost.ToString();
+        }
+    }
 
     private int drawRemain = 0;
     public int DrawRemain
@@ -111,15 +120,9 @@ public class FuncUI : IUserInterface
         }
     }
 
-    public int BuyShapeCost 
-    {   
-        get => buyShapeCost; 
-        set 
-        {
-            buyShapeCost = value;
-            DrawBtnTxt.text = /*GameMultiLang.GetTraduction("DRAWMODULE")*/ buyShapeCost.ToString();
-        }
-    }
+
+
+
 
     public override void Initialize(GameManager gameManager)
     {
@@ -171,6 +174,7 @@ public class FuncUI : IUserInterface
             //DrawThisTurn = true;
             m_GameManager.DrawShapes();
             BuyShapeCost += StaticData.Instance.MultipleShapeCost;
+            m_GameManager.CheckDrawSkill();
             //DrawRemain = 0;
         }
 

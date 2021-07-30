@@ -70,6 +70,13 @@ public class StrategyComposite : StrategyBase
         }
     }
 
+    public void DrawTurretSkill()
+    {
+        foreach (var skill in TurretSkills)
+        {
+            skill.Draw();//³éÈ¡Ð§¹û
+        }
+    }
     public void CompositeSkill()
     {
         foreach(var skill in TurretSkills)

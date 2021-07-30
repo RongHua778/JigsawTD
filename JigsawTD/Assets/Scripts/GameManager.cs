@@ -64,9 +64,6 @@ public class GameManager : Singleton<GameManager>
     private PickingState pickingState;
     private WaveState waveState;
 
-    //testetst
-    public int totalInterest;
-
     //初始化设定
     public void Initinal()
     {
@@ -344,9 +341,7 @@ public class GameManager : Singleton<GameManager>
 
     public void GainInterest()
     {
-        totalInterest += (int)(m_MainUI.Coin * (StaticData.Instance.CoinInterest));
-        Debug.LogWarning("利息："+totalInterest);
-        m_MainUI.Coin = (int)(m_MainUI.Coin* (1 + StaticData.Instance.CoinInterest));;
+        m_MainUI.Coin = (int)(m_MainUI.Coin * (1 + StaticData.Instance.CoinInterest));
     }
 
     public void GainDraw(int amount)
@@ -412,6 +407,14 @@ public class GameManager : Singleton<GameManager>
         foreach (var turret in compositeTurrets.behaviors)
         {
             ((StrategyComposite)(((TurretContent)turret).Strategy)).LandedTurretSkill();
+        }
+    }
+
+    public void CheckDrawSkill()
+    {
+        foreach (var turret in compositeTurrets.behaviors)
+        {
+            ((StrategyComposite)(((TurretContent)turret).Strategy)).DrawTurretSkill();
         }
     }
     #endregion
@@ -484,7 +487,10 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region 待加入功能
-
+    public void SetBuyShapeCostDiscount(float discount)
+    {
+        m_FuncUI.BuyShapeCost = Mathf.RoundToInt(m_FuncUI.BuyShapeCost * (1 - discount));
+    }
 
     #endregion
 }
