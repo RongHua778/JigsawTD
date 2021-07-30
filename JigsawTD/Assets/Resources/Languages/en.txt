@@ -256,12 +256,14 @@ ARROWTRAP=Slow Arrow
 DAMAGETRAP=Damage Marker
 SPAWNPOINT=Start Point
 DESTINATION=End Point
+BLINKTRAP=blink trap
 
 STUNTRAPINFO=Enemies passing through this tile will be stunned for 1.5 seconds.
 ARROWTRAPINFO=Enemies passing through this tile with the same direction of the arrow will be slowed down until they turn.
 DAMAGETRAPINFO=Each time an enemy passes this tile, deals damge equal to 20% of the damage taken during last period.
 SPAWNPOINTINFO=Enemy borns here, make sure there is a route to the end point.
 DESTINATIONINFO=Enemy's destination, make sure there is a route to the start point.
+BLINKTRAPINFO=this is blink trap
 
 //TurretBase
 ATTACKBASE=Attack Base

@@ -96,6 +96,8 @@ public class WaveSystem : IGameSystem
             if (i < 3)
             {
                 stage = (i + 1) * 0.5f;
+                //////////////
+                stage = 100f;
                 sequences = GenerateRandomSequence(1, stage, i);
             }
             else if (i == 9)

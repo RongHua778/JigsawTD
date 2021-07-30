@@ -12,7 +12,7 @@ public class PathFollower : ReusableObject,IGameBehavior
     public virtual DirectionChange DirectionChange { get => directionChange; set => directionChange = value; }
 
     [SerializeField] public Transform model = default;
-    protected PathPoint CurrentPoint;
+    public PathPoint CurrentPoint;
     protected Vector3 positionFrom, positionTo;
     private float progress;
     protected float directionAngleFrom, directionAngleTo;

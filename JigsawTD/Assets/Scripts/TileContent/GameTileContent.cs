@@ -40,7 +40,7 @@ public abstract class GameTileContent : ReusableObject
 
     }
 
-    public virtual void OnContentPass(Enemy enemy)
+    public virtual void OnContentPassOnce(Enemy enemy)
     {
 
     }

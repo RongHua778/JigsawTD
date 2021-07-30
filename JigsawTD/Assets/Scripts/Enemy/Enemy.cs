@@ -28,8 +28,11 @@ public abstract class Enemy : PathFollower, IDamageable
     private TrapContent currentTrap;
     public TrapContent CurrentTrap { get => currentTrap; set => currentTrap = value; }
 
-    private List<Skill> enemySkills;
-    public List<Skill> EnemySkills { get => enemySkills; set => enemySkills = value; }
+    private List<EnemyTrapManager> passedTraps=new List<EnemyTrapManager>();
+    public List<EnemyTrapManager> PassedTraps { get => passedTraps; set => passedTraps = value; }
+
+    private List<Skill> skills;
+    public List<Skill> Skills { get => skills; set => skills = value; }
     public int ReachDamage { get; set; }
 
     private float stunTime;
@@ -113,7 +116,6 @@ public abstract class Enemy : PathFollower, IDamageable
     }
 
 
-
     public virtual void Awake()
     {
         enemySprite = transform.Find("Model").Find("GFX").GetComponent<SpriteRenderer>();
@@ -133,21 +135,28 @@ public abstract class Enemy : PathFollower, IDamageable
     {
         //if (EnemySkills != null)
         //{
-        //    foreach (Skill enemySkill in EnemySkills)
-        //    {
-        //        enemySkill.OnGameUpdating();
-        //    }
+            //foreach (Skill enemySkill in EnemySkills)
+            //{
+            //    enemySkill.OnGameUpdating();
+            //}
         //}
+        if (PassedTraps != null)
+        {
+            foreach (EnemyTrapManager trap in PassedTraps)
+            {
+                trap.trap.OnGameUpdating(this);
+            }
+        }
         OnEnemyUpdate();
         if (IsDie)
         {
-            if (EnemySkills != null)
-            {
-                foreach (Skill enemySkill in EnemySkills)
-                {
-                    enemySkill.OnDying();
-                }
-            }
+            //if (EnemyTraps != null)
+            //{
+            //    foreach (EnemyTrap enemySkill in EnemyTraps)
+            //    {
+            //        enemySkill.OnDying();
+            //    }
+            //}
             OnDie();
             StopAllCoroutines();
             ReusableObject explosion = ObjectPool.Instance.Spawn(exlposionPrefab);
@@ -167,7 +176,7 @@ public abstract class Enemy : PathFollower, IDamageable
 
         if (!trapTriggered && Progress >= 0.5f)
         {
-            TriigerTrap();
+            //TriigerTrap();
         }
 
         while (Progress >= 1f)
@@ -203,12 +212,36 @@ public abstract class Enemy : PathFollower, IDamageable
 
     }
 
-    protected void TriigerTrap()
+    public void TriigerTrap()
     {
-        if (CurrentTrap != null)
-            CurrentTrap.OnContentPass(this);
-        CurrentTrap = null;
+        for (int i = 0; i < PassedTraps.Count; i++)
+        {
+            PassedTraps[i].trap.trapIntensify2 = 1f;
+        }
+        if (PassedTraps.Count>0) 
+        {
+            EnemyTrapManager m = PassedTraps[PassedTraps.Count - 1];
+            //受到上一个陷阱的强化
+            if (PassedTraps.Count > 1)
+            {
+                for (int i = 0; i < PassedTraps.Count-1; i++)
+                {
+                    PassedTraps[i].trap.NextTrap(PassedTraps[i+1].trap);
+                }
+            }
+            if (!m.trapPassed)
+            {
+                m.trap.OnContentPassOnce(this);
+                m.trapPassed = true;
+            }
+            m.trap.OnContentPassMoreThanOnce(this);
+        }
+
+        //if (CurrentTrap != null)
+        //    CurrentTrap.OnContentPass(this);
+        //CurrentTrap = null;
         trapTriggered = true;
+
     }
 
     protected override void PrepareNextState()
@@ -235,6 +268,14 @@ public abstract class Enemy : PathFollower, IDamageable
         Speed = attribute.Speed;
         DamageIntensify = attribute.Shell;
         ReachDamage = attribute.ReachDamage;
+        if (Skills != null)
+        {
+            foreach (Skill enemySkill in Skills)
+            {
+                enemySkill.OnBorn();
+            }
+        }
+        PassedTraps = new List<EnemyTrapManager>();
     }
 
     protected override void PrepareIntro()
@@ -261,13 +302,6 @@ public abstract class Enemy : PathFollower, IDamageable
     public override void OnSpawn()
     {
         base.OnSpawn();
-        if (EnemySkills != null)
-        {
-            foreach (Skill enemySkill in EnemySkills)
-            {
-                enemySkill.OnBorn();
-            }
-        }
         IsDie = false;
     }
 
@@ -285,9 +319,9 @@ public abstract class Enemy : PathFollower, IDamageable
         StunTime = 0;
         CurrentTrap = null;
         Buffable.RemoveAllBuffs();
-        if (enemySkills != null)
+        if (skills != null)
         {
-            enemySkills.Clear();
+            skills.Clear();
         }
     }
 }

@@ -10,7 +10,7 @@ public class StrongerAircraftCarrier : AircraftCarrier
     {
         base.Initialize(attribute, pathOffset, healthBar, intensify);
         Armor = intensify * armorIntensify;
-        EnemySkills = new List<Skill>();
-        EnemySkills.Add(GameManager.Instance.SkillFactory.GetSkill(EnemySkill.strongerAircraft, this));
+        Skills = new List<Skill>();
+        Skills.Add(GameManager.Instance.SkillFactory.GetSkill(EnemySkill.strongerAircraft, this));
     }
 }

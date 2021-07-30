@@ -257,12 +257,14 @@ ARROWTRAP=减速箭头
 DAMAGETRAP=伤害标记
 SPAWNPOINT=起点
 DESTINATION=终点
+BLINKTRAP=闪烁陷阱
 
 STUNTRAPINFO=经过此格的敌人会被晕眩1.5秒。
 ARROWTRAPINFO=按箭头方向经过此处的敌人会被减速，直到转向。
 DAMAGETRAPINFO=每次敌人经过时，造成其期间所受伤害20%的额外伤害。
 SPAWNPOINTINFO=敌人的出生点，确保有路线与终点相连。
 DESTINATIONINFO=敌人的目的地，确保有路线与起点相连。
+BLINKTRAPINFO=闪烁陷阱
 
 //TurretBase
 ATTACKBASE=攻击基座

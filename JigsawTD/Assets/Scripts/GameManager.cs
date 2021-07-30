@@ -64,6 +64,9 @@ public class GameManager : Singleton<GameManager>
     private PickingState pickingState;
     private WaveState waveState;
 
+    //testetst
+    public int totalInterest;
+
     //初始化设定
     public void Initinal()
     {
@@ -341,7 +344,9 @@ public class GameManager : Singleton<GameManager>
 
     public void GainInterest()
     {
-        m_MainUI.Coin = (int)(m_MainUI.Coin* (1 + StaticData.Instance.CoinInterest));
+        totalInterest += (int)(m_MainUI.Coin * (StaticData.Instance.CoinInterest));
+        Debug.LogWarning("利息："+totalInterest);
+        m_MainUI.Coin = (int)(m_MainUI.Coin* (1 + StaticData.Instance.CoinInterest));;
     }
 
     public void GainDraw(int amount)

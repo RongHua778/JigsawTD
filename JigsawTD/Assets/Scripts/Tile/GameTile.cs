@@ -73,7 +73,7 @@ public abstract class GameTile : TileBase
 
     public virtual void OnTilePass(Enemy enemy)//经过触发特殊效果
     {
-        Content.OnContentPass(enemy);
+        Content.OnContentPassOnce(enemy);
     }
 
     protected override void OnMouseDown()

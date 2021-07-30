@@ -35,6 +35,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 201af454a56b147428bcc12e84b17d0b, type: 2}
   - {fileID: 11400000, guid: 7fe6d72c40d904b40b1e5e27ef4f12b6, type: 2}
   - {fileID: 11400000, guid: c09d9ab69fe482743be7a990ad9a6fcd, type: 2}
+  - {fileID: 11400000, guid: b97947ffb3f15a14ca54916da2ef71e6, type: 2}
+  - {fileID: 11400000, guid: 354eee86bbc7cdf4e8be1496b32979b2, type: 2}
+  - {fileID: 11400000, guid: f13230317ffdf964db484592817fadb6, type: 2}
+  - {fileID: 11400000, guid: 88e20e47c4e008b4e9a99a99edee8b9c, type: 2}
+  - {fileID: 11400000, guid: 0f5b17d06e53ad249a9d73451828bd4c, type: 2}
+  - {fileID: 11400000, guid: a4403e1aa24e65f4496cdcc54de25da7, type: 2}
+  - {fileID: 11400000, guid: bd18a2582f85635438ff7d96cb4a6138, type: 2}
   turretBaseAtts:
   - {fileID: 11400000, guid: f2893f05498ee0d46831e8279022852e, type: 2}
   - {fileID: 11400000, guid: cb02325040029af4aba013bf8db4d5d9, type: 2}

@@ -14,6 +14,9 @@ public class TrapContent : GameTileContent
     private List<BuffInfo> trapBuffs = new List<BuffInfo>();
     public float TrapIntensify = 1;
 
+    protected float trapCounter;
+    public float trapIntensify2=1;
+
     public override void ContentLanded()
     {
         base.ContentLanded();
@@ -29,9 +32,9 @@ public class TrapContent : GameTileContent
             transform.rotation = Quaternion.identity;
         }
     }
-    public override void OnContentPass(Enemy enemy)
+    public override void OnContentPassOnce(Enemy enemy)
     {
-        base.OnContentPass(enemy);
+        base.OnContentPassOnce(enemy);
         trapBuffs = m_TrapAttribute.BuffInfos;
         if (m_TrapAttribute.BuffInfos.Count <= 0)
             return;
@@ -39,6 +42,11 @@ public class TrapContent : GameTileContent
         {
             enemy.Buffable.AddBuff(trap, TrapIntensify);
         }
+    }
+
+    public virtual void OnContentPassMoreThanOnce(Enemy enemy)
+    {
+
     }
 
     public override void OnContentSelected(bool value)
@@ -63,6 +71,27 @@ public class TrapContent : GameTileContent
         {
             if (target.Enemy != null) 
             ((Enemy)target.Enemy).CurrentTrap = this;
+            List<EnemyTrapManager> m= ((Enemy)target.Enemy).PassedTraps;
+            if (m.Count > 0)
+            {
+                bool contained=false;
+                for (int i = 0; i < m.Count; i++)
+                {
+                    if (m[i].trap == this)
+                    {
+                        contained = true;
+                    }
+                }
+                if (!contained)
+                {
+                    ((Enemy)target.Enemy).PassedTraps.Add(new EnemyTrapManager(this, false));
+                }
+            }
+            else
+            {
+                ((Enemy)target.Enemy).PassedTraps.Add(new EnemyTrapManager(this, false));
+            }
+            ((Enemy)target.Enemy).TriigerTrap();
         }
         else
         {
@@ -71,4 +100,13 @@ public class TrapContent : GameTileContent
 
     }
 
+    public virtual void OnGameUpdating(Enemy enemy)
+    {
+        
+    }
+
+    public virtual void NextTrap(TrapContent nextTrap)
+    {
+
+    }
 }
