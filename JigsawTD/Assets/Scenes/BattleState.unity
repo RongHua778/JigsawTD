@@ -5796,15 +5796,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerMaxLevel: 7
   LevelUpMoney: 000000003200000064000000c80000005e01000026020000200300000f270000
-  StartCoin: 4
+  StartCoin: 5
   StartLotteryDraw: 0
-  BaseWaveIncome: 25
-  WaveMultiplyIncome: 2
+  BaseWaveIncome: 20
+  WaveMultiplyIncome: 5
   BuyBluePrintCost: 20
   ShopRefreshCost: 20
-  CoinInterest: 0.3
+  CoinInterest: 0.2
   BaseShapeCost: 20
-  MultipleShapeCost: 2
+  MultipleShapeCost: 5
   EnvrionmentBaseVolume: 0.5
   TileSize: 1
   TileShapeChance: []
