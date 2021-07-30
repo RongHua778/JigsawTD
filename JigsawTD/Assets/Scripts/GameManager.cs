@@ -341,7 +341,7 @@ public class GameManager : Singleton<GameManager>
 
     public void GainInterest()
     {
-        m_MainUI.Coin = (int)(m_MainUI.Coin* (1 + StaticData.Instance.CoinInterest));
+        m_MainUI.Coin = (int)(m_MainUI.Coin * (1 + StaticData.Instance.CoinInterest));
     }
 
     public void GainDraw(int amount)
@@ -407,6 +407,14 @@ public class GameManager : Singleton<GameManager>
         foreach (var turret in compositeTurrets.behaviors)
         {
             ((StrategyComposite)(((TurretContent)turret).Strategy)).LandedTurretSkill();
+        }
+    }
+
+    public void CheckDrawSkill()
+    {
+        foreach (var turret in compositeTurrets.behaviors)
+        {
+            ((StrategyComposite)(((TurretContent)turret).Strategy)).DrawTurretSkill();
         }
     }
     #endregion
@@ -479,7 +487,10 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region 待加入功能
-
+    public void SetBuyShapeCostDiscount(float discount)
+    {
+        m_FuncUI.BuyShapeCost = Mathf.RoundToInt(m_FuncUI.BuyShapeCost * (1 - discount));
+    }
 
     #endregion
 }

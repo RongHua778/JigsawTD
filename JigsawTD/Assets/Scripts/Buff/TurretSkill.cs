@@ -60,6 +60,11 @@ public abstract class TurretSkill
 
     }
 
+    public virtual void Draw()
+    {
+
+    }
+
     public virtual void Tick(float delta)
     {
         Duration -= delta;

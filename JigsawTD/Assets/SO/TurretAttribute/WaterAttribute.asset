@@ -39,7 +39,7 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.29}
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 45
+    AttackDamage: 60
     AttackSpeed: 0.75
     SputteringRange: 0
     CriticalRate: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.32}
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 75
+    AttackDamage: 125
     AttackSpeed: 0.75
     SputteringRange: 0
     CriticalRate: 0
@@ -61,7 +61,7 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.35}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 120
+    AttackDamage: 250
     AttackSpeed: 0.75
     SputteringRange: 0
     CriticalRate: 0
@@ -72,7 +72,7 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.38}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 210
+    AttackDamage: 360
     AttackSpeed: 0.75
     SputteringRange: 0
     CriticalRate: 0

@@ -19,6 +19,7 @@ public class Blueprint
 
     public void SetBluePrintIntensify()
     {
+        SortBluePrint();
         CompositeAttackDamage = CompositeAttackSpeed = CompositeSlowRate = CompositeCriticalRate = CompositeSputteringRange = 0;
         foreach (Composition com in Compositions)
         {
@@ -42,6 +43,32 @@ public class Blueprint
                     break;
                 default:
                     break;
+            }
+        }
+    }
+
+    private void SortBluePrint()
+    {
+        int temp;
+        for (int i = 0; i < compositions.Count - 1; i++)
+        {
+            for (int j = 0; j < compositions.Count - 1 - i; j++)
+            {
+                if (compositions[j].elementRequirement > compositions[j + 1].elementRequirement)
+                {
+                    temp = compositions[j + 1].elementRequirement;
+                    compositions[j + 1].elementRequirement = compositions[j].elementRequirement;
+                    compositions[j].elementRequirement = temp;
+                }
+                else if(compositions[j].elementRequirement == compositions[j + 1].elementRequirement)
+                {
+                    if(compositions[j].qualityRequeirement > compositions[j + 1].qualityRequeirement)
+                    {
+                        temp = compositions[j + 1].qualityRequeirement;
+                        compositions[j + 1].qualityRequeirement = compositions[j].qualityRequeirement;
+                        compositions[j].qualityRequeirement = temp;
+                    }
+                }
             }
         }
     }

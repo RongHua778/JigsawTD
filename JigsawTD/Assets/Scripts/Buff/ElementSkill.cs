@@ -49,10 +49,27 @@ public class CCCFrostCore : ElementSkill
 {
     public override List<int> Elements => new List<int> { 2, 2, 2 };
     public override string SkillDescription => "CCC";
+    private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
 
-    public override void Composite()
+    public override void Detect()
     {
-        GameManager.Instance.GetPerfectElement(1);
+        foreach (var strategy in intensifiedStrategies)
+        {
+            strategy.BaseSlowRateIntensify -= 0.5f;
+        }
+        intensifiedStrategies.Clear();
+        List<Vector2Int> points = StaticData.GetCirclePoints(1);
+        foreach (var point in points)
+        {
+            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
+            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
+            if (hit != null)
+            {
+                StrategyBase strategy = hit.GetComponent<TurretContent>().Strategy;
+                strategy.BaseSlowRateIntensify += 0.5f;
+                intensifiedStrategies.Add(strategy);
+            }
+        }
     }
 
 }
@@ -189,16 +206,20 @@ public class ABEResourcesAllocation : ElementSkill
     public override List<int> Elements => new List<int> { 0, 1, 4 };
     public override string SkillDescription => "ABE";
 
-    private int turn;
-    public override void EndTurn()
+    public override void Draw()
     {
-        turn++;
-        if (turn > 4)
-        {
-            turn = 0;
-            GameManager.Instance.GainDraw(1);
-        }
+        strategy.BaseAttackIntensify += 0.1f;
     }
+    //private int turn;
+    //public override void EndTurn()
+    //{
+    //    turn++;
+    //    if (turn > 4)
+    //    {
+    //        turn = 0;
+    //        GameManager.Instance.GainDraw(1);
+    //    }
+    //}
 }
 
 public class ACDResourcesRecycle : ElementSkill
@@ -208,7 +229,7 @@ public class ACDResourcesRecycle : ElementSkill
 
     public override void Composite()
     {
-        GameManager.Instance.GainDraw(3);
+        GameManager.Instance.SetBuyShapeCostDiscount(0.3f);
     }
 }
 
@@ -227,28 +248,12 @@ public class ADEHardCore : ElementSkill
 {
     public override List<int> Elements => new List<int> { 0, 3, 4 };
     public override string SkillDescription => "ADE";
-
-    private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
-    public override void Detect()
+    public override void Composite()
     {
-        foreach (var strategy in intensifiedStrategies)
-        {
-            strategy.BaseAttackIntensify -= 0.5f;
-        }
-        intensifiedStrategies.Clear();
-        List<Vector2Int> points = StaticData.GetCirclePoints(1);
-        foreach (var point in points)
-        {
-            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
-            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
-            if (hit != null)
-            {
-                StrategyBase strategy = hit.GetComponent<TurretContent>().Strategy;
-                strategy.BaseAttackIntensify += 0.5f;
-                intensifiedStrategies.Add(strategy);
-            }
-        }
+        GameManager.Instance.GetPerfectElement(1);
     }
+
+
 }
 
 public class BBAProcessImprovement : ElementSkill
@@ -258,12 +263,12 @@ public class BBAProcessImprovement : ElementSkill
 
     public override void StartTurn()
     {
-        Duration = 20;
+        Duration = 30;
     }
 
     public override void TickEnd()
     {
-        strategy.TurnSpeedIntensify *= 1.6f;
+        strategy.TurnSpeedIntensify += 1;
     }
 
     public override void EndTurn()
@@ -278,7 +283,7 @@ public class BBCPreciseStrike : ElementSkill
     public override List<int> Elements => new List<int> { 1, 1, 2 };
     public override string SkillDescription => "BBC";
 
-    public override void Hit(Enemy target,Bullet bullet = null)
+    public override void Hit(Enemy target, Bullet bullet = null)
     {
         float realDamage;
         float extraDamage = target.CurrentHealth * (target.IsBoss ? 0.01f : 0.04f);
@@ -293,18 +298,19 @@ public class BBDBirdShoot : ElementSkill
     public override List<int> Elements => new List<int> { 1, 1, 3 };
     public override string SkillDescription => "BBD";
 
-    float criticalRateIncreased;
-    public override void Shoot(Bullet bullet = null)
+    private float speedIncreased;
+    public override void PreHit(Bullet bullet = null)
     {
-        if (criticalRateIncreased > 1.99f)
-            return;
-        strategy.TurnFixCriticalRate += 0.05f;
-        criticalRateIncreased += 0.05f;
+        if (bullet.isCritical && speedIncreased < 1.99f)
+        {
+            strategy.TurnSpeedIntensify += 0.1f;
+            speedIncreased += 0.1f;
+        }
     }
 
     public override void EndTurn()
     {
-        criticalRateIncreased = 0;
+        speedIncreased = 0;
     }
 }
 
@@ -333,7 +339,7 @@ public class BCDMoneyFactory : ElementSkill
     {
         if (bullet.isCritical)
         {
-            GameManager.Instance.GainMoney(1);
+            GameManager.Instance.GainMoney(2);
         }
     }
 }
@@ -374,6 +380,46 @@ public class ADESpeedCore : ElementSkill
     public override List<int> Elements => new List<int> { 1, 3, 4 };
     public override string SkillDescription => "BDE";
 
+    public override void Composite()
+    {
+        GameManager.Instance.GetRandomBluePrint(true);
+    }
+
+}
+
+public class CCABlueprint : ElementSkill
+{
+    public override List<int> Elements => new List<int> { 2, 2, 0 };
+    public override string SkillDescription => "CCA";
+
+    private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
+    public override void Detect()
+    {
+        foreach (var strategy in intensifiedStrategies)
+        {
+            strategy.BaseAttackIntensify -= 0.5f;
+        }
+        intensifiedStrategies.Clear();
+        List<Vector2Int> points = StaticData.GetCirclePoints(1);
+        foreach (var point in points)
+        {
+            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
+            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
+            if (hit != null)
+            {
+                StrategyBase strategy = hit.GetComponent<TurretContent>().Strategy;
+                strategy.BaseAttackIntensify += 0.5f;
+                intensifiedStrategies.Add(strategy);
+            }
+        }
+    }
+
+}
+public class CCBFrostCore : ElementSkill
+{
+    public override List<int> Elements => new List<int> { 2, 2, 1 };
+    public override string SkillDescription => "CCB";
+
     private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
     public override void Detect()
     {
@@ -397,27 +443,18 @@ public class ADESpeedCore : ElementSkill
     }
 }
 
-public class CCABlueprint : ElementSkill
+public class CCDUnstableShaft : ElementSkill
 {
-    public override List<int> Elements => new List<int> { 2, 2, 0 };
-    public override string SkillDescription => "CCA";
+    public override List<int> Elements => new List<int> { 2, 2, 3 };
+    public override string SkillDescription => "CCD";
 
-    public override void Composite()
-    {
-        GameManager.Instance.GetRandomBluePrint(true);
-    }
-}
-public class CCBFrostCore : ElementSkill
-{
-    public override List<int> Elements => new List<int> { 2, 2, 1 };
-    public override string SkillDescription => "CCB";
 
     private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
     public override void Detect()
     {
         foreach (var strategy in intensifiedStrategies)
         {
-            strategy.BaseSlowRateIntensify -= 0.5f;
+            strategy.BaseCriticalRateIntensify -= 0.3f;
         }
         intensifiedStrategies.Clear();
         List<Vector2Int> points = StaticData.GetCirclePoints(1);
@@ -428,23 +465,10 @@ public class CCBFrostCore : ElementSkill
             if (hit != null)
             {
                 StrategyBase strategy = hit.GetComponent<TurretContent>().Strategy;
-                strategy.BaseSlowRateIntensify += 0.5f;
+                strategy.BaseCriticalRateIntensify += 0.3f;
+                strategy.m_Turret.GenerateRange();
                 intensifiedStrategies.Add(strategy);
             }
-        }
-    }
-}
-
-public class CCDUnstableShaft : ElementSkill
-{
-    public override List<int> Elements => new List<int> { 2, 2, 3 };
-    public override string SkillDescription => "CCD";
-
-    public override void Hit(Enemy target, Bullet bullet = null)
-    {
-        if (bullet.isCritical)
-        {
-            bullet.SlowRate *= 2;
         }
     }
 }
@@ -454,15 +478,30 @@ public class CCEIceBomb : ElementSkill
     public override List<int> Elements => new List<int> { 2, 2, 4 };
     public override string SkillDescription => "CCE";
 
-    public override void Build()
+    private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
+    public override void Detect()
     {
-        strategy.BaseTargetCountIntensify += 2;
+        foreach (var strategy in intensifiedStrategies)
+        {
+            strategy.BaseSputteringRangeIntensify -= 0.5f;
+        }
+        intensifiedStrategies.Clear();
+        List<Vector2Int> points = StaticData.GetCirclePoints(1);
+        foreach (var point in points)
+        {
+            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
+            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
+            if (hit != null)
+            {
+                StrategyBase strategy = hit.GetComponent<TurretContent>().Strategy;
+                strategy.BaseSputteringRangeIntensify += 0.5f;
+                strategy.m_Turret.GenerateRange();
+                intensifiedStrategies.Add(strategy);
+            }
+        }
     }
 
-    public override void Hit(Enemy target, Bullet bullet = null)
-    {
-        bullet.Damage *= 0.5f;
-    }
+
 }
 
 public class CDETargetCore : ElementSkill
@@ -536,27 +575,9 @@ public class DDCVentureInvestment : ElementSkill
     public override List<int> Elements => new List<int> { 3, 3, 2 };
     public override string SkillDescription => "DDC";
 
-    private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
-    public override void Detect()
+    public override void Hit(Enemy target, Bullet bullet = null)
     {
-        foreach (var strategy in intensifiedStrategies)
-        {
-            strategy.BaseCriticalRateIntensify -= 0.3f;
-        }
-        intensifiedStrategies.Clear();
-        List<Vector2Int> points = StaticData.GetCirclePoints(1);
-        foreach (var point in points)
-        {
-            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
-            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
-            if (hit != null)
-            {
-                StrategyBase strategy = hit.GetComponent<TurretContent>().Strategy;
-                strategy.BaseCriticalRateIntensify += 0.3f;
-                strategy.m_Turret.GenerateRange();
-                intensifiedStrategies.Add(strategy);
-            }
-        }
+        bullet.CriticalPercentage += bullet.SlowRate;
     }
 
 }
@@ -595,19 +616,21 @@ public class EEBHeatingBarrel : ElementSkill
     public override List<int> Elements => new List<int> { 4, 4, 1 };
     public override string SkillDescription => "EEB";
 
-    float sputteringRangeIncreased;
-    public override void Shoot(Bullet bullet = null)
-    {
-        if (sputteringRangeIncreased < 1.5f)
-        {
-            sputteringRangeIncreased += 0.1f;
-            strategy.TurnFixSputteringRange += 0.1f;
-        }
-    }
 
-    public override void EndTurn()
+    private int adjacentTurretCount = 0;
+    public override void Detect()
     {
-        sputteringRangeIncreased = 0;
+        strategy.BaseSputteringRangeIntensify -= 0.3f * adjacentTurretCount;//ÐÞ¸´»Ø³õÊ¼Öµ
+        adjacentTurretCount = 0;
+        List<Vector2Int> points = StaticData.GetCirclePoints(1);
+        foreach (var point in points)
+        {
+            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
+            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
+            if (hit != null)
+                adjacentTurretCount++;
+        }
+        strategy.BaseSputteringRangeIntensify += 0.3f * adjacentTurretCount;
     }
 
 }
@@ -617,27 +640,14 @@ public class EECConcretePouring : ElementSkill
     public override List<int> Elements => new List<int> { 4, 4, 2 };
     public override string SkillDescription => "EEC";
 
-    private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
-    public override void Detect()
+    public override void Build()
     {
-        foreach (var strategy in intensifiedStrategies)
-        {
-            strategy.BaseSputteringRangeIntensify -= 0.5f;
-        }
-        intensifiedStrategies.Clear();
-        List<Vector2Int> points = StaticData.GetCirclePoints(1);
-        foreach (var point in points)
-        {
-            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
-            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
-            if (hit != null)
-            {
-                StrategyBase strategy = hit.GetComponent<TurretContent>().Strategy;
-                strategy.BaseSputteringRangeIntensify += 0.5f;
-                strategy.m_Turret.GenerateRange();
-                intensifiedStrategies.Add(strategy);
-            }
-        }
+        strategy.BaseTargetCountIntensify += 2;
+    }
+
+    public override void Hit(Enemy target, Bullet bullet = null)
+    {
+        bullet.Damage *= 0.5f;
     }
 
 }
