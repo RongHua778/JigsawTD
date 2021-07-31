@@ -18,16 +18,17 @@ public class BasicTile : GameTile
 
     public void SetBaseSprite(int type)
     {
+        TileRenderers = GetComponentsInChildren<SpriteRenderer>();
         switch (type)
         {
             case 0:
-                BaseRenderer.sprite = sprites[Random.Range(0, sprites.Length)];
+                TileRenderers[0].sprite = sprites[Random.Range(0, sprites.Length)];
                 break;
             case 1:
-                BaseRenderer.sprite = basicTurretBase;
+                TileRenderers[0].sprite = basicTurretBase;
                 break;
             case 2:
-                BaseRenderer.sprite = compositeTurretBase;
+                TileRenderers[0].sprite = compositeTurretBase;
                 break;
         }
     }

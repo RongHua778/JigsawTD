@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyName: RESTORER
   EnemyType: 2
-  InitCount: 3
+  InitCount: 2
   CountIncrease: 3
   Health: 18
   Speed: 0.7

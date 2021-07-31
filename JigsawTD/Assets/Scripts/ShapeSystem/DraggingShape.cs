@@ -33,7 +33,7 @@ public class DraggingShape : DraggingActions
     {
         foreach (GameTile tile in TileShape.tiles)
         {
-            tile.BaseRenderer.color = colorToSet;
+            tile.SetTileColor(colorToSet);
         }
     }
 
@@ -47,7 +47,7 @@ public class DraggingShape : DraggingActions
 
     private void SetTileColor(Color colorToSet, GameTile tile)
     {
-        tile.BaseRenderer.color = colorToSet;
+        tile.SetTileColor(colorToSet);
     }
 
     protected override void Update()
@@ -57,8 +57,6 @@ public class DraggingShape : DraggingActions
         {
             RotateShape();
         }
-
-
     }
 
 

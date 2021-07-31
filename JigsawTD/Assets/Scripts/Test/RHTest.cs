@@ -21,7 +21,7 @@ public class RHTest : MonoBehaviour
 
     [SerializeField] InputField trapInputField = default;
 
-    [SerializeField] InputField waveStateField = default;
+   // [SerializeField] InputField waveStateField = default;
     [SerializeField] WaveSystem waveSystem = default;
 
 

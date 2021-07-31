@@ -208,7 +208,7 @@ public class FuncUI : IUserInterface
             if (GameManager.Instance.ConsumeMoney(PlayerLvUpMoney))
             {
                 PlayerLevel++;
-                if (PlayerLevel == 4 || PlayerLevel == 7)//4和7级增加一个商店容量
+                if (PlayerLevel == 3 || PlayerLevel == 5 || PlayerLevel == 7)//3,5和7级增加一个商店容量
                 {
                     m_GameManager.IncreaseShopCapacity();
                 }

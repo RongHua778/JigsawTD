@@ -129,13 +129,13 @@ public class TurretTips : TileTips
         m_Strategy = grid.BluePrint.ComStrategy;
         BasicInfo();
         UpdateBluePrintInfo();
-        BuyBtn.SetActive(grid.InShop);
+        //BuyBtn.SetActive(grid.InShop);
         TileSkillArea.SetActive(false);
 
         AnalysisArea.SetActive(false);
         UpgradeArea.SetActive(false);
         IntensifyArea.SetActive(false);
-        BluePrintArea.SetActive(true);
+        BluePrintArea.SetActive(false);
         elementConstruct.gameObject.SetActive(true);
         elementConstruct.SetElements((StrategyComposite)m_Strategy);
 
