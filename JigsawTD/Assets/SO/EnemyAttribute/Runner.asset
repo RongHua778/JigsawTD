@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyName: RUNNER
   EnemyType: 1
-  InitCount: 3
+  InitCount: 2
   CountIncrease: 3
   Health: 12
   Speed: 1

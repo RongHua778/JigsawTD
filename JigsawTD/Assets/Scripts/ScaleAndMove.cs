@@ -191,6 +191,11 @@ public class ScaleAndMove : IGameSystem
         {
             cam.transform.DOMove(CamInitialPos, 0.6f);
         }
+
+        speedVertical = Input.GetAxisRaw("Horizontal") * Vector3.right * slideSpeed * Time.deltaTime;
+        speedHorizon = Input.GetAxisRaw("Vertical") * Vector3.up * slideSpeed * Time.deltaTime;
+        speed = speedHorizon + speedVertical;
+        transform.Translate(speed / m_MainUI.GameSpeed, Space.World);
         //else
         //{
         //    CamMovement = Vector2.zero;
@@ -200,7 +205,7 @@ public class ScaleAndMove : IGameSystem
 
     //private void LateUpdate()
     //{
-        
+
 
     //    transform.Translate(CamMovement * moveSpeed * Time.deltaTime);
     //}

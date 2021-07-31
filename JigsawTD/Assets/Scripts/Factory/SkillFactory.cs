@@ -10,11 +10,11 @@ public enum EnemySkill
 [CreateAssetMenu(menuName = "Factory/SkillFactory", fileName = "skillFactory")]
 public class SkillFactory : GameObjectFactory
 {
-    [SerializeField] float[] bornerBornCD;
-    [SerializeField] int[] bornerEnemyOneBorn;
-    [SerializeField] int blinkerBlink = 3;
-    [SerializeField] ReusableObject holePrefab = default;
-    [SerializeField] int dividerDividing;
+    //[SerializeField] float[] bornerBornCD;
+    //[SerializeField] int[] bornerEnemyOneBorn;
+    //[SerializeField] int blinkerBlink = 3;
+    //[SerializeField] ReusableObject holePrefab = default;
+    //[SerializeField] int dividerDividing;
     [SerializeField] int dividerSprings;
     [SerializeField] Sprite[] dividerSprites = default;
     [SerializeField] float aircraftBornCD = 4f;

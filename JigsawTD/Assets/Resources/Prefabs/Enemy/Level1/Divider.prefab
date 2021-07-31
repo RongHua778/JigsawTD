@@ -87,13 +87,12 @@ MonoBehaviour:
   IsBoss: 1
   Intensify: 0
   exlposionPrefab: {fileID: 4814509631623709245, guid: da26032d01e11f8489ff266989819e3b, type: 3}
-  enemyCol: {fileID: 0}
   DividerSprites:
   - {fileID: -8360756241666586474, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
   - {fileID: 6048167617135722125, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
   - {fileID: -8847467542957845770, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
   dividing: 2
-  springs: 3
+  springs: 2
 --- !u!1 &8360252054385358165
 GameObject:
   m_ObjectHideFlags: 0

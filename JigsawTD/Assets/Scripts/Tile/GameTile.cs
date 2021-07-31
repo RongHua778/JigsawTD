@@ -13,7 +13,7 @@ public abstract class GameTile : TileBase
 
     public bool isWalkable { get => Content.IsWalkable; }
     public DraggingShape m_DraggingShape { get; set; }
-    public SpriteRenderer BaseRenderer { get; set; }
+    public SpriteRenderer[] TileRenderers { get; set; }
     public SpriteRenderer PreviewRenderer { get; set; }
     public Vector3 ExitPoint { get; set; }
 
@@ -56,8 +56,15 @@ public abstract class GameTile : TileBase
         previewGlow = transform.Find("PreviewGlow").gameObject;
         PreviewRenderer = previewGlow.GetComponent<SpriteRenderer>();
         tileBase = transform.Find("TileBase");
-        BaseRenderer = tileBase.GetComponent<SpriteRenderer>();
         directionCheckPoint = transform.Find("CheckPoint");
+    }
+
+    public void SetTileColor(Color colorToSet)
+    {
+        foreach(var sr in TileRenderers)
+        {
+            sr.color = colorToSet;
+        }
     }
 
     public virtual void TileLanded()//tile被放入版图时
@@ -112,7 +119,7 @@ public abstract class GameTile : TileBase
         ObjectPool.Instance.UnSpawn(Content);
         gameObject.tag = "Untagged";
         m_DraggingShape = null;
-        BaseRenderer.color = Color.white;
+        SetTileColor(Color.white);
         Content = null;
 
     }
@@ -131,9 +138,4 @@ public abstract class GameTile : TileBase
         Content.CorretRotation();
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    //if(collision.GetComponent<TargetPoint>())
-    //    collision.GetComponent<TargetPoint>().Object.CurrentTile = this;
-    //}
 }

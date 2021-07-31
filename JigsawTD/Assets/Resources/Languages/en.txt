@@ -58,11 +58,11 @@ NEXTWAVE=Next Wave[Space]
 DRAWMODULE=Draw Module
 MODULELEVELINFO1=Current level probability
 MODULELEVELINFO2=Level
-MODULELEVELINFO3=Shop blueprint +1 when module level reaches 4 and 7
+MODULELEVELINFO3=Shop blueprint +1 when module level reaches 3,5 and 7
 ENERGYINFO=1. Gain 1 energy if you haven't drawed last wave\n2. Gain additional energy if you keep not drawing \n3. Gain 1 extra draw while energy reach 10.
 
 //shop
-SHOPBLUEPRINT=Shop
+SHOPBLUEPRINT=Double click to composite
 OWNBLUEPRINT=Owned
 NEXTREFRESH=Refresh after
 OWNPERFECT=Perfect Element
@@ -192,7 +192,7 @@ ABC=Reinforcement base: Upgrade cost -50%.
 ABD=Quantitative Investment: Coin earned increased by 15%.
 ABE=Resource allocation: Attack increased by 10% permanently for your each draw.
 
-ACD=Recycling: Gain 3 draws while composite.
+ACD=Recycling: Draw module cost reduced by 30% while composite.
 ACE=Urgent Refactoring: Enhanced the next blueprint you bought.
 
 ADE=Metal Mind: Gain 1 perfect element while composite.

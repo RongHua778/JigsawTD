@@ -34,7 +34,7 @@ public class BluePrintShopUI : IUserInterface
                 nextRefreshTrun = 3;
                 GameManager.Instance.RefreshShop(0);
             }
-            NextRefreshTurnsTxt.text = GameMultiLang.GetTraduction("NEXTREFRESH")+":"+nextRefreshTrun + GameMultiLang.GetTraduction("WAVE");
+            NextRefreshTurnsTxt.text = GameMultiLang.GetTraduction("NEXTREFRESH") + ":" + nextRefreshTrun + GameMultiLang.GetTraduction("WAVE");
         }
     }
 
@@ -61,12 +61,19 @@ public class BluePrintShopUI : IUserInterface
 
     public void RefreshShop(int level, int cost)//Ë¢ÐÂÉÌµê
     {
-        foreach (var grid in ShopBluePrints.ToList())
+        int lockNum = 0;
+        foreach(var grid in ShopBluePrints.ToList())
         {
-            RemoveGrid(grid);
+            if (!grid.IsLock)
+            {
+                RemoveGrid(grid);
+            }
+            else
+            {
+                lockNum++;
+            }
         }
-        ShopBluePrints.Clear();
-        for (int i = 0; i < ShopCapacity; i++)
+        for (int i = 0; i < ShopCapacity - lockNum; i++)
         {
             Blueprint bluePrint = ConstructHelper.GetRandomBluePrintByLevel(level);
             AddBluePrint(bluePrint, true);
@@ -82,7 +89,7 @@ public class BluePrintShopUI : IUserInterface
         bluePrintGrid.SetElements(shopContent.GetComponent<ToggleGroup>(), bluePrint);
         if (isShopBluePrint)
         {
-            bluePrintGrid.transform.SetAsFirstSibling();
+            //bluePrintGrid.transform.SetAsFirstSibling();
             bluePrintGrid.InShop = true;
             ShopBluePrints.Add(bluePrintGrid);
         }

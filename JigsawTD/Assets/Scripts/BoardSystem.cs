@@ -272,7 +272,7 @@ public class BoardSystem : IGameSystem
                 tempPoss.Remove(pos);
             }
         }
-        for (int i = 0; i < StaticData.trapN; i++)
+        for (int i = 0; i < StaticData.Instance.trapN; i++)
         {
             int index = UnityEngine.Random.Range(0, tempPoss.Count);
             Vector2Int temp = tempPoss[index];

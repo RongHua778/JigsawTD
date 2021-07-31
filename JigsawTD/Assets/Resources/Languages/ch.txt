@@ -57,11 +57,11 @@ NEXTWAVE=下一波[Space]
 DRAWMODULE=抽取模块
 MODULELEVELINFO1=当前等级概率
 MODULELEVELINFO2=品质
-MODULELEVELINFO3=当模块等级达到4和7级时，商店配方数量+1
+MODULELEVELINFO3=当模块等级达到3,5和7级时，商店配方数量+1
 ENERGYINFO=1.当前回合没有抽取时，获得1点能量\n2.连续不抽取时，会获得额外能量\n3.能量每达到10点，获得1次额外抽取次数
 
 //shop
-SHOPBLUEPRINT=商店配方
+SHOPBLUEPRINT=双击配方合成
 OWNBLUEPRINT=拥有配方
 NEXTREFRESH=下次刷新
 OWNPERFECT=拥有万能元素
@@ -193,7 +193,7 @@ ABC=加固底座：防御塔升级费用-50%
 ABD=量化投资：获得的金币提高15%
 ABE=资源配置：每次抽取模块都会使该防御塔攻击力永久提升10%
 
-ACD=资源回收：合成时，获得3次额外抽取次数
+ACD=资源回收：合成时，使抽取模块价格降低30%
 ACE=紧急重构：使你下一个购买的配方变为强化配方
 
 ADE=霜冻核心：合成后，获得1个万能元素

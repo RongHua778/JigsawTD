@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyName: SOILDER
   EnemyType: 0
-  InitCount: 5
+  InitCount: 3
   CountIncrease: 8
   Health: 10
   Speed: 1

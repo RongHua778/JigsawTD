@@ -2,29 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class BluePrintGrid : ReusableObject
+public class BluePrintGrid : ReusableObject, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public static BluePrintGrid SelectingBluePrint = null;
     [SerializeField] Color UnobtainColor = default;
-    private bool inShop=false;
+    private bool isLock = false;
+    public bool IsLock { get => isLock; set => isLock = value; }
+    private bool inShop = false;
     public bool InShop { get => inShop; set => inShop = value; }
 
     [SerializeField] Text compositeName = default;
     [SerializeField] Image compositeIcon = default;
     [SerializeField] ElementGrid[] elementGrids = default;
-    private Toggle toggle;
+    [SerializeField] Toggle m_LockToggle = default;
+    private Toggle m_Toggle;
     private Blueprint m_BluePrint;
 
     public Blueprint BluePrint { get => m_BluePrint; set => m_BluePrint = value; }
 
-
     public void SetElements(ToggleGroup group, Blueprint bluePrint)
     {
-        toggle = this.GetComponent<Toggle>();
+        m_Toggle = this.GetComponent<Toggle>();
         BluePrint = bluePrint;
         BluePrint.CheckElement();
-        toggle.group = group;
+        m_Toggle.group = group;
         compositeName.text = bluePrint.CompositeTurretAttribute.Name;
         compositeIcon.sprite = bluePrint.CompositeTurretAttribute.TurretLevels[0].TurretIcon;
         //给每一个组件设置图片
@@ -32,9 +35,9 @@ public class BluePrintGrid : ReusableObject
 
     }
 
-    public void PreviewElement(bool value, Element element,int quality)
+    public void PreviewElement(bool value, Element element, int quality)
     {
-        foreach(var elementGrid in elementGrids)
+        foreach (var elementGrid in elementGrids)
         {
             elementGrid.SetPreview(value, element, quality);
         }
@@ -60,7 +63,7 @@ public class BluePrintGrid : ReusableObject
 
     public void OnBluePrintSelect()
     {
-        if (toggle.isOn)
+        if (m_Toggle.isOn)
         {
             if (SelectingBluePrint != null)
                 SelectingBluePrint.OnBluePrintDeselect();
@@ -80,9 +83,39 @@ public class BluePrintGrid : ReusableObject
         GameManager.Instance.HideTips();
     }
 
+    public void OnLock(bool value)
+    {
+        IsLock = value;
+    }
+
     public void CheckElements()
     {
         BluePrint.CheckElement();
         RefreshElementsSprite();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        m_Toggle.isOn = true;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        m_Toggle.isOn = false;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.clickCount == 2)
+        {
+            GameManager.Instance.CompositeShape(this);
+        }
+    }
+
+    public override void OnUnSpawn()
+    {
+        base.OnUnSpawn();
+        IsLock = false;
+        m_LockToggle.isOn = false;
     }
 }
