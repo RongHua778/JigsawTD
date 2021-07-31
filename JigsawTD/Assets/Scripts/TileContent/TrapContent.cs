@@ -32,9 +32,30 @@ public class TrapContent : GameTileContent
             transform.rotation = Quaternion.identity;
         }
     }
-    public override void OnContentPassOnce(Enemy enemy)
+    public override void OnContentPass(Enemy enemy)
     {
-        base.OnContentPassOnce(enemy);
+        base.OnContentPass(enemy);
+        //以下是新加的内容
+        for (int i = 0; i < enemy.PassedTraps.Count; i++)
+        {
+            enemy.PassedTraps[i].trapIntensify2 = 1f;
+        }
+        if (enemy.PassedTraps.Count > 0)
+        {
+            TrapContent m = enemy.PassedTraps[enemy.PassedTraps.Count - 1];
+            //受到上一个陷阱的强化
+            if (enemy.PassedTraps.Count > 1)
+            {
+                for (int i = 0; i < enemy.PassedTraps.Count - 1; i++)
+                {
+                    enemy.PassedTraps[i].NextTrap(enemy.PassedTraps[i + 1]);
+                }
+                enemy.PassedTraps[enemy.PassedTraps.Count - 1].NextTrap(this);
+            }
+        }
+        OnPassOnce(enemy);
+        PassManyTimes(enemy);
+        //******
         trapBuffs = m_TrapAttribute.BuffInfos;
         if (m_TrapAttribute.BuffInfos.Count <= 0)
             return;
@@ -42,11 +63,42 @@ public class TrapContent : GameTileContent
         {
             enemy.Buffable.AddBuff(trap, TrapIntensify);
         }
+
     }
 
-    public virtual void OnContentPassMoreThanOnce(Enemy enemy)
+    private void OnPassOnce(Enemy enemy)
+    {
+        bool contained = false;
+        List<TrapContent> m = enemy.PassedTraps;
+        if (m.Count == 0)
+        {
+            m.Add(this);
+            PassOnce(enemy);
+        }
+        else
+        {
+            for (int i = 0; i < m.Count; i++)
+            {
+                if (m[i] == this)
+                {
+                    contained = true;
+                }
+            }
+            if (!contained)
+            {
+                m.Add(this);
+                PassOnce(enemy);
+            }
+        }
+    }
+
+    public virtual void PassOnce(Enemy enemy)
     {
 
+    }
+    public virtual void PassManyTimes(Enemy enemy)
+    {
+        enemy.PassedTraps.Add(this);
     }
 
     public override void OnContentSelected(bool value)
@@ -71,27 +123,28 @@ public class TrapContent : GameTileContent
         {
             if (target.Enemy != null) 
             ((Enemy)target.Enemy).CurrentTrap = this;
-            List<EnemyTrapManager> m= ((Enemy)target.Enemy).PassedTraps;
-            if (m.Count > 0)
-            {
-                bool contained=false;
-                for (int i = 0; i < m.Count; i++)
-                {
-                    if (m[i].trap == this)
-                    {
-                        contained = true;
-                    }
-                }
-                if (!contained)
-                {
-                    ((Enemy)target.Enemy).PassedTraps.Add(new EnemyTrapManager(this, false));
-                }
-            }
-            else
-            {
-                ((Enemy)target.Enemy).PassedTraps.Add(new EnemyTrapManager(this, false));
-            }
             ((Enemy)target.Enemy).TriigerTrap();
+
+            //List<EnemyTrapManager> m= ((Enemy)target.Enemy).PassedTraps;
+            //if (m.Count > 0)
+            //{
+            //    bool contained=false;
+            //    for (int i = 0; i < m.Count; i++)
+            //    {
+            //        if (m[i].trap == this)
+            //        {
+            //            contained = true;
+            //        }
+            //    }
+            //    if (!contained)
+            //    {
+            //        ((Enemy)target.Enemy).PassedTraps.Add(new EnemyTrapManager(this, false));
+            //    }
+            //}
+            //else
+            //{
+            //    ((Enemy)target.Enemy).PassedTraps.Add(new EnemyTrapManager(this, false));
+            //}
         }
         else
         {

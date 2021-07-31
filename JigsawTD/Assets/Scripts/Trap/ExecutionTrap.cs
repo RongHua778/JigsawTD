@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ExecutionTrap : TrapContent
 {
-    public override void OnContentPassMoreThanOnce(Enemy enemy)
+    public override void PassManyTimes(Enemy enemy)
     {
+        base.PassManyTimes(enemy);
         float realdamage;
         enemy.ApplyDamage((enemy.MaxHealth-enemy.CurrentHealth)*0.01f* trapIntensify2,
             out realdamage, true);

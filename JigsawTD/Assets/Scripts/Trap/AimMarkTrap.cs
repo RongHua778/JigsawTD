@@ -6,8 +6,9 @@ public class AimMarkTrap : TrapContent
 {
     int trapIndex;
 
-    public override void OnContentPassMoreThanOnce(Enemy enemy)
+    public override void PassManyTimes(Enemy enemy)
     {
+        base.PassManyTimes(enemy);
         trapIndex = enemy.PointIndex;
     }
 

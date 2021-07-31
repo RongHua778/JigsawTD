@@ -28,8 +28,8 @@ public abstract class Enemy : PathFollower, IDamageable
     private TrapContent currentTrap;
     public TrapContent CurrentTrap { get => currentTrap; set => currentTrap = value; }
 
-    private List<EnemyTrapManager> passedTraps=new List<EnemyTrapManager>();
-    public List<EnemyTrapManager> PassedTraps { get => passedTraps; set => passedTraps = value; }
+    private List<TrapContent> passedTraps=new List<TrapContent>();
+    public List<TrapContent> PassedTraps { get => passedTraps; set => passedTraps = value; }
 
     private List<Skill> skills;
     public List<Skill> Skills { get => skills; set => skills = value; }
@@ -142,9 +142,9 @@ public abstract class Enemy : PathFollower, IDamageable
         //}
         if (PassedTraps != null)
         {
-            foreach (EnemyTrapManager trap in PassedTraps)
+            foreach (TrapContent trap in PassedTraps)
             {
-                trap.trap.OnGameUpdating(this);
+                trap.OnGameUpdating(this);
             }
         }
         OnEnemyUpdate();
@@ -214,34 +214,10 @@ public abstract class Enemy : PathFollower, IDamageable
 
     public void TriigerTrap()
     {
-        for (int i = 0; i < PassedTraps.Count; i++)
-        {
-            PassedTraps[i].trap.trapIntensify2 = 1f;
-        }
-        if (PassedTraps.Count>0) 
-        {
-            EnemyTrapManager m = PassedTraps[PassedTraps.Count - 1];
-            //受到上一个陷阱的强化
-            if (PassedTraps.Count > 1)
-            {
-                for (int i = 0; i < PassedTraps.Count-1; i++)
-                {
-                    PassedTraps[i].trap.NextTrap(PassedTraps[i+1].trap);
-                }
-            }
-            if (!m.trapPassed)
-            {
-                m.trap.OnContentPassOnce(this);
-                m.trapPassed = true;
-            }
-            m.trap.OnContentPassMoreThanOnce(this);
-        }
-
-        //if (CurrentTrap != null)
-        //    CurrentTrap.OnContentPass(this);
-        //CurrentTrap = null;
+        if (CurrentTrap != null)
+                CurrentTrap.OnContentPass(this);
+            CurrentTrap = null;
         trapTriggered = true;
-
     }
 
     protected override void PrepareNextState()
@@ -275,9 +251,9 @@ public abstract class Enemy : PathFollower, IDamageable
                 enemySkill.OnBorn();
             }
         }
-        PassedTraps = new List<EnemyTrapManager>();
+        PassedTraps = new List<TrapContent>();
     }
-
+   
     protected override void PrepareIntro()
     {
         base.PrepareIntro();

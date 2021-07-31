@@ -5,10 +5,10 @@ using UnityEngine;
 public class EnemyTrapManager
 {
     public TrapContent trap;
-    public bool trapPassed;
+    //public bool trapPassed;
     public EnemyTrapManager(TrapContent trap, bool trapPassed)
     {
         this.trap = trap;
-        this.trapPassed = trapPassed;
+        //this.trapPassed = trapPassed;
     }
 }

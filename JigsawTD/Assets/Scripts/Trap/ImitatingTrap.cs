@@ -5,12 +5,13 @@ using UnityEngine;
 public class ImitatingTrap : TrapContent
 {
     TrapContent previousTrap=null;
-    public override void OnContentPassOnce(Enemy enemy)
+    public override void PassManyTimes(Enemy enemy)
     {
+        base.PassManyTimes(enemy);
         if (!previousTrap)
         {
-            previousTrap = enemy.PassedTraps[enemy.PassedTraps.Count - 2].trap;
+            previousTrap = enemy.PassedTraps[enemy.PassedTraps.Count - 2];
         }
-        previousTrap.OnContentPassOnce(enemy);
+        previousTrap.OnContentPass(enemy);
     }
 }
