@@ -40,6 +40,7 @@ NOOVERLAP=防御塔不可与特殊地形重叠
 NOTBATTLESTATE=战斗中不可购买
 ALREADYGROUND=此处已经有格子
 NOENOUGHDRAW=抽取次数不足
+SKILLFULL=该合成塔元素技能已满
 
 //guidevideo
 PLACERULE=摆放规则

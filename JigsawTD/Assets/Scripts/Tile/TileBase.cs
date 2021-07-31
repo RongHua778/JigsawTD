@@ -18,7 +18,7 @@ public abstract class TileBase : ReusableObject
     private bool isLanded = false;//ÊÇ·ñ´¦ÓÚ°æÍ¼×´Ì¬
     public virtual bool IsLanded { get => isLanded; set => isLanded = value; }
 
-    public void SetContent(GameTileContent content)
+    public virtual void SetContent(GameTileContent content)
     {
         content.transform.SetParent(this.transform);
         content.transform.position = transform.position + Vector3.forward * 0.01f;

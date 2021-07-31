@@ -25,7 +25,6 @@ public static class ConstructHelper
         GameTile specialTile = m_TileFactory.GetBasicTile();
         GameTileContent content = m_ContentFactory.GetRandomElementTurret(playerLevel);
         specialTile.SetContent(content);
-        ((BasicTile)specialTile).SetBaseSprite(1);
         shape.SetTile(specialTile);
         return shape;
     }
@@ -59,7 +58,6 @@ public static class ConstructHelper
         GameTile tile = m_TileFactory.GetBasicTile();
         GameTileContent content = m_ContentFactory.GetRandomTrapContent();
         tile.SetContent(content);
-        ((BasicTile)tile).SetBaseSprite(1);
         return tile;
     }
 
@@ -69,7 +67,6 @@ public static class ConstructHelper
         GameTile tile = m_TileFactory.GetBasicTile();
         GameTileContent content = m_ContentFactory.GetRandomTurretBase();
         tile.SetContent(content);
-        ((BasicTile)tile).SetBaseSprite(1);
         return tile;
     }
 
@@ -87,7 +84,6 @@ public static class ConstructHelper
         GameTile tile = m_TileFactory.GetBasicTile();
         CompositeTurret content = m_ContentFactory.GetCompositeTurret(bluePrint);
         tile.SetContent(content);
-        ((BasicTile)tile).SetBaseSprite(2);
         shape.SetTile(tile);
         bluePrint.ComStrategy.CompositeSkill();
         return shape;
@@ -101,7 +97,6 @@ public static class ConstructHelper
         GameTile tile = m_TileFactory.GetBasicTile();
         GameTileContent content = m_ContentFactory.GetTrapContentByName(name);
         tile.SetContent(content);
-        ((BasicTile)tile).SetBaseSprite(1);
         shape.SetTile(tile);
         return shape;
     }
@@ -128,7 +123,6 @@ public static class ConstructHelper
         GameTile tile = m_TileFactory.GetBasicTile();
         GameTileContent content = m_ContentFactory.GetElementTurret(element, quality);
         tile.SetContent(content);
-        ((BasicTile)tile).SetBaseSprite(1);
         shape.SetTile(tile);
         return shape;
     }

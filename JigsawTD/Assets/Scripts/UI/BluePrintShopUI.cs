@@ -127,7 +127,7 @@ public class BluePrintShopUI : IUserInterface
             grid.BluePrint.SetBluePrintIntensify();
             grid.BluePrint.ComStrategy.ClearBasicIntensify();
             grid.BluePrint.ComStrategy.SetQualityValue();
-            grid.BluePrint.ComStrategy.GetComIntensify();
+            grid.BluePrint.ComStrategy.GetComIntensify(grid.BluePrint);
             grid.BluePrint.ComStrategy.GetTurretSkills();
         }
         grid.InShop = false;

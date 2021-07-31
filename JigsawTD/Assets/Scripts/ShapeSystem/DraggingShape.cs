@@ -16,12 +16,13 @@ public class DraggingShape : DraggingActions
 
     bool canDrop = false;
     bool overLapPoint = false;
+    bool skillFull = false;
     bool waitingForPath = false;
 
     Collider2D[] attachedResult = new Collider2D[10];
 
     [SerializeField]
-    Color wrongColor, correctColor, transparentColor, holdColor, dropColor = default;
+    Color wrongColor, correctColor, transparentColor, holdColor, dropColor,equipColor = default;
 
     public void Initialized(TileShape shape)
     {
@@ -95,6 +96,8 @@ public class DraggingShape : DraggingActions
 
     private bool CheckCanDrop()
     {
+        overLapPoint = false;
+        skillFull = false;
         canDrop = true;
         Physics2D.SyncTransforms();
         //CheckAttached();
@@ -156,17 +159,35 @@ public class DraggingShape : DraggingActions
             }
             if (tile.Content.ContentType != GameTileContentType.Empty)//如果是有防御塔的，就比对冲突
             {
-                if (col.CompareTag("OnlyCompositeTurret"))
+                //if (col.CompareTag("OnlyCompositeTurret"))
+                //{
+                //    if (tile.Content.ContentType == GameTileContentType.CompositeTurret)
+                //    {
+                //        SetTileColor(correctColor, tile);
+                //        continue;
+                //    }
+                //    else
+                //    {
+                //        canDrop = false;
+                //        break;
+                //    }
+                //}
+                if(tile.Content.ContentType == GameTileContentType.CompositeTurret)
                 {
-                    if (tile.Content.ContentType == GameTileContentType.CompositeTurret)
+                    if (col.CompareTag("OnlyCompositeTurret"))
                     {
-                        SetTileColor(correctColor, tile);
-                        continue;
-                    }
-                    else
-                    {
-                        canDrop = false;
-                        break;
+                        GameTile tTile = col.GetComponent<GameTile>();
+                        if (((CompositeTurret)tTile.Content).Strategy.ElementSKill2 == null)
+                        {
+                            SetTileColor(equipColor, tile);
+                            break;
+                        }
+                        else
+                        {
+                            canDrop = false;
+                            skillFull = true;
+                            break;
+                        }
                     }
                 }
                 if (col.CompareTag("UnDropablePoint"))//冲突，返回，所有颜色被设为红色
@@ -277,6 +298,10 @@ public class DraggingShape : DraggingActions
         else if (overLapPoint)
         {
             GameManager.Instance.ShowMessage(GameMultiLang.GetTraduction("NOOVERLAP"));
+        }
+        else if (skillFull)
+        {
+            GameManager.Instance.ShowMessage(GameMultiLang.GetTraduction("SKILLFULL"));
         }
         //else
         //{

@@ -287,7 +287,8 @@ public class BoardSystem : IGameSystem
         }
         foreach (Vector2Int pos in traps)
         {
-            GameTile tile = UnityEngine.Random.value > 0.75f ? ConstructHelper.GetRandomTurretBase() : ConstructHelper.GetRandomTrap();
+            //GameTile tile = UnityEngine.Random.value > 0.75f ? ConstructHelper.GetRandomTurretBase() : ConstructHelper.GetRandomTrap();
+            GameTile tile= ConstructHelper.GetRandomTrap();
             tile.transform.position = (Vector3Int)pos;
             tile.TileLanded();
             tile.SetRandomRotation();

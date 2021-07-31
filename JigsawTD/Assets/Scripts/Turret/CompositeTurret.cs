@@ -24,21 +24,36 @@ public class CompositeTurret : TurretContent
     {
         GameManager.Instance.compositeTurrets.Add(this);
         base.ContentLanded();
+        m_GameTile.tag = "OnlyCompositeTurret";
     }
 
     protected override void ContentLandedCheck(Collider2D col)
     {
         if (col != null)
         {
+            //GameTile tile = col.GetComponent<GameTile>();
+            //if (tile.Content.ContentType == GameTileContentType.TurretBase)//放在加成地形上时，获得地形技能
+            //{
+            //    TurretBaseContent content = tile.Content as TurretBaseContent;
+            //    ((StrategyComposite)Strategy).AddTileSkill(content.m_TurretBaseAttribute.tileSkill);
+            //    ((BasicTile)m_GameTile).SetDeco(content.m_TurretBaseAttribute.Icon);
+            //}
+            //ObjectPool.Instance.UnSpawn(tile);
             GameTile tile = col.GetComponent<GameTile>();
-            if (tile.Content.ContentType == GameTileContentType.TurretBase)//放在加成地形上时，获得地形技能
+            if (tile.Content.ContentType == GameTileContentType.CompositeTurret)
             {
-                TurretBaseContent content = tile.Content as TurretBaseContent;
-                ((StrategyComposite)Strategy).AddTileSkill(content.m_TurretBaseAttribute.tileSkill);
-                ((BasicTile)m_GameTile).SetDeco(content.m_TurretBaseAttribute.Icon);
+                CompositeTurret turret = tile.Content as CompositeTurret;
+                turret.Strategy.ElementSKill2 = this.Strategy.ElementSkill;
+                turret.Strategy.AddSkill(this.Strategy.ElementSkill);
+                ((StrategyComposite)turret.Strategy).GetComIntensify(((StrategyComposite)Strategy).CompositeBluePrint);
+                ObjectPool.Instance.UnSpawn(m_GameTile);
             }
-            ObjectPool.Instance.UnSpawn(tile);
+            else
+            {
+                ObjectPool.Instance.UnSpawn(tile);
+            }
         }
+        
     }
     public override void OnUnSpawn()
     {

@@ -37,8 +37,8 @@ public class TurretTips : TileTips
     [SerializeField] GameObject BuyBtn = default;
 
     //地形加成
-    [SerializeField] GameObject TileSkillArea = default;
-    [SerializeField] Text TileSkillTxt = default;
+    [SerializeField] GameObject ElementSkill2Area = default;
+    [SerializeField] Text ElementSkill2Txt = default;
 
     //infoBtn
     [SerializeField] InfoBtn CriticalInfo = default;
@@ -81,7 +81,7 @@ public class TurretTips : TileTips
 
         AnalysisArea.SetActive(true);
         BluePrintArea.SetActive(false);
-        TileSkillArea.SetActive(false);
+        ElementSkill2Area.SetActive(false);
         //根据防御塔类型显示
         switch (Strategy.strategyType)
         {
@@ -106,10 +106,10 @@ public class TurretTips : TileTips
                 IntensifyArea.SetActive(false);
                 elementConstruct.gameObject.SetActive(true);
                 elementConstruct.SetElements((StrategyComposite)Strategy);
-                if (((StrategyComposite)Strategy).TileSkill != null)
+                if (((StrategyComposite)Strategy).ElementSKill2 != null)
                 {
-                    TileSkillArea.SetActive(true);
-                    TileSkillTxt.text = GameMultiLang.GetTraduction(((StrategyComposite)Strategy).TileSkill.SkillDescription);
+                    ElementSkill2Area.SetActive(true);
+                    ElementSkill2Txt.text = GameMultiLang.GetTraduction(((StrategyComposite)Strategy).ElementSKill2.SkillDescription);
                 }
 
                 break;
@@ -130,7 +130,7 @@ public class TurretTips : TileTips
         BasicInfo();
         UpdateBluePrintInfo();
         //BuyBtn.SetActive(grid.InShop);
-        TileSkillArea.SetActive(false);
+        ElementSkill2Area.SetActive(false);
 
         AnalysisArea.SetActive(false);
         UpgradeArea.SetActive(false);

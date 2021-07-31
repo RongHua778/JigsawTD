@@ -40,6 +40,7 @@ NOOVERLAP=Turret cannot overlap with special tile
 NOTBATTLESTATE=Can not buy during battle state
 ALREADYGROUND=There are already a tile
 NOENOUGHDRAW=You have no draw point
+SKILLFULL=This turret already equipped a blueprint
 
 //guidevideo
 PLACERULE=Placement Rule

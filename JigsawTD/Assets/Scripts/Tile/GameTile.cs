@@ -13,7 +13,7 @@ public abstract class GameTile : TileBase
 
     public bool isWalkable { get => Content.IsWalkable; }
     public DraggingShape m_DraggingShape { get; set; }
-    public SpriteRenderer[] TileRenderers { get; set; }
+    public List<SpriteRenderer> TileRenderers { get; set; }
     public SpriteRenderer PreviewRenderer { get; set; }
     public Vector3 ExitPoint { get; set; }
 

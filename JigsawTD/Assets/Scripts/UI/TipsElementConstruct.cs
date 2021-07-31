@@ -10,7 +10,7 @@ public class TipsElementConstruct : MonoBehaviour
     Blueprint m_BluePrint;
     [SerializeField] InfoBtn m_InfoBtn = default;
     [SerializeField] Text elementSkillDes = default;
-    [SerializeField] Image intensifyImg = default;
+    //[SerializeField] Image intensifyImg = default;
 
     public void SetElements(StrategyComposite strategy)
     {
@@ -29,10 +29,10 @@ public class TipsElementConstruct : MonoBehaviour
         }
         SetIntensifyInfo();
 
-        intensifyImg.gameObject.SetActive(strategy.CompositeBluePrint.IntensifyBluePrint);
+        //intensifyImg.gameObject.SetActive(strategy.CompositeBluePrint.IntensifyBluePrint);
 
-        if (strategy.ElementSkill1 != null)
-            elementSkillDes.text = GameMultiLang.GetTraduction(strategy.ElementSkill1.SkillDescription);
+        if (strategy.ElementSkill != null)
+            elementSkillDes.text = GameMultiLang.GetTraduction(strategy.ElementSkill.SkillDescription);
         else
             Debug.LogWarning("没有这个元素技能显示TIPS");
 

@@ -149,17 +149,23 @@ public abstract class StrategyBase
     public TurretSkill TurretSkill { get; set; }
     public List<TurretSkill> TurretSkills = new List<TurretSkill>();
 
+    public ElementSkill ElementSkill { get; set; }
+    public ElementSkill ElementSKill2 { get; set; }
 
+    //public void BuildTurretEffects()
+    //{
+    //    foreach (var skill in TurretSkills)
+    //    {
+    //        skill.Build();//前置修正
+    //    }
+    //}
 
-    public void BuildTurretEffects()
+    public void AddSkill(TurretSkill skill)
     {
-        foreach (var skill in TurretSkills)
-        {
-            skill.Build();//前置修正
-        }
+        skill.strategy = this;
+        TurretSkills.Add(skill);
+        skill.Build();
     }
-
-
 
     public virtual void SetQualityValue()
     {

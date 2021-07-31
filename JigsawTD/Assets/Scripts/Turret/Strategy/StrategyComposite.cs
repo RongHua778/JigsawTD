@@ -12,13 +12,13 @@ public class StrategyComposite : StrategyBase
     }
 
 
-    public void GetComIntensify()
+    public void GetComIntensify(Blueprint bluePrint)
     {
-        BaseAttackIntensify += CompositeBluePrint.CompositeAttackDamage;
-        BaseSpeedIntensify += CompositeBluePrint.CompositeAttackSpeed;
-        BaseCriticalRateIntensify += CompositeBluePrint.CompositeCriticalRate;
-        BaseSputteringRangeIntensify += CompositeBluePrint.CompositeSputteringRange;
-        BaseSlowRateIntensify += CompositeBluePrint.CompositeSlowRate;
+        BaseAttackIntensify += bluePrint.CompositeAttackDamage;
+        BaseSpeedIntensify += bluePrint.CompositeAttackSpeed;
+        BaseCriticalRateIntensify += bluePrint.CompositeCriticalRate;
+        BaseSputteringRangeIntensify += bluePrint.CompositeSputteringRange;
+        BaseSlowRateIntensify += bluePrint.CompositeSlowRate;
     }
 
     //下一级属性
@@ -29,38 +29,38 @@ public class StrategyComposite : StrategyBase
     public float NextSlowRate { get => m_Att.TurretLevels[Quality].SlowRate + BaseSlowRateIntensify; }
 
 
-    public ElementSkill ElementSkill1 { get; set; }
-    public TileSkill TileSkill { get; set; }
-
-
     public void GetTurretSkills()//首次获取并激活效果
     {
         TurretSkills.Clear();
-        TurretSkill effect;
-        effect = TurretEffectFactory.GetInitialSkill((int)m_Att.TurretSkill);
-        effect.strategy = this;
-        TurretSkill = effect;
-        TurretSkills.Add(effect);
 
+        TurretSkill effect = TurretEffectFactory.GetInitialSkill((int)m_Att.TurretSkill);//自带技能
+        TurretSkill = effect;
+        AddSkill(effect);
+
+        //元素组合技能
         List<int> elements = new List<int>();
         foreach(var com in CompositeBluePrint.Compositions)
         {
             elements.Add(com.elementRequirement);
         }
-        effect = TurretEffectFactory.GetElementSkill(elements);
-        if (effect != null)
-        {
-            effect.strategy = this;
-            ElementSkill1 = effect as ElementSkill;
-            TurretSkills.Add(effect);
-        }
-        else
-        {
-            Debug.LogWarning("没有该元素技能");
-        }
+        TurretSkill effect2 = TurretEffectFactory.GetElementSkill(elements);
+        ElementSkill = effect2 as ElementSkill;
+        AddSkill(effect2);
+        //if (effect != null)
+        //{
+        //    effect.strategy = this;
+        //    ElementSkill = effect as ElementSkill;
+        //    TurretSkills.Add(effect);
+        //}
+        //else
+        //{
+        //    Debug.LogWarning("没有该元素技能");
+        //}
 
-        BuildTurretEffects();
+        //BuildTurretEffects();
     }
+
+
 
     public void LandedTurretSkill()
     {
@@ -85,18 +85,18 @@ public class StrategyComposite : StrategyBase
         }
     }
 
-    public void AddTileSkill(TileSkillName skillName)
-    {
-        if (TileSkill != null)
-        {
-            Debug.Log("已经有地形技能了");
-            return;
-        }
-        TileSkill skill = TurretEffectFactory.GetTileSkill((int)skillName);
-        skill.strategy = this;
-        TileSkill = skill;
-        TurretSkills.Add(skill);
-        TileSkill.Build();
-    }
+    //public void AddTileSkill(TileSkillName skillName)
+    //{
+    //    if (TileSkill != null)
+    //    {
+    //        Debug.Log("已经有地形技能了");
+    //        return;
+    //    }
+    //    TileSkill skill = TurretEffectFactory.GetTileSkill((int)skillName);
+    //    skill.strategy = this;
+    //    TileSkill = skill;
+    //    TurretSkills.Add(skill);
+    //    TileSkill.Build();
+    //}
 
 }
