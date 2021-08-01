@@ -5,13 +5,8 @@ using UnityEngine;
 public class BlinkTrap : TrapContent
 {
 
-    public override void PassManyTimes(Enemy enemy)
+    public override void OnPassOnce(Enemy enemy)
     {
-
-    }
-    public override void PassOnce(Enemy enemy)
-    {
-        base.OnContentPass(enemy);
         enemy.PointIndex -= 4*(int)trapIntensify2;
         if (enemy.PointIndex < 0)
         {

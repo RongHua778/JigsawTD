@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ExecutionTrap : TrapContent
 {
+
     public override void PassManyTimes(Enemy enemy)
     {
         base.PassManyTimes(enemy);

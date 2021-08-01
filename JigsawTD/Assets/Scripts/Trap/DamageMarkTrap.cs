@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class DamageMarkTrap : TrapContent
 {
+
+    public override void PassManyTimes(Enemy enemy)
+    {
+        base.PassManyTimes(enemy);
+    }
     public override void OnGameUpdating(Enemy enemy)
     {
         base.OnGameUpdating(enemy);

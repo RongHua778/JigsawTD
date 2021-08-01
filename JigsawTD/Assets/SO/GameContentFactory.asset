@@ -42,6 +42,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0f5b17d06e53ad249a9d73451828bd4c, type: 2}
   - {fileID: 11400000, guid: a4403e1aa24e65f4496cdcc54de25da7, type: 2}
   - {fileID: 11400000, guid: bd18a2582f85635438ff7d96cb4a6138, type: 2}
+  - {fileID: 11400000, guid: b7257ac7a2488b6448bbde03310b0430, type: 2}
   turretBaseAtts:
   - {fileID: 11400000, guid: f2893f05498ee0d46831e8279022852e, type: 2}
   - {fileID: 11400000, guid: cb02325040029af4aba013bf8db4d5d9, type: 2}

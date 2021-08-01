@@ -16,7 +16,7 @@ public class TrapContent : GameTileContent
 
     protected float trapCounter;
     public float trapIntensify2=1;
-
+    public bool passingOnce = false;
     public override void ContentLanded()
     {
         base.ContentLanded();
@@ -53,8 +53,14 @@ public class TrapContent : GameTileContent
                 enemy.PassedTraps[enemy.PassedTraps.Count - 1].NextTrap(this);
             }
         }
-        OnPassOnce(enemy);
-        PassManyTimes(enemy);
+        if (passingOnce)
+        {
+            PassOnce(enemy);
+        }
+        else
+        {
+            PassManyTimes(enemy);
+        }
         //******
         trapBuffs = m_TrapAttribute.BuffInfos;
         if (m_TrapAttribute.BuffInfos.Count <= 0)
@@ -66,36 +72,29 @@ public class TrapContent : GameTileContent
 
     }
 
-    private void OnPassOnce(Enemy enemy)
+    public virtual void OnPassOnce(Enemy enemy)
     {
-        bool contained = false;
+
+    }
+
+    private void PassOnce(Enemy enemy)
+    {
+        int contained = 0;
         List<TrapContent> m = enemy.PassedTraps;
-        if (m.Count == 0)
+        m.Add(this);
+        for (int i = 0; i < m.Count; i++)
         {
-            m.Add(this);
-            PassOnce(enemy);
+            if (m[i] == this)
+            {
+                contained++; ;
+            }
         }
-        else
+        if (contained<2)
         {
-            for (int i = 0; i < m.Count; i++)
-            {
-                if (m[i] == this)
-                {
-                    contained = true;
-                }
-            }
-            if (!contained)
-            {
-                m.Add(this);
-                PassOnce(enemy);
-            }
+            OnPassOnce(enemy);
         }
     }
 
-    public virtual void PassOnce(Enemy enemy)
-    {
-
-    }
     public virtual void PassManyTimes(Enemy enemy)
     {
         enemy.PassedTraps.Add(this);
@@ -153,12 +152,32 @@ public class TrapContent : GameTileContent
 
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        TargetPoint target = collision.GetComponent<TargetPoint>();
+        if (target != null)
+        {
+            if (target.Enemy != null)
+                OnExitTrap(((Enemy)target.Enemy));
+        }
+        else
+        {
+            Debug.LogWarning(collision.name + ":´íÎóµÄÅö×²´¥·¢");
+        }
+
+    }
+
     public virtual void OnGameUpdating(Enemy enemy)
     {
         
     }
 
-    public virtual void NextTrap(TrapContent nextTrap)
+    protected virtual void NextTrap(TrapContent nextTrap)
+    {
+
+    }
+
+    protected virtual void OnExitTrap(Enemy enemy)
     {
 
     }
