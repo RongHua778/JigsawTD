@@ -5,10 +5,6 @@ using UnityEngine;
 public class CompositeTurret : TurretContent
 {
     public override GameTileContentType ContentType => GameTileContentType.CompositeTurret;
-
-
-    public Blueprint CompositeBluePrint;
-
     public override bool GameUpdate()
     {
         foreach (var skill in Strategy.TurretSkills)
@@ -45,7 +41,7 @@ public class CompositeTurret : TurretContent
                 CompositeTurret turret = tile.Content as CompositeTurret;
                 turret.Strategy.ElementSKill2 = this.Strategy.ElementSkill;
                 turret.Strategy.AddSkill(this.Strategy.ElementSkill);
-                ((StrategyComposite)turret.Strategy).GetComIntensify(((StrategyComposite)Strategy).CompositeBluePrint);
+                turret.Strategy.GetComIntensify(((StrategyComposite)Strategy).CompositeBluePrint);
                 ObjectPool.Instance.UnSpawn(m_GameTile);
             }
             else
@@ -58,7 +54,6 @@ public class CompositeTurret : TurretContent
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
-        CompositeBluePrint = null;
         GameManager.Instance.compositeTurrets.Remove(this);
 
     }

@@ -27,19 +27,19 @@ public class Blueprint
             {
                 case Element.Gold:
                     //CompositeAttackDamage += StaticData.GoldAttackIntensify * com.qualityRequeirement;
-                    CompositeAttackDamage += StaticData.GoldAttackIntensify * (IntensifyBluePrint ? 3 : 1);
+                    CompositeAttackDamage += StaticData.GoldAttackIntensify * com.qualityRequeirement + 0.1f; // * (IntensifyBluePrint ? 3 : 1);
                     break;
                 case Element.Wood:
-                    CompositeAttackSpeed += StaticData.WoodSpeedIntensify * (IntensifyBluePrint ? 3 : 1);
+                    CompositeAttackSpeed += StaticData.WoodSpeedIntensify * com.qualityRequeirement + 0.1f;// * (IntensifyBluePrint ? 3 : 1);
                     break;
                 case Element.Water:
-                    CompositeSlowRate += StaticData.WaterSlowIntensify * (IntensifyBluePrint ? 3 : 1);
+                    CompositeSlowRate += StaticData.WaterSlowIntensify * com.qualityRequeirement + 0.1f;// * (IntensifyBluePrint ? 3 : 1);
                     break;
                 case Element.Fire:
-                    CompositeCriticalRate += StaticData.FireCriticalIntensify * (IntensifyBluePrint ? 3 : 1);
+                    CompositeCriticalRate += StaticData.FireCriticalIntensify * com.qualityRequeirement + 0.1f;// * (IntensifyBluePrint ? 3 : 1);
                     break;
                 case Element.Dust:
-                    CompositeSputteringRange += StaticData.DustSputteringIntensify * (IntensifyBluePrint ? 3 : 1);
+                    CompositeSputteringRange += StaticData.DustSputteringIntensify * com.qualityRequeirement + 0.1f;// * (IntensifyBluePrint ? 3 : 1);
                     break;
                 default:
                     break;
@@ -60,9 +60,9 @@ public class Blueprint
                     compositions[j + 1].elementRequirement = compositions[j].elementRequirement;
                     compositions[j].elementRequirement = temp;
                 }
-                else if(compositions[j].elementRequirement == compositions[j + 1].elementRequirement)
+                else if (compositions[j].elementRequirement == compositions[j + 1].elementRequirement)
                 {
-                    if(compositions[j].qualityRequeirement > compositions[j + 1].qualityRequeirement)
+                    if (compositions[j].qualityRequeirement > compositions[j + 1].qualityRequeirement)
                     {
                         temp = compositions[j + 1].qualityRequeirement;
                         compositions[j + 1].qualityRequeirement = compositions[j].qualityRequeirement;

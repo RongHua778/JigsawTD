@@ -147,10 +147,10 @@ public abstract class StrategyBase
     #endregion
 
     public TurretSkill TurretSkill { get; set; }
-    public List<TurretSkill> TurretSkills = new List<TurretSkill>();
-
     public ElementSkill ElementSkill { get; set; }
     public ElementSkill ElementSKill2 { get; set; }
+
+    public List<TurretSkill> TurretSkills = new List<TurretSkill>();
 
     //public void BuildTurretEffects()
     //{
@@ -159,6 +159,11 @@ public abstract class StrategyBase
     //        skill.Build();//Ç°ÖÃÐÞÕý
     //    }
     //}
+
+    public virtual void GetComIntensify(Blueprint bluePrint)
+    {
+
+    }
 
     public void AddSkill(TurretSkill skill)
     {
@@ -169,7 +174,6 @@ public abstract class StrategyBase
 
     public virtual void SetQualityValue()
     {
-        //ClearBasicIntensify();
         InitAttack = m_Att.TurretLevels[Quality - 1].AttackDamage;
         InitSpeed = m_Att.TurretLevels[Quality - 1].AttackSpeed;
         InitRange = m_Att.TurretLevels[Quality - 1].AttackRange;

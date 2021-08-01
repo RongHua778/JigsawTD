@@ -18,7 +18,7 @@ public class AAAHeavyCannon : ElementSkill
     public override string SkillDescription => "AAA";
     public override void Build()
     {
-        strategy.AllAttackIntensifyModify += 1;
+        strategy.AllAttackIntensifyModify *=2;
         strategy.RotSpeed = 0.5f;
     }
 }
@@ -382,7 +382,9 @@ public class ADESpeedCore : ElementSkill
 
     public override void Composite()
     {
-        GameManager.Instance.GetRandomBluePrint(true);
+        int money = Random.Range(100, 301);
+        GameManager.Instance.GainMoney(money);
+        GameManager.Instance.ShowMessage(GameMultiLang.GetTraduction("GETMONEY") + money);
     }
 
 }

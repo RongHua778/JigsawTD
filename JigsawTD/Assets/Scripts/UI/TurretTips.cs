@@ -22,6 +22,7 @@ public class TurretTips : TileTips
     [SerializeField] GameObject UpgradeArea = default;//合成塔升级区
     [SerializeField] GameObject IntensifyArea = default;//元素塔加成效果区
     [SerializeField] TipsElementConstruct elementConstruct = default;//合成塔组成元素区
+    [SerializeField] TipsElementConstruct elementConstruct2 = default;//第二元素技能区
     //合成塔升级区
 
     //加成值
@@ -36,9 +37,9 @@ public class TurretTips : TileTips
     [SerializeField] GameObject BluePrintArea = default;
     [SerializeField] GameObject BuyBtn = default;
 
-    //地形加成
-    [SerializeField] GameObject ElementSkill2Area = default;
-    [SerializeField] Text ElementSkill2Txt = default;
+    ////地形加成
+    //[SerializeField] GameObject ElementSkill2Area = default;
+    //[SerializeField] Text ElementSkill2Txt = default;
 
     //infoBtn
     [SerializeField] InfoBtn CriticalInfo = default;
@@ -81,7 +82,6 @@ public class TurretTips : TileTips
 
         AnalysisArea.SetActive(true);
         BluePrintArea.SetActive(false);
-        ElementSkill2Area.SetActive(false);
         //根据防御塔类型显示
         switch (Strategy.strategyType)
         {
@@ -89,6 +89,7 @@ public class TurretTips : TileTips
                 UpgradeArea.SetActive(false);
                 IntensifyArea.SetActive(true);
                 elementConstruct.gameObject.SetActive(false);
+                elementConstruct2.gameObject.SetActive(false);
                 IntensifyValue.text = StaticData.GetElementIntensifyText(((StrategyElement)Strategy).Element, Strategy.Quality);
                 break;
             case StrategyType.Composite:
@@ -104,12 +105,18 @@ public class TurretTips : TileTips
                     UpgradeArea.SetActive(false);
                 }
                 IntensifyArea.SetActive(false);
+
+                //元素技能
                 elementConstruct.gameObject.SetActive(true);
                 elementConstruct.SetElements((StrategyComposite)Strategy);
-                if (((StrategyComposite)Strategy).ElementSKill2 != null)
+                if (Strategy.ElementSKill2 != null)
                 {
-                    ElementSkill2Area.SetActive(true);
-                    ElementSkill2Txt.text = GameMultiLang.GetTraduction(((StrategyComposite)Strategy).ElementSKill2.SkillDescription);
+                    elementConstruct2.gameObject.SetActive(true);
+                    elementConstruct2.SetElements((StrategyComposite)Strategy);
+                }
+                else
+                {
+                    elementConstruct2.gameObject.SetActive(false);
                 }
 
                 break;
@@ -129,15 +136,15 @@ public class TurretTips : TileTips
         m_Strategy = grid.BluePrint.ComStrategy;
         BasicInfo();
         UpdateBluePrintInfo();
-        //BuyBtn.SetActive(grid.InShop);
-        ElementSkill2Area.SetActive(false);
 
         AnalysisArea.SetActive(false);
         UpgradeArea.SetActive(false);
         IntensifyArea.SetActive(false);
         BluePrintArea.SetActive(false);
+
         elementConstruct.gameObject.SetActive(true);
         elementConstruct.SetElements((StrategyComposite)m_Strategy);
+        elementConstruct2.gameObject.SetActive(false);
 
     }
 

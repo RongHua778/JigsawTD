@@ -12,7 +12,7 @@ public class StrategyComposite : StrategyBase
     }
 
 
-    public void GetComIntensify(Blueprint bluePrint)
+    public override void GetComIntensify(Blueprint bluePrint)
     {
         BaseAttackIntensify += bluePrint.CompositeAttackDamage;
         BaseSpeedIntensify += bluePrint.CompositeAttackSpeed;
@@ -46,18 +46,7 @@ public class StrategyComposite : StrategyBase
         TurretSkill effect2 = TurretEffectFactory.GetElementSkill(elements);
         ElementSkill = effect2 as ElementSkill;
         AddSkill(effect2);
-        //if (effect != null)
-        //{
-        //    effect.strategy = this;
-        //    ElementSkill = effect as ElementSkill;
-        //    TurretSkills.Add(effect);
-        //}
-        //else
-        //{
-        //    Debug.LogWarning("没有该元素技能");
-        //}
 
-        //BuildTurretEffects();
     }
 
 

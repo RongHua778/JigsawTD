@@ -71,11 +71,11 @@ public class StaticData : Singleton<StaticData>
         }
     }
     //元素加成
-    public static float GoldAttackIntensify = 0.3f;
-    public static float WoodSpeedIntensify = 0.3f;
-    public static float WaterSlowIntensify = 0.3f;
-    public static float FireCriticalIntensify = 0.25f;
-    public static float DustSputteringIntensify = 0.3f;
+    public static float GoldAttackIntensify = 0.1f;
+    public static float WoodSpeedIntensify = 0.1f;
+    public static float WaterSlowIntensify = 0.1f;
+    public static float FireCriticalIntensify = 0.1f;
+    public static float DustSputteringIntensify = 0.1f;
 
     public static Color32 RedColor;
     public static Color32 GreenColor;
@@ -353,19 +353,19 @@ public class StaticData : Singleton<StaticData>
         switch (element)
         {
             case Element.Gold:
-                intensifyTxt += GoldAttackIntensify * 100 + GameMultiLang.GetTraduction("ATTACKUP");
+                intensifyTxt += (GoldAttackIntensify * quality + 0.1f) * 100 + GameMultiLang.GetTraduction("ATTACKUP");
                 break;
             case Element.Wood:
-                intensifyTxt += WoodSpeedIntensify * 100 + GameMultiLang.GetTraduction("SPEEDUP");
+                intensifyTxt += (WoodSpeedIntensify * quality + 0.1f) * 100 + GameMultiLang.GetTraduction("SPEEDUP");
                 break;
             case Element.Water:
-                intensifyTxt += WaterSlowIntensify + GameMultiLang.GetTraduction("SLOWUP");
+                intensifyTxt += (WaterSlowIntensify * quality + 0.1f) + GameMultiLang.GetTraduction("SLOWUP");
                 break;
             case Element.Fire:
-                intensifyTxt += FireCriticalIntensify * 100 + GameMultiLang.GetTraduction("CRITICALUP");
+                intensifyTxt += (FireCriticalIntensify * quality + 0.1f) * 100 + GameMultiLang.GetTraduction("CRITICALUP");
                 break;
             case Element.Dust:
-                intensifyTxt += DustSputteringIntensify + GameMultiLang.GetTraduction("SPUTTERINGUP");
+                intensifyTxt += (DustSputteringIntensify * quality + 0.1f) + GameMultiLang.GetTraduction("SPUTTERINGUP");
                 break;
             default:
                 Debug.Log("错误的元素，无法配置加成");
@@ -376,7 +376,7 @@ public class StaticData : Singleton<StaticData>
 
     public static string GetBluePrintIntensify(Blueprint bluePrint)
     {
-        string intensifyTxt = GameMultiLang.GetTraduction("ELEMENTSKILL")+":";//根据元素及品质设置显示加成效果
+        string intensifyTxt = GameMultiLang.GetTraduction("ELEMENTSKILL") + ":";//根据元素及品质设置显示加成效果
         intensifyTxt += bluePrint.CompositeAttackDamage > 0 ? "\n+" + bluePrint.CompositeAttackDamage * 100 + GameMultiLang.GetTraduction("ATTACKUP") : "";
         intensifyTxt += bluePrint.CompositeAttackSpeed > 0 ? "\n+" + bluePrint.CompositeAttackSpeed * 100 + GameMultiLang.GetTraduction("SPEEDUP") : "";
         intensifyTxt += bluePrint.CompositeSlowRate > 0 ? "\n+" + bluePrint.CompositeSlowRate + GameMultiLang.GetTraduction("SLOWUP") : "";

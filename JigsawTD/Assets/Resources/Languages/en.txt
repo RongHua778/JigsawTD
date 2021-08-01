@@ -41,6 +41,7 @@ NOTBATTLESTATE=Can not buy during battle state
 ALREADYGROUND=There are already a tile
 NOENOUGHDRAW=You have no draw point
 SKILLFULL=This turret already equipped a blueprint
+GETMONEY=You have gained 
 
 //guidevideo
 PLACERULE=Placement Rule
@@ -206,7 +207,7 @@ BBE=Miniature muzzle: Double all firerate increased. No critical anymore.
 BCD=Mint Factory: This turret gives you 1 coin each time it deals a critical hit.
 BCE=Repair factory: Increased the adjacent traps' effect by 100%.
 
-BDE=Technical Blueprint: Gain a random enhanced blueprint while composite.
+BDE=Lucky Lottery: Gain random 100-300 coins.
 
 CCA=Hardcore: Increase acjacent turrets' basic attack by 50%.
 CCB=Accelerated Core: Increase adjacent turrets' basic firerate by 50%.
