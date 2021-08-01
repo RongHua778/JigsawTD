@@ -17,6 +17,8 @@ public class TestWindow : EditorWindow
     Element e1 = Element.Gold;
     Element e2 = Element.Gold;
     Element e3 = Element.Gold;
+
+    string trapName = "BLINKTRAP";
     [MenuItem("Window/TestWindow")]
     public static void ShowWindow()
     {
@@ -57,6 +59,14 @@ public class TestWindow : EditorWindow
         {
             ConstructHelper.GetCompositeTurretByNameAndElement(turretName, (int)e1, (int)e2, (int)e3);
 
+        }
+        GUILayout.EndHorizontal();
+
+        GUILayout.BeginHorizontal();
+        trapName= EditorGUILayout.TextField("ÏÝÚå", trapName);
+        if (GUILayout.Button("»ñÈ¡", GUILayout.Width(120)))
+        {
+            ConstructHelper.GetTrapByName(trapName);
         }
         GUILayout.EndHorizontal();
 
