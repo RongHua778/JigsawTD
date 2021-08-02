@@ -16,8 +16,9 @@ public class DamageArrowTrap : TrapContent
         enemy.DamageIntensify -= 0.5f;
     }
 
-    private void Update()
+    public override void ContentLanded()
     {
+        base.ContentLanded();
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 1);
     }
 }

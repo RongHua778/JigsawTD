@@ -17,7 +17,6 @@ public class PathFollower : ReusableObject,IGameBehavior
     private float progress;
     protected float directionAngleFrom, directionAngleTo;
     private float pathOffset = 0;
-    // Start is called before the first frame update
 
     protected float speed = 0.8f;
     private float adjust;

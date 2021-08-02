@@ -133,6 +133,8 @@ MonoBehaviour:
   needReset: 0
   TrapIntensify: 1
   trapIntensify2: 1
+  passingOnce: 0
+  relocatable: 1
 --- !u!58 &7684558311415652510
 CircleCollider2D:
   m_ObjectHideFlags: 0

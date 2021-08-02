@@ -101,6 +101,7 @@ COMINTENSIFY=Composite Benefit
 BUY=Buy
 COMPOSITE=Composite
 UPGRADE=Upgrade
+SWITCHTRAP=Relocate
 
 //Groundtips
 BUYGROUND=Buy a basic tile?
@@ -258,7 +259,14 @@ ARROWTRAP=Slow Arrow
 DAMAGETRAP=Damage Marker
 SPAWNPOINT=Start Point
 DESTINATION=End Point
-BLINKTRAP=blink trap
+BLINKTRAP=Blink trap
+PROMOTETRAP=Promote trap
+IMITATETRAP=Imitate trap
+STUNTRAP2=Stun Trap(new)
+DAMAGEARROW=Damage Arrow Marker
+EXECUTETRAP=Execute trap
+AIMMARKTRAP=Aim marker
+DAMAGEMARKTRAP=Damage marker(new)
 
 STUNTRAPINFO=Enemies passing through this tile will be stunned for 1.5 seconds.
 ARROWTRAPINFO=Enemies passing through this tile with the same direction of the arrow will be slowed down until they turn.
@@ -266,6 +274,13 @@ DAMAGETRAPINFO=Each time an enemy passes this tile, deals damge equal to 20% of 
 SPAWNPOINTINFO=Enemy borns here, make sure there is a route to the end point.
 DESTINATIONINFO=Enemy's destination, make sure there is a route to the start point.
 BLINKTRAPINFO=this is blink trap
+PROMOTETRAPINFO=Increases the effect of the enemy's next passing trap by 100%, can be stacked.
+IMITATETRAPINFO=The effect of this trap is the same as the last trap passed by the enemy.
+STUNTRAP2INFO=Enemies passing by are stunned for 0.5 * N seconds, N = number of traps the enemy passed before.
+DAMAGEARROWINFO=Within 4 grids of the direction indicated by the arrow, the damage taken by the enemy increased by 50%.
+EXECUTETRAPINFO= Causes (N * 1)% of the enemy's lost HP damage ,N = number of grids the enemy passed before.
+AIMMARKTRAPINFO=After passing this trap, the damage taken by enemies increases 5% more for each grid they pass.
+DAMAGEMARKTRAPINFO=Enemies passing by will be marked and receive 50% of the damage taken during the period after 5 seconds.
 
 //TurretBase
 ATTACKBASE=Attack Base

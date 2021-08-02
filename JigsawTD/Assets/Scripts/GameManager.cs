@@ -392,6 +392,11 @@ public class GameManager : Singleton<GameManager>
         m_BoardSystem.BuyOneEmptyTile();
     }
 
+    public void SwitchTrap()
+    {
+        m_BoardSystem.SwitchTrap();
+    }
+
     public void IncreaseShopCapacity()
     {
         m_BluePrintShopUI.ShopCapacity++;
@@ -430,7 +435,7 @@ public class GameManager : Singleton<GameManager>
     public void ShowTrapTips(TrapContent trap)
     {
         HideTips();
-        m_TrapTips.ReadTrap(trap);
+        m_TrapTips.ReadTrap(trap, m_BoardSystem.SwitchTrapCost,BoardSystem.relocatable);
         m_TrapTips.Show();
     }
 

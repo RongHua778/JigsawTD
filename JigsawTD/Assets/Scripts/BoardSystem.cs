@@ -32,6 +32,9 @@ public class BoardSystem : IGameSystem
     private float moveDis;
     private Vector3 startPos;
 
+    public static string selectedTrap;
+    public static bool relocatable;
+
     private static TileBase selectingTile;
     public static TileBase SelectingTile
     {
@@ -86,6 +89,17 @@ public class BoardSystem : IGameSystem
         set
         {
             buyOneGroundMoney = value;
+        }
+    }
+
+    //买一块地板多少钱
+    int switchTrapCost = 50;
+    public int SwitchTrapCost
+    {
+        get => switchTrapCost;
+        set
+        {
+            switchTrapCost = value;
         }
     }
 
@@ -272,18 +286,29 @@ public class BoardSystem : IGameSystem
                 tempPoss.Remove(pos);
             }
         }
+        List<int> indices = StaticData.SelectNoRepeat(tempPoss.Count, StaticData.Instance.trapN);
+
         for (int i = 0; i < StaticData.Instance.trapN; i++)
         {
-            int index = UnityEngine.Random.Range(0, tempPoss.Count);
-            Vector2Int temp = tempPoss[index];
-            traps.Add(temp);
-            List<Vector2Int> neibor = StaticData.GetCirclePoints(5, 0);
-            for (int k = 0; k < neibor.Count; k++)
+            try
             {
-                neibor[k] = neibor[k] + tempPoss[index];
+                int index = indices[i];
+                index = UnityEngine.Random.Range(0, tempPoss.Count);
+                Vector2Int temp = tempPoss[index];
+                traps.Add(temp);
+                List<Vector2Int> neibor = StaticData.GetCirclePoints(5, 0);
+                for (int k = 0; k < neibor.Count; k++)
+                {
+                    neibor[k] = neibor[k] + tempPoss[index];
+                }
+                tempPoss = tempPoss.Except(neibor).ToList();
+                //tempPoss.Remove(temp);
             }
-            tempPoss = tempPoss.Except(neibor).ToList();
-            tempPoss.Remove(temp);
+            catch
+            {
+                Debug.LogAssertion("生成陷阱错误！");
+            }
+
         }
         foreach (Vector2Int pos in traps)
         {
@@ -346,7 +371,28 @@ public class BoardSystem : IGameSystem
         BuyOneGroundMoney += 20;
     }
 
-
+    public void SwitchTrap()
+    {
+        if (GameManager.Instance.OperationState.StateName == StateName.WaveState)
+        {
+            GameManager.Instance.ShowMessage(GameMultiLang.GetTraduction("NOTBATTLESTATE"));
+            return;
+        }
+        else if (!GameManager.Instance.ConsumeMoney(50))
+        {
+            return;
+        }
+        Vector3 p = SelectingTile.transform.position;
+        ObjectPool.Instance.UnSpawn(SelectingTile);
+        TileShape shape = GameManager.Instance.ShapeFactory.GetDShape();
+        GameTile tile = GameManager.Instance.TileFactory.GetBasicTile();
+        tile.SetContent(GameManager.Instance.ContentFactory.GetTrapContentByName(selectedTrap));
+        shape.SetTile(tile);
+        shape.transform.position = new Vector3(p.x, p.y, -1);
+        GameTile tile2 = ConstructHelper.GetNormalTile(GameTileContentType.Empty);
+        tile2.transform.position = p;
+        tile2.TileLanded();
+    }
 
 
 }

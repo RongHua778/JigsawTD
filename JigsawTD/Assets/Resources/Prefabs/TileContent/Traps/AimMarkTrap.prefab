@@ -148,6 +148,9 @@ MonoBehaviour:
   m_TrapAttribute: {fileID: 0}
   needReset: 0
   TrapIntensify: 1
+  trapIntensify2: 1
+  passingOnce: 0
+  relocatable: 1
 --- !u!1 &8809196961676829142
 GameObject:
   m_ObjectHideFlags: 0

@@ -214,6 +214,9 @@ MonoBehaviour:
   m_TrapAttribute: {fileID: 11400000, guid: 7fe6d72c40d904b40b1e5e27ef4f12b6, type: 2}
   needReset: 1
   TrapIntensify: 1
+  trapIntensify2: 1
+  passingOnce: 0
+  relocatable: 1
 --- !u!58 &2623551280471278839
 CircleCollider2D:
   m_ObjectHideFlags: 0

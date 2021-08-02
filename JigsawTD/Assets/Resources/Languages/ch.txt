@@ -100,6 +100,7 @@ COMINTENSIFY=作为合成素材时提供
 BUY=购买
 COMPOSITE=合成
 UPGRADE=升级
+SWITCHTRAP=换位
 
 //Groundtips
 BUYGROUND=购买一块基础格
@@ -260,13 +261,27 @@ DAMAGETRAP=伤害标记
 SPAWNPOINT=起点
 DESTINATION=终点
 BLINKTRAP=闪烁陷阱
+PROMOTETRAP=强化陷阱
+IMITATETRAP=变化陷阱
+STUNTRAP2=晕眩陷阱(新)
+DAMAGEARROW=伤害箭头
+EXECUTETRAP=处决陷阱
+AIMMARKTRAP=标准陷阱
+DAMAGEMARKTRAP=伤害标记
 
 STUNTRAPINFO=经过此格的敌人会被晕眩1.5秒。
 ARROWTRAPINFO=按箭头方向经过此处的敌人会被减速，直到转向。
 DAMAGETRAPINFO=每次敌人经过时，造成其期间所受伤害20%的额外伤害。
 SPAWNPOINTINFO=敌人的出生点，确保有路线与终点相连。
 DESTINATIONINFO=敌人的目的地，确保有路线与起点相连。
-BLINKTRAPINFO=闪烁陷阱
+BLINKTRAPINFO=闪烁陷阱，经过的敌人传送到4格前的位置，每个敌人只可触发一次。
+PROMOTETRAPINFO=使敌人下一个经过的陷阱的效果提高100%，可以叠加。
+IMITATETRAPINFO=这个陷阱效果等同于敌人经过的上一个陷阱。
+STUNTRAP2INFO=经过的敌人被晕眩0.5*N秒，N=此前经过的陷阱数量。
+DAMAGEARROWINFO=箭头指示方向的4格内，敌人在其上受到的伤害提高50%。
+EXECUTETRAPINFO=敌人此前每移动一格，就造成1%的已损失生命值伤害。
+AIMMARKTRAPINFO=敌人此后每移动1格，受到的伤害就提高5%。
+DAMAGEMARKTRAPINFO=经过的敌人会被标记，5秒后受到期间所受伤害50%的额外伤害。
 
 //TurretBase
 ATTACKBASE=攻击基座

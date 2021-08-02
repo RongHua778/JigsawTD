@@ -17,6 +17,7 @@ public class TrapContent : GameTileContent
     protected float trapCounter;
     public float trapIntensify2=1;
     public bool passingOnce = false;
+    public bool relocatable = false;
     public override void ContentLanded()
     {
         base.ContentLanded();
@@ -102,11 +103,14 @@ public class TrapContent : GameTileContent
 
     public override void OnContentSelected(bool value)
     {
+        BoardSystem.selectedTrap = m_TrapAttribute.Name;
+        BoardSystem.relocatable = relocatable;
         base.OnContentSelected(value);
         if (value)
         {
             GameManager.Instance.ShowTrapTips(this);
         }
+
     }
 
     public override void OnUnSpawn()
