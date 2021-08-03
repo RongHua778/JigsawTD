@@ -23,7 +23,11 @@ public class TrapContent : GameTileContent
         base.ContentLanded();
         m_GameTile.tag = "UnDropablePoint";
         StaticData.SetNodeWalkable(m_GameTile, true);
+        Collider2D col = StaticData.RaycastCollider(transform.position, LayerMask.GetMask(StaticData.ConcreteTileMask));
+        ContentLandedCheck(col);
     }
+
+
 
     public override void CorretRotation()
     {
@@ -37,23 +41,22 @@ public class TrapContent : GameTileContent
     {
         base.OnContentPass(enemy);
         //以下是新加的内容
-        for (int i = 0; i < enemy.PassedTraps.Count; i++)
-        {
-            enemy.PassedTraps[i].trapIntensify2 = 1f;
-        }
-        if (enemy.PassedTraps.Count > 0)
-        {
-            TrapContent m = enemy.PassedTraps[enemy.PassedTraps.Count - 1];
-            //受到上一个陷阱的强化
-            if (enemy.PassedTraps.Count > 1)
-            {
-                for (int i = 0; i < enemy.PassedTraps.Count - 1; i++)
-                {
-                    enemy.PassedTraps[i].NextTrap(enemy.PassedTraps[i + 1]);
-                }
-                enemy.PassedTraps[enemy.PassedTraps.Count - 1].NextTrap(this);
-            }
-        }
+        //for (int i = 0; i < enemy.PassedTraps.Count; i++)
+        //{
+        //    enemy.PassedTraps[i].trapIntensify2 = 1f;
+        //}
+        //trapIntensify2 = 1f;
+        //if (enemy.PassedTraps.Count > 0)
+        //{
+        //    //TrapContent m = enemy.PassedTraps[enemy.PassedTraps.Count - 1];
+        //    //受到上一个陷阱的强化
+        //    for (int i = 0; i < enemy.PassedTraps.Count - 1; i++)
+        //    {
+        //        enemy.PassedTraps[i].NextTrap(enemy.PassedTraps[i + 1]);
+        //    }
+        //    enemy.PassedTraps[enemy.PassedTraps.Count - 1].NextTrap(this);
+        //}
+
         if (passingOnce)
         {
             PassOnce(enemy);
@@ -61,6 +64,7 @@ public class TrapContent : GameTileContent
         else
         {
             PassManyTimes(enemy);
+            OnLeaveManyTimes(enemy);
         }
         //******
         trapBuffs = m_TrapAttribute.BuffInfos;
@@ -75,25 +79,47 @@ public class TrapContent : GameTileContent
 
     public virtual void OnPassOnce(Enemy enemy)
     {
-
     }
 
     private void PassOnce(Enemy enemy)
     {
-        int contained = 0;
+        //int contained = 0;
         List<TrapContent> m = enemy.PassedTraps;
-        m.Add(this);
-        for (int i = 0; i < m.Count; i++)
+        //for (int i = 0; i < m.Count; i++)
+        //{
+        //    if (m[i] == this)
+        //    {
+        //        contained++; ;
+        //    }
+        //}
+        if (!m.Contains(this))
         {
-            if (m[i] == this)
-            {
-                contained++; ;
-            }
-        }
-        if (contained<2)
-        {
+            m.Add(this);
             OnPassOnce(enemy);
+            OnLeaveOnce(enemy);
         }
+    }
+
+    public void LeaveOnce(Enemy enemy)
+    {
+        //int contained = 0;
+        //List<TrapContent> m = enemy.PassedTraps;
+        //for (int i = 0; i < m.Count; i++)
+        //{
+        //    if (m[i] == this)
+        //    {
+        //        contained++; ;
+        //    }
+        //}
+    }
+    public virtual void OnLeaveOnce(Enemy enemy)
+    {
+        enemy.TrapIntentify = 1f;
+    }
+
+    public virtual void OnLeaveManyTimes(Enemy enemy)
+    {
+        enemy.TrapIntentify = 1f;
     }
 
     public virtual void PassManyTimes(Enemy enemy)
@@ -127,7 +153,6 @@ public class TrapContent : GameTileContent
             if (target.Enemy != null) 
             ((Enemy)target.Enemy).CurrentTrap = this;
             ((Enemy)target.Enemy).TriigerTrap();
-
             //List<EnemyTrapManager> m= ((Enemy)target.Enemy).PassedTraps;
             //if (m.Count > 0)
             //{
@@ -156,33 +181,18 @@ public class TrapContent : GameTileContent
 
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        TargetPoint target = collision.GetComponent<TargetPoint>();
-        if (target != null)
-        {
-            if (target.Enemy != null)
-                OnExitTrap(((Enemy)target.Enemy));
-        }
-        else
-        {
-            Debug.LogWarning(collision.name + ":错误的碰撞触发");
-        }
-
-    }
 
     public virtual void OnGameUpdating(Enemy enemy)
     {
         
     }
 
-    protected virtual void NextTrap(TrapContent nextTrap)
+    protected override void ContentLandedCheck(Collider2D col)
     {
-
-    }
-
-    protected virtual void OnExitTrap(Enemy enemy)
-    {
-
+        if (col != null)
+        {
+            GameTile tile = col.GetComponent<GameTile>();
+            ObjectPool.Instance.UnSpawn(tile);
+        }
     }
 }

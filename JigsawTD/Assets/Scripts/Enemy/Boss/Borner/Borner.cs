@@ -65,9 +65,9 @@ public class Borner : Enemy
         if (castleCounter > 0)
         {
             castleCounter -= Time.deltaTime;
-            level = 0;
             if (castleCounter <= 0f)
             {
+                level = 0;
                 DamageIntensify = 0f;
                 Anim.SetBool("Transform", false);
                 Sound.Instance.PlayEffect("Sound_BornerTransform");

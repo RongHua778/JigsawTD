@@ -11,9 +11,19 @@ public class DamageArrowTrap : TrapContent
         enemy.DamageIntensify += 0.5f;
     }
 
-    protected override void OnExitTrap(Enemy enemy)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        enemy.DamageIntensify -= 0.5f;
+        TargetPoint target = collision.GetComponent<TargetPoint>();
+        if (target != null)
+        {
+            if (target.Enemy != null)
+            ((Enemy)target.Enemy).DamageIntensify -= 0.5f;
+        }
+        else
+        {
+            Debug.LogWarning(collision.name + ":´íÎóµÄÅö×²´¥·¢");
+        }
+
     }
 
     public override void ContentLanded()

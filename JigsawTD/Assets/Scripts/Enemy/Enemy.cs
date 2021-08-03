@@ -116,6 +116,10 @@ public abstract class Enemy : PathFollower, IDamageable
     }
 
 
+    float trapIntentify=1f;
+    public float TrapIntentify { get => trapIntentify; set => trapIntentify = value; }
+
+
     public virtual void Awake()
     {
         enemySprite = transform.Find("Model").Find("GFX").GetComponent<SpriteRenderer>();
@@ -299,5 +303,6 @@ public abstract class Enemy : PathFollower, IDamageable
         {
             skills.Clear();
         }
+        TrapIntentify = 1f;
     }
 }

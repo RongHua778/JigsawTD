@@ -16,7 +16,7 @@ public class AimMarkTrap : TrapContent
     {
         if (trapIndex < enemy.PointIndex)
         {
-            enemy.DamageIntensify += (enemy.PointIndex - trapIndex) * 0.05f * trapIntensify2;
+            enemy.DamageIntensify += (enemy.PointIndex - trapIndex) * 0.05f * enemy.TrapIntentify;
             trapIndex = enemy.PointIndex;
         }
     }

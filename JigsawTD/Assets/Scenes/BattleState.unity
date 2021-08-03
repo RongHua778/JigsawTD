@@ -5871,7 +5871,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerMaxLevel: 7
-  LevelUpMoney: 000000003c0000009600000018010000c20100008a020000840300000f270000
+  LevelUpMoney: 000000003200000078000000fa0000009001000058020000520300000f270000
   StartCoin: 5
   StartLotteryDraw: 0
   BaseWaveIncome: 20
@@ -14239,7 +14239,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -232.61998, y: 0}
+  m_AnchoredPosition: {x: -232.62, y: 0}
   m_SizeDelta: {x: 515.24316, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &878872112

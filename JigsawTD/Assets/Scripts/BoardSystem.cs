@@ -286,34 +286,24 @@ public class BoardSystem : IGameSystem
                 tempPoss.Remove(pos);
             }
         }
-        List<int> indices = StaticData.SelectNoRepeat(tempPoss.Count, StaticData.Instance.trapN);
-
         for (int i = 0; i < StaticData.Instance.trapN; i++)
         {
-            try
+            int index = UnityEngine.Random.Range(0, tempPoss.Count);
+            Vector2Int temp = tempPoss[index];
+            traps.Add(temp);
+            List<Vector2Int> neibor = StaticData.GetCirclePoints(5);
+            for (int k = 0; k < neibor.Count; k++)
             {
-                int index = indices[i];
-                index = UnityEngine.Random.Range(0, tempPoss.Count);
-                Vector2Int temp = tempPoss[index];
-                traps.Add(temp);
-                List<Vector2Int> neibor = StaticData.GetCirclePoints(5, 0);
-                for (int k = 0; k < neibor.Count; k++)
-                {
-                    neibor[k] = neibor[k] + tempPoss[index];
-                }
-                tempPoss = tempPoss.Except(neibor).ToList();
-                //tempPoss.Remove(temp);
+                neibor[k] = neibor[k] + tempPoss[index];
             }
-            catch
-            {
-                Debug.LogAssertion("Éú³ÉÏÝÚå´íÎó£¡");
-            }
+            tempPoss = tempPoss.Except(neibor).ToList();
+            tempPoss.Remove(temp);
+
 
         }
         foreach (Vector2Int pos in traps)
         {
-            //GameTile tile = UnityEngine.Random.value > 0.75f ? ConstructHelper.GetRandomTurretBase() : ConstructHelper.GetRandomTrap();
-            GameTile tile= ConstructHelper.GetRandomTrap();
+            GameTile tile = ConstructHelper.GetRandomTrap();
             tile.transform.position = (Vector3Int)pos;
             tile.TileLanded();
             tile.SetRandomRotation();

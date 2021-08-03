@@ -7,7 +7,7 @@ public class StunTrap : TrapContent
     public override void PassManyTimes(Enemy enemy)
     {
         base.PassManyTimes(enemy);
-        enemy.StunTime += enemy.PassedTraps.Count * 0.5f* trapIntensify2;
+        enemy.StunTime += enemy.PassedTraps.Count * 0.5f* enemy.TrapIntentify;
     }
 
 }

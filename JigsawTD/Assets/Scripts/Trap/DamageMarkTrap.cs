@@ -18,7 +18,7 @@ public class DamageMarkTrap : TrapContent
         }
         else
         {
-            enemy.DamageIntensify += 0.5f * trapIntensify2;
+            enemy.DamageIntensify += 0.5f * enemy.TrapIntentify;
         }
     }
 

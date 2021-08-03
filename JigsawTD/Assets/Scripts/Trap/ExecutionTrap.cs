@@ -9,7 +9,7 @@ public class ExecutionTrap : TrapContent
     {
         base.PassManyTimes(enemy);
         float realdamage;
-        enemy.ApplyDamage((enemy.MaxHealth-enemy.CurrentHealth)*0.01f* trapIntensify2,
+        enemy.ApplyDamage((enemy.MaxHealth-enemy.CurrentHealth)*0.01f* enemy.TrapIntentify,
             out realdamage, true);
         DamageAnalysis += (int)realdamage;
     }

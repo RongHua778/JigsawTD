@@ -7,7 +7,7 @@ public class BlinkTrap : TrapContent
 
     public override void OnPassOnce(Enemy enemy)
     {
-        enemy.PointIndex -= 4*(int)trapIntensify2;
+        enemy.PointIndex -= 4*(int)enemy.TrapIntentify;
         if (enemy.PointIndex < 0)
         {
             enemy.PointIndex = 0;
@@ -22,5 +22,7 @@ public class BlinkTrap : TrapContent
         enemy.DirectionAngleFrom = enemy.DirectionAngleTo = enemy.Direction.GetAngle();
         enemy.transform.localRotation = enemy.CurrentPoint.PathDirection.GetRotation();
         enemy.Progress = 0.5f;
+        base.OnPassOnce(enemy);
     }
+
 }
