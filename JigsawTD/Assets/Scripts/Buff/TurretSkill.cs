@@ -46,7 +46,7 @@ public abstract class TurretSkill
 
     }
 
-    public virtual void Shoot(Bullet bullet = null)
+    public virtual void Shoot(Bullet bullet = null, Enemy target = null)
     {
 
     }
@@ -99,7 +99,7 @@ public class I1SkillSpeedIncreasePerShoot : InitialSkill
 {
     public override TurretSkillName EffectName => TurretSkillName.I1SkillSpeedIncreasedPerShoot;
     public override string SkillDescription => "I1SKILL";
-    public override void Shoot(Bullet bullet = null)
+    public override void Shoot(Bullet bullet = null,Enemy target=null)
     {
         if (strategy.TurnFixSpeed > 9.95f)
             return;
@@ -113,22 +113,8 @@ public class J1SkillDistanceBaseDamage : InitialSkill
 
     float increaseRate = 0.3f;
 
-    //public override void Detect()
-    //{
-    //    increaseRate = 0f;
-    //    List<Vector2Int> points = StaticData.GetCirclePoints(1);
-    //    foreach (var point in points)
-    //    {
-    //        Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
-    //        Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.GroundTileMask));
-    //        if (hit != null)
-    //        {
-    //            increaseRate += 0.1f;
-    //        }
-    //    }
-    //}
 
-    public override void Shoot(Bullet bullet=null)
+    public override void Shoot(Bullet bullet = null, Enemy target = null)
     {
         bullet.Damage *= 1 + (increaseRate * bullet.GetTargetDistance());
     }
@@ -181,7 +167,7 @@ public class SlowBullet : InitialSkill
     public override TurretSkillName EffectName => TurretSkillName.S002SlowBullet;
 
     private float duration = 2f;
-    public override void Hit(Enemy target,Bullet bullet = null)
+    public override void Hit(Enemy target, Bullet bullet = null)
     {
         BuffInfo info = new BuffInfo(EnemyBuffName.SlowDown, KeyValue, duration);
         target.Buffable.AddBuff(info);
@@ -195,7 +181,7 @@ public class L1Skill : InitialSkill
     public override string SkillDescription => "L1SKILL";
 
     private float intensifyIncreased = 0;
-    public override void Shoot(Bullet bullet = null)
+    public override void Shoot(Bullet bullet = null, Enemy target = null)
     {
         if (intensifyIncreased > 1.95f)
             return;
@@ -214,7 +200,7 @@ public class F1Skill : InitialSkill
     public override TurretSkillName EffectName => TurretSkillName.F1Skill;
     public override string SkillDescription => "F1SKILL";
 
-    public override void Shoot(Bullet bullet = null)
+    public override void Shoot(Bullet bullet = null, Enemy target = null)
     {
         int count = strategy.m_Turret.targetList.Count;
         bullet.Damage *= (1 + count * 0.1f);
@@ -227,13 +213,12 @@ public class CurrentHealthBaseDmage : InitialSkill
 {
     public override TurretSkillName EffectName => TurretSkillName.S009CurrentHealthBaseDamage;
 
-    public override void Hit(Enemy target,Bullet bullet = null)
+    public override void Hit(Enemy target, Bullet bullet = null)
     {
         float realDamage;
         float extraDamage = target.CurrentHealth * (target.IsBoss ? 0.01f : 0.04f);
         target.ApplyDamage(extraDamage, out realDamage);
         strategy.DamageAnalysis += (int)realDamage;
-        Debug.Log("DealHealthBaseDamage:" + extraDamage);
     }
 }
 
@@ -242,7 +227,7 @@ public class M1SkillDoubleSlowRate : InitialSkill
     public override TurretSkillName EffectName => TurretSkillName.M1SkillDoubleSlowRate;
 
     public override string SkillDescription => "M1SKILL";
-    public override void Hit(Enemy target,Bullet bullet = null)
+    public override void Hit(Enemy target, Bullet bullet = null)
     {
         strategy.RotSpeed = 0;
         float increaseSlow = target.SlowRate * 2f;
@@ -255,7 +240,7 @@ public class IncreaseDamageBuff : InitialSkill
 {
     public override TurretSkillName EffectName => TurretSkillName.S011IncreaseDamageBuff;
 
-    public override void Hit(Enemy target,Bullet bullet = null)
+    public override void Hit(Enemy target, Bullet bullet = null)
     {
         BuffInfo info = new BuffInfo(EnemyBuffName.DamageIntensify, KeyValue, 2f);
         target.Buffable.AddBuff(info);
@@ -269,7 +254,7 @@ public class SameTargetDamageIncrease : InitialSkill
     public Enemy LastTarget;
     private float maxDamageIncrease = 500;
 
-    public override void Hit(Enemy target,Bullet bullet = null)
+    public override void Hit(Enemy target, Bullet bullet = null)
     {
 
         if (target == LastTarget)

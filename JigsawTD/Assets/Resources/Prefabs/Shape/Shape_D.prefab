@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d98ad2cf37821a49bd1185cce6df0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsTurretPos: 1
 --- !u!1 &3904407804800979459
 GameObject:
   m_ObjectHideFlags: 0

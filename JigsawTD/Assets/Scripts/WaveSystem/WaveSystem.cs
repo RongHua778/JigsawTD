@@ -97,7 +97,7 @@ public class WaveSystem : IGameSystem
             {
                 stage = (i + 1) * 0.5f;
                 //////////////
-                stage = 100f;
+                //stage = 100f;
                 sequences = GenerateRandomSequence(1, stage, i);
             }
             else if (i == 9)
@@ -140,7 +140,7 @@ public class WaveSystem : IGameSystem
 
     private List<EnemySequence> GenerateRandomSequence(int genres, float stage, int wave)
     {
-        int maxRandom = wave > 9 ? 6 : 4;
+        int maxRandom = wave > 15 ? 6 : 4;
         List<EnemySequence> sequencesToReturn = new List<EnemySequence>();
         List<int> indexs = StaticData.SelectNoRepeat(maxRandom, genres);
         foreach (int index in indexs)

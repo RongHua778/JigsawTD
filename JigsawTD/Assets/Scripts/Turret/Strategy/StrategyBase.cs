@@ -23,6 +23,7 @@ public abstract class StrategyBase
         this.Quality = quality;
     }
 
+
     //基础属性
     private float initAttack;
     private float initSpeed;
@@ -74,6 +75,7 @@ public abstract class StrategyBase
     private float baseSputteringPercentageIntensifyModify = 1;
     private float baseSlowRateIntensifyModify = 1;
     private float baseCriticalPercentageIntensifyModify = 1;
+    private float poloIntensifyModify = 1;
     public float AllAttackIntensifyModify { get => allAttackIntensifyModify; set => allAttackIntensifyModify = value; }
     public float AllSpeedIntensifyModify { get => allSpeedIntensifyModify; set => allSpeedIntensifyModify = value; }
     public float AllCriticalIntensifyModify { get => allCriticalIntensifyModify; set => allCriticalIntensifyModify = value; }
@@ -81,6 +83,7 @@ public abstract class StrategyBase
     public float BaseSputteringPercentageIntensifyModify { get => baseSputteringPercentageIntensifyModify; set => baseSputteringPercentageIntensifyModify = value; }
     public float BaseSlowRateIntensifyModify { get => baseSlowRateIntensifyModify; set => baseSlowRateIntensifyModify = value; }
     public float BaseCriticalPercentageIntensifyModify { get => baseCriticalPercentageIntensifyModify; set => baseCriticalPercentageIntensifyModify = value; }
+    public float PoloIntensifyModify { get => poloIntensifyModify; set => poloIntensifyModify = value; }
     #endregion
 
     //最终基础属性
@@ -212,6 +215,7 @@ public abstract class StrategyBase
         BaseSputteringRangeIntensifyModify = 1;
         BaseSputteringPercentageIntensifyModify = 1;
         BaseSlowRateIntensifyModify = 1;
+        PoloIntensifyModify = 1;
 
     }
 

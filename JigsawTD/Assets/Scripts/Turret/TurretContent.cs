@@ -110,35 +110,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         CannonSprite.sprite = Strategy.m_Att.TurretLevels[Strategy.Quality - 1].CannonSprite;
     }
 
-    //public virtual void TriggerPoloEffect(bool value)
-    //{
-    //    if (m_TurretAttribute.TurretLevels[Quality - 1].PoloEffects.Count > 0)
-    //    {
-    //        List<Vector2> poss = StaticData.GetCirclePoints(AttackRange, ForbidRange);
-    //        foreach (var polo in m_TurretAttribute.TurretLevels[Quality - 1].PoloEffects)
-    //        {
-    //            switch (polo.EffectType)
-    //            {
-    //                case PoloEffectType.RangeIntensify:
-    //                    foreach (var pos in poss)
-    //                    {
-    //                        GroundTile groungTile = StaticData.RaycastCollider(pos + (Vector2)transform.position, StaticData.GetGroundLayer).GetComponent<GroundTile>();
-    //                        groungTile.RangeIntensify += value ? (int)polo.KeyValue : -(int)polo.KeyValue;
-    //                        groungTile.TriggerIntensify();
-    //                    }
-    //                    break;
-    //                case PoloEffectType.AttackIntensify:
-    //                    foreach (var pos in poss)
-    //                    {
-    //                        GroundTile groungTile = StaticData.RaycastCollider(pos + (Vector2)transform.position, StaticData.GetGroundLayer).GetComponent<GroundTile>();
-    //                        groungTile.AttackIntensify += value ? polo.KeyValue : -polo.KeyValue;
-    //                        groungTile.TriggerIntensify();
-    //                    }
-    //                    break;
-    //            }
-    //        }
-    //    }
-    //}
+
 
     public void AddTarget(TargetPoint target)
     {

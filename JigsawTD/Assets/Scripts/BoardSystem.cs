@@ -144,7 +144,7 @@ public class BoardSystem : IGameSystem
     private void TileUp(TileBase tile)
     {
         moveDis = Vector2.SqrMagnitude(Input.mousePosition - startPos);
-        if (moveDis < 0.2f)
+        if (moveDis < 0.5f)
         {
             SelectingTile = tile;
         }
@@ -169,7 +169,7 @@ public class BoardSystem : IGameSystem
         AstarPath.active.Scan();
 
         GenerateStartTiles(_startSize, sizeOffset);
-        GenerateTrapTiles(sizeOffset, _startSize);
+        //GenerateTrapTiles(sizeOffset, _startSize);
         Physics2D.SyncTransforms();
         SeekPath();
         ShowPath();

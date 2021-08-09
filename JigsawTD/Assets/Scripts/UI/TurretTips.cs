@@ -108,11 +108,11 @@ public class TurretTips : TileTips
 
                 //ÔªËØ¼¼ÄÜ
                 elementConstruct.gameObject.SetActive(true);
-                elementConstruct.SetElements((StrategyComposite)Strategy);
+                elementConstruct.SetElements(Strategy.ElementSkill);
                 if (Strategy.ElementSKill2 != null)
                 {
                     elementConstruct2.gameObject.SetActive(true);
-                    elementConstruct2.SetElements((StrategyComposite)Strategy);
+                    elementConstruct2.SetElements(Strategy.ElementSKill2);
                 }
                 else
                 {
@@ -143,7 +143,7 @@ public class TurretTips : TileTips
         BluePrintArea.SetActive(false);
 
         elementConstruct.gameObject.SetActive(true);
-        elementConstruct.SetElements((StrategyComposite)m_Strategy);
+        elementConstruct.SetElements(m_Strategy.ElementSkill);
         elementConstruct2.gameObject.SetActive(false);
 
     }

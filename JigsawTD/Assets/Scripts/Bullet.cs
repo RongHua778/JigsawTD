@@ -95,7 +95,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         {
             foreach (TurretSkill effect in turretEffects)
             {
-                effect.Shoot(this);
+                effect.Shoot(this, (Enemy)Target.Enemy);
             }
         }
     }
@@ -118,7 +118,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         {
             foreach (TurretSkill effect in turretEffects)
             {
-                effect.Hit(target,this);
+                effect.Hit(target, this);
             }
         }
         if (SlowRate > 0 && !target.IsDie)//技能可能会修改slowrate

@@ -92,7 +92,7 @@ GameObject:
   m_Layer: 0
   m_Name: TilePos1
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -122,6 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d98ad2cf37821a49bd1185cce6df0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsTurretPos: 1
 --- !u!1 &4634135920836066886
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,7 +292,7 @@ GameObject:
   m_Layer: 0
   m_Name: TilePos2
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -321,6 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d98ad2cf37821a49bd1185cce6df0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsTurretPos: 0
 --- !u!1 &6528997629779224560
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,7 +336,7 @@ GameObject:
   m_Layer: 0
   m_Name: TilePos4
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -364,6 +366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d98ad2cf37821a49bd1185cce6df0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsTurretPos: 1
 --- !u!1 &6889555362419343918
 GameObject:
   m_ObjectHideFlags: 0
@@ -816,7 +819,7 @@ GameObject:
   m_Layer: 0
   m_Name: TilePos3
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -846,6 +849,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d98ad2cf37821a49bd1185cce6df0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsTurretPos: 0
 --- !u!1 &8260021623939495456
 GameObject:
   m_ObjectHideFlags: 0

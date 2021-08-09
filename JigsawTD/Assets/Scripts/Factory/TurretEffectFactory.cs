@@ -50,7 +50,14 @@ public class TurretEffectFactory
         foreach (var type in types)
         {
             var effect = Activator.CreateInstance(type) as ElementSkill;
-            ElementSkillDIC.Add(effect.Elements, type);
+            if (!ElementSkillDIC.ContainsKey(effect.Elements))
+            {
+                ElementSkillDIC.Add(effect.Elements, type);
+            }
+            else
+            {
+                Debug.LogWarning("重复的元素搭配：" + effect.Elements[0].ToString() + effect.Elements[1].ToString() + effect.Elements[2].ToString());
+            }
         }
     }
 
@@ -80,10 +87,10 @@ public class TurretEffectFactory
     {
         Type type;
         ElementSkill effect;
-        foreach(var skill in ElementSkillDIC.Keys)
+        foreach (var skill in ElementSkillDIC.Keys)
         {
             List<int> temp = skill.ToList();
-            foreach(var element in elements)
+            foreach (var element in elements)
             {
                 if (temp.Contains(element))
                 {
@@ -101,7 +108,7 @@ public class TurretEffectFactory
                 }
             }
         }
-        Debug.LogWarning("没有这个元素技能");
+        Debug.LogWarning("没有这个元素技能" + elements[0].ToString() + elements[1].ToString() + elements[2].ToString());
         return null;
     }
 

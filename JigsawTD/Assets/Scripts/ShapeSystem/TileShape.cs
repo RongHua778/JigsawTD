@@ -11,7 +11,8 @@ public enum ShapeType
 public class TileShape : MonoBehaviour
 {
     public bool IsPreviewing = false;
-    TileSlot[] tilePos;
+    List<TileSlot> tilePos = new List<TileSlot>();
+    List<TileSlot> turretPos = new List<TileSlot>();
     Camera renderCam;
     GameObject bgObj;
     DraggingShape draggingShape;
@@ -26,11 +27,20 @@ public class TileShape : MonoBehaviour
     private void Awake()
     {
         turretNameTxt = transform.GetComponentInChildren<Text>();
-        tilePos = transform.GetComponentsInChildren<TileSlot>();
+        tilePos = transform.GetComponentsInChildren<TileSlot>().ToList();
+        foreach (var slot in tilePos)
+        {
+            if (slot.IsTurretPos)
+            {
+                turretPos.Add(slot);
+            }
+        }
         renderCam = transform.Find("RenderCam").GetComponent<Camera>();
         bgObj = transform.Find("BG").gameObject;
         draggingShape = this.GetComponent<DraggingShape>();
     }
+
+
 
 
     //在shape上面加上塔
@@ -51,33 +61,31 @@ public class TileShape : MonoBehaviour
         }
         else
         {
-            int g = Random.Range(0, tilePos.Length);
-            for (int i = 0; i < tilePos.Length; i++)
+            GameTile tile;
+            TileSlot turretSlot = turretPos[Random.Range(0, turretPos.Count)];
+            tile = specialTile;
+            ElementTurret turret = tile.Content as ElementTurret;
+            turretNameTxt.text = turret.Strategy.m_Att.TurretLevels[turret.Strategy.Quality - 1].TurretName.Substring(0, 2);
+            SetTilePos(tile, turretSlot.transform.position);
+            tilePos.Remove(turretSlot);
+
+            for (int i = 0; i < tilePos.Count; i++)
             {
-                GameTile tile;
-                if (i == g)
-                {
-                    tile = specialTile;
-                    ElementTurret turret = tile.Content as ElementTurret;
-                    turretNameTxt.text = turret.Strategy.m_Att.TurretLevels[turret.Strategy.Quality - 1].TurretName.Substring(0, 2);
-                }
-                else
-                {
-                    tile = ConstructHelper.GetNormalTile(GameTileContentType.Empty);
-                }
-                tile.transform.position = tilePos[i].transform.position;
-                tile.SetRandomRotation();
-                tile.transform.SetParent(this.transform);
-                tile.m_DraggingShape = draggingShape;
-                tiles.Add(tile);
+                tile = ConstructHelper.GetNormalTile(GameTileContentType.Empty);
+                SetTilePos(tile, tilePos[i].transform.position);
             }
             draggingShape.Initialized(this);
         }
 
     }
-    public int GetSlotCount()
+
+    private void SetTilePos(GameTile tile, Vector3 pos)
     {
-        return tilePos.Length;
+        tile.transform.position = pos;
+        tile.SetRandomRotation();
+        tile.transform.SetParent(this.transform);
+        tile.m_DraggingShape = draggingShape;
+        tiles.Add(tile);
     }
 
     public void ReclaimTiles()

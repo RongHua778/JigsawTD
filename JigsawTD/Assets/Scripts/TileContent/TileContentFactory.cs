@@ -90,7 +90,7 @@ public class TileContentFactory : GameObjectFactory
 
     public ElementTurret GetRandomElementTurret(int playerLevel)
     {
-        int element = Random.Range(0, 5);
+        int element = Random.Range(0, StaticData.elementN);
         float[] qualityC = new float[5];
         for (int i = 0; i < 5; i++)
         {

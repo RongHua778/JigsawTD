@@ -180,6 +180,41 @@ J1SKILL=Bullet damage increased by 30%/block it travelled.
 K1SKILL=Double the increased critical damage.
 M1SKILL=Fire a snowball that moves to the end of a straight path and doubles the enemy's current slow rate.
 
+//Aϵ
+ATTACKPOLO=Increase acjacent turrets' basic attack by 50%.
+ATTACKSPEED=Each shoot increases attack by 10% this turn (up to 200%).
+LATEATTACK=Attack increased by 100% after 30 seconds of each wave.
+RANDOMATTACK=Bullet damage is randomly ranged from 50% to 200%.
+ATTACKADJACENT=Basic attack increased by 50% for each adjacent turret.
+
+//B系
+SPEEDPOLO=Increase adjacent turrets' basic firerate by 50%.
+SPEEDTARGET=Firerate increased by 10% each shoot while attacking the same target (up to 300%).
+LATESPEED=Firerate increased by 100% after 30 seconds of each wave.
+SPEEDCRITICAL=Firerate increased by 10% for each critical hit.(up to 200%).
+SPEEDADJACENT=Basic firerate increased by 50% for each adjacent turret.
+
+//C系
+SLOWPOLO=Increase adjacent turrets' slow by 50%.
+SLOWATTACK=Bullet damage increased by 10% for every 0.1 slow.
+SLOWSPEED=Slow increased by 0.1 for each shoot this turn (up to 2).
+RANDOMSLOW=Bullet's slow randomly increased by 0 to 1
+SLOWADJACENT=Slow increased by 0.5 for each adjacent turret.
+
+//D系
+CRITICALPOLO=Increase adjacent turrets' critical by 25%.
+RANDOMCRITICAL=Critical damage randomly increased by -100% to 400%.
+CRITICALSPEED=Critical increased by 5% for each shoot this turn (up to 50%).
+LATECRITICAL=Critical increased by 50% after 30 seconds of each wave.
+CRITICALADJACENT=Critical increased by 25% for each adjacent turret.
+
+//E系
+SPLASHPOLO=Increase adjacent turrets' splash by 0.3.
+NEARSPLASH=Splash damage is increased by 100% when target's distance less than 3.
+SPLASHSPEED=Splash increased by 0.06 for each shoot this turn (up to 1.2).
+LATESPLASH=Splash increased by 1.2 after 30 seconds of each wave.
+RANDOMSPLASH=Bullet's splash randomly increased by 0 to 1.5.
+
 AAA=Heavy Cannon: greatly reduced rotate speed and double all increased attack.
 BBB=Overload Magazine: Firerate increased by 200% for the first 10 seconds each wave.
 CCC=Ice Core: Increase adjacent turrets' slow by 0.5.
@@ -189,7 +224,7 @@ EEE=Nuclear Projectile: Bullet's splash range increased by 0.3/block it travalle
 AAB=Charged Base: Attack increased by 100% for the first 15 seconds each wave.
 AAC=Extended Barrel: Range +2.
 AAD=Metal Bullet: Each critical hit increases attack by 10% during this wave(up to 200%).
-AAE=Detector Radar:Basic attack increased by 50% for each adjacent turret.
+
 
 ABC=Reinforcement base: Upgrade cost -50%.
 ABD=Quantitative Investment: Coin earned increased by 15%.
@@ -200,9 +235,7 @@ ACE=Urgent Refactoring: Enhanced the next blueprint you bought.
 
 ADE=Metal Mind: Gain 1 perfect element while composite.
 
-BBA=Improved Flow: Firerate increased by 100% after 30 seconds of each wave.
 BBC=Accurate Strike: Bullet deal extra damage equal to 4% of the target's current health(1% of boss).
-BBD=Blind Bird:Firerate increased by 10% for each critical hit.(up to 200%).
 BBE=Miniature muzzle: Double all firerate increased. No critical anymore.
 
 BCD=Mint Factory: This turret gives you 1 coin each time it deals a critical hit.
@@ -210,8 +243,6 @@ BCE=Repair factory: Increased the adjacent traps' effect by 100%.
 
 BDE=Lucky Lottery: Gain random 100-300 coins.
 
-CCA=Hardcore: Increase acjacent turrets' basic attack by 50%.
-CCB=Accelerated Core: Increase adjacent turrets' basic firerate by 50%.
 CCD=Flame Core: Increase adjacent turrets' critical by 30%.
 CCE=Steady Core: Increase adjacent turrets' splash by 0.5.
 

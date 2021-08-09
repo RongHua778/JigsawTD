@@ -5883,7 +5883,7 @@ MonoBehaviour:
   MultipleShapeCost: 5
   EnvrionmentBaseVolume: 0.5
   TileSize: 1
-  trapN: 25
+  trapN: 20
   TileShapeChance: []
   PlayerMaxHealth: 1900000019000000190000001900000019000000
   difficutyWave: c8000000c8000000c8000000c8000000c8000000
@@ -36353,7 +36353,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2136738921
 RectTransform:
   m_ObjectHideFlags: 0

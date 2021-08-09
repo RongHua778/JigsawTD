@@ -46,7 +46,7 @@ public class StaticData : Singleton<StaticData>
     //塔的最大等级
     public static int maxLevel = 5;
     //一共有几种元素
-    public static int elementN = 5;
+    public static int elementN = 4;
     //最大quality
     public static int maxQuality = 5;
     public int trapN = 15;

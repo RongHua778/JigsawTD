@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class TileSlot : MonoBehaviour
 {
-
+    public bool IsTurretPos;
 }
