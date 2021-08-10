@@ -23,12 +23,10 @@ public class BlueprintFactory : GameObjectFactory
             Composition c = new Composition(compositionLevel[i], Random.Range(0, StaticData.elementN));
             blueprint.Compositions.Add(c);
         }
-        blueprint.SetBluePrintIntensify();
-        StrategyComposite strategy = new StrategyComposite(attribute, blueprint, 1, null);
-        strategy.SetQualityValue();
-        strategy.GetComIntensify(blueprint);
-        strategy.GetTurretSkills();
-        blueprint.ComStrategy = strategy;
+        blueprint.ComStrategy= new StrategyBase(StrategyType.Composite, attribute, 1,Element.Gold, blueprint);
+        blueprint.ComStrategy.GetTurretSkills();
+        blueprint.ComStrategy.SetQualityValue();
+        blueprint.SortBluePrint();
         return blueprint;
     }
 
@@ -42,12 +40,10 @@ public class BlueprintFactory : GameObjectFactory
         blueprint.Compositions.Add(c1);
         blueprint.Compositions.Add(c2);
         blueprint.Compositions.Add(c3);
-        blueprint.SetBluePrintIntensify();
-        StrategyComposite strategy = new StrategyComposite(attribute, blueprint, 1, null);
-        strategy.SetQualityValue();
-        strategy.GetComIntensify(blueprint);
-        strategy.GetTurretSkills();
-        blueprint.ComStrategy = strategy;
+        blueprint.ComStrategy = new StrategyBase(StrategyType.Composite, attribute, 1, Element.Gold, blueprint);
+        blueprint.ComStrategy.GetTurretSkills();
+        blueprint.ComStrategy.SetQualityValue();
+        blueprint.SortBluePrint();
         return blueprint;
     }
 

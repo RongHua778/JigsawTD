@@ -215,6 +215,18 @@ SPLASHSPEED=Splash increased by 0.06 for each shoot this turn (up to 1.2).
 LATESPLASH=Splash increased by 1.2 after 30 seconds of each wave.
 RANDOMSPLASH=Bullet's splash randomly increased by 0 to 1.5.
 
+//综合系
+HURTBULLET=Bullet will increase the damage enemy took by 25% for 2 seconds
+RANDOMINTENSIFY=Randomly gain one of the effects every turn: +80% attack; +80% firerate; +40% critical;
+LEVELDISCOUNT=Upgrade cost -50%.
+COPYSKILL=Copy another element skill
+MODULELEVELUP=Upgrade your module system
+POLOINTENSIFY=Double the benefit from other turrets.
+RANDOMTRAP=Generate a random trap infront.
+CIRCLERANGE=Change the turret's range type to Circle.
+TRAPINTENSIFY=Increased the adjacent traps' effect by 100%.
+PORTALHIT=Each hit has a 5% chance to transfer enemy back 3 blocks.
+
 AAA=Heavy Cannon: greatly reduced rotate speed and double all increased attack.
 BBB=Overload Magazine: Firerate increased by 200% for the first 10 seconds each wave.
 CCC=Ice Core: Increase adjacent turrets' slow by 0.5.

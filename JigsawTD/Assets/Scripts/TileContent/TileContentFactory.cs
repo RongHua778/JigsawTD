@@ -63,7 +63,7 @@ public class TileContentFactory : GameObjectFactory
         {
             TrapDIC.Add(attribute.Name, attribute);
         }
-        foreach(var attribute in turretBaseAtts)
+        foreach (var attribute in turretBaseAtts)
         {
             TurretBaseDIC.Add(attribute.Name, attribute);
         }
@@ -99,7 +99,8 @@ public class TileContentFactory : GameObjectFactory
         int quality = StaticData.RandomNumber(qualityC) + 1;
         TurretAttribute attribute = ElementDIC[(Element)element];
         ElementTurret content = Get(attribute.ContentPrefab) as ElementTurret;
-        content.Strategy = new StrategyElement(attribute, quality, (Element)element, content);
+        content.Strategy = new StrategyBase(StrategyType.Element, attribute, quality,(Element)element);
+        content.Strategy.m_Turret = content;
         content.Strategy.SetQualityValue();
         content.InitializeTurret();
         return content;
@@ -109,7 +110,8 @@ public class TileContentFactory : GameObjectFactory
     {
         TurretAttribute attribute = ElementDIC[element];
         ElementTurret content = Get(attribute.ContentPrefab) as ElementTurret;
-        content.Strategy = new StrategyElement(attribute, quality, element, content);
+        content.Strategy = new StrategyBase(StrategyType.Element, attribute, quality,element);
+        content.Strategy.m_Turret = content;
         content.Strategy.SetQualityValue();
         content.InitializeTurret();
         return content;

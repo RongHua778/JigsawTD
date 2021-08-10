@@ -275,7 +275,7 @@ public class GameManager : Singleton<GameManager>
     {
         TransitionToState(StateName.PickingState);
         m_FuncUI.Hide();
-        m_ShapeSelectUI.ShowThreeShapes(m_FuncUI.PlayerLevel);
+        m_ShapeSelectUI.ShowThreeShapes(m_FuncUI.ModuleLevel);
     }
 
     public void SelectShape()//选择了一个模块
@@ -358,13 +358,13 @@ public class GameManager : Singleton<GameManager>
     {
         if (ConsumeMoney(cost))
         {
-            m_BluePrintShopUI.RefreshShop(m_FuncUI.PlayerLevel, cost);
+            m_BluePrintShopUI.RefreshShop(m_FuncUI.ModuleLevel, cost);
         }
     }
 
     public void GetRandomBluePrint(bool isIntensify = false)
     {
-        m_BluePrintShopUI.GetARandomBluePrintToPocket(m_FuncUI.PlayerLevel, isIntensify);
+        m_BluePrintShopUI.GetARandomBluePrintToPocket(m_FuncUI.ModuleLevel, isIntensify);
     }
 
     public void BuyBluePrint(BluePrintGrid grid, int cost)
@@ -411,7 +411,7 @@ public class GameManager : Singleton<GameManager>
     {
         foreach (var turret in compositeTurrets.behaviors)
         {
-            ((StrategyComposite)(((TurretContent)turret).Strategy)).LandedTurretSkill();
+            (((TurretContent)turret).Strategy).LandedTurretSkill();
         }
     }
 
@@ -419,7 +419,15 @@ public class GameManager : Singleton<GameManager>
     {
         foreach (var turret in compositeTurrets.behaviors)
         {
-            ((StrategyComposite)(((TurretContent)turret).Strategy)).DrawTurretSkill();
+            (((TurretContent)turret).Strategy).DrawTurretSkill();
+        }
+    }
+
+    public void ModuleLevelUp()
+    {
+        if (m_FuncUI.ModuleLevel < StaticData.Instance.PlayerMaxLevel)
+        {
+            m_FuncUI.ModuleLevel++;
         }
     }
     #endregion
@@ -435,7 +443,7 @@ public class GameManager : Singleton<GameManager>
     public void ShowTrapTips(TrapContent trap)
     {
         HideTips();
-        m_TrapTips.ReadTrap(trap, m_BoardSystem.SwitchTrapCost,BoardSystem.relocatable);
+        m_TrapTips.ReadTrap(trap, m_BoardSystem.SwitchTrapCost, BoardSystem.relocatable);
         m_TrapTips.Show();
     }
 

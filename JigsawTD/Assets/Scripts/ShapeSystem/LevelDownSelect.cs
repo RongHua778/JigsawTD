@@ -6,8 +6,8 @@ using UnityEngine.EventSystems;
 
 public class LevelDownSelect :MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public StrategyElement m_Strategy;
-    public void SetStrategy(StrategyElement strategy)
+    public StrategyBase m_Strategy;
+    public void SetStrategy(StrategyBase strategy)
     {
         m_Strategy = strategy;
     }

@@ -28,18 +28,7 @@ public class FuncUI : IUserInterface
     {
         get => energyProgress;
         set => energyProgress = Mathf.Min(5, value);
-        //{
-        //    if (value > 1)
-        //    {
-        //        energyProgress = 0;
-        //        Energy++;
-        //    }
-        //    else
-        //    {
-        //        energyProgress = value;
-        //    }
-        //    m_LuckInfo.SetContent(StaticData.GetLuckyInfo(Energy, EnergyProgress));
-        //}
+
     }
 
     int buyShapeCost=25;
@@ -60,28 +49,20 @@ public class FuncUI : IUserInterface
         set
         {
             drawRemain = value;
-            //DrawBtnTxt.text = /*GameMultiLang.GetTraduction("DRAWMODULE")*/ drawRemain.ToString();
-            //if (drawRemain <= 0)
-            //{
-            //    DrawBtnTxt.text = "抽取模块(金币" + buyShapeCost + ")";
-            //}
-            //else
-            //{
-            //    DrawBtnTxt.text = "抽取模块X" + drawRemain.ToString();
-            //}
+
         }
     }
 
-    private int playerLevel = 1;
-    public int PlayerLevel
+    private int moduleLevel = 1;
+    public int ModuleLevel
     {
-        get => playerLevel;
+        get => moduleLevel;
         set
         {
-            playerLevel = value;
-            PlayerLevelTxt.text = PlayerLevel.ToString();
-            PlayerLvUpMoney = StaticData.Instance.LevelUpMoney[PlayerLevel];
-            if (PlayerLevel < StaticData.Instance.PlayerMaxLevel)
+            moduleLevel = value;
+            PlayerLevelTxt.text = ModuleLevel.ToString();
+            PlayerLvUpMoney = StaticData.Instance.LevelUpMoney[ModuleLevel];
+            if (ModuleLevel < StaticData.Instance.PlayerMaxLevel)
             {
                 LevelUpTxt.text = PlayerLvUpMoney.ToString();
             }
@@ -89,7 +70,11 @@ public class FuncUI : IUserInterface
             {
                 LevelUpTxt.text = "MAX";
             }
-            m_LevelInfo.SetContent(StaticData.GetLevelInfo(playerLevel));
+            m_LevelInfo.SetContent(StaticData.GetLevelInfo(moduleLevel));
+            if (ModuleLevel == 3 || ModuleLevel == 5 || ModuleLevel == 7)//3,5和7级增加一个商店容量
+            {
+                m_GameManager.IncreaseShopCapacity();
+            }
         }
     }
 
@@ -130,7 +115,7 @@ public class FuncUI : IUserInterface
         //DrawRemain = StaticData.Instance.StartLotteryDraw;
         BuyShapeCost = StaticData.Instance.BaseShapeCost;
         Energy = 0;
-        PlayerLevel = 1;
+        ModuleLevel = 1;
 
         m_Anim = this.GetComponent<Animator>();
     }
@@ -203,15 +188,11 @@ public class FuncUI : IUserInterface
 
     public void LevelUpBtnClick()
     {
-        if (PlayerLevel < StaticData.Instance.PlayerMaxLevel)
+        if (ModuleLevel < StaticData.Instance.PlayerMaxLevel)
         {
             if (GameManager.Instance.ConsumeMoney(PlayerLvUpMoney))
             {
-                PlayerLevel++;
-                if (PlayerLevel == 3 || PlayerLevel == 5 || PlayerLevel == 7)//3,5和7级增加一个商店容量
-                {
-                    m_GameManager.IncreaseShopCapacity();
-                }
+                ModuleLevel++;
             }
         }
     }

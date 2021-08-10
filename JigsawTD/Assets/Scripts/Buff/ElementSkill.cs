@@ -9,7 +9,14 @@ public struct ElementSkillInfo
 }
 public abstract class ElementSkill : TurretSkill
 {
+    public int SkillIndex;
     public abstract List<int> Elements { get; }
+
+    public override void Build()
+    {
+        base.Build();
+        strategy.GetComIntensify(this);
+    }
 }
 
 

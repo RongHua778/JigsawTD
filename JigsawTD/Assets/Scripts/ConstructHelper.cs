@@ -83,9 +83,9 @@ public static class ConstructHelper
         TileShape shape = m_ShapeFactory.GetDShape();
         GameTile tile = m_TileFactory.GetBasicTile();
         CompositeTurret content = m_ContentFactory.GetCompositeTurret(bluePrint);
+        bluePrint.ComStrategy.CompositeSkill();
         tile.SetContent(content);
         shape.SetTile(tile);
-        bluePrint.ComStrategy.CompositeSkill();
         return shape;
     }
 

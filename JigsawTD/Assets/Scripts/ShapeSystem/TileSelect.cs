@@ -15,10 +15,10 @@ public class TileSelect : MonoBehaviour
     {
         Shape = shape;
         shape.SetUIDisplay(displayID, renderTexture);
-        StrategyElement strategy = Shape.m_ElementTurret.Strategy as StrategyElement;
+        StrategyBase strategy = Shape.m_ElementTurret.Strategy;
         if (strategy.Quality > 1)
         {
-            m_LevelDownSelect.SetStrategy((StrategyElement)Shape.m_ElementTurret.Strategy);
+            m_LevelDownSelect.SetStrategy(Shape.m_ElementTurret.Strategy);
             m_LevelDownSelect.gameObject.SetActive(true);
         }
         else

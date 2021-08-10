@@ -7,47 +7,47 @@ public class Blueprint
 {
     public bool IntensifyBluePrint = false;
     public TurretAttribute CompositeTurretAttribute;
-    public StrategyComposite ComStrategy;
+    public StrategyBase ComStrategy;
     List<Composition> compositions = new List<Composition>();
     public List<Composition> Compositions { get => compositions; set => compositions = value; }
 
-    public float CompositeAttackDamage;
-    public float CompositeAttackSpeed;
-    public float CompositeSlowRate;
-    public float CompositeCriticalRate;
-    public float CompositeSputteringRange;
+    //public float CompositeAttackDamage;
+    //public float CompositeAttackSpeed;
+    //public float CompositeSlowRate;
+    //public float CompositeCriticalRate;
+    //public float CompositeSputteringRange;
 
-    public void SetBluePrintIntensify()
-    {
-        SortBluePrint();
-        CompositeAttackDamage = CompositeAttackSpeed = CompositeSlowRate = CompositeCriticalRate = CompositeSputteringRange = 0;
-        foreach (Composition com in Compositions)
-        {
-            switch ((Element)com.elementRequirement)
-            {
-                case Element.Gold:
-                    //CompositeAttackDamage += StaticData.GoldAttackIntensify * com.qualityRequeirement;
-                    CompositeAttackDamage += StaticData.GoldAttackIntensify * com.qualityRequeirement + 0.1f; // * (IntensifyBluePrint ? 3 : 1);
-                    break;
-                case Element.Wood:
-                    CompositeAttackSpeed += StaticData.WoodSpeedIntensify * com.qualityRequeirement + 0.1f;// * (IntensifyBluePrint ? 3 : 1);
-                    break;
-                case Element.Water:
-                    CompositeSlowRate += StaticData.WaterSlowIntensify * com.qualityRequeirement + 0.1f;// * (IntensifyBluePrint ? 3 : 1);
-                    break;
-                case Element.Fire:
-                    CompositeCriticalRate += StaticData.FireCriticalIntensify * com.qualityRequeirement + 0.1f;// * (IntensifyBluePrint ? 3 : 1);
-                    break;
-                case Element.Dust:
-                    CompositeSputteringRange += StaticData.DustSputteringIntensify * com.qualityRequeirement + 0.1f;// * (IntensifyBluePrint ? 3 : 1);
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
+    //public void SetBluePrintIntensify()
+    //{
+    //    SortBluePrint();
+    //    CompositeAttackDamage = CompositeAttackSpeed = CompositeSlowRate = CompositeCriticalRate = CompositeSputteringRange = 0;
+    //    foreach (Composition com in Compositions)
+    //    {
+    //        switch ((Element)com.elementRequirement)
+    //        {
+    //            case Element.Gold:
+    //                //CompositeAttackDamage += StaticData.GoldAttackIntensify * com.qualityRequeirement;
+    //                CompositeAttackDamage += StaticData.GoldAttackIntensify * com.qualityRequeirement + 0.1f; // * (IntensifyBluePrint ? 3 : 1);
+    //                break;
+    //            case Element.Wood:
+    //                CompositeAttackSpeed += StaticData.WoodSpeedIntensify * com.qualityRequeirement + 0.1f;// * (IntensifyBluePrint ? 3 : 1);
+    //                break;
+    //            case Element.Water:
+    //                CompositeSlowRate += StaticData.WaterSlowIntensify * com.qualityRequeirement + 0.1f;// * (IntensifyBluePrint ? 3 : 1);
+    //                break;
+    //            case Element.Fire:
+    //                CompositeCriticalRate += StaticData.FireCriticalIntensify * com.qualityRequeirement + 0.1f;// * (IntensifyBluePrint ? 3 : 1);
+    //                break;
+    //            case Element.Dust:
+    //                CompositeSputteringRange += StaticData.DustSputteringIntensify * com.qualityRequeirement + 0.1f;// * (IntensifyBluePrint ? 3 : 1);
+    //                break;
+    //            default:
+    //                break;
+    //        }
+    //    }
+    //}
 
-    private void SortBluePrint()
+    public void SortBluePrint()
     {
         int temp;
         for (int i = 0; i < compositions.Count - 1; i++)
@@ -101,7 +101,7 @@ public class Blueprint
             for (int j = 0; j < temp.Count; j++)
             {
                 ElementTurret turret = temp[j] as ElementTurret;
-                StrategyElement strategy = turret.Strategy as StrategyElement;
+                StrategyBase strategy = turret.Strategy;
                 if (compositions[i].elementRequirement == (int)(strategy.Element) &&
                     compositions[i].qualityRequeirement == strategy.Quality)
                 {

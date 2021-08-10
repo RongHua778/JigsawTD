@@ -71,17 +71,22 @@ public class StaticData : Singleton<StaticData>
         }
     }
     //元素加成
-    public static float GoldAttackIntensify = 0.1f;
-    public static float WoodSpeedIntensify = 0.1f;
-    public static float WaterSlowIntensify = 0.1f;
-    public static float FireCriticalIntensify = 0.1f;
-    public static float DustSputteringIntensify = 0.1f;
+    public static float GoldAttackIntensify = 0.5f;
+    public static float WoodSpeedIntensify = 0.5f;
+    public static float WaterSlowIntensify = 0.5f;
+    public static float FireCriticalIntensify = 0.25f;
+    public static float DustSputteringIntensify = 0.3f;
 
     public static Color32 RedColor;
     public static Color32 GreenColor;
     public static Color32 BlueColor;
     public static Color32 YellowColor;
     public static Color32 PurpleColor;
+
+    //攻击范围PREFAB
+    public Collider2D CircleCol;
+    public Collider2D HalfCircleCol;
+    public Collider2D LineCol;
 
     private void Start()
     {
@@ -374,14 +379,35 @@ public class StaticData : Singleton<StaticData>
         return intensifyTxt;
     }
 
-    public static string GetBluePrintIntensify(Blueprint bluePrint)
+    public static string SetElementSkillInfo(ElementSkill skill)
     {
         string intensifyTxt = GameMultiLang.GetTraduction("ELEMENTSKILL") + ":";//根据元素及品质设置显示加成效果
-        intensifyTxt += bluePrint.CompositeAttackDamage > 0 ? "\n+" + bluePrint.CompositeAttackDamage * 100 + GameMultiLang.GetTraduction("ATTACKUP") : "";
-        intensifyTxt += bluePrint.CompositeAttackSpeed > 0 ? "\n+" + bluePrint.CompositeAttackSpeed * 100 + GameMultiLang.GetTraduction("SPEEDUP") : "";
-        intensifyTxt += bluePrint.CompositeSlowRate > 0 ? "\n+" + bluePrint.CompositeSlowRate + GameMultiLang.GetTraduction("SLOWUP") : "";
-        intensifyTxt += bluePrint.CompositeCriticalRate > 0 ? "\n+" + bluePrint.CompositeCriticalRate * 100 + GameMultiLang.GetTraduction("CRITICALUP") : "";
-        intensifyTxt += bluePrint.CompositeSputteringRange > 0 ? "\n+" + bluePrint.CompositeSputteringRange + GameMultiLang.GetTraduction("SPUTTERINGUP") : "";
+        foreach (var element in skill.Elements)
+        {
+            switch ((Element)element)
+            {
+                case Element.Gold:
+                    intensifyTxt += "\n" + GoldAttackIntensify * 100 + GameMultiLang.GetTraduction("ATTACKUP");
+                    break;
+                case Element.Wood:
+                    intensifyTxt += "\n" + WoodSpeedIntensify * 100 + GameMultiLang.GetTraduction("SPEEDUP");
+                    break;
+                case Element.Water:
+                    intensifyTxt += "\n" + WaterSlowIntensify + GameMultiLang.GetTraduction("SLOWUP");
+                    break;
+                case Element.Fire:
+                    intensifyTxt += "\n" + FireCriticalIntensify * 100 + GameMultiLang.GetTraduction("CRITICALUP");
+                    break;
+                case Element.Dust:
+                    intensifyTxt += "\n" + DustSputteringIntensify + GameMultiLang.GetTraduction("SPUTTERINGUP");
+                    break;
+            }
+        }
+        //intensifyTxt += bluePrint.CompositeAttackDamage > 0 ? "\n+" + bluePrint.CompositeAttackDamage * 100 + GameMultiLang.GetTraduction("ATTACKUP") : "";
+        //intensifyTxt += bluePrint.CompositeAttackSpeed > 0 ? "\n+" + bluePrint.CompositeAttackSpeed * 100 + GameMultiLang.GetTraduction("SPEEDUP") : "";
+        //intensifyTxt += bluePrint.CompositeSlowRate > 0 ? "\n+" + bluePrint.CompositeSlowRate + GameMultiLang.GetTraduction("SLOWUP") : "";
+        //intensifyTxt += bluePrint.CompositeCriticalRate > 0 ? "\n+" + bluePrint.CompositeCriticalRate * 100 + GameMultiLang.GetTraduction("CRITICALUP") : "";
+        //intensifyTxt += bluePrint.CompositeSputteringRange > 0 ? "\n+" + bluePrint.CompositeSputteringRange + GameMultiLang.GetTraduction("SPUTTERINGUP") : "";
         return intensifyTxt;
     }
 

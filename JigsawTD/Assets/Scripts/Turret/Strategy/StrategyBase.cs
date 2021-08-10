@@ -1,26 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public enum StrategyType
 {
     Element, Composite
 }
 
-public abstract class StrategyBase
+public class StrategyBase
 {
-    public virtual StrategyType strategyType => StrategyType.Element;
+    public StrategyType strategyType;
+    public Element Element;
+    public Blueprint CompositeBluePrint;
     //字段
     public TurretContent m_Turret;
     public TurretAttribute m_Att;
     private int quality = 0;
     public int Quality { get => quality; set => quality = value; }
 
-    public StrategyBase(TurretAttribute attribute, int quality, TurretContent turret)
+    public StrategyBase(StrategyType sType, TurretAttribute attribute, int quality, Element element = Element.Gold, Blueprint comBlueprint = null)
     {
+        strategyType = sType;
         m_Att = attribute;
-        m_Turret = turret;
+        //m_Turret = turret;
         this.Quality = quality;
+        this.Element = element;
+        CompositeBluePrint = comBlueprint;
+        this.RangeType = attribute.RangeType;
     }
 
 
@@ -39,13 +46,14 @@ public abstract class StrategyBase
     public float InitSlowRate { get => initSlowRate; set => initSlowRate = value; }
 
     //二级属性
+    public RangeType RangeType = RangeType.Circle;
     private float initSputteringPercentage = 0.5f;//溅射伤害率
     private float initCriticalPercentage = 1.5f;//暴击伤害率
     private int initTargetCount = 1;//目标数
     private float rotSpeed = 10f;//炮塔转速
     public float RotSpeed { get => rotSpeed; set => rotSpeed = value; }
     private float upgradeDiscount = 0;//升级折扣
-    public float UpgradeDiscount { get => upgradeDiscount; set => upgradeDiscount = value; }
+    public float UpgradeDiscount { get => Mathf.Max(0, upgradeDiscount); set => upgradeDiscount = value; }
 
     //基础加成
     private float baseAttackIntensify;
@@ -57,15 +65,30 @@ public abstract class StrategyBase
     private float baseSputteringPercentageIntensify;
     private float baseCriticalPercentageIntensify;
     private int baseTargetCountIntensify;
-    public float BaseAttackIntensify { get => baseAttackIntensify; set => baseAttackIntensify = value; }
-    public float BaseSpeedIntensify { get => baseSpeedIntensify; set => baseSpeedIntensify = value; }
-    public int BaseRangeIntensify { get => baseRangeIntensify; set => baseRangeIntensify = value; }
-    public float BaseCriticalRateIntensify { get => baseCriticalRateIntensify; set => baseCriticalRateIntensify = value; }
+    public float BaseAttackIntensify { get => baseAttackIntensify + ComAttackIntensify; set => baseAttackIntensify = value; }
+    public float BaseSpeedIntensify { get => baseSpeedIntensify + ComSpeedIntensify; set => baseSpeedIntensify = value; }
+    public int BaseRangeIntensify { get => baseRangeIntensify + ComRangeIntensify; set => baseRangeIntensify = value; }
+    public float BaseCriticalRateIntensify { get => baseCriticalRateIntensify + ComCriticalIntensify; set => baseCriticalRateIntensify = value; }
     public float BaseCriticalPercentageIntensify { get => baseCriticalPercentageIntensify; set => baseCriticalPercentageIntensify = value; }
-    public float BaseSlowRateIntensify { get => baseSlowRateIntensify; set => baseSlowRateIntensify = value; }
+    public float BaseSlowRateIntensify { get => baseSlowRateIntensify + ComSlowIntensify; set => baseSlowRateIntensify = value; }
     public float BaseSputteringPercentageIntensify { get => baseSputteringPercentageIntensify; set => baseSputteringPercentageIntensify = value; }
-    public float BaseSputteringRangeIntensify { get => baseSputteringRangeIntensify; set => baseSputteringRangeIntensify = value; }
+    public float BaseSputteringRangeIntensify { get => baseSputteringRangeIntensify + ComSputteringRangeIntensify; set => baseSputteringRangeIntensify = value; }
     public int BaseTargetCountIntensify { get => baseTargetCountIntensify; set => baseTargetCountIntensify = value; }
+
+    #region 元素加成
+    private float comAttackIntensify;
+    private float comSpeedIntensify;
+    private int comRangeIntensify;
+    private float comCriticalIntensify;
+    private float comSputteringRangeIntensify;
+    private float comSlowIntensify;
+    public float ComAttackIntensify { get => comAttackIntensify; set => comAttackIntensify = value; }
+    public float ComSpeedIntensify { get => comSpeedIntensify; set => comSpeedIntensify = value; }
+    public int ComRangeIntensify { get => comRangeIntensify; set => comRangeIntensify = value; }
+    public float ComCriticalIntensify { get => comCriticalIntensify; set => comCriticalIntensify = value; }
+    public float ComSputteringRangeIntensify { get => comSputteringRangeIntensify; set => comSputteringRangeIntensify = value; }
+    public float ComSlowIntensify { get => comSlowIntensify; set => comSlowIntensify = value; }
+    #endregion
 
     #region 所有加成二次修正
     private float allAttackIntensifyModify = 1;
@@ -149,10 +172,17 @@ public abstract class StrategyBase
     public float TurnSlowRateIntensify { get => turnSlowRateIntensify; set => turnSlowRateIntensify = value; }
     #endregion
 
-    public TurretSkill TurretSkill { get; set; }
-    public ElementSkill ElementSkill { get; set; }
-    public ElementSkill ElementSKill2 { get; set; }
 
+    #region 下级属性
+    public float NextAttack { get => m_Att.TurretLevels[Quality].AttackDamage * (1 + BaseAttackIntensify); }
+    public float NextSpeed { get => m_Att.TurretLevels[Quality].AttackSpeed * (1 + BaseSpeedIntensify); }
+    public float NextSputteringRange { get => m_Att.TurretLevels[Quality].SputteringRange + BaseSputteringRangeIntensify; }
+    public float NextCriticalRate { get => m_Att.TurretLevels[Quality].CriticalRate + BaseCriticalRateIntensify; }
+    public float NextSlowRate { get => m_Att.TurretLevels[Quality].SlowRate + BaseSlowRateIntensify; }
+    #endregion
+
+    public TurretSkill TurretSkill { get; set; }
+    //public List<ElementSkill> ElementSkills = new List<ElementSkill>();
     public List<TurretSkill> TurretSkills = new List<TurretSkill>();
 
     //public void BuildTurretEffects()
@@ -163,16 +193,66 @@ public abstract class StrategyBase
     //    }
     //}
 
-    public virtual void GetComIntensify(Blueprint bluePrint)
+    public void GetComIntensify(ElementSkill skill, bool add = true)
     {
+        foreach (var element in skill.Elements)
+        {
+            switch ((Element)element)
+            {
+                case Element.Gold:
+                    ComAttackIntensify += add ? StaticData.GoldAttackIntensify : -StaticData.GoldAttackIntensify;
+                    break;
+                case Element.Wood:
+                    ComSpeedIntensify += add ? StaticData.WoodSpeedIntensify : -StaticData.WoodSpeedIntensify;
+                    break;
+                case Element.Water:
+                    ComSlowIntensify += add ? StaticData.WaterSlowIntensify : -StaticData.WaterSlowIntensify;
+                    break;
+                case Element.Fire:
+                    ComCriticalIntensify += add ? StaticData.FireCriticalIntensify : -StaticData.FireCriticalIntensify;
+                    break;
+                case Element.Dust:
+                    ComSputteringRangeIntensify += add ? StaticData.DustSputteringIntensify : -StaticData.DustSputteringIntensify;
+                    break;
+            }
+        }
+    }
+
+    public void GetTurretSkills()//首次获取并激活效果
+    {
+        TurretSkills.Clear();
+
+        TurretSkill effect = TurretEffectFactory.GetInitialSkill((int)m_Att.TurretSkill);//自带技能
+        TurretSkill = effect;
+        TurretSkill.strategy = this;
+        TurretSkills.Add(effect);
+        TurretSkill.Build();
+
+        //元素组合技能
+        List<int> elements = new List<int>();
+        foreach (var com in CompositeBluePrint.Compositions)
+        {
+            elements.Add(com.elementRequirement);
+        }
+        ElementSkill effect2 = TurretEffectFactory.GetElementSkill(elements);
+        AddElementSkill(effect2);
 
     }
 
-    public void AddSkill(TurretSkill skill)
+    public void AddElementSkill(ElementSkill skill)
     {
+        skill.SkillIndex = TurretSkills.Count;
         skill.strategy = this;
         TurretSkills.Add(skill);
         skill.Build();
+    }
+
+    public void OnEquipSkill()
+    {
+        foreach (var skill in TurretSkills.ToList())
+        {
+            skill.OnEquip();
+        }
     }
 
     public virtual void SetQualityValue()
@@ -245,6 +325,29 @@ public abstract class StrategyBase
         foreach (TurretSkill skill in TurretSkills)
         {
             skill.EndTurn();
+        }
+    }
+
+    public void LandedTurretSkill()
+    {
+        foreach (var skill in TurretSkills)
+        {
+            skill.Detect();//放置效果
+        }
+    }
+
+    public void DrawTurretSkill()
+    {
+        foreach (var skill in TurretSkills)
+        {
+            skill.Draw();//抽取效果
+        }
+    }
+    public void CompositeSkill()
+    {
+        foreach (var skill in TurretSkills)
+        {
+            skill.Composite();
         }
     }
 }

@@ -89,6 +89,11 @@ public abstract class TurretSkill
     {
 
     }
+
+    public virtual void OnEquip()
+    {
+
+    }
 }
 
 public abstract class InitialSkill : TurretSkill
@@ -205,8 +210,6 @@ public class F1Skill : InitialSkill
         int count = strategy.m_Turret.targetList.Count;
         bullet.Damage *= (1 + count * 0.1f);
     }
-
-
 }
 
 public class CurrentHealthBaseDmage : InitialSkill

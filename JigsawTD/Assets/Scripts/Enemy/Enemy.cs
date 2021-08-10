@@ -178,10 +178,10 @@ public abstract class Enemy : PathFollower, IDamageable
         }
         Progress += Time.deltaTime * ProgressFactor;
 
-        if (!trapTriggered && Progress >= 0.5f)
-        {
-            //TriigerTrap();
-        }
+        //if (!trapTriggered && Progress >= 0.5f)
+        //{
+        //    //TriigerTrap();
+        //}
 
         while (Progress >= 1f)
         {
@@ -276,6 +276,29 @@ public abstract class Enemy : PathFollower, IDamageable
         {
             healthBar.ShowJumpDamage((int)realDamage);
         }
+    }
+
+    public void Flash(int distance)
+    {
+        PointIndex -= distance;
+        if (PointIndex < 0)
+        {
+            PointIndex = 0;
+        }
+        else if (PointIndex >= PathPoints.Count - 1)
+        {
+            PointIndex = PathPoints.Count - 1;
+        }
+        CurrentPoint = PathPoints[PointIndex];
+        transform.localPosition = PathPoints[PointIndex].PathPos;
+        PositionFrom = CurrentPoint.PathPos;
+        PositionTo = CurrentPoint.ExitPoint;
+        Direction = CurrentPoint.PathDirection;
+        DirectionChange = DirectionChange.None;
+        model.localPosition = new Vector3(PathOffset, 0);
+        DirectionAngleFrom = DirectionAngleTo = Direction.GetAngle();
+        transform.localRotation = CurrentPoint.PathDirection.GetRotation();
+        Progress = 0.5f;
     }
 
 

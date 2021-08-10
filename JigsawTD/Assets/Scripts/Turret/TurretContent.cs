@@ -20,7 +20,6 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     protected List<RangeIndicator> rangeIndicators;
     protected List<RangeIndicator> currentRangetors;
 
-    private Transform rangeParent;
     private float nextAttackTime;
     private Quaternion look_Rotation;
 
@@ -51,16 +50,14 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     protected List<SpriteRenderer> sprites = new List<SpriteRenderer>();
     protected List<Color> originalColors = new List<Color>();
 
-    private int currentRange = 0;//为检测范围变化时的Rangeindicator修改
-
 
     private void Awake()
     {
         rangeIndicators = new List<RangeIndicator>();
         currentRangetors = new List<RangeIndicator>();
         rangeIndicator = Resources.Load<RangeIndicator>("Prefabs/Other/RangeIndicator");
-        rangeParent = transform.Find("TurretRangeCol");
-        detectCollider = rangeParent.GetComponent<Collider2D>();
+        //rangeParent = transform.Find("TurretRangeCol");
+        //detectCollider = rangeParent.GetComponent<Collider2D>();
         rotTrans = transform.Find("RotPoint");
         shootPoint = rotTrans.Find("ShootPoint");
         //TurretBaseSprite = transform.Find("TurretBase").GetComponent<SpriteRenderer>();
@@ -77,7 +74,6 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
 
     public virtual void InitializeTurret()
     {
-        RangeType = Strategy.m_Att.RangeType;
         rotTrans.localRotation = Quaternion.identity;
         bulletPrefab = Strategy.m_Att.Bullet;
         ShootClip = Strategy.m_Att.ShootSound;
@@ -225,22 +221,25 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     public void GenerateRange()
     {
         int m = rangeIndicators.Count;
-        if (Strategy.FinalRange == currentRange)
-            return;
         if (currentRangetors.Count > 0)
             RecycleRanges();
         List<Vector2Int> points = null;
-        switch (RangeType)
+        if (detectCollider != null)
+            Destroy(detectCollider.gameObject);
+        switch (Strategy.RangeType)
         {
             case RangeType.Circle:
+                detectCollider = Instantiate(StaticData.Instance.CircleCol, transform);
                 points = StaticData.GetCirclePoints(Strategy.FinalRange);
                 ((BoxCollider2D)detectCollider).size = Vector2.one * (2 * Strategy.FinalRange + 1) * Mathf.Cos(45 * Mathf.Deg2Rad);
                 break;
             case RangeType.HalfCircle:
+                detectCollider = Instantiate(StaticData.Instance.HalfCircleCol, transform);
                 points = StaticData.GetHalfCirclePoints(Strategy.FinalRange);
                 detectCollider.transform.localScale = Vector2.one * (Strategy.FinalRange + 0.5f);
                 break;
             case RangeType.Line:
+                detectCollider = Instantiate(StaticData.Instance.LineCol, transform);
                 points = StaticData.GetLinePoints(Strategy.FinalRange);
                 ((BoxCollider2D)detectCollider).size = new Vector2(1, Strategy.FinalRange);
                 detectCollider.offset = new Vector2(0, 1 + 0.5f * (Strategy.FinalRange - 1));
@@ -262,7 +261,6 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
                 currentRangetors.Add(rangeIndicators[i]);
             }
         }
-        currentRange = Strategy.FinalRange;
         ShowRange(ShowingRange);
     }
 

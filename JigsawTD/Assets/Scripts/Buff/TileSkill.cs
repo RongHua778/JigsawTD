@@ -20,6 +20,7 @@ public class DoubleDustElement : TileSkill
 
     public override void Build()
     {
+        base.Build();
         strategy.BaseSputteringRangeIntensify += 1;
     }
 }
@@ -30,6 +31,7 @@ public class DoubleGoldElement : TileSkill
     public override string SkillDescription => "ATTACKBASEINFO";
     public override void Build()
     {
+        base.Build();
         strategy.AllAttackIntensifyModify *= 2f;
     }
 }
@@ -40,6 +42,7 @@ public class DoubleWoodElement : TileSkill
     public override string SkillDescription => "SPEEDBASEINFO";
     public override void Build()
     {
+        base.Build();
         strategy.AllSpeedIntensifyModify +=1;
     }
 }
@@ -50,6 +53,7 @@ public class DoubleWaterElement: TileSkill
     public override string SkillDescription => "SLOWBASEINFO";
     public override void Build()
     {
+        base.Build();
         strategy.BaseSlowRateIntensify += 1;
     }
 }
@@ -60,6 +64,7 @@ public class DoubleFireElement : TileSkill
     public override string SkillDescription => "CRITICALBASEINFO";
     public override void Build()
     {
+        base.Build();
         strategy.AllCriticalIntensifyModify *= 2f;
     }
 }

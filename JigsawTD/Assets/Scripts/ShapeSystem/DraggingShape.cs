@@ -22,7 +22,7 @@ public class DraggingShape : DraggingActions
     Collider2D[] attachedResult = new Collider2D[10];
 
     [SerializeField]
-    Color wrongColor, correctColor, transparentColor, holdColor, dropColor,equipColor = default;
+    Color wrongColor, correctColor, transparentColor, holdColor, dropColor, equipColor = default;
 
     public void Initialized(TileShape shape)
     {
@@ -172,12 +172,12 @@ public class DraggingShape : DraggingActions
                 //        break;
                 //    }
                 //}
-                if(tile.Content.ContentType == GameTileContentType.CompositeTurret)
+                if (tile.Content.ContentType == GameTileContentType.CompositeTurret)
                 {
                     if (col.CompareTag("OnlyCompositeTurret"))
                     {
                         GameTile tTile = col.GetComponent<GameTile>();
-                        if (((CompositeTurret)tTile.Content).Strategy.ElementSKill2 == null)
+                        if (((CompositeTurret)tTile.Content).Strategy.TurretSkills.Count < 3)
                         {
                             SetTileColor(equipColor, tile);
                             break;

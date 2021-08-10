@@ -39,9 +39,10 @@ public class CompositeTurret : TurretContent
             if (tile.Content.ContentType == GameTileContentType.CompositeTurret)
             {
                 CompositeTurret turret = tile.Content as CompositeTurret;
-                turret.Strategy.ElementSKill2 = this.Strategy.ElementSkill;
-                turret.Strategy.AddSkill(this.Strategy.ElementSkill);
-                turret.Strategy.GetComIntensify(((StrategyComposite)Strategy).CompositeBluePrint);
+                ElementSkill skill = (ElementSkill)this.Strategy.TurretSkills[1];
+                turret.Strategy.AddElementSkill(skill);
+                turret.Strategy.OnEquipSkill();
+                
                 ObjectPool.Instance.UnSpawn(m_GameTile);
             }
             else

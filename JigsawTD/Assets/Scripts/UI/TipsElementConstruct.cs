@@ -16,8 +16,7 @@ public class TipsElementConstruct : MonoBehaviour
     public void SetElements(ElementSkill skill)
     {
         m_Skill = skill;
-        //m_BluePrint = strategy.CompositeBluePrint;
-        //List<Composition> compositions = m_BluePrint.Compositions;
+
         for (int i = 0; i < skill.Elements.Count; i++)
         {
             if (i >= skill.Elements.Count)
@@ -29,20 +28,15 @@ public class TipsElementConstruct : MonoBehaviour
             TurretAttribute attribute = ConstructHelper.GetElementAttribute((Element)skill.Elements[i]);
             Elements[i].sprite = attribute.TurretLevels[0].TurretIcon;
         }
-        //SetIntensifyInfo();
+        SetIntensifyInfo();
         elementSkillDes.text = GameMultiLang.GetTraduction(skill.SkillDescription);
         //intensifyImg.gameObject.SetActive(strategy.CompositeBluePrint.IntensifyBluePrint);
-
-        //if (strategy.ElementSkill != null)
-        //    elementSkillDes.text = GameMultiLang.GetTraduction(strategy.ElementSkill.SkillDescription);
-        //else
-        //    Debug.LogWarning("没有这个元素技能显示TIPS");
 
     }
 
     public void SetIntensifyInfo()
     {
-        string text = StaticData.GetBluePrintIntensify(m_BluePrint);
+        string text = StaticData.SetElementSkillInfo(m_Skill);
         m_InfoBtn.SetContent(text);
     }
 

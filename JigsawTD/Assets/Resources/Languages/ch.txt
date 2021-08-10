@@ -216,6 +216,18 @@ SPLASHSPEED=每次攻击提升本回合溅射0.06，上限1.2
 LATESPLASH=开局30秒后，溅射提高1.2
 RANDOMSPLASH=溅射增加0-1.5的随机浮动
 
+//综合系
+HURTBULLET=使被攻击的敌人受到伤害提高25%，持续2秒
+RANDOMINTENSIFY=每回合随机获得以下效果之一：攻击提升80%；攻速提升80%；暴击率提升40%；
+LEVELDISCOUNT=升级防御塔费用-50%
+COPYSKILL=复制另一个元素技能
+MODULELEVELUP=将你的模块等级提升1级
+POLOINTENSIFY=受到光环的加成效果提升100%
+RANDOMTRAP=在防御塔前方生成一个随机陷阱
+CIRCLERANGE=使防御塔攻击范围变为圆型
+TRAPINTENSIFY=相邻陷阱的效果提升100%
+PORTALHIT=攻击有5%概率将敌人传送到3格前的位置
+
 AAA=沉重炮口：炮塔转速大幅降低，所有攻击力提升效果翻倍
 BBB=过载弹夹：每回合开始前10秒，攻速提升200%
 CCC=寒冰核心：相邻防御塔+0.5减速
