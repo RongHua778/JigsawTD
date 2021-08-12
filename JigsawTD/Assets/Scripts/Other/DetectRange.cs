@@ -2,24 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangeDetect : MonoBehaviour
+public class DetectRange : MonoBehaviour
 {
-    TurretContent Turret;
+    RangeHolder detector;
+
     private void Awake()
     {
-        Turret = this.transform.root.GetComponentInChildren<TurretContent>();
+        detector = transform.parent.GetComponent<RangeHolder>();
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         TargetPoint target = collision.GetComponent<TargetPoint>();
-        if(target)Turret.AddTarget(target);
+        if (target)  detector.AddTarget(target);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         TargetPoint target = collision.GetComponent<TargetPoint>();
-        Turret.RemoveTarget(target);
+        detector.RemoveTarget(target);
     }
-
 }

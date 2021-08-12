@@ -8,9 +8,8 @@ public class GuideVideo :IUserInterface
     [SerializeField] Toggle[] tabs = default;
     Animator anim;
 
-    public override void Initialize(GameManager gameManager)
+    public override void Initialize()
     {
-        base.Initialize(gameManager);
         anim = this.GetComponent<Animator>();
         if (Game.Instance.Tutorial)
         {

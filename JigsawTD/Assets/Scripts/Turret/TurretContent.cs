@@ -16,9 +16,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     public bool Dropped { get; set; }
     public List<TargetPoint> targetList = new List<TargetPoint>();
 
-    private RangeIndicator rangeIndicator;
-    protected List<RangeIndicator> rangeIndicators;
-    protected List<RangeIndicator> currentRangetors;
+    RangeHolder m_RangeHolder;
 
     private float nextAttackTime;
     private Quaternion look_Rotation;
@@ -53,9 +51,6 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
 
     private void Awake()
     {
-        rangeIndicators = new List<RangeIndicator>();
-        currentRangetors = new List<RangeIndicator>();
-        rangeIndicator = Resources.Load<RangeIndicator>("Prefabs/Other/RangeIndicator");
         //rangeParent = transform.Find("TurretRangeCol");
         //detectCollider = rangeParent.GetComponent<Collider2D>();
         rotTrans = transform.Find("RotPoint");
@@ -110,7 +105,8 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
 
     public void AddTarget(TargetPoint target)
     {
-        targetList.Add(target);
+        if (target.gameObject.activeInHierarchy)
+            targetList.Add(target);
         AcquireTarget();
     }
 
@@ -211,67 +207,12 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
 
     public void ShowRange(bool show)
     {
-        ShowingRange = show;
-        var ranges = currentRangetors.GetEnumerator();
-        while (ranges.MoveNext())
-        {
-            ranges.Current.ShowSprite(show);
-        }
+        m_RangeHolder.ShowRange(show);
     }
     public void GenerateRange()
     {
-        int m = rangeIndicators.Count;
-        if (currentRangetors.Count > 0)
-            RecycleRanges();
-        List<Vector2Int> points = null;
-        if (detectCollider != null)
-            Destroy(detectCollider.gameObject);
-        switch (Strategy.RangeType)
-        {
-            case RangeType.Circle:
-                detectCollider = Instantiate(StaticData.Instance.CircleCol, transform);
-                points = StaticData.GetCirclePoints(Strategy.FinalRange);
-                ((BoxCollider2D)detectCollider).size = Vector2.one * (2 * Strategy.FinalRange + 1) * Mathf.Cos(45 * Mathf.Deg2Rad);
-                break;
-            case RangeType.HalfCircle:
-                detectCollider = Instantiate(StaticData.Instance.HalfCircleCol, transform);
-                points = StaticData.GetHalfCirclePoints(Strategy.FinalRange);
-                detectCollider.transform.localScale = Vector2.one * (Strategy.FinalRange + 0.5f);
-                break;
-            case RangeType.Line:
-                detectCollider = Instantiate(StaticData.Instance.LineCol, transform);
-                points = StaticData.GetLinePoints(Strategy.FinalRange);
-                ((BoxCollider2D)detectCollider).size = new Vector2(1, Strategy.FinalRange);
-                detectCollider.offset = new Vector2(0, 1 + 0.5f * (Strategy.FinalRange - 1));
-                break;
-        }
-
-        for (int i = 0; i < points.Count; i++)
-        {
-            if (i >= m)
-            {
-                RangeIndicator rangeIndecator = Instantiate(rangeIndicator, transform);
-                rangeIndecator.transform.localPosition = (Vector3Int)points[i];
-                rangeIndicators.Add(rangeIndecator);
-                currentRangetors.Add(rangeIndecator);
-            }
-            else
-            {
-                rangeIndicators[i].transform.localPosition = (Vector3Int)points[i];
-                currentRangetors.Add(rangeIndicators[i]);
-            }
-        }
-        ShowRange(ShowingRange);
-    }
-
-    public void RecycleRanges()
-    {
-        var ranges = currentRangetors.GetEnumerator();
-        while (ranges.MoveNext())
-        {
-            ranges.Current.ShowSprite(false);
-        }
-        currentRangetors.Clear();
+        m_RangeHolder = Instantiate(StaticData.Instance.CircleCol, transform);
+        m_RangeHolder.SetRange(Strategy.FinalRange, Strategy.ForbidRange, Strategy.RangeType);
     }
 
     protected virtual void RotateTowards()

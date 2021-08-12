@@ -31,9 +31,8 @@ public class GuideUI : IUserInterface
     [SerializeField] Text oldContent = default;
 
 
-    public void Initialize(GameManager gameManager, FuncUI funcUI, MainUI mainUI,BluePrintShopUI shopUI)
+    public void Initialize( FuncUI funcUI, MainUI mainUI,BluePrintShopUI shopUI)
     {
-        Initialize(gameManager);
         m_FuncUI = funcUI;
         m_MainUI = mainUI;
         m_ShopUI = shopUI;
@@ -63,8 +62,8 @@ public class GuideUI : IUserInterface
         switch (index)//教程开始时做什么
         {
             case 3://摆放模块教程、触发是绑定在外面按钮上的
-                m_GameManager.ShowGuideVideo(1);
-                m_GameManager.ShowGuideVideo(0);
+                GameManager.Instance.ShowGuideVideo(1);
+                GameManager.Instance.ShowGuideVideo(0);
                 m_FuncUI.NextBtnObj.SetActive(true);
                 break;
             case 4://血量
@@ -88,7 +87,7 @@ public class GuideUI : IUserInterface
                 m_ShopUI.ShopBtnObj.SetActive(true);
                 break;
             case 9:
-                m_GameManager.ShowGuideVideo(2);
+                GameManager.Instance.ShowGuideVideo(2);
                 break;
 
         }

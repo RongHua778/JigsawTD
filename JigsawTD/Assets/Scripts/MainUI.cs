@@ -19,12 +19,6 @@ public class MainUI : IUserInterface
     [SerializeField] GuideBook m_GuideBook = default;
 
 
-    //[SerializeField] Text[] taskTexts = default;
-    //[SerializeField] Button[] taskButtons = default;
-
-    //List<Task> tasksInPocket = new List<Task>();
-    //List<Task> taksOutPocket = new List<Task>();
-    //public Task clickedTask;
 
     private int coin = 0;
     public int Coin
@@ -45,7 +39,7 @@ public class MainUI : IUserInterface
         {
             if (value <= 0)
             {
-                m_GameManager.GameEnd(CurrentWave);
+                GameManager.Instance.GameEnd(CurrentWave);
             }
             life = Mathf.Clamp(value, 0, StaticData.Instance.PlayerMaxHealth[Game.Instance.Difficulty - 1]);
             PlayerLifeTxt.text = life.ToString() + "/" + StaticData.Instance.PlayerMaxHealth[Game.Instance.Difficulty - 1].ToString();
@@ -84,22 +78,18 @@ public class MainUI : IUserInterface
     }
 
 
-    public override void Initialize(GameManager gameManager)
+    public override void Initialize()
     {
-        base.Initialize(gameManager);
         GameEvents.Instance.onEnemyReach += EnemyReach;
         GameSpeed = 1;
         CurrentWave = 0;
         Life = StaticData.Instance.PlayerMaxHealth[Game.Instance.Difficulty - 1];
         Coin = StaticData.Instance.StartCoin;
 
-        m_PausePanel.Initialize(m_GameManager);
-        m_GuideBook.Initialize(m_GameManager);
+        m_PausePanel.Initialize();
+        m_GuideBook.Initialize();
         m_Anim = GetComponent<Animator>();
-        //for (int i = 0; i < taskButtons.Length; i++)
-        //{
-        //    taskButtons[i].gameObject.SetActive(false);
-        //}
+
     }
 
 
@@ -142,8 +132,8 @@ public class MainUI : IUserInterface
     {
         //CountTasks();
         CurrentWave++;
-        m_GameManager.GainInterest();
-        m_GameManager.GainMoney((StaticData.Instance.BaseWaveIncome +
+        GameManager.Instance.GainInterest();
+        GameManager.Instance.GainMoney((StaticData.Instance.BaseWaveIncome +
             StaticData.Instance.WaveMultiplyIncome * (CurrentWave - 1)));//最多一回合获得200金币
         m_WaveInfoSetter.SetWaveInfo(CurrentWave, sequences);
     }
@@ -162,52 +152,9 @@ public class MainUI : IUserInterface
         }
     }
 
-    //private void CountTasks()
-    //{
-    //    for (int i = 0; i < tasksInPocket.Count; i++)
-    //    {
-    //        tasksInPocket[i].CountTask();
-    //        if (tasksInPocket[i].TaskComplete)
-    //        {
-    //            tasksInPocket[i].Reclaim(tasksInPocket);
-    //        }
-
-    //    }
-    //    foreach (Task t in taksOutPocket)
-    //    {
-    //        t.CountDisappear();
-    //    }
-    //    UpdateTaskInfo();
-    //    clickedTask = null;
-    //}
-
-    //private void UpdateTaskInfo()
-    //{
-    //    for (int i = 0; i < tasksInPocket.Count; i++)
-    //    {
-    //        taskTexts[i].text = tasksInPocket[i].GetInfo();
-    //        if (tasksInPocket[i].Actived)
-    //        {
-    //            taskButtons[i].gameObject.SetActive(false);
-    //        }
-    //        else
-    //        {
-    //            taskButtons[i].gameObject.SetActive(true);
-    //        }
-    //    }
-    //    if (tasksInPocket.Count < 3)
-    //    {
-    //        for (int i = tasksInPocket.Count; i < 3; i++)
-    //        {
-    //            taskTexts[i].text = "空白";
-    //            taskButtons[i].gameObject.SetActive(false);
-    //        }
-    //    }
-    //}
-
     public void GuideBookBtnClick()
     {
-        m_GameManager.ShowGuideVideo(0);
+        GameManager.Instance.ShowGuideVideo(0);
     }
 
     public void PauseBtnClick()
@@ -220,35 +167,5 @@ public class MainUI : IUserInterface
         GameSpeed++;
     }
 
-    //public void GetTask(Transform t)
-    //{
-    //    Task task = GameManager.Instance.TaskFactory.GetRandomTask();
-    //    task.transform.position = t.position;
-    //    taksOutPocket.Add(task);
-    //    if (tasksInPocket.Count < 3)
-    //    {
-    //        taksOutPocket.Remove(task);
-    //        task.AddTo(tasksInPocket);
-    //        UpdateTaskInfo();
-    //    }
-    //    //task.PlayTask();
-    //}
 
-    //public void ReplaceTask(int i)
-    //{
-    //    if (clickedTask != null)
-    //    {
-    //        clickedTask.Replace(tasksInPocket, i);
-    //        clickedTask = null;
-    //        UpdateTaskInfo();
-    //    }
-    //}
-
-    //public void PlayTask(int i)
-    //{
-    //    tasksInPocket[i].PlayTask();
-    //    taskButtons[i].gameObject.SetActive(false);
-    //    taskTexts[i].text = tasksInPocket[0].GetInfo();
-    //    //m_WaveInfoSetter.SetWaveInfo(GameManager.Instance.WaveSystem.LevelSequence[0]);
-    //}
 }

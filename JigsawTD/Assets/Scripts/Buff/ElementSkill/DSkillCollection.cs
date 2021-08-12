@@ -13,7 +13,7 @@ public class CriticalPolo : ElementSkill
     {
         foreach (var strategy in intensifiedStrategies)
         {
-            strategy.BaseCriticalPercentageIntensify -= 0.5f * strategy.PoloIntensifyModify;
+            strategy.BaseCriticalRateIntensify -= 0.5f * strategy.PoloIntensifyModify;
         }
         intensifiedStrategies.Clear();
         List<Vector2Int> points = StaticData.GetCirclePoints(1);
@@ -24,7 +24,7 @@ public class CriticalPolo : ElementSkill
             if (hit != null)
             {
                 StrategyBase strategy = hit.GetComponent<TurretContent>().Strategy;
-                strategy.BaseCriticalPercentageIntensify += 0.5f * strategy.PoloIntensifyModify;
+                strategy.BaseCriticalRateIntensify += 0.5f * strategy.PoloIntensifyModify;
                 intensifiedStrategies.Add(strategy);
             }
         }

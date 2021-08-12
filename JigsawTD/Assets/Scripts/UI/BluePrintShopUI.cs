@@ -40,9 +40,8 @@ public class BluePrintShopUI : IUserInterface
 
 
 
-    public override void Initialize(GameManager gameManager)
+    public override void Initialize()
     {
-        base.Initialize(gameManager);
         anim = this.GetComponent<Animator>();
         NextRefreshTrun = 4;
         SetPerfectElementCount(0);

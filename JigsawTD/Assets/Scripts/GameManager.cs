@@ -79,24 +79,24 @@ public class GameManager : Singleton<GameManager>
         ConstructHelper.Initialize();
 
         //初始化系统
-        m_BoardSystem.Initialize(this);//版图系统
-        m_WaveSystem.Initialize(this);//波次系统
-        m_CamControl.Initialize(this, m_MainUI);//摄像机控制
+        m_BoardSystem.Initialize();//版图系统
+        m_WaveSystem.Initialize();//波次系统
+        m_CamControl.Initialize( m_MainUI);//摄像机控制
 
         //初始化UI
-        m_MainUI.Initialize(this);//主界面顶部UI
-        m_FuncUI.Initialize(this);//主界面功能UI
-        m_GuideUI.Initialize(this, m_FuncUI, m_MainUI, m_BluePrintShopUI);//教学系统UI
-        m_BluePrintShopUI.Initialize(this);//配方系统UI
-        m_ShapeSelectUI.Initialize(this);//抽模块UI
-        m_GameEndUI.Initialize(this);//游戏结束UI
-        m_TrapTips.Initialize(this);//防御塔TIPS
-        m_TurretTips.Initialize(this);//陷阱及其他TIPS
-        m_BuyGroundTips.Initialize(this);//购买地板TIPS
-        m_MessageUI.Initialize(this);//提示系统UI
-        m_GuideVideo.Initialize(this);//教程视频UI
-        m_EnemyTips.Initialize(this);//敌人TIPS
-        m_TurretBaseTips.Initialize(this);//基座tips
+        m_MainUI.Initialize();//主界面顶部UI
+        m_FuncUI.Initialize();//主界面功能UI
+        m_GuideUI.Initialize( m_FuncUI, m_MainUI, m_BluePrintShopUI);//教学系统UI
+        m_BluePrintShopUI.Initialize();//配方系统UI
+        m_ShapeSelectUI.Initialize();//抽模块UI
+        m_GameEndUI.Initialize();//游戏结束UI
+        m_TrapTips.Initialize();//防御塔TIPS
+        m_TurretTips.Initialize();//陷阱及其他TIPS
+        m_BuyGroundTips.Initialize();//购买地板TIPS
+        m_MessageUI.Initialize();//提示系统UI
+        m_GuideVideo.Initialize();//教程视频UI
+        m_EnemyTips.Initialize();//敌人TIPS
+        m_TurretBaseTips.Initialize();//基座tips
 
         //设置操作流程
         buildingState = new BuildingState(this, m_BoardSystem);

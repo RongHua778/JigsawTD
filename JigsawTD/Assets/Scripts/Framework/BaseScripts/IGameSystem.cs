@@ -4,11 +4,7 @@ using UnityEngine;
 
 public abstract class IGameSystem : MonoBehaviour
 {
-    protected GameManager m_GameManager = null;
-    public virtual void Initialize(GameManager gameManager)
-    {
-        m_GameManager = gameManager;
-    }
+    public virtual void Initialize() { }
     public virtual void Release() { }
     public virtual void GameUpdate() { }
 }

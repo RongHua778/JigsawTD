@@ -50,9 +50,8 @@ public class ScaleAndMove : IGameSystem
     //}
 
 
-    public void Initialize(GameManager gamemanager, MainUI mainUI)
+    public void Initialize(MainUI mainUI)
     {
-        Initialize(gamemanager);
         m_MainUI = mainUI;
         cam = this.GetComponent<Camera>();
         CamInitialPos = cam.transform.position;

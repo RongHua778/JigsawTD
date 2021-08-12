@@ -5887,9 +5887,10 @@ MonoBehaviour:
   TileShapeChance: []
   PlayerMaxHealth: 1900000019000000190000001900000019000000
   difficutyWave: c8000000c8000000c8000000c8000000c8000000
-  CircleCol: {fileID: 6130107034426994721, guid: 88314c00e62edfc4ea1c16ad951dd62f, type: 3}
+  CircleCol: {fileID: 379002804665637541, guid: 88314c00e62edfc4ea1c16ad951dd62f, type: 3}
   HalfCircleCol: {fileID: 7596794955534363694, guid: 50875bb1c1fe9494986c25fe26851e21, type: 3}
   LineCol: {fileID: 6795443890427911548, guid: 0205623c809c30b42b3a1523f0f9774a, type: 3}
+  RangeIndicatorPrefab: {fileID: 7053043907688615658, guid: d8a2a921f17ca0e46b801451269a7676, type: 3}
 --- !u!1 &288904573
 GameObject:
   m_ObjectHideFlags: 0

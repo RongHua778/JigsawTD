@@ -52,9 +52,8 @@ public class TurretTips : TileTips
     bool showingBlueprint = false;
     int upgradeCost;
 
-    public override void Initialize(GameManager gameManager)
+    public override void Initialize()
     {
-        base.Initialize(gameManager);
         mainCam = Camera.main;
         CriticalInfo.SetContent(GameMultiLang.GetTraduction("CRITICALINFO"));
         SplashInfo.SetContent(GameMultiLang.GetTraduction("SPLASHINFO"));

@@ -3,23 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MenuUIManager : MonoBehaviour
+public class MenuUIManager : Singleton<MenuUIManager>
 {
-    [SerializeField] GameObject messagePanel = default;
-    [SerializeField] Text messageTxt = default;
-    [SerializeField] UILevelSelect levelPanel = default;
-    Animator m_Anim;
+    //界面系统
+    [SerializeField] UILevelManager m_UILevelManager = default;
+    [SerializeField] MenuMessage m_Message = default;
 
-    // Start is called before the first frame update
-    void Start()
+    public void Initinal()
     {
-        m_Anim = this.GetComponent<Animator>();
         Sound.Instance.PlayBg("menu");
-        Game.Instance.Difficulty = 1;
+        m_Message.Initialize();
+        m_UILevelManager.Initialize();
+
+    }
+    public void Release()
+    {
+        m_Message.Release();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void GameUpdate()
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
@@ -35,14 +37,11 @@ public class MenuUIManager : MonoBehaviour
 
     public void StartGameBtnClick()
     {
-        m_Anim.SetBool("OpenLevel", true);
-        levelPanel.SetLevelInfo();
+        m_UILevelManager.Show();
+        m_UILevelManager.SetLevelInfo();
     }
 
-    public void LevelBackClick()
-    {
-        m_Anim.SetBool("OpenLevel", false);
-    }
+
 
     public void BluePrintBtnClick()
     {
@@ -56,17 +55,9 @@ public class MenuUIManager : MonoBehaviour
 
     private void ShowMessage(string content)
     {
-        StartCoroutine(MessageCor(content));
+        m_Message.SetText(content);
     }
 
-    IEnumerator MessageCor(string content)
-    {
-        messagePanel.SetActive(true);
-        messageTxt.text = content;
-        yield return new WaitForSeconds(3f);
-        messagePanel.SetActive(false);
-        messageTxt.text = "";
-    }
 
     public void QuitGameBtnClick()
     {

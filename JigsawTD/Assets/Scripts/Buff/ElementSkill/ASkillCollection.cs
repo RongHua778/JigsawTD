@@ -67,7 +67,7 @@ public class LateAttack : ElementSkill
 
     public override void TickEnd()
     {
-        strategy.TurnAttackIntensify *= 2f;
+        strategy.TurnAttackIntensify +=1;
     }
 
     public override void EndTurn()

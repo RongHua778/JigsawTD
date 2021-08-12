@@ -4,13 +4,11 @@ using UnityEngine;
 
 public abstract class IUserInterface : MonoBehaviour
 {
-    protected GameManager m_GameManager;
     protected GameObject m_RootUI;
     protected bool m_Active = true;
 
-    public virtual void Initialize(GameManager gameManager)
+    public virtual void Initialize()
     {
-        m_GameManager = gameManager;
         m_RootUI = transform.Find("Root").gameObject;
     }
     public bool IsVisible()

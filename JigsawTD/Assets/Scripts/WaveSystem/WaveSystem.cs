@@ -31,14 +31,12 @@ public class WaveSystem : IGameSystem
     [SerializeField] private List<EnemySequence> runningSequence;
     public List<EnemySequence> RunningSequence { get => runningSequence; set => runningSequence = value; }
 
-    public override void Initialize(GameManager gameManager)
+    public override void Initialize()
     {
-        base.Initialize(gameManager);
         LevelAttribute = LevelManager.Instance.CurrentLevel;
         LevelInitialize();
         GameEvents.Instance.onEnemyReach += EnemyReach;
         GameEvents.Instance.onEnemyDie += EnemyDie;
-
     }
 
     public override void Release()

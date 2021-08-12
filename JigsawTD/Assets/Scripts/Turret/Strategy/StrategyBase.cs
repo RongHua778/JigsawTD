@@ -55,6 +55,9 @@ public class StrategyBase
     private float upgradeDiscount = 0;//升级折扣
     public float UpgradeDiscount { get => Mathf.Max(0, upgradeDiscount); set => upgradeDiscount = value; }
 
+    private int forbidRange;
+    public int ForbidRange { get => forbidRange; set => forbidRange = value; }
+
     //基础加成
     private float baseAttackIntensify;
     private float baseSpeedIntensify;
@@ -263,6 +266,7 @@ public class StrategyBase
         InitCriticalRate = m_Att.TurretLevels[Quality - 1].CriticalRate;
         InitSputteringRange = m_Att.TurretLevels[Quality - 1].SputteringRange;
         InitSlowRate = m_Att.TurretLevels[Quality - 1].SlowRate;
+        ForbidRange= m_Att.TurretLevels[Quality - 1].ForbidRange;
     }
 
     public void StartTurnSkills()

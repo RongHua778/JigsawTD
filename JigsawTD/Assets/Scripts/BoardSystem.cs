@@ -105,9 +105,8 @@ public class BoardSystem : IGameSystem
 
     public static bool FindPath { get; set; }
 
-    public override void Initialize(GameManager gameManager)
+    public override void Initialize()
     {
-        base.Initialize(gameManager);
         selection = transform.Find("Selection").gameObject;
         mainCam = Camera.main;
         GameEvents.Instance.onSeekPath += SeekPath;

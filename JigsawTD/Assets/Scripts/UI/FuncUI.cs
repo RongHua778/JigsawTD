@@ -73,7 +73,7 @@ public class FuncUI : IUserInterface
             m_LevelInfo.SetContent(StaticData.GetLevelInfo(moduleLevel));
             if (ModuleLevel == 3 || ModuleLevel == 5 || ModuleLevel == 7)//3,5和7级增加一个商店容量
             {
-                m_GameManager.IncreaseShopCapacity();
+                GameManager.Instance.IncreaseShopCapacity();
             }
         }
     }
@@ -109,10 +109,8 @@ public class FuncUI : IUserInterface
 
 
 
-    public override void Initialize(GameManager gameManager)
+    public override void Initialize()
     {
-        base.Initialize(gameManager);
-        //DrawRemain = StaticData.Instance.StartLotteryDraw;
         BuyShapeCost = StaticData.Instance.BaseShapeCost;
         Energy = 0;
         ModuleLevel = 1;
@@ -154,12 +152,12 @@ public class FuncUI : IUserInterface
         //{
         //    GameManager.Instance.ShowMessage(GameMultiLang.GetTraduction("NOENOUGHDRAW"));
         //}
-        if(m_GameManager.ConsumeMoney(BuyShapeCost))
+        if(GameManager.Instance.ConsumeMoney(BuyShapeCost))
         {
             //DrawThisTurn = true;
-            m_GameManager.DrawShapes();
+            GameManager.Instance.DrawShapes();
             BuyShapeCost += StaticData.Instance.MultipleShapeCost;
-            m_GameManager.CheckDrawSkill();
+            GameManager.Instance.CheckDrawSkill();
             //DrawRemain = 0;
         }
 
@@ -178,12 +176,12 @@ public class FuncUI : IUserInterface
         }
         Energy += EnergyProgress;
         DrawThisTurn = false;
-        m_GameManager.GainDraw(1);
+        GameManager.Instance.GainDraw(1);
     }
 
     public void NextWaveBtnClick()
     {
-        m_GameManager.StartNewWave();
+        GameManager.Instance.StartNewWave();
     }
 
     public void LevelUpBtnClick()

@@ -84,9 +84,10 @@ public class StaticData : Singleton<StaticData>
     public static Color32 PurpleColor;
 
     //攻击范围PREFAB
-    public Collider2D CircleCol;
+    public RangeHolder CircleCol;
     public Collider2D HalfCircleCol;
     public Collider2D LineCol;
+    public RangeIndicator RangeIndicatorPrefab;
 
     private void Start()
     {

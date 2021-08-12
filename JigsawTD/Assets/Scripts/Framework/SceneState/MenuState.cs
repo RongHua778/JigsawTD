@@ -11,7 +11,18 @@ public class MenuState : ISceneState
 	// é_Ê¼
 	public override void StateBegin()
 	{
-		
+		MenuUIManager.Instance.Initinal();
+	}
+
+	// ½YÊø
+	public override void StateEnd()
+	{
+		MenuUIManager.Instance.Release();
+	}
+
+	public override void StateUpdate()
+	{
+		MenuUIManager.Instance.GameUpdate();
 	}
 
 }
