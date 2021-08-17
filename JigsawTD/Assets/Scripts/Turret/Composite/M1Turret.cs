@@ -23,44 +23,49 @@ public class M1Turret : CompositeTurret
     //    bullet.Initialize(this, Target[0], pos);
     //}
 
-    IEnumerator ShootCor()
-    {
-        foreach (TargetPoint target in Target.ToList())
-        {
-            if (!target.gameObject.activeSelf)
-                continue;
-            turretAnim.SetTrigger("Attack");
-            PlayAudio(ShootClip, false);
-            Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
-            bullet.transform.position = shootPoint.position;
-            Vector2 pos = (Vector2)shootPoint.position + (Vector2)transform.up * Strategy.FinalRange;
-            bullet.Initialize(this, target, pos);
-            yield return new WaitForSeconds(ShootInterval);
-        }
-    }
+    //IEnumerator ShootCor()
+    //{
+    //    foreach (TargetPoint target in Target.ToList())
+    //    {
+    //        if (!target.gameObject.activeSelf)
+    //            continue;
+    //        turretAnim.SetTrigger("Attack");
+    //        PlayAudio(ShootClip, false);
+    //        Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
+    //        bullet.transform.position = shootPoint.position;
+    //        Vector2 pos = (Vector2)shootPoint.position + (Vector2)transform.up * Strategy.FinalRange;
+    //        bullet.Initialize(this, target, pos);
+    //        yield return new WaitForSeconds(ShootInterval);
+    //    }
+    //}
 
     protected override void Shoot()
     {
         turretAnim.SetTrigger("Attack");
         PlayAudio(ShootClip, false);
-        float minDis = Mathf.Infinity;
-        RaycastHit2D hitTurret= Physics2D.Raycast(transform.position + transform.up * 0.5f, transform.up, Mathf.Infinity, LayerMask.GetMask(StaticData.TurretMask));
-        RaycastHit2D hitGround = Physics2D.Raycast(transform.position + transform.up * 0.5f, transform.up, Mathf.Infinity, LayerMask.GetMask(StaticData.GroundTileMask));
-        if (hitGround.collider != null)
-        {
-            minDis = Vector2.Distance(transform.position, hitGround.transform.position);
-        }
-        if (hitTurret.collider != null)
-        {
-            float dis2= Vector2.Distance(transform.position, hitTurret.transform.position);
-            if (dis2 < minDis)
-            {
-                minDis = dis2;
-            }
-        }
+        //float minDis = Mathf.Infinity;
+        //RaycastHit2D hitTurret= Physics2D.Raycast(transform.position + transform.up * 0.5f, transform.up, Mathf.Infinity, LayerMask.GetMask(StaticData.TurretMask));
+        //RaycastHit2D hitGround = Physics2D.Raycast(transform.position + transform.up * 0.5f, transform.up, Mathf.Infinity, LayerMask.GetMask(StaticData.GroundTileMask));
+        //if (hitGround.collider != null)
+        //{
+        //    minDis = Vector2.Distance(transform.position, hitGround.transform.position);
+        //}
+        //if (hitTurret.collider != null)
+        //{
+        //    float dis2= Vector2.Distance(transform.position, hitTurret.transform.position);
+        //    if (dis2 < minDis)
+        //    {
+        //        minDis = dis2;
+        //    }
+        //}
+        //Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
+        //bullet.transform.position = shootPoint.position;
+        //Vector2 pos = (Vector2)shootPoint.position + (Vector2)transform.up * (minDis - 1);
+        //bullet.Initialize(this, Target[0], pos);
+
         Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
         bullet.transform.position = shootPoint.position;
-        Vector2 pos = (Vector2)shootPoint.position + (Vector2)transform.up * (minDis - 1);
+        Vector2 pos = (Vector2)shootPoint.position + (Vector2)shootPoint.up * Strategy.FinalRange;
         bullet.Initialize(this, Target[0], pos);
     }
 }

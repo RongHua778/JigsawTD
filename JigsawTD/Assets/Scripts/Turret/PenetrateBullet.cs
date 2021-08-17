@@ -36,23 +36,23 @@ public class PenetrateBullet : Bullet
         }
     }
 
-    public override void TriggerDamage()
+    public override void TriggerDamage()//½¦Éä×Óµ¯²»»áÔì³É½¦Éä
     {
-        if (SputteringRange > 0)
-        {
-            ParticalControl effect = ObjectPool.Instance.Spawn(SputteringEffect) as ParticalControl;
-            effect.transform.position = transform.position;
-            effect.transform.localScale = Vector3.one * SputteringRange;//´©Í¸×Óµ¯µÄ½¦Éä·¶Î§¼õ°ë
-            effect.PlayEffect();
-            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, SputteringRange / 2, enemyLayerMask);
-            SputteredCount = hits.Length;
-            TriggerPreHitEffect();
-            foreach (Collider2D hit in hits)
-            {
-                TargetPoint target = hit.GetComponent<TargetPoint>();
-                EnemyDamageProcess(target.Enemy, true);
-            }
-        }
+        //if (SputteringRange > 0)
+        //{
+        //    ParticalControl effect = ObjectPool.Instance.Spawn(SputteringEffect) as ParticalControl;
+        //    effect.transform.position = transform.position;
+        //    effect.transform.localScale = Vector3.one * SputteringRange;//´©Í¸×Óµ¯µÄ½¦Éä·¶Î§¼õ°ë
+        //    effect.PlayEffect();
+        //    Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, SputteringRange / 2, enemyLayerMask);
+        //    SputteredCount = hits.Length;
+        //    TriggerPreHitEffect();
+        //    foreach (Collider2D hit in hits)
+        //    {
+        //        TargetPoint target = hit.GetComponent<TargetPoint>();
+        //        EnemyDamageProcess(target.Enemy, true);
+        //    }
+        //}
 
     }
 }

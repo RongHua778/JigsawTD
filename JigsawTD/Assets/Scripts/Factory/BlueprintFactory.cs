@@ -24,8 +24,8 @@ public class BlueprintFactory : GameObjectFactory
             blueprint.Compositions.Add(c);
         }
         blueprint.ComStrategy= new StrategyBase(StrategyType.Composite, attribute, 1,Element.Gold, blueprint);
-        blueprint.ComStrategy.GetTurretSkills();
         blueprint.ComStrategy.SetQualityValue();
+        blueprint.ComStrategy.GetTurretSkills();
         blueprint.SortBluePrint();
         return blueprint;
     }

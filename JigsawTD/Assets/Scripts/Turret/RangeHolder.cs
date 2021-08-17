@@ -117,7 +117,7 @@ public class RangeHolder : MonoBehaviour
     public void UnForbidTarget(TargetPoint target)
     {
         forbidList.Remove(target);
-        Turret.AddTarget(target);
+        //Turret.AddTarget(target);
     }
 
 

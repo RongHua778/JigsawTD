@@ -211,7 +211,8 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     }
     public void GenerateRange()
     {
-        m_RangeHolder = Instantiate(StaticData.Instance.CircleCol, transform);
+        if (m_RangeHolder == null)
+            m_RangeHolder = Instantiate(StaticData.Instance.CircleCol, transform);
         m_RangeHolder.SetRange(Strategy.FinalRange, Strategy.ForbidRange, Strategy.RangeType);
     }
 

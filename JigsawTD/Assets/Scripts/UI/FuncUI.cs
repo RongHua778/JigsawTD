@@ -28,17 +28,30 @@ public class FuncUI : IUserInterface
     {
         get => energyProgress;
         set => energyProgress = Mathf.Min(5, value);
-
     }
 
-    int buyShapeCost=25;
+    int freeShapeCount;
+    public int FreeShapeCount
+    {
+        get => freeShapeCount;
+        set
+        {
+            freeShapeCount = value;
+            if (freeShapeCount > 0)
+                DrawBtnTxt.text = 0.ToString();
+            else
+                DrawBtnTxt.text = buyShapeCost.ToString();
+        }
+    }
+
+    int buyShapeCost;
     public int BuyShapeCost
     {
         get => buyShapeCost;
         set
         {
             buyShapeCost = value;
-            DrawBtnTxt.text = /*GameMultiLang.GetTraduction("DRAWMODULE")*/ buyShapeCost.ToString();
+            DrawBtnTxt.text = buyShapeCost.ToString();
         }
     }
 
@@ -62,14 +75,6 @@ public class FuncUI : IUserInterface
             moduleLevel = value;
             PlayerLevelTxt.text = ModuleLevel.ToString();
             PlayerLvUpMoney = StaticData.Instance.LevelUpMoney[ModuleLevel];
-            if (ModuleLevel < StaticData.Instance.PlayerMaxLevel)
-            {
-                LevelUpTxt.text = PlayerLvUpMoney.ToString();
-            }
-            else
-            {
-                LevelUpTxt.text = "MAX";
-            }
             m_LevelInfo.SetContent(StaticData.GetLevelInfo(moduleLevel));
             if (ModuleLevel == 3 || ModuleLevel == 5 || ModuleLevel == 7)//3,5和7级增加一个商店容量
             {
@@ -85,6 +90,14 @@ public class FuncUI : IUserInterface
         set
         {
             playerLvUpMoney = value;
+            if (ModuleLevel < StaticData.Instance.PlayerMaxLevel)
+            {
+                LevelUpTxt.text = PlayerLvUpMoney.ToString();
+            }
+            else
+            {
+                LevelUpTxt.text = "MAX";
+            }
         }
     }
 
@@ -141,24 +154,18 @@ public class FuncUI : IUserInterface
 
     public void DrawBtnClick()
     {
-        //if (DrawRemain > 0)
-        //{
-        //    Energy = 0;
-        //    DrawRemain--;
-        //    DrawThisTurn = true;
-        //    m_GameManager.DrawShapes();
-        //}
-        //else
-        //{
-        //    GameManager.Instance.ShowMessage(GameMultiLang.GetTraduction("NOENOUGHDRAW"));
-        //}
-        if(GameManager.Instance.ConsumeMoney(BuyShapeCost))
+        if (FreeShapeCount > 0)
         {
-            //DrawThisTurn = true;
+            FreeShapeCount--;
+            GameManager.Instance.DrawShapes();
+            GameManager.Instance.CheckDrawSkill();
+            return;
+        }
+        if (GameManager.Instance.ConsumeMoney(BuyShapeCost))
+        {
             GameManager.Instance.DrawShapes();
             BuyShapeCost += StaticData.Instance.MultipleShapeCost;
             GameManager.Instance.CheckDrawSkill();
-            //DrawRemain = 0;
         }
 
     }

@@ -81,12 +81,12 @@ public class GameManager : Singleton<GameManager>
         //初始化系统
         m_BoardSystem.Initialize();//版图系统
         m_WaveSystem.Initialize();//波次系统
-        m_CamControl.Initialize( m_MainUI);//摄像机控制
+        m_CamControl.Initialize(m_MainUI);//摄像机控制
 
         //初始化UI
         m_MainUI.Initialize();//主界面顶部UI
         m_FuncUI.Initialize();//主界面功能UI
-        m_GuideUI.Initialize( m_FuncUI, m_MainUI, m_BluePrintShopUI);//教学系统UI
+        m_GuideUI.Initialize(m_FuncUI, m_MainUI, m_BluePrintShopUI);//教学系统UI
         m_BluePrintShopUI.Initialize();//配方系统UI
         m_ShapeSelectUI.Initialize();//抽模块UI
         m_GameEndUI.Initialize();//游戏结束UI
@@ -423,11 +423,11 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public void ModuleLevelUp()
+    public void SetModuleSystemDiscount(float discount)
     {
         if (m_FuncUI.ModuleLevel < StaticData.Instance.PlayerMaxLevel)
         {
-            m_FuncUI.ModuleLevel++;
+            m_FuncUI.PlayerLvUpMoney = Mathf.RoundToInt(m_FuncUI.PlayerLvUpMoney * (1 - discount));
         }
     }
     #endregion
@@ -503,6 +503,10 @@ public class GameManager : Singleton<GameManager>
     public void SetBuyShapeCostDiscount(float discount)
     {
         m_FuncUI.BuyShapeCost = Mathf.RoundToInt(m_FuncUI.BuyShapeCost * (1 - discount));
+    }
+    public void SetFreeShapeCount(int count)
+    {
+        m_FuncUI.FreeShapeCount += count;
     }
 
     #endregion

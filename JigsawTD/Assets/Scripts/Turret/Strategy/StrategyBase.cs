@@ -281,7 +281,7 @@ public class StrategyBase
         InitCriticalRate = m_Att.TurretLevels[Quality - 1].CriticalRate;
         InitSputteringRange = m_Att.TurretLevels[Quality - 1].SputteringRange;
         InitSlowRate = m_Att.TurretLevels[Quality - 1].SlowRate;
-        ForbidRange = m_Att.TurretLevels[Quality - 1].ForbidRange;
+        //ForbidRange = m_Att.TurretLevels[Quality - 1].ForbidRange;
     }
 
     public void StartTurnSkills()
@@ -367,9 +367,9 @@ public class StrategyBase
     }
     public void CompositeSkill()
     {
-        foreach (var skill in TurretSkills)
+        for(int i = 0; i < TurretSkills.Count; i++)
         {
-            skill.Composite();
+            TurretSkills[i].Composite();
         }
     }
 }

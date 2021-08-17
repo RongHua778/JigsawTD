@@ -168,7 +168,7 @@ public class BoardSystem : IGameSystem
         AstarPath.active.Scan();
 
         GenerateStartTiles(_startSize, sizeOffset);
-        //GenerateTrapTiles(sizeOffset, _startSize);
+        GenerateTrapTiles(sizeOffset, _startSize);
         Physics2D.SyncTransforms();
         SeekPath();
         ShowPath();
@@ -344,6 +344,10 @@ public class BoardSystem : IGameSystem
         {
             return;
         }
+        else
+        {
+            BuyOneGroundMoney += 20;
+        }
         GameTile tile = ConstructHelper.GetNormalTile(GameTileContentType.Empty);
         tile.transform.position = SelectingTile.transform.position;
         tile.TileLanded();
@@ -357,7 +361,6 @@ public class BoardSystem : IGameSystem
             SeekPath();
         }
         GameManager.Instance.HideTips();
-        BuyOneGroundMoney += 20;
     }
 
     public void SwitchTrap()

@@ -53,15 +53,12 @@ public class WoodTurret : ElementTurret
     }
     protected override void Shoot()
     {
-        foreach (var target in Target)
-        {
-            Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
-            float offset = Random.Range(-0.02f, 0.02f);
-            bullet.transform.position = shootPoint.position + offset * shootPoint.right;
-            Vector2 dir = bullet.transform.position - transform.position;
-            Vector2 pos = (Vector2)shootPoint.position + dir.normalized * Strategy.FinalRange;
-            bullet.Initialize(this, target, pos);
-        }
+        Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
+        float offset = Random.Range(-0.02f, 0.02f);
+        bullet.transform.position = shootPoint.position + offset * shootPoint.right;
+        Vector2 dir = bullet.transform.position - transform.position;
+        Vector2 pos = (Vector2)shootPoint.position + dir.normalized * Strategy.FinalRange;
+        bullet.Initialize(this, Target[0], pos);
     }
 
 

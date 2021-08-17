@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class HurtBullet : ElementSkill
+public class LevelDiscount : ElementSkill
 {
-    //被子弹伤害的敌人受到伤害提高25%，持续2秒
+    //升级防御塔费用-50%
     public override List<int> Elements => new List<int> { 0, 1, 2 };
-    public override string SkillDescription => "HURTBULLET";
+    public override string SkillDescription => "LEVELDISCOUNT";
 
-    public override void Hit(Enemy target, Bullet bullet = null)
+    public override void Build()
     {
-        BuffInfo info = new BuffInfo(EnemyBuffName.DamageIntensify, 0.25f, 2f);
-        target.Buffable.AddBuff(info);
+        strategy.UpgradeDiscount += 0.5f;
+    }
+    public override void PreHit(Bullet bullet = null)
+    {
+        bullet.Damage *= 0.75f;
     }
 }
 
@@ -37,16 +40,101 @@ public class NextIntensify : ElementSkill
     }
 }
 
-public class LevelDiscount : ElementSkill
+
+
+public class FreeDraw : ElementSkill
 {
-    //升级防御塔费用-50%
-    public override List<int> Elements => new List<int> { 0, 1, 2 };
-    public override string SkillDescription => "LEVELDISCOUNT";
+    //造成的伤害-25%，接下来两次抽取模块免费
+    public override List<int> Elements => new List<int> { 0, 1, 4 };
+    public override string SkillDescription => "FreeDraw";
+
+    public override void Composite()
+    {
+        GameManager.Instance.SetFreeShapeCount(2);
+    }
+}
+
+public class TurretLevelUp : ElementSkill
+{
+    //提升1级防御塔等级
+    public override List<int> Elements => new List<int> { 0, 2, 3 };
+    public override string SkillDescription => "TURRETLEVELUP";
 
     public override void Build()
     {
-        strategy.UpgradeDiscount += 0.5f;
+        base.Build();
+        strategy.Quality++;
+        strategy.SetQualityValue();
     }
+}
+
+public class SystemDiscount : ElementSkill
+{
+    //造成的伤害-25%，使模块升级费用-50%
+    public override List<int> Elements => new List<int> { 0, 2, 4 };
+    public override string SkillDescription => "SYSTEMDISCOUNT";
+
+    public override void Composite()
+    {
+        GameManager.Instance.SetModuleSystemDiscount(0.5f);
+    }
+    public override void PreHit(Bullet bullet = null)
+    {
+        bullet.Damage *= 0.75f;
+    }
+}
+public class RandomSkill : ElementSkill
+{
+    //变化为1个随机技能
+    public override List<int> Elements => new List<int> { 0, 3, 4 };
+    public override string SkillDescription => "RANDOMSKILL";
+
+    public override void Build()
+    {
+
+    }
+    public override void Composite()
+    {
+        List<int> newElements = new List<int> { Random.Range(0, 4), Random.Range(0, 4), Random.Range(0, 4) };
+        ElementSkill newSkill = TurretEffectFactory.GetElementSkill(newElements);
+        strategy.TurretSkills.Remove(this);
+        newSkill.Composite();//触发合成效果
+        strategy.AddElementSkill(newSkill);
+    }
+
+}
+
+
+
+public class FreeGround : ElementSkill
+{
+    //造成的伤害-25%，使接下来3次购买地板价格变为0
+    public override List<int> Elements => new List<int> { 1, 2, 3 };
+    public override string SkillDescription => "FREEGROUND";
+
+    public override void Composite()
+    {
+        StaticData.FreeGroundTileCount += 3;
+    }
+
+    public override void PreHit(Bullet bullet = null)
+    {
+        bullet.Damage *= 0.75f;
+    }
+
+}
+
+public class PerfectElement : ElementSkill
+{
+    //造成的伤害-25%，合成时获得1个万能元素
+    public override List<int> Elements => new List<int> { 1, 2, 4 };
+    public override string SkillDescription => "PERFECTELEMENT";
+
+    public override void Composite()
+    {
+        GameManager.Instance.GetPerfectElement(1);
+    }
+
     public override void PreHit(Bullet bullet = null)
     {
         bullet.Damage *= 0.75f;
@@ -54,68 +142,6 @@ public class LevelDiscount : ElementSkill
 }
 
 
-
-
-
-
-
-public class ModuleLevelUp : ElementSkill
-{
-    //提升1级模块等级
-    public override List<int> Elements => new List<int> { 0, 2, 4 };
-    public override string SkillDescription => "MODULELEVELUP";
-
-    public override void Composite()
-    {
-        GameManager.Instance.ModuleLevelUp();
-    }
-
-}
-
-public class PoloIntensify : ElementSkill
-{
-    //受到光环的加成效果提升100%
-    public override List<int> Elements => new List<int> { 0, 3, 4 };
-    public override string SkillDescription => "POLOINTENSIFY";
-
-    public override void Build()
-    {
-        base.Build();
-        strategy.PoloIntensifyModify += 1f;
-    }
-}
-
-public class RandomTrap : ElementSkill
-{
-    //获得一个随机陷阱
-    public override List<int> Elements => new List<int> { 1, 2, 3 };
-    public override string SkillDescription => "RANDOMTRAP";
-
-    public override void Composite()
-    {
-        Debug.Log("获得一个随机陷阱");
-    }
-
-}
-
-public class CircleRange : ElementSkill
-{
-    //使防御塔攻击范围变为圆型
-    public override List<int> Elements => new List<int> { 1, 2, 4 };
-    public override string SkillDescription => "CIRCLERANGE";
-
-    public override void Build()
-    {
-        strategy.RangeType = RangeType.Circle;
-        strategy.m_Turret.GenerateRange();
-    }
-
-    //public override void OnEquip()
-    //{
-    //    strategy.m_Turret.GenerateRange();
-    //}
-
-}
 
 public class TrapIntensify : ElementSkill
 {
@@ -190,6 +216,20 @@ public class LateDamage : ElementSkill
     {
         damageIncreased = 0;
         interval = 0;
+    }
+
+}
+
+public class CircleRange : ElementSkill
+{
+    //使防御塔攻击范围变为圆型
+    public override List<int> Elements => new List<int> { 6, 7, 8 };
+    public override string SkillDescription => "CIRCLERANGE";
+
+    public override void Build()
+    {
+        strategy.RangeType = RangeType.Circle;
+        strategy.m_Turret.GenerateRange();
     }
 
 }

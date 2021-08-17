@@ -56,7 +56,6 @@ public class StaticData : Singleton<StaticData>
     public static int PerfectElementCount = 0;//完美元素数量
     public static float OverallMoneyIntensify = 0;//金币加成
     public static int FreeGroundTileCount = 0;//免费地板数量
-    public static int NextBuyIntensifyBlueprint = 0;//下一次购买是加强配方数量
     public static Action<StrategyBase> NextCompositeCallback = null;
 
     [Header("ProbabilitySetting")]
