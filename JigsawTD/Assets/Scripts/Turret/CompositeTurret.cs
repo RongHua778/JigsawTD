@@ -41,7 +41,7 @@ public class CompositeTurret : TurretContent
                 CompositeTurret turret = tile.Content as CompositeTurret;
                 ElementSkill skill = (ElementSkill)this.Strategy.TurretSkills[1];
                 turret.Strategy.AddElementSkill(skill);
-                turret.Strategy.OnEquipSkill();
+                skill.OnEquip();
                 
                 ObjectPool.Instance.UnSpawn(m_GameTile);
             }

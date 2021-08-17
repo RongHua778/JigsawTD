@@ -1,11 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+public class CopySkill : ElementSkill
+{
+    //装备：复制第一个元素技能
+    
+    public override List<int> Elements => new List<int> { 3, 3, 3 };
+    public override string SkillDescription => "COPYSKILL";
 
+    public override void OnEquip()
+    {
+        ElementSkill skill = strategy.TurretSkills[1] as ElementSkill;
+        if (skill.Elements.SequenceEqual(Elements))
+        {
+            Debug.Log("两个重复的复制技能");
+            return;
+        }
+        strategy.GetComIntensify(Elements, false);
+        ElementSkill newSkill = TurretEffectFactory.GetElementSkill(skill.Elements);
+        strategy.TurretSkills.Remove(this);
+        newSkill.Composite();//触发合成效果
+        strategy.AddElementSkill(newSkill);
+        
+    }
+}
 public class CriticalPolo : ElementSkill
 {
-    //相邻每个防御塔提高自身25%暴击
-    public override List<int> Elements => new List<int> { 3, 3, 3 };
+    //相邻防御塔提高25%暴击
+    public override List<int> Elements => new List<int> { 3, 3, 4 };
     public override string SkillDescription => "CRITICALPOLO";
 
     private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
@@ -13,7 +36,7 @@ public class CriticalPolo : ElementSkill
     {
         foreach (var strategy in intensifiedStrategies)
         {
-            strategy.BaseCriticalRateIntensify -= 0.5f * strategy.PoloIntensifyModify;
+            strategy.InitCriticalRateIntensify -= 0.25f * strategy.PoloIntensifyModify;
         }
         intensifiedStrategies.Clear();
         List<Vector2Int> points = StaticData.GetCirclePoints(1);
@@ -24,7 +47,7 @@ public class CriticalPolo : ElementSkill
             if (hit != null)
             {
                 StrategyBase strategy = hit.GetComponent<TurretContent>().Strategy;
-                strategy.BaseCriticalRateIntensify += 0.5f * strategy.PoloIntensifyModify;
+                strategy.InitCriticalRateIntensify += 0.25f * strategy.PoloIntensifyModify;
                 intensifiedStrategies.Add(strategy);
             }
         }
@@ -45,7 +68,7 @@ public class RandomCritical : ElementSkill
 
 public class CriticalSpeed : ElementSkill
 {
-    //每回合每次攻击提升5%暴击率，上限100%
+    //攻击特效每回合每次攻击提升2.5%暴击率，上限100%
     public override List<int> Elements => new List<int> { 3, 3, 1 };
     public override string SkillDescription => "CRITICALSPEED";
 
@@ -54,8 +77,8 @@ public class CriticalSpeed : ElementSkill
     {
         if (criticalIncreased > 0.99f)
             return;
-        criticalIncreased += 0.05f;
-        strategy.TurnFixCriticalPercentage += 0.05f;
+        criticalIncreased += 0.025f * strategy.TimeModify;
+        strategy.TurnFixCriticalPercentage += 0.025f * strategy.TimeModify;
     }
 
     public override void EndTurn()
@@ -66,7 +89,7 @@ public class CriticalSpeed : ElementSkill
 
 public class LateCritical : ElementSkill
 {
-    //开局30秒后暴击率提高50%
+    //开局30秒后暴击率提高40%
     public override List<int> Elements => new List<int> { 3, 3, 2 };
     public override string SkillDescription => "LATECRITICAL";
 
@@ -77,7 +100,7 @@ public class LateCritical : ElementSkill
 
     public override void TickEnd()
     {
-        strategy.TurnFixCriticalPercentage += 0.5f;
+        strategy.TurnFixCriticalPercentage += 0.4f * strategy.TimeModify;
     }
 
     public override void EndTurn()
@@ -86,25 +109,25 @@ public class LateCritical : ElementSkill
     }
 }
 
-public class CriticalAdjacent : ElementSkill
-{
-    //相邻每个防御塔提高自身25%暴击率
-    public override List<int> Elements => new List<int> { 3, 3, 4 };
-    public override string SkillDescription => "CRITICALADJACENT";
+//public class CriticalAdjacent : ElementSkill
+//{
+//    //相邻每个防御塔提高自身25%暴击率
+//    public override List<int> Elements => new List<int> { 3, 3, 4 };
+//    public override string SkillDescription => "CRITICALADJACENT";
 
-    private int adjacentTurretCount = 0;
-    public override void Detect()
-    {
-        strategy.BaseCriticalPercentageIntensify -= 0.25f * adjacentTurretCount;//修复回初始值
-        adjacentTurretCount = 0;
-        List<Vector2Int> points = StaticData.GetCirclePoints(1);
-        foreach (var point in points)
-        {
-            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
-            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
-            if (hit != null)
-                adjacentTurretCount++;
-        }
-        strategy.BaseCriticalPercentageIntensify += 0.25f * adjacentTurretCount;
-    }
-}
+//    private int adjacentTurretCount = 0;
+//    public override void Detect()
+//    {
+//        strategy.BaseCriticalPercentageIntensify -= 0.25f * adjacentTurretCount;//修复回初始值
+//        adjacentTurretCount = 0;
+//        List<Vector2Int> points = StaticData.GetCirclePoints(1);
+//        foreach (var point in points)
+//        {
+//            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
+//            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
+//            if (hit != null)
+//                adjacentTurretCount++;
+//        }
+//        strategy.BaseCriticalPercentageIntensify += 0.25f * adjacentTurretCount;
+//    }
+//}

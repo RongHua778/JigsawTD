@@ -56,9 +56,6 @@ public class Armor : MonoBehaviour,IDamageable
         Bullet bullet = collision.GetComponent<Bullet>();
         if (bullet!=null)
         {
-            //if (bullet.hit)
-            //    return;
-            //bullet.hit = true;
             bullet.TriggerPreHitEffect();
             bullet.DealRealDamage(this);
             GameManager.Instance.nonEnemies.Remove(bullet);

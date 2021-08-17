@@ -21,7 +21,7 @@ public class DoubleDustElement : TileSkill
     public override void Build()
     {
         base.Build();
-        strategy.BaseSputteringRangeIntensify += 1;
+        strategy.InitSputteringRangeIntensify += 1;
     }
 }
 
@@ -54,7 +54,7 @@ public class DoubleWaterElement: TileSkill
     public override void Build()
     {
         base.Build();
-        strategy.BaseSlowRateIntensify += 1;
+        strategy.InitSlowRateIntensify += 1;
     }
 }
 

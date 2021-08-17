@@ -2,38 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpeedPolo : ElementSkill
+public class MultiTarget : ElementSkill
 {
-    //相邻防御塔攻速提高50%
+    //额外攻击2个目标
     public override List<int> Elements => new List<int> { 1, 1, 1 };
-    public override string SkillDescription => "SPEEDPOLO";
+    public override string SkillDescription => "MULTITARGET";
 
-    private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
-    public override void Detect()
+    public override void Build()
     {
-        foreach (var strategy in intensifiedStrategies)
-        {
-            strategy.BaseSpeedIntensify -= 0.5f * strategy.PoloIntensifyModify;
-        }
-        intensifiedStrategies.Clear();
-        List<Vector2Int> points = StaticData.GetCirclePoints(1);
-        foreach (var point in points)
-        {
-            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
-            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
-            if (hit != null)
-            {
-                StrategyBase strategy = hit.GetComponent<TurretContent>().Strategy;
-                strategy.BaseSpeedIntensify += 0.5f * strategy.PoloIntensifyModify;
-                intensifiedStrategies.Add(strategy);
-            }
-        }
+        base.Build();
+        strategy.BaseTargetCountIntensify += 2;
     }
 }
 
+
+
 public class SpeedTarget : ElementSkill
 {
-    //对同一目标进行攻击时，每次攻击攻速提升10%，上限300%，切换目标重置
+    //攻击特效:对同一目标进行攻击时，每次攻击攻速提升10%，上限300%，切换目标重置
     public override List<int> Elements => new List<int> { 1, 1, 0 };
     public override string SkillDescription => "SPEEDTARGET";
 
@@ -51,8 +37,8 @@ public class SpeedTarget : ElementSkill
         }
         if (speedIncreased < 2.99f)
         {
-            speedIncreased += 0.1f;
-            strategy.TurnSpeedIntensify += 0.1f;
+            speedIncreased += 0.1f * strategy.TimeModify;
+            strategy.TurnSpeedIntensify += 0.1f * strategy.TimeModify;
         }
     }
 
@@ -77,7 +63,7 @@ public class LateSpeed : ElementSkill
 
     public override void TickEnd()
     {
-        strategy.TurnSpeedIntensify += 1;
+        strategy.TurnSpeedIntensify += 1 * strategy.TimeModify;
     }
 
     public override void EndTurn()
@@ -89,7 +75,7 @@ public class LateSpeed : ElementSkill
 
 public class SpeedCritical : ElementSkill
 {
-    //每次暴击提高10%攻速，上限200%
+    //每次暴击提高20%攻速，上限200%
     public override List<int> Elements => new List<int> { 1, 1, 3 };
     public override string SkillDescription => "SPEEDCRITICAL";
 
@@ -98,8 +84,8 @@ public class SpeedCritical : ElementSkill
     {
         if (bullet.isCritical && speedIncreased < 1.99f)
         {
-            strategy.TurnSpeedIntensify += 0.1f;
-            speedIncreased += 0.1f;
+            strategy.TurnSpeedIntensify += 0.2f * strategy.TimeModify;
+            speedIncreased += 0.2f * strategy.TimeModify;
         }
     }
 
@@ -109,25 +95,53 @@ public class SpeedCritical : ElementSkill
     }
 }
 
-public class SpeedAdjacent : ElementSkill
+public class SpeedPolo : ElementSkill
 {
-    //相邻每个防御塔提高自身50%攻速
+    //相邻防御塔攻速提高50%
     public override List<int> Elements => new List<int> { 1, 1, 4 };
-    public override string SkillDescription => "SPEEDADJACENT";
+    public override string SkillDescription => "SPEEDPOLO";
 
-    private int adjacentTurretCount = 0;
+    private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
     public override void Detect()
     {
-        strategy.BaseSpeedIntensify -= 0.5f * adjacentTurretCount;//修复回初始值
-        adjacentTurretCount = 0;
+        foreach (var strategy in intensifiedStrategies)
+        {
+            strategy.InitSpeedIntensify -= 0.5f * strategy.PoloIntensifyModify;
+        }
+        intensifiedStrategies.Clear();
         List<Vector2Int> points = StaticData.GetCirclePoints(1);
         foreach (var point in points)
         {
             Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
             Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
             if (hit != null)
-                adjacentTurretCount++;
+            {
+                StrategyBase strategy = hit.GetComponent<TurretContent>().Strategy;
+                strategy.InitSpeedIntensify += 0.5f * strategy.PoloIntensifyModify;
+                intensifiedStrategies.Add(strategy);
+            }
         }
-        strategy.BaseSpeedIntensify += 0.5f * adjacentTurretCount;
     }
 }
+//public class SpeedAdjacent : ElementSkill
+//{
+//    //相邻每个防御塔提高自身50%攻速
+//    public override List<int> Elements => new List<int> { 1, 1, 4 };
+//    public override string SkillDescription => "SPEEDADJACENT";
+
+//    private int adjacentTurretCount = 0;
+//    public override void Detect()
+//    {
+//        strategy.BaseSpeedIntensify -= 0.5f * adjacentTurretCount;//修复回初始值
+//        adjacentTurretCount = 0;
+//        List<Vector2Int> points = StaticData.GetCirclePoints(1);
+//        foreach (var point in points)
+//        {
+//            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
+//            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
+//            if (hit != null)
+//                adjacentTurretCount++;
+//        }
+//        strategy.BaseSpeedIntensify += 0.5f * adjacentTurretCount;
+//    }
+//}

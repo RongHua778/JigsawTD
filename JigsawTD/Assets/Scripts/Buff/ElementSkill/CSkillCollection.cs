@@ -2,10 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class LateIntensify : ElementSkill
+{
+    //所有20秒后发生的属性提升翻倍
+    public override List<int> Elements => new List<int> { 2, 2, 2 };
+    public override string SkillDescription => "LATEINTENSIFY";
+    public override void StartTurn()
+    {
+        Duration = 20;
+    }
+
+    public override void TickEnd()
+    {
+        strategy.TimeModify += 1;
+    }
+
+    public override void EndTurn()
+    {
+        Duration = 0;
+    }
+}
+
 public class SlowPolo : ElementSkill
 {
     //相邻防御塔减速提高0.5
-    public override List<int> Elements => new List<int> { 2, 2, 2 };
+    public override List<int> Elements => new List<int> { 2, 2, 4 };
     public override string SkillDescription => "SLOWPOLO";
 
     private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
@@ -13,7 +34,7 @@ public class SlowPolo : ElementSkill
     {
         foreach (var strategy in intensifiedStrategies)
         {
-            strategy.BaseSlowRateIntensify -= 0.5f * strategy.PoloIntensifyModify;
+            strategy.InitSlowRateIntensify -= 0.5f * strategy.PoloIntensifyModify;
         }
         intensifiedStrategies.Clear();
         List<Vector2Int> points = StaticData.GetCirclePoints(1);
@@ -24,7 +45,7 @@ public class SlowPolo : ElementSkill
             if (hit != null)
             {
                 StrategyBase strategy = hit.GetComponent<TurretContent>().Strategy;
-                strategy.BaseSlowRateIntensify += 0.5f * strategy.PoloIntensifyModify;
+                strategy.InitSlowRateIntensify += 0.5f * strategy.PoloIntensifyModify;
                 intensifiedStrategies.Add(strategy);
             }
         }
@@ -33,65 +54,70 @@ public class SlowPolo : ElementSkill
 
 public class SlowAttack : ElementSkill
 {
-    //每0.1减速提高10%伤害
+    //对距离小于3的敌人造成减速效果翻倍
     public override List<int> Elements => new List<int> { 2, 2, 0 };
     public override string SkillDescription => "SLOWATTACK";
-    public override void Hit(Enemy target, Bullet bullet = null)
+    public override void PreHit(Bullet bullet = null)
     {
-        bullet.Damage *= (1 + bullet.SlowRate);
+        if (bullet.GetTargetDistance() <= 3)
+        {
+            bullet.SlowRate *= 2;
+        }
     }
 }
 
 public class SlowSpeed : ElementSkill
 {
-    //每次攻击后提升本回合0.1减速,上限为2
+    //攻击特效：每次攻击提升0.05减速，上限为2
     public override List<int> Elements => new List<int> { 2, 2, 1 };
     public override string SkillDescription => "SLOWSPEED";
     private float slowIncreased = 0;
     public override void Shoot(Bullet bullet = null, Enemy target = null)
     {
-        if (slowIncreased > 1.95f)
+        if (slowIncreased > 1.99f)
             return;
-        slowIncreased += 0.1f;
-        strategy.TurnFixSlowRate += 0.1f;
+        strategy.TurnFixSlowRate += 0.05f * strategy.TimeModify;
+        slowIncreased += 0.05f * strategy.TimeModify;
     }
-
     public override void EndTurn()
     {
         slowIncreased = 0;
     }
 }
 
-public class RandomSlow : ElementSkill
+public class CriticalSlow : ElementSkill
 {
-    //子弹增加0-1的随机减速
+    //暴击造成的减速效果翻倍
     public override List<int> Elements => new List<int> { 2, 2, 3 };
-    public override string SkillDescription => "RANDOMSLOW";
+    public override string SkillDescription => "CRITICALSLOW";
     public override void PreHit(Bullet bullet = null)
     {
-        bullet.SlowRate += Random.Range(0, 1f);
-    }
-}
-
-public class SlowAdjacent : ElementSkill
-{
-    //相邻每个防御塔提高自身0.5减速
-    public override List<int> Elements => new List<int> { 0, 0, 4 };
-    public override string SkillDescription => "SLOWADJACENT";
-
-    private int adjacentTurretCount = 0;
-    public override void Detect()
-    {
-        strategy.BaseSlowRateIntensify -= 0.5f * adjacentTurretCount;//修复回初始值
-        adjacentTurretCount = 0;
-        List<Vector2Int> points = StaticData.GetCirclePoints(1);
-        foreach (var point in points)
+        if (bullet.isCritical)
         {
-            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
-            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
-            if (hit != null)
-                adjacentTurretCount++;
+            bullet.SlowRate *= 2f;
         }
-        strategy.BaseSlowRateIntensify += 0.5f * adjacentTurretCount;
     }
 }
+
+//public class SlowAdjacent : ElementSkill
+//{
+//    //相邻每个防御塔提高自身0.5减速
+//    public override List<int> Elements => new List<int> { 2, 2, 4 };
+//    public override string SkillDescription => "SLOWADJACENT";
+
+//    private int adjacentTurretCount = 0;
+//    public override void Detect()
+//    {
+//        strategy.BaseSlowRateIntensify -= 0.5f * adjacentTurretCount;//修复回初始值
+//        adjacentTurretCount = 0;
+//        List<Vector2Int> points = StaticData.GetCirclePoints(1);
+//        foreach (var point in points)
+//        {
+//            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
+//            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
+//            if (hit != null)
+//                adjacentTurretCount++;
+//        }
+//        strategy.BaseSlowRateIntensify += 0.5f * adjacentTurretCount;
+//    }
+//}

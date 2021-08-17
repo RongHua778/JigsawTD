@@ -83,7 +83,13 @@ public static class ConstructHelper
         TileShape shape = m_ShapeFactory.GetDShape();
         GameTile tile = m_TileFactory.GetBasicTile();
         CompositeTurret content = m_ContentFactory.GetCompositeTurret(bluePrint);
+        if (StaticData.NextCompositeCallback != null)//下一次合成获得额外加成
+        {
+            StaticData.NextCompositeCallback(bluePrint.ComStrategy);
+            StaticData.NextCompositeCallback = null;
+        }
         bluePrint.ComStrategy.CompositeSkill();
+
         tile.SetContent(content);
         shape.SetTile(tile);
         return shape;

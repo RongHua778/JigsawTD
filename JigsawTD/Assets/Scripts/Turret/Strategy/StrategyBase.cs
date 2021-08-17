@@ -51,6 +51,10 @@ public class StrategyBase
     private float initCriticalPercentage = 1.5f;//暴击伤害率
     private int initTargetCount = 1;//目标数
     private float rotSpeed = 10f;//炮塔转速
+    private float timeModify = 1;//回合内时间加成修正
+    public float TimeModify { get => timeModify; set => timeModify = value; }
+    private int shootTriggerCount = 1;//攻击特效触发次数
+    public int ShootTriggerCount { get => shootTriggerCount; set => shootTriggerCount = value; }
     public float RotSpeed { get => rotSpeed; set => rotSpeed = value; }
     private float upgradeDiscount = 0;//升级折扣
     public float UpgradeDiscount { get => Mathf.Max(0, upgradeDiscount); set => upgradeDiscount = value; }
@@ -59,23 +63,41 @@ public class StrategyBase
     public int ForbidRange { get => forbidRange; set => forbidRange = value; }
 
     //基础加成
-    private float baseAttackIntensify;
-    private float baseSpeedIntensify;
-    private int baseRangeIntensify;
-    private float baseCriticalRateIntensify;
-    private float baseSlowRateIntensify;
-    private float baseSputteringRangeIntensify;
-    private float baseSputteringPercentageIntensify;
-    private float baseCriticalPercentageIntensify;
+    private float initAttackIntensify;
+    private float initSpeedIntensify;
+    private int initRangeIntensify;
+    private float initCriticalRateIntensify;
+    private float initCriticalPercentageIntensify;
+    private float initSlowRateIntensify;
+    private float initSputteringRangeIntensify;
+    private float initSputteringPercentageIntensify;
+    public float InitAttackIntensify { get => initAttackIntensify; set => initAttackIntensify = value; }
+    public float InitSpeedIntensify { get => initSpeedIntensify; set => initSpeedIntensify = value; }
+    public int InitRangeIntensify { get => initRangeIntensify; set => initRangeIntensify = value; }
+    public float InitCriticalRateIntensify { get => initCriticalRateIntensify; set => initCriticalRateIntensify = value; }
+    public float InitCriticalPercentageIntensify { get => initCriticalPercentageIntensify; set => initCriticalPercentageIntensify = value; }
+    public float InitSlowRateIntensify { get => initSlowRateIntensify; set => initSlowRateIntensify = value; }
+    public float InitSputteringRangeIntensify { get => initSputteringRangeIntensify; set => initSputteringRangeIntensify = value; }
+    public float InitSputteringPercentageIntensify { get => initSputteringPercentageIntensify; set => initSputteringPercentageIntensify = value; }
+
+
+    //private float baseAttackIntensify;
+    //private float baseSpeedIntensify;
+    //private int baseRangeIntensify;
+    //private float baseCriticalRateIntensify;
+    //private float baseSlowRateIntensify;
+    //private float baseSputteringRangeIntensify;
+    //private float baseSputteringPercentageIntensify;
+    //private float baseCriticalPercentageIntensify;
     private int baseTargetCountIntensify;
-    public float BaseAttackIntensify { get => baseAttackIntensify + ComAttackIntensify; set => baseAttackIntensify = value; }
-    public float BaseSpeedIntensify { get => baseSpeedIntensify + ComSpeedIntensify; set => baseSpeedIntensify = value; }
-    public int BaseRangeIntensify { get => baseRangeIntensify + ComRangeIntensify; set => baseRangeIntensify = value; }
-    public float BaseCriticalRateIntensify { get => baseCriticalRateIntensify + ComCriticalIntensify; set => baseCriticalRateIntensify = value; }
-    public float BaseCriticalPercentageIntensify { get => baseCriticalPercentageIntensify; set => baseCriticalPercentageIntensify = value; }
-    public float BaseSlowRateIntensify { get => baseSlowRateIntensify + ComSlowIntensify; set => baseSlowRateIntensify = value; }
-    public float BaseSputteringPercentageIntensify { get => baseSputteringPercentageIntensify; set => baseSputteringPercentageIntensify = value; }
-    public float BaseSputteringRangeIntensify { get => baseSputteringRangeIntensify + ComSputteringRangeIntensify; set => baseSputteringRangeIntensify = value; }
+    public float BaseAttackIntensify { get => InitAttackIntensify + ComAttackIntensify;}
+    public float BaseSpeedIntensify { get => InitSpeedIntensify + ComSpeedIntensify;}
+    public int BaseRangeIntensify { get => InitRangeIntensify + ComRangeIntensify;}
+    public float BaseCriticalRateIntensify { get => initCriticalRateIntensify + ComCriticalIntensify; }
+    public float BaseCriticalPercentageIntensify { get => InitCriticalPercentageIntensify; }
+    public float BaseSlowRateIntensify { get => InitSlowRateIntensify + ComSlowIntensify; }
+    public float BaseSputteringPercentageIntensify { get => InitSputteringPercentageIntensify;}
+    public float BaseSputteringRangeIntensify { get => InitSputteringRangeIntensify + ComSputteringRangeIntensify; }
     public int BaseTargetCountIntensify { get => baseTargetCountIntensify; set => baseTargetCountIntensify = value; }
 
     #region 元素加成
@@ -185,20 +207,14 @@ public class StrategyBase
     #endregion
 
     public TurretSkill TurretSkill { get; set; }
-    //public List<ElementSkill> ElementSkills = new List<ElementSkill>();
+   
+
     public List<TurretSkill> TurretSkills = new List<TurretSkill>();
 
-    //public void BuildTurretEffects()
-    //{
-    //    foreach (var skill in TurretSkills)
-    //    {
-    //        skill.Build();//前置修正
-    //    }
-    //}
 
-    public void GetComIntensify(ElementSkill skill, bool add = true)
+    public void GetComIntensify(List<int> elements, bool add = true)
     {
-        foreach (var element in skill.Elements)
+        foreach (var element in elements)
         {
             switch ((Element)element)
             {
@@ -244,7 +260,6 @@ public class StrategyBase
 
     public void AddElementSkill(ElementSkill skill)
     {
-        skill.SkillIndex = TurretSkills.Count;
         skill.strategy = this;
         TurretSkills.Add(skill);
         skill.Build();
@@ -266,7 +281,7 @@ public class StrategyBase
         InitCriticalRate = m_Att.TurretLevels[Quality - 1].CriticalRate;
         InitSputteringRange = m_Att.TurretLevels[Quality - 1].SputteringRange;
         InitSlowRate = m_Att.TurretLevels[Quality - 1].SlowRate;
-        ForbidRange= m_Att.TurretLevels[Quality - 1].ForbidRange;
+        ForbidRange = m_Att.TurretLevels[Quality - 1].ForbidRange;
     }
 
     public void StartTurnSkills()
@@ -281,14 +296,14 @@ public class StrategyBase
     {
         UpgradeDiscount = 0;
         //基础加成
-        BaseAttackIntensify = 0;
-        BaseSpeedIntensify = 0;
-        BaseRangeIntensify = 0;
-        BaseCriticalRateIntensify = 0;
-        BaseCriticalPercentageIntensify = 0;
-        BaseSputteringRangeIntensify = 0;
-        BaseSputteringPercentageIntensify = 0;
-        BaseSlowRateIntensify = 0;
+        InitAttackIntensify = 0;
+        InitSpeedIntensify = 0;
+        InitRangeIntensify = 0;
+        InitCriticalRateIntensify = 0;
+        InitCriticalPercentageIntensify = 0;
+        InitSputteringRangeIntensify = 0;
+        InitSputteringPercentageIntensify = 0;
+        InitSlowRateIntensify = 0;
         BaseTargetCountIntensify = 0;
 
         //基础加成二次修正
@@ -305,6 +320,9 @@ public class StrategyBase
 
     public void ClearTurnIntensify()
     {
+        //回合时间修正
+        TimeModify = 1;
+
         //回合固定加成
         TurnFixAttack = 0;
         TurnFixSpeed = 0;

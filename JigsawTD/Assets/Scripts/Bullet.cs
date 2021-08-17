@@ -100,7 +100,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         }
     }
 
-    public void TriggerPreHitEffect()
+    public void TriggerPreHitEffect()//子弹命中前触发
     {
         isCritical = UnityEngine.Random.value <= CriticalRate;//在命中敌人前判断是否暴击
         if (turretEffects.Count > 0)
@@ -130,8 +130,6 @@ public abstract class Bullet : ReusableObject, IGameBehavior
 
     public virtual bool GameUpdate()
     {
-        //if (!hit)
-        //{
         if (Target != null && (Target.Enemy.IsDie || !Target.gameObject.activeSelf))
         {
             TargetPos = Target.transform.position;
@@ -167,7 +165,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
 
     public float GetTargetDistance()
     {
-        float distanceToTarget = ((Vector2)transform.position - TargetPos).magnitude;
+        float distanceToTarget = ((Vector2)turretParent.transform.position - TargetPos).magnitude;
         return distanceToTarget;
     }
 

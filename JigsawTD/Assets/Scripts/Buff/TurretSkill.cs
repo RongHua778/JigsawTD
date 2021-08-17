@@ -104,11 +104,11 @@ public class I1SkillSpeedIncreasePerShoot : InitialSkill
 {
     public override TurretSkillName EffectName => TurretSkillName.I1SkillSpeedIncreasedPerShoot;
     public override string SkillDescription => "I1SKILL";
-    public override void Shoot(Bullet bullet = null,Enemy target=null)
+    public override void Shoot(Bullet bullet = null, Enemy target = null)
     {
         if (strategy.TurnFixSpeed > 9.95f)
             return;
-        strategy.TurnFixSpeed += 0.1f;
+        strategy.TurnFixSpeed += 0.1f * strategy.TimeModify;
     }
 }
 public class J1SkillDistanceBaseDamage : InitialSkill
@@ -119,7 +119,7 @@ public class J1SkillDistanceBaseDamage : InitialSkill
     float increaseRate = 0.3f;
 
 
-    public override void Shoot(Bullet bullet = null, Enemy target = null)
+    public override void PreHit(Bullet bullet = null)
     {
         bullet.Damage *= 1 + (increaseRate * bullet.GetTargetDistance());
     }
@@ -134,7 +134,7 @@ public class G1SkillMultiTarget : InitialSkill
         strategy.BaseTargetCountIntensify += 3;
     }
 
-    public override void Hit(Enemy target, Bullet bullet = null)
+    public override void PreHit(Bullet bullet = null)
     {
         bullet.Damage *= 0.5f;
     }
@@ -190,8 +190,8 @@ public class L1Skill : InitialSkill
     {
         if (intensifyIncreased > 1.95f)
             return;
-        intensifyIncreased += 0.1f;
-        strategy.TurnAttackIntensify += 0.1f;
+        intensifyIncreased += 0.1f * strategy.TimeModify;
+        strategy.TurnAttackIntensify += 0.1f * strategy.TimeModify;
     }
 
     public override void EndTurn()
@@ -205,7 +205,7 @@ public class F1Skill : InitialSkill
     public override TurretSkillName EffectName => TurretSkillName.F1Skill;
     public override string SkillDescription => "F1SKILL";
 
-    public override void Shoot(Bullet bullet = null, Enemy target = null)
+    public override void PreHit(Bullet bullet = null)
     {
         int count = strategy.m_Turret.targetList.Count;
         bullet.Damage *= (1 + count * 0.1f);
@@ -239,43 +239,3 @@ public class M1SkillDoubleSlowRate : InitialSkill
     }
 }
 
-public class IncreaseDamageBuff : InitialSkill
-{
-    public override TurretSkillName EffectName => TurretSkillName.S011IncreaseDamageBuff;
-
-    public override void Hit(Enemy target, Bullet bullet = null)
-    {
-        BuffInfo info = new BuffInfo(EnemyBuffName.DamageIntensify, KeyValue, 2f);
-        target.Buffable.AddBuff(info);
-    }
-}
-
-public class SameTargetDamageIncrease : InitialSkill
-{
-    public override TurretSkillName EffectName => TurretSkillName.S012SameTargetDamageIncrease;
-    public float IncreaseDamage;
-    public Enemy LastTarget;
-    private float maxDamageIncrease = 500;
-
-    public override void Hit(Enemy target, Bullet bullet = null)
-    {
-
-        if (target == LastTarget)
-        {
-            if (IncreaseDamage > maxDamageIncrease)
-                return;
-            IncreaseDamage += KeyValue;
-            bullet.Damage += IncreaseDamage;
-        }
-        else
-        {
-            IncreaseDamage = 0;
-            LastTarget = target;
-        }
-    }
-
-    public override void EndTurn()
-    {
-        IncreaseDamage = 0;
-    }
-}

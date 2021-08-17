@@ -9,13 +9,12 @@ public struct ElementSkillInfo
 }
 public abstract class ElementSkill : TurretSkill
 {
-    public int SkillIndex;
-    public abstract List<int> Elements { get; }
+    public virtual List<int> Elements { get; set; }
 
     public override void Build()
     {
         base.Build();
-        strategy.GetComIntensify(this);
+        strategy.GetComIntensify(Elements);
     }
 }
 

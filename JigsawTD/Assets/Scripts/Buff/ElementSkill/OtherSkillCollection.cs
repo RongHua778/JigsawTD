@@ -16,62 +16,45 @@ public class HurtBullet : ElementSkill
     }
 }
 
-public class RandomIntensify : ElementSkill
+public class NextIntensify : ElementSkill
 {
-    //每回合开始随机获得以下效果之一：攻击提升80%；攻速提升80%；暴击率提升50%；
+    //造成的伤害-25%，使下一个合成塔暴击+50%
     public override List<int> Elements => new List<int> { 0, 1, 3 };
-    public override string SkillDescription => "RANDOMINTENSIFY";
+    public override string SkillDescription => "NEXTINTENSIFY";
 
-    public override void StartTurn()
+    public override void Composite()
     {
-        int random = Random.Range(0, 3);
-        switch (random)
-        {
-            case 0:
-                strategy.TurnAttackIntensify += 0.8f;
-                break;
-            case 1:
-                strategy.TurnSpeedIntensify += 0.8f;
-                break;
-            case 2:
-                strategy.TurnFixCriticalRate += 0.5f;
-                break;
-        }
+        StaticData.NextCompositeCallback = CompositeCallback;
+    }
+
+    public void CompositeCallback(StrategyBase strategy)
+    {
+        strategy.InitCriticalRateIntensify += 0.5f;
+    }
+    public override void PreHit(Bullet bullet = null)
+    {
+        bullet.Damage *= 0.75f;
     }
 }
 
 public class LevelDiscount : ElementSkill
 {
     //升级防御塔费用-50%
-    public override List<int> Elements => new List<int> { 0, 1, 4 };
+    public override List<int> Elements => new List<int> { 0, 1, 2 };
     public override string SkillDescription => "LEVELDISCOUNT";
 
     public override void Build()
     {
         strategy.UpgradeDiscount += 0.5f;
     }
-}
-
-public class CopySkill : ElementSkill
-{
-    //复制另一个元素技能
-    public override List<int> Elements => new List<int> { 0, 2, 3 };
-    public override string SkillDescription => "COPYSKILL";
-
-    public override void OnEquip()
+    public override void PreHit(Bullet bullet = null)
     {
-        ElementSkill skill = strategy.TurretSkills[SkillIndex == 1 ? 2 : 1] as ElementSkill;
-        if (skill.Elements.SequenceEqual(Elements))
-        {
-            Debug.Log("两个重复的复制技能");
-            return;
-        }
-        strategy.GetComIntensify(this, false);
-        ElementSkill newSkill = TurretEffectFactory.GetElementSkill(skill.Elements);
-        strategy.TurretSkills.Remove(this);
-        strategy.AddElementSkill(newSkill);
+        bullet.Damage *= 0.75f;
     }
 }
+
+
+
 
 
 
@@ -124,12 +107,13 @@ public class CircleRange : ElementSkill
     public override void Build()
     {
         strategy.RangeType = RangeType.Circle;
-    }
-
-    public override void OnEquip()
-    {
         strategy.m_Turret.GenerateRange();
     }
+
+    //public override void OnEquip()
+    //{
+    //    strategy.m_Turret.GenerateRange();
+    //}
 
 }
 

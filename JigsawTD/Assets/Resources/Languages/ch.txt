@@ -182,13 +182,15 @@ K1SKILL=所有暴击伤害提升效果翻倍
 M1SKILL=发射一个移动到直线路径末端的雪球，雪球使敌人的当前减速效果翻倍
 
 //A系
-ATTACKPOLO=相邻防御塔的基础攻击力提升50%
-ATTACKSPEED=每次攻击提升本回合10%攻击力，上限200%
+DOUBLEATTACK=所有攻击提升效果翻倍
+ATTACKSPEED=攻击特效:每次攻击提升本回合5%攻击力，上限200%
 LATEATTACK=每回合开始30秒后，攻击力提高100%
 RANDOMATTACK=子弹攻击力在50%-200%之间随机浮动
+ATTACKPOLO=相邻防御塔的基础攻击力提升50%
 ATTACKADJACENT=相邻每有1个防御塔，就提升50%基础攻击力
 
 //B系
+MULTITARGET=额外攻击2个目标
 SPEEDPOLO=相邻防御塔的基础攻速提升50%
 SPEEDTARGET=对同一目标进行攻击时，每次攻击使攻速提高10%，上限300%，切换目标重置
 LATESPEED=每回合开始30秒后，攻速提升100%
@@ -196,30 +198,32 @@ SPEEDCRITICAL=每次暴击后，提升10%攻速，上限为200%
 SPEEDADJACENT=相邻每有1个防御塔，就提升50%基础攻速
 
 //C系
+LATEINTENSIFY=回合开始20秒后发生的所有属性提升翻倍
 SLOWPOLO=相邻防御塔的减速提高0.5
-SLOWATTACK=子弹每0.1减速提高10%伤害
-SLOWSPEED=每次攻击提升0.1减速，上限为2
-RANDOMSLOW=子弹增加0-1的随机减速
+SLOWATTACK=对距离小于3的敌人造成减速效果翻倍
+SLOWSPEED=每次攻击提升0.05减速，上限为2
+CRITICALSLOW=暴击造成的减速效果翻倍
 SLOWADJACENT=相邻每有1个防御塔，就提升0.5减速
 
 //D系
 CRITICALPOLO=相邻防御塔的暴击率提高25%
 RANDOMCRITICAL=暴击伤害增加-100到400%的随机浮动
-CRITICALSPEED=每次攻击提升本回合5%暴击率，上限50%
+CRITICALSPEED=每次攻击提升本回合2.5%暴击率，上限50%
 LATECRITICAL=每回合开始30秒后，暴击率提升50%
 CRITICALADJACENT=相邻每有1个防御塔，就提升25%暴击率
 
 //E系
-SPLASHPOLO=相邻防御塔的溅射提高0.3
+POLOGETTER=受到的所有光环效果翻倍
 NEARSPLASH=攻击距离小于3的敌人时，溅射伤害提高100%
-SPLASHSPEED=每次攻击提升本回合溅射0.06，上限1.2
-LATESPLASH=开局30秒后，溅射提高1.2
-RANDOMSPLASH=溅射增加0-1.5的随机浮动
+SPLASHSPEED=每次攻击提升本回合溅射0.05，上限2
+LATESPLASH=开局30秒后，溅射提高0.8
+RANDOMSPLASH=溅射增加0-1的随机浮动
+
 
 //综合系
 HURTBULLET=使被攻击的敌人受到伤害提高25%，持续2秒
-RANDOMINTENSIFY=每回合随机获得以下效果之一：攻击提升80%；攻速提升80%；暴击率提升40%；
-LEVELDISCOUNT=升级防御塔费用-50%
+NEXTINTENSIFY=造成的伤害-25%，使下一个合成塔暴击+50%
+LEVELDISCOUNT=造成的伤害-25%，升级费用-50%
 COPYSKILL=复制另一个元素技能
 MODULELEVELUP=将你的模块等级提升1级
 POLOINTENSIFY=受到光环的加成效果提升100%

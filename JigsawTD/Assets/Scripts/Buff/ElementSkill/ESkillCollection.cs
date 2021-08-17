@@ -2,32 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SplashPolo : ElementSkill
+public class PoloGetter : ElementSkill
 {
-    //相邻每个防御塔提高自身0.3溅射
+    //受到的所有光环效果翻倍
     public override List<int> Elements => new List<int> { 4, 4, 4 };
-    public override string SkillDescription => "SPLASHPOLO";
+    public override string SkillDescription => "POLOGETTER";
 
-    private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
-    public override void Detect()
+    public override void Build()
     {
-        foreach (var strategy in intensifiedStrategies)
-        {
-            strategy.BaseSputteringRangeIntensify -= 0.3f * strategy.PoloIntensifyModify;
-        }
-        intensifiedStrategies.Clear();
-        List<Vector2Int> points = StaticData.GetCirclePoints(1);
-        foreach (var point in points)
-        {
-            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
-            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
-            if (hit != null)
-            {
-                StrategyBase strategy = hit.GetComponent<TurretContent>().Strategy;
-                strategy.BaseSputteringRangeIntensify += 0.3f * strategy.PoloIntensifyModify;
-                intensifiedStrategies.Add(strategy);
-            }
-        }
+        base.Build();
+        strategy.PoloIntensifyModify += 1;
     }
 }
 
@@ -49,7 +33,7 @@ public class NearSplash : ElementSkill
 
 public class SplashSpeed : ElementSkill
 {
-    //每回合每次攻击提升0.06溅射，上限1.2
+    //每回合每次攻击提升0.03溅射，上限1.2
     public override List<int> Elements => new List<int> { 4, 4, 1 };
     public override string SkillDescription => "SPLASHSPEED";
 
@@ -58,8 +42,8 @@ public class SplashSpeed : ElementSkill
     {
         if (splashIncreased > 1.19f)
             return;
-        splashIncreased += 0.06f;
-        strategy.TurnFixCriticalPercentage += 0.06f;
+        splashIncreased += 0.03f*strategy.TimeModify;
+        strategy.TurnFixCriticalPercentage += 0.03f * strategy.TimeModify;
     }
 
     public override void EndTurn()
@@ -70,7 +54,7 @@ public class SplashSpeed : ElementSkill
 
 public class LateSplash : ElementSkill
 {
-    //开局30秒后溅射提高1.2
+    //开局30秒后溅射提高1
     public override List<int> Elements => new List<int> { 4, 4, 2 };
     public override string SkillDescription => "LATESPLASH";
 
@@ -81,7 +65,7 @@ public class LateSplash : ElementSkill
 
     public override void TickEnd()
     {
-        strategy.TurnFixSputteringRange += 1.2f;
+        strategy.TurnFixSputteringRange += 0.8f * strategy.TimeModify;
     }
 
     public override void EndTurn()
@@ -92,12 +76,12 @@ public class LateSplash : ElementSkill
 
 public class RandomSplash : ElementSkill
 {
-    //子弹溅射范围增加0-1.5的随机浮动
+    //子弹溅射范围增加0-1的随机浮动
     public override List<int> Elements => new List<int> { 4, 4, 3 };
     public override string SkillDescription => "RANDOMSPLASH";
 
-    public override void Shoot(Bullet bullet = null, Enemy target = null)
+    public override void PreHit(Bullet bullet = null)
     {
-        bullet.SputteringRange += Random.Range(0, 1.5f);
+        bullet.SputteringRange += Random.Range(0, 1f);
     }
 }

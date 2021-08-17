@@ -57,7 +57,7 @@ public class StaticData : Singleton<StaticData>
     public static float OverallMoneyIntensify = 0;//金币加成
     public static int FreeGroundTileCount = 0;//免费地板数量
     public static int NextBuyIntensifyBlueprint = 0;//下一次购买是加强配方数量
-
+    public static Action<StrategyBase> NextCompositeCallback = null;
 
     [Header("ProbabilitySetting")]
     public float[] TileShapeChance = default;
@@ -71,8 +71,8 @@ public class StaticData : Singleton<StaticData>
         }
     }
     //元素加成
-    public static float GoldAttackIntensify = 0.5f;
-    public static float WoodSpeedIntensify = 0.5f;
+    public static float GoldAttackIntensify = 0.3f;
+    public static float WoodSpeedIntensify = 0.3f;
     public static float WaterSlowIntensify = 0.5f;
     public static float FireCriticalIntensify = 0.25f;
     public static float DustSputteringIntensify = 0.3f;

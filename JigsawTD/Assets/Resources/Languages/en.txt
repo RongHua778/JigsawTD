@@ -180,14 +180,16 @@ J1SKILL=Bullet damage increased by 30%/block it travelled.
 K1SKILL=Double the increased critical damage.
 M1SKILL=Fire a snowball that moves to the end of a straight path and doubles the enemy's current slow rate.
 
-//Aϵ
-ATTACKPOLO=Increase acjacent turrets' basic attack by 50%.
-ATTACKSPEED=Each shoot increases attack by 10% this turn (up to 200%).
+//A系
+DOUBLEATTACK=Double all attack increased.
+ATTACKSPEED=Attack Effect:Each shoot increases attack by 5% this turn (up to 200%).
 LATEATTACK=Attack increased by 100% after 30 seconds of each wave.
 RANDOMATTACK=Bullet damage is randomly ranged from 50% to 200%.
 ATTACKADJACENT=Basic attack increased by 50% for each adjacent turret.
+ATTACKPOLO=Increase acjacent turrets' basic attack by 50%.
 
 //B系
+MULTITARGET=Attacks 2 additional targets.
 SPEEDPOLO=Increase adjacent turrets' basic firerate by 50%.
 SPEEDTARGET=Firerate increased by 10% each shoot while attacking the same target (up to 300%).
 LATESPEED=Firerate increased by 100% after 30 seconds of each wave.
@@ -195,30 +197,32 @@ SPEEDCRITICAL=Firerate increased by 10% for each critical hit.(up to 200%).
 SPEEDADJACENT=Basic firerate increased by 50% for each adjacent turret.
 
 //C系
+LATEINTENSIFY=Double all property increased happened after 20 seconds each turn.
 SLOWPOLO=Increase adjacent turrets' slow by 50%.
-SLOWATTACK=Bullet damage increased by 10% for every 0.1 slow.
-SLOWSPEED=Slow increased by 0.1 for each shoot this turn (up to 2).
-RANDOMSLOW=Bullet's slow randomly increased by 0 to 1
+SLOWATTACK=Double slow rate if target's distance is less than 3.
+SLOWSPEED=Slow increased by 0.05 for each shoot this turn (up to 2).
+CRITICALSLOW=Double bullet's slow if it is a critical hit.
 SLOWADJACENT=Slow increased by 0.5 for each adjacent turret.
 
 //D系
 CRITICALPOLO=Increase adjacent turrets' critical by 25%.
 RANDOMCRITICAL=Critical damage randomly increased by -100% to 400%.
-CRITICALSPEED=Critical increased by 5% for each shoot this turn (up to 50%).
+CRITICALSPEED=Critical increased by 2.5% for each shoot this turn (up to 50%).
 LATECRITICAL=Critical increased by 50% after 30 seconds of each wave.
 CRITICALADJACENT=Critical increased by 25% for each adjacent turret.
 
 //E系
-SPLASHPOLO=Increase adjacent turrets' splash by 0.3.
+POLOGETTER=Double all intensify from other turrets.
 NEARSPLASH=Splash damage is increased by 100% when target's distance less than 3.
-SPLASHSPEED=Splash increased by 0.06 for each shoot this turn (up to 1.2).
-LATESPLASH=Splash increased by 1.2 after 30 seconds of each wave.
-RANDOMSPLASH=Bullet's splash randomly increased by 0 to 1.5.
+SPLASHSPEED=Splash increased by 0.05 for each shoot this turn (up to 2).
+LATESPLASH=Splash increased by 0.8 after 30 seconds of each wave.
+RANDOMSPLASH=Bullet's splash randomly increased by 0 to 1.
+
 
 //综合系
 HURTBULLET=Bullet will increase the damage enemy took by 25% for 2 seconds
-RANDOMINTENSIFY=Randomly gain one of the effects every turn: +80% attack; +80% firerate; +40% critical;
-LEVELDISCOUNT=Upgrade cost -50%.
+NEXTINTENSIFY=Damage reduced by 25%, the next composite turret gain additional 50% critical.
+LEVELDISCOUNT=Damage reduced by 25%, Upgrade cost -50%.
 COPYSKILL=Copy another element skill
 MODULELEVELUP=Upgrade your module system
 POLOINTENSIFY=Double the benefit from other turrets.
