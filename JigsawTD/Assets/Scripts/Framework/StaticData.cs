@@ -16,6 +16,7 @@ public class StaticData : Singleton<StaticData>
     public static string TempTurretMask = "TempTurret";
     public static string TurretMask = "Turret";
     public static string TempGroundMask = "TempGround";
+    public static LayerMask EnemyLayerMask = 1 << 11;
     public static LayerMask GetGroundLayer = 1 << 8 | 1 << 12;
     //public static LayerMask RunTimeFindPathLayer = 1 << 8;
     public int PlayerMaxLevel;
@@ -87,6 +88,7 @@ public class StaticData : Singleton<StaticData>
     public Collider2D HalfCircleCol;
     public Collider2D LineCol;
     public RangeIndicator RangeIndicatorPrefab;
+    public JumpDamage JumpDamagePrefab;
 
     private void Start()
     {
@@ -476,5 +478,11 @@ public class StaticData : Singleton<StaticData>
         GridNodeBase node = grid.nodes[q * grid.width + p];
 
         return node.Walkable;
+    }
+
+    public void ShowJumpDamage(Vector2 pos,int amount)
+    {
+        JumpDamage obj = ObjectPool.Instance.Spawn(JumpDamagePrefab) as JumpDamage;
+        obj.Jump(amount, pos);
     }
 }

@@ -51,11 +51,8 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
 
     private void Awake()
     {
-        //rangeParent = transform.Find("TurretRangeCol");
-        //detectCollider = rangeParent.GetComponent<Collider2D>();
         rotTrans = transform.Find("RotPoint");
         shootPoint = rotTrans.Find("ShootPoint");
-        //TurretBaseSprite = transform.Find("TurretBase").GetComponent<SpriteRenderer>();
         CannonSprite = rotTrans.Find("Cannon").GetComponent<SpriteRenderer>();
         turretAnim = this.GetComponent<Animator>();
         audioSource = this.GetComponent<AudioSource>();

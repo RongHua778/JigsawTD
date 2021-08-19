@@ -11,24 +11,23 @@ public enum BulletType
 public abstract class Bullet : ReusableObject, IGameBehavior
 {
     [SerializeField] private ParticalControl sputteringEffect = default;
-    //[SerializeField] protected ParticalControl HitEffect = default;
-    TrailRenderer trailRenderer;
-    protected const int enemyLayerMask = 1 << 11;
     public abstract BulletType BulletType { get; }
     private TargetPoint target;
     public TargetPoint Target { get => target; set => target = value; }
-    Vector2 targetPos;
-    [HideInInspector] public TurretContent turretParent;
+
+    private TurretContent turretParent;
     private List<TurretSkill> turretEffects;
+
+    private Vector2 targetPos;
     protected virtual Vector2 TargetPos
     {
         get => targetPos;
         set => targetPos = value;
     }
 
-    private Vector3 initScale;
-    protected float bulletSpeed;
     protected readonly float minDistanceToDealDamage = .1f;
+
+    private float bulletSpeed;
     private float damage;
     public float Damage { get => damage; set => damage = value; }
     private float sputteringRange;
@@ -46,15 +45,9 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     public float SlowRate { get => slowRate; set => slowRate = value; }
     public ParticalControl SputteringEffect { get => sputteringEffect; set => sputteringEffect = value; }
 
-    //用来判断是否击中护甲，如果击中则子弹被挡掉
-    public bool hit;
-    public bool isCritical;
-    public int SputteredCount;
-    private void Awake()
-    {
-        trailRenderer = this.GetComponent<TrailRenderer>();
-        initScale = transform.localScale;
-    }
+    public bool isCritical;//是否暴击
+    public int SputteredCount;//溅射目标数
+
     public override void OnSpawn()
     {
         base.OnSpawn();
@@ -64,16 +57,12 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
-        transform.localScale = initScale;
         SputteredCount = 0;
         isCritical = false;
-        //hit = false;
     }
 
     public virtual void Initialize(TurretContent turret, TargetPoint target = null, Vector2? pos = null)
     {
-        if (trailRenderer != null)
-            trailRenderer.Clear();
         this.turretParent = turret;
         this.Target = target;
         this.TargetPos = pos ?? target.Position;
@@ -91,40 +80,30 @@ public abstract class Bullet : ReusableObject, IGameBehavior
 
     protected void TriggerShootEffect()
     {
-        if (turretEffects.Count > 0)
+        foreach (TurretSkill effect in turretEffects)
         {
-            foreach (TurretSkill effect in turretEffects)
-            {
-                effect.Shoot(this, (Enemy)Target.Enemy);
-            }
+            effect.Shoot(this, (Enemy)Target.Enemy);
         }
     }
 
-    public void TriggerPreHitEffect()//子弹命中前触发
+    public void TriggerPreHitEffect()//子弹命中前触发,溅射发生前
     {
         isCritical = UnityEngine.Random.value <= CriticalRate;//在命中敌人前判断是否暴击
-        if (turretEffects.Count > 0)
+        foreach (TurretSkill effect in turretEffects)
         {
-            foreach (TurretSkill effect in turretEffects)
-            {
-                effect.PreHit(this);
-            }
+            effect.PreHit(this);
         }
     }
 
-    protected void TriggerHitEffect(Enemy target)
+    protected void TriggerHitEffect(IDamageable target)
     {
-        if (turretEffects.Count > 0)
+        foreach (TurretSkill effect in turretEffects)
         {
-            foreach (TurretSkill effect in turretEffects)
-            {
-                effect.Hit(target, this);
-            }
+            effect.Hit(target, this);
         }
-        if (SlowRate > 0 && !target.IsDie)//技能可能会修改slowrate
+        if (SlowRate > 0 && target.DamageStrategy.IsEnemy)//技能可能会修改slowrate
         {
-            BuffInfo info = new BuffInfo(EnemyBuffName.SlowDown, SlowRate, 2f);
-            target.Buffable.AddBuff(info);
+            target.DamageStrategy.ApplyBuff(EnemyBuffName.SlowDown, SlowRate, 2f);
         }
     }
 
@@ -137,9 +116,6 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         }
         RotateBullet(TargetPos);
         return MoveTowards(TargetPos);
-        //}
-        //return false;
-
     }
 
     protected void RotateBullet(Vector2 pos)
@@ -157,7 +133,6 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         if ((distanceToTarget < minDistanceToDealDamage))
         {
             TriggerDamage();
-            ReclaimBullet();
             return false;
         }
         return true;
@@ -176,21 +151,30 @@ public abstract class Bullet : ReusableObject, IGameBehavior
 
     public virtual void TriggerDamage()
     {
-
+        ReclaimBullet();
     }
-    public void DealRealDamage(IDamageable damageable, bool isSputtering = false)
+    public void DealRealDamage(IDamageable target, bool isSputtering = false)
     {
         float finalDamage = isCritical ? Damage * CriticalPercentage : Damage;
         if (isSputtering)
             finalDamage *= SputteringPercentage;
         float realDamage;
-        damageable.ApplyDamage(finalDamage, out realDamage, isCritical);
-        turretParent.Strategy.DamageAnalysis += (int)realDamage;
+        target.DamageStrategy.ApplyDamage(finalDamage, out realDamage, isCritical);
+        turretParent.Strategy.DamageAnalysis += (int)realDamage;//防御塔伤害统计
+
+        GameEndUI.TotalDamage += (int)realDamage;//总伤害统计
+        if (isCritical)//暴击跳字
+        {
+            JumpDamage obj = ObjectPool.Instance.Spawn(StaticData.Instance.JumpDamagePrefab) as JumpDamage;
+            obj.Jump((int)realDamage, transform.position);
+        }
     }
 
-    public void EnemyDamageProcess(IDamageable target, bool isSputtering = false)
+    public void DamageProcess(IDamageable target, bool isSputtering = false)
     {
-        TriggerHitEffect((Enemy)target);
+        TriggerHitEffect(target);
         DealRealDamage(target, isSputtering);
     }
+
+
 }

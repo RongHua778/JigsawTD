@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Blue_Restorer : Enemy
+public class Green_Restorer : Enemy
 {
     public override EnemyType EnemyType => EnemyType.Restorer;
 
@@ -12,7 +12,7 @@ public class Blue_Restorer : Enemy
         damagedCounter += Time.deltaTime;
         if (damagedCounter > 1f)
         {
-            CurrentHealth += MaxHealth * 0.05f * Time.deltaTime;
+            DamageStrategy.CurrentHealth += DamageStrategy.MaxHealth * 0.05f * Time.deltaTime;
         }
         return base.GameUpdate();
     }

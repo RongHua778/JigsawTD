@@ -9,17 +9,17 @@ public class Ninja : Enemy
     public override EnemyType EnemyType => EnemyType.Ninja;
 
     float size;
-    public override float CurrentHealth 
-    { 
-        get => base.CurrentHealth; 
-        set
-        {
-            base.CurrentHealth = value;
+    //public override float CurrentHealth 
+    //{ 
+    //    get => base.CurrentHealth; 
+    //    set
+    //    {
+    //        base.CurrentHealth = value;
 
-            size = 0.8f + CurrentHealth / MaxHealth;
-            model.transform.localScale = new Vector3(size,size,1);
-        }
-    }
+    //        size = 0.8f + CurrentHealth / MaxHealth;
+    //        model.transform.localScale = new Vector3(size,size,1);
+    //    }
+    //}
 
     public override bool GameUpdate()
     {

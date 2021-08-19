@@ -20,17 +20,17 @@ public class Blinker : Enemy
 
     protected override void OnEnemyUpdate()
     {
-        if (CurrentHealth / MaxHealth < 0.75f && blink >= 3)
+        if (DamageStrategy.CurrentHealth / DamageStrategy.MaxHealth < 0.75f && blink >= 3)
         {
             BlinkAfterAnim();
 
         }
-        else if (CurrentHealth / MaxHealth < 0.5f && blink >= 2)
+        else if (DamageStrategy.CurrentHealth / DamageStrategy.MaxHealth < 0.5f && blink >= 2)
         {
             BlinkAfterAnim();
 
         }
-        else if (CurrentHealth / MaxHealth < 0.25f && blink >= 1)
+        else if (DamageStrategy.CurrentHealth / DamageStrategy.MaxHealth < 0.25f && blink >= 1)
         {
             BlinkAfterAnim();
 

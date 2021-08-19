@@ -55,7 +55,7 @@ public abstract class TurretSkill
 
     }
 
-    public virtual void Hit(Enemy target, Bullet bullet = null)
+    public virtual void Hit(IDamageable target, Bullet bullet = null)
     {
 
     }
@@ -104,19 +104,15 @@ public class I1SkillSpeedIncreasePerShoot : InitialSkill
 {
     public override TurretSkillName EffectName => TurretSkillName.I1SkillSpeedIncreasedPerShoot;
     public override string SkillDescription => "I1SKILL";
-    //public override void Shoot(Bullet bullet = null, Enemy target = null)
-    //{
-    //    if (strategy.TurnFixSpeed > 9.95f)
-    //        return;
-    //    strategy.TurnFixSpeed += 0.1f * strategy.TimeModify;
-    //}
-
-    public override void Hit(Enemy target, Bullet bullet = null)
+    public override void Hit(IDamageable target, Bullet bullet = null)
     {
-        strategy.RotSpeed = 0;
-        float increaseSlow = target.SlowRate * 2f;
-        BuffInfo info = new BuffInfo(EnemyBuffName.SlowDown, increaseSlow, 2f);
-        target.Buffable.AddBuff(info);
+        if (target.DamageStrategy.IsEnemy)
+        {
+            strategy.RotSpeed = 0;
+            float increaseSlow = ((Enemy)target).SlowRate * 2f;
+            BuffInfo info = new BuffInfo(EnemyBuffName.SlowDown, increaseSlow, 2f);
+            ((Enemy)target).Buffable.AddBuff(info);
+        }
     }
 }
 public class J1SkillDistanceBaseDamage : InitialSkill
@@ -124,13 +120,6 @@ public class J1SkillDistanceBaseDamage : InitialSkill
     public override TurretSkillName EffectName => TurretSkillName.J1SkillDistanceBaseDamage;
     public override string SkillDescription => "J1SKILL";
 
-    //float increaseRate = 0.3f;
-
-
-    //public override void PreHit(Bullet bullet = null)
-    //{
-    //    bullet.Damage *= 1 + (increaseRate * bullet.GetTargetDistance());
-    //}
     private float attackIncreased;
 
     public override void Build()
@@ -139,10 +128,6 @@ public class J1SkillDistanceBaseDamage : InitialSkill
         strategy.ForbidRange += 2;
     }
 
-    //public override void Composite()
-    //{
-    //    strategy.m_Turret.GenerateRange();
-    //}
 
     public override void Detect()
     {
@@ -199,10 +184,9 @@ public class SlowBullet : InitialSkill
     public override TurretSkillName EffectName => TurretSkillName.S002SlowBullet;
 
     private float duration = 2f;
-    public override void Hit(Enemy target, Bullet bullet = null)
+    public override void Hit(IDamageable target, Bullet bullet = null)
     {
-        BuffInfo info = new BuffInfo(EnemyBuffName.SlowDown, KeyValue, duration);
-        target.Buffable.AddBuff(info);
+        target.DamageStrategy.ApplyBuff(EnemyBuffName.SlowDown, KeyValue, duration);
     }
 
 }
@@ -244,11 +228,11 @@ public class CurrentHealthBaseDmage : InitialSkill
 {
     public override TurretSkillName EffectName => TurretSkillName.S009CurrentHealthBaseDamage;
 
-    public override void Hit(Enemy target, Bullet bullet = null)
+    public override void Hit(IDamageable target, Bullet bullet = null)
     {
         float realDamage;
-        float extraDamage = target.CurrentHealth * (target.IsBoss ? 0.01f : 0.04f);
-        target.ApplyDamage(extraDamage, out realDamage);
+        float extraDamage = target.DamageStrategy.CurrentHealth * 0.04f;
+        target.DamageStrategy.ApplyDamage(extraDamage, out realDamage, false);
         strategy.DamageAnalysis += (int)realDamage;
     }
 }
@@ -258,13 +242,6 @@ public class M1SkillDoubleSlowRate : InitialSkill
     public override TurretSkillName EffectName => TurretSkillName.M1SkillDoubleSlowRate;
 
     public override string SkillDescription => "M1SKILL";
-    //public override void Hit(Enemy target, Bullet bullet = null)
-    //{
-    //    strategy.RotSpeed = 0;
-    //    float increaseSlow = target.SlowRate * 2f;
-    //    BuffInfo info = new BuffInfo(EnemyBuffName.SlowDown, increaseSlow, 2f);
-    //    target.Buffable.AddBuff(info);
-    //}
 
     public override void PreHit(Bullet bullet = null)
     {

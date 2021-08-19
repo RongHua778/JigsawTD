@@ -189,24 +189,7 @@ public class BreakShell : TileBuff
     }
 }
 
-public class HealthBaseDamage : TileBuff
-{
-    public override EnemyBuffName BuffName => EnemyBuffName.HealthBaseDamage;
 
-    public override bool IsStackable => false;
-
-    public override bool IsTimeBase => false;
-
-    public override void Affect()
-    {
-        float damage = KeyValue * (Target.MaxHealth - Target.CurrentHealth);
-    }
-
-    public override void End()
-    {
-
-    }
-}
 
 public class DamageTarget : TileBuff
 {
@@ -220,7 +203,7 @@ public class DamageTarget : TileBuff
     public override void Affect()
     {
         float damageReturn;
-        Target.ApplyDamage(Target.TargetDamageCounter * KeyValue, out damageReturn, true);
+        Target.ApplyDamage(Target.TargetDamageCounter * KeyValue, out damageReturn);
         ((TrapContent)(Target.CurrentTrap)).DamageAnalysis += (int)damageReturn;
         Target.TargetDamageCounter = 0;
 

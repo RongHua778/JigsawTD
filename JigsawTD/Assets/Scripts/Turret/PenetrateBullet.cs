@@ -27,7 +27,7 @@ public class PenetrateBullet : Bullet
             SputteredCount = 0;
             TriggerPreHitEffect();
             IDamageable enemy = collision.GetComponent<TargetPoint>().Enemy;
-            EnemyDamageProcess(enemy);
+            DamageProcess(enemy);
 
             ParticalControl effect = ObjectPool.Instance.Spawn(SputteringEffect) as ParticalControl;
             effect.transform.position = transform.position;
@@ -53,6 +53,7 @@ public class PenetrateBullet : Bullet
         //        EnemyDamageProcess(target.Enemy, true);
         //    }
         //}
+        base.TriggerDamage();
 
     }
 }

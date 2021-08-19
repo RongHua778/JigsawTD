@@ -179,10 +179,13 @@ public class PortalHit : ElementSkill
     public override List<int> Elements => new List<int> { 2, 3, 4 };
     public override string SkillDescription => "PORTALHIT";
 
-    public override void Hit(Enemy target, Bullet bullet = null)
+    public override void Hit(IDamageable target, Bullet bullet = null)
     {
-        if (Random.value > 0.95f)
-            target.Flash(3);
+        if (target.DamageStrategy.IsEnemy) 
+        {
+            if (Random.value > 0.95f)
+                ((Enemy)target).Flash(3);
+        }
     }
 
 }

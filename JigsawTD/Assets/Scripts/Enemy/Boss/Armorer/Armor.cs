@@ -5,30 +5,10 @@ using UnityEngine;
 public class Armor : MonoBehaviour,IDamageable
 {
 
-    [SerializeField] ParticalControl explosionPrefab = default;
-    [SerializeField] JumpDamage jumpDamagePrefab = default;
-    protected AudioClip explosionClip;
-    public bool IsEnemy { get => false; }
-
-    private bool isDie;
-    public bool IsDie { get => isDie; set => isDie = value; }
-    float maxHealth;
-    float currentHealth;
-    public float CurrentHealth 
-    { get => currentHealth;
-        set 
-        {
-            currentHealth = value;
-            if (currentHealth <= 0)
-            {
-                ReusableObject explosion = ObjectPool.Instance.Spawn(explosionPrefab);
-                Sound.Instance.PlayEffect(explosionClip);
-                explosion.transform.position = transform.position;
-                DisArmor();
-            }
-        } 
-    }
-    public float MaxHealth { get => maxHealth; set => maxHealth = value; }
+    public ParticalControl explosionPrefab = default;
+    public AudioClip explosionClip;
+    public DamageStrategy DamageStrategy { get; set; }
+    public bool IsDie { get; set; }
 
 
     private void Awake()
@@ -38,7 +18,7 @@ public class Armor : MonoBehaviour,IDamageable
     }
 
 
-    protected virtual void DisArmor()
+    public virtual void DisArmor()
     {
         transform.localScale = Vector3.zero;
 
@@ -47,14 +27,14 @@ public class Armor : MonoBehaviour,IDamageable
     public virtual void ReArmor()
     {
         transform.localScale = Vector3.one;
-        CurrentHealth = MaxHealth;
-
+        //CurrentHealth = MaxHealth;//*********
+        DamageStrategy.CurrentHealth = DamageStrategy.MaxHealth;
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         Bullet bullet = collision.GetComponent<Bullet>();
-        if (bullet!=null)
+        if (bullet != null)
         {
             bullet.TriggerPreHitEffect();
             bullet.DealRealDamage(this);
@@ -65,20 +45,6 @@ public class Armor : MonoBehaviour,IDamageable
             effect.transform.position = transform.position;
             effect.transform.localScale = Vector3.one * 0.3f;
             effect.PlayEffect();
-        }
-
-    }
-
-    public void ApplyDamage(float amount, out float realDamage, bool isCritical = false)
-    {
-        realDamage = amount;
-        CurrentHealth -= realDamage;
-        GameEndUI.TotalDamage += (int)realDamage;
-
-        if (isCritical)
-        {
-            JumpDamage obj = ObjectPool.Instance.Spawn(jumpDamagePrefab) as JumpDamage;
-            obj.Jump((int)realDamage, transform.position);
         }
 
     }

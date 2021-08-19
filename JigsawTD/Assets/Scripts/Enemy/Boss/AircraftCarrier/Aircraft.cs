@@ -10,7 +10,7 @@ public enum Destination
 public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
 {
     [SerializeField] ParticalControl explosionPrefab = default;
-    [SerializeField] JumpDamage jumpDamagePrefab = default;
+    public DamageStrategy DamageStrategy { get; set; }
 
     public AircraftCarrier boss;
     public TurretContent targetTurret;
@@ -36,7 +36,8 @@ public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
 
     protected AudioClip explosionClip;
     public bool IsEnemy { get => false; }
-
+    float damageIntensify;
+    public float DamageIntensify { get => damageIntensify; set => damageIntensify = value; }
     float maxHealth = 10;
     public float MaxHealth { get => maxHealth; set => maxHealth = value; }
     float currentHealth;
@@ -95,8 +96,7 @@ public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
 
         if (isCritical)
         {
-            JumpDamage obj = ObjectPool.Instance.Spawn(jumpDamagePrefab) as JumpDamage;
-            obj.Jump((int)realDamage, transform.position);
+            StaticData.Instance.ShowJumpDamage(transform.position, (int)realDamage);
         }
 
     }
@@ -215,5 +215,15 @@ public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
         boss.aircraftQueue.Remove(this);
         boss.SetQueue();
         ObjectPool.Instance.UnSpawn(this);
+    }
+
+    public void ApplyBuff(EnemyBuffName buffName, float keyValue, float duration)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void ApplyDamage(float amount, out float realDamag)
+    {
+        throw new System.NotImplementedException();
     }
 }

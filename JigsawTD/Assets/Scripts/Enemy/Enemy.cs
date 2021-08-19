@@ -8,8 +8,11 @@ public abstract class Enemy : PathFollower, IDamageable
     [Header("»ù±¾ÅäÖÃ")]
     public bool IsBoss = false;
     protected HealthBar healthBar;
+    public HealthBar HealthBar { get => healthBar; }
     protected SpriteRenderer enemySprite;
     protected CircleCollider2D enemyCol;
+
+    public DamageStrategy DamageStrategy { get; set; }
 
     //×´Ì¬ÅäÖÃ
     public float Intensify;
@@ -28,7 +31,7 @@ public abstract class Enemy : PathFollower, IDamageable
     private TrapContent currentTrap;
     public TrapContent CurrentTrap { get => currentTrap; set => currentTrap = value; }
 
-    private List<TrapContent> passedTraps=new List<TrapContent>();
+    private List<TrapContent> passedTraps = new List<TrapContent>();
     public List<TrapContent> PassedTraps { get => passedTraps; set => passedTraps = value; }
 
     private List<Skill> skills;
@@ -90,38 +93,38 @@ public abstract class Enemy : PathFollower, IDamageable
         }
     }
 
-    private float maxHealth;
-    public float MaxHealth
-    {
-        get => maxHealth;
-        set
-        {
-            maxHealth = value;
-            CurrentHealth = maxHealth;
-        }
-    }
-    protected float currentHealth;
-    public virtual float CurrentHealth
-    {
-        get => currentHealth;
-        set
-        {
-            currentHealth = Mathf.Clamp(value, 0, MaxHealth);
-            if (currentHealth <= 0 && maxHealth > 0)
-            {
-                IsDie = true;
-            }
-            healthBar.FillAmount = currentHealth / MaxHealth;
-        }
-    }
+    //private float maxHealth;
+    //public float MaxHealth
+    //{
+    //    get => maxHealth;
+    //    set
+    //    {
+    //        maxHealth = value;
+    //        CurrentHealth = maxHealth;
+    //    }
+    //}
+    //protected float currentHealth;
+    //public virtual float CurrentHealth
+    //{
+    //    get => currentHealth;
+    //    set
+    //    {
+    //        currentHealth = Mathf.Clamp(value, 0, MaxHealth);
+    //        if (currentHealth <= 0 && maxHealth > 0)
+    //        {
+    //            IsDie = true;
+    //        }
+    //        healthBar.FillAmount = currentHealth / MaxHealth;
+    //    }
+    //}
 
 
-    float trapIntentify=1f;
+    float trapIntentify = 1f;
     public float TrapIntentify { get => trapIntentify; set => trapIntentify = value; }
-
 
     public virtual void Awake()
     {
+        DamageStrategy = new EnemyDamageStrategy(this.gameObject, this);
         enemySprite = transform.Find("Model").Find("GFX").GetComponent<SpriteRenderer>();
         enemyCol = enemySprite.GetComponent<CircleCollider2D>();
         Anim = GetComponent<Animator>();
@@ -137,13 +140,7 @@ public abstract class Enemy : PathFollower, IDamageable
 
     public override bool GameUpdate()
     {
-        //if (EnemySkills != null)
-        //{
-            //foreach (Skill enemySkill in EnemySkills)
-            //{
-            //    enemySkill.OnGameUpdating();
-            //}
-        //}
+
         if (PassedTraps != null)
         {
             foreach (TrapContent trap in PassedTraps)
@@ -154,13 +151,6 @@ public abstract class Enemy : PathFollower, IDamageable
         OnEnemyUpdate();
         if (IsDie)
         {
-            //if (EnemyTraps != null)
-            //{
-            //    foreach (EnemyTrap enemySkill in EnemyTraps)
-            //    {
-            //        enemySkill.OnDying();
-            //    }
-            //}
             OnDie();
             StopAllCoroutines();
             ReusableObject explosion = ObjectPool.Instance.Spawn(exlposionPrefab);
@@ -177,11 +167,6 @@ public abstract class Enemy : PathFollower, IDamageable
                 ProgressFactor = Speed * Adjust;
         }
         Progress += Time.deltaTime * ProgressFactor;
-
-        //if (!trapTriggered && Progress >= 0.5f)
-        //{
-        //    //TriigerTrap();
-        //}
 
         while (Progress >= 1f)
         {
@@ -219,8 +204,8 @@ public abstract class Enemy : PathFollower, IDamageable
     public void TriigerTrap()
     {
         if (CurrentTrap != null)
-                CurrentTrap.OnContentPass(this);
-            CurrentTrap = null;
+            CurrentTrap.OnContentPass(this);
+        CurrentTrap = null;
         trapTriggered = true;
     }
 
@@ -244,7 +229,7 @@ public abstract class Enemy : PathFollower, IDamageable
         this.healthBar.followTrans = model;
         this.Intensify = intensify;
         Buffable = this.GetComponent<BuffableEntity>();
-        MaxHealth = Mathf.RoundToInt(attribute.Health * intensify);
+        DamageStrategy.MaxHealth = Mathf.RoundToInt(attribute.Health * intensify);
         Speed = attribute.Speed;
         DamageIntensify = attribute.Shell;
         ReachDamage = attribute.ReachDamage;
@@ -257,7 +242,7 @@ public abstract class Enemy : PathFollower, IDamageable
         }
         PassedTraps = new List<TrapContent>();
     }
-   
+
     protected override void PrepareIntro()
     {
         base.PrepareIntro();
@@ -268,13 +253,12 @@ public abstract class Enemy : PathFollower, IDamageable
     public virtual void ApplyDamage(float amount, out float realDamage, bool isCritical = false)
     {
         realDamage = amount * (1 + DamageIntensify);
-        CurrentHealth -= realDamage;
+        DamageStrategy.CurrentHealth -= realDamage;
         TargetDamageCounter += realDamage;
         GameEndUI.TotalDamage += (int)realDamage;
-
         if (isCritical)
         {
-            healthBar.ShowJumpDamage((int)realDamage);
+            StaticData.Instance.ShowJumpDamage(transform.position, (int)realDamage);
         }
     }
 
@@ -301,6 +285,11 @@ public abstract class Enemy : PathFollower, IDamageable
         Progress = 0.5f;
     }
 
+    public void ApplyBuff(EnemyBuffName buffName, float keyvalue, float duration)
+    {
+        BuffInfo info = new BuffInfo(EnemyBuffName.SlowDown, keyvalue, duration);
+        Buffable.AddBuff(info);
+    }
 
     public override void OnSpawn()
     {

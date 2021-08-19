@@ -6,7 +6,7 @@ using DG.Tweening;
 public class RotatingArmor : Armor
 {
 
-    protected override void DisArmor()
+    public override void DisArmor()
     {
         base.DisArmor();
         //Invoke("ReArmor", boss.ArmorCoolDown);

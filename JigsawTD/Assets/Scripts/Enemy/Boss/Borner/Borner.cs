@@ -41,7 +41,7 @@ public class Borner : Enemy
 
     private void Castle()
     {
-        if (CurrentHealth / MaxHealth <= 0.7f && form == 0)
+        if (DamageStrategy.CurrentHealth / DamageStrategy.MaxHealth <= 0.7f && form == 0)
         {
             DamageIntensify = -0.7f;
             level = 1;
@@ -51,7 +51,7 @@ public class Borner : Enemy
             Anim.SetBool("Transform", true);
             Sound.Instance.PlayEffect("Sound_BornerTransform");
         }
-        if (CurrentHealth / MaxHealth <= 0.3f && form == 1)
+        if (DamageStrategy.CurrentHealth / DamageStrategy.MaxHealth <= 0.3f && form == 1)
         {
             DamageIntensify = -0.7f;
             level = 2;
