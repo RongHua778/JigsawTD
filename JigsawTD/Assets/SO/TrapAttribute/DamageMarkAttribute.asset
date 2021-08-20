@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a06a8e352dd064bab9b6bf5b84988e, type: 3}
   m_Name: DamageMarkAttribute
   m_EditorClassIdentifier: 
-  Name: DAMAGEMARKTRAP
-  Icon: {fileID: 21300000, guid: 59b5237702cfb5541b911ee81f4c3d53, type: 3}
-  Description: DAMAGEMARKTRAPINFO
-  ContentPrefab: {fileID: 5075806810127487672, guid: 8795191846b04144cbb6ec2ad3f22974, type: 3}
-  BuffInfos: []
+  Name: DAMAGEMARK
+  Icon: {fileID: 5171557775822150397, guid: 7cdac59c1a58c4049b2d1ad53616d6b1, type: 3}
+  Description: DAMAGEMARKINFO
+  ContentPrefab: {fileID: 2869067965855928848, guid: ff388b9dcb814cf4ba73a8702ab78c3d, type: 3}

@@ -17,14 +17,7 @@ public abstract class GameTile : TileBase
     public SpriteRenderer PreviewRenderer { get; set; }
     public Vector3 ExitPoint { get; set; }
 
-
-
-    //Direction pathDirection;
-    //public Direction PathDirection { get => pathDirection; set => pathDirection = value; }
-
-    //GameTile nextOnPath;
-    //public GameTile NextTileOnPath { get => nextOnPath; set => nextOnPath = value; }
-
+    //tileµÄ³¯Ïò
     Direction tileDirection;
     public Direction TileDirection { get => tileDirection; set => tileDirection = value; }
 

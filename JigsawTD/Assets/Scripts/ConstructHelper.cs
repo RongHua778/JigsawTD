@@ -61,6 +61,21 @@ public static class ConstructHelper
         return tile;
     }
 
+    public static GameTile GetSpawnPoint()
+    {
+        GameTile tile = m_TileFactory.GetBasicTile();
+        GameTileContent content = m_ContentFactory.GetSpawnPoint();
+        tile.SetContent(content);
+        return tile;
+    }
+
+    public static GameTile GetDestinationPoint()
+    {
+        GameTile tile = m_TileFactory.GetBasicTile();
+        GameTileContent content = m_ContentFactory.GetDestinationPoint();
+        tile.SetContent(content);
+        return tile;
+    }
     //»ù×ù
     public static GameTile GetRandomTurretBase()
     {

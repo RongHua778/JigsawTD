@@ -17,7 +17,7 @@ MonoBehaviour:
   InitCount: 2
   CountIncrease: 3
   Health: 12
-  Speed: 1
+  Speed: 0.5
   Shell: 0
   CoolDown: 1
   Prefab: {fileID: 2303344070539863949, guid: b8d466535f2566a4cb8cf786b9a7d19f, type: 3}

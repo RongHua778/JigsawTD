@@ -15,8 +15,4 @@ MonoBehaviour:
   Name: STUNTRAP
   Icon: {fileID: 1123063040376734126, guid: 7cdac59c1a58c4049b2d1ad53616d6b1, type: 3}
   Description: STUNTRAPINFO
-  ContentPrefab: {fileID: -1443366368468062987, guid: c62c48ec4f6ca9d4bbc81ab93eb771d7, type: 3}
-  BuffInfos:
-  - EnemyBuffName: 6
-    KeyValue: 1.5
-    Duration: 0
+  ContentPrefab: {fileID: 1967630184950370932, guid: c62c48ec4f6ca9d4bbc81ab93eb771d7, type: 3}

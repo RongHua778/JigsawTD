@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class PromoteTrap : TrapContent
 {
-    public override void OnLeaveOnce(Enemy enemy)
+    public override void OnContentPass(Enemy enemy)
     {
+        base.OnContentPass(enemy);
         enemy.TrapIntentify += 1f;
     }
-
-    public override void OnLeaveManyTimes(Enemy enemy)
-    {
-        enemy.TrapIntentify+=1f;
-    }
-
 
 }

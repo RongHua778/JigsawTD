@@ -15,8 +15,4 @@ MonoBehaviour:
   Name: ARROWTRAP
   Icon: {fileID: -3739705916145077919, guid: 7cdac59c1a58c4049b2d1ad53616d6b1, type: 3}
   Description: ARROWTRAPINFO
-  ContentPrefab: {fileID: 6968047598390281921, guid: ee774973d577ef84aab35c8203d62838, type: 3}
-  BuffInfos:
-  - EnemyBuffName: 3
-    KeyValue: 0.8
-    Duration: 0
+  ContentPrefab: {fileID: 3452595739242333879, guid: ee774973d577ef84aab35c8203d62838, type: 3}

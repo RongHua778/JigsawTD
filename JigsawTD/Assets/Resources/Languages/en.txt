@@ -182,8 +182,8 @@ M1SKILL=Doubles the enemy's current slow rate.
 
 //A系
 DOUBLEATTACK=Double all attack increased.
-ATTACKSPEED=Attack Effect:Each shoot increases attack by 5% this turn (up to 200%).
-LATEATTACK=Attack increased by 100% after 30 seconds of each wave.
+ATTACKSPEED=Attack Effect:Each shoot increases attack by 5% this turn.
+LATEATTACK=Attack increased by 2% every second after each wave start.
 RANDOMATTACK=Bullet damage is randomly ranged from 50% to 200%.
 ATTACKADJACENT=Basic attack increased by 50% for each adjacent turret.
 ATTACKPOLO=Increase acjacent turrets' basic attack by 50%.
@@ -192,30 +192,30 @@ ATTACKPOLO=Increase acjacent turrets' basic attack by 50%.
 MULTITARGET=Attacks 2 additional targets.
 SPEEDPOLO=Increase adjacent turrets' basic firerate by 50%.
 SPEEDTARGET=Firerate increased by 10% each shoot while attacking the same target (up to 300%).
-LATESPEED=Firerate increased by 100% after 30 seconds of each wave.
-SPEEDCRITICAL=Firerate increased by 10% for each critical hit.(up to 200%).
+LATESPEED=Firerate increased by 2% every second after each wave start.
+SPEEDCRITICAL=Firerate increased by 60% for 2s if a critical hit happened.
 SPEEDADJACENT=Basic firerate increased by 50% for each adjacent turret.
 
 //C系
 LATEINTENSIFY=Double all property increased happened after 20 seconds each turn.
 SLOWPOLO=Increase adjacent turrets' slow by 50%.
 SLOWATTACK=Double slow rate if target's distance is less than 3.
-SLOWSPEED=Slow increased by 0.05 for each shoot this turn (up to 2).
+SLOWSPEED=Bullet deal additional damage equals to 2% of target's current health.
 CRITICALSLOW=Double bullet's slow if it is a critical hit.
 SLOWADJACENT=Slow increased by 0.5 for each adjacent turret.
 
 //D系
 CRITICALPOLO=Increase adjacent turrets' critical by 25%.
 RANDOMCRITICAL=Critical damage randomly increased by -100% to 400%.
-CRITICALSPEED=Critical increased by 2.5% for each shoot this turn (up to 50%).
-LATECRITICAL=Critical increased by 50% after 30 seconds of each wave.
+CRITICALSPEED=Critical increased by 2.5% for each shoot this turn.
+LATECRITICAL=Critical increased by 1% every second after each wave start.
 CRITICALADJACENT=Critical increased by 25% for each adjacent turret.
 
 //E系
 POLOGETTER=Double all intensify from other turrets.
 NEARSPLASH=Splash damage is increased by 100% when target's distance less than 3.
-SPLASHSPEED=Splash increased by 0.05 for each shoot this turn (up to 2).
-LATESPLASH=Splash increased by 0.8 after 30 seconds of each wave.
+SPLASHSPEED=Splash increased by 0.02 for each shoot this turn.
+LATESPLASH=Splash increased by 0.01 every second after each wave start.
 RANDOMSPLASH=Bullet's splash randomly increased by 0 to 1.
 
 
@@ -307,6 +307,9 @@ BLINKERINFO=Flashes forward a certain distance while it takes a certain amount o
 BORNERINFO=Summon a large amount of enemies every once in a while.
 
 //Trap
+UNREVEAL=Unreveal Trap
+UNREVEALINFO=Reveal this trap by connect this tile into your path
+
 STUNTRAP=Stun Trap
 ARROWTRAP=Slow Arrow
 DAMAGETRAP=Damage Marker
@@ -319,10 +322,10 @@ STUNTRAP2=Stun Trap(new)
 DAMAGEARROW=Damage Arrow Marker
 EXECUTETRAP=Execute trap
 AIMMARKTRAP=Aim marker
-DAMAGEMARKTRAP=Damage marker(new)
+DAMAGEMARK=Damage Marker
 
-STUNTRAPINFO=Enemies passing through this tile will be stunned for 1.5 seconds.
-ARROWTRAPINFO=Enemies passing through this tile with the same direction of the arrow will be slowed down until they turn.
+STUNTRAPINFO=Enemies passing by are stunned for 0.5 * N seconds, N = number of traps the enemy passed before.
+ARROWTRAPINFO=Enemies passing through this tile with the same direction of the arrow will be slowed down for 5s.
 DAMAGETRAPINFO=Each time an enemy passes this tile, deals damge equal to 20% of the damage taken during last period.
 SPAWNPOINTINFO=Enemy borns here, make sure there is a route to the end point.
 DESTINATIONINFO=Enemy's destination, make sure there is a route to the start point.
@@ -332,8 +335,8 @@ IMITATETRAPINFO=The effect of this trap is the same as the last trap passed by t
 STUNTRAP2INFO=Enemies passing by are stunned for 0.5 * N seconds, N = number of traps the enemy passed before.
 DAMAGEARROWINFO=Within 4 grids of the direction indicated by the arrow, the damage taken by the enemy increased by 50%.
 EXECUTETRAPINFO= Causes (N * 1)% of the enemy's lost HP damage ,N = number of grids the enemy passed before.
-AIMMARKTRAPINFO=After passing this trap, the damage taken by enemies increases 5% more for each grid they pass.
-DAMAGEMARKTRAPINFO=Enemies passing by will be marked and receive 50% of the damage taken during the period after 5 seconds.
+AIMMARKTRAPINFO=After passing this trap, the damage taken by enemies increases 10%.
+DAMAGEMARKINFO=Enemies passing by will be marked and take 50% additional damage within 5 seconds.
 
 //TurretBase
 ATTACKBASE=Attack Base

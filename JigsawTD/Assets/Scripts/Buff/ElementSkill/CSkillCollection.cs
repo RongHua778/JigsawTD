@@ -68,20 +68,13 @@ public class SlowAttack : ElementSkill
 
 public class SlowSpeed : ElementSkill
 {
-    //攻击特效：每次攻击提升0.05减速，上限为2
+    //攻击造成目标2%当前生命值的伤害
     public override List<int> Elements => new List<int> { 2, 2, 1 };
     public override string SkillDescription => "SLOWSPEED";
-    private float slowIncreased = 0;
-    public override void Shoot(Bullet bullet = null, Enemy target = null)
+    public override void Hit(IDamageable target, Bullet bullet = null)
     {
-        if (slowIncreased > 1.99f)
-            return;
-        strategy.TurnFixSlowRate += 0.05f * strategy.TimeModify;
-        slowIncreased += 0.05f * strategy.TimeModify;
-    }
-    public override void EndTurn()
-    {
-        slowIncreased = 0;
+        float damageIncreased = target.DamageStrategy.CurrentHealth * 0.02f;
+        bullet.Damage += damageIncreased;
     }
 }
 

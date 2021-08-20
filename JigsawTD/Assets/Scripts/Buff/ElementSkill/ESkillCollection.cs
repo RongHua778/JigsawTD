@@ -33,39 +33,33 @@ public class NearSplash : ElementSkill
 
 public class SplashSpeed : ElementSkill
 {
-    //每回合每次攻击提升0.03溅射，上限1.2
+    //每回合每次攻击提升0.02溅射
     public override List<int> Elements => new List<int> { 4, 4, 1 };
     public override string SkillDescription => "SPLASHSPEED";
 
-    private float splashIncreased = 0;
     public override void Shoot(Bullet bullet = null, Enemy target = null)
     {
-        if (splashIncreased > 1.19f)
-            return;
-        splashIncreased += 0.03f*strategy.TimeModify;
-        strategy.TurnFixCriticalPercentage += 0.03f * strategy.TimeModify;
+        strategy.TurnFixSputteringRange += 0.02f * strategy.TimeModify;
     }
 
-    public override void EndTurn()
-    {
-        splashIncreased = 0;
-    }
+
 }
 
 public class LateSplash : ElementSkill
 {
-    //开局30秒后溅射提高1
+    //每回合开始后，溅射范围每秒提升0.01
     public override List<int> Elements => new List<int> { 4, 4, 2 };
     public override string SkillDescription => "LATESPLASH";
 
     public override void StartTurn()
     {
-        Duration += 30;
+        Duration += 999;
     }
 
-    public override void TickEnd()
+    public override void Tick(float delta)
     {
-        strategy.TurnFixSputteringRange += 0.8f * strategy.TimeModify;
+        base.Tick(delta);
+        strategy.TurnFixSputteringRange += 0.01f * delta * strategy.TimeModify;
     }
 
     public override void EndTurn()

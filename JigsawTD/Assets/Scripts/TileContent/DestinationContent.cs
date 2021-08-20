@@ -5,7 +5,10 @@ using UnityEngine;
 public class DestinationContent : TrapContent
 {
     public override GameTileContentType ContentType => GameTileContentType.Destination;
-
+    protected override void Awake()
+    {
+        IsReveal = true;
+    }
 
 
 }

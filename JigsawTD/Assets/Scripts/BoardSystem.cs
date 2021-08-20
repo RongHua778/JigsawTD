@@ -32,8 +32,6 @@ public class BoardSystem : IGameSystem
     private float moveDis;
     private Vector3 startPos;
 
-    public static string selectedTrap;
-    public static bool relocatable;
 
     private static TileBase selectingTile;
     public static TileBase SelectingTile
@@ -186,12 +184,12 @@ public class BoardSystem : IGameSystem
                     continue;
                 if (pos.x == -1 && pos.y == 0)//SpawnPoint
                 {
-                    tile = ConstructHelper.GetNormalTile(GameTileContentType.SpawnPoint);
+                    tile = ConstructHelper.GetSpawnPoint();
                     SpawnPoint = tile;
                 }
                 else if (pos.x == 1 && pos.y == 0)//Destination
                 {
-                    tile = ConstructHelper.GetNormalTile(GameTileContentType.Destination);
+                    tile = ConstructHelper.GetDestinationPoint();
                     DestinationPoint = tile;
                 }
                 else//空格子
@@ -363,6 +361,20 @@ public class BoardSystem : IGameSystem
         GameManager.Instance.HideTips();
     }
 
+
+    public void CheckPathTrap()//检查是否有陷阱加入到路线中
+    {
+        foreach (var pathPoint in shortestPoints)
+        {
+            Collider2D col = StaticData.RaycastCollider(pathPoint.PathPos, LayerMask.GetMask(StaticData.TrapMask));
+            if (col != null)
+            {
+                TrapContent trap = col.GetComponent<TrapContent>();
+                trap.RevealTrap();
+            }
+        }
+    }
+
     public void SwitchTrap()
     {
         if (GameManager.Instance.OperationState.StateName == StateName.WaveState)
@@ -378,7 +390,7 @@ public class BoardSystem : IGameSystem
         ObjectPool.Instance.UnSpawn(SelectingTile);
         TileShape shape = GameManager.Instance.ShapeFactory.GetDShape();
         GameTile tile = GameManager.Instance.TileFactory.GetBasicTile();
-        tile.SetContent(GameManager.Instance.ContentFactory.GetTrapContentByName(selectedTrap));
+        //tile.SetContent(GameManager.Instance.ContentFactory.GetTrapContentByName(selectedTrap));
         shape.SetTile(tile);
         shape.transform.position = new Vector3(p.x, p.y, -1);
         GameTile tile2 = ConstructHelper.GetNormalTile(GameTileContentType.Empty);

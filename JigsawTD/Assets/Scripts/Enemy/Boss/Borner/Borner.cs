@@ -43,7 +43,7 @@ public class Borner : Enemy
     {
         if (DamageStrategy.CurrentHealth / DamageStrategy.MaxHealth <= 0.7f && form == 0)
         {
-            DamageIntensify = -0.7f;
+            DamageIntensify -=0.7f;
             level = 1;
             form = 1;
             StunTime += 7f;
@@ -53,7 +53,7 @@ public class Borner : Enemy
         }
         if (DamageStrategy.CurrentHealth / DamageStrategy.MaxHealth <= 0.3f && form == 1)
         {
-            DamageIntensify = -0.7f;
+            DamageIntensify -=0.7f;
             level = 2;
             form = 2;
             StunTime += 7f;
@@ -68,7 +68,7 @@ public class Borner : Enemy
             if (castleCounter <= 0f)
             {
                 level = 0;
-                DamageIntensify = 0f;
+                DamageIntensify += 0.7f;
                 Anim.SetBool("Transform", false);
                 Sound.Instance.PlayEffect("Sound_BornerTransform");
             }

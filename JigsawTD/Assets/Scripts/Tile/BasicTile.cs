@@ -30,6 +30,7 @@ public class BasicTile : GameTile
                 TileRenderers[0].sprite = sprites[Random.Range(0, sprites.Length)];
                 break;
             case GameTileContentType.ElementTurret:
+            case GameTileContentType.Trap:
                 TileRenderers[0].sprite = basicTurretBase;
                 break;
             case GameTileContentType.CompositeTurret:

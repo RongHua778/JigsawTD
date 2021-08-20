@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -68,6 +69,20 @@ public class TileContentFactory : GameObjectFactory
             TurretBaseDIC.Add(attribute.Name, attribute);
         }
     }
+    //*******终点
+    public GameTileContent GetDestinationPoint()
+    {
+        TrapContent content = Get(destinationAtt.ContentPrefab) as TrapContent;
+        content.TrapAttribute = destinationAtt as TrapAttribute;
+        return content;
+    }
+    //*******起点
+    public GameTileContent GetSpawnPoint()
+    {
+        TrapContent content = Get(spawnPointAtt.ContentPrefab) as TrapContent;
+        content.TrapAttribute = spawnPointAtt as TrapAttribute;
+        return content;
+    }
 
     public GameTileContent GetBasicContent(GameTileContentType type)
     {
@@ -75,10 +90,6 @@ public class TileContentFactory : GameObjectFactory
         {
             case GameTileContentType.Empty:
                 return Get(emptyAtt.ContentPrefab);
-            case GameTileContentType.Destination:
-                return Get(destinationAtt.ContentPrefab);
-            case GameTileContentType.SpawnPoint:
-                return Get(spawnPointAtt.ContentPrefab);
             case GameTileContentType.Ground:
                 return Get(groundAtt.ContentPrefab);
         }
@@ -90,7 +101,7 @@ public class TileContentFactory : GameObjectFactory
 
     public ElementTurret GetRandomElementTurret(int playerLevel)
     {
-        int element = Random.Range(0, StaticData.elementN);
+        int element = UnityEngine.Random.Range(0, StaticData.elementN);
         float[] qualityC = new float[5];
         for (int i = 0; i < 5; i++)
         {
@@ -156,13 +167,13 @@ public class TileContentFactory : GameObjectFactory
         switch (random)
         {
             case 0:
-                attributeToReturn = Rare1Turrets[Random.Range(0, Rare1Turrets.Count)];
+                attributeToReturn = Rare1Turrets[UnityEngine.Random.Range(0, Rare1Turrets.Count)];
                 break;
             case 1:
-                attributeToReturn = Rare2Turrets[Random.Range(0, Rare2Turrets.Count)];
+                attributeToReturn = Rare2Turrets[UnityEngine.Random.Range(0, Rare2Turrets.Count)];
                 break;
             case 2:
-                attributeToReturn = Rare3Turrets[Random.Range(0, Rare3Turrets.Count)];
+                attributeToReturn = Rare3Turrets[UnityEngine.Random.Range(0, Rare3Turrets.Count)];
                 break;
         }
         Debug.Assert(attributeToReturn != null, "传入了错误的等级");
@@ -176,7 +187,7 @@ public class TileContentFactory : GameObjectFactory
         if (TrapDIC.ContainsKey(name))
         {
             TrapContent content = Get(TrapDIC[name].ContentPrefab) as TrapContent;
-            content.m_TrapAttribute = TrapDIC[name];
+            content.TrapAttribute = TrapDIC[name];
             return content;
         }
         Debug.LogWarning("没有对应名字的陷阱");
@@ -186,9 +197,9 @@ public class TileContentFactory : GameObjectFactory
 
     public TrapContent GetRandomTrapContent()
     {
-        int index = Random.Range(0, trapAtts.Count);
+        int index = UnityEngine.Random.Range(0, trapAtts.Count);
         TrapContent content = Get(trapAtts[index].ContentPrefab) as TrapContent;
-        content.m_TrapAttribute = trapAtts[index];
+        content.TrapAttribute = trapAtts[index];
         return content;
     }
 
@@ -207,7 +218,7 @@ public class TileContentFactory : GameObjectFactory
 
     public TurretBaseContent GetRandomTurretBase()
     {
-        int index = Random.Range(0, turretBaseAtts.Count);
+        int index = UnityEngine.Random.Range(0, turretBaseAtts.Count);
         TurretBaseContent content = Get(turretBaseAtts[index].ContentPrefab) as TurretBaseContent;
         content.m_TurretBaseAttribute = turretBaseAtts[index];
         return content;

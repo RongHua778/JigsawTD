@@ -161,13 +161,6 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         float realDamage;
         target.DamageStrategy.ApplyDamage(finalDamage, out realDamage, isCritical);
         turretParent.Strategy.DamageAnalysis += (int)realDamage;//·ÀÓùËþÉËº¦Í³¼Æ
-
-        GameEndUI.TotalDamage += (int)realDamage;//×ÜÉËº¦Í³¼Æ
-        if (isCritical)//±©»÷Ìø×Ö
-        {
-            JumpDamage obj = ObjectPool.Instance.Spawn(StaticData.Instance.JumpDamagePrefab) as JumpDamage;
-            obj.Jump((int)realDamage, transform.position);
-        }
     }
 
     public void DamageProcess(IDamageable target, bool isSputtering = false)

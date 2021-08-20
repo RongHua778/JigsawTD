@@ -14,7 +14,7 @@ public class Armor : MonoBehaviour,IDamageable
     private void Awake()
     {
         explosionClip = Resources.Load<AudioClip>("Music/Effects/Sound_EnemyExplosion");
-
+        DamageStrategy = new ArmourStrategy(this.gameObject, this);
     }
 
 
@@ -27,7 +27,6 @@ public class Armor : MonoBehaviour,IDamageable
     public virtual void ReArmor()
     {
         transform.localScale = Vector3.one;
-        //CurrentHealth = MaxHealth;//*********
         DamageStrategy.CurrentHealth = DamageStrategy.MaxHealth;
     }
 

@@ -286,7 +286,7 @@ public class GameManager : Singleton<GameManager>
     public void ConfirmShape()//放下了一个模块
     {
         TransitionToState(StateName.BuildingState);
-
+        m_BoardSystem.CheckPathTrap();
         m_FuncUI.Show();
         m_BluePrintShopUI.CheckAllBluePrint();
     }
@@ -443,7 +443,7 @@ public class GameManager : Singleton<GameManager>
     public void ShowTrapTips(TrapContent trap)
     {
         HideTips();
-        m_TrapTips.ReadTrap(trap, m_BoardSystem.SwitchTrapCost, BoardSystem.relocatable);
+        m_TrapTips.ReadTrap(trap, m_BoardSystem.SwitchTrapCost);
         m_TrapTips.Show();
     }
 

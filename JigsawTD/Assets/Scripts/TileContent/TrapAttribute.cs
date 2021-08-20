@@ -8,7 +8,7 @@ public class BuffInfo
     public EnemyBuffName EnemyBuffName;
     public float KeyValue;
     public float Duration;
-    public BuffInfo(EnemyBuffName name,float keyValue,float duration)
+    public BuffInfo(EnemyBuffName name, float keyValue, float duration)
     {
         this.EnemyBuffName = name;
         this.KeyValue = keyValue;
@@ -16,16 +16,16 @@ public class BuffInfo
     }
 }
 
-[System.Serializable]
-public class TrapInfo
-{
-    public List<BuffInfo> BuffInfos = new List<BuffInfo>();
-}
+//[System.Serializable]
+//public class TrapInfo
+//{
+//    public List<BuffInfo> BuffInfos = new List<BuffInfo>();
+//}
 
 [CreateAssetMenu(menuName = "Attribute/TrapAttribute", fileName = "TrapAttribute")]
 public class TrapAttribute : ContentAttribute
 {
-    public List<BuffInfo> BuffInfos = new List<BuffInfo>();
+    //public List<BuffInfo> BuffInfos = new List<BuffInfo>();
 
 }
 

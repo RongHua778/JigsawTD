@@ -28,11 +28,24 @@ public abstract class Enemy : PathFollower, IDamageable
     private Animator anim;
     public Animator Anim { get => anim; set => anim = value; }
 
-    private TrapContent currentTrap;
-    public TrapContent CurrentTrap { get => currentTrap; set => currentTrap = value; }
 
+    //上一个经过的陷阱
+    private TrapContent lastTrap;
+    public TrapContent LastTrap { get => lastTrap; set => lastTrap = value; }
+    //经过的陷阱列表
     private List<TrapContent> passedTraps = new List<TrapContent>();
     public List<TrapContent> PassedTraps { get => passedTraps; set => passedTraps = value; }
+    //陷阱强化值
+    float trapIntentify = 1f;
+    public float TrapIntentify
+    {
+        get => trapIntentify;
+        set
+        {
+            trapIntentify = value;
+            healthBar.ShowPromoteIcon(trapIntentify > 1);
+        }
+    }
 
     private List<Skill> skills;
     public List<Skill> Skills { get => skills; set => skills = value; }
@@ -63,7 +76,7 @@ public abstract class Enemy : PathFollower, IDamageable
         {
             slowRate = value;
             ProgressFactor = Speed * Adjust;//子弹减速即时更新速度
-            healthBar.ShowSlowIcon(slowRate > 0.01f);
+            healthBar.ShowSlowIcon(slowRate > 0f);
         }
     }
     float pathSlow;
@@ -80,7 +93,15 @@ public abstract class Enemy : PathFollower, IDamageable
     public float TargetDamageCounter { get; set; }
 
     float damageIntensify;
-    public float DamageIntensify { get => damageIntensify; set => damageIntensify = value; }
+    public float DamageIntensify
+    {
+        get => damageIntensify;
+        set
+        {
+            damageIntensify = value;
+            healthBar.ShowDamageIcon(damageIntensify > 0);
+        }
+    }
     public BuffableEntity Buffable { get; set; }
 
     private bool isDie = false;
@@ -93,34 +114,7 @@ public abstract class Enemy : PathFollower, IDamageable
         }
     }
 
-    //private float maxHealth;
-    //public float MaxHealth
-    //{
-    //    get => maxHealth;
-    //    set
-    //    {
-    //        maxHealth = value;
-    //        CurrentHealth = maxHealth;
-    //    }
-    //}
-    //protected float currentHealth;
-    //public virtual float CurrentHealth
-    //{
-    //    get => currentHealth;
-    //    set
-    //    {
-    //        currentHealth = Mathf.Clamp(value, 0, MaxHealth);
-    //        if (currentHealth <= 0 && maxHealth > 0)
-    //        {
-    //            IsDie = true;
-    //        }
-    //        healthBar.FillAmount = currentHealth / MaxHealth;
-    //    }
-    //}
 
-
-    float trapIntentify = 1f;
-    public float TrapIntentify { get => trapIntentify; set => trapIntentify = value; }
 
     public virtual void Awake()
     {
@@ -136,18 +130,19 @@ public abstract class Enemy : PathFollower, IDamageable
         {
             explosionClip = Resources.Load<AudioClip>("Music/Effects/Sound_EnemyExplosion");
         }
+        PassedTraps = new List<TrapContent>();
     }
 
     public override bool GameUpdate()
     {
 
-        if (PassedTraps != null)
-        {
-            foreach (TrapContent trap in PassedTraps)
-            {
-                trap.OnGameUpdating(this);
-            }
-        }
+        //if (PassedTraps != null)
+        //{
+        //    foreach (TrapContent trap in PassedTraps)
+        //    {
+        //        trap.OnGameUpdating(this);
+        //    }
+        //}
         OnEnemyUpdate();
         if (IsDie)
         {
@@ -203,9 +198,9 @@ public abstract class Enemy : PathFollower, IDamageable
 
     public void TriigerTrap()
     {
-        if (CurrentTrap != null)
-            CurrentTrap.OnContentPass(this);
-        CurrentTrap = null;
+        if (LastTrap != null)
+            LastTrap.OnContentPass(this);
+        LastTrap = null;
         trapTriggered = true;
     }
 
@@ -240,7 +235,6 @@ public abstract class Enemy : PathFollower, IDamageable
                 enemySkill.OnBorn();
             }
         }
-        PassedTraps = new List<TrapContent>();
     }
 
     protected override void PrepareIntro()
@@ -300,6 +294,7 @@ public abstract class Enemy : PathFollower, IDamageable
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
+        PassedTraps.Clear();
         isOutTroing = false;
         ObjectPool.Instance.UnSpawn(healthBar);
         TargetDamageCounter = 0;
@@ -309,7 +304,7 @@ public abstract class Enemy : PathFollower, IDamageable
         PathSlow = 0;
         SlowRate = 0;
         StunTime = 0;
-        CurrentTrap = null;
+        LastTrap = null;
         Buffable.RemoveAllBuffs();
         if (skills != null)
         {

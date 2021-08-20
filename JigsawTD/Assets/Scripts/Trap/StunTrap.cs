@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class StunTrap : TrapContent
 {
-    public override void PassManyTimes(Enemy enemy)
+    public override void OnContentPass(Enemy enemy)
     {
-        base.PassManyTimes(enemy);
-        enemy.StunTime += enemy.PassedTraps.Count * 0.5f* enemy.TrapIntentify;
+        base.OnContentPass(enemy);
+        enemy.StunTime += enemy.PassedTraps.Count * 0.2f * TrapIntensify * enemy.TrapIntentify;
+        enemy.TrapIntentify = 0;
     }
 
 }

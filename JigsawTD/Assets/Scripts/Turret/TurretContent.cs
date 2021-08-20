@@ -259,7 +259,6 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         {
             Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab) as Bullet;
             bullet.transform.position = shootPoint.position;
-            bullet.transform.localScale += 0.05f * Strategy.Quality * Vector3.one;
             bullet.Initialize(this, targets.Current);
         }
     }

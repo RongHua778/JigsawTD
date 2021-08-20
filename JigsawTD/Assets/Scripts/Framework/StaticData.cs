@@ -89,6 +89,7 @@ public class StaticData : Singleton<StaticData>
     public Collider2D LineCol;
     public RangeIndicator RangeIndicatorPrefab;
     public JumpDamage JumpDamagePrefab;
+    public Sprite UnrevealTrap;
 
     private void Start()
     {

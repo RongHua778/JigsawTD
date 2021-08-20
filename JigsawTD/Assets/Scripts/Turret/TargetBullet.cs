@@ -47,11 +47,12 @@ public class TargetBullet : Bullet
         }
         else
         {
-            if (Target == null)
-                return;
-            SputteredCount = 0;
-            TriggerPreHitEffect();
-            DamageProcess(Target.Enemy);
+            if (Target != null)
+            {
+                SputteredCount = 0;
+                TriggerPreHitEffect();
+                DamageProcess(Target.Enemy);
+            }
         }
         base.TriggerDamage();
     }

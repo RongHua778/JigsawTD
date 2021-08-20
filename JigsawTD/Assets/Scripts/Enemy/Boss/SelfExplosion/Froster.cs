@@ -13,6 +13,7 @@ public class Froster : Enemy
 
     public override void Awake()
     {
+        base.Awake();
         Anim = this.GetComponent<Animator>();
         explosionClip = Resources.Load<AudioClip>("Music/Effects/Sound_EnemyExplosionFrost");
     }

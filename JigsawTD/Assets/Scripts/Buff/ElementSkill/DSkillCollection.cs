@@ -68,22 +68,13 @@ public class RandomCritical : ElementSkill
 
 public class CriticalSpeed : ElementSkill
 {
-    //攻击特效每回合每次攻击提升2.5%暴击率，上限100%
+    //攻击特效每回合每次攻击提升2.5%暴击率
     public override List<int> Elements => new List<int> { 3, 3, 1 };
     public override string SkillDescription => "CRITICALSPEED";
 
-    private float criticalIncreased = 0;
     public override void Shoot(Bullet bullet = null, Enemy target = null)
     {
-        if (criticalIncreased > 0.99f)
-            return;
-        criticalIncreased += 0.025f * strategy.TimeModify;
         strategy.TurnFixCriticalPercentage += 0.025f * strategy.TimeModify;
-    }
-
-    public override void EndTurn()
-    {
-        criticalIncreased = 0;
     }
 }
 
@@ -95,12 +86,13 @@ public class LateCritical : ElementSkill
 
     public override void StartTurn()
     {
-        Duration += 30;
+        Duration += 999;
     }
 
-    public override void TickEnd()
+    public override void Tick(float delta)
     {
-        strategy.TurnFixCriticalPercentage += 0.4f * strategy.TimeModify;
+        base.Tick(delta);
+        strategy.TurnFixCriticalRate += 0.01f * delta * strategy.TimeModify;
     }
 
     public override void EndTurn()

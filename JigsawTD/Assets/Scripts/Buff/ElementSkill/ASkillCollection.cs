@@ -10,19 +10,18 @@ public class AttackSpeed : ElementSkill
     public override List<int> Elements => new List<int> { 0, 0, 1 };
     public override string SkillDescription => "ATTACKSPEED";
 
-    private float attackIncreased = 0;
+    //private float attackIncreased = 0;
     public override void Shoot(Bullet bullet = null, Enemy target = null)
     {
-        if (attackIncreased > 1.95f)
-            return;
-        attackIncreased += 0.05f * strategy.TimeModify;
+
+        //attackIncreased += 0.05f * strategy.TimeModify;
         strategy.TurnAttackIntensify += 0.05f * strategy.TimeModify;
     }
 
-    public override void EndTurn()
-    {
-        attackIncreased = 0;
-    }
+    //public override void EndTurn()
+    //{
+    //    attackIncreased = 0;
+    //}
 }
 
 
@@ -34,12 +33,13 @@ public class LateAttack : ElementSkill
 
     public override void StartTurn()
     {
-        Duration += 30;
+        Duration += 999;
     }
 
-    public override void TickEnd()
+    public override void Tick(float delta)
     {
-        strategy.TurnAttackIntensify += 1f * strategy.TimeModify;
+        base.Tick(delta);
+        strategy.TurnAttackIntensify += 0.02f * delta * strategy.TimeModify;
     }
 
     public override void EndTurn()

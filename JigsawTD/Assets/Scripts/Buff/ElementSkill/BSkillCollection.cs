@@ -58,12 +58,13 @@ public class LateSpeed : ElementSkill
 
     public override void StartTurn()
     {
-        Duration = 30;
+        Duration += 999;
     }
 
-    public override void TickEnd()
+    public override void Tick(float delta)
     {
-        strategy.TurnSpeedIntensify += 1 * strategy.TimeModify;
+        base.Tick(delta);
+        strategy.TurnSpeedIntensify += 0.02f * delta * strategy.TimeModify;
     }
 
     public override void EndTurn()
@@ -75,24 +76,48 @@ public class LateSpeed : ElementSkill
 
 public class SpeedCritical : ElementSkill
 {
-    //每次暴击提高20%攻速，上限200%
+    //暴击后，使接下来2秒攻速提升50%
     public override List<int> Elements => new List<int> { 1, 1, 3 };
     public override string SkillDescription => "SPEEDCRITICAL";
 
     private float speedIncreased;
+    private float timeCounter;
+    private bool isIntensify;
+
     public override void PreHit(Bullet bullet = null)
     {
-        if (bullet.isCritical && speedIncreased < 1.99f)
+        if (bullet.isCritical)
         {
-            strategy.TurnSpeedIntensify += 0.2f * strategy.TimeModify;
-            speedIncreased += 0.2f * strategy.TimeModify;
+            timeCounter = 2f;
+            if (!isIntensify)
+            {
+                isIntensify = true;
+                speedIncreased = 0.6f * strategy.TimeModify;
+                strategy.TurnSpeedIntensify += 0.6f * strategy.TimeModify;
+            }
         }
+    }
+    public override void Tick(float delta)
+    {
+        base.Tick(delta);
+        if (timeCounter > 0)
+        {
+            timeCounter -= delta;
+            if (timeCounter <= 0)
+            {
+                isIntensify = false;
+                strategy.TurnSpeedIntensify -= speedIncreased;
+            }
+        }
+        
     }
 
     public override void EndTurn()
     {
         speedIncreased = 0;
+        isIntensify = false;
     }
+
 }
 
 public class SpeedPolo : ElementSkill
