@@ -15,10 +15,25 @@ public class BluePrintShopUI : IUserInterface
     [SerializeField] Text NextRefreshTurnsTxt = default;
     [SerializeField] Transform shopContent = default;
     [SerializeField] Text PerfectElementTxt = default;
+    [SerializeField] Text LockCountTxt = default;
     [SerializeField] InfoBtn PerfectInfo = default;
 
     public List<BluePrintGrid> ShopBluePrints = new List<BluePrintGrid>();//商店配方表
     public List<BluePrintGrid> OwnBluePrints = new List<BluePrintGrid>();//拥有配方表
+
+    int currentLock = 0;
+    public int CurrentLock
+    {
+        get => currentLock;
+        set
+        {
+            currentLock = value;
+            LockCountTxt.text = GameMultiLang.GetTraduction("SHOPBLUEPRINT") + CurrentLock.ToString() + "/" + MaxLock.ToString();
+        }
+    }
+
+    int maxLock = 1;
+    public int MaxLock { get => maxLock; set => maxLock = value; }
 
     int shopCapacity = 3;
     public int ShopCapacity { get => shopCapacity; set => shopCapacity = value; }
@@ -46,6 +61,7 @@ public class BluePrintShopUI : IUserInterface
         NextRefreshTrun = 4;
         SetPerfectElementCount(0);
         PerfectInfo.SetContent(GameMultiLang.GetTraduction("PERFECTINFO"));
+        CurrentLock = 0;
     }
 
     public void PrepareForGuide()
@@ -61,7 +77,7 @@ public class BluePrintShopUI : IUserInterface
     public void RefreshShop(int level, int cost)//刷新商店
     {
         int lockNum = 0;
-        foreach(var grid in ShopBluePrints.ToList())
+        foreach (var grid in ShopBluePrints.ToList())
         {
             if (!grid.IsLock)
             {
@@ -85,16 +101,43 @@ public class BluePrintShopUI : IUserInterface
         bluePrintGrid.transform.SetParent(shopContent);
         bluePrintGrid.transform.localScale = Vector3.one;
         bluePrintGrid.transform.localPosition = Vector3.zero;
-        bluePrintGrid.SetElements(shopContent.GetComponent<ToggleGroup>(), bluePrint);
+        bluePrintGrid.SetElements(this, shopContent.GetComponent<ToggleGroup>(), bluePrint);
         if (isShopBluePrint)
         {
             //bluePrintGrid.transform.SetAsFirstSibling();
+            bluePrintGrid.ShowLockBtn(CurrentLock < MaxLock);
             bluePrintGrid.InShop = true;
             ShopBluePrints.Add(bluePrintGrid);
         }
         else
         {
             MoveBluePrintToPocket(bluePrintGrid);
+        }
+    }
+
+    public void OnLockGrid(BluePrintGrid bluePrintGrid, bool isLock)
+    {
+        if (isLock)
+        {
+            CurrentLock++;
+            if (CurrentLock >= MaxLock)
+            {
+                foreach (var grid in ShopBluePrints)
+                {
+                    if (!grid.IsLock)
+                    {
+                        grid.ShowLockBtn(false);
+                    }
+                }
+            }
+        }
+        else
+        {
+            CurrentLock--;
+            foreach (var grid in ShopBluePrints)
+            {
+                grid.ShowLockBtn(true);
+            }
         }
     }
 
@@ -119,16 +162,7 @@ public class BluePrintShopUI : IUserInterface
 
     public void MoveBluePrintToPocket(BluePrintGrid grid)//把商店配方移入拥有
     {
-        //if (StaticData.NextBuyIntensifyBlueprint > 0)//下一个购买的是强化配方
-        //{
-        //    StaticData.NextBuyIntensifyBlueprint--;
-        //    grid.BluePrint.IntensifyBluePrint = true;
-        //    grid.BluePrint.SetBluePrintIntensify();
-        //    grid.BluePrint.ComStrategy.ClearBasicIntensify();
-        //    grid.BluePrint.ComStrategy.SetQualityValue();
-        //    grid.BluePrint.ComStrategy.GetComIntensify(grid.BluePrint);
-        //    grid.BluePrint.ComStrategy.GetTurretSkills();
-        //}
+
         grid.InShop = false;
         grid.transform.SetAsLastSibling();
         OwnBluePrints.Add(grid);

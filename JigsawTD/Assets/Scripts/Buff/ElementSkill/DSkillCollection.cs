@@ -60,7 +60,7 @@ public class RandomCritical : ElementSkill
     public override List<int> Elements => new List<int> { 3, 3, 0 };
     public override string SkillDescription => "RANDOMCRITICAL";
 
-    public override void Shoot(Bullet bullet = null, Enemy target = null)
+    public override void Shoot(Bullet bullet = null)
     {
         bullet.CriticalPercentage += Random.Range(-1f, 4f);
     }
@@ -72,7 +72,7 @@ public class CriticalSpeed : ElementSkill
     public override List<int> Elements => new List<int> { 3, 3, 1 };
     public override string SkillDescription => "CRITICALSPEED";
 
-    public override void Shoot(Bullet bullet = null, Enemy target = null)
+    public override void Shoot(Bullet bullet = null)
     {
         strategy.TurnFixCriticalPercentage += 0.025f * strategy.TimeModify;
     }

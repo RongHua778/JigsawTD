@@ -11,7 +11,7 @@ public class AttackSpeed : ElementSkill
     public override string SkillDescription => "ATTACKSPEED";
 
     //private float attackIncreased = 0;
-    public override void Shoot(Bullet bullet = null, Enemy target = null)
+    public override void Shoot(Bullet bullet = null)
     {
 
         //attackIncreased += 0.05f * strategy.TimeModify;
@@ -54,34 +54,13 @@ public class RandomAttack : ElementSkill
     public override List<int> Elements => new List<int> { 0, 0, 3 };
     public override string SkillDescription => "RANDOMATTACK";
 
-    public override void Shoot(Bullet bullet = null, Enemy target = null)
+    public override void Shoot(Bullet bullet = null)
     {
         bullet.Damage *= Random.Range(0.5f, 2f);
     }
 }
 
-//public class AttackAdjacent : ElementSkill
-//{
-//    //相邻每个防御塔提高自身50%攻击力
-//    public override List<int> Elements => new List<int> { 0, 0, 4 };
-//    public override string SkillDescription => "ATTACKADJACENT";
 
-//    private int adjacentTurretCount = 0;
-//    public override void Detect()
-//    {
-//        strategy.BaseAttackIntensify -= 0.5f * adjacentTurretCount;//修复回初始值
-//        adjacentTurretCount = 0;
-//        List<Vector2Int> points = StaticData.GetCirclePoints(1);
-//        foreach (var point in points)
-//        {
-//            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
-//            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
-//            if (hit != null)
-//                adjacentTurretCount++;
-//        }
-//        strategy.BaseAttackIntensify += 0.5f * adjacentTurretCount;
-//    }
-//}
 public class AttackPolo : ElementSkill
 {
     //相邻防御塔攻击力提高50%

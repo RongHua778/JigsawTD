@@ -17,6 +17,6 @@ public class SlowArrowTrap : TrapContent
         {
             Debug.Log("敌人方式为：" + enemy.Direction + "陷阱方向为" + ((GameTile)m_GameTile).TileDirection);
         }
-        enemy.TrapIntentify = 0;
+        enemy.TrapIntentify = 1;
     }
 }

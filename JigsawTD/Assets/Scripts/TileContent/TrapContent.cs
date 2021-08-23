@@ -162,7 +162,7 @@ public class TrapContent : GameTileContent
 
     public virtual void OnGameUpdating(Enemy enemy)
     {
-        
+
     }
 
     protected override void ContentLandedCheck(Collider2D col)
@@ -179,6 +179,8 @@ public class TrapContent : GameTileContent
     {
         if (!IsReveal)
         {
+            if (!needReset)
+                ((GameTile)m_GameTile).SetRandomRotation();
             trapGFX.sprite = initSprite;
             IsReveal = true;
         }

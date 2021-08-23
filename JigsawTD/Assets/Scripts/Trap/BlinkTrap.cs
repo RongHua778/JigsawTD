@@ -11,7 +11,7 @@ public class BlinkTrap : TrapContent
             return;
         base.OnContentPass(enemy);
         enemy.Flash(Mathf.RoundToInt(4 * TrapIntensify * enemy.TrapIntentify));
-        enemy.TrapIntentify = 0;
+        enemy.TrapIntentify = 1;
     }
 
 }

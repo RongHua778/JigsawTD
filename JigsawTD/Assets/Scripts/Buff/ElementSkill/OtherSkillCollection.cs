@@ -211,7 +211,7 @@ public class LateDamage : ElementSkill
         }
     }
 
-    public override void Shoot(Bullet bullet = null, Enemy target = null)
+    public override void Shoot(Bullet bullet = null)
     {
         bullet.Damage *= (1 + damageIncreased);
     }

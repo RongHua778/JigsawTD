@@ -64,7 +64,7 @@ MODULELEVELINFO3=Shop blueprint +1 when module level reaches 3,5 and 7
 ENERGYINFO=1. Gain 1 energy if you haven't drawed last wave\n2. Gain additional energy if you keep not drawing \n3. Gain 1 extra draw while energy reach 10.
 
 //shop
-SHOPBLUEPRINT=Double click to composite
+SHOPBLUEPRINT=Lock:
 OWNBLUEPRINT=Owned
 NEXTREFRESH=Refresh after
 OWNPERFECT=Perfect Element
@@ -193,7 +193,7 @@ MULTITARGET=Attacks 2 additional targets.
 SPEEDPOLO=Increase adjacent turrets' basic firerate by 50%.
 SPEEDTARGET=Firerate increased by 10% each shoot while attacking the same target (up to 300%).
 LATESPEED=Firerate increased by 2% every second after each wave start.
-SPEEDCRITICAL=Firerate increased by 60% for 2s if a critical hit happened.
+SPEEDCRITICAL=Firerate increased by 50% for 1s if a critical hit happened.
 SPEEDADJACENT=Basic firerate increased by 50% for each adjacent turret.
 
 //C系
@@ -205,7 +205,7 @@ CRITICALSLOW=Double bullet's slow if it is a critical hit.
 SLOWADJACENT=Slow increased by 0.5 for each adjacent turret.
 
 //D系
-CRITICALPOLO=Increase adjacent turrets' critical by 25%.
+CRITICALPOLO=Equip:Copy the first element skill.
 RANDOMCRITICAL=Critical damage randomly increased by -100% to 400%.
 CRITICALSPEED=Critical increased by 2.5% for each shoot this turn.
 LATECRITICAL=Critical increased by 1% every second after each wave start.

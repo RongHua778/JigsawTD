@@ -135,14 +135,6 @@ public abstract class Enemy : PathFollower, IDamageable
 
     public override bool GameUpdate()
     {
-
-        //if (PassedTraps != null)
-        //{
-        //    foreach (TrapContent trap in PassedTraps)
-        //    {
-        //        trap.OnGameUpdating(this);
-        //    }
-        //}
         OnEnemyUpdate();
         if (IsDie)
         {

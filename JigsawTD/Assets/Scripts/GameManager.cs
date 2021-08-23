@@ -392,9 +392,23 @@ public class GameManager : Singleton<GameManager>
         m_BoardSystem.BuyOneEmptyTile();
     }
 
-    public void SwitchTrap()
+    public void SwitchTrap(TrapContent trap)
     {
-        m_BoardSystem.SwitchTrap();
+        if (operationState.StateName == StateName.PickingState)
+        {
+            ShowMessage(GameMultiLang.GetTraduction("PUTFIRST"));
+            return;
+        }
+        if (operationState.StateName == StateName.WaveState)
+        {
+            ShowMessage(GameMultiLang.GetTraduction("NOTBUILDSTATE"));
+            return;
+        }
+        if (ConsumeMoney(m_BoardSystem.SwitchTrapCost))
+        {
+            TransitionToState(StateName.PickingState);
+            m_BoardSystem.SwitchTrap(trap);
+        }
     }
 
     public void IncreaseShopCapacity()

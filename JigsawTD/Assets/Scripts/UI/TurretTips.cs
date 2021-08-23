@@ -143,7 +143,7 @@ public class TurretTips : TileTips
         AnalysisArea.SetActive(false);
         UpgradeArea.SetActive(false);
         IntensifyArea.SetActive(false);
-        BluePrintArea.SetActive(false);
+        BluePrintArea.SetActive(true);
         SetElementSkill();
         //elementConstruct.gameObject.SetActive(true);
         //elementConstruct.SetElements(m_Strategy.ElementSkill);

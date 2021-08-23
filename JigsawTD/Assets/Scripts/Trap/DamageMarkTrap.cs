@@ -10,7 +10,7 @@ public class DamageMarkTrap : TrapContent
         base.OnContentPass(enemy);
         BuffInfo buff = new BuffInfo(EnemyBuffName.DamageIntensify, 0.5f * TrapIntensify * enemy.TrapIntentify, 5f);
         enemy.Buffable.AddBuff(buff);
-        enemy.TrapIntentify = 0;
+        enemy.TrapIntentify = 1;
     }
 
 

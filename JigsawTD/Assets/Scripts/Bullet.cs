@@ -82,7 +82,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     {
         foreach (TurretSkill effect in turretEffects)
         {
-            effect.Shoot(this, (Enemy)Target.Enemy);
+            effect.Shoot(this);
         }
     }
 

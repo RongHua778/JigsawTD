@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: PromoteTrapAttribute
   m_EditorClassIdentifier: 
   Name: PROMOTETRAP
-  Icon: {fileID: 21300000, guid: 36fb94fefb0faa544a65ab99e228fc9c, type: 3}
+  Icon: {fileID: -2910786955879074301, guid: 7cdac59c1a58c4049b2d1ad53616d6b1, type: 3}
   Description: PROMOTETRAPINFO
   ContentPrefab: {fileID: 8525636314392825116, guid: 9b513d676a84dcb45b871456abe7ec2d, type: 3}
-  BuffInfos: []

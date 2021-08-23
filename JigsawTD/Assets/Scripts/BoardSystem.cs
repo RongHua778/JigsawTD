@@ -303,7 +303,7 @@ public class BoardSystem : IGameSystem
             GameTile tile = ConstructHelper.GetRandomTrap();
             tile.transform.position = (Vector3Int)pos;
             tile.TileLanded();
-            tile.SetRandomRotation();
+            //tile.SetRandomRotation();
         }
     }
     private void GenerateGroundTiles(Vector2Int groundSize)
@@ -375,27 +375,16 @@ public class BoardSystem : IGameSystem
         }
     }
 
-    public void SwitchTrap()
+    public void SwitchTrap(TrapContent trap)
     {
-        if (GameManager.Instance.OperationState.StateName == StateName.WaveState)
-        {
-            GameManager.Instance.ShowMessage(GameMultiLang.GetTraduction("NOTBATTLESTATE"));
-            return;
-        }
-        else if (!GameManager.Instance.ConsumeMoney(50))
-        {
-            return;
-        }
-        Vector3 p = SelectingTile.transform.position;
-        ObjectPool.Instance.UnSpawn(SelectingTile);
-        TileShape shape = GameManager.Instance.ShapeFactory.GetDShape();
-        GameTile tile = GameManager.Instance.TileFactory.GetBasicTile();
-        //tile.SetContent(GameManager.Instance.ContentFactory.GetTrapContentByName(selectedTrap));
-        shape.SetTile(tile);
-        shape.transform.position = new Vector3(p.x, p.y, -1);
-        GameTile tile2 = ConstructHelper.GetNormalTile(GameTileContentType.Empty);
-        tile2.transform.position = p;
-        tile2.TileLanded();
+        SwitchTrapCost += 50;
+        Vector2 pos = trap.m_GameTile.transform.position;
+        ObjectPool.Instance.UnSpawn(trap.m_GameTile);
+        GameTile tile = ConstructHelper.GetNormalTile(GameTileContentType.Empty);
+        tile.transform.position = pos;
+        tile.TileLanded();
+        ConstructHelper.GetTrapByName(trap.TrapAttribute.Name);
+
     }
 
 

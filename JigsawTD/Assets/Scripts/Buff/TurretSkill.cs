@@ -46,7 +46,7 @@ public abstract class TurretSkill
 
     }
 
-    public virtual void Shoot(Bullet bullet = null, Enemy target = null)
+    public virtual void Shoot(Bullet bullet = null)
     {
 
     }
@@ -197,7 +197,7 @@ public class L1Skill : InitialSkill
     public override string SkillDescription => "L1SKILL";
 
     //private float intensifyIncreased = 0;
-    public override void Shoot(Bullet bullet = null, Enemy target = null)
+    public override void Shoot(Bullet bullet = null)
     {
         //if (intensifyIncreased > 1.95f)
         //    return;

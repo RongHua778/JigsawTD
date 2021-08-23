@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: AimMarkTrapAttribute
   m_EditorClassIdentifier: 
   Name: AIMMARKTRAP
-  Icon: {fileID: 21300000, guid: 74d66711337d5fe45b8444516f4df000, type: 3}
+  Icon: {fileID: 2841108905781951038, guid: 7cdac59c1a58c4049b2d1ad53616d6b1, type: 3}
   Description: AIMMARKTRAPINFO
   ContentPrefab: {fileID: 7496585715104819807, guid: b3263af6d3b9581499e543461755737f, type: 3}
-  BuffInfos: []

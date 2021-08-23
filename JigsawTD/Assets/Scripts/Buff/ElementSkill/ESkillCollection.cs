@@ -21,7 +21,7 @@ public class NearSplash : ElementSkill
     public override List<int> Elements => new List<int> { 4, 4, 0 };
     public override string SkillDescription => "NEARSPLASH";
 
-    public override void Shoot(Bullet bullet = null, Enemy target = null)
+    public override void Shoot(Bullet bullet = null)
     {
         if (bullet.GetTargetDistance() < 3f)
         {
@@ -37,7 +37,7 @@ public class SplashSpeed : ElementSkill
     public override List<int> Elements => new List<int> { 4, 4, 1 };
     public override string SkillDescription => "SPLASHSPEED";
 
-    public override void Shoot(Bullet bullet = null, Enemy target = null)
+    public override void Shoot(Bullet bullet = null)
     {
         strategy.TurnFixSputteringRange += 0.02f * strategy.TimeModify;
     }

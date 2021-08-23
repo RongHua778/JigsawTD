@@ -26,8 +26,9 @@ public class SpeedTarget : ElementSkill
     private Enemy lastTarget;
     private float speedIncreased;
 
-    public override void Shoot(Bullet bullet = null, Enemy target = null)
+    public override void Shoot(Bullet bullet = null)
     {
+        Enemy target = (Enemy)strategy.m_Turret.Target[0].Enemy;
         if (target != lastTarget)
         {
             lastTarget = target;
@@ -76,7 +77,7 @@ public class LateSpeed : ElementSkill
 
 public class SpeedCritical : ElementSkill
 {
-    //暴击后，使接下来2秒攻速提升50%
+    //暴击后，使接下来1秒攻速提升50%
     public override List<int> Elements => new List<int> { 1, 1, 3 };
     public override string SkillDescription => "SPEEDCRITICAL";
 
@@ -84,23 +85,27 @@ public class SpeedCritical : ElementSkill
     private float timeCounter;
     private bool isIntensify;
 
+    public override void StartTurn()
+    {
+        Duration += 999;
+    }
     public override void PreHit(Bullet bullet = null)
     {
         if (bullet.isCritical)
         {
-            timeCounter = 2f;
+            timeCounter = 1f;
             if (!isIntensify)
             {
                 isIntensify = true;
-                speedIncreased = 0.6f * strategy.TimeModify;
-                strategy.TurnSpeedIntensify += 0.6f * strategy.TimeModify;
+                speedIncreased = 0.5f * strategy.TimeModify;
+                strategy.TurnSpeedIntensify += 0.5f * strategy.TimeModify;
             }
         }
     }
     public override void Tick(float delta)
     {
         base.Tick(delta);
-        if (timeCounter > 0)
+        if (timeCounter >= 0)
         {
             timeCounter -= delta;
             if (timeCounter <= 0)

@@ -34,7 +34,7 @@ LEVEL1INFO=这是原型机进入重构模组的首次资格测试，被淘汰的
 LACKMONEY=金币不足
 LACKMATERIAL=合成所需素材不足
 PUTFIRST=请先放置抽取模块
-NOTBUILDSTATE=只可以在非战斗阶段合成
+NOTBUILDSTATE=只可在非战斗阶段进行
 NOROUTE=必须有道路连接起点和终点
 NOOVERLAP=防御塔不可与特殊地形重叠
 NOTBATTLESTATE=战斗中不可购买
@@ -63,7 +63,7 @@ MODULELEVELINFO3=当模块等级达到3,5和7级时，商店配方数量+1
 ENERGYINFO=1.当前回合没有抽取时，获得1点能量\n2.连续不抽取时，会获得额外能量\n3.能量每达到10点，获得1次额外抽取次数
 
 //shop
-SHOPBLUEPRINT=双击配方合成
+SHOPBLUEPRINT=可锁定：
 OWNBLUEPRINT=拥有配方
 NEXTREFRESH=下次刷新
 OWNPERFECT=拥有万能元素
@@ -194,7 +194,7 @@ MULTITARGET=额外攻击2个目标
 SPEEDPOLO=相邻防御塔的基础攻速提升50%
 SPEEDTARGET=对同一目标进行攻击时，每次攻击使攻速提高10%，上限300%，切换目标重置
 LATESPEED=每回合开始后，攻速每秒提升2%
-SPEEDCRITICAL=暴击后，使接下来2秒攻速提升50%
+SPEEDCRITICAL=暴击后，使接下来1秒攻速提升50%
 SPEEDADJACENT=相邻每有1个防御塔，就提升50%基础攻速
 
 //C系
@@ -230,7 +230,7 @@ FREEGROUND=造成的伤害-25%，使接下来3次购买地板价格变为0
 SYSTEMDISCOUNT=造成的伤害-25%，使模块升级费用-50%
 PERFECTELEMENT=造成的伤害-25%，合成时获得1个万能元素
 
-COPYSKILL=复制另一个元素技能
+COPYSKILL=装备：复制第一个元素技能
 MODULELEVELUP=将你的模块等级提升1级
 POLOINTENSIFY=受到光环的加成效果提升100%
 RANDOMTRAP=在防御塔前方生成一个随机陷阱
@@ -323,7 +323,7 @@ IMITATETRAP=变化陷阱
 STUNTRAP2=晕眩陷阱(新)
 DAMAGEARROW=伤害箭头
 EXECUTETRAP=处决陷阱
-AIMMARKTRAP=标准陷阱
+AIMMARKTRAP=瞄准陷阱
 DAMAGEMARK=伤害标记
 
 STUNTRAPINFO=经过的敌人被晕眩0.5*N秒，N=此前经过的陷阱数量

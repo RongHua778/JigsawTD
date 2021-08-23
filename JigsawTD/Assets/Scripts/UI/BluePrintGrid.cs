@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
 
-public class BluePrintGrid : ReusableObject, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class BluePrintGrid : ReusableObject//, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public static BluePrintGrid SelectingBluePrint = null;
     [SerializeField] Color UnobtainColor = default;
@@ -13,17 +14,20 @@ public class BluePrintGrid : ReusableObject, IPointerEnterHandler, IPointerExitH
     private bool inShop = false;
     public bool InShop { get => inShop; set => inShop = value; }
 
+
     [SerializeField] Text compositeName = default;
     [SerializeField] Image compositeIcon = default;
     [SerializeField] ElementGrid[] elementGrids = default;
     [SerializeField] Toggle m_LockToggle = default;
     private Toggle m_Toggle;
+    private BluePrintShopUI m_Shop;
     private Blueprint m_BluePrint;
 
     public Blueprint BluePrint { get => m_BluePrint; set => m_BluePrint = value; }
 
-    public void SetElements(ToggleGroup group, Blueprint bluePrint)
+    public void SetElements(BluePrintShopUI shop, ToggleGroup group, Blueprint bluePrint)
     {
+        m_Shop = shop;
         m_Toggle = this.GetComponent<Toggle>();
         BluePrint = bluePrint;
         BluePrint.CheckElement();
@@ -86,6 +90,7 @@ public class BluePrintGrid : ReusableObject, IPointerEnterHandler, IPointerExitH
     public void OnLock(bool value)
     {
         IsLock = value;
+        m_Shop.OnLockGrid(this, value);
     }
 
     public void CheckElements()
@@ -94,28 +99,33 @@ public class BluePrintGrid : ReusableObject, IPointerEnterHandler, IPointerExitH
         RefreshElementsSprite();
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        m_Toggle.isOn = true;
-    }
+    //public void OnPointerEnter(PointerEventData eventData)
+    //{
+    //    m_Toggle.isOn = true;
+    //}
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        m_Toggle.isOn = false;
-    }
+    //public void OnPointerExit(PointerEventData eventData)
+    //{
+    //    m_Toggle.isOn = false;
+    //}
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if (eventData.clickCount == 2)
-        {
-            GameManager.Instance.CompositeShape(this);
-        }
-    }
+    //public void OnPointerClick(PointerEventData eventData)
+    //{
+    //    if (eventData.clickCount == 2)
+    //    {
+    //        GameManager.Instance.CompositeShape(this);
+    //    }
+    //}
 
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
         IsLock = false;
         m_LockToggle.isOn = false;
+    }
+
+    public void ShowLockBtn(bool value)
+    {
+        m_LockToggle.gameObject.SetActive(value);
     }
 }
