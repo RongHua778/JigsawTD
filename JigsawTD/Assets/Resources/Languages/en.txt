@@ -18,7 +18,9 @@ TEST2=Test:Unlock all difficulties
 LEVEL1NAME=TEST LEVEL
 LEVELOTHER=MORE INCOMING
 LEVELINFO=DESCRIPTION
-BOSSINFO=BOSS
+DIFFICULTINFO=DIFFICULTY
+DIFFICULTY=Difficulty
+BATTLESET=Battle Setting
 HIGHSCORE=High Score
 WAVE=Wave
 NUM=
@@ -42,6 +44,7 @@ ALREADYGROUND=There are already a tile
 NOENOUGHDRAW=You have no draw point
 SKILLFULL=This turret already equipped a blueprint
 GETMONEY=You have gained 
+TUTORIALPLACE=Please place module at tutorial position
 
 //guidevideo
 PLACERULE=Placement Rule
@@ -237,48 +240,6 @@ CIRCLERANGE=Change the turret's range type to Circle.
 TRAPINTENSIFY=Increased the adjacent traps' effect by 100%.
 PORTALHIT=Each hit has a 5% chance to transfer enemy back 3 blocks.
 
-AAA=Heavy Cannon: greatly reduced rotate speed and double all increased attack.
-BBB=Overload Magazine: Firerate increased by 200% for the first 10 seconds each wave.
-CCC=Ice Core: Increase adjacent turrets' slow by 0.5.
-DDD=Restless Powder: Critical damage randomly increased by -100% to 400%.
-EEE=Nuclear Projectile: Bullet's splash range increased by 0.3/block it travalled.
-
-AAB=Charged Base: Attack increased by 100% for the first 15 seconds each wave.
-AAC=Extended Barrel: Range +2.
-AAD=Metal Bullet: Each critical hit increases attack by 10% during this wave(up to 200%).
-
-
-ABC=Reinforcement base: Upgrade cost -50%.
-ABD=Quantitative Investment: Coin earned increased by 15%.
-ABE=Resource allocation: Attack increased by 10% permanently for your each draw.
-
-ACD=Recycling: Draw module cost reduced by 30% while composite.
-ACE=Urgent Refactoring: Enhanced the next blueprint you bought.
-
-ADE=Metal Mind: Gain 1 perfect element while composite.
-
-BBC=Accurate Strike: Bullet deal extra damage equal to 4% of the target's current health(1% of boss).
-BBE=Miniature muzzle: Double all firerate increased. No critical anymore.
-
-BCD=Mint Factory: This turret gives you 1 coin each time it deals a critical hit.
-BCE=Repair factory: Increased the adjacent traps' effect by 100%.
-
-BDE=Lucky Lottery: Gain random 100-300 coins.
-
-CCD=Flame Core: Increase adjacent turrets' critical by 30%.
-CCE=Steady Core: Increase adjacent turrets' splash by 0.5.
-
-CDE=Aimed Core: Increase adjacent turrets' range by 1.
-
-DDA=Sealed Cannon: If critical is greater than 100%, increase bullet's damage by 100%.
-DDB=Suppression: Critical increased by 100% for the first 15 seconds each wave.
-DDC=Unstable Axis: Critical damage increase 10% for every 0.1 slow.
-DDE=Range Guidance: Critical damage is increased by 100% while target's distance greater than 3.
-
-EEA=Powerful Splash: Splash damage is increased by 100% when target's distance less than 3.
-EEB=Heating Gun: Splash increased by 0.3 for each adjacent turret.
-EEC=Extra Muzzle: Damage reduced by 50%. Attacks 2 additional targets.
-EED=Bombardment: Splash damage increased by 100% if it is a critical hit.
 
 //Enemy
 SOILDER=Sartre
@@ -352,7 +313,7 @@ SPUTTERINGBASEINFO=Splash Base: Only Composite Tuttet can be placed, splash+1.
 SLOWBASEINFO=Slow Base: Only Composite Tuttet can be placed, slow+1.
 
 //Guide
-GuideName=Kant
+KANGDE=Kant
 Guide01=Welcome, Prototype S66666, your first Refactor Test is initializing...
 Guide02=Welcome to your first test, and I'll walk you through the ground rules.
 Guide03=First, drag your cursor to the edge of the screen to move the view.

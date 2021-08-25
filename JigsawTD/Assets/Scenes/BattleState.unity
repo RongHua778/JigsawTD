@@ -5652,7 +5652,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &273820033
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5816,7 +5816,6 @@ MonoBehaviour:
   _bluePrintFacotry: {fileID: 11400000, guid: 328a3a7240180f7409f1f8d5a3654b4f, type: 2}
   _skillFactory: {fileID: 11400000, guid: 8dfa564f81651544a9e92088070f60c2, type: 2}
   _nonEnemyFactory: {fileID: 11400000, guid: 30f433efbe7ecd14e811dc996935ecb0, type: 2}
-  _taskFactory: {fileID: 11400000, guid: 8e679b45845228943917caaeb5ef9a19, type: 2}
 --- !u!4 &286649183
 Transform:
   m_ObjectHideFlags: 0
@@ -5874,19 +5873,19 @@ MonoBehaviour:
   LevelUpMoney: 000000003200000078000000fa0000009001000058020000520300000f270000
   StartCoin: 5
   StartLotteryDraw: 0
-  BaseWaveIncome: 20
+  BaseWaveIncome: 10
   WaveMultiplyIncome: 5
   BuyBluePrintCost: 20
   ShopRefreshCost: 20
   CoinInterest: 0
-  BaseShapeCost: 20
+  BaseShapeCost: 10
   MultipleShapeCost: 5
   EnvrionmentBaseVolume: 0.5
   TileSize: 1
   trapN: 15
   TileShapeChance: []
-  PlayerMaxHealth: 1900000019000000190000001900000019000000
-  difficutyWave: c8000000c8000000c8000000c8000000c8000000
+  PlayerMaxHealth: 1e0000000f0000000f0000000f0000000f000000
+  difficutyWave: 1400000028000000280000002800000028000000
   CircleCol: {fileID: 379002804665637541, guid: 88314c00e62edfc4ea1c16ad951dd62f, type: 3}
   HalfCircleCol: {fileID: 7596794955534363694, guid: 50875bb1c1fe9494986c25fe26851e21, type: 3}
   LineCol: {fileID: 6795443890427911548, guid: 0205623c809c30b42b3a1523f0f9774a, type: 3}
@@ -12001,18 +12000,6 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 286649182}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: TriggerGuide
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -18511,18 +18498,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 286649182}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: TriggerGuide
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 10
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1079363497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22857,67 +22832,88 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogues:
-  - Name: GuideName
+  - GuideNote: "\u9F20\u6807\u79FB\u52A8"
+    TriggerID: 0
+    Name: KANGDE
     Words:
     - Guide01
     - Guide02
     - Guide03
     DontNeedClickEnd: 1
-  - Name: GuideName
+  - GuideNote: "\u9F20\u6807\u7F29\u653E"
+    TriggerID: 1
+    Name: KANGDE
     Words:
     - Guide04
     - Guide05
     DontNeedClickEnd: 1
-  - Name: GuideName
+  - GuideNote: "\u57FA\u672C\u89C4\u5219\u8BF4\u660E"
+    TriggerID: 2
+    Name: KANGDE
     Words:
     - Guide06
     - Guide07
     - Guide08
+    DontNeedClickEnd: 0
+  - GuideNote: "\u4EE3\u5E01\u663E\u793A\u53CA\u7B2C\u4E00\u6B21\u62BD\u53D6"
+    TriggerID: 3
+    Name: KANGDE
+    Words:
     - Guide09
     - Guide10
     DontNeedClickEnd: 1
-  - Name: GuideName
-    Words: []
-    DontNeedClickEnd: 0
-  - Name: GuideName
+  - GuideNote: "\u751F\u547D\u503C"
+    TriggerID: 4
+    Name: KANGDE
     Words:
     - Guide11
     - Guide12
-    DontNeedClickEnd: 0
-  - Name: GuideName
-    Words:
     - Guide13
     - Guide14
-    - Guide15
-    DontNeedClickEnd: 1
-  - Name: GuideName
+    DontNeedClickEnd: 0
+  - GuideNote: "\u6CE2\u6B21"
+    TriggerID: 5
+    Name: KANGDE
     Words:
+    - Guide15
     - Guide16
+    DontNeedClickEnd: 1
+  - GuideNote: "\u7B2C\u4E8C\u6B21\u62BD\u53D6"
+    TriggerID: 4
+    Name: KANGDE
+    Words:
     - Guide17
     - Guide18
     DontNeedClickEnd: 1
-  - Name: GuideName
+  - GuideNote: "\u5F00\u59CB\u7B2C\u4E8C\u6CE2\u6218\u6597"
+    TriggerID: 5
+    Name: KANGDE
     Words:
     - Guide19
+    DontNeedClickEnd: 1
+  - GuideNote: "\u7B2C\u4E09\u6B21\u62BD\u53D6"
+    TriggerID: 6
+    Name: KANGDE
+    Words:
     - Guide20
     - Guide21
-    - Guide22
-    DontNeedClickEnd: 0
-  - Name: GuideName
+    DontNeedClickEnd: 1
+  - GuideNote: "\u5408\u6210"
+    TriggerID: 7
+    Name: KANGDE
     Words:
-    - Guide23
-    - Guide24
+    - Guide22
     DontNeedClickEnd: 1
-  - Name: GuideName
-    Words: []
-    DontNeedClickEnd: 1
-  - Name: GuideName
+  - GuideNote: 
+    TriggerID: 8
+    Name: GuideName
     Words:
     - Guide25
     - Guide26
     - Guide27
     DontNeedClickEnd: 0
   backBtn: {fileID: 458023095}
+  currentGuideIndex: 0
   newContent: {fileID: 885656457}
   oldContent: {fileID: 2104441421}
 --- !u!222 &1337809833
@@ -30790,7 +30786,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6.19, y: 231}
+  m_AnchoredPosition: {x: 6.175, y: 184}
   m_SizeDelta: {x: 698.45, y: 79.15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1770094917
@@ -31635,11 +31631,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8834c8b736c85524bb85789591747753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Difficulty: 1
-  MaxDifficulty: 5
+  SelectDifficulty: 0
   transition: {fileID: 231277384}
   transitionTime: 1
-  Tutorial: 0
+  Tutorial: 1
   SeletecedLevel: 1
 --- !u!114 &1834551531
 MonoBehaviour:
@@ -35810,18 +35805,6 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 286649182}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: TriggerGuide
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 9
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

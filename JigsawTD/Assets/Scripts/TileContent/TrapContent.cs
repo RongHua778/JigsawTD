@@ -19,6 +19,8 @@ public class TrapContent : GameTileContent
     //ÃÀÊõÉèÖÃ
     private bool isReveal = false;
     public bool IsReveal { get => isReveal; set => isReveal = value; }
+
+    [HideInInspector] public bool Important;
     private SpriteRenderer trapGFX;
     private Sprite initSprite;
     private Sprite unrevealSprite;

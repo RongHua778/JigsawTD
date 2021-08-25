@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class WaveInfoSetter : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
+public class WaveInfoSetter : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] Image[] enemyIcons = default;
     [SerializeField] Text waveTxt = default;
@@ -15,17 +15,17 @@ public class WaveInfoSetter : MonoBehaviour,IPointerEnterHandler,IPointerExitHan
         switch (lang)
         {
             case "ch":
-                waveTxt.text = GameMultiLang.GetTraduction("NUM") + wave + GameMultiLang.GetTraduction("WAVE");
+                waveTxt.text = GameMultiLang.GetTraduction("NUM") + wave + "/" + StaticData.Instance.LevelMaxWave + GameMultiLang.GetTraduction("WAVE");
                 break;
             case "en":
-                waveTxt.text = GameMultiLang.GetTraduction("WAVE") + wave;
+                waveTxt.text = GameMultiLang.GetTraduction("WAVE") + wave + "/" + StaticData.Instance.LevelMaxWave;
                 break;
         }
         foreach (var obj in enemyIcons)
         {
             obj.gameObject.SetActive(false);
         }
-        for(int i = 0; i < sequences.Count; i++)
+        for (int i = 0; i < sequences.Count; i++)
         {
             enemyIcons[i].gameObject.SetActive(true);
             EnemyAttribute attribute = GameManager.Instance.EnemyFactory.Get(sequences[i].EnemyType);

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundTile: {fileID: 458233090153635530, guid: 616c0c537063af4489540002ccbcbb03, type: 3}
   basicTilePrefab: {fileID: 1381369290962742139, guid: 557a00bbb39db9146a95b084ae54a7cb, type: 3}
+  tutorialPrefab: {fileID: 7443573808806835420, guid: bdc6bc77c687ab0438d04f8669ef57a2, type: 3}

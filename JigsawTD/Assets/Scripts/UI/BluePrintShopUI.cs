@@ -143,6 +143,7 @@ public class BluePrintShopUI : IUserInterface
 
     public void ShopBtnClick()//播放商店界面打开动画
     {
+        GameManager.Instance.TriggerGuide(10);
         Showing = !Showing;
         if (Showing)
             Show();
@@ -162,7 +163,6 @@ public class BluePrintShopUI : IUserInterface
 
     public void MoveBluePrintToPocket(BluePrintGrid grid)//把商店配方移入拥有
     {
-
         grid.InShop = false;
         grid.transform.SetAsLastSibling();
         OwnBluePrints.Add(grid);

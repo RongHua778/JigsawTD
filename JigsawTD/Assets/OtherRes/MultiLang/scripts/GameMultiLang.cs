@@ -23,7 +23,6 @@ public class GameMultiLang : MonoBehaviour
 			DontDestroyOnLoad (gameObject);
 		} else {
 			Destroy (gameObject);
-			//return;
 		}
 		LoadLanguage();
 
@@ -36,11 +35,20 @@ public class GameMultiLang : MonoBehaviour
 			Fields = new Dictionary<string, string> ();
 		
 		Fields.Clear ();
-		PlayerPrefs.SetString("_language", defaultLang);
 		string lang = PlayerPrefs.GetString ("_language", defaultLang);
+		//PlayerPrefs.SetString("_language", lang);
+		switch (lang)
+		{
+			case "en":
+				PlayerPrefs.SetInt("_language_index", 0);
+				break;
+			case "ch":
+				PlayerPrefs.SetInt("_language_index", 1);
+				break;
+		}
 
-		if (PlayerPrefs.GetInt ("_language_index", -1) == -1)
-			PlayerPrefs.SetInt ("_language_index", 0);
+		//if (PlayerPrefs.GetInt ("_language_index", -1) == -1)
+		//	PlayerPrefs.SetInt ("_language_index", 0);
 
 		string allTexts = (Resources.Load (@"Languages/" + lang) as TextAsset).text; //without (.txt)
 

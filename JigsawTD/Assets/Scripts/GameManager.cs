@@ -39,7 +39,6 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] BlueprintFactory _bluePrintFacotry = default;
     [SerializeField] SkillFactory _skillFactory = default;
     [SerializeField] NonEnemyFactory _nonEnemyFactory = default;
-    [SerializeField] TaskFactory _taskFactory = default;
     public TileFactory TileFactory { get => _tileFactory; }
     public TileContentFactory ContentFactory { get => _contentFactory; }
     public TileShapeFactory ShapeFactory { get => _shapeFactory; }
@@ -47,7 +46,6 @@ public class GameManager : Singleton<GameManager>
     public BlueprintFactory BluePrintFactory { get => _bluePrintFacotry; }
     public SkillFactory SkillFactory { get => _skillFactory; set => _skillFactory = value; }
     public NonEnemyFactory NonEnemyFactory { get => _nonEnemyFactory; set => _nonEnemyFactory = value; }
-    public TaskFactory TaskFactory { get => _taskFactory; set => _taskFactory = value; }
 
 
     [Header("集合")]
@@ -73,7 +71,6 @@ public class GameManager : Singleton<GameManager>
         ContentFactory.Initialize();
         ShapeFactory.Initialize();
         EnemyFactory.InitializeFactory();
-        TaskFactory.InitializeFactory();
 
         //形状生成外观类
         ConstructHelper.Initialize();
@@ -86,7 +83,6 @@ public class GameManager : Singleton<GameManager>
         //初始化UI
         m_MainUI.Initialize();//主界面顶部UI
         m_FuncUI.Initialize();//主界面功能UI
-        m_GuideUI.Initialize(m_FuncUI, m_MainUI, m_BluePrintShopUI);//教学系统UI
         m_BluePrintShopUI.Initialize();//配方系统UI
         m_ShapeSelectUI.Initialize();//抽模块UI
         m_GameEndUI.Initialize();//游戏结束UI
@@ -98,6 +94,8 @@ public class GameManager : Singleton<GameManager>
         m_EnemyTips.Initialize();//敌人TIPS
         m_TurretBaseTips.Initialize();//基座tips
 
+        m_GuideUI.Initialize(m_FuncUI, m_MainUI, m_BluePrintShopUI,m_ShapeSelectUI);//教学系统UI
+        m_GuideUI.Initialize();//IuserInterface初始化
         //设置操作流程
         buildingState = new BuildingState(this, m_BoardSystem);
         waveState = new WaveState(this, m_WaveSystem);
@@ -210,6 +208,11 @@ public class GameManager : Singleton<GameManager>
         {
             return;
         }
+        if (m_MainUI.CurrentWave >= StaticData.Instance.LevelMaxWave)
+        {
+            GameEnd(true);
+            return;
+        }
         TransitionToState(StateName.BuildingState);
 
         m_WaveSystem.GetSequence();
@@ -218,7 +221,6 @@ public class GameManager : Singleton<GameManager>
         m_FuncUI.PrepareNextWave();
 
         TriggerGuide(6);
-        TriggerGuide(7);
         TriggerGuide(8);
         //重置所有防御塔的回合临时加成
         foreach (var turret in elementTurrets.behaviors)
@@ -232,10 +234,10 @@ public class GameManager : Singleton<GameManager>
 
     }
 
-    public void GameEnd(int turn)
+    public void GameEnd(bool win)
     {
         m_GameEndUI.Show();
-        m_GameEndUI.SetGameResult(turn);
+        m_GameEndUI.SetGameResult(win);
     }
 
     public void TransitionToState(StateName stateName)
@@ -381,10 +383,11 @@ public class GameManager : Singleton<GameManager>
         m_GuideVideo.ShowPage(index);
     }
 
-    public void TriggerGuide(int index)
+    public int TriggerGuide(int index)
     {
         if (Game.Instance.Tutorial)
-            m_GuideUI.GuideTrigger(index);
+            return m_GuideUI.GuideTrigger(index);
+        return -1;
     }
 
     public void BuyOneGround()

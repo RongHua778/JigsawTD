@@ -157,16 +157,13 @@ public class FuncUI : IUserInterface
         if (FreeShapeCount > 0)
         {
             FreeShapeCount--;
-            GameManager.Instance.DrawShapes();
-            GameManager.Instance.CheckDrawSkill();
-            return;
         }
-        if (GameManager.Instance.ConsumeMoney(BuyShapeCost))
+        else if (GameManager.Instance.ConsumeMoney(BuyShapeCost))
         {
-            GameManager.Instance.DrawShapes();
             BuyShapeCost += StaticData.Instance.MultipleShapeCost;
-            GameManager.Instance.CheckDrawSkill();
         }
+        GameManager.Instance.DrawShapes();
+        GameManager.Instance.CheckDrawSkill();
 
     }
 

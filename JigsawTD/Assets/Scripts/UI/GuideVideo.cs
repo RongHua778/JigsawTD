@@ -10,6 +10,7 @@ public class GuideVideo :IUserInterface
 
     public override void Initialize()
     {
+        base.Initialize();
         anim = this.GetComponent<Animator>();
         if (Game.Instance.Tutorial)
         {

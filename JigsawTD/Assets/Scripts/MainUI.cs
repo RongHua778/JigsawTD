@@ -39,10 +39,10 @@ public class MainUI : IUserInterface
         {
             if (value <= 0)
             {
-                GameManager.Instance.GameEnd(CurrentWave);
+                GameManager.Instance.GameEnd(false);
             }
-            life = Mathf.Clamp(value, 0, StaticData.Instance.PlayerMaxHealth[Game.Instance.Difficulty - 1]);
-            PlayerLifeTxt.text = life.ToString() + "/" + StaticData.Instance.PlayerMaxHealth[Game.Instance.Difficulty - 1].ToString();
+            life = Mathf.Clamp(value, 0, StaticData.Instance.PlayerMaxHealth[Game.Instance.SelectDifficulty]);
+            PlayerLifeTxt.text = life.ToString() + "/" + StaticData.Instance.PlayerMaxHealth[Game.Instance.SelectDifficulty].ToString();
         }
     }
     int currentWave;
@@ -52,6 +52,7 @@ public class MainUI : IUserInterface
         set
         {
             currentWave = value;
+
         }
     }
 
@@ -83,7 +84,7 @@ public class MainUI : IUserInterface
         GameEvents.Instance.onEnemyReach += EnemyReach;
         GameSpeed = 1;
         CurrentWave = 0;
-        Life = StaticData.Instance.PlayerMaxHealth[Game.Instance.Difficulty - 1];
+        Life = StaticData.Instance.PlayerMaxHealth[Game.Instance.SelectDifficulty];
         Coin = StaticData.Instance.StartCoin;
 
         m_PausePanel.Initialize();

@@ -11,18 +11,31 @@ public class UILevelManager : IUserInterface
     [SerializeField] Text highScore = default;
     [SerializeField] GameObject tutorialPanel = default;
     private Animator m_Anim;
+    [SerializeField] Text difficultyTxt = default;
+    int difficulty;
+    public int Difficulty
+    {
+        get => difficulty;
+        set
+        {
+            difficulty = Mathf.Clamp(value, 0, 5);
+            difficultyTxt.text = GameMultiLang.GetTraduction("DIFFICULTY") + " " + difficulty.ToString();
+        }
+    }
+
 
     public override void Initialize()
     {
         base.Initialize();
         m_Anim = this.GetComponent<Animator>();
+        Difficulty = PlayerPrefs.GetInt("MaxDifficulty", 0);
     }
     public void SetLevelInfo()
     {
         LevelAttribute attribute = LevelManager.Instance.CurrentLevel;
         int maxPass = LevelManager.Instance.LevelMaxTurn;
         levelInfo.text = GameMultiLang.GetTraduction(attribute.LevelInfo);
-        highScore.text = GameMultiLang.GetTraduction("HIGHSCORE")+":" + maxPass + GameMultiLang.GetTraduction("WAVE");
+        highScore.text = GameMultiLang.GetTraduction("HIGHSCORE") + ":" + maxPass + GameMultiLang.GetTraduction("WAVE");
         for (int i = 0; i < bossSlots.Length; i++)
         {
             bossSlots[i].SetBossInfo(attribute.Boss[i], maxPass, (i + 1) * 10);
@@ -31,11 +44,23 @@ public class UILevelManager : IUserInterface
 
     public void StartGameBtnClick()
     {
-        if (!gameStart && LevelManager.Instance.SelectedLevelID == 1)
+        if (!gameStart)
         {
-            tutorialPanel.SetActive(true);
+            Game.Instance.SelectDifficulty = Difficulty;
             gameStart = true;
+            if (Difficulty == 0)
+                tutorialPanel.SetActive(true);
+            else
+            {
+                Game.Instance.Tutorial = false;
+                Game.Instance.LoadScene(1);
+            }
         }
+    }
+
+    public void DifficultyBtnClick(int count)
+    {
+        Difficulty += count;
     }
 
     public override void Show()
@@ -47,6 +72,5 @@ public class UILevelManager : IUserInterface
     public void ClosePanel()
     {
         m_Anim.SetBool("OpenLevel", false);
-
     }
 }

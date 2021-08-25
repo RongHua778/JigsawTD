@@ -100,7 +100,7 @@ public class DraggingShape : DraggingActions
         skillFull = false;
         canDrop = true;
         Physics2D.SyncTransforms();
-        CheckAttached();
+        //CheckAttached();
         CheckOverLap();
         CheckMapEdge();
         if (!canDrop)
@@ -160,19 +160,7 @@ public class DraggingShape : DraggingActions
             }
             if (tile.Content.ContentType != GameTileContentType.Empty)//如果是有防御塔的，就比对冲突
             {
-                //if (col.CompareTag("OnlyCompositeTurret"))
-                //{
-                //    if (tile.Content.ContentType == GameTileContentType.CompositeTurret)
-                //    {
-                //        SetTileColor(correctColor, tile);
-                //        continue;
-                //    }
-                //    else
-                //    {
-                //        canDrop = false;
-                //        break;
-                //    }
-                //}
+
                 if (tile.Content.ContentType == GameTileContentType.CompositeTurret)
                 {
                     if (col.CompareTag("OnlyCompositeTurret"))
@@ -278,6 +266,12 @@ public class DraggingShape : DraggingActions
             GameManager.Instance.ShowMessage("你点的太快了");
             return;
         }
+        //判断是否为教程
+        if (!tileShape.CheckForcePlacement())
+        {
+            GameManager.Instance.ShowMessage(GameMultiLang.GetTraduction("TUTORIALPLACE"));
+            return;
+        }
         if (canDrop)
         {
             if (!BoardSystem.FindPath)
@@ -292,7 +286,11 @@ public class DraggingShape : DraggingActions
                 tile.TileLanded();
             }
             GameManager.Instance.ConfirmShape();
+            //新手引导
             GameManager.Instance.TriggerGuide(4);
+            GameManager.Instance.TriggerGuide(7);
+            GameManager.Instance.TriggerGuide(9);
+
             PickingShape = null;
             Destroy(this.gameObject);
         }

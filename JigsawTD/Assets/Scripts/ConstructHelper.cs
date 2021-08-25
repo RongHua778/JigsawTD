@@ -149,4 +149,16 @@ public static class ConstructHelper
     }
 
 
+    //ΩÃ—ß”√
+    public static TileShape GetTutorialShape(ShapeType shapeType, Element element, int quality, int turretPos, Vector2 forcePos, Vector2 forceDir)
+    {
+        TileShape shape = m_ShapeFactory.GetShape(shapeType);
+        GameTile tile = m_TileFactory.GetBasicTile();
+        GameTileContent content = m_ContentFactory.GetElementTurret(element, quality);
+        tile.SetContent(content);
+        shape.SetTile(tile, turretPos);
+        shape.SetForcePlace(forceDir, forcePos);
+        return shape;
+    }
+
 }

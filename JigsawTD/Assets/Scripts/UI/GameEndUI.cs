@@ -29,6 +29,15 @@ public class GameEndUI : IUserInterface
         totalDamageTxt.text = TotalDamage.ToString();
     }
 
+    public void SetGameResult(bool win)
+    {
+        title.text = win ? GameMultiLang.GetTraduction("WIN") : GameMultiLang.GetTraduction("LOSE");
+        if (win)
+            PlayerPrefs.SetInt("MaxDifficulty", Game.Instance.SelectDifficulty + 1);
+        totalCompositeTxt.text = TotalComposite.ToString();
+        totalDamageTxt.text = TotalDamage.ToString();
+    }
+
     public void ReturnToMenu()
     {
         if (Game.Instance != null)

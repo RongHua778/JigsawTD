@@ -18,8 +18,8 @@ public class TrapTips : TileTips
             Icon.sprite = trapContent.TrapAttribute.Icon;
             Name.text = GameMultiLang.GetTraduction(trapContent.TrapAttribute.Name);
             Description.text = GameMultiLang.GetTraduction(trapContent.TrapAttribute.Description);
+            switchTrapArea.SetActive(!trapContent.Important);
             switchTrapCostTxt.text = cost.ToString();
-            switchTrapArea.SetActive(true);
         }
         else
         {

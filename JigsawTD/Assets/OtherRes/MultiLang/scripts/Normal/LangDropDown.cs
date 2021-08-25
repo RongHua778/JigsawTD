@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class LangDropDown : MonoBehaviour
 {
@@ -8,7 +7,7 @@ public class LangDropDown : MonoBehaviour
 	Dropdown drp;
 	int index;
 
-	void Awake ()
+	void Start ()
 	{
 		drp = this.GetComponent <Dropdown> ();
 		int v = PlayerPrefs.GetInt ("_language_index", 0);
@@ -26,8 +25,7 @@ public class LangDropDown : MonoBehaviour
 
 	void ApplyLanguageChanges ()
 	{
-		SceneManager.LoadScene (0);
-		//GameMultiLang.Instance.LoadLanguage();
+		Game.Instance.ReloadScene();
 	}
 
 	void OnDestroy ()

@@ -80,16 +80,16 @@ public class WaveSystem : IGameSystem
         List<EnemySequence> sequences = null;
         for (int i = 0; i < StaticData.Instance.LevelMaxWave; i++)
         {
-            
+
             if (i % 3 == 0)
             {
-                stage += ((i / 10) + 1) * LevelAttribute.LevelIntensify;
+                stage += ((i / 10) + 1) * (Game.Instance.SelectDifficulty + 1) / 2;// * LevelAttribute.LevelIntensify;
             }
-            if (i > 39)
-            {
-                float number = 2f;
-                stage += ((i / 10) + 1) * LevelAttribute.LevelIntensify * number;
-            }
+            //if (i > 39)
+            //{
+            //    float number = 2f;
+            //    stage += ((i / 10) + 1) * LevelAttribute.LevelIntensify * number;
+            //}
 
             if (i < 3)
             {

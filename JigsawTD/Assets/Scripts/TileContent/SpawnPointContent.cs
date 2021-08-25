@@ -9,6 +9,7 @@ public class SpawnPointContent : TrapContent
     protected override void Awake()
     {
         IsReveal = true;
+        Important = true;
     }
 
 }

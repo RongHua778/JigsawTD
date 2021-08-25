@@ -11,6 +11,7 @@ public class TileFactory : GameObjectFactory
 {
     [SerializeField] GroundTile groundTile = default;
     [SerializeField] GameTile basicTilePrefab = default;
+    [SerializeField] GameObject tutorialPrefab = default;
 
     public void Initialize()
     {
@@ -26,6 +27,10 @@ public class TileFactory : GameObjectFactory
     {
         return CreateInstance(groundTile) as GroundTile;
 
+    }
+    public GameObject GetTutorialPrefab()
+    {
+        return tutorialPrefab;
     }
 
 

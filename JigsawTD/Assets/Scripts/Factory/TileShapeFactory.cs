@@ -30,7 +30,7 @@ public class TileShapeFactory : ScriptableObject
         return GetShape(ShapeType.D);
     }
 
-    private TileShape GetShape(ShapeType type)
+    public TileShape GetShape(ShapeType type)
     {
         if (ShapeDIC.ContainsKey(type))
         {
