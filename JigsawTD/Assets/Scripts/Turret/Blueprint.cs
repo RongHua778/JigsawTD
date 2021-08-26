@@ -5,7 +5,6 @@ using System.Linq;
 
 public class Blueprint
 {
-    public bool IntensifyBluePrint = false;
     public TurretAttribute CompositeTurretAttribute;
     public StrategyBase ComStrategy;
     List<Composition> compositions = new List<Composition>();

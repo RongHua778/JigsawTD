@@ -79,8 +79,12 @@ public class BoardSystem : IGameSystem
     GameTile destinationPoint;
     public GameTile DestinationPoint { get => destinationPoint; set => destinationPoint = value; }
 
+    //新手引导指引格子
+    private List<GameObject> tutorialObjs = new List<GameObject>();
+
+
     //买一块地板多少钱
-    int buyOneGroundMoney = 20;
+    int buyOneGroundMoney;
     public int BuyOneGroundMoney
     {
         get => buyOneGroundMoney;
@@ -91,7 +95,7 @@ public class BoardSystem : IGameSystem
     }
 
     //买一块地板多少钱
-    int switchTrapCost = 50;
+    int switchTrapCost;
     public int SwitchTrapCost
     {
         get => switchTrapCost;
@@ -107,6 +111,8 @@ public class BoardSystem : IGameSystem
     {
         selection = transform.Find("Selection").gameObject;
         mainCam = Camera.main;
+        BuyOneGroundMoney = StaticData.Instance.BuyGroundCost;
+        SwitchTrapCost = StaticData.Instance.SwitchTrapCost;
         GameEvents.Instance.onSeekPath += SeekPath;
         GameEvents.Instance.onTileClick += TileClick;
         GameEvents.Instance.onTileUp += TileUp;
@@ -324,6 +330,8 @@ public class BoardSystem : IGameSystem
 
     public void BuyOneEmptyTile()
     {
+        if (Game.Instance.Tutorial)//教程期间无法购买地板
+            return;
         if (GameManager.Instance.OperationState.StateName == StateName.WaveState)
         {
             GameManager.Instance.ShowMessage(GameMultiLang.GetTraduction("NOTBATTLESTATE"));
@@ -344,7 +352,7 @@ public class BoardSystem : IGameSystem
         }
         else
         {
-            BuyOneGroundMoney += 20;
+            BuyOneGroundMoney +=StaticData.Instance.BuyGroundCostMultyply;
         }
         GameTile tile = ConstructHelper.GetNormalTile(GameTileContentType.Empty);
         tile.transform.position = SelectingTile.transform.position;
@@ -377,7 +385,7 @@ public class BoardSystem : IGameSystem
 
     public void SwitchTrap(TrapContent trap)
     {
-        SwitchTrapCost += 50;
+        SwitchTrapCost += StaticData.Instance.SwitchTrapCostMultiply;
         Vector2 pos = trap.m_GameTile.transform.position;
         ObjectPool.Instance.UnSpawn(trap.m_GameTile);
         GameTile tile = ConstructHelper.GetNormalTile(GameTileContentType.Empty);
@@ -387,7 +395,30 @@ public class BoardSystem : IGameSystem
 
     }
 
+    public void SetTutorialPoss(bool value, List<Vector2> poss=null)
+    {
+        if (!value)
+        {
+            DestoryTutorialPoss();
+        }
+        else
+        {
+            foreach(var pos in poss)
+            {
+                GameObject GO = Instantiate(GameManager.Instance.TileFactory.GetTutorialPrefab(), pos, Quaternion.identity,this.transform);
+                tutorialObjs.Add(GO);
+            }
+        }
+    }
 
+    private void DestoryTutorialPoss()
+    {
+        foreach(var obj in tutorialObjs)
+        {
+            Destroy(obj);
+        }
+        tutorialObjs.Clear();
+    }
 }
 
 

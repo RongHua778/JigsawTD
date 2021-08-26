@@ -74,6 +74,8 @@ OWNPERFECT=Perfect Element
 PERFECTINFO=Perfect element can served as any element for composition
 
 //gameEndPanel
+WIN=WIN
+LOSE=END
 PASSLEVEL=You have pass 
 TOTALDAMAGE=Total Damage
 COMPOSITECOUNT=Composite Turret
@@ -177,7 +179,7 @@ ESKILL=Attacks deal splash area damage.
 F1SKILL=Damage increased by 10% for each enemy in range.
 G1SKILL=Deals 50% less damage, but can attack an additional 3 targets.
 H1SKILL=Bullet's splash damage increased by 25% for each enemy it hit.
-L1SKILL=Each shoot increases attack by 5 * the total amount of composite turrets.
+L1SKILL=Each shoot increases attack by 1 * the total amount of composite turrets.
 I1SKILL=Randomly shoot energy bullets around, and each shoot increases attack speed by 0.1(up to 10).
 J1SKILL=Forbid range+2, attack increased by 10% for every 1 range.
 K1SKILL=Double the increased critical damage.

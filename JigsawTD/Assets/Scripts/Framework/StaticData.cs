@@ -30,6 +30,10 @@ public class StaticData : Singleton<StaticData>
     public float CoinInterest;
     public int BaseShapeCost;
     public int MultipleShapeCost;
+    public int BuyGroundCost;
+    public int BuyGroundCostMultyply;
+    public int SwitchTrapCost;
+    public int SwitchTrapCostMultiply;
     public static float[,] QualityChances = new float[7, 5]
     {
         { 1f, 0f, 0f, 0f, 0f },
@@ -85,8 +89,8 @@ public class StaticData : Singleton<StaticData>
 
     //攻击范围PREFAB
     public RangeHolder CircleCol;
-    public Collider2D HalfCircleCol;
-    public Collider2D LineCol;
+    //public Collider2D HalfCircleCol;
+    //public Collider2D LineCol;
     public RangeIndicator RangeIndicatorPrefab;
     public JumpDamage JumpDamagePrefab;
     public Sprite UnrevealTrap;

@@ -162,6 +162,10 @@ public class FuncUI : IUserInterface
         {
             BuyShapeCost += StaticData.Instance.MultipleShapeCost;
         }
+        else
+        {
+            return;
+        }
         GameManager.Instance.DrawShapes();
         GameManager.Instance.CheckDrawSkill();
 

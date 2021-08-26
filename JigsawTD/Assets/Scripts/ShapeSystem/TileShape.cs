@@ -143,7 +143,7 @@ public class TileShape : MonoBehaviour
             return false;
         else
         {
-            m_ShapeSelectUI.ClearTutorialPrefabs();
+            GameManager.Instance.SetTutorialPoss(false);
             return true;
         }
     }

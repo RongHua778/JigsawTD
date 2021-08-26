@@ -202,7 +202,7 @@ public class L1Skill : InitialSkill
         //if (intensifyIncreased > 1.95f)
         //    return;
         //intensifyIncreased += 0.1f * strategy.TimeModify;
-        strategy.TurnFixAttack += 5 * GameEndUI.TotalComposite * strategy.TimeModify;
+        strategy.TurnFixAttack += GameEndUI.TotalComposite * strategy.TimeModify;
         //strategy.TurnAttackIntensify += 0.1f * strategy.TimeModify;
     }
 

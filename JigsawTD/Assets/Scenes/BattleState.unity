@@ -5870,16 +5870,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerMaxLevel: 7
-  LevelUpMoney: 000000003200000078000000fa0000009001000058020000520300000f270000
-  StartCoin: 5
+  LevelUpMoney: 000000002800000078000000fa0000009001000058020000520300000f270000
+  StartCoin: 0
   StartLotteryDraw: 0
   BaseWaveIncome: 10
-  WaveMultiplyIncome: 5
+  WaveMultiplyIncome: 3
   BuyBluePrintCost: 20
   ShopRefreshCost: 20
-  CoinInterest: 0
+  CoinInterest: 0.2
   BaseShapeCost: 10
-  MultipleShapeCost: 5
+  MultipleShapeCost: 3
+  BuyGroundCost: 10
+  BuyGroundCostMultyply: 10
+  SwitchTrapCost: 30
+  SwitchTrapCostMultiply: 30
   EnvrionmentBaseVolume: 0.5
   TileSize: 1
   trapN: 15
@@ -5887,8 +5891,6 @@ MonoBehaviour:
   PlayerMaxHealth: 1e0000000f0000000f0000000f0000000f000000
   difficutyWave: 1400000028000000280000002800000028000000
   CircleCol: {fileID: 379002804665637541, guid: 88314c00e62edfc4ea1c16ad951dd62f, type: 3}
-  HalfCircleCol: {fileID: 7596794955534363694, guid: 50875bb1c1fe9494986c25fe26851e21, type: 3}
-  LineCol: {fileID: 6795443890427911548, guid: 0205623c809c30b42b3a1523f0f9774a, type: 3}
   RangeIndicatorPrefab: {fileID: 7053043907688615658, guid: d8a2a921f17ca0e46b801451269a7676, type: 3}
   JumpDamagePrefab: {fileID: 4699521983380265760, guid: 312c9ecb05f5d3f4fa19d5107ffc2833, type: 3}
   UnrevealTrap: {fileID: 21300000, guid: e8ecebd490ee97447a3e4938bf2835cc, type: 3}
@@ -5925,7 +5927,7 @@ RectTransform:
   m_Children:
   - {fileID: 1056937478}
   m_Father: {fileID: 1576089491}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -22812,7 +22814,7 @@ RectTransform:
   m_Children:
   - {fileID: 1780090705}
   m_Father: {fileID: 1576089491}
-  m_RootOrder: 11
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -22879,38 +22881,65 @@ MonoBehaviour:
     - Guide16
     DontNeedClickEnd: 1
   - GuideNote: "\u7B2C\u4E8C\u6B21\u62BD\u53D6"
-    TriggerID: 4
+    TriggerID: 6
     Name: KANGDE
     Words:
     - Guide17
     - Guide18
     DontNeedClickEnd: 1
   - GuideNote: "\u5F00\u59CB\u7B2C\u4E8C\u6CE2\u6218\u6597"
-    TriggerID: 5
+    TriggerID: 7
     Name: KANGDE
     Words:
     - Guide19
     DontNeedClickEnd: 1
   - GuideNote: "\u7B2C\u4E09\u6B21\u62BD\u53D6"
-    TriggerID: 6
+    TriggerID: 8
     Name: KANGDE
     Words:
     - Guide20
     - Guide21
     DontNeedClickEnd: 1
   - GuideNote: "\u5408\u6210"
-    TriggerID: 7
+    TriggerID: 9
     Name: KANGDE
     Words:
     - Guide22
     DontNeedClickEnd: 1
-  - GuideNote: 
-    TriggerID: 8
-    Name: GuideName
+  - GuideNote: "\u5546\u5E97"
+    TriggerID: 10
+    Name: KANGDE
     Words:
+    - Guide23
+    - Guide24
     - Guide25
+    DontNeedClickEnd: 1
+  - GuideNote: "\u5408\u6210\u843D\u5730"
+    TriggerID: 11
+    Name: KANGDE
+    Words:
     - Guide26
     - Guide27
+    - Guide28
+    DontNeedClickEnd: 1
+  - GuideNote: "\u6A21\u5757\u7B49\u7EA7\u4ECB\u7ECD"
+    TriggerID: 12
+    Name: KANGDE
+    Words:
+    - Guide29
+    - Guide30
+    - Guide31
+    - Guide32
+    DontNeedClickEnd: 0
+  - GuideNote: "\u5229\u606F\u53CA\u7ED3\u675F"
+    TriggerID: 13
+    Name: KANGDE
+    Words:
+    - Guide33
+    - Guide34
+    - Guide35
+    - Guide36
+    - Guide37
     DontNeedClickEnd: 0
   backBtn: {fileID: 458023095}
   currentGuideIndex: 0
@@ -27002,10 +27031,10 @@ RectTransform:
   - {fileID: 491704459}
   - {fileID: 7154940297539556853}
   - {fileID: 33334173}
+  - {fileID: 1337809831}
   - {fileID: 7154940298000812943}
   - {fileID: 1703365155}
   - {fileID: 288904574}
-  - {fileID: 1337809831}
   - {fileID: 1863234689}
   - {fileID: 976930640}
   - {fileID: 183971227}
@@ -29874,7 +29903,7 @@ RectTransform:
   m_Children:
   - {fileID: 277661089}
   m_Father: {fileID: 1576089491}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -31631,7 +31660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8834c8b736c85524bb85789591747753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectDifficulty: 0
+  SelectDifficulty: 4
   transition: {fileID: 231277384}
   transitionTime: 1
   Tutorial: 1
@@ -39780,7 +39809,7 @@ RectTransform:
   m_Children:
   - {fileID: 4941691922364663940}
   m_Father: {fileID: 1576089491}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

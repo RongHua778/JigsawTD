@@ -28,7 +28,7 @@ public class GuideUI : IUserInterface
 
     private Queue<string> wordQueue;
 
-    [SerializeField]private int currentGuideIndex = 0;
+    [SerializeField] private int currentGuideIndex = 0;
     public int CurrentGuideIndex { get => currentGuideIndex; set => currentGuideIndex = value; }
 
 
@@ -111,7 +111,7 @@ public class GuideUI : IUserInterface
         backBtn.SetActive(false);
         CurrentGuideIndex++;
         GuideEndEvent(currentGuideIndex);
-        
+
         //Invoke(currentDialogue.GuideEndEvent, 0f);
         //switch (currentGuideIndex - 1)//具体每个教程做什么，比正常的index-1
         //{
@@ -227,6 +227,9 @@ public class GuideUI : IUserInterface
     {
         switch (id)
         {
+            case 0:
+                m_MainUI.TopLeftArea.SetActive(true);
+                break;
             case 4://显示生命值
                 m_MainUI.LifeObj.SetActive(true);
                 m_MainUI.PlayAnim("ShowLife", true);
@@ -234,20 +237,34 @@ public class GuideUI : IUserInterface
             case 5://显示下一波信息
                 m_MainUI.WaveObj.SetActive(true);
                 m_MainUI.PlayAnim("ShowWave", true);
+                m_MainUI.PlayAnim("ShowMoney", false);
                 break;
             case 6:
-                m_ShapeUI.TutorialID = 2;
+                List<Vector2> poss = new List<Vector2> { new Vector2(0, 1), new Vector2(0, 2), new Vector2(-1, 2), new Vector2(-2, 2) };
+                ShapeInfo shapeInfo = new ShapeInfo(ShapeType.L, Element.Gold, 1, 1, new Vector2(0, 2), Vector2.down, poss);
+                m_ShapeUI.PreSetShape = shapeInfo;
                 m_FuncUI.NextBtnObj.SetActive(false);
                 break;
             case 7:
                 m_FuncUI.NextBtnObj.SetActive(true);
                 break;
             case 8:
-                m_ShapeUI.TutorialID = 3;
+                List<Vector2> poss2 = new List<Vector2> { new Vector2(-2, 0), new Vector2(-2, 1), new Vector2(-2, -1), new Vector2(-3, 0) };
+                ShapeInfo shapeInfo2 = new ShapeInfo(ShapeType.T, Element.Wood, 1, 3, new Vector2(-2, 0), Vector2.left, poss2);
+                m_ShapeUI.PreSetShape = shapeInfo2;
                 m_FuncUI.NextBtnObj.SetActive(false);
                 break;
-            case 9://放下第三个模块后，出现合成按钮
+            case 9://放下第三个模块后，出现商店按钮
                 m_ShopUI.ShopBtnObj.SetActive(true);
+                break;
+            case 10://点击商店按钮
+
+                break;
+            case 11://放下合成塔
+                m_FuncUI.NextBtnObj.SetActive(true);
+                break;
+            case 12://第四回合开始，显示模块等级
+                m_FuncUI.LevelBtnObj.SetActive(true);
                 break;
 
         }
@@ -257,6 +274,13 @@ public class GuideUI : IUserInterface
         switch (id)
         {
             case 1://第一段对话结束，鼠标移动操作
+                //生成一个专属配方
+                Blueprint blueprint = ConstructHelper.GetSpecificBlueprint("L1", 0, 1, 2);
+                m_ShopUI.AddBluePrint(blueprint, true);
+                m_ShopUI.RemoveGrid(m_ShopUI.ShopBluePrints[0]);//移除1个
+
+                
+
                 ScaleAndMove.MoveTurorial = true;
                 ScaleAndMove.CanControl = true;
                 break;
@@ -273,13 +297,19 @@ public class GuideUI : IUserInterface
             case 4://显示抽取按钮
                 m_FuncUI.DrawBtnObj.SetActive(true);
                 m_FuncUI.Show();
-                m_ShapeUI.TutorialID = 1;
+                List<Vector2> poss = new List<Vector2> { new Vector2(0, 0), new Vector2(0, 1), new Vector2(1, 1), new Vector2(1, 2) };
+                ShapeInfo shapeInfo = new ShapeInfo(ShapeType.Z, Element.Water, 1, 0, new Vector2(1, 1), Vector2.left, poss);
+                m_ShapeUI.PreSetShape = shapeInfo;
                 break;
             case 5:
                 GameManager.Instance.TriggerGuide(5);
                 break;
             case 6://显示出怪按钮
                 m_FuncUI.NextBtnObj.SetActive(true);
+                break;
+            case 14://结束
+                Hide();
+                Game.Instance.Tutorial = false;
                 break;
 
         }

@@ -286,10 +286,6 @@ public class DraggingShape : DraggingActions
                 tile.TileLanded();
             }
             GameManager.Instance.ConfirmShape();
-            //新手引导
-            GameManager.Instance.TriggerGuide(4);
-            GameManager.Instance.TriggerGuide(7);
-            GameManager.Instance.TriggerGuide(9);
 
             PickingShape = null;
             Destroy(this.gameObject);

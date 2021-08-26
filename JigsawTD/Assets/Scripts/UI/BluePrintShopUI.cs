@@ -189,7 +189,7 @@ public class BluePrintShopUI : IUserInterface
         GameEndUI.TotalComposite++;
     }
 
-    private void RemoveGrid(BluePrintGrid grid)//移除对应的配方，并清理列表
+    public void RemoveGrid(BluePrintGrid grid)//移除对应的配方，并清理列表
     {
         if (ShopBluePrints.Contains(grid))
         {
@@ -214,11 +214,6 @@ public class BluePrintShopUI : IUserInterface
         }
     }
 
-    public void GetARandomBluePrintToPocket(int level, bool isIntensify = false)//幸运值满，随机获得一个配方
-    {
-        Blueprint bluePrint = ConstructHelper.GetRandomBluePrintByLevel(level, isIntensify);
-        AddBluePrint(bluePrint, false);
-    }
 
     public void PreviewComposition(bool value, Element element, int quality)
     {

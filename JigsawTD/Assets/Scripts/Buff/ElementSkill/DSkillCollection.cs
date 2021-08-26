@@ -74,7 +74,7 @@ public class CriticalSpeed : ElementSkill
 
     public override void Shoot(Bullet bullet = null)
     {
-        strategy.TurnFixCriticalPercentage += 0.025f * strategy.TimeModify;
+        strategy.TurnFixCriticalRate += 0.025f * strategy.TimeModify;
     }
 }
 

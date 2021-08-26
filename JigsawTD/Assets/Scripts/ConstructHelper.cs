@@ -87,10 +87,10 @@ public static class ConstructHelper
 
 
     //合成塔
-    public static Blueprint GetRandomBluePrintByLevel(int level, bool isIntensify = false)
+    public static Blueprint GetRandomBluePrintByLevel(int level)
     {
         TurretAttribute attribute = m_ContentFactory.GetRandomCompositeAttributeByLevel(level);
-        return m_BlurPrintFactory.GetRandomBluePrint(attribute, isIntensify);
+        return m_BlurPrintFactory.GetRandomBluePrint(attribute);
     }
 
     public static TileShape GetCompositeTurretByBluePrint(Blueprint bluePrint)
@@ -150,15 +150,23 @@ public static class ConstructHelper
 
 
     //教学用
-    public static TileShape GetTutorialShape(ShapeType shapeType, Element element, int quality, int turretPos, Vector2 forcePos, Vector2 forceDir)
+    public static TileShape GetTutorialShape(ShapeInfo shapeInfo)
     {
-        TileShape shape = m_ShapeFactory.GetShape(shapeType);
+        TileShape shape = m_ShapeFactory.GetShape(shapeInfo.ShapeType);
         GameTile tile = m_TileFactory.GetBasicTile();
-        GameTileContent content = m_ContentFactory.GetElementTurret(element, quality);
+        GameTileContent content = m_ContentFactory.GetElementTurret(shapeInfo.Element, shapeInfo.Quality);
         tile.SetContent(content);
-        shape.SetTile(tile, turretPos);
-        shape.SetForcePlace(forceDir, forcePos);
+        shape.SetTile(tile, shapeInfo.TurretPos);
+        shape.SetForcePlace(shapeInfo.ForceDir, shapeInfo.ForcePos);
+        GameManager.Instance.SetTutorialPoss(true, shapeInfo.TutorialPoss);
         return shape;
+    }
+
+    public static Blueprint GetSpecificBlueprint(string name, int e1, int e2, int e3)
+    {
+        TurretAttribute attribute = m_ContentFactory.GetCompositeTurretByName(name);
+        Blueprint bluePrint = m_BlurPrintFactory.GetSpecificBluePrint(attribute, e1, e2, e3);
+        return bluePrint;
     }
 
 }

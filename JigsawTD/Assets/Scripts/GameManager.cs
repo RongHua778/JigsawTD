@@ -94,7 +94,7 @@ public class GameManager : Singleton<GameManager>
         m_EnemyTips.Initialize();//敌人TIPS
         m_TurretBaseTips.Initialize();//基座tips
 
-        m_GuideUI.Initialize(m_FuncUI, m_MainUI, m_BluePrintShopUI,m_ShapeSelectUI);//教学系统UI
+        m_GuideUI.Initialize(m_FuncUI, m_MainUI, m_BluePrintShopUI, m_ShapeSelectUI);//教学系统UI
         m_GuideUI.Initialize();//IuserInterface初始化
         //设置操作流程
         buildingState = new BuildingState(this, m_BoardSystem);
@@ -160,6 +160,7 @@ public class GameManager : Singleton<GameManager>
     }
 
 
+
     private void KeyboardControl()
     {
         if (Game.Instance.Tutorial)
@@ -222,6 +223,8 @@ public class GameManager : Singleton<GameManager>
 
         TriggerGuide(6);
         TriggerGuide(8);
+        TriggerGuide(12);
+        TriggerGuide(13);
         //重置所有防御塔的回合临时加成
         foreach (var turret in elementTurrets.behaviors)
         {
@@ -291,6 +294,12 @@ public class GameManager : Singleton<GameManager>
         m_BoardSystem.CheckPathTrap();
         m_FuncUI.Show();
         m_BluePrintShopUI.CheckAllBluePrint();
+
+        //新手引导
+        TriggerGuide(4);
+        TriggerGuide(7);
+        TriggerGuide(9);
+        TriggerGuide(11);
     }
 
     public void CompositeShape(BluePrintGrid grid)//合成了一个防御塔
@@ -343,7 +352,8 @@ public class GameManager : Singleton<GameManager>
 
     public void GainInterest()
     {
-        m_MainUI.Coin = (int)(m_MainUI.Coin * (1 + StaticData.Instance.CoinInterest));
+        int interest = Mathf.Min(100, (int)(m_MainUI.Coin * StaticData.Instance.CoinInterest));
+        m_MainUI.Coin += interest;
     }
 
     public void GainDraw(int amount)
@@ -362,11 +372,6 @@ public class GameManager : Singleton<GameManager>
         {
             m_BluePrintShopUI.RefreshShop(m_FuncUI.ModuleLevel, cost);
         }
-    }
-
-    public void GetRandomBluePrint(bool isIntensify = false)
-    {
-        m_BluePrintShopUI.GetARandomBluePrintToPocket(m_FuncUI.ModuleLevel, isIntensify);
     }
 
     public void BuyBluePrint(BluePrintGrid grid, int cost)
@@ -526,5 +531,9 @@ public class GameManager : Singleton<GameManager>
         m_FuncUI.FreeShapeCount += count;
     }
 
+    public void SetTutorialPoss(bool value,List<Vector2> poss=null)
+    {
+        m_BoardSystem.SetTutorialPoss(value, poss);
+    }
     #endregion
 }

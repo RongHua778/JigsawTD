@@ -11,6 +11,7 @@ public class LevelDiscount : ElementSkill
 
     public override void Build()
     {
+        base.Build();
         strategy.UpgradeDiscount += 0.5f;
     }
     public override void PreHit(Bullet bullet = null)
@@ -231,6 +232,7 @@ public class CircleRange : ElementSkill
 
     public override void Build()
     {
+        base.Build();
         strategy.RangeType = RangeType.Circle;
         strategy.m_Turret.GenerateRange();
     }
