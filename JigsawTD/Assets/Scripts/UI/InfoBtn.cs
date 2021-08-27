@@ -20,6 +20,8 @@ public class InfoBtn : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (content == "")
+            return;
         GameManager.Instance.ShowTempTips(content, mainCam.WorldToScreenPoint(transform.position + offset));
     }
 

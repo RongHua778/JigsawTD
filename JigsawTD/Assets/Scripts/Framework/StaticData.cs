@@ -94,6 +94,7 @@ public class StaticData : Singleton<StaticData>
     public RangeIndicator RangeIndicatorPrefab;
     public JumpDamage JumpDamagePrefab;
     public Sprite UnrevealTrap;
+    public GainCoinAnim GainCoinAnimPrefab;
 
     private void Start()
     {

@@ -535,5 +535,13 @@ public class GameManager : Singleton<GameManager>
     {
         m_BoardSystem.SetTutorialPoss(value, poss);
     }
+
+    public void GainWaveBaseMoney(Vector2 pos)//goldkeeper¹¦ÄÜ
+    {
+        int amount = m_MainUI.CurrentWave * 2;
+        GainMoney(amount);
+        GameObject obj = ObjectPool.Instance.Spawn(StaticData.Instance.GainCoinAnimPrefab).gameObject;
+        obj.transform.position = pos;
+    }
     #endregion
 }

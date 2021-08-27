@@ -106,6 +106,7 @@ BUY=购买
 COMPOSITE=合成
 UPGRADE=升级
 SWITCHTRAP=换位
+ELEMENTSLOT=元素技能
 
 //Groundtips
 BUYGROUND=购买一块基础格
@@ -187,61 +188,96 @@ K1SKILL=所有暴击伤害提升效果翻倍
 M1SKILL=穿透型子弹, 子弹每次造成伤害就使后续伤害提高10%
 
 //A系
-DOUBLEATTACK=所有攻击提升效果翻倍
-ATTACKSPEED=攻击特效:每次攻击提升本回合5%攻击力
-LATEATTACK=每回合开始后，攻击力每秒提升2%
-RANDOMATTACK=子弹攻击力在50%-200%之间随机浮动
-ATTACKPOLO=相邻防御塔的基础攻击力提升50%
-ATTACKADJACENT=相邻每有1个防御塔，就提升50%基础攻击力
+AAA=合金重炮
+AAAINFO=所有攻击提升效果翻倍
+AAB=充能子弹
+AABINFO=每次攻击提升本回合5%攻击力
+AAC=加热炮管
+AACINFO=每回合开始后，攻击力每秒提升2%
+AAD=不稳定轴
+AADINFO=子弹攻击力在50%-200%之间随机浮动
+AAE=强攻核心
+AAEINFO=相邻防御塔的基础攻击力提升50%
 
 //B系
-MULTITARGET=额外攻击2个目标
-SPEEDPOLO=相邻防御塔的基础攻速提升50%
-SPEEDTARGET=对同一目标进行攻击时，每次攻击使攻速提高10%，上限300%，切换目标重置
-LATESPEED=每回合开始后，攻速每秒提升2%
-SPEEDCRITICAL=暴击后，使接下来1秒攻速提升50%
+BBB=极骤打击
+BBBINFO=额外攻击2个目标
+BBA=聚焦打击
+BBAINFO=对同一目标进行攻击时，每次攻击使攻速提高10%，上限300%，切换目标重置
+BBC=改进弹夹
+BBCINFO=每回合开始后，攻速每秒提升2%
+BBD=激发火药
+BBDINFO=暴击后，使接下来1秒攻速提升50%
+BBE=加速核心
+BBEINFO=相邻防御塔的基础攻速提升50%
 SPEEDADJACENT=相邻每有1个防御塔，就提升50%基础攻速
 
 //C系
-LATEINTENSIFY=回合开始20秒后发生的所有属性提升翻倍
-SLOWPOLO=相邻防御塔的减速提高0.5
-SLOWATTACK=对距离小于3的敌人造成减速效果翻倍
-SLOWSPEED=攻击造成目标2%当前生命值的伤害
-CRITICALSLOW=暴击造成的减速效果翻倍
+CCC=蓄能底座
+CCCINFO=回合开始20秒后发生的所有属性提升翻倍
+CCA=寒气阵地
+CCAINFO=对距离小于3的敌人造成减速效果翻倍
+CCB=穿透子弹
+CCBINFO=攻击造成目标2%当前生命值的伤害
+CCD=寒冰炸弹
+CCDINFO=暴击造成的减速效果翻倍
+CCE=减速核心
+CCEINFO=相邻防御塔的减速提高0.5
 SLOWADJACENT=相邻每有1个防御塔，就提升0.5减速
 
 //D系
-CRITICALPOLO=相邻防御塔的暴击率提高25%
-RANDOMCRITICAL=暴击伤害增加-100到400%的随机浮动
-CRITICALSPEED=每次攻击提升本回合2.5%暴击率
-LATECRITICAL=每回合开始后，暴击率每秒提升1%
+DDD=纳米重构
+DDDINFO=装备：复制第一个元素技能
+DDA=躁动火药
+DDAINFO=暴击伤害增加-100到400%的随机浮动
+DDB=震荡射击
+DDBINFO=每次攻击提升本回合2.5%暴击率
+DDC=热能基座
+DDCINFO=每回合开始后，暴击率每秒提升1%
+DDE=炽热核心
+DDEINFO=相邻防御塔的暴击率提高25%
 CRITICALADJACENT=相邻每有1个防御塔，就提升25%暴击率
 
 //E系
-POLOGETTER=受到的所有光环效果翻倍
-NEARSPLASH=攻击距离小于3的敌人时，溅射伤害提高100%
-SPLASHSPEED=每次攻击提升本回合溅射0.02
-LATESPLASH=每回合开始后，溅射范围每秒提升0.01
-RANDOMSPLASH=溅射增加0-1的随机浮动
+EEE=原子中心
+EEEINFO=受到的所有光环效果翻倍
+EEA=集火阵地
+EEAINFO=攻击距离小于3的敌人时，溅射伤害提高100%
+EEB=加重弹药
+EEBINFO=每次攻击提升本回合溅射范围0.02
+EEC=聚能打击
+EECINFO=每回合开始后，溅射范围每秒提升0.01
+EED=不稳定轴
+EEDINFO=溅射增加0-1的随机浮动
+
 
 
 //综合系
-FREEDRAW=造成的伤害-25%，接下来两次抽取模块免费
-NEXTINTENSIFY=造成的伤害-25%，使下一个合成塔暴击+50%
-LEVELDISCOUNT=造成的伤害-25%，升级费用-50%
-TURRETLEVELUP=造成的伤害-25%，防御塔等级提升1级
-RANDOMSKILL=合成后变化为一个随机技能
-FREEGROUND=造成的伤害-25%，使接下来3次购买地板价格变为0
-SYSTEMDISCOUNT=造成的伤害-25%，使模块升级费用-50%
-PERFECTELEMENT=造成的伤害-25%，合成时获得1个万能元素
+ABC=廉价基座
+ABCINFO=造成的伤害-25%，升级费用-50%
+ABD=强化配方
+ABDINFO=造成的伤害-25%，使下一个合成塔暴击+50%
+ABE=免费奖券
+ABEINFO=造成的伤害-25%，接下来两次抽取模块免费
 
-COPYSKILL=装备：复制第一个元素技能
-MODULELEVELUP=将你的模块等级提升1级
-POLOINTENSIFY=受到光环的加成效果提升100%
+ACD=快速升级
+ACDINFO=造成的伤害-25%，防御塔等级提升1级
+ACE=科技跃进
+ACEINFO=造成的伤害-25%，使模块升级费用-50%
+ADE=幻化构造
+ADEINFO=合成后变化为一个随机技能
+BCD=水泥倾泻
+BCDINFO=造成的伤害-25%，使接下来三次购买基本格价格为0
+BCE=万能元素
+BCEINFO=造成的伤害-25%，合成时获得1个万能元素
+BDE=维修工厂
+BDEINFO=造成的伤害-25%，相邻陷阱的效果提升100%
+CDE=闪烁打击
+CDEINFO=造成的伤害-25%，攻击有5%概率将敌人传送到3格前的位置
+
 RANDOMTRAP=在防御塔前方生成一个随机陷阱
 CIRCLERANGE=使防御塔攻击范围变为圆型
-TRAPINTENSIFY=相邻陷阱的效果提升100%
-PORTALHIT=攻击有5%概率将敌人传送到3格前的位置
+
 
 
 //Enemy
@@ -251,6 +287,7 @@ TANKER=海明威
 RESTORER=尼采
 FROSTER=黑格尔
 HEALER=叔本华
+GOLDKEEPER=运钞车
 
 SOILDERINFO=数量较多，集群出动。
 RUNNERINFO=当其直线移动时，会移动更快。
@@ -258,6 +295,7 @@ TANKERINFO=生命值较高但移动缓慢。
 RESTORERINFO=当一定时间内没有受到伤害，会迅速回复生命值。
 FROSTERINFO=死亡后冻结周围的塔一定的时间。
 HEALERINFO=在其一定范围内的敌人提高移动速度。
+GOLDKEEPERINFO=每受到一定伤害就会掉落金币。（抵达终点不会造成伤害）
 
 //boss
 DIVIDER=海德格尔（Boss）

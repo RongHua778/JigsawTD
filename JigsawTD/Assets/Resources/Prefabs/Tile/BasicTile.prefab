@@ -357,6 +357,6 @@ MonoBehaviour:
   - {fileID: 5298052241823903811, guid: 40d0b9e2f658f4e49a4a13e65a35bb86, type: 3}
   - {fileID: -5031080086131195028, guid: 40d0b9e2f658f4e49a4a13e65a35bb86, type: 3}
   - {fileID: 6051944637248819377, guid: 40d0b9e2f658f4e49a4a13e65a35bb86, type: 3}
-  turretBaseDeco: {fileID: 1074088240198149506}
-  basicTurretBase: {fileID: 21300000, guid: 405681c8b14a95a4193e4f68b978ed91, type: 3}
-  compositeTurretBase: {fileID: 21300000, guid: bbc1791fa5da5264a9d932e7e202efa4, type: 3}
+  basicTurretBase: {fileID: -2751177121866005933, guid: ed75be710d9524b4484adbccb1e29b87, type: 3}
+  compositeTurretBase: {fileID: 2219362761703447931, guid: ed75be710d9524b4484adbccb1e29b87, type: 3}
+  compositeTurretBase2: {fileID: -7132121176335741257, guid: ed75be710d9524b4484adbccb1e29b87, type: 3}

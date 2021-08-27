@@ -6,9 +6,9 @@ using System.Linq;
 public class BasicTile : GameTile
 {
     [SerializeField] Sprite[] sprites = default;
-    [SerializeField] SpriteRenderer turretBaseDeco = default;
     [SerializeField] Sprite basicTurretBase = default;
     [SerializeField] Sprite compositeTurretBase = default;
+    [SerializeField] Sprite compositeTurretBase2 = default;
 
 
     public override void SetContent(GameTileContent content)
@@ -39,10 +39,8 @@ public class BasicTile : GameTile
         }
     }
 
-    public void SetDeco(Sprite sprite)
+    public void EquipTurret()
     {
-        turretBaseDeco.sprite = sprite;
-        turretBaseDeco.gameObject.SetActive(true);
+        TileRenderers[0].sprite = compositeTurretBase2;
     }
-
 }

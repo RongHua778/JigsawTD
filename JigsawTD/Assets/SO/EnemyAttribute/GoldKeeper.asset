@@ -10,17 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 614735ba97a8e4b4bbdf8128289355f3, type: 3}
-  m_Name: Fat
+  m_Name: GoldKeeper
   m_EditorClassIdentifier: 
-  EnemyType: 6
-  InitCount: 0
+  EnemyName: GOLDKEEPER
+  EnemyType: 16
+  InitCount: 1
   CountIncrease: 0
-  Health: 250
-  Speed: 0.6
+  Health: 500
+  Speed: 0.5
   Shell: 0
   CoolDown: 2
-  Prefab: {fileID: 1826846765945729799, guid: 64a8a9f56a62f9e4b8d1293799b67f4d, type: 3}
-  ReachDamage: 5
+  Prefab: {fileID: -1710581719449573739, guid: 821b74dddf1519344ad3a3ff63562b2e, type: 3}
+  ReachDamage: 0
   extraHealth: 0
-  EnemyIcon: {fileID: 21300000, guid: 9ded6d6e3486ba04aa9907b672b4bfba, type: 3}
-  Description: "\u80E1\u585E\u5C14\uFF08Boss\uFF09\uFF0C\u751F\u547D\u503C\u6781\u9AD8\uFF0C\u79FB\u52A8\u7F13\u6162\u3002"
+  EnemyIcon: {fileID: 21300000, guid: 391aae71d8536744abedccf0f37ad9f5, type: 3}
+  EnemyEmptyIcon: {fileID: 0}
+  Description: GOLDKEEPERINFO

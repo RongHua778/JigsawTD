@@ -150,6 +150,7 @@ public class DraggingShape : DraggingActions
     }
     private void CheckOverLap()
     {
+        BoardSystem.PreviewEquipTile = null;
         foreach (var tile in TileShape.tiles)
         {
             Collider2D col = StaticData.RaycastCollider(tile.transform.position, LayerMask.GetMask(StaticData.ConcreteTileMask));
@@ -169,6 +170,7 @@ public class DraggingShape : DraggingActions
                         if (((CompositeTurret)tTile.Content).Strategy.TurretSkills.Count < 3)
                         {
                             SetTileColor(equipColor, tile);
+                            BoardSystem.PreviewEquipTile = tTile;
                             break;
                         }
                         else
@@ -280,7 +282,6 @@ public class DraggingShape : DraggingActions
                 return;
             }
             Sound.Instance.PlayEffect("Sound_ConfirmShape");
-            // EnableGroundColliders();
             foreach (GameTile tile in TileShape.tiles)
             {
                 tile.TileLanded();
@@ -314,6 +315,7 @@ public class DraggingShape : DraggingActions
         SetPreviewColor(holdColor);
         OnStartDrag();
     }
+
 
     public void EndDragging()
     {

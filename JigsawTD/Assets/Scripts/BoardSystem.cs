@@ -23,6 +23,21 @@ public struct PathPoint
 public class BoardSystem : IGameSystem
 {
     //计算点击选中
+    #region 装备预览
+    static GameObject equipAnim;
+    private static TileBase previewEquipTile;
+    public static TileBase PreviewEquipTile
+    {
+        get => previewEquipTile;
+        set
+        {
+            previewEquipTile = value;
+            if (previewEquipTile != null)
+                equipAnim.transform.position = previewEquipTile.transform.position;
+            equipAnim.SetActive(previewEquipTile != null);
+        }
+    }
+    #endregion
     #region 选择Tile高亮
     static GameObject selection;
     float pressCounter = 0;
@@ -110,6 +125,7 @@ public class BoardSystem : IGameSystem
     public override void Initialize()
     {
         selection = transform.Find("Selection").gameObject;
+        equipAnim = transform.Find("EquipAnim").gameObject;
         mainCam = Camera.main;
         BuyOneGroundMoney = StaticData.Instance.BuyGroundCost;
         SwitchTrapCost = StaticData.Instance.SwitchTrapCost;

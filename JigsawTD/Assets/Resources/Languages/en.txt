@@ -107,6 +107,7 @@ BUY=Buy
 COMPOSITE=Composite
 UPGRADE=Upgrade
 SWITCHTRAP=Relocate
+ELEMENTSLOT=Element Skill
 
 //Groundtips
 BUYGROUND=Buy a basic tile?
@@ -250,6 +251,7 @@ TANKER=Hemingway
 RESTORER=Nietzsche
 FROSTER=Hegel
 HEALER=Schopenhauer
+GOLDKEEPER=Banknote
 
 SOILDERINFO=There are more of them.
 RUNNERINFO=When it's moving in a straight line, it's moving faster.
@@ -257,6 +259,7 @@ TANKERINFO=High health but move slow.
 RESTORERINFO=It will quickly restore health if no damage is taken for a while.
 FROSTERINFO=Freezes the turrets around it while it die.
 HEALERINFO=Increased the nearby enemies' speed.
+GOLDKEEPERINFO=Gold coins will be dropped every time a certain amount of damage is taken.(will not cause damage to you)
 
 //boss
 DIVIDER=Hidegger (Boss)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
 
 public class TipsElementConstruct : MonoBehaviour
 {
@@ -10,11 +11,15 @@ public class TipsElementConstruct : MonoBehaviour
     Blueprint m_BluePrint;
     ElementSkill m_Skill;
     [SerializeField] InfoBtn m_InfoBtn = default;
+    [SerializeField] Text elementSkillName = default;
     [SerializeField] Text elementSkillDes = default;
+    [SerializeField] GameObject[] areas = default;
     //[SerializeField] Image intensifyImg = default;
 
     public void SetElements(ElementSkill skill)
     {
+        areas[1].SetActive(false);
+        areas[0].SetActive(true);
         m_Skill = skill;
 
         for (int i = 0; i < skill.Elements.Count; i++)
@@ -29,7 +34,31 @@ public class TipsElementConstruct : MonoBehaviour
             Elements[i].sprite = attribute.TurretLevels[0].TurretIcon;
         }
         SetIntensifyInfo();
-        elementSkillDes.text = GameMultiLang.GetTraduction(skill.SkillDescription);
+
+        string key="";
+        foreach(var element in skill.Elements)
+        {
+            switch (element)
+            {
+                case 0:
+                    key += "A";
+                    break;
+                case 1:
+                    key += "B";
+                    break;
+                case 2:
+                    key += "C";
+                    break;
+                case 3:
+                    key += "D";
+                    break;
+                case 4:
+                    key += "E";
+                    break;
+            }
+        }
+        elementSkillName.text = GameMultiLang.GetTraduction(key);
+        elementSkillDes.text = GameMultiLang.GetTraduction(key+"INFO");
         //intensifyImg.gameObject.SetActive(strategy.CompositeBluePrint.IntensifyBluePrint);
 
     }
@@ -40,4 +69,9 @@ public class TipsElementConstruct : MonoBehaviour
         m_InfoBtn.SetContent(text);
     }
 
+    public void SetEmpty()//ÏÔÊ¾¿Õ²Û×´Ì¬
+    {
+        areas[0].SetActive(false);
+        areas[1].SetActive(true);
+    }
 }

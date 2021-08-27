@@ -27,14 +27,7 @@ public class CompositeTurret : TurretContent
     {
         if (col != null)
         {
-            //GameTile tile = col.GetComponent<GameTile>();
-            //if (tile.Content.ContentType == GameTileContentType.TurretBase)//放在加成地形上时，获得地形技能
-            //{
-            //    TurretBaseContent content = tile.Content as TurretBaseContent;
-            //    ((StrategyComposite)Strategy).AddTileSkill(content.m_TurretBaseAttribute.tileSkill);
-            //    ((BasicTile)m_GameTile).SetDeco(content.m_TurretBaseAttribute.Icon);
-            //}
-            //ObjectPool.Instance.UnSpawn(tile);
+
             GameTile tile = col.GetComponent<GameTile>();
             if (tile.Content.ContentType == GameTileContentType.CompositeTurret)
             {
@@ -42,7 +35,8 @@ public class CompositeTurret : TurretContent
                 ElementSkill skill = (ElementSkill)this.Strategy.TurretSkills[1];
                 turret.Strategy.AddElementSkill(skill);
                 skill.OnEquip();
-                
+                ((BasicTile)turret.m_GameTile).EquipTurret();
+                BoardSystem.PreviewEquipTile = null;
                 ObjectPool.Instance.UnSpawn(m_GameTile);
             }
             else

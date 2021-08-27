@@ -114,6 +114,10 @@ public class WaveSystem : IGameSystem
             {
                 sequences = GenerateSpecificSequence(LevelAttribute.Boss[3].EnemyType, stage, i);
             }
+            else if ((i + 4) % 10 == 0)
+            {
+                sequences = GenerateSpecificSequence(EnemyType.GoldKeeper, stage, i);
+            }
             else if (i % 7 == 0 && i > 0)
             {
                 sequences = GenerateRandomSequence(2, stage, i);

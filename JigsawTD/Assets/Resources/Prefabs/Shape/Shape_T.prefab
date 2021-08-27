@@ -717,6 +717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsPreviewing: 0
   m_ElementTurret: {fileID: 0}
+  m_ShapeSelectUI: {fileID: 0}
   tiles: []
   shapeType: 2
 --- !u!114 &6889555363922204875
@@ -736,7 +737,7 @@ MonoBehaviour:
   transparentColor: {r: 1, g: 1, b: 1, a: 0}
   holdColor: {r: 1, g: 1, b: 1, a: 1}
   dropColor: {r: 0.48490566, g: 1, b: 0.53602576, a: 0.78431374}
-  equipColor: {r: 0, g: 0.963078, b: 1, a: 0.39215687}
+  equipColor: {r: 1, g: 0.6302396, b: 0, a: 0.39215687}
 --- !u!1 &6889555364187642330
 GameObject:
   m_ObjectHideFlags: 0

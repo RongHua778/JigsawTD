@@ -23,7 +23,6 @@ public class StrategyBase
     {
         strategyType = sType;
         m_Att = attribute;
-        //m_Turret = turret;
         this.Quality = quality;
         this.Element = element;
         CompositeBluePrint = comBlueprint;
@@ -46,6 +45,9 @@ public class StrategyBase
     public float InitSlowRate { get => initSlowRate; set => initSlowRate = value; }
 
     //二级属性
+    private int elementSkillSlot = 2;//元素技能槽数
+    public int ElementSKillSlot { get => elementSkillSlot; set => elementSkillSlot = value; }
+
     public RangeType RangeType = RangeType.Circle;
     private float initSputteringPercentage = 0.5f;//溅射伤害率
     private float initCriticalPercentage = 1.5f;//暴击伤害率
@@ -90,13 +92,13 @@ public class StrategyBase
     //private float baseSputteringPercentageIntensify;
     //private float baseCriticalPercentageIntensify;
     private int baseTargetCountIntensify;
-    public float BaseAttackIntensify { get => InitAttackIntensify + ComAttackIntensify;}
-    public float BaseSpeedIntensify { get => InitSpeedIntensify + ComSpeedIntensify;}
-    public int BaseRangeIntensify { get => InitRangeIntensify + ComRangeIntensify;}
+    public float BaseAttackIntensify { get => InitAttackIntensify + ComAttackIntensify; }
+    public float BaseSpeedIntensify { get => InitSpeedIntensify + ComSpeedIntensify; }
+    public int BaseRangeIntensify { get => InitRangeIntensify + ComRangeIntensify; }
     public float BaseCriticalRateIntensify { get => initCriticalRateIntensify + ComCriticalIntensify; }
     public float BaseCriticalPercentageIntensify { get => InitCriticalPercentageIntensify; }
     public float BaseSlowRateIntensify { get => InitSlowRateIntensify + ComSlowIntensify; }
-    public float BaseSputteringPercentageIntensify { get => InitSputteringPercentageIntensify;}
+    public float BaseSputteringPercentageIntensify { get => InitSputteringPercentageIntensify; }
     public float BaseSputteringRangeIntensify { get => InitSputteringRangeIntensify + ComSputteringRangeIntensify; }
     public int BaseTargetCountIntensify { get => baseTargetCountIntensify; set => baseTargetCountIntensify = value; }
 
@@ -207,7 +209,7 @@ public class StrategyBase
     #endregion
 
     public TurretSkill TurretSkill { get; set; }
-   
+
 
     public List<TurretSkill> TurretSkills = new List<TurretSkill>();
 
@@ -367,7 +369,7 @@ public class StrategyBase
     }
     public void CompositeSkill()
     {
-        for(int i = 0; i < TurretSkills.Count; i++)
+        for (int i = 0; i < TurretSkills.Count; i++)
         {
             TurretSkills[i].Composite();
         }

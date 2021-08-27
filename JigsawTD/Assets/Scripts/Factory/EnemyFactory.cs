@@ -7,7 +7,8 @@ public enum EnemyType
     Soilder, Runner, Restorer, Tanker, Healer, Froster,
     Fat, SixArmor, Divider, Blinker,
     Ninja, Borner, Armorer,
-    Random, AircraftCarrier, StrongerAircraftCarrier
+    Random, AircraftCarrier, StrongerAircraftCarrier,
+    GoldKeeper
         , None
 }
 [CreateAssetMenu(menuName = "Factory/EnemyFactory", fileName = "EnemyFactory")]

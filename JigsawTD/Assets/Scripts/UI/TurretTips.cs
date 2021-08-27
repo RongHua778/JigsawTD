@@ -21,6 +21,8 @@ public class TurretTips : TileTips
     [SerializeField] GameObject AnalysisArea = default;//伤害统计区
     [SerializeField] GameObject UpgradeArea = default;//合成塔升级区
     [SerializeField] GameObject IntensifyArea = default;//元素塔加成效果区
+
+    [SerializeField] GameObject ElementSkillArea = default;//元素技能区
     [SerializeField] TipsElementConstruct[] elementConstruct = default;//合成塔组成元素区
     //[SerializeField] TipsElementConstruct elementConstruct2 = default;//第二元素技能区
     //合成塔升级区
@@ -87,13 +89,11 @@ public class TurretTips : TileTips
             case StrategyType.Element:
                 UpgradeArea.SetActive(false);
                 IntensifyArea.SetActive(true);
-                foreach (var ecom in elementConstruct)
-                {
-                    ecom.gameObject.SetActive(false);
-                }
+                ElementSkillArea.SetActive(false);
                 IntensifyValue.text = StaticData.GetElementIntensifyText(Strategy.Element, Strategy.Quality);
                 break;
             case StrategyType.Composite:
+                ElementSkillArea.SetActive(true);
                 if (Strategy.Quality < 3)
                 {
                     UpgradeArea.SetActive(true);
@@ -109,18 +109,6 @@ public class TurretTips : TileTips
 
                 //元素技能
                 SetElementSkill();
-                //elementConstruct.gameObject.SetActive(true);
-
-                //elementConstruct.SetElements((ElementSkill)Strategy.TurretSkills[1]);
-                //if (Strategy.ElementSKill2 != null)
-                //{
-                //    elementConstruct2.gameObject.SetActive(true);
-                //    elementConstruct2.SetElements(Strategy.ElementSKill2);
-                //}
-                //else
-                //{
-                //    elementConstruct2.gameObject.SetActive(false);
-                //}
 
                 break;
         }
@@ -145,10 +133,6 @@ public class TurretTips : TileTips
         IntensifyArea.SetActive(false);
         BluePrintArea.SetActive(true);
         SetElementSkill();
-        //elementConstruct.gameObject.SetActive(true);
-        //elementConstruct.SetElements(m_Strategy.ElementSkill);
-        //elementConstruct2.gameObject.SetActive(false);
-
     }
 
     private void SetElementSkill()
@@ -157,10 +141,13 @@ public class TurretTips : TileTips
         {
             ecom.gameObject.SetActive(false);
         }
-        for (int i = 1; i < m_Strategy.TurretSkills.Count; i++)
+        for (int i = 0; i < m_Strategy.ElementSKillSlot; i++)
         {
-            elementConstruct[i - 1].gameObject.SetActive(true);
-            elementConstruct[i - 1].SetElements((ElementSkill)m_Strategy.TurretSkills[i]);
+            elementConstruct[i].gameObject.SetActive(true);
+            if (i < m_Strategy.TurretSkills.Count - 1)
+                elementConstruct[i].SetElements((ElementSkill)m_Strategy.TurretSkills[i + 1]);//第一个是被动技能
+            else
+                elementConstruct[i].SetEmpty();
         }
     }
 
@@ -267,7 +254,6 @@ public class TurretTips : TileTips
         {
             m_Strategy.Quality++;
             m_Strategy.SetQualityValue();
-            //m_Strategy.BuildTurretEffects();
             m_Strategy.m_Turret.SetGraphic();
             Icon.sprite = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].TurretIcon;
             Name.text = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].TurretName;
