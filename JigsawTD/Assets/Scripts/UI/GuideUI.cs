@@ -198,31 +198,6 @@ public class GuideUI : IUserInterface
     }
 
     #region GuideCallBack
-    //private void AllowMouseControl()
-    //{
-    //    ScaleAndMove.MoveTurorial = true;
-    //    ScaleAndMove.CanControl = true;
-    //}
-    //private void AllowSizeControl()
-    //{
-    //    ScaleAndMove.SizeTutorial = true;
-    //    ScaleAndMove.CanControl = true;
-    //}
-
-    //private void ShowMoney()
-    //{
-    //    m_MainUI.MoneyObj.SetActive(true);
-    //    m_MainUI.PlayAnim("ShowMoney", true);
-    //    m_FuncUI.Hide();
-    //    GameManager.Instance.TriggerGuide(3);
-    //}
-
-    //private void FirstTutorialDraw()
-    //{
-    //    m_FuncUI.DrawBtnObj.SetActive(true);
-    //    m_FuncUI.Show();
-    //    m_ShapeUI.TutorialID = 1;
-    //}
     private void GuideStartEvent(int id)
     {
         switch (id)
@@ -230,40 +205,39 @@ public class GuideUI : IUserInterface
             case 0:
                 m_MainUI.TopLeftArea.SetActive(true);
                 break;
-            case 4://显示生命值
+            case 5://显示生命值
                 m_MainUI.LifeObj.SetActive(true);
                 m_MainUI.PlayAnim("ShowLife", true);
                 break;
-            case 5://显示下一波信息
+            case 6://显示下一波信息
                 m_MainUI.WaveObj.SetActive(true);
                 m_MainUI.PlayAnim("ShowWave", true);
                 m_MainUI.PlayAnim("ShowMoney", false);
+                m_FuncUI.Hide();
                 break;
-            case 6:
+            case 7:
                 List<Vector2> poss = new List<Vector2> { new Vector2(0, 1), new Vector2(0, 2), new Vector2(-1, 2), new Vector2(-2, 2) };
                 ShapeInfo shapeInfo = new ShapeInfo(ShapeType.L, Element.Gold, 1, 1, new Vector2(0, 2), Vector2.down, poss);
                 m_ShapeUI.PreSetShape = shapeInfo;
                 m_FuncUI.NextBtnObj.SetActive(false);
                 break;
-            case 7:
-                m_FuncUI.NextBtnObj.SetActive(true);
-                break;
             case 8:
+                m_FuncUI.Hide();
+                
+                break;
+            case 9:
                 List<Vector2> poss2 = new List<Vector2> { new Vector2(-2, 0), new Vector2(-2, 1), new Vector2(-2, -1), new Vector2(-3, 0) };
                 ShapeInfo shapeInfo2 = new ShapeInfo(ShapeType.T, Element.Wood, 1, 3, new Vector2(-2, 0), Vector2.left, poss2);
                 m_ShapeUI.PreSetShape = shapeInfo2;
                 m_FuncUI.NextBtnObj.SetActive(false);
                 break;
-            case 9://放下第三个模块后，出现商店按钮
+            case 10:
                 m_ShopUI.ShopBtnObj.SetActive(true);
                 break;
-            case 10://点击商店按钮
-
-                break;
-            case 11://放下合成塔
+            case 12://放下合成塔
                 m_FuncUI.NextBtnObj.SetActive(true);
                 break;
-            case 12://第四回合开始，显示模块等级
+            case 13://第四回合开始，显示模块等级
                 m_FuncUI.LevelBtnObj.SetActive(true);
                 break;
 
@@ -278,8 +252,6 @@ public class GuideUI : IUserInterface
                 Blueprint blueprint = ConstructHelper.GetSpecificBlueprint("L1", 0, 1, 2);
                 m_ShopUI.AddBluePrint(blueprint, true);
                 m_ShopUI.RemoveGrid(m_ShopUI.ShopBluePrints[0]);//移除1个
-
-                
 
                 ScaleAndMove.MoveTurorial = true;
                 ScaleAndMove.CanControl = true;
@@ -301,13 +273,16 @@ public class GuideUI : IUserInterface
                 ShapeInfo shapeInfo = new ShapeInfo(ShapeType.Z, Element.Water, 1, 0, new Vector2(1, 1), Vector2.left, poss);
                 m_ShapeUI.PreSetShape = shapeInfo;
                 break;
-            case 5:
-                GameManager.Instance.TriggerGuide(5);
+            case 6:
+                GameManager.Instance.TriggerGuide(6);
                 break;
-            case 6://显示出怪按钮
+
+            case 7://显示出怪按钮
+            case 9:
                 m_FuncUI.NextBtnObj.SetActive(true);
+                m_FuncUI.Show();
                 break;
-            case 14://结束
+            case 15://结束
                 Hide();
                 Game.Instance.Tutorial = false;
                 break;

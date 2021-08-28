@@ -221,10 +221,10 @@ public class GameManager : Singleton<GameManager>
         m_MainUI.PrepareNextWave(m_WaveSystem.RunningSequence);
         m_FuncUI.PrepareNextWave();
 
-        TriggerGuide(6);
-        TriggerGuide(8);
-        TriggerGuide(12);
+        TriggerGuide(7);
+        TriggerGuide(9);
         TriggerGuide(13);
+        TriggerGuide(14);
         //重置所有防御塔的回合临时加成
         foreach (var turret in elementTurrets.behaviors)
         {
@@ -278,6 +278,7 @@ public class GameManager : Singleton<GameManager>
     #region 形状控制
     public void DrawShapes()
     {
+        TriggerGuide(4);
         TransitionToState(StateName.PickingState);
         m_FuncUI.Hide();
         m_ShapeSelectUI.ShowThreeShapes(m_FuncUI.ModuleLevel);
@@ -296,10 +297,10 @@ public class GameManager : Singleton<GameManager>
         m_BluePrintShopUI.CheckAllBluePrint();
 
         //新手引导
-        TriggerGuide(4);
-        TriggerGuide(7);
-        TriggerGuide(9);
-        TriggerGuide(11);
+        TriggerGuide(5);
+        TriggerGuide(8);
+        TriggerGuide(10);
+        TriggerGuide(12);
     }
 
     public void CompositeShape(BluePrintGrid grid)//合成了一个防御塔

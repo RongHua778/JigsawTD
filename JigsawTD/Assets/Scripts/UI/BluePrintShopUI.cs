@@ -143,7 +143,7 @@ public class BluePrintShopUI : IUserInterface
 
     public void ShopBtnClick()//播放商店界面打开动画
     {
-        GameManager.Instance.TriggerGuide(10);
+        GameManager.Instance.TriggerGuide(11);
         Showing = !Showing;
         if (Showing)
             Show();

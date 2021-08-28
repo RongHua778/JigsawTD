@@ -128,6 +128,7 @@ public class TurretTips : TileTips
         BasicInfo();
         UpdateBluePrintInfo();
 
+        ElementSkillArea.SetActive(true);
         AnalysisArea.SetActive(false);
         UpgradeArea.SetActive(false);
         IntensifyArea.SetActive(false);
