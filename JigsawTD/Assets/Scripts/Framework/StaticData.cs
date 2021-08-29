@@ -34,15 +34,22 @@ public class StaticData : Singleton<StaticData>
     public int BuyGroundCostMultyply;
     public int SwitchTrapCost;
     public int SwitchTrapCostMultiply;
-    public static float[,] QualityChances = new float[7, 5]
+    //抽取品质概率
+    public static float[,] QualityChances = new float[6, 5]
     {
+        //{ 1f, 0f, 0f, 0f, 0f },
+        //{ 0.6f, 0.3f, 0.1f, 0f, 0f },
+        //{ 0.4f, 0.35f, 0.15f, 0.1f, 0f },
+        //{ 0.3f, 0.35f, 0.2f, 0.125f, 0.025f },
+        //{ 0.15f, 0.3f, 0.3f, 0.25f, 0.1f },
+        //{ 0f, 0.2f, 0.3f, 0.3f, 0.2f },
+        //{ 0f, 0.15f, 0.25f, 0.3f, 0.3f }
         { 1f, 0f, 0f, 0f, 0f },
         { 0.6f, 0.3f, 0.1f, 0f, 0f },
         { 0.4f, 0.35f, 0.15f, 0.1f, 0f },
         { 0.3f, 0.35f, 0.2f, 0.125f, 0.025f },
         { 0.15f, 0.3f, 0.3f, 0.25f, 0.1f },
         { 0f, 0.2f, 0.3f, 0.3f, 0.2f },
-        { 0f, 0.15f, 0.25f, 0.3f, 0.3f }
     };
     [Header("GameSetting")]
     public static Vector2Int BoardOffset;

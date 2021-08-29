@@ -19,6 +19,7 @@ public class StrategyBase
     private int quality = 0;
     public int Quality { get => quality; set => quality = value; }
 
+
     public StrategyBase(StrategyType sType, TurretAttribute attribute, int quality, Element element = Element.Gold, Blueprint comBlueprint = null)
     {
         strategyType = sType;
@@ -151,7 +152,7 @@ public class StrategyBase
 
     //战斗中属性
     public float FinalAttack { get => BaseAttack * (1 + (TurnAttackIntensify - 1) * AllAttackIntensifyModify) + TurnFixAttack * AllAttackIntensifyModify; }
-    public float FinalSpeed { get => BaseSpeed * (1 + (TurnSpeedIntensify - 1) * AllSpeedIntensifyModify) + TurnFixSpeed * AllSpeedIntensifyModify; }
+    public float FinalSpeed { get => Mathf.Min(30, BaseSpeed * (1 + (TurnSpeedIntensify - 1) * AllSpeedIntensifyModify) + TurnFixSpeed * AllSpeedIntensifyModify); }//速度上限30
     public int FinalRange { get => BaseRange + TurnFixRange; }
     public float FinalCriticalRate { get => BaseCriticalRate * (1 + (TurnCriticalRateIntensify - 1) * AllCriticalIntensifyModify) + TurnFixCriticalRate * AllCriticalIntensifyModify; }
     public float FinalCriticalPercentage { get => (BaseCriticalPercentage + FinalCriticalRate) * TurnCriticalRateIntensify + TurnFixCriticalPercentage; }

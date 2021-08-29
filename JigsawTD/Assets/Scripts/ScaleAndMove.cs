@@ -58,6 +58,8 @@ public class ScaleAndMove : IGameSystem
         CamInitialSize = cam.orthographicSize;
         oldPosition = cam.transform.position;
         Input.multiTouchEnabled = true;
+        MoveTurorial = false;
+        SizeTutorial = false;
     }
 
     public override void GameUpdate()
@@ -186,10 +188,10 @@ public class ScaleAndMove : IGameSystem
             Vector3 smoothPos = Vector3.Lerp(cam.transform.position, desirePos, SmoothSpeed);
             cam.transform.position = smoothPos;
         }
-        if (Input.GetMouseButtonDown(1))
-        {
-            cam.transform.DOMove(CamInitialPos, 0.6f);
-        }
+        //if (Input.GetMouseButtonDown(1))
+        //{
+        //    cam.transform.DOMove(CamInitialPos, 0.6f);
+        //}
 
         speedVertical = Input.GetAxisRaw("Horizontal") * Vector3.right * slideSpeed * Time.deltaTime;
         speedHorizon = Input.GetAxisRaw("Vertical") * Vector3.up * slideSpeed * Time.deltaTime;

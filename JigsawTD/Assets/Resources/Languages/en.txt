@@ -82,7 +82,7 @@ COMPOSITECOUNT=Composite Turret
 THANKSINFO=Thank you for playing the DEMO of Refactor\nYou can whishlist it on Steam or send your feedback to 13500006441@163.com
 
 //turretips
-DAMAGEANLYSIS=Total Damage
+DAMAGEANLYSIS=Damage
 ATTACK=Attack
 RANGE=Range
 SPEED=FireRate
@@ -108,19 +108,20 @@ COMPOSITE=Composite
 UPGRADE=Upgrade
 SWITCHTRAP=Relocate
 ELEMENTSLOT=Element Skill
+RARE=Rare
 
 //Groundtips
 BUYGROUND=Buy a basic tile?
 
 //towername
-F1=F1 Constructor
-G1=G1 Scatter
-H1=H1 Mortar
-I1=I1 Rotary
-J1=J1 Sniper
-K1=K1 UltraCannon
-L1=L1 RapidFirer
-M1=M1 SnowBall
+CONSTRUCTOR=Constructor
+SCATTER=Scatter
+MORTAR=Mortar
+ROTARY=Rotary
+SNIPER=Sniper
+ULTRA=Ultra
+RAPIDER=Rapider
+SNOW=SnowBall
 
 F2=F2 Constructor
 G2=G2 Scatter
@@ -140,35 +141,6 @@ K3=K3 UltraCannon
 L3=L3 RapidFirer
 M3=M3 SnowBall
 
-A1=A1
-A2=A2
-A3=A3
-A4=A4
-A5=A5
-
-B1=B1
-B2=B2
-B3=B3
-B4=B4
-B5=B5
-
-C1=C1
-C2=C2
-C3=C3
-C4=C4
-C5=C5
-
-D1=D1
-D2=D2
-D3=D3
-D4=D4
-D5=D5
-
-E1=E1
-E2=E2
-E3=E3
-E4=E4
-E5=E5
 
 //turretskill
 ASKILL=Stable and practical defense tower.
@@ -181,10 +153,10 @@ F1SKILL=Damage increased by 10% for each enemy in range.
 G1SKILL=Deals 50% less damage, but can attack an additional 3 targets.
 H1SKILL=Bullet's splash damage increased by 25% for each enemy it hit.
 L1SKILL=Each shoot increases attack by 1 * the total amount of composite turrets.
-I1SKILL=Randomly shoot energy bullets around, and each shoot increases attack speed by 0.1(up to 10).
-J1SKILL=Forbid range+2, attack increased by 10% for every 1 range.
+I1SKILL=Penetration Bullet; Randomly shoot around and double all firerate increased.
+SNIPERSKILL=Forbid range+2, attack increased by 10% for every 1 range.
 K1SKILL=Double the increased critical damage.
-M1SKILL=Doubles the enemy's current slow rate.
+SNOWSKILL=Penetration Bullet;Bullet will move to the end of straight direction, and double enemy's current slow.
 
 //A系
 DOUBLEATTACK=Double all attack increased.
@@ -301,7 +273,7 @@ IMITATETRAPINFO=The effect of this trap is the same as the last trap passed by t
 STUNTRAP2INFO=Enemies passing by are stunned for 0.5 * N seconds, N = number of traps the enemy passed before.
 DAMAGEARROWINFO=Within 4 grids of the direction indicated by the arrow, the damage taken by the enemy increased by 50%.
 EXECUTETRAPINFO= Causes (N * 1)% of the enemy's lost HP damage ,N = number of grids the enemy passed before.
-AIMMARKTRAPINFO=After passing this trap, the damage taken by enemies increases 10%.
+AIMMARKTRAPINFO=Deal damage equal to 10% of enemy's lost health.
 DAMAGEMARKINFO=Enemies passing by will be marked and take 50% additional damage within 5 seconds.
 
 //TurretBase

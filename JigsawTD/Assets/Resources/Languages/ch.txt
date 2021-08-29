@@ -62,7 +62,7 @@ NEXTWAVE=下一波[Space]
 DRAWMODULE=抽取模块
 MODULELEVELINFO1=当前等级概率
 MODULELEVELINFO2=品质
-MODULELEVELINFO3=当模块等级达到3,5和7级时，商店配方数量+1
+MODULELEVELINFO3=当模块等级达到2,4和6级时，商店配方数量+1
 ENERGYINFO=1.当前回合没有抽取时，获得1点能量\n2.连续不抽取时，会获得额外能量\n3.能量每达到10点，获得1次额外抽取次数
 
 //shop
@@ -81,7 +81,7 @@ COMPOSITECOUNT=合成防御塔
 THANKSINFO=感谢您体验《重构》游戏DEMO，游戏仍在开发中\n欢迎加入反馈QQ群809891580！
 
 //turretips
-DAMAGEANLYSIS=伤害统计
+DAMAGEANLYSIS=总伤害
 ATTACK=攻击
 RANGE=范围
 SPEED=攻速
@@ -107,69 +107,27 @@ COMPOSITE=合成
 UPGRADE=升级
 SWITCHTRAP=换位
 ELEMENTSLOT=元素技能
+RARE=稀有度
 
 //Groundtips
 BUYGROUND=购买一块基础格
 
 
 //towername
-F1=F1组合炮
-G1=G1散射炮
-H1=H1迫击炮
-I1=I1轮转炮
-J1=J1狙击炮
-K1=K1巨炮
-L1=L1疾射炮
-M1=M1雪球炮
+CONSTRUCTOR=组合炮
+SCATTER=散射炮
+MORTAR=迫击炮
+ROTARY=轮转炮
+SNIPER=狙击炮
+ULTRA=巨炮
+RAPIDER=疾射炮
+SNOW=雪球炮
 
-F2=F2组合炮
-G2=G2散射炮
-H2=H2迫击炮
-I2=I2轮转炮
-J2=J2狙击炮
-K2=K2巨炮
-L2=L2疾射炮
-M2=M2雪球炮
-
-F3=F3组合炮
-G3=G3散射炮
-H3=H3迫击炮
-I3=I3轮转炮
-J3=J3狙击炮
-K3=K3巨炮
-L3=L3疾射炮
-M3=M3雪球炮
-
-A1=A1
-A2=A2
-A3=A3
-A4=A4
-A5=A5
-
-B1=B1
-B2=B2
-B3=B3
-B4=B4
-B5=B5
-
-C1=C1
-C2=C2
-C3=C3
-C4=C4
-C5=C5
-
-D1=D1
-D2=D2
-D3=D3
-D4=D4
-D5=D5
-
-E1=E1
-E2=E2
-E3=E3
-E4=E4
-E5=E5
-
+GOLD=金元素塔
+WOOD=木元素塔
+WATER=水元素塔
+FIRE=火元素塔
+DUST=土元素塔
 
 //turretskill
 ASKILL=稳固实用的防御塔
@@ -182,10 +140,10 @@ F1SKILL=攻击范围内每有1个敌人，造成的伤害就提高10%
 G1SKILL=造成的伤害降低50%，但是可以额外攻击3个目标
 H1SKILL=炮弹每溅射到1个敌人，就使溅射伤害提高25%
 L1SKILL=每次攻击都会提升1*总合成塔数量的攻击
-I1SKILL=穿透型子弹, 向周围随机攻击，子弹会使敌人的当前减速效果翻倍
-J1SKILL=禁止攻击范围+2，每1攻击范围提升10%基础攻击力
+I1SKILL=穿透型子弹;向周围随机攻击，自身所有攻速加成翻倍
+SNIPERSKILL=禁止攻击范围+2，每1攻击范围提升10%基础攻击力
 K1SKILL=所有暴击伤害提升效果翻倍
-M1SKILL=穿透型子弹, 子弹每次造成伤害就使后续伤害提高10%
+SNOWSKILL=穿透型子弹;子弹会持续移动到直线终点，并使敌人当前减速效果翻倍。
 
 //A系
 AAA=合金重炮
@@ -201,9 +159,9 @@ AAEINFO=相邻防御塔的基础攻击力提升50%
 
 //B系
 BBB=极骤打击
-BBBINFO=额外攻击2个目标
+BBBINFO=造成的伤害-30%，额外攻击2个目标
 BBA=聚焦打击
-BBAINFO=对同一目标进行攻击时，每次攻击使攻速提高10%，上限300%，切换目标重置
+BBAINFO=造成的伤害-50%，对同一目标进行攻击时，每次攻击使攻速提高10%，上限300%，切换目标重置
 BBC=改进弹夹
 BBCINFO=每回合开始后，攻速每秒提升2%
 BBD=激发火药
@@ -254,26 +212,26 @@ EEDINFO=溅射增加0-1的随机浮动
 
 //综合系
 ABC=廉价基座
-ABCINFO=造成的伤害-25%，升级费用-50%
+ABCINFO=升级费用-50%
 ABD=强化配方
-ABDINFO=造成的伤害-25%，使下一个合成塔暴击+50%
+ABDINFO=使下一个合成塔暴击+50%
 ABE=免费奖券
-ABEINFO=造成的伤害-25%，接下来两次抽取模块免费
+ABEINFO=接下来两次抽取模块免费
 
 ACD=快速升级
-ACDINFO=造成的伤害-25%，防御塔等级提升1级
+ACDINFO=防御塔等级提升1级
 ACE=科技跃进
-ACEINFO=造成的伤害-25%，使模块升级费用-50%
+ACEINFO=使模块升级费用-50%
 ADE=幻化构造
 ADEINFO=合成后变化为一个随机技能
 BCD=水泥倾泻
-BCDINFO=造成的伤害-25%，使接下来三次购买基本格价格为0
+BCDINFO=使接下来三次购买基本格价格为0
 BCE=万能元素
-BCEINFO=造成的伤害-25%，合成时获得1个万能元素
+BCEINFO=合成时获得1个万能元素
 BDE=维修工厂
-BDEINFO=造成的伤害-25%，相邻陷阱的效果提升100%
+BDEINFO=相邻陷阱的效果提升100%
 CDE=闪烁打击
-CDEINFO=造成的伤害-25%，攻击有5%概率将敌人传送到3格前的位置
+CDEINFO=攻击有5%概率将敌人传送到3格前的位置
 
 RANDOMTRAP=在防御塔前方生成一个随机陷阱
 CIRCLERANGE=使防御塔攻击范围变为圆型
@@ -337,7 +295,7 @@ IMITATETRAPINFO=这个陷阱效果等同于敌人经过的上一个陷阱。
 STUNTRAP2INFO=经过的敌人被晕眩0.5*N秒，N=此前经过的陷阱数量。
 DAMAGEARROWINFO=箭头指示方向的4格内，敌人在其上受到的伤害提高50%。
 EXECUTETRAPINFO=敌人此前每移动一格，就造成1%的已损失生命值伤害。
-AIMMARKTRAPINFO=使敌人此后受到的伤害提高10%
+AIMMARKTRAPINFO=敌人每损失1%的生命值，就对其造成0.1%最大生命值的伤害。
 DAMAGEMARKINFO=经过的敌人会被标记，5秒内所受伤害提高50%
 
 //TurretBase

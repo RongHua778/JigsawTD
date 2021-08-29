@@ -14,7 +14,7 @@ public class GoldKeeper : Enemy
     }
     protected override void OnEnemyUpdate()
     {
-        if (DamageStrategy.CurrentHealth / DamageStrategy.MaxHealth <= 1 - 0.2f * LifeCount)
+        if (DamageStrategy.CurrentHealth / DamageStrategy.MaxHealth <= 1 - 0.05f * LifeCount)
         {
             LifeCount++;
             GainMoney();

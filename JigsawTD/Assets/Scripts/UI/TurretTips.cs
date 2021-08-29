@@ -43,6 +43,7 @@ public class TurretTips : TileTips
     //[SerializeField] GameObject ElementSkill2Area = default;
     //[SerializeField] Text ElementSkill2Txt = default;
 
+    [SerializeField] RareInfoSetter QualitySetter = default;
     //infoBtn
     [SerializeField] InfoBtn CriticalInfo = default;
     [SerializeField] InfoBtn SplashInfo = default;
@@ -87,6 +88,7 @@ public class TurretTips : TileTips
         switch (Strategy.strategyType)
         {
             case StrategyType.Element:
+                QualitySetter.gameObject.SetActive(false);
                 UpgradeArea.SetActive(false);
                 IntensifyArea.SetActive(true);
                 ElementSkillArea.SetActive(false);
@@ -122,9 +124,9 @@ public class TurretTips : TileTips
         transform.position = myCanvas.transform.TransformPoint(newPos);
 
         showingBlueprint = true;
-
         m_Grid = grid;
         m_Strategy = grid.BluePrint.ComStrategy;
+
         BasicInfo();
         UpdateBluePrintInfo();
 
@@ -155,7 +157,40 @@ public class TurretTips : TileTips
     private void BasicInfo()
     {
         Icon.sprite = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].TurretIcon;
-        Name.text = GameMultiLang.GetTraduction(m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].TurretName);
+
+        switch (m_Strategy.strategyType)
+        {
+            case StrategyType.Element:
+                string element = "";
+                switch (m_Strategy.Element)
+                {
+                    case Element.Gold:
+                        element = "A";
+                        break;
+                    case Element.Wood:
+                        element = "B";
+                        break;
+                    case Element.Water:
+                        element = "C";
+                        break;
+                    case Element.Fire:
+                        element = "D";
+                        break;
+                    case Element.Dust:
+                        element = "E";
+                        break;
+                }
+                element += m_Strategy.Quality;
+                Name.text = element + " " + GameMultiLang.GetTraduction(m_Strategy.m_Att.Name);
+                QualitySetter.gameObject.SetActive(false);
+                break;
+            case StrategyType.Composite:
+                Name.text = GameMultiLang.GetTraduction(m_Strategy.m_Att.Name) + " Lv." + m_Strategy.Quality;
+                QualitySetter.gameObject.SetActive(true);
+                QualitySetter.SetRare(m_Strategy.m_Att.Rare);
+                break;
+        }
+
         string rangeTypeTxt = "";
         switch (m_Strategy.m_Att.RangeType)
         {

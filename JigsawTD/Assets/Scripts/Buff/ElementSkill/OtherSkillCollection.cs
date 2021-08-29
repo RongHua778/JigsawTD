@@ -14,10 +14,7 @@ public class LevelDiscount : ElementSkill
         base.Build();
         strategy.UpgradeDiscount += 0.5f;
     }
-    public override void PreHit(Bullet bullet = null)
-    {
-        bullet.Damage *= 0.75f;
-    }
+
 }
 
 public class NextIntensify : ElementSkill
@@ -35,10 +32,7 @@ public class NextIntensify : ElementSkill
     {
         strategy.InitCriticalRateIntensify += 0.5f;
     }
-    public override void PreHit(Bullet bullet = null)
-    {
-        bullet.Damage *= 0.75f;
-    }
+
 }
 
 
@@ -79,10 +73,7 @@ public class SystemDiscount : ElementSkill
     {
         GameManager.Instance.SetModuleSystemDiscount(0.5f);
     }
-    public override void PreHit(Bullet bullet = null)
-    {
-        bullet.Damage *= 0.75f;
-    }
+
 }
 public class RandomSkill : ElementSkill
 {
@@ -118,10 +109,7 @@ public class FreeGround : ElementSkill
         StaticData.FreeGroundTileCount += 3;
     }
 
-    public override void PreHit(Bullet bullet = null)
-    {
-        bullet.Damage *= 0.75f;
-    }
+
 
 }
 
@@ -136,10 +124,7 @@ public class PerfectElement : ElementSkill
         GameManager.Instance.GetPerfectElement(1);
     }
 
-    public override void PreHit(Bullet bullet = null)
-    {
-        bullet.Damage *= 0.75f;
-    }
+
 }
 
 

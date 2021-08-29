@@ -28,7 +28,9 @@ public class TileContentFactory : GameObjectFactory
     private List<TurretAttribute> Rare1Turrets;
     private List<TurretAttribute> Rare2Turrets;
     private List<TurretAttribute> Rare3Turrets;
-
+    private List<TurretAttribute> Rare4Turrets;
+    private List<TurretAttribute> Rare5Turrets;
+    private List<TurretAttribute> Rare6Turrets;
 
 
     public void Initialize()
@@ -36,6 +38,9 @@ public class TileContentFactory : GameObjectFactory
         Rare1Turrets = new List<TurretAttribute>();
         Rare2Turrets = new List<TurretAttribute>();
         Rare3Turrets = new List<TurretAttribute>();
+        Rare4Turrets = new List<TurretAttribute>();
+        Rare5Turrets = new List<TurretAttribute>();
+        Rare6Turrets = new List<TurretAttribute>();
         ElementDIC = new Dictionary<Element, TurretAttribute>();
         TrapDIC = new Dictionary<string, TrapAttribute>();
         CompositeDIC = new Dictionary<string, TurretAttribute>();
@@ -53,6 +58,15 @@ public class TileContentFactory : GameObjectFactory
                     break;
                 case 3:
                     Rare3Turrets.Add(attribute);
+                    break;
+                case 4:
+                    Rare4Turrets.Add(attribute);
+                    break;
+                case 5:
+                    Rare5Turrets.Add(attribute);
+                    break;
+                case 6:
+                    Rare6Turrets.Add(attribute);
                     break;
             }
         }
@@ -110,7 +124,7 @@ public class TileContentFactory : GameObjectFactory
         int quality = StaticData.RandomNumber(qualityC) + 1;
         TurretAttribute attribute = ElementDIC[(Element)element];
         ElementTurret content = Get(attribute.ContentPrefab) as ElementTurret;
-        content.Strategy = new StrategyBase(StrategyType.Element, attribute, quality,(Element)element);
+        content.Strategy = new StrategyBase(StrategyType.Element, attribute, quality, (Element)element);
         content.Strategy.m_Turret = content;
         content.Strategy.SetQualityValue();
         content.InitializeTurret();
@@ -121,7 +135,7 @@ public class TileContentFactory : GameObjectFactory
     {
         TurretAttribute attribute = ElementDIC[element];
         ElementTurret content = Get(attribute.ContentPrefab) as ElementTurret;
-        content.Strategy = new StrategyBase(StrategyType.Element, attribute, quality,element);
+        content.Strategy = new StrategyBase(StrategyType.Element, attribute, quality, element);
         content.Strategy.m_Turret = content;
         content.Strategy.SetQualityValue();
         content.InitializeTurret();
@@ -157,23 +171,48 @@ public class TileContentFactory : GameObjectFactory
 
     public TurretAttribute GetRandomCompositeAttributeByLevel(int level)
     {
+        //TurretAttribute attributeToReturn = null;
+        //float[] chances = new float[3];
+        //for (int i = 0; i < 3; i++)
+        //{
+        //    chances[i] = StaticData.Instance.RareChances[level - 1, i];
+        //}
+        //int random = StaticData.RandomNumber(chances);
+        //switch (random)
+        //{
+        //    case 0:
+        //        attributeToReturn = Rare1Turrets[UnityEngine.Random.Range(0, Rare1Turrets.Count)];
+        //        break;
+        //    case 1:
+        //        attributeToReturn = Rare2Turrets[UnityEngine.Random.Range(0, Rare2Turrets.Count)];
+        //        break;
+        //    case 2:
+        //        attributeToReturn = Rare3Turrets[UnityEngine.Random.Range(0, Rare3Turrets.Count)];
+        //        break;
+        //}
+        //Debug.Assert(attributeToReturn != null, "传入了错误的等级");
+        //return attributeToReturn;
         TurretAttribute attributeToReturn = null;
-        float[] chances = new float[3];
-        for (int i = 0; i < 3; i++)
-        {
-            chances[i] = StaticData.Instance.RareChances[level - 1, i];
-        }
-        int random = StaticData.RandomNumber(chances);
+        int random = UnityEngine.Random.Range(1, level + 1);
         switch (random)
         {
-            case 0:
+            case 1:
                 attributeToReturn = Rare1Turrets[UnityEngine.Random.Range(0, Rare1Turrets.Count)];
                 break;
-            case 1:
+            case 2:
                 attributeToReturn = Rare2Turrets[UnityEngine.Random.Range(0, Rare2Turrets.Count)];
                 break;
-            case 2:
+            case 3:
                 attributeToReturn = Rare3Turrets[UnityEngine.Random.Range(0, Rare3Turrets.Count)];
+                break;
+            case 4:
+                attributeToReturn = Rare4Turrets[UnityEngine.Random.Range(0, Rare1Turrets.Count)];
+                break;
+            case 5:
+                attributeToReturn = Rare5Turrets[UnityEngine.Random.Range(0, Rare2Turrets.Count)];
+                break;
+            case 6:
+                attributeToReturn = Rare6Turrets[UnityEngine.Random.Range(0, Rare3Turrets.Count)];
                 break;
         }
         Debug.Assert(attributeToReturn != null, "传入了错误的等级");

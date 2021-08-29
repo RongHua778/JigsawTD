@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
-  m_Name: J1Attribute
+  m_Name: Sniper
   m_EditorClassIdentifier: 
-  Name: J1
+  Name: SNIPER
   Icon: {fileID: 0}
   Description: 
   ContentPrefab: {fileID: 1494963813994468761, guid: 05869ddac62aff043bf7e0106d00bc2e, type: 3}
@@ -21,41 +21,41 @@ MonoBehaviour:
   Bullet: {fileID: 3228400359097999329, guid: 8cff4d87089bb6d43bd9304c1e2efd03, type: 3}
   BulletSpeed: 14
   ShootSound: {fileID: 8300000, guid: d219934a001042144970c13012229363, type: 3}
-  Rare: 3
+  Rare: 5
   totalLevel: 12
   elementNumber: 3
   TurretSkill: 0
   TurretLevels:
   - AttackRange: 6
     ForbidRange: 0
-    AttackDamage: 500
+    AttackDamage: 1100
     AttackSpeed: 0.35
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: J1
+    TurretName: SNIPER
     TurretIcon: {fileID: -6734541021382769069, guid: c1be13963e61eae42b02687dd1475717, type: 3}
     CannonSprite: {fileID: -5442612025329375428, guid: 42957127c2e7aba48a21a85a636cb609, type: 3}
     ShootPointOffset: {x: 0, y: 0.29}
   - AttackRange: 6
     ForbidRange: 0
-    AttackDamage: 750
+    AttackDamage: 1800
     AttackSpeed: 0.35
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: J2
+    TurretName: SNIPER
     TurretIcon: {fileID: -7260088481118571112, guid: c1be13963e61eae42b02687dd1475717, type: 3}
     CannonSprite: {fileID: -2004675633971898, guid: 42957127c2e7aba48a21a85a636cb609, type: 3}
     ShootPointOffset: {x: 0, y: 0.37}
   - AttackRange: 6
     ForbidRange: 0
-    AttackDamage: 1300
+    AttackDamage: 2500
     AttackSpeed: 0.35
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: J3
+    TurretName: SNIPER
     TurretIcon: {fileID: -1944259913073176082, guid: c1be13963e61eae42b02687dd1475717, type: 3}
     CannonSprite: {fileID: 5670319644688947614, guid: 42957127c2e7aba48a21a85a636cb609, type: 3}
     ShootPointOffset: {x: 0, y: 0.38}

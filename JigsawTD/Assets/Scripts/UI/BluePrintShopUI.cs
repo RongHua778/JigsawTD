@@ -76,6 +76,7 @@ public class BluePrintShopUI : IUserInterface
 
     public void RefreshShop(int level, int cost)//Ë¢ÐÂÉÌµê
     {
+        NextRefreshTrun = 3;
         int lockNum = 0;
         foreach (var grid in ShopBluePrints.ToList())
         {

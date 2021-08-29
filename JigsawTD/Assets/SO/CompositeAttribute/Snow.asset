@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
-  m_Name: M1Attribute
+  m_Name: Snow
   m_EditorClassIdentifier: 
-  Name: M1
+  Name: SNOW
   Icon: {fileID: 21300000, guid: 8e83712f39bdf9e4db0b0de438c2e4b2, type: 3}
   Description: 
   ContentPrefab: {fileID: 3184344065496086193, guid: ec76f05b1efa1874b8faa449cea6300a, type: 3}
@@ -21,41 +21,41 @@ MonoBehaviour:
   Bullet: {fileID: 6504941539332389289, guid: d783f38712dd14d4e9cc485d051d7b20, type: 3}
   BulletSpeed: 2
   ShootSound: {fileID: 8300000, guid: 4ed1e1b069a2797408e854b01ab7ce17, type: 3}
-  Rare: 2
-  totalLevel: 10
+  Rare: 4
+  totalLevel: 9
   elementNumber: 3
   TurretSkill: 9
   TurretLevels:
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 200
-    AttackSpeed: 0.25
+    AttackDamage: 950
+    AttackSpeed: 0.35
     SputteringRange: 0
     CriticalRate: 0
-    SlowRate: 0.4
-    TurretName: M1
+    SlowRate: 0.3
+    TurretName: SNOW
     TurretIcon: {fileID: -2498145647754195257, guid: 650ade1de42820843ab504b46ce30229, type: 3}
     CannonSprite: {fileID: -264787257917623472, guid: bde35e3e9a4d90044ab007465a63e442, type: 3}
     ShootPointOffset: {x: 0, y: 0.21}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 350
-    AttackSpeed: 0.25
+    AttackDamage: 1400
+    AttackSpeed: 0.35
     SputteringRange: 0
     CriticalRate: 0
-    SlowRate: 0.6
-    TurretName: M2
+    SlowRate: 0.35
+    TurretName: SNOW
     TurretIcon: {fileID: 5414056219789662719, guid: 650ade1de42820843ab504b46ce30229, type: 3}
     CannonSprite: {fileID: -1221509669150334452, guid: bde35e3e9a4d90044ab007465a63e442, type: 3}
     ShootPointOffset: {x: 0, y: 0.23}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 550
-    AttackSpeed: 0.25
+    AttackDamage: 2000
+    AttackSpeed: 0.35
     SputteringRange: 0
     CriticalRate: 0
-    SlowRate: 0.8
-    TurretName: M3
+    SlowRate: 0.4
+    TurretName: SNOW
     TurretIcon: {fileID: 1974467737375703195, guid: 650ade1de42820843ab504b46ce30229, type: 3}
     CannonSprite: {fileID: 5355383472882469194, guid: bde35e3e9a4d90044ab007465a63e442, type: 3}
     ShootPointOffset: {x: 0, y: 0.28}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
   m_Name: DustAttribute
   m_EditorClassIdentifier: 
-  Name: Dust
+  Name: DUST
   Icon: {fileID: 0}
   Description: ESKILL
   ContentPrefab: {fileID: 900867221070031195, guid: 8574fb7c958d9084199e76f94ed13f80, type: 3}
@@ -28,8 +28,8 @@ MonoBehaviour:
   TurretLevels:
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 35
-    AttackSpeed: 0.4
+    AttackDamage: 60
+    AttackSpeed: 0.55
     SputteringRange: 0.3
     CriticalRate: 0
     SlowRate: 0
@@ -39,8 +39,8 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.27}
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 60
-    AttackSpeed: 0.4
+    AttackDamage: 85
+    AttackSpeed: 0.55
     SputteringRange: 0.35
     CriticalRate: 0
     SlowRate: 0
@@ -50,8 +50,8 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.3}
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 125
-    AttackSpeed: 0.4
+    AttackDamage: 120
+    AttackSpeed: 0.55
     SputteringRange: 0.4
     CriticalRate: 0
     SlowRate: 0
@@ -59,10 +59,10 @@ MonoBehaviour:
     TurretIcon: {fileID: 2768713202220553346, guid: 848bbae097f55734ab0a02c063fd3e70, type: 3}
     CannonSprite: {fileID: -4254847361795187178, guid: 6b887e89a4f334f4e876753947f5fd50, type: 3}
     ShootPointOffset: {x: 0, y: 0.32}
-  - AttackRange: 3
+  - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 250
-    AttackSpeed: 0.4
+    AttackDamage: 180
+    AttackSpeed: 0.55
     SputteringRange: 0.45
     CriticalRate: 0
     SlowRate: 0
@@ -70,10 +70,10 @@ MonoBehaviour:
     TurretIcon: {fileID: 3239631297230032197, guid: 848bbae097f55734ab0a02c063fd3e70, type: 3}
     CannonSprite: {fileID: 9147300514977118220, guid: 6b887e89a4f334f4e876753947f5fd50, type: 3}
     ShootPointOffset: {x: 0, y: 0.32}
-  - AttackRange: 3
+  - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 400
-    AttackSpeed: 0.4
+    AttackDamage: 280
+    AttackSpeed: 0.55
     SputteringRange: 0.5
     CriticalRate: 0
     SlowRate: 0

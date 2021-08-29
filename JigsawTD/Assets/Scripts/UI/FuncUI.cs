@@ -50,7 +50,7 @@ public class FuncUI : IUserInterface
         get => buyShapeCost;
         set
         {
-            buyShapeCost = value;
+            buyShapeCost = Mathf.Max(0, value);
             DrawBtnTxt.text = buyShapeCost.ToString();
         }
     }
@@ -76,9 +76,9 @@ public class FuncUI : IUserInterface
             PlayerLevelTxt.text = ModuleLevel.ToString();
             PlayerLvUpMoney = StaticData.Instance.LevelUpMoney[ModuleLevel];
             m_LevelInfo.SetContent(StaticData.GetLevelInfo(moduleLevel));
-            if (ModuleLevel == 3 || ModuleLevel == 5 || ModuleLevel == 7)//3,5和7级增加一个商店容量
+            if (ModuleLevel == 2 || ModuleLevel == 4 || ModuleLevel == 6)//2，4,6级增加一个商店容量
             {
-                GameManager.Instance.IncreaseShopCapacity();
+                GameManager.Instance.IncreaseShopCapacity(1);
             }
         }
     }
@@ -107,7 +107,7 @@ public class FuncUI : IUserInterface
         get => energy;
         set
         {
-            energy = Mathf.Min(10, value);
+            energy = Mathf.Min(5, value);
             if (energy >= 10)
             {
                 energy = 0;
@@ -166,6 +166,7 @@ public class FuncUI : IUserInterface
         {
             return;
         }
+        DrawThisTurn = true;
         GameManager.Instance.DrawShapes();
         GameManager.Instance.CheckDrawSkill();
 
@@ -176,13 +177,17 @@ public class FuncUI : IUserInterface
         Show();
         if (!DrawThisTurn)
         {
-            EnergyProgress++;
+            //EnergyProgress++;
+            //Energy++;
+            //BuyShapeCost -= Energy;
+            BuyShapeCost = Mathf.RoundToInt(BuyShapeCost * 0.95f);//没抽就减5%的价格
         }
         else
         {
-            EnergyProgress = 1;
+            //Energy = 0;
+            //EnergyProgress = 1;
         }
-        Energy += EnergyProgress;
+        //Energy += EnergyProgress;
         DrawThisTurn = false;
         GameManager.Instance.GainDraw(1);
     }

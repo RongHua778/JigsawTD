@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
   m_Name: WoodAttribute
   m_EditorClassIdentifier: 
-  Name: Wood
+  Name: WOOD
   Icon: {fileID: 0}
   Description: BSKILL
   ContentPrefab: {fileID: 3830102932677347064, guid: 24c7518827485fc418d3132bf749252c, type: 3}
@@ -39,7 +39,7 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.35}
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 20
+    AttackDamage: 16
     AttackSpeed: 8
     SputteringRange: 0
     CriticalRate: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.35}
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 40
+    AttackDamage: 24
     AttackSpeed: 8
     SputteringRange: 0
     CriticalRate: 0
@@ -59,9 +59,9 @@ MonoBehaviour:
     TurretIcon: {fileID: -5162238023950050135, guid: 170dc2e643d4d3d46bc6b1fdd1cd28d0, type: 3}
     CannonSprite: {fileID: 6932297891388812724, guid: b0ab56063522368429e276fb52baa9e7, type: 3}
     ShootPointOffset: {x: 0, y: 0.41}
-  - AttackRange: 3
+  - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 60
+    AttackDamage: 36
     AttackSpeed: 8
     SputteringRange: 0
     CriticalRate: 0
@@ -70,9 +70,9 @@ MonoBehaviour:
     TurretIcon: {fileID: -8749453646720632882, guid: 170dc2e643d4d3d46bc6b1fdd1cd28d0, type: 3}
     CannonSprite: {fileID: 1474691046141679077, guid: b0ab56063522368429e276fb52baa9e7, type: 3}
     ShootPointOffset: {x: 0, y: 0.47}
-  - AttackRange: 3
+  - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 90
+    AttackDamage: 58
     AttackSpeed: 8
     SputteringRange: 0
     CriticalRate: 0

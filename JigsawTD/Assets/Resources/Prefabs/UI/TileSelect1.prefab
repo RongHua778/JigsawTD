@@ -135,7 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -288,19 +288,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2428495454343918667}
         m_TargetAssemblyTypeName: TileSelect, Assembly-CSharp
         m_MethodName: OnShapeClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: RoadPlacement, Assembly-CSharp
-        m_MethodName: ClearAllSelections
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -323,6 +311,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderTexture: {fileID: 8400000, guid: 17730fb157ebe954f8d34cf2f84f5948, type: 2}
   m_LevelDownSelect: {fileID: 7359984401380683283}
+  NormalColor: {r: 0.627451, g: 0.9098039, b: 1, a: 1}
+  HandleColor: {r: 0.3647059, g: 1, b: 0.6901961, a: 1}
+  FrameSprite: {fileID: 2428495454860525341}
 --- !u!1 &2428495454686638303
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,26 +439,14 @@ MonoBehaviour:
       - m_Target: {fileID: 2428495454343918667}
         m_TargetAssemblyTypeName: TileSelect, Assembly-CSharp
         m_MethodName: OnShapeClick
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2428495454343918667}
-        m_TargetAssemblyTypeName: TileSelect, Assembly-CSharp
-        m_MethodName: ClearShape
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &7359984401380683283
 MonoBehaviour:
@@ -539,8 +518,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 0.627451, g: 0.9098039, b: 1, a: 1}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

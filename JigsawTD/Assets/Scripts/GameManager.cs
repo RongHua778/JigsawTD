@@ -420,9 +420,9 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public void IncreaseShopCapacity()
+    public void IncreaseShopCapacity(int amount)
     {
-        m_BluePrintShopUI.ShopCapacity++;
+        m_BluePrintShopUI.ShopCapacity+=amount;
     }
     public void GetPerfectElement(int count)
     {

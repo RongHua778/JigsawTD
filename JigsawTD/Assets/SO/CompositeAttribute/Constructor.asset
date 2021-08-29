@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
-  m_Name: F1Attribute
+  m_Name: Constructor
   m_EditorClassIdentifier: 
-  Name: F1
+  Name: CONSTRUCTOR
   Icon: {fileID: 21300000, guid: efd7eca78d1a1d44d8b38abd7973113e, type: 3}
   Description: 
   ContentPrefab: {fileID: 7540347977943103148, guid: d914d163b81634f4c893b72c05177560, type: 3}
@@ -22,40 +22,40 @@ MonoBehaviour:
   BulletSpeed: 8
   ShootSound: {fileID: 8300000, guid: af5ec73dace3dab4489f0b98e8e6098d, type: 3}
   Rare: 1
-  totalLevel: 4
+  totalLevel: 3
   elementNumber: 3
   TurretSkill: 3
   TurretLevels:
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 160
+    AttackDamage: 85
     AttackSpeed: 0.8
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: F1
+    TurretName: CONSTRUCTOR
     TurretIcon: {fileID: 6058281127652968510, guid: d9ef5bc7f2e68154eb1935bcb8c3c85e, type: 3}
     CannonSprite: {fileID: -4849019349383934194, guid: 1558cccd561e63b498e46ef6dc096a5d, type: 3}
     ShootPointOffset: {x: 0, y: 0.4}
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 280
+    AttackDamage: 130
     AttackSpeed: 0.8
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: F2
+    TurretName: CONSTRUCTOR
     TurretIcon: {fileID: 1138143217412330110, guid: d9ef5bc7f2e68154eb1935bcb8c3c85e, type: 3}
     CannonSprite: {fileID: 2752858795648052391, guid: 1558cccd561e63b498e46ef6dc096a5d, type: 3}
     ShootPointOffset: {x: 0, y: 0.44}
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 400
+    AttackDamage: 200
     AttackSpeed: 0.8
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: F3
+    TurretName: CONSTRUCTOR
     TurretIcon: {fileID: 5061518847745216781, guid: d9ef5bc7f2e68154eb1935bcb8c3c85e, type: 3}
     CannonSprite: {fileID: 6073466923811645465, guid: 1558cccd561e63b498e46ef6dc096a5d, type: 3}
     ShootPointOffset: {x: 0, y: 0.44}

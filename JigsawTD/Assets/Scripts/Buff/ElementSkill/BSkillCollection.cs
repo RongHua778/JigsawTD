@@ -13,6 +13,11 @@ public class MultiTarget : ElementSkill
         base.Build();
         strategy.BaseTargetCountIntensify += 2;
     }
+
+    public override void Shoot(Bullet bullet = null)
+    {
+        bullet.Damage *= 0.7f;
+    }
 }
 
 
@@ -26,8 +31,10 @@ public class SpeedTarget : ElementSkill
     private Enemy lastTarget;
     private float speedIncreased;
 
+
     public override void Shoot(Bullet bullet = null)
     {
+        bullet.Damage *= 0.5f;
         Enemy target = (Enemy)strategy.m_Turret.Target[0].Enemy;
         if (target != lastTarget)
         {

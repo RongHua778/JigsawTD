@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
-  m_Name: I1Attribute
+  m_Name: Rotary
   m_EditorClassIdentifier: 
-  Name: I1
-  Icon: {fileID: 0}
+  Name: ROTARY
+  Icon: {fileID: -4688781176453597497, guid: 5fd2f2e134ec9bc4ca7e863cf2992137, type: 3}
   Description: 
   ContentPrefab: {fileID: 3473736283192967209, guid: ae3a3ea7c8913984ba274c5376b270bd, type: 3}
   RangeType: 0
@@ -21,41 +21,41 @@ MonoBehaviour:
   Bullet: {fileID: -5451000839793556455, guid: 898695e6a84f19b4381f2e5e29e0280c, type: 3}
   BulletSpeed: 0.8
   ShootSound: {fileID: 8300000, guid: 4f7538d155d5687479b2932c5349bdf2, type: 3}
-  Rare: 2
-  totalLevel: 9
+  Rare: 3
+  totalLevel: 7
   elementNumber: 3
   TurretSkill: 6
   TurretLevels:
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 120
-    AttackSpeed: 5
+    AttackDamage: 80
+    AttackSpeed: 2
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: I1
+    TurretName: ROTARY
     TurretIcon: {fileID: -4688781176453597497, guid: 5fd2f2e134ec9bc4ca7e863cf2992137, type: 3}
     CannonSprite: {fileID: -6186797135952016049, guid: c066612b6f4b1e44d8b5837b75cf8b08, type: 3}
     ShootPointOffset: {x: 0, y: 0}
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 200
-    AttackSpeed: 6
+    AttackDamage: 120
+    AttackSpeed: 2
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: I2
+    TurretName: ROTARY
     TurretIcon: {fileID: -2368188075412391048, guid: 5fd2f2e134ec9bc4ca7e863cf2992137, type: 3}
     CannonSprite: {fileID: -432138986413943803, guid: c066612b6f4b1e44d8b5837b75cf8b08, type: 3}
     ShootPointOffset: {x: 0, y: 0}
   - AttackRange: 2
     ForbidRange: 0
-    AttackDamage: 320
-    AttackSpeed: 7
+    AttackDamage: 180
+    AttackSpeed: 2
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: I3
+    TurretName: ROTARY
     TurretIcon: {fileID: -1588336856667769469, guid: 5fd2f2e134ec9bc4ca7e863cf2992137, type: 3}
     CannonSprite: {fileID: 8605722687922174138, guid: c066612b6f4b1e44d8b5837b75cf8b08, type: 3}
     ShootPointOffset: {x: 0, y: 0}
