@@ -6318,7 +6318,7 @@ MonoBehaviour:
   RangeIndicatorPrefab: {fileID: 7053043907688615658, guid: d8a2a921f17ca0e46b801451269a7676, type: 3}
   JumpDamagePrefab: {fileID: 4699521983380265760, guid: 312c9ecb05f5d3f4fa19d5107ffc2833, type: 3}
   UnrevealTrap: {fileID: 21300000, guid: e8ecebd490ee97447a3e4938bf2835cc, type: 3}
-  GainCoinAnimPrefab: {fileID: 1926441791724971538, guid: 772397d6e2f78d142a70b5168e1282e4, type: 3}
+  LevelUpCostPerRare: 50
 --- !u!1 &288904573
 GameObject:
   m_ObjectHideFlags: 0
@@ -38283,6 +38283,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1311986533}
     m_Modifications:
+    - target: {fileID: 2428495453433778348, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2428495453433778350, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
       propertyPath: m_IsActive
       value: 1

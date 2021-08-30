@@ -15,8 +15,8 @@ MonoBehaviour:
   EnemyName: RUNNER
   EnemyType: 1
   InitCount: 2
-  CountIncrease: 3
-  Health: 12
+  CountIncrease: 2
+  Health: 18
   Speed: 0.5
   Shell: 0
   CoolDown: 1

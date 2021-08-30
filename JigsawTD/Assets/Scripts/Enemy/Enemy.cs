@@ -118,7 +118,7 @@ public abstract class Enemy : PathFollower, IDamageable
 
     public virtual void Awake()
     {
-        DamageStrategy = new EnemyDamageStrategy(this.gameObject, this);
+        SetStrategy();
         enemySprite = transform.Find("Model").Find("GFX").GetComponent<SpriteRenderer>();
         enemyCol = enemySprite.GetComponent<CircleCollider2D>();
         Anim = GetComponent<Animator>();
@@ -133,6 +133,10 @@ public abstract class Enemy : PathFollower, IDamageable
         PassedTraps = new List<TrapContent>();
     }
 
+    protected virtual void SetStrategy()
+    {
+        DamageStrategy = new EnemyDamageStrategy(model, this);
+    }
     public override bool GameUpdate()
     {
         OnEnemyUpdate();
@@ -236,17 +240,17 @@ public abstract class Enemy : PathFollower, IDamageable
         Anim.SetTrigger("Enter");
     }
 
-    public virtual void ApplyDamage(float amount, out float realDamage, bool isCritical = false)
-    {
-        realDamage = amount * (1 + DamageIntensify);
-        DamageStrategy.CurrentHealth -= realDamage;
-        TargetDamageCounter += realDamage;
-        GameEndUI.TotalDamage += (int)realDamage;
-        if (isCritical)
-        {
-            StaticData.Instance.ShowJumpDamage(transform.position, (int)realDamage);
-        }
-    }
+    //public virtual void ApplyDamage(float amount, out float realDamage, bool isCritical = false)
+    //{
+    //    realDamage = amount * (1 + DamageIntensify);
+    //    DamageStrategy.CurrentHealth -= realDamage;
+    //    TargetDamageCounter += realDamage;
+    //    GameEndUI.TotalDamage += (int)realDamage;
+    //    if (isCritical)
+    //    {
+    //        StaticData.Instance.ShowJumpDamage(model.transform.position, (int)realDamage);
+    //    }
+    //}
 
     public void Flash(int distance)
     {

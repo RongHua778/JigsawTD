@@ -20,41 +20,16 @@ public class MainUI : IUserInterface
 
 
 
-    private int coin = 0;
     public int Coin
     {
-        get => coin;
-        set
-        {
-            coin = value;
-            coinTxt.text = coin.ToString();
-        }
+        set => coinTxt.text = value.ToString();
     }
 
-    private int life;
     public int Life
     {
-        get => life;
-        set
-        {
-            if (value <= 0)
-            {
-                GameManager.Instance.GameEnd(false);
-            }
-            life = Mathf.Clamp(value, 0, StaticData.Instance.PlayerMaxHealth[Game.Instance.SelectDifficulty]);
-            PlayerLifeTxt.text = life.ToString() + "/" + StaticData.Instance.PlayerMaxHealth[Game.Instance.SelectDifficulty].ToString();
-        }
+        set => PlayerLifeTxt.text = value.ToString() + "/" + StaticData.Instance.PlayerMaxHealth[Game.Instance.SelectDifficulty].ToString();
     }
-    int currentWave;
-    public int CurrentWave
-    {
-        get => currentWave;
-        set
-        {
-            currentWave = value;
 
-        }
-    }
 
 
     [SerializeField] Sprite[] GameSpeedSprites = default;
@@ -83,9 +58,6 @@ public class MainUI : IUserInterface
     {
         GameEvents.Instance.onEnemyReach += EnemyReach;
         GameSpeed = 1;
-        CurrentWave = 0;
-        Life = StaticData.Instance.PlayerMaxHealth[Game.Instance.SelectDifficulty];
-        Coin = StaticData.Instance.StartCoin;
 
         m_PausePanel.Initialize();
         m_GuideBook.Initialize();
@@ -124,26 +96,25 @@ public class MainUI : IUserInterface
 
     private void EnemyReach(Enemy enemy)
     {
-        Life -= enemy.ReachDamage;
+        GameRes.Life -= enemy.ReachDamage;
     }
 
 
 
     public void PrepareNextWave(List<EnemySequence> sequences)
     {
-        //CountTasks();
-        CurrentWave++;
+        GameRes.CurrentWave++;
         GameManager.Instance.GainInterest();
         GameManager.Instance.GainMoney((StaticData.Instance.BaseWaveIncome +
-            StaticData.Instance.WaveMultiplyIncome * (CurrentWave - 1)));
-        m_WaveInfoSetter.SetWaveInfo(CurrentWave, sequences);
+            StaticData.Instance.WaveMultiplyIncome * (GameRes.CurrentWave - 1)));
+        m_WaveInfoSetter.SetWaveInfo(GameRes.CurrentWave, sequences);
     }
 
     public bool ConsumeMoney(int cost)
     {
-        if (Coin >= cost)
+        if (GameRes.Coin >= cost)
         {
-            Coin -= cost;
+            GameRes.Coin -= cost;
             return true;
         }
         else

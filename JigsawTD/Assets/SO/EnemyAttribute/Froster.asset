@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyName: FROSTER
   EnemyType: 5
-  InitCount: 3
-  CountIncrease: 3
-  Health: 20
+  InitCount: 2
+  CountIncrease: 2
+  Health: 30
   Speed: 0.7
   Shell: 0
   CoolDown: 1.5

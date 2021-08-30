@@ -73,6 +73,7 @@ public class ImitatingTrap : TrapContent
 
     public override void OnContentPass(Enemy enemy)
     {
-        enemy.LastTrap.OnContentPass(enemy);
+        if (enemy.PassedTraps.Count > 0)
+            enemy.LastTrap.OnContentPass(enemy);
     }
 }

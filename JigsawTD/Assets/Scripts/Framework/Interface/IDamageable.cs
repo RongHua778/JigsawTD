@@ -4,12 +4,6 @@ using UnityEngine;
 
 public interface IDamageable
 {
-    //void ApplyDamage(float amount, out float realDamag, bool isCritical = false);
-
-    //void ApplyBuff(EnemyBuffName buffName, float keyValue, float duration);
-    //float DamageIntensify { get; set; }
-    //float CurrentHealth { get; set; }
-    //float MaxHealth { get; set; }
     public bool IsDie { get; set; }
     DamageStrategy DamageStrategy { get; set; }
 
@@ -17,7 +11,7 @@ public interface IDamageable
 
 public abstract class DamageStrategy
 {
-    public GameObject TargetObj;
+    public Transform ModelTrans;
     protected float damageIntensify;
     protected float currentHealth;
     protected float maxHealth;
@@ -25,9 +19,9 @@ public abstract class DamageStrategy
     public virtual float DamageIntensify { get => damageIntensify; set => damageIntensify = value; }
     public virtual float CurrentHealth { get => currentHealth; set => currentHealth = value; }
     public virtual float MaxHealth { get => maxHealth; set => maxHealth = value; }
-    public DamageStrategy(GameObject obj)
+    public DamageStrategy(Transform tr)
     {
-        this.TargetObj = obj;
+        this.ModelTrans = tr;
     }
 
     public virtual void ApplyDamage(float amount, out float realDamage, bool isCritical = false)
@@ -37,7 +31,7 @@ public abstract class DamageStrategy
         GameEndUI.TotalDamage += (int)realDamage;
         if (isCritical)
         {
-            StaticData.Instance.ShowJumpDamage(TargetObj.transform.position, (int)realDamage);
+            StaticData.Instance.ShowJumpDamage(ModelTrans.position, (int)realDamage);
         }
     }
 
@@ -51,10 +45,10 @@ public abstract class DamageStrategy
 public class EnemyDamageStrategy : DamageStrategy
 {
     public override bool IsEnemy => true;
-    Enemy enemy;
-    public EnemyDamageStrategy(GameObject obj, Enemy enemy) : base(obj)
+    protected Enemy enemy;
+    public EnemyDamageStrategy(Transform tr, Enemy enemy) : base(tr)
     {
-        this.TargetObj = obj;
+        this.ModelTrans = tr;
         this.enemy = enemy;
     }
     public override float MaxHealth
@@ -92,9 +86,9 @@ public class ArmourStrategy : DamageStrategy
 {
     public override bool IsEnemy => false;
     Armor armor;
-    public ArmourStrategy(GameObject obj, Armor armor) : base(obj)
+    public ArmourStrategy(Transform tr, Armor armor) : base(tr)
     {
-        this.TargetObj = obj;
+        this.ModelTrans = tr;
         this.armor = armor;
     }
     public override float CurrentHealth
@@ -107,10 +101,27 @@ public class ArmourStrategy : DamageStrategy
             {
                 ReusableObject explosion = ObjectPool.Instance.Spawn(armor.explosionPrefab);
                 Sound.Instance.PlayEffect(armor.explosionClip);
-                explosion.transform.position = TargetObj.transform.position;
+                explosion.transform.position = ModelTrans.position;
                 armor.DisArmor();
             }
         }
+    }
+}
+
+public class RestorerStrategy : EnemyDamageStrategy
+{
+    public override bool IsEnemy => true;
+    public float damagedCounter;
+
+    public RestorerStrategy(Transform tr,Enemy enemy) :base(tr,enemy)
+    {
+        this.ModelTrans = tr;
+        this.enemy = enemy;
+    }
+    public override void ApplyDamage(float amount, out float realDamage, bool isCritical = false)
+    {
+        base.ApplyDamage(amount, out realDamage, isCritical);
+        damagedCounter = 0;
     }
 }
 

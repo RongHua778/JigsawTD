@@ -15,8 +15,8 @@ MonoBehaviour:
   EnemyName: RESTORER
   EnemyType: 2
   InitCount: 2
-  CountIncrease: 3
-  Health: 18
+  CountIncrease: 2
+  Health: 26
   Speed: 0.7
   Shell: 0
   CoolDown: 1.5

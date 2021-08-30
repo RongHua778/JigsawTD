@@ -17,12 +17,11 @@ public class CopySkill : ElementSkill
             Debug.Log("两个重复的复制技能");
             return;
         }
-        strategy.GetComIntensify(Elements, false);
+        //strategy.GetComIntensify(Elements, false);
         ElementSkill newSkill = TurretEffectFactory.GetElementSkill(skill.Elements);
         strategy.TurretSkills.Remove(this);
         newSkill.Composite();//触发合成效果
         strategy.AddElementSkill(newSkill);
-        
     }
 }
 public class CriticalPolo : ElementSkill

@@ -101,7 +101,7 @@ public class StaticData : Singleton<StaticData>
     public RangeIndicator RangeIndicatorPrefab;
     public JumpDamage JumpDamagePrefab;
     public Sprite UnrevealTrap;
-    public GainCoinAnim GainCoinAnimPrefab;
+    //public GainCoinAnim GainCoinAnimPrefab;
 
     private void Start()
     {
@@ -115,6 +115,7 @@ public class StaticData : Singleton<StaticData>
     }
 
     [Header("CompositionAttributes")]
+    public int LevelUpCostPerRare;
     public int[,] LevelUpCost = new int[3, 2]//合成塔升级费用
     {
         { 75, 150 },

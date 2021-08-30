@@ -5,22 +5,19 @@ using UnityEngine;
 public class Green_Restorer : Enemy
 {
     public override EnemyType EnemyType => EnemyType.Restorer;
-
-    float damagedCounter;
+    protected override void SetStrategy()
+    {
+        DamageStrategy = new RestorerStrategy(model, this);
+    }
     public override bool GameUpdate()
     {
-        damagedCounter += Time.deltaTime;
-        if (damagedCounter > 1f)
+        ((RestorerStrategy)DamageStrategy).damagedCounter += Time.deltaTime;
+        if (((RestorerStrategy)DamageStrategy).damagedCounter > 1f)
         {
             DamageStrategy.CurrentHealth += DamageStrategy.MaxHealth * 0.05f * Time.deltaTime;
         }
         return base.GameUpdate();
     }
 
-    public override void ApplyDamage(float amount, out float realDamage, bool isCritical = false)
-    {
-        base.ApplyDamage(amount, out realDamage, isCritical);
-        damagedCounter = 0;
-    }
 
 }

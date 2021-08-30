@@ -99,7 +99,8 @@ public class TurretTips : TileTips
                 if (Strategy.Quality < 3)
                 {
                     UpgradeArea.SetActive(true);
-                    upgradeCost = StaticData.Instance.LevelUpCost[Strategy.m_Att.Rare - 1, Strategy.Quality - 1];
+                    //upgradeCost = StaticData.Instance.LevelUpCost[Strategy.m_Att.Rare - 1, Strategy.Quality - 1];
+                    upgradeCost = StaticData.Instance.LevelUpCostPerRare * m_Strategy.m_Att.Rare * m_Strategy.Quality;
                     upgradeCost = (int)(upgradeCost * (1 - m_Strategy.UpgradeDiscount));
                     UpgradeCostValue.text = upgradeCost.ToString();
                 }
@@ -291,8 +292,7 @@ public class TurretTips : TileTips
             m_Strategy.Quality++;
             m_Strategy.SetQualityValue();
             m_Strategy.m_Turret.SetGraphic();
-            Icon.sprite = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].TurretIcon;
-            Name.text = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].TurretName;
+            BasicInfo();
             UpdateInfo();
             if (m_Strategy.Quality > 2)
             {
@@ -300,7 +300,7 @@ public class TurretTips : TileTips
                 return;
             }
             UpdateLevelUpInfo();
-            upgradeCost = StaticData.Instance.LevelUpCost[m_Strategy.m_Att.Rare - 1, m_Strategy.Quality - 1];
+            upgradeCost = StaticData.Instance.LevelUpCostPerRare * m_Strategy.m_Att.Rare * m_Strategy.Quality;
             upgradeCost = (int)(upgradeCost * (1 - m_Strategy.UpgradeDiscount));
             UpgradeCostValue.text = upgradeCost.ToString();
         }

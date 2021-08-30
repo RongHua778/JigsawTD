@@ -14,7 +14,7 @@ public class Armor : MonoBehaviour,IDamageable
     private void Awake()
     {
         explosionClip = Resources.Load<AudioClip>("Music/Effects/Sound_EnemyExplosion");
-        DamageStrategy = new ArmourStrategy(this.gameObject, this);
+        DamageStrategy = new ArmourStrategy(this.transform, this);
     }
 
 

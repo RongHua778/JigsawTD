@@ -9539,6 +9539,7 @@ MonoBehaviour:
   IsBoss: 0
   Intensify: 0
   exlposionPrefab: {fileID: 4814509631623709245, guid: 80e6008c99b83d843b0e50f70653018f, type: 3}
+  gainMoneyPrefab: {fileID: 1926441791724971538, guid: 772397d6e2f78d142a70b5168e1282e4, type: 3}
 --- !u!1 &6627235728306182668
 GameObject:
   m_ObjectHideFlags: 0

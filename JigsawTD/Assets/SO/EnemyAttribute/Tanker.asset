@@ -15,9 +15,9 @@ MonoBehaviour:
   EnemyName: TANKER
   EnemyType: 3
   InitCount: 1
-  CountIncrease: 1
-  Health: 50
-  Speed: 0.6
+  CountIncrease: 0.5
+  Health: 100
+  Speed: 0.5
   Shell: 0
   CoolDown: 3.5
   Prefab: {fileID: 8538428539047822095, guid: f7b1c5b6e3f289240b40cfb7e17d87e4, type: 3}

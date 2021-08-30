@@ -8,7 +8,7 @@ public class EnemyAttribute : ScriptableObject
     public string EnemyName;
     public EnemyType EnemyType;
     public int InitCount;
-    public int CountIncrease;
+    public float CountIncrease;
     public float Health;
     public float Speed;
     public int Shell;

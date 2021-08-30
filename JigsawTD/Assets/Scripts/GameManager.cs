@@ -65,6 +65,8 @@ public class GameManager : Singleton<GameManager>
     //初始化设定
     public void Initinal()
     {
+        //初始化全局数据
+        GameRes.Initialize(m_MainUI, m_FuncUI);
         //初始化工厂
         TurretEffectFactory.Initialize();
         TileFactory.Initialize();
@@ -205,11 +207,11 @@ public class GameManager : Singleton<GameManager>
     }
     public void PrepareNextWave()
     {
-        if (m_MainUI.Life <= 0)//游戏失败
+        if (GameRes.Life <= 0)//游戏失败
         {
             return;
         }
-        if (m_MainUI.CurrentWave >= StaticData.Instance.LevelMaxWave)
+        if (GameRes.CurrentWave >= StaticData.Instance.LevelMaxWave)
         {
             GameEnd(true);
             return;
@@ -348,13 +350,13 @@ public class GameManager : Singleton<GameManager>
 
     public void GainMoney(int amount)
     {
-        m_MainUI.Coin += (int)(amount * (1 + StaticData.OverallMoneyIntensify));
+        GameRes.Coin += (int)(amount * (1 + StaticData.OverallMoneyIntensify));
     }
 
     public void GainInterest()
     {
-        int interest = Mathf.Min(100, (int)(m_MainUI.Coin * StaticData.Instance.CoinInterest));
-        m_MainUI.Coin += interest;
+        int interest = Mathf.Min(100, (int)(GameRes.Coin * StaticData.Instance.CoinInterest));
+        GameRes.Coin += interest;
     }
 
     public void GainDraw(int amount)
@@ -537,12 +539,5 @@ public class GameManager : Singleton<GameManager>
         m_BoardSystem.SetTutorialPoss(value, poss);
     }
 
-    public void GainWaveBaseMoney(Vector2 pos)//goldkeeper功能
-    {
-        int amount = m_MainUI.CurrentWave * 2;
-        GainMoney(amount);
-        GameObject obj = ObjectPool.Instance.Spawn(StaticData.Instance.GainCoinAnimPrefab).gameObject;
-        obj.transform.position = pos;
-    }
     #endregion
 }

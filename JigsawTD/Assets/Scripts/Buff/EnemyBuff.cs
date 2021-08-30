@@ -203,7 +203,7 @@ public class DamageTarget : TileBuff
     public override void Affect()
     {
         float damageReturn;
-        Target.ApplyDamage(Target.TargetDamageCounter * KeyValue, out damageReturn);
+        Target.DamageStrategy.ApplyDamage(Target.TargetDamageCounter * KeyValue, out damageReturn);
         ((TrapContent)(Target.LastTrap)).DamageAnalysis += (int)damageReturn;
         Target.TargetDamageCounter = 0;
 
