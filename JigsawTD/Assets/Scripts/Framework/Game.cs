@@ -10,6 +10,8 @@ public class Game : Singleton<Game>
 {
     SceneStateController m_SceneStateController = new SceneStateController();
 
+    [HideInInspector] public Save SaveData;
+
     public int SelectDifficulty;
 
     public Animator transition;
@@ -21,6 +23,8 @@ public class Game : Singleton<Game>
     protected override void Awake()
     {
         base.Awake();
+       
+        StaticData.LoadGame();
         Application.runInBackground = true;
         GameObject.DontDestroyOnLoad(this.gameObject);
     }

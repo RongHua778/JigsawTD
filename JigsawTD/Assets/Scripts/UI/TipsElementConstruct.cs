@@ -8,14 +8,13 @@ using System;
 public class TipsElementConstruct : MonoBehaviour
 {
     [SerializeField] Image[] Elements = default;
-    Blueprint m_BluePrint;
     ElementSkill m_Skill;
     [SerializeField] InfoBtn m_InfoBtn = default;
     [SerializeField] Text elementSkillName = default;
     [SerializeField] Text elementSkillDes = default;
     [SerializeField] GameObject[] areas = default;
     //[SerializeField] Image intensifyImg = default;
-
+    [SerializeField] Sprite[] elementSprites = default;
     public void SetElements(ElementSkill skill)
     {
         areas[1].SetActive(false);
@@ -30,8 +29,8 @@ public class TipsElementConstruct : MonoBehaviour
                 continue;
             }
             Elements[i].gameObject.SetActive(true);
-            TurretAttribute attribute = ConstructHelper.GetElementAttribute((Element)skill.Elements[i]);
-            Elements[i].sprite = attribute.TurretLevels[0].TurretIcon;
+            //TurretAttribute attribute = ConstructHelper.GetElementAttribute((Element)skill.Elements[i]);
+            Elements[i].sprite = elementSprites[skill.Elements[i]];
         }
         SetIntensifyInfo();
 

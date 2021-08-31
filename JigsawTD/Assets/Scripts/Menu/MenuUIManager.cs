@@ -8,12 +8,14 @@ public class MenuUIManager : Singleton<MenuUIManager>
     //界面系统
     [SerializeField] UILevelManager m_UILevelManager = default;
     [SerializeField] MenuMessage m_Message = default;
+    [SerializeField] UIBattleSet m_UIBattleSet = default;
 
     public void Initinal()
     {
         Sound.Instance.PlayBg("menu");
         m_Message.Initialize();
         m_UILevelManager.Initialize();
+        m_UIBattleSet.Initialize();
 
     }
     public void Release()
@@ -53,7 +55,7 @@ public class MenuUIManager : Singleton<MenuUIManager>
         ShowMessage("暂未开放");
     }
 
-    private void ShowMessage(string content)
+    public void ShowMessage(string content)
     {
         m_Message.SetText(content);
     }

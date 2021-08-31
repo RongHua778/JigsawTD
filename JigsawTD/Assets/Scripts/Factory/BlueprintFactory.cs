@@ -19,14 +19,15 @@ public class BlueprintFactory : GameObjectFactory
         int[] compositionLevel = StaticData.GetSomeRandoms(attribute.totalLevel, attribute.elementNumber);
         for (int i = 0; i < attribute.elementNumber; i++)
         {
-            Composition c = new Composition(compositionLevel[i], Random.Range(0, StaticData.elementN));
+            int element = Game.Instance.SaveData.SaveSelectedElement[Random.Range(0, StaticData.elementN)];
+            Composition c = new Composition(compositionLevel[i], element);
             blueprint.Compositions.Add(c);
         }
         CompositeBlueprint(attribute, blueprint);
         return blueprint;
     }
 
-    public Blueprint GetSpecificBluePrint(TurretAttribute attribute,int element1,int element2,int element3)
+    public Blueprint GetSpecificBluePrint(TurretAttribute attribute, int element1, int element2, int element3)
     {
         Blueprint blueprint = new Blueprint();
         blueprint.CompositeTurretAttribute = attribute;
@@ -42,7 +43,7 @@ public class BlueprintFactory : GameObjectFactory
 
     private void CompositeBlueprint(TurretAttribute attribute, Blueprint blueprint)
     {
-        blueprint.ComStrategy = new StrategyBase(StrategyType.Composite, attribute, 1, Element.Gold, blueprint);
+        blueprint.ComStrategy = new StrategyBase(StrategyType.Composite, attribute, 1, blueprint);
         blueprint.ComStrategy.SetQualityValue();
         blueprint.ComStrategy.GetTurretSkills();
         blueprint.SortBluePrint();

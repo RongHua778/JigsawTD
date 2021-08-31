@@ -11,13 +11,18 @@ CONTINUE=继续游戏
 RESTART=重新开始
 RETURNTOMENU=返回菜单
 QUIT2=退出游戏
+CONFIRM=确定
+
+//Battleset
+SELECTELEMENT=选择战斗元素：
+NOENOUGHELEMENT=请选择4种出战元素
 
 
 TEST1=测试：删除了所有存档
 TEST2=测试：已解锁全部难度
 
-LEVEL1NAME=测试关卡
-LEVELOTHER=更多关卡开发中
+LEVEL1NAME=标准模式
+LEVELOTHER=更多模式开发中
 LEVELINFO=关卡信息
 DIFFICULTINFO=难度选择
 DIFFICULTY=难度
@@ -30,7 +35,7 @@ TUTORIAL=是否开启教程？
 YES=是
 NO=否
 
-LEVEL1INFO=这是原型机进入重构模组的首次资格测试，被淘汰的新人警告你这里的首领会不断制造大量敌人来冲击你的防线，当然你得坚持足够多的回合才能见到它。
+LEVEL1INFO=在标准模式下，你需要镇守40波的敌人入侵，选择并运用你所擅长的策略，只要坚持到最后你就是胜利者。
 
 //tips
 LACKMONEY=金币不足
@@ -185,7 +190,7 @@ SLOWADJACENT=相邻每有1个防御塔，就提升0.5减速
 
 //D系
 DDD=纳米重构
-DDDINFO=作为装备时：复制第一个元素技能，并获得75%暴击率
+DDDINFO=作为装备时：复制第一个元素技能，并获得60%暴击率
 DDA=躁动火药
 DDAINFO=暴击伤害增加-100到400%的随机浮动
 DDB=震荡射击
@@ -206,7 +211,7 @@ EEBINFO=每次攻击提升本回合溅射范围0.02
 EEC=聚能打击
 EECINFO=每回合开始后，溅射范围每秒提升0.01
 EED=不稳定轴
-EEDINFO=溅射增加0-1的随机浮动
+EEDINFO=溅射范围增加0-1的随机浮动
 
 
 

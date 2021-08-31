@@ -10,15 +10,17 @@ public class UILevelManager : IUserInterface
     [SerializeField] Text levelInfo = default;
     [SerializeField] Text highScore = default;
     [SerializeField] GameObject tutorialPanel = default;
+    [SerializeField] UIBattleSet m_UIBattleSet = default;
     private Animator m_Anim;
     [SerializeField] Text difficultyTxt = default;
+    private int maxDifficulty;
     int difficulty;
     public int Difficulty
     {
         get => difficulty;
         set
         {
-            difficulty = Mathf.Clamp(value, 0, 5);
+            difficulty = Mathf.Clamp(value, 0, maxDifficulty);
             difficultyTxt.text = GameMultiLang.GetTraduction("DIFFICULTY") + " " + difficulty.ToString();
         }
     }
@@ -29,6 +31,7 @@ public class UILevelManager : IUserInterface
         base.Initialize();
         m_Anim = this.GetComponent<Animator>();
         Difficulty = PlayerPrefs.GetInt("MaxDifficulty", 0);
+        maxDifficulty = Difficulty;
     }
     public void SetLevelInfo()
     {
@@ -72,5 +75,10 @@ public class UILevelManager : IUserInterface
     public void ClosePanel()
     {
         m_Anim.SetBool("OpenLevel", false);
+    }
+
+    public void OnBattleSetBtnClick()
+    {
+        m_UIBattleSet.Show();
     }
 }

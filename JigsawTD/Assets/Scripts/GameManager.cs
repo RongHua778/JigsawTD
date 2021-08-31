@@ -68,7 +68,6 @@ public class GameManager : Singleton<GameManager>
         //初始化全局数据
         GameRes.Initialize(m_MainUI, m_FuncUI);
         //初始化工厂
-        TurretEffectFactory.Initialize();
         TileFactory.Initialize();
         ContentFactory.Initialize();
         ShapeFactory.Initialize();

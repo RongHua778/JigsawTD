@@ -11,6 +11,11 @@ CONTINUE=Coninue
 RESTART=Restart
 RETURNTOMENU=Return to menu
 QUIT2=Quit
+CONFIRM=Confirm
+
+//Battleset
+SELECTELEMENT=Pick battle elements:
+NOENOUGHELEMENT=Please pick 4 battle elements
 
 TEST1=Test:Clear all save data
 TEST2=Test:Unlock all difficulties

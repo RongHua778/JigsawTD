@@ -4,6 +4,8 @@ using UnityEngine;
 using System.Linq;
 using System;
 using Pathfinding;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 public class StaticData : Singleton<StaticData>
 {
@@ -57,7 +59,7 @@ public class StaticData : Singleton<StaticData>
     public float TileSize = default;
     //塔的最大等级
     public static int maxLevel = 5;
-    //一共有几种元素
+    //一共有几种战斗元素
     public static int elementN = 4;
     //最大quality
     public static int maxQuality = 5;
@@ -85,7 +87,7 @@ public class StaticData : Singleton<StaticData>
     public static float GoldAttackIntensify = 0.3f;
     public static float WoodSpeedIntensify = 0.3f;
     public static float WaterSlowIntensify = 0.5f;
-    public static float FireCriticalIntensify = 0.25f;
+    public static float FireCriticalIntensify = 0.2f;
     public static float DustSputteringIntensify = 0.3f;
 
     public static Color32 RedColor;
@@ -105,7 +107,7 @@ public class StaticData : Singleton<StaticData>
 
     private void Start()
     {
-
+        TurretEffectFactory.Initialize();
         RedColor = new Color32(255, 110, 66, 255);
         GreenColor = new Color32(66, 255, 100, 255);
         BlueColor = new Color32(66, 223, 255, 255);
@@ -374,19 +376,19 @@ public class StaticData : Singleton<StaticData>
         switch (element)
         {
             case Element.Gold:
-                intensifyTxt += (GoldAttackIntensify * quality + 0.1f) * 100 + GameMultiLang.GetTraduction("ATTACKUP");
+                intensifyTxt += GoldAttackIntensify * 100 + GameMultiLang.GetTraduction("ATTACKUP");
                 break;
             case Element.Wood:
-                intensifyTxt += (WoodSpeedIntensify * quality + 0.1f) * 100 + GameMultiLang.GetTraduction("SPEEDUP");
+                intensifyTxt += WoodSpeedIntensify * 100 + GameMultiLang.GetTraduction("SPEEDUP");
                 break;
             case Element.Water:
-                intensifyTxt += (WaterSlowIntensify * quality + 0.1f) + GameMultiLang.GetTraduction("SLOWUP");
+                intensifyTxt += WaterSlowIntensify + GameMultiLang.GetTraduction("SLOWUP");
                 break;
             case Element.Fire:
-                intensifyTxt += (FireCriticalIntensify * quality + 0.1f) * 100 + GameMultiLang.GetTraduction("CRITICALUP");
+                intensifyTxt += FireCriticalIntensify * 100 + GameMultiLang.GetTraduction("CRITICALUP");
                 break;
             case Element.Dust:
-                intensifyTxt += (DustSputteringIntensify * quality + 0.1f) + GameMultiLang.GetTraduction("SPUTTERINGUP");
+                intensifyTxt += DustSputteringIntensify + GameMultiLang.GetTraduction("SPUTTERINGUP");
                 break;
             default:
                 Debug.Log("错误的元素，无法配置加成");
@@ -494,9 +496,188 @@ public class StaticData : Singleton<StaticData>
         return node.Walkable;
     }
 
-    public void ShowJumpDamage(Vector2 pos,int amount)
+    public void ShowJumpDamage(Vector2 pos, int amount)
     {
         JumpDamage obj = ObjectPool.Instance.Spawn(JumpDamagePrefab) as JumpDamage;
         obj.Jump(amount, pos);
     }
+
+
+    //存档
+    public static void SaveGame(Save save)
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/gamesave.save");
+        bf.Serialize(file, save);
+        file.Close();
+        Debug.Log("Game Save");
+
+    }
+
+    public static void LoadGame()
+    {
+        if (File.Exists(Application.persistentDataPath + "/gamesave.save"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/gamesave.save", FileMode.Open);
+            Save save = (Save)bf.Deserialize(file);
+            file.Close();
+            Game.Instance.SaveData = save;
+
+        }
+        else
+        {
+            Save save = new Save();
+            List<int> sElements = new List<int> { 0, 1, 2, 3 };
+            save.SaveSelectedElement = sElements;
+            Game.Instance.SaveData = save;
+            //m_EventTrigger.SetRemainEvent();//初始化eventlist
+        }
+
+    }
+
+    public static void C(List<int> lsArray, int selectCount)
+    {
+        int totolcount = lsArray.Count;
+        int[] currectselect = new int[selectCount];
+        int last = selectCount - 1;
+
+        for (int i = 0; i < selectCount; i++)
+        {
+            currectselect[i] = i;
+        }
+
+        while (true)
+        {
+            for (int i = 0; i < selectCount; i++)
+            {
+                Debug.Log(lsArray[currectselect[i]]);
+            }
+            Debug.Log("");
+            if (currectselect[last] < totolcount - 1)
+            {
+                currectselect[last]++;
+            }
+            else
+            {
+                int pos = last;
+                while (pos > 0 && currectselect[pos - 1] == currectselect[pos] - 1)
+                {
+                    pos--;
+                }
+                if (pos == 0) return;
+                currectselect[pos - 1]++;
+                for (int i = pos; i < selectCount; i++)
+                {
+                    currectselect[i] = currectselect[i - 1] + 1;
+                }
+            }
+        }
+    }
+
+    public static List<List<int>> GetAllC(List<int> dataList, int n, List<int> value = null)
+    {
+        List<List<int>> result = new List<List<int>>();
+        for (int i = 0, count = dataList.Count; i < count; i++)
+        {
+            List<int> itemList = new List<int>();
+            if (value != null && value.Count > 0)
+            {
+                itemList.AddRange(value);
+            }
+            itemList.Add(dataList[i]);
+
+            if (itemList.Count == n)
+            {
+                result.Add(itemList);
+            }
+            else
+            {
+                result.AddRange(GetAllC(dataList, n, itemList));
+            }
+        }
+        return result;
+    }
+
+    public static List<List<int>> GetAllCC(List<int> dataList)
+    {
+        List<List<int>> result = new List<List<int>>();
+        for (int a = 0; a < dataList.Count; a++)
+        {
+            for (int b = a; b < dataList.Count; b++)
+            {
+                for (int c = b; c < dataList.Count; c++)
+                {
+                    List<int> itemList = new List<int>();
+                    itemList.Add(dataList[a]);
+                    itemList.Add(dataList[b]);
+                    itemList.Add(dataList[c]);
+                    result.Add(itemList);
+                }
+            }
+        }
+        return result;
+    }
+
+    public static List<List<int>> GetAllCC2(List<int> dataList)
+    {
+        List<List<int>> result = new List<List<int>>();
+        for (int a = 0; a < dataList.Count; a++)//同名先加
+        {
+            List<int> itemList = new List<int>();
+            itemList.Add(dataList[a]);
+            itemList.Add(dataList[a]);
+            itemList.Add(dataList[a]);
+            result.Add(itemList);
+        }
+        for (int b = 0; b < dataList.Count; b++)//双同名
+        {
+            for (int c = b + 1; c < dataList.Count; c++)
+            {
+                if (c >= dataList.Count)
+                    continue;
+                List<int> itemList = new List<int>();
+                itemList.Add(dataList[b]);
+                itemList.Add(dataList[b]);
+                itemList.Add(dataList[c]);
+                result.Add(itemList);
+            }
+        }
+        for (int b = 0; b < dataList.Count; b++)//混合
+        {
+            for (int c = b + 1; c < dataList.Count; c++)
+            {
+                if (c >= dataList.Count)
+                    continue;
+                for (int d = c + 1; c < dataList.Count; c++)
+                {
+                    if (d >= dataList.Count)
+                        continue;
+                    List<int> itemList = new List<int>();
+                    itemList.Add(dataList[c]);
+                    itemList.Add(dataList[c]);
+                    itemList.Add(dataList[d]);
+                    result.Add(itemList);
+                }
+            }
+        }
+
+
+        //for (int a = 0; a < dataList.Count; a++)
+        //{
+        //    for (int b = a; b < dataList.Count; b++)
+        //    {
+        //        for (int c = b; c < dataList.Count; c++)
+        //        {
+        //            List<int> itemList = new List<int>();
+        //            itemList.Add(dataList[a]);
+        //            itemList.Add(dataList[b]);
+        //            itemList.Add(dataList[c]);
+        //            result.Add(itemList);
+        //        }
+        //    }
+        //}
+        return result;
+    }
+
 }
