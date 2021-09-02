@@ -43,7 +43,7 @@ public class BlueprintFactory : GameObjectFactory
 
     private void CompositeBlueprint(TurretAttribute attribute, Blueprint blueprint)
     {
-        blueprint.ComStrategy = new StrategyBase(StrategyType.Composite, attribute, 1, blueprint);
+        blueprint.ComStrategy = new StrategyBase(attribute, 1, blueprint);
         blueprint.ComStrategy.SetQualityValue();
         blueprint.ComStrategy.GetTurretSkills();
         blueprint.SortBluePrint();

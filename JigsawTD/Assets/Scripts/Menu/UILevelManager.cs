@@ -21,7 +21,10 @@ public class UILevelManager : IUserInterface
         set
         {
             difficulty = Mathf.Clamp(value, 0, maxDifficulty);
-            difficultyTxt.text = GameMultiLang.GetTraduction("DIFFICULTY") + " " + difficulty.ToString();
+            if (Difficulty == 0)
+                difficultyTxt.text = GameMultiLang.GetTraduction("TUTORIAL");
+            else
+                difficultyTxt.text = GameMultiLang.GetTraduction("DIFFICULTY") + " " + difficulty.ToString();
         }
     }
 
@@ -30,11 +33,12 @@ public class UILevelManager : IUserInterface
     {
         base.Initialize();
         m_Anim = this.GetComponent<Animator>();
-        Difficulty = PlayerPrefs.GetInt("MaxDifficulty", 0);
-        maxDifficulty = Difficulty;
+        
     }
     public void SetLevelInfo()
     {
+        maxDifficulty = PlayerPrefs.GetInt("MaxDifficulty",0);
+        Difficulty = maxDifficulty;
         LevelAttribute attribute = LevelManager.Instance.CurrentLevel;
         int maxPass = LevelManager.Instance.LevelMaxTurn;
         levelInfo.text = GameMultiLang.GetTraduction(attribute.LevelInfo);
@@ -52,12 +56,21 @@ public class UILevelManager : IUserInterface
             Game.Instance.SelectDifficulty = Difficulty;
             gameStart = true;
             if (Difficulty == 0)
-                tutorialPanel.SetActive(true);
+            {
+                Game.Instance.Tutorial = true;
+                Game.Instance.SaveData.SaveSelectedElement = new List<int> { 0, 1, 2, 3 };
+            }
             else
             {
                 Game.Instance.Tutorial = false;
-                Game.Instance.LoadScene(1);
             }
+            //    tutorialPanel.SetActive(true);
+            //else
+            //{
+            //    Game.Instance.Tutorial = false;
+            //    Game.Instance.LoadScene(1);
+            //}
+            Game.Instance.LoadScene(1);
         }
     }
 

@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: SNIPER
   Icon: {fileID: 0}
-  Description: 
+  Description: SNIPERSKILL
   ContentPrefab: {fileID: 1494963813994468761, guid: 05869ddac62aff043bf7e0106d00bc2e, type: 3}
+  StrategyType: 1
   RangeType: 1
   element: 0
   Bullet: {fileID: 3228400359097999329, guid: 8cff4d87089bb6d43bd9304c1e2efd03, type: 3}

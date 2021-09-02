@@ -21,7 +21,7 @@ MonoBehaviour:
   Shell: 0
   CoolDown: 3
   Prefab: {fileID: -4008761052356302502, guid: 74ed77649a912194784c510912c2ef8e, type: 3}
-  ReachDamage: 1
+  ReachDamage: 5
   extraHealth: 0
   EnemyIcon: {fileID: -8847467542957845770, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
   EnemyEmptyIcon: {fileID: 6774334592187772519, guid: 57e00b28c7ddb744eab6e4415c7c879a, type: 3}

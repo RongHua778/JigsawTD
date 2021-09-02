@@ -13,7 +13,7 @@ public class TestWindow : EditorWindow
     Quality quality = Quality.level1;
     Element element = Element.Gold;
 
-    string turretName = "F1";
+    string turretName = "CONSTRUCTOR";
     Element e1 = Element.Gold;
     Element e2 = Element.Gold;
     Element e3 = Element.Gold;

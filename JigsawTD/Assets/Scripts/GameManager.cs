@@ -66,6 +66,7 @@ public class GameManager : Singleton<GameManager>
     public void Initinal()
     {
         //初始化全局数据
+        
         GameRes.Initialize(m_MainUI, m_FuncUI);
         //初始化工厂
         TileFactory.Initialize();
@@ -497,6 +498,8 @@ public class GameManager : Singleton<GameManager>
 
     public void ShowEnemyTips()
     {
+        if (m_WaveSystem.LevelSequence[0] == null)
+            return;
         m_EnemyTips.Show();
         m_EnemyTips.ReadSequenceInfo(m_WaveSystem.LevelSequence[0]);
     }

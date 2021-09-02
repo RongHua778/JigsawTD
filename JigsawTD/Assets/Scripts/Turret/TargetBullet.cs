@@ -18,16 +18,14 @@ public class TargetBullet : Bullet
     }
     public override void TriggerDamage()
     {
-        ParticalControl effect = ObjectPool.Instance.Spawn(SputteringEffect) as ParticalControl;
-        effect.transform.position = transform.position;
-        effect.transform.localScale = Mathf.Max(0.3f, SputteringRange * 2) * Vector3.one;
-        effect.PlayEffect();
+        TriggerPreHitEffect();
+        SputteredCount = 0;
 
         if (SputteringRange > 0)
         {
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, SputteringRange, StaticData.EnemyLayerMask);
             SputteredCount = hits.Length;
-            TriggerPreHitEffect();
+
             for (int i = 0; i < hits.Length; i++)
             {
                 TargetPoint target = hits[i].GetComponent<TargetPoint>();
@@ -49,11 +47,14 @@ public class TargetBullet : Bullet
         {
             if (Target != null)
             {
-                SputteredCount = 0;
                 TriggerPreHitEffect();
                 DamageProcess(Target.Enemy);
             }
         }
+        ParticalControl effect = ObjectPool.Instance.Spawn(SputteringEffect) as ParticalControl;
+        effect.transform.position = transform.position;
+        effect.transform.localScale = Mathf.Max(0.3f, SputteringRange * 2) * Vector3.one;
+        effect.PlayEffect();
         base.TriggerDamage();
     }
 

@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class MultiTarget : ElementSkill
 {
-    //额外攻击2个目标
+    //造成的伤害-35%，额外攻击2个目标
     public override List<int> Elements => new List<int> { 1, 1, 1 };
-    public override string SkillDescription => "MULTITARGET";
 
     public override void Build()
     {
@@ -16,150 +14,103 @@ public class MultiTarget : ElementSkill
 
     public override void Shoot(Bullet bullet = null)
     {
-        bullet.Damage *= 0.7f;
+        bullet.Damage *= 0.65f;
     }
 }
-
-
-
-public class SpeedTarget : ElementSkill
+public class AttackSpeed : ElementSkill
 {
-    //攻击特效:对同一目标进行攻击时，每次攻击攻速提升10%，上限300%，切换目标重置
+    //每回合每次攻击提升5%攻击力
     public override List<int> Elements => new List<int> { 1, 1, 0 };
-    public override string SkillDescription => "SPEEDTARGET";
-
-    private Enemy lastTarget;
-    private float speedIncreased;
-
 
     public override void Shoot(Bullet bullet = null)
     {
-        bullet.Damage *= 0.5f;
-        Enemy target = (Enemy)strategy.m_Turret.Target[0].Enemy;
-        if (target != lastTarget)
-        {
-            lastTarget = target;
-            strategy.TurnSpeedIntensify -= speedIncreased;
-            speedIncreased = 0;
-            return;
-        }
-        if (speedIncreased < 2.99f)
-        {
-            speedIncreased += 0.1f * strategy.TimeModify;
-            strategy.TurnSpeedIntensify += 0.1f * strategy.TimeModify;
-        }
+        strategy.TurnAttackIntensify += 0.05f * strategy.TimeModify;
     }
-
-    public override void EndTurn()
-    {
-        lastTarget = null;
-        speedIncreased = 0;
-    }
-
 }
 
-public class LateSpeed : ElementSkill
+public class SlowSpeed : ElementSkill
 {
-    //开局30秒后攻速提高100%
+    //每次攻击提升0.08减速
     public override List<int> Elements => new List<int> { 1, 1, 2 };
-    public override string SkillDescription => "LATESPEED";
-
-    public override void StartTurn()
+    public override void Shoot(Bullet bullet = null)
     {
-        Duration += 999;
+        strategy.TurnFixSlowRate += 0.08f * strategy.TimeModify;
     }
-
-    public override void Tick(float delta)
-    {
-        base.Tick(delta);
-        strategy.TurnSpeedIntensify += 0.02f * delta * strategy.TimeModify;
-    }
-
-    public override void EndTurn()
-    {
-        Duration = 0;
-    }
-
+    //public override void Hit(IDamageable target, Bullet bullet = null)
+    //{
+    //    float damageIncreased = target.DamageStrategy.CurrentHealth * 0.08f;
+    //    bullet.Damage += damageIncreased;
+    //}
 }
 
-public class SpeedCritical : ElementSkill
+public class CriticalSpeed : ElementSkill
 {
-    //暴击后，使接下来1秒攻速提升50%
+    //每次攻击提升本回合3%暴击率
     public override List<int> Elements => new List<int> { 1, 1, 3 };
-    public override string SkillDescription => "SPEEDCRITICAL";
 
-    private float speedIncreased;
-    private float timeCounter;
-    private bool isIntensify;
-
-    public override void StartTurn()
+    public override void Shoot(Bullet bullet = null)
     {
-        Duration += 999;
+        strategy.TurnFixCriticalRate += 0.03f * strategy.TimeModify;
     }
-    public override void PreHit(Bullet bullet = null)
-    {
-        if (bullet.isCritical)
-        {
-            timeCounter = 1f;
-            if (!isIntensify)
-            {
-                isIntensify = true;
-                speedIncreased = 0.5f * strategy.TimeModify;
-                strategy.TurnSpeedIntensify += 0.5f * strategy.TimeModify;
-            }
-        }
-    }
-    public override void Tick(float delta)
-    {
-        base.Tick(delta);
-        if (timeCounter >= 0)
-        {
-            timeCounter -= delta;
-            if (timeCounter <= 0)
-            {
-                isIntensify = false;
-                strategy.TurnSpeedIntensify -= speedIncreased;
-            }
-        }
-        
-    }
-
-    public override void EndTurn()
-    {
-        speedIncreased = 0;
-        isIntensify = false;
-    }
-
 }
 
-public class SpeedPolo : ElementSkill
+public class SplashSpeed : ElementSkill
 {
-    //相邻防御塔攻速提高50%
+    //每回合每次攻击提升0.02溅射
     public override List<int> Elements => new List<int> { 1, 1, 4 };
-    public override string SkillDescription => "SPEEDPOLO";
 
-    private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
-    public override void Detect()
+    public override void Shoot(Bullet bullet = null)
     {
-        foreach (var strategy in intensifiedStrategies)
-        {
-            strategy.InitSpeedIntensify -= 0.5f * strategy.PoloIntensifyModify;
-        }
-        intensifiedStrategies.Clear();
-        List<Vector2Int> points = StaticData.GetCirclePoints(1);
-        foreach (var point in points)
-        {
-            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
-            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
-            if (hit != null)
-            {
-                StrategyBase strategy = hit.GetComponent<TurretContent>().Strategy;
-                strategy.InitSpeedIntensify += 0.5f * strategy.PoloIntensifyModify;
-                intensifiedStrategies.Add(strategy);
-            }
-        }
+        strategy.TurnFixSputteringRange += 0.02f * strategy.TimeModify;
     }
+
+
 }
+
+
+
+
+//public class SpeedTarget : ElementSkill
+//{
+//    //攻击特效:对同一目标进行攻击时，每次攻击攻速提升10%，上限300%，切换目标重置
+//    public override List<int> Elements => new List<int> { 1, 1, 0 };
+//    public override string SkillDescription => "SPEEDTARGET";
+
+//    private Enemy lastTarget;
+//    private float speedIncreased;
+
+
+//    public override void Shoot(Bullet bullet = null)
+//    {
+//        bullet.Damage *= 0.5f;
+//        Enemy target = (Enemy)strategy.m_Turret.Target[0].Enemy;
+//        if (target != lastTarget)
+//        {
+//            lastTarget = target;
+//            strategy.TurnSpeedIntensify -= speedIncreased;
+//            speedIncreased = 0;
+//            return;
+//        }
+//        if (speedIncreased < 2.99f)
+//        {
+//            speedIncreased += 0.1f * strategy.TimeModify;
+//            strategy.TurnSpeedIntensify += 0.1f * strategy.TimeModify;
+//        }
+//    }
+
+//    public override void EndTurn()
+//    {
+//        lastTarget = null;
+//        speedIncreased = 0;
+//    }
+
+//}
+
+
+
+
+
+
 //public class SpeedAdjacent : ElementSkill
 //{
 //    //相邻每个防御塔提高自身50%攻速

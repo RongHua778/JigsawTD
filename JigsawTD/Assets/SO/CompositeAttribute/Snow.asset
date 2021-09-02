@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: SNOW
   Icon: {fileID: 21300000, guid: 8e83712f39bdf9e4db0b0de438c2e4b2, type: 3}
-  Description: 
+  Description: SNOWSKILL
   ContentPrefab: {fileID: 3184344065496086193, guid: ec76f05b1efa1874b8faa449cea6300a, type: 3}
+  StrategyType: 1
   RangeType: 2
   element: 0
   Bullet: {fileID: 6504941539332389289, guid: d783f38712dd14d4e9cc485d051d7b20, type: 3}
@@ -24,7 +25,7 @@ MonoBehaviour:
   Rare: 4
   totalLevel: 9
   elementNumber: 3
-  TurretSkill: 9
+  TurretSkill: 7
   TurretLevels:
   - AttackRange: 3
     ForbidRange: 0

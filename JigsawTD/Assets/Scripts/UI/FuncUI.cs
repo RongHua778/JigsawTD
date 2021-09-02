@@ -17,8 +17,11 @@ public class FuncUI : IUserInterface
     [SerializeField] Text PlayerLevelTxt = default;
     [SerializeField] InfoBtn m_LuckInfo = default;
     [SerializeField] InfoBtn m_LevelInfo = default;
+    [SerializeField] InfoBtn m_DrawInfo = default;
     [SerializeField] LuckProgress m_LuckProgress = default;
     Animator m_Anim;
+
+    float discountRate = 0.1f;
 
     bool drawThisTurn = true;
     public bool DrawThisTurn { get => drawThisTurn; set => drawThisTurn = value; }
@@ -175,12 +178,13 @@ public class FuncUI : IUserInterface
     public void PrepareNextWave()
     {
         Show();
+        m_DrawInfo.SetContent(GameMultiLang.GetTraduction("DRAWINFO") + "<color=cyan>" + discountRate * 100 + "%</color>");
         if (!DrawThisTurn)
         {
             //EnergyProgress++;
             //Energy++;
             //BuyShapeCost -= Energy;
-            BuyShapeCost = Mathf.RoundToInt(BuyShapeCost * 0.95f);//没抽就减5%的价格
+            BuyShapeCost = Mathf.RoundToInt(BuyShapeCost * (1 - discountRate));//没抽就减5%的价格
         }
         else
         {

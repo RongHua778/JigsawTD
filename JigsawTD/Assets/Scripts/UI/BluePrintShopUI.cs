@@ -35,7 +35,7 @@ public class BluePrintShopUI : IUserInterface
     int maxLock = 1;
     public int MaxLock { get => maxLock; set => maxLock = value; }
 
-    int shopCapacity = 3;
+    int shopCapacity = 0;
     public int ShopCapacity { get => shopCapacity; set => shopCapacity = value; }
     int nextRefreshTrun = 0;
     public int NextRefreshTrun //下次自动刷新回合

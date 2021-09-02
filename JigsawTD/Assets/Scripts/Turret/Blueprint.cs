@@ -101,7 +101,7 @@ public class Blueprint
             {
                 ElementTurret turret = temp[j] as ElementTurret;
                 StrategyBase strategy = turret.Strategy;
-                if (compositions[i].elementRequirement == (int)(strategy.Element) &&
+                if (compositions[i].elementRequirement == (int)(strategy.m_Att.element) &&
                     compositions[i].qualityRequeirement == strategy.Quality)
                 {
                     compositions[i].obtained = true;

@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: ULTRA
   Icon: {fileID: 0}
-  Description: 
+  Description: ULTRASKILL
   ContentPrefab: {fileID: 2075981503273244670, guid: ac415d48924f27348b2ad7abc05a61ca, type: 3}
+  StrategyType: 1
   RangeType: 0
   element: 0
   Bullet: {fileID: 3444003037580827743, guid: 3aecd23a7705a044d927a9428874f868, type: 3}
@@ -24,7 +25,7 @@ MonoBehaviour:
   Rare: 6
   totalLevel: 14
   elementNumber: 3
-  TurretSkill: 7
+  TurretSkill: 6
   TurretLevels:
   - AttackRange: 5
     ForbidRange: 0

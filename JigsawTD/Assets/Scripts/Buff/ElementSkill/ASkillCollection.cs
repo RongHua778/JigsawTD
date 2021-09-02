@@ -2,95 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
-public class AttackSpeed : ElementSkill
-{
-    //每回合每次攻击提升10%攻击力，上限200%
-    public override List<int> Elements => new List<int> { 0, 0, 1 };
-    public override string SkillDescription => "ATTACKSPEED";
-
-    //private float attackIncreased = 0;
-    public override void Shoot(Bullet bullet = null)
-    {
-
-        //attackIncreased += 0.05f * strategy.TimeModify;
-        strategy.TurnAttackIntensify += 0.05f * strategy.TimeModify;
-    }
-
-    //public override void EndTurn()
-    //{
-    //    attackIncreased = 0;
-    //}
-}
-
-
-public class LateAttack : ElementSkill
-{
-    //开局30秒后攻击提高100%
-    public override List<int> Elements => new List<int> { 0, 0, 2 };
-    public override string SkillDescription => "LATEATTACK";
-
-    public override void StartTurn()
-    {
-        Duration += 999;
-    }
-
-    public override void Tick(float delta)
-    {
-        base.Tick(delta);
-        strategy.TurnAttackIntensify += 0.02f * delta * strategy.TimeModify;
-    }
-
-    public override void EndTurn()
-    {
-        Duration = 0;
-    }
-}
-
-public class RandomAttack : ElementSkill
-{
-    //子弹攻击力在50%-200%之间随机浮动
-    public override List<int> Elements => new List<int> { 0, 0, 3 };
-    public override string SkillDescription => "RANDOMATTACK";
-
-    public override void Shoot(Bullet bullet = null)
-    {
-        bullet.Damage *= Random.Range(0.5f, 2f);
-    }
-}
-
-
-public class AttackPolo : ElementSkill
-{
-    //相邻防御塔攻击力提高50%
-    public override List<int> Elements => new List<int> { 0, 0, 4 };
-    public override string SkillDescription => "ATTACKPOLO";
-
-    private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
-    public override void Detect()
-    {
-        foreach (var strategy in intensifiedStrategies)
-        {
-            strategy.InitAttackIntensify -= 0.5f * strategy.PoloIntensifyModify;
-        }
-        intensifiedStrategies.Clear();
-        List<Vector2Int> points = StaticData.GetCirclePoints(1);
-        foreach (var point in points)
-        {
-            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
-            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
-            if (hit != null)
-            {
-                StrategyBase strategy = hit.GetComponent<TurretContent>().Strategy;
-                strategy.InitAttackIntensify += 0.5f * strategy.PoloIntensifyModify;
-                intensifiedStrategies.Add(strategy);
-            }
-        }
-    }
-
-}
-
 public class DoubleAttack : ElementSkill
 {
     //所有攻击提升效果翻倍
@@ -103,3 +14,99 @@ public class DoubleAttack : ElementSkill
     }
 
 }
+
+public class NearSpeed : ElementSkill
+{
+    //如果距离小于3，则攻速提升50%
+    public override List<int> Elements => new List<int> { 0, 0, 1 };
+    float intensifyValue;
+    bool isIntensified = false;
+    public override void Shoot(Bullet bullet = null)
+    {
+
+        if (bullet.GetTargetDistance() < 3f)
+        {
+            if (!isIntensified)
+            {
+                intensifyValue = 0.5f * strategy.TimeModify;
+                strategy.TurnSpeedIntensify += intensifyValue;
+                isIntensified = true;
+            }
+        }
+        else
+        {
+            if (isIntensified)
+            {
+                strategy.TurnSpeedIntensify -= intensifyValue;
+                isIntensified = false;
+            }
+        }
+    }
+
+    public override void EndTurn()
+    {
+        isIntensified = false;
+        intensifyValue = 0;
+    }
+}
+
+public class NearSlow : ElementSkill
+{
+    //如果距离小于3，则减速效果提高50%
+    public override List<int> Elements => new List<int> { 0, 0, 2 };
+
+    public override void Shoot(Bullet bullet = null)
+    {
+        if (bullet.GetTargetDistance() < 3f)
+        {
+            bullet.SlowRate *= (1 + 0.5f * strategy.TimeModify);
+        }
+    }
+}
+
+public class NearCritical : ElementSkill
+{
+    //如果距离小于3，则子弹暴击率提高35%
+    public override List<int> Elements => new List<int> { 0, 0, 3 };
+
+    public override void Shoot(Bullet bullet = null)
+    {
+        if (bullet.GetTargetDistance() < 3f)
+        {
+            bullet.CriticalRate += 0.35f * strategy.TimeModify;
+
+        }
+    }
+}
+public class NearSplash : ElementSkill
+{
+    //如果距离小于3，则子弹暴击率提高35%
+    public override List<int> Elements => new List<int> { 0, 0, 4 };
+
+    public override void Shoot(Bullet bullet = null)
+    {
+        if (bullet.GetTargetDistance() < 3f)
+        {
+            bullet.SputteringRange *= (1 + 0.5f * strategy.TimeModify);
+        }
+    }
+}
+
+
+
+//public class RandomAttack : ElementSkill
+//{
+//    //子弹攻击力在50%-200%之间随机浮动
+//    public override List<int> Elements => new List<int> { 0, 0, 3 };
+//    public override string SkillDescription => "RANDOMATTACK";
+
+//    public override void Shoot(Bullet bullet = null)
+//    {
+//        bullet.Damage *= Random.Range(0.5f, 2f);
+//    }
+//}
+
+
+
+
+

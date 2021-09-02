@@ -9,7 +9,7 @@ public class ElementSelectPreview : MonoBehaviour,IPointerEnterHandler,IPointerE
     public void OnPointerEnter(PointerEventData eventData)
     {
         StrategyBase strategy = m_TileSelect.Shape.m_ElementTurret.Strategy;
-        GameManager.Instance.PreviewComposition(true, strategy.Element, strategy.Quality);
+        GameManager.Instance.PreviewComposition(true, strategy.m_Att.element, strategy.Quality);
     }
 
     public void OnPointerExit(PointerEventData eventData)

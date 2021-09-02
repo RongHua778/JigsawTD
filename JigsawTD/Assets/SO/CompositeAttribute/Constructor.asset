@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: CONSTRUCTOR
   Icon: {fileID: 21300000, guid: efd7eca78d1a1d44d8b38abd7973113e, type: 3}
-  Description: 
+  Description: CONSTRUCTORSKILL
   ContentPrefab: {fileID: 7540347977943103148, guid: d914d163b81634f4c893b72c05177560, type: 3}
+  StrategyType: 1
   RangeType: 0
   element: 0
   Bullet: {fileID: -8373056630608583431, guid: 3e3b44a6f04ad6148972b255b36a12e7, type: 3}
@@ -24,7 +25,7 @@ MonoBehaviour:
   Rare: 1
   totalLevel: 3
   elementNumber: 3
-  TurretSkill: 3
+  TurretSkill: 2
   TurretLevels:
   - AttackRange: 2
     ForbidRange: 0

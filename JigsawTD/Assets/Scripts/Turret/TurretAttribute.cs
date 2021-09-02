@@ -39,6 +39,7 @@ public enum RangeType
 public class TurretAttribute : ContentAttribute
 {
     [Header("»ù´¡²ÎÊý")]
+    public StrategyType StrategyType;
     public RangeType RangeType;
     public Element element;
     public Bullet Bullet;

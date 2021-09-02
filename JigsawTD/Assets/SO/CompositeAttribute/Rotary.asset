@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: ROTARY
   Icon: {fileID: -4688781176453597497, guid: 5fd2f2e134ec9bc4ca7e863cf2992137, type: 3}
-  Description: 
+  Description: ROTARYSKILL
   ContentPrefab: {fileID: 3473736283192967209, guid: ae3a3ea7c8913984ba274c5376b270bd, type: 3}
+  StrategyType: 1
   RangeType: 0
   element: 0
   Bullet: {fileID: -5451000839793556455, guid: 898695e6a84f19b4381f2e5e29e0280c, type: 3}
@@ -24,7 +25,7 @@ MonoBehaviour:
   Rare: 3
   totalLevel: 7
   elementNumber: 3
-  TurretSkill: 6
+  TurretSkill: 5
   TurretLevels:
   - AttackRange: 2
     ForbidRange: 0

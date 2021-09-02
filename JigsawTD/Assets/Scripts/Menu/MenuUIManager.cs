@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class MenuUIManager : Singleton<MenuUIManager>
     [SerializeField] UILevelManager m_UILevelManager = default;
     [SerializeField] MenuMessage m_Message = default;
     [SerializeField] UIBattleSet m_UIBattleSet = default;
+    [SerializeField] TurretTips m_TurretTips = default;
 
     public void Initinal()
     {
@@ -16,6 +18,7 @@ public class MenuUIManager : Singleton<MenuUIManager>
         m_Message.Initialize();
         m_UILevelManager.Initialize();
         m_UIBattleSet.Initialize();
+        m_TurretTips.Initialize();
 
     }
     public void Release()
@@ -33,7 +36,8 @@ public class MenuUIManager : Singleton<MenuUIManager>
         if (Input.GetKeyDown(KeyCode.J))
         {
             ShowMessage(GameMultiLang.GetTraduction("TEST2"));
-            PlayerPrefs.SetInt("MaxPassLevel", 3);
+            PlayerPrefs.SetInt("MaxDifficulty", 3);
+            Debug.Log(PlayerPrefs.GetInt("MaxDifficulty"));
         }
     }
 
@@ -43,7 +47,11 @@ public class MenuUIManager : Singleton<MenuUIManager>
         m_UILevelManager.SetLevelInfo();
     }
 
-
+    public void ShowTurretTips(TurretAttribute att)
+    {
+        m_TurretTips.Show();
+        m_TurretTips.ReadAttribute(att);
+    }
 
     public void BluePrintBtnClick()
     {
@@ -53,6 +61,11 @@ public class MenuUIManager : Singleton<MenuUIManager>
     public void SettingBtnClick()
     {
         ShowMessage("ÔÝÎ´¿ª·Å");
+    }
+
+    internal void HideTips()
+    {
+        m_TurretTips.Hide();
     }
 
     public void ShowMessage(string content)

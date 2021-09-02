@@ -90,8 +90,9 @@ public class RandomSkill : ElementSkill
         List<int> newElements = new List<int> { Random.Range(0, 4), Random.Range(0, 4), Random.Range(0, 4) };
         ElementSkill newSkill = TurretEffectFactory.GetElementSkill(newElements);
         strategy.TurretSkills.Remove(this);
-        newSkill.Composite();//触发合成效果
         strategy.AddElementSkill(newSkill);
+        newSkill.Composite();//触发合成效果
+
     }
 
 }

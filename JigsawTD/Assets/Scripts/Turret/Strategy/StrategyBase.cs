@@ -10,8 +10,7 @@ public enum StrategyType
 
 public class StrategyBase
 {
-    public StrategyType strategyType;
-    public Element Element;
+
     public Blueprint CompositeBluePrint;
     //×Ö¶Î
     public TurretContent m_Turret;
@@ -20,14 +19,12 @@ public class StrategyBase
     public int Quality { get => quality; set => quality = value; }
 
 
-    public StrategyBase(StrategyType sType, TurretAttribute attribute, int quality, Blueprint comBlueprint = null)
+    public StrategyBase(TurretAttribute attribute, int quality, Blueprint comBlueprint = null)
     {
-        strategyType = sType;
         m_Att = attribute;
         this.Quality = quality;
         CompositeBluePrint = comBlueprint;
         this.RangeType = attribute.RangeType;
-        this.Element = attribute.element;
     }
 
 

@@ -27,6 +27,7 @@ public class Game : Singleton<Game>
         StaticData.LoadGame();
         Application.runInBackground = true;
         GameObject.DontDestroyOnLoad(this.gameObject);
+        TurretEffectFactory.Initialize();
     }
 
     private void Start()

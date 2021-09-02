@@ -78,36 +78,25 @@ public class TurretTips : TileTips
         transform.position = myCanvas.transform.TransformPoint(newPos);
 
         m_Strategy = Strategy;
-        BasicInfo();
-        UpdateInfo();
+        BasicInfo(m_Strategy.m_Att, m_Strategy.Quality);
+        UpdateRealTimeValue();
         showingTurret = true;
 
         AnalysisArea.SetActive(true);
         BluePrintArea.SetActive(false);
         //根据防御塔类型显示
-        switch (Strategy.strategyType)
+        switch (Strategy.m_Att.StrategyType)
         {
             case StrategyType.Element:
                 QualitySetter.gameObject.SetActive(false);
                 UpgradeArea.SetActive(false);
                 IntensifyArea.SetActive(true);
                 ElementSkillArea.SetActive(false);
-                IntensifyValue.text = StaticData.GetElementIntensifyText(Strategy.Element, Strategy.Quality);
+                IntensifyValue.text = StaticData.GetElementIntensifyText(Strategy.m_Att.element, Strategy.Quality);
                 break;
             case StrategyType.Composite:
                 ElementSkillArea.SetActive(true);
-                if (Strategy.Quality < 3)
-                {
-                    UpgradeArea.SetActive(true);
-                    //upgradeCost = StaticData.Instance.LevelUpCost[Strategy.m_Att.Rare - 1, Strategy.Quality - 1];
-                    upgradeCost = StaticData.Instance.LevelUpCostPerRare * m_Strategy.m_Att.Rare * m_Strategy.Quality;
-                    upgradeCost = (int)(upgradeCost * (1 - m_Strategy.UpgradeDiscount));
-                    UpgradeCostValue.text = upgradeCost.ToString();
-                }
-                else
-                {
-                    UpgradeArea.SetActive(false);
-                }
+                UpgradeAreaSet(Strategy);
                 IntensifyArea.SetActive(false);
 
                 //元素技能
@@ -128,7 +117,7 @@ public class TurretTips : TileTips
         m_Grid = grid;
         m_Strategy = grid.BluePrint.ComStrategy;
 
-        BasicInfo();
+        BasicInfo(m_Strategy.m_Att, m_Strategy.Quality);
         UpdateBluePrintInfo();
 
         ElementSkillArea.SetActive(true);
@@ -137,8 +126,47 @@ public class TurretTips : TileTips
         IntensifyArea.SetActive(false);
         BluePrintArea.SetActive(true);
         SetElementSkill();
+    }//通过配方查看
+
+    public void ReadAttribute(TurretAttribute att)//通过Attribute查看
+    {
+        int quality = att.StrategyType == StrategyType.Element ? 5 : 3;
+        BasicInfo(att, quality);//满级状态
+        AnalysisArea.SetActive(false);
+        UpgradeArea.SetActive(false);
+        ElementSkillArea.SetActive(false);
+        switch (att.StrategyType)
+        {
+            case StrategyType.Element:
+                QualitySetter.gameObject.SetActive(false);
+                IntensifyArea.SetActive(true);
+                IntensifyValue.text = StaticData.GetElementIntensifyText(att.element, quality);
+                break;
+            case StrategyType.Composite:
+                QualitySetter.gameObject.SetActive(true);
+                QualitySetter.SetRare(att.Rare);
+                IntensifyArea.SetActive(false);
+                break;
+        }
+
+        UpdatePreviewValue(att, quality - 1);
     }
 
+    private void UpgradeAreaSet(StrategyBase Strategy)
+    {
+        if (Strategy.Quality < 3)
+        {
+            UpgradeArea.SetActive(true);
+            upgradeCost = StaticData.Instance.LevelUpCostPerRare * m_Strategy.m_Att.Rare * m_Strategy.Quality;
+            upgradeCost = (int)(upgradeCost * (1 - m_Strategy.UpgradeDiscount));
+            UpgradeCostValue.text = upgradeCost.ToString();
+            //UpdateLevelUpInfo();
+        }
+        else
+        {
+            UpgradeArea.SetActive(false);
+        }
+    }
     private void SetElementSkill()
     {
         foreach (var ecom in elementConstruct)
@@ -155,15 +183,15 @@ public class TurretTips : TileTips
         }
     }
 
-    private void BasicInfo()
+    private void BasicInfo(TurretAttribute att, int quality)
     {
-        Icon.sprite = m_Strategy.m_Att.TurretLevels[m_Strategy.Quality - 1].TurretIcon;
+        Icon.sprite = att.TurretLevels[quality - 1].TurretIcon;
 
-        switch (m_Strategy.strategyType)
+        switch (att.StrategyType)
         {
             case StrategyType.Element:
                 string element = "";
-                switch (m_Strategy.Element)
+                switch (att.element)
                 {
                     case Element.Gold:
                         element = "A";
@@ -181,19 +209,19 @@ public class TurretTips : TileTips
                         element = "E";
                         break;
                 }
-                element += m_Strategy.Quality;
-                Name.text = element + " " + GameMultiLang.GetTraduction(m_Strategy.m_Att.Name);
+                element += quality;
+                Name.text = element + " " + GameMultiLang.GetTraduction(att.Name);
                 QualitySetter.gameObject.SetActive(false);
                 break;
             case StrategyType.Composite:
-                Name.text = GameMultiLang.GetTraduction(m_Strategy.m_Att.Name) + " Lv." + m_Strategy.Quality;
+                Name.text = GameMultiLang.GetTraduction(att.Name) + " Lv." + quality;
                 QualitySetter.gameObject.SetActive(true);
-                QualitySetter.SetRare(m_Strategy.m_Att.Rare);
+                QualitySetter.SetRare(att.Rare);
                 break;
         }
 
         string rangeTypeTxt = "";
-        switch (m_Strategy.m_Att.RangeType)
+        switch (att.RangeType)
         {
             case RangeType.Circle:
                 rangeTypeTxt = GameMultiLang.GetTraduction("RANGETYPE1");
@@ -207,10 +235,31 @@ public class TurretTips : TileTips
         }
         this.RangeTypeValue.text = rangeTypeTxt;
         //设置描述文案
-        Description.text = StaticData.GetTurretDes(m_Strategy.m_Att, m_Strategy);
+        Description.text = StaticData.GetTurretDes(att);
     }
 
-    private void UpdateInfo()
+    private void UpdatePreviewValue(TurretAttribute att, int quality)
+    {
+        AttackValue.text = att.TurretLevels[quality].AttackDamage.ToString();
+        AttackChangeTxt.text = "";
+
+        SpeedValue.text = att.TurretLevels[quality].AttackSpeed.ToString();
+        SpeedChangeTxt.text = "";
+
+        RangeValue.text = att.TurretLevels[quality].AttackRange.ToString();
+        RangeChangeTxt.text = "";
+
+        CriticalValue.text = (att.TurretLevels[quality].CriticalRate * 100).ToString() + "%";
+        CriticalChangeTxt.text = "";
+
+        SputteringValue.text = att.TurretLevels[quality].SputteringRange.ToString();
+        SputteringChangeTxt.text = "";
+
+        SlowRateValue.text = att.TurretLevels[quality].SlowRate.ToString();
+        SlowRateChangeTxt.text = "";
+    }
+
+    private void UpdateRealTimeValue()
     {
         AttackValue.text = m_Strategy.FinalAttack.ToString();
         AttackChangeTxt.text = "";
@@ -292,24 +341,17 @@ public class TurretTips : TileTips
             m_Strategy.Quality++;
             m_Strategy.SetQualityValue();
             m_Strategy.m_Turret.SetGraphic();
-            BasicInfo();
-            UpdateInfo();
-            if (m_Strategy.Quality > 2)
-            {
-                UpgradeArea.SetActive(false);
-                return;
-            }
-            UpdateLevelUpInfo();
-            upgradeCost = StaticData.Instance.LevelUpCostPerRare * m_Strategy.m_Att.Rare * m_Strategy.Quality;
-            upgradeCost = (int)(upgradeCost * (1 - m_Strategy.UpgradeDiscount));
-            UpgradeCostValue.text = upgradeCost.ToString();
+            BasicInfo(m_Strategy.m_Att, m_Strategy.Quality);
+            UpdateRealTimeValue();
+            UpgradeAreaSet(m_Strategy);
+
         }
     }
     private void FixedUpdate()
     {
         if (showingTurret)
         {
-            UpdateInfo();
+            UpdateRealTimeValue();
         }
         if (showingBlueprint)
         {

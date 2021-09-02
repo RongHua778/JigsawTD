@@ -7,7 +7,7 @@ public class StunTrap : TrapContent
     public override void OnContentPass(Enemy enemy)
     {
         base.OnContentPass(enemy);
-        enemy.StunTime += enemy.PassedTraps.Count * 0.2f * TrapIntensify * enemy.TrapIntentify;
+        enemy.StunTime += enemy.PassedTraps.Count * 0.5f * TrapIntensify * enemy.TrapIntentify;
         enemy.TrapIntentify = 1;
     }
 

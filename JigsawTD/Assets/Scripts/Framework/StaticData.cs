@@ -103,18 +103,10 @@ public class StaticData : Singleton<StaticData>
     public RangeIndicator RangeIndicatorPrefab;
     public JumpDamage JumpDamagePrefab;
     public Sprite UnrevealTrap;
+    public ParticalControl LandedEffect;
     //public GainCoinAnim GainCoinAnimPrefab;
 
-    private void Start()
-    {
-        TurretEffectFactory.Initialize();
-        RedColor = new Color32(255, 110, 66, 255);
-        GreenColor = new Color32(66, 255, 100, 255);
-        BlueColor = new Color32(66, 223, 255, 255);
-        YellowColor = new Color32(255, 182, 66, 255);
-        PurpleColor = new Color32(255, 100, 237, 255);
 
-    }
 
     [Header("CompositionAttributes")]
     public int LevelUpCostPerRare;
@@ -429,15 +421,15 @@ public class StaticData : Singleton<StaticData>
         return intensifyTxt;
     }
 
-    public static string GetTurretDes(TurretAttribute attribute, StrategyBase strategy)
+    public static string GetTurretDes(TurretAttribute attribute)
     {
         string finalDes = "";
         if (attribute.Description != "")
-            finalDes += GameMultiLang.GetTraduction(attribute.Description) + "\n";
-        if (strategy.TurretSkill != null)
-        {
-            finalDes += GameMultiLang.GetTraduction(strategy.TurretSkill.SkillDescription);
-        }
+            finalDes += GameMultiLang.GetTraduction(attribute.Description);
+        //if (strategy.TurretSkill != null)
+        //{
+        //    finalDes += GameMultiLang.GetTraduction(strategy.TurretSkill.SkillDescription);
+        //}
         return finalDes;
     }
 
@@ -632,9 +624,9 @@ public class StaticData : Singleton<StaticData>
         }
         for (int b = 0; b < dataList.Count; b++)//双同名
         {
-            for (int c = b + 1; c < dataList.Count; c++)
+            for (int c = 0; c < dataList.Count; c++)
             {
-                if (c >= dataList.Count)
+                if (c == b)
                     continue;
                 List<int> itemList = new List<int>();
                 itemList.Add(dataList[b]);
@@ -643,20 +635,16 @@ public class StaticData : Singleton<StaticData>
                 result.Add(itemList);
             }
         }
-        for (int b = 0; b < dataList.Count; b++)//混合
+        for (int a = 0; a < dataList.Count; a++)//混合
         {
-            for (int c = b + 1; c < dataList.Count; c++)
+            for (int b = a + 1; b < dataList.Count; b++)
             {
-                if (c >= dataList.Count)
-                    continue;
-                for (int d = c + 1; c < dataList.Count; c++)
+                for (int c = b + 1; c < dataList.Count; c++)
                 {
-                    if (d >= dataList.Count)
-                        continue;
                     List<int> itemList = new List<int>();
+                    itemList.Add(dataList[a]);
+                    itemList.Add(dataList[b]);
                     itemList.Add(dataList[c]);
-                    itemList.Add(dataList[c]);
-                    itemList.Add(dataList[d]);
                     result.Add(itemList);
                 }
             }

@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: RAPIDER
   Icon: {fileID: 21300000, guid: 0313e8a830a8757458ebfaed99058ff8, type: 3}
-  Description: 
+  Description: RAPIDERSKILL
   ContentPrefab: {fileID: 1405721755924127496, guid: d71b8f03e81b3ab45b0b1062d0c191df, type: 3}
+  StrategyType: 1
   RangeType: 1
   element: 0
   Bullet: {fileID: 329896916940016936, guid: 1dd15d4be1a0df145af2a2e90e9f0184, type: 3}
@@ -24,7 +25,7 @@ MonoBehaviour:
   Rare: 1
   totalLevel: 3
   elementNumber: 3
-  TurretSkill: 2
+  TurretSkill: 1
   TurretLevels:
   - AttackRange: 3
     ForbidRange: 0

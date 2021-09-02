@@ -5,18 +5,13 @@ using UnityEngine;
 public enum TurretSkillName
 {
     SniperSkill,
-    S002SlowBullet,
-    L1Skill,
-    F1Skill,
-    G1SkillMultiTarget,
-    HISkillCountBaseSputteringPercentage,
-    I1Skill,
-    K1SkillDoubleCriticalPercentage,
-    S009CurrentHealthBaseDamage,
+    RapiderSkill,
+    ConstructorSkill,
+    ScatterSkill,
+    MortarSkill,
+    RotarySkill,
+    UltraSkill,
     SnowSkill,
-    S011IncreaseDamageBuff,
-    S012SameTargetDamageIncrease,
-
     None
 }
 
@@ -100,26 +95,17 @@ public abstract class InitialSkill : TurretSkill
 {
 
 }
-public class I1Skill : InitialSkill
+public class RotarySkill : InitialSkill
 {
-    public override TurretSkillName EffectName => TurretSkillName.I1Skill;
-    public override string SkillDescription => "I1SKILL";
+    public override TurretSkillName EffectName => TurretSkillName.RotarySkill;
+    public override string SkillDescription => "ROTARYSKILL";
 
     public override void Build()
     {
         base.Build();
         strategy.AllSpeedIntensifyModify += 1;
     }
-    //public override void Hit(IDamageable target, Bullet bullet = null)
-    //{
-    //    if (target.DamageStrategy.IsEnemy)
-    //    {
-    //        strategy.RotSpeed = 0;
-    //        float increaseSlow = ((Enemy)target).SlowRate * 2f;
-    //        BuffInfo info = new BuffInfo(EnemyBuffName.SlowDown, increaseSlow, 2f);
-    //        ((Enemy)target).Buffable.AddBuff(info);
-    //    }
-    //}
+
 }
 public class SniperSkill : InitialSkill
 {
@@ -143,10 +129,10 @@ public class SniperSkill : InitialSkill
     }
 }
 
-public class G1SkillMultiTarget : InitialSkill
+public class ScatterSkill : InitialSkill
 {
-    public override TurretSkillName EffectName => TurretSkillName.G1SkillMultiTarget;
-    public override string SkillDescription => "G1SKILL";
+    public override TurretSkillName EffectName => TurretSkillName.ScatterSkill;
+    public override string SkillDescription => "SCATTERSKILL";
     public override void Build()
     {
         strategy.BaseTargetCountIntensify += 3;
@@ -158,10 +144,10 @@ public class G1SkillMultiTarget : InitialSkill
     }
 
 }
-public class K1SkillDoubleCriticalPercentage : InitialSkill
+public class UltraSkill : InitialSkill
 {
-    public override TurretSkillName EffectName => TurretSkillName.K1SkillDoubleCriticalPercentage;
-    public override string SkillDescription => "K1SKILL";
+    public override TurretSkillName EffectName => TurretSkillName.UltraSkill;
+    public override string SkillDescription => "ULTRASKILL";
 
     public override void PreHit(Bullet bullet = null)
     {
@@ -170,58 +156,38 @@ public class K1SkillDoubleCriticalPercentage : InitialSkill
     }
 
 }
-public class H1SkillCountBaseSputteringPercentage : InitialSkill
+public class MortarSkill : InitialSkill
 {
-    public override TurretSkillName EffectName => TurretSkillName.HISkillCountBaseSputteringPercentage;
-    public override string SkillDescription => "H1SKILL";
+    public override TurretSkillName EffectName => TurretSkillName.MortarSkill;
+    public override string SkillDescription => "MORTARSKILL";
 
 
-    public override void PreHit(Bullet bullet = null)
+    public override void Build()
     {
-        bullet.SputteringPercentage += bullet.SputteredCount * 0.25f;
-    }
-
-
-}
-
-
-public class SlowBullet : InitialSkill
-{
-    public override TurretSkillName EffectName => TurretSkillName.S002SlowBullet;
-
-    private float duration = 2f;
-    public override void Hit(IDamageable target, Bullet bullet = null)
-    {
-        target.DamageStrategy.ApplyBuff(EnemyBuffName.SlowDown, KeyValue, duration);
+        base.Build();
+        strategy.InitSputteringPercentageIntensify += 1.5f;
     }
 
 }
 
-public class L1Skill : InitialSkill
-{
-    public override TurretSkillName EffectName => TurretSkillName.L1Skill;
-    public override string SkillDescription => "L1SKILL";
 
-    //private float intensifyIncreased = 0;
+
+public class RapiderSkill : InitialSkill
+{
+    public override TurretSkillName EffectName => TurretSkillName.RapiderSkill;
+    public override string SkillDescription => "RAPIDERSKILL";
+
     public override void Shoot(Bullet bullet = null)
     {
-        //if (intensifyIncreased > 1.95f)
-        //    return;
-        //intensifyIncreased += 0.1f * strategy.TimeModify;
         strategy.TurnFixAttack += GameEndUI.TotalComposite * strategy.TimeModify;
-        //strategy.TurnAttackIntensify += 0.1f * strategy.TimeModify;
     }
 
-    //public override void EndTurn()
-    //{
-    //    intensifyIncreased = 0;
-    //}
 }
 
-public class F1Skill : InitialSkill
+public class ConstructorSkill : InitialSkill
 {
-    public override TurretSkillName EffectName => TurretSkillName.F1Skill;
-    public override string SkillDescription => "F1SKILL";
+    public override TurretSkillName EffectName => TurretSkillName.ConstructorSkill;
+    public override string SkillDescription => "CONSTRUCTORSKILL";
 
     public override void PreHit(Bullet bullet = null)
     {
@@ -230,18 +196,7 @@ public class F1Skill : InitialSkill
     }
 }
 
-public class CurrentHealthBaseDmage : InitialSkill
-{
-    public override TurretSkillName EffectName => TurretSkillName.S009CurrentHealthBaseDamage;
 
-    public override void Hit(IDamageable target, Bullet bullet = null)
-    {
-        float realDamage;
-        float extraDamage = target.DamageStrategy.CurrentHealth * 0.04f;
-        target.DamageStrategy.ApplyDamage(extraDamage, out realDamage, false);
-        strategy.DamageAnalysis += (int)realDamage;
-    }
-}
 
 public class SnowSkill : InitialSkill
 {

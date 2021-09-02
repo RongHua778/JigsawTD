@@ -84,6 +84,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         {
             effect.Shoot(this);
         }
+
     }
 
     public void TriggerPreHitEffect()//子弹命中前触发,溅射发生前

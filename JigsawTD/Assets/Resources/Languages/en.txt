@@ -12,6 +12,7 @@ RESTART=Restart
 RETURNTOMENU=Return to menu
 QUIT2=Quit
 CONFIRM=Confirm
+TUTORIAL=Guidence
 
 //Battleset
 SELECTELEMENT=Pick battle elements:
@@ -30,7 +31,7 @@ HIGHSCORE=High Score
 WAVE=Wave
 NUM=
 
-TUTORIAL=Do you want to start a tutorial?
+NEEDTUTORIAL=Do you want to start a tutorial?
 YES=YES
 NO=NO
 

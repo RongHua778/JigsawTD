@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: MORTAR
   Icon: {fileID: 21300000, guid: 210ece2c2e01aab46860c56550dc1802, type: 3}
-  Description: 
+  Description: MORTARSKILL
   ContentPrefab: {fileID: 4967710668388058910, guid: 1222c5c9d6ecf7a4195b038a25c2816f, type: 3}
+  StrategyType: 1
   RangeType: 1
   element: 0
   Bullet: {fileID: 7964743809017469607, guid: bf78bd4c17ef2db429e9853d40118583, type: 3}
@@ -24,7 +25,7 @@ MonoBehaviour:
   Rare: 4
   totalLevel: 10
   elementNumber: 3
-  TurretSkill: 5
+  TurretSkill: 4
   TurretLevels:
   - AttackRange: 4
     ForbidRange: 0

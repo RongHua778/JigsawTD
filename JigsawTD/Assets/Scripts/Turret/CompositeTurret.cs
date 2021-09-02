@@ -27,7 +27,6 @@ public class CompositeTurret : TurretContent
     {
         if (col != null)
         {
-
             GameTile tile = col.GetComponent<GameTile>();
             if (tile.Content.ContentType == GameTileContentType.CompositeTurret)
             {
@@ -44,7 +43,8 @@ public class CompositeTurret : TurretContent
                 ObjectPool.Instance.UnSpawn(tile);
             }
         }
-        
+        ReusableObject partical = ObjectPool.Instance.Spawn(StaticData.Instance.LandedEffect);
+        partical.transform.position = transform.position + Vector3.up * 0.2f;
     }
     public override void OnUnSpawn()
     {

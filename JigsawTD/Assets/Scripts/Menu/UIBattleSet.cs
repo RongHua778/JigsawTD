@@ -109,7 +109,7 @@ public class UIBattleSet : IUserInterface
 
     private void SetSkillPreview()
     {
-        List<List<int>> skills = StaticData.GetAllCC(Game.Instance.SaveData.SaveSelectedElement);
+        List<List<int>> skills = StaticData.GetAllCC2(Game.Instance.SaveData.SaveSelectedElement);
         for (int i = 0; i < skills.Count; i++)
         {
             ElementSkill skill = TurretEffectFactory.GetElementSkill(skills[i]);

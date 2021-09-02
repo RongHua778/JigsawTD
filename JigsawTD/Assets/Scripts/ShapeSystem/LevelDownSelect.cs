@@ -13,7 +13,7 @@ public class LevelDownSelect :MonoBehaviour, IPointerEnterHandler, IPointerExitH
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        GameManager.Instance.PreviewComposition(true, m_Strategy.Element, m_Strategy.Quality-1);
+        GameManager.Instance.PreviewComposition(true, m_Strategy.m_Att.element, m_Strategy.Quality-1);
     }
 
     public void OnPointerExit(PointerEventData eventData)

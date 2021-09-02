@@ -188,7 +188,10 @@ public class BoardSystem : IGameSystem
         AstarPath.active.Scan();
 
         GenerateStartTiles(_startSize, sizeOffset);
-        GenerateTrapTiles(sizeOffset, _startSize);
+
+        if (!Game.Instance.Tutorial)//只有非教学关带有陷阱
+            GenerateTrapTiles(sizeOffset, _startSize);
+
         Physics2D.SyncTransforms();
         SeekPath();
         ShowPath();
@@ -368,7 +371,7 @@ public class BoardSystem : IGameSystem
         }
         else
         {
-            BuyOneGroundMoney +=StaticData.Instance.BuyGroundCostMultyply;
+            BuyOneGroundMoney += StaticData.Instance.BuyGroundCostMultyply;
         }
         GameTile tile = ConstructHelper.GetNormalTile(GameTileContentType.Empty);
         tile.transform.position = SelectingTile.transform.position;
@@ -411,7 +414,7 @@ public class BoardSystem : IGameSystem
 
     }
 
-    public void SetTutorialPoss(bool value, List<Vector2> poss=null)
+    public void SetTutorialPoss(bool value, List<Vector2> poss = null)
     {
         if (!value)
         {
@@ -419,9 +422,9 @@ public class BoardSystem : IGameSystem
         }
         else
         {
-            foreach(var pos in poss)
+            foreach (var pos in poss)
             {
-                GameObject GO = Instantiate(GameManager.Instance.TileFactory.GetTutorialPrefab(), pos, Quaternion.identity,this.transform);
+                GameObject GO = Instantiate(GameManager.Instance.TileFactory.GetTutorialPrefab(), pos, Quaternion.identity, this.transform);
                 tutorialObjs.Add(GO);
             }
         }
@@ -429,7 +432,7 @@ public class BoardSystem : IGameSystem
 
     private void DestoryTutorialPoss()
     {
-        foreach(var obj in tutorialObjs)
+        foreach (var obj in tutorialObjs)
         {
             Destroy(obj);
         }

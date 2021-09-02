@@ -15,67 +15,110 @@ public class PoloGetter : ElementSkill
     }
 }
 
-public class NearSplash : ElementSkill
-{
-    //如果距离小于3，则溅射伤害提高100%
-    public override List<int> Elements => new List<int> { 4, 4, 0 };
-    public override string SkillDescription => "NEARSPLASH";
 
-    public override void Shoot(Bullet bullet = null)
+public class AttackPolo : ElementSkill
+{
+    //相邻防御塔攻击力提高50%
+    public override List<int> Elements => new List<int> { 0, 4, 4 };
+
+    private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
+    public override void Detect()
     {
-        if (bullet.GetTargetDistance() < 3f)
+        foreach (var strategy in intensifiedStrategies)
         {
-            bullet.SputteringPercentage += 1f;
+            strategy.InitAttackIntensify -= 0.3f * strategy.PoloIntensifyModify;
+        }
+        intensifiedStrategies.Clear();
+        List<Vector2Int> points = StaticData.GetCirclePoints(1);
+        foreach (var point in points)
+        {
+            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
+            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
+            if (hit != null)
+            {
+                StrategyBase strategy = hit.GetComponent<TurretContent>().Strategy;
+                strategy.InitAttackIntensify += 0.3f * strategy.PoloIntensifyModify;
+                intensifiedStrategies.Add(strategy);
+            }
         }
     }
 
 }
 
-public class SplashSpeed : ElementSkill
+public class SpeedPolo : ElementSkill
 {
-    //每回合每次攻击提升0.02溅射
-    public override List<int> Elements => new List<int> { 4, 4, 1 };
-    public override string SkillDescription => "SPLASHSPEED";
+    //相邻防御塔攻速提高50%
+    public override List<int> Elements => new List<int> { 1, 4, 4 };
 
-    public override void Shoot(Bullet bullet = null)
+    private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
+    public override void Detect()
     {
-        strategy.TurnFixSputteringRange += 0.02f * strategy.TimeModify;
-    }
-
-
-}
-
-public class LateSplash : ElementSkill
-{
-    //每回合开始后，溅射范围每秒提升0.01
-    public override List<int> Elements => new List<int> { 4, 4, 2 };
-    public override string SkillDescription => "LATESPLASH";
-
-    public override void StartTurn()
-    {
-        Duration += 999;
-    }
-
-    public override void Tick(float delta)
-    {
-        base.Tick(delta);
-        strategy.TurnFixSputteringRange += 0.01f * delta * strategy.TimeModify;
-    }
-
-    public override void EndTurn()
-    {
-        Duration = 0;
+        foreach (var strategy in intensifiedStrategies)
+        {
+            strategy.InitSpeedIntensify -= 0.3f * strategy.PoloIntensifyModify;
+        }
+        intensifiedStrategies.Clear();
+        List<Vector2Int> points = StaticData.GetCirclePoints(1);
+        foreach (var point in points)
+        {
+            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
+            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
+            if (hit != null)
+            {
+                StrategyBase strategy = hit.GetComponent<TurretContent>().Strategy;
+                strategy.InitSpeedIntensify += 0.3f * strategy.PoloIntensifyModify;
+                intensifiedStrategies.Add(strategy);
+            }
+        }
     }
 }
 
-public class RandomSplash : ElementSkill
+public class SlowAdjacent : ElementSkill
 {
-    //子弹溅射范围增加0-1的随机浮动
-    public override List<int> Elements => new List<int> { 4, 4, 3 };
-    public override string SkillDescription => "RANDOMSPLASH";
+    //相邻每个防御塔提高自身0.5减速
+    public override List<int> Elements => new List<int> { 2, 4, 4 };
 
-    public override void PreHit(Bullet bullet = null)
+    private int adjacentTurretCount = 0;
+    public override void Detect()
     {
-        bullet.SputteringRange += Random.Range(0, 1f);
+        strategy.InitSlowRateIntensify -= 0.5f * adjacentTurretCount;//修复回初始值
+        adjacentTurretCount = 0;
+        List<Vector2Int> points = StaticData.GetCirclePoints(1);
+        foreach (var point in points)
+        {
+            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
+            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
+            if (hit != null)
+                adjacentTurretCount++;
+        }
+        strategy.InitSlowRateIntensify += 0.5f * adjacentTurretCount;
+    }
+}
+
+public class CriticalPolo : ElementSkill
+{
+    //相邻防御塔提高20%暴击
+    public override List<int> Elements => new List<int> { 3, 4, 4 };
+
+    private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
+    public override void Detect()
+    {
+        foreach (var strategy in intensifiedStrategies)
+        {
+            strategy.InitCriticalRateIntensify -= 0.2f * strategy.PoloIntensifyModify;
+        }
+        intensifiedStrategies.Clear();
+        List<Vector2Int> points = StaticData.GetCirclePoints(1);
+        foreach (var point in points)
+        {
+            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
+            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
+            if (hit != null)
+            {
+                StrategyBase strategy = hit.GetComponent<TurretContent>().Strategy;
+                strategy.InitCriticalRateIntensify += 0.2f * strategy.PoloIntensifyModify;
+                intensifiedStrategies.Add(strategy);
+            }
+        }
     }
 }

@@ -72,5 +72,6 @@ public class TipsElementConstruct : MonoBehaviour
     {
         areas[0].SetActive(false);
         areas[1].SetActive(true);
+        m_InfoBtn.SetContent(GameMultiLang.GetTraduction("EMPTYSLOT"));
     }
 }

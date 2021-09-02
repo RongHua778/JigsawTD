@@ -42,6 +42,7 @@ public class Divider : Enemy
         divider.dividing = dividing - 1;
         divider.Progress = Mathf.Clamp((Progress + Random.Range(-0.2f, 0.2f)), 0, 1);
         divider.enemyCol.radius = 0.4f - 0.1f * (3 - divider.dividing);
+        divider.ReachDamage = divider.dividing;
 
     }
 }

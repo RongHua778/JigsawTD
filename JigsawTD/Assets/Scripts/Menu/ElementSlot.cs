@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class ElementSlot : MonoBehaviour
+public class ElementSlot : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
 {
     [SerializeField] Image icon = default;
     UIBattleSet m_UIBattleSet;
-    public TurretAttribute TurretAtt;
+    [HideInInspector] public TurretAttribute TurretAtt;
     bool isSelect = false;
     public bool IsSelect 
     { 
@@ -48,5 +49,13 @@ public class ElementSlot : MonoBehaviour
         }
     }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        MenuUIManager.Instance.ShowTurretTips(TurretAtt);
+    }
 
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        MenuUIManager.Instance.HideTips();
+    }
 }

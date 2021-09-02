@@ -83,7 +83,7 @@ public class WaveSystem : IGameSystem
 
             if (i % 3 == 0)
             {
-                stage += ((i / 10) + 1) * (Game.Instance.SelectDifficulty + 1) / 2;// * LevelAttribute.LevelIntensify;
+                stage += (((float)i / 10) + 1) * (Game.Instance.SelectDifficulty + 1) * (0.5f * i + 1);
             }
             //if (i > 39)
             //{
@@ -165,10 +165,9 @@ public class WaveSystem : IGameSystem
     private EnemySequence SequenceInfoSet(int genres, float stage, int wave, EnemyType type)
     {
         EnemyAttribute attribute = GameManager.Instance.EnemyFactory.Get(type);
-        float intensify = stage * (0.5f * wave + 1);
         int amount = Mathf.RoundToInt(attribute.InitCount + ((float)wave / 5) * attribute.CountIncrease / genres);
         float coolDown = (float)(5f + wave / 2) / (float)amount;
-        EnemySequence sequence = new EnemySequence(type, amount, coolDown, intensify);
+        EnemySequence sequence = new EnemySequence(type, amount, coolDown, stage);
         return sequence;
     }
 
