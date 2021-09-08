@@ -4,8 +4,7 @@ using UnityEngine;
 using System.Linq;
 using System;
 using Pathfinding;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
+
 
 public class StaticData : Singleton<StaticData>
 {
@@ -66,11 +65,7 @@ public class StaticData : Singleton<StaticData>
     public int trapN = 15;
     public static int basicN = 25;
 
-    [Header("动态数据")]
-    public static int PerfectElementCount = 0;//完美元素数量
-    public static float OverallMoneyIntensify = 0;//金币加成
-    public static int FreeGroundTileCount = 0;//免费地板数量
-    public static Action<StrategyBase> NextCompositeCallback = null;
+
 
     [Header("ProbabilitySetting")]
     public float[] TileShapeChance = default;
@@ -98,12 +93,11 @@ public class StaticData : Singleton<StaticData>
 
     //攻击范围PREFAB
     public RangeHolder CircleCol;
-    //public Collider2D HalfCircleCol;
-    //public Collider2D LineCol;
     public RangeIndicator RangeIndicatorPrefab;
     public JumpDamage JumpDamagePrefab;
     public Sprite UnrevealTrap;
     public ParticalControl LandedEffect;
+    public ReusableObject GainMoneyPrefab;
     //public GainCoinAnim GainCoinAnimPrefab;
 
 
@@ -495,38 +489,6 @@ public class StaticData : Singleton<StaticData>
     }
 
 
-    //存档
-    public static void SaveGame(Save save)
-    {
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/gamesave.save");
-        bf.Serialize(file, save);
-        file.Close();
-        Debug.Log("Game Save");
-
-    }
-
-    public static void LoadGame()
-    {
-        if (File.Exists(Application.persistentDataPath + "/gamesave.save"))
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/gamesave.save", FileMode.Open);
-            Save save = (Save)bf.Deserialize(file);
-            file.Close();
-            Game.Instance.SaveData = save;
-
-        }
-        else
-        {
-            Save save = new Save();
-            List<int> sElements = new List<int> { 0, 1, 2, 3 };
-            save.SaveSelectedElement = sElements;
-            Game.Instance.SaveData = save;
-            //m_EventTrigger.SetRemainEvent();//初始化eventlist
-        }
-
-    }
 
     public static void C(List<int> lsArray, int selectCount)
     {
@@ -650,22 +612,14 @@ public class StaticData : Singleton<StaticData>
             }
         }
 
-
-        //for (int a = 0; a < dataList.Count; a++)
-        //{
-        //    for (int b = a; b < dataList.Count; b++)
-        //    {
-        //        for (int c = b; c < dataList.Count; c++)
-        //        {
-        //            List<int> itemList = new List<int>();
-        //            itemList.Add(dataList[a]);
-        //            itemList.Add(dataList[b]);
-        //            itemList.Add(dataList[c]);
-        //            result.Add(itemList);
-        //        }
-        //    }
-        //}
         return result;
     }
 
+    public void GainMoneyEffect(Vector2 pos,int amount)
+    {
+        GameManager.Instance.GainMoney(amount);
+        GameObject obj = ObjectPool.Instance.Spawn(GainMoneyPrefab).gameObject;
+        obj.transform.position = pos + Vector2.up * 0.2f;
+        Sound.Instance.PlayEffect("Sound_GainCoin");
+    }
 }

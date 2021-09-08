@@ -6,11 +6,10 @@ public class DoubleAttack : ElementSkill
 {
     //所有攻击提升效果翻倍
     public override List<int> Elements => new List<int> { 0, 0, 0 };
-    public override string SkillDescription => "DOUBLEATTACK";
     public override void Build()
     {
         base.Build();
-        strategy.AllAttackIntensifyModify += 1;
+        strategy.ElementSKillSlot += 2;
     }
 
 }

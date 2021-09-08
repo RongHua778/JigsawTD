@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 [RequireComponent(typeof(Sound))]
 public class Game : Singleton<Game>
@@ -24,7 +26,7 @@ public class Game : Singleton<Game>
     {
         base.Awake();
        
-        StaticData.LoadGame();
+        LoadGame();
         Application.runInBackground = true;
         GameObject.DontDestroyOnLoad(this.gameObject);
         TurretEffectFactory.Initialize();
@@ -97,4 +99,37 @@ public class Game : Singleton<Game>
         Application.Quit();
     }
 
+
+    //存档
+    public void SaveGame(Save save)
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/gamesave.save");
+        bf.Serialize(file, save);
+        file.Close();
+        Debug.Log("Game Save");
+
+    }
+
+    public void LoadGame()
+    {
+        if (File.Exists(Application.persistentDataPath + "/gamesave.save"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/gamesave.save", FileMode.Open);
+            Save save = (Save)bf.Deserialize(file);
+            file.Close();
+            SaveData = save;
+
+        }
+        else
+        {
+            Save save = new Save();
+            List<int> sElements = new List<int> { 0, 1, 2, 3 };
+            save.SaveSelectedElement = sElements;
+            SaveData = save;
+            //m_EventTrigger.SetRemainEvent();//初始化eventlist
+        }
+
+    }
 }

@@ -25,7 +25,7 @@ public class NextIntensify : ElementSkill
 
     public override void Composite()
     {
-        StaticData.NextCompositeCallback = CompositeCallback;
+        GameRes.NextCompositeCallback = CompositeCallback;
     }
 
     public void CompositeCallback(StrategyBase strategy)
@@ -107,7 +107,7 @@ public class FreeGround : ElementSkill
 
     public override void Composite()
     {
-        StaticData.FreeGroundTileCount += 3;
+        GameRes.FreeGroundTileCount += 3;
     }
 
 
@@ -141,7 +141,7 @@ public class TrapIntensify : ElementSkill
     {
         foreach (var trap in intensifiedTraps)
         {
-            trap.TrapIntensify -= 1f;
+            trap.m_GameTile.TrapIntensify -= 1f;
         }
         intensifiedTraps.Clear();
         List<Vector2Int> points = StaticData.GetCirclePoints(1);
@@ -152,7 +152,7 @@ public class TrapIntensify : ElementSkill
             if (hit != null)
             {
                 TrapContent trap = hit.GetComponent<TrapContent>();
-                trap.TrapIntensify += 1f;
+                trap.m_GameTile.TrapIntensify += 1f;
                 intensifiedTraps.Add(trap);
             }
         }

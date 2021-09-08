@@ -16,6 +16,7 @@ MonoBehaviour:
   Icon: {fileID: 0}
   Description: BSKILL
   ContentPrefab: {fileID: 3830102932677347064, guid: 24c7518827485fc418d3132bf749252c, type: 3}
+  StrategyType: 0
   RangeType: 2
   element: 1
   Bullet: {fileID: 8751158320438164632, guid: f22cf9b0a0803b242aac9b92dc875dc6, type: 3}
@@ -26,7 +27,7 @@ MonoBehaviour:
   elementNumber: 0
   TurretSkill: 12
   TurretLevels:
-  - AttackRange: 2
+  - AttackRange: 3
     ForbidRange: 0
     AttackDamage: 10
     AttackSpeed: 8
@@ -37,7 +38,7 @@ MonoBehaviour:
     TurretIcon: {fileID: 2571443558420675432, guid: 170dc2e643d4d3d46bc6b1fdd1cd28d0, type: 3}
     CannonSprite: {fileID: 5550528487485531156, guid: b0ab56063522368429e276fb52baa9e7, type: 3}
     ShootPointOffset: {x: 0, y: 0.35}
-  - AttackRange: 2
+  - AttackRange: 3
     ForbidRange: 0
     AttackDamage: 16
     AttackSpeed: 8
@@ -48,7 +49,7 @@ MonoBehaviour:
     TurretIcon: {fileID: 8134750897822888972, guid: 170dc2e643d4d3d46bc6b1fdd1cd28d0, type: 3}
     CannonSprite: {fileID: 2265894132087011927, guid: b0ab56063522368429e276fb52baa9e7, type: 3}
     ShootPointOffset: {x: 0, y: 0.35}
-  - AttackRange: 2
+  - AttackRange: 3
     ForbidRange: 0
     AttackDamage: 24
     AttackSpeed: 8
@@ -59,7 +60,7 @@ MonoBehaviour:
     TurretIcon: {fileID: -5162238023950050135, guid: 170dc2e643d4d3d46bc6b1fdd1cd28d0, type: 3}
     CannonSprite: {fileID: 6932297891388812724, guid: b0ab56063522368429e276fb52baa9e7, type: 3}
     ShootPointOffset: {x: 0, y: 0.41}
-  - AttackRange: 2
+  - AttackRange: 3
     ForbidRange: 0
     AttackDamage: 36
     AttackSpeed: 8
@@ -70,7 +71,7 @@ MonoBehaviour:
     TurretIcon: {fileID: -8749453646720632882, guid: 170dc2e643d4d3d46bc6b1fdd1cd28d0, type: 3}
     CannonSprite: {fileID: 1474691046141679077, guid: b0ab56063522368429e276fb52baa9e7, type: 3}
     ShootPointOffset: {x: 0, y: 0.47}
-  - AttackRange: 2
+  - AttackRange: 3
     ForbidRange: 0
     AttackDamage: 58
     AttackSpeed: 8

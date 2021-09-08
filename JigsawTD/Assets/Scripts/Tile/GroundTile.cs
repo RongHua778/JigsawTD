@@ -18,6 +18,14 @@ public class GroundTile : TileBase
 
     public GameTile TileAbrove;
 
+    public override void OnTileSelected(bool value)
+    {
+        base.OnTileSelected(value);
+        if (value)
+        {
+            GameManager.Instance.ShowBuyGroundTips();
+        }
+    }
     public override void OnSpawn()
     {
 

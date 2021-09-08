@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class LateIntensify : ElementSkill
 {
-    //所有20秒后发生的属性提升翻倍
+    //所有30秒后发生的属性提升翻倍
     public override List<int> Elements => new List<int> { 2, 2, 2 };
     public override string SkillDescription => "LATEINTENSIFY";
     public override void StartTurn()
     {
-        Duration = 20;
+        Duration = 30;
     }
 
     public override void TickEnd()
     {
-        strategy.TimeModify += 1;
+        strategy.TimeModify += 2;
     }
 
     public override void EndTurn()

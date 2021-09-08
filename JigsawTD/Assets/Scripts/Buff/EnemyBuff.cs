@@ -4,13 +4,13 @@ using UnityEngine;
 
 public enum EnemyBuffName
 {
-    SlowDown, 
-    DealDamage, 
-    BreakShell, 
-    DirectionSlow, 
-    HealthBaseDamage, 
-    DamageTarget, 
-    Stun, 
+    SlowDown,
+    DealDamage,
+    BreakShell,
+    DirectionSlow,
+    HealthBaseDamage,
+    DamageTarget,
+    Stun,
     TileStun,
     DamageIntensify
 }
@@ -91,14 +91,16 @@ public class SlowBuff : TimeBuff
     public override EnemyBuffName BuffName => EnemyBuffName.SlowDown;
     public override bool IsStackable => true;
     public override bool IsTimeBase => true;
+    private float intensifyValue;
 
     public override void Affect()
     {
-        Target.SlowRate += KeyValue;
+        intensifyValue = KeyValue * (1 + Target.DamageStrategy.SlowIntensify);
+        Target.SlowRate += intensifyValue;
     }
     public override void End()
     {
-        Target.SlowRate -= KeyValue;
+        Target.SlowRate -= intensifyValue;
     }
 }
 
@@ -110,11 +112,11 @@ public class DamageIntensifyBuff : TimeBuff
 
     public override void Affect()
     {
-        Target.DamageIntensify += KeyValue;
+        Target.DamageStrategy.BuffDamageIntensify += KeyValue;
     }
     public override void End()
     {
-        Target.DamageIntensify -= KeyValue;
+        Target.DamageStrategy.BuffDamageIntensify -= KeyValue;
     }
 }
 
@@ -137,15 +139,15 @@ public class DirectionSlow : TileBuff
 
     public override void Affect()
     {
-        if (Target.Direction == ((GameTile)(Target.LastTrap.m_GameTile)).TileDirection)
-        {
-            Target.PathSlow += KeyValue;
-        }
+        //if (Target.Direction == ((GameTile)(Target.LastTrap.m_GameTile)).TileDirection)
+        //{
+        //    //Target.PathSlow += KeyValue;
+        //}
 
     }
     public override void End()
     {
-        Target.PathSlow = 0;
+        //Target.PathSlow = 0;
     }
 }
 
@@ -204,14 +206,14 @@ public class DamageTarget : TileBuff
     {
         float damageReturn;
         Target.DamageStrategy.ApplyDamage(Target.TargetDamageCounter * KeyValue, out damageReturn);
-        ((TrapContent)(Target.LastTrap)).DamageAnalysis += (int)damageReturn;
+        // ((TrapContent)(Target.LastTrap)).DamageAnalysis += (int)damageReturn;
         Target.TargetDamageCounter = 0;
 
     }
 
     public override void End()
     {
-        
+
     }
 }
 

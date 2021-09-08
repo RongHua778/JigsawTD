@@ -2075,7 +2075,6 @@ GameObject:
   - component: {fileID: 356425825}
   - component: {fileID: 356425824}
   - component: {fileID: 356425827}
-  - component: {fileID: 356425828}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -2146,45 +2145,6 @@ MonoBehaviour:
   Levels:
   - {fileID: 11400000, guid: 3db901bc7ef15e646a5ab9b664f6c01b, type: 2}
   SelectedLevelID: 1
---- !u!114 &356425828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 356425823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c36269159d099e40bfe87a4cf0fb38e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerMaxLevel: 6
-  LevelUpMoney: 0000000032000000b40000005e0100005802000084030000520300000f270000
-  StartCoin: 0
-  StartLotteryDraw: 0
-  BaseWaveIncome: 10
-  WaveMultiplyIncome: 10
-  BuyBluePrintCost: 20
-  ShopRefreshCost: 20
-  CoinInterest: 0
-  BaseShapeCost: 5
-  MultipleShapeCost: 10
-  BuyGroundCost: 20
-  BuyGroundCostMultyply: 20
-  SwitchTrapCost: 50
-  SwitchTrapCostMultiply: 50
-  EnvrionmentBaseVolume: 0.5
-  TileSize: 1
-  trapN: 15
-  TileShapeChance: []
-  PlayerMaxHealth: 1e0000000f0000000f0000000f0000000f000000
-  difficutyWave: 0a00000028000000280000002800000028000000
-  CircleCol: {fileID: 379002804665637541, guid: 88314c00e62edfc4ea1c16ad951dd62f, type: 3}
-  RangeIndicatorPrefab: {fileID: 7053043907688615658, guid: d8a2a921f17ca0e46b801451269a7676, type: 3}
-  JumpDamagePrefab: {fileID: 4699521983380265760, guid: 312c9ecb05f5d3f4fa19d5107ffc2833, type: 3}
-  UnrevealTrap: {fileID: 21300000, guid: e8ecebd490ee97447a3e4938bf2835cc, type: 3}
-  LandedEffect: {fileID: 3581280347063733391, guid: 6c69b997b2840b04fae94e6a1ba14337, type: 3}
-  LevelUpCostPerRare: 50
 --- !u!224 &361613944 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8615578732770674544, guid: ed194cbc8fa0ea642a1c55c651a97096, type: 3}

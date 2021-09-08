@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: -1642744281
   m_SortingLayer: 2
   m_SortingOrder: 2
-  m_Sprite: {fileID: 1123063040376734126, guid: 7cdac59c1a58c4049b2d1ad53616d6b1, type: 3}
+  m_Sprite: {fileID: -6436588411321994143, guid: 77f1f203341c46246ad62b6652017dda, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 2623551280471278839}
   - component: {fileID: 1967630184950370932}
   m_Layer: 16
-  m_Name: StunTrap
+  m_Name: IceTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -145,4 +145,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
   needReset: 1
-  TrapIntensify: 1
+  Important: 0

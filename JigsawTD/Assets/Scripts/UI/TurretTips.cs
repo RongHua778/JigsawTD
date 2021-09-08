@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class TurretTips : TileTips
 {
@@ -23,7 +24,9 @@ public class TurretTips : TileTips
     [SerializeField] GameObject IntensifyArea = default;//元素塔加成效果区
 
     [SerializeField] GameObject ElementSkillArea = default;//元素技能区
-    [SerializeField] TipsElementConstruct[] elementConstruct = default;//合成塔组成元素区
+    [SerializeField] Transform ElementSkillContent = default;//元素技能滑动区
+    [SerializeField] TipsElementConstruct ElementConstructPrefab = default;
+    List<TipsElementConstruct> elementConstructs = new List<TipsElementConstruct>();//合成塔组成元素区
     //[SerializeField] TipsElementConstruct elementConstruct2 = default;//第二元素技能区
     //合成塔升级区
 
@@ -169,17 +172,22 @@ public class TurretTips : TileTips
     }
     private void SetElementSkill()
     {
-        foreach (var ecom in elementConstruct)
+        foreach (var ecom in elementConstructs)
         {
             ecom.gameObject.SetActive(false);
         }
         for (int i = 0; i < m_Strategy.ElementSKillSlot; i++)
         {
-            elementConstruct[i].gameObject.SetActive(true);
+            if (i > elementConstructs.Count - 1)
+            {
+                TipsElementConstruct construct = Instantiate(ElementConstructPrefab, ElementSkillContent);
+                elementConstructs.Add(construct);
+            }
+            elementConstructs[i].gameObject.SetActive(true);
             if (i < m_Strategy.TurretSkills.Count - 1)
-                elementConstruct[i].SetElements((ElementSkill)m_Strategy.TurretSkills[i + 1]);//第一个是被动技能
+                elementConstructs[i].SetElements((ElementSkill)m_Strategy.TurretSkills[i + 1]);//第一个是被动技能
             else
-                elementConstruct[i].SetEmpty();
+                elementConstructs[i].SetEmpty();
         }
     }
 

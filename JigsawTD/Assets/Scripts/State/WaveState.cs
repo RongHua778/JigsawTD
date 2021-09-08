@@ -5,8 +5,10 @@ using UnityEngine;
 public class WaveState : BattleOperationState
 {
     WaveSystem m_WaveSystem;
-    public WaveState(GameManager gameManager, WaveSystem waveSystem) : base(gameManager)
+    BoardSystem m_BoardSystem;
+    public WaveState(GameManager gameManager, WaveSystem waveSystem,BoardSystem boardSystem) : base(gameManager)
     {
+        m_BoardSystem = boardSystem;
         m_WaveSystem = waveSystem;
     }
 
@@ -14,6 +16,8 @@ public class WaveState : BattleOperationState
 
     public override IEnumerator EnterState()
     {
+        //计算陷阱列表及效果
+        m_BoardSystem.GetPathTiles();
         yield return new WaitForSeconds(0.5f);
         m_WaveSystem.Running = true;
         switch (m_WaveSystem.RunningSequence[0].EnemyType)

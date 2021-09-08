@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7a06a8e352dd064bab9b6bf5b84988e, type: 3}
-  m_Name: DamageDirAttribute
+  m_Name: FrostTrap
   m_EditorClassIdentifier: 
-  Icon: {fileID: 0}
-  Name: DamageArrow
-  Description: 
-  LevelInfos: []
+  Name: FROSTTRAP
+  Icon: {fileID: -47297616180671556, guid: 77f1f203341c46246ad62b6652017dda, type: 3}
+  Description: FROSTTRAPINFO
+  ContentPrefab: {fileID: 6749070376678447189, guid: f194274714525524c82988b8b4ad1cdf, type: 3}

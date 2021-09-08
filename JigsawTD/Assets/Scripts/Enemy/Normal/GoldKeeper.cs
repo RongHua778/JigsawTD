@@ -6,28 +6,24 @@ public class GoldKeeper : Enemy
 {
     public override EnemyType EnemyType => EnemyType.GoldKeeper;
     private int LifeCount;
-    [SerializeField] ReusableObject gainMoneyPrefab = default;
 
-    public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify)
+    public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify, List<BasicTile> path)
     {
-        base.Initialize(attribute, pathOffset, healthBar, intensify);
+        base.Initialize(attribute, pathOffset, healthBar, intensify, path);
         LifeCount = 1;
     }
     protected override void OnEnemyUpdate()
     {
         if (DamageStrategy.CurrentHealth / DamageStrategy.MaxHealth <= 1 - 0.05f * LifeCount)
         {
-            LifeCount++;
             GainMoney();
         }
     }
 
     private void GainMoney()
     {
-        GameManager.Instance.GainMoney(GameRes.CurrentWave);
-        GameObject obj = ObjectPool.Instance.Spawn(gainMoneyPrefab).gameObject;
-        obj.transform.position = (Vector2)model.position + Vector2.up * 0.2f;
-        Sound.Instance.PlayEffect("Sound_GainCoin");
+        LifeCount++;
+        StaticData.Instance.GainMoneyEffect((Vector2)model.position, Mathf.RoundToInt(GameRes.CurrentWave * 1.5f));
     }
 
     protected override void OnDie()

@@ -6,14 +6,17 @@ using UnityEngine.UI;
 public class HealthBar : ReusableObject
 {
     [SerializeField] Image healthProgress = default;
-    [SerializeField] Image slowIcon = default;
-    [SerializeField] Image damageIcon = default;
-    [SerializeField] Image promoteIcon = default;
 
-    [SerializeField] Vector2 offset = default;
+    [SerializeField] Vector2 enemyOffset = default;
+    [SerializeField] Vector2 iconStartPos = default;
+    [SerializeField] Vector2 iconOffset = default;
+
+    private List<GameObject> iconShowList = new List<GameObject>();
+
+    [SerializeField] GameObject[] Icons = default;//1=SLOW,2=DAMAGEMARK,3=SLOWINTENSIFY,4=GOLD
     public Transform followTrans;
-    float fillAmount;
 
+    float fillAmount;
     public float FillAmount
     {
         get => fillAmount;
@@ -27,28 +30,49 @@ public class HealthBar : ReusableObject
     public override void OnUnSpawn()
     {
         FillAmount = 1;
-        ShowPromoteIcon(false);
-        ShowSlowIcon(false);
-        ShowDamageIcon(false);
+        iconShowList.Clear();
     }
 
-    public void ShowSlowIcon(bool value)
+    public void ShowIcon(int id, bool value)
     {
-        slowIcon.gameObject.SetActive(value);
+        Icons[id].SetActive(value);
+        if (value)
+        {
+            if (!iconShowList.Contains(Icons[id]))
+                iconShowList.Add(Icons[id]);
+        }
+        else
+            iconShowList.Remove(Icons[id]);
+        SortIcons();
     }
 
-    public void ShowDamageIcon(bool value)
+    private void SortIcons()
     {
-        damageIcon.gameObject.SetActive(value);
-    }
+        Vector2 offset = iconOffset;
+        for (int i = 0; i < iconShowList.Count; i++)
+        {
+            iconShowList[i].transform.localPosition = iconStartPos + offset;
+            offset += iconOffset;
+        }
 
-    public void ShowPromoteIcon(bool value)
-    {
-        promoteIcon.gameObject.SetActive(value);
     }
+    //public void ShowSlowIcon(bool value)
+    //{
+    //    slowIcon.gameObject.SetActive(value);
+    //}
+
+    //public void ShowDamageIcon(bool value)
+    //{
+    //    damageIcon.gameObject.SetActive(value);
+    //}
+
+    //public void ShowPromoteIcon(bool value)
+    //{
+    //    promoteIcon.gameObject.SetActive(value);
+    //}
     private void LateUpdate()
     {
         if (followTrans != null)
-            transform.position = (Vector2)followTrans.position + offset;
+            transform.position = (Vector2)followTrans.position + enemyOffset;
     }
 }

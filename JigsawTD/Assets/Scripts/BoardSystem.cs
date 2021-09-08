@@ -43,7 +43,6 @@ public class BoardSystem : IGameSystem
     float pressCounter = 0;
     public bool IsPressingTile = false;
     public bool IsLongPress { get => pressCounter >= 0.2f; }
-    private Camera mainCam;
     private float moveDis;
     private Vector3 startPos;
 
@@ -56,7 +55,7 @@ public class BoardSystem : IGameSystem
         {
             if (selectingTile != null)
             {
-                selectingTile.Content.OnContentSelected(false);
+                selectingTile.OnTileSelected(false);
                 selectingTile = selectingTile == value ? null : value;
                 GameManager.Instance.HideTips();
             }
@@ -67,7 +66,7 @@ public class BoardSystem : IGameSystem
             if (selectingTile != null)
             {
                 selection.transform.position = selectingTile.transform.position;
-                selectingTile.Content.OnContentSelected(true);
+                selectingTile.OnTileSelected(true);
             }
             selection.SetActive(selectingTile != null);
         }
@@ -83,7 +82,7 @@ public class BoardSystem : IGameSystem
 
     List<Vector2Int> tilePoss = new List<Vector2Int>();
 
-    public List<GameTile> shortestPath = new List<GameTile>();
+    public List<BasicTile> shortestPath = new List<BasicTile>();
 
     public List<PathPoint> shortestPoints = new List<PathPoint>();
 
@@ -122,11 +121,14 @@ public class BoardSystem : IGameSystem
 
     public static bool FindPath { get; set; }
 
+    //Trap设置
+    public static TrapContent LastTrap;
+
+
     public override void Initialize()
     {
         selection = transform.Find("Selection").gameObject;
         equipAnim = transform.Find("EquipAnim").gameObject;
-        mainCam = Camera.main;
         BuyOneGroundMoney = StaticData.Instance.BuyGroundCost;
         SwitchTrapCost = StaticData.Instance.SwitchTrapCost;
         GameEvents.Instance.onSeekPath += SeekPath;
@@ -253,7 +255,6 @@ public class BoardSystem : IGameSystem
         {
             path = p;
             HidePath();
-            shortestPath.Clear();
             //Debug.LogError("No Path Found");
             FindPath = false;
         }
@@ -294,6 +295,28 @@ public class BoardSystem : IGameSystem
         }
         followers.behaviors.Clear();
     }
+
+    public void GetPathTiles()
+    {
+        shortestPath.Clear();
+        foreach (var point in shortestPoints)
+        {
+            BasicTile tile = StaticData.RaycastCollider(point.PathPos, LayerMask.GetMask(StaticData.ConcreteTileMask)).GetComponent<BasicTile>();
+            shortestPath.Add(tile);
+            tile.ResetTile();//清除加成数据
+        }
+        PreCheckPath();
+    }
+
+    private void PreCheckPath()
+    {
+        LastTrap = null;
+        for (int i = 0; i < shortestPath.Count; i++)
+        {
+            shortestPath[i].CheckContent(i,shortestPath);
+        }
+    }
+
     private void GenerateTrapTiles(Vector2Int offset, Vector2Int size)
     {
         List<Vector2Int> traps = new List<Vector2Int>();
@@ -313,7 +336,7 @@ public class BoardSystem : IGameSystem
             int index = UnityEngine.Random.Range(0, tempPoss.Count);
             Vector2Int temp = tempPoss[index];
             traps.Add(temp);
-            List<Vector2Int> neibor = StaticData.GetCirclePoints(5);
+            List<Vector2Int> neibor = StaticData.GetCirclePoints(4);
             for (int k = 0; k < neibor.Count; k++)
             {
                 neibor[k] = neibor[k] + tempPoss[index];
@@ -361,9 +384,9 @@ public class BoardSystem : IGameSystem
             GameManager.Instance.ShowMessage(GameMultiLang.GetTraduction("ALREADYGROUND"));
             return;
         }
-        if (StaticData.FreeGroundTileCount > 0)
+        if (GameRes.FreeGroundTileCount > 0)
         {
-            StaticData.FreeGroundTileCount--;
+            GameRes.FreeGroundTileCount--;
         }
         else if (!GameManager.Instance.ConsumeMoney(BuyOneGroundMoney))
         {

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8318468018590937565}
   - component: {fileID: 7684558311415652510}
-  - component: {fileID: 9106564161691296726}
+  - component: {fileID: 4035454610492290991}
   m_Layer: 16
-  m_Name: ExecuteTrap
+  m_Name: BonusTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,8 +48,8 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.3
---- !u!114 &9106564161691296726
+  m_Radius: 0.2
+--- !u!114 &4035454610492290991
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,12 +58,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4332522189360882429}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8584899e289220f41b728401f37e7a6b, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f8bbff6a939ad34c8b15ad42f377f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
-  needReset: 0
-  TrapIntensify: 1
+  needReset: 1
+  Important: 0
 --- !u!1 &8809196961676829142
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,7 +135,7 @@ SpriteRenderer:
   m_SortingLayerID: -1642744281
   m_SortingLayer: 2
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 036e1cc6e16e56341891f7d307d93a30, type: 3}
+  m_Sprite: {fileID: 2745613724628408894, guid: 77f1f203341c46246ad62b6652017dda, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

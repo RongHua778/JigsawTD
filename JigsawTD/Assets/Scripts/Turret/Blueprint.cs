@@ -92,7 +92,7 @@ public class Blueprint
     public void CheckElement()
     {
         List<IGameBehavior> temp = GameManager.Instance.elementTurrets.behaviors.ToList();
-        int perfectCount = StaticData.PerfectElementCount;
+        int perfectCount = GameRes.PerfectElementCount;
         for (int i = 0; i < compositions.Count; i++)
         {
             compositions[i].obtained = false;

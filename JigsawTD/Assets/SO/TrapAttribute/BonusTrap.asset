@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7a06a8e352dd064bab9b6bf5b84988e, type: 3}
-  m_Name: DamageArrowTrapAttribute
+  m_Name: BonusTrap
   m_EditorClassIdentifier: 
-  Name: DAMAGEARROW
-  Icon: {fileID: 21300000, guid: d460d853663b8df4bb881d7ccc487ca3, type: 3}
-  Description: DAMAGEARROWINFO
-  ContentPrefab: {fileID: 4493129584135058458, guid: 949af04d352211b4fa535e36f0888b05, type: 3}
-  BuffInfos: []
+  Name: BONUSTRAP
+  Icon: {fileID: 2745613724628408894, guid: 77f1f203341c46246ad62b6652017dda, type: 3}
+  Description: BONUSTRAPINFO
+  ContentPrefab: {fileID: 4035454610492290991, guid: 2c13dcad0a2d6e34598a99eb5c14cd0d, type: 3}

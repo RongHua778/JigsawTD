@@ -11,7 +11,6 @@ public class EnemyAttribute : ScriptableObject
     public float CountIncrease;
     public float Health;
     public float Speed;
-    public int Shell;
     public float CoolDown;
     public Enemy Prefab;
     public int ReachDamage;

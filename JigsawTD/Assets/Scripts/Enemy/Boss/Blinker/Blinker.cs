@@ -9,9 +9,9 @@ public class Blinker : Enemy
     [SerializeField] private ReusableObject holePrefab = default;
     bool transfering = false;
     public override EnemyType EnemyType => EnemyType.Blinker;
-    public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify)
+    public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify, List<BasicTile> path)
     {
-        base.Initialize(attribute, pathOffset, healthBar, intensify);
+        base.Initialize(attribute, pathOffset, healthBar, intensify,path);
         //EnemySkills = new List<Skill>();
         //EnemySkills.Add(GameManager.Instance.SkillFactory.GetSkill(EnemySkill.Blink, this));
         transfering = false;

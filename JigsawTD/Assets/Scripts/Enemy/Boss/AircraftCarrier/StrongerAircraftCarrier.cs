@@ -6,11 +6,11 @@ public class StrongerAircraftCarrier : AircraftCarrier
 {
     public override EnemyType EnemyType => EnemyType.StrongerAircraftCarrier;
 
-    public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify)
+    public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify, List<BasicTile> path)
     {
-        base.Initialize(attribute, pathOffset, healthBar, intensify);
+        base.Initialize(attribute, pathOffset, healthBar, intensify,path);
         Armor = intensify * armorIntensify;
-        Skills = new List<Skill>();
-        Skills.Add(GameManager.Instance.SkillFactory.GetSkill(EnemySkill.strongerAircraft, this));
+        //Skills = new List<Skill>();
+        //Skills.Add(GameManager.Instance.SkillFactory.GetSkill(EnemySkill.strongerAircraft, this));
     }
 }

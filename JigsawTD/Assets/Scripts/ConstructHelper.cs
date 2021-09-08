@@ -39,9 +39,7 @@ public static class ConstructHelper
 
     public static GroundTile GetGroundTile()
     {
-        GameTileContent content = m_ContentFactory.GetBasicContent(GameTileContentType.Ground);
         GroundTile tile = m_TileFactory.GetGroundTile();
-        tile.SetContent(content);
         return tile;
     }
 
@@ -98,10 +96,10 @@ public static class ConstructHelper
         TileShape shape = m_ShapeFactory.GetDShape();
         GameTile tile = m_TileFactory.GetBasicTile();
         CompositeTurret content = m_ContentFactory.GetCompositeTurret(bluePrint);
-        if (StaticData.NextCompositeCallback != null)//下一次合成获得额外加成
+        if (GameRes.NextCompositeCallback != null)//下一次合成获得额外加成
         {
-            StaticData.NextCompositeCallback(bluePrint.ComStrategy);
-            StaticData.NextCompositeCallback = null;
+            GameRes.NextCompositeCallback(bluePrint.ComStrategy);
+            GameRes.NextCompositeCallback = null;
         }
         bluePrint.ComStrategy.CompositeSkill();
 

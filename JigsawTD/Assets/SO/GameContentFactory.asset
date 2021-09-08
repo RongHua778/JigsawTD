@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5e7d9a89618bc4dade5c8c8a6427cf, type: 3}
   m_Name: GameContentFactory
   m_EditorClassIdentifier: 
-  groundAtt: {fileID: 11400000, guid: 8259855867d58d741b0ca314a216b901, type: 2}
   emptyAtt: {fileID: 11400000, guid: 4c8da1e145ab6214c944bcc43fad4205, type: 2}
   spawnPointAtt: {fileID: 11400000, guid: 0263469d903409a46837ef1fb50628ce, type: 2}
   destinationAtt: {fileID: 11400000, guid: 132429f84cc3e32449aabf043aee0234, type: 2}
@@ -38,6 +37,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bd18a2582f85635438ff7d96cb4a6138, type: 2}
   - {fileID: 11400000, guid: b97947ffb3f15a14ca54916da2ef71e6, type: 2}
   - {fileID: 11400000, guid: 0f5b17d06e53ad249a9d73451828bd4c, type: 2}
+  - {fileID: 11400000, guid: 623be3fad58bdab4e8ebdf367d76741f, type: 2}
+  - {fileID: 11400000, guid: 879c171f538d1b04c886f8130cc13b7d, type: 2}
+  - {fileID: 11400000, guid: d4f7c44b4edeb1140837b0a7bccb27d4, type: 2}
   turretBaseAtts:
   - {fileID: 11400000, guid: f2893f05498ee0d46831e8279022852e, type: 2}
   - {fileID: 11400000, guid: cb02325040029af4aba013bf8db4d5d9, type: 2}

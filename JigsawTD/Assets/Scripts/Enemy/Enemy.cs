@@ -11,8 +11,20 @@ public abstract class Enemy : PathFollower, IDamageable
     public HealthBar HealthBar { get => healthBar; }
     protected SpriteRenderer enemySprite;
     protected CircleCollider2D enemyCol;
-
     public DamageStrategy DamageStrategy { get; set; }
+
+    //寻路及陷阱触发
+    private List<BasicTile> pathTiles;
+    private BasicTile currentTile;
+    public BasicTile CurrentTile
+    {
+        get => currentTile;
+        set
+        {
+            currentTile = value;
+            currentTile.OnTilePass(this);
+        }
+    }
 
     //状态配置
     public float Intensify;
@@ -29,26 +41,10 @@ public abstract class Enemy : PathFollower, IDamageable
     public Animator Anim { get => anim; set => anim = value; }
 
 
-    //上一个经过的陷阱
-    private TrapContent lastTrap;
-    public TrapContent LastTrap { get => lastTrap; set => lastTrap = value; }
     //经过的陷阱列表
     private List<TrapContent> passedTraps = new List<TrapContent>();
     public List<TrapContent> PassedTraps { get => passedTraps; set => passedTraps = value; }
-    //陷阱强化值
-    float trapIntentify = 1f;
-    public float TrapIntentify
-    {
-        get => trapIntentify;
-        set
-        {
-            trapIntentify = value;
-            healthBar.ShowPromoteIcon(trapIntentify > 1);
-        }
-    }
 
-    private List<Skill> skills;
-    public List<Skill> Skills { get => skills; set => skills = value; }
     public int ReachDamage { get; set; }
 
     private float stunTime;
@@ -66,9 +62,9 @@ public abstract class Enemy : PathFollower, IDamageable
     public int AffectHealerCount { get => affectHealerCount; set => affectHealerCount = value; }
     float speedIntensify = 0;
     public virtual float SpeedIntensify { get => speedIntensify + AffectHealerCount > 0 ? 0.4f : 0; set => speedIntensify = Mathf.Min(2, value); }
-    public override float Speed { get => StunTime > 0 ? 0 : Mathf.Max(0.1f, (speed + SpeedIntensify) * (1 - (SlowRate + PathSlow) / (SlowRate + PathSlow + 1))); set => speed = value; }
+    public override float Speed { get => StunTime > 0 ? 0 : Mathf.Max(0.1f, (speed + SpeedIntensify) * (1 - SlowRate / (SlowRate + 2f))); set => speed = value; }
 
-    float slowRate;
+    float slowRate = 0;
     public float SlowRate
     {
         get => slowRate;
@@ -76,32 +72,12 @@ public abstract class Enemy : PathFollower, IDamageable
         {
             slowRate = value;
             ProgressFactor = Speed * Adjust;//子弹减速即时更新速度
-            healthBar.ShowSlowIcon(slowRate > 0f);
-        }
-    }
-    float pathSlow;
-    public float PathSlow
-    {
-        get => pathSlow;
-        set
-        {
-            pathSlow = value;
-            ProgressFactor = Speed * Adjust;//子弹减速即时更新速度
+            healthBar.ShowIcon(0, slowRate > 0f);
         }
     }
 
     public float TargetDamageCounter { get; set; }
 
-    float damageIntensify;
-    public float DamageIntensify
-    {
-        get => damageIntensify;
-        set
-        {
-            damageIntensify = value;
-            healthBar.ShowDamageIcon(damageIntensify > 0);
-        }
-    }
     public BuffableEntity Buffable { get; set; }
 
     private bool isDie = false;
@@ -115,6 +91,20 @@ public abstract class Enemy : PathFollower, IDamageable
     }
 
 
+    public virtual void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify, List<BasicTile> shortpath)
+    {
+        this.pathTiles = shortpath;
+        this.PathOffset = pathOffset;
+        this.healthBar = healthBar;
+        this.healthBar.followTrans = model;
+        this.Intensify = intensify;
+        Buffable = this.GetComponent<BuffableEntity>();
+        this.DamageStrategy.MaxHealth = Mathf.RoundToInt(attribute.Health * intensify);
+        this.DamageStrategy.ResetStrategy();//清除加成
+        Speed = attribute.Speed;
+        ReachDamage = attribute.ReachDamage;
+
+    }
 
     public virtual void Awake()
     {
@@ -192,17 +182,12 @@ public abstract class Enemy : PathFollower, IDamageable
 
     }
 
-    public void TriigerTrap()
-    {
-        if (LastTrap != null)
-            LastTrap.OnContentPass(this);
-        LastTrap = null;
-        trapTriggered = true;
-    }
 
     protected override void PrepareNextState()
     {
         base.PrepareNextState();
+        CurrentTile.OnTileLeave(this);//离开格子效果
+        CurrentTile = pathTiles[PointIndex];
         Buffable.TileTick();
     }
 
@@ -213,47 +198,20 @@ public abstract class Enemy : PathFollower, IDamageable
         GameEvents.Instance.EnemyReach(this);
         ObjectPool.Instance.UnSpawn(this);
     }
-    public virtual void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify)
-    {
-        this.PathOffset = pathOffset;
-        this.healthBar = healthBar;
-        this.healthBar.followTrans = model;
-        this.Intensify = intensify;
-        Buffable = this.GetComponent<BuffableEntity>();
-        DamageStrategy.MaxHealth = Mathf.RoundToInt(attribute.Health * intensify);
-        Speed = attribute.Speed;
-        DamageIntensify = attribute.Shell;
-        ReachDamage = attribute.ReachDamage;
-        if (Skills != null)
-        {
-            foreach (Skill enemySkill in Skills)
-            {
-                enemySkill.OnBorn();
-            }
-        }
-    }
+
 
     protected override void PrepareIntro()
     {
         base.PrepareIntro();
+        CurrentTile = pathTiles[PointIndex];
         Anim.Play("Default");
         Anim.SetTrigger("Enter");
     }
 
-    //public virtual void ApplyDamage(float amount, out float realDamage, bool isCritical = false)
-    //{
-    //    realDamage = amount * (1 + DamageIntensify);
-    //    DamageStrategy.CurrentHealth -= realDamage;
-    //    TargetDamageCounter += realDamage;
-    //    GameEndUI.TotalDamage += (int)realDamage;
-    //    if (isCritical)
-    //    {
-    //        StaticData.Instance.ShowJumpDamage(model.transform.position, (int)realDamage);
-    //    }
-    //}
 
     public void Flash(int distance)
     {
+        CurrentTile.OnTileLeave(this);
         PointIndex -= distance;
         if (PointIndex < 0)
         {
@@ -264,6 +222,7 @@ public abstract class Enemy : PathFollower, IDamageable
             PointIndex = PathPoints.Count - 1;
         }
         CurrentPoint = PathPoints[PointIndex];
+        CurrentTile = pathTiles[PointIndex];
         transform.localPosition = PathPoints[PointIndex].PathPos;
         PositionFrom = CurrentPoint.PathPos;
         PositionTo = CurrentPoint.ExitPoint;
@@ -294,18 +253,12 @@ public abstract class Enemy : PathFollower, IDamageable
         isOutTroing = false;
         ObjectPool.Instance.UnSpawn(healthBar);
         TargetDamageCounter = 0;
-        DamageIntensify = 0;
         SpeedIntensify = 0;
         AffectHealerCount = 0;
-        PathSlow = 0;
+
         SlowRate = 0;
         StunTime = 0;
-        LastTrap = null;
         Buffable.RemoveAllBuffs();
-        if (skills != null)
-        {
-            skills.Clear();
-        }
-        TrapIntentify = 1f;
+
     }
 }

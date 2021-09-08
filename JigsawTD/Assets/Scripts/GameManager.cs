@@ -66,7 +66,7 @@ public class GameManager : Singleton<GameManager>
     public void Initinal()
     {
         //初始化全局数据
-        
+
         GameRes.Initialize(m_MainUI, m_FuncUI);
         //初始化工厂
         TileFactory.Initialize();
@@ -100,7 +100,7 @@ public class GameManager : Singleton<GameManager>
         m_GuideUI.Initialize();//IuserInterface初始化
         //设置操作流程
         buildingState = new BuildingState(this, m_BoardSystem);
-        waveState = new WaveState(this, m_WaveSystem);
+        waveState = new WaveState(this, m_WaveSystem, m_BoardSystem);
         pickingState = new PickingState(this);
 
         //开局准备下一波
@@ -350,7 +350,7 @@ public class GameManager : Singleton<GameManager>
 
     public void GainMoney(int amount)
     {
-        GameRes.Coin += (int)(amount * (1 + StaticData.OverallMoneyIntensify));
+        GameRes.Coin += (int)(amount * (1 + GameRes.OverallMoneyIntensify));
     }
 
     public void GainInterest()
@@ -424,12 +424,12 @@ public class GameManager : Singleton<GameManager>
 
     public void IncreaseShopCapacity(int amount)
     {
-        m_BluePrintShopUI.ShopCapacity+=amount;
+        m_BluePrintShopUI.ShopCapacity += amount;
     }
     public void GetPerfectElement(int count)
     {
-        StaticData.PerfectElementCount += count;
-        m_BluePrintShopUI.SetPerfectElementCount(StaticData.PerfectElementCount);
+        GameRes.PerfectElementCount += count;
+        m_BluePrintShopUI.SetPerfectElementCount(GameRes.PerfectElementCount);
     }
 
     public void CheckDetectSkill()
@@ -468,14 +468,14 @@ public class GameManager : Singleton<GameManager>
     public void ShowTrapTips(TrapContent trap)
     {
         HideTips();
-        m_TrapTips.ReadTrap(trap, m_BoardSystem.SwitchTrapCost);
+        m_TrapTips.ReadTrap(trap, GameRes.FreeTrapCount > 0 ? 0 : m_BoardSystem.SwitchTrapCost);
         m_TrapTips.Show();
     }
 
     public void ShowBuyGroundTips()
     {
         HideTips();
-        m_BuyGroundTips.ReadInfo(StaticData.FreeGroundTileCount > 0 ? 0 : m_BoardSystem.BuyOneGroundMoney);
+        m_BuyGroundTips.ReadInfo(GameRes.FreeGroundTileCount > 0 ? 0 : m_BoardSystem.BuyOneGroundMoney);
         m_BuyGroundTips.Show();
     }
 
@@ -536,7 +536,7 @@ public class GameManager : Singleton<GameManager>
         m_FuncUI.FreeShapeCount += count;
     }
 
-    public void SetTutorialPoss(bool value,List<Vector2> poss=null)
+    public void SetTutorialPoss(bool value, List<Vector2> poss = null)
     {
         m_BoardSystem.SetTutorialPoss(value, poss);
     }

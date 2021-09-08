@@ -1,28 +1,40 @@
 fileFormatVersion: 2
-guid: 7cdac59c1a58c4049b2d1ad53616d6b1
+guid: 77f1f203341c46246ad62b6652017dda
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3739705916145077919
-    second: TrapCollection_0
+      213: -2834877147454124499
+    second: TrapIcons_Collection_0
   - first:
-      213: 5171557775822150397
-    second: TrapCollection_1
+      213: -1834239815237150624
+    second: TrapIcons_Collection_1
   - first:
-      213: 1123063040376734126
-    second: TrapCollection_2
+      213: -2877823446954535018
+    second: TrapIcons_Collection_2
   - first:
-      213: -2144070522006488021
-    second: TrapCollection_3
+      213: 5112721545276643150
+    second: TrapIcons_Collection_3
   - first:
-      213: -854091410859664073
-    second: TrapCollection_4
+      213: 5035026766149074293
+    second: TrapIcons_Collection_4
   - first:
-      213: -2910786955879074301
-    second: TrapCollection_5
+      213: -8850144073333168560
+    second: TrapIcons_Collection_5
   - first:
-      213: 2841108905781951038
-    second: TrapCollection_6
+      213: 3584539639483946653
+    second: TrapIcons_Collection_6
+  - first:
+      213: -6436588411321994143
+    second: TrapIcons_Collection_7
+  - first:
+      213: -47297616180671556
+    second: TrapIcons_Collection_8
+  - first:
+      213: 8969078856711057251
+    second: TrapIcons_Collection_9
+  - first:
+      213: 2745613724628408894
+    second: TrapIcons_Collection_10
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -53,7 +65,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -148,7 +160,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TrapCollection_0
+      name: TrapIcons_Collection_0
       rect:
         serializedVersion: 2
         x: 0
@@ -162,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 161feb77845e91cc0800000000000000
-      internalID: -3739705916145077919
+      spriteID: d2ecf14114e78a8d0800000000000000
+      internalID: -2834877147454124499
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TrapCollection_1
+      name: TrapIcons_Collection_1
       rect:
         serializedVersion: 2
         x: 128
@@ -183,14 +195,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dfad943a56015c740800000000000000
-      internalID: 5171557775822150397
+      spriteID: 06859e33b987b86e0800000000000000
+      internalID: -1834239815237150624
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TrapCollection_2
+      name: TrapIcons_Collection_2
       rect:
         serializedVersion: 2
         x: 256
@@ -204,14 +216,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea1860e82ebe59f00800000000000000
-      internalID: 1123063040376734126
+      spriteID: 6971cf582daef08d0800000000000000
+      internalID: -2877823446954535018
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TrapCollection_3
+      name: TrapIcons_Collection_3
       rect:
         serializedVersion: 2
         x: 384
@@ -225,14 +237,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b2cba62583bbe32e0800000000000000
-      internalID: -2144070522006488021
+      spriteID: e4753b5382904f640800000000000000
+      internalID: 5112721545276643150
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TrapCollection_4
+      name: TrapIcons_Collection_4
       rect:
         serializedVersion: 2
         x: 512
@@ -246,14 +258,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73d5ff11368a524f0800000000000000
-      internalID: -854091410859664073
+      spriteID: 57d36e6ca2200e540800000000000000
+      internalID: 5035026766149074293
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TrapCollection_5
+      name: TrapIcons_Collection_5
       rect:
         serializedVersion: 2
         x: 640
@@ -267,14 +279,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 306bcf58faeca97d0800000000000000
-      internalID: -2910786955879074301
+      spriteID: 056a2f9fad8fd2580800000000000000
+      internalID: -8850144073333168560
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TrapCollection_6
+      name: TrapIcons_Collection_6
       rect:
         serializedVersion: 2
         x: 768
@@ -288,8 +300,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e3af4593f75ad6720800000000000000
-      internalID: 2841108905781951038
+      spriteID: d965fb67fc7deb130800000000000000
+      internalID: 3584539639483946653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrapIcons_Collection_7
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 164b1c141f4aca6a0800000000000000
+      internalID: -6436588411321994143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrapIcons_Collection_8
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbb04d49117f75ff0800000000000000
+      internalID: -47297616180671556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrapIcons_Collection_9
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36faab033b1987c70800000000000000
+      internalID: 8969078856711057251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrapIcons_Collection_10
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3ad9eab2216a1620800000000000000
+      internalID: 2745613724628408894
       vertices: []
       indices: 
       edges: []

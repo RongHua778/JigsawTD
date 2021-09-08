@@ -19,7 +19,7 @@ public class PoloGetter : ElementSkill
 public class AttackPolo : ElementSkill
 {
     //相邻防御塔攻击力提高50%
-    public override List<int> Elements => new List<int> { 0, 4, 4 };
+    public override List<int> Elements => new List<int> { 4, 4, 0 };
 
     private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
     public override void Detect()
@@ -48,7 +48,7 @@ public class AttackPolo : ElementSkill
 public class SpeedPolo : ElementSkill
 {
     //相邻防御塔攻速提高50%
-    public override List<int> Elements => new List<int> { 1, 4, 4 };
+    public override List<int> Elements => new List<int> { 4, 4, 1 };
 
     private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
     public override void Detect()
@@ -76,7 +76,7 @@ public class SpeedPolo : ElementSkill
 public class SlowAdjacent : ElementSkill
 {
     //相邻每个防御塔提高自身0.5减速
-    public override List<int> Elements => new List<int> { 2, 4, 4 };
+    public override List<int> Elements => new List<int> { 4, 4, 2 };
 
     private int adjacentTurretCount = 0;
     public override void Detect()
@@ -98,7 +98,7 @@ public class SlowAdjacent : ElementSkill
 public class CriticalPolo : ElementSkill
 {
     //相邻防御塔提高20%暴击
-    public override List<int> Elements => new List<int> { 3, 4, 4 };
+    public override List<int> Elements => new List<int> { 4, 4, 3 };
 
     private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
     public override void Detect()

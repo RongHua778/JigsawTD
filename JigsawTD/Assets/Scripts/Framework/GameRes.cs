@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,13 @@ public static class GameRes
 {
     private static MainUI m_MainUI;
     private static FuncUI m_FuncUI;
+
+    [Header("动态数据")]
+    public static int PerfectElementCount = 0;//完美元素数量
+    public static float OverallMoneyIntensify = 0;//金币加成
+    public static int FreeGroundTileCount = 0;//免费地板数量
+    public static int FreeTrapCount = 0;//免费陷阱换位数量
+    public static Action<StrategyBase> NextCompositeCallback = null;
 
     private static int coin;
     public static int Coin
@@ -49,6 +57,11 @@ public static class GameRes
         CurrentWave = 0;
         Coin = StaticData.Instance.StartCoin;
         Life = StaticData.Instance.PlayerMaxHealth[Game.Instance.SelectDifficulty];
+
+        PerfectElementCount = 0;
+        OverallMoneyIntensify = 0;
+        FreeGroundTileCount = 0;
+        FreeTrapCount = 0;
     }
 
 }

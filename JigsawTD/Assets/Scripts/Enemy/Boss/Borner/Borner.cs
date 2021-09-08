@@ -11,9 +11,9 @@ public class Borner : Enemy
     int form;
     float castleCounter;
     float bornCounter;
-    public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify)
+    public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify, List<BasicTile> path)
     {
-        base.Initialize(attribute, pathOffset, healthBar, intensify);
+        base.Initialize(attribute, pathOffset, healthBar, intensify,path);
         level = 0;
         form = 0;
     }
@@ -43,7 +43,7 @@ public class Borner : Enemy
     {
         if (DamageStrategy.CurrentHealth / DamageStrategy.MaxHealth <= 0.7f && form == 0)
         {
-            DamageIntensify -=0.7f;
+            DamageStrategy.BuffDamageIntensify -= 0.7f;
             level = 1;
             form = 1;
             StunTime += 7f;
@@ -53,7 +53,7 @@ public class Borner : Enemy
         }
         if (DamageStrategy.CurrentHealth / DamageStrategy.MaxHealth <= 0.3f && form == 1)
         {
-            DamageIntensify -=0.7f;
+            DamageStrategy.BuffDamageIntensify -= 0.7f;
             level = 2;
             form = 2;
             StunTime += 7f;
@@ -68,7 +68,7 @@ public class Borner : Enemy
             if (castleCounter <= 0f)
             {
                 level = 0;
-                DamageIntensify += 0.7f;
+                DamageStrategy.BuffDamageIntensify += 0.7f;
                 Anim.SetBool("Transform", false);
                 Sound.Instance.PlayEffect("Sound_BornerTransform");
             }

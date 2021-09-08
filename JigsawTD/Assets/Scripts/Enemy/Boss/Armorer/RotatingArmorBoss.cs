@@ -11,9 +11,9 @@ public class RotatingArmorBoss : Armorer
    // [SerializeField] Transform rotateObj = default;
 
 
-    public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify)
+    public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify, List<BasicTile> path)
     {
-        base.Initialize(attribute, pathOffset, healthBar, intensify);
+        base.Initialize(attribute, pathOffset, healthBar, intensify,path);
         //Vector3 rot = new Vector3(0, 0, 360);
         //tween = rotateObj.DORotate(rot, 12f).SetLoops(-1, LoopType.Incremental).SetEase(Ease.Linear).SetRelative();
 

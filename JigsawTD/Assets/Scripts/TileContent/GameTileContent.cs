@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum GameTileContentType
 {
-    Empty, Destination, SpawnPoint, ElementTurret, CompositeTurret, Trap, Ground,TurretBase
+    Empty, Destination, SpawnPoint, ElementTurret, CompositeTurret, Trap, TurretBase
 }
 public abstract class GameTileContent : ReusableObject
 {
@@ -13,8 +13,8 @@ public abstract class GameTileContent : ReusableObject
     public virtual bool IsWalkable { get => true; }
     public virtual GameTileContentType ContentType { get; }
 
-    private TileBase m_gameTile;
-    public TileBase m_GameTile { get => m_gameTile; set => m_gameTile = value; }
+    private GameTile m_gameTile;
+    public GameTile m_GameTile { get => m_gameTile; set => m_gameTile = value; }
 
     public virtual void ContentLanded()//该content放在地上时触发
     {
@@ -41,6 +41,11 @@ public abstract class GameTileContent : ReusableObject
     }
 
     public virtual void OnContentPass(Enemy enemy)
+    {
+
+    }
+
+    public virtual void OnContentPreCheck(int index,List<BasicTile> path)//回合开始时执行效果
     {
 
     }

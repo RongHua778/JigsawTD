@@ -63,7 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
   needReset: 1
-  TrapIntensify: 1
+  Important: 0
 --- !u!1 &8041477864737400204
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,7 +135,7 @@ SpriteRenderer:
   m_SortingLayerID: -1642744281
   m_SortingLayer: 2
   m_SortingOrder: 2
-  m_Sprite: {fileID: 5171557775822150397, guid: 7cdac59c1a58c4049b2d1ad53616d6b1, type: 3}
+  m_Sprite: {fileID: -1834239815237150624, guid: 77f1f203341c46246ad62b6652017dda, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

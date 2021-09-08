@@ -91,11 +91,12 @@ public class WaveSystem : IGameSystem
             //    stage += ((i / 10) + 1) * LevelAttribute.LevelIntensify * number;
             //}
 
+
             if (i < 3)
             {
                 stage = (i + 1) * 0.5f;
                 //////////////
-                //stage = 100f;
+                //stage = 1000f;
                 sequences = GenerateRandomSequence(1, stage, i);
             }
             else if (i == 9)
@@ -191,7 +192,7 @@ public class WaveSystem : IGameSystem
         //float intensify = RunningSequence.Intensify;
         Enemy enemy = ObjectPool.Instance.Spawn(attribute.Prefab) as Enemy;
         HealthBar healthBar = ObjectPool.Instance.Spawn(healthBarPrefab) as HealthBar;
-        enemy.Initialize(attribute, UnityEngine.Random.Range(-pathOffset, pathOffset), healthBar, intensify);
+        enemy.Initialize(attribute, UnityEngine.Random.Range(-pathOffset, pathOffset), healthBar, intensify, board.shortestPath);
         enemy.SpawnOn(pathIndex, board.shortestPoints);
         GameManager.Instance.enemies.Add(enemy);
         return enemy;

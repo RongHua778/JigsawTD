@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8318468018590937565}
   - component: {fileID: 7684558311415652510}
-  - component: {fileID: 2392898383585726100}
+  - component: {fileID: 4445610322067386579}
   m_Layer: 16
-  m_Name: StunTrap2
+  m_Name: ExplosionTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,8 +48,8 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.3
---- !u!114 &2392898383585726100
+  m_Radius: 0.2
+--- !u!114 &4445610322067386579
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,13 +58,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4332522189360882429}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 031aeb70ad49a3b428da130c9766fecf, type: 3}
+  m_Script: {fileID: 11500000, guid: 582b83b8c8e819744a35b8fa09d0dd21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
-  m_TrapAttribute: {fileID: 0}
-  needReset: 0
-  TrapIntensify: 1
+  needReset: 1
+  Important: 0
+  explisionPrefab: {fileID: 3494240544614092349, guid: 0226d37d02ed0ef488ae549d871b0abc, type: 3}
 --- !u!1 &8809196961676829142
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,7 +136,7 @@ SpriteRenderer:
   m_SortingLayerID: -1642744281
   m_SortingLayer: 2
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 98a8972a98949c64ab4fbcfdb5211a1f, type: 3}
+  m_Sprite: {fileID: 8969078856711057251, guid: 77f1f203341c46246ad62b6652017dda, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

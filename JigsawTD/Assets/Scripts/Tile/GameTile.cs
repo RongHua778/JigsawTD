@@ -7,6 +7,13 @@ using UnityEngine.EventSystems;
 
 public abstract class GameTile : TileBase
 {
+    private GameTileContent content;
+    public GameTileContent Content
+    {
+        get => content;
+        set => content = value;
+    }
+
     GameObject previewGlow;
     Transform directionCheckPoint;
     Transform tileBase;
@@ -20,6 +27,20 @@ public abstract class GameTile : TileBase
     //tile的朝向
     Direction tileDirection;
     public Direction TileDirection { get => tileDirection; set => tileDirection = value; }
+
+    //格子特殊效果
+    private float tileDamageIntensify = 0;
+    public float TileDamageIntensify { get => tileDamageIntensify; set => tileDamageIntensify = value; }
+    private float tileSlowIntensify = 0;
+    public float TileSlowIntensify { get => tileSlowIntensify; set => tileSlowIntensify = value; }
+
+    private int bounsCoin = 0;
+    public int BounsCoin { get => bounsCoin; set => bounsCoin = value; }
+
+    private float trapIntensify = 1;
+    public float TrapIntensify { get => trapIntensify; set => trapIntensify = value; }
+
+
 
     public override bool IsLanded
     {
@@ -41,7 +62,6 @@ public abstract class GameTile : TileBase
             previewGlow.SetActive(value);
         }
     }
-
 
 
     protected virtual void Awake()
@@ -71,9 +91,21 @@ public abstract class GameTile : TileBase
         IsLanded = true;//这个必须在CONTENTLANDED下面，否则会导致回收自己
     }
 
+    public virtual void SetContent(GameTileContent content)
+    {
+        content.transform.SetParent(this.transform);
+        content.transform.position = transform.position + Vector3.forward * 0.01f;
+        content.m_GameTile = this;
+        Content = content;
+    }
+
     public virtual void OnTilePass(Enemy enemy)//经过触发特殊效果
     {
         Content.OnContentPass(enemy);
+    }
+    public virtual void OnTileLeave(Enemy enemy)
+    {
+
     }
 
     protected override void OnMouseDown()

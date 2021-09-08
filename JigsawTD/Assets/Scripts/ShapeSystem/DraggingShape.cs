@@ -162,12 +162,13 @@ public class DraggingShape : DraggingActions
             if (tile.Content.ContentType != GameTileContentType.Empty)//如果是有防御塔的，就比对冲突
             {
 
-                if (tile.Content.ContentType == GameTileContentType.CompositeTurret)
+                if (col.CompareTag("OnlyCompositeTurret"))
                 {
-                    if (col.CompareTag("OnlyCompositeTurret"))
+                    if (tile.Content.ContentType == GameTileContentType.CompositeTurret)
                     {
                         GameTile tTile = col.GetComponent<GameTile>();
-                        if (((CompositeTurret)tTile.Content).Strategy.TurretSkills.Count < 3)
+                        StrategyBase strategy = ((CompositeTurret)tTile.Content).Strategy;
+                        if (strategy.TurretSkills.Count < strategy.ElementSKillSlot + 1)
                         {
                             SetTileColor(equipColor, tile);
                             BoardSystem.PreviewEquipTile = tTile;
@@ -180,7 +181,15 @@ public class DraggingShape : DraggingActions
                             break;
                         }
                     }
+                    else
+                    {
+                        overLapPoint = true;
+                        canDrop = false;
+                        break;
+                    }
                 }
+
+
                 if (col.CompareTag("UnDropablePoint"))//冲突，返回，所有颜色被设为红色
                 {
                     canDrop = false;

@@ -12,9 +12,9 @@ public class Armorer : Enemy
     [SerializeField] float armorCoolDown;
     public override EnemyType EnemyType => EnemyType.Armorer;
 
-    public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify)
+    public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify, List<BasicTile> path)
     {
-        base.Initialize(attribute, pathOffset, healthBar, intensify);
+        base.Initialize(attribute, pathOffset, healthBar, intensify,path);
         armor = intensify * armorIntensify;
         Armor[] armors = GetComponentsInChildren<Armor>();
         for (int i = 0; i < armors.Length; i++)

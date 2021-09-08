@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: DamageMarkAttribute
   m_EditorClassIdentifier: 
   Name: DAMAGEMARK
-  Icon: {fileID: 5171557775822150397, guid: 7cdac59c1a58c4049b2d1ad53616d6b1, type: 3}
+  Icon: {fileID: -1834239815237150624, guid: 77f1f203341c46246ad62b6652017dda, type: 3}
   Description: DAMAGEMARKINFO
   ContentPrefab: {fileID: 2869067965855928848, guid: ff388b9dcb814cf4ba73a8702ab78c3d, type: 3}

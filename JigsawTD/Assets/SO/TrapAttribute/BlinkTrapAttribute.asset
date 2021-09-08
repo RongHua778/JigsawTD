@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: BlinkTrapAttribute
   m_EditorClassIdentifier: 
   Name: BLINKTRAP
-  Icon: {fileID: -2144070522006488021, guid: 7cdac59c1a58c4049b2d1ad53616d6b1, type: 3}
+  Icon: {fileID: 5112721545276643150, guid: 77f1f203341c46246ad62b6652017dda, type: 3}
   Description: BLINKTRAPINFO
   ContentPrefab: {fileID: 3221097787184527278, guid: 0b292102891540541b775c26bdfcbcb9, type: 3}

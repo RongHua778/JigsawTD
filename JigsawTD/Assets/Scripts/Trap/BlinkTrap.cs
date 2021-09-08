@@ -10,8 +10,7 @@ public class BlinkTrap : TrapContent
         if (enemy.PassedTraps.Contains(this))
             return;
         base.OnContentPass(enemy);
-        enemy.Flash(Mathf.RoundToInt(2 * TrapIntensify * enemy.TrapIntentify));
-        enemy.TrapIntentify = 1;
+        enemy.Flash(Mathf.RoundToInt(2 * m_GameTile.TrapIntensify));
     }
 
 }
