@@ -15,6 +15,7 @@ public class FuncUI : IUserInterface
     [SerializeField] Text DrawBtnTxt = default;
     [SerializeField] Text LevelUpTxt = default;
     [SerializeField] Text PlayerLevelTxt = default;
+    [SerializeField] Text DiscountTxt = default;
     [SerializeField] InfoBtn m_LuckInfo = default;
     [SerializeField] InfoBtn m_LevelInfo = default;
     [SerializeField] InfoBtn m_DrawInfo = default;
@@ -22,6 +23,14 @@ public class FuncUI : IUserInterface
     Animator m_Anim;
 
     float discountRate = 0.1f;
+    public float DiscountRate { 
+        get => discountRate; 
+        set
+        {
+            discountRate = value;
+            DiscountTxt.text = discountRate * 100 + "%";
+        } 
+    }
 
     bool drawThisTurn = true;
     public bool DrawThisTurn { get => drawThisTurn; set => drawThisTurn = value; }
@@ -130,7 +139,7 @@ public class FuncUI : IUserInterface
         BuyShapeCost = StaticData.Instance.BaseShapeCost;
         Energy = 0;
         ModuleLevel = 1;
-
+        DiscountRate = 0.1f;
         m_Anim = this.GetComponent<Animator>();
     }
 

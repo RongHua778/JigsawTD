@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IceTrap : TrapContent
 {
-    public override void OnContentPass(Enemy enemy)
+    public override void OnContentPass(Enemy enemy, GameTileContent content = null)
     {
         base.OnContentPass(enemy);
         float slowRate = enemy.PassedTraps.Count * 0.5f * m_GameTile.TrapIntensify;

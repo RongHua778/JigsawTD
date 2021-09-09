@@ -6,7 +6,7 @@ public class ExplosionTrap : TrapContent
 {
     [SerializeField] ParticalControl explisionPrefab = default;
     private float sputteringRange = 0.5f;
-    public override void OnContentPass(Enemy enemy)
+    public override void OnContentPass(Enemy enemy, GameTileContent content = null)
     {
         base.OnContentPass(enemy);
         float realDamage;

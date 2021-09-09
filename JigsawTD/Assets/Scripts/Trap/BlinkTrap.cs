@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class BlinkTrap : TrapContent
 {
-
-    public override void OnContentPass(Enemy enemy)
+    private int Distance;
+    public override void OnContentPreCheck(int index, List<BasicTile> path)
     {
-        if (enemy.PassedTraps.Contains(this))
+        base.OnContentPreCheck(index, path);
+        Distance = 2 + Mathf.FloorToInt(index / 15 * m_GameTile.TrapIntensify);
+    }
+    public override void OnContentPass(Enemy enemy, GameTileContent content = null)
+    {
+        if (content == null)
+            content = this;
+        if (enemy.PassedTraps.Contains((TrapContent)content))
             return;
-        base.OnContentPass(enemy);
-        enemy.Flash(Mathf.RoundToInt(2 * m_GameTile.TrapIntensify));
+        base.OnContentPass(enemy, content);
+        enemy.Flash(Distance);
     }
 
 }

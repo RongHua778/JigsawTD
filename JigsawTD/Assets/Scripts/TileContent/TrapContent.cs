@@ -50,11 +50,10 @@ public class TrapContent : GameTileContent
             transform.rotation = Quaternion.identity;
         }
     }
-    public override void OnContentPass(Enemy enemy)
+    public override void OnContentPass(Enemy enemy, GameTileContent content = null)
     {
         base.OnContentPass(enemy);
-        //enemy.LastTrap = this;
-        enemy.PassedTraps.Add(this);
+        enemy.PassedTraps.Add(content == null ? this : (TrapContent)content);//∏¥÷∆…¡À∏œ›⁄Â
 
     }
 

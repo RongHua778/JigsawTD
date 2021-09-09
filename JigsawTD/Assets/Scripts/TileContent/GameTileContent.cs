@@ -40,12 +40,12 @@ public abstract class GameTileContent : ReusableObject
 
     }
 
-    public virtual void OnContentPass(Enemy enemy)
+    public virtual void OnContentPass(Enemy enemy, GameTileContent content = null)
     {
 
     }
 
-    public virtual void OnContentPreCheck(int index,List<BasicTile> path)//回合开始时执行效果
+    public virtual void OnContentPreCheck(int index, List<BasicTile> path)//回合开始时执行效果
     {
 
     }

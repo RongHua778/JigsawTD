@@ -297,13 +297,13 @@ DESTINATIONINFO=敌人的目的地，确保有路线与起点相连。
 
 ICETRAPINFO=经过的敌人减速增加0.5*N，N=此前经过的陷阱数量
 ARROWTRAPINFO=按箭头方向经过的敌人会被减速5秒。
-BLINKTRAPINFO=经过的敌人传送到2格前的位置，每个敌人只会触发一次。
-PROMOTETRAPINFO=路线接下来2格内的陷阱效果提升50%。
+BLINKTRAPINFO=经过的敌人传送到2格前的位置，距离起点每15格传送距离+1。（每个敌人只会触发一次）
+PROMOTETRAPINFO=接下来2格内的陷阱效果提升50%。
 IMITATETRAPINFO=这个陷阱效果等同于敌人经过的上一个陷阱。
 EXECUTETRAPINFO=对经过的敌人造成0.2%*N的最大生命值伤害，N=此前经过的格子数量。
-DAMAGEMARKINFO=路线接下来3格内敌人所受伤害提高50%
-FROSTTRAPINFO=路线接下来3格内敌人所受减速效果提高50%
-BONUSTRAPINFO=路线接下来2格内每个死亡的敌人使你获得5金币
+DAMAGEMARKINFO=接下来3格内敌人所受伤害提高50%
+FROSTTRAPINFO=接下来3格内敌人所受减速效果提高50%
+BONUSTRAPINFO=接下来2格内每个死亡的敌人使你获得5金币
 EXPLOSIONTRAPINFO=经过的敌人会触发一次爆炸，造成其20%已损失生命值的范围伤害
 
 //TurretBase

@@ -16,9 +16,9 @@ public class ImitateTrap : TrapContent
         }
     }
 
-    public override void OnContentPass(Enemy enemy)
+    public override void OnContentPass(Enemy enemy, GameTileContent content = null)
     {
         if (lastTrap != null)
-            lastTrap.OnContentPass(enemy);
+            lastTrap.OnContentPass(enemy, this);
     }
 }

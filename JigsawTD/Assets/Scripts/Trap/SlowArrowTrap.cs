@@ -5,7 +5,7 @@ using UnityEngine;
 public class SlowArrowTrap : TrapContent
 {
 
-    public override void OnContentPass(Enemy enemy)
+    public override void OnContentPass(Enemy enemy, GameTileContent content = null)
     {
         base.OnContentPass(enemy);
         if (enemy.Direction == m_GameTile.TileDirection)
