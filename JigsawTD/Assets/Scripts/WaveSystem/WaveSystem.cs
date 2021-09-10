@@ -19,17 +19,19 @@ public class WaveSystem : IGameSystem
             if (enemyRemain <= 0 && !Running)
             {
                 enemyRemain = 0;
-                LevelSequence.RemoveAt(0);
+                //LevelSequence.RemoveAt(0);
                 GameManager.Instance.PrepareNextWave();
             }
         }
     }
     [SerializeField] float pathOffset = 0.3f;
     [SerializeField] HealthBar healthBarPrefab = default;
-    public List<List<EnemySequence>> LevelSequence = new List<List<EnemySequence>>();
+    public Queue<List<EnemySequence>> LevelSequence = new Queue<List<EnemySequence>>();
     LevelAttribute LevelAttribute;
     [SerializeField] private List<EnemySequence> runningSequence;
     public List<EnemySequence> RunningSequence { get => runningSequence; set => runningSequence = value; }
+
+    [SerializeField] BossComeAnim bossWarningUIAnim = default;
 
     public override void Initialize()
     {
@@ -37,6 +39,7 @@ public class WaveSystem : IGameSystem
         LevelInitialize();
         GameEvents.Instance.onEnemyReach += EnemyReach;
         GameEvents.Instance.onEnemyDie += EnemyDie;
+        bossWarningUIAnim.Initialize();
     }
 
     public override void Release()
@@ -62,12 +65,11 @@ public class WaveSystem : IGameSystem
         {
             for (int i = 0; i < RunningSequence.Count; i++)
             {
-                if (!RunningSequence[i].Progress())
+                if (RunningSequence[i].Progress())
                 {
-                    RunningSequence.Remove(RunningSequence[i]);
-                    if (RunningSequence.Count == 0)
-                        Running = false;
+                    continue;
                 }
+                Running = false;
             }
         }
     }
@@ -101,19 +103,19 @@ public class WaveSystem : IGameSystem
             }
             else if (i == 9)
             {
-                sequences = GenerateSpecificSequence(LevelAttribute.Boss[0].EnemyType, stage, i);
+                sequences = GenerateSpecificSequence(LevelAttribute.Boss[0].EnemyType, stage, i, true);
             }
             else if (i == 19)
             {
-                sequences = GenerateSpecificSequence(LevelAttribute.Boss[1].EnemyType, stage, i);
+                sequences = GenerateSpecificSequence(LevelAttribute.Boss[1].EnemyType, stage, i, true);
             }
             else if (i == 29)
             {
-                sequences = GenerateSpecificSequence(LevelAttribute.Boss[2].EnemyType, stage, i);
+                sequences = GenerateSpecificSequence(LevelAttribute.Boss[2].EnemyType, stage, i, true);
             }
             else if ((i + 1) % 10 == 0)
             {
-                sequences = GenerateSpecificSequence(LevelAttribute.Boss[3].EnemyType, stage, i);
+                sequences = GenerateSpecificSequence(LevelAttribute.Boss[3].EnemyType, stage, i, true);
             }
             else if ((i + 4) % 10 == 0)
             {
@@ -134,9 +136,9 @@ public class WaveSystem : IGameSystem
 
             if (TestType != EnemyType.None)//测试特定敌人用
             {
-                sequences = GenerateSpecificSequence(TestType, 3f, i);
+                sequences = GenerateSpecificSequence(TestType, 3f, i,true);
             }
-            LevelSequence.Add(sequences);
+            LevelSequence.Enqueue(sequences);
         }
     }
 
@@ -155,20 +157,20 @@ public class WaveSystem : IGameSystem
         return sequencesToReturn;
     }
 
-    private List<EnemySequence> GenerateSpecificSequence(EnemyType type, float stage, int wave)
+    private List<EnemySequence> GenerateSpecificSequence(EnemyType type, float stage, int wave, bool isBoss = false)
     {
         List<EnemySequence> sequencesToReturn = new List<EnemySequence>();
-        EnemySequence sequence = SequenceInfoSet(1, stage, wave, type);
+        EnemySequence sequence = SequenceInfoSet(1, stage, wave, type, isBoss);
         sequencesToReturn.Add(sequence);
         return sequencesToReturn;
     }
 
-    private EnemySequence SequenceInfoSet(int genres, float stage, int wave, EnemyType type)
+    private EnemySequence SequenceInfoSet(int genres, float stage, int wave, EnemyType type, bool isBoss = false)
     {
         EnemyAttribute attribute = GameManager.Instance.EnemyFactory.Get(type);
         int amount = Mathf.RoundToInt(attribute.InitCount + ((float)wave / 5) * attribute.CountIncrease / genres);
         float coolDown = (float)(5f + wave / 2) / (float)amount;
-        EnemySequence sequence = new EnemySequence(type, amount, coolDown, stage);
+        EnemySequence sequence = new EnemySequence(type, amount, coolDown, stage, isBoss);
         return sequence;
     }
 
@@ -177,7 +179,11 @@ public class WaveSystem : IGameSystem
     {
         if (LevelSequence.Count > 0)
         {
-            RunningSequence = LevelSequence[0].ToList();
+            RunningSequence = LevelSequence.Dequeue();
+            if (RunningSequence[0].IsBoss)
+            {
+                bossWarningUIAnim.Show();
+            }
         }
         else
         {

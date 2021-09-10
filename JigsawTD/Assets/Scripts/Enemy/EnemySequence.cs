@@ -13,6 +13,7 @@ public class EnemySequence
     public int Amount;
     public float AmountIntensify;
     public float CoolDown;
+    public bool IsBoss;
     private float SpawnTimer;
     //public float waveCoolDown = 2.5f;
 
@@ -20,13 +21,14 @@ public class EnemySequence
     //public bool IsEnd;
     //public int Wave { get => wave; set => wave = value; }
 
-    public EnemySequence(EnemyType type, int amount, float cooldown, float intensify)
+    public EnemySequence(EnemyType type, int amount, float cooldown, float intensify,bool isBoss)
     {
         EnemyType = type;
         Amount = amount;
         CoolDown = cooldown;
         Intensify = intensify;
         SpawnTimer = 0;
+        this.IsBoss = isBoss;
 
     }
 

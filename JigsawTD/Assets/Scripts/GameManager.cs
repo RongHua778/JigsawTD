@@ -498,10 +498,10 @@ public class GameManager : Singleton<GameManager>
 
     public void ShowEnemyTips()
     {
-        if (m_WaveSystem.LevelSequence[0] == null)
-            return;
+        //if (m_WaveSystem.LevelSequence[0] == null)
+        //    return;
         m_EnemyTips.Show();
-        m_EnemyTips.ReadSequenceInfo(m_WaveSystem.LevelSequence[0]);
+        m_EnemyTips.ReadSequenceInfo(m_WaveSystem.RunningSequence);
     }
 
     public void ShowTurretBaseTips(TurretBaseContent content)
