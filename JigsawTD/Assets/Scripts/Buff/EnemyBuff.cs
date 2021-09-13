@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum EnemyBuffName
 {
     SlowDown,
     DealDamage,
-    BreakShell,
+    TileBaseDamageIntensify,
     DirectionSlow,
     HealthBaseDamage,
     DamageTarget,
@@ -171,9 +169,9 @@ public class DealDamage : TileBuff
     }
 }
 
-public class BreakShell : TileBuff
+public class TileBaseDamageIntensify : TileBuff
 {
-    public override EnemyBuffName BuffName => EnemyBuffName.BreakShell;
+    public override EnemyBuffName BuffName => EnemyBuffName.TileBaseDamageIntensify;
 
     public override bool IsStackable => true;
 
@@ -181,13 +179,12 @@ public class BreakShell : TileBuff
 
     public override void Affect()
     {
-        //Target.BrokeShell += (int)KeyValue;
-
+        Target.DamageStrategy.BuffDamageIntensify += KeyValue;
     }
 
     public override void End()
     {
-        //Target.BrokeShell -= (int)KeyValue;
+        Target.DamageStrategy.BuffDamageIntensify -= KeyValue;
     }
 }
 

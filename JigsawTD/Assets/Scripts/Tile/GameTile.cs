@@ -28,17 +28,7 @@ public abstract class GameTile : TileBase
     Direction tileDirection;
     public Direction TileDirection { get => tileDirection; set => tileDirection = value; }
 
-    //格子特殊效果
-    private float tileDamageIntensify = 0;
-    public float TileDamageIntensify { get => tileDamageIntensify; set => tileDamageIntensify = value; }
-    private float tileSlowIntensify = 0;
-    public float TileSlowIntensify { get => tileSlowIntensify; set => tileSlowIntensify = value; }
 
-    private int bounsCoin = 0;
-    public int BounsCoin { get => bounsCoin; set => bounsCoin = value; }
-
-    private float trapIntensify = 1;
-    public float TrapIntensify { get => trapIntensify; set => trapIntensify = value; }
 
 
 
@@ -103,10 +93,7 @@ public abstract class GameTile : TileBase
     {
         Content.OnContentPass(enemy);
     }
-    public virtual void OnTileLeave(Enemy enemy)
-    {
 
-    }
 
     protected override void OnMouseDown()
     {

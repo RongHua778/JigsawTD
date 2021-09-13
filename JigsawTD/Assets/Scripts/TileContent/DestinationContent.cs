@@ -11,6 +11,10 @@ public class DestinationContent : TrapContent
         Important = true;
     }
 
+    public override void OnContentPass(Enemy enemy, GameTileContent content = null)
+    {
+
+    }
 
 }
 

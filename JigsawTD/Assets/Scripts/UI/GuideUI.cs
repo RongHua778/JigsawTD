@@ -269,8 +269,8 @@ public class GuideUI : IUserInterface
             case 4://œ‘ æ≥È»°∞¥≈•
                 m_FuncUI.DrawBtnObj.SetActive(true);
                 m_FuncUI.Show();
-                List<Vector2> poss = new List<Vector2> { new Vector2(0, 0), new Vector2(0, 1), new Vector2(1, 1), new Vector2(1, 2) };
-                ShapeInfo shapeInfo = new ShapeInfo(ShapeType.Z, Element.Water, 1, 0, new Vector2(1, 1), Vector2.left, poss);
+                List<Vector2> poss = new List<Vector2> { new Vector2(0, 0), new Vector2(0, 1), new Vector2(0, 2), new Vector2(1, 2) };
+                ShapeInfo shapeInfo = new ShapeInfo(ShapeType.L, Element.Water, 1, 3, new Vector2(0, 2), Vector2.right, poss);
                 m_ShapeUI.PreSetShape = shapeInfo;
                 break;
             case 6:

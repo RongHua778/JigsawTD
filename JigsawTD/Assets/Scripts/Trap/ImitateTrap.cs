@@ -4,21 +4,13 @@ using UnityEngine;
 
 public class ImitateTrap : TrapContent
 {
-
-    TrapContent lastTrap;
-
-    public override void OnContentPreCheck(int index, List<BasicTile> path)
-    {
-        if (BoardSystem.LastTrap != null)
-        {
-            lastTrap = BoardSystem.LastTrap;
-            lastTrap.OnContentPreCheck(index, path);
-        }
-    }
-
     public override void OnContentPass(Enemy enemy, GameTileContent content = null)
     {
-        if (lastTrap != null)
-            lastTrap.OnContentPass(enemy, this);
+        if (enemy.PassedTraps.Count > 0)
+        {
+            TrapContent trap = enemy.PassedTraps[enemy.PassedTraps.Count - 1];
+            if (trap != this)
+                trap.OnContentPass(enemy, this);
+        }
     }
 }

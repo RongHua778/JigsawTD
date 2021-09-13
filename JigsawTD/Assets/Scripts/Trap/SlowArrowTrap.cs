@@ -10,7 +10,7 @@ public class SlowArrowTrap : TrapContent
         base.OnContentPass(enemy);
         if (enemy.Direction == m_GameTile.TileDirection)
         {
-            BuffInfo buff = new BuffInfo(EnemyBuffName.SlowDown, 1f * m_GameTile.TrapIntensify, 5f);
+            BuffInfo buff = new BuffInfo(EnemyBuffName.SlowDown, 1f * TrapIntensify, 5f);
             enemy.Buffable.AddBuff(buff);
         }
         else

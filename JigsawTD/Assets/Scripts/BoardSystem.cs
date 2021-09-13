@@ -303,19 +303,19 @@ public class BoardSystem : IGameSystem
         {
             BasicTile tile = StaticData.RaycastCollider(point.PathPos, LayerMask.GetMask(StaticData.ConcreteTileMask)).GetComponent<BasicTile>();
             shortestPath.Add(tile);
-            tile.ResetTile();//清除加成数据
+            //tile.ResetTile();//清除加成数据
         }
-        PreCheckPath();
+        //PreCheckPath();
     }
 
-    private void PreCheckPath()
-    {
-        LastTrap = null;
-        for (int i = 0; i < shortestPath.Count; i++)
-        {
-            shortestPath[i].CheckContent(i,shortestPath);
-        }
-    }
+    //private void PreCheckPath()
+    //{
+    //    LastTrap = null;
+    //    for (int i = 0; i < shortestPath.Count; i++)
+    //    {
+    //        shortestPath[i].CheckContent(i,shortestPath);
+    //    }
+    //}
 
     private void GenerateTrapTiles(Vector2Int offset, Vector2Int size)
     {

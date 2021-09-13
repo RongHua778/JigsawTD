@@ -136,7 +136,7 @@ public class WaveSystem : IGameSystem
 
             if (TestType != EnemyType.None)//测试特定敌人用
             {
-                sequences = GenerateSpecificSequence(TestType, 3f, i,true);
+                sequences = GenerateSpecificSequence(TestType, 3f, i);
             }
             LevelSequence.Enqueue(sequences);
         }

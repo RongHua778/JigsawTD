@@ -36,11 +36,7 @@ public class SlowSpeed : ElementSkill
     {
         strategy.TurnFixSlowRate += 0.08f * strategy.TimeModify;
     }
-    //public override void Hit(IDamageable target, Bullet bullet = null)
-    //{
-    //    float damageIncreased = target.DamageStrategy.CurrentHealth * 0.08f;
-    //    bullet.Damage += damageIncreased;
-    //}
+
 }
 
 public class CriticalSpeed : ElementSkill
@@ -70,41 +66,6 @@ public class SplashSpeed : ElementSkill
 
 
 
-//public class SpeedTarget : ElementSkill
-//{
-//    //攻击特效:对同一目标进行攻击时，每次攻击攻速提升10%，上限300%，切换目标重置
-//    public override List<int> Elements => new List<int> { 1, 1, 0 };
-//    public override string SkillDescription => "SPEEDTARGET";
-
-//    private Enemy lastTarget;
-//    private float speedIncreased;
-
-
-//    public override void Shoot(Bullet bullet = null)
-//    {
-//        bullet.Damage *= 0.5f;
-//        Enemy target = (Enemy)strategy.m_Turret.Target[0].Enemy;
-//        if (target != lastTarget)
-//        {
-//            lastTarget = target;
-//            strategy.TurnSpeedIntensify -= speedIncreased;
-//            speedIncreased = 0;
-//            return;
-//        }
-//        if (speedIncreased < 2.99f)
-//        {
-//            speedIncreased += 0.1f * strategy.TimeModify;
-//            strategy.TurnSpeedIntensify += 0.1f * strategy.TimeModify;
-//        }
-//    }
-
-//    public override void EndTurn()
-//    {
-//        lastTarget = null;
-//        speedIncreased = 0;
-//    }
-
-//}
 
 
 

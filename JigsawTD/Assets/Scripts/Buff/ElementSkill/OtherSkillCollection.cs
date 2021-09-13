@@ -141,7 +141,7 @@ public class TrapIntensify : ElementSkill
     {
         foreach (var trap in intensifiedTraps)
         {
-            trap.m_GameTile.TrapIntensify -= 1f;
+            trap.TrapIntensify -= 1f;
         }
         intensifiedTraps.Clear();
         List<Vector2Int> points = StaticData.GetCirclePoints(1);
@@ -152,7 +152,7 @@ public class TrapIntensify : ElementSkill
             if (hit != null)
             {
                 TrapContent trap = hit.GetComponent<TrapContent>();
-                trap.m_GameTile.TrapIntensify += 1f;
+                trap.TrapIntensify += 1f;
                 intensifiedTraps.Add(trap);
             }
         }

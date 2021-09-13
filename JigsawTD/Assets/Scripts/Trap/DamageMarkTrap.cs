@@ -5,16 +5,24 @@ using UnityEngine;
 public class DamageMarkTrap : TrapContent
 {
     //接下来两个格内敌人所受伤害增加50%
-    public override void OnContentPreCheck(int index, List<BasicTile> path)
+    //public override void OnContentPreCheck(int index, List<BasicTile> path)
+    //{
+    //    base.OnContentPreCheck(index,path);
+    //    for (int i = 0; i < 4; i++)
+    //    {
+    //        if ((index + i) < path.Count)
+    //        {
+    //            path[index + i].TileDamageIntensify += 0.5f * m_GameTile.TrapIntensify;
+    //        }
+    //    }
+    //}
+
+    public override void OnContentPass(Enemy enemy, GameTileContent content = null)
     {
-        base.OnContentPreCheck(index,path);
-        for (int i = 0; i < 4; i++)
-        {
-            if ((index + i) < path.Count)
-            {
-                path[index + i].TileDamageIntensify += 0.5f * m_GameTile.TrapIntensify;
-            }
-        }
+        base.OnContentPass(enemy, content);
+        BuffInfo buff = new BuffInfo(EnemyBuffName.TileBaseDamageIntensify, 0.5f * TrapIntensify * enemy.EnemyTrapIntensify, 3);
+        enemy.Buffable.AddBuff(buff);
+        enemy.EnemyTrapIntensify = 1;
     }
 
 

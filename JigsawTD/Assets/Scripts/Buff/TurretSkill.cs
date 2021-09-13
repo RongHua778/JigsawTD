@@ -12,6 +12,8 @@ public enum TurretSkillName
     RotarySkill,
     UltraSkill,
     SnowSkill,
+    CooporativeSkill,
+    BoomerrangSkill,
     None
 }
 
@@ -177,9 +179,35 @@ public class RapiderSkill : InitialSkill
     public override TurretSkillName EffectName => TurretSkillName.RapiderSkill;
     public override string SkillDescription => "RAPIDERSKILL";
 
+    //public override void Shoot(Bullet bullet = null)
+    //{
+    //    strategy.TurnFixAttack += GameEndUI.TotalComposite * strategy.TimeModify;
+    //}
+
+    private Enemy lastTarget;
+    private float speedIncreased;
+
     public override void Shoot(Bullet bullet = null)
     {
-        strategy.TurnFixAttack += GameEndUI.TotalComposite * strategy.TimeModify;
+        Enemy target = (Enemy)strategy.m_Turret.Target[0].Enemy;
+        if (target != lastTarget)
+        {
+            lastTarget = target;
+            strategy.TurnSpeedIntensify -= speedIncreased;
+            speedIncreased = 0;
+            return;
+        }
+        if (speedIncreased < 3.99f)
+        {
+            speedIncreased += 0.1f * strategy.TimeModify;
+            strategy.TurnSpeedIntensify += 0.1f * strategy.TimeModify;
+        }
+    }
+
+    public override void EndTurn()
+    {
+        lastTarget = null;
+        speedIncreased = 0;
     }
 
 }
@@ -213,6 +241,34 @@ public class SnowSkill : InitialSkill
             BuffInfo info = new BuffInfo(EnemyBuffName.SlowDown, increaseSlow, 2f);
             ((Enemy)target).Buffable.AddBuff(info);
         }
+    }
+}
+
+public class CooporativeSkill : InitialSkill
+{
+    public override TurretSkillName EffectName => TurretSkillName.CooporativeSkill;
+    public override string SkillDescription => "COOPORATIVESKILL";
+
+    public override void Shoot(Bullet bullet = null)
+    {
+        strategy.TurnAttackIntensify += 0.01f * GameEndUI.TotalComposite * strategy.TimeModify;
+    }
+}
+
+public class BoomerrangSkill : InitialSkill
+{
+    public override TurretSkillName EffectName => TurretSkillName.BoomerrangSkill;
+    public override string SkillDescription => "BOOMERRANGSKILL";
+
+    public override void Build()
+    {
+        base.Build();
+        strategy.AllSpeedIntensifyModify = 0;
+
+    }
+    public override void Shoot(Bullet bullet = null)
+    {
+        strategy.TurnAttackIntensify += 0.01f * GameEndUI.TotalComposite * strategy.TimeModify;
     }
 }
 

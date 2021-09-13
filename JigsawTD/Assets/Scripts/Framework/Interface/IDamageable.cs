@@ -15,6 +15,8 @@ public abstract class DamageStrategy
     protected float currentHealth;
     protected float maxHealth;
     private float slowIntensify;
+    
+
     public abstract bool IsEnemy { get; }
     public virtual float DamageIntensify { get => TileDamageIntensify + BuffDamageIntensify; }
     public virtual float CurrentHealth { get => currentHealth; set => currentHealth = value; }
@@ -23,7 +25,7 @@ public abstract class DamageStrategy
 
     //buffÊôÐÔ
     private float buffDamageIntensify;
-    public float BuffDamageIntensify { get => buffDamageIntensify; set => buffDamageIntensify = value; }
+    public virtual float BuffDamageIntensify { get => buffDamageIntensify; set => buffDamageIntensify = value; }
     private float buffSlowIntensify;
     public float BuffSlowIntensify { get => buffSlowIntensify; set => buffSlowIntensify = value; }
 
@@ -33,8 +35,7 @@ public abstract class DamageStrategy
     public virtual float TileSlowIntensify { get => tileSlowIntensify; set => tileSlowIntensify = value; }
     private float tileDamageIntensify;
     public virtual float TileDamageIntensify { get => tileDamageIntensify; set => tileDamageIntensify = value; }
-    private int bonusCoin;
-    public virtual int BonusCoin { get => bonusCoin; set => bonusCoin = value; }
+
 
     public DamageStrategy(Transform tr)
     {
@@ -64,7 +65,6 @@ public abstract class DamageStrategy
         TileSlowIntensify = 0;
         BuffDamageIntensify = 0;
         TileDamageIntensify = 0;
-        BonusCoin = 0;
     }
 }
 
@@ -97,14 +97,20 @@ public class EnemyDamageStrategy : DamageStrategy
             if (currentHealth <= 0 && maxHealth > 0)
             {
                 enemy.IsDie = true;
-                if (BonusCoin > 0)
-                    StaticData.Instance.GainMoneyEffect(ModelTrans.position, BonusCoin);
             }
             enemy.HealthBar.FillAmount = currentHealth / MaxHealth;
         }
     }
 
-
+    public override float BuffDamageIntensify
+    {
+        get => base.BuffDamageIntensify;
+        set
+        {
+            base.BuffDamageIntensify = value;
+            enemy.HealthBar.ShowIcon(1, value > 0);
+        }
+    }
     public override float TileDamageIntensify
     {
         get => base.TileDamageIntensify;
@@ -115,15 +121,7 @@ public class EnemyDamageStrategy : DamageStrategy
         }
     }
 
-    public override int BonusCoin
-    {
-        get => base.BonusCoin;
-        set
-        {
-            base.BonusCoin = value;
-            enemy.HealthBar.ShowIcon(3, value > 0);
-        }
-    }
+
     public override float TileSlowIntensify
     {
         get => base.TileSlowIntensify;

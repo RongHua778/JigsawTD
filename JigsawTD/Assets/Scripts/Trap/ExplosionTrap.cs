@@ -10,7 +10,7 @@ public class ExplosionTrap : TrapContent
     {
         base.OnContentPass(enemy);
         float realDamage;
-        float damage = m_GameTile.TrapIntensify * 0.2f * (enemy.DamageStrategy.MaxHealth - enemy.DamageStrategy.CurrentHealth);
+        float damage = TrapIntensify * enemy.EnemyTrapIntensify * 0.2f * (enemy.DamageStrategy.MaxHealth - enemy.DamageStrategy.CurrentHealth);
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, sputteringRange, StaticData.EnemyLayerMask);
         for (int i = 0; i < hits.Length; i++)
         {

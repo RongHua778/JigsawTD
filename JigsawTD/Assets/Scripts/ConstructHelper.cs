@@ -125,6 +125,7 @@ public static class ConstructHelper
         TurretAttribute attribute = m_ContentFactory.GetCompositeTurretByName(name);
         Blueprint bluePrint = m_BlurPrintFactory.GetRandomBluePrint(attribute);
         TileShape shape = GetCompositeTurretByBluePrint(bluePrint);
+        GameEndUI.TotalComposite++;
         return shape;
     }
 
@@ -133,6 +134,7 @@ public static class ConstructHelper
         TurretAttribute attribute = m_ContentFactory.GetCompositeTurretByName(name);
         Blueprint bluePrint = m_BlurPrintFactory.GetSpecificBluePrint(attribute, e1, e2, e3);
         TileShape shape = GetCompositeTurretByBluePrint(bluePrint);
+        GameEndUI.TotalComposite++;
         return shape;
     }
 

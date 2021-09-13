@@ -45,10 +45,5 @@ public abstract class GameTileContent : ReusableObject
 
     }
 
-    public virtual void OnContentPreCheck(int index, List<BasicTile> path)//回合开始时执行效果
-    {
-
-    }
-
 
 }

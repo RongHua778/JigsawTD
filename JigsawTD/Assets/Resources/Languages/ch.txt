@@ -130,6 +130,8 @@ SNIPER=狙击炮
 ULTRA=巨炮
 RAPIDER=疾射炮
 SNOW=雪球炮
+COOPORATIVE=协同塔
+BOOMERRANG=回旋镖
 
 GOLD=金元素塔
 WOOD=木元素塔
@@ -138,20 +140,22 @@ FIRE=火元素塔
 DUST=土元素塔
 
 //turretskill
-ASKILL=稳固实用的防御塔；\n元素重构特点：攻击，折扣
-BSKILL=穿透型子弹, 只能攻击正前方；\n元素重构特点：攻速，目标数
-CSKILL=子弹可以造成减速效果；\n元素重构特点：减速，时间增幅
-DSKILL=子弹有概率造成暴击；\n元素重构特点：暴击，随机性
-ESKILL=子弹造成溅射范围伤害；\n元素重构特点：溅射，光环
+ASKILL=稳固实用的防御塔
+BSKILL=穿透型子弹, 只能攻击正前方
+CSKILL=子弹可以造成减速效果
+DSKILL=子弹有概率造成暴击
+ESKILL=子弹造成溅射范围伤害
 
 CONSTRUCTORSKILL=攻击范围内每有1个敌人，造成的伤害就提高10%
 SCATTERSKILL=造成的伤害降低50%，但是可以额外攻击3个目标
 MORTARSKILL=溅射伤害率提高150%
-RAPIDERSKILL=每次攻击都会提升1*总合成塔数量的攻击
+RAPIDERSKILL=对同一目标进行攻击时，每次攻击使攻速提升10%，上限400%
 ROTARYSKILL=穿透型子弹;向周围随机攻击，自身所有攻速加成翻倍
 SNIPERSKILL=禁止攻击范围+2，每1攻击范围提升10%基础攻击力
 ULTRASKILL=所有暴击伤害提升效果翻倍
 SNOWSKILL=穿透型子弹;子弹会持续移动到直线终点，并使敌人当前减速效果翻倍。
+COOPORATIVESKILL=每次攻击提升1%*总合成塔数量的攻击力
+BOOMERRANGSKILL=穿透型子弹；无法提升攻速；发射一枚回旋镖，每命中一个敌人就使后续伤害提高10%
 
 //A系
 AAA=量子负荷
@@ -281,6 +285,7 @@ UNREVEALINFO=将该地块连接进道路以揭示该陷阱
 SPAWNPOINT=起点
 DESTINATION=终点
 
+STUNTRAP=晕眩陷阱
 ICETRAP=极寒陷阱
 ARROWTRAP=减速箭头
 BLINKTRAP=闪烁陷阱
@@ -295,15 +300,16 @@ EXPLOSIONTRAP=爆炸陷阱
 SPAWNPOINTINFO=敌人的出生点，确保有路线与终点相连。
 DESTINATIONINFO=敌人的目的地，确保有路线与起点相连。
 
+STUNTRAPINFO=经过的敌人晕眩0.5*N秒，N=此前经过的陷阱数量
 ICETRAPINFO=经过的敌人减速增加0.5*N，N=此前经过的陷阱数量
 ARROWTRAPINFO=按箭头方向经过的敌人会被减速5秒。
-BLINKTRAPINFO=经过的敌人传送到2格前的位置，距离起点每15格传送距离+1。（每个敌人只会触发一次）
+BLINKTRAPINFO=经过的敌人传送到2格前的位置。（每个敌人只会触发一次）
 PROMOTETRAPINFO=接下来2格内的陷阱效果提升50%。
 IMITATETRAPINFO=这个陷阱效果等同于敌人经过的上一个陷阱。
 EXECUTETRAPINFO=对经过的敌人造成0.2%*N的最大生命值伤害，N=此前经过的格子数量。
-DAMAGEMARKINFO=接下来3格内敌人所受伤害提高50%
+DAMAGEMARKINFO=敌人在接下来3格的移动内所受伤害提高50%
 FROSTTRAPINFO=接下来3格内敌人所受减速效果提高50%
-BONUSTRAPINFO=接下来2格内每个死亡的敌人使你获得5金币
+BONUSTRAPINFO=每个经过的敌人使你获得2金币
 EXPLOSIONTRAPINFO=经过的敌人会触发一次爆炸，造成其20%已损失生命值的范围伤害
 
 //TurretBase

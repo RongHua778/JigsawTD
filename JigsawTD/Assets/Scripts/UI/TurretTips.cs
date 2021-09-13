@@ -365,6 +365,13 @@ public class TurretTips : TileTips
         {
             UpdateBluePrintInfo();
         }
+
+        //if (Input.GetKeyDown(KeyCode.T))
+        //{
+        //    Debug.Log(m_Strategy.AllSpeedIntensifyModify);
+        //    Debug.Log(m_Strategy.BaseSpeed);
+        //    Debug.Log(m_Strategy.FinalSpeed);
+        //}
     }
 
     public void BuyBluePrintBtnClick()

@@ -14,6 +14,9 @@ public class TrapContent : GameTileContent
     int damageAnalysis;
     public int DamageAnalysis { get => damageAnalysis; set => damageAnalysis = value; }
 
+    float trapIntensify = 1;
+    public float TrapIntensify { get => trapIntensify; set => trapIntensify = value; }
+
     //美术设置
     private bool isReveal = false;
     public bool IsReveal { get => isReveal; set => isReveal = value; }
@@ -54,7 +57,6 @@ public class TrapContent : GameTileContent
     {
         base.OnContentPass(enemy);
         enemy.PassedTraps.Add(content == null ? this : (TrapContent)content);//复制闪烁陷阱
-
     }
 
 
@@ -74,17 +76,6 @@ public class TrapContent : GameTileContent
         DamageAnalysis = 0;
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    TargetPoint target = collision.GetComponent<TargetPoint>();
-    //    OnContentPass((Enemy)target.Enemy);
-    //}
-
-
-    //public virtual void OnGameUpdating(Enemy enemy)
-    //{
-
-    //}
 
     protected override void ContentLandedCheck(Collider2D col)
     {
@@ -107,9 +98,9 @@ public class TrapContent : GameTileContent
         }
     }
 
-    public override void OnContentPreCheck(int index, List<BasicTile> path)
-    {
-        base.OnContentPreCheck(index, path);
-        BoardSystem.LastTrap = this;
-    }
+    //public override void OnContentPreCheck(int index, List<BasicTile> path)
+    //{
+    //    base.OnContentPreCheck(index, path);
+    //    BoardSystem.LastTrap = this;
+    //}
 }

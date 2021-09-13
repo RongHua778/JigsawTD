@@ -21,6 +21,7 @@ public abstract class Enemy : PathFollower, IDamageable
         get => currentTile;
         set
         {
+            Buffable.TileTick();
             currentTile = value;
             currentTile.OnTilePass(this);
         }
@@ -89,6 +90,19 @@ public abstract class Enemy : PathFollower, IDamageable
             isDie = value;
         }
     }
+
+
+    float enemyTrapIntensify = 1;
+    public float EnemyTrapIntensify
+    {
+        get => enemyTrapIntensify;
+        set
+        {
+            enemyTrapIntensify = value;
+            healthBar.ShowIcon(3, value > 1);
+        }
+    }
+
 
 
     public virtual void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify, List<BasicTile> shortpath)
@@ -186,9 +200,7 @@ public abstract class Enemy : PathFollower, IDamageable
     protected override void PrepareNextState()
     {
         base.PrepareNextState();
-        CurrentTile.OnTileLeave(this);//离开格子效果
         CurrentTile = pathTiles[PointIndex];
-        Buffable.TileTick();
     }
 
     protected IEnumerator ExitCor()
@@ -211,7 +223,6 @@ public abstract class Enemy : PathFollower, IDamageable
 
     public void Flash(int distance)
     {
-        CurrentTile.OnTileLeave(this);
         PointIndex -= distance;
         if (PointIndex < 0)
         {
@@ -231,7 +242,7 @@ public abstract class Enemy : PathFollower, IDamageable
         model.localPosition = new Vector3(PathOffset, 0);
         DirectionAngleFrom = DirectionAngleTo = Direction.GetAngle();
         transform.localRotation = CurrentPoint.PathDirection.GetRotation();
-        Progress = 0.5f;
+        Progress = 0f;
     }
 
     public void ApplyBuff(EnemyBuffName buffName, float keyvalue, float duration)
@@ -255,6 +266,7 @@ public abstract class Enemy : PathFollower, IDamageable
         TargetDamageCounter = 0;
         SpeedIntensify = 0;
         AffectHealerCount = 0;
+        EnemyTrapIntensify = 1;
 
         SlowRate = 0;
         StunTime = 0;
