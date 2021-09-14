@@ -28,10 +28,9 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     //**********美术，动画及音效
     protected Animator turretAnim;
     protected AudioSource audioSource;
-    //protected SpriteRenderer TurretBaseSprite;
     protected SpriteRenderer CannonSprite;
     protected AudioClip ShootClip;
-
+    [SerializeField] Color turretLightColor = default;
     [SerializeField] protected ParticleSystem ShootEffect = default;
     //**********
 
@@ -49,11 +48,13 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     protected List<Color> originalColors = new List<Color>();
 
 
+
     private void Awake()
     {
         rotTrans = transform.Find("RotPoint");
         shootPoint = rotTrans.Find("ShootPoint");
         CannonSprite = rotTrans.Find("Cannon").GetComponent<SpriteRenderer>();
+        
         turretAnim = this.GetComponent<Animator>();
         audioSource = this.GetComponent<AudioSource>();
         SpriteRenderer[] ss = GetComponentsInChildren<SpriteRenderer>();
@@ -62,6 +63,8 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
             sprites.Add(ss[i]);
             originalColors.Add(sprites[i].color);
         }
+
+
     }
 
     public virtual void InitializeTurret()

@@ -6,7 +6,7 @@ using System.Linq;
 
 public enum BulletType
 {
-    Ground, Target, Penetrate
+    Ground, Target, Penetrate,Self
 }
 public abstract class Bullet : ReusableObject, IGameBehavior
 {
@@ -67,6 +67,13 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         this.Target = target;
         this.TargetPos = pos ?? target.Position;
 
+        SetAttribute(turret);
+        TriggerShootEffect();
+    }
+
+    protected void SetAttribute(TurretContent turret)
+    {
+        this.turretParent = turret;
         this.Damage = turret.Strategy.FinalAttack;
         this.bulletSpeed = turret.Strategy.m_Att.BulletSpeed;
         this.SputteringRange = turret.Strategy.FinalSputteringRange;
@@ -75,7 +82,6 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         this.turretEffects = turret.Strategy.TurretSkills;
         this.SlowRate = turret.Strategy.FinalSlowRate;
         this.SputteringPercentage = turret.Strategy.FinalSputteringPercentage;
-        TriggerShootEffect();
     }
 
     protected void TriggerShootEffect()

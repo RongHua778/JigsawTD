@@ -5,7 +5,7 @@ using UnityEngine;
 public class I1Turret : CompositeTurret
 {
     float rotSpeed = 0;
-    float RotSpeed { get => Mathf.Min(720, rotSpeed * Mathf.Pow(Strategy.FinalSpeed, 2)); set => rotSpeed = value; }
+    float RotSpeed { get => Mathf.Max(-720, -rotSpeed * Mathf.Pow(Strategy.FinalSpeed, 2)); set => rotSpeed = value; }
     protected override void RotateTowards()
     {
 
@@ -22,13 +22,13 @@ public class I1Turret : CompositeTurret
     {
         base.OnSpawn();
         rotTrans.rotation = Quaternion.identity;
-        RotSpeed = 10f;
+        RotSpeed = -10f;
         CheckAngle = 360f;
     }
 
     private void SelfRotateControl()
     {
-        rotTrans.Rotate(Vector3.forward * RotSpeed * Time.deltaTime, Space.Self);
+        rotTrans.Rotate(Vector3.forward * -RotSpeed * Time.deltaTime, Space.Self);
     }
 
     protected override void Shoot()

@@ -19,7 +19,7 @@ public class ElementGrid : MonoBehaviour
         quality = composition.qualityRequeirement;
         TurretAttribute attribute = ConstructHelper.GetElementAttribute(element);
         Img_Icon.sprite = attribute.TurretLevels[quality - 1].TurretIcon;
-        Txt_ElementName.text = attribute.TurretLevels[quality - 1].TurretName.Substring(0, 2);
+        Txt_ElementName.text = StaticData.FormElementName(element, quality);
 
         if (composition.isPerfect)
             perfectIcon.SetActive(true);

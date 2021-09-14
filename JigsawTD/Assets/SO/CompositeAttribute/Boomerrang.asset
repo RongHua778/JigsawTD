@@ -27,36 +27,33 @@ MonoBehaviour:
   elementNumber: 3
   TurretSkill: 9
   TurretLevels:
-  - AttackRange: 6
+  - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 1100
+    AttackDamage: 1150
     AttackSpeed: 0.2
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: SNIPER
-    TurretIcon: {fileID: -6186797135952016049, guid: c066612b6f4b1e44d8b5837b75cf8b08, type: 3}
-    CannonSprite: {fileID: -6186797135952016049, guid: c066612b6f4b1e44d8b5837b75cf8b08, type: 3}
+    TurretIcon: {fileID: 6252459201115839096, guid: a799722f85e58a34993e12144292e1a9, type: 3}
+    CannonSprite: {fileID: -3111040703750061689, guid: ef329b970cf7ced4888442c7bc757356, type: 3}
     ShootPointOffset: {x: 0, y: 0}
-  - AttackRange: 6
+  - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 1800
-    AttackSpeed: 0.35
+    AttackDamage: 1750
+    AttackSpeed: 0.2
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: SNIPER
-    TurretIcon: {fileID: -7260088481118571112, guid: c1be13963e61eae42b02687dd1475717, type: 3}
-    CannonSprite: {fileID: -2004675633971898, guid: 42957127c2e7aba48a21a85a636cb609, type: 3}
-    ShootPointOffset: {x: 0, y: 0.37}
-  - AttackRange: 6
+    TurretIcon: {fileID: 3442024006206321382, guid: a799722f85e58a34993e12144292e1a9, type: 3}
+    CannonSprite: {fileID: -4017865521878045518, guid: ef329b970cf7ced4888442c7bc757356, type: 3}
+    ShootPointOffset: {x: 0, y: 0}
+  - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 2500
-    AttackSpeed: 0.35
+    AttackDamage: 2550
+    AttackSpeed: 0.2
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: SNIPER
-    TurretIcon: {fileID: -1944259913073176082, guid: c1be13963e61eae42b02687dd1475717, type: 3}
-    CannonSprite: {fileID: 5670319644688947614, guid: 42957127c2e7aba48a21a85a636cb609, type: 3}
-    ShootPointOffset: {x: 0, y: 0.38}
+    TurretIcon: {fileID: -5153134150779752020, guid: a799722f85e58a34993e12144292e1a9, type: 3}
+    CannonSprite: {fileID: -3067152747596256526, guid: ef329b970cf7ced4888442c7bc757356, type: 3}
+    ShootPointOffset: {x: 0, y: 0}

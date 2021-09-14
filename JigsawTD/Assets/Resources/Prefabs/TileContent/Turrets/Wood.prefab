@@ -59,7 +59,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1364061810720648712}
+  - {fileID: 6158330680410120138}
   m_Father: {fileID: 2233865851691860706}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -114,7 +114,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &2615498001020760795
+--- !u!1 &2701584516548456750
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,8 +122,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1364061810720648712}
-  - component: {fileID: 1966385199435934131}
+  - component: {fileID: 6158330680410120138}
+  - component: {fileID: 7903074609655499110}
   m_Layer: 0
   m_Name: Point Light 2D
   m_TagString: Untagged
@@ -131,13 +131,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1364061810720648712
+--- !u!4 &6158330680410120138
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2615498001020760795}
+  m_GameObject: {fileID: 2701584516548456750}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -145,13 +145,13 @@ Transform:
   m_Father: {fileID: 7604165204156061317}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1966385199435934131
+--- !u!114 &7903074609655499110
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2615498001020760795}
+  m_GameObject: {fileID: 2701584516548456750}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
@@ -160,8 +160,8 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.18431371, g: 1, b: 0.21992165, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 0.27225128, g: 1, b: 0.2588235, a: 1}
+  m_Intensity: 0.5
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 00000000e784145627b6159e2d7135b3e33260e1a304961711752f89
   m_LightCookieSprite: {fileID: 0}
@@ -284,6 +284,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8cf58385fe4af842a06208f099b6d6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  circleDetectRange: {fileID: 0}
+  circleForbidRange: {fileID: 0}
+  halfCircleDetectRange: {fileID: 0}
+  halfCircleForbidRange: {fileID: 0}
+  lineDetectRange: {fileID: 0}
 --- !u!61 &7811781132511134579
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -362,6 +367,7 @@ MonoBehaviour:
   ParentObj: {fileID: 0}
   Activated: 1
   targetList: []
+  turretLightColor: {r: 0, g: 0, b: 0, a: 0}
   ShootEffect: {fileID: 308361807643785624}
 --- !u!95 &6524487967244621157
 Animator:

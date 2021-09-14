@@ -14,6 +14,7 @@ public enum TurretSkillName
     SnowSkill,
     CooporativeSkill,
     BoomerrangSkill,
+    SuperSkill,
     None
 }
 
@@ -266,9 +267,31 @@ public class BoomerrangSkill : InitialSkill
         strategy.AllSpeedIntensifyModify = 0;
 
     }
-    public override void Shoot(Bullet bullet = null)
+    public override void Hit(IDamageable target, Bullet bullet = null)
     {
-        strategy.TurnAttackIntensify += 0.01f * GameEndUI.TotalComposite * strategy.TimeModify;
+        base.Hit(target, bullet);
+        bullet.Damage *= 1.1f;
+    }
+}
+
+public class SuperSkill : InitialSkill
+{
+    public override TurretSkillName EffectName => TurretSkillName.SuperSkill;
+    public override string SkillDescription => "SUPERSKILL";
+
+    public override void StartTurn()
+    {
+        Duration = 30;
+    }
+
+    public override void TickEnd()
+    {
+        strategy.TimeModify += 2;
+    }
+
+    public override void EndTurn()
+    {
+        Duration = 0;
     }
 }
 

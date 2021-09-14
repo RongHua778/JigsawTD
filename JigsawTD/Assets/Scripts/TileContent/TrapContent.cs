@@ -98,9 +98,4 @@ public class TrapContent : GameTileContent
         }
     }
 
-    //public override void OnContentPreCheck(int index, List<BasicTile> path)
-    //{
-    //    base.OnContentPreCheck(index, path);
-    //    BoardSystem.LastTrap = this;
-    //}
 }

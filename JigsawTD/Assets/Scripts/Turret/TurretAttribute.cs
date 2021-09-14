@@ -13,7 +13,6 @@ public class TurretInfo
     public float CriticalRate;
     public float SlowRate;
     [Header("美术资源设置")]
-    public string TurretName;
     public Sprite TurretIcon;
     public Sprite CannonSprite;
     public Vector2 ShootPointOffset;

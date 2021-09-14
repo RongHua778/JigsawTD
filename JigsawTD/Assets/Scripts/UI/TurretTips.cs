@@ -198,26 +198,7 @@ public class TurretTips : TileTips
         switch (att.StrategyType)
         {
             case StrategyType.Element:
-                string element = "";
-                switch (att.element)
-                {
-                    case Element.Gold:
-                        element = "A";
-                        break;
-                    case Element.Wood:
-                        element = "B";
-                        break;
-                    case Element.Water:
-                        element = "C";
-                        break;
-                    case Element.Fire:
-                        element = "D";
-                        break;
-                    case Element.Dust:
-                        element = "E";
-                        break;
-                }
-                element += quality;
+                string element = StaticData.FormElementName(att.element, quality);
                 Name.text = element + " " + GameMultiLang.GetTraduction(att.Name);
                 QualitySetter.gameObject.SetActive(false);
                 break;

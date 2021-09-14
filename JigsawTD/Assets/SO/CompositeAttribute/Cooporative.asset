@@ -34,9 +34,8 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: CONSTRUCTOR
-    TurretIcon: {fileID: -5964304119457197868, guid: 5ffd5a68966da114d9a58cd1e921a4ef, type: 3}
-    CannonSprite: {fileID: -904023156309304506, guid: b5134be62bab5a04a911a1e496c0884c, type: 3}
+    TurretIcon: {fileID: -5964304119457197868, guid: 30a21b1d5faac134e801f6967d51797e, type: 3}
+    CannonSprite: {fileID: -904023156309304506, guid: 6cf47a978103e194c8afedb5c0a62054, type: 3}
     ShootPointOffset: {x: 0, y: 0.3}
   - AttackRange: 2
     ForbidRange: 0
@@ -45,9 +44,8 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: CONSTRUCTOR
-    TurretIcon: {fileID: -6349673670143671397, guid: 5ffd5a68966da114d9a58cd1e921a4ef, type: 3}
-    CannonSprite: {fileID: -4658550255081737855, guid: b5134be62bab5a04a911a1e496c0884c, type: 3}
+    TurretIcon: {fileID: -6349673670143671397, guid: 30a21b1d5faac134e801f6967d51797e, type: 3}
+    CannonSprite: {fileID: -4658550255081737855, guid: 6cf47a978103e194c8afedb5c0a62054, type: 3}
     ShootPointOffset: {x: 0, y: 0.3}
   - AttackRange: 2
     ForbidRange: 0
@@ -56,7 +54,6 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: CONSTRUCTOR
-    TurretIcon: {fileID: 8666163450238569026, guid: 5ffd5a68966da114d9a58cd1e921a4ef, type: 3}
-    CannonSprite: {fileID: -4272800115496777295, guid: b5134be62bab5a04a911a1e496c0884c, type: 3}
+    TurretIcon: {fileID: 8666163450238569026, guid: 30a21b1d5faac134e801f6967d51797e, type: 3}
+    CannonSprite: {fileID: -4272800115496777295, guid: 6cf47a978103e194c8afedb5c0a62054, type: 3}
     ShootPointOffset: {x: 0, y: 0.3}

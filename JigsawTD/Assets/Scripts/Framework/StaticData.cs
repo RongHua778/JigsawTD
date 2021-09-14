@@ -622,4 +622,29 @@ public class StaticData : Singleton<StaticData>
         obj.transform.position = pos + Vector2.up * 0.2f;
         Sound.Instance.PlayEffect("Sound_GainCoin");
     }
+
+    public static string FormElementName(Element element,int quality)
+    {
+        string texttoreturn = "";
+        switch (element)
+        {
+            case Element.Gold:
+                texttoreturn = "A";
+                break;
+            case Element.Wood:
+                texttoreturn = "B";
+                break;
+            case Element.Water:
+                texttoreturn = "C";
+                break;
+            case Element.Fire:
+                texttoreturn = "D";
+                break;
+            case Element.Dust:
+                texttoreturn = "E";
+                break;
+        }
+        texttoreturn += quality;
+        return texttoreturn;
+    }
 }
