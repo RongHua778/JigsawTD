@@ -15,6 +15,7 @@ public enum TurretSkillName
     CooporativeSkill,
     BoomerrangSkill,
     SuperSkill,
+    CoreSkill,
     None
 }
 
@@ -294,4 +295,31 @@ public class SuperSkill : InitialSkill
         Duration = 0;
     }
 }
+
+public class CoreSkill : InitialSkill
+{
+    public override TurretSkillName EffectName => TurretSkillName.CoreSkill;
+    public override string SkillDescription => "CORESKILL";
+    public override void StartTurn()
+    {
+        List<Vector2Int> points = StaticData.GetCirclePoints(1);
+        StrategyBase turretStrategy;
+        foreach (var point in points)
+        {
+            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
+            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
+            if (hit != null)
+            {
+                turretStrategy = hit.GetComponent<TurretContent>().Strategy;
+                strategy.InitAttack += turretStrategy.BaseAttack * (0.25f + strategy.Quality * 0.25f);
+            }
+        }
+    }
+
+    public override void EndTurn()
+    {
+        strategy.InitAttack = 0;
+    }
+}
+
 

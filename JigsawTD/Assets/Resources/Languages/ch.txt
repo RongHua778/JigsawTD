@@ -133,6 +133,7 @@ SNOW=雪球炮
 COOPORATIVE=协同塔
 BOOMERRANG=回旋镖
 SUPER=超能炮
+CORE=核心机
 
 GOLD=金元素塔
 WOOD=木元素塔
@@ -158,6 +159,7 @@ SNOWSKILL=穿透型子弹;子弹会持续移动到直线终点，并使敌人当
 COOPORATIVESKILL=每次攻击提升1%*总合成塔数量的攻击力
 BOOMERRANGSKILL=穿透型子弹；无法提升攻速；发射一枚回旋镖，每命中一个敌人就使后续伤害提高10%
 SUPERSKILL=使所有30秒后发生的属性提升翻倍
+CORESKILL=回合开始时，攻击力变为相邻防御塔的攻击力之和的50%/75%/100%（随合成塔等级提升）
 
 //A系
 AAA=量子负荷

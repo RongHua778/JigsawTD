@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3228400359097999329}
   - component: {fileID: 6956692086412214077}
   m_Layer: 9
-  m_Name: J1_Bullet
+  m_Name: CoreBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1217,8 +1217,8 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 0, g: 1, b: 1, a: 1}
-        key2: {r: 0, g: 0.12941177, b: 1, a: 0}
+        key1: {r: 0.5602889, g: 0, b: 1, a: 1}
+        key2: {r: 1, g: 0, b: 0.8531437, a: 0}
         key3: {r: 1, g: 0.13333334, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
@@ -4688,7 +4688,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
-  sputteringEffect: {fileID: -6391399736653394268, guid: e258eb5dd8fec164d82bd7edfbd4757b, type: 3}
+  sputteringEffect: {fileID: -3059407560167740816, guid: b5f13c242e60228459781b9cc7f1b163, type: 3}
   isCritical: 0
   SputteredCount: 0
 --- !u!58 &6956692086412214077
@@ -4929,7 +4929,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0, g: 0.52156866, b: 1, a: 0.23529412}
+      maxColor: {r: 1, g: 0, b: 0.9831486, a: 0.23529412}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

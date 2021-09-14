@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
+  m_Name: Core
+  m_EditorClassIdentifier: 
+  Name: CORE
+  Icon: {fileID: 0}
+  Description: CORESKILL
+  ContentPrefab: {fileID: 3599036617770833836, guid: 67cb0b48bf93f234faa1e8c5410b17ce, type: 3}
+  StrategyType: 1
+  RangeType: 0
+  element: 0
+  Bullet: {fileID: 3228400359097999329, guid: d4ae3946002cde347b9f18b7c8d44e07, type: 3}
+  BulletSpeed: 8
+  ShootSound: {fileID: 8300000, guid: c7d09802ded20f348a9f62d60af2d8f7, type: 3}
+  Rare: 6
+  totalLevel: 13
+  elementNumber: 3
+  TurretSkill: 11
+  TurretLevels:
+  - AttackRange: 5
+    ForbidRange: 0
+    AttackDamage: 0
+    AttackSpeed: 0.5
+    SputteringRange: 0
+    CriticalRate: 0
+    SlowRate: 0
+    TurretIcon: {fileID: -6794916759731001225, guid: 6e04c07d22153c8489284847581ecaf5, type: 3}
+    CannonSprite: {fileID: 5092826176138024346, guid: e20f65fd5734d004e87f5c0292f31684, type: 3}
+    ShootPointOffset: {x: 0, y: 0.32}
+  - AttackRange: 5
+    ForbidRange: 0
+    AttackDamage: 0
+    AttackSpeed: 0.5
+    SputteringRange: 0
+    CriticalRate: 0
+    SlowRate: 0
+    TurretIcon: {fileID: 1301479130615220830, guid: 6e04c07d22153c8489284847581ecaf5, type: 3}
+    CannonSprite: {fileID: -3866566516407217818, guid: e20f65fd5734d004e87f5c0292f31684, type: 3}
+    ShootPointOffset: {x: 0, y: 0.32}
+  - AttackRange: 5
+    ForbidRange: 0
+    AttackDamage: 0
+    AttackSpeed: 0.5
+    SputteringRange: 0
+    CriticalRate: 0
+    SlowRate: 0
+    TurretIcon: {fileID: 2252942032037098127, guid: 6e04c07d22153c8489284847581ecaf5, type: 3}
+    CannonSprite: {fileID: 2794215373345157203, guid: e20f65fd5734d004e87f5c0292f31684, type: 3}
+    ShootPointOffset: {x: 0, y: 0.33}
