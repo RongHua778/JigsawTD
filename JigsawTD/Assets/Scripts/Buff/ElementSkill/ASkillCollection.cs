@@ -6,12 +6,12 @@ public class DoubleAttack : ElementSkill
 {
     //所有攻击提升效果翻倍
     public override List<int> Elements => new List<int> { 0, 0, 0 };
-    public override void Build()
-    {
-        base.Build();
-        strategy.ElementSKillSlot += 2;
-    }
 
+    public override void Composite()
+    {
+        GameRes.TempGoldIntensify += 0.15f;
+
+    }
 }
 
 public class NearSpeed : ElementSkill

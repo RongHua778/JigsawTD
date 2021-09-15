@@ -6,13 +6,17 @@ public class PoloGetter : ElementSkill
 {
     //受到的所有光环效果翻倍
     public override List<int> Elements => new List<int> { 4, 4, 4 };
-    public override string SkillDescription => "POLOGETTER";
 
-    public override void Build()
+    public override void Composite()
     {
-        base.Build();
-        strategy.PoloIntensifyModify += 1;
+        GameRes.TempDustIntensify += 0.15f;
+
     }
+    //public override void Build()
+    //{
+    //    base.Build();
+    //    strategy.PoloIntensifyModify += 1;
+    //}
 }
 
 

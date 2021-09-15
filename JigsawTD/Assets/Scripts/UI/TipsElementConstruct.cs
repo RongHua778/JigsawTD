@@ -29,7 +29,6 @@ public class TipsElementConstruct : MonoBehaviour
                 continue;
             }
             Elements[i].gameObject.SetActive(true);
-            //TurretAttribute attribute = ConstructHelper.GetElementAttribute((Element)skill.Elements[i]);
             Elements[i].sprite = elementSprites[skill.Elements[i]];
         }
         SetIntensifyInfo();
@@ -58,8 +57,6 @@ public class TipsElementConstruct : MonoBehaviour
         }
         elementSkillName.text = GameMultiLang.GetTraduction(key);
         elementSkillDes.text = GameMultiLang.GetTraduction(key+"INFO");
-        //intensifyImg.gameObject.SetActive(strategy.CompositeBluePrint.IntensifyBluePrint);
-
     }
 
     public void SetIntensifyInfo()

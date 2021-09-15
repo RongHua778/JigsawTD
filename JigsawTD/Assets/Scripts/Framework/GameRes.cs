@@ -15,6 +15,15 @@ public static class GameRes
     public static int FreeTrapCount = 0;//免费陷阱换位数量
     public static Action<StrategyBase> NextCompositeCallback = null;
 
+    [Header("全局元素加成")]
+    public static float TempGoldIntensify=0;
+    public static float TempWoodIntensify = 0;
+    public static float TempWaterIntensify = 0;
+    public static float TempFireIntensify = 0;
+    public static float TempDustIntensify = 0;
+
+
+
     private static int coin;
     public static int Coin
     {
@@ -62,6 +71,12 @@ public static class GameRes
         OverallMoneyIntensify = 0;
         FreeGroundTileCount = 0;
         FreeTrapCount = 0;
+
+        TempGoldIntensify = 0;
+        TempWoodIntensify = 0;
+        TempWaterIntensify = 0;
+        TempFireIntensify = 0;
+        TempDustIntensify = 0;
     }
 
 }

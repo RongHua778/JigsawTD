@@ -391,19 +391,19 @@ public class StaticData : Singleton<StaticData>
             switch ((Element)element)
             {
                 case Element.Gold:
-                    intensifyTxt += "\n" + GoldAttackIntensify * 100 + GameMultiLang.GetTraduction("ATTACKUP");
+                    intensifyTxt += "\n" + (GoldAttackIntensify + GameRes.TempGoldIntensify) * 100 + GameMultiLang.GetTraduction("ATTACKUP");
                     break;
                 case Element.Wood:
-                    intensifyTxt += "\n" + WoodSpeedIntensify * 100 + GameMultiLang.GetTraduction("SPEEDUP");
+                    intensifyTxt += "\n" + (WoodSpeedIntensify + GameRes.TempWoodIntensify) * 100 + GameMultiLang.GetTraduction("SPEEDUP");
                     break;
                 case Element.Water:
-                    intensifyTxt += "\n" + WaterSlowIntensify + GameMultiLang.GetTraduction("SLOWUP");
+                    intensifyTxt += "\n" + (WaterSlowIntensify + GameRes.TempWaterIntensify) + GameMultiLang.GetTraduction("SLOWUP");
                     break;
                 case Element.Fire:
-                    intensifyTxt += "\n" + FireCriticalIntensify * 100 + GameMultiLang.GetTraduction("CRITICALUP");
+                    intensifyTxt += "\n" + (FireCriticalIntensify + GameRes.TempFireIntensify) * 100 + GameMultiLang.GetTraduction("CRITICALUP");
                     break;
                 case Element.Dust:
-                    intensifyTxt += "\n" + DustSputteringIntensify + GameMultiLang.GetTraduction("SPUTTERINGUP");
+                    intensifyTxt += "\n" + (DustSputteringIntensify + GameRes.TempDustIntensify) + GameMultiLang.GetTraduction("SPUTTERINGUP");
                     break;
             }
         }
@@ -615,7 +615,7 @@ public class StaticData : Singleton<StaticData>
         return result;
     }
 
-    public void GainMoneyEffect(Vector2 pos,int amount)
+    public void GainMoneyEffect(Vector2 pos, int amount)
     {
         GameManager.Instance.GainMoney(amount);
         GameObject obj = ObjectPool.Instance.Spawn(GainMoneyPrefab).gameObject;
@@ -623,7 +623,7 @@ public class StaticData : Singleton<StaticData>
         Sound.Instance.PlayEffect("Sound_GainCoin");
     }
 
-    public static string FormElementName(Element element,int quality)
+    public static string FormElementName(Element element, int quality)
     {
         string texttoreturn = "";
         switch (element)

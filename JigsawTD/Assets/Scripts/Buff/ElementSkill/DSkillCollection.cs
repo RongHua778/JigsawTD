@@ -29,10 +29,15 @@ public class RandomCritical : ElementSkill
     //暴击伤害增加-100%-400%的随机浮动
     public override List<int> Elements => new List<int> { 3, 3, 3 };
 
-    public override void Shoot(Bullet bullet = null)
+    public override void Composite()
     {
-        bullet.CriticalPercentage += Random.Range(-1f, 4f);
+        GameRes.TempFireIntensify += 0.1f;
+
     }
+    //public override void Shoot(Bullet bullet = null)
+    //{
+    //    bullet.CriticalPercentage += Random.Range(-1f, 4f);
+    //}
 }
 
 public class AttackCritical : ElementSkill

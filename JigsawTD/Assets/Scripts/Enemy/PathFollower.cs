@@ -82,6 +82,7 @@ public class PathFollower : ReusableObject,IGameBehavior
             positionTo = CurrentPoint.PathPos;
             //Direction = PathPoints[PointIndex-2].PathDirection;
             transform.localRotation = PathPoints[PointIndex - 2].PathDirection.GetRotation();
+            Progress = 1;
         }
         else
         {

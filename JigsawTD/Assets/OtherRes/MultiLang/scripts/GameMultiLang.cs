@@ -36,7 +36,7 @@ public class GameMultiLang : MonoBehaviour
 		
 		Fields.Clear ();
 		string lang = PlayerPrefs.GetString ("_language", defaultLang);
-		//PlayerPrefs.SetString("_language", lang);
+		PlayerPrefs.SetString("_language", lang);
 		switch (lang)
 		{
 			case "en":

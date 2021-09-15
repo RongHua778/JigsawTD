@@ -2796,6 +2796,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dropdown_UI
       objectReference: {fileID: 0}
+    - target: {fileID: 1971719901037828, guid: 98771098b2ae76a4ca4f74a7c286a6e0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 114315437051833356, guid: 98771098b2ae76a4ca4f74a7c286a6e0, type: 3}
       propertyPath: m_Options.m_Options.Array.size
       value: 2
@@ -5060,7 +5064,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Version 2.0
+  m_Text: Version 2.3
 --- !u!222 &1077198958
 CanvasRenderer:
   m_ObjectHideFlags: 0

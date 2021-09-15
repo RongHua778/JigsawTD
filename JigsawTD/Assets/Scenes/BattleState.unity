@@ -1993,7 +1993,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2f1bb5477ddfcc4faab948daa32faf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TestType: 3
+  TestType: 17
   Running: 0
   pathOffset: 0.1
   healthBarPrefab: {fileID: 904725062044126347, guid: 2362ca59ddd854447ba882941722eec4, type: 3}
@@ -12018,7 +12018,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u7B2C1/50\u6CE2"
+  m_Text: "\u7B2C\u6CE2"
 --- !u!222 &785419718
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -28579,7 +28579,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1834551530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28594,7 +28594,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SaveData:
     SaveSelectedElement: 
-  SelectDifficulty: 4
+  SelectDifficulty: 3
   transition: {fileID: 231277384}
   transitionTime: 1
   Tutorial: 0
@@ -30705,7 +30705,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 56, y: -122.900024}
+  m_AnchoredPosition: {x: 56, y: -122.900055}
   m_SizeDelta: {x: -736.2401, y: -377.81}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1970478273

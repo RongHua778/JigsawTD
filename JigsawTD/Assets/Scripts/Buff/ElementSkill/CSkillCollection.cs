@@ -6,20 +6,10 @@ public class LateIntensify : ElementSkill
 {
     //所有30秒后发生的属性提升翻倍
     public override List<int> Elements => new List<int> { 2, 2, 2 };
-    public override string SkillDescription => "LATEINTENSIFY";
-    public override void StartTurn()
+    public override void Composite()
     {
-        Duration = 30;
-    }
+        GameRes.TempWaterIntensify += 0.25f;
 
-    public override void TickEnd()
-    {
-        strategy.TimeModify += 2;
-    }
-
-    public override void EndTurn()
-    {
-        Duration = 0;
     }
 }
 

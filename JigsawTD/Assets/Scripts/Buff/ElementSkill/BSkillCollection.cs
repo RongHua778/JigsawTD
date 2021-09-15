@@ -6,16 +6,21 @@ public class MultiTarget : ElementSkill
     //造成的伤害-35%，额外攻击2个目标
     public override List<int> Elements => new List<int> { 1, 1, 1 };
 
-    public override void Build()
+    public override void Composite()
     {
-        base.Build();
-        strategy.BaseTargetCountIntensify += 2;
+        base.Composite();
+        GameRes.TempWoodIntensify += 0.15f;
     }
+    //public override void Build()
+    //{
+    //    base.Build();
+    //    strategy.BaseTargetCountIntensify += 2;
+    //}
 
-    public override void Shoot(Bullet bullet = null)
-    {
-        bullet.Damage *= 0.65f;
-    }
+    //public override void Shoot(Bullet bullet = null)
+    //{
+    //    bullet.Damage *= 0.65f;
+    //}
 }
 public class AttackSpeed : ElementSkill
 {

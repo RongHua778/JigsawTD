@@ -62,6 +62,12 @@ public class StrategyBase
     private int forbidRange;
     public int ForbidRange { get => forbidRange; set => forbidRange = value; }
 
+    private int goldCount;
+    private int woodCount;
+    private int waterCount;
+    private int fireCount;
+    private int dustCount;
+
     //基础加成
     private float initAttackIntensify;
     private float initSpeedIntensify;
@@ -80,15 +86,6 @@ public class StrategyBase
     public float InitSputteringRangeIntensify { get => initSputteringRangeIntensify; set => initSputteringRangeIntensify = value; }
     public float InitSputteringPercentageIntensify { get => initSputteringPercentageIntensify; set => initSputteringPercentageIntensify = value; }
 
-
-    //private float baseAttackIntensify;
-    //private float baseSpeedIntensify;
-    //private int baseRangeIntensify;
-    //private float baseCriticalRateIntensify;
-    //private float baseSlowRateIntensify;
-    //private float baseSputteringRangeIntensify;
-    //private float baseSputteringPercentageIntensify;
-    //private float baseCriticalPercentageIntensify;
     private int baseTargetCountIntensify;
     public float BaseAttackIntensify { get => InitAttackIntensify + ComAttackIntensify; }
     public float BaseSpeedIntensify { get => InitSpeedIntensify + ComSpeedIntensify; }
@@ -107,12 +104,12 @@ public class StrategyBase
     private float comCriticalIntensify;
     private float comSputteringRangeIntensify;
     private float comSlowIntensify;
-    public float ComAttackIntensify { get => comAttackIntensify; set => comAttackIntensify = value; }
-    public float ComSpeedIntensify { get => comSpeedIntensify; set => comSpeedIntensify = value; }
+    public float ComAttackIntensify { get => comAttackIntensify + GameRes.TempGoldIntensify*goldCount; set => comAttackIntensify = value; }
+    public float ComSpeedIntensify { get => comSpeedIntensify + GameRes.TempWoodIntensify*woodCount; set => comSpeedIntensify = value; }
     public int ComRangeIntensify { get => comRangeIntensify; set => comRangeIntensify = value; }
-    public float ComCriticalIntensify { get => comCriticalIntensify; set => comCriticalIntensify = value; }
-    public float ComSputteringRangeIntensify { get => comSputteringRangeIntensify; set => comSputteringRangeIntensify = value; }
-    public float ComSlowIntensify { get => comSlowIntensify; set => comSlowIntensify = value; }
+    public float ComCriticalIntensify { get => comCriticalIntensify + GameRes.TempFireIntensify*fireCount; set => comCriticalIntensify = value; }
+    public float ComSputteringRangeIntensify { get => comSputteringRangeIntensify + GameRes.TempDustIntensify*dustCount; set => comSputteringRangeIntensify = value; }
+    public float ComSlowIntensify { get => comSlowIntensify + GameRes.TempWaterIntensify*waterCount; set => comSlowIntensify = value; }
     #endregion
 
     #region 所有加成二次修正
@@ -219,18 +216,23 @@ public class StrategyBase
             switch ((Element)element)
             {
                 case Element.Gold:
+                    goldCount++;
                     ComAttackIntensify += add ? StaticData.GoldAttackIntensify : -StaticData.GoldAttackIntensify;
                     break;
                 case Element.Wood:
+                    woodCount++;
                     ComSpeedIntensify += add ? StaticData.WoodSpeedIntensify : -StaticData.WoodSpeedIntensify;
                     break;
                 case Element.Water:
+                    waterCount++;
                     ComSlowIntensify += add ? StaticData.WaterSlowIntensify : -StaticData.WaterSlowIntensify;
                     break;
                 case Element.Fire:
+                    fireCount++;
                     ComCriticalIntensify += add ? StaticData.FireCriticalIntensify : -StaticData.FireCriticalIntensify;
                     break;
                 case Element.Dust:
+                    dustCount++;
                     ComSputteringRangeIntensify += add ? StaticData.DustSputteringIntensify : -StaticData.DustSputteringIntensify;
                     break;
             }
