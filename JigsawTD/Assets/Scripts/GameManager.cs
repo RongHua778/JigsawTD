@@ -1,4 +1,3 @@
-using Pathfinding;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -31,21 +30,21 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private EnemyTips m_EnemyTips = default;
     [SerializeField] private TurretBaseTips m_TurretBaseTips = default;
 
-    [Header("工厂")]
-    [SerializeField] TileFactory _tileFactory = default;
-    [SerializeField] TileContentFactory _contentFactory = default;
-    [SerializeField] TileShapeFactory _shapeFactory = default;
-    [SerializeField] EnemyFactory _enemyFactory = default;
-    [SerializeField] BlueprintFactory _bluePrintFacotry = default;
-    [SerializeField] SkillFactory _skillFactory = default;
-    [SerializeField] NonEnemyFactory _nonEnemyFactory = default;
-    public TileFactory TileFactory { get => _tileFactory; }
-    public TileContentFactory ContentFactory { get => _contentFactory; }
-    public TileShapeFactory ShapeFactory { get => _shapeFactory; }
-    public EnemyFactory EnemyFactory { get => _enemyFactory; }
-    public BlueprintFactory BluePrintFactory { get => _bluePrintFacotry; }
-    public SkillFactory SkillFactory { get => _skillFactory; set => _skillFactory = value; }
-    public NonEnemyFactory NonEnemyFactory { get => _nonEnemyFactory; set => _nonEnemyFactory = value; }
+    //[Header("工厂")]
+    //[SerializeField] TileFactory _tileFactory = default;
+    //[SerializeField] TileContentFactory _contentFactory = default;
+    //[SerializeField] TileShapeFactory _shapeFactory = default;
+    //[SerializeField] EnemyFactory _enemyFactory = default;
+    //[SerializeField] BlueprintFactory _bluePrintFacotry = default;
+    //[SerializeField] SkillFactory _skillFactory = default;
+    //[SerializeField] NonEnemyFactory _nonEnemyFactory = default;
+    //public TileFactory TileFactory { get => _tileFactory; }
+    //public TileContentFactory ContentFactory { get => _contentFactory; }
+    //public TileShapeFactory ShapeFactory { get => _shapeFactory; }
+    //public EnemyFactory EnemyFactory { get => _enemyFactory; }
+    //public BlueprintFactory BluePrintFactory { get => _bluePrintFacotry; }
+    //public SkillFactory SkillFactory { get => _skillFactory; set => _skillFactory = value; }
+    //public NonEnemyFactory NonEnemyFactory { get => _nonEnemyFactory; set => _nonEnemyFactory = value; }
 
 
     [Header("集合")]
@@ -66,13 +65,9 @@ public class GameManager : Singleton<GameManager>
     public void Initinal()
     {
         //初始化全局数据
-
         GameRes.Initialize(m_MainUI, m_FuncUI);
         //初始化工厂
-        TileFactory.Initialize();
-        ContentFactory.Initialize();
-        ShapeFactory.Initialize();
-        EnemyFactory.InitializeFactory();
+        StaticData.Instance.ContentFactory.SetBattleElements();
 
         //形状生成外观类
         ConstructHelper.Initialize();
@@ -366,7 +361,7 @@ public class GameManager : Singleton<GameManager>
 
     public Enemy SpawnEnemy(EnemyType type, int pathIndex, float intensify)
     {
-        return m_WaveSystem.SpawnEnemy(m_BoardSystem, EnemyFactory.Get(type), pathIndex, intensify);
+        return m_WaveSystem.SpawnEnemy(m_BoardSystem, StaticData.Instance.EnemyFactory.Get(type), pathIndex, intensify);
     }
 
     public void RefreshShop(int cost)

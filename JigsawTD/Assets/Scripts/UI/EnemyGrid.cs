@@ -11,7 +11,7 @@ public class EnemyGrid : MonoBehaviour
 
     public void SetEnemyInfo(EnemySequence sequence)
     {
-        EnemyAttribute attribute = GameManager.Instance.EnemyFactory.Get(sequence.EnemyType);
+        EnemyAttribute attribute = StaticData.Instance.EnemyFactory.Get(sequence.EnemyType);
         enemyIcon.sprite = attribute.EnemyIcon;
         enemyName.text = GameMultiLang.GetTraduction(attribute.EnemyName);
         enemyDes.text = GameMultiLang.GetTraduction(attribute.Description);

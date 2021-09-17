@@ -22,10 +22,10 @@ public class ScaleAndMove : IGameSystem
     private float maximum = 10;
     private float minmum = 3;
 
-    private float maxY = 13;
-    private float minY = -13;
-    private float minX = -13;
-    private float maxX = 13;
+    private float maxY = 8;
+    private float minY = -8;
+    private float minX = -8;
+    private float maxX = 8;
     Vector2 CamMovement;
     // Start is called before the first frame update
 
@@ -49,11 +49,20 @@ public class ScaleAndMove : IGameSystem
     //    Input.multiTouchEnabled = true;
     //}
 
+    [Header("ÊÓ²î¿ØÖÆ")]
+    [SerializeField] Transform[] backGrounds = default;
+    [SerializeField] float parallaxScale = default;
+    [SerializeField] float parallaxReductionFactor = default;
+    [SerializeField] float smoothing;
+
+    private Transform camTr;
+
 
     public void Initialize(MainUI mainUI)
     {
         m_MainUI = mainUI;
         cam = this.GetComponent<Camera>();
+        camTr = cam.transform;
         CamInitialPos = cam.transform.position;
         CamInitialSize = cam.orthographicSize;
         oldPosition = cam.transform.position;
@@ -203,14 +212,6 @@ public class ScaleAndMove : IGameSystem
         //}
 
     }
-
-    //private void LateUpdate()
-    //{
-
-
-    //    transform.Translate(CamMovement * moveSpeed * Time.deltaTime);
-    //}
-
     private void MobileInput()
     {
         if (Input.touchCount <= 0)
@@ -226,5 +227,18 @@ public class ScaleAndMove : IGameSystem
                 cam.transform.Translate(new Vector3(-Input.touches[0].deltaPosition.x, -Input.touches[0].deltaPosition.y, 0) * Time.deltaTime * 0.1f);
             }
         }
+    }
+
+    private void Update()
+    {
+        Vector2 parallax = (CamInitialPos - camTr.position) * parallaxScale;
+        for (int i = 0; i < backGrounds.Length; i++)
+        {
+            float backgroundTargetPosX = backGrounds[i].position.x + parallax.x * (i * parallaxReductionFactor + 1);
+            float backgroundTargetPosY = backGrounds[i].position.y + parallax.y * (i * parallaxReductionFactor + 1);
+            Vector3 backgroundTargetPos = new Vector3(backgroundTargetPosX, backgroundTargetPosY, backGrounds[i].position.z);
+            backGrounds[i].position = Vector3.Lerp(backGrounds[i].position, backgroundTargetPos, smoothing * Time.deltaTime);
+        }
+        CamInitialPos = camTr.position;
     }
 }

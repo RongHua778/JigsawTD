@@ -8,7 +8,9 @@ using Pathfinding;
 
 public class StaticData : Singleton<StaticData>
 {
-    [Header("LevelSetting")]
+
+    [Header("静态数据")]
+    public static Vector2Int BoardOffset;
     public static LayerMask PathLayer = 1 << 6 | 1 << 10;
     public static string TrapMask = "Trap";
     public static string ConcreteTileMask = "ConcreteTile";
@@ -20,6 +22,33 @@ public class StaticData : Singleton<StaticData>
     public static LayerMask EnemyLayerMask = 1 << 11;
     public static LayerMask GetGroundLayer = 1 << 8 | 1 << 12;
     //public static LayerMask RunTimeFindPathLayer = 1 << 8;
+    //抽取品质概率
+    public static float[,] QualityChances = new float[6, 5]
+    {
+        { 1f, 0f, 0f, 0f, 0f },
+        { 0.6f, 0.3f, 0.1f, 0f, 0f },
+        { 0.4f, 0.35f, 0.15f, 0.1f, 0f },
+        { 0.3f, 0.35f, 0.2f, 0.125f, 0.025f },
+        { 0.15f, 0.3f, 0.3f, 0.25f, 0.1f },
+        { 0f, 0.2f, 0.3f, 0.3f, 0.2f },
+    };
+
+    [Header("工厂类")]
+    [SerializeField] TileFactory _tileFactory = default;
+    [SerializeField] TileContentFactory _contentFactory = default;
+    [SerializeField] TileShapeFactory _shapeFactory = default;
+    [SerializeField] EnemyFactory _enemyFactory = default;
+    [SerializeField] BlueprintFactory _bluePrintFacotry = default;
+    [SerializeField] NonEnemyFactory _nonEnemyFactory = default;
+    public TileFactory TileFactory { get => _tileFactory; }
+    public TileContentFactory ContentFactory { get => _contentFactory; }
+    public TileShapeFactory ShapeFactory { get => _shapeFactory; }
+    public EnemyFactory EnemyFactory { get => _enemyFactory; }
+    public BlueprintFactory BluePrintFactory { get => _bluePrintFacotry; }
+    public NonEnemyFactory NonEnemyFactory { get => _nonEnemyFactory; set => _nonEnemyFactory = value; }
+
+
+    [Header("战斗基础数值")]
     public int PlayerMaxLevel;
     public int[] LevelUpMoney;
     public int StartCoin;
@@ -35,72 +64,36 @@ public class StaticData : Singleton<StaticData>
     public int BuyGroundCostMultyply;
     public int SwitchTrapCost;
     public int SwitchTrapCostMultiply;
-    //抽取品质概率
-    public static float[,] QualityChances = new float[6, 5]
-    {
-        //{ 1f, 0f, 0f, 0f, 0f },
-        //{ 0.6f, 0.3f, 0.1f, 0f, 0f },
-        //{ 0.4f, 0.35f, 0.15f, 0.1f, 0f },
-        //{ 0.3f, 0.35f, 0.2f, 0.125f, 0.025f },
-        //{ 0.15f, 0.3f, 0.3f, 0.25f, 0.1f },
-        //{ 0f, 0.2f, 0.3f, 0.3f, 0.2f },
-        //{ 0f, 0.15f, 0.25f, 0.3f, 0.3f }
-        { 1f, 0f, 0f, 0f, 0f },
-        { 0.6f, 0.3f, 0.1f, 0f, 0f },
-        { 0.4f, 0.35f, 0.15f, 0.1f, 0f },
-        { 0.3f, 0.35f, 0.2f, 0.125f, 0.025f },
-        { 0.15f, 0.3f, 0.3f, 0.25f, 0.1f },
-        { 0f, 0.2f, 0.3f, 0.3f, 0.2f },
-    };
-    [Header("GameSetting")]
-    public static Vector2Int BoardOffset;
+
+
+    [Header("场景数值设置")]
     public float EnvrionmentBaseVolume = .25f;
     public float TileSize = default;
-    //塔的最大等级
-    public static int maxLevel = 5;
-    //一共有几种战斗元素
-    public static int elementN = 4;
-    //最大quality
-    public static int maxQuality = 5;
+    public int maxLevel = 5;    //塔的最大等级
+    public int elementN = 4;//一共有几种战斗元素
+    public int maxQuality = 5;//最大quality
     public int trapN = 15;
-    public static int basicN = 25;
+    public int basicN = 25;
 
-
-
-    [Header("ProbabilitySetting")]
-    public float[] TileShapeChance = default;
+    [Header("波次设置")]
     public int[] PlayerMaxHealth;
-    [SerializeField] int[] difficutyWave;
-    public int LevelMaxWave
-    {
-        get
-        {
-            return difficutyWave[Game.Instance.SelectDifficulty];
-        }
-    }
-    //元素加成
-    public static float GoldAttackIntensify = 0.3f;
-    public static float WoodSpeedIntensify = 0.3f;
-    public static float WaterSlowIntensify = 0.5f;
-    public static float FireCriticalIntensify = 0.2f;
-    public static float DustSputteringIntensify = 0.3f;
+    public int[] difficutyWave;
+    public int LevelMaxWave=> difficutyWave[Game.Instance.SelectDifficulty];
 
-    public static Color32 RedColor;
-    public static Color32 GreenColor;
-    public static Color32 BlueColor;
-    public static Color32 YellowColor;
-    public static Color32 PurpleColor;
+    [Header("元素加成")]
+    public float GoldAttackIntensify = 0.3f;
+    public float WoodSpeedIntensify = 0.3f;
+    public float WaterSlowIntensify = 0.5f;
+    public float FireCriticalIntensify = 0.2f;
+    public float DustSputteringIntensify = 0.3f;
 
-    //攻击范围PREFAB
+    [Header("Prefabs")]
     public RangeHolder CircleCol;
     public RangeIndicator RangeIndicatorPrefab;
     public JumpDamage JumpDamagePrefab;
     public Sprite UnrevealTrap;
     public ParticalControl LandedEffect;
     public ReusableObject GainMoneyPrefab;
-    //public GainCoinAnim GainCoinAnimPrefab;
-
-
 
     [Header("CompositionAttributes")]
     public int LevelUpCostPerRare;
@@ -120,6 +113,16 @@ public class StaticData : Singleton<StaticData>
         { 0.3f,0.4f,0.3f},
         { 0.2f,0.4f,0.4f},
     };
+
+
+    protected override void Awake()
+    {
+        base.Awake();
+        TileFactory.Initialize();
+        ContentFactory.Initialize();
+        ShapeFactory.Initialize();
+        EnemyFactory.InitializeFactory();
+    }
 
     //随机打乱一个int list的方法
     public static List<T> RandomSort<T>(List<T> list)
@@ -261,13 +264,13 @@ public class StaticData : Singleton<StaticData>
     //给定一个总等级，返回若干个随机数的方法
     public static int[] GetSomeRandoms(int totalLevel, int number)
     {
-        if ((totalLevel / number) > maxLevel)
+        if ((totalLevel / number) >Instance.maxLevel)
         {
             Debug.LogWarning("配方等级输错了，菜鸡");
             int[] errorRandom = new int[number];
             for (int i = 0; i < number; i++)
             {
-                errorRandom[i] = maxLevel;
+                errorRandom[i] = Instance.maxLevel;
             }
             return errorRandom;
         }
@@ -289,7 +292,7 @@ public class StaticData : Singleton<StaticData>
             if (number == 2)
             {
                 int min = 1;
-                while (totalLevel - min > maxLevel)
+                while (totalLevel - min > Instance.maxLevel)
                 {
                     min++;
                 }
@@ -299,9 +302,9 @@ public class StaticData : Singleton<StaticData>
             }
             else if (number >= 2)
             {
-                int max = Mathf.Min(totalLevel - (number - 1), maxLevel);
+                int max = Mathf.Min(totalLevel - (number - 1), Instance.maxLevel);
                 int min = 1;
-                while (totalLevel - min > maxLevel * (number - 1))
+                while (totalLevel - min > Instance.maxLevel * (number - 1))
                 {
                     min++;
                 }
@@ -362,19 +365,19 @@ public class StaticData : Singleton<StaticData>
         switch (element)
         {
             case Element.Gold:
-                intensifyTxt += GoldAttackIntensify * 100 + GameMultiLang.GetTraduction("ATTACKUP");
+                intensifyTxt += Instance.GoldAttackIntensify * 100 + GameMultiLang.GetTraduction("ATTACKUP");
                 break;
             case Element.Wood:
-                intensifyTxt += WoodSpeedIntensify * 100 + GameMultiLang.GetTraduction("SPEEDUP");
+                intensifyTxt += Instance.WoodSpeedIntensify * 100 + GameMultiLang.GetTraduction("SPEEDUP");
                 break;
             case Element.Water:
-                intensifyTxt += WaterSlowIntensify + GameMultiLang.GetTraduction("SLOWUP");
+                intensifyTxt += Instance.WaterSlowIntensify + GameMultiLang.GetTraduction("SLOWUP");
                 break;
             case Element.Fire:
-                intensifyTxt += FireCriticalIntensify * 100 + GameMultiLang.GetTraduction("CRITICALUP");
+                intensifyTxt += Instance.FireCriticalIntensify * 100 + GameMultiLang.GetTraduction("CRITICALUP");
                 break;
             case Element.Dust:
-                intensifyTxt += DustSputteringIntensify + GameMultiLang.GetTraduction("SPUTTERINGUP");
+                intensifyTxt += Instance.DustSputteringIntensify + GameMultiLang.GetTraduction("SPUTTERINGUP");
                 break;
             default:
                 Debug.Log("错误的元素，无法配置加成");
@@ -391,19 +394,19 @@ public class StaticData : Singleton<StaticData>
             switch ((Element)element)
             {
                 case Element.Gold:
-                    intensifyTxt += "\n" + (GoldAttackIntensify + GameRes.TempGoldIntensify) * 100 + GameMultiLang.GetTraduction("ATTACKUP");
+                    intensifyTxt += "\n" + (Instance.GoldAttackIntensify + GameRes.TempGoldIntensify) * 100 + GameMultiLang.GetTraduction("ATTACKUP");
                     break;
                 case Element.Wood:
-                    intensifyTxt += "\n" + (WoodSpeedIntensify + GameRes.TempWoodIntensify) * 100 + GameMultiLang.GetTraduction("SPEEDUP");
+                    intensifyTxt += "\n" + (Instance.WoodSpeedIntensify + GameRes.TempWoodIntensify) * 100 + GameMultiLang.GetTraduction("SPEEDUP");
                     break;
                 case Element.Water:
-                    intensifyTxt += "\n" + (WaterSlowIntensify + GameRes.TempWaterIntensify) + GameMultiLang.GetTraduction("SLOWUP");
+                    intensifyTxt += "\n" + (Instance.WaterSlowIntensify + GameRes.TempWaterIntensify) + GameMultiLang.GetTraduction("SLOWUP");
                     break;
                 case Element.Fire:
-                    intensifyTxt += "\n" + (FireCriticalIntensify + GameRes.TempFireIntensify) * 100 + GameMultiLang.GetTraduction("CRITICALUP");
+                    intensifyTxt += "\n" + (Instance.FireCriticalIntensify + GameRes.TempFireIntensify) * 100 + GameMultiLang.GetTraduction("CRITICALUP");
                     break;
                 case Element.Dust:
-                    intensifyTxt += "\n" + (DustSputteringIntensify + GameRes.TempDustIntensify) + GameMultiLang.GetTraduction("SPUTTERINGUP");
+                    intensifyTxt += "\n" + (Instance.DustSputteringIntensify + GameRes.TempDustIntensify) + GameMultiLang.GetTraduction("SPUTTERINGUP");
                     break;
             }
         }

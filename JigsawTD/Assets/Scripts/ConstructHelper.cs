@@ -12,10 +12,10 @@ public static class ConstructHelper
 
     public static void Initialize()
     {
-        m_TileFactory = GameManager.Instance.TileFactory;
-        m_ShapeFactory = GameManager.Instance.ShapeFactory;
-        m_ContentFactory = GameManager.Instance.ContentFactory;
-        m_BlurPrintFactory = GameManager.Instance.BluePrintFactory;
+        m_TileFactory = StaticData.Instance.TileFactory;
+        m_ShapeFactory = StaticData.Instance.ShapeFactory;
+        m_ContentFactory = StaticData.Instance.ContentFactory;
+        m_BlurPrintFactory = StaticData.Instance.BluePrintFactory;
     }
 
 

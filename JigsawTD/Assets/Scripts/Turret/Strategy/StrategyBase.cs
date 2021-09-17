@@ -87,14 +87,14 @@ public class StrategyBase
     public float InitSputteringPercentageIntensify { get => initSputteringPercentageIntensify; set => initSputteringPercentageIntensify = value; }
 
     private int baseTargetCountIntensify;
-    public float BaseAttackIntensify { get => InitAttackIntensify + ComAttackIntensify; }
-    public float BaseSpeedIntensify { get => InitSpeedIntensify + ComSpeedIntensify; }
+    public float BaseAttackIntensify { get => InitAttackIntensify + ComAttackIntensify + GameRes.TempGoldIntensify * goldCount; }
+    public float BaseSpeedIntensify { get => InitSpeedIntensify + ComSpeedIntensify + GameRes.TempWoodIntensify * woodCount; }
     public int BaseRangeIntensify { get => InitRangeIntensify + ComRangeIntensify; }
-    public float BaseCriticalRateIntensify { get => initCriticalRateIntensify + ComCriticalIntensify; }
+    public float BaseCriticalRateIntensify { get => initCriticalRateIntensify + ComCriticalIntensify + GameRes.TempFireIntensify * fireCount; }
     public float BaseCriticalPercentageIntensify { get => InitCriticalPercentageIntensify; }
-    public float BaseSlowRateIntensify { get => InitSlowRateIntensify + ComSlowIntensify; }
+    public float BaseSlowRateIntensify { get => InitSlowRateIntensify + ComSlowIntensify + GameRes.TempWaterIntensify * waterCount; }
     public float BaseSputteringPercentageIntensify { get => InitSputteringPercentageIntensify; }
-    public float BaseSputteringRangeIntensify { get => InitSputteringRangeIntensify + ComSputteringRangeIntensify; }
+    public float BaseSputteringRangeIntensify { get => InitSputteringRangeIntensify + ComSputteringRangeIntensify + GameRes.TempDustIntensify * dustCount; }
     public int BaseTargetCountIntensify { get => baseTargetCountIntensify; set => baseTargetCountIntensify = value; }
 
     #region 元素加成
@@ -104,12 +104,13 @@ public class StrategyBase
     private float comCriticalIntensify;
     private float comSputteringRangeIntensify;
     private float comSlowIntensify;
-    public float ComAttackIntensify { get => comAttackIntensify + GameRes.TempGoldIntensify*goldCount; set => comAttackIntensify = value; }
-    public float ComSpeedIntensify { get => comSpeedIntensify + GameRes.TempWoodIntensify*woodCount; set => comSpeedIntensify = value; }
+    public float ComAttackIntensify { get => comAttackIntensify; set => comAttackIntensify = value; }
+    public float ComSpeedIntensify { get => comSpeedIntensify; set => comSpeedIntensify = value; }
     public int ComRangeIntensify { get => comRangeIntensify; set => comRangeIntensify = value; }
-    public float ComCriticalIntensify { get => comCriticalIntensify + GameRes.TempFireIntensify*fireCount; set => comCriticalIntensify = value; }
-    public float ComSputteringRangeIntensify { get => comSputteringRangeIntensify + GameRes.TempDustIntensify*dustCount; set => comSputteringRangeIntensify = value; }
-    public float ComSlowIntensify { get => comSlowIntensify + GameRes.TempWaterIntensify*waterCount; set => comSlowIntensify = value; }
+    public float ComCriticalIntensify { get => comCriticalIntensify; set => comCriticalIntensify = value; }
+    public float ComSputteringRangeIntensify { get => comSputteringRangeIntensify; set => comSputteringRangeIntensify = value; }
+    public float ComSlowIntensify { get => comSlowIntensify; set => comSlowIntensify = value; }
+
     #endregion
 
     #region 所有加成二次修正
@@ -217,23 +218,23 @@ public class StrategyBase
             {
                 case Element.Gold:
                     goldCount++;
-                    ComAttackIntensify += add ? StaticData.GoldAttackIntensify : -StaticData.GoldAttackIntensify;
+                    ComAttackIntensify += add ? StaticData.Instance.GoldAttackIntensify : -StaticData.Instance.GoldAttackIntensify;
                     break;
                 case Element.Wood:
                     woodCount++;
-                    ComSpeedIntensify += add ? StaticData.WoodSpeedIntensify : -StaticData.WoodSpeedIntensify;
+                    ComSpeedIntensify += add ? StaticData.Instance.WoodSpeedIntensify : -StaticData.Instance.WoodSpeedIntensify;
                     break;
                 case Element.Water:
                     waterCount++;
-                    ComSlowIntensify += add ? StaticData.WaterSlowIntensify : -StaticData.WaterSlowIntensify;
+                    ComSlowIntensify += add ? StaticData.Instance.WaterSlowIntensify : -StaticData.Instance.WaterSlowIntensify;
                     break;
                 case Element.Fire:
                     fireCount++;
-                    ComCriticalIntensify += add ? StaticData.FireCriticalIntensify : -StaticData.FireCriticalIntensify;
+                    ComCriticalIntensify += add ? StaticData.Instance.FireCriticalIntensify : -StaticData.Instance.FireCriticalIntensify;
                     break;
                 case Element.Dust:
                     dustCount++;
-                    ComSputteringRangeIntensify += add ? StaticData.DustSputteringIntensify : -StaticData.DustSputteringIntensify;
+                    ComSputteringRangeIntensify += add ? StaticData.Instance.DustSputteringIntensify : -StaticData.Instance.DustSputteringIntensify;
                     break;
             }
         }

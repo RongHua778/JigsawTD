@@ -72,7 +72,6 @@ public class TileContentFactory : GameObjectFactory
                     break;
             }
         }
-        SetBattleElements();
         foreach (var attribute in trapAtts)
         {
             TrapDIC.Add(attribute.Name, attribute);
@@ -81,14 +80,14 @@ public class TileContentFactory : GameObjectFactory
         {
             TurretBaseDIC.Add(attribute.Name, attribute);
         }
-    }
-
-    private void SetBattleElements()
-    {
         foreach (var att in elementTurrets)
         {
             ElementDIC.Add(att.element, att);
         }
+    }
+
+    public void SetBattleElements()
+    {
         foreach(int index in Game.Instance.SaveData.SaveSelectedElement)
         {
             BattleElements.Add(ElementDIC[(Element)index]);
@@ -131,7 +130,7 @@ public class TileContentFactory : GameObjectFactory
             qualityC[i] = StaticData.QualityChances[playerLevel - 1, i];
         }
         int quality = StaticData.RandomNumber(qualityC) + 1;
-        TurretAttribute attribute = BattleElements[UnityEngine.Random.Range(0, StaticData.elementN)];
+        TurretAttribute attribute = BattleElements[UnityEngine.Random.Range(0, StaticData.Instance.elementN)];
         ElementTurret content = Get(attribute.ContentPrefab) as ElementTurret;
         content.Strategy = new StrategyBase( attribute, quality);
         content.Strategy.m_Turret = content;

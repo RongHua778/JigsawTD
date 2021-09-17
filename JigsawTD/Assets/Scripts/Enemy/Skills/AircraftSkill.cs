@@ -44,12 +44,12 @@ public class AircraftSkill : Skill
             switch (aircraftType)
             {
                 case AircraftType.Normal:
-                    AirAttacker aircraft=GameManager.Instance.NonEnemyFactory.GetAirAttacker();
+                    AirAttacker aircraft= StaticData.Instance.NonEnemyFactory.GetAirAttacker();
                     aircraft.transform.localPosition = boss.transform.localPosition;
                     aircraft.Initiate(boss);
                     break;
                 case AircraftType.Stronger:
-                    AirProtector strongerAircraft = GameManager.Instance.NonEnemyFactory.GetAirProtector();
+                    AirProtector strongerAircraft = StaticData.Instance.NonEnemyFactory.GetAirProtector();
                     strongerAircraft.transform.localPosition = boss.transform.localPosition;
                     strongerAircraft.Initiate(boss);
                     break;

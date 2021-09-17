@@ -28,7 +28,7 @@ public class UIBattleSet : IUserInterface
                 SetData();
                 SetSkillPreview();
             }
-            m_ElementCountTxt.text = GameMultiLang.GetTraduction("SELECTELEMENT") + selectedElement + "/" + MaxSelectElement;
+            m_ElementCountTxt.text = GameMultiLang.GetTraduction("SELECTEDCOUNT") + selectedElement + "/" + MaxSelectElement;
         }
     }
 

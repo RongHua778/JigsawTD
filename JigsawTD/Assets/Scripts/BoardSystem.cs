@@ -447,7 +447,7 @@ public class BoardSystem : IGameSystem
         {
             foreach (var pos in poss)
             {
-                GameObject GO = Instantiate(GameManager.Instance.TileFactory.GetTutorialPrefab(), pos, Quaternion.identity, this.transform);
+                GameObject GO = Instantiate(StaticData.Instance.TileFactory.GetTutorialPrefab(), pos, Quaternion.identity, this.transform);
                 tutorialObjs.Add(GO);
             }
         }

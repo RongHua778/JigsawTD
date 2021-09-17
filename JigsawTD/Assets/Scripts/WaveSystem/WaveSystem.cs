@@ -167,7 +167,7 @@ public class WaveSystem : IGameSystem
 
     private EnemySequence SequenceInfoSet(int genres, float stage, int wave, EnemyType type, bool isBoss = false)
     {
-        EnemyAttribute attribute = GameManager.Instance.EnemyFactory.Get(type);
+        EnemyAttribute attribute = StaticData.Instance.EnemyFactory.Get(type);
         int amount = Mathf.RoundToInt(attribute.InitCount + ((float)wave / 5) * attribute.CountIncrease / genres);
         float coolDown = (float)(5f + wave / 2) / (float)amount;
         EnemySequence sequence = new EnemySequence(type, amount, coolDown, stage, isBoss);

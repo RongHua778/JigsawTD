@@ -19,7 +19,7 @@ public class BlueprintFactory : GameObjectFactory
         int[] compositionLevel = StaticData.GetSomeRandoms(attribute.totalLevel, attribute.elementNumber);
         for (int i = 0; i < attribute.elementNumber; i++)
         {
-            int element = Game.Instance.SaveData.SaveSelectedElement[Random.Range(0, StaticData.elementN)];
+            int element = Game.Instance.SaveData.SaveSelectedElement[Random.Range(0, StaticData.Instance.elementN)];
             Composition c = new Composition(compositionLevel[i], element);
             blueprint.Compositions.Add(c);
         }

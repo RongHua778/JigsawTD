@@ -15,7 +15,7 @@ CONFIRM=确定
 TUTORIAL=教学
 
 //Battleset
-SELECTELEMENT=选择战斗元素：
+SELECTEDCOUNT=已选择：
 NOENOUGHELEMENT=请选择4种出战元素
 
 
