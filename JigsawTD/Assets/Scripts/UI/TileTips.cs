@@ -14,7 +14,7 @@ public class TileTips : IUserInterface
 
     public override void Show()
     {
-        Sound.Instance.PlayEffect("Sound_Click");
+        //Sound.Instance.PlayEffect("Sound_Click");
         anim.SetBool("isOpen", true);
     }
 

@@ -16,18 +16,18 @@ public class GameEndUI : IUserInterface
     public static int TotalComposite { get => totalComposite; set => totalComposite = value; }
     public static int TotalDamage { get => totalDamage; set => totalDamage = value; }
 
-    public void SetGameResult(int turn)
-    {
-        title.text = GameMultiLang.GetTraduction("PASSLEVEL") + (turn - 1) + GameMultiLang.GetTraduction("WAVE");
-        int maxLevel = LevelManager.Instance.LevelMaxTurn;
-        if ((turn - 1) > maxLevel)
-        {
-            LevelManager.Instance.LevelMaxTurn = turn - 1;
-        }
-        levelHighScore.text = LevelManager.Instance.LevelMaxTurn.ToString();
-        totalCompositeTxt.text = TotalComposite.ToString();
-        totalDamageTxt.text = TotalDamage.ToString();
-    }
+    //public void SetGameResult(int turn)
+    //{
+    //    title.text = GameMultiLang.GetTraduction("PASSLEVEL") + (turn - 1) + GameMultiLang.GetTraduction("WAVE");
+    //    int maxLevel = LevelManager.Instance.LevelMaxTurn;
+    //    if ((turn - 1) > maxLevel)
+    //    {
+    //        LevelManager.Instance.LevelMaxTurn = turn - 1;
+    //    }
+    //    levelHighScore.text = LevelManager.Instance.LevelMaxTurn.ToString();
+    //    totalCompositeTxt.text = TotalComposite.ToString();
+    //    totalDamageTxt.text = TotalDamage.ToString();
+    //}
 
     public void SetGameResult(bool win)
     {

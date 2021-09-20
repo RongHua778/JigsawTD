@@ -7,10 +7,10 @@ public class UILevelManager : IUserInterface
 {
     private bool gameStart = false;
     [SerializeField] BossSlot[] bossSlots = default;
-    [SerializeField] Text levelInfo = default;
     [SerializeField] Text highScore = default;
     [SerializeField] GameObject tutorialPanel = default;
     [SerializeField] UIBattleSet m_UIBattleSet = default;
+    [SerializeField] Text difficultyInfo_Txt = default;
     private Animator m_Anim;
     [SerializeField] Text difficultyTxt = default;
     private int maxDifficulty;
@@ -21,6 +21,8 @@ public class UILevelManager : IUserInterface
         set
         {
             difficulty = Mathf.Clamp(value, 0, maxDifficulty);
+            LevelManager.Instance.SelectedLevelID = Difficulty;
+            difficultyInfo_Txt.text = GameMultiLang.GetTraduction("DIFFICULTY" + difficulty);
             if (Difficulty == 0)
                 difficultyTxt.text = GameMultiLang.GetTraduction("TUTORIAL");
             else
@@ -33,20 +35,21 @@ public class UILevelManager : IUserInterface
     {
         base.Initialize();
         m_Anim = this.GetComponent<Animator>();
-        
+
     }
     public void SetLevelInfo()
     {
-        maxDifficulty = PlayerPrefs.GetInt("MaxDifficulty",0);
+        maxDifficulty = Mathf.Min(4, PlayerPrefs.GetInt("MaxDifficulty", 0));
         Difficulty = maxDifficulty;
         LevelAttribute attribute = LevelManager.Instance.CurrentLevel;
-        int maxPass = LevelManager.Instance.LevelMaxTurn;
-        levelInfo.text = GameMultiLang.GetTraduction(attribute.LevelInfo);
-        highScore.text = GameMultiLang.GetTraduction("HIGHSCORE") + ":" + maxPass + GameMultiLang.GetTraduction("WAVE");
-        for (int i = 0; i < bossSlots.Length; i++)
-        {
-            bossSlots[i].SetBossInfo(attribute.Boss[i], maxPass, (i + 1) * 10);
-        }
+        //int maxPass = LevelManager.Instance.LevelMaxTurn;
+        //highScore.text = GameMultiLang.GetTraduction("HIGHSCORE") + ":" + maxPass + GameMultiLang.GetTraduction("WAVE");
+        //for (int i = 0; i < bossSlots.Length; i++)
+        //{
+        //    bossSlots[i].SetBossInfo(attribute.Boss[i], maxPass, (i + 1) * 10);
+        //}
+
+
     }
 
     public void StartGameBtnClick()
@@ -58,18 +61,13 @@ public class UILevelManager : IUserInterface
             if (Difficulty == 0)
             {
                 Game.Instance.Tutorial = true;
-                Game.Instance.SaveData.SaveSelectedElement = new List<int> { 0, 1, 2, 3 };
+
+                Game.Instance.SaveData.SaveSelectedElement = Game.Instance.SetTutorialElements();
             }
             else
             {
                 Game.Instance.Tutorial = false;
             }
-            //    tutorialPanel.SetActive(true);
-            //else
-            //{
-            //    Game.Instance.Tutorial = false;
-            //    Game.Instance.LoadScene(1);
-            //}
             Game.Instance.LoadScene(1);
         }
     }

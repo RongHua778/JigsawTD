@@ -36,7 +36,7 @@ public class MenuUIManager : Singleton<MenuUIManager>
         if (Input.GetKeyDown(KeyCode.J))
         {
             ShowMessage(GameMultiLang.GetTraduction("TEST2"));
-            PlayerPrefs.SetInt("MaxDifficulty", 3);
+            PlayerPrefs.SetInt("MaxDifficulty", 4);
             Debug.Log(PlayerPrefs.GetInt("MaxDifficulty"));
         }
     }

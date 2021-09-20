@@ -22096,7 +22096,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.11764706}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.09803922}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -29183,8 +29183,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8834c8b736c85524bb85789591747753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SaveData:
-    SaveSelectedElement: 
   SelectDifficulty: 3
   transition: {fileID: 231277384}
   transitionTime: 1
@@ -29232,8 +29230,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Levels:
+  - {fileID: 11400000, guid: 1cffab4195a17dc4f8326be6876fab11, type: 2}
   - {fileID: 11400000, guid: 3db901bc7ef15e646a5ab9b664f6c01b, type: 2}
-  SelectedLevelID: 1
+  - {fileID: 11400000, guid: fbf3466ab2bed174096203daed7b2d4f, type: 2}
+  - {fileID: 11400000, guid: 993e7ccb381984e4983180597ec9c10f, type: 2}
+  - {fileID: 11400000, guid: 99391903eba8a1041af83dc6b559379e, type: 2}
+  SelectedLevelID: 0
 --- !u!114 &1834551534
 MonoBehaviour:
   m_ObjectHideFlags: 0

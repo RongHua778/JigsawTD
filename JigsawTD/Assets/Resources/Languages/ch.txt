@@ -18,13 +18,13 @@ TUTORIAL=教学
 SELECTEDCOUNT=已选择：
 NOENOUGHELEMENT=请选择4种出战元素
 
-
 TEST1=测试：删除了所有存档
 TEST2=测试：已解锁全部难度
 
 LEVEL1NAME=标准模式
 LEVELOTHER=更多模式开发中
 LEVELINFO=关卡信息
+BONUSINFO=通关奖励
 DIFFICULTINFO=难度选择
 DIFFICULTY=难度
 HIGHSCORE=最高记录
@@ -32,11 +32,17 @@ BATTLESET=战斗设置
 WAVE=波
 NUM=第
 
+DIFFICULTY0=
+DIFFICULTY1=1.加入战场标记\n2.坚持30波进攻
+DIFFICULTY2=1.基础血量变为25\n2.普通波中加入两种新的精英敌人
+DIFFICULTY3=1.战场中将出现更多标记\n2.坚持40波进攻
+DIFFICULTY4=1.迎战最强大的BOSS\n2.坚持50波进攻
+
 NEEDTUTORIAL=是否开启教程？
 YES=是
 NO=否
 
-LEVEL1INFO=在标准模式下，你需要镇守40波的敌人入侵，选择并运用你所擅长的策略，只要坚持到最后你就是胜利者。
+MODE1=在标准模式下，你需要镇守40波的敌人入侵，选择并运用你所擅长的策略，只要坚持到最后你就是胜利者。
 
 //tips
 LACKMONEY=金币不足
@@ -310,11 +316,11 @@ ARROWTRAPINFO=按箭头方向经过的敌人会被减速5秒。
 BLINKTRAPINFO=经过的敌人传送到2格前的位置。（每个敌人只会触发一次）
 PROMOTETRAPINFO=接下来2格内的陷阱效果提升50%。
 IMITATETRAPINFO=这个陷阱效果等同于敌人经过的上一个陷阱。
-EXECUTETRAPINFO=对经过的敌人造成0.2%*N的最大生命值伤害，N=此前经过的格子数量。
+EXECUTETRAPINFO=对经过的敌人造成0.4%*N的最大生命值伤害，N=此前经过的格子数量。
 DAMAGEMARKINFO=敌人在接下来3格的移动内所受伤害提高50%
 FROSTTRAPINFO=接下来3格内敌人所受减速效果提高50%
 BONUSTRAPINFO=每个经过的敌人使你获得2金币
-EXPLOSIONTRAPINFO=经过的敌人会触发一次爆炸，造成其20%已损失生命值的范围伤害
+EXPLOSIONTRAPINFO=经过的敌人会触发一次10%当前生命值的范围伤害
 
 //TurretBase
 ATTACKBASE=攻击基座

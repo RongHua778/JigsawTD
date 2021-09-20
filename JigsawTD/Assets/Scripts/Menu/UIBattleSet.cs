@@ -9,8 +9,14 @@ public class UIBattleSet : IUserInterface
 {
     [SerializeField] TipsElementConstruct[] elementConstructs = default;
     [SerializeField] Text m_ElementCountTxt = default;
-    [SerializeField] TurretAttribute[] ElementTurrets = default;
-    [SerializeField] TurretAttribute[] CompositeTurrets = default;
+
+    private List<int> skillPreviewElements = new List<int>();
+
+    private int maxSelectElement = 4;
+    public int MaxSelectElement => maxSelectElement;
+
+    [SerializeField] ElementSlot[] elementSlots = default;
+
 
     private int selectedElement;
     public int SelectedElement
@@ -25,7 +31,6 @@ public class UIBattleSet : IUserInterface
             }
             else
             {
-                SetData();
                 SetSkillPreview();
             }
             m_ElementCountTxt.text = GameMultiLang.GetTraduction("SELECTEDCOUNT") + selectedElement + "/" + MaxSelectElement;
@@ -51,10 +56,7 @@ public class UIBattleSet : IUserInterface
         }
     }
 
-    private int maxSelectElement = 4;
-    public int MaxSelectElement => maxSelectElement;
 
-    [SerializeField] ElementSlot[] elementSlots = default;
 
     public override void Show()
     {
@@ -65,16 +67,11 @@ public class UIBattleSet : IUserInterface
     private void InitializeSlots()
     {
         SelectedElement = 0;
-        List<int> eElements = Game.Instance.SaveData.SaveSelectedElement;
-
-        for (int i = 0; i < elementSlots.Length; i++)
-        {
-            elementSlots[i].Initialize(this, ElementTurrets[i]);
-        }
+        List<ElementSelect> eElements = Game.Instance.SaveData.SaveSelectedElement;
 
         for (int i = 0; i < eElements.Count; i++)
         {
-            elementSlots[i].IsSelect = true;//等于I就代表这个元素已选择
+            elementSlots[i].Initialize(this, eElements[i]);
         }
 
         SetSkillPreview();
@@ -82,14 +79,10 @@ public class UIBattleSet : IUserInterface
 
     private void SetData()
     {
-        Game.Instance.SaveData.SaveSelectedElement.Clear();
-
         for (int i = 0; i < elementSlots.Length; i++)
         {
-            if (elementSlots[i].IsSelect)
-            {
-                Game.Instance.SaveData.SaveSelectedElement.Add(i);
-            }
+            Game.Instance.SaveData.SaveSelectedElement[i].isSelect = elementSlots[i].IsSelect;
+            Game.Instance.SaveData.SaveSelectedElement[i].isLock = elementSlots[i].IsLock;
         }
     }
 
@@ -109,7 +102,14 @@ public class UIBattleSet : IUserInterface
 
     private void SetSkillPreview()
     {
-        List<List<int>> skills = StaticData.GetAllCC2(Game.Instance.SaveData.SaveSelectedElement);
+        skillPreviewElements.Clear();
+        for (int i = 0; i < elementSlots.Length; i++)
+        {
+            if (elementSlots[i].IsSelect)
+                skillPreviewElements.Add(i);
+        }
+
+        List<List<int>> skills = StaticData.GetAllCC2(skillPreviewElements);
         for (int i = 0; i < skills.Count; i++)
         {
             ElementSkill skill = TurretEffectFactory.GetElementSkill(skills[i]);

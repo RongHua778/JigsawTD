@@ -88,9 +88,10 @@ public class TileContentFactory : GameObjectFactory
 
     public void SetBattleElements()
     {
-        foreach(int index in Game.Instance.SaveData.SaveSelectedElement)
+        foreach (var select in Game.Instance.SaveData.SaveSelectedElement)
         {
-            BattleElements.Add(ElementDIC[(Element)index]);
+            if (select.isSelect)
+                BattleElements.Add(ElementDIC[(Element)select.id]);
         }
     }
 
@@ -132,7 +133,7 @@ public class TileContentFactory : GameObjectFactory
         int quality = StaticData.RandomNumber(qualityC) + 1;
         TurretAttribute attribute = BattleElements[UnityEngine.Random.Range(0, StaticData.Instance.elementN)];
         ElementTurret content = Get(attribute.ContentPrefab) as ElementTurret;
-        content.Strategy = new StrategyBase( attribute, quality);
+        content.Strategy = new StrategyBase(attribute, quality);
         content.Strategy.m_Turret = content;
         content.Strategy.SetQualityValue();
         content.InitializeTurret();

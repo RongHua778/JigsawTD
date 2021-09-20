@@ -80,12 +80,12 @@ public class WaveSystem : IGameSystem
         LevelSequence.Clear();
         float stage = 1;
         List<EnemySequence> sequences = null;
-        for (int i = 0; i < StaticData.Instance.LevelMaxWave; i++)
+        for (int i = 0; i < LevelAttribute.Wave; i++)
         {
 
             if (i % 3 == 0)
             {
-                stage += (((float)i / 10) + 1) * (Game.Instance.SelectDifficulty + 1) * (0.5f * i + 1);
+                stage += (((float)i / 10) + 1) * LevelAttribute.LevelIntensify * (0.5f * i + 1);
             }
             //if (i > 39)
             //{
@@ -145,7 +145,7 @@ public class WaveSystem : IGameSystem
 
     private List<EnemySequence> GenerateRandomSequence(int genres, float stage, int wave)
     {
-        int maxRandom = wave > 15 ? 6 : 4;
+        int maxRandom = wave > LevelAttribute.EliteWave ? LevelAttribute.NormalEnemies.Count : 4;
         List<EnemySequence> sequencesToReturn = new List<EnemySequence>();
         List<int> indexs = StaticData.SelectNoRepeat(maxRandom, genres);
         foreach (int index in indexs)

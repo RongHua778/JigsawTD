@@ -67,6 +67,7 @@ public class BoardSystem : IGameSystem
             {
                 selection.transform.position = selectingTile.transform.position;
                 selectingTile.OnTileSelected(true);
+                Sound.Instance.PlayEffect("Sound_Click");
             }
             selection.SetActive(selectingTile != null);
         }

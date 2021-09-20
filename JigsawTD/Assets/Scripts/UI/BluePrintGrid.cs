@@ -73,14 +73,16 @@ public class BluePrintGrid : ReusableObject//, IPointerEnterHandler, IPointerExi
                 SelectingBluePrint.OnBluePrintDeselect();
             SelectingBluePrint = this;
             GameManager.Instance.ShowBluePrintTips(this);
+            Sound.Instance.PlayEffect("Sound_Click");
         }
         else
         {
             if (SelectingBluePrint == this)
                 OnBluePrintDeselect();
         }
-
     }
+
+
 
     public void OnBluePrintDeselect()
     {

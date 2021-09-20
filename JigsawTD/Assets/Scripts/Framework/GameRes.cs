@@ -22,6 +22,7 @@ public static class GameRes
     public static float TempFireIntensify = 0;
     public static float TempDustIntensify = 0;
 
+    public static List<int> BattleElements = new List<int>();
 
 
     private static int coin;
@@ -77,6 +78,17 @@ public static class GameRes
         TempWaterIntensify = 0;
         TempFireIntensify = 0;
         TempDustIntensify = 0;
+
+        SetBattleElements();
+    }
+
+    private static void SetBattleElements()
+    {
+        foreach(var select in Game.Instance.SaveData.SaveSelectedElement)
+        {
+            if(select.isSelect)
+                BattleElements.Add(select.id);
+        }
     }
 
 }

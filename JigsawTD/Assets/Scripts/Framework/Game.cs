@@ -25,7 +25,7 @@ public class Game : Singleton<Game>
     protected override void Awake()
     {
         base.Awake();
-       
+
         LoadGame();
         Application.runInBackground = true;
         GameObject.DontDestroyOnLoad(this.gameObject);
@@ -125,11 +125,22 @@ public class Game : Singleton<Game>
         else
         {
             Save save = new Save();
-            List<int> sElements = new List<int> { 0, 1, 2, 3 };
+            List<ElementSelect> sElements = SetTutorialElements();
             save.SaveSelectedElement = sElements;
             SaveData = save;
             //m_EventTrigger.SetRemainEvent();//初始化eventlist
         }
-
     }
+
+    public List<ElementSelect> SetTutorialElements()
+    {
+        ElementSelect select0 = new ElementSelect(0, false, true);
+        ElementSelect select1 = new ElementSelect(1, false, true);
+        ElementSelect select2 = new ElementSelect(2, false, true);
+        ElementSelect select3 = new ElementSelect(3, false, true);
+        ElementSelect select4 = new ElementSelect(4, true, false);
+        List<ElementSelect> sElements = new List<ElementSelect> { select0, select1, select2, select3, select4 };
+        return sElements;
+    }
+
 }

@@ -7,7 +7,7 @@ using System;
 public class Save
 {
     //已选择战斗元素
-    public List<int> SaveSelectedElement = new List<int>();
+    public List<ElementSelect> SaveSelectedElement = new List<ElementSelect>();
     //已选择合成塔
 
 }
@@ -15,10 +15,12 @@ public class Save
 public class ElementSelect
 {
     public int id;
+    public bool isLock;
     public bool isSelect;
-    public ElementSelect(int id,bool select)
+    public ElementSelect(int id,bool isLock, bool select)
     {
         this.id = id;
+        this.isLock = isLock;
         this.isSelect = select;
     }
 }
