@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rotary
   m_EditorClassIdentifier: 
   Name: ROTARY
-  Icon: {fileID: -4688781176453597497, guid: 5fd2f2e134ec9bc4ca7e863cf2992137, type: 3}
+  Icon: {fileID: -1588336856667769469, guid: 5fd2f2e134ec9bc4ca7e863cf2992137, type: 3}
   Description: ROTARYSKILL
   ContentPrefab: {fileID: 3473736283192967209, guid: ae3a3ea7c8913984ba274c5376b270bd, type: 3}
   StrategyType: 1
@@ -34,7 +34,6 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: ROTARY
     TurretIcon: {fileID: -4688781176453597497, guid: 5fd2f2e134ec9bc4ca7e863cf2992137, type: 3}
     CannonSprite: {fileID: -6186797135952016049, guid: c066612b6f4b1e44d8b5837b75cf8b08, type: 3}
     ShootPointOffset: {x: 0, y: 0}
@@ -45,7 +44,6 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: ROTARY
     TurretIcon: {fileID: -2368188075412391048, guid: 5fd2f2e134ec9bc4ca7e863cf2992137, type: 3}
     CannonSprite: {fileID: -432138986413943803, guid: c066612b6f4b1e44d8b5837b75cf8b08, type: 3}
     ShootPointOffset: {x: 0, y: 0}
@@ -56,7 +54,6 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: ROTARY
     TurretIcon: {fileID: -1588336856667769469, guid: 5fd2f2e134ec9bc4ca7e863cf2992137, type: 3}
     CannonSprite: {fileID: 8605722687922174138, guid: c066612b6f4b1e44d8b5837b75cf8b08, type: 3}
     ShootPointOffset: {x: 0, y: 0}

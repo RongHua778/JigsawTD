@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Level4
   m_EditorClassIdentifier: 
   LevelID: 0
-  Wave: 50
+  PlayerHealth: 15
+  Wave: 40
   LevelIntensify: 5
   NormalEnemies:
   - {fileID: 11400000, guid: a2fa830bad8e11c448623ce28354a1bd, type: 2}

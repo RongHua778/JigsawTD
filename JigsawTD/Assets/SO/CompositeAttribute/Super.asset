@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Super
   m_EditorClassIdentifier: 
   Name: SUPER
-  Icon: {fileID: 21300000, guid: efd7eca78d1a1d44d8b38abd7973113e, type: 3}
+  Icon: {fileID: 8783240499713188425, guid: 5ffd5a68966da114d9a58cd1e921a4ef, type: 3}
   Description: SUPERSKILL
   ContentPrefab: {fileID: 2682830154004877270, guid: 38a933d8a495386418cc643b0a8dbb6d, type: 3}
   StrategyType: 1

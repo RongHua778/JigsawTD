@@ -15,7 +15,7 @@ namespace Assets.Plugins.ButtonSoundsEditor
 
         private void PlayClickSound()
         {
-            AudioSource.PlayOneShot(ClickSound);
+            Sound.Instance.PlayEffect(ClickSound);
         }
     }
 

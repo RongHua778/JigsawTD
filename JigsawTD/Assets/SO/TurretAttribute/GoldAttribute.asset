@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GoldAttribute
   m_EditorClassIdentifier: 
   Name: GOLD
-  Icon: {fileID: 0}
+  Icon: {fileID: -5385682246039739975, guid: 1d42c048b2d65864e8d3e6f8f439d0ba, type: 3}
   Description: ASKILL
   ContentPrefab: {fileID: 8572582981006047005, guid: 64023e2772aa3cf4292462b25d0fb727, type: 3}
   StrategyType: 0
@@ -34,7 +34,6 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: A1
     TurretIcon: {fileID: -4293952102954766580, guid: 1d42c048b2d65864e8d3e6f8f439d0ba, type: 3}
     CannonSprite: {fileID: -2494827163238398725, guid: 768de1dbe1dcb8c45b69b4de6a5821bb, type: 3}
     ShootPointOffset: {x: 0, y: 0.33}
@@ -45,7 +44,6 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: A2
     TurretIcon: {fileID: -7579240340240280150, guid: 1d42c048b2d65864e8d3e6f8f439d0ba, type: 3}
     CannonSprite: {fileID: -5280431197249048325, guid: 768de1dbe1dcb8c45b69b4de6a5821bb, type: 3}
     ShootPointOffset: {x: 0, y: 0.35}
@@ -56,7 +54,6 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: A3
     TurretIcon: {fileID: -7641452014064155769, guid: 1d42c048b2d65864e8d3e6f8f439d0ba, type: 3}
     CannonSprite: {fileID: -4889670263694701591, guid: 768de1dbe1dcb8c45b69b4de6a5821bb, type: 3}
     ShootPointOffset: {x: 0, y: 0.38}
@@ -67,7 +64,6 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: A4
     TurretIcon: {fileID: -1087002185150558114, guid: 1d42c048b2d65864e8d3e6f8f439d0ba, type: 3}
     CannonSprite: {fileID: 7028729962307703768, guid: 768de1dbe1dcb8c45b69b4de6a5821bb, type: 3}
     ShootPointOffset: {x: 0, y: 0.41}
@@ -78,7 +74,6 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: A5
     TurretIcon: {fileID: -5385682246039739975, guid: 1d42c048b2d65864e8d3e6f8f439d0ba, type: 3}
     CannonSprite: {fileID: 4799454438761694576, guid: 768de1dbe1dcb8c45b69b4de6a5821bb, type: 3}
     ShootPointOffset: {x: 0, y: 0.44}

@@ -27,7 +27,7 @@ public class MainUI : IUserInterface
 
     public int Life
     {
-        set => PlayerLifeTxt.text = value.ToString() + "/" + StaticData.Instance.PlayerMaxHealth[Game.Instance.SelectDifficulty].ToString();
+        set => PlayerLifeTxt.text = value.ToString() + "/" + LevelManager.Instance.CurrentLevel.PlayerHealth.ToString();
     }
 
 

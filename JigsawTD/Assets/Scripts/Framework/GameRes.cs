@@ -46,7 +46,7 @@ public static class GameRes
             {
                 GameManager.Instance.GameEnd(false);
             }
-            life = Mathf.Clamp(value, 0, StaticData.Instance.PlayerMaxHealth[Game.Instance.SelectDifficulty]);
+            life = Mathf.Clamp(value, 0, LevelManager.Instance.CurrentLevel.PlayerHealth);
             m_MainUI.Life = life;
         }
     }
@@ -66,7 +66,7 @@ public static class GameRes
         m_FuncUI = funcUI;
         CurrentWave = 0;
         Coin = StaticData.Instance.StartCoin;
-        Life = StaticData.Instance.PlayerMaxHealth[Game.Instance.SelectDifficulty];
+        Life = LevelManager.Instance.CurrentLevel.PlayerHealth;
 
         PerfectElementCount = 0;
         OverallMoneyIntensify = 0;

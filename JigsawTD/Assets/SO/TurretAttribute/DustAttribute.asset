@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DustAttribute
   m_EditorClassIdentifier: 
   Name: DUST
-  Icon: {fileID: 0}
+  Icon: {fileID: -302460881117483773, guid: 848bbae097f55734ab0a02c063fd3e70, type: 3}
   Description: ESKILL
   ContentPrefab: {fileID: 900867221070031195, guid: 8574fb7c958d9084199e76f94ed13f80, type: 3}
   StrategyType: 0
@@ -34,7 +34,6 @@ MonoBehaviour:
     SputteringRange: 0.3
     CriticalRate: 0
     SlowRate: 0
-    TurretName: E1
     TurretIcon: {fileID: -6036163202154314397, guid: 848bbae097f55734ab0a02c063fd3e70, type: 3}
     CannonSprite: {fileID: 5677318413422527814, guid: 6b887e89a4f334f4e876753947f5fd50, type: 3}
     ShootPointOffset: {x: 0, y: 0.27}
@@ -45,7 +44,6 @@ MonoBehaviour:
     SputteringRange: 0.35
     CriticalRate: 0
     SlowRate: 0
-    TurretName: E2
     TurretIcon: {fileID: -5104728489556445294, guid: 848bbae097f55734ab0a02c063fd3e70, type: 3}
     CannonSprite: {fileID: -4508707043556292444, guid: 6b887e89a4f334f4e876753947f5fd50, type: 3}
     ShootPointOffset: {x: 0, y: 0.3}
@@ -56,7 +54,6 @@ MonoBehaviour:
     SputteringRange: 0.4
     CriticalRate: 0
     SlowRate: 0
-    TurretName: E3
     TurretIcon: {fileID: 2768713202220553346, guid: 848bbae097f55734ab0a02c063fd3e70, type: 3}
     CannonSprite: {fileID: -4254847361795187178, guid: 6b887e89a4f334f4e876753947f5fd50, type: 3}
     ShootPointOffset: {x: 0, y: 0.32}
@@ -67,7 +64,6 @@ MonoBehaviour:
     SputteringRange: 0.45
     CriticalRate: 0
     SlowRate: 0
-    TurretName: E4
     TurretIcon: {fileID: 3239631297230032197, guid: 848bbae097f55734ab0a02c063fd3e70, type: 3}
     CannonSprite: {fileID: 9147300514977118220, guid: 6b887e89a4f334f4e876753947f5fd50, type: 3}
     ShootPointOffset: {x: 0, y: 0.32}
@@ -78,7 +74,6 @@ MonoBehaviour:
     SputteringRange: 0.5
     CriticalRate: 0
     SlowRate: 0
-    TurretName: E5
     TurretIcon: {fileID: -302460881117483773, guid: 848bbae097f55734ab0a02c063fd3e70, type: 3}
     CannonSprite: {fileID: -8803647767435065335, guid: 6b887e89a4f334f4e876753947f5fd50, type: 3}
     ShootPointOffset: {x: 0, y: 0.38}

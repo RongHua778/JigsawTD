@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Scatter
   m_EditorClassIdentifier: 
   Name: SCATTER
-  Icon: {fileID: 21300000, guid: 00a54f1e9a5dc594f92df5235b551bd3, type: 3}
+  Icon: {fileID: -2627968999494206068, guid: 4b038e37e166a7c48af47f16a54bb6cd, type: 3}
   Description: SCATTERSKILL
   ContentPrefab: {fileID: 5443515898983359739, guid: da3c56fe5fd034e4eade45627187e825, type: 3}
   StrategyType: 1
@@ -34,7 +34,6 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: SCATTER
     TurretIcon: {fileID: -9211831098944562447, guid: 4b038e37e166a7c48af47f16a54bb6cd, type: 3}
     CannonSprite: {fileID: 2089025809146879076, guid: 303ce8eb792cc7a4986fd191b331e232, type: 3}
     ShootPointOffset: {x: 0, y: 0.2}
@@ -45,7 +44,6 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: SCATTER
     TurretIcon: {fileID: 2157814476178702334, guid: 4b038e37e166a7c48af47f16a54bb6cd, type: 3}
     CannonSprite: {fileID: -2814716490535584438, guid: 303ce8eb792cc7a4986fd191b331e232, type: 3}
     ShootPointOffset: {x: 0, y: 0.24}
@@ -56,7 +54,6 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: SCATTER
     TurretIcon: {fileID: -2627968999494206068, guid: 4b038e37e166a7c48af47f16a54bb6cd, type: 3}
     CannonSprite: {fileID: 6594016546165510742, guid: 303ce8eb792cc7a4986fd191b331e232, type: 3}
     ShootPointOffset: {x: 0, y: 0.3}

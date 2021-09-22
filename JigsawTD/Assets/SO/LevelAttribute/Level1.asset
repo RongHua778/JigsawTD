@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: 
   LevelID: 0
+  PlayerHealth: 25
   Wave: 30
   LevelIntensify: 2
   NormalEnemies:

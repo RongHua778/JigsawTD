@@ -15,10 +15,10 @@ public class WaveInfoSetter : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         switch (lang)
         {
             case "ch":
-                waveTxt.text = GameMultiLang.GetTraduction("NUM") + wave + "/" + StaticData.Instance.LevelMaxWave + GameMultiLang.GetTraduction("WAVE");
+                waveTxt.text = GameMultiLang.GetTraduction("NUM") + wave + "/" + LevelManager.Instance.CurrentLevel.Wave + GameMultiLang.GetTraduction("WAVE");
                 break;
             case "en":
-                waveTxt.text = GameMultiLang.GetTraduction("WAVE") + wave + "/" + StaticData.Instance.LevelMaxWave;
+                waveTxt.text = GameMultiLang.GetTraduction("WAVE") + wave + "/" + LevelManager.Instance.CurrentLevel.Wave;
                 break;
         }
         foreach (var obj in enemyIcons)

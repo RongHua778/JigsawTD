@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Mortar
   m_EditorClassIdentifier: 
   Name: MORTAR
-  Icon: {fileID: 21300000, guid: 210ece2c2e01aab46860c56550dc1802, type: 3}
+  Icon: {fileID: 7539865526745803331, guid: 551af557e968b9045aaedf98e3e4550e, type: 3}
   Description: MORTARSKILL
   ContentPrefab: {fileID: 4967710668388058910, guid: 1222c5c9d6ecf7a4195b038a25c2816f, type: 3}
   StrategyType: 1
@@ -34,7 +34,6 @@ MonoBehaviour:
     SputteringRange: 0.4
     CriticalRate: 0
     SlowRate: 0
-    TurretName: MORTAR
     TurretIcon: {fileID: 1801364980830264451, guid: 551af557e968b9045aaedf98e3e4550e, type: 3}
     CannonSprite: {fileID: -1663970100683075234, guid: 9f8ffabf4348bc14f856b8f7431d5260, type: 3}
     ShootPointOffset: {x: 0, y: 0.22}
@@ -45,7 +44,6 @@ MonoBehaviour:
     SputteringRange: 0.6
     CriticalRate: 0
     SlowRate: 0
-    TurretName: MORTAR
     TurretIcon: {fileID: 5231916774148396669, guid: 551af557e968b9045aaedf98e3e4550e, type: 3}
     CannonSprite: {fileID: 2696707030071803913, guid: 9f8ffabf4348bc14f856b8f7431d5260, type: 3}
     ShootPointOffset: {x: 0, y: 0.25}
@@ -56,7 +54,6 @@ MonoBehaviour:
     SputteringRange: 0.8
     CriticalRate: 0
     SlowRate: 0
-    TurretName: MORTAR
     TurretIcon: {fileID: 7539865526745803331, guid: 551af557e968b9045aaedf98e3e4550e, type: 3}
     CannonSprite: {fileID: -763524890675468239, guid: 9f8ffabf4348bc14f856b8f7431d5260, type: 3}
     ShootPointOffset: {x: 0, y: 0.3}

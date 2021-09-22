@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cooporative
   m_EditorClassIdentifier: 
   Name: COOPORATIVE
-  Icon: {fileID: -5964304119457197868, guid: 5ffd5a68966da114d9a58cd1e921a4ef, type: 3}
+  Icon: {fileID: 8666163450238569026, guid: 30a21b1d5faac134e801f6967d51797e, type: 3}
   Description: COOPORATIVESKILL
   ContentPrefab: {fileID: 2408362322337057344, guid: 9db29f8dde8f00d47abb71ad308bed81, type: 3}
   StrategyType: 1

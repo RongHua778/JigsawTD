@@ -8373,8 +8373,8 @@ MonoBehaviour:
   - {fileID: 1162124525}
   - {fileID: 2028100717}
   - {fileID: 1532827754}
-  parallaxScale: 1
-  parallaxReductionFactor: 0.8
+  parallaxScale: 0.8
+  parallaxReductionFactor: 0.6
   smoothing: 8
 --- !u!20 &519420031
 Camera:
@@ -29269,15 +29269,7 @@ MonoBehaviour:
   BuyGroundCostMultyply: 20
   SwitchTrapCost: 50
   SwitchTrapCostMultiply: 50
-  EnvrionmentBaseVolume: 0.5
   TileSize: 1
-  maxLevel: 5
-  elementN: 4
-  maxQuality: 5
-  trapN: 30
-  basicN: 25
-  PlayerMaxHealth: 1e0000000f0000000f0000000f0000000f000000
-  difficutyWave: 1400000028000000280000002800000028000000
   GoldAttackIntensify: 0.3
   WoodSpeedIntensify: 0.3
   WaterSlowIntensify: 0.5

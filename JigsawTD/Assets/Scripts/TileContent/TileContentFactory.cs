@@ -131,7 +131,7 @@ public class TileContentFactory : GameObjectFactory
             qualityC[i] = StaticData.QualityChances[playerLevel - 1, i];
         }
         int quality = StaticData.RandomNumber(qualityC) + 1;
-        TurretAttribute attribute = BattleElements[UnityEngine.Random.Range(0, StaticData.Instance.elementN)];
+        TurretAttribute attribute = BattleElements[UnityEngine.Random.Range(0, StaticData.elementN)];
         ElementTurret content = Get(attribute.ContentPrefab) as ElementTurret;
         content.Strategy = new StrategyBase(attribute, quality);
         content.Strategy.m_Turret = content;

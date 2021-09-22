@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sniper
   m_EditorClassIdentifier: 
   Name: SNIPER
-  Icon: {fileID: 0}
+  Icon: {fileID: -1944259913073176082, guid: c1be13963e61eae42b02687dd1475717, type: 3}
   Description: SNIPERSKILL
   ContentPrefab: {fileID: 1494963813994468761, guid: 05869ddac62aff043bf7e0106d00bc2e, type: 3}
   StrategyType: 1
@@ -34,7 +34,6 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: SNIPER
     TurretIcon: {fileID: -6734541021382769069, guid: c1be13963e61eae42b02687dd1475717, type: 3}
     CannonSprite: {fileID: -5442612025329375428, guid: 42957127c2e7aba48a21a85a636cb609, type: 3}
     ShootPointOffset: {x: 0, y: 0.29}
@@ -45,7 +44,6 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: SNIPER
     TurretIcon: {fileID: -7260088481118571112, guid: c1be13963e61eae42b02687dd1475717, type: 3}
     CannonSprite: {fileID: -2004675633971898, guid: 42957127c2e7aba48a21a85a636cb609, type: 3}
     ShootPointOffset: {x: 0, y: 0.37}
@@ -56,7 +54,6 @@ MonoBehaviour:
     SputteringRange: 0
     CriticalRate: 0
     SlowRate: 0
-    TurretName: SNIPER
     TurretIcon: {fileID: -1944259913073176082, guid: c1be13963e61eae42b02687dd1475717, type: 3}
     CannonSprite: {fileID: 5670319644688947614, guid: 42957127c2e7aba48a21a85a636cb609, type: 3}
     ShootPointOffset: {x: 0, y: 0.38}

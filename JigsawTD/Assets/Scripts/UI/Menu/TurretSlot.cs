@@ -4,9 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ElementSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class TurretSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField]private bool isLock;
+    [SerializeField] Vector2 tipsPos = default;
+    SetHolder m_SetHolder;
+
+    [SerializeField] private bool isLock;
     public bool IsLock
     {
         get => isLock;
@@ -19,7 +22,6 @@ public class ElementSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     [SerializeField] Image lockIcon = default;
     [SerializeField] Image icon = default;
-    UIBattleSet m_UIBattleSet;
     [SerializeField] TurretAttribute TurretAtt;
 
     bool isSelect = false;
@@ -29,23 +31,19 @@ public class ElementSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         set
         {
             isSelect = value;
-            if (isSelect)
-                m_UIBattleSet.SelectedElement++;
-            else
-                m_UIBattleSet.SelectedElement--;
             _Anim.SetBool("IsSelect", isSelect);
         }
     }
 
     Animator _Anim;
 
-    public void Initialize(UIBattleSet battleSet, ElementSelect selectInfo)
+    public void Initialize(SetHolder setHolder, SelectInfo selectInfo)
     {
-        this.m_UIBattleSet = battleSet;
+        this.m_SetHolder = setHolder;
         _Anim = this.GetComponent<Animator>();
         this.IsSelect = selectInfo.isSelect;
         this.IsLock = selectInfo.isLock;
-        icon.sprite = TurretAtt.TurretLevels[4].TurretIcon;
+        icon.sprite = TurretAtt.Icon;
     }
 
     public void OnSlotClick()
@@ -53,20 +51,22 @@ public class ElementSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if (isSelect)
         {
             IsSelect = false;
+            m_SetHolder.SelectedCount--;
         }
         else
         {
-            if (!IsLock && m_UIBattleSet.SelectedElement < m_UIBattleSet.MaxSelectElement)
+            if (!IsLock && m_SetHolder.SelectedCount < m_SetHolder.MaxSelectCount)
             {
                 IsSelect = true;
+                m_SetHolder.SelectedCount++;
             }
         }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(!IsLock)
-            MenuUIManager.Instance.ShowTurretTips(TurretAtt);
+        if (!IsLock)
+            MenuUIManager.Instance.ShowTurretTips(TurretAtt, tipsPos);
     }
 
     public void OnPointerExit(PointerEventData eventData)

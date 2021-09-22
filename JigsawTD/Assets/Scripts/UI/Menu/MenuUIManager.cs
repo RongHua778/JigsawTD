@@ -47,8 +47,9 @@ public class MenuUIManager : Singleton<MenuUIManager>
         m_UILevelManager.SetLevelInfo();
     }
 
-    public void ShowTurretTips(TurretAttribute att)
+    public void ShowTurretTips(TurretAttribute att, Vector2 pos)
     {
+        m_TurretTips.GetComponent<RectTransform>().anchoredPosition = pos;
         m_TurretTips.Show();
         m_TurretTips.ReadAttribute(att);
     }

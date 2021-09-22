@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Boomerrang
   m_EditorClassIdentifier: 
   Name: BOOMERRANG
-  Icon: {fileID: 0}
+  Icon: {fileID: -5153134150779752020, guid: a799722f85e58a34993e12144292e1a9, type: 3}
   Description: BOOMERRANGSKILL
   ContentPrefab: {fileID: 5634142968415057810, guid: f48e2d78274808848bf0c98accb78f83, type: 3}
   StrategyType: 1

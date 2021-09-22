@@ -67,18 +67,11 @@ public class StaticData : Singleton<StaticData>
 
 
     [Header("场景数值设置")]
-    public float EnvrionmentBaseVolume = .25f;
+    public static float EnvrionmentBaseVolume = .5f;
     public float TileSize = default;
-    public int maxLevel = 5;    //塔的最大等级
-    public int elementN = 4;//一共有几种战斗元素
-    public int maxQuality = 5;//最大quality
-    public int trapN = 15;
-    public int basicN = 25;
-
-    [Header("波次设置")]
-    public int[] PlayerMaxHealth;
-    public int[] difficutyWave;
-    public int LevelMaxWave=> difficutyWave[Game.Instance.SelectDifficulty];
+    public static int maxLevel = 5;    //塔的最大等级
+    public static int elementN = 4;//一共有几种战斗元素
+    public static int maxQuality = 5;//最大quality
 
     [Header("元素加成")]
     public float GoldAttackIntensify = 0.3f;
@@ -264,13 +257,13 @@ public class StaticData : Singleton<StaticData>
     //给定一个总等级，返回若干个随机数的方法
     public static int[] GetSomeRandoms(int totalLevel, int number)
     {
-        if ((totalLevel / number) >Instance.maxLevel)
+        if ((totalLevel / number) >maxLevel)
         {
             Debug.LogWarning("配方等级输错了，菜鸡");
             int[] errorRandom = new int[number];
             for (int i = 0; i < number; i++)
             {
-                errorRandom[i] = Instance.maxLevel;
+                errorRandom[i] = maxLevel;
             }
             return errorRandom;
         }
@@ -292,7 +285,7 @@ public class StaticData : Singleton<StaticData>
             if (number == 2)
             {
                 int min = 1;
-                while (totalLevel - min > Instance.maxLevel)
+                while (totalLevel - min > maxLevel)
                 {
                     min++;
                 }
@@ -302,9 +295,9 @@ public class StaticData : Singleton<StaticData>
             }
             else if (number >= 2)
             {
-                int max = Mathf.Min(totalLevel - (number - 1), Instance.maxLevel);
+                int max = Mathf.Min(totalLevel - (number - 1), maxLevel);
                 int min = 1;
-                while (totalLevel - min > Instance.maxLevel * (number - 1))
+                while (totalLevel - min > maxLevel * (number - 1))
                 {
                     min++;
                 }

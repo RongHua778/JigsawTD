@@ -6,6 +6,7 @@ using UnityEngine;
 public class LevelAttribute : ScriptableObject
 {
     public int LevelID;
+    public int PlayerHealth;
     public int Wave;
     public float LevelIntensify;
     public List<EnemyAttribute> NormalEnemies;

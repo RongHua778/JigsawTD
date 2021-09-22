@@ -16,7 +16,7 @@ TUTORIAL=教学
 
 //Battleset
 SELECTEDCOUNT=已选择：
-NOENOUGHELEMENT=请选择4种出战元素
+NOENOUGHELEMENT=请选择指定数目的元素/配方
 
 TEST1=测试：删除了所有存档
 TEST2=测试：已解锁全部难度
@@ -36,7 +36,7 @@ DIFFICULTY0=
 DIFFICULTY1=1.加入战场标记\n2.坚持30波进攻
 DIFFICULTY2=1.基础血量变为25\n2.普通波中加入两种新的精英敌人
 DIFFICULTY3=1.战场中将出现更多标记\n2.坚持40波进攻
-DIFFICULTY4=1.迎战最强大的BOSS\n2.坚持50波进攻
+DIFFICULTY4=1.迎接最终难度挑战
 
 NEEDTUTORIAL=是否开启教程？
 YES=是

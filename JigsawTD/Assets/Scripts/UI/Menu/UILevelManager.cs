@@ -62,7 +62,7 @@ public class UILevelManager : IUserInterface
             {
                 Game.Instance.Tutorial = true;
 
-                Game.Instance.SaveData.SaveSelectedElement = Game.Instance.SetTutorialElements();
+                Game.Instance.SaveData.SetTutorialElements();
             }
             else
             {

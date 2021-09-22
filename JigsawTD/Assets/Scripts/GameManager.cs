@@ -206,7 +206,7 @@ public class GameManager : Singleton<GameManager>
         {
             return;
         }
-        if (GameRes.CurrentWave >= StaticData.Instance.LevelMaxWave)
+        if (GameRes.CurrentWave >= LevelManager.Instance.CurrentLevel.Wave)
         {
             GameEnd(true);
             return;

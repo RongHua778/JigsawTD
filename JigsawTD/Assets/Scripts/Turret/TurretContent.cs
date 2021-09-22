@@ -80,7 +80,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
 
     protected virtual void PlayAudio(AudioClip clip, bool isAuto)
     {
-        audioSource.volume = StaticData.Instance.EnvrionmentBaseVolume;
+        audioSource.volume = StaticData.EnvrionmentBaseVolume;
         audioSource.clip = clip;
         if (isAuto)
         {
