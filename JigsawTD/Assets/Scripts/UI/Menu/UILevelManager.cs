@@ -6,29 +6,11 @@ using UnityEngine.UI;
 public class UILevelManager : IUserInterface
 {
     private bool gameStart = false;
-    [SerializeField] BossSlot[] bossSlots = default;
-    [SerializeField] Text highScore = default;
-    [SerializeField] GameObject tutorialPanel = default;
     [SerializeField] UIBattleSet m_UIBattleSet = default;
     [SerializeField] Text difficultyInfo_Txt = default;
     private Animator m_Anim;
     [SerializeField] Text difficultyTxt = default;
-    private int maxDifficulty;
-    int difficulty;
-    public int Difficulty
-    {
-        get => difficulty;
-        set
-        {
-            difficulty = Mathf.Clamp(value, 0, maxDifficulty);
-            LevelManager.Instance.SelectedLevelID = Difficulty;
-            difficultyInfo_Txt.text = GameMultiLang.GetTraduction("DIFFICULTY" + difficulty);
-            if (Difficulty == 0)
-                difficultyTxt.text = GameMultiLang.GetTraduction("TUTORIAL");
-            else
-                difficultyTxt.text = GameMultiLang.GetTraduction("DIFFICULTY") + " " + difficulty.ToString();
-        }
-    }
+
 
 
     public override void Initialize()
@@ -39,9 +21,7 @@ public class UILevelManager : IUserInterface
     }
     public void SetLevelInfo()
     {
-        maxDifficulty = Mathf.Min(4, PlayerPrefs.GetInt("MaxDifficulty", 0));
-        Difficulty = maxDifficulty;
-        LevelAttribute attribute = LevelManager.Instance.CurrentLevel;
+        DifficultyBtnClick(0);
         //int maxPass = LevelManager.Instance.LevelMaxTurn;
         //highScore.text = GameMultiLang.GetTraduction("HIGHSCORE") + ":" + maxPass + GameMultiLang.GetTraduction("WAVE");
         //for (int i = 0; i < bossSlots.Length; i++)
@@ -56,13 +36,12 @@ public class UILevelManager : IUserInterface
     {
         if (!gameStart)
         {
-            Game.Instance.SelectDifficulty = Difficulty;
             gameStart = true;
-            if (Difficulty == 0)
+            if (LevelManager.Instance.SelectedLevelID == 0)
             {
                 Game.Instance.Tutorial = true;
 
-                Game.Instance.SaveData.SetTutorialElements();
+                //Game.Instance.SaveData.SetTutorialElements();
             }
             else
             {
@@ -74,7 +53,12 @@ public class UILevelManager : IUserInterface
 
     public void DifficultyBtnClick(int count)
     {
-        Difficulty += count;
+        LevelManager.Instance.SelectedLevelID += count;
+        difficultyInfo_Txt.text = GameMultiLang.GetTraduction("DIFFICULTY" + LevelManager.Instance.SelectedLevelID);
+        if (LevelManager.Instance.SelectedLevelID == 0)
+            difficultyTxt.text = GameMultiLang.GetTraduction("TUTORIAL");
+        else
+            difficultyTxt.text = GameMultiLang.GetTraduction("DIFFICULTY") + " " + LevelManager.Instance.SelectedLevelID.ToString();
     }
 
     public override void Show()

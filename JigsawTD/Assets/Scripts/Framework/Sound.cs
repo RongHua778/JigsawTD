@@ -23,11 +23,12 @@ public class Sound : Singleton<Sound>
     AudioSource m_effectSound;
     public string ResourceDir = "";
 
+
     protected override void Awake()
     {
         base.Awake();
         InitializeMusicDIC();
-        
+
         m_bgSound = this.gameObject.AddComponent<AudioSource>();
         m_bgSound.playOnAwake = false;
         m_bgSound.loop = true;
@@ -35,6 +36,7 @@ public class Sound : Singleton<Sound>
         m_effectSound = this.gameObject.AddComponent<AudioSource>();
         EffectVolume = 0.5f;
     }
+
 
     private void InitializeMusicDIC()
     {

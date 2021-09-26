@@ -438,7 +438,7 @@ public class BoardSystem : IGameSystem
 
     }
 
-    public void SetTutorialPoss(bool value, List<Vector2> poss = null)
+    public void SetTutorialPoss(bool value)
     {
         if (!value)
         {
@@ -446,10 +446,13 @@ public class BoardSystem : IGameSystem
         }
         else
         {
-            foreach (var pos in poss)
+            if (GameRes.ForcePlace != null)
             {
-                GameObject GO = Instantiate(StaticData.Instance.TileFactory.GetTutorialPrefab(), pos, Quaternion.identity, this.transform);
-                tutorialObjs.Add(GO);
+                foreach (var pos in GameRes.ForcePlace.GuidePos)
+                {
+                    GameObject GO = Instantiate(StaticData.Instance.TileFactory.GetTutorialPrefab(), pos, Quaternion.identity, this.transform);
+                    tutorialObjs.Add(GO);
+                }
             }
         }
     }

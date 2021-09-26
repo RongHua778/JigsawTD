@@ -30,54 +30,54 @@ public class Save
 
         SaveSelectedRare1 = new List<SelectInfo>()
         {
-            new SelectInfo(0, false, true),
-            new SelectInfo(0, false, true)
+            new SelectInfo("RAPIDER", false, true),
+            new SelectInfo("CONSTRUCTOR", false, true)
         };
         SaveRareDIC.Add(1, SaveSelectedRare1);
 
         SaveSelectedRare2 = new List<SelectInfo>()
         {
-            new SelectInfo(0, false, true),
-            new SelectInfo(0, false, true)
+            new SelectInfo("COOPORATIVE", false, true),
+            new SelectInfo("SCATTER", false, true)
         };
         SaveRareDIC.Add(2, SaveSelectedRare2);
 
         SaveSelectedRare3 = new List<SelectInfo>()
         {
-            new SelectInfo(0, false, true),
-            new SelectInfo(0, false, true)
+            new SelectInfo("ROTARY", false, true),
+            new SelectInfo("SUPER", false, true)
         };
         SaveRareDIC.Add(3, SaveSelectedRare3);
 
         SaveSelectedRare4 = new List<SelectInfo>()
         {
-            new SelectInfo(0, false, true),
-            new SelectInfo(0, true, false)
+            new SelectInfo("SNOW", false, true),
+            new SelectInfo("MORTAR", false, false)
         };
         SaveRareDIC.Add(4, SaveSelectedRare4);
 
         SaveSelectedRare5 = new List<SelectInfo>()
         {
-            new SelectInfo(0, false, true),
-            new SelectInfo(0, true, false)
+            new SelectInfo("SNIPER", false, true),
+            new SelectInfo("BOOMERRANG", false, false)
         };
         SaveRareDIC.Add(5, SaveSelectedRare5);
 
         SaveSelectedRare6 = new List<SelectInfo>()
         {
-            new SelectInfo(0, false, true),
-            new SelectInfo(0, true, false)
+            new SelectInfo("ULTRA", false, true),
+            new SelectInfo("CORE", false, false)
         };
         SaveRareDIC.Add(6, SaveSelectedRare6);
     }
 
     public void SetInitElements()
     {
-        SelectInfo select0 = new SelectInfo(0, false, true);
-        SelectInfo select1 = new SelectInfo(1, false, true);
-        SelectInfo select2 = new SelectInfo(2, false, true);
-        SelectInfo select3 = new SelectInfo(3, false, true);
-        SelectInfo select4 = new SelectInfo(4, true, false);
+        SelectInfo select0 = new SelectInfo("GOLD", false, true);
+        SelectInfo select1 = new SelectInfo("WOOD", false, true);
+        SelectInfo select2 = new SelectInfo("WATER", false, true);
+        SelectInfo select3 = new SelectInfo("FIRE", false, true);
+        SelectInfo select4 = new SelectInfo("DUST", false, false);
         SaveSelectedElement = new List<SelectInfo> { select0, select1, select2, select3, select4 };
     }
 
@@ -96,12 +96,12 @@ public class Save
 
 public class SelectInfo
 {
-    public int id;
+    public string turretName;
     public bool isLock;
     public bool isSelect;
-    public SelectInfo(int id, bool isLock, bool select)
+    public SelectInfo(string turretName, bool isLock, bool select)
     {
-        this.id = id;
+        this.turretName = turretName;
         this.isLock = isLock;
         this.isSelect = select;
     }

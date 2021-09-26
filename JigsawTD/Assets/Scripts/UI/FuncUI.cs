@@ -92,6 +92,7 @@ public class FuncUI : IUserInterface
             {
                 GameManager.Instance.IncreaseShopCapacity(1);
             }
+            StaticData.Instance.ContentFactory.PlayerLevelUp(moduleLevel);
         }
     }
 

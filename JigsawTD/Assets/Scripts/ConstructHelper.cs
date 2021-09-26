@@ -85,9 +85,9 @@ public static class ConstructHelper
 
 
     //ºÏ³ÉËþ
-    public static Blueprint GetRandomBluePrintByLevel(int level)
+    public static Blueprint GetRandomBluePrintByLevel()
     {
-        TurretAttribute attribute = m_ContentFactory.GetRandomCompositeAttributeByLevel(level);
+        TurretAttribute attribute = m_ContentFactory.GetRandomCompositeAtt();
         return m_BlurPrintFactory.GetRandomBluePrint(attribute);
     }
 
@@ -157,8 +157,8 @@ public static class ConstructHelper
         GameTileContent content = m_ContentFactory.GetElementTurret(shapeInfo.Element, shapeInfo.Quality);
         tile.SetContent(content);
         shape.SetTile(tile, shapeInfo.TurretPos);
-        shape.SetForcePlace(shapeInfo.ForceDir, shapeInfo.ForcePos);
-        GameManager.Instance.SetTutorialPoss(true, shapeInfo.TutorialPoss);
+        //shape.SetForcePlace(shapeInfo.ForceDir, shapeInfo.ForcePos);
+        //GameManager.Instance.SetTutorialPoss(true, shapeInfo.TutorialPoss);
         return shape;
     }
 

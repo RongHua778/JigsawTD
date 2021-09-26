@@ -79,23 +79,29 @@ public class SpeedPolo : ElementSkill
 
 public class SlowAdjacent : ElementSkill
 {
-    //相邻每个防御塔提高自身0.5减速
+    //相邻每个防御塔提高0.5减速
     public override List<int> Elements => new List<int> { 4, 4, 2 };
 
-    private int adjacentTurretCount = 0;
+    private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
     public override void Detect()
     {
-        strategy.InitSlowRateIntensify -= 0.5f * adjacentTurretCount;//修复回初始值
-        adjacentTurretCount = 0;
+        foreach (var strategy in intensifiedStrategies)
+        {
+            strategy.InitSlowRateIntensify -= 0.5f * strategy.PoloIntensifyModify;
+        }
+        intensifiedStrategies.Clear();
         List<Vector2Int> points = StaticData.GetCirclePoints(1);
         foreach (var point in points)
         {
             Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
             Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
             if (hit != null)
-                adjacentTurretCount++;
+            {
+                StrategyBase strategy = hit.GetComponent<TurretContent>().Strategy;
+                strategy.InitSlowRateIntensify += 0.5f * strategy.PoloIntensifyModify;
+                intensifiedStrategies.Add(strategy);
+            }
         }
-        strategy.InitSlowRateIntensify += 0.5f * adjacentTurretCount;
     }
 }
 

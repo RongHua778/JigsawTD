@@ -31,13 +31,13 @@ public class MenuUIManager : Singleton<MenuUIManager>
         if (Input.GetKeyDown(KeyCode.K))
         {
             ShowMessage(GameMultiLang.GetTraduction("TEST1"));
-            PlayerPrefs.DeleteAll();
+            LevelManager.Instance.MaxDifficulty = 0;
         }
         if (Input.GetKeyDown(KeyCode.J))
         {
             ShowMessage(GameMultiLang.GetTraduction("TEST2"));
+            LevelManager.Instance.MaxDifficulty = 4;
             PlayerPrefs.SetInt("MaxDifficulty", 4);
-            Debug.Log(PlayerPrefs.GetInt("MaxDifficulty"));
         }
     }
 
@@ -79,6 +79,12 @@ public class MenuUIManager : Singleton<MenuUIManager>
     {
         Game.Instance.QuitGame();
     }
+
+    public void UnlockAll()
+    {
+
+    }
+
 
     //public void DifficultBtnClick(int value)
     //{

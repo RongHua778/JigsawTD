@@ -216,23 +216,32 @@ public class GuideUI : IUserInterface
                 m_FuncUI.Hide();
                 break;
             case 7:
+                ShapeInfo shapeInfo = new ShapeInfo(ShapeType.L, Element.GOLD, 1, 1);
+                GameRes.PreSetShape = shapeInfo;
                 List<Vector2> poss = new List<Vector2> { new Vector2(0, 1), new Vector2(0, 2), new Vector2(-1, 2), new Vector2(-2, 2) };
-                ShapeInfo shapeInfo = new ShapeInfo(ShapeType.L, Element.Gold, 1, 1, new Vector2(0, 2), Vector2.down, poss);
-                m_ShapeUI.PreSetShape = shapeInfo;
+                ForcePlace forcePlace = new ForcePlace(new Vector2(0, 2), Vector2.down, poss);
+                GameRes.ForcePlace = forcePlace;
+
                 m_FuncUI.NextBtnObj.SetActive(false);
                 break;
             case 8:
                 m_FuncUI.Hide();
-                
+
                 break;
             case 9:
+                ShapeInfo shapeInfo2 = new ShapeInfo(ShapeType.T, Element.WOOD, 1, 3);
+                GameRes.PreSetShape = shapeInfo2;
                 List<Vector2> poss2 = new List<Vector2> { new Vector2(-2, 0), new Vector2(-2, 1), new Vector2(-2, -1), new Vector2(-3, 0) };
-                ShapeInfo shapeInfo2 = new ShapeInfo(ShapeType.T, Element.Wood, 1, 3, new Vector2(-2, 0), Vector2.left, poss2);
-                m_ShapeUI.PreSetShape = shapeInfo2;
+                ForcePlace forcePlace2 = new ForcePlace(new Vector2(-2, 0), Vector2.left, poss2);
+                GameRes.ForcePlace = forcePlace2;
+
                 m_FuncUI.NextBtnObj.SetActive(false);
                 break;
             case 10:
                 m_ShopUI.ShopBtnObj.SetActive(true);
+                List<Vector2> poss3 = new List<Vector2> { new Vector2(-1, 1) };
+                ForcePlace forcePlace3 = new ForcePlace(new Vector2(-1, 1), Vector2.zero, poss3);
+                GameRes.ForcePlace = forcePlace3;
                 break;
             case 12://放下合成塔
                 m_FuncUI.NextBtnObj.SetActive(true);
@@ -249,7 +258,7 @@ public class GuideUI : IUserInterface
         {
             case 1://第一段对话结束，鼠标移动操作
                 //生成一个专属配方
-                Blueprint blueprint = ConstructHelper.GetSpecificBlueprint("RAPIDER", 0, 1, 2);
+                Blueprint blueprint = ConstructHelper.GetSpecificBlueprint("CONSTRUCTOR", 0, 1, 2);
                 m_ShopUI.AddBluePrint(blueprint, true);
                 m_ShopUI.RemoveGrid(m_ShopUI.ShopBluePrints[0]);//移除1个
 
@@ -269,9 +278,13 @@ public class GuideUI : IUserInterface
             case 4://显示抽取按钮
                 m_FuncUI.DrawBtnObj.SetActive(true);
                 m_FuncUI.Show();
+
+                ShapeInfo shapeInfo = new ShapeInfo(ShapeType.L, Element.WATER, 1, 3);
+                GameRes.PreSetShape = shapeInfo;
                 List<Vector2> poss = new List<Vector2> { new Vector2(0, 0), new Vector2(0, 1), new Vector2(0, 2), new Vector2(1, 2) };
-                ShapeInfo shapeInfo = new ShapeInfo(ShapeType.L, Element.Water, 1, 3, new Vector2(0, 2), Vector2.right, poss);
-                m_ShapeUI.PreSetShape = shapeInfo;
+                ForcePlace forcePlace = new ForcePlace(new Vector2(0, 2), Vector2.right, poss);
+                GameRes.ForcePlace = forcePlace;
+
                 break;
             case 6:
                 GameManager.Instance.TriggerGuide(6);

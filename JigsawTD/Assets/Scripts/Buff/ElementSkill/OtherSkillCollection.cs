@@ -19,7 +19,7 @@ public class LevelDiscount : ElementSkill
 
 public class NextIntensify : ElementSkill
 {
-    //造成的伤害-25%，使下一个合成塔暴击+50%
+    //造成的伤害-25%，使下一个合成塔暴击+40%
     public override List<int> Elements => new List<int> { 0, 1, 3 };
     public override string SkillDescription => "NEXTINTENSIFY";
 
@@ -30,7 +30,7 @@ public class NextIntensify : ElementSkill
 
     public void CompositeCallback(StrategyBase strategy)
     {
-        strategy.InitCriticalRateIntensify += 0.5f;
+        strategy.InitCriticalRateIntensify += 0.4f;
     }
 
 }

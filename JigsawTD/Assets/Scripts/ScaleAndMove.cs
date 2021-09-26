@@ -30,7 +30,8 @@ public class ScaleAndMove : IGameSystem
     // Start is called before the first frame update
 
     //新手引导
-    Vector3 CamInitialPos;
+    Vector3 camInitPos;
+    Vector3 CamViewPos;
     float CamInitialSize;
     public static bool MoveTurorial = false;
     public static bool SizeTutorial = false;
@@ -63,7 +64,8 @@ public class ScaleAndMove : IGameSystem
         m_MainUI = mainUI;
         cam = this.GetComponent<Camera>();
         camTr = cam.transform;
-        CamInitialPos = cam.transform.position;
+        CamViewPos = cam.transform.position;
+        camInitPos = cam.transform.position;
         CamInitialSize = cam.orthographicSize;
         oldPosition = cam.transform.position;
         Input.multiTouchEnabled = true;
@@ -94,7 +96,7 @@ public class ScaleAndMove : IGameSystem
             {
                 MoveTurorial = false;
                 CamMovement = Vector2.zero;
-                cam.transform.DOMove(CamInitialPos, 1f);
+                cam.transform.DOMove(camInitPos, 1f);
                 CanControl = false;
                 GameManager.Instance.TriggerGuide(1);
             }
@@ -104,22 +106,13 @@ public class ScaleAndMove : IGameSystem
             if (Mathf.Abs(cam.orthographicSize - CamInitialSize) > 1f)
             {
                 SizeTutorial = false;
-                cam.transform.DOMove(CamInitialPos, 1f);
+                cam.transform.DOMove(camInitPos, 1f);
                 GameManager.Instance.TriggerGuide(2);
             }
         }
     }
 
-    private void FixedUpdate()
-    {
-        //if (transform.localPosition.x < maxLeft ||
-        //    transform.localPosition.x > maxRight ||
-        //    transform.localPosition.y > maxUp ||
-        //    transform.localPosition.y < maxDown)
-        //{
-        //    transform.position = new Vector3(0, 0, -10);
-        //}
-    }
+
 
     private void RTSView()
     {
@@ -231,7 +224,7 @@ public class ScaleAndMove : IGameSystem
 
     private void Update()
     {
-        Vector2 parallax = (CamInitialPos - camTr.position) * parallaxScale;
+        Vector2 parallax = (CamViewPos - camTr.position) * parallaxScale;
         for (int i = 0; i < backGrounds.Length; i++)
         {
             float backgroundTargetPosX = backGrounds[i].position.x + parallax.x * (i * parallaxReductionFactor + 1);
@@ -239,6 +232,6 @@ public class ScaleAndMove : IGameSystem
             Vector3 backgroundTargetPos = new Vector3(backgroundTargetPosX, backgroundTargetPosY, backGrounds[i].position.z);
             backGrounds[i].position = Vector3.Lerp(backGrounds[i].position, backgroundTargetPos, smoothing * Time.deltaTime);
         }
-        CamInitialPos = camTr.position;
+        CamViewPos = camTr.position;
     }
 }

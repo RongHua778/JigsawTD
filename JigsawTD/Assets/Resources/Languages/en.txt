@@ -13,15 +13,16 @@ RETURNTOMENU=Return to menu
 QUIT2=Quit
 CONFIRM=Confirm
 TUTORIAL=Guidence
+WISHLIST=Add to wishlist
 
 //Battleset
-SELECTELEMENT=Pick battle elements:
-NOENOUGHELEMENT=Please pick 4 battle elements
+SELECTEDCOUNT=Already Picked:
+NOENOUGHELEMENT=There are unselected items
 
 TEST1=Test:Clear all save data
 TEST2=Test:Unlock all difficulties
 
-LEVEL1NAME=TEST LEVEL
+LEVEL1NAME=STANDARD
 LEVELOTHER=MORE INCOMING
 LEVELINFO=DESCRIPTION
 DIFFICULTINFO=DIFFICULTY
@@ -31,12 +32,18 @@ HIGHSCORE=High Score
 WAVE=Wave
 NUM=
 
+DIFFICULTY0=
+DIFFICULTY1=1."Mark" will appear in the batllefield\n2.Stick to 30 wave
+DIFFICULTY2=1.Elite enemies exist in normal waves\n2.Basic health change to 15
+DIFFICULTY3=1.More marks will apprear in the battlefield\n2.Stick to 40 wave
+DIFFICULTY4=1.The final challenge
+
 NEEDTUTORIAL=Do you want to start a tutorial?
 YES=YES
 NO=NO
 
 
-LEVEL1INFO=This is the first qualification test of the Refactor, the boss here will constantly creates tons of enemies to take down your defenses, but of course you have to stick around for enough waves to face him.
+MODE1=In standard mode, you need to against a certain wave of enemy invasion. Please choose and use the strategy you are good at to pass this challenge.
 
 //tips
 LACKMONEY=You don't have eneugh coins
@@ -51,20 +58,29 @@ NOENOUGHDRAW=You have no draw point
 SKILLFULL=This turret already equipped a blueprint
 GETMONEY=You have gained 
 TUTORIALPLACE=Please place module at tutorial position
+EMPTYSLOT=When you place a new refactor turret on it, you can equip it with the refactor skill of the new refactor turret.
+DEMOINFO=DEMO is not the final quality
+
 
 //guidevideo
 PLACERULE=Placement Rule
 PLANROUTE=Plan a Route
 COMPOSITERULE=Composition Rule
+TRAPRULE=Mark
+EQUIPRULE=Refactor Skill
 GUIDEVIDEO01=Each module consists of three basic tile and a turret. The basic tile can serves as path while the turret can act as a obstacle.
 GUIDEVIDEO02=Note: Turret can only be placed on empty tile or basic tile while the basic tile can be placed anywhere.
 GUIDEVIDEO03=If you want to extend the path, you need to place basic tile in advance, and then place turret as an obstacle.
 GUIDEVIDEO04=Tip: You can also buy a single basic tile by clicking on a empty tile.
 GUIDEVIDEO05=When you have all the elements of a blueprint, you can composite a turret. Composite turret have different effects depending on it's elements.
 GUIDEVIDEO06=Tip: The store refreshes every 3 waves. However you can buy and keep the blueprint you want.
-
+GUIDEVIDEO07=The mark will be revealed when a route is passing the tile. Each mark will trigger a special effect when the enemy passes by.
+GUIDEVIDEO08=Tip: you can spend some coins to change the mark to another location
+GUIDEVIDEO09=Each refactor turret has an unique refactor skill according to its structure combination. You can put the new turret on the existing turret to make it have additional refactor skills, but doing so will consume the new turret.
+GUIDEVIDEO10=Tip: each refactor turret can only be equipped with 1 additional refactor skill by default, depending on it's number of refactor skill slots.
 
 //func
+DRAWINFO=If you haven't build last turn, the price will be reduced\n current price reduction percentage:
 NEXTWAVE=Next Wave[Space]
 DRAWMODULE=Draw Module
 MODULELEVELINFO1=Current level probability
@@ -76,16 +92,16 @@ ENERGYINFO=1. Gain 1 energy if you haven't drawed last wave\n2. Gain additional 
 SHOPBLUEPRINT=Lock:
 OWNBLUEPRINT=Owned
 NEXTREFRESH=Refresh after
-OWNPERFECT=Perfect Element
-PERFECTINFO=Perfect element can served as any element for composition
+OWNPERFECT=Perfect Structure
+PERFECTINFO=Perfect structure can served as any composition for refactor
 
 //gameEndPanel
 WIN=WIN
 LOSE=END
 PASSLEVEL=You have pass 
 TOTALDAMAGE=Total Damage
-COMPOSITECOUNT=Composite Turret
-THANKSINFO=Thank you for playing the DEMO of Refactor\nYou can whishlist it on Steam or send your feedback to 13500006441@163.com
+COMPOSITECOUNT=Refactor Turret
+THANKSINFO=Thank you for experiencing the game demo. If you like our game, \n please add it to your wishlist!
 
 //turretips
 DAMAGEANLYSIS=Damage
@@ -99,7 +115,7 @@ RANGETYPE1=Circle
 RANGETYPE2=Semicircle
 RANGETYPE3=Line
 TURRETSKILL=Basic Skill
-ELEMENTSKILL=Element Benefit
+ELEMENTSKILL=Refactor Skill
 TILESKILL=Tile Benefit
 CRITICALINFO=Each 1% critical = 1% extra critical damage. Defacult critical damage is 150%
 SPLASHINFO=Splash radius. Default splash damage is 50%
@@ -108,16 +124,16 @@ SPEEDUP=% FireRate
 CRITICALUP=% Critical
 SPUTTERINGUP= Splash
 SLOWUP= Slow
-COMINTENSIFY=Composite Benefit
+COMINTENSIFY=Structure Benefit
 BUY=Buy
-COMPOSITE=Composite
+COMPOSITE=Refactor
 UPGRADE=Upgrade
 SWITCHTRAP=Relocate
-ELEMENTSLOT=Element Skill
+ELEMENTSLOT=Refactor Skill Slot
 RARE=Rare
 
 //Groundtips
-BUYGROUND=Buy a basic tile?
+BUYGROUND=Build a basic tile?
 
 //towername
 CONSTRUCTOR=Constructor
@@ -128,24 +144,16 @@ SNIPER=Sniper
 ULTRA=Ultra
 RAPIDER=Rapider
 SNOW=SnowBall
+COOPORATIVE=Cooporative
+BOOMERRANG=Boomerrang
+SUPER=Super
+CORE=Core
 
-F2=F2 Constructor
-G2=G2 Scatter
-H2=H2 Mortar
-I2=I2 Rotary
-J2=J2 Sniper
-K2=K2 UltraCannon
-L2=L2 RapidFirer
-M2=M2 SnowBall
-
-F3=F3 Constructor
-G3=G3 Scatter
-H3=H3 Mortar
-I3=I3 Rotary
-J3=J3 Sniper
-K3=K3 UltraCannon
-L3=L3 RapidFirer
-M3=M3 SnowBall
+GOLD=Gold Structure
+WOOD=Wood Structure
+WATER=Water Structure
+FIRE=Fire Structure
+DUST=Dust Structure
 
 
 //turretskill
@@ -155,72 +163,103 @@ CSKILL=Attacks cause a slowdown effect.
 DSKILL=Attacks have a chance to cause critical damage.
 ESKILL=Attacks deal splash area damage.
 
-F1SKILL=Damage increased by 10% for each enemy in range.
-G1SKILL=Deals 50% less damage, but can attack an additional 3 targets.
-H1SKILL=Bullet's splash damage increased by 25% for each enemy it hit.
-L1SKILL=Each shoot increases attack by 1 * the total amount of composite turrets.
-I1SKILL=Penetration Bullet; Randomly shoot around and double all firerate increased.
+CONSTRUCTORSKILL=Damage increased by 10% for each enemy in range.
+SCATTERSKILL=Deals 50% less damage, but can attack an additional 3 targets.
+MORTARSKILL=Bullet's splash damage increased by 150%.
+RAPIDERSKILL=Firerate increased by 10% each shoot when it is attacking the same target(up to 400%).
+ROTARYSKILL=Penetration Bullet; Randomly shoot around and double all firerate increased.
 SNIPERSKILL=Forbid range+2, attack increased by 10% for every 1 range.
-K1SKILL=Double the increased critical damage.
+ULTRASKILL=Double the increased critical damage.
 SNOWSKILL=Penetration Bullet;Bullet will move to the end of straight direction, and double enemy's current slow.
+COOPORATIVESKILL=Attack increased by 1% * the amount of refacotor turrets each shoot.
+BOOMERRANGSKILL=Penetration Bullet;Can not increase firerate; Bullet damage will increase by 10% for each enemy it hit.
+SUPERSKILL=Double all attribute increased after 30s of each wave.
+CORESKILL=At the start of each wave, it's attack will become 50%/75%/100% of the sum of adjacent turrets.
+
 
 //A系
-DOUBLEATTACK=Double all attack increased.
-ATTACKSPEED=Attack Effect:Each shoot increases attack by 5% this turn.
-LATEATTACK=Attack increased by 2% every second after each wave start.
-RANDOMATTACK=Bullet damage is randomly ranged from 50% to 200%.
-ATTACKADJACENT=Basic attack increased by 50% for each adjacent turret.
-ATTACKPOLO=Increase acjacent turrets' basic attack by 50%.
+AAA=Metalize
+AAAINFO=Increased the structure benefit of Gold structure by 15%
+AAB=Verical Strike
+AABINFO=Firerate increased by 35% when target's distance is less than 3
+AAC=Hitch Vision
+AACINFO=Slow increased by 50% when target's distance is less than 3
+AAD=Unstable Shaft
+AADINFO=Critical increased by 35% when target's distance is less than 3
+AAE=Close Bombing
+AAEINFO=Splash range increased by 50% when target's distance is less than 3
 
 //B系
-MULTITARGET=Attacks 2 additional targets.
-SPEEDPOLO=Increase adjacent turrets' basic firerate by 50%.
-SPEEDTARGET=Firerate increased by 10% each shoot while attacking the same target (up to 300%).
-LATESPEED=Firerate increased by 2% every second after each wave start.
-SPEEDCRITICAL=Firerate increased by 50% for 1s if a critical hit happened.
-SPEEDADJACENT=Basic firerate increased by 50% for each adjacent turret.
+BBB=Lightweight Material
+BBBINFO=Increased the structure benefit of Wood structure by 15%
+BBA=Charged Bullet
+BBAINFO=Attack increased by 5% each shoot.
+BBC=Cold Bullet
+BBCINFO=Slow increased by 5% each shoot.
+BBD=Concussive Shot
+BBDINFO=Critical increased by 3% each shoot.
+BBE=Ammunition
+BBEINFO=Splash range increased by 0.02 each shoot.
 
 //C系
-LATEINTENSIFY=Double all property increased happened after 20 seconds each turn.
-SLOWPOLO=Increase adjacent turrets' slow by 50%.
-SLOWATTACK=Double slow rate if target's distance is less than 3.
-SLOWSPEED=Bullet deal additional damage equals to 2% of target's current health.
-CRITICALSLOW=Double bullet's slow if it is a critical hit.
-SLOWADJACENT=Slow increased by 0.5 for each adjacent turret.
+CCC=Forst Environment
+CCCINFO=Increased the structure benefit of Water structure by 0.25
+CCA=Cold Front
+CCAINFO=Attack increases by 2% per second after the start of each wave.
+CCB=Overload Cartridge
+CCBINFO=Firerate increases by 2% per second after the start of each wave.
+CCD=Energy Base
+CCDINFO=Critical increases by 1% per second after the start of each wave.
+CCE=Filled Gunpowder
+CCEINFO=Splash range increases by 0.01 per second after the start of each wave.
 
 //D系
-CRITICALPOLO=Equip:Copy the first element skill.
-RANDOMCRITICAL=Critical damage randomly increased by -100% to 400%.
-CRITICALSPEED=Critical increased by 2.5% for each shoot this turn.
-LATECRITICAL=Critical increased by 1% every second after each wave start.
-CRITICALADJACENT=Critical increased by 25% for each adjacent turret.
+DDD=Chaos Technology
+DDDINFO=Increased the structure benefit of Fire structure by 10%
+DDA=Energy Blasting
+DDAINFO=Attack increase by 60% for 2 seconds after a critical hit.
+DDB=Vulnerability Shoot
+DDBINFO=Firerate increase by 50% for 2 seconds after a critical hit.
+DDC=Ice Bomb
+DDCINFO=Double bullet's slow if it is a critical hit.
+DDE=Bombardment
+DDEINFO=Double bullet's splash range if it is a critical hit.
 
 //E系
-POLOGETTER=Double all intensify from other turrets.
-NEARSPLASH=Splash damage is increased by 100% when target's distance less than 3.
-SPLASHSPEED=Splash increased by 0.02 for each shoot this turn.
-LATESPLASH=Splash increased by 0.01 every second after each wave start.
-RANDOMSPLASH=Bullet's splash randomly increased by 0 to 1.
+EEE=Atomic Center
+EEEINFO=Increased the structure benefit of Dust structure by 0.15
+EEA=Attack Core
+EEAINFO=Increase adjacent turrets' attack by 30%
+EEB=Speed Core
+EEBINFO=Increase adjacent turrets' firerate by 30%
+EEC=Slow Core
+EECINFO=Increase adjacent turrets' slow by 0.5
+EED=Critical Core
+EEDINFO=Increase adjacent turrets' critical by 20%
 
 
 //综合系
-FREEDRAW=Damage reduced by 25%,the next two draw will be free.
-NEXTINTENSIFY=Damage reduced by 25%, the next composite turret gain additional 50% critical.
-LEVELDISCOUNT=Damage reduced by 25%, Upgrade cost -50%.
-TURRETLEVELUP=Damage reduced by 25%, turret level +1.
-RANDOMSKILL=Transform into a random skill while composite.
-FREEGROUND=Damage reduced by 25%, the next 3 times you buy empty tile will be free.
-SYSTEMDISCOUNT=Damage reduced by 25%, reduce module upgrade cost by 50%.
-PERFECTELEMENT=Damage reduced by 25%, gain 1 perfect element while composite.
+ABC=Inferior Base
+ABCINFO=Upgrade cost reduced by 50%
+ABD=Improved Formula
+ABDINFO=Increase the next refactor turret's critical by 40%
+ABE=Free Tickets
+ABEINFO=The next two build will be free
 
-COPYSKILL=Copy another element skill
-MODULELEVELUP=Upgrade your module system
-POLOINTENSIFY=Double the benefit from other turrets.
-RANDOMTRAP=Generate a random trap infront.
-CIRCLERANGE=Change the turret's range type to Circle.
-TRAPINTENSIFY=Increased the adjacent traps' effect by 100%.
-PORTALHIT=Each hit has a 5% chance to transfer enemy back 3 blocks.
-
+ACD=Rapid Upgrade
+ACDINFO=Increase turret's level by 1
+ACE=Technology Leaps
+ACEINFO=Reduce module upgrade cost by 50%
+ADE=Unreal Structure
+ADEINFO=Becomes a random refactor skill when refactor
+BCD=Concrete Pouring
+BCDINFO=The next 3 basic tile you build will be free
+BCE=Perfect Element
+BCEINFO=Gain 1 perfect structure when refactor
+BDE=Repair Factory
+BDEINFO=The effect of adjacent marks will be increased by 100%
+CDE=Blink Strike
+CDEINFO=Each shoot has a 5% chance of teleporting enemy to 3 tiles ahead
 
 //Enemy
 SOILDER=Sartre
@@ -251,76 +290,95 @@ BLINKERINFO=Flashes forward a certain distance while it takes a certain amount o
 BORNERINFO=Summon a large amount of enemies every once in a while.
 
 //Trap
-UNREVEAL=Unreveal Trap
-UNREVEALINFO=Reveal this trap by connect this tile into your path
+UNREVEAL=Unreveal Mark
+UNREVEALINFO=Reveal this mark by connect this tile into your path
 
-STUNTRAP=Stun Trap
-ARROWTRAP=Slow Arrow
-DAMAGETRAP=Damage Marker
 SPAWNPOINT=Start Point
 DESTINATION=End Point
-BLINKTRAP=Blink trap
-PROMOTETRAP=Promote trap
-IMITATETRAP=Imitate trap
-STUNTRAP2=Stun Trap(new)
-DAMAGEARROW=Damage Arrow Marker
-EXECUTETRAP=Execute trap
-AIMMARKTRAP=Aim marker
-DAMAGEMARK=Damage Marker
 
-STUNTRAPINFO=Enemies passing by are stunned for 0.5 * N seconds, N = number of traps the enemy passed before.
-ARROWTRAPINFO=Enemies passing through this tile with the same direction of the arrow will be slowed down for 5s.
-DAMAGETRAPINFO=Each time an enemy passes this tile, deals damge equal to 20% of the damage taken during last period.
+STUNTRAP=Stun Mark
+ICETRAP=Ice Mark
+ARROWTRAP=Slow Arrow
+BLINKTRAP=Blink Mark
+PROMOTETRAP=Promote Mark
+IMITATETRAP=Imitate Mark
+EXECUTETRAP=Execution Mark
+DAMAGEMARK=Damage Mark
+FROSTTRAP=Frost Mark
+BONUSTRAP=Coin Mark
+EXPLOSIONTRAP=Explosion Mark
+
 SPAWNPOINTINFO=Enemy borns here, make sure there is a route to the end point.
 DESTINATIONINFO=Enemy's destination, make sure there is a route to the start point.
-BLINKTRAPINFO=this is blink trap
-PROMOTETRAPINFO=Increases the effect of the enemy's next passing trap by 100%, can be stacked.
-IMITATETRAPINFO=The effect of this trap is the same as the last trap passed by the enemy.
-STUNTRAP2INFO=Enemies passing by are stunned for 0.5 * N seconds, N = number of traps the enemy passed before.
-DAMAGEARROWINFO=Within 4 grids of the direction indicated by the arrow, the damage taken by the enemy increased by 50%.
-EXECUTETRAPINFO= Causes (N * 1)% of the enemy's lost HP damage ,N = number of grids the enemy passed before.
-AIMMARKTRAPINFO=Deal damage equal to 10% of enemy's lost health.
-DAMAGEMARKINFO=Enemies passing by will be marked and take 50% additional damage within 5 seconds.
 
-//TurretBase
-ATTACKBASE=Attack Base
-SPEEDBASE=Firerate Base
-CRITICALBASE=Critical Base
-SPUTTERINGBASE=Splash Base
-SLOWBASE=Slow Base
+STUNTRAPINFO=Enemies passing by are stunned for 0.5 * N seconds, N = number of traps the enemy passed before.
+ICETRAPINFO=Enemies passing by increase slow by 0.5 * N, N = number of traps the enemy passed before.
+ARROWTRAPINFO=Enemies passing through this tile with the same direction of the arrow will be slowed down for 5s
+BLINKTRAPINFO=Enemies passing by will be teleporting to 2 tiles ahead.(Each enemy once)
+PROMOTETRAPINFO=The effect of the next mark that enemy passing by will be increased by 100%
+IMITATETRAPINFO=The effect of this mark is the same as the last mark passed by the enemy.
+EXECUTETRAPINFO=Deal damage equal to 0.4% * enemy's max health, N equal to the number of tiles ahead.
+DAMAGEMARKINFO=Enemies passing by will takes 50% addition damage for the next 3 tiles' move.
+FROSTTRAPINFO=Enemies passing by will takes 50% addition slow for the next 3 tiles' move.
+BONUSTRAPINFO=Each enemy passing by will give you 2 coins
+EXPLOSIONTRAPINFO=Enemy passing by will trigger an explosion equal to 10% of it current health.
 
-ATTACKBASEINFO=Attack Base: Only Composite Tuttet can be placed, double all attack increased.
-SPEEDBASEINFO=Firerate Base: Only Composite Tuttet can be placed, double all firerate increased.
-CRITICALBASEINFO=Critical Base: Only Composite Tuttet can be placed, double all critical increased.
-SPUTTERINGBASEINFO=Splash Base: Only Composite Tuttet can be placed, splash+1.
-SLOWBASEINFO=Slow Base: Only Composite Tuttet can be placed, slow+1.
 
 //Guide
 KANGDE=Kant
-Guide01=Welcome, Prototype S66666, your first Refactor Test is initializing...
-Guide02=Welcome to your first test, and I'll walk you through the ground rules.
-Guide03=First, drag your cursor to the edge of the screen to move the view.
+//0
+Guide01=Consciousness connection is in progress……
+Guide02=Connection complete, basic response test begin.
+Guide03=Please hold down the left mouse button and drag\n to move the camera.
+//1
 Guide04=Good.
-Guide05=Try using the mouse wheel to zoom in and out.
-Guide06=Great.
-Guide07=In the center of the grid, there is a start point and an end point, and moving blue arrows mark the enemy's path.
-Guide08=Your mission is to prevent them from reaching the end point.
-Guide09=Before entering the battle state, let's deploy some defenses.
-Guide10=Click the lower right button and choose one module to deploy.
-Guide11=At the top left corner, it shows your HP, you'll lose 1 HP for each enemy reach the end point.
-Guide12=When your HP lower than 0, you'll fail the test.
-Guide13=At the top right corner, shows the current wave and the enemy's info.
-Guide14=Pay attention to the info of the enemy and deloy reasonable defense.
-Guide15=When you are ready, click the Next Wave button at the bottom to start the battle state.
-Guide16=Above the draw button is your energy.
-Guide17=If you haven't draw last turn, you will gain energy.You'll gain 1 draw each time you have 10 enery.
-Guide18=Now you can choose to draw more module, or save your draw and start next wave.
-Guide19=Every time you survive a wave, you receive coin reward that shows on the top left corner.
-Guide20=Coin can be used for many purposes, such as upgrading your modular system.
-Guide21=On the right side shows your current module system level. The higher the level, the higher the quality of the turret you can find.
-Guide22=When you're ready, start the next wave.
-Guide23=Finally, an important feature of Refactor Test --- Composition, it will greatly improve your ability.
-Guide24=Click the blueprint button on the left side and I will introduce you to the composition system.
-Guide25=Okay, so you know all the rules of Refactor.
-Guide26=So far, few prototypes have passed the Refactoror Test, which is not what Dr James wanted.
-Guide27=I hope you are an exception and good luck.
+Guide05=Then try using the mouse wheel to zoom in and out.
+//2
+Guide06=Pefect.
+Guide07=Deployment officer S0666, welcome to Sagittarius \nA* Port 19.
+Guide08=Our enemy is attempting a time warp, and we sent \nyou here to take charge of the defense mission.
+Guide09=Time is running out, I'm going to give you a quick \ntutorial, so please focus on the center of the battlefield.
+Guide10=The red tile is the entrance, blue tile is the exit,\n and the moving blue arrows mark the enemy's route.
+Guide11=Your mission is to deploy defenses to prevent the \nenemy from reaching the exit.
+//3
+Guide12=The upper right corner shows our coins supply for \nyou, it will increases by 10 per wave.
+Guide13=In the bottom right corner is the module building \nfunction. Now spend some coins to build a module.
+//4
+Guide14=Each module consists of 3 "basic tile" and 1 \n"structure turret", basic tiles can be used as a path, \nwhile the turret can be used as an obstacle.
+Guide15=Due to wartime signal transmission interference, \nthe module is built entirely random.
+Guide16=Now pick one module and place it as indicated。
+//5
+Guide17=In the upper right corner is your remaining health, \nEach enemy that reaches the end will deal 1 damage \nto you.
+Guide18=When your health goes to zero, we will be forced to \nabandon this interface.
+//6
+Guide19=Right at the top shows the incoming waves we detected,\n as well as the type of incoming enemies.
+Guide20=Now press the button below to start the battle state.
+//7
+Guide21=Well done.
+Guide22=Every time you build a module, the price will increases\n by 10. Coins also have other uses, and you need \nto allocate them wisely.
+Guide23=But now, try to build another module.
+//8
+Guide24=This time you build a new structure turret which has\n different characteristic。
+Guide25=You can click on the turret on the grid to view its \ninformation and attack range.
+Guide26=When you're ready, you can start the next wave.
+//9
+Guide27=We managed to hold off two waves of attack, but to go \nfurther, we needed a more powerful turret.
+Guide28=Now build the third module, and I'll walk you through\n a "refactoring"
+//10
+Guide29=Please click the button on the left side to open the \nformula panel.
+//11
+Guide30=The formula panel refreshes a batch of refactor turret \nblueprint every 3 waves, and the components of each \nblueprint are completely random.
+Guide31=Refactor turrets have their own unique skill, and a \nrefactor skill depending on the composition structures.
+Guide32=Now that you have collect enough structure for a \nblueprint, now build and place it on the grid.
+//12
+Guide33=Refactor turret is the backbone of the defense. \nNow let's move on to the next wave.
+//13
+Guide34=Let me introduce the module system.
+Guide35=The module button displays your current module \nlevel and the coins required to upgrade it.
+Guide36=You don't have to build every turn to save enough \ncoins for upgrades.
+Guide37=Also, if you don't build in this turn, it will \nreduce the build price by 10%.
+Guide38=Now we have enough defenses. Let's move on.
+//14
+Guide39=Invest your tokens flexibly on building modules, \nupgrade modules, or pgrade rafactor turrets for maximum benefit.
+Guide40=I've put more of the guidelines in the top left \nguidance panel, please check it out anytime.
+Guide41=Now, please stick to 20 waves to complete this \ntutorial.

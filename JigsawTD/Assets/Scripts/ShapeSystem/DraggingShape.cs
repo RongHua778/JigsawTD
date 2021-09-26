@@ -277,8 +277,8 @@ public class DraggingShape : DraggingActions
             GameManager.Instance.ShowMessage("你点的太快了");
             return;
         }
-        //判断是否为教程
-        if (!tileShape.CheckForcePlacement())
+        //判断是否满足强制摆位
+        if (!GameRes.CheckForcePlacement(transform.position, transform.up))
         {
             GameManager.Instance.ShowMessage(GameMultiLang.GetTraduction("TUTORIALPLACE"));
             return;

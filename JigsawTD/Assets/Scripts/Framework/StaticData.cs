@@ -117,6 +117,7 @@ public class StaticData : Singleton<StaticData>
         EnemyFactory.InitializeFactory();
     }
 
+
     //随机打乱一个int list的方法
     public static List<T> RandomSort<T>(List<T> list)
     {
@@ -357,19 +358,19 @@ public class StaticData : Singleton<StaticData>
         string intensifyTxt = "+";//根据元素及品质设置显示加成效果
         switch (element)
         {
-            case Element.Gold:
+            case Element.GOLD:
                 intensifyTxt += Instance.GoldAttackIntensify * 100 + GameMultiLang.GetTraduction("ATTACKUP");
                 break;
-            case Element.Wood:
+            case Element.WOOD:
                 intensifyTxt += Instance.WoodSpeedIntensify * 100 + GameMultiLang.GetTraduction("SPEEDUP");
                 break;
-            case Element.Water:
+            case Element.WATER:
                 intensifyTxt += Instance.WaterSlowIntensify + GameMultiLang.GetTraduction("SLOWUP");
                 break;
-            case Element.Fire:
+            case Element.FIRE:
                 intensifyTxt += Instance.FireCriticalIntensify * 100 + GameMultiLang.GetTraduction("CRITICALUP");
                 break;
-            case Element.Dust:
+            case Element.DUST:
                 intensifyTxt += Instance.DustSputteringIntensify + GameMultiLang.GetTraduction("SPUTTERINGUP");
                 break;
             default:
@@ -386,19 +387,19 @@ public class StaticData : Singleton<StaticData>
         {
             switch ((Element)element)
             {
-                case Element.Gold:
+                case Element.GOLD:
                     intensifyTxt += "\n" + (Instance.GoldAttackIntensify + GameRes.TempGoldIntensify) * 100 + GameMultiLang.GetTraduction("ATTACKUP");
                     break;
-                case Element.Wood:
+                case Element.WOOD:
                     intensifyTxt += "\n" + (Instance.WoodSpeedIntensify + GameRes.TempWoodIntensify) * 100 + GameMultiLang.GetTraduction("SPEEDUP");
                     break;
-                case Element.Water:
+                case Element.WATER:
                     intensifyTxt += "\n" + (Instance.WaterSlowIntensify + GameRes.TempWaterIntensify) + GameMultiLang.GetTraduction("SLOWUP");
                     break;
-                case Element.Fire:
+                case Element.FIRE:
                     intensifyTxt += "\n" + (Instance.FireCriticalIntensify + GameRes.TempFireIntensify) * 100 + GameMultiLang.GetTraduction("CRITICALUP");
                     break;
-                case Element.Dust:
+                case Element.DUST:
                     intensifyTxt += "\n" + (Instance.DustSputteringIntensify + GameRes.TempDustIntensify) + GameMultiLang.GetTraduction("SPUTTERINGUP");
                     break;
             }
@@ -624,19 +625,19 @@ public class StaticData : Singleton<StaticData>
         string texttoreturn = "";
         switch (element)
         {
-            case Element.Gold:
+            case Element.GOLD:
                 texttoreturn = "A";
                 break;
-            case Element.Wood:
+            case Element.WOOD:
                 texttoreturn = "B";
                 break;
-            case Element.Water:
+            case Element.WATER:
                 texttoreturn = "C";
                 break;
-            case Element.Fire:
+            case Element.FIRE:
                 texttoreturn = "D";
                 break;
-            case Element.Dust:
+            case Element.DUST:
                 texttoreturn = "E";
                 break;
         }

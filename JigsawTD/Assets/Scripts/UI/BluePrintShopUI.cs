@@ -74,7 +74,7 @@ public class BluePrintShopUI : IUserInterface
         PerfectElementTxt.text = GameMultiLang.GetTraduction("OWNPERFECT") + ":" + count;
     }
 
-    public void RefreshShop(int level, int cost)//刷新商店
+    public void RefreshShop(int level)//刷新商店
     {
         NextRefreshTrun = 3;
         int lockNum = 0;
@@ -91,7 +91,7 @@ public class BluePrintShopUI : IUserInterface
         }
         for (int i = 0; i < ShopCapacity - lockNum; i++)
         {
-            Blueprint bluePrint = ConstructHelper.GetRandomBluePrintByLevel(level);
+            Blueprint bluePrint = ConstructHelper.GetRandomBluePrintByLevel();
             AddBluePrint(bluePrint, true);
         }
     }

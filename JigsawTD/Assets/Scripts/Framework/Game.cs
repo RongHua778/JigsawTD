@@ -14,26 +14,24 @@ public class Game : Singleton<Game>
 
     [HideInInspector] public Save SaveData;
 
-    public int SelectDifficulty;
 
     public Animator transition;
     public float transitionTime = 0.8f;
     public bool Tutorial = false;
-    public int SeletecedLevel = 1;
 
 
     protected override void Awake()
     {
         base.Awake();
-
         LoadGame();
         Application.runInBackground = true;
-        GameObject.DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(this.gameObject);
         TurretEffectFactory.Initialize();
     }
 
     private void Start()
     {
+
         //判断当前初始场景在哪里，根据不同场景初始化当前State
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         switch (currentSceneIndex)

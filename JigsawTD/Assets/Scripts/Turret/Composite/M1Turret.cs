@@ -13,31 +13,7 @@ public class M1Turret : CompositeTurret
         Strategy.RotSpeed = 0;
         CheckAngle = 45f;
     }
-    //protected override void Shoot()
-    //{
-    //    turretAnim.SetTrigger("Attack");
-    //    PlayAudio(ShootClip, false);
-    //    Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
-    //    bullet.transform.position = shootPoint.position;
-    //    Vector2 pos = (Vector2)shootPoint.position + (Vector2)transform.up * Strategy.FinalRange;
-    //    bullet.Initialize(this, Target[0], pos);
-    //}
 
-    //IEnumerator ShootCor()
-    //{
-    //    foreach (TargetPoint target in Target.ToList())
-    //    {
-    //        if (!target.gameObject.activeSelf)
-    //            continue;
-    //        turretAnim.SetTrigger("Attack");
-    //        PlayAudio(ShootClip, false);
-    //        Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
-    //        bullet.transform.position = shootPoint.position;
-    //        Vector2 pos = (Vector2)shootPoint.position + (Vector2)transform.up * Strategy.FinalRange;
-    //        bullet.Initialize(this, target, pos);
-    //        yield return new WaitForSeconds(ShootInterval);
-    //    }
-    //}
 
     protected override void Shoot()
     {
@@ -53,7 +29,7 @@ public class M1Turret : CompositeTurret
         if (hitTurret.collider != null)
         {
             float dis2 = Vector2.Distance(transform.position, hitTurret.transform.position);
-            if (dis2 < minDis)
+            if (dis2 < minDis && dis2 > Strategy.FinalRange)
             {
                 minDis = dis2;
             }

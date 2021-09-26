@@ -11,12 +11,12 @@ public class TestWindow : EditorWindow
     string moneyGet = "10000";
     //string element = "0";
     Quality quality = Quality.level1;
-    Element element = Element.Gold;
+    Element element = Element.GOLD;
 
     string turretName = "CONSTRUCTOR";
-    Element e1 = Element.Gold;
-    Element e2 = Element.Gold;
-    Element e3 = Element.Gold;
+    Element e1 = Element.GOLD;
+    Element e2 = Element.GOLD;
+    Element e3 = Element.GOLD;
 
     string trapName = "BLINKTRAP";
     [MenuItem("Window/TestWindow")]

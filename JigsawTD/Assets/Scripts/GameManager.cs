@@ -66,17 +66,15 @@ public class GameManager : Singleton<GameManager>
     {
         //初始化全局数据
         GameRes.Initialize(m_MainUI, m_FuncUI);
-        //初始化工厂
-        StaticData.Instance.ContentFactory.SetBattleElements();
 
         //形状生成外观类
         ConstructHelper.Initialize();
 
         //初始化系统
-        m_BoardSystem.Initialize();//版图系统
+        
         m_WaveSystem.Initialize();//波次系统
         m_CamControl.Initialize(m_MainUI);//摄像机控制
-
+        m_BoardSystem.Initialize();//版图系统
         //初始化UI
         m_MainUI.Initialize();//主界面顶部UI
         m_FuncUI.Initialize();//主界面功能UI
@@ -284,6 +282,7 @@ public class GameManager : Singleton<GameManager>
     public void SelectShape()//选择了一个模块
     {
         m_ShapeSelectUI.ClearAllSelections();
+        m_BoardSystem.SetTutorialPoss(true);//显示强制摆放位置
     }
 
     public void ConfirmShape()//放下了一个模块
@@ -292,7 +291,9 @@ public class GameManager : Singleton<GameManager>
         m_BoardSystem.CheckPathTrap();
         m_FuncUI.Show();
         m_BluePrintShopUI.CheckAllBluePrint();
-
+        m_BoardSystem.SetTutorialPoss(false);//关闭显示强制摆放位置
+        GameRes.ForcePlace = null;
+        GameRes.PreSetShape = null;
         //新手引导
         TriggerGuide(5);
         TriggerGuide(8);
@@ -317,6 +318,7 @@ public class GameManager : Singleton<GameManager>
             TransitionToState(StateName.PickingState);
             m_BluePrintShopUI.CompositeBluePrint(grid);
             m_FuncUI.Hide();
+            m_BoardSystem.SetTutorialPoss(true);//显示强制摆放位置
         }
         else
         {
@@ -325,7 +327,7 @@ public class GameManager : Singleton<GameManager>
 
     }
 
-    public void PreviewComposition(bool value, Element element = Element.Dust, int quality = 1)
+    public void PreviewComposition(bool value, Element element = Element.DUST, int quality = 1)
     {
         m_BluePrintShopUI.PreviewComposition(value, element, quality);
     }
@@ -368,7 +370,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (ConsumeMoney(cost))
         {
-            m_BluePrintShopUI.RefreshShop(m_FuncUI.ModuleLevel, cost);
+            m_BluePrintShopUI.RefreshShop(m_FuncUI.ModuleLevel);
         }
     }
 
@@ -529,11 +531,6 @@ public class GameManager : Singleton<GameManager>
     public void SetFreeShapeCount(int count)
     {
         m_FuncUI.FreeShapeCount += count;
-    }
-
-    public void SetTutorialPoss(bool value, List<Vector2> poss = null)
-    {
-        m_BoardSystem.SetTutorialPoss(value, poss);
     }
 
     #endregion

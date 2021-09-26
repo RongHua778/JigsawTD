@@ -216,23 +216,23 @@ public class StrategyBase
         {
             switch ((Element)element)
             {
-                case Element.Gold:
+                case Element.GOLD:
                     goldCount++;
                     ComAttackIntensify += add ? StaticData.Instance.GoldAttackIntensify : -StaticData.Instance.GoldAttackIntensify;
                     break;
-                case Element.Wood:
+                case Element.WOOD:
                     woodCount++;
                     ComSpeedIntensify += add ? StaticData.Instance.WoodSpeedIntensify : -StaticData.Instance.WoodSpeedIntensify;
                     break;
-                case Element.Water:
+                case Element.WATER:
                     waterCount++;
                     ComSlowIntensify += add ? StaticData.Instance.WaterSlowIntensify : -StaticData.Instance.WaterSlowIntensify;
                     break;
-                case Element.Fire:
+                case Element.FIRE:
                     fireCount++;
                     ComCriticalIntensify += add ? StaticData.Instance.FireCriticalIntensify : -StaticData.Instance.FireCriticalIntensify;
                     break;
-                case Element.Dust:
+                case Element.DUST:
                     dustCount++;
                     ComSputteringRangeIntensify += add ? StaticData.Instance.DustSputteringIntensify : -StaticData.Instance.DustSputteringIntensify;
                     break;

@@ -8,7 +8,7 @@ public class GameEndUI : IUserInterface
     [SerializeField] Text title = default;
     [SerializeField] Text totalCompositeTxt = default;
     [SerializeField] Text totalDamageTxt = default;
-    [SerializeField] Text levelHighScore = default;
+    Animator anim;
 
     private static int totalComposite = 0;
     private static int totalDamage = 0;
@@ -16,6 +16,10 @@ public class GameEndUI : IUserInterface
     public static int TotalComposite { get => totalComposite; set => totalComposite = value; }
     public static int TotalDamage { get => totalDamage; set => totalDamage = value; }
 
+    private void Awake()
+    {
+        anim = this.GetComponent<Animator>();
+    }
     //public void SetGameResult(int turn)
     //{
     //    title.text = GameMultiLang.GetTraduction("PASSLEVEL") + (turn - 1) + GameMultiLang.GetTraduction("WAVE");
@@ -33,7 +37,7 @@ public class GameEndUI : IUserInterface
     {
         title.text = win ? GameMultiLang.GetTraduction("WIN") : GameMultiLang.GetTraduction("LOSE");
         if (win)
-            PlayerPrefs.SetInt("MaxDifficulty", Game.Instance.SelectDifficulty + 1);
+            PlayerPrefs.SetInt("MaxDifficulty", LevelManager.Instance.SelectedLevelID + 1);
         totalCompositeTxt.text = TotalComposite.ToString();
         totalDamageTxt.text = TotalDamage.ToString();
     }
@@ -44,6 +48,16 @@ public class GameEndUI : IUserInterface
         {
             Game.Instance.LoadScene(0);
         }
+    }
+    public override void Show()
+    {
+        base.Show();
+        anim.SetBool("isOpen", true);
+    }
+
+    public override void Hide()
+    {
+        anim.SetBool("isOpen", false);
     }
 
 

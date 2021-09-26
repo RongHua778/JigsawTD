@@ -20,57 +20,28 @@ public class TileContentFactory : GameObjectFactory
     List<TurretBaseAttribute> turretBaseAtts = default;
 
     private List<TurretAttribute> BattleElements;
+    private List<TurretAttribute> BattleComposites;
 
     private Dictionary<Element, TurretAttribute> ElementDIC;
     private Dictionary<string, TurretAttribute> CompositeDIC;
     private Dictionary<string, TrapAttribute> TrapDIC;
     private Dictionary<string, TurretBaseAttribute> TurretBaseDIC;
 
-    private List<TurretAttribute> Rare1Turrets;
-    private List<TurretAttribute> Rare2Turrets;
-    private List<TurretAttribute> Rare3Turrets;
-    private List<TurretAttribute> Rare4Turrets;
-    private List<TurretAttribute> Rare5Turrets;
-    private List<TurretAttribute> Rare6Turrets;
-
-
     public void Initialize()
     {
-        Rare1Turrets = new List<TurretAttribute>();
-        Rare2Turrets = new List<TurretAttribute>();
-        Rare3Turrets = new List<TurretAttribute>();
-        Rare4Turrets = new List<TurretAttribute>();
-        Rare5Turrets = new List<TurretAttribute>();
-        Rare6Turrets = new List<TurretAttribute>();
+
         ElementDIC = new Dictionary<Element, TurretAttribute>();
-        BattleElements = new List<TurretAttribute>();
         TrapDIC = new Dictionary<string, TrapAttribute>();
         CompositeDIC = new Dictionary<string, TurretAttribute>();
         TurretBaseDIC = new Dictionary<string, TurretBaseAttribute>();
+
+        BattleElements = new List<TurretAttribute>();
+        BattleComposites = new List<TurretAttribute>();
+
         foreach (TurretAttribute attribute in compositeTurrets)
         {
             CompositeDIC.Add(attribute.Name, attribute);
-            switch (attribute.Rare)
-            {
-                case 1:
-                    Rare1Turrets.Add(attribute);
-                    break;
-                case 2:
-                    Rare2Turrets.Add(attribute);
-                    break;
-                case 3:
-                    Rare3Turrets.Add(attribute);
-                    break;
-                case 4:
-                    Rare4Turrets.Add(attribute);
-                    break;
-                case 5:
-                    Rare5Turrets.Add(attribute);
-                    break;
-                case 6:
-                    Rare6Turrets.Add(attribute);
-                    break;
-            }
+
         }
         foreach (var attribute in trapAtts)
         {
@@ -84,16 +55,20 @@ public class TileContentFactory : GameObjectFactory
         {
             ElementDIC.Add(att.element, att);
         }
+        SetBattleElements();
     }
 
-    public void SetBattleElements()
+    private void SetBattleElements()
     {
         foreach (var select in Game.Instance.SaveData.SaveSelectedElement)
         {
             if (select.isSelect)
-                BattleElements.Add(ElementDIC[(Element)select.id]);
+            {
+                BattleElements.Add(ElementDIC[(Element)Enum.Parse(typeof(Element), select.turretName)]);
+            }
         }
     }
+
 
     //*******终点
     public GameTileContent GetDestinationPoint()
@@ -157,6 +132,12 @@ public class TileContentFactory : GameObjectFactory
         return attribute;
     }
 
+    public TurretAttribute GetRandomElementAttribute(bool isBattleElement = true)
+    {
+        return isBattleElement ?
+            BattleElements[UnityEngine.Random.Range(0, BattleElements.Count)] : 
+            ElementDIC[(Element)UnityEngine.Random.Range(0, ElementDIC.Count)];
+    }
     //合成塔***********
     public CompositeTurret GetCompositeTurret(Blueprint bluePrint)
     {
@@ -178,54 +159,21 @@ public class TileContentFactory : GameObjectFactory
         return null;
     }
 
-    public TurretAttribute GetRandomCompositeAttributeByLevel(int level)
+    public void PlayerLevelUp(int level)
     {
-        //TurretAttribute attributeToReturn = null;
-        //float[] chances = new float[3];
-        //for (int i = 0; i < 3; i++)
-        //{
-        //    chances[i] = StaticData.Instance.RareChances[level - 1, i];
-        //}
-        //int random = StaticData.RandomNumber(chances);
-        //switch (random)
-        //{
-        //    case 0:
-        //        attributeToReturn = Rare1Turrets[UnityEngine.Random.Range(0, Rare1Turrets.Count)];
-        //        break;
-        //    case 1:
-        //        attributeToReturn = Rare2Turrets[UnityEngine.Random.Range(0, Rare2Turrets.Count)];
-        //        break;
-        //    case 2:
-        //        attributeToReturn = Rare3Turrets[UnityEngine.Random.Range(0, Rare3Turrets.Count)];
-        //        break;
-        //}
-        //Debug.Assert(attributeToReturn != null, "传入了错误的等级");
-        //return attributeToReturn;
-        TurretAttribute attributeToReturn = null;
-        int random = UnityEngine.Random.Range(1, level + 1);
-        switch (random)
+        List<SelectInfo> list = Game.Instance.SaveData.SaveRareDIC[level];
+        foreach (var item in list)
         {
-            case 1:
-                attributeToReturn = Rare1Turrets[UnityEngine.Random.Range(0, Rare1Turrets.Count)];
-                break;
-            case 2:
-                attributeToReturn = Rare2Turrets[UnityEngine.Random.Range(0, Rare2Turrets.Count)];
-                break;
-            case 3:
-                attributeToReturn = Rare3Turrets[UnityEngine.Random.Range(0, Rare3Turrets.Count)];
-                break;
-            case 4:
-                attributeToReturn = Rare4Turrets[UnityEngine.Random.Range(0, Rare1Turrets.Count)];
-                break;
-            case 5:
-                attributeToReturn = Rare5Turrets[UnityEngine.Random.Range(0, Rare2Turrets.Count)];
-                break;
-            case 6:
-                attributeToReturn = Rare6Turrets[UnityEngine.Random.Range(0, Rare3Turrets.Count)];
-                break;
+            if (item.isSelect)
+            {
+                BattleComposites.Add(CompositeDIC[item.turretName]);
+            }
         }
-        Debug.Assert(attributeToReturn != null, "传入了错误的等级");
-        return attributeToReturn;
+    }
+
+    public TurretAttribute GetRandomCompositeAtt()
+    {
+        return BattleComposites[UnityEngine.Random.Range(0, BattleComposites.Count)];
     }
 
     //陷阱*************

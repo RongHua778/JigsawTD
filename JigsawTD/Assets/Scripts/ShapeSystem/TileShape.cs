@@ -24,10 +24,10 @@ public class TileShape : MonoBehaviour
     public List<GameTile> tiles = new List<GameTile>();
     public ShapeType shapeType = default;
 
-    //教程强制落位
-    private bool needForcePlace;
-    private Vector2 forceDir;
-    private Vector2 forcePos;
+    ////教程强制落位
+    //private bool needForcePlace;
+    //private Vector2 forceDir;
+    //private Vector2 forcePos;
 
     private void Awake()
     {
@@ -46,12 +46,12 @@ public class TileShape : MonoBehaviour
     }
 
 
-    public void SetForcePlace(Vector2 dir, Vector2 pos)//设置强制落位
-    {
-        needForcePlace = true;
-        forceDir = dir;
-        forcePos = pos;
-    }
+    //public void SetForcePlace(Vector2 dir, Vector2 pos)//设置强制落位
+    //{
+    //    needForcePlace = true;
+    //    forceDir = dir;
+    //    forcePos = pos;
+    //}
 
 
 
@@ -134,19 +134,19 @@ public class TileShape : MonoBehaviour
         }
     }
 
-    public bool CheckForcePlacement()
-    {
-        if (!needForcePlace)
-            return true;
-        if (Vector2.SqrMagnitude((Vector2)transform.position - forcePos) > 0.1f
-            || Vector2.Dot(transform.up, forceDir) < 0.99f)
-            return false;
-        else
-        {
-            GameManager.Instance.SetTutorialPoss(false);
-            return true;
-        }
-    }
+    //public bool CheckForcePlacement()
+    //{
+    //    if (!needForcePlace)
+    //        return true;
+    //    if (Vector2.SqrMagnitude((Vector2)transform.position - forcePos) > 0.1f
+    //        || Vector2.Dot(transform.up, forceDir) < 0.99f)
+    //        return false;
+    //    else
+    //    {
+    //        GameManager.Instance.SetTutorialPoss(false);
+    //        return true;
+    //    }
+    //}
 
 
 }

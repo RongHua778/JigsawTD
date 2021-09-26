@@ -18,9 +18,11 @@ public abstract class Singleton<T> : MonoBehaviour
         {
             Destroy(this.gameObject);
             Debug.Log(this.name + "已经创建了相同singleton实例");
+            return;
         }
         else
             m_instance = this as T;
     }
+
 
 }

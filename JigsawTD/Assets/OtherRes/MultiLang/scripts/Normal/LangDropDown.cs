@@ -3,33 +3,38 @@ using UnityEngine.UI;
 
 public class LangDropDown : MonoBehaviour
 {
-	[SerializeField] string[] myLangs;
-	Dropdown drp;
-	int index;
+    [SerializeField] string[] myLangs;
+    Dropdown drp;
+    int index;
 
-	void Start ()
-	{
-		drp = this.GetComponent <Dropdown> ();
-		int v = PlayerPrefs.GetInt ("_language_index", 0);
-		drp.value = v;
+    void Start()
+    {
+        drp = this.GetComponent<Dropdown>();
+        int v = 0;
+        string lang = PlayerPrefs.GetString("_language");
+        for (int i = 0; i < myLangs.Length; i++)
+        {
+            if (lang == myLangs[i])
+            {
+                v = i;
+            }
+        }
 
-		drp.onValueChanged.AddListener (delegate {
-			index = drp.value;
-			PlayerPrefs.SetInt ("_language_index", index);
-			PlayerPrefs.SetString ("_language", myLangs [index]);
-			Debug.Log ("language changed to " + myLangs [index]);
-			//apply changes
-			ApplyLanguageChanges ();
-		});
-	}
+        drp.value = v;
 
-	void ApplyLanguageChanges ()
-	{
-		Game.Instance.ReloadScene();
-	}
+        drp.onValueChanged.AddListener(delegate
+        {
+            index = drp.value;
+            PlayerPrefs.SetString("_language", myLangs[index]);
+            Debug.Log("language changed to " + myLangs[index]);
+            //apply changes
+            ApplyLanguageChanges();
+        });
+    }
 
-	void OnDestroy ()
-	{
-		drp.onValueChanged.RemoveAllListeners ();
-	}
+    void ApplyLanguageChanges()
+    {
+        Game.Instance.ReloadScene();
+    }
+
 }

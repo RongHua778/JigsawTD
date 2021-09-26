@@ -30,7 +30,6 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     protected AudioSource audioSource;
     protected SpriteRenderer CannonSprite;
     protected AudioClip ShootClip;
-    [SerializeField] Color turretLightColor = default;
     [SerializeField] protected ParticleSystem ShootEffect = default;
     //**********
 

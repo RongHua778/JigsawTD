@@ -47,6 +47,8 @@ public class TileSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         Shape = null;
         GameManager.Instance.PreviewComposition(false);
         GameManager.Instance.SelectShape();
+
+
     }
 
     public void ClearShape()

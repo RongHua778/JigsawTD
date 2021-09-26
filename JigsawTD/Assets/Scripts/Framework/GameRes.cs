@@ -3,6 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class ForcePlace
+{
+    public Vector2 ForcePos;
+    public Vector2 ForceDir;
+    public List<Vector2> GuidePos = new List<Vector2>();
+    public ForcePlace(Vector2 forcePos, Vector2 forceDir, List<Vector2> guidePoss)
+    {
+        this.ForcePos = forcePos;
+        this.ForceDir = forceDir;
+        this.GuidePos = guidePoss;
+    }
+}
+public class ShapeInfo
+{
+    public ShapeType ShapeType;
+    public Element Element;
+    public int Quality;
+    public int TurretPos;
+
+    public ShapeInfo(ShapeType type, Element element, int quality, int pos)
+    {
+        this.ShapeType = type;
+        this.Element = element;
+        this.Quality = quality;
+        this.TurretPos = pos;
+
+    }
+}
 public static class GameRes
 {
     private static MainUI m_MainUI;
@@ -16,13 +44,19 @@ public static class GameRes
     public static Action<StrategyBase> NextCompositeCallback = null;
 
     [Header("全局元素加成")]
-    public static float TempGoldIntensify=0;
+    public static float TempGoldIntensify = 0;
     public static float TempWoodIntensify = 0;
     public static float TempWaterIntensify = 0;
     public static float TempFireIntensify = 0;
     public static float TempDustIntensify = 0;
 
-    public static List<int> BattleElements = new List<int>();
+    //新手引导
+    static ShapeInfo preSetShape;//预设形状
+    public static ShapeInfo PreSetShape { get => preSetShape; set => preSetShape = value; }
+
+    static ForcePlace forcePlace;//强制摆位
+    public static ForcePlace ForcePlace { get => forcePlace; set => forcePlace = value; }
+
 
 
     private static int coin;
@@ -79,16 +113,17 @@ public static class GameRes
         TempFireIntensify = 0;
         TempDustIntensify = 0;
 
-        SetBattleElements();
     }
 
-    private static void SetBattleElements()
+    public static bool CheckForcePlacement(Vector2 pos, Vector2 dir)
     {
-        foreach(var select in Game.Instance.SaveData.SaveSelectedElement)
-        {
-            if(select.isSelect)
-                BattleElements.Add(select.id);
-        }
+        if (ForcePlace == null)
+            return true;
+        if (Vector2.SqrMagnitude(pos - ForcePlace.ForcePos) < 0.1f
+            && (ForcePlace.ForceDir == Vector2.zero || Vector2.Dot(dir, ForcePlace.ForceDir) > 0.99f))
+            return true;
+        else
+            return false;
     }
 
 }
