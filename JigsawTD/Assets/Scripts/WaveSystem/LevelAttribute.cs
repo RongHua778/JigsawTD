@@ -15,4 +15,6 @@ public class LevelAttribute : ScriptableObject
     public int TrapCount;
     public int EliteWave;
 
+    public List<TurretAttribute> Bonus;
+
 }

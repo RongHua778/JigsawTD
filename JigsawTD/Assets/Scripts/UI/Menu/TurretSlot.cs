@@ -55,7 +55,12 @@ public class TurretSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         }
         else
         {
-            if (!IsLock && m_SetHolder.SelectedCount < m_SetHolder.MaxSelectCount)
+            if (IsLock)
+            {
+                MenuUIManager.Instance.ShowMessage(GameMultiLang.GetTraduction("ISLOCK"));
+                return;
+            }
+            if (m_SetHolder.SelectedCount < m_SetHolder.MaxSelectCount)
             {
                 IsSelect = true;
                 m_SetHolder.SelectedCount++;

@@ -707,6 +707,7 @@ GameObject:
   - component: {fileID: 8429279062057710118}
   - component: {fileID: 5325759042064283974}
   - component: {fileID: 1715142111025119028}
+  - component: {fileID: 5114225278193340144}
   m_Layer: 5
   m_Name: EmptyArea
   m_TagString: Untagged
@@ -775,3 +776,16 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u7A7A\u5143\u7D20\u6280\u80FD\u69FD"
+--- !u!114 &5114225278193340144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8090417569636997595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a1c8a755ebe1841816e3a5b3aca1ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: EMPTYSKILL

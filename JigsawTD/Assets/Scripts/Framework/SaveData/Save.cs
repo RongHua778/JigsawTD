@@ -51,22 +51,22 @@ public class Save
 
         SaveSelectedRare4 = new List<SelectInfo>()
         {
-            new SelectInfo("SNOW", false, true),
-            new SelectInfo("MORTAR", false, false)
+            new SelectInfo("MORTAR", false, true),
+            new SelectInfo("SNOW", true, false)
         };
         SaveRareDIC.Add(4, SaveSelectedRare4);
 
         SaveSelectedRare5 = new List<SelectInfo>()
         {
             new SelectInfo("SNIPER", false, true),
-            new SelectInfo("BOOMERRANG", false, false)
+            new SelectInfo("BOOMERRANG",true, false)
         };
         SaveRareDIC.Add(5, SaveSelectedRare5);
 
         SaveSelectedRare6 = new List<SelectInfo>()
         {
             new SelectInfo("ULTRA", false, true),
-            new SelectInfo("CORE", false, false)
+            new SelectInfo("CORE", true, false)
         };
         SaveRareDIC.Add(6, SaveSelectedRare6);
     }
@@ -77,7 +77,7 @@ public class Save
         SelectInfo select1 = new SelectInfo("WOOD", false, true);
         SelectInfo select2 = new SelectInfo("WATER", false, true);
         SelectInfo select3 = new SelectInfo("FIRE", false, true);
-        SelectInfo select4 = new SelectInfo("DUST", false, false);
+        SelectInfo select4 = new SelectInfo("DUST", true, false);
         SaveSelectedElement = new List<SelectInfo> { select0, select1, select2, select3, select4 };
     }
 
@@ -92,8 +92,32 @@ public class Save
         }
     }
 
+    public void UnlockBonus(string bonusName)
+    {
+        foreach (var item in SaveSelectedElement)
+        {
+            if (item.turretName == bonusName)
+            {
+                item.isLock = false;
+                return;
+            }
+        }
+        foreach (var list in SaveRareDIC.Values)
+        {
+            foreach (var item in list)
+            {
+                if (item.turretName == bonusName)
+                {
+                    item.isLock = false;
+                    return;
+                }
+            }
+        }
+    }
+
 }
 
+[Serializable]
 public class SelectInfo
 {
     public string turretName;

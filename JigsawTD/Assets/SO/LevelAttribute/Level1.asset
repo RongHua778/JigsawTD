@@ -29,3 +29,5 @@ MonoBehaviour:
   LevelInfo: LEVEL1INFO
   TrapCount: 15
   EliteWave: 15
+  Bonus:
+  - {fileID: 11400000, guid: 95641219ac7af8c4e9a6a2cefe944374, type: 2}

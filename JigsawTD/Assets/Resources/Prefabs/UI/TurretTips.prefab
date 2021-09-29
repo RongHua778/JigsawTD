@@ -1403,6 +1403,11 @@ MonoBehaviour:
   - {fileID: 7017463891845619310}
   - {fileID: 6048249180633655900}
   - {fileID: 6113097801493233407}
+  m_InfoBtn: {fileID: 0}
+  elementSkillName: {fileID: 0}
+  elementSkillDes: {fileID: 0}
+  areas: []
+  elementSprites: []
 --- !u!114 &7906447874970851600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5224,7 +5229,7 @@ RectTransform:
   m_GameObject: {fileID: 7154940298271512606}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4941691922618522386}
   m_Father: {fileID: 0}
@@ -5255,11 +5260,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e5b29057e3f25042b96ca06271cffd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RootUI: {fileID: 243250748392089614}
   anim: {fileID: 5755275711962930110}
   Icon: {fileID: 7154940298204203962}
   Name: {fileID: 7172333835741629046}
   Description: {fileID: 2646891430220354650}
+  myCanvas: {fileID: 0}
   RangeTypeValue: {fileID: 3146524033611431889}
   AttackValue: {fileID: 5548011800127280789}
   SpeedValue: {fileID: 6260396227151372214}
@@ -5270,10 +5275,24 @@ MonoBehaviour:
   IntensifyValue: {fileID: 6529132235988917901}
   AnalysisValue: {fileID: 4141395123800592986}
   UpgradeCostValue: {fileID: 5979496603015834990}
+  AnalysisArea: {fileID: 2830715346529025986}
   UpgradeArea: {fileID: 1223337588749068032}
   IntensifyArea: {fileID: 3873196845415134752}
-  AnalysisArea: {fileID: 2830715346529025986}
-  elementConstruct: {fileID: 1009784397881732197}
+  ElementSkillArea: {fileID: 0}
+  ElementSkillContent: {fileID: 0}
+  ElementConstructPrefab: {fileID: 0}
+  AttackChangeTxt: {fileID: 0}
+  SpeedChangeTxt: {fileID: 0}
+  RangeChangeTxt: {fileID: 0}
+  CriticalChangeTxt: {fileID: 0}
+  SputteringChangeTxt: {fileID: 0}
+  SlowRateChangeTxt: {fileID: 0}
+  BluePrintArea: {fileID: 0}
+  BuyBtn: {fileID: 0}
+  QualitySetter: {fileID: 0}
+  CriticalInfo: {fileID: 0}
+  SplashInfo: {fileID: 0}
+  showingTurret: 0
 --- !u!95 &5755275711962930110
 Animator:
   serializedVersion: 3

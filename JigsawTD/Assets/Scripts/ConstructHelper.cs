@@ -157,8 +157,6 @@ public static class ConstructHelper
         GameTileContent content = m_ContentFactory.GetElementTurret(shapeInfo.Element, shapeInfo.Quality);
         tile.SetContent(content);
         shape.SetTile(tile, shapeInfo.TurretPos);
-        //shape.SetForcePlace(shapeInfo.ForceDir, shapeInfo.ForcePos);
-        //GameManager.Instance.SetTutorialPoss(true, shapeInfo.TutorialPoss);
         return shape;
     }
 

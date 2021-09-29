@@ -125,7 +125,6 @@ public class BoardSystem : IGameSystem
     //Trap…Ë÷√
     public static TrapContent LastTrap;
 
-
     public override void Initialize()
     {
         selection = transform.Find("Selection").gameObject;
@@ -179,7 +178,6 @@ public class BoardSystem : IGameSystem
         if (FindPath)
             ShowPath();
     }
-
 
     public void SetGameBoard()
     {

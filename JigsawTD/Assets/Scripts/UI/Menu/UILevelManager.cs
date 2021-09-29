@@ -10,43 +10,37 @@ public class UILevelManager : IUserInterface
     [SerializeField] Text difficultyInfo_Txt = default;
     private Animator m_Anim;
     [SerializeField] Text difficultyTxt = default;
-
-
+    [SerializeField] BonusSetter bonusSetter = default;
+    [SerializeField] Toggle tutorialCheck = default;
+    [SerializeField] CanvasGroup startGameBtnSprite = default;
 
     public override void Initialize()
     {
         base.Initialize();
         m_Anim = this.GetComponent<Animator>();
-
+        bonusSetter.SetInfo();
+        tutorialCheck.isOn = false;
     }
     public void SetLevelInfo()
     {
         DifficultyBtnClick(0);
-        //int maxPass = LevelManager.Instance.LevelMaxTurn;
-        //highScore.text = GameMultiLang.GetTraduction("HIGHSCORE") + ":" + maxPass + GameMultiLang.GetTraduction("WAVE");
-        //for (int i = 0; i < bossSlots.Length; i++)
-        //{
-        //    bossSlots[i].SetBossInfo(attribute.Boss[i], maxPass, (i + 1) * 10);
-        //}
-
-
     }
 
     public void StartGameBtnClick()
     {
         if (!gameStart)
         {
+            if (LevelManager.Instance.SelectedLevelID > LevelManager.Instance.PremitDifficulty)
+            {
+                MenuUIManager.Instance.ShowMessage(GameMultiLang.GetTraduction("UNPERMIT"));
+                return;
+            }
+            else if (LevelManager.Instance.SelectedLevelID > LevelManager.Instance.PassDiifcutly)
+            {
+                MenuUIManager.Instance.ShowMessage(GameMultiLang.GetTraduction("UNPASS"));
+                return;
+            }
             gameStart = true;
-            if (LevelManager.Instance.SelectedLevelID == 0)
-            {
-                Game.Instance.Tutorial = true;
-
-                //Game.Instance.SaveData.SetTutorialElements();
-            }
-            else
-            {
-                Game.Instance.Tutorial = false;
-            }
             Game.Instance.LoadScene(1);
         }
     }
@@ -56,9 +50,25 @@ public class UILevelManager : IUserInterface
         LevelManager.Instance.SelectedLevelID += count;
         difficultyInfo_Txt.text = GameMultiLang.GetTraduction("DIFFICULTY" + LevelManager.Instance.SelectedLevelID);
         if (LevelManager.Instance.SelectedLevelID == 0)
+        {
             difficultyTxt.text = GameMultiLang.GetTraduction("TUTORIAL");
+            tutorialCheck.gameObject.SetActive(true);
+        }
         else
+        {
             difficultyTxt.text = GameMultiLang.GetTraduction("DIFFICULTY") + " " + LevelManager.Instance.SelectedLevelID.ToString();
+            tutorialCheck.gameObject.SetActive(false);
+        }
+        if (LevelManager.Instance.SelectedLevelID > LevelManager.Instance.PremitDifficulty)
+        {
+            startGameBtnSprite.alpha = 0.5f;
+        }
+        else
+        {
+            startGameBtnSprite.alpha = 1f;
+        }
+
+        bonusSetter.SetInfo();
     }
 
     public override void Show()
@@ -75,5 +85,10 @@ public class UILevelManager : IUserInterface
     public void OnBattleSetBtnClick()
     {
         m_UIBattleSet.Show();
+    }
+
+    public void OnTutorialCheck(bool value)
+    {
+        Game.Instance.Tutorial = !value;
     }
 }

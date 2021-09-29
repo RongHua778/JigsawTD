@@ -16,7 +16,6 @@ public class MainUI : IUserInterface
     [SerializeField] Text coinTxt = default;
     [SerializeField] WaveInfoSetter m_WaveInfoSetter = default;
     [SerializeField] PausePanel m_PausePanel = default;
-    [SerializeField] GuideBook m_GuideBook = default;
 
 
 
@@ -60,7 +59,6 @@ public class MainUI : IUserInterface
         GameSpeed = 1;
 
         m_PausePanel.Initialize();
-        m_GuideBook.Initialize();
         m_Anim = GetComponent<Animator>();
 
     }

@@ -97,6 +97,10 @@ public class Game : Singleton<Game>
         Application.Quit();
     }
 
+    private void OnApplicationQuit()
+    {
+        SaveGame(SaveData);
+    }
 
     //存档
     public void SaveGame(Save save)

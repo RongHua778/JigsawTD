@@ -19,8 +19,8 @@ MonoBehaviour:
   StrategyType: 1
   RangeType: 1
   element: 0
-  Bullet: {fileID: -8373056630608583431, guid: 4fba859ed71eea449a9ff868bf2bb361, type: 3}
-  BulletSpeed: 6
+  Bullet: {fileID: 3971056745658777380, guid: 4c77cf9cbcc0a9740bc10c328648420d, type: 3}
+  BulletSpeed: 8
   ShootSound: {fileID: 8300000, guid: b72eee29e7c25884ab75b8dcff12d468, type: 3}
   Rare: 3
   totalLevel: 8

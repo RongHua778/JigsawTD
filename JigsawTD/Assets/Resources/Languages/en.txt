@@ -12,12 +12,14 @@ RESTART=Restart
 RETURNTOMENU=Return to menu
 QUIT2=Quit
 CONFIRM=Confirm
-TUTORIAL=Guidence
+TUTORIAL=Tutorial
 WISHLIST=Add to wishlist
 
 //Battleset
 SELECTEDCOUNT=Already Picked:
 NOENOUGHELEMENT=There are unselected items
+SKILLPREVIEW=Skills
+BATTLEELEMENT=Elements
 
 TEST1=Test:Clear all save data
 TEST2=Test:Unlock all difficulties
@@ -25,16 +27,18 @@ TEST2=Test:Unlock all difficulties
 LEVEL1NAME=STANDARD
 LEVELOTHER=MORE INCOMING
 LEVELINFO=DESCRIPTION
+BONUSINFO=REWARD
 DIFFICULTINFO=DIFFICULTY
 DIFFICULTY=Difficulty
 BATTLESET=Battle Setting
 HIGHSCORE=High Score
 WAVE=Wave
 NUM=
+SKIPTUTORIAL=Skip tutorial
 
 DIFFICULTY0=
 DIFFICULTY1=1."Mark" will appear in the batllefield\n2.Stick to 30 wave
-DIFFICULTY2=1.Elite enemies exist in normal waves\n2.Basic health change to 15
+DIFFICULTY2=1.Elite enemies exist in normal waves\n2.You have only 15 health
 DIFFICULTY3=1.More marks will apprear in the battlefield\n2.Stick to 40 wave
 DIFFICULTY4=1.The final challenge
 
@@ -60,7 +64,9 @@ GETMONEY=You have gained
 TUTORIALPLACE=Please place module at tutorial position
 EMPTYSLOT=When you place a new refactor turret on it, you can equip it with the refactor skill of the new refactor turret.
 DEMOINFO=DEMO is not the final quality
-
+ISLOCK=Unlock after passing specific difficulty
+UNPERMIT=Difficuly unlock in the official version
+UNPASS=Please pass the previous difficulty first
 
 //guidevideo
 PLACERULE=Placement Rule
@@ -76,8 +82,8 @@ GUIDEVIDEO05=When you have all the elements of a blueprint, you can composite a 
 GUIDEVIDEO06=Tip: The store refreshes every 3 waves. However you can buy and keep the blueprint you want.
 GUIDEVIDEO07=The mark will be revealed when a route is passing the tile. Each mark will trigger a special effect when the enemy passes by.
 GUIDEVIDEO08=Tip: you can spend some coins to change the mark to another location
-GUIDEVIDEO09=Each refactor turret has an unique refactor skill according to its structure combination. You can put the new turret on the existing turret to make it have additional refactor skills, but doing so will consume the new turret.
-GUIDEVIDEO10=Tip: each refactor turret can only be equipped with 1 additional refactor skill by default, depending on it's number of refactor skill slots.
+GUIDEVIDEO09=Each refactor turret has an unique element skill according to it's element combination. You can put the new turret on the existing turret to make it have additional element skills, but doing so will consume the new turret.
+GUIDEVIDEO10=Tip: each refactor turret can only be equipped with 1 additional element skill by default, depending on it's number of element skill slots.
 
 //func
 DRAWINFO=If you haven't build last turn, the price will be reduced\n current price reduction percentage:
@@ -92,8 +98,8 @@ ENERGYINFO=1. Gain 1 energy if you haven't drawed last wave\n2. Gain additional 
 SHOPBLUEPRINT=Lock:
 OWNBLUEPRINT=Owned
 NEXTREFRESH=Refresh after
-OWNPERFECT=Perfect Structure
-PERFECTINFO=Perfect structure can served as any composition for refactor
+OWNPERFECT=Perfect Element
+PERFECTINFO=Perfect Element can served as any composition for refactor
 
 //gameEndPanel
 WIN=WIN
@@ -115,7 +121,7 @@ RANGETYPE1=Circle
 RANGETYPE2=Semicircle
 RANGETYPE3=Line
 TURRETSKILL=Basic Skill
-ELEMENTSKILL=Refactor Skill
+ELEMENTSKILL=Element Skill
 TILESKILL=Tile Benefit
 CRITICALINFO=Each 1% critical = 1% extra critical damage. Defacult critical damage is 150%
 SPLASHINFO=Splash radius. Default splash damage is 50%
@@ -124,13 +130,14 @@ SPEEDUP=% FireRate
 CRITICALUP=% Critical
 SPUTTERINGUP= Splash
 SLOWUP= Slow
-COMINTENSIFY=Structure Benefit
+COMINTENSIFY=Element Benefit
 BUY=Buy
 COMPOSITE=Refactor
 UPGRADE=Upgrade
 SWITCHTRAP=Relocate
-ELEMENTSLOT=Refactor Skill Slot
+ELEMENTSLOT=Element Skill
 RARE=Rare
+EMPTYSKILL=Empty slot
 
 //Groundtips
 BUYGROUND=Build a basic tile?
@@ -149,11 +156,11 @@ BOOMERRANG=Boomerrang
 SUPER=Super
 CORE=Core
 
-GOLD=Gold Structure
-WOOD=Wood Structure
-WATER=Water Structure
-FIRE=Fire Structure
-DUST=Dust Structure
+GOLD=Gold Element
+WOOD=Wood Element
+WATER=Water Element
+FIRE=Fire Element
+DUST=Dust Element
 
 
 //turretskill
@@ -179,7 +186,7 @@ CORESKILL=At the start of each wave, it's attack will become 50%/75%/100% of the
 
 //A系
 AAA=Metalize
-AAAINFO=Increased the structure benefit of Gold structure by 15%
+AAAINFO=Increased the element benefit of Gold element by 15%
 AAB=Verical Strike
 AABINFO=Firerate increased by 35% when target's distance is less than 3
 AAC=Hitch Vision
@@ -191,7 +198,7 @@ AAEINFO=Splash range increased by 50% when target's distance is less than 3
 
 //B系
 BBB=Lightweight Material
-BBBINFO=Increased the structure benefit of Wood structure by 15%
+BBBINFO=Increased the element benefit of Wood element by 15%
 BBA=Charged Bullet
 BBAINFO=Attack increased by 5% each shoot.
 BBC=Cold Bullet
@@ -203,7 +210,7 @@ BBEINFO=Splash range increased by 0.02 each shoot.
 
 //C系
 CCC=Forst Environment
-CCCINFO=Increased the structure benefit of Water structure by 0.25
+CCCINFO=Increased the element benefit of Water element by 0.25
 CCA=Cold Front
 CCAINFO=Attack increases by 2% per second after the start of each wave.
 CCB=Overload Cartridge
@@ -215,7 +222,7 @@ CCEINFO=Splash range increases by 0.01 per second after the start of each wave.
 
 //D系
 DDD=Chaos Technology
-DDDINFO=Increased the structure benefit of Fire structure by 10%
+DDDINFO=Increased the element benefit of Fire element by 10%
 DDA=Energy Blasting
 DDAINFO=Attack increase by 60% for 2 seconds after a critical hit.
 DDB=Vulnerability Shoot
@@ -227,7 +234,7 @@ DDEINFO=Double bullet's splash range if it is a critical hit.
 
 //E系
 EEE=Atomic Center
-EEEINFO=Increased the structure benefit of Dust structure by 0.15
+EEEINFO=Increased the element benefit of Dust element by 0.15
 EEA=Attack Core
 EEAINFO=Increase adjacent turrets' attack by 30%
 EEB=Speed Core
@@ -251,11 +258,11 @@ ACDINFO=Increase turret's level by 1
 ACE=Technology Leaps
 ACEINFO=Reduce module upgrade cost by 50%
 ADE=Unreal Structure
-ADEINFO=Becomes a random refactor skill when refactor
+ADEINFO=Becomes a random element skill while refactor
 BCD=Concrete Pouring
 BCDINFO=The next 3 basic tile you build will be free
 BCE=Perfect Element
-BCEINFO=Gain 1 perfect structure when refactor
+BCEINFO=Gain 1 perfect element when refactor
 BDE=Repair Factory
 BDEINFO=The effect of adjacent marks will be increased by 100%
 CDE=Blink Strike
@@ -344,7 +351,7 @@ Guide11=Your mission is to deploy defenses to prevent the \nenemy from reaching 
 Guide12=The upper right corner shows our coins supply for \nyou, it will increases by 10 per wave.
 Guide13=In the bottom right corner is the module building \nfunction. Now spend some coins to build a module.
 //4
-Guide14=Each module consists of 3 "basic tile" and 1 \n"structure turret", basic tiles can be used as a path, \nwhile the turret can be used as an obstacle.
+Guide14=Each module consists of 3 "basic tile" and 1 \n"element turret", basic tiles can be used as a path, \nwhile the turret can be used as an obstacle.
 Guide15=Due to wartime signal transmission interference, \nthe module is built entirely random.
 Guide16=Now pick one module and place it as indicated。
 //5
@@ -368,8 +375,8 @@ Guide28=Now build the third module, and I'll walk you through\n a "refactoring"
 Guide29=Please click the button on the left side to open the \nformula panel.
 //11
 Guide30=The formula panel refreshes a batch of refactor turret \nblueprint every 3 waves, and the components of each \nblueprint are completely random.
-Guide31=Refactor turrets have their own unique skill, and a \nrefactor skill depending on the composition structures.
-Guide32=Now that you have collect enough structure for a \nblueprint, now build and place it on the grid.
+Guide31=Refactor turrets have their own unique skill, and a \nelement skill depending on the composition elements.
+Guide32=Now that you have collect enough element for a \nblueprint, now build and place it on the grid.
 //12
 Guide33=Refactor turret is the backbone of the defense. \nNow let's move on to the next wave.
 //13

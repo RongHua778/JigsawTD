@@ -533,5 +533,10 @@ public class GameManager : Singleton<GameManager>
         m_FuncUI.FreeShapeCount += count;
     }
 
+    public void AddtoWishList()
+    {
+        Application.OpenURL("https://store.steampowered.com/app/1664670/_Refactor");
+    }
+
     #endregion
 }

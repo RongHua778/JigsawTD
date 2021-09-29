@@ -18,9 +18,11 @@ WISHLIST=加入愿望单
 //Battleset
 SELECTEDCOUNT=已选择：
 NOENOUGHELEMENT=仍有未选择的项
+SKILLPREVIEW=技能预览
+BATTLEELEMENT=参战元素
 
-TEST1=测试：已限定教学难度
-TEST2=测试：已解锁全部难度
+TEST1=测试：已清除通关数据
+TEST2=测试：已解锁全难度
 
 LEVEL1NAME=标准模式
 LEVELOTHER=更多模式开发中
@@ -32,10 +34,11 @@ HIGHSCORE=最高记录
 BATTLESET=战斗设置
 WAVE=波
 NUM=第
+SKIPTUTORIAL=跳过教程
 
 DIFFICULTY0=
 DIFFICULTY1=1.加入战场标记\n2.坚持30波进攻
-DIFFICULTY2=1.普通波中加入两种新的精英敌人\n2.基础生命值变为15
+DIFFICULTY2=1.普通波中加入两种新的精英敌人\n2.你只有15点生命值
 DIFFICULTY3=1.战场中将出现更多标记\n2.坚持40波进攻
 DIFFICULTY4=1.迎接最终难度挑战
 
@@ -55,11 +58,14 @@ NOOVERLAP=防御塔不可与特殊地形重叠
 NOTBATTLESTATE=战斗中不可购买
 ALREADYGROUND=此处已经有格子
 NOENOUGHDRAW=抽取次数不足
-SKILLFULL=该重构塔重构技能槽已满
+SKILLFULL=该重构塔元素技能槽已满
 GETMONEY=获得了金币
 TUTORIALPLACE=请按教程位置摆放
-EMPTYSLOT=放置一个新重构塔在该重构塔上时，可使其装备新重构塔的重构技能。
+EMPTYSLOT=放置一个新重构塔在该重构塔上时，可使其装备新重构塔的元素技能。
 DEMOINFO=当前为DEMO效果，不代表游戏最终品质
+ISLOCK=需通过指定难度解锁
+UNPERMIT=正式版解锁该难度
+UNPASS=请先通过上一难度
 
 //guidevideo
 PLACERULE=摆放模块
@@ -75,8 +81,8 @@ GUIDEVIDEO05=当凑齐配方所需的素材时，可以合成防御塔，并根�
 GUIDEVIDEO06=提示：商店每3回合刷新一次配方，购买配方可以增加合成的机会。
 GUIDEVIDEO07=通过将道路经过战场上随机出现的标记格子，将会揭示该标记，每个标记在敌人经过时会触发特殊效果。
 GUIDEVIDEO08=提示：你可以花费一定代币将标记格子换到其他位置
-GUIDEVIDEO09=每个合成重构塔根据其结构组合会有不同的重构技能，每个重构塔都默认带有1个重构技能。你可以将新重构塔放置在已重构塔上，使其具备额外的重构技能，但这么做会消耗新重构塔。
-GUIDEVIDEO10=提示：每个重构塔默认只可以再配备1个额外重构技能，视乎该重构塔的重构技能槽数量。
+GUIDEVIDEO09=每个合成重构塔根据其元素组合会有不同的重构技能，每个重构塔都默认带有1个元素技能。你可以将新重构塔放置在已重构塔上，使其具备额外的元素技能，但这么做会消耗新重构塔。
+GUIDEVIDEO10=提示：每个重构塔默认只可以再配备1个额外元素技能，视乎该重构塔的元素技能槽数量。
 
 //func
 DRAWINFO=当前回合没有构建时，构建价格将降低；\n当前降价百分比：
@@ -91,8 +97,8 @@ ENERGYINFO=1.当前回合没有抽取时，获得1点能量\n2.连续不抽取�
 SHOPBLUEPRINT=可锁定：
 OWNBLUEPRINT=拥有配方
 NEXTREFRESH=下次刷新
-OWNPERFECT=拥有万能结构
-PERFECTINFO=万能结构可以作为任意重构素材使用
+OWNPERFECT=拥有万能元素
+PERFECTINFO=万能元素可以作为任意重构素材使用
 
 //gameEndPanel
 WIN=通关
@@ -114,7 +120,7 @@ RANGETYPE1=圆型
 RANGETYPE2=半圆型
 RANGETYPE3=直线型
 TURRETSKILL=被动技能
-ELEMENTSKILL=重构技能
+ELEMENTSKILL=元素技能
 TILESKILL=地形效果
 CRITICALINFO=每1%暴击率=1%额外暴击伤害，基础暴击伤害为150%
 SPLASHINFO=溅射半径，基础溅射伤害为50%
@@ -128,8 +134,9 @@ BUY=购买
 COMPOSITE=重构
 UPGRADE=升级
 SWITCHTRAP=换位
-ELEMENTSLOT=重构技能槽
+ELEMENTSLOT=元素技能槽
 RARE=稀有度
+EMPTYSKILL=空技能槽
 
 //Groundtips
 BUYGROUND=购买一块基础格
@@ -148,11 +155,11 @@ BOOMERRANG=回旋镖
 SUPER=超能炮
 CORE=核心机
 
-GOLD=金结构
-WOOD=木结构
-WATER=水结构
-FIRE=火结构
-DUST=土结构
+GOLD=金元素
+WOOD=木元素
+WATER=水元素
+FIRE=火元素
+DUST=土元素
 
 //turretskill
 ASKILL=稳固实用的防御塔
@@ -176,7 +183,7 @@ CORESKILL=回合开始时，攻击力变为相邻防御塔的攻击力之和的5
 
 //A系
 AAA=重金属化
-AAAINFO=所有金结构的结构加成提高15%
+AAAINFO=所有金元素的结构加成提高15%
 AAB=垂直打击
 AABINFO=攻击距离小于3的目标时，攻速提升35%
 AAC=凝滞视野
@@ -188,7 +195,7 @@ AAEINFO=攻击距离小于3的目标时，子弹溅射范围提高50%
 
 //B系
 BBB=轻材料化
-BBBINFO=所有木结构的结构加成提高15%
+BBBINFO=所有木元素的结构加成提高15%
 BBA=充能子弹
 BBAINFO=每次攻击提升本回合5%攻击力
 BBC=极寒子弹
@@ -201,7 +208,7 @@ BBEINFO=每次攻击提升本回合0.02溅射范围
 
 //C系
 CCC=低温环境
-CCCINFO=所有水结构的结构加成提高0.25
+CCCINFO=所有水元素的结构加成提高0.25
 CCA=寒气阵地
 CCAINFO=每回合开始后，攻击力每秒提升2%
 CCB=过载弹夹
@@ -214,7 +221,7 @@ CCEINFO=每回合开始后，溅射范围每秒提升0.01
 
 //D系
 DDD=混沌科技
-DDDINFO=所有火结构的结构加成提高10%
+DDDINFO=所有火元素的结构加成提高10%
 DDA=高能爆破
 DDAINFO=暴击时，使防御塔攻击力提高60%，持续2秒
 DDB=弱点击破
@@ -227,7 +234,7 @@ CRITICALADJACENT=相邻每有1个防御塔，就提升25%暴击率
 
 //E系
 EEE=原子中心
-EEEINFO=所有土结构的结构加成提高0.15
+EEEINFO=所有土元素的结构加成提高0.15
 EEA=强攻核心
 EEAINFO=相邻防御塔攻击力提高30%
 EEB=加速核心
@@ -241,7 +248,7 @@ EEDINFO=相邻防御塔的暴击率提高20%
 ABC=廉价基座
 ABCINFO=升级费用-50%
 ABD=强化配方
-ABDINFO=使下一个合成塔暴击+40%
+ABDINFO=使下一个重构塔暴击+40%
 ABE=免费奖券
 ABEINFO=接下来两次抽取模块免费
 
@@ -250,11 +257,11 @@ ACDINFO=防御塔等级提升1级
 ACE=科技跃进
 ACEINFO=使模块升级费用-50%
 ADE=幻化构造
-ADEINFO=合成后变化为一个随机技能
+ADEINFO=重构后变化为一个随机技能
 BCD=水泥倾泻
 BCDINFO=使接下来三次购买基本格价格为0
 BCE=万能元素
-BCEINFO=合成时获得1个万能元素
+BCEINFO=重构后获得1个万能元素
 BDE=维修工厂
 BDEINFO=相邻标记的效果提升100%
 CDE=闪烁打击
@@ -343,7 +350,7 @@ Guide11=你的任务就是部署防御阻止敌人抵达出口。
 Guide12=画面右上角显示了我们为你提供的代币供给，\n每回合供给量都会提高10。
 Guide13=在画面右下角是模块构建功能，现在请使用\n代币构建一个模块。
 //4
-Guide14=每个模块由3个"基本格"和1个“结构塔”格组成，\n基本格可以用作道路，而结构塔可以作为障碍。
+Guide14=每个模块由3个"基本格"和1个“元素塔”组成，\n基本格可以用作道路，而元素塔可以作为障碍。
 Guide15=由于战时的信号传输干扰，模块的构建是完全随\n机的，所以请随机应变。
 Guide16=现在选择1个模块，并按照标识的位置进行摆放。
 //5
@@ -357,8 +364,8 @@ Guide21=做得很好。
 Guide22=每次进行模块构建都会使其价格提高10，代币还有\n其他用途，你需要合理规划资源分配。
 Guide23=但是现在请再次构建模块，我们还需要继续加强防御。
 //8
-Guide24=这次你构建了一个金结构塔，不同的结构塔拥有不\n同的特点。
-Guide25=点击场上的结构塔，可以查看其基本信息及攻击范围。
+Guide24=这次你构建了一个金元素塔，不同的元素塔拥有不\n同的特点。
+Guide25=你可以点击场上的元素塔，以查看其基本信息及攻击范围。
 Guide26=当你准备好了，可以随时开启下一波战斗。
 //9
 Guide27=我们成功守住了两波进攻，但为了走得更远，我们需\n要更强力的“重构塔”。
@@ -378,7 +385,7 @@ Guide36=你可以不必在每个回合都进行构建，以便存下足够代\n�
 Guide37=并且，如果你在本回合没有进行构建，则会使构建\n价格降低10%。
 Guide38=现在的防御力量充足，开始下一波战斗吧。
 //14
-Guide39=将你的代币灵活投入在抽取模块，升级模块，或\n升级合成塔上，以获取最大收益。
+Guide39=将你的代币灵活投入在抽取模块，升级模块，或\n升级重构塔上，以获取最大收益。
 Guide40=我把更多指引的内容放在了左上角的指引面板里，\n请在任何时候查看。
 Guide41=请坚持20波进攻，完成这一次教程。
 
