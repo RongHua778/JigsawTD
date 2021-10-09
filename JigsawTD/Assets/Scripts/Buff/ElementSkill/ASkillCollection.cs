@@ -7,10 +7,16 @@ public class DoubleAttack : ElementSkill
     //所有攻击提升效果翻倍
     public override List<int> Elements => new List<int> { 0, 0, 0 };
 
-    public override void Composite()
-    {
-        GameRes.TempGoldIntensify += 0.15f;
+    //public override void Composite()
+    //{
+    //    GameRes.TempGoldIntensify += 0.15f;
+    //}
 
+    public override void Build()
+    {
+        base.Build();
+        strategy.AllAttackIntensifyModify += 1;
+        strategy.InitRange = 3;
     }
 }
 
@@ -27,7 +33,7 @@ public class NearSpeed : ElementSkill
         {
             if (!isIntensified)
             {
-                intensifyValue = 0.5f * strategy.TimeModify;
+                intensifyValue = 0.6f * strategy.TimeModify;
                 strategy.TurnSpeedIntensify += intensifyValue;
                 isIntensified = true;
             }
@@ -51,14 +57,14 @@ public class NearSpeed : ElementSkill
 
 public class NearSlow : ElementSkill
 {
-    //如果距离小于3，则减速效果提高50%
+    //如果距离小于3，则减速效果提高1
     public override List<int> Elements => new List<int> { 0, 0, 2 };
 
     public override void Shoot(Bullet bullet = null)
     {
         if (bullet.GetTargetDistance() < 3f)
         {
-            bullet.SlowRate *= (1 + 0.5f * strategy.TimeModify);
+            bullet.SlowRate += (1 * strategy.TimeModify);
         }
     }
 }
@@ -72,7 +78,7 @@ public class NearCritical : ElementSkill
     {
         if (bullet.GetTargetDistance() < 3f)
         {
-            bullet.CriticalRate += 0.35f * strategy.TimeModify;
+            bullet.CriticalRate += 0.4f * strategy.TimeModify;
 
         }
     }
@@ -86,7 +92,7 @@ public class NearSplash : ElementSkill
     {
         if (bullet.GetTargetDistance() < 3f)
         {
-            bullet.SputteringRange *= (1 + 0.5f * strategy.TimeModify);
+            bullet.SputteringRange += (0.6f * strategy.TimeModify);
         }
     }
 }

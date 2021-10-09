@@ -41,6 +41,8 @@ public class TrapContent : GameTileContent
         StaticData.SetNodeWalkable(m_GameTile, true);
         Collider2D col = StaticData.RaycastCollider(transform.position, LayerMask.GetMask(StaticData.ConcreteTileMask));
         ContentLandedCheck(col);
+
+        GameManager.Instance.CheckDetectSkill();//任何一个塔放下来，都要所有防御塔检测一次侦测效果
     }
 
 

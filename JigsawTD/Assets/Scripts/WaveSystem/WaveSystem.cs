@@ -83,16 +83,17 @@ public class WaveSystem : IGameSystem
         for (int i = 0; i < LevelAttribute.Wave; i++)
         {
 
-            if (i % 3 == 0)
-            {
-                stage += (((float)i / 10) + 1) * LevelAttribute.LevelIntensify * (0.5f * i + 1);
-            }
+            //if (i % 3 == 0)
+            //{
+            //    stage += (((float)i / 10) + 1) * LevelAttribute.LevelIntensify * (0.5f * i + 1);
+            //}
             //if (i > 39)
             //{
             //    float number = 2f;
             //    stage += ((i / 10) + 1) * LevelAttribute.LevelIntensify * number;
             //}
-
+            //stage += (((float)i / 10) + 1) * LevelAttribute.LevelIntensify * (0.5f * i + 1);
+            stage += LevelAttribute.LevelIntensify * (0.05f * Mathf.Pow(i, 1.8f) + 1);
 
             if (i < 3)
             {

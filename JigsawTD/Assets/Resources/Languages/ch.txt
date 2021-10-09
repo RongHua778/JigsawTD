@@ -92,6 +92,7 @@ MODULELEVELINFO1=当前等级概率
 MODULELEVELINFO2=品质
 MODULELEVELINFO3=当模块等级达到2,4和6级时，商店配方数量+1
 ENERGYINFO=1.当前回合没有抽取时，获得1点能量\n2.连续不抽取时，会获得额外能量\n3.能量每达到10点，获得1次额外抽取次数
+DEGRADE=降级
 
 //shop
 SHOPBLUEPRINT=可锁定：
@@ -168,34 +169,34 @@ CSKILL=子弹可以造成减速效果
 DSKILL=子弹有概率造成暴击
 ESKILL=子弹造成溅射范围伤害
 
-CONSTRUCTORSKILL=攻击范围内每有1个敌人，造成的伤害就提高10%
+CONSTRUCTORSKILL=攻击范围内每有1个敌人，攻击力就提高10%
 SCATTERSKILL=造成的伤害降低50%，但是可以额外攻击3个目标
 MORTARSKILL=溅射伤害率提高150%
-RAPIDERSKILL=对同一目标进行攻击时，每次攻击使攻速提升10%，上限400%
+RAPIDERSKILL=对同一目标进行攻击时，每次攻击使攻速提升15%，上限300%
 ROTARYSKILL=穿透型子弹;向周围随机攻击，自身所有攻速加成翻倍
 SNIPERSKILL=禁止攻击范围+2，每1攻击范围提升10%基础攻击力
 ULTRASKILL=所有暴击伤害提升效果翻倍
 SNOWSKILL=穿透型子弹;子弹会持续移动到直线终点，并使敌人当前减速效果翻倍。
 COOPORATIVESKILL=每次攻击提升1%*总合成塔数量的攻击力
 BOOMERRANGSKILL=穿透型子弹；无法提升攻速；发射一枚回旋镖，每命中一个敌人就使后续伤害提高10%
-SUPERSKILL=使所有30秒后发生的属性提升翻倍
+SUPERSKILL=战斗开始30秒后，使当前所有属性值翻倍
 CORESKILL=回合开始时，攻击力变为相邻防御塔的攻击力之和的50%/75%/100%（随合成塔等级提升）
 
 //A系
 AAA=重金属化
-AAAINFO=所有金元素的结构加成提高15%
+AAAINFO=攻击范围变为3，使自身所有攻击加成翻倍
 AAB=垂直打击
-AABINFO=攻击距离小于3的目标时，攻速提升35%
+AABINFO=攻击距离小于3的目标时，攻速提升60%
 AAC=凝滞视野
-AACINFO=攻击距离小于3的目标时，子弹减速效果提升50%
+AACINFO=攻击距离小于3的目标时，子弹减速效果提升1
 AAD=不稳定轴
-AADINFO=攻击距离小于3的目标时，子弹暴击率提高35%
+AADINFO=攻击距离小于3的目标时，子弹暴击率提高40%
 AAE=近距轰炸
-AAEINFO=攻击距离小于3的目标时，子弹溅射范围提高50%
+AAEINFO=攻击距离小于3的目标时，子弹溅射范围提高0.6
 
 //B系
 BBB=轻材料化
-BBBINFO=所有木元素的结构加成提高15%
+BBBINFO=造成的伤害减少35%，额外攻击2个目标
 BBA=充能子弹
 BBAINFO=每次攻击提升本回合5%攻击力
 BBC=极寒子弹
@@ -207,8 +208,8 @@ BBEINFO=每次攻击提升本回合0.02溅射范围
 
 
 //C系
-CCC=低温环境
-CCCINFO=所有水元素的结构加成提高0.25
+CCC=急冻技术
+CCCINFO=所有战斗开始后发生的属性提升翻倍
 CCA=寒气阵地
 CCAINFO=每回合开始后，攻击力每秒提升2%
 CCB=过载弹夹
@@ -221,7 +222,7 @@ CCEINFO=每回合开始后，溅射范围每秒提升0.01
 
 //D系
 DDD=混沌科技
-DDDINFO=所有火元素的结构加成提高10%
+DDDINFO=暴击伤害增加-100%到400%的随机浮动
 DDA=高能爆破
 DDAINFO=暴击时，使防御塔攻击力提高60%，持续2秒
 DDB=弱点击破
@@ -234,7 +235,7 @@ CRITICALADJACENT=相邻每有1个防御塔，就提升25%暴击率
 
 //E系
 EEE=原子中心
-EEEINFO=所有土元素的结构加成提高0.15
+EEEINFO=相邻防御塔溅射提高0.5
 EEA=强攻核心
 EEAINFO=相邻防御塔攻击力提高30%
 EEB=加速核心
@@ -259,13 +260,13 @@ ACEINFO=使模块升级费用-50%
 ADE=幻化构造
 ADEINFO=重构后变化为一个随机技能
 BCD=水泥倾泻
-BCDINFO=使接下来三次购买基本格价格为0
+BCDINFO=接下来一次标记换位免费
 BCE=万能元素
 BCEINFO=重构后获得1个万能元素
 BDE=维修工厂
 BDEINFO=相邻标记的效果提升100%
 CDE=闪烁打击
-CDEINFO=攻击有5%概率将敌人传送到3格前的位置
+CDEINFO=攻击有3%概率将敌人传送到2格前的位置
 
 //Enemy
 SOILDER=萨特
@@ -317,17 +318,17 @@ EXPLOSIONTRAP=爆炸标记
 SPAWNPOINTINFO=敌人的出生点，确保有路线与终点相连。
 DESTINATIONINFO=敌人的目的地，确保有路线与起点相连。
 
-STUNTRAPINFO=经过的敌人晕眩0.5*N秒，N=此前经过的标记数量
-ICETRAPINFO=经过的敌人减速增加0.5*N，N=此前经过的陷阱数量
+STUNTRAPINFO=经过的敌人晕眩0.5*N秒，N=此前经过的标记数
+ICETRAPINFO=经过的敌人减速增加0.5*N，N=此前经过的标记数
 ARROWTRAPINFO=按箭头方向经过的敌人会被减速5秒。
 BLINKTRAPINFO=经过的敌人传送到2格前的位置。（每个敌人只会触发一次）
 PROMOTETRAPINFO=使敌人经过的下一个标记效果提升100%
-IMITATETRAPINFO=这个陷阱效果等同于敌人经过的上一个标记。
-EXECUTETRAPINFO=对经过的敌人造成0.4%*N的最大生命值伤害，N=此前经过的格子数量。
+IMITATETRAPINFO=这个陷阱效果等同于敌人经过的上一个标记
+EXECUTETRAPINFO=对经过的敌人造成20%已损失生命值的伤害
 DAMAGEMARKINFO=敌人在接下来3格的移动内所受伤害提高50%
 FROSTTRAPINFO=接下来3格内敌人所受减速效果提高50%
 BONUSTRAPINFO=每个经过的敌人使你获得2金币
-EXPLOSIONTRAPINFO=经过的敌人会触发一次10%当前生命值的范围伤害
+EXPLOSIONTRAPINFO=经过的敌人会触发一次5%当前生命值的范围伤害
 
 
 //Guide

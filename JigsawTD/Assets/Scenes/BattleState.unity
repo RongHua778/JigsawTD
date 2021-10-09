@@ -15999,7 +15999,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2428495454343918671, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -35.00009
+      value: -40.000072
       objectReference: {fileID: 0}
     - target: {fileID: 2428495454343918671, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -16039,11 +16039,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2428495454686638302, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 246.99994
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 2428495454686638302, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -4.119996
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 2428495454860525341, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
       propertyPath: m_Color.g
@@ -22798,7 +22798,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2428495454343918671, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -35.00009
+      value: -40
       objectReference: {fileID: 0}
     - target: {fileID: 2428495454343918671, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -22830,11 +22830,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2428495454686638302, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 247
+      value: 256.00006
       objectReference: {fileID: 0}
     - target: {fileID: 2428495454686638302, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -4.119996
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 2428495454860525341, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
       propertyPath: m_Color.g
@@ -25087,9 +25087,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fbf3466ab2bed174096203daed7b2d4f, type: 2}
   - {fileID: 11400000, guid: 993e7ccb381984e4983180597ec9c10f, type: 2}
   - {fileID: 11400000, guid: 99391903eba8a1041af83dc6b559379e, type: 2}
-  PremitDifficulty: 0
+  PremitDifficulty: 2
   maxDifficutly: 0
-  selectedLevelId: 0
+  selectedLevelId: 4
 --- !u!114 &1834551534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29443,7 +29443,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2428495454343918671, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -35
+      value: -39.99998
       objectReference: {fileID: 0}
     - target: {fileID: 2428495454343918671, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -29491,11 +29491,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2428495454686638302, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 246.99994
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 2428495454686638302, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -4.119996
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 2428495454860525341, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
       propertyPath: m_Color.b
@@ -30548,6 +30548,7 @@ GameObject:
   - component: {fileID: 5846189135381870978}
   - component: {fileID: 4645707156143587777}
   - component: {fileID: 1135779745210088791}
+  - component: {fileID: 8032589232880866027}
   m_Layer: 5
   m_Name: DamageAnalysisTxt
   m_TagString: Untagged
@@ -30555,6 +30556,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8032589232880866027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8032589232880866026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a1c8a755ebe1841816e3a5b3aca1ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: DAMAGEANLYSIS
 --- !u!224 &8529047756098216895
 RectTransform:
   m_ObjectHideFlags: 0

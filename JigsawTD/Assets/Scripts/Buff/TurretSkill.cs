@@ -93,6 +93,17 @@ public abstract class TurretSkill
     {
 
     }
+
+    public virtual void OnEnter(IDamageable target)
+    {
+
+    }
+
+    public virtual void OnExit(IDamageable target)
+    {
+
+    }
+
 }
 
 public abstract class InitialSkill : TurretSkill
@@ -199,10 +210,10 @@ public class RapiderSkill : InitialSkill
             speedIncreased = 0;
             return;
         }
-        if (speedIncreased < 3.99f)
+        if (speedIncreased < 2.99f)
         {
-            speedIncreased += 0.1f * strategy.TimeModify;
-            strategy.TurnSpeedIntensify += 0.1f * strategy.TimeModify;
+            speedIncreased += 0.15f * strategy.TimeModify;
+            strategy.TurnSpeedIntensify += 0.15f * strategy.TimeModify;
         }
     }
 
@@ -219,11 +230,21 @@ public class ConstructorSkill : InitialSkill
     public override TurretSkillName EffectName => TurretSkillName.ConstructorSkill;
     public override string SkillDescription => "CONSTRUCTORSKILL";
 
-    public override void PreHit(Bullet bullet = null)
+    //public override void PreHit(Bullet bullet = null)
+    //{
+    //    int count = strategy.m_Turret.targetList.Count;
+    //    bullet.Damage *= (1 + count * 0.1f);
+    //}
+
+    public override void OnEnter(IDamageable target)
     {
-        int count = strategy.m_Turret.targetList.Count;
-        bullet.Damage *= (1 + count * 0.1f);
+        strategy.TurnAttackIntensify += 0.1f * strategy.TimeModify;
     }
+    public override void OnExit(IDamageable target)
+    {
+        strategy.TurnAttackIntensify -= 0.1f * strategy.TimeModify;
+    }
+
 }
 
 
@@ -253,7 +274,7 @@ public class CooporativeSkill : InitialSkill
 
     public override void Shoot(Bullet bullet = null)
     {
-        strategy.TurnAttackIntensify += 0.01f * GameEndUI.TotalComposite * strategy.TimeModify;
+        strategy.TurnAttackIntensify += 0.01f * GameRes.TotalRefactor * strategy.TimeModify;
     }
 }
 
@@ -282,12 +303,16 @@ public class SuperSkill : InitialSkill
 
     public override void StartTurn()
     {
-        Duration = 30;
+        Duration += 30;
     }
 
     public override void TickEnd()
     {
-        strategy.TimeModify += 2;
+        strategy.TurnFixAttack += strategy.FinalAttack*strategy.TimeModify;
+        strategy.TurnFixSpeed += strategy.FinalSpeed * strategy.TimeModify;
+        strategy.TurnFixCriticalRate += strategy.FinalCriticalRate * strategy.TimeModify;
+        strategy.TurnFixSlowRate += strategy.FinalSlowRate * strategy.TimeModify;
+        strategy.TurnFixSputteringRange += strategy.FinalSputteringRange * strategy.TimeModify;
     }
 
     public override void EndTurn()

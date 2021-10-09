@@ -375,4 +375,20 @@ public class StrategyBase
             TurretSkills[i].Composite();
         }
     }
+
+    public void EnterSkill(IDamageable target)
+    {
+        for (int i = 0; i < TurretSkills.Count; i++)
+        {
+            TurretSkills[i].OnEnter(target);
+        }
+    }
+
+    public void ExitSkill(IDamageable target)
+    {
+        for (int i = 0; i < TurretSkills.Count; i++)
+        {
+            TurretSkills[i].OnExit(target);
+        }
+    }
 }

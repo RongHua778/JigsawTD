@@ -31,15 +31,15 @@ public class MenuUIManager : Singleton<MenuUIManager>
         if (Input.GetKeyDown(KeyCode.K))
         {
             ShowMessage(GameMultiLang.GetTraduction("TEST1"));
-            //   LevelManager.Instance.MaxDifficulty = 0;
+            LevelManager.Instance.PremitDifficulty = 0;
             PlayerPrefs.DeleteAll();
         }
-        //if (Input.GetKeyDown(KeyCode.J))
-        //{
-        //    ShowMessage(GameMultiLang.GetTraduction("TEST2"));
-        //    LevelManager.Instance.MaxDifficulty = 4;
-        //    PlayerPrefs.SetInt("MaxDifficulty", 4);
-        //}
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            ShowMessage(GameMultiLang.GetTraduction("TEST2"));
+            LevelManager.Instance.PremitDifficulty = 4;
+            PlayerPrefs.SetInt("MaxDifficulty", 4);
+        }
     }
 
     public void StartGameBtnClick()

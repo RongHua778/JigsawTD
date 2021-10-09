@@ -105,6 +105,8 @@ public static class ConstructHelper
 
         tile.SetContent(content);
         shape.SetTile(tile);
+
+        GameRes.TotalRefactor++;
         return shape;
     }
 
@@ -112,29 +114,24 @@ public static class ConstructHelper
     //测试用
     public static TileShape GetTrapByName(string name)//测试用，生成一个随意放置的陷阱
     {
+        GameTileContent content = m_ContentFactory.GetTrapContentByName(name);
+        if (content == null)
+        {
+            return null;
+        }
         TileShape shape = m_ShapeFactory.GetDShape();
         GameTile tile = m_TileFactory.GetBasicTile();
-        GameTileContent content = m_ContentFactory.GetTrapContentByName(name);
         tile.SetContent(content);
         shape.SetTile(tile);
         return shape;
     }
 
-    public static TileShape GetCompositeTurretByName(string name)//测试用，生成一个指定合成塔搭配随机配方
-    {
-        TurretAttribute attribute = m_ContentFactory.GetCompositeTurretByName(name);
-        Blueprint bluePrint = m_BlurPrintFactory.GetRandomBluePrint(attribute);
-        TileShape shape = GetCompositeTurretByBluePrint(bluePrint);
-        GameEndUI.TotalComposite++;
-        return shape;
-    }
 
     public static TileShape GetCompositeTurretByNameAndElement(string name, int e1, int e2, int e3)
     {
         TurretAttribute attribute = m_ContentFactory.GetCompositeTurretByName(name);
         Blueprint bluePrint = m_BlurPrintFactory.GetSpecificBluePrint(attribute, e1, e2, e3);
         TileShape shape = GetCompositeTurretByBluePrint(bluePrint);
-        GameEndUI.TotalComposite++;
         return shape;
     }
 

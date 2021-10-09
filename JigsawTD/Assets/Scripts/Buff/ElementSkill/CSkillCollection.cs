@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class LateIntensify : ElementSkill
 {
-    //所有30秒后发生的属性提升翻倍
+    //所有战斗开始后发生的属性提升翻倍
     public override List<int> Elements => new List<int> { 2, 2, 2 };
-    public override void Composite()
-    {
-        GameRes.TempWaterIntensify += 0.25f;
 
+    public override void Build()
+    {
+        base.Build();
+        strategy.TimeModify += 1;
     }
+
 }
 
 public class LateAttack : ElementSkill

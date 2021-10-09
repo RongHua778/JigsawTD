@@ -28,9 +28,9 @@ public class StaticData : Singleton<StaticData>
         { 1f, 0f, 0f, 0f, 0f },
         { 0.6f, 0.3f, 0.1f, 0f, 0f },
         { 0.4f, 0.35f, 0.15f, 0.1f, 0f },
-        { 0.3f, 0.35f, 0.2f, 0.125f, 0.025f },
+        { 0.25f, 0.3f, 0.25f, 0.2f, 0f },
         { 0.15f, 0.3f, 0.3f, 0.25f, 0.1f },
-        { 0f, 0.2f, 0.3f, 0.3f, 0.2f },
+        { 0.05f, 0.2f, 0.25f, 0.3f, 0.2f },
     };
 
     [Header("工厂类")]
@@ -256,15 +256,15 @@ public class StaticData : Singleton<StaticData>
         return pointsToRetrun;
     }
     //给定一个总等级，返回若干个随机数的方法
-    public static int[] GetSomeRandoms(int totalLevel, int number)
+    public static int[] GetSomeRandoms(int levelMax, int totalLevel, int number)
     {
-        if ((totalLevel / number) >maxLevel)
+        if ((totalLevel / number) > levelMax)
         {
             Debug.LogWarning("配方等级输错了，菜鸡");
             int[] errorRandom = new int[number];
             for (int i = 0; i < number; i++)
             {
-                errorRandom[i] = maxLevel;
+                errorRandom[i] = levelMax;
             }
             return errorRandom;
         }
@@ -286,7 +286,7 @@ public class StaticData : Singleton<StaticData>
             if (number == 2)
             {
                 int min = 1;
-                while (totalLevel - min > maxLevel)
+                while (totalLevel - min > levelMax)
                 {
                     min++;
                 }
@@ -296,9 +296,9 @@ public class StaticData : Singleton<StaticData>
             }
             else if (number >= 2)
             {
-                int max = Mathf.Min(totalLevel - (number - 1), maxLevel);
+                int max = Mathf.Min(totalLevel - (number - 1), levelMax);
                 int min = 1;
-                while (totalLevel - min > maxLevel * (number - 1))
+                while (totalLevel - min > levelMax * (number - 1))
                 {
                     min++;
                 }

@@ -25,6 +25,7 @@ MonoBehaviour:
   Rare: 6
   totalLevel: 14
   elementNumber: 3
+  maxElementLevel: 5
   TurretSkill: 6
   TurretLevels:
   - AttackRange: 5

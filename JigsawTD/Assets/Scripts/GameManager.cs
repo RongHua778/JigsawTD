@@ -71,7 +71,7 @@ public class GameManager : Singleton<GameManager>
         ConstructHelper.Initialize();
 
         //初始化系统
-        
+
         m_WaveSystem.Initialize();//波次系统
         m_CamControl.Initialize(m_MainUI);//摄像机控制
         m_BoardSystem.Initialize();//版图系统
@@ -220,15 +220,7 @@ public class GameManager : Singleton<GameManager>
         TriggerGuide(9);
         TriggerGuide(13);
         TriggerGuide(14);
-        //重置所有防御塔的回合临时加成
-        foreach (var turret in elementTurrets.behaviors)
-        {
-            ((TurretContent)turret).Strategy.ClearTurnIntensify();
-        }
-        foreach (var turret in compositeTurrets.behaviors)
-        {
-            ((TurretContent)turret).Strategy.ClearTurnIntensify();
-        }
+
 
     }
 
@@ -412,11 +404,7 @@ public class GameManager : Singleton<GameManager>
             ShowMessage(GameMultiLang.GetTraduction("NOTBUILDSTATE"));
             return;
         }
-        if (ConsumeMoney(m_BoardSystem.SwitchTrapCost))
-        {
-            TransitionToState(StateName.PickingState);
-            m_BoardSystem.SwitchTrap(trap);
-        }
+        m_BoardSystem.SwitchTrap(trap);
     }
 
     public void IncreaseShopCapacity(int amount)

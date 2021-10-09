@@ -9,9 +9,10 @@ public class ExplosionTrap : TrapContent
     public override void OnContentPass(Enemy enemy, GameTileContent content = null)
     {
         base.OnContentPass(enemy);
+        Vector2 pos = content == null ? transform.position : content.transform.position;
         float realDamage;
-        float damage = TrapIntensify * enemy.EnemyTrapIntensify * 0.1f * enemy.DamageStrategy.CurrentHealth;
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, sputteringRange, StaticData.EnemyLayerMask);
+        float damage = TrapIntensify * enemy.EnemyTrapIntensify * 0.05f * enemy.DamageStrategy.CurrentHealth;
+        Collider2D[] hits = Physics2D.OverlapCircleAll(pos, sputteringRange, StaticData.EnemyLayerMask);
         for (int i = 0; i < hits.Length; i++)
         {
             TargetPoint target = hits[i].GetComponent<TargetPoint>();
@@ -22,7 +23,7 @@ public class ExplosionTrap : TrapContent
             }
         }
         ParticalControl effect = ObjectPool.Instance.Spawn(explisionPrefab) as ParticalControl;
-        effect.transform.position = transform.position;
+        effect.transform.position = pos;
         effect.transform.localScale = Mathf.Max(0.3f, sputteringRange * 2) * Vector3.one;
         effect.PlayEffect();
         Sound.Instance.PlayEffect("Sound_ExplosionTrap");

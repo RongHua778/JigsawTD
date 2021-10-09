@@ -92,7 +92,7 @@ public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
     {
         realDamage = amount;
         CurrentHealth -= realDamage;
-        GameEndUI.TotalDamage += (int)realDamage;
+        GameRes.TotalDamage += (int)realDamage;
 
         if (isCritical)
         {

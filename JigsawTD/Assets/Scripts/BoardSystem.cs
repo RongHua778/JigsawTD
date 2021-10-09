@@ -67,9 +67,9 @@ public class BoardSystem : IGameSystem
             {
                 selection.transform.position = selectingTile.transform.position;
                 selectingTile.OnTileSelected(true);
-                Sound.Instance.PlayEffect("Sound_Click");
             }
             selection.SetActive(selectingTile != null);
+            Sound.Instance.PlayEffect("Sound_Click");
         }
 
     }
@@ -147,29 +147,29 @@ public class BoardSystem : IGameSystem
     public override void GameUpdate()
     {
         followers.GameUpdate();
-        if (IsPressingTile && Input.GetMouseButton(0))
-        {
-            pressCounter += Time.deltaTime;
-        }
-        else
-        {
-            pressCounter = 0;
-        }
+        //if (IsPressingTile && Input.GetMouseButton(0))
+        //{
+        //    pressCounter += Time.deltaTime;
+        //}
+        //else
+        //{
+        //    pressCounter = 0;
+        //}
     }
     private void TileClick()
     {
-        IsPressingTile = true;
+       // IsPressingTile = true;
         startPos = Input.mousePosition;
     }
 
     private void TileUp(TileBase tile)
     {
         moveDis = Vector2.SqrMagnitude(Input.mousePosition - startPos);
-        if (moveDis < 0.5f)
+        if (moveDis < 1000f)
         {
             SelectingTile = tile;
         }
-        IsPressingTile = false;
+        //IsPressingTile = false;
     }
 
 
@@ -426,13 +426,21 @@ public class BoardSystem : IGameSystem
 
     public void SwitchTrap(TrapContent trap)
     {
-        SwitchTrapCost += StaticData.Instance.SwitchTrapCostMultiply;
+        if (GameRes.FreeTrapCount > 0)
+        {
+            GameRes.FreeTrapCount--;
+        }
+        else if (GameManager.Instance.ConsumeMoney(SwitchTrapCost))
+        {
+            SwitchTrapCost += StaticData.Instance.SwitchTrapCostMultiply;
+        }
         Vector2 pos = trap.m_GameTile.transform.position;
         ObjectPool.Instance.UnSpawn(trap.m_GameTile);
         GameTile tile = ConstructHelper.GetNormalTile(GameTileContentType.Empty);
         tile.transform.position = pos;
         tile.TileLanded();
         ConstructHelper.GetTrapByName(trap.TrapAttribute.Name);
+        GameManager.Instance.TransitionToState(StateName.PickingState);
 
     }
 

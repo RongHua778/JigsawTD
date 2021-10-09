@@ -49,6 +49,7 @@ public class TurretAttribute : ContentAttribute
     public int Rare;//稀有度
     public int totalLevel;
     public int elementNumber;
+    public int maxElementLevel;//配方元素最大等级
     public TurretSkillName TurretSkill;
     public List<TurretInfo> TurretLevels = new List<TurretInfo>();
 

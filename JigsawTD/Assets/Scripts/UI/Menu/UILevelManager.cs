@@ -53,10 +53,12 @@ public class UILevelManager : IUserInterface
         {
             difficultyTxt.text = GameMultiLang.GetTraduction("TUTORIAL");
             tutorialCheck.gameObject.SetActive(true);
+            tutorialCheck.isOn = false;
         }
         else
         {
             difficultyTxt.text = GameMultiLang.GetTraduction("DIFFICULTY") + " " + LevelManager.Instance.SelectedLevelID.ToString();
+            tutorialCheck.isOn = true;
             tutorialCheck.gameObject.SetActive(false);
         }
         if (LevelManager.Instance.SelectedLevelID > LevelManager.Instance.PremitDifficulty)

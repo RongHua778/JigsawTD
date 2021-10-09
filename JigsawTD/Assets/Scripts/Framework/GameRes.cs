@@ -43,6 +43,10 @@ public static class GameRes
     public static int FreeTrapCount = 0;//免费陷阱换位数量
     public static Action<StrategyBase> NextCompositeCallback = null;
 
+    [Header("统计数据")]
+    public static int TotalRefactor = 0;
+    public static int TotalDamage = 0;
+
     [Header("全局元素加成")]
     public static float TempGoldIntensify = 0;
     public static float TempWoodIntensify = 0;

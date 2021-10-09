@@ -4811,7 +4811,7 @@ GameObject:
   - component: {fileID: 19998672}
   - component: {fileID: 3971056745658777380}
   - component: {fileID: 2479922576969674396}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SuperBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

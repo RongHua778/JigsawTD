@@ -106,6 +106,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     {
         if (target.gameObject.activeInHierarchy)
             targetList.Add(target);
+        Strategy.EnterSkill(target.Enemy);
         AcquireTarget();
     }
 
@@ -116,9 +117,9 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
             if (this.Target.Contains(target))
             {
                 this.Target.Remove(target);
-                //this.Target = null;
             }
             targetList.Remove(target);
+            Strategy.ExitSkill(target.Enemy);
         }
     }
 

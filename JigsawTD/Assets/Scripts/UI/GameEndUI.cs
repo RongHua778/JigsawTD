@@ -10,12 +10,6 @@ public class GameEndUI : IUserInterface
     [SerializeField] Text totalDamageTxt = default;
     Animator anim;
 
-    private static int totalComposite = 0;
-    private static int totalDamage = 0;
-
-    public static int TotalComposite { get => totalComposite; set => totalComposite = value; }
-    public static int TotalDamage { get => totalDamage; set => totalDamage = value; }
-
     private void Awake()
     {
         anim = this.GetComponent<Animator>();
@@ -38,8 +32,8 @@ public class GameEndUI : IUserInterface
         title.text = win ? GameMultiLang.GetTraduction("WIN") : GameMultiLang.GetTraduction("LOSE");
         if (win)
             PlayerPrefs.SetInt("MaxDifficulty", LevelManager.Instance.SelectedLevelID + 1);
-        totalCompositeTxt.text = TotalComposite.ToString();
-        totalDamageTxt.text = TotalDamage.ToString();
+        totalCompositeTxt.text = GameRes.TotalRefactor.ToString();
+        totalDamageTxt.text = GameRes.TotalDamage.ToString();
     }
 
     public void ReturnToMenu()

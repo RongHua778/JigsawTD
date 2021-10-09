@@ -53,7 +53,7 @@ MODE1=In standard mode, you need to against a certain wave of enemy invasion. Pl
 LACKMONEY=You don't have eneugh coins
 LACKMATERIAL=You don't have materials needed
 PUTFIRST=Please place the drawed module first
-NOTBUILDSTATE=Can not composite during battle state
+NOTBUILDSTATE=Can not refactor during battle state
 NOROUTE=Make sure there are a route available
 NOOVERLAP=Turret cannot overlap with special tile
 NOTBATTLESTATE=Can not buy during battle state
@@ -93,6 +93,7 @@ MODULELEVELINFO1=Current level probability
 MODULELEVELINFO2=Level
 MODULELEVELINFO3=Shop blueprint +1 when module level reaches 3,5 and 7
 ENERGYINFO=1. Gain 1 energy if you haven't drawed last wave\n2. Gain additional energy if you keep not drawing \n3. Gain 1 extra draw while energy reach 10.
+DEGRADE=Degrade
 
 //shop
 SHOPBLUEPRINT=Lock:
@@ -170,35 +171,35 @@ CSKILL=Attacks cause a slowdown effect.
 DSKILL=Attacks have a chance to cause critical damage.
 ESKILL=Attacks deal splash area damage.
 
-CONSTRUCTORSKILL=Damage increased by 10% for each enemy in range.
+CONSTRUCTORSKILL=Attack increased by 10% for each enemy in range.
 SCATTERSKILL=Deals 50% less damage, but can attack an additional 3 targets.
 MORTARSKILL=Bullet's splash damage increased by 150%.
-RAPIDERSKILL=Firerate increased by 10% each shoot when it is attacking the same target(up to 400%).
+RAPIDERSKILL=Firerate increased by 15% each shoot when it is attacking the same target(up to 300%).
 ROTARYSKILL=Penetration Bullet; Randomly shoot around and double all firerate increased.
 SNIPERSKILL=Forbid range+2, attack increased by 10% for every 1 range.
 ULTRASKILL=Double the increased critical damage.
 SNOWSKILL=Penetration Bullet;Bullet will move to the end of straight direction, and double enemy's current slow.
 COOPORATIVESKILL=Attack increased by 1% * the amount of refacotor turrets each shoot.
 BOOMERRANGSKILL=Penetration Bullet;Can not increase firerate; Bullet damage will increase by 10% for each enemy it hit.
-SUPERSKILL=Double all attribute increased after 30s of each wave.
+SUPERSKILL=Double all current stats after 30s of each wave
 CORESKILL=At the start of each wave, it's attack will become 50%/75%/100% of the sum of adjacent turrets.
 
 
 //A系
 AAA=Metalize
-AAAINFO=Increased the element benefit of Gold element by 15%
+AAAINFO=Change range to 3, and double all attack increased
 AAB=Verical Strike
-AABINFO=Firerate increased by 35% when target's distance is less than 3
+AABINFO=Firerate increased by 60 when target's distance is less than 3
 AAC=Hitch Vision
-AACINFO=Slow increased by 50% when target's distance is less than 3
+AACINFO=Slow increased by 1 when target's distance is less than 3
 AAD=Unstable Shaft
-AADINFO=Critical increased by 35% when target's distance is less than 3
+AADINFO=Critical increased by 40% when target's distance is less than 3
 AAE=Close Bombing
-AAEINFO=Splash range increased by 50% when target's distance is less than 3
+AAEINFO=Splash range increased by 0.6 when target's distance is less than 3
 
 //B系
 BBB=Lightweight Material
-BBBINFO=Increased the element benefit of Wood element by 15%
+BBBINFO=Bullet's damage is reduced by 35% but attacks 2 additional targets
 BBA=Charged Bullet
 BBAINFO=Attack increased by 5% each shoot.
 BBC=Cold Bullet
@@ -209,8 +210,8 @@ BBE=Ammunition
 BBEINFO=Splash range increased by 0.02 each shoot.
 
 //C系
-CCC=Forst Environment
-CCCINFO=Increased the element benefit of Water element by 0.25
+CCC=Forst Technology
+CCCINFO=Double all stats increased that occur after the start of each wave
 CCA=Cold Front
 CCAINFO=Attack increases by 2% per second after the start of each wave.
 CCB=Overload Cartridge
@@ -222,7 +223,7 @@ CCEINFO=Splash range increases by 0.01 per second after the start of each wave.
 
 //D系
 DDD=Chaos Technology
-DDDINFO=Increased the element benefit of Fire element by 10%
+DDDINFO=Critical damage randomly increased by -100% to 400%
 DDA=Energy Blasting
 DDAINFO=Attack increase by 60% for 2 seconds after a critical hit.
 DDB=Vulnerability Shoot
@@ -234,7 +235,7 @@ DDEINFO=Double bullet's splash range if it is a critical hit.
 
 //E系
 EEE=Atomic Center
-EEEINFO=Increased the element benefit of Dust element by 0.15
+EEEINFO=Increase adjacent turrets' splash by 0.5
 EEA=Attack Core
 EEAINFO=Increase adjacent turrets' attack by 30%
 EEB=Speed Core
@@ -260,13 +261,13 @@ ACEINFO=Reduce module upgrade cost by 50%
 ADE=Unreal Structure
 ADEINFO=Becomes a random element skill while refactor
 BCD=Concrete Pouring
-BCDINFO=The next 3 basic tile you build will be free
+BCDINFO=The next relocate mark will be free
 BCE=Perfect Element
 BCEINFO=Gain 1 perfect element when refactor
 BDE=Repair Factory
 BDEINFO=The effect of adjacent marks will be increased by 100%
 CDE=Blink Strike
-CDEINFO=Each shoot has a 5% chance of teleporting enemy to 3 tiles ahead
+CDEINFO=Each shoot has a 3% chance of teleporting enemy to 2 tiles ahead
 
 //Enemy
 SOILDER=Sartre
@@ -324,11 +325,11 @@ ARROWTRAPINFO=Enemies passing through this tile with the same direction of the a
 BLINKTRAPINFO=Enemies passing by will be teleporting to 2 tiles ahead.(Each enemy once)
 PROMOTETRAPINFO=The effect of the next mark that enemy passing by will be increased by 100%
 IMITATETRAPINFO=The effect of this mark is the same as the last mark passed by the enemy.
-EXECUTETRAPINFO=Deal damage equal to 0.4% * enemy's max health, N equal to the number of tiles ahead.
+EXECUTETRAPINFO=Deal damage equal to 20% * enemy's lost health
 DAMAGEMARKINFO=Enemies passing by will takes 50% addition damage for the next 3 tiles' move.
 FROSTTRAPINFO=Enemies passing by will takes 50% addition slow for the next 3 tiles' move.
 BONUSTRAPINFO=Each enemy passing by will give you 2 coins
-EXPLOSIONTRAPINFO=Enemy passing by will trigger an explosion equal to 10% of it current health.
+EXPLOSIONTRAPINFO=Enemy passing by will trigger an explosion equal to 5% of it's current health.
 
 
 //Guide

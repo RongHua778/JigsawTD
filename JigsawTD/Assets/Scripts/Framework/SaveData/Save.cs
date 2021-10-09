@@ -30,14 +30,14 @@ public class Save
 
         SaveSelectedRare1 = new List<SelectInfo>()
         {
-            new SelectInfo("RAPIDER", false, true),
+            new SelectInfo("RAPIDER", false, false),
             new SelectInfo("CONSTRUCTOR", false, true)
         };
         SaveRareDIC.Add(1, SaveSelectedRare1);
 
         SaveSelectedRare2 = new List<SelectInfo>()
         {
-            new SelectInfo("COOPORATIVE", false, true),
+            new SelectInfo("COOPORATIVE", false, false),
             new SelectInfo("SCATTER", false, true)
         };
         SaveRareDIC.Add(2, SaveSelectedRare2);
@@ -45,7 +45,7 @@ public class Save
         SaveSelectedRare3 = new List<SelectInfo>()
         {
             new SelectInfo("ROTARY", false, true),
-            new SelectInfo("SUPER", false, true)
+            new SelectInfo("SUPER", false, false)
         };
         SaveRareDIC.Add(3, SaveSelectedRare3);
 

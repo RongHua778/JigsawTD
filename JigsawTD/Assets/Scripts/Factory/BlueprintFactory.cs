@@ -16,7 +16,7 @@ public class BlueprintFactory : GameObjectFactory
     private Blueprint SetBluePrint(TurretAttribute attribute, Blueprint blueprint)
     {
         blueprint.CompositeTurretAttribute = attribute;
-        int[] compositionLevel = StaticData.GetSomeRandoms(attribute.totalLevel, attribute.elementNumber);
+        int[] compositionLevel = StaticData.GetSomeRandoms(attribute.maxElementLevel, attribute.totalLevel, attribute.elementNumber);
         for (int i = 0; i < attribute.elementNumber; i++)
         {
             int element = (int)StaticData.Instance.ContentFactory.GetRandomElementAttribute().element;

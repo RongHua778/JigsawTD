@@ -25,11 +25,12 @@ MonoBehaviour:
   Rare: 1
   totalLevel: 3
   elementNumber: 3
+  maxElementLevel: 2
   TurretSkill: 1
   TurretLevels:
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 35
+    AttackDamage: 45
     AttackSpeed: 1
     SputteringRange: 0
     CriticalRate: 0
@@ -39,7 +40,7 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.19}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 45
+    AttackDamage: 55
     AttackSpeed: 1.1
     SputteringRange: 0
     CriticalRate: 0
@@ -49,7 +50,7 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.24}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 55
+    AttackDamage: 65
     AttackSpeed: 1.2
     SputteringRange: 0
     CriticalRate: 0

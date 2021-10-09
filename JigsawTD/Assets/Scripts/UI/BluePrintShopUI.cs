@@ -186,8 +186,6 @@ public class BluePrintShopUI : IUserInterface
         RemoveGrid(grid);
         CheckAllBluePrint();
         GameManager.Instance.HideTips();
-        //设置结算信息
-        GameEndUI.TotalComposite++;
     }
 
     public void RemoveGrid(BluePrintGrid grid)//移除对应的配方，并清理列表

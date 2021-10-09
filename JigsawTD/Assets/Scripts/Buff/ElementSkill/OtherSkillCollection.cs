@@ -58,8 +58,11 @@ public class TurretLevelUp : ElementSkill
     public override void Build()
     {
         base.Build();
-        strategy.Quality++;
-        strategy.SetQualityValue();
+        if (strategy.Quality < 3)
+        {
+            strategy.Quality++;
+            strategy.SetQualityValue();
+        }
     }
 }
 
@@ -101,13 +104,13 @@ public class RandomSkill : ElementSkill
 
 public class FreeGround : ElementSkill
 {
-    //造成的伤害-25%，使接下来3次购买地板价格变为0
+    //使交换陷阱的价格减半
     public override List<int> Elements => new List<int> { 1, 2, 3 };
     public override string SkillDescription => "FREEGROUND";
 
     public override void Composite()
     {
-        GameRes.FreeGroundTileCount += 3;
+        GameRes.FreeTrapCount += 1;
     }
 
 
@@ -162,7 +165,7 @@ public class TrapIntensify : ElementSkill
 
 public class PortalHit : ElementSkill
 {
-    //攻击有5%概率将敌人传送到3格前的位置
+    //攻击有3%概率将敌人传送到2格前的位置
     public override List<int> Elements => new List<int> { 2, 3, 4 };
     public override string SkillDescription => "PORTALHIT";
 
@@ -170,8 +173,8 @@ public class PortalHit : ElementSkill
     {
         if (target.DamageStrategy.IsEnemy) 
         {
-            if (Random.value > 0.95f)
-                ((Enemy)target).Flash(3);
+            if (Random.value > 0.97f)
+                ((Enemy)target).Flash(2);
         }
     }
 

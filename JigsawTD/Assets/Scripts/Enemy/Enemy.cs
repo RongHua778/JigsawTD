@@ -163,6 +163,12 @@ public abstract class Enemy : PathFollower, IDamageable
         }
         Progress += Time.deltaTime * ProgressFactor;
 
+        if (Progress >= 0.5f&&!trapTriggered)
+        {
+            trapTriggered = true;
+            CurrentTile = pathTiles[PointIndex];
+        }
+
         while (Progress >= 1f)
         {
             if (PointIndex == PathPoints.Count - 1)
@@ -200,7 +206,8 @@ public abstract class Enemy : PathFollower, IDamageable
     protected override void PrepareNextState()
     {
         base.PrepareNextState();
-        CurrentTile = pathTiles[PointIndex];
+        //CurrentTile = pathTiles[PointIndex];
+
     }
 
     protected IEnumerator ExitCor()
@@ -233,7 +240,10 @@ public abstract class Enemy : PathFollower, IDamageable
             PointIndex = PathPoints.Count - 1;
         }
         CurrentPoint = PathPoints[PointIndex];
+
         CurrentTile = pathTiles[PointIndex];
+        trapTriggered = true;
+
         transform.localPosition = PathPoints[PointIndex].PathPos;
         PositionFrom = CurrentPoint.PathPos;
         PositionTo = CurrentPoint.ExitPoint;
@@ -242,7 +252,10 @@ public abstract class Enemy : PathFollower, IDamageable
         model.localPosition = new Vector3(PathOffset, 0);
         DirectionAngleFrom = DirectionAngleTo = Direction.GetAngle();
         transform.localRotation = CurrentPoint.PathDirection.GetRotation();
+
         Progress = 0f;
+        Adjust = 2f;
+        ProgressFactor = Adjust * Speed;
     }
 
     public void ApplyBuff(EnemyBuffName buffName, float keyvalue, float duration)

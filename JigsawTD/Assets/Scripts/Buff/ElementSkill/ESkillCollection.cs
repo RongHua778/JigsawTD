@@ -7,16 +7,27 @@ public class PoloGetter : ElementSkill
     //受到的所有光环效果翻倍
     public override List<int> Elements => new List<int> { 4, 4, 4 };
 
-    public override void Composite()
+    private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
+    public override void Detect()
     {
-        GameRes.TempDustIntensify += 0.15f;
-
+        foreach (var strategy in intensifiedStrategies)
+        {
+            strategy.InitSputteringRangeIntensify -= 0.5f * strategy.PoloIntensifyModify;
+        }
+        intensifiedStrategies.Clear();
+        List<Vector2Int> points = StaticData.GetCirclePoints(1);
+        foreach (var point in points)
+        {
+            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
+            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
+            if (hit != null)
+            {
+                StrategyBase strategy = hit.GetComponent<TurretContent>().Strategy;
+                strategy.InitSputteringRangeIntensify += 0.5f * strategy.PoloIntensifyModify;
+                intensifiedStrategies.Add(strategy);
+            }
+        }
     }
-    //public override void Build()
-    //{
-    //    base.Build();
-    //    strategy.PoloIntensifyModify += 1;
-    //}
 }
 
 

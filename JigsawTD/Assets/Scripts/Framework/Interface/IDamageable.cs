@@ -46,7 +46,7 @@ public abstract class DamageStrategy
     {
         realDamage = amount * (1 + DamageIntensify);
         CurrentHealth -= realDamage;
-        GameEndUI.TotalDamage += (int)realDamage;
+        GameRes.TotalDamage += (int)realDamage;
         if (isCritical)
         {
             StaticData.Instance.ShowJumpDamage(ModelTrans.position, (int)realDamage);

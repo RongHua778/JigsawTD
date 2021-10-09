@@ -2840,7 +2840,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fbf3466ab2bed174096203daed7b2d4f, type: 2}
   - {fileID: 11400000, guid: 993e7ccb381984e4983180597ec9c10f, type: 2}
   - {fileID: 11400000, guid: 99391903eba8a1041af83dc6b559379e, type: 2}
-  PremitDifficulty: 0
+  PremitDifficulty: 4
   maxDifficutly: 4
   selectedLevelId: 0
 --- !u!114 &356425828
@@ -4983,7 +4983,7 @@ MonoBehaviour:
   - {fileID: 1984506135}
   - {fileID: 1107794496}
   m_PickCountTxt: {fileID: 1473192455}
-  maxSelectedCount: 2
+  maxSelectedCount: 1
   RareIndex: 3
 --- !u!222 &734413850
 CanvasRenderer:
@@ -11380,7 +11380,7 @@ MonoBehaviour:
   - {fileID: 761115358}
   - {fileID: 1744228416}
   m_PickCountTxt: {fileID: 1054606889}
-  maxSelectedCount: 2
+  maxSelectedCount: 1
   RareIndex: 2
 --- !u!222 &1554670591
 CanvasRenderer:
@@ -12503,7 +12503,7 @@ MonoBehaviour:
   - {fileID: 606627021}
   - {fileID: 238085367}
   m_PickCountTxt: {fileID: 465155002}
-  maxSelectedCount: 2
+  maxSelectedCount: 1
   RareIndex: 1
 --- !u!1001 &1685344512
 PrefabInstance:
