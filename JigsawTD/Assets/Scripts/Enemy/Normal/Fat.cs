@@ -4,6 +4,5 @@ using UnityEngine;
 
 public class Fat : Enemy
 {
-    public override EnemyType EnemyType => EnemyType.Fat;
 
 }

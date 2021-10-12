@@ -54,7 +54,7 @@ public class RHTest : MonoBehaviour
 
     public void GetElementClick()
     {
-        ConstructHelper.GetElementTurretByQualityAndElement((Element)int.Parse(elementInputField.text), int.Parse(qualityInputField.text));
+        ConstructHelper.GetElementTurretByQualityAndElement((ElementType)int.Parse(elementInputField.text), int.Parse(qualityInputField.text));
     }
 
     public void GetTrapClick()

@@ -6,7 +6,6 @@ public class Ninja : Enemy
 {
     [SerializeField] float maxSpeed;
     [SerializeField] float minSpeed;
-    public override EnemyType EnemyType => EnemyType.Ninja;
 
     float size;
     //public override float CurrentHealth 

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Borner : Enemy
 {
-    public override EnemyType EnemyType => EnemyType.Borner;
     [SerializeField] float[] bornCD;
     [SerializeField] int[] enemyOneBorn;
     int level;

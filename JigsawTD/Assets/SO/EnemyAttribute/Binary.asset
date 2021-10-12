@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 614735ba97a8e4b4bbdf8128289355f3, type: 3}
-  m_Name: GoldKeeper
+  m_Name: Binary
   m_EditorClassIdentifier: 
-  EnemyName: GOLDKEEPER
-  EnemyType: 17
+  EnemyName: BINARY
+  EnemyType: 10
   InitCount: 1
   CountIncrease: 0
-  Health: 300
+  Health: 70
   Speed: 0.5
-  CoolDown: 2
-  Prefab: {fileID: -1710581719449573739, guid: 821b74dddf1519344ad3a3ff63562b2e, type: 3}
-  ReachDamage: 0
+  CoolDown: 3
+  Prefab: {fileID: -5785879013757558806, guid: c7b9b2740b4e86542b81aac43b1b74c2, type: 3}
+  ReachDamage: 5
   extraHealth: 0
-  EnemyIcon: {fileID: 21300000, guid: 391aae71d8536744abedccf0f37ad9f5, type: 3}
-  EnemyEmptyIcon: {fileID: 0}
-  Description: GOLDKEEPERINFO
+  EnemyIcon: {fileID: -8847467542957845770, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
+  EnemyEmptyIcon: {fileID: 6774334592187772519, guid: 57e00b28c7ddb744eab6e4415c7c879a, type: 3}
+  Description: BINARYINFO

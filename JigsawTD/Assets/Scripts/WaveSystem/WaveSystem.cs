@@ -24,7 +24,6 @@ public class WaveSystem : IGameSystem
             }
         }
     }
-    [SerializeField] float pathOffset = 0.3f;
     [SerializeField] HealthBar healthBarPrefab = default;
     public Queue<List<EnemySequence>> LevelSequence = new Queue<List<EnemySequence>>();
     LevelAttribute LevelAttribute;
@@ -193,13 +192,13 @@ public class WaveSystem : IGameSystem
 
     }
 
-    public Enemy SpawnEnemy(BoardSystem board, EnemyAttribute attribute, int pathIndex, float intensify)
+    public Enemy SpawnEnemy(BoardSystem board, EnemyAttribute attribute, int pathIndex, float intensify,float pathOffset)
     {
         EnemyRemain++;
         //float intensify = RunningSequence.Intensify;
         Enemy enemy = ObjectPool.Instance.Spawn(attribute.Prefab) as Enemy;
         HealthBar healthBar = ObjectPool.Instance.Spawn(healthBarPrefab) as HealthBar;
-        enemy.Initialize(attribute, UnityEngine.Random.Range(-pathOffset, pathOffset), healthBar, intensify, board.shortestPath);
+        enemy.Initialize(attribute, pathOffset, healthBar, intensify, board.shortestPath);
         enemy.SpawnOn(pathIndex, board.shortestPoints);
         GameManager.Instance.enemies.Add(enemy);
         return enemy;

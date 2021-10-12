@@ -10,7 +10,6 @@ public class AircraftCarrier : Enemy
     public List<Aircraft> aircraftQueue = new List<Aircraft>();
     //float setQueueCD = 3f;
     //float setQueueCounter;
-    public override EnemyType EnemyType => EnemyType.AircraftCarrier;
     public float Armor { get => armor; set => armor = value; }
 
     public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify, List<BasicTile> path)

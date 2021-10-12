@@ -95,7 +95,7 @@ public class TurretTips : TileTips
                 UpgradeArea.SetActive(false);
                 IntensifyArea.SetActive(true);
                 ElementSkillArea.SetActive(false);
-                IntensifyValue.text = StaticData.GetElementIntensifyText(Strategy.m_Att.element, Strategy.Quality);
+                IntensifyValue.text = StaticData.GetElementIntensifyText(Strategy.m_Att.element);
                 break;
             case StrategyType.Composite:
                 ElementSkillArea.SetActive(true);
@@ -143,7 +143,7 @@ public class TurretTips : TileTips
             case StrategyType.Element:
                 QualitySetter.gameObject.SetActive(false);
                 IntensifyArea.SetActive(true);
-                IntensifyValue.text = StaticData.GetElementIntensifyText(att.element, quality);
+                IntensifyValue.text = StaticData.GetElementIntensifyText(att.element);
                 break;
             case StrategyType.Composite:
                 QualitySetter.gameObject.SetActive(true);

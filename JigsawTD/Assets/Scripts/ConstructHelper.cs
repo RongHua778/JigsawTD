@@ -44,7 +44,7 @@ public static class ConstructHelper
     }
 
     //ÔªËØËþ
-    public static TurretAttribute GetElementAttribute(Element element)
+    public static TurretAttribute GetElementAttribute(ElementType element)
     {
         return m_ContentFactory.GetElementAttribute(element);
     }
@@ -135,7 +135,7 @@ public static class ConstructHelper
         return shape;
     }
 
-    public static TileShape GetElementTurretByQualityAndElement(Element element, int quality)
+    public static TileShape GetElementTurretByQualityAndElement(ElementType element, int quality)
     {
         TileShape shape = m_ShapeFactory.GetDShape();
         GameTile tile = m_TileFactory.GetBasicTile();

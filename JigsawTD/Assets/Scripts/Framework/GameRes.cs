@@ -18,11 +18,11 @@ public class ForcePlace
 public class ShapeInfo
 {
     public ShapeType ShapeType;
-    public Element Element;
+    public ElementType Element;
     public int Quality;
     public int TurretPos;
 
-    public ShapeInfo(ShapeType type, Element element, int quality, int pos)
+    public ShapeInfo(ShapeType type, ElementType element, int quality, int pos)
     {
         this.ShapeType = type;
         this.Element = element;

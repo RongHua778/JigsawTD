@@ -319,7 +319,7 @@ public class GameManager : Singleton<GameManager>
 
     }
 
-    public void PreviewComposition(bool value, Element element = Element.DUST, int quality = 1)
+    public void PreviewComposition(bool value, ElementType element = ElementType.DUST, int quality = 1)
     {
         m_BluePrintShopUI.PreviewComposition(value, element, quality);
     }
@@ -353,9 +353,11 @@ public class GameManager : Singleton<GameManager>
         m_FuncUI.DrawRemain += amount;
     }
 
-    public Enemy SpawnEnemy(EnemyType type, int pathIndex, float intensify)
+    public Enemy SpawnEnemy(EnemyType type, int pathIndex, float intensify, float pathoffset = 0)
     {
-        return m_WaveSystem.SpawnEnemy(m_BoardSystem, StaticData.Instance.EnemyFactory.Get(type), pathIndex, intensify);
+        if (pathoffset == 0)
+            pathoffset = UnityEngine.Random.Range(-0.3f, 0.3f);
+        return m_WaveSystem.SpawnEnemy(m_BoardSystem, StaticData.Instance.EnemyFactory.Get(type), pathIndex, intensify, pathoffset);
     }
 
     public void RefreshShop(int cost)

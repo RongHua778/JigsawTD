@@ -79,6 +79,7 @@ public class StaticData : Singleton<StaticData>
     public float WaterSlowIntensify = 0.5f;
     public float FireCriticalIntensify = 0.2f;
     public float DustSputteringIntensify = 0.3f;
+    public static Dictionary<ElementType, Element> ElementDIC;
 
     [Header("Prefabs")]
     public RangeHolder CircleCol;
@@ -87,6 +88,8 @@ public class StaticData : Singleton<StaticData>
     public Sprite UnrevealTrap;
     public ParticalControl LandedEffect;
     public ReusableObject GainMoneyPrefab;
+    public ReusableObject FrostExplosion;
+    public ReusableObject FrostEffectPrefab;
 
     [Header("CompositionAttributes")]
     public int LevelUpCostPerRare;
@@ -111,12 +114,24 @@ public class StaticData : Singleton<StaticData>
     protected override void Awake()
     {
         base.Awake();
+        InitializeData();
         TileFactory.Initialize();
         ContentFactory.Initialize();
         ShapeFactory.Initialize();
         EnemyFactory.InitializeFactory();
     }
 
+    private void InitializeData()
+    {
+        //元素字典
+        ElementDIC = new Dictionary<ElementType, Element>();
+        ElementDIC.Add(ElementType.GOLD, new Gold());
+        ElementDIC.Add(ElementType.WOOD, new Wood());
+        ElementDIC.Add(ElementType.WATER, new Water());
+        ElementDIC.Add(ElementType.FIRE, new Fire());
+        ElementDIC.Add(ElementType.DUST, new Dust());
+
+    }
 
     //随机打乱一个int list的方法
     public static List<T> RandomSort<T>(List<T> list)
@@ -353,30 +368,10 @@ public class StaticData : Singleton<StaticData>
         return null;
     }
 
-    public static string GetElementIntensifyText(Element element, int quality)
+    public static string GetElementIntensifyText(ElementType element)//根据元素及品质设置显示加成效果
     {
-        string intensifyTxt = "+";//根据元素及品质设置显示加成效果
-        switch (element)
-        {
-            case Element.GOLD:
-                intensifyTxt += Instance.GoldAttackIntensify * 100 + GameMultiLang.GetTraduction("ATTACKUP");
-                break;
-            case Element.WOOD:
-                intensifyTxt += Instance.WoodSpeedIntensify * 100 + GameMultiLang.GetTraduction("SPEEDUP");
-                break;
-            case Element.WATER:
-                intensifyTxt += Instance.WaterSlowIntensify + GameMultiLang.GetTraduction("SLOWUP");
-                break;
-            case Element.FIRE:
-                intensifyTxt += Instance.FireCriticalIntensify * 100 + GameMultiLang.GetTraduction("CRITICALUP");
-                break;
-            case Element.DUST:
-                intensifyTxt += Instance.DustSputteringIntensify + GameMultiLang.GetTraduction("SPUTTERINGUP");
-                break;
-            default:
-                Debug.Log("错误的元素，无法配置加成");
-                break;
-        }
+        string intensifyTxt = "+";
+        intensifyTxt += ElementDIC[element].GetIntensifyText;
         return intensifyTxt;
     }
 
@@ -385,30 +380,8 @@ public class StaticData : Singleton<StaticData>
         string intensifyTxt = GameMultiLang.GetTraduction("ELEMENTSKILL") + ":";//根据元素及品质设置显示加成效果
         foreach (var element in skill.Elements)
         {
-            switch ((Element)element)
-            {
-                case Element.GOLD:
-                    intensifyTxt += "\n" + (Instance.GoldAttackIntensify + GameRes.TempGoldIntensify) * 100 + GameMultiLang.GetTraduction("ATTACKUP");
-                    break;
-                case Element.WOOD:
-                    intensifyTxt += "\n" + (Instance.WoodSpeedIntensify + GameRes.TempWoodIntensify) * 100 + GameMultiLang.GetTraduction("SPEEDUP");
-                    break;
-                case Element.WATER:
-                    intensifyTxt += "\n" + (Instance.WaterSlowIntensify + GameRes.TempWaterIntensify) + GameMultiLang.GetTraduction("SLOWUP");
-                    break;
-                case Element.FIRE:
-                    intensifyTxt += "\n" + (Instance.FireCriticalIntensify + GameRes.TempFireIntensify) * 100 + GameMultiLang.GetTraduction("CRITICALUP");
-                    break;
-                case Element.DUST:
-                    intensifyTxt += "\n" + (Instance.DustSputteringIntensify + GameRes.TempDustIntensify) + GameMultiLang.GetTraduction("SPUTTERINGUP");
-                    break;
-            }
+            intensifyTxt += ElementDIC[(ElementType)element].GetSkillText;
         }
-        //intensifyTxt += bluePrint.CompositeAttackDamage > 0 ? "\n+" + bluePrint.CompositeAttackDamage * 100 + GameMultiLang.GetTraduction("ATTACKUP") : "";
-        //intensifyTxt += bluePrint.CompositeAttackSpeed > 0 ? "\n+" + bluePrint.CompositeAttackSpeed * 100 + GameMultiLang.GetTraduction("SPEEDUP") : "";
-        //intensifyTxt += bluePrint.CompositeSlowRate > 0 ? "\n+" + bluePrint.CompositeSlowRate + GameMultiLang.GetTraduction("SLOWUP") : "";
-        //intensifyTxt += bluePrint.CompositeCriticalRate > 0 ? "\n+" + bluePrint.CompositeCriticalRate * 100 + GameMultiLang.GetTraduction("CRITICALUP") : "";
-        //intensifyTxt += bluePrint.CompositeSputteringRange > 0 ? "\n+" + bluePrint.CompositeSputteringRange + GameMultiLang.GetTraduction("SPUTTERINGUP") : "";
         return intensifyTxt;
     }
 
@@ -620,27 +593,41 @@ public class StaticData : Singleton<StaticData>
         Sound.Instance.PlayEffect("Sound_GainCoin");
     }
 
-    public static string FormElementName(Element element, int quality)
+    public void FrostTurretEffect(Vector2 pos, float distance, float frostTime)
+    {
+        ReusableObject partical = ObjectPool.Instance.Spawn(FrostExplosion);
+        partical.transform.position = pos;
+        partical.transform.localScale = Vector3.one * distance;
+        Collider2D[] cols = Physics2D.OverlapCircleAll(pos, distance, LayerMask.GetMask(TurretMask));
+        foreach (var col in cols)
+        {
+            TurretContent turret = col.GetComponent<TurretContent>();
+            FrostEffect frosteffect = null;
+            if (turret.Activated)
+            {
+                frosteffect = ObjectPool.Instance.Spawn(FrostEffectPrefab) as FrostEffect;
+                frosteffect.transform.position = col.transform.position;
+            }
+            turret.Frost(frostTime, frosteffect);
+        }
+        Sound.Instance.PlayEffect("Sound_EnemyExplosionFrost");
+        //for (int i = 0; i < co; i++)
+        //{
+        //    TurretContent turret = attachedResult[i].GetComponent<TurretContent>();
+        //    FrostEffect frosteffect = null;
+        //    if (turret.Activated)
+        //    {
+        //        frosteffect = ObjectPool.Instance.Spawn(frostPrefab) as FrostEffect;
+        //        frosteffect.transform.position = attachedResult[i].transform.position;
+        //    }
+        //    turret.Frost(freezeTime, frosteffect);
+        //}
+    }
+
+    public static string FormElementName(ElementType element, int quality)
     {
         string texttoreturn = "";
-        switch (element)
-        {
-            case Element.GOLD:
-                texttoreturn = "A";
-                break;
-            case Element.WOOD:
-                texttoreturn = "B";
-                break;
-            case Element.WATER:
-                texttoreturn = "C";
-                break;
-            case Element.FIRE:
-                texttoreturn = "D";
-                break;
-            case Element.DUST:
-                texttoreturn = "E";
-                break;
-        }
+        texttoreturn += ElementDIC[element].GetElementName;
         texttoreturn += quality;
         return texttoreturn;
     }

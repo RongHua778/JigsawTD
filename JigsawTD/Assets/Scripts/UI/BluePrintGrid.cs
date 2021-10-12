@@ -39,7 +39,7 @@ public class BluePrintGrid : ReusableObject//, IPointerEnterHandler, IPointerExi
 
     }
 
-    public void PreviewElement(bool value, Element element, int quality)
+    public void PreviewElement(bool value, ElementType element, int quality)
     {
         foreach (var elementGrid in elementGrids)
         {

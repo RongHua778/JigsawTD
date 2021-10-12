@@ -4,6 +4,5 @@ using UnityEngine;
 
 public class Healer : Enemy
 {
-    public override EnemyType EnemyType => EnemyType.Healer;
 
 }

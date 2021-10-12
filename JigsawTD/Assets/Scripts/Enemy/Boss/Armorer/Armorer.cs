@@ -10,7 +10,6 @@ public class Armorer : Enemy
     public float ArmorCoolDown { get => armorCoolDown; set => armorCoolDown = value; }
 
     [SerializeField] float armorCoolDown;
-    public override EnemyType EnemyType => EnemyType.Armorer;
 
     public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify, List<BasicTile> path)
     {

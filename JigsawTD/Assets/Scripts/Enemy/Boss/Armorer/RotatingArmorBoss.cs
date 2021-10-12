@@ -5,7 +5,6 @@ using DG.Tweening;
 
 public class RotatingArmorBoss : Armorer
 {
-    public override EnemyType EnemyType => EnemyType.SixArmor;
     private Tween tween;
 
    // [SerializeField] Transform rotateObj = default;

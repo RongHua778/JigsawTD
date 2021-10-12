@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GoldKeeper : Enemy
 {
-    public override EnemyType EnemyType => EnemyType.GoldKeeper;
     private int LifeCount;
 
     public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify, List<BasicTile> path)

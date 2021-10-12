@@ -11,12 +11,12 @@ public class TestWindow : EditorWindow
     string moneyGet = "10000";
     //string element = "0";
     Quality quality = Quality.level1;
-    Element element = Element.GOLD;
+    ElementType element = ElementType.GOLD;
 
     string turretName = "CONSTRUCTOR";
-    Element e1 = Element.GOLD;
-    Element e2 = Element.GOLD;
-    Element e3 = Element.GOLD;
+    ElementType e1 = ElementType.GOLD;
+    ElementType e2 = ElementType.GOLD;
+    ElementType e3 = ElementType.GOLD;
 
     string trapName = "BLINKTRAP";
     [MenuItem("Window/TestWindow")]
@@ -38,7 +38,7 @@ public class TestWindow : EditorWindow
 
         GUILayout.BeginHorizontal();
         GUILayout.Label("元素");
-        element = (Element)EditorGUILayout.EnumPopup("", element, GUILayout.Width(60));
+        element = (ElementType)EditorGUILayout.EnumPopup("", element, GUILayout.Width(60));
         GUILayout.Label("品质");
         quality = (Quality)EditorGUILayout.EnumPopup("", quality, GUILayout.Width(60));
         if (GUILayout.Button("获取", GUILayout.Width(120)))
@@ -50,11 +50,11 @@ public class TestWindow : EditorWindow
         turretName = EditorGUILayout.TextField("合成塔", turretName);
         GUILayout.BeginHorizontal();
         GUILayout.Label("元素1");
-        e1 = (Element)EditorGUILayout.EnumPopup("", e1, GUILayout.Width(60));
+        e1 = (ElementType)EditorGUILayout.EnumPopup("", e1, GUILayout.Width(60));
         GUILayout.Label("元素2");
-        e2 = (Element)EditorGUILayout.EnumPopup("", e2, GUILayout.Width(60)); 
+        e2 = (ElementType)EditorGUILayout.EnumPopup("", e2, GUILayout.Width(60)); 
         GUILayout.Label("元素3");
-        e3 = (Element)EditorGUILayout.EnumPopup("", e3, GUILayout.Width(60));
+        e3 = (ElementType)EditorGUILayout.EnumPopup("", e3, GUILayout.Width(60));
         if (GUILayout.Button("获取", GUILayout.Width(120)))
         {
             ConstructHelper.GetCompositeTurretByNameAndElement(turretName, (int)e1, (int)e2, (int)e3);

@@ -8,7 +8,6 @@ public class Blinker : Enemy
     int blink;
     [SerializeField] private ReusableObject holePrefab = default;
     bool transfering = false;
-    public override EnemyType EnemyType => EnemyType.Blinker;
     public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify, List<BasicTile> path)
     {
         base.Initialize(attribute, pathOffset, healthBar, intensify,path);

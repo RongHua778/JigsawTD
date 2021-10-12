@@ -121,7 +121,7 @@ RANGETYPE1=圆型
 RANGETYPE2=半圆型
 RANGETYPE3=直线型
 TURRETSKILL=被动技能
-ELEMENTSKILL=元素技能
+ELEMENTSKILL=元素技能加成
 TILESKILL=地形效果
 CRITICALINFO=每1%暴击率=1%额外暴击伤害，基础暴击伤害为150%
 SPLASHINFO=溅射半径，基础溅射伤害为50%
@@ -290,11 +290,15 @@ DIVIDER=海德格尔（Boss）
 SIXARMOUR=克尔凯郭尔（Boss）
 BLINKER=笛卡尔（Boss）
 BORNER=亚里士多德（Boss）
+BINARY=双子星（Boss）
+ICEBALL=雪球（Boss）
 
 DIVIDERINFO=死亡后会分裂成几个较小的本体。
 SIXARMOURINFO=周身环绕着能抵挡伤害的护甲。
 BLINKERINFO=每当受到一定伤害后会向前闪现一段距离。
 BORNERINFO=每隔一段时间召唤出随机类型的敌人。
+BINARYINFO=同时生成两个双子星，其中一个死亡时另一个会加速前进。
+ICEBALLINFO=每当雪球转向时，会释放一道大范围的冰冻。
 
 //Trap
 UNREVEAL=未揭示标记

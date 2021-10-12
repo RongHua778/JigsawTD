@@ -4,6 +4,5 @@ using UnityEngine;
 
 public class Yellow_Tanker : Enemy
 {
-    public override EnemyType EnemyType => EnemyType.Tanker;
 
 }

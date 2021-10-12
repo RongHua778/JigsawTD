@@ -214,29 +214,7 @@ public class StrategyBase
     {
         foreach (var element in elements)
         {
-            switch ((Element)element)
-            {
-                case Element.GOLD:
-                    goldCount++;
-                    ComAttackIntensify += add ? StaticData.Instance.GoldAttackIntensify : -StaticData.Instance.GoldAttackIntensify;
-                    break;
-                case Element.WOOD:
-                    woodCount++;
-                    ComSpeedIntensify += add ? StaticData.Instance.WoodSpeedIntensify : -StaticData.Instance.WoodSpeedIntensify;
-                    break;
-                case Element.WATER:
-                    waterCount++;
-                    ComSlowIntensify += add ? StaticData.Instance.WaterSlowIntensify : -StaticData.Instance.WaterSlowIntensify;
-                    break;
-                case Element.FIRE:
-                    fireCount++;
-                    ComCriticalIntensify += add ? StaticData.Instance.FireCriticalIntensify : -StaticData.Instance.FireCriticalIntensify;
-                    break;
-                case Element.DUST:
-                    dustCount++;
-                    ComSputteringRangeIntensify += add ? StaticData.Instance.DustSputteringIntensify : -StaticData.Instance.DustSputteringIntensify;
-                    break;
-            }
+            StaticData.ElementDIC[(ElementType)element].GetComIntensify(this, add);
         }
     }
 

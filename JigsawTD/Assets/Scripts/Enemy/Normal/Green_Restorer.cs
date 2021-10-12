@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Green_Restorer : Enemy
 {
-    public override EnemyType EnemyType => EnemyType.Restorer;
     protected override void SetStrategy()
     {
         DamageStrategy = new RestorerStrategy(model, this);

@@ -214,7 +214,7 @@ public class BluePrintShopUI : IUserInterface
     }
 
 
-    public void PreviewComposition(bool value, Element element, int quality)
+    public void PreviewComposition(bool value, ElementType element, int quality)
     {
         foreach (var blueprint in ShopBluePrints)
         {

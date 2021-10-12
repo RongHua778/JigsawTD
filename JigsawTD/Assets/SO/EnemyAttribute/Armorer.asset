@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: Armorer
   m_EditorClassIdentifier: 
   EnemyName: 
-  EnemyType: 12
+  EnemyType: 13
   InitCount: 1
   CountIncrease: 0
   Health: 100
   Speed: 0.4
-  Shell: 0
   CoolDown: 1
   Prefab: {fileID: 1917517731428350432, guid: 5a78956dead208b43bfc7c204565dfe7, type: 3}
   ReachDamage: 5
   extraHealth: 0
   EnemyIcon: {fileID: 21300000, guid: 05f67270eed774d458305d46c391fd99, type: 3}
+  EnemyEmptyIcon: {fileID: 0}
   Description: 

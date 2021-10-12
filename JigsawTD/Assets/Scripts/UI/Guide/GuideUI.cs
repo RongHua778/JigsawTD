@@ -160,7 +160,7 @@ public class GuideUI : IUserInterface
                 m_MainUI.PlayAnim("ShowMoney", false);
                 break;
             case 7:
-                ShapeInfo shapeInfo = new ShapeInfo(ShapeType.L, Element.GOLD, 1, 1);
+                ShapeInfo shapeInfo = new ShapeInfo(ShapeType.L, ElementType.GOLD, 1, 1);
                 GameRes.PreSetShape = shapeInfo;
                 List<Vector2> poss = new List<Vector2> { new Vector2(0, 1), new Vector2(0, 2), new Vector2(-1, 2), new Vector2(-2, 2) };
                 ForcePlace forcePlace = new ForcePlace(new Vector2(0, 2), Vector2.down, poss);
@@ -175,7 +175,7 @@ public class GuideUI : IUserInterface
 
                 break;
             case 9:
-                ShapeInfo shapeInfo2 = new ShapeInfo(ShapeType.T, Element.WOOD, 1, 3);
+                ShapeInfo shapeInfo2 = new ShapeInfo(ShapeType.T, ElementType.WOOD, 1, 3);
                 GameRes.PreSetShape = shapeInfo2;
                 List<Vector2> poss2 = new List<Vector2> { new Vector2(-2, 0), new Vector2(-2, 1), new Vector2(-2, -1), new Vector2(-3, 0) };
                 ForcePlace forcePlace2 = new ForcePlace(new Vector2(-2, 0), Vector2.left, poss2);
@@ -243,7 +243,7 @@ public class GuideUI : IUserInterface
 
                 guideIndicator.Show(true, m_FuncUI.DrawBtnObj.transform);
 
-                ShapeInfo shapeInfo = new ShapeInfo(ShapeType.L, Element.WATER, 1, 3);
+                ShapeInfo shapeInfo = new ShapeInfo(ShapeType.L, ElementType.WATER, 1, 3);
                 GameRes.PreSetShape = shapeInfo;
                 List<Vector2> poss = new List<Vector2> { new Vector2(0, 0), new Vector2(0, 1), new Vector2(0, 2), new Vector2(1, 2) };
                 ForcePlace forcePlace = new ForcePlace(new Vector2(0, 2), Vector2.right, poss);

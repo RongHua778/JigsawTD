@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Runner : Enemy
 {
-    public override EnemyType EnemyType => EnemyType.Runner;
 
     public override float SpeedIntensify { get => base.SpeedIntensify + speedIncreased; set => base.SpeedIntensify = value; }
 

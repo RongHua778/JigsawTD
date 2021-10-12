@@ -10,12 +10,12 @@ public class ElementGrid : MonoBehaviour
     [SerializeField] Color UnobtainColor = default;
     [SerializeField] GameObject previewGlow = default;
     [SerializeField] GameObject perfectIcon = default;
-    private Element element;
+    private ElementType element;
     private int quality;
 
     public void SetElement(Composition composition)
     {
-        element = (Element)composition.elementRequirement;
+        element = (ElementType)composition.elementRequirement;
         quality = composition.qualityRequeirement;
         TurretAttribute attribute = ConstructHelper.GetElementAttribute(element);
         Img_Icon.sprite = attribute.TurretLevels[quality - 1].TurretIcon;
@@ -34,7 +34,7 @@ public class ElementGrid : MonoBehaviour
 
 
 
-    public void SetPreview(bool value, Element element, int quality)
+    public void SetPreview(bool value, ElementType element, int quality)
     {
         if (!value)
         {

@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: Borner
   m_EditorClassIdentifier: 
   EnemyName: BORNER
-  EnemyType: 11
+  EnemyType: 12
   InitCount: 1
   CountIncrease: 0
   Health: 300
   Speed: 0.3
-  Shell: 0
   CoolDown: 1
   Prefab: {fileID: 3559500654722631785, guid: 310738398761dc541a7590eecd33631f, type: 3}
   ReachDamage: 10

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class StrongerAircraftCarrier : AircraftCarrier
 {
-    public override EnemyType EnemyType => EnemyType.StrongerAircraftCarrier;
 
     public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify, List<BasicTile> path)
     {

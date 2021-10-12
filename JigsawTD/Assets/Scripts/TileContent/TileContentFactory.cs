@@ -22,7 +22,7 @@ public class TileContentFactory : GameObjectFactory
     private List<TurretAttribute> BattleElements;
     private List<TurretAttribute> BattleComposites;
 
-    private Dictionary<Element, TurretAttribute> ElementDIC;
+    private Dictionary<ElementType, TurretAttribute> ElementDIC;
     private Dictionary<string, TurretAttribute> CompositeDIC;
     private Dictionary<string, TrapAttribute> TrapDIC;
     private Dictionary<string, TurretBaseAttribute> TurretBaseDIC;
@@ -30,7 +30,7 @@ public class TileContentFactory : GameObjectFactory
     public void Initialize()
     {
 
-        ElementDIC = new Dictionary<Element, TurretAttribute>();
+        ElementDIC = new Dictionary<ElementType, TurretAttribute>();
         TrapDIC = new Dictionary<string, TrapAttribute>();
         CompositeDIC = new Dictionary<string, TurretAttribute>();
         TurretBaseDIC = new Dictionary<string, TurretBaseAttribute>();
@@ -64,7 +64,7 @@ public class TileContentFactory : GameObjectFactory
         {
             if (select.isSelect)
             {
-                BattleElements.Add(ElementDIC[(Element)Enum.Parse(typeof(Element), select.turretName)]);
+                BattleElements.Add(ElementDIC[(ElementType)Enum.Parse(typeof(ElementType), select.turretName)]);
             }
         }
     }
@@ -115,7 +115,7 @@ public class TileContentFactory : GameObjectFactory
         return content;
     }
 
-    public ElementTurret GetElementTurret(Element element, int quality)
+    public ElementTurret GetElementTurret(ElementType element, int quality)
     {
         TurretAttribute attribute = ElementDIC[element];
         ElementTurret content = Get(attribute.ContentPrefab) as ElementTurret;
@@ -126,7 +126,7 @@ public class TileContentFactory : GameObjectFactory
         return content;
     }
 
-    public TurretAttribute GetElementAttribute(Element element)
+    public TurretAttribute GetElementAttribute(ElementType element)
     {
         TurretAttribute attribute = ElementDIC[element];
         return attribute;
@@ -136,7 +136,7 @@ public class TileContentFactory : GameObjectFactory
     {
         return isBattleElement ?
             BattleElements[UnityEngine.Random.Range(0, BattleElements.Count)] : 
-            ElementDIC[(Element)UnityEngine.Random.Range(0, ElementDIC.Count)];
+            ElementDIC[(ElementType)UnityEngine.Random.Range(0, ElementDIC.Count)];
     }
     //ºÏ³ÉËþ***********
     public CompositeTurret GetCompositeTurret(Blueprint bluePrint)

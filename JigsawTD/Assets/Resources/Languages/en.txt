@@ -122,7 +122,7 @@ RANGETYPE1=Circle
 RANGETYPE2=Semicircle
 RANGETYPE3=Line
 TURRETSKILL=Basic Skill
-ELEMENTSKILL=Element Skill
+ELEMENTSKILL=Element Skill Benefit
 TILESKILL=Tile Benefit
 CRITICALINFO=Each 1% critical = 1% extra critical damage. Defacult critical damage is 150%
 SPLASHINFO=Splash radius. Default splash damage is 50%
@@ -291,11 +291,15 @@ DIVIDER=Hidegger (Boss)
 SIXARMOUR=Kierkegaard (Boss)
 BLINKER=Descartes (Boss)
 BORNER=Aristotle (Boss)
+BINARY=Binary Star (Boss)
+ICEBALL=Snow Ball（Boss）
 
 DIVIDERINFO=Splits into several smaller bodies while it die.
 SIXARMOURINFO=Surrounded by armors that protects against damage.
 BLINKERINFO=Flashes forward a certain distance while it takes a certain amount of damage.
 BORNERINFO=Summon a large amount of enemies every once in a while.
+BINARYINFO=Summon two binary stars at the same time, and when one dies, the other accelerates.
+ICEBALLINFO=Each time the Snow Ball veered, it released a wide freeze.
 
 //Trap
 UNREVEAL=Unreveal Mark

@@ -21,7 +21,7 @@ public class EnemySequence
     //public bool IsEnd;
     //public int Wave { get => wave; set => wave = value; }
 
-    public EnemySequence(EnemyType type, int amount, float cooldown, float intensify,bool isBoss)
+    public EnemySequence(EnemyType type, int amount, float cooldown, float intensify, bool isBoss)
     {
         EnemyType = type;
         Amount = amount;

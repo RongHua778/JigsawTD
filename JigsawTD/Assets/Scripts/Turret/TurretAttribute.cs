@@ -40,7 +40,7 @@ public class TurretAttribute : ContentAttribute
     [Header("»ù´¡²ÎÊý")]
     public StrategyType StrategyType;
     public RangeType RangeType;
-    public Element element;
+    public ElementType element;
     public Bullet Bullet;
     public float BulletSpeed;
     public AudioClip ShootSound;
