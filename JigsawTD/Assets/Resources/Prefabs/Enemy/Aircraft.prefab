@@ -73,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1288343251
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 10
   m_Sprite: {fileID: 5000823649156328451, guid: f9835346b30cae840a9eff85ed192e6f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -159,8 +159,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
   explosionPrefab: {fileID: 4814509631623709245, guid: cde09d379e3e93f46afc53b515cc5441, type: 3}
-  jumpDamagePrefab: {fileID: 4699521983380265760, guid: 312c9ecb05f5d3f4fa19d5107ffc2833, type: 3}
   boss: {fileID: 0}
   targetTurret: {fileID: 0}
+  isFollowing: 0
   attackPrefab: {fileID: -6034455848977891584, guid: c563cad02289a8749aacab7b722c9044, type: 3}
   frostPrefab: {fileID: 6979043889180068788, guid: 755d05657c602c64eb650125808f0cb1, type: 3}

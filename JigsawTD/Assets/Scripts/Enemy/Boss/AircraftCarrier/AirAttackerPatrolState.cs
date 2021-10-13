@@ -13,7 +13,7 @@ public class AirAttackerPatrolState : FSMState
     {
         StateID = StateID.Patrol;
     }
-    public override void Act(AirAttacker agent)
+    public override void Act(Aircraft agent)
     {
         agent.MovingToTarget(Destination.Random);
         directionWaitingTime += Time.deltaTime;
@@ -23,7 +23,7 @@ public class AirAttackerPatrolState : FSMState
             directionWaitingTime = 0;
         }
     }
-    public override void Reason(AirAttacker agent)
+    public override void Reason(Aircraft agent)
     {
         attackWaitingTime += Time.deltaTime;
         if (attackWaitingTime > searchTargetCD)

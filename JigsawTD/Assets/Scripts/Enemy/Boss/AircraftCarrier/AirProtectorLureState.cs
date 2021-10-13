@@ -10,11 +10,11 @@ public class AirProtectorLureState : FSMState
     {
         StateID = StateID.Lure;
     }
-    public override void Act(AirProtector agent)
+    public override void Act(Aircraft agent)
     {
         agent.Lure();
     }
-    public override void Reason(AirProtector agent)
+    public override void Reason(Aircraft agent)
     {
         waitingTime += Time.deltaTime;
         if (waitingTime > lureTime)

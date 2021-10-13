@@ -85,10 +85,11 @@ MonoBehaviour:
     PathDirection: 0
     ExitPoint: {x: 0, y: 0}
   IsBoss: 1
+  Intensify: 0
   exlposionPrefab: {fileID: 4814509631623709245, guid: ce7784084ac4d8046831643b89f1e650, type: 3}
-  initialSpeed: 0
-  armorIntensify: 50
+  armorIntensify: 0.2
   aircraftQueue: []
+  aircraftType: 1
 --- !u!1 &8360252054385358165
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,7 +193,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1288343251
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_Sprite: {fileID: 1633734841747217399, guid: 268b8018b7cb9f34cafa09f27ec0e24e, type: 3}
   m_Color: {r: 0, g: 0.27494478, b: 1, a: 1}

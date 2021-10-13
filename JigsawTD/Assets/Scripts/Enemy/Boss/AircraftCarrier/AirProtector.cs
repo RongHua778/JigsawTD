@@ -39,29 +39,7 @@ public class AirProtector : Aircraft
     }
 
 
-    public void Protect()
-    {
-        if (isLeader||!isFollowing)
-        {
-            movingSpeed = originalMovingSpeed;
-            rotatingSpeed = originalRotatingSpeed;
-            float distanceToTarget = ((Vector2)transform.position - (Vector2)boss.transform.position).magnitude;
-            if (distanceToTarget < minDistanceToLure)
-            {
-                movingDirection = boss.transform.position - transform.position + new Vector3(0.5f, 0.5f);
-            }
-            else
-            {
-                movingDirection = boss.transform.position - transform.position;
-            }
-            MovingToTarget(Destination.Random);
-        }
-        else
-        {
-            Follow();
-        }
 
-    }
 
 
     public override void OnUnSpawn()

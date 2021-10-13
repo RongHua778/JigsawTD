@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: StrongerAircraftCarrier
   m_EditorClassIdentifier: 
   EnemyName: 
-  EnemyType: 15
+  EnemyType: 16
   InitCount: 1
   CountIncrease: 0
   Health: 1000
   Speed: 0.05
-  Shell: 0
   CoolDown: 0
   Prefab: {fileID: 8324898011576784853, guid: c0dc0042395e19b479eca062267e88fa, type: 3}
   ReachDamage: 5
   extraHealth: 0
   EnemyIcon: {fileID: -1273360545368378337, guid: 6de4522e4ff4399429dddadebe803987, type: 3}
+  EnemyEmptyIcon: {fileID: 0}
   Description: 

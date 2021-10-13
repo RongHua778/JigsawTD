@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614735ba97a8e4b4bbdf8128289355f3, type: 3}
   m_Name: AircraftCarrier
   m_EditorClassIdentifier: 
-  EnemyName: 
-  EnemyType: 14
+  EnemyName: AIRCRAFT
+  EnemyType: 15
   InitCount: 1
   CountIncrease: 0
-  Health: 1000
+  Health: 200
   Speed: 0.3
-  Shell: 0
   CoolDown: 3
   Prefab: {fileID: 6050365752319345184, guid: b56709a603158444c8b3644c20e4d799, type: 3}
   ReachDamage: 5
   extraHealth: 0
   EnemyIcon: {fileID: 1633734841747217399, guid: 268b8018b7cb9f34cafa09f27ec0e24e, type: 3}
-  Description: 
+  EnemyEmptyIcon: {fileID: 0}
+  Description: AIRCRAFTINFO

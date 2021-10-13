@@ -1918,7 +1918,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2f1bb5477ddfcc4faab948daa32faf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TestType: 18
+  TestType: 15
   Running: 0
   healthBarPrefab: {fileID: 904725062044126347, guid: 2362ca59ddd854447ba882941722eec4, type: 3}
   runningSequence: []
@@ -27114,7 +27114,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 56, y: -122.90018}
+  m_AnchoredPosition: {x: 56, y: -122.90021}
   m_SizeDelta: {x: -784.24, y: -378.06}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1970478273

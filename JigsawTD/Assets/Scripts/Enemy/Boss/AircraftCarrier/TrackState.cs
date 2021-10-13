@@ -10,11 +10,11 @@ public class TrackState : FSMState
     {
         StateID = StateID.Track;
     }
-    public override void Act(AirAttacker agent)
+    public override void Act(Aircraft agent)
     {
         agent.MovingToTarget(Destination.target);
     }
-    public override void Reason(AirAttacker agent)
+    public override void Reason(Aircraft agent)
     {
         float distanceToTarget = ((Vector2)agent.transform.position - (Vector2)agent.targetTurret.transform.position).magnitude;
         if(distanceToTarget< agent.minDistanceToDealDamage)

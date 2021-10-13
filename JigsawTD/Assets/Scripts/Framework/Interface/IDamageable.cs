@@ -138,6 +138,33 @@ public class ArmourStrategy : DamageStrategy
     }
 }
 
+public class AircraftStrategy : DamageStrategy
+{
+    public override bool IsEnemy => false;
+    Aircraft aircraft;
+    public AircraftStrategy(Transform tr, Aircraft aircraft) : base(tr)
+    {
+        this.ModelTrans = tr;
+        this.aircraft = aircraft;
+    }
+    public override float CurrentHealth
+    {
+        get => currentHealth;
+        set
+        {
+            currentHealth = value;
+            if (currentHealth <= 0)
+            {
+                ReusableObject explosion = ObjectPool.Instance.Spawn(aircraft.explosionPrefab);
+                //   Sound.Instance.PlayEffect(aircraft.explosionClip);
+                explosion.transform.position = ModelTrans.position;
+                aircraft.IsDie = true;
+                aircraft.Reclaim();
+            }
+        }
+    }
+}
+
 public class RestorerStrategy : EnemyDamageStrategy
 {
     public override bool IsEnemy => true;

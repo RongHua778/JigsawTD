@@ -9,7 +9,8 @@ public enum Transition//转换条件
     LureTarget,
     Attacked,
     BackToBoss,
-    ProtectBoss
+    ProtectBoss,
+    Patrol
 }
 
 public enum StateID//状态id
@@ -90,9 +91,9 @@ public abstract class FSMState
 
     public virtual void DoBeforeEntering() { }
     public virtual void DoAfterLeaving() { }
-    public virtual void Act(AirAttacker agent) { }
-    public virtual void Reason(AirAttacker agent) { }//判断转换条件
-    public virtual void Act(AirProtector agent) { }
-    public virtual void Reason(AirProtector agent) { }//判断转换条件
+    public virtual void Act(Aircraft agent) { }
+    public virtual void Reason(Aircraft agent) { }//判断转换条件
+    //public virtual void Act(AirProtector agent) { }
+    //public virtual void Reason(AirProtector agent) { }//判断转换条件
 
 }

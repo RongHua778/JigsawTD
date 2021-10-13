@@ -4,12 +4,12 @@ using UnityEngine;
 
 public enum Destination
 {
-    boss,target,Random
+    boss, target, Random
 }
 
 public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
 {
-    [SerializeField] ParticalControl explosionPrefab = default;
+    [SerializeField] public ParticalControl explosionPrefab = default;
     public DamageStrategy DamageStrategy { get; set; }
 
     public AircraftCarrier boss;
@@ -18,7 +18,7 @@ public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
     public bool isFollowing = true;
     protected bool isLeader;
     protected Aircraft predecessor;
-    Vector3[] followingPosition=new Vector3[2];
+    Vector3[] followingPosition = new Vector3[2];
 
 
     Quaternion look_Rotation;
@@ -27,7 +27,7 @@ public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
     public readonly float minDistanceToLure = .1f;
     public readonly float minDistanceToDealDamage = 0.75f;
     readonly float maxDistanceToReturnToBoss = 5f;
-    protected float movingSpeed=3.5f;
+    protected float movingSpeed = 3.5f;
     protected float rotatingSpeed = 2f;
     protected float originalMovingSpeed = 3.5f;
     protected float originalRotatingSpeed = 2f;
@@ -35,29 +35,29 @@ public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
     protected Vector3 movingDirection;
 
     protected AudioClip explosionClip;
-    public bool IsEnemy { get => false; }
-    float damageIntensify;
-    public float DamageIntensify { get => damageIntensify; set => damageIntensify = value; }
-    float maxHealth = 10;
-    public float MaxHealth { get => maxHealth; set => maxHealth = value; }
-    float currentHealth;
+    //public bool IsEnemy { get => false; }
+    //float damageIntensify;
+    //public float DamageIntensify { get => damageIntensify; set => damageIntensify = value; }
+    //float maxHealth = 10;
+    //public float MaxHealth { get => maxHealth; set => maxHealth = value; }
+    //float currentHealth;
 
-    public float CurrentHealth
-    {
-        get => currentHealth;
-        set
-        {
-            currentHealth = value;
-            if (currentHealth <= 0&&!IsDie)
-            {
-                ReusableObject explosion = ObjectPool.Instance.Spawn(explosionPrefab);
-                Sound.Instance.PlayEffect(explosionClip);
-                explosion.transform.position = transform.position;
-                IsDie = true;
-                Reclaim();
-            }
-        }
-    }
+    //public float CurrentHealth
+    //{
+    //    get => currentHealth;
+    //    set
+    //    {
+    //        currentHealth = value;
+    //        if (currentHealth <= 0&&!IsDie)
+    //        {
+    //            ReusableObject explosion = ObjectPool.Instance.Spawn(explosionPrefab);
+    //            Sound.Instance.PlayEffect(explosionClip);
+    //            explosion.transform.position = transform.position;
+    //            IsDie = true;
+    //            Reclaim();
+    //        }
+    //    }
+    //}
     private bool isDie;
     public bool IsDie { get => isDie; set => isDie = value; }
 
@@ -67,8 +67,8 @@ public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
     public virtual void Initiate(AircraftCarrier boss)
     {
         IsDie = false;
-        MaxHealth = boss.Armor;
-        CurrentHealth = MaxHealth;
+        DamageStrategy.CurrentHealth = boss.Armor;
+        //CurrentHealth = MaxHealth;
         boss.AddAircraft(this);
         boss.SetQueue();
     }
@@ -76,7 +76,9 @@ public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
     void Awake()
     {
         explosionClip = Resources.Load<AudioClip>("Music/Effects/Sound_EnemyExplosion");
+        DamageStrategy = new AircraftStrategy(this.transform, this);
     }
+
 
     public virtual bool GameUpdate()
     {
@@ -87,25 +89,25 @@ public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
         }
         return true;
     }
-    public void ApplyDamage(float amount, out float realDamage, bool isCritical = false)
-    {
-        realDamage = amount;
-        CurrentHealth -= realDamage;
-        GameRes.TotalDamage += (int)realDamage;
+    //public void ApplyDamage(float amount, out float realDamage, bool isCritical = false)
+    //{
+    //    realDamage = amount;
+    //    CurrentHealth -= realDamage;
+    //    GameRes.TotalDamage += (int)realDamage;
 
-        if (isCritical)
-        {
-            StaticData.Instance.ShowJumpDamage(transform.position, (int)realDamage);
-        }
+    //    if (isCritical)
+    //    {
+    //        StaticData.Instance.ShowJumpDamage(transform.position, (int)realDamage);
+    //    }
 
-    }
+    //}
     public void PickRandomDes()
     {
         float randomX = Random.Range(boss.transform.position.x - maxDistanceToReturnToBoss,
             boss.transform.position.x + maxDistanceToReturnToBoss);
         float randomY = Random.Range(boss.transform.position.y - maxDistanceToReturnToBoss,
             boss.transform.position.y + maxDistanceToReturnToBoss);
-        movingDirection = new Vector3(randomX,randomY) - transform.position;
+        movingDirection = new Vector3(randomX, randomY) - transform.position;
     }
     public void MovingToTarget(Destination des)
     {
@@ -147,7 +149,7 @@ public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
 
     public void Lure()
     {
-        if (!isFollowing||isLeader)
+        if (!isFollowing || isLeader)
         {
             movingSpeed = originalMovingSpeed;
             rotatingSpeed = originalRotatingSpeed;
@@ -162,6 +164,41 @@ public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
                 movingDirection = targetTurret.transform.position - transform.position;
                 MovingToTarget(Destination.Random);
             }
+        }
+        else
+        {
+            Follow();
+        }
+
+    }
+
+    public virtual void Attack()
+    {
+
+    }
+
+    public void ProtectMe()
+    {
+        fsm.PerformTransition(Transition.ProtectBoss);
+        // isFollowing = true;
+    }
+
+    public void Protect()
+    {
+        if (isLeader || !isFollowing)
+        {
+            movingSpeed = originalMovingSpeed;
+            rotatingSpeed = originalRotatingSpeed;
+            float distanceToTarget = ((Vector2)transform.position - (Vector2)boss.transform.position).magnitude;
+            if (distanceToTarget < minDistanceToLure)
+            {
+                movingDirection = boss.model.transform.position - transform.position + new Vector3(0.5f, 0.5f);
+            }
+            else
+            {
+                movingDirection = boss.model.transform.position - transform.position;
+            }
+            MovingToTarget(Destination.Random);
         }
         else
         {
@@ -216,13 +253,13 @@ public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
         ObjectPool.Instance.UnSpawn(this);
     }
 
-    public void ApplyBuff(EnemyBuffName buffName, float keyValue, float duration)
-    {
-        throw new System.NotImplementedException();
-    }
+    //public void ApplyBuff(EnemyBuffName buffName, float keyValue, float duration)
+    //{
+    //    throw new System.NotImplementedException();
+    //}
 
-    public void ApplyDamage(float amount, out float realDamag)
-    {
-        throw new System.NotImplementedException();
-    }
+    //public void ApplyDamage(float amount, out float realDamag)
+    //{
+    //    throw new System.NotImplementedException();
+    //}
 }

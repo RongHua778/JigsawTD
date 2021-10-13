@@ -12,7 +12,7 @@ public class AirProtectorPatrolState : FSMState
     {
         StateID = StateID.Patrol;
     }
-    public override void Act(AirProtector agent)
+    public override void Act(Aircraft agent)
     {
         agent.MovingToTarget(Destination.Random);
         directionWaitingTime += Time.deltaTime;
@@ -22,7 +22,7 @@ public class AirProtectorPatrolState : FSMState
             directionWaitingTime = 0;
         }
     }
-    public override void Reason(AirProtector agent)
+    public override void Reason(Aircraft agent)
     {
         protectWaitingTime += Time.deltaTime;
         if (protectWaitingTime > protectBossCD)
