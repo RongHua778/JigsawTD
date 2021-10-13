@@ -60,8 +60,7 @@ public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
     }
     private bool isDie;
     public bool IsDie { get => isDie; set => isDie = value; }
-    public BuffableEntity Buffable { get; set; }
-    public TrapContent CurrentTrap { get; set; }
+
     protected FSMSystem fsm;
 
 

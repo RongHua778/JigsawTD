@@ -293,6 +293,7 @@ BLINKER=Descartes (Boss)
 BORNER=Aristotle (Boss)
 BINARY=Binary Star (Boss)
 ICEBALL=Snow Ball（Boss）
+HAMSTER=Hamster (Boss)
 
 DIVIDERINFO=Splits into several smaller bodies while it die.
 SIXARMOURINFO=Surrounded by armors that protects against damage.
@@ -300,6 +301,7 @@ BLINKERINFO=Flashes forward a certain distance while it takes a certain amount o
 BORNERINFO=Summon a large amount of enemies every once in a while.
 BINARYINFO=Summon two binary stars at the same time, and when one dies, the other accelerates.
 ICEBALLINFO=Each time the Snow Ball veered, it released a wide freeze.
+HAMSTERINFO=There are 15 hamsters, each hamster has 75% damage reduction, and each hamster death reduces all hamster's damage reduction by 5%.
 
 //Trap
 UNREVEAL=Unreveal Mark

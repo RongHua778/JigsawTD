@@ -13,9 +13,9 @@ public class JumpDamage : ReusableObject
         anim = this.GetComponent<Animator>();
     }
 
-    public void Jump(int amount,Vector3 pos)
+    public void Jump(int amount, Vector3 pos)
     {
-        transform.localScale *= Mathf.Max(0.5f, 0.3f * (Mathf.Log10(amount) + 1));
+        transform.localScale *= Mathf.Clamp(0.3f * (Mathf.Log10(amount) + 1), 0.1f, 5f);
         transform.position = pos;
         valueTxt.text = amount.ToString();
         anim.SetTrigger("Jump");

@@ -15,27 +15,19 @@ public abstract class DamageStrategy
     protected float currentHealth;
     protected float maxHealth;
     private float slowIntensify;
-    
+
 
     public abstract bool IsEnemy { get; }
-    public virtual float DamageIntensify { get => TileDamageIntensify + BuffDamageIntensify; }
+    public virtual float DamageIntensify { get => BuffDamageIntensify; }
     public virtual float CurrentHealth { get => currentHealth; set => currentHealth = value; }
     public virtual float MaxHealth { get => maxHealth; set => maxHealth = value; }
-    public virtual float SlowIntensify { get => BuffSlowIntensify + TileSlowIntensify; }
+    public virtual float SlowIntensify { get => BuffSlowIntensify; }
 
     //buff属性
     private float buffDamageIntensify;
     public virtual float BuffDamageIntensify { get => buffDamageIntensify; set => buffDamageIntensify = value; }
     private float buffSlowIntensify;
     public float BuffSlowIntensify { get => buffSlowIntensify; set => buffSlowIntensify = value; }
-
-
-    //地形属性
-    private float tileSlowIntensify;
-    public virtual float TileSlowIntensify { get => tileSlowIntensify; set => tileSlowIntensify = value; }
-    private float tileDamageIntensify;
-    public virtual float TileDamageIntensify { get => tileDamageIntensify; set => tileDamageIntensify = value; }
-
 
     public DamageStrategy(Transform tr)
     {
@@ -61,10 +53,7 @@ public abstract class DamageStrategy
 
     public virtual void ResetStrategy()
     {
-        BuffSlowIntensify = 0;
-        TileSlowIntensify = 0;
         BuffDamageIntensify = 0;
-        TileDamageIntensify = 0;
     }
 }
 
@@ -111,26 +100,9 @@ public class EnemyDamageStrategy : DamageStrategy
             enemy.HealthBar.ShowIcon(1, value > 0);
         }
     }
-    public override float TileDamageIntensify
-    {
-        get => base.TileDamageIntensify;
-        set
-        {
-            base.TileDamageIntensify = value;
-            enemy.HealthBar.ShowIcon(1, value > 0);
-        }
-    }
 
 
-    public override float TileSlowIntensify
-    {
-        get => base.TileSlowIntensify;
-        set
-        {
-            base.TileSlowIntensify = value;
-            enemy.HealthBar.ShowIcon(2, value > 0);
-        }
-    }
+
 
     public override void ApplyBuff(EnemyBuffName buffName, float keyvalue, float duration)
     {
@@ -181,6 +153,22 @@ public class RestorerStrategy : EnemyDamageStrategy
         base.ApplyDamage(amount, out realDamage, isCritical);
         damagedCounter = 0;
     }
+}
+
+public class HamsterStrategy : EnemyDamageStrategy
+{
+    public override bool IsEnemy => true;
+
+    public override float DamageIntensify => base.DamageIntensify + HamsterDamageIntensify;
+    public float HamsterDamageIntensify => -Hamster.HamsterCount * 0.05f;
+
+
+    public HamsterStrategy(Transform tr, Enemy enemy) : base(tr, enemy)
+    {
+        this.ModelTrans = tr;
+        this.enemy = enemy;
+    }
+
 }
 
 

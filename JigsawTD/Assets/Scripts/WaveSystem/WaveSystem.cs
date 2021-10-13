@@ -136,7 +136,7 @@ public class WaveSystem : IGameSystem
 
             if (TestType != EnemyType.None)//测试特定敌人用
             {
-                sequences = GenerateSpecificSequence(TestType, 3f, i);
+                sequences = GenerateSpecificSequence(TestType, 500f, i);
             }
             LevelSequence.Enqueue(sequences);
         }
@@ -169,7 +169,7 @@ public class WaveSystem : IGameSystem
     {
         EnemyAttribute attribute = StaticData.Instance.EnemyFactory.Get(type);
         int amount = Mathf.RoundToInt(attribute.InitCount + ((float)wave / 5) * attribute.CountIncrease / genres);
-        float coolDown = (float)(5f + wave / 2) / (float)amount;
+        float coolDown = (float)(5f + wave / 2) / amount;
         EnemySequence sequence = new EnemySequence(type, amount, coolDown, stage, isBoss);
         return sequence;
     }

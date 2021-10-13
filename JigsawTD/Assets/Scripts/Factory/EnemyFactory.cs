@@ -5,7 +5,7 @@ using UnityEngine;
 public enum EnemyType
 {
     Soilder, Runner, Restorer, Tanker, Healer, Froster,
-    Fat, SixArmor, Divider, Blinker,Binary,
+    Hamster, SixArmor, Divider, Blinker,Binary,
     IceBall, Borner, Armorer,
     Random, AircraftCarrier, StrongerAircraftCarrier,
     GoldKeeper

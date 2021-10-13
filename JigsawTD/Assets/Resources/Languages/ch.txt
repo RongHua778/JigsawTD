@@ -292,6 +292,7 @@ BLINKER=笛卡尔（Boss）
 BORNER=亚里士多德（Boss）
 BINARY=双子星（Boss）
 ICEBALL=雪球（Boss）
+HAMSTER=仓鼠（Boss）
 
 DIVIDERINFO=死亡后会分裂成几个较小的本体。
 SIXARMOURINFO=周身环绕着能抵挡伤害的护甲。
@@ -299,6 +300,7 @@ BLINKERINFO=每当受到一定伤害后会向前闪现一段距离。
 BORNERINFO=每隔一段时间召唤出随机类型的敌人。
 BINARYINFO=同时生成两个双子星，其中一个死亡时另一个会加速前进。
 ICEBALLINFO=每当雪球转向时，会释放一道大范围的冰冻。
+HAMSTERINFO=一共15个仓鼠，每个仓鼠自带75%的伤害减免，每只死亡的仓鼠使所有仓鼠伤害减免降低5%。
 
 //Trap
 UNREVEAL=未揭示标记

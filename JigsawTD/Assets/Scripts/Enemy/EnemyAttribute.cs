@@ -18,4 +18,5 @@ public class EnemyAttribute : ScriptableObject
     public Sprite EnemyIcon;
     public Sprite EnemyEmptyIcon;
     public string Description;
+
 }
