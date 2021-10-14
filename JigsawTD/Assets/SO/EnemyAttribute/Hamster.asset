@@ -17,11 +17,11 @@ MonoBehaviour:
   InitCount: 15
   CountIncrease: 0
   Health: 50
-  Speed: 0.5
+  Speed: 0.7
   CoolDown: 0.5
   Prefab: {fileID: 5042288069490103953, guid: d3aac527b4cb7b24483e988a8060353a, type: 3}
   ReachDamage: 1
   extraHealth: 0
-  EnemyIcon: {fileID: 21300000, guid: 05f67270eed774d458305d46c391fd99, type: 3}
+  EnemyIcon: {fileID: -2708782251966510395, guid: f754236f3e3a8c94696ea4c3a0681592, type: 3}
   EnemyEmptyIcon: {fileID: 21300000, guid: 43b7a67ba6a63734da9a23d66e32260b, type: 3}
   Description: HAMSTERINFO

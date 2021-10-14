@@ -16,12 +16,12 @@ MonoBehaviour:
   EnemyType: 15
   InitCount: 1
   CountIncrease: 0
-  Health: 200
-  Speed: 0.3
+  Health: 800
+  Speed: 0.5
   CoolDown: 3
   Prefab: {fileID: 6050365752319345184, guid: b56709a603158444c8b3644c20e4d799, type: 3}
   ReachDamage: 5
   extraHealth: 0
-  EnemyIcon: {fileID: 1633734841747217399, guid: 268b8018b7cb9f34cafa09f27ec0e24e, type: 3}
+  EnemyIcon: {fileID: -2881442684568117505, guid: f754236f3e3a8c94696ea4c3a0681592, type: 3}
   EnemyEmptyIcon: {fileID: 0}
   Description: AIRCRAFTINFO

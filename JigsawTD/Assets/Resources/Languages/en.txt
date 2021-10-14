@@ -294,6 +294,7 @@ BORNER=Aristotle (Boss)
 BINARY=Binary Star (Boss)
 ICEBALL=Snow Ball（Boss）
 HAMSTER=Hamster (Boss)
+AIRCRAFT=Aircraft Carrier(Boss)
 
 DIVIDERINFO=Splits into several smaller bodies while it die.
 SIXARMOURINFO=Surrounded by armors that protects against damage.
@@ -302,6 +303,7 @@ BORNERINFO=Summon a large amount of enemies every once in a while.
 BINARYINFO=Summon two binary stars at the same time, and when one dies, the other accelerates.
 ICEBALLINFO=Each time the Snow Ball veered, it released a wide freeze.
 HAMSTERINFO=There are 15 hamsters, each hamster has 75% damage reduction, and each hamster death reduces all hamster's damage reduction by 5%.
+AIRCRAFTINFO=With aircrafts which can freeze turrets
 
 //Trap
 UNREVEAL=Unreveal Mark

@@ -5,7 +5,7 @@ using UnityEngine;
 public class ProtectState : FSMState
 {
     float waitingTime;
-    float protectTime = 15f + Random.Range(0, 2f);
+    float protectTime = 5f;
     public ProtectState(FSMSystem fsm) : base(fsm)
     {
         StateID = StateID.Protect;
@@ -20,14 +20,7 @@ public class ProtectState : FSMState
         waitingTime += Time.deltaTime;
         if (waitingTime > protectTime)
         {
-            //agent.isFollowing = false;
             fsm.PerformTransition(Transition.Patrol);
-            //agent.SearchTarget();
-            //if (agent.targetTurret != null)
-            //{
-                
-            //    Debug.LogWarning("found target!");
-            //}
             waitingTime = 0;
         }
     }

@@ -86,7 +86,7 @@ MonoBehaviour:
     ExitPoint: {x: 0, y: 0}
   IsBoss: 1
   Intensify: 0
-  exlposionPrefab: {fileID: 4814509631623709245, guid: f67ede64dda110a44a621ef491bab4b5, type: 3}
+  exlposionPrefab: {fileID: 4814509631623709245, guid: da26032d01e11f8489ff266989819e3b, type: 3}
 --- !u!1 &8360252054385358165
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,8 +193,8 @@ SpriteRenderer:
   m_SortingLayerID: -1288343251
   m_SortingLayer: 3
   m_SortingOrder: 2
-  m_Sprite: {fileID: -8847467542957845770, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
-  m_Color: {r: 0, g: 0.8734219, b: 1, a: 1}
+  m_Sprite: {fileID: -7297425823691836014, guid: 2138c8f635a68044d8b153780571587c, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -274,11 +274,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 457066, guid: 2c12797632c13ab46bc213129166332c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.15
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 457066, guid: 2c12797632c13ab46bc213129166332c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.15
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 457066, guid: 2c12797632c13ab46bc213129166332c, type: 3}
       propertyPath: m_LocalPosition.x

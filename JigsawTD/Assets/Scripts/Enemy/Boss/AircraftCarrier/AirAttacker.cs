@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class AirAttacker : Aircraft
 {
-    [SerializeField] ParticalControl attackPrefab = default;
     float freezeTime = 5f;
 
-    public override void Initiate(AircraftCarrier boss)
+    public override void Initiate(AircraftCarrier boss,float maxHealth)
     {
-        base.Initiate(boss);
+        base.Initiate(boss,maxHealth);
         if (fsm == null)
         {
             this.boss = boss;
@@ -56,22 +55,16 @@ public class AirAttacker : Aircraft
 
     public override void Attack()
     {
-        //FrostEffect frosteffect = ObjectPool.Instance.Spawn(frostPrefab) as FrostEffect;
-        //frosteffect.transform.position = targetTurret.transform.position;
-        //frosteffect.UnspawnAfterTime(freezeTime);
-        //targetTurret.Frost(freezeTime);
-        //ReusableObject explosion = ObjectPool.Instance.Spawn(attackPrefab);
-        //Sound.Instance.PlayEffect(explosionClip);
-        //explosion.transform.position = targetTurret.transform.position;
-        //targetTurret = null;
-
-        FrostEffect frosteffect = null;
         if (targetTurret.Activated)
         {
-            frosteffect = ObjectPool.Instance.Spawn(StaticData.Instance.FrostEffectPrefab) as FrostEffect;
+            FrostEffect frosteffect = ObjectPool.Instance.Spawn(StaticData.Instance.FrostEffectPrefab) as FrostEffect;
             frosteffect.transform.position = targetTurret.transform.position;
+            ReusableObject partical = ObjectPool.Instance.Spawn(StaticData.Instance.FrostExplosion);
+            partical.transform.position = transform.position;
+            partical.transform.localScale = Vector3.one;
+            targetTurret.Frost(freezeTime, frosteffect);
+            Sound.Instance.PlayEffect("Sound_EnemyExplosionFrost");
         }
-        targetTurret.Frost(freezeTime, frosteffect);
         targetTurret = null;
 
     }

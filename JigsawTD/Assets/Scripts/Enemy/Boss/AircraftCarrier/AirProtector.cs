@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class AirProtector : Aircraft
 {
-    public override void Initiate(AircraftCarrier boss)
+    public override void Initiate(AircraftCarrier boss, float maxHealth)
     {
-        base.Initiate(boss);
+        base.Initiate(boss, maxHealth);
         if (fsm == null)
         {
             this.boss = boss;
@@ -38,14 +38,4 @@ public class AirProtector : Aircraft
         return base.GameUpdate();
     }
 
-
-
-
-
-    public override void OnUnSpawn()
-    {
-        isLeader = false;
-        predecessor = null;
-        base.OnUnSpawn();
-    }
 }

@@ -20,7 +20,7 @@ public abstract class DamageStrategy
     public abstract bool IsEnemy { get; }
     public virtual float DamageIntensify { get => BuffDamageIntensify; }
     public virtual float CurrentHealth { get => currentHealth; set => currentHealth = value; }
-    public virtual float MaxHealth { get => maxHealth; set => maxHealth = value; }
+    public virtual float MaxHealth { get => maxHealth; set { maxHealth = value; CurrentHealth = maxHealth; } }
     public virtual float SlowIntensify { get => BuffSlowIntensify; }
 
     //buffÊôÐÔ
@@ -68,15 +68,7 @@ public class EnemyDamageStrategy : DamageStrategy
         this.ModelTrans = tr;
         this.enemy = enemy;
     }
-    public override float MaxHealth
-    {
-        get => maxHealth;
-        set
-        {
-            maxHealth = value;
-            CurrentHealth = maxHealth;
-        }
-    }
+
     public override float CurrentHealth
     {
         get => currentHealth;
@@ -159,7 +151,6 @@ public class AircraftStrategy : DamageStrategy
                 //   Sound.Instance.PlayEffect(aircraft.explosionClip);
                 explosion.transform.position = ModelTrans.position;
                 aircraft.IsDie = true;
-                aircraft.Reclaim();
             }
         }
     }
