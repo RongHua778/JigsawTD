@@ -16,7 +16,7 @@ MonoBehaviour:
   EnemyType: 15
   InitCount: 1
   CountIncrease: 0
-  Health: 800
+  Health: 1000
   Speed: 0.5
   CoolDown: 3
   Prefab: {fileID: 6050365752319345184, guid: b56709a603158444c8b3644c20e4d799, type: 3}

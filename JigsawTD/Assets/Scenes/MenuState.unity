@@ -2888,6 +2888,8 @@ MonoBehaviour:
   UnrevealTrap: {fileID: 21300000, guid: e8ecebd490ee97447a3e4938bf2835cc, type: 3}
   LandedEffect: {fileID: 3581280347063733391, guid: 6c69b997b2840b04fae94e6a1ba14337, type: 3}
   GainMoneyPrefab: {fileID: 1926441791724971538, guid: 772397d6e2f78d142a70b5168e1282e4, type: 3}
+  FrostExplosion: {fileID: 2080882099982660507, guid: 3ca80b13c462a3945a930eee7d9e845f, type: 3}
+  FrostEffectPrefab: {fileID: 6979043889180068788, guid: 755d05657c602c64eb650125808f0cb1, type: 3}
   LevelUpCostPerRare: 50
 --- !u!224 &361613944 stripped
 RectTransform:
@@ -7365,7 +7367,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Version 2.31
+  m_Text: Version 2.4
 --- !u!222 &1077198958
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -16,8 +16,8 @@ MonoBehaviour:
   EnemyType: 10
   InitCount: 1
   CountIncrease: 0
-  Health: 70
-  Speed: 0.5
+  Health: 100
+  Speed: 0.4
   CoolDown: 3
   Prefab: {fileID: -5785879013757558806, guid: c7b9b2740b4e86542b81aac43b1b74c2, type: 3}
   ReachDamage: 3

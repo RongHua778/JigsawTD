@@ -18562,8 +18562,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -506.6, y: 562}
-  m_SizeDelta: {x: 46.98, y: 35.49}
+  m_AnchoredPosition: {x: -521.42, y: 556.8}
+  m_SizeDelta: {x: 76.62, y: 53.92}
   m_Pivot: {x: 0.5, y: 0.49999997}
 --- !u!114 &1370321936
 MonoBehaviour:
@@ -18676,7 +18676,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1383652722
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25086,9 +25086,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fbf3466ab2bed174096203daed7b2d4f, type: 2}
   - {fileID: 11400000, guid: 993e7ccb381984e4983180597ec9c10f, type: 2}
   - {fileID: 11400000, guid: 99391903eba8a1041af83dc6b559379e, type: 2}
-  PremitDifficulty: 2
+  - {fileID: 11400000, guid: 26c45941be4757843b5b55cfce05d36f, type: 2}
+  PremitDifficulty: 4
   maxDifficutly: 0
-  selectedLevelId: 2
+  selectedLevelId: 5
 --- !u!114 &1834551534
 MonoBehaviour:
   m_ObjectHideFlags: 0

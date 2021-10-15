@@ -18,9 +18,9 @@ public class AircraftCarrier : Enemy
     public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify, List<BasicTile> path)
     {
         base.Initialize(attribute, pathOffset, healthBar, intensify, path);
-        bornCD = 4;
+        bornCD = 3;
         enemyOneBorn = 4;
-        maxEnemyNumber = 12;
+        maxEnemyNumber = 16;
     }
 
 
@@ -29,8 +29,8 @@ public class AircraftCarrier : Enemy
         bornCounter += Time.deltaTime;
         if (bornCounter > bornCD)
         {
-            if (enemyNumber <= maxEnemyNumber)
-                Born();
+            if (enemyNumber < maxEnemyNumber)
+                StartCoroutine(BornCor());
             bornCounter = 0;
         }
         //if (!protect && DamageStrategy.CurrentHealth < DamageStrategy.MaxHealth * 0.5f)
@@ -42,6 +42,24 @@ public class AircraftCarrier : Enemy
         //        aircraft.ProtectMe();
         //    }
         //}
+    }
+
+    IEnumerator BornCor()
+    {
+        Anim.SetBool("Transform", true);
+        Sound.Instance.PlayEffect("Sound_BornerTransform");
+
+        yield return new WaitForSeconds(0.5f);
+        for (int i = 0; i < enemyOneBorn; i++)
+        {
+            AirAttacker aircraft = ObjectPool.Instance.Spawn(airCraftPrefab) as AirAttacker;
+            aircraft.transform.position = this.model.position;
+            aircraft.Initiate(this, DamageStrategy.MaxHealth * aircarftIntensify);
+            enemyNumber += 1;
+            yield return new WaitForSeconds(0.2f);
+        }
+        yield return new WaitForSeconds(0.5f);
+        Anim.SetBool("Transform", false);
     }
 
     private void Born()

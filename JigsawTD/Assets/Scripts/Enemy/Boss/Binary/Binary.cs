@@ -26,7 +26,7 @@ public class Binary : Enemy
     {
         if (m_brother != null)
         {
-            m_brother.SpeedIntensify += 4f;
+            m_brother.SpeedIntensify += 6f;
             m_brother.ProgressFactor = m_brother.Speed * m_brother.Adjust;
             m_brother.m_brother = null;
             m_brother = null;

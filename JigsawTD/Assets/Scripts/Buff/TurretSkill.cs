@@ -202,6 +202,8 @@ public class RapiderSkill : InitialSkill
 
     public override void Shoot(Bullet bullet = null)
     {
+        if (!strategy.m_Turret.Target[0].Enemy.DamageStrategy.IsEnemy)
+            return;
         Enemy target = (Enemy)strategy.m_Turret.Target[0].Enemy;
         if (target != lastTarget)
         {
