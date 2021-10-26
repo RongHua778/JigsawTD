@@ -192,19 +192,12 @@ public class RapiderSkill : InitialSkill
     public override TurretSkillName EffectName => TurretSkillName.RapiderSkill;
     public override string SkillDescription => "RAPIDERSKILL";
 
-    //public override void Shoot(Bullet bullet = null)
-    //{
-    //    strategy.TurnFixAttack += GameEndUI.TotalComposite * strategy.TimeModify;
-    //}
-
-    private Enemy lastTarget;
+    private IDamageable lastTarget;
     private float speedIncreased;
 
     public override void Shoot(Bullet bullet = null)
     {
-        if (!strategy.m_Turret.Target[0].Enemy.DamageStrategy.IsEnemy)
-            return;
-        Enemy target = (Enemy)strategy.m_Turret.Target[0].Enemy;
+        IDamageable target = strategy.m_Turret.Target[0].Enemy;
         if (target != lastTarget)
         {
             lastTarget = target;
@@ -212,10 +205,10 @@ public class RapiderSkill : InitialSkill
             speedIncreased = 0;
             return;
         }
-        if (speedIncreased < 2.99f)
+        if (speedIncreased < 1.99f)
         {
-            speedIncreased += 0.15f * strategy.TimeModify;
-            strategy.TurnSpeedIntensify += 0.15f * strategy.TimeModify;
+            speedIncreased += 0.2f * strategy.TimeModify;
+            strategy.TurnSpeedIntensify += 0.2f * strategy.TimeModify;
         }
     }
 

@@ -98,7 +98,7 @@ public class ScaleAndMove : IGameSystem
                 CamMovement = Vector2.zero;
                 cam.transform.DOMove(camInitPos, 1f);
                 CanControl = false;
-                GameManager.Instance.TriggerGuide(1);
+                GameEvents.Instance.TutorialTrigger(TutorialType.MouseMove);
             }
         }
         if (SizeTutorial)
@@ -107,7 +107,7 @@ public class ScaleAndMove : IGameSystem
             {
                 SizeTutorial = false;
                 cam.transform.DOMove(camInitPos, 1f);
-                GameManager.Instance.TriggerGuide(2);
+                GameEvents.Instance.TutorialTrigger(TutorialType.WheelMove);
             }
         }
     }

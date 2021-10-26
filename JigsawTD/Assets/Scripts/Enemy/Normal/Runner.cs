@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Runner : Enemy
 {
-
+    public override string ExplosionEffect => "EnemyExplosionBlue";
     public override float SpeedIntensify { get => base.SpeedIntensify + speedIncreased; set => base.SpeedIntensify = value; }
 
     private float speedIncreased = 0;
@@ -24,14 +24,6 @@ public class Runner : Enemy
             }
         }
     }
-    //public override bool GameUpdate()
-    //{
-    //    if (StunTime <= 0)
-    //    {
-    //        speedIncreased += 1f * Time.deltaTime;
-    //    }
-    //    return base.GameUpdate();
-    //}
 
     public override void OnUnSpawn()
     {

@@ -8,6 +8,7 @@ public class EnemyGrid : MonoBehaviour
     [SerializeField] Image enemyIcon = default;
     [SerializeField] Text enemyName = default;
     [SerializeField] Text enemyDes = default;
+    [SerializeField] Text enemyDamage = default;
 
     public void SetEnemyInfo(EnemySequence sequence)
     {
@@ -15,6 +16,7 @@ public class EnemyGrid : MonoBehaviour
         enemyIcon.sprite = attribute.EnemyIcon;
         enemyName.text = GameMultiLang.GetTraduction(attribute.EnemyName);
         enemyDes.text = GameMultiLang.GetTraduction(attribute.Description);
+        enemyDamage.text = GameMultiLang.GetTraduction("ENEMYDAMAGE") + ":" + attribute.ReachDamage;
     }
 
 

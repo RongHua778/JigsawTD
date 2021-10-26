@@ -83,9 +83,9 @@ public class BoardSystem : IGameSystem
 
     List<Vector2Int> tilePoss = new List<Vector2Int>();
 
-    public List<BasicTile> shortestPath = new List<BasicTile>();
+    public static List<BasicTile> shortestPath = new List<BasicTile>();
 
-    public List<PathPoint> shortestPoints = new List<PathPoint>();
+    public static List<PathPoint> shortestPoints = new List<PathPoint>();
 
     public static Path path;
 

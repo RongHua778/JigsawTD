@@ -28,7 +28,6 @@ public class GuideVideo :IUserInterface
     public override void Hide()
     {
         anim.SetBool("isOpen", false);
-        GameManager.Instance.TriggerGuide(10);
     }
 
 }

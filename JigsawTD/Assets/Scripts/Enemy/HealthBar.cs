@@ -56,23 +56,13 @@ public class HealthBar : ReusableObject
         }
 
     }
-    //public void ShowSlowIcon(bool value)
-    //{
-    //    slowIcon.gameObject.SetActive(value);
-    //}
 
-    //public void ShowDamageIcon(bool value)
-    //{
-    //    damageIcon.gameObject.SetActive(value);
-    //}
-
-    //public void ShowPromoteIcon(bool value)
-    //{
-    //    promoteIcon.gameObject.SetActive(value);
-    //}
     private void LateUpdate()
     {
-        if (followTrans != null)
-            transform.position = (Vector2)followTrans.position + enemyOffset;
+        //if (followTrans != null)
+        //    transform.position = (Vector2)followTrans.position + enemyOffset;
+        transform.position = (Vector2)transform.parent.position + enemyOffset;
+        transform.rotation = Quaternion.identity;
+
     }
 }

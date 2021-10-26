@@ -17,6 +17,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private MainUI m_MainUI = default;
     [SerializeField] private FuncUI m_FuncUI = default;
     [SerializeField] private GuideUI m_GuideUI = default;
+    [SerializeField] private GuideGirlUI m_GuideGirlUI = default;
+
     [SerializeField] private GameEndUI m_GameEndUI = default;
     [SerializeField] private MessageUI m_MessageUI = default;
     [SerializeField] private GuideVideo m_GuideVideo = default;
@@ -30,21 +32,6 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private EnemyTips m_EnemyTips = default;
     [SerializeField] private TurretBaseTips m_TurretBaseTips = default;
 
-    //[Header("工厂")]
-    //[SerializeField] TileFactory _tileFactory = default;
-    //[SerializeField] TileContentFactory _contentFactory = default;
-    //[SerializeField] TileShapeFactory _shapeFactory = default;
-    //[SerializeField] EnemyFactory _enemyFactory = default;
-    //[SerializeField] BlueprintFactory _bluePrintFacotry = default;
-    //[SerializeField] SkillFactory _skillFactory = default;
-    //[SerializeField] NonEnemyFactory _nonEnemyFactory = default;
-    //public TileFactory TileFactory { get => _tileFactory; }
-    //public TileContentFactory ContentFactory { get => _contentFactory; }
-    //public TileShapeFactory ShapeFactory { get => _shapeFactory; }
-    //public EnemyFactory EnemyFactory { get => _enemyFactory; }
-    //public BlueprintFactory BluePrintFactory { get => _bluePrintFacotry; }
-    //public SkillFactory SkillFactory { get => _skillFactory; set => _skillFactory = value; }
-    //public NonEnemyFactory NonEnemyFactory { get => _nonEnemyFactory; set => _nonEnemyFactory = value; }
 
 
     [Header("集合")]
@@ -89,8 +76,12 @@ public class GameManager : Singleton<GameManager>
         m_EnemyTips.Initialize();//敌人TIPS
         m_TurretBaseTips.Initialize();//基座tips
 
-        m_GuideUI.Initialize(m_FuncUI, m_MainUI, m_BluePrintShopUI, m_ShapeSelectUI);//教学系统UI
-        m_GuideUI.Initialize();//IuserInterface初始化
+        //m_GuideUI.Initialize(m_FuncUI, m_MainUI, m_BluePrintShopUI, m_ShapeSelectUI);//教学系统UI
+        //m_GuideUI.Initialize();//IuserInterface初始化
+
+        m_GuideGirlUI.Initialize(m_FuncUI, m_MainUI, m_BluePrintShopUI, m_ShapeSelectUI);
+        m_GuideGirlUI.Initialize();
+
         //设置操作流程
         buildingState = new BuildingState(this, m_BoardSystem);
         waveState = new WaveState(this, m_WaveSystem, m_BoardSystem);
@@ -101,14 +92,18 @@ public class GameManager : Singleton<GameManager>
 
         //初始化商店
         RefreshShop(0);
+
+        //关闭显示强制摆放位置
+        m_BoardSystem.SetTutorialPoss(false);
+
         //初始化教程
         if (Game.Instance.Tutorial)
         {
             m_FuncUI.PrepareForGuide();
             m_MainUI.PrepareForGuide();
             m_BluePrintShopUI.PrepareForGuide();
-            m_GuideUI.Show();
-            TriggerGuide(0);
+            //m_GuideUI.Show();
+            m_GuideGirlUI.Show();
         }
         else
         {
@@ -126,7 +121,8 @@ public class GameManager : Singleton<GameManager>
 
         m_MainUI.Release();
         m_FuncUI.Release();
-        m_GuideUI.Release();
+        //m_GuideUI.Release();
+        m_GuideGirlUI.Release();
         m_BluePrintShopUI.Release();
         m_ShapeSelectUI.Release();
         m_GameEndUI.Release();
@@ -216,12 +212,7 @@ public class GameManager : Singleton<GameManager>
         m_MainUI.PrepareNextWave(m_WaveSystem.RunningSequence);
         m_FuncUI.PrepareNextWave();
 
-        TriggerGuide(7);
-        TriggerGuide(9);
-        TriggerGuide(13);
-        TriggerGuide(14);
-
-
+        GameEvents.Instance.TutorialTrigger(TutorialType.NextWaveStart);
     }
 
     public void GameEnd(bool win)
@@ -265,7 +256,7 @@ public class GameManager : Singleton<GameManager>
     #region 形状控制
     public void DrawShapes()
     {
-        TriggerGuide(4);
+        GameEvents.Instance.TutorialTrigger(TutorialType.DrawBtnClick);
         TransitionToState(StateName.PickingState);
         m_FuncUI.Hide();
         m_ShapeSelectUI.ShowThreeShapes(m_FuncUI.ModuleLevel);
@@ -287,10 +278,7 @@ public class GameManager : Singleton<GameManager>
         GameRes.ForcePlace = null;
         GameRes.PreSetShape = null;
         //新手引导
-        TriggerGuide(5);
-        TriggerGuide(8);
-        TriggerGuide(10);
-        TriggerGuide(12);
+        GameEvents.Instance.TutorialTrigger(TutorialType.ConfirmShape);
     }
 
     public void CompositeShape(BluePrintGrid grid)//合成了一个防御塔
@@ -353,11 +341,9 @@ public class GameManager : Singleton<GameManager>
         m_FuncUI.DrawRemain += amount;
     }
 
-    public Enemy SpawnEnemy(EnemyType type, int pathIndex, float intensify, float pathoffset = 0)
+    public Enemy SpawnEnemy(EnemyType type, int pathIndex, float intensify)
     {
-        if (pathoffset == 0)
-            pathoffset = UnityEngine.Random.Range(-0.3f, 0.3f);
-        return m_WaveSystem.SpawnEnemy(m_BoardSystem, StaticData.Instance.EnemyFactory.Get(type), pathIndex, intensify, pathoffset);
+        return m_WaveSystem.SpawnEnemy(StaticData.Instance.EnemyFactory.Get(type), pathIndex, intensify);
     }
 
     public void RefreshShop(int cost)
@@ -382,12 +368,10 @@ public class GameManager : Singleton<GameManager>
         m_GuideVideo.ShowPage(index);
     }
 
-    public int TriggerGuide(int index)
-    {
-        if (Game.Instance.Tutorial)
-            return m_GuideUI.GuideTrigger(index);
-        return -1;
-    }
+    //public void TriggerGuide(TutorialType triggerType)
+    //{
+    //    m_GuideGirlUI.GuideTrigger(triggerType);
+    //}
 
     public void BuyOneGround()
     {
@@ -445,10 +429,11 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region TIPS
-    public void ShowTurretTips(StrategyBase strategy)
+    public void ShowTurretTips(StrategyBase strategy, Vector2 pos)
     {
         HideTips();
-        m_TurretTips.ReadTurret(strategy);
+
+        m_TurretTips.ReadTurret(strategy, pos);
         m_TurretTips.Show();
     }
 

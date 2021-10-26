@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoldKeeper : Enemy
+public class GoldKeeper : Boss
 {
+    public override string ExplosionEffect => "BossExplosionYellow";
+
+
     private int LifeCount;
 
-    public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify, List<BasicTile> path)
+    public override void Initialize(int pathIndex, EnemyAttribute attribute, float pathOffset,float intensify)
     {
-        base.Initialize(attribute, pathOffset, healthBar, intensify, path);
+        base.Initialize(pathIndex, attribute, pathOffset, intensify);
         LifeCount = 1;
     }
     protected override void OnEnemyUpdate()

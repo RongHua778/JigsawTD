@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class Blinker : Enemy
+public class Blinker : Boss
 {
+    public override string ExplosionEffect => "BossExplosionYePurple";
+
+
     int blink;
     [SerializeField] private ReusableObject holePrefab = default;
     bool transfering = false;
-    public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify, List<BasicTile> path)
+    public override void Initialize(int pathIndex, EnemyAttribute attribute, float pathOffset, float intensify)
     {
-        base.Initialize(attribute, pathOffset, healthBar, intensify,path);
-        //EnemySkills = new List<Skill>();
-        //EnemySkills.Add(GameManager.Instance.SkillFactory.GetSkill(EnemySkill.Blink, this));
+        base.Initialize(pathIndex, attribute, pathOffset,intensify);
         transfering = false;
         blink = 3;
     }
@@ -38,7 +39,7 @@ public class Blinker : Enemy
 
     void Blink()
     {
-        AnimatorStateInfo stateinfo = Anim.GetCurrentAnimatorStateInfo(0);
+        AnimatorStateInfo stateinfo = anim.GetCurrentAnimatorStateInfo(0);
         if (stateinfo.normalizedTime >= 0.98f/*&&stateinfo.normalizedTime<=1f*/)
         {
             PointIndex += 4;
@@ -66,7 +67,7 @@ public class Blinker : Enemy
             }
             transfering = false;
             blink -= 1;
-            Anim.Play("Default");
+            anim.Play("Default");
         }
     }
 
@@ -79,7 +80,7 @@ public class Blinker : Enemy
             targetPos = PathPoints[Mathf.Min(PointIndex + 4,PathPoints.Count - 1)].PathPos;
             SpawnHoleOnPos(transform.position);
             SpawnHoleOnPos(targetPos);
-            Anim.Play("Exit");
+            anim.Play("Exit");
             StunTime += 0.5f;
             transfering = true;
         }

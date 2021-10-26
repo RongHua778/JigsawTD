@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class IceBall : Enemy
+public class IceBall : Boss
 {
+    public override string ExplosionEffect => "BossExplosionBlue";
+
     public float freezeRange;
     public float freezeTime;
     private Tween tween;
     [SerializeField] Transform rotateObj = default;
-    public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify, List<BasicTile> shortpath)
+    public override void Initialize(int pathIndex, EnemyAttribute attribute, float pathOffset, float intensify)
     {
-        base.Initialize(attribute, pathOffset, healthBar, intensify, shortpath);
+        base.Initialize(pathIndex, attribute, pathOffset, intensify);
         Vector3 rot = new Vector3(0, 0, 360);
         tween = rotateObj.DORotate(rot, 4f).SetLoops(-1, LoopType.Incremental).SetEase(Ease.Linear).SetRelative();
     }

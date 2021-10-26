@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class Armor : MonoBehaviour,IDamageable
 {
+    public string ExplosionEffect => "EnemyExplosionYellow";
+    public string ExplosionSound => "Sound_EnemyExplosion";
 
-    public ParticalControl explosionPrefab = default;
-    public AudioClip explosionClip;
+    public HealthBar HealthBar { get; set; }
+
     public DamageStrategy DamageStrategy { get; set; }
-    public bool IsDie { get; set; }
 
 
     private void Awake()
     {
-        explosionClip = Resources.Load<AudioClip>("Music/Effects/Sound_EnemyExplosion");
-        DamageStrategy = new ArmourStrategy(this.transform, this);
+        DamageStrategy = new ArmourStrategy(this);
+        HealthBar = transform.Find("HealthBarSmall").GetComponent<HealthBar>();
     }
 
 

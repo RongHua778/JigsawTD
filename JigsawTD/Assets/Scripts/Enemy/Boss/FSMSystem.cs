@@ -10,7 +10,7 @@ public class FSMSystem
 
     public void Update(AirAttacker agent)
     {
-        if (!agent.IsDie)
+        if (!agent.DamageStrategy.IsDie)
         {
             CurrentState.Act(agent);
             CurrentState.Reason(agent);
@@ -19,7 +19,7 @@ public class FSMSystem
 
     public void Update(AirProtector agent)
     {
-        if (!agent.IsDie)
+        if (!agent.DamageStrategy.IsDie)
         {
             CurrentState.Act(agent);
             CurrentState.Reason(agent);

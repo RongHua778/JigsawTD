@@ -631,4 +631,9 @@ public class StaticData : Singleton<StaticData>
         texttoreturn += quality;
         return texttoreturn;
     }
+
+    public static string GetElementName(ElementType element)
+    {
+        return ElementDIC[element].GetElementName;
+    }
 }

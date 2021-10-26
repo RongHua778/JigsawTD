@@ -20,7 +20,7 @@ MonoBehaviour:
   Speed: 0.5
   CoolDown: 3.5
   Prefab: {fileID: 8538428539047822095, guid: f7b1c5b6e3f289240b40cfb7e17d87e4, type: 3}
-  ReachDamage: 1
+  ReachDamage: 2
   extraHealth: 0
   EnemyIcon: {fileID: 3188815087764474750, guid: f9835346b30cae840a9eff85ed192e6f, type: 3}
   EnemyEmptyIcon: {fileID: 0}

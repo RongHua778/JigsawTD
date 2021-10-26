@@ -116,7 +116,7 @@ public class BluePrintShopUI : IUserInterface
         }
     }
 
-    public void OnLockGrid(BluePrintGrid bluePrintGrid, bool isLock)
+    public void OnLockGrid(bool isLock)
     {
         if (isLock)
         {
@@ -144,7 +144,7 @@ public class BluePrintShopUI : IUserInterface
 
     public void ShopBtnClick()//播放商店界面打开动画
     {
-        GameManager.Instance.TriggerGuide(11);
+        GameEvents.Instance.TutorialTrigger(TutorialType.ShopBtnClick);
         Showing = !Showing;
         if (Showing)
             Show();

@@ -5,14 +5,14 @@ using UnityEngine;
 public class PathFollower : ReusableObject,IGameBehavior
 {
     private List<PathPoint> pathPoints = new List<PathPoint>();
-    public int PointIndex = 0;
+    protected int PointIndex = 0;
     Direction direction;
     public Direction Direction { get => direction; set => direction = value; }
     DirectionChange directionChange;
     public virtual DirectionChange DirectionChange { get => directionChange; set => directionChange = value; }
 
     [SerializeField] public Transform model = default;
-    public PathPoint CurrentPoint;
+    protected PathPoint CurrentPoint;
     protected Vector3 positionFrom, positionTo;
     private float progress;
     protected float directionAngleFrom, directionAngleTo;

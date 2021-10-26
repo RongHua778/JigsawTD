@@ -18,9 +18,8 @@ MonoBehaviour:
   CountIncrease: 0
   Health: 25
   Speed: 0.5
-  Shell: 0
   CoolDown: 3
-  Prefab: {fileID: 1339772327, guid: 01171ff9a6ad7854bbfd9f7ab8a16b75, type: 3}
+  Prefab: {fileID: 1089310082073990611, guid: 01171ff9a6ad7854bbfd9f7ab8a16b75, type: 3}
   ReachDamage: 5
   extraHealth: 0
   EnemyIcon: {fileID: 2497086793369854952, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}

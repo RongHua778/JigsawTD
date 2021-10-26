@@ -53,7 +53,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         rotTrans = transform.Find("RotPoint");
         shootPoint = rotTrans.Find("ShootPoint");
         CannonSprite = rotTrans.Find("Cannon").GetComponent<SpriteRenderer>();
-        
+
         turretAnim = this.GetComponent<Animator>();
         audioSource = this.GetComponent<AudioSource>();
         SpriteRenderer[] ss = GetComponentsInChildren<SpriteRenderer>();
@@ -169,7 +169,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         }
         for (int i = 0; i < Target.Count; i++)
         {
-            if (Target[i].Enemy.IsDie)
+            if (!Target[i].gameObject.activeSelf)
             {
                 targetList.Remove(Target[i]);
                 Target.Remove(Target[i]);
@@ -287,7 +287,8 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         ShowRange(value);
         if (value)
         {
-            GameManager.Instance.ShowTurretTips(this.Strategy);
+            GameManager.Instance.ShowTurretTips(this.Strategy, new Vector2(300, Screen.height / 2));
+            GameEvents.Instance.TutorialTrigger(TutorialType.TurretSelect);
         }
 
     }

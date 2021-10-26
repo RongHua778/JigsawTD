@@ -11,7 +11,7 @@ public class ExplosionTrap : TrapContent
         base.OnContentPass(enemy);
         Vector2 pos = content == null ? transform.position : content.transform.position;
         float realDamage;
-        float damage = TrapIntensify * enemy.EnemyTrapIntensify * 0.05f * enemy.DamageStrategy.CurrentHealth;
+        float damage = TrapIntensify * enemy.DamageStrategy.TrapIntensify * 0.05f * enemy.DamageStrategy.CurrentHealth;
         Collider2D[] hits = Physics2D.OverlapCircleAll(pos, sputteringRange, StaticData.EnemyLayerMask);
         for (int i = 0; i < hits.Length; i++)
         {
@@ -27,6 +27,7 @@ public class ExplosionTrap : TrapContent
         effect.transform.localScale = Mathf.Max(0.3f, sputteringRange * 2) * Vector3.one;
         effect.PlayEffect();
         Sound.Instance.PlayEffect("Sound_ExplosionTrap");
+        enemy.DamageStrategy.TrapIntensify = 1;
     }
 
 

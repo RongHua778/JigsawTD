@@ -95,6 +95,9 @@ MODULELEVELINFO3=Shop blueprint +1 when module level reaches 3,5 and 7
 ENERGYINFO=1. Gain 1 energy if you haven't drawed last wave\n2. Gain additional energy if you keep not drawing \n3. Gain 1 extra draw while energy reach 10.
 DEGRADE=Degrade
 
+//enemytips
+ENEMYDAMAGE=Reach Damage
+
 //shop
 SHOPBLUEPRINT=Lock:
 OWNBLUEPRINT=Owned
@@ -137,8 +140,9 @@ COMPOSITE=Refactor
 UPGRADE=Upgrade
 SWITCHTRAP=Relocate
 ELEMENTSLOT=Element Skill
-RARE=Rare
+TURRETLEVEL=Turret Level
 EMPTYSKILL=Empty slot
+RARE=Blueprint level: Increasing the module level makes it possible to have higher levels of blueprints in the store
 
 //Groundtips
 BUYGROUND=Build a basic tile?
@@ -327,7 +331,7 @@ EXPLOSIONTRAP=Explosion Mark
 SPAWNPOINTINFO=Enemy borns here, make sure there is a route to the end point.
 DESTINATIONINFO=Enemy's destination, make sure there is a route to the start point.
 
-STUNTRAPINFO=Enemies passing by are stunned for 0.5 * N seconds, N = number of traps the enemy passed before.
+STUNTRAPINFO=Enemies passing by are stunned for 0.5s, stun time increased by 0.5s for each mark enemy passed.
 ICETRAPINFO=Enemies passing by increase slow by 0.5 * N, N = number of traps the enemy passed before.
 ARROWTRAPINFO=Enemies passing through this tile with the same direction of the arrow will be slowed down for 5s
 BLINKTRAPINFO=Enemies passing by will be teleporting to 2 tiles ahead.(Each enemy once)

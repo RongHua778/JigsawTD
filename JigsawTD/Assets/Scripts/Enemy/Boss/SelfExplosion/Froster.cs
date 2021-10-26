@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Froster : Enemy
 {
+    public override string ExplosionEffect => "EnemyExplosionBlue";
+
     public float freezeRange;
     public float freezeTime;
 

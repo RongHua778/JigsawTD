@@ -30,14 +30,14 @@ public class Save
 
         SaveSelectedRare1 = new List<SelectInfo>()
         {
-            new SelectInfo("RAPIDER", false, false),
+            new SelectInfo("RAPIDER", false, true),
             new SelectInfo("CONSTRUCTOR", false, true)
         };
         SaveRareDIC.Add(1, SaveSelectedRare1);
 
         SaveSelectedRare2 = new List<SelectInfo>()
         {
-            new SelectInfo("COOPORATIVE", false, false),
+            new SelectInfo("COOPORATIVE", false, true),
             new SelectInfo("SCATTER", false, true)
         };
         SaveRareDIC.Add(2, SaveSelectedRare2);
@@ -45,28 +45,28 @@ public class Save
         SaveSelectedRare3 = new List<SelectInfo>()
         {
             new SelectInfo("ROTARY", false, true),
-            new SelectInfo("SUPER", false, false)
+            new SelectInfo("SUPER", false, true)
         };
         SaveRareDIC.Add(3, SaveSelectedRare3);
 
         SaveSelectedRare4 = new List<SelectInfo>()
         {
             new SelectInfo("MORTAR", false, true),
-            new SelectInfo("SNOW", true, false)
+            new SelectInfo("SNOW", false, true)
         };
         SaveRareDIC.Add(4, SaveSelectedRare4);
 
         SaveSelectedRare5 = new List<SelectInfo>()
         {
             new SelectInfo("SNIPER", false, true),
-            new SelectInfo("BOOMERRANG",true, false)
+            new SelectInfo("BOOMERRANG",false, true)
         };
         SaveRareDIC.Add(5, SaveSelectedRare5);
 
         SaveSelectedRare6 = new List<SelectInfo>()
         {
             new SelectInfo("ULTRA", false, true),
-            new SelectInfo("CORE", true, false)
+            new SelectInfo("CORE", false, true)
         };
         SaveRareDIC.Add(6, SaveSelectedRare6);
     }
@@ -77,7 +77,7 @@ public class Save
         SelectInfo select1 = new SelectInfo("WOOD", false, true);
         SelectInfo select2 = new SelectInfo("WATER", false, true);
         SelectInfo select3 = new SelectInfo("FIRE", false, true);
-        SelectInfo select4 = new SelectInfo("DUST", true, false);
+        SelectInfo select4 = new SelectInfo("DUST", true, true);
         SaveSelectedElement = new List<SelectInfo> { select0, select1, select2, select3, select4 };
     }
 

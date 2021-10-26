@@ -2,24 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Armorer : Enemy
+public class Armorer : Boss
 {
+    public override string ExplosionEffect => "BossExplosionYellow";
+
     [SerializeField] float armorIntensify; 
-    float armor;
-    public float Armor { get => armor; set => armor = value; }
-    public float ArmorCoolDown { get => armorCoolDown; set => armorCoolDown = value; }
+    public float Armor { get; set; }
 
-    [SerializeField] float armorCoolDown;
-
-    public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify, List<BasicTile> path)
+    public override void Initialize(int pathIndex,EnemyAttribute attribute, float pathOffset, float intensify)
     {
-        base.Initialize(attribute, pathOffset, healthBar, intensify,path);
-        armor = intensify * armorIntensify;
+        base.Initialize(pathIndex, attribute, pathOffset, intensify);
+        Armor = intensify * armorIntensify;
         Armor[] armors = GetComponentsInChildren<Armor>();
         for (int i = 0; i < armors.Length; i++)
         {
-            armors[i].DamageStrategy. MaxHealth = armor;
-            armors[i].DamageStrategy.CurrentHealth = armor;
+            armors[i].DamageStrategy.ResetStrategy(Armor);
             armors[i].ReArmor();
         }
     }

@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Hamster : Enemy
 {
+    public override string ExplosionEffect => "BossExplosionRed";
+
     public static bool isFirstHamster = false;
     public static int HamsterCount;
     public static float HamsterDamageIntensify;
 
-    public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify, List<BasicTile> shortpath)
+    public override void Initialize(int pathIndex, EnemyAttribute attribute, float pathOffset, float intensify)
     {
-        base.Initialize(attribute, pathOffset, healthBar, intensify, shortpath);
+        base.Initialize(pathIndex, attribute, pathOffset,intensify);
         if (!isFirstHamster)
         {
             HamsterCount = attribute.InitCount;
@@ -19,7 +21,7 @@ public class Hamster : Enemy
     }
     protected override void SetStrategy()
     {
-        DamageStrategy = new HamsterStrategy(model, this);
+        DamageStrategy = new HamsterStrategy(this);
     }
 
     protected override void OnDie()

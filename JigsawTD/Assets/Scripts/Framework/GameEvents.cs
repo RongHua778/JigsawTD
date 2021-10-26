@@ -3,6 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+public enum TutorialType
+{
+    None,
+    DrawBtnClick,
+    NextWaveBtnClick,
+    TurretSelect,
+    BlueprintSelect,
+    MouseMove,
+    WheelMove,
+    NextWaveStart,
+    ConfirmShape,
+    ShopBtnClick,
+    ElementBenefitEnter
+}
+
 public class GameEvents : Singleton<GameEvents>
 {
     // public event Action<int> onEventName;
@@ -13,6 +28,11 @@ public class GameEvents : Singleton<GameEvents>
     // }
 
 
+    public event Action<TutorialType> onTutorialTrigger;
+    public void TutorialTrigger(TutorialType tutorialType)
+    {
+        onTutorialTrigger?.Invoke(tutorialType);
+    }
 
 
     public event Action onSeekPath;

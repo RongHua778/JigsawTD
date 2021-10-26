@@ -4,34 +4,67 @@ using UnityEngine;
 
 public interface IDamageable
 {
-    public bool IsDie { get; set; }
+    string ExplosionSound { get; }
+    string ExplosionEffect { get; }
     DamageStrategy DamageStrategy { get; set; }
-
+    HealthBar HealthBar { get; set; }
 }
 
 public abstract class DamageStrategy
 {
+    public IDamageable damageTarget;
+    public ReusableObject explosionEffect;
     public Transform ModelTrans;
     protected float currentHealth;
     protected float maxHealth;
-    private float slowIntensify;
+    private bool isDie;
+    private int trapIntensify = 1;
+    public virtual int TrapIntensify
+    {
+        get => trapIntensify;
+        set => trapIntensify = value;
+    }
+    public virtual bool IsDie
+    {
+        get => isDie;
+        set
+        {
+            isDie = value;
+            if (value)
+            {
+                ReusableObject explosion = ObjectPool.Instance.Spawn(explosionEffect);
+                explosion.transform.position = ModelTrans.position;
 
-
+                Sound.Instance.PlayEffect(damageTarget.ExplosionSound);
+            }
+        }
+    }
     public abstract bool IsEnemy { get; }
     public virtual float DamageIntensify { get => BuffDamageIntensify; }
-    public virtual float CurrentHealth { get => currentHealth; set => currentHealth = value; }
+    public virtual float CurrentHealth
+    {
+        get => currentHealth;
+        set
+        {
+            currentHealth = Mathf.Clamp(value, 0, MaxHealth);
+            if (currentHealth <= 0 && maxHealth > 0)
+            {
+                IsDie = true;
+            }
+            damageTarget.HealthBar.FillAmount = currentHealth / MaxHealth;
+        }
+    }
     public virtual float MaxHealth { get => maxHealth; set { maxHealth = value; CurrentHealth = maxHealth; } }
-    public virtual float SlowIntensify { get => BuffSlowIntensify; }
 
     //buffÊôÐÔ
     private float buffDamageIntensify;
     public virtual float BuffDamageIntensify { get => buffDamageIntensify; set => buffDamageIntensify = value; }
-    private float buffSlowIntensify;
-    public float BuffSlowIntensify { get => buffSlowIntensify; set => buffSlowIntensify = value; }
 
-    public DamageStrategy(Transform tr)
+
+    public DamageStrategy(IDamageable damageTarget)
     {
-        this.ModelTrans = tr;
+        this.damageTarget = damageTarget;
+        explosionEffect = Resources.Load<ReusableObject>("Prefabs/Effects/Enemy/" + damageTarget.ExplosionEffect);
     }
 
     public virtual void ApplyDamage(float amount, out float realDamage, bool isCritical = false)
@@ -51,37 +84,35 @@ public abstract class DamageStrategy
 
     }
 
-    public virtual void ResetStrategy()
+    public virtual void ResetStrategy(float maxHealth)
     {
+        IsDie = false;
+        this.MaxHealth = maxHealth;
         BuffDamageIntensify = 0;
     }
 }
 
-public class EnemyDamageStrategy : DamageStrategy
+public class BasicEnemyStrategy : DamageStrategy
 {
     public override bool IsEnemy => true;
     protected Enemy enemy;
 
-
-    public EnemyDamageStrategy(Transform tr, Enemy enemy) : base(tr)
+    public  override int TrapIntensify
     {
-        this.ModelTrans = tr;
-        this.enemy = enemy;
-    }
-
-    public override float CurrentHealth
-    {
-        get => currentHealth;
+        get => base.TrapIntensify;
         set
         {
-            currentHealth = Mathf.Clamp(value, 0, MaxHealth);
-            if (currentHealth <= 0 && maxHealth > 0)
-            {
-                enemy.IsDie = true;
-            }
-            enemy.HealthBar.FillAmount = currentHealth / MaxHealth;
+            base.TrapIntensify = value;
+            enemy.HealthBar.ShowIcon(3, value > 1);
         }
     }
+
+    public BasicEnemyStrategy(IDamageable damageTarget) : base(damageTarget)
+    {
+        this.enemy = damageTarget as Enemy;
+        this.ModelTrans = enemy.model;
+    }
+
 
     public override float BuffDamageIntensify
     {
@@ -93,79 +124,68 @@ public class EnemyDamageStrategy : DamageStrategy
         }
     }
 
-
-
-
     public override void ApplyBuff(EnemyBuffName buffName, float keyvalue, float duration)
     {
         BuffInfo info = new BuffInfo(EnemyBuffName.SlowDown, keyvalue, duration);
         enemy.Buffable.AddBuff(info);
     }
 
+    public override void ResetStrategy(float maxHealth)
+    {
+        base.ResetStrategy(maxHealth);
+        TrapIntensify = 1;
+    }
+
 }
+
+
 
 public class ArmourStrategy : DamageStrategy
 {
     public override bool IsEnemy => false;
     Armor armor;
-    public ArmourStrategy(Transform tr, Armor armor) : base(tr)
+    public ArmourStrategy(IDamageable damageTarget) : base(damageTarget)
     {
-        this.ModelTrans = tr;
-        this.armor = armor;
+        this.damageTarget = damageTarget;
+        this.armor = damageTarget as Armor;
+        this.ModelTrans = armor.transform;
+
     }
-    public override float CurrentHealth
+    public override bool IsDie
     {
-        get => currentHealth;
-        set
+        get => base.IsDie; set
         {
-            currentHealth = value;
-            if (currentHealth <= 0)
-            {
-                ReusableObject explosion = ObjectPool.Instance.Spawn(armor.explosionPrefab);
-                Sound.Instance.PlayEffect(armor.explosionClip);
-                explosion.transform.position = ModelTrans.position;
+            base.IsDie = value;
+            if (!value)
                 armor.DisArmor();
-            }
         }
     }
+
 }
 
 public class AircraftStrategy : DamageStrategy
 {
     public override bool IsEnemy => false;
     Aircraft aircraft;
-    public AircraftStrategy(Transform tr, Aircraft aircraft) : base(tr)
+    public AircraftStrategy(IDamageable damageTarget) : base(damageTarget)
     {
-        this.ModelTrans = tr;
-        this.aircraft = aircraft;
+        this.damageTarget = damageTarget;
+        this.aircraft = damageTarget as Aircraft;
+        this.ModelTrans = aircraft.transform;
+
     }
-    public override float CurrentHealth
-    {
-        get => currentHealth;
-        set
-        {
-            currentHealth = value;
-            if (currentHealth <= 0)
-            {
-                ReusableObject explosion = ObjectPool.Instance.Spawn(aircraft.explosionPrefab);
-                //   Sound.Instance.PlayEffect(aircraft.explosionClip);
-                explosion.transform.position = ModelTrans.position;
-                aircraft.IsDie = true;
-            }
-        }
-    }
+
 }
 
-public class RestorerStrategy : EnemyDamageStrategy
+public class RestorerStrategy : BasicEnemyStrategy
 {
     public override bool IsEnemy => true;
     public float damagedCounter;
 
-    public RestorerStrategy(Transform tr, Enemy enemy) : base(tr, enemy)
+    public RestorerStrategy(IDamageable damageTarget) : base(damageTarget)
     {
-        this.ModelTrans = tr;
-        this.enemy = enemy;
     }
+
     public override void ApplyDamage(float amount, out float realDamage, bool isCritical = false)
     {
         base.ApplyDamage(amount, out realDamage, isCritical);
@@ -173,7 +193,7 @@ public class RestorerStrategy : EnemyDamageStrategy
     }
 }
 
-public class HamsterStrategy : EnemyDamageStrategy
+public class HamsterStrategy : BasicEnemyStrategy
 {
     public override bool IsEnemy => true;
 
@@ -181,10 +201,8 @@ public class HamsterStrategy : EnemyDamageStrategy
     public float HamsterDamageIntensify => -Hamster.HamsterCount * 0.05f;
 
 
-    public HamsterStrategy(Transform tr, Enemy enemy) : base(tr, enemy)
+    public HamsterStrategy(IDamageable damageTarget) : base(damageTarget)
     {
-        this.ModelTrans = tr;
-        this.enemy = enemy;
     }
 
 }

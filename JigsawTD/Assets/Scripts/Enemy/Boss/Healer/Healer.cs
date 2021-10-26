@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Healer : Enemy
 {
-
+    public override string ExplosionEffect => "EnemyExplosionBlue";
 }

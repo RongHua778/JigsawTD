@@ -9,7 +9,11 @@ public enum Destination
 
 public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
 {
-    [SerializeField] public ParticalControl explosionPrefab = default;
+    public string ExplosionSound => "Sound_EnemyExplosion";
+    public string ExplosionEffect => "EnemyExplosionBlue"; 
+
+
+    public HealthBar HealthBar { get; set; }
     public DamageStrategy DamageStrategy { get; set; }
 
     [HideInInspector] public AircraftCarrier boss;
@@ -29,33 +33,26 @@ public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
 
     protected Vector3 movingDirection;
 
-    protected AudioClip explosionClip;
-
-    private bool isDie;
-    public bool IsDie { get => isDie; set => isDie = value; }
-
     protected FSMSystem fsm;
 
 
     public virtual void Initiate(AircraftCarrier boss, float maxHealth)
     {
-        IsDie = false;
-        DamageStrategy.MaxHealth = maxHealth;
+        DamageStrategy.ResetStrategy(maxHealth);
         boss.AddAircraft(this);
     }
 
     void Awake()
     {
-        explosionClip = Resources.Load<AudioClip>("Music/Effects/Sound_EnemyExplosion");
-        DamageStrategy = new AircraftStrategy(this.transform, this);
+        DamageStrategy = new AircraftStrategy(this);
+        HealthBar = transform.Find("HealthBarSmall").GetComponent<HealthBar>();
     }
 
 
     public virtual bool GameUpdate()
     {
-        if (IsDie)
+        if (DamageStrategy.IsDie)
         {
-            Sound.Instance.PlayEffect(explosionClip);
             ObjectPool.Instance.UnSpawn(this);
             return false;
         }

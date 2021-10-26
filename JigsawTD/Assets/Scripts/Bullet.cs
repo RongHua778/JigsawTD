@@ -116,7 +116,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
 
     public virtual bool GameUpdate()
     {
-        if (Target != null && (Target.Enemy.IsDie || !Target.gameObject.activeSelf))
+        if (Target != null && !Target.gameObject.activeSelf)
         {
             TargetPos = Target.transform.position;
             Target = null;

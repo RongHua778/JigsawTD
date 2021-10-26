@@ -4,23 +4,18 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class TileSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class TileSelect : MonoBehaviour
 {
 
     [SerializeField] RenderTexture renderTexture;
     public TileShape Shape { get; set; }
     [SerializeField] LevelDownSelect m_LevelDownSelect = default;
+    [SerializeField] ElementSelectPreview m_ElementPreview = default;
 
-    [SerializeField] Color NormalColor = default;
-    [SerializeField] Color HandleColor = default;
-
-    [SerializeField] Image FrameSprite = default;
 
 
     public void InitializeDisplay(int displayID, TileShape shape)
     {
-        FrameSprite.color = NormalColor;
-
         Shape = shape;
         shape.SetUIDisplay(displayID, renderTexture);
         StrategyBase strategy = Shape.m_ElementTurret.Strategy;
@@ -33,6 +28,7 @@ public class TileSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         {
             m_LevelDownSelect.gameObject.SetActive(false);
         }
+        m_ElementPreview.SetStrategy(strategy);
     }
 
     public void OnShapeClick(bool levelDown = false)
@@ -47,6 +43,7 @@ public class TileSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         Shape = null;
         GameManager.Instance.PreviewComposition(false);
         GameManager.Instance.SelectShape();
+        GameManager.Instance.HideTips();
 
 
     }
@@ -60,14 +57,5 @@ public class TileSelect : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         Shape = null;
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        FrameSprite.color = HandleColor;
-    }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        FrameSprite.color = NormalColor;
-
-    }
 }

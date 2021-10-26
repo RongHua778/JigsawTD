@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Borner : Enemy
+public class Borner : Boss
 {
+    public override string ExplosionEffect => "BossExplosionYPurple";
+
+
     [SerializeField] float[] bornCD;
     [SerializeField] int[] enemyOneBorn;
     int level;
     int form;
     float castleCounter;
     float bornCounter;
-    public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify, List<BasicTile> path)
+    public override void Initialize(int pathIndex, EnemyAttribute attribute, float pathOffset, float intensify)
     {
-        base.Initialize(attribute, pathOffset, healthBar, intensify,path);
+        base.Initialize(pathIndex, attribute, pathOffset, intensify);
         level = 0;
         form = 0;
     }
@@ -47,7 +50,7 @@ public class Borner : Enemy
             form = 1;
             StunTime += 7f;
             castleCounter = 7f;
-            Anim.SetBool("Transform", true);
+            anim.SetBool("Transform", true);
             Sound.Instance.PlayEffect("Sound_BornerTransform");
         }
         if (DamageStrategy.CurrentHealth / DamageStrategy.MaxHealth <= 0.3f && form == 1)
@@ -57,7 +60,7 @@ public class Borner : Enemy
             form = 2;
             StunTime += 7f;
             castleCounter = 7f;
-            Anim.SetBool("Transform", true);
+            anim.SetBool("Transform", true);
             Sound.Instance.PlayEffect("Sound_BornerTransform");
 
         }
@@ -68,7 +71,7 @@ public class Borner : Enemy
             {
                 level = 0;
                 DamageStrategy.BuffDamageIntensify += 0.7f;
-                Anim.SetBool("Transform", false);
+                anim.SetBool("Transform", false);
                 Sound.Instance.PlayEffect("Sound_BornerTransform");
             }
         }

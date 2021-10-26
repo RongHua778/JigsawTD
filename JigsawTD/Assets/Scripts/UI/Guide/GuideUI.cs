@@ -3,15 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[System.Serializable]
-public class Dialogue
-{
-    public string GuideNote;
-    public int TriggerID;//触发ID
-    public string Name;//说话人名字
-    public string[] Words;//对话内容
-    public bool DontNeedClickEnd;//是否自动结束并解锁操作
-}
 public class GuideUI : IUserInterface
 {
     //存放所有需要控制的UI
@@ -58,10 +49,9 @@ public class GuideUI : IUserInterface
     }
 
 
-    private void StartDialogue(int index)
+    private void StartDialogue()
     {
         backBtn.SetActive(true);
-        currentDialogue = dialogues[index];
         wordQueue.Clear();
         foreach (var key in currentDialogue.Words)
         {
@@ -76,11 +66,14 @@ public class GuideUI : IUserInterface
     private void EndDialogue()
     {
         backBtn.SetActive(false);
-        CurrentGuideIndex++;
         GuideEndEvent(currentGuideIndex);
-
-
+        if (CurrentGuideIndex < dialogues.Length)//如果不是最后一个教程，就设置下一个教程
+        {
+            CurrentGuideIndex++;
+            currentDialogue = dialogues[CurrentGuideIndex];
+        }
     }
+
     private void DisplayNextSentence()
     {
         if (wordQueue.Count == 0)
@@ -93,6 +86,7 @@ public class GuideUI : IUserInterface
         StopAllCoroutines();
         StartCoroutine(TypeSentence(word));
     }
+
     private IEnumerator TypeSentence(string word)
     {
         typingSentence = true;
@@ -111,20 +105,19 @@ public class GuideUI : IUserInterface
     }
 
 
-    public int GuideTrigger(int index)
+    public void GuideTrigger(TutorialType triggetType)
     {
-        if (index == CurrentGuideIndex)
+
+        if (currentDialogue.TriggerType == triggetType)
         {
-            StartCoroutine(GuideCor(index));
-            return index;
+            StartCoroutine(GuideCor());
         }
-        return -1;
     }
 
-    IEnumerator GuideCor(int index)
+    IEnumerator GuideCor()
     {
         yield return new WaitForSeconds(0.1f);
-        StartDialogue(index);
+        StartDialogue();
     }
 
     public void NextBtnClick()
@@ -235,7 +228,7 @@ public class GuideUI : IUserInterface
                 m_MainUI.MoneyObj.SetActive(true);
                 m_MainUI.PlayAnim("ShowMoney", true);
                 m_FuncUI.Hide();
-                GameManager.Instance.TriggerGuide(3);
+                GuideTrigger(TutorialType.None);
                 break;
             case 4://显示抽取按钮
                 m_FuncUI.DrawBtnObj.SetActive(true);
@@ -251,7 +244,9 @@ public class GuideUI : IUserInterface
 
                 break;
             case 6:
-                GameManager.Instance.TriggerGuide(6);
+                //GameManager.Instance.TriggerGuide(6);
+                GuideTrigger(TutorialType.None);
+
                 break;
 
             case 7://显示出怪按钮

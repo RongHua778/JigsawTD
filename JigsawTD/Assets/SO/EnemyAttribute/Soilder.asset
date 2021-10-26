@@ -15,10 +15,9 @@ MonoBehaviour:
   EnemyName: SOILDER
   EnemyType: 0
   InitCount: 3
-  CountIncrease: 8
+  CountIncrease: 6
   Health: 10
   Speed: 1
-  Shell: 0
   CoolDown: 1
   Prefab: {fileID: 496477690780185357, guid: 0a0eaa2abe1fb674fa53f8a4364f22be, type: 3}
   ReachDamage: 1

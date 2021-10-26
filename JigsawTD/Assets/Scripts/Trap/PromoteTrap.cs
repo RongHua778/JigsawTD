@@ -19,7 +19,7 @@ public class PromoteTrap : TrapContent
     public override void OnContentPass(Enemy enemy, GameTileContent content = null)
     {
         base.OnContentPass(enemy, content);
-        enemy.EnemyTrapIntensify += 1;
+        enemy.DamageStrategy.TrapIntensify += 1;
     }
 
 }

@@ -46,7 +46,7 @@ public class TurretTips : TileTips
     //[SerializeField] GameObject ElementSkill2Area = default;
     //[SerializeField] Text ElementSkill2Txt = default;
 
-    [SerializeField] RareInfoSetter QualitySetter = default;
+    [SerializeField] TurretInfoSetter QualitySetter = default;
     //infoBtn
     [SerializeField] InfoBtn CriticalInfo = default;
     [SerializeField] InfoBtn SplashInfo = default;
@@ -74,10 +74,10 @@ public class TurretTips : TileTips
         showingTurret = false;
     }
 
-    public void ReadTurret(StrategyBase Strategy)//通过场上防御塔查看
+    public void ReadTurret(StrategyBase Strategy,Vector2 pos)//通过场上防御塔查看
     {
         Vector2 newPos;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(myCanvas.transform as RectTransform, new Vector2(300, Screen.height / 2), myCanvas.worldCamera, out newPos);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(myCanvas.transform as RectTransform, pos, myCanvas.worldCamera, out newPos);//new Vector2(300, Screen.height / 2)
         transform.position = myCanvas.transform.TransformPoint(newPos);
 
         m_Strategy = Strategy;
@@ -113,7 +113,7 @@ public class TurretTips : TileTips
     public void ReadBluePrint(BluePrintGrid grid)
     {
         Vector2 newPos;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(myCanvas.transform as RectTransform, new Vector2(800, Screen.height / 2), myCanvas.worldCamera, out newPos);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(myCanvas.transform as RectTransform, new Vector2(900, Screen.height / 2), myCanvas.worldCamera, out newPos);
         transform.position = myCanvas.transform.TransformPoint(newPos);
 
         showingBlueprint = true;
@@ -203,9 +203,10 @@ public class TurretTips : TileTips
                 QualitySetter.gameObject.SetActive(false);
                 break;
             case StrategyType.Composite:
-                Name.text = GameMultiLang.GetTraduction(att.Name) + " Lv." + quality;
+                Name.text = GameMultiLang.GetTraduction(att.Name);
                 QualitySetter.gameObject.SetActive(true);
                 QualitySetter.SetRare(att.Rare);
+                QualitySetter.SetLevel(quality);
                 break;
         }
 
@@ -347,12 +348,7 @@ public class TurretTips : TileTips
             UpdateBluePrintInfo();
         }
 
-        //if (Input.GetKeyDown(KeyCode.T))
-        //{
-        //    Debug.Log(m_Strategy.AllSpeedIntensifyModify);
-        //    Debug.Log(m_Strategy.BaseSpeed);
-        //    Debug.Log(m_Strategy.FinalSpeed);
-        //}
+
     }
 
     public void BuyBluePrintBtnClick()

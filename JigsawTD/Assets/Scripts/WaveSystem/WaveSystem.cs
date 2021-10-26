@@ -19,12 +19,10 @@ public class WaveSystem : IGameSystem
             if (enemyRemain <= 0 && !Running)
             {
                 enemyRemain = 0;
-                //LevelSequence.RemoveAt(0);
                 GameManager.Instance.PrepareNextWave();
             }
         }
     }
-    [SerializeField] HealthBar healthBarPrefab = default;
     public Queue<List<EnemySequence>> LevelSequence = new Queue<List<EnemySequence>>();
     LevelAttribute LevelAttribute;
     [SerializeField] private List<EnemySequence> runningSequence;
@@ -192,14 +190,11 @@ public class WaveSystem : IGameSystem
 
     }
 
-    public Enemy SpawnEnemy(BoardSystem board, EnemyAttribute attribute, int pathIndex, float intensify,float pathOffset)
+    public Enemy SpawnEnemy(EnemyAttribute attribute, int pathIndex, float intensify)
     {
         EnemyRemain++;
-        //float intensify = RunningSequence.Intensify;
         Enemy enemy = ObjectPool.Instance.Spawn(attribute.Prefab) as Enemy;
-        HealthBar healthBar = ObjectPool.Instance.Spawn(healthBarPrefab) as HealthBar;
-        enemy.Initialize(attribute, pathOffset, healthBar, intensify, board.shortestPath);
-        enemy.SpawnOn(pathIndex, board.shortestPoints);
+        enemy.Initialize(pathIndex, attribute, UnityEngine.Random.Range(-0.3f,0.3f), intensify);
         GameManager.Instance.enemies.Add(enemy);
         return enemy;
     }

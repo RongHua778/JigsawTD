@@ -5,12 +5,14 @@ using UnityEngine;
 
 public abstract class Enemy : PathFollower, IDamageable
 {
+    public virtual string ExplosionSound => "Sound_EnemyExplosion";
+    public virtual string ExplosionEffect { get; }
     [Header("基本配置")]
-    public bool IsBoss = false;
-    protected HealthBar healthBar;
-    public HealthBar HealthBar { get => healthBar; }
+    protected Animator anim;
+    public HealthBar HealthBar { get; set; }
     protected SpriteRenderer enemySprite;
     protected CircleCollider2D enemyCol;
+    protected EnemyAttribute m_Attribute;
     public DamageStrategy DamageStrategy { get; set; }
 
     //寻路及陷阱触发
@@ -28,18 +30,11 @@ public abstract class Enemy : PathFollower, IDamageable
     }
 
     //状态配置
-    public float Intensify;
+    protected float Intensify;
     protected bool isOutTroing = false;//正在消失
     protected bool trapTriggered = false;
     public bool IsEnemy { get => true; }
     public virtual EnemyType EnemyType { get; }
-
-    [Header("资源配置")]
-    [SerializeField] protected ReusableObject exlposionPrefab = default;
-    protected AudioClip explosionClip;
-    private Animator anim;
-    public Animator Anim { get => anim; set => anim = value; }
-
 
     //经过的陷阱列表
     private List<TrapContent> passedTraps = new List<TrapContent>();
@@ -72,7 +67,7 @@ public abstract class Enemy : PathFollower, IDamageable
         {
             slowRate = value;
             ProgressFactor = Speed * Adjust;//子弹减速即时更新速度
-            healthBar.ShowIcon(0, slowRate > 0f);
+            HealthBar.ShowIcon(0, slowRate > 0f);
         }
     }
 
@@ -80,76 +75,44 @@ public abstract class Enemy : PathFollower, IDamageable
 
     public BuffableEntity Buffable { get; set; }
 
-    private bool isDie = false;
-    public bool IsDie
+
+
+    public virtual void Initialize(int pathIndex, EnemyAttribute attribute, float pathOffset, float intensify)
     {
-        get => isDie;
-        set
-        {
-            isDie = value;
-        }
-    }
-
-
-    float enemyTrapIntensify = 1;
-    public float EnemyTrapIntensify
-    {
-        get => enemyTrapIntensify;
-        set
-        {
-            enemyTrapIntensify = value;
-            healthBar.ShowIcon(3, value > 1);
-        }
-    }
-
-
-
-    public virtual void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify, List<BasicTile> shortpath)
-    {
-        this.pathTiles = shortpath;
+        this.pathTiles = BoardSystem.shortestPath;
         this.PathOffset = pathOffset;
-        this.healthBar = healthBar;
-        this.healthBar.followTrans = model;
         this.Intensify = intensify;
-        Buffable = this.GetComponent<BuffableEntity>();
-        this.DamageStrategy.MaxHealth = Mathf.RoundToInt(attribute.Health * intensify);
-        this.DamageStrategy.ResetStrategy();//清除加成
-        Speed = attribute.Speed;
-        ReachDamage = attribute.ReachDamage;
+        this.DamageStrategy.ResetStrategy(Mathf.RoundToInt(attribute.Health * intensify));//清除加成
+        this.Speed = attribute.Speed;
+        this.ReachDamage = attribute.ReachDamage;
+        SpawnOn(pathIndex, BoardSystem.shortestPoints);
 
     }
 
     public virtual void Awake()
     {
         SetStrategy();
-        enemySprite = transform.Find("Model").Find("GFX").GetComponent<SpriteRenderer>();
+        HealthBar = model.GetComponentInChildren<HealthBar>();
+        enemySprite = model.Find("GFX").GetComponent<SpriteRenderer>();
+
+        Buffable = this.GetComponent<BuffableEntity>();
         enemyCol = enemySprite.GetComponent<CircleCollider2D>();
-        Anim = GetComponent<Animator>();
-        if (IsBoss)
-        {
-            explosionClip = Resources.Load<AudioClip>("Music/Effects/Sound_BossExplosion");
-        }
-        else
-        {
-            explosionClip = Resources.Load<AudioClip>("Music/Effects/Sound_EnemyExplosion");
-        }
-        PassedTraps = new List<TrapContent>();
+        anim = GetComponent<Animator>();
+
     }
 
     protected virtual void SetStrategy()
     {
-        DamageStrategy = new EnemyDamageStrategy(model, this);
+        DamageStrategy = new BasicEnemyStrategy(this);
+
     }
     public override bool GameUpdate()
     {
         OnEnemyUpdate();
-        if (IsDie)
+        if (DamageStrategy.IsDie)
         {
             OnDie();
             StopAllCoroutines();
-            ReusableObject explosion = ObjectPool.Instance.Spawn(exlposionPrefab);
-            Sound.Instance.PlayEffect(explosionClip);
-            explosion.transform.position = model.transform.position;
             GameEvents.Instance.EnemyDie(this);
             ObjectPool.Instance.UnSpawn(this);
             return false;
@@ -211,7 +174,7 @@ public abstract class Enemy : PathFollower, IDamageable
 
     protected IEnumerator ExitCor()
     {
-        Anim.SetTrigger("Exit");
+        anim.SetTrigger("Exit");
         yield return new WaitForSeconds(0.5f);
         GameEvents.Instance.EnemyReach(this);
         ObjectPool.Instance.UnSpawn(this);
@@ -222,8 +185,8 @@ public abstract class Enemy : PathFollower, IDamageable
     {
         base.PrepareIntro();
         CurrentTile = pathTiles[PointIndex];
-        Anim.Play("Default");
-        Anim.SetTrigger("Enter");
+        anim.Play("Default");
+        anim.SetTrigger("Enter");
     }
 
 
@@ -263,22 +226,17 @@ public abstract class Enemy : PathFollower, IDamageable
         Buffable.AddBuff(info);
     }
 
-    public override void OnSpawn()
-    {
-        base.OnSpawn();
-        IsDie = false;
-    }
+
 
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
         PassedTraps.Clear();
         isOutTroing = false;
-        ObjectPool.Instance.UnSpawn(healthBar);
+        //ObjectPool.Instance.UnSpawn(healthBar);
         TargetDamageCounter = 0;
         SpeedIntensify = 0;
         AffectHealerCount = 0;
-        EnemyTrapIntensify = 1;
 
         SlowRate = 0;
         StunTime = 0;

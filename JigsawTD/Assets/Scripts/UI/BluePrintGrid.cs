@@ -24,7 +24,7 @@ public class BluePrintGrid : ReusableObject//, IPointerEnterHandler, IPointerExi
     private Blueprint m_BluePrint;
 
     public Blueprint BluePrint { get => m_BluePrint; set => m_BluePrint = value; }
-
+    bool buildAble = false;
     public void SetElements(BluePrintShopUI shop, ToggleGroup group, Blueprint bluePrint)
     {
         m_Shop = shop;
@@ -61,7 +61,8 @@ public class BluePrintGrid : ReusableObject//, IPointerEnterHandler, IPointerExi
                 elementGrids[i].gameObject.SetActive(false);
             }
         }
-        compositeIcon.color = BluePrint.CheckBuildable() ? Color.white : UnobtainColor;
+        buildAble = BluePrint.CheckBuildable();
+        compositeIcon.color = buildAble ? Color.white : UnobtainColor;
     }
 
 
@@ -73,6 +74,8 @@ public class BluePrintGrid : ReusableObject//, IPointerEnterHandler, IPointerExi
                 SelectingBluePrint.OnBluePrintDeselect();
             SelectingBluePrint = this;
             GameManager.Instance.ShowBluePrintTips(this);
+            if (buildAble)
+                GameEvents.Instance.TutorialTrigger(TutorialType.BlueprintSelect);
             Sound.Instance.PlayEffect("Sound_Click");
         }
         else
@@ -92,7 +95,7 @@ public class BluePrintGrid : ReusableObject//, IPointerEnterHandler, IPointerExi
     public void OnLock(bool value)
     {
         IsLock = value;
-        m_Shop.OnLockGrid(this, value);
+        m_Shop.OnLockGrid(value);
     }
 
     public void CheckElements()

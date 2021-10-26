@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Divider : Enemy
+public class Divider : Boss
 {
+    public override string ExplosionEffect => "BossExplosionRed";
     [SerializeField] Sprite[] DividerSprites = default;
     public int dividing;
     public int springs;
     public override EnemyType EnemyType => EnemyType.Divider;
 
-    public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify, List<BasicTile> path)
+    public override void Initialize(int pathIndex,EnemyAttribute attribute, float pathOffset,float intensify)
     {
-        base.Initialize(attribute, pathOffset, healthBar, intensify, path);
+        base.Initialize(pathIndex, attribute, pathOffset,intensify);
         dividing = 2;
     }
 

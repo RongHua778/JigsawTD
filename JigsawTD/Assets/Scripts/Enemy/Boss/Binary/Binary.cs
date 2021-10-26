@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Binary : Enemy
+public class Binary : Boss
 {
-    public static Binary FirstBinary;
-    public Binary m_brother;
+    public override string ExplosionEffect => "BossExplosionPurple";
 
-    public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify, List<BasicTile> path)
+    public static Binary FirstBinary;
+    private Binary m_brother;
+
+    public override void Initialize(int pathIndex, EnemyAttribute attribute, float pathOffset,float intensify)
     {
-        base.Initialize(attribute, pathOffset, healthBar, intensify, path);
+        base.Initialize(pathIndex, attribute, pathOffset, intensify);
         if (FirstBinary == null)
         {
             FirstBinary = this;
-            this.PathOffset = - 0.25f;
-
-            m_brother = GameManager.Instance.SpawnEnemy(EnemyType.Binary, 0, Intensify, 0.25f) as Binary;
+            m_brother = GameManager.Instance.SpawnEnemy(EnemyType.Binary, 0, Intensify) as Binary;
             m_brother.m_brother = this;
             FirstBinary = null;
         }

@@ -86,6 +86,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TileSelect: {fileID: 2428495454343918667}
+  FrameSprite: {fileID: 2428495454860525341}
+  NormalColor: {r: 0.627451, g: 0.9098039, b: 1, a: 1}
+  HandleColor: {r: 0.3647059, g: 1, b: 0.6901961, a: 1}
 --- !u!1 &2428495454343918656
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,6 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderTexture: {fileID: 8400000, guid: 17730fb157ebe954f8d34cf2f84f5948, type: 2}
   m_LevelDownSelect: {fileID: 7359984401380683283}
+  m_ElementPreview: {fileID: 491088745880454314}
   NormalColor: {r: 0.627451, g: 0.9098039, b: 1, a: 1}
   HandleColor: {r: 0.3647059, g: 1, b: 0.6901961, a: 1}
   FrameSprite: {fileID: 2428495454860525341}

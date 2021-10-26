@@ -5,22 +5,24 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
 
-public class TipsElementConstruct : MonoBehaviour
+public class TipsElementConstruct : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    [SerializeField] bool canPreview = false;
     [SerializeField] Image[] Elements = default;
     ElementSkill m_Skill;
-    [SerializeField] InfoBtn m_InfoBtn = default;
     [SerializeField] Text elementSkillName = default;
     [SerializeField] Text elementSkillDes = default;
     [SerializeField] GameObject[] areas = default;
     //[SerializeField] Image intensifyImg = default;
     [SerializeField] Sprite[] elementSprites = default;
+    [SerializeField] ElementBenefitPanel benefitPanel = default;
     public void SetElements(ElementSkill skill)
     {
         areas[1].SetActive(false);
         areas[0].SetActive(true);
         m_Skill = skill;
-
+        benefitPanel.InitializePanel(m_Skill);
+        canPreview = true;
         for (int i = 0; i < skill.Elements.Count; i++)
         {
             if (i >= skill.Elements.Count)
@@ -31,10 +33,10 @@ public class TipsElementConstruct : MonoBehaviour
             Elements[i].gameObject.SetActive(true);
             Elements[i].sprite = elementSprites[skill.Elements[i]];
         }
-        SetIntensifyInfo();
+        //SetIntensifyInfo();
 
-        string key="";
-        foreach(var element in skill.Elements)
+        string key = "";
+        foreach (var element in skill.Elements)
         {
             switch (element)
             {
@@ -56,19 +58,29 @@ public class TipsElementConstruct : MonoBehaviour
             }
         }
         elementSkillName.text = GameMultiLang.GetTraduction(key);
-        elementSkillDes.text = GameMultiLang.GetTraduction(key+"INFO");
-    }
-
-    public void SetIntensifyInfo()
-    {
-        string text = StaticData.SetElementSkillInfo(m_Skill);
-        m_InfoBtn.SetContent(text);
+        elementSkillDes.text = GameMultiLang.GetTraduction(key + "INFO");
     }
 
     public void SetEmpty()//ÏÔÊ¾¿Õ²Û×´Ì¬
     {
         areas[0].SetActive(false);
         areas[1].SetActive(true);
-        m_InfoBtn.SetContent(GameMultiLang.GetTraduction("EMPTYSLOT"));
+        canPreview = false;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (canPreview)
+        {
+            benefitPanel.Show();
+            GameEvents.Instance.TutorialTrigger(TutorialType.ElementBenefitEnter);
+        }
+
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (canPreview)
+            benefitPanel.Hide();
     }
 }

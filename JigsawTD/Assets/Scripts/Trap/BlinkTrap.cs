@@ -13,9 +13,9 @@ public class BlinkTrap : TrapContent
         if (enemy.PassedTraps.Contains((TrapContent)content))
             return;
         base.OnContentPass(enemy, content);
-        Distance = Mathf.RoundToInt(2 * TrapIntensify * enemy.EnemyTrapIntensify);
+        Distance = Mathf.RoundToInt(2 * TrapIntensify * enemy.DamageStrategy.TrapIntensify);
         enemy.Flash(Distance);
-        enemy.EnemyTrapIntensify = 1;
+        enemy.DamageStrategy.TrapIntensify = 1;
     }
 
 }

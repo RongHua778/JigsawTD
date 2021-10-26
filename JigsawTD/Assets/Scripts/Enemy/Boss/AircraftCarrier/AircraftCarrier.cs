@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class AircraftCarrier : Enemy
 {
+    public override string ExplosionEffect => "BossExplosionBlue";
+
     [SerializeField] float aircarftIntensify;
     [SerializeField] Aircraft airCraftPrefab = default;
     List<Aircraft> aircrafts = new List<Aircraft>();
 
-    bool protect = false;
     float bornCounter;
     float bornCD;
     int enemyOneBorn;
     int enemyNumber;
     int maxEnemyNumber;
 
-    public override void Initialize(EnemyAttribute attribute, float pathOffset, HealthBar healthBar, float intensify, List<BasicTile> path)
+    public override void Initialize(int pathIndex, EnemyAttribute attribute, float pathOffset,float intensify)
     {
-        base.Initialize(attribute, pathOffset, healthBar, intensify, path);
+        base.Initialize(pathIndex, attribute, pathOffset, intensify);
         bornCD = 3;
         enemyOneBorn = 4;
         maxEnemyNumber = 16;
@@ -33,20 +34,11 @@ public class AircraftCarrier : Enemy
                 StartCoroutine(BornCor());
             bornCounter = 0;
         }
-        //if (!protect && DamageStrategy.CurrentHealth < DamageStrategy.MaxHealth * 0.5f)
-        //{
-        //    protect = true;
-        //    Born();
-        //    foreach (var aircraft in aircrafts)
-        //    {
-        //        aircraft.ProtectMe();
-        //    }
-        //}
     }
 
     IEnumerator BornCor()
     {
-        Anim.SetBool("Transform", true);
+        anim.SetBool("Transform", true);
         Sound.Instance.PlayEffect("Sound_BornerTransform");
 
         yield return new WaitForSeconds(0.5f);
@@ -59,7 +51,7 @@ public class AircraftCarrier : Enemy
             yield return new WaitForSeconds(0.2f);
         }
         yield return new WaitForSeconds(0.5f);
-        Anim.SetBool("Transform", false);
+        anim.SetBool("Transform", false);
     }
 
     private void Born()
@@ -83,7 +75,6 @@ public class AircraftCarrier : Enemy
     {
         base.OnUnSpawn();
         enemyNumber = 0;
-        protect = false;
         for (int i = 0; i < aircrafts.Count; i++)
         {
             aircrafts[i].DamageStrategy.CurrentHealth = 0;
