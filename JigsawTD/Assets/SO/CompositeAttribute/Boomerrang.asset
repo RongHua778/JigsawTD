@@ -28,7 +28,7 @@ MonoBehaviour:
   maxElementLevel: 5
   TurretSkill: 9
   TurretLevels:
-  - AttackRange: 3
+  - AttackRange: 4
     ForbidRange: 0
     AttackDamage: 1150
     AttackSpeed: 0.2
@@ -38,7 +38,7 @@ MonoBehaviour:
     TurretIcon: {fileID: 6252459201115839096, guid: a799722f85e58a34993e12144292e1a9, type: 3}
     CannonSprite: {fileID: -3111040703750061689, guid: ef329b970cf7ced4888442c7bc757356, type: 3}
     ShootPointOffset: {x: 0, y: 0}
-  - AttackRange: 3
+  - AttackRange: 4
     ForbidRange: 0
     AttackDamage: 1750
     AttackSpeed: 0.2
@@ -48,7 +48,7 @@ MonoBehaviour:
     TurretIcon: {fileID: 3442024006206321382, guid: a799722f85e58a34993e12144292e1a9, type: 3}
     CannonSprite: {fileID: -4017865521878045518, guid: ef329b970cf7ced4888442c7bc757356, type: 3}
     ShootPointOffset: {x: 0, y: 0}
-  - AttackRange: 3
+  - AttackRange: 4
     ForbidRange: 0
     AttackDamage: 2550
     AttackSpeed: 0.2

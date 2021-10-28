@@ -27,6 +27,14 @@ public class TileContentFactory : GameObjectFactory
     private Dictionary<string, TrapAttribute> TrapDIC;
     private Dictionary<string, TurretBaseAttribute> TurretBaseDIC;
 
+    private List<TurretAttribute> Rare1Att;
+    private List<TurretAttribute> Rare2Att;
+    private List<TurretAttribute> Rare3Att;
+    private List<TurretAttribute> Rare4Att;
+    private List<TurretAttribute> Rare5Att;
+    private List<TurretAttribute> Rare6Att;
+
+
     public void Initialize()
     {
 
@@ -38,8 +46,37 @@ public class TileContentFactory : GameObjectFactory
         BattleElements = new List<TurretAttribute>();
         BattleComposites = new List<TurretAttribute>();
 
+        Rare1Att = new List<TurretAttribute>();
+        Rare2Att = new List<TurretAttribute>();
+        Rare3Att = new List<TurretAttribute>();
+        Rare4Att = new List<TurretAttribute>();
+        Rare5Att = new List<TurretAttribute>();
+        Rare6Att = new List<TurretAttribute>();
+
+
         foreach (TurretAttribute attribute in compositeTurrets)
         {
+            switch (attribute.Rare)
+            {
+                case 1:
+                    Rare1Att.Add(attribute);
+                    break;
+                case 2:
+                    Rare2Att.Add(attribute);
+                    break;
+                case 3:
+                    Rare3Att.Add(attribute);
+                    break;
+                case 4:
+                    Rare4Att.Add(attribute);
+                    break;
+                case 5:
+                    Rare5Att.Add(attribute);
+                    break;
+                case 6:
+                    Rare6Att.Add(attribute);
+                    break;
+            }
             CompositeDIC.Add(attribute.Name, attribute);
 
         }
@@ -98,12 +135,12 @@ public class TileContentFactory : GameObjectFactory
 
     //元素塔*******************
 
-    public ElementTurret GetRandomElementTurret(int playerLevel)
+    public ElementTurret GetRandomElementTurret()
     {
         float[] qualityC = new float[5];
         for (int i = 0; i < 5; i++)
         {
-            qualityC[i] = StaticData.QualityChances[playerLevel - 1, i];
+            qualityC[i] = StaticData.QualityChances[GameRes.ModuleLevel - 1, i];
         }
         int quality = StaticData.RandomNumber(qualityC) + 1;
         TurretAttribute attribute = BattleElements[UnityEngine.Random.Range(0, StaticData.elementN)];
@@ -135,7 +172,7 @@ public class TileContentFactory : GameObjectFactory
     public TurretAttribute GetRandomElementAttribute(bool isBattleElement = true)
     {
         return isBattleElement ?
-            BattleElements[UnityEngine.Random.Range(0, BattleElements.Count)] : 
+            BattleElements[UnityEngine.Random.Range(0, BattleElements.Count)] :
             ElementDIC[(ElementType)UnityEngine.Random.Range(0, ElementDIC.Count)];
     }
     //合成塔***********
@@ -173,7 +210,36 @@ public class TileContentFactory : GameObjectFactory
 
     public TurretAttribute GetRandomCompositeAtt()
     {
-        return BattleComposites[UnityEngine.Random.Range(0, BattleComposites.Count)];
+        float[] rareChance = new float[6];
+        for (int i = 0; i < 6; i++)
+        {
+            rareChance[i] = StaticData.RareChances[GameRes.ModuleLevel - 1, i];
+        }
+        int rare = StaticData.RandomNumber(rareChance) + 1;
+        TurretAttribute atrributeToReturn = null;
+        switch (rare)
+        {
+            case 1:
+                atrributeToReturn = Rare1Att[UnityEngine.Random.Range(0, Rare1Att.Count)];
+                break;
+            case 2:
+                atrributeToReturn = Rare2Att[UnityEngine.Random.Range(0, Rare1Att.Count)];
+                break;
+            case 3:
+                atrributeToReturn = Rare3Att[UnityEngine.Random.Range(0, Rare1Att.Count)];
+                break;
+            case 4:
+                atrributeToReturn = Rare4Att[UnityEngine.Random.Range(0, Rare1Att.Count)];
+                break;
+            case 5:
+                atrributeToReturn = Rare5Att[UnityEngine.Random.Range(0, Rare1Att.Count)];
+                break;
+            case 6:
+                atrributeToReturn = Rare6Att[UnityEngine.Random.Range(0, Rare1Att.Count)];
+                break;
+        }
+        Debug.Assert(atrributeToReturn != null, "没有可以返回的配方");
+        return atrributeToReturn;
     }
 
     //陷阱*************

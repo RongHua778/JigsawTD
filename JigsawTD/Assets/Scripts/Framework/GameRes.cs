@@ -64,7 +64,7 @@ public static class GameRes
 
 
     private static int coin;
-    public static int Coin
+    public static int Coin//拥有代币
     {
         get => coin;
         set
@@ -75,7 +75,7 @@ public static class GameRes
     }
 
     private static int life;
-    public static int Life
+    public static int Life//当亲生命值
     {
         get => life;
         set
@@ -90,7 +90,7 @@ public static class GameRes
     }
 
     public static int currentWave;
-    public static int CurrentWave
+    public static int CurrentWave//当前波数
     {
         get => currentWave;
         set
@@ -98,13 +98,59 @@ public static class GameRes
             currentWave = value;
         }
     }
+
+    private static int buyShapeCost;
+    public static int BuyShapeCost//构建价格
+    {
+        get => buyShapeCost;
+        set
+        {
+            buyShapeCost = Mathf.Max(0, value);
+            m_FuncUI.BuyShapeCost = buyShapeCost;
+        }
+    }
+
+    private static int moduleLevel;
+    public static int ModuleLevel   //模块等级
+    {
+        get => moduleLevel;
+        set
+        {
+            moduleLevel = Mathf.Clamp(value, 1, 6);
+            m_FuncUI.ModuleLevel = moduleLevel;
+        }
+    }
+
+    private static float discountRate;
+    public static float DiscountRate
+    {
+        get => discountRate;
+        set
+        {
+            discountRate = Mathf.Min(0.5f, value);
+            m_FuncUI.DiscountRate = discountRate;
+        }
+    }
+
+    private static int shopCapacity;
+    public static int ShopCapacity { get => shopCapacity; set => shopCapacity = value; }//商店容量
+
+
+    private static int maxLock;
+    public static int MaxLock { get => maxLock; set => maxLock = value; }//最大锁定量
+
     public static void Initialize(MainUI mainUI, FuncUI funcUI)
     {
         m_MainUI = mainUI;
         m_FuncUI = funcUI;
+        DiscountRate = 0.1f;
+        ShopCapacity = 3;
+        MaxLock = 1;
+        ModuleLevel = 1;
         CurrentWave = 0;
         Coin = StaticData.Instance.StartCoin;
         Life = LevelManager.Instance.CurrentLevel.PlayerHealth;
+        BuyShapeCost = StaticData.Instance.BaseShapeCost;
 
         PerfectElementCount = 0;
         OverallMoneyIntensify = 0;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Borner : Boss
 {
-    public override string ExplosionEffect => "BossExplosionYPurple";
+    public override string ExplosionEffect => "BossExplosionPurple";
 
 
     [SerializeField] float[] bornCD;

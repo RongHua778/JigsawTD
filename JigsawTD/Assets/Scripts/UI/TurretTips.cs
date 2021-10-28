@@ -50,6 +50,7 @@ public class TurretTips : TileTips
     //infoBtn
     [SerializeField] InfoBtn CriticalInfo = default;
     [SerializeField] InfoBtn SplashInfo = default;
+    [SerializeField] InfoBtn SlowInfo = default;
 
 
     private StrategyBase m_Strategy;
@@ -63,6 +64,7 @@ public class TurretTips : TileTips
         mainCam = Camera.main;
         CriticalInfo.SetContent(GameMultiLang.GetTraduction("CRITICALINFO"));
         SplashInfo.SetContent(GameMultiLang.GetTraduction("SPLASHINFO"));
+        SlowInfo.SetContent(GameMultiLang.GetTraduction("SLOWINFO"));
     }
 
     public override void Hide()

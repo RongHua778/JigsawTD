@@ -10,6 +10,7 @@ public class FuncUI : IUserInterface
     public GameObject NextBtnObj;
     public GameObject LevelBtnObj;
 
+    [SerializeField] LevelInfoPanel m_LevelInfoPanel = default;
 
     //[SerializeField] Text LuckPointTxt = default;
     [SerializeField] Text DrawBtnTxt = default;
@@ -17,19 +18,17 @@ public class FuncUI : IUserInterface
     [SerializeField] Text PlayerLevelTxt = default;
     [SerializeField] Text DiscountTxt = default;
     [SerializeField] InfoBtn m_LuckInfo = default;
-    [SerializeField] InfoBtn m_LevelInfo = default;
     [SerializeField] InfoBtn m_DrawInfo = default;
     [SerializeField] LuckProgress m_LuckProgress = default;
     Animator m_Anim;
 
-    float discountRate = 0.1f;
     public float DiscountRate { 
-        get => discountRate; 
         set
         {
-            discountRate = value;
-            DiscountTxt.text = discountRate * 100 + "%";
-        } 
+            DiscountTxt.text = GameRes.DiscountRate * 100 + "%";
+            m_DrawInfo.SetContent(GameMultiLang.GetTraduction("DRAWINFO") + "<color=cyan>" + GameRes.DiscountRate * 100 + "%</color>");
+
+        }
     }
 
     bool drawThisTurn = true;
@@ -52,19 +51,13 @@ public class FuncUI : IUserInterface
             if (freeShapeCount > 0)
                 DrawBtnTxt.text = 0.ToString();
             else
-                DrawBtnTxt.text = buyShapeCost.ToString();
+                DrawBtnTxt.text = GameRes.BuyShapeCost.ToString();
         }
     }
 
-    int buyShapeCost;
     public int BuyShapeCost
     {
-        get => buyShapeCost;
-        set
-        {
-            buyShapeCost = Mathf.Max(0, value);
-            DrawBtnTxt.text = buyShapeCost.ToString();
-        }
+        set=> DrawBtnTxt.text = GameRes.BuyShapeCost.ToString();
     }
 
     private int drawRemain = 0;
@@ -78,21 +71,16 @@ public class FuncUI : IUserInterface
         }
     }
 
-    private int moduleLevel = 1;
     public int ModuleLevel
     {
-        get => moduleLevel;
         set
         {
-            moduleLevel = value;
-            PlayerLevelTxt.text = ModuleLevel.ToString();
-            PlayerLvUpMoney = StaticData.Instance.LevelUpMoney[ModuleLevel];
-            m_LevelInfo.SetContent(StaticData.GetLevelInfo(moduleLevel));
-            if (ModuleLevel == 2 || ModuleLevel == 4 || ModuleLevel == 6)//2，4,6级增加一个商店容量
+            PlayerLevelTxt.text = value.ToString();
+            PlayerLvUpMoney = StaticData.Instance.LevelUpMoney[value];
+            if (value == 2 || value == 4 || value == 6)//2，4,6级增加一个商店容量
             {
-                GameManager.Instance.IncreaseShopCapacity(1);
+                GameRes.ShopCapacity++;
             }
-            StaticData.Instance.ContentFactory.PlayerLevelUp(moduleLevel);
         }
     }
 
@@ -103,7 +91,7 @@ public class FuncUI : IUserInterface
         set
         {
             playerLvUpMoney = value;
-            if (ModuleLevel < StaticData.Instance.PlayerMaxLevel)
+            if (GameRes.ModuleLevel < StaticData.Instance.PlayerMaxLevel)
             {
                 LevelUpTxt.text = PlayerLvUpMoney.ToString();
             }
@@ -137,9 +125,9 @@ public class FuncUI : IUserInterface
 
     public override void Initialize()
     {
-        BuyShapeCost = StaticData.Instance.BaseShapeCost;
+        m_LevelInfoPanel.Initialize();
+        m_LevelInfoPanel.SetInfo();
         Energy = 0;
-        ModuleLevel = 1;
         DiscountRate = 0.1f;
         m_Anim = this.GetComponent<Animator>();
     }
@@ -171,9 +159,9 @@ public class FuncUI : IUserInterface
         {
             FreeShapeCount--;
         }
-        else if (GameManager.Instance.ConsumeMoney(BuyShapeCost))
+        else if (GameManager.Instance.ConsumeMoney(GameRes.BuyShapeCost))
         {
-            BuyShapeCost += StaticData.Instance.MultipleShapeCost;
+            GameRes.BuyShapeCost += StaticData.Instance.MultipleShapeCost;
         }
         else
         {
@@ -188,20 +176,11 @@ public class FuncUI : IUserInterface
     public void PrepareNextWave()
     {
         Show();
-        m_DrawInfo.SetContent(GameMultiLang.GetTraduction("DRAWINFO") + "<color=cyan>" + discountRate * 100 + "%</color>");
         if (!DrawThisTurn)
         {
-            //EnergyProgress++;
-            //Energy++;
-            //BuyShapeCost -= Energy;
-            BuyShapeCost = Mathf.RoundToInt(BuyShapeCost * (1 - discountRate));//没抽就减5%的价格
+            GameRes.BuyShapeCost = Mathf.RoundToInt(GameRes.BuyShapeCost * (1 - GameRes.DiscountRate));//没抽就减5%的价格
         }
-        else
-        {
-            //Energy = 0;
-            //EnergyProgress = 1;
-        }
-        //Energy += EnergyProgress;
+
         DrawThisTurn = false;
         GameManager.Instance.GainDraw(1);
     }
@@ -213,11 +192,12 @@ public class FuncUI : IUserInterface
 
     public void LevelUpBtnClick()
     {
-        if (ModuleLevel < StaticData.Instance.PlayerMaxLevel)
+        if (GameRes.ModuleLevel < StaticData.Instance.PlayerMaxLevel)
         {
             if (GameManager.Instance.ConsumeMoney(PlayerLvUpMoney))
             {
-                ModuleLevel++;
+                GameRes.ModuleLevel++;
+                m_LevelInfoPanel.SetInfo();
             }
         }
     }

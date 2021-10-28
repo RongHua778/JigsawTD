@@ -89,11 +89,12 @@ public class SlowBuff : TimeBuff
     public override EnemyBuffName BuffName => EnemyBuffName.SlowDown;
     public override bool IsStackable => true;
     public override bool IsTimeBase => true;
-    private float intensifyValue;
+    private float intensifyValue = 0;
 
     public override void Affect()
     {
-        Target.SlowRate += KeyValue;
+        intensifyValue = KeyValue * (1 - Target.SlowResist);
+        Target.SlowRate += intensifyValue;
     }
     public override void End()
     {

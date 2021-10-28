@@ -28,15 +28,10 @@ public class BluePrintShopUI : IUserInterface
         set
         {
             currentLock = value;
-            LockCountTxt.text = GameMultiLang.GetTraduction("SHOPBLUEPRINT") + CurrentLock.ToString() + "/" + MaxLock.ToString();
+            LockCountTxt.text = GameMultiLang.GetTraduction("SHOPBLUEPRINT") + CurrentLock.ToString() + "/" + GameRes.MaxLock.ToString();
         }
     }
 
-    int maxLock = 1;
-    public int MaxLock { get => maxLock; set => maxLock = value; }
-
-    int shopCapacity = 3;
-    public int ShopCapacity { get => shopCapacity; set => shopCapacity = value; }
     int nextRefreshTrun = 0;
     public int NextRefreshTrun //下次自动刷新回合
     {
@@ -74,7 +69,7 @@ public class BluePrintShopUI : IUserInterface
         PerfectElementTxt.text = GameMultiLang.GetTraduction("OWNPERFECT") + ":" + count;
     }
 
-    public void RefreshShop(int level)//刷新商店
+    public void RefreshShop()//刷新商店
     {
         NextRefreshTrun = 3;
         int lockNum = 0;
@@ -89,7 +84,7 @@ public class BluePrintShopUI : IUserInterface
                 lockNum++;
             }
         }
-        for (int i = 0; i < ShopCapacity - lockNum; i++)
+        for (int i = 0; i < GameRes.ShopCapacity - lockNum; i++)
         {
             Blueprint bluePrint = ConstructHelper.GetRandomBluePrintByLevel();
             AddBluePrint(bluePrint, true);
@@ -106,7 +101,7 @@ public class BluePrintShopUI : IUserInterface
         if (isShopBluePrint)
         {
             //bluePrintGrid.transform.SetAsFirstSibling();
-            bluePrintGrid.ShowLockBtn(CurrentLock < MaxLock);
+            bluePrintGrid.ShowLockBtn(CurrentLock < GameRes.MaxLock);
             bluePrintGrid.InShop = true;
             ShopBluePrints.Add(bluePrintGrid);
         }
@@ -121,7 +116,7 @@ public class BluePrintShopUI : IUserInterface
         if (isLock)
         {
             CurrentLock++;
-            if (CurrentLock >= MaxLock)
+            if (CurrentLock >= GameRes.MaxLock)
             {
                 foreach (var grid in ShopBluePrints)
                 {

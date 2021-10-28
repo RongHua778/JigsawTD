@@ -32,6 +32,15 @@ public class StaticData : Singleton<StaticData>
         { 0.15f, 0.3f, 0.3f, 0.25f, 0.1f },
         { 0.05f, 0.2f, 0.25f, 0.3f, 0.2f },
     };
+    public static float[,] RareChances = new float[6, 6]
+    {
+        { 0.3f, 0f, 0f, 0f, 0f,0f },
+        { 0.3f, 0.45f, 0f, 0f, 0f ,0f},
+        { 0.3f, 0.35f, 0.5f, 0f, 0f,0f },
+        { 0.3f, 0.35f, 0.4f, 0.55f, 0f,0f },
+        { 0.3f, 0.35f, 0.4f, 0.45f, 0.6f,0f },
+        { 0.3f, 0.35f, 0.4f, 0.45f, 0.5f,0.65f },
+    };
 
     [Header("工厂类")]
     [SerializeField] TileFactory _tileFactory = default;
@@ -70,7 +79,7 @@ public class StaticData : Singleton<StaticData>
     public static float EnvrionmentBaseVolume = .5f;
     public float TileSize = default;
     public static int maxLevel = 5;    //塔的最大等级
-    public static int elementN = 4;//一共有几种战斗元素
+    public static int elementN = 5;//一共有几种战斗元素
     public static int maxQuality = 5;//最大quality
 
     [Header("元素加成")]
@@ -78,7 +87,7 @@ public class StaticData : Singleton<StaticData>
     public float WoodSpeedIntensify = 0.3f;
     public float WaterSlowIntensify = 0.5f;
     public float FireCriticalIntensify = 0.2f;
-    public float DustSputteringIntensify = 0.3f;
+    public float DustSputteringIntensify = 0.25f;
     public static Dictionary<ElementType, Element> ElementDIC;
 
     [Header("Prefabs")]
@@ -98,16 +107,6 @@ public class StaticData : Singleton<StaticData>
         { 75, 150 },
         { 150,300 },
         { 250,500 }
-    };
-    public float[,] RareChances = new float[7, 3]//配方刷新概率
-    {
-        { 1f,0f,0f },
-        { 0.9f,0.1f,0f},
-        { 0.75f,0.25f,0f },
-        { 0.6f,0.35f,0.1f},
-        { 0.5f,0.3f,0.2f},
-        { 0.3f,0.4f,0.3f},
-        { 0.2f,0.4f,0.4f},
     };
 
 

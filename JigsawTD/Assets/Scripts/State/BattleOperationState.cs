@@ -22,7 +22,6 @@ public abstract class BattleOperationState
 
     public virtual IEnumerator ExitState(BattleOperationState newState)
     {
-        
         yield break;
     }
 }

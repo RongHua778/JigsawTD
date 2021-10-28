@@ -96,6 +96,7 @@ public class GameManager : Singleton<GameManager>
         //关闭显示强制摆放位置
         m_BoardSystem.SetTutorialPoss(false);
 
+
         //初始化教程
         if (Game.Instance.Tutorial)
         {
@@ -211,7 +212,6 @@ public class GameManager : Singleton<GameManager>
         m_BluePrintShopUI.NextRefreshTrun--;
         m_MainUI.PrepareNextWave(m_WaveSystem.RunningSequence);
         m_FuncUI.PrepareNextWave();
-
         GameEvents.Instance.TutorialTrigger(TutorialType.NextWaveStart);
     }
 
@@ -259,7 +259,7 @@ public class GameManager : Singleton<GameManager>
         GameEvents.Instance.TutorialTrigger(TutorialType.DrawBtnClick);
         TransitionToState(StateName.PickingState);
         m_FuncUI.Hide();
-        m_ShapeSelectUI.ShowThreeShapes(m_FuncUI.ModuleLevel);
+        m_ShapeSelectUI.ShowThreeShapes();
     }
 
     public void SelectShape()//选择了一个模块
@@ -299,6 +299,7 @@ public class GameManager : Singleton<GameManager>
             m_BluePrintShopUI.CompositeBluePrint(grid);
             m_FuncUI.Hide();
             m_BoardSystem.SetTutorialPoss(true);//显示强制摆放位置
+            GameEvents.Instance.TutorialTrigger(TutorialType.RefactorBtnClick);
         }
         else
         {
@@ -350,7 +351,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (ConsumeMoney(cost))
         {
-            m_BluePrintShopUI.RefreshShop(m_FuncUI.ModuleLevel);
+            m_BluePrintShopUI.RefreshShop();
         }
     }
 
@@ -393,10 +394,6 @@ public class GameManager : Singleton<GameManager>
         m_BoardSystem.SwitchTrap(trap);
     }
 
-    public void IncreaseShopCapacity(int amount)
-    {
-        m_BluePrintShopUI.ShopCapacity += amount;
-    }
     public void GetPerfectElement(int count)
     {
         GameRes.PerfectElementCount += count;
@@ -421,7 +418,7 @@ public class GameManager : Singleton<GameManager>
 
     public void SetModuleSystemDiscount(float discount)
     {
-        if (m_FuncUI.ModuleLevel < StaticData.Instance.PlayerMaxLevel)
+        if (GameRes.ModuleLevel < StaticData.Instance.PlayerMaxLevel)
         {
             m_FuncUI.PlayerLvUpMoney = Mathf.RoundToInt(m_FuncUI.PlayerLvUpMoney * (1 - discount));
         }
@@ -499,10 +496,7 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region 待加入功能
-    public void SetBuyShapeCostDiscount(float discount)
-    {
-        m_FuncUI.BuyShapeCost = Mathf.RoundToInt(m_FuncUI.BuyShapeCost * (1 - discount));
-    }
+
     public void SetFreeShapeCount(int count)
     {
         m_FuncUI.FreeShapeCount += count;

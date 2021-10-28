@@ -153,10 +153,11 @@ public class ArmourStrategy : DamageStrategy
     }
     public override bool IsDie
     {
-        get => base.IsDie; set
+        get => base.IsDie; 
+        set
         {
             base.IsDie = value;
-            if (!value)
+            if (value)
                 armor.DisArmor();
         }
     }

@@ -441,6 +441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ccdd4f8a5d17b745902e6ecbc66210d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canPreview: 0
   Elements:
   - {fileID: 2627547253356143777}
   - {fileID: 6777039131113397229}
@@ -498,6 +499,7 @@ GameObject:
   - component: {fileID: 2248517418632407695}
   - component: {fileID: 9213686571242178758}
   - component: {fileID: 4736984460468256725}
+  - component: {fileID: 6383292023057759409}
   m_Layer: 0
   m_Name: ElementBenefitTxt
   m_TagString: Untagged
@@ -565,7 +567,20 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5143\u7D20\u5C5E\u6027\u52A0\u6210"
+  m_Text: "\u91CD\u6784\u5143\u7D20\u52A0\u6210"
+--- !u!114 &6383292023057759409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2855300624961802658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a1c8a755ebe1841816e3a5b3aca1ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: REFACTORBENEFIT
 --- !u!1 &3312606502496863075
 GameObject:
   m_ObjectHideFlags: 0

@@ -127,21 +127,33 @@ public class SniperSkill : InitialSkill
     public override TurretSkillName EffectName => TurretSkillName.SniperSkill;
     public override string SkillDescription => "SNIPERSKILL";
 
-    private float attackIncreased;
+    //private float attackIncreased;
 
     public override void Build()
     {
         base.Build();
         strategy.ForbidRange += 2;
     }
-
-
-    public override void Detect()
+    public override void Shoot(Bullet bullet = null)
     {
-        strategy.InitAttackIntensify -= attackIncreased;
-        attackIncreased = strategy.FinalRange * 0.1f;
-        strategy.InitAttackIntensify += attackIncreased;
+        base.Shoot(bullet);
+        float distance = bullet.GetTargetDistance();
+        bullet.Damage *= (1 + distance * 0.15f);
     }
+
+    //public override void Build()
+    //{
+    //    base.Build();
+    //    strategy.ForbidRange += 2;
+    //}
+
+
+    //public override void Detect()
+    //{
+    //    strategy.InitAttackIntensify -= attackIncreased;
+    //    attackIncreased = strategy.FinalRange * 0.1f;
+    //    strategy.InitAttackIntensify += attackIncreased;
+    //}
 }
 
 public class ScatterSkill : InitialSkill
@@ -167,7 +179,7 @@ public class UltraSkill : InitialSkill
     public override void PreHit(Bullet bullet = null)
     {
         float increase = bullet.CriticalPercentage - 1.5f;
-        bullet.CriticalPercentage += increase * 2f;
+        bullet.CriticalPercentage += increase * 2f * strategy.TimeModify;
     }
 
 }
@@ -303,7 +315,7 @@ public class SuperSkill : InitialSkill
 
     public override void TickEnd()
     {
-        strategy.TurnFixAttack += strategy.FinalAttack*strategy.TimeModify;
+        strategy.TurnFixAttack += strategy.FinalAttack * strategy.TimeModify;
         strategy.TurnFixSpeed += strategy.FinalSpeed * strategy.TimeModify;
         strategy.TurnFixCriticalRate += strategy.FinalCriticalRate * strategy.TimeModify;
         strategy.TurnFixSlowRate += strategy.FinalSlowRate * strategy.TimeModify;
@@ -331,7 +343,7 @@ public class CoreSkill : InitialSkill
             if (hit != null)
             {
                 turretStrategy = hit.GetComponent<TurretContent>().Strategy;
-                strategy.InitAttack += turretStrategy.BaseAttack * (0.25f + strategy.Quality * 0.25f);
+                strategy.InitAttack += turretStrategy.BaseAttack * (0.25f + strategy.Quality * 0.25f) * strategy.TimeModify;
             }
         }
     }

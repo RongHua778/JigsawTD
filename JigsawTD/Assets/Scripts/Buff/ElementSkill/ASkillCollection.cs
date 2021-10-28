@@ -7,10 +7,6 @@ public class DoubleAttack : ElementSkill
     //所有攻击提升效果翻倍
     public override List<int> Elements => new List<int> { 0, 0, 0 };
 
-    //public override void Composite()
-    //{
-    //    GameRes.TempGoldIntensify += 0.15f;
-    //}
 
     public override void Build()
     {
@@ -99,17 +95,6 @@ public class NearSplash : ElementSkill
 
 
 
-//public class RandomAttack : ElementSkill
-//{
-//    //子弹攻击力在50%-200%之间随机浮动
-//    public override List<int> Elements => new List<int> { 0, 0, 3 };
-//    public override string SkillDescription => "RANDOMATTACK";
-
-//    public override void Shoot(Bullet bullet = null)
-//    {
-//        bullet.Damage *= Random.Range(0.5f, 2f);
-//    }
-//}
 
 
 

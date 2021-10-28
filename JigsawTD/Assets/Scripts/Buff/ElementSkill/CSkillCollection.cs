@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LateIntensify : ElementSkill
+public class ExtraSkill : ElementSkill
 {
-    //所有战斗开始后发生的属性提升翻倍
+    //获得2个额外的元素技能槽
     public override List<int> Elements => new List<int> { 2, 2, 2 };
 
     public override void Build()
     {
         base.Build();
-        strategy.TimeModify += 1;
+        strategy.ElementSKillSlot += 2;
     }
 
 }

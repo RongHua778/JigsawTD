@@ -147,18 +147,9 @@ public class BoardSystem : IGameSystem
     public override void GameUpdate()
     {
         followers.GameUpdate();
-        //if (IsPressingTile && Input.GetMouseButton(0))
-        //{
-        //    pressCounter += Time.deltaTime;
-        //}
-        //else
-        //{
-        //    pressCounter = 0;
-        //}
     }
     private void TileClick()
     {
-       // IsPressingTile = true;
         startPos = Input.mousePosition;
     }
 
@@ -169,15 +160,14 @@ public class BoardSystem : IGameSystem
         {
             SelectingTile = tile;
         }
-        //IsPressingTile = false;
     }
-
 
     private void OnApplicationFocus(bool focus)
     {
         if (FindPath)
             ShowPath();
     }
+
 
     public void SetGameBoard()
     {
@@ -273,7 +263,7 @@ public class BoardSystem : IGameSystem
     }
 
 
-    private void ShowPath()
+    public void ShowPath()
     {
         GetPathPoints();
         HidePath();

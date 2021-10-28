@@ -13,9 +13,11 @@ public class Dialogue
     public string Name;//说话人名字
     public string[] Words;//对话内容
     public bool DontNeedClickEnd;//是否自动结束并解锁操作
+    public float WaitingTime;
 }
 public class GuideGirlUI : IUserInterface
 {
+    private Animator anim;
     private FuncUI m_FuncUI;
     private MainUI m_MainUI;
     private BluePrintShopUI m_ShopUI;
@@ -46,6 +48,7 @@ public class GuideGirlUI : IUserInterface
 
     public void Initialize(FuncUI funcUI, MainUI mainUI, BluePrintShopUI shopUI, ShapeSelectUI shapeUI)
     {
+        anim = this.GetComponent<Animator>();
         m_FuncUI = funcUI;
         m_MainUI = mainUI;
         m_ShopUI = shopUI;
@@ -55,7 +58,6 @@ public class GuideGirlUI : IUserInterface
         {
             GameEvents.Instance.onTutorialTrigger += GuideTrigger;
             currentDialogue = dialogues[startIndex];
-            GuideTrigger(currentDialogue.TriggerType);
             m_FuncUI.Hide();//因为Preparenextwave自动show了
         }
         else
@@ -126,7 +128,7 @@ public class GuideGirlUI : IUserInterface
 
         // 按时间逐个显示字符
         var timer = 0f;
-        var interval = 0.05f;
+        var interval = 0.03f;
         while (dialogTxt.maxVisibleCharacters < textInfo.characterCount)
         {
             timer += Time.deltaTime;
@@ -170,7 +172,7 @@ public class GuideGirlUI : IUserInterface
 
     IEnumerator GuideCor()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(currentDialogue.WaitingTime);
         StartDialogue();
     }
 
@@ -244,10 +246,9 @@ public class GuideGirlUI : IUserInterface
                 guideIndicator.Show(false);
 
                 break;
+            case 24://点击重构按钮后
             case 23://点击商店按钮
-                guideIndicator.Show(false);
-                break;
-            case 22://点击合成
+            case 22:
                 guideIndicator.Show(false);
                 break;
             case 12://放下合成塔
@@ -330,6 +331,9 @@ public class GuideGirlUI : IUserInterface
                 Hide();
                 Game.Instance.Tutorial = false;
                 break;
+            case 22://悬停元素技能后，点击重构按钮
+                guideIndicator.Show(true, turretTips_RefactorObj.transform);
+                break;
 
         }
     }
@@ -338,5 +342,17 @@ public class GuideGirlUI : IUserInterface
     #endregion
 
 
-
+    public override void Show()
+    {
+        base.Show();
+        anim.SetBool("Show", true);
+    }
+    public override void Hide()
+    {
+        anim.SetBool("Show", false);
+    }
+    public void HideRoot()
+    {
+        m_RootUI.gameObject.SetActive(false);
+    }
 }

@@ -77,7 +77,7 @@ public class Save
         SelectInfo select1 = new SelectInfo("WOOD", false, true);
         SelectInfo select2 = new SelectInfo("WATER", false, true);
         SelectInfo select3 = new SelectInfo("FIRE", false, true);
-        SelectInfo select4 = new SelectInfo("DUST", true, true);
+        SelectInfo select4 = new SelectInfo("DUST", false, true);
         SaveSelectedElement = new List<SelectInfo> { select0, select1, select2, select3, select4 };
     }
 

@@ -7,7 +7,6 @@ public class LevelDiscount : ElementSkill
 {
     //升级防御塔费用-50%
     public override List<int> Elements => new List<int> { 0, 1, 2 };
-    public override string SkillDescription => "LEVELDISCOUNT";
 
     public override void Build()
     {
@@ -17,35 +16,53 @@ public class LevelDiscount : ElementSkill
 
 }
 
-public class NextIntensify : ElementSkill
+public class CircleRange : ElementSkill
 {
-    //造成的伤害-25%，使下一个合成塔暴击+40%
+    //使防御塔攻击范围变为圆型
     public override List<int> Elements => new List<int> { 0, 1, 3 };
-    public override string SkillDescription => "NEXTINTENSIFY";
 
-    public override void Composite()
+    public override void Build()
     {
-        GameRes.NextCompositeCallback = CompositeCallback;
+        base.Build();
+        strategy.RangeType = RangeType.Circle;
     }
 
-    public void CompositeCallback(StrategyBase strategy)
+    public override void OnEquip()
     {
-        strategy.InitCriticalRateIntensify += 0.4f;
+        base.OnEquip();
+        strategy.m_Turret.GenerateRange();
     }
 
 }
+
+//public class NextIntensify : ElementSkill
+//{
+//    //造成的伤害-25%，使下一个合成塔暴击+40%
+//    public override List<int> Elements => new List<int> { 0, 1, 3 };
+//    public override string SkillDescription => "NEXTINTENSIFY";
+
+//    public override void Composite()
+//    {
+//        GameRes.NextCompositeCallback = CompositeCallback;
+//    }
+
+//    public void CompositeCallback(StrategyBase strategy)
+//    {
+//        strategy.InitCriticalRateIntensify += 0.4f;
+//    }
+
+//}
 
 
 
 public class FreeDraw : ElementSkill
 {
-    //造成的伤害-25%，接下来两次抽取模块免费
+    //抽取模块价格降低50%
     public override List<int> Elements => new List<int> { 0, 1, 4 };
-    public override string SkillDescription => "FreeDraw";
 
     public override void Composite()
     {
-        GameManager.Instance.SetFreeShapeCount(2);
+        GameRes.BuyShapeCost = (int)(GameRes.BuyShapeCost * 0.5f);
     }
 }
 
@@ -53,22 +70,16 @@ public class TurretLevelUp : ElementSkill
 {
     //提升1级防御塔等级
     public override List<int> Elements => new List<int> { 0, 2, 3 };
-    public override string SkillDescription => "TURRETLEVELUP";
 
-    public override void Build()
+    public override void Composite()
     {
-        base.Build();
-        if (strategy.Quality < 3)
-        {
-            strategy.Quality++;
-            strategy.SetQualityValue();
-        }
+        GameRes.DiscountRate += 0.1f;
     }
 }
 
 public class SystemDiscount : ElementSkill
 {
-    //造成的伤害-25%，使模块升级费用-50%
+    //使模块升级费用-50%
     public override List<int> Elements => new List<int> { 0, 2, 4 };
     public override string SkillDescription => "SYSTEMDISCOUNT";
 
@@ -104,13 +115,12 @@ public class RandomSkill : ElementSkill
 
 public class FreeGround : ElementSkill
 {
-    //使交换陷阱的价格减半
+    //攻击范围+1
     public override List<int> Elements => new List<int> { 1, 2, 3 };
-    public override string SkillDescription => "FREEGROUND";
-
-    public override void Composite()
+    public override void Build()
     {
-        GameRes.FreeTrapCount += 1;
+        base.Build();
+        strategy.ComRangeIntensify += 1;
     }
 
 
@@ -171,7 +181,7 @@ public class PortalHit : ElementSkill
 
     public override void Hit(IDamageable target, Bullet bullet = null)
     {
-        if (target.DamageStrategy.IsEnemy) 
+        if (target.DamageStrategy.IsEnemy)
         {
             if (Random.value > 0.97f)
                 ((Enemy)target).Flash(2);
@@ -213,17 +223,3 @@ public class LateDamage : ElementSkill
 
 }
 
-public class CircleRange : ElementSkill
-{
-    //使防御塔攻击范围变为圆型
-    public override List<int> Elements => new List<int> { 6, 7, 8 };
-    public override string SkillDescription => "CIRCLERANGE";
-
-    public override void Build()
-    {
-        base.Build();
-        strategy.RangeType = RangeType.Circle;
-        strategy.m_Turret.GenerateRange();
-    }
-
-}

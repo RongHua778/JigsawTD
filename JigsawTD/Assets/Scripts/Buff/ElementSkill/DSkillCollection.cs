@@ -2,6 +2,159 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using DG.Tweening;
+
+public class RandomCritical : ElementSkill
+{
+    //暴击伤害增加-100%-400%的随机浮动
+    public override List<int> Elements => new List<int> { 3, 3, 3 };
+
+    public override void Shoot(Bullet bullet = null)
+    {
+        bullet.CriticalPercentage += Random.Range(-1f, 4f) * strategy.TimeModify;
+    }
+}
+
+public class AttackCritical : ElementSkill
+{
+    //攻击力在50%-200%之间随机浮动
+    public override List<int> Elements => new List<int> { 3, 3, 0 };
+    float targetValue;
+    float currentValue;
+    float counter = 2;
+    public override void StartTurn()
+    {
+        base.StartTurn();
+        Duration += 999;
+    }
+    public override void Tick(float delta)
+    {
+        base.Tick(delta);
+        counter += delta;
+        if (counter > 2f)
+        {
+            counter = 0;
+            targetValue = Random.Range(0.5f, 2f) * strategy.TimeModify;
+            DOTween.To(() => currentValue, x => currentValue = x, targetValue, 2);
+        }
+        strategy.AttackAdjust = currentValue;
+    }
+
+    public override void EndTurn()
+    {
+        base.EndTurn();
+        Duration = 0;
+        strategy.AttackAdjust = 1;
+        currentValue = 1;
+        counter = 2;
+    }
+}
+
+public class SpeedCritical : ElementSkill
+{
+    //攻击力在50%-200%之间随机浮动
+    public override List<int> Elements => new List<int> { 3, 3, 1 };
+    float targetValue;
+    float currentValue;
+    float counter = 2;
+    public override void StartTurn()
+    {
+        base.StartTurn();
+        Duration += 999;
+    }
+    public override void Tick(float delta)
+    {
+        base.Tick(delta);
+        counter += delta;
+        if (counter > 2f)
+        {
+            counter = 0;
+            targetValue = Random.Range(0.5f, 2f) * strategy.TimeModify;
+            DOTween.To(() => currentValue, x => currentValue = x, targetValue, 2);
+        }
+        strategy.SpeedAdjust = currentValue;
+    }
+
+    public override void EndTurn()
+    {
+        base.EndTurn();
+        Duration = 0;
+        strategy.SpeedAdjust = 1;
+        currentValue = 1;
+        counter = 2;
+    }
+}
+
+public class SlowCritical : ElementSkill
+{
+    //攻击力在50%-200%之间随机浮动
+    public override List<int> Elements => new List<int> { 3, 3, 2 };
+    float targetValue;
+    float currentValue;
+    float counter = 2;
+    public override void StartTurn()
+    {
+        base.StartTurn();
+        Duration += 999;
+    }
+    public override void Tick(float delta)
+    {
+        base.Tick(delta);
+        counter += delta;
+        if (counter > 2f)
+        {
+            counter = 0;
+            targetValue = Random.Range(0.5f, 2f) * strategy.TimeModify;
+            DOTween.To(() => currentValue, x => currentValue = x, targetValue, 2);
+        }
+        strategy.SlowAdjust = currentValue;
+    }
+
+    public override void EndTurn()
+    {
+        base.EndTurn();
+        Duration = 0;
+        strategy.SlowAdjust = 1;
+        currentValue = 1;
+        counter = 2;
+    }
+}
+
+public class SplashCritical : ElementSkill
+{
+    //攻击力在50%-200%之间随机浮动
+    public override List<int> Elements => new List<int> { 3, 3, 4 };
+    float targetValue;
+    float currentValue;
+    float counter = 2;
+    public override void StartTurn()
+    {
+        base.StartTurn();
+        Duration += 999;
+    }
+    public override void Tick(float delta)
+    {
+        base.Tick(delta);
+        counter += delta;
+        if (counter > 2f)
+        {
+            counter = 0;
+            targetValue = Random.Range(0.5f, 2f) * strategy.TimeModify;
+            DOTween.To(() => currentValue, x => currentValue = x, targetValue, 2);
+        }
+        strategy.SplashAdjust = currentValue;
+    }
+
+    public override void EndTurn()
+    {
+        base.EndTurn();
+        Duration = 0;
+        strategy.SplashAdjust = 1;
+        currentValue = 1;
+        counter = 2;
+    }
+}
+
 //public class CopySkill : ElementSkill
 //{
 //    //装备：复制第一个元素技能
@@ -24,143 +177,127 @@ using System.Linq;
 //        strategy.AddElementSkill(newSkill);
 //    }
 //}
-public class RandomCritical : ElementSkill
-{
-    //暴击伤害增加-100%-400%的随机浮动
-    public override List<int> Elements => new List<int> { 3, 3, 3 };
+//public class AttackCritical : ElementSkill
+//{
+//    public override List<int> Elements => new List<int> { 3, 3, 0 };
+//    private float attackIntensified;
+//    private float timeCounter;
+//    private bool isIntensify;
 
-    //public override void Composite()
-    //{
-    //    GameRes.TempFireIntensify += 0.1f;
+//    public override void StartTurn()
+//    {
+//        Duration += 999;
+//    }
+//    public override void PreHit(Bullet bullet = null)
+//    {
+//        if (bullet.isCritical)
+//        {
+//            timeCounter = 2f;
+//            if (!isIntensify)
+//            {
+//                isIntensify = true;
+//                attackIntensified = 0.6f * strategy.TimeModify;
+//                strategy.TurnAttackIntensify += 0.6f * strategy.TimeModify;
+//            }
+//        }
+//    }
+//    public override void Tick(float delta)
+//    {
+//        base.Tick(delta);
+//        if (timeCounter >= 0)
+//        {
+//            timeCounter -= delta;
+//            if (timeCounter <= 0)
+//            {
+//                isIntensify = false;
+//                strategy.TurnAttackIntensify -= attackIntensified;
+//            }
+//        }
 
-    //}
-    public override void Shoot(Bullet bullet = null)
-    {
-        bullet.CriticalPercentage += Random.Range(-1f, 4f);
-    }
-}
+//    }
 
-public class AttackCritical : ElementSkill
-{
-    public override List<int> Elements => new List<int> { 3, 3, 0 };
-    private float attackIntensified;
-    private float timeCounter;
-    private bool isIntensify;
+//    public override void EndTurn()
+//    {
+//        attackIntensified = 0;
+//        isIntensify = false;
+//    }
 
-    public override void StartTurn()
-    {
-        Duration += 999;
-    }
-    public override void PreHit(Bullet bullet = null)
-    {
-        if (bullet.isCritical)
-        {
-            timeCounter = 2f;
-            if (!isIntensify)
-            {
-                isIntensify = true;
-                attackIntensified = 0.6f * strategy.TimeModify;
-                strategy.TurnAttackIntensify += 0.6f * strategy.TimeModify;
-            }
-        }
-    }
-    public override void Tick(float delta)
-    {
-        base.Tick(delta);
-        if (timeCounter >= 0)
-        {
-            timeCounter -= delta;
-            if (timeCounter <= 0)
-            {
-                isIntensify = false;
-                strategy.TurnAttackIntensify -= attackIntensified;
-            }
-        }
+//}
 
-    }
+//public class SpeedCritical : ElementSkill
+//{
+//    //暴击后，使接下来1秒攻速提升50%
+//    public override List<int> Elements => new List<int> { 3, 3, 1 };
 
-    public override void EndTurn()
-    {
-        attackIntensified = 0;
-        isIntensify = false;
-    }
+//    private float speedIncreased;
+//    private float timeCounter;
+//    private bool isIntensify;
 
-}
+//    public override void StartTurn()
+//    {
+//        Duration += 999;
+//    }
+//    public override void PreHit(Bullet bullet = null)
+//    {
+//        if (bullet.isCritical)
+//        {
+//            timeCounter = 2f;
+//            if (!isIntensify)
+//            {
+//                isIntensify = true;
+//                speedIncreased = 0.5f * strategy.TimeModify;
+//                strategy.TurnSpeedIntensify += 0.5f * strategy.TimeModify;
+//            }
+//        }
+//    }
+//    public override void Tick(float delta)
+//    {
+//        base.Tick(delta);
+//        if (timeCounter >= 0)
+//        {
+//            timeCounter -= delta;
+//            if (timeCounter <= 0)
+//            {
+//                isIntensify = false;
+//                strategy.TurnSpeedIntensify -= speedIncreased;
+//            }
+//        }
 
-public class SpeedCritical : ElementSkill
-{
-    //暴击后，使接下来1秒攻速提升50%
-    public override List<int> Elements => new List<int> { 3, 3, 1 };
+//    }
 
-    private float speedIncreased;
-    private float timeCounter;
-    private bool isIntensify;
+//    public override void EndTurn()
+//    {
+//        speedIncreased = 0;
+//        isIntensify = false;
+//    }
 
-    public override void StartTurn()
-    {
-        Duration += 999;
-    }
-    public override void PreHit(Bullet bullet = null)
-    {
-        if (bullet.isCritical)
-        {
-            timeCounter = 2f;
-            if (!isIntensify)
-            {
-                isIntensify = true;
-                speedIncreased = 0.5f * strategy.TimeModify;
-                strategy.TurnSpeedIntensify += 0.5f * strategy.TimeModify;
-            }
-        }
-    }
-    public override void Tick(float delta)
-    {
-        base.Tick(delta);
-        if (timeCounter >= 0)
-        {
-            timeCounter -= delta;
-            if (timeCounter <= 0)
-            {
-                isIntensify = false;
-                strategy.TurnSpeedIntensify -= speedIncreased;
-            }
-        }
+//}
 
-    }
+//public class CriticalSlow : ElementSkill
+//{
+//    //暴击造成的减速效果翻倍
+//    public override List<int> Elements => new List<int> { 3, 3, 2 };
+//    public override void PreHit(Bullet bullet = null)
+//    {
+//        if (bullet.isCritical)
+//        {
+//            bullet.SlowRate *= 2f;
+//        }
+//    }
+//}
 
-    public override void EndTurn()
-    {
-        speedIncreased = 0;
-        isIntensify = false;
-    }
-
-}
-
-public class CriticalSlow : ElementSkill
-{
-    //暴击造成的减速效果翻倍
-    public override List<int> Elements => new List<int> { 3, 3, 2 };
-    public override void PreHit(Bullet bullet = null)
-    {
-        if (bullet.isCritical)
-        {
-            bullet.SlowRate *= 2f;
-        }
-    }
-}
-
-public class CriticalSplash : ElementSkill
-{
-    //暴击造成的减速效果翻倍
-    public override List<int> Elements => new List<int> { 3, 3, 4 };
-    public override void PreHit(Bullet bullet = null)
-    {
-        if (bullet.isCritical)
-        {
-            bullet.SputteringRange *= 2f;
-        }
-    }
-}
+//public class CriticalSplash : ElementSkill
+//{
+//    //暴击造成的减速效果翻倍
+//    public override List<int> Elements => new List<int> { 3, 3, 4 };
+//    public override void PreHit(Bullet bullet = null)
+//    {
+//        if (bullet.isCritical)
+//        {
+//            bullet.SputteringRange *= 2f;
+//        }
+//    }
+//}
 
 
 

@@ -74,8 +74,7 @@ public abstract class Enemy : PathFollower, IDamageable
     public float TargetDamageCounter { get; set; }
 
     public BuffableEntity Buffable { get; set; }
-
-
+    public float SlowResist { get; set; }//减速抗性
 
     public virtual void Initialize(int pathIndex, EnemyAttribute attribute, float pathOffset, float intensify)
     {
@@ -85,6 +84,7 @@ public abstract class Enemy : PathFollower, IDamageable
         this.DamageStrategy.ResetStrategy(Mathf.RoundToInt(attribute.Health * intensify));//清除加成
         this.Speed = attribute.Speed;
         this.ReachDamage = attribute.ReachDamage;
+        this.SlowResist = GameRes.CurrentWave / (GameRes.CurrentWave + 20);
         SpawnOn(pathIndex, BoardSystem.shortestPoints);
 
     }

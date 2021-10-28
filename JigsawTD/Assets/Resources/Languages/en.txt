@@ -89,9 +89,11 @@ GUIDEVIDEO10=Tip: each refactor turret can only be equipped with 1 additional el
 DRAWINFO=If you haven't build last turn, the price will be reduced\n current price reduction percentage:
 NEXTWAVE=Next Wave[Space]
 DRAWMODULE=Draw Module
+CHANCEBEFORE=Now
+CHANCEAFTER=After
 MODULELEVELINFO1=Current level probability
 MODULELEVELINFO2=Level
-MODULELEVELINFO3=Shop blueprint +1 when module level reaches 3,5 and 7
+MODULELEVELINFO3=Shop blueprint +1 when module level reaches 2,4 and 6
 ENERGYINFO=1. Gain 1 energy if you haven't drawed last wave\n2. Gain additional energy if you keep not drawing \n3. Gain 1 extra draw while energy reach 10.
 DEGRADE=Degrade
 
@@ -129,6 +131,7 @@ ELEMENTSKILL=Element Skill Benefit
 TILESKILL=Tile Benefit
 CRITICALINFO=Each 1% critical = 1% extra critical damage. Defacult critical damage is 150%
 SPLASHINFO=Splash radius. Default splash damage is 50%
+SLOWINFO=Bullet can slow down enemy, enemy's slow resistence will increase each wave
 ATTACKUP=% Attack
 SPEEDUP=% FireRate
 CRITICALUP=% Critical
@@ -143,6 +146,7 @@ ELEMENTSLOT=Element Skill
 TURRETLEVEL=Turret Level
 EMPTYSKILL=Empty slot
 RARE=Blueprint level: Increasing the module level makes it possible to have higher levels of blueprints in the store
+REFACTORBENEFIT=Refactor Benefit
 
 //Groundtips
 BUYGROUND=Build a basic tile?
@@ -180,7 +184,7 @@ SCATTERSKILL=Deals 50% less damage, but can attack an additional 3 targets.
 MORTARSKILL=Bullet's splash damage increased by 150%.
 RAPIDERSKILL=Firerate increased by 15% each shoot when it is attacking the same target(up to 300%).
 ROTARYSKILL=Penetration Bullet; Randomly shoot around and double all firerate increased.
-SNIPERSKILL=Forbid range+2, attack increased by 10% for every 1 range.
+SNIPERSKILL=Forbid range+2, bullet's damage increased by 10% for each meter it travelled
 ULTRASKILL=Double the increased critical damage.
 SNOWSKILL=Penetration Bullet;Bullet will move to the end of straight direction, and double enemy's current slow.
 COOPORATIVESKILL=Attack increased by 1% * the amount of refacotor turrets each shoot.
@@ -215,7 +219,7 @@ BBEINFO=Splash range increased by 0.02 each shoot.
 
 //C系
 CCC=Forst Technology
-CCCINFO=Double all stats increased that occur after the start of each wave
+CCCINFO=Gain 2 extra element skill slots
 CCA=Cold Front
 CCAINFO=Attack increases by 2% per second after the start of each wave.
 CCB=Overload Cartridge
@@ -227,45 +231,45 @@ CCEINFO=Splash range increases by 0.01 per second after the start of each wave.
 
 //D系
 DDD=Chaos Technology
-DDDINFO=Critical damage randomly increased by -100% to 400%
+DDDINFO=Bullet's critical damage randomly increased by -100% to 400%
 DDA=Energy Blasting
-DDAINFO=Attack increase by 60% for 2 seconds after a critical hit.
+DDAINFO=Turret's attack fluctuates between 50% and 200%
 DDB=Vulnerability Shoot
-DDBINFO=Firerate increase by 50% for 2 seconds after a critical hit.
+DDBINFO=Turret's firerate fluctuates between 50% and 200%
 DDC=Ice Bomb
-DDCINFO=Double bullet's slow if it is a critical hit.
+DDCINFO=Turret's slow fluctuates between 50% and 200%
 DDE=Bombardment
-DDEINFO=Double bullet's splash range if it is a critical hit.
+DDEINFO=Turret's splash fluctuates between 50% and 200%
 
 //E系
 EEE=Atomic Center
-EEEINFO=Increase adjacent turrets' splash by 0.5
+EEEINFO=Double all stats increased that occur after the start of each wave
 EEA=Attack Core
-EEAINFO=Increase adjacent turrets' attack by 30%
+EEAINFO=Turret's attack increased by 100% before X seconds of each wave, X = Current wave
 EEB=Speed Core
-EEBINFO=Increase adjacent turrets' firerate by 30%
+EEBINFO=Turret's firerate increased by 100% before X seconds of each wave, X = Current wave
 EEC=Slow Core
-EECINFO=Increase adjacent turrets' slow by 0.5
+EECINFO=Turret's slow increased by 100% before X seconds of each wave, X = Current wave
 EED=Critical Core
-EEDINFO=Increase adjacent turrets' critical by 20%
+EEDINFO=Turret's splash increased by 100% before X seconds of each wave, X = Current wave
 
 
 //综合系
 ABC=Inferior Base
 ABCINFO=Upgrade cost reduced by 50%
 ABD=Improved Formula
-ABDINFO=Increase the next refactor turret's critical by 40%
+ABDINFO=Turn this turret's attack range in to circle
 ABE=Free Tickets
-ABEINFO=The next two build will be free
+ABEINFO=Reduce the cost of buidling module by 50%
 
 ACD=Rapid Upgrade
-ACDINFO=Increase turret's level by 1
+ACDINFO=Increase the price reduction of module builds by 10% (Up to 50%)
 ACE=Technology Leaps
 ACEINFO=Reduce module upgrade cost by 50%
 ADE=Unreal Structure
 ADEINFO=Becomes a random element skill while refactor
 BCD=Concrete Pouring
-BCDINFO=The next relocate mark will be free
+BCDINFO=Range increased by 1
 BCE=Perfect Element
 BCEINFO=Gain 1 perfect element when refactor
 BDE=Repair Factory

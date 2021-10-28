@@ -7,10 +7,13 @@ public class CompositeTurret : TurretContent
     public override GameTileContentType ContentType => GameTileContentType.CompositeTurret;
     public override bool GameUpdate()
     {
-        foreach (var skill in Strategy.TurretSkills)
+        if (GameManager.Instance.OperationState.StateName == StateName.WaveState)
         {
-            if (skill.Duration > 0)
-                skill.Tick(Time.deltaTime);
+            foreach (var skill in Strategy.TurretSkills)
+            {
+                if (skill.Duration > 0)
+                    skill.Tick(Time.deltaTime);
+            }
         }
         return base.GameUpdate();
     }

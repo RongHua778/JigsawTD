@@ -19,11 +19,11 @@ public static class ConstructHelper
     }
 
 
-    public static TileShape GetRandomShapeByLevel(int playerLevel)
+    public static TileShape GetRandomShapeByLevel()
     {
         TileShape shape = m_ShapeFactory.GetRandomShape();
         GameTile specialTile = m_TileFactory.GetBasicTile();
-        GameTileContent content = m_ContentFactory.GetRandomElementTurret(playerLevel);
+        GameTileContent content = m_ContentFactory.GetRandomElementTurret();
         specialTile.SetContent(content);
         shape.SetTile(specialTile);
         return shape;
