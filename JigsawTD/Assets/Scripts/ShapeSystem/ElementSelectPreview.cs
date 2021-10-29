@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class ElementSelectPreview : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
 {
-    [SerializeField] TileSelect m_TileSelect = default;
     [SerializeField] Image FrameSprite = default;
     [SerializeField] Color NormalColor = default;
     [SerializeField] Color HandleColor = default;

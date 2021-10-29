@@ -10,8 +10,9 @@ public enum Destination
 public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
 {
     public string ExplosionSound => "Sound_EnemyExplosion";
-    public string ExplosionEffect => "EnemyExplosionBlue"; 
+    public string ExplosionEffect => "EnemyExplosionBlue";
 
+    private ReusableObject ExplosionPrefab;
 
     public HealthBar HealthBar { get; set; }
     public DamageStrategy DamageStrategy { get; set; }
@@ -46,6 +47,8 @@ public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
     {
         DamageStrategy = new AircraftStrategy(this);
         HealthBar = transform.Find("HealthBarSmall").GetComponent<HealthBar>();
+        ExplosionPrefab = Resources.Load<ReusableObject>("Prefabs/Effects/Enemy/" + ExplosionEffect);
+
     }
 
 
@@ -53,11 +56,19 @@ public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
     {
         if (DamageStrategy.IsDie)
         {
+            OnDie();
             ObjectPool.Instance.UnSpawn(this);
             return false;
         }
         return true;
     }
+    private void OnDie()
+    {
+        ReusableObject explosion = ObjectPool.Instance.Spawn(ExplosionPrefab);
+        explosion.transform.position = transform.position;
+        Sound.Instance.PlayEffect(ExplosionSound);
+    }
+
 
     public override void OnUnSpawn()
     {

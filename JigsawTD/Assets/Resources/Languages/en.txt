@@ -231,15 +231,15 @@ CCEINFO=Splash range increases by 0.01 per second after the start of each wave.
 
 //D系
 DDD=Chaos Technology
-DDDINFO=Bullet's critical damage randomly increased by -100% to 400%
+DDDINFO=When composited or equipped, randomly changed all base stats of the turret by 50% to 300%
 DDA=Energy Blasting
-DDAINFO=Turret's attack fluctuates between 50% and 200%
+DDAINFO=Turret's attack fluctuates between 25% and 250%
 DDB=Vulnerability Shoot
-DDBINFO=Turret's firerate fluctuates between 50% and 200%
+DDBINFO=Turret's firerate fluctuates between 25% and 250%
 DDC=Ice Bomb
-DDCINFO=Turret's slow fluctuates between 50% and 200%
+DDCINFO=Turret's slow fluctuates between 25% and 250%
 DDE=Bombardment
-DDEINFO=Turret's splash fluctuates between 50% and 200%
+DDEINFO=Turret's splash fluctuates between 25% and 250%
 
 //E系
 EEE=Atomic Center

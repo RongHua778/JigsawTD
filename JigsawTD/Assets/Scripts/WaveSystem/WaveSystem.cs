@@ -167,7 +167,8 @@ public class WaveSystem : IGameSystem
     {
         EnemyAttribute attribute = StaticData.Instance.EnemyFactory.Get(type);
         int amount = Mathf.RoundToInt(attribute.InitCount + ((float)wave / 5) * attribute.CountIncrease / genres);
-        float coolDown = (float)(5f + wave / 2) / amount;
+        //float coolDown = (float)(5f + wave / 2) / amount;
+        float coolDown = attribute.CoolDown * genres;
         EnemySequence sequence = new EnemySequence(type, amount, coolDown, stage, isBoss);
         return sequence;
     }
@@ -194,7 +195,7 @@ public class WaveSystem : IGameSystem
     {
         EnemyRemain++;
         Enemy enemy = ObjectPool.Instance.Spawn(attribute.Prefab) as Enemy;
-        enemy.Initialize(pathIndex, attribute, UnityEngine.Random.Range(-0.3f,0.3f), intensify);
+        enemy.Initialize(pathIndex, attribute, UnityEngine.Random.Range(-0.3f, 0.3f), intensify);
         GameManager.Instance.enemies.Add(enemy);
         return enemy;
     }

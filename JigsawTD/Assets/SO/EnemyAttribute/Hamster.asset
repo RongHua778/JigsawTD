@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyName: HAMSTER
   EnemyType: 6
-  InitCount: 15
+  InitCount: 5
   CountIncrease: 0
-  Health: 40
+  Health: 100
   Speed: 0.6
-  CoolDown: 0.5
+  CoolDown: 1
   Prefab: {fileID: 5042288069490103953, guid: d3aac527b4cb7b24483e988a8060353a, type: 3}
   ReachDamage: 1
   extraHealth: 0

@@ -17,7 +17,7 @@ public class QualitySlot : MonoBehaviour
         ChanceProgress.fillAmount = chanceNow / 1;
         ChanceNow.text = chanceNow * 100 + "%";
         ChanceAfter.text = chanceAfter * 100 + "%";
-        ChanceAfter.color = chanceAfter >= chanceNow ? UpColor : DownColor;
+        ChanceAfter.color = chanceAfter > chanceNow ? UpColor : DownColor;
     }
 
 }

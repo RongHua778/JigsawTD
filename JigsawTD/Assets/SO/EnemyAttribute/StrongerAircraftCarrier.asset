@@ -18,7 +18,7 @@ MonoBehaviour:
   CountIncrease: 0
   Health: 1000
   Speed: 0.05
-  CoolDown: 0
+  CoolDown: 1
   Prefab: {fileID: 8324898011576784853, guid: c0dc0042395e19b479eca062267e88fa, type: 3}
   ReachDamage: 5
   extraHealth: 0

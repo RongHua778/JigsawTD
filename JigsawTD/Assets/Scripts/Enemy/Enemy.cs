@@ -7,6 +7,7 @@ public abstract class Enemy : PathFollower, IDamageable
 {
     public virtual string ExplosionSound => "Sound_EnemyExplosion";
     public virtual string ExplosionEffect { get; }
+    protected ReusableObject ExplosionPrefab;
     [Header("基本配置")]
     protected Animator anim;
     public HealthBar HealthBar { get; set; }
@@ -56,8 +57,8 @@ public abstract class Enemy : PathFollower, IDamageable
     private int affectHealerCount = 0;
     public int AffectHealerCount { get => affectHealerCount; set => affectHealerCount = value; }
     float speedIntensify = 0;
-    public virtual float SpeedIntensify { get => speedIntensify + AffectHealerCount > 0 ? 0.4f : 0; set => speedIntensify = Mathf.Min(6, value); }
-    public override float Speed { get => StunTime > 0 ? 0 : Mathf.Max(0.1f, (speed + SpeedIntensify) * (1 - SlowRate / (SlowRate + 2f))); set => speed = value; }
+    public virtual float SpeedIntensify { get => speedIntensify + (AffectHealerCount > 0 ? 0.4f : 0); set => speedIntensify = value; }
+    public override float Speed { get => StunTime > 0 ? 0 : Mathf.Max(0.1f, (speed + SpeedIntensify) * (1 - SlowRate / (SlowRate + 2f))); }
 
     float slowRate = 0;
     public float SlowRate
@@ -82,7 +83,7 @@ public abstract class Enemy : PathFollower, IDamageable
         this.PathOffset = pathOffset;
         this.Intensify = intensify;
         this.DamageStrategy.ResetStrategy(Mathf.RoundToInt(attribute.Health * intensify));//清除加成
-        this.Speed = attribute.Speed;
+        this.speed = attribute.Speed;
         this.ReachDamage = attribute.ReachDamage;
         this.SlowResist = GameRes.CurrentWave / (GameRes.CurrentWave + 20);
         SpawnOn(pathIndex, BoardSystem.shortestPoints);
@@ -98,6 +99,9 @@ public abstract class Enemy : PathFollower, IDamageable
         Buffable = this.GetComponent<BuffableEntity>();
         enemyCol = enemySprite.GetComponent<CircleCollider2D>();
         anim = GetComponent<Animator>();
+
+        ExplosionPrefab = Resources.Load<ReusableObject>("Prefabs/Effects/Enemy/" + ExplosionEffect);
+
 
     }
 
@@ -161,14 +165,15 @@ public abstract class Enemy : PathFollower, IDamageable
     }
     protected virtual void OnDie()
     {
-
+        ReusableObject explosion = ObjectPool.Instance.Spawn(ExplosionPrefab);
+        explosion.transform.position = model.position;
+        Sound.Instance.PlayEffect(ExplosionSound);
     }
 
 
     protected override void PrepareNextState()
     {
         base.PrepareNextState();
-        //CurrentTile = pathTiles[PointIndex];
 
     }
 

@@ -14,25 +14,29 @@ public class Binary : Boss
         base.Initialize(pathIndex, attribute, pathOffset, intensify);
         if (FirstBinary == null)
         {
+            SpeedIntensify = 0;
             FirstBinary = this;
             m_brother = GameManager.Instance.SpawnEnemy(EnemyType.Binary, 0, Intensify) as Binary;
             m_brother.m_brother = this;
             FirstBinary = null;
+            m_brother.SpeedIntensify = 0;
         }
     }
 
 
     protected override void OnDie()
     {
+        base.OnDie();
         if (m_brother != null)
         {
-            m_brother.SpeedIntensify += 6f;
+            m_brother.SpeedIntensify += 0.7f;
             m_brother.ProgressFactor = m_brother.Speed * m_brother.Adjust;
             m_brother.m_brother = null;
             m_brother = null;
         }
 
     }
+
 
 
 

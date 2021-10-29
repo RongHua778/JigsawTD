@@ -16,7 +16,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private ShapeSelectUI m_ShapeSelectUI = default;
     [SerializeField] private MainUI m_MainUI = default;
     [SerializeField] private FuncUI m_FuncUI = default;
-    [SerializeField] private GuideUI m_GuideUI = default;
+    //[SerializeField] private GuideUI m_GuideUI = default;
     [SerializeField] private GuideGirlUI m_GuideGirlUI = default;
 
     [SerializeField] private GameEndUI m_GameEndUI = default;

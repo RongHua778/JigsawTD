@@ -18,6 +18,8 @@ public class Divider : Boss
 
     protected override void OnDie()
     {
+        base.OnDie();
+
         if (!isOutTroing)
             GetSprings();
     }

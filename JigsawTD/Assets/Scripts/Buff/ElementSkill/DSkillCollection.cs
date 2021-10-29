@@ -13,6 +13,26 @@ public class RandomCritical : ElementSkill
     {
         bullet.CriticalPercentage += Random.Range(-1f, 4f) * strategy.TimeModify;
     }
+
+    public override void Composite()
+    {
+        base.Composite();
+        strategy.InitAttack *= Random.Range(0.5f, 3f);
+        strategy.InitSpeed *= Random.Range(0.5f, 3f);
+        strategy.InitSlowRate *= Random.Range(0.5f, 3f);
+        strategy.InitCriticalRate *= Random.Range(0.5f, 3f);
+        strategy.InitSputteringRange *= Random.Range(0.5f, 3f);
+    }
+
+    public override void OnEquip()
+    {
+        base.OnEquip();
+        strategy.InitAttack *= Random.Range(0.5f, 3f);
+        strategy.InitSpeed *= Random.Range(0.5f, 3f);
+        strategy.InitSlowRate *= Random.Range(0.5f, 3f);
+        strategy.InitCriticalRate *= Random.Range(0.5f, 3f);
+        strategy.InitSputteringRange *= Random.Range(0.5f, 3f);
+    }
 }
 
 public class AttackCritical : ElementSkill
@@ -34,7 +54,7 @@ public class AttackCritical : ElementSkill
         if (counter > 2f)
         {
             counter = 0;
-            targetValue = Random.Range(0.5f, 2f) * strategy.TimeModify;
+            targetValue = Random.Range(0.25f, 2.5f);
             DOTween.To(() => currentValue, x => currentValue = x, targetValue, 2);
         }
         strategy.AttackAdjust = currentValue;
@@ -69,7 +89,7 @@ public class SpeedCritical : ElementSkill
         if (counter > 2f)
         {
             counter = 0;
-            targetValue = Random.Range(0.5f, 2f) * strategy.TimeModify;
+            targetValue = Random.Range(0.25f, 2.5f);
             DOTween.To(() => currentValue, x => currentValue = x, targetValue, 2);
         }
         strategy.SpeedAdjust = currentValue;
@@ -104,7 +124,7 @@ public class SlowCritical : ElementSkill
         if (counter > 2f)
         {
             counter = 0;
-            targetValue = Random.Range(0.5f, 2f) * strategy.TimeModify;
+            targetValue = Random.Range(0.25f, 2.5f);
             DOTween.To(() => currentValue, x => currentValue = x, targetValue, 2);
         }
         strategy.SlowAdjust = currentValue;
@@ -139,7 +159,7 @@ public class SplashCritical : ElementSkill
         if (counter > 2f)
         {
             counter = 0;
-            targetValue = Random.Range(0.5f, 2f) * strategy.TimeModify;
+            targetValue = Random.Range(0.25f, 2.5f);
             DOTween.To(() => currentValue, x => currentValue = x, targetValue, 2);
         }
         strategy.SplashAdjust = currentValue;

@@ -6,6 +6,7 @@ public class Armor : MonoBehaviour,IDamageable
 {
     public string ExplosionEffect => "EnemyExplosionYellow";
     public string ExplosionSound => "Sound_EnemyExplosion";
+    private ReusableObject ExplosionPrefab;
 
     public HealthBar HealthBar { get; set; }
 
@@ -16,13 +17,17 @@ public class Armor : MonoBehaviour,IDamageable
     {
         DamageStrategy = new ArmourStrategy(this);
         HealthBar = transform.Find("HealthBarSmall").GetComponent<HealthBar>();
+        ExplosionPrefab = Resources.Load<ReusableObject>("Prefabs/Effects/Enemy/" + ExplosionEffect);
+
     }
 
 
     public virtual void DisArmor()
     {
         transform.localScale = Vector3.zero;
-
+        ReusableObject explosion = ObjectPool.Instance.Spawn(ExplosionPrefab);
+        explosion.transform.position = transform.position;
+        Sound.Instance.PlayEffect(ExplosionSound);
     }
 
     public virtual void ReArmor()

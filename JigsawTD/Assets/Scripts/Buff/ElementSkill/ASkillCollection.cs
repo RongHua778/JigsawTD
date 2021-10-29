@@ -12,7 +12,6 @@ public class DoubleAttack : ElementSkill
     {
         base.Build();
         strategy.AllAttackIntensifyModify += 1;
-        strategy.InitRange = 3;
     }
 }
 

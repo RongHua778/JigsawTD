@@ -5085,7 +5085,6 @@ MonoBehaviour:
   m_ShapeSelectUI: {fileID: 1064182619}
   m_MainUI: {fileID: 895535906}
   m_FuncUI: {fileID: 1898166545}
-  m_GuideUI: {fileID: 1337809832}
   m_GuideGirlUI: {fileID: 1524556391}
   m_GameEndUI: {fileID: 491704460}
   m_MessageUI: {fileID: 1919595584}
@@ -16698,7 +16697,7 @@ MonoBehaviour:
   ChanceAfter: {fileID: 588339842}
   ChanceProgress: {fileID: 1416630577}
   UpColor: {r: 0.55946577, g: 1, b: 0.4198113, a: 1}
-  DownColor: {r: 1, g: 0.4009434, b: 0.4009434, a: 1}
+  DownColor: {r: 0.4745098, g: 0.85490197, b: 1, a: 1}
 --- !u!222 &1129270073
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -17230,7 +17229,7 @@ MonoBehaviour:
   ChanceAfter: {fileID: 747240604}
   ChanceProgress: {fileID: 1244209172}
   UpColor: {r: 0.55946577, g: 1, b: 0.4198113, a: 1}
-  DownColor: {r: 1, g: 0.4009434, b: 0.4009434, a: 1}
+  DownColor: {r: 0.4745098, g: 0.85490197, b: 1, a: 1}
 --- !u!222 &1166568951
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -24389,7 +24388,7 @@ MonoBehaviour:
   ChanceAfter: {fileID: 674004524}
   ChanceProgress: {fileID: 238804348}
   UpColor: {r: 0.55946577, g: 1, b: 0.4198113, a: 1}
-  DownColor: {r: 1, g: 0.4009434, b: 0.4009434, a: 1}
+  DownColor: {r: 0.4745098, g: 0.85490197, b: 1, a: 1}
 --- !u!222 &1609540249
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -27535,7 +27534,7 @@ MonoBehaviour:
   ChanceAfter: {fileID: 763724294}
   ChanceProgress: {fileID: 1092947890}
   UpColor: {r: 0.55946577, g: 1, b: 0.4198113, a: 1}
-  DownColor: {r: 1, g: 0.4009434, b: 0.4009434, a: 1}
+  DownColor: {r: 0.4745098, g: 0.85490197, b: 1, a: 1}
 --- !u!222 &1792668815
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -31399,8 +31398,8 @@ MonoBehaviour:
   ChanceNow: {fileID: 134239134}
   ChanceAfter: {fileID: 1924656387}
   ChanceProgress: {fileID: 591138064}
-  UpColor: {r: 0.55946577, g: 1, b: 0.4198113, a: 1}
-  DownColor: {r: 1, g: 0.4009434, b: 0.4009434, a: 1}
+  UpColor: {r: 0.56078434, g: 1, b: 0.41960785, a: 1}
+  DownColor: {r: 0.4745098, g: 0.85490197, b: 1, a: 1}
 --- !u!222 &2062551242
 CanvasRenderer:
   m_ObjectHideFlags: 0

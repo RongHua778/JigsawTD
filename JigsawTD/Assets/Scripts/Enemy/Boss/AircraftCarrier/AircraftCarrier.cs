@@ -12,27 +12,33 @@ public class AircraftCarrier : Enemy
 
     float bornCounter;
     float bornCD;
-    int enemyOneBorn;
-    int enemyNumber;
     int maxEnemyNumber;
+    private bool secondBorn;
 
-    public override void Initialize(int pathIndex, EnemyAttribute attribute, float pathOffset,float intensify)
+    public override void Initialize(int pathIndex, EnemyAttribute attribute, float pathOffset, float intensify)
     {
         base.Initialize(pathIndex, attribute, pathOffset, intensify);
-        bornCD = 3;
-        enemyOneBorn = 4;
-        maxEnemyNumber = 16;
+        bornCD = 2;
+        maxEnemyNumber = 12;
+        secondBorn = false;
     }
 
 
     protected override void OnEnemyUpdate()
     {
-        bornCounter += Time.deltaTime;
-        if (bornCounter > bornCD)
+        if (bornCounter < bornCD)
         {
-            if (enemyNumber < maxEnemyNumber)
-                StartCoroutine(BornCor());
-            bornCounter = 0;
+            bornCounter += Time.deltaTime;
+            if (bornCounter > bornCD)
+            {
+                StartCoroutine(BornCor());  //开局3秒后第一次诞生小飞机
+            }
+        }
+        if (!secondBorn && DamageStrategy.CurrentHealth < DamageStrategy.MaxHealth * 0.5f)
+        {
+            secondBorn = true;
+            StopAllCoroutines();
+            StartCoroutine(BornCor());  //开局后生命值低于50%第二次诞生小飞机
         }
     }
 
@@ -42,28 +48,19 @@ public class AircraftCarrier : Enemy
         Sound.Instance.PlayEffect("Sound_BornerTransform");
 
         yield return new WaitForSeconds(0.5f);
-        for (int i = 0; i < enemyOneBorn; i++)
+        for (int i = 0; i < maxEnemyNumber; i++)
         {
             AirAttacker aircraft = ObjectPool.Instance.Spawn(airCraftPrefab) as AirAttacker;
             aircraft.transform.position = this.model.position;
             aircraft.Initiate(this, DamageStrategy.MaxHealth * aircarftIntensify);
-            enemyNumber += 1;
-            yield return new WaitForSeconds(0.2f);
+            Sound.Instance.PlayEffect("Sound_Aircraft");
+            yield return new WaitForSeconds(0.3f);
         }
         yield return new WaitForSeconds(0.5f);
         anim.SetBool("Transform", false);
     }
 
-    private void Born()
-    {
-        for (int i = 0; i < enemyOneBorn; i++)
-        {
-            AirAttacker aircraft = ObjectPool.Instance.Spawn(airCraftPrefab) as AirAttacker;
-            aircraft.transform.localPosition = this.transform.localPosition;
-            aircraft.Initiate(this, DamageStrategy.MaxHealth * aircarftIntensify);
-            enemyNumber += 1;
-        }
-    }
+
 
     public void AddAircraft(Aircraft a)
     {
@@ -74,7 +71,7 @@ public class AircraftCarrier : Enemy
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
-        enemyNumber = 0;
+        bornCounter = 0;
         for (int i = 0; i < aircrafts.Count; i++)
         {
             aircrafts[i].DamageStrategy.CurrentHealth = 0;

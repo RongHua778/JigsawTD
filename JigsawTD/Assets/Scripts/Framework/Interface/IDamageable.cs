@@ -13,7 +13,6 @@ public interface IDamageable
 public abstract class DamageStrategy
 {
     public IDamageable damageTarget;
-    public ReusableObject explosionEffect;
     public Transform ModelTrans;
     protected float currentHealth;
     protected float maxHealth;
@@ -27,17 +26,7 @@ public abstract class DamageStrategy
     public virtual bool IsDie
     {
         get => isDie;
-        set
-        {
-            isDie = value;
-            if (value)
-            {
-                ReusableObject explosion = ObjectPool.Instance.Spawn(explosionEffect);
-                explosion.transform.position = ModelTrans.position;
-
-                Sound.Instance.PlayEffect(damageTarget.ExplosionSound);
-            }
-        }
+        set => isDie = value;
     }
     public abstract bool IsEnemy { get; }
     public virtual float DamageIntensify { get => BuffDamageIntensify; }
@@ -64,7 +53,6 @@ public abstract class DamageStrategy
     public DamageStrategy(IDamageable damageTarget)
     {
         this.damageTarget = damageTarget;
-        explosionEffect = Resources.Load<ReusableObject>("Prefabs/Effects/Enemy/" + damageTarget.ExplosionEffect);
     }
 
     public virtual void ApplyDamage(float amount, out float realDamage, bool isCritical = false)
@@ -199,7 +187,7 @@ public class HamsterStrategy : BasicEnemyStrategy
     public override bool IsEnemy => true;
 
     public override float DamageIntensify => base.DamageIntensify + HamsterDamageIntensify;
-    public float HamsterDamageIntensify => -Hamster.HamsterCount * 0.05f;
+    public float HamsterDamageIntensify => -Hamster.HamsterCount * 0.15f;
 
 
     public HamsterStrategy(IDamageable damageTarget) : base(damageTarget)
