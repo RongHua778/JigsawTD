@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
   m_Name: Ultra
   m_EditorClassIdentifier: 
+  AttType: 1
   Name: ULTRA
   Icon: {fileID: 3750989098115402312, guid: e4922f05a8d12a5478500ccd8eddc736, type: 3}
   Description: ULTRASKILL
-  ContentPrefab: {fileID: 2075981503273244670, guid: ac415d48924f27348b2ad7abc05a61ca, type: 3}
+  Prefab: {fileID: 2075981503273244670, guid: ac415d48924f27348b2ad7abc05a61ca, type: 3}
   StrategyType: 1
   RangeType: 0
   element: 0

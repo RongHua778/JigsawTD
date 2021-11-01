@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
   m_Name: WoodAttribute
   m_EditorClassIdentifier: 
+  AttType: 0
   Name: WOOD
   Icon: {fileID: 5015630989428296150, guid: 170dc2e643d4d3d46bc6b1fdd1cd28d0, type: 3}
   Description: BSKILL
-  ContentPrefab: {fileID: 3830102932677347064, guid: 24c7518827485fc418d3132bf749252c, type: 3}
+  Prefab: {fileID: 3830102932677347064, guid: 24c7518827485fc418d3132bf749252c, type: 3}
   StrategyType: 0
   RangeType: 2
   element: 1
@@ -25,6 +26,7 @@ MonoBehaviour:
   Rare: 0
   totalLevel: 0
   elementNumber: 0
+  maxElementLevel: 0
   TurretSkill: 12
   TurretLevels:
   - AttackRange: 3

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a06a8e352dd064bab9b6bf5b84988e, type: 3}
   m_Name: ArrowTrapAttitrute
   m_EditorClassIdentifier: 
+  AttType: 0
   Name: ARROWTRAP
   Icon: {fileID: -2834877147454124499, guid: 77f1f203341c46246ad62b6652017dda, type: 3}
   Description: ARROWTRAPINFO
-  ContentPrefab: {fileID: 3452595739242333879, guid: ee774973d577ef84aab35c8203d62838, type: 3}
+  Prefab: {fileID: 3452595739242333879, guid: ee774973d577ef84aab35c8203d62838, type: 3}

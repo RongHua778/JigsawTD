@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a06a8e352dd064bab9b6bf5b84988e, type: 3}
   m_Name: ImitateTrapAttribute
   m_EditorClassIdentifier: 
+  AttType: 0
   Name: IMITATETRAP
   Icon: {fileID: 5035026766149074293, guid: 77f1f203341c46246ad62b6652017dda, type: 3}
   Description: IMITATETRAPINFO
-  ContentPrefab: {fileID: 2086895483048769337, guid: 961abc722433dc044a47201d4b55be4d, type: 3}
+  Prefab: {fileID: 2086895483048769337, guid: 961abc722433dc044a47201d4b55be4d, type: 3}

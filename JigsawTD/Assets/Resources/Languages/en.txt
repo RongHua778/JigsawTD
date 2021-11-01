@@ -3,7 +3,7 @@ SCENE2=Scene2
 
 //Menu
 STARTGAME=START GAME
-BLUEPRINT=BLUEPRINT
+BLUEPRINT=HANDBOOK
 SETTING=SETTING
 QUIT=QUIT
 LEVELSTART=START LEVEL
@@ -14,6 +14,12 @@ QUIT2=Quit
 CONFIRM=Confirm
 TUTORIAL=Tutorial
 WISHLIST=Add to wishlist
+
+//tujian
+ELEMENTTURRET=Eelement Turret
+REFACTORTURRET=Refactor Turret
+MARK=Mark
+BOSS=BOSS
 
 //Battleset
 SELECTEDCOUNT=Already Picked:
@@ -275,7 +281,7 @@ BCEINFO=Gain 1 perfect element when refactor
 BDE=Repair Factory
 BDEINFO=The effect of adjacent marks will be increased by 100%
 CDE=Blink Strike
-CDEINFO=Each shoot has a 3% chance of teleporting enemy to 2 tiles ahead
+CDEINFO=Each shoot has a 2% chance of teleporting enemy to 2 tiles ahead
 
 //Enemy
 SOILDER=Sartre

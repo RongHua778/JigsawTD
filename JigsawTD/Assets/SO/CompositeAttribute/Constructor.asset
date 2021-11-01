@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
   m_Name: Constructor
   m_EditorClassIdentifier: 
+  AttType: 1
   Name: CONSTRUCTOR
   Icon: {fileID: 5061518847745216781, guid: d9ef5bc7f2e68154eb1935bcb8c3c85e, type: 3}
   Description: CONSTRUCTORSKILL
-  ContentPrefab: {fileID: 7540347977943103148, guid: d914d163b81634f4c893b72c05177560, type: 3}
+  Prefab: {fileID: 7540347977943103148, guid: d914d163b81634f4c893b72c05177560, type: 3}
   StrategyType: 1
   RangeType: 0
   element: 0

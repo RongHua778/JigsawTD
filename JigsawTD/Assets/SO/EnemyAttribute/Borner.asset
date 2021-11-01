@@ -12,16 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614735ba97a8e4b4bbdf8128289355f3, type: 3}
   m_Name: Borner
   m_EditorClassIdentifier: 
-  EnemyName: BORNER
+  AttType: 3
+  Name: BORNER
+  Icon: {fileID: 5503619113886890817, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
+  Description: BORNERINFO
+  Prefab: {fileID: 3559500654722631785, guid: 310738398761dc541a7590eecd33631f, type: 3}
   EnemyType: 12
   InitCount: 1
   CountIncrease: 0
   Health: 300
   Speed: 0.3
   CoolDown: 1
-  Prefab: {fileID: 3559500654722631785, guid: 310738398761dc541a7590eecd33631f, type: 3}
   ReachDamage: 10
-  extraHealth: 0
-  EnemyIcon: {fileID: 5503619113886890817, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
-  EnemyEmptyIcon: {fileID: 7837554273832453032, guid: 57e00b28c7ddb744eab6e4415c7c879a, type: 3}
-  Description: BORNERINFO

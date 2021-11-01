@@ -10,7 +10,7 @@ public class BossSlot : MonoBehaviour
 
     public void SetBossInfo(EnemyAttribute attribute, int pass, int turn)
     {
-        bossIcon.sprite = pass > turn ? attribute.EnemyIcon : attribute.EnemyEmptyIcon;
+        bossIcon.sprite = attribute.Icon;
         turnTxt.text = GameMultiLang.GetTraduction("NUM") + turn + GameMultiLang.GetTraduction("WAVE");
     }
 }

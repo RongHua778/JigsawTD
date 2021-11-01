@@ -27,7 +27,7 @@ public class PoloEffect
 
 public enum PoloEffectType
 {
-    RangeIntensify,AttackIntensify
+    RangeIntensify, AttackIntensify
 }
 public enum RangeType
 {
@@ -53,5 +53,10 @@ public class TurretAttribute : ContentAttribute
     public TurretSkillName TurretSkill;
     public List<TurretInfo> TurretLevels = new List<TurretInfo>();
 
+    public override void MenuShowTips(Vector2 pos)
+    {
+        base.MenuShowTips(pos);
+        MenuUIManager.Instance.ShowTurretTips(this, pos);
+    }
 
 }

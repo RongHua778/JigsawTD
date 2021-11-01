@@ -37,11 +37,10 @@ public class TurretSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     Animator _Anim;
 
-    public void Initialize(SetHolder setHolder, SelectInfo selectInfo)
+    public void Initialize(SetHolder setHolder, ItemLockInfo selectInfo)
     {
         this.m_SetHolder = setHolder;
         _Anim = this.GetComponent<Animator>();
-        this.IsSelect = selectInfo.isSelect;
         this.IsLock = selectInfo.isLock;
         icon.sprite = TurretAtt.Icon;
     }

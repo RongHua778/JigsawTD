@@ -25,7 +25,7 @@ public class LevelManager : Singleton<LevelManager>
         {
             foreach (var bo in Levels[i].Bonus)
             {
-                Game.Instance.SaveData.UnlockBonus(bo.Name);
+               // Game.Instance.SaveData.UnlockBonus(bo.Name);
             }
         }
     }

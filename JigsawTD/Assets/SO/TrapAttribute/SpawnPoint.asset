@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a06a8e352dd064bab9b6bf5b84988e, type: 3}
   m_Name: SpawnPoint
   m_EditorClassIdentifier: 
+  AttType: 0
   Name: SPAWNPOINT
   Icon: {fileID: 21300000, guid: c28e3e62c18d361459a70e76b72ff131, type: 3}
   Description: SPAWNPOINTINFO
-  ContentPrefab: {fileID: -5650298545676880583, guid: d8f1fb0847b1f1347ba6041df5ab0bbf, type: 3}
-  BuffInfos: []
+  Prefab: {fileID: -5650298545676880583, guid: d8f1fb0847b1f1347ba6041df5ab0bbf, type: 3}

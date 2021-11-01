@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
   m_Name: GoldAttribute
   m_EditorClassIdentifier: 
+  AttType: 0
   Name: GOLD
   Icon: {fileID: -5385682246039739975, guid: 1d42c048b2d65864e8d3e6f8f439d0ba, type: 3}
   Description: ASKILL
-  ContentPrefab: {fileID: 8572582981006047005, guid: 64023e2772aa3cf4292462b25d0fb727, type: 3}
+  Prefab: {fileID: 8572582981006047005, guid: 64023e2772aa3cf4292462b25d0fb727, type: 3}
   StrategyType: 0
   RangeType: 0
   element: 0
@@ -25,6 +26,7 @@ MonoBehaviour:
   Rare: 0
   totalLevel: 0
   elementNumber: 0
+  maxElementLevel: 0
   TurretSkill: 12
   TurretLevels:
   - AttackRange: 2

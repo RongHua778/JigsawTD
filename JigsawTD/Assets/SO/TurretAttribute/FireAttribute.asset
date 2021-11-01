@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
   m_Name: FireAttribute
   m_EditorClassIdentifier: 
+  AttType: 0
   Name: FIRE
   Icon: {fileID: 4066939847818862564, guid: 62703dca31f30d8499eaa26af53751e7, type: 3}
   Description: DSKILL
-  ContentPrefab: {fileID: 5446042232708124106, guid: ebaafe7a79a077f42aa6b5b2ab6852c6, type: 3}
+  Prefab: {fileID: 5446042232708124106, guid: ebaafe7a79a077f42aa6b5b2ab6852c6, type: 3}
   StrategyType: 0
   RangeType: 1
   element: 3
@@ -25,6 +26,7 @@ MonoBehaviour:
   Rare: 0
   totalLevel: 0
   elementNumber: 0
+  maxElementLevel: 0
   TurretSkill: 12
   TurretLevels:
   - AttackRange: 3

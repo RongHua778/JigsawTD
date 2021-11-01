@@ -12,16 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614735ba97a8e4b4bbdf8128289355f3, type: 3}
   m_Name: Hamster
   m_EditorClassIdentifier: 
-  EnemyName: HAMSTER
+  AttType: 3
+  Name: HAMSTER
+  Icon: {fileID: -7297425823691836014, guid: 2138c8f635a68044d8b153780571587c, type: 3}
+  Description: HAMSTERINFO
+  Prefab: {fileID: 5042288069490103953, guid: d3aac527b4cb7b24483e988a8060353a, type: 3}
   EnemyType: 6
   InitCount: 5
   CountIncrease: 0
   Health: 100
   Speed: 0.6
   CoolDown: 1
-  Prefab: {fileID: 5042288069490103953, guid: d3aac527b4cb7b24483e988a8060353a, type: 3}
   ReachDamage: 1
-  extraHealth: 0
-  EnemyIcon: {fileID: -2708782251966510395, guid: f754236f3e3a8c94696ea4c3a0681592, type: 3}
-  EnemyEmptyIcon: {fileID: 21300000, guid: 43b7a67ba6a63734da9a23d66e32260b, type: 3}
-  Description: HAMSTERINFO

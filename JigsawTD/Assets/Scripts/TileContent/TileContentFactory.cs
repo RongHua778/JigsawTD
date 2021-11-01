@@ -19,8 +19,8 @@ public class TileContentFactory : GameObjectFactory
     [SerializeField]
     List<TurretBaseAttribute> turretBaseAtts = default;
 
-    private List<TurretAttribute> BattleElements;
-    private List<TurretAttribute> BattleComposites;
+    //private List<TurretAttribute> BattleElements;
+    //private List<TurretAttribute> BattleComposites;
 
     private Dictionary<ElementType, TurretAttribute> ElementDIC;
     private Dictionary<string, TurretAttribute> CompositeDIC;
@@ -43,8 +43,8 @@ public class TileContentFactory : GameObjectFactory
         CompositeDIC = new Dictionary<string, TurretAttribute>();
         TurretBaseDIC = new Dictionary<string, TurretBaseAttribute>();
 
-        BattleElements = new List<TurretAttribute>();
-        BattleComposites = new List<TurretAttribute>();
+        //BattleElements = new List<TurretAttribute>();
+        //BattleComposites = new List<TurretAttribute>();
 
         Rare1Att = new List<TurretAttribute>();
         Rare2Att = new List<TurretAttribute>();
@@ -92,32 +92,32 @@ public class TileContentFactory : GameObjectFactory
         {
             ElementDIC.Add(att.element, att);
         }
-        SetBattleElements();
+        //SetBattleElements();
     }
 
-    private void SetBattleElements()
-    {
-        foreach (var select in Game.Instance.SaveData.SaveSelectedElement)
-        {
-            if (select.isSelect)
-            {
-                BattleElements.Add(ElementDIC[(ElementType)Enum.Parse(typeof(ElementType), select.turretName)]);
-            }
-        }
-    }
+    //private void SetBattleElements()
+    //{
+    //    foreach (var select in Game.Instance.SaveData.SaveSelectedElement)
+    //    {
+    //        if (select.isSelect)
+    //        {
+    //            BattleElements.Add(ElementDIC[(ElementType)Enum.Parse(typeof(ElementType), select.itemName)]);
+    //        }
+    //    }
+    //}
 
 
     //*******终点
     public GameTileContent GetDestinationPoint()
     {
-        TrapContent content = Get(destinationAtt.ContentPrefab) as TrapContent;
+        TrapContent content = Get(destinationAtt.Prefab) as TrapContent;
         content.TrapAttribute = destinationAtt as TrapAttribute;
         return content;
     }
     //*******起点
     public GameTileContent GetSpawnPoint()
     {
-        TrapContent content = Get(spawnPointAtt.ContentPrefab) as TrapContent;
+        TrapContent content = Get(spawnPointAtt.Prefab) as TrapContent;
         content.TrapAttribute = spawnPointAtt as TrapAttribute;
         return content;
     }
@@ -127,7 +127,7 @@ public class TileContentFactory : GameObjectFactory
         switch (type)
         {
             case GameTileContentType.Empty:
-                return Get(emptyAtt.ContentPrefab);
+                return Get(emptyAtt.Prefab) as GameTileContent;
         }
         Debug.Assert(false, "Unsupported Type" + type);
         return null;
@@ -143,8 +143,8 @@ public class TileContentFactory : GameObjectFactory
             qualityC[i] = StaticData.QualityChances[GameRes.ModuleLevel - 1, i];
         }
         int quality = StaticData.RandomNumber(qualityC) + 1;
-        TurretAttribute attribute = BattleElements[UnityEngine.Random.Range(0, StaticData.elementN)];
-        ElementTurret content = Get(attribute.ContentPrefab) as ElementTurret;
+        TurretAttribute attribute = elementTurrets[UnityEngine.Random.Range(0, StaticData.elementN)];
+        ElementTurret content = Get(attribute.Prefab) as ElementTurret;
         content.Strategy = new StrategyBase(attribute, quality);
         content.Strategy.m_Turret = content;
         content.Strategy.SetQualityValue();
@@ -155,7 +155,7 @@ public class TileContentFactory : GameObjectFactory
     public ElementTurret GetElementTurret(ElementType element, int quality)
     {
         TurretAttribute attribute = ElementDIC[element];
-        ElementTurret content = Get(attribute.ContentPrefab) as ElementTurret;
+        ElementTurret content = Get(attribute.Prefab) as ElementTurret;
         content.Strategy = new StrategyBase(attribute, quality);
         content.Strategy.m_Turret = content;
         content.Strategy.SetQualityValue();
@@ -172,13 +172,13 @@ public class TileContentFactory : GameObjectFactory
     public TurretAttribute GetRandomElementAttribute(bool isBattleElement = true)
     {
         return isBattleElement ?
-            BattleElements[UnityEngine.Random.Range(0, BattleElements.Count)] :
+            elementTurrets[UnityEngine.Random.Range(0, StaticData.elementN)] :
             ElementDIC[(ElementType)UnityEngine.Random.Range(0, ElementDIC.Count)];
     }
     //合成塔***********
     public CompositeTurret GetCompositeTurret(Blueprint bluePrint)
     {
-        CompositeTurret content = Get(bluePrint.CompositeTurretAttribute.ContentPrefab) as CompositeTurret;
+        CompositeTurret content = Get(bluePrint.CompositeTurretAttribute.Prefab) as CompositeTurret;
         content.Strategy = bluePrint.ComStrategy;
         bluePrint.ComStrategy.m_Turret = content;
         content.InitializeTurret();
@@ -196,17 +196,7 @@ public class TileContentFactory : GameObjectFactory
         return null;
     }
 
-    public void PlayerLevelUp(int level)
-    {
-        List<SelectInfo> list = Game.Instance.SaveData.SaveRareDIC[level];
-        foreach (var item in list)
-        {
-            if (item.isSelect)
-            {
-                BattleComposites.Add(CompositeDIC[item.turretName]);
-            }
-        }
-    }
+
 
     public TurretAttribute GetRandomCompositeAtt()
     {
@@ -248,7 +238,7 @@ public class TileContentFactory : GameObjectFactory
     {
         if (TrapDIC.ContainsKey(name))
         {
-            TrapContent content = Get(TrapDIC[name].ContentPrefab) as TrapContent;
+            TrapContent content = Get(TrapDIC[name].Prefab) as TrapContent;
             content.TrapAttribute = TrapDIC[name];
             return content;
         }
@@ -260,7 +250,7 @@ public class TileContentFactory : GameObjectFactory
     public TrapContent GetRandomTrapContent()
     {
         int index = UnityEngine.Random.Range(0, trapAtts.Count);
-        TrapContent content = Get(trapAtts[index].ContentPrefab) as TrapContent;
+        TrapContent content = Get(trapAtts[index].Prefab) as TrapContent;
         content.TrapAttribute = trapAtts[index];
         return content;
     }
@@ -272,7 +262,7 @@ public class TileContentFactory : GameObjectFactory
     {
         if (TurretBaseDIC.ContainsKey(name))
         {
-            return Get(TurretBaseDIC[name].ContentPrefab) as TurretBaseContent;
+            return Get(TurretBaseDIC[name].Prefab) as TurretBaseContent;
         }
         Debug.LogWarning("没有对应名字的基座");
         return null;
@@ -281,14 +271,14 @@ public class TileContentFactory : GameObjectFactory
     public TurretBaseContent GetRandomTurretBase()
     {
         int index = UnityEngine.Random.Range(0, turretBaseAtts.Count);
-        TurretBaseContent content = Get(turretBaseAtts[index].ContentPrefab) as TurretBaseContent;
+        TurretBaseContent content = Get(turretBaseAtts[index].Prefab) as TurretBaseContent;
         content.m_TurretBaseAttribute = turretBaseAtts[index];
         return content;
     }
 
-    private GameTileContent Get(GameTileContent prefab)
+    private ReusableObject Get(ReusableObject prefab)
     {
-        GameTileContent instance = CreateInstance(prefab) as GameTileContent;
+        ReusableObject instance = CreateInstance(prefab);
         return instance;
     }
 

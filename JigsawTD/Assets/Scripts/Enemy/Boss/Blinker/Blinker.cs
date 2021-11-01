@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class Blinker : Boss
 {
-    public override string ExplosionEffect => "BossExplosionYePurple";
+    public override string ExplosionEffect => "BossExplosionPurple";
 
 
     int blink;

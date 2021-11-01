@@ -10,15 +10,15 @@ public class TrapTips : TileTips
     [SerializeField] Text switchTrapCostTxt = default;
     [SerializeField] GameObject switchTrapArea = default;
     TrapContent m_Trap;
+    TrapAttribute m_TrapAtt;
     public void ReadTrap(TrapContent trapContent, int cost)
     {
         m_Trap = trapContent;
+        m_TrapAtt = m_Trap.TrapAttribute;
         if (trapContent.IsReveal)
         {
-            Icon.sprite = trapContent.TrapAttribute.Icon;
-            Name.text = GameMultiLang.GetTraduction(trapContent.TrapAttribute.Name);
-            Description.text = GameMultiLang.GetTraduction(trapContent.TrapAttribute.Description);
-            switchTrapArea.SetActive(!trapContent.Important);
+            BasicInfo();
+            switchTrapArea.SetActive(!m_Trap.Important);
             switchTrapCostTxt.text = cost.ToString();
         }
         else
@@ -32,13 +32,29 @@ public class TrapTips : TileTips
         if (trapContent.DamageAnalysis > 0)
         {
             AnalysisArea.SetActive(true);
-            AnalysisTxt.text = trapContent.DamageAnalysis.ToString();
+            AnalysisTxt.text = m_Trap.DamageAnalysis.ToString();
         }
         else
         {
             AnalysisArea.SetActive(false);
         }
 
+    }
+
+    public void ReadTrapAtt(TrapAttribute trapAtt)
+    {
+        m_TrapAtt = trapAtt;
+        BasicInfo();
+        switchTrapArea.SetActive(false);
+        AnalysisArea.SetActive(false);
+
+    }
+
+    private void BasicInfo()
+    {
+        Icon.sprite = m_TrapAtt.Icon;
+        Name.text = GameMultiLang.GetTraduction(m_TrapAtt.Name);
+        Description.text = GameMultiLang.GetTraduction(m_TrapAtt.Description);
     }
 
     public void SwitchTrap()

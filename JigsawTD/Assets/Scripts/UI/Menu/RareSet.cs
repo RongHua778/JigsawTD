@@ -11,7 +11,7 @@ public class RareSet : SetHolder
 
     public void InitializeSlots(BluePrintPanel blueprintSet)
     {
-        SaveList = Game.Instance.SaveData.SaveRareDIC[RareIndex];
+        //SaveList = Game.Instance.SaveData.SaveRareDIC[RareIndex];
         SelectedCount = MaxSelectCount;
         m_BluePrintSet = blueprintSet;
         for (int i = 0; i < turretSlots.Length; i++)

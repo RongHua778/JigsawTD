@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
   m_Name: Scatter
   m_EditorClassIdentifier: 
+  AttType: 1
   Name: SCATTER
   Icon: {fileID: -2627968999494206068, guid: 4b038e37e166a7c48af47f16a54bb6cd, type: 3}
   Description: SCATTERSKILL
-  ContentPrefab: {fileID: 5443515898983359739, guid: da3c56fe5fd034e4eade45627187e825, type: 3}
+  Prefab: {fileID: 5443515898983359739, guid: da3c56fe5fd034e4eade45627187e825, type: 3}
   StrategyType: 1
   RangeType: 0
   element: 0

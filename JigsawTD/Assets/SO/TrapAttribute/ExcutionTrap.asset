@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a06a8e352dd064bab9b6bf5b84988e, type: 3}
   m_Name: ExcutionTrap
   m_EditorClassIdentifier: 
+  AttType: 0
   Name: EXECUTETRAP
   Icon: {fileID: 3584539639483946653, guid: 77f1f203341c46246ad62b6652017dda, type: 3}
   Description: EXECUTETRAPINFO
-  ContentPrefab: {fileID: 7496585715104819807, guid: b3263af6d3b9581499e543461755737f, type: 3}
+  Prefab: {fileID: 7496585715104819807, guid: b3263af6d3b9581499e543461755737f, type: 3}

@@ -12,16 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614735ba97a8e4b4bbdf8128289355f3, type: 3}
   m_Name: Divider
   m_EditorClassIdentifier: 
-  EnemyName: DIVIDER
+  AttType: 3
+  Name: DIVIDER
+  Icon: {fileID: -8847467542957845770, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
+  Description: DIVIDERINFO
+  Prefab: {fileID: -4008761052356302502, guid: 74ed77649a912194784c510912c2ef8e, type: 3}
   EnemyType: 8
   InitCount: 1
   CountIncrease: 0
   Health: 70
   Speed: 0.5
   CoolDown: 1
-  Prefab: {fileID: -4008761052356302502, guid: 74ed77649a912194784c510912c2ef8e, type: 3}
   ReachDamage: 5
-  extraHealth: 0
-  EnemyIcon: {fileID: -8847467542957845770, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
-  EnemyEmptyIcon: {fileID: 6774334592187772519, guid: 57e00b28c7ddb744eab6e4415c7c879a, type: 3}
-  Description: DIVIDERINFO

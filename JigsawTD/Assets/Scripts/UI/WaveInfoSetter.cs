@@ -29,7 +29,7 @@ public class WaveInfoSetter : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         {
             enemyIcons[i].gameObject.SetActive(true);
             EnemyAttribute attribute = StaticData.Instance.EnemyFactory.Get(sequences[i].EnemyType);
-            enemyIcons[i].sprite = attribute.EnemyIcon;
+            enemyIcons[i].sprite = attribute.Icon;
         }
     }
 

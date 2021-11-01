@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a06a8e352dd064bab9b6bf5b84988e, type: 3}
   m_Name: EmptyContent
   m_EditorClassIdentifier: 
+  AttType: 0
   Name: "\u57FA\u672C\u683C"
   Icon: {fileID: 21300000, guid: c18808b650cc1984baab9e69a1dd72fa, type: 3}
   Description: "\u654C\u4EBA\u53EF\u4EE5\u9700\u8981\u901A\u8FC7\u57FA\u672C\u683C\u884C\u8D70\u3002"
-  ContentPrefab: {fileID: -2139438983669213832, guid: d601f0165e672d24e85bc7977e090fba, type: 3}
-  BuffInfos: []
+  Prefab: {fileID: -2139438983669213832, guid: d601f0165e672d24e85bc7977e090fba, type: 3}

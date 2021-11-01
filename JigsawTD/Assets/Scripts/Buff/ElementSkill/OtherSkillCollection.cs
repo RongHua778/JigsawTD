@@ -175,7 +175,7 @@ public class TrapIntensify : ElementSkill
 
 public class PortalHit : ElementSkill
 {
-    //攻击有3%概率将敌人传送到2格前的位置
+    //攻击有2%概率将敌人传送到2格前的位置
     public override List<int> Elements => new List<int> { 2, 3, 4 };
     public override string SkillDescription => "PORTALHIT";
 
@@ -183,7 +183,7 @@ public class PortalHit : ElementSkill
     {
         if (target.DamageStrategy.IsEnemy)
         {
-            if (Random.value > 0.97f)
+            if (Random.value > 0.98f)
                 ((Enemy)target).Flash(2);
         }
     }

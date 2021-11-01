@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
   m_Name: Super
   m_EditorClassIdentifier: 
+  AttType: 1
   Name: SUPER
   Icon: {fileID: 8783240499713188425, guid: 5ffd5a68966da114d9a58cd1e921a4ef, type: 3}
   Description: SUPERSKILL
-  ContentPrefab: {fileID: 2682830154004877270, guid: 38a933d8a495386418cc643b0a8dbb6d, type: 3}
+  Prefab: {fileID: 2682830154004877270, guid: 38a933d8a495386418cc643b0a8dbb6d, type: 3}
   StrategyType: 1
   RangeType: 1
   element: 0

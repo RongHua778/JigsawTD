@@ -12,16 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614735ba97a8e4b4bbdf8128289355f3, type: 3}
   m_Name: Restorer
   m_EditorClassIdentifier: 
-  EnemyName: RESTORER
+  AttType: 3
+  Name: RESTORER
+  Icon: {fileID: -1992789463179596284, guid: f9835346b30cae840a9eff85ed192e6f, type: 3}
+  Description: RESTORERINFO
+  Prefab: {fileID: 821673950540951135, guid: 673cb8fb8fac45949b3e29c50a2d7ac3, type: 3}
   EnemyType: 2
   InitCount: 2
   CountIncrease: 2
   Health: 26
   Speed: 0.7
   CoolDown: 0.85
-  Prefab: {fileID: 821673950540951135, guid: 673cb8fb8fac45949b3e29c50a2d7ac3, type: 3}
   ReachDamage: 1
-  extraHealth: 0
-  EnemyIcon: {fileID: -1992789463179596284, guid: f9835346b30cae840a9eff85ed192e6f, type: 3}
-  EnemyEmptyIcon: {fileID: 0}
-  Description: RESTORERINFO

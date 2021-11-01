@@ -12,16 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614735ba97a8e4b4bbdf8128289355f3, type: 3}
   m_Name: SixArmour
   m_EditorClassIdentifier: 
-  EnemyName: SIXARMOUR
+  AttType: 3
+  Name: SIXARMOUR
+  Icon: {fileID: 2497086793369854952, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
+  Description: SIXARMOURINFO
+  Prefab: {fileID: 1089310082073990611, guid: 01171ff9a6ad7854bbfd9f7ab8a16b75, type: 3}
   EnemyType: 7
   InitCount: 1
   CountIncrease: 0
   Health: 25
   Speed: 0.5
   CoolDown: 1
-  Prefab: {fileID: 1089310082073990611, guid: 01171ff9a6ad7854bbfd9f7ab8a16b75, type: 3}
   ReachDamage: 5
-  extraHealth: 0
-  EnemyIcon: {fileID: 2497086793369854952, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
-  EnemyEmptyIcon: {fileID: 9054047721523705475, guid: 57e00b28c7ddb744eab6e4415c7c879a, type: 3}
-  Description: SIXARMOURINFO

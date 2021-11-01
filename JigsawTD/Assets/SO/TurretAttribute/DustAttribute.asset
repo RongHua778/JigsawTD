@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
   m_Name: DustAttribute
   m_EditorClassIdentifier: 
+  AttType: 0
   Name: DUST
   Icon: {fileID: -302460881117483773, guid: 848bbae097f55734ab0a02c063fd3e70, type: 3}
   Description: ESKILL
-  ContentPrefab: {fileID: 900867221070031195, guid: 8574fb7c958d9084199e76f94ed13f80, type: 3}
+  Prefab: {fileID: 900867221070031195, guid: 8574fb7c958d9084199e76f94ed13f80, type: 3}
   StrategyType: 0
   RangeType: 0
   element: 4
@@ -25,6 +26,7 @@ MonoBehaviour:
   Rare: 0
   totalLevel: 0
   elementNumber: 0
+  maxElementLevel: 0
   TurretSkill: 12
   TurretLevels:
   - AttackRange: 3

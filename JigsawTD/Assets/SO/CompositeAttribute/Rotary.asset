@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
   m_Name: Rotary
   m_EditorClassIdentifier: 
+  AttType: 1
   Name: ROTARY
   Icon: {fileID: -1588336856667769469, guid: 5fd2f2e134ec9bc4ca7e863cf2992137, type: 3}
   Description: ROTARYSKILL
-  ContentPrefab: {fileID: 3473736283192967209, guid: ae3a3ea7c8913984ba274c5376b270bd, type: 3}
+  Prefab: {fileID: 3473736283192967209, guid: ae3a3ea7c8913984ba274c5376b270bd, type: 3}
   StrategyType: 1
   RangeType: 0
   element: 0

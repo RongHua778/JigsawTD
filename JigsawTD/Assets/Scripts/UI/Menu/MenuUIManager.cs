@@ -10,20 +10,25 @@ public class MenuUIManager : Singleton<MenuUIManager>
     [SerializeField] UILevelManager m_UILevelManager = default;
     [SerializeField] MenuMessage m_Message = default;
     [SerializeField] UIBattleSet m_UIBattleSet = default;
+    [SerializeField] UITujian m_UITujian = default;
+    //tips
     [SerializeField] TurretTips m_TurretTips = default;
+    [SerializeField] TrapTips m_TrapTips = default;
 
     public void Initinal()
     {
         Sound.Instance.PlayBg("menu");
         m_Message.Initialize();
         m_UILevelManager.Initialize();
+        m_UITujian.Initialize();
         m_UIBattleSet.Initialize();
         m_TurretTips.Initialize();
-
+        m_TrapTips.Initialize();
     }
     public void Release()
     {
         m_Message.Release();
+        m_UITujian.Release();
     }
 
     public void GameUpdate()
@@ -48,11 +53,23 @@ public class MenuUIManager : Singleton<MenuUIManager>
         m_UILevelManager.SetLevelInfo();
     }
 
+    public void TujianBtnClick()
+    {
+        m_UITujian.Show();
+    }
+
     public void ShowTurretTips(TurretAttribute att, Vector2 pos)
     {
-        m_TurretTips.GetComponent<RectTransform>().anchoredPosition = pos;
+        m_TurretTips.transform.position = pos;
         m_TurretTips.Show();
         m_TurretTips.ReadAttribute(att);
+    }
+
+    public void ShowTrapTips(TrapAttribute att,Vector2 pos)
+    {
+        m_TrapTips.transform.position = pos;
+        m_TrapTips.Show();
+        m_TrapTips.ReadTrapAtt(att);
     }
 
     public void BluePrintBtnClick()
@@ -68,6 +85,7 @@ public class MenuUIManager : Singleton<MenuUIManager>
     internal void HideTips()
     {
         m_TurretTips.Hide();
+        m_TrapTips.Hide();
     }
 
     public void ShowMessage(string content)

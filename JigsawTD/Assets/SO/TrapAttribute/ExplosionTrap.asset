@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a06a8e352dd064bab9b6bf5b84988e, type: 3}
   m_Name: ExplosionTrap
   m_EditorClassIdentifier: 
+  AttType: 0
   Name: EXPLOSIONTRAP
   Icon: {fileID: 8969078856711057251, guid: 77f1f203341c46246ad62b6652017dda, type: 3}
   Description: EXPLOSIONTRAPINFO
-  ContentPrefab: {fileID: 4445610322067386579, guid: 45c8e01b0608cd6418bc3e8b062f6b96, type: 3}
+  Prefab: {fileID: 4445610322067386579, guid: 45c8e01b0608cd6418bc3e8b062f6b96, type: 3}

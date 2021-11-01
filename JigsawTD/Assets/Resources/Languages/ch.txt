@@ -3,7 +3,7 @@ SCENE2=Scene2
 
 //Menu
 STARTGAME=开始游戏
-BLUEPRINT=配方管理
+BLUEPRINT=游戏图鉴
 SETTING=游戏设置
 QUIT=退出游戏
 LEVELSTART=开始关卡
@@ -14,6 +14,12 @@ QUIT2=退出游戏
 CONFIRM=确定
 TUTORIAL=教学
 WISHLIST=加入愿望单
+
+//tujian
+ELEMENTTURRET=元素塔
+REFACTORTURRET=重构塔
+MARK=标记
+BOSS=BOSS
 
 //Battleset
 SELECTEDCOUNT=已选择：
@@ -141,7 +147,7 @@ BUY=购买
 COMPOSITE=重构
 UPGRADE=升级
 SWITCHTRAP=换位
-ELEMENTSLOT=元素技能槽
+ELEMENTSLOT=元素技能
 TURRETLEVEL=防御塔等级
 EMPTYSKILL=空技能槽
 RARE=配方等级：提高模块等级可以使商店可能出现更高等级的配方
@@ -274,7 +280,7 @@ BCEINFO=重构后获得1个万能元素
 BDE=维修工厂
 BDEINFO=相邻标记的效果提升100%
 CDE=闪烁打击
-CDEINFO=攻击有3%概率将敌人传送到2格前的位置
+CDEINFO=攻击有2%概率将敌人传送到2格前的位置
 
 //Enemy
 SOILDER=萨特

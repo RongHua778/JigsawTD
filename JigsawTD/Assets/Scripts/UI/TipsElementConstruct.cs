@@ -7,7 +7,7 @@ using System;
 
 public class TipsElementConstruct : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] bool canPreview = false;
+    public bool canPreview = false;
     [SerializeField] Image[] Elements = default;
     ElementSkill m_Skill;
     [SerializeField] Text elementSkillName = default;

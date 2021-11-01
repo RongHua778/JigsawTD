@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
   m_Name: Sniper
   m_EditorClassIdentifier: 
+  AttType: 1
   Name: SNIPER
   Icon: {fileID: -1944259913073176082, guid: c1be13963e61eae42b02687dd1475717, type: 3}
   Description: SNIPERSKILL
-  ContentPrefab: {fileID: 1494963813994468761, guid: 05869ddac62aff043bf7e0106d00bc2e, type: 3}
+  Prefab: {fileID: 1494963813994468761, guid: 05869ddac62aff043bf7e0106d00bc2e, type: 3}
   StrategyType: 1
   RangeType: 1
   element: 0

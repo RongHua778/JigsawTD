@@ -12,16 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 614735ba97a8e4b4bbdf8128289355f3, type: 3}
   m_Name: Soilder
   m_EditorClassIdentifier: 
-  EnemyName: SOILDER
+  AttType: 3
+  Name: SOILDER
+  Icon: {fileID: 4062577230677641764, guid: f9835346b30cae840a9eff85ed192e6f, type: 3}
+  Description: SOILDERINFO
+  Prefab: {fileID: 496477690780185357, guid: 0a0eaa2abe1fb674fa53f8a4364f22be, type: 3}
   EnemyType: 0
   InitCount: 3
   CountIncrease: 6
   Health: 10
   Speed: 1
   CoolDown: 0.3
-  Prefab: {fileID: 496477690780185357, guid: 0a0eaa2abe1fb674fa53f8a4364f22be, type: 3}
   ReachDamage: 1
-  extraHealth: 0
-  EnemyIcon: {fileID: 4062577230677641764, guid: f9835346b30cae840a9eff85ed192e6f, type: 3}
-  EnemyEmptyIcon: {fileID: 0}
-  Description: SOILDERINFO

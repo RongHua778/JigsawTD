@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
   m_Name: Boomerrang
   m_EditorClassIdentifier: 
+  AttType: 1
   Name: BOOMERRANG
   Icon: {fileID: -5153134150779752020, guid: a799722f85e58a34993e12144292e1a9, type: 3}
   Description: BOOMERRANGSKILL
-  ContentPrefab: {fileID: 5634142968415057810, guid: f48e2d78274808848bf0c98accb78f83, type: 3}
+  Prefab: {fileID: 5634142968415057810, guid: f48e2d78274808848bf0c98accb78f83, type: 3}
   StrategyType: 1
   RangeType: 0
   element: 0

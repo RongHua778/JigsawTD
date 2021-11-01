@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a06a8e352dd064bab9b6bf5b84988e, type: 3}
   m_Name: DestinationPoint
   m_EditorClassIdentifier: 
+  AttType: 0
   Name: DESTINATION
   Icon: {fileID: 21300000, guid: 6774f12f95fd05f4f883d9233b90fe25, type: 3}
   Description: DESTINATIONINFO
-  ContentPrefab: {fileID: 7783551210583405030, guid: dc1f79158d8f5fe4a81f6b23af2e0b81, type: 3}
-  BuffInfos: []
+  Prefab: {fileID: 7783551210583405030, guid: dc1f79158d8f5fe4a81f6b23af2e0b81, type: 3}

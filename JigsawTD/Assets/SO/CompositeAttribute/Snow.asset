@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
   m_Name: Snow
   m_EditorClassIdentifier: 
+  AttType: 1
   Name: SNOW
   Icon: {fileID: 1974467737375703195, guid: 650ade1de42820843ab504b46ce30229, type: 3}
   Description: SNOWSKILL
-  ContentPrefab: {fileID: 3184344065496086193, guid: ec76f05b1efa1874b8faa449cea6300a, type: 3}
+  Prefab: {fileID: 3184344065496086193, guid: ec76f05b1efa1874b8faa449cea6300a, type: 3}
   StrategyType: 1
   RangeType: 2
   element: 0

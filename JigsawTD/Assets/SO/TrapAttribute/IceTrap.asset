@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a06a8e352dd064bab9b6bf5b84988e, type: 3}
   m_Name: IceTrap
   m_EditorClassIdentifier: 
+  AttType: 0
   Name: ICETRAP
   Icon: {fileID: -6436588411321994143, guid: 77f1f203341c46246ad62b6652017dda, type: 3}
   Description: ICETRAPINFO
-  ContentPrefab: {fileID: 1967630184950370932, guid: c62c48ec4f6ca9d4bbc81ab93eb771d7, type: 3}
+  Prefab: {fileID: 1967630184950370932, guid: c62c48ec4f6ca9d4bbc81ab93eb771d7, type: 3}

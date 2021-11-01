@@ -7,7 +7,7 @@ public class SetHolder : MonoBehaviour
 {
     [SerializeField] protected TurretSlot[] turretSlots = default;
     [SerializeField] protected Text m_PickCountTxt = default;
-    protected List<SelectInfo> SaveList;
+    protected List<ItemLockInfo> SaveList;
 
     [SerializeField] protected int maxSelectedCount = default;
     public virtual int MaxSelectCount => maxSelectedCount;
@@ -39,10 +39,10 @@ public class SetHolder : MonoBehaviour
 
     protected void SetData()
     {
-        for (int i = 0; i < turretSlots.Length; i++)
-        {
-            SaveList[i].isSelect = turretSlots[i].IsSelect;
-            SaveList[i].isLock = turretSlots[i].IsLock;
-        }
+        //for (int i = 0; i < turretSlots.Length; i++)
+        //{
+        //    SaveList[i].isSelect = turretSlots[i].IsSelect;
+        //    SaveList[i].isLock = turretSlots[i].IsLock;
+        //}
     }
 }

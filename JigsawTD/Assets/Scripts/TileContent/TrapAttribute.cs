@@ -26,7 +26,11 @@ public class BuffInfo
 public class TrapAttribute : ContentAttribute
 {
     //public List<BuffInfo> BuffInfos = new List<BuffInfo>();
-
+    public override void MenuShowTips(Vector2 pos)
+    {
+        base.MenuShowTips(pos);
+        MenuUIManager.Instance.ShowTrapTips(this, pos);
+    }
 }
 
 

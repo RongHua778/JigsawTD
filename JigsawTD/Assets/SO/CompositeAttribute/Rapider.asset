@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ecd0cdf550451549a89d4b36e2f191b, type: 3}
   m_Name: Rapider
   m_EditorClassIdentifier: 
+  AttType: 1
   Name: RAPIDER
   Icon: {fileID: -1343758528997770693, guid: c08f452247fa17245b5b595ed6454216, type: 3}
   Description: RAPIDERSKILL
-  ContentPrefab: {fileID: 1405721755924127496, guid: d71b8f03e81b3ab45b0b1062d0c191df, type: 3}
+  Prefab: {fileID: 1405721755924127496, guid: d71b8f03e81b3ab45b0b1062d0c191df, type: 3}
   StrategyType: 1
   RangeType: 1
   element: 0

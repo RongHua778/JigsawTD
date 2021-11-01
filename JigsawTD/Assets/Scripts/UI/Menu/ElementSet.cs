@@ -52,7 +52,7 @@ public class ElementSet : SetHolder
     public void InitializeSlots()
     {
         SelectedCount = MaxSelectCount;
-        SaveList = Game.Instance.SaveData.SaveSelectedElement;
+       // SaveList = Game.Instance.SaveData.SaveSelectedElement;
 
         for (int i = 0; i < SaveList.Count; i++)
         {
