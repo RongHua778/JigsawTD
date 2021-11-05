@@ -73,7 +73,7 @@ public class BluePrintGrid : ReusableObject//, IPointerEnterHandler, IPointerExi
             if (SelectingBluePrint != null)
                 SelectingBluePrint.OnBluePrintDeselect();
             SelectingBluePrint = this;
-            GameManager.Instance.ShowBluePrintTips(this);
+            GameManager.Instance.ShowBluePrintTips(this, StaticData.LeftMidTipsPos);
             if (buildAble)
                 GameEvents.Instance.TutorialTrigger(TutorialType.BlueprintSelect);
             Sound.Instance.PlayEffect("Sound_Click");

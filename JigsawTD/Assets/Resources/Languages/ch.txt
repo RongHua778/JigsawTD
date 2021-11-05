@@ -6,7 +6,7 @@ STARTGAME=开始游戏
 BLUEPRINT=游戏图鉴
 SETTING=游戏设置
 QUIT=退出游戏
-LEVELSTART=开始关卡
+LEVELSTART=开始游戏
 CONTINUE=继续游戏
 RESTART=重新开始
 RETURNTOMENU=返回菜单
@@ -14,12 +14,18 @@ QUIT2=退出游戏
 CONFIRM=确定
 TUTORIAL=教学
 WISHLIST=加入愿望单
+MODESELECT=模式选择
+
 
 //tujian
 ELEMENTTURRET=元素塔
 REFACTORTURRET=重构塔
 MARK=标记
 BOSS=BOSS
+BASICENEMY=敌人
+
+//enemyTips
+BACKGROUND=背景研究
 
 //Battleset
 SELECTEDCOUNT=已选择：
@@ -44,9 +50,10 @@ SKIPTUTORIAL=跳过教程
 
 DIFFICULTY0=
 DIFFICULTY1=1.加入战场标记\n2.坚持30波进攻
-DIFFICULTY2=1.普通波中加入两种新的精英敌人\n2.你只有15点生命值
-DIFFICULTY3=1.战场中将出现更多标记\n2.坚持40波进攻
-DIFFICULTY4=1.迎接最终难度挑战
+DIFFICULTY2=1.你只有15点生命值\n1.坚持40波进攻
+DIFFICULTY3=1.战场中将出现更多标记
+DIFFICULTY4=1.一次艰难的挑战
+DIFFICULTY5=1.不可能完成的任务
 
 NEEDTUTORIAL=是否开启教程？
 YES=是
@@ -82,7 +89,7 @@ EQUIPRULE=重构技能
 GUIDEVIDEO01=每个模块由三格基本格和一格防御塔组成。放置模块时需要确保起点和终点之间能够通过基本格相连，而防御塔可以作为障碍。
 GUIDEVIDEO02=注意：防御塔只可以放置在空格或基本格上，而基本格可以放置在任何位置。
 GUIDEVIDEO03=当希望延长路线时，需要提前在规划好的路线上摆放基本格，然后利用防御塔作为障碍延长路线。
-GUIDEVIDEO04=提示：点击空白位置也可以花费金币购买单格地板。
+GUIDEVIDEO04=提示：点击空白位置也可以花费代币购买单格地板。
 GUIDEVIDEO05=当凑齐配方所需的素材时，可以合成防御塔，并根据组合不同带有不同的效果。
 GUIDEVIDEO06=提示：商店每3回合刷新一次配方，购买配方可以增加合成的机会。
 GUIDEVIDEO07=通过将道路经过战场上随机出现的标记格子，将会揭示该标记，每个标记在敌人经过时会触发特殊效果。
@@ -117,11 +124,17 @@ WIN=通关
 LOSE=结束
 PASSLEVEL=你通过了
 TOTALDAMAGE=造成总伤害
-COMPOSITECOUNT=重构塔数量
+COMPOSITECOUNT=重构防御塔
+MAXPATH=最长路径
+MAXMARK=揭示标记
+GAINGOLD=获取代币
 THANKSINFO=感谢您体验《重构》游戏DEMO，如果你喜欢我们的游戏，\n请扫码把它加入愿望单吧！
+EXPVALUE=获得经验
+BOSSDEFEAT=击败BOSS
+
 
 //turretips
-DAMAGEANLYSIS=总伤害
+DAMAGEANLYSIS=回合伤害
 ATTACK=攻击
 RANGE=范围
 SPEED=攻速
@@ -236,7 +249,7 @@ CCEINFO=每回合开始后，溅射范围每秒提升0.01
 
 //D系
 DDD=混沌科技
-DDDINFO=合成或装备后，使防御塔的所有基础属性随机变化50%-300%
+DDDINFO=合成或装备后，使防御塔的所有基础属性随机变化50%-300%（不包括攻击范围）
 DDA=高能爆破
 DDAINFO=防御塔攻击力在25%-250%之间随机浮动
 DDB=弱点击破
@@ -319,8 +332,8 @@ HAMSTERINFO=一共5个仓鼠，每个仓鼠自带75%的伤害减免，每只死�
 AIRCRAFTINFO=附带若干会冰冻防御塔的僚机
 
 //Trap
-UNREVEAL=未揭示标记
-UNREVEALINFO=将该地块连接进道路以揭示该标记
+UNREVEAL=未揭示信号
+UNREVEALINFO=将该地块连接进道路以揭示该信号，敌人在经过时会触发特殊负面效果
 
 SPAWNPOINT=起点
 DESTINATION=终点
@@ -375,13 +388,14 @@ Guide13=在画面右下角是模块构建功能,现在请<color=#FFEA6D>使用�
 //4
 Guide14=每个模块由3个<color=#FFEA6D>基本格</color>和1个<color=#FFEA6D>防御塔</color>组成,<color=#FFEA6D>基本格</color>可以用作<color=#FFEA6D>道路</color>,而<color=#FFEA6D>防御塔</color>可以作为<color=#FFEA6D>障碍</color>.
 Guide15=通过<color=#FFEA6D>将防御塔作为障碍,并确保起点和终点之间以基本格连接,可以延长敌人的行进路线</color>.
-Guide16=现在请选择1个模块,并按照<color=#FFEA6D>标识的位置</color>进行摆放,你将学习到基本的寻路规则.
+Guide16=现在请选择1个模块,并按照<color=#FFEA6D>标识的位置</color>进行<color=#FFEA6D>旋转和摆放</color>,你将学习到基本的寻路规则.
 //5
-Guide17=你成功延长了敌人的行进路线,你可以在接下来的战斗中继续熟练该技巧.
+Guide17=你<color=#FFEA6D>成功延长了敌人的行进路线</color>,你可以在接下来的战斗中继续熟练该技巧.
 Guide18=在画面的右上方,会显示你当前生命值,每个抵达终点的敌人都会让你失去一定生命值.
 Guide181=当生命值为0时,你的任务宣告失败.
 //6
 Guide19=在画面的正上方,会显示我们探测到的敌人剩余进攻波数,以及即将到来的敌人类型.
+Guide191=将<color=#FFEA6D>鼠标悬停在敌人图标处,可以查看敌人相关信息</color>.
 Guide20=现在点击下方的<color=#FFEA6D>下一波</color>按钮,这将开启跃迁入口,迎接战斗阶段.
 //7
 Guide21=做得很好,你成功守住了敌人的进攻.
@@ -408,14 +422,14 @@ Guide332=注意,每个重构塔有<color=#FFEA6D>2个元素技能槽,如果将�
 Guide33=合理分配重构塔和元素技能,是提升战斗力的关键,现在直接开始下一波战斗吧.
 //13
 Guide34=最后介绍模块等级系统.
-Guide35=抽取模块按钮上方显示了你的当前模块等级和其升级所需的代币.
+Guide35=抽取模块按钮上方显示了你的当前<color=#FFEA6D>模块等级</color>和其<color=#FFEA6D>升级所需的代币</color>.
 Guide36=<color=#FFEA6D>升级模块可以提高构建元素塔的品质,以及在重构商店刷出新的高级配方.</color>.
 Guide37=你不需要在每回合都进行构建,<color=#FFEA6D>如果你在本回合没有进行构建,则会使构建价格降低10%</color>.
 Guide38=现在的防御力量充足,请直接开始下一波战斗吧.
 //14
 Guide39=将你的代币灵活投入在抽取模块,升级模块,或升级重构塔上,以获取最大收益.
-Guide40=我把更多指引的内容放在了左上角的指引面板里,请在任何时候查看.
-Guide41=请坚持20波进攻,完成这一次教程.
+Guide40=<color=#FFEA6D>我把更多指引的内容放在了左上角的指引面板里</color>,请在任何时候查看.
+Guide41=<color=#FFEA6D>请坚持20波进攻</color>,完成这一次教程.
 
 
 

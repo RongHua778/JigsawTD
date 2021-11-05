@@ -287,7 +287,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         ShowRange(value);
         if (value)
         {
-            GameManager.Instance.ShowTurretTips(this.Strategy, new Vector2(300, Screen.height / 2));
+            GameManager.Instance.ShowTurretTips(this.Strategy, StaticData.LeftTipsPos);
             GameEvents.Instance.TutorialTrigger(TutorialType.TurretSelect);
         }
 

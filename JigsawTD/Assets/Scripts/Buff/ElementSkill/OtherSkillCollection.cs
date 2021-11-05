@@ -123,6 +123,12 @@ public class FreeGround : ElementSkill
         strategy.ComRangeIntensify += 1;
     }
 
+    public override void OnEquip()
+    {
+        base.OnEquip();
+        strategy.m_Turret.GenerateRange();
+    }
+
 
 
 }

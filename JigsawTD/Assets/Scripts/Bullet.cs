@@ -167,7 +167,8 @@ public abstract class Bullet : ReusableObject, IGameBehavior
             finalDamage *= SputteringPercentage;
         float realDamage;
         target.DamageStrategy.ApplyDamage(finalDamage, out realDamage, isCritical);
-        turretParent.Strategy.DamageAnalysis += (int)realDamage;//防御塔伤害统计
+        turretParent.Strategy.TotalDamage += (int)realDamage;//防御塔伤害统计
+        turretParent.Strategy.TurnDamage += (int)realDamage;//回合伤害统计
     }
 
     public void DamageProcess(IDamageable target, bool isSputtering = false)

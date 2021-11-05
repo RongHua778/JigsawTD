@@ -14,6 +14,7 @@ public class MenuUIManager : Singleton<MenuUIManager>
     //tips
     [SerializeField] TurretTips m_TurretTips = default;
     [SerializeField] TrapTips m_TrapTips = default;
+    [SerializeField] EnemyInfoTips m_EnemyInfoTips = default;
 
     public void Initinal()
     {
@@ -72,6 +73,13 @@ public class MenuUIManager : Singleton<MenuUIManager>
         m_TrapTips.ReadTrapAtt(att);
     }
 
+    public void ShowEnemyInfoTips(EnemyAttribute att,Vector2 pos)
+    {
+        m_EnemyInfoTips.transform.position = pos;
+        m_EnemyInfoTips.Show();
+        m_EnemyInfoTips.ReadEnemyAtt(att);
+    }
+
     public void BluePrintBtnClick()
     {
         ShowMessage("ÔÝÎ´¿ª·Å");
@@ -86,6 +94,7 @@ public class MenuUIManager : Singleton<MenuUIManager>
     {
         m_TurretTips.Hide();
         m_TrapTips.Hide();
+        m_EnemyInfoTips.Hide();
     }
 
     public void ShowMessage(string content)

@@ -17,6 +17,8 @@ MonoBehaviour:
   Icon: {fileID: 8019492531564915904, guid: f9835346b30cae840a9eff85ed192e6f, type: 3}
   Description: HEALERINFO
   Prefab: {fileID: 7544039814910962251, guid: aeee3495596b43f45b147c47867bd345, type: 3}
+  isLock: 0
+  initialLock: 0
   EnemyType: 4
   InitCount: 1
   CountIncrease: 0.5

@@ -17,3 +17,5 @@ MonoBehaviour:
   Icon: {fileID: 5035026766149074293, guid: 77f1f203341c46246ad62b6652017dda, type: 3}
   Description: IMITATETRAPINFO
   Prefab: {fileID: 2086895483048769337, guid: 961abc722433dc044a47201d4b55be4d, type: 3}
+  isLock: 0
+  initialLock: 1

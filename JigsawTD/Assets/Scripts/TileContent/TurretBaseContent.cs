@@ -22,7 +22,7 @@ public class TurretBaseContent : GameTileContent
         base.OnContentSelected(value);
         if (value)
         {
-            GameManager.Instance.ShowTurretBaseTips(this);
+            //GameManager.Instance.ShowTurretBaseTips(this);
         }
     }
 

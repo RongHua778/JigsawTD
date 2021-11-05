@@ -12,7 +12,6 @@ public class MenuState : ISceneState
 	public override void StateBegin()
 	{
 		MenuUIManager.Instance.Initinal();
-		LevelManager.Instance.UnlockBonus();//ÅĞ¶Ï½âËø½±Àø
 	}
 
 	// ½YÊø

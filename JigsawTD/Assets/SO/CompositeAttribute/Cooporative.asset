@@ -17,6 +17,8 @@ MonoBehaviour:
   Icon: {fileID: 8666163450238569026, guid: 30a21b1d5faac134e801f6967d51797e, type: 3}
   Description: COOPORATIVESKILL
   Prefab: {fileID: 2408362322337057344, guid: 9db29f8dde8f00d47abb71ad308bed81, type: 3}
+  isLock: 1
+  initialLock: 1
   StrategyType: 1
   RangeType: 0
   element: 0

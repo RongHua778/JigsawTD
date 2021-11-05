@@ -6,15 +6,12 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using LitJson;
 
 [RequireComponent(typeof(Sound))]
 public class Game : Singleton<Game>
 {
     SceneStateController m_SceneStateController = new SceneStateController();
-
-    [HideInInspector] public Save SaveData;
-
-
     public Animator transition;
     public float transitionTime = 0.8f;
     public bool Tutorial = false;
@@ -23,7 +20,7 @@ public class Game : Singleton<Game>
     protected override void Awake()
     {
         base.Awake();
-        LoadGame();
+        //LoadByJson();
         Application.runInBackground = true;
         DontDestroyOnLoad(this.gameObject);
         TurretEffectFactory.Initialize();
@@ -31,7 +28,7 @@ public class Game : Singleton<Game>
 
     private void Start()
     {
-
+        LoadByJson();
         //判断当前初始场景在哪里，根据不同场景初始化当前State
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         switch (currentSceneIndex)
@@ -97,40 +94,77 @@ public class Game : Singleton<Game>
         Application.Quit();
     }
 
+
     private void OnApplicationQuit()
     {
-        SaveGame(SaveData);
+        SaveByJson();
     }
 
-    //存档
-    public void SaveGame(Save save)
+    public void SaveGame()
     {
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/gamesave.save");
-        bf.Serialize(file, save);
-        file.Close();
-        Debug.Log("Game Save");
+        SaveByJson();
+    }
+    private void SaveByJson()
+    {
+        Save save = LevelManager.Instance.SetSaveData();
+        string filePath = Application.persistentDataPath + "/JsonSave.json";
+        Debug.Log(filePath);
+        string saveJsonStr = JsonMapper.ToJson(save);
+        StreamWriter sw = new StreamWriter(filePath);
+        sw.Write(saveJsonStr);
+        sw.Close();
 
+        Debug.Log("Saved!");
     }
 
-    public void LoadGame()
+    private void LoadByJson()
     {
-        if (File.Exists(Application.persistentDataPath + "/gamesave.save"))
+        string filePath = Application.persistentDataPath + "/JsonSave.json";
+        if (File.Exists(filePath))
         {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/gamesave.save", FileMode.Open);
-            Save save = (Save)bf.Deserialize(file);
-            file.Close();
-            SaveData = save;
-
+            StreamReader sr = new StreamReader(filePath);
+            string jsonStr = sr.ReadToEnd();
+            sr.Close();
+            Save save = JsonMapper.ToObject<Save>(jsonStr);
+            LevelManager.Instance.LoadSaveData(save);
         }
         else
         {
-            Save save = new Save();
-            save.Initialize();
-            SaveData = save;
+            LevelManager.Instance.FirstGameData();
+            Debug.Log("NoSaveData.");
         }
     }
+
+
+    //存档
+    //public void SaveGame(Save save)
+    //{
+    //    BinaryFormatter bf = new BinaryFormatter();
+    //    FileStream file = File.Create(Application.persistentDataPath + "/gamesave.save");
+    //    bf.Serialize(file, save);
+    //    file.Close();
+    //    Debug.Log("Game Save");
+
+    //}
+
+    //public void LoadGame()
+    //{
+    //    if (File.Exists(Application.persistentDataPath + "/gamesave.save"))
+    //    {
+    //        BinaryFormatter bf = new BinaryFormatter();
+    //        FileStream file = File.Open(Application.persistentDataPath + "/gamesave.save", FileMode.Open);
+    //        Save save = (Save)bf.Deserialize(file);
+    //        file.Close();
+    //        SaveData = save;
+
+    //    }
+    //    else
+    //    {
+    //        Save save = new Save();
+    //        save.Initialize();
+    //        SaveData = save;
+    //    }
+    //}
 
 
 

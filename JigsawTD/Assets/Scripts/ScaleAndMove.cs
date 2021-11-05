@@ -41,14 +41,6 @@ public class ScaleAndMove : IGameSystem
     Vector3 speedVertical = Vector3.zero;
     Vector3 speed = Vector3.zero;
 
-    //void Start()
-    //{
-    //    cam = this.GetComponent<Camera>();
-    //    CamInitialPos = cam.transform.position;
-    //    CamInitialSize = cam.orthographicSize;
-    //    oldPosition = cam.transform.position;
-    //    Input.multiTouchEnabled = true;
-    //}
 
     [Header("ÊÓ²î¿ØÖÆ")]
     [SerializeField] Transform[] backGrounds = default;
@@ -80,11 +72,6 @@ public class ScaleAndMove : IGameSystem
         //RTSView();
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, minX, maxX), Mathf.Clamp(transform.position.y, minY, maxY), transform.position.z);
 
-        //TEST
-        //if (Input.GetKeyDown(KeyCode.P))
-        //{
-        //    CanControl = !CanControl;
-        //}
     }
 
 
@@ -190,19 +177,13 @@ public class ScaleAndMove : IGameSystem
             Vector3 smoothPos = Vector3.Lerp(cam.transform.position, desirePos, SmoothSpeed);
             cam.transform.position = smoothPos;
         }
-        //if (Input.GetMouseButtonDown(1))
-        //{
-        //    cam.transform.DOMove(CamInitialPos, 0.6f);
-        //}
+
 
         speedVertical = Input.GetAxisRaw("Horizontal") * Vector3.right * slideSpeed * Time.deltaTime;
         speedHorizon = Input.GetAxisRaw("Vertical") * Vector3.up * slideSpeed * Time.deltaTime;
         speed = speedHorizon + speedVertical;
         transform.Translate(speed / m_MainUI.GameSpeed, Space.World);
-        //else
-        //{
-        //    CamMovement = Vector2.zero;
-        //}
+
 
     }
     private void MobileInput()
@@ -220,6 +201,12 @@ public class ScaleAndMove : IGameSystem
                 cam.transform.Translate(new Vector3(-Input.touches[0].deltaPosition.x, -Input.touches[0].deltaPosition.y, 0) * Time.deltaTime * 0.1f);
             }
         }
+    }
+
+    public void LocatePos(Vector2 pos)
+    {
+        Vector3 newPos = new Vector3(pos.x, pos.y, cam.transform.position.z);
+        cam.transform.DOMove(newPos, 0.5f);
     }
 
     private void Update()

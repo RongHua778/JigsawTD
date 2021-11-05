@@ -17,3 +17,5 @@ MonoBehaviour:
   Icon: {fileID: 2745613724628408894, guid: 77f1f203341c46246ad62b6652017dda, type: 3}
   Description: BONUSTRAPINFO
   Prefab: {fileID: 4035454610492290991, guid: 2c13dcad0a2d6e34598a99eb5c14cd0d, type: 3}
+  isLock: 0
+  initialLock: 1

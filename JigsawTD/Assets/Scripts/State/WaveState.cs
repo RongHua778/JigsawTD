@@ -18,6 +18,15 @@ public class WaveState : BattleOperationState
     {
         //计算陷阱列表及效果
         m_BoardSystem.GetPathTiles();
+        foreach (var turret in GameManager.Instance.elementTurrets.behaviors)
+        {
+            ((TurretContent)turret).Strategy.ClearTurnAnalysis();
+        }
+        foreach (var turret in GameManager.Instance.compositeTurrets.behaviors)
+        {
+            ((TurretContent)turret).Strategy.ClearTurnAnalysis();
+        }
+        GameRes.MaxPath = BoardSystem.shortestPath.Count;
         yield return new WaitForSeconds(0.5f);
         m_WaveSystem.Running = true;
         switch (m_WaveSystem.RunningSequence[0].EnemyType)

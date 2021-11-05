@@ -7,7 +7,7 @@ public class TrapContent : GameTileContent
 {
     public override GameTileContentType ContentType => GameTileContentType.Trap;
     private TrapAttribute trapAttribute;
-    public TrapAttribute TrapAttribute { get => trapAttribute; set => trapAttribute = value; }
+    public TrapAttribute TrapAttribute { get => trapAttribute; }
 
     public bool needReset = false;//是否需要重置朝向
 
@@ -27,6 +27,10 @@ public class TrapContent : GameTileContent
     private Sprite unrevealSprite;
 
 
+    public void Initialize(TrapAttribute att)
+    {
+        trapAttribute = att;
+    }
     protected virtual void Awake()
     {
         trapGFX = transform.Find("Sprite").GetComponent<SpriteRenderer>();
@@ -67,7 +71,7 @@ public class TrapContent : GameTileContent
         base.OnContentSelected(value);
         if (value)
         {
-            GameManager.Instance.ShowTrapTips(this);
+            GameManager.Instance.ShowTrapTips(this, StaticData.LeftTipsPos);
         }
 
     }
@@ -97,6 +101,8 @@ public class TrapContent : GameTileContent
                 (m_GameTile).SetRandomRotation();
             trapGFX.sprite = initSprite;
             IsReveal = true;
+
+            GameRes.MaxMark++;
         }
     }
 

@@ -6,9 +6,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Factory/ContentFactory", fileName = "GameContentFactory")]
 public class TileContentFactory : GameObjectFactory
 {
-    [SerializeField] ContentAttribute emptyAtt = default;
-    [SerializeField] ContentAttribute spawnPointAtt = default;
-    [SerializeField] ContentAttribute destinationAtt = default;
+    [SerializeField] TrapAttribute emptyAtt = default;
+    [SerializeField] TrapAttribute spawnPointAtt = default;
+    [SerializeField] TrapAttribute destinationAtt = default;
 
     [SerializeField]
     TurretAttribute[] elementTurrets = default;
@@ -34,6 +34,8 @@ public class TileContentFactory : GameObjectFactory
     private List<TurretAttribute> Rare5Att;
     private List<TurretAttribute> Rare6Att;
 
+    private List<TrapAttribute> BattleTraps;
+
 
     public void Initialize()
     {
@@ -43,9 +45,6 @@ public class TileContentFactory : GameObjectFactory
         CompositeDIC = new Dictionary<string, TurretAttribute>();
         TurretBaseDIC = new Dictionary<string, TurretBaseAttribute>();
 
-        //BattleElements = new List<TurretAttribute>();
-        //BattleComposites = new List<TurretAttribute>();
-
         Rare1Att = new List<TurretAttribute>();
         Rare2Att = new List<TurretAttribute>();
         Rare3Att = new List<TurretAttribute>();
@@ -53,72 +52,70 @@ public class TileContentFactory : GameObjectFactory
         Rare5Att = new List<TurretAttribute>();
         Rare6Att = new List<TurretAttribute>();
 
+        BattleTraps = new List<TrapAttribute>();
+
+
 
         foreach (TurretAttribute attribute in compositeTurrets)
         {
-            switch (attribute.Rare)
+            if (!attribute.isLock)
             {
-                case 1:
-                    Rare1Att.Add(attribute);
-                    break;
-                case 2:
-                    Rare2Att.Add(attribute);
-                    break;
-                case 3:
-                    Rare3Att.Add(attribute);
-                    break;
-                case 4:
-                    Rare4Att.Add(attribute);
-                    break;
-                case 5:
-                    Rare5Att.Add(attribute);
-                    break;
-                case 6:
-                    Rare6Att.Add(attribute);
-                    break;
+                switch (attribute.Rare)
+                {
+                    case 1:
+                        Rare1Att.Add(attribute);
+                        break;
+                    case 2:
+                        Rare2Att.Add(attribute);
+                        break;
+                    case 3:
+                        Rare3Att.Add(attribute);
+                        break;
+                    case 4:
+                        Rare4Att.Add(attribute);
+                        break;
+                    case 5:
+                        Rare5Att.Add(attribute);
+                        break;
+                    case 6:
+                        Rare6Att.Add(attribute);
+                        break;
+                }
             }
             CompositeDIC.Add(attribute.Name, attribute);
 
         }
         foreach (var attribute in trapAtts)
         {
+            if (!attribute.isLock)
+            {
+                BattleTraps.Add(attribute);
+            }
             TrapDIC.Add(attribute.Name, attribute);
         }
         foreach (var attribute in turretBaseAtts)
         {
             TurretBaseDIC.Add(attribute.Name, attribute);
         }
-        foreach (var att in elementTurrets)
+        foreach (var attribute in elementTurrets)
         {
-            ElementDIC.Add(att.element, att);
+            ElementDIC.Add(attribute.element, attribute);
         }
-        //SetBattleElements();
     }
-
-    //private void SetBattleElements()
-    //{
-    //    foreach (var select in Game.Instance.SaveData.SaveSelectedElement)
-    //    {
-    //        if (select.isSelect)
-    //        {
-    //            BattleElements.Add(ElementDIC[(ElementType)Enum.Parse(typeof(ElementType), select.itemName)]);
-    //        }
-    //    }
-    //}
 
 
     //*******终点
     public GameTileContent GetDestinationPoint()
     {
         TrapContent content = Get(destinationAtt.Prefab) as TrapContent;
-        content.TrapAttribute = destinationAtt as TrapAttribute;
+        content.Initialize(destinationAtt);
         return content;
     }
     //*******起点
     public GameTileContent GetSpawnPoint()
     {
         TrapContent content = Get(spawnPointAtt.Prefab) as TrapContent;
-        content.TrapAttribute = spawnPointAtt as TrapAttribute;
+        content.Initialize(spawnPointAtt);
         return content;
     }
 
@@ -213,19 +210,19 @@ public class TileContentFactory : GameObjectFactory
                 atrributeToReturn = Rare1Att[UnityEngine.Random.Range(0, Rare1Att.Count)];
                 break;
             case 2:
-                atrributeToReturn = Rare2Att[UnityEngine.Random.Range(0, Rare1Att.Count)];
+                atrributeToReturn = Rare2Att[UnityEngine.Random.Range(0, Rare2Att.Count)];
                 break;
             case 3:
-                atrributeToReturn = Rare3Att[UnityEngine.Random.Range(0, Rare1Att.Count)];
+                atrributeToReturn = Rare3Att[UnityEngine.Random.Range(0, Rare3Att.Count)];
                 break;
             case 4:
-                atrributeToReturn = Rare4Att[UnityEngine.Random.Range(0, Rare1Att.Count)];
+                atrributeToReturn = Rare4Att[UnityEngine.Random.Range(0, Rare4Att.Count)];
                 break;
             case 5:
-                atrributeToReturn = Rare5Att[UnityEngine.Random.Range(0, Rare1Att.Count)];
+                atrributeToReturn = Rare5Att[UnityEngine.Random.Range(0, Rare5Att.Count)];
                 break;
             case 6:
-                atrributeToReturn = Rare6Att[UnityEngine.Random.Range(0, Rare1Att.Count)];
+                atrributeToReturn = Rare6Att[UnityEngine.Random.Range(0, Rare6Att.Count)];
                 break;
         }
         Debug.Assert(atrributeToReturn != null, "没有可以返回的配方");
@@ -239,7 +236,7 @@ public class TileContentFactory : GameObjectFactory
         if (TrapDIC.ContainsKey(name))
         {
             TrapContent content = Get(TrapDIC[name].Prefab) as TrapContent;
-            content.TrapAttribute = TrapDIC[name];
+            content.Initialize(TrapDIC[name]);
             return content;
         }
         Debug.LogWarning("没有对应名字的陷阱");
@@ -249,9 +246,9 @@ public class TileContentFactory : GameObjectFactory
 
     public TrapContent GetRandomTrapContent()
     {
-        int index = UnityEngine.Random.Range(0, trapAtts.Count);
-        TrapContent content = Get(trapAtts[index].Prefab) as TrapContent;
-        content.TrapAttribute = trapAtts[index];
+        TrapAttribute att = BattleTraps[UnityEngine.Random.Range(0, BattleTraps.Count)];
+        TrapContent content = Get(att.Prefab) as TrapContent;
+        content.Initialize(att);
         return content;
     }
 

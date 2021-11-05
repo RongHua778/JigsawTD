@@ -17,6 +17,8 @@ MonoBehaviour:
   Icon: {fileID: 8783240499713188425, guid: 5ffd5a68966da114d9a58cd1e921a4ef, type: 3}
   Description: SUPERSKILL
   Prefab: {fileID: 2682830154004877270, guid: 38a933d8a495386418cc643b0a8dbb6d, type: 3}
+  isLock: 1
+  initialLock: 1
   StrategyType: 1
   RangeType: 1
   element: 0
@@ -31,7 +33,7 @@ MonoBehaviour:
   TurretLevels:
   - AttackRange: 4
     ForbidRange: 0
-    AttackDamage: 300
+    AttackDamage: 250
     AttackSpeed: 0.6
     SputteringRange: 0
     CriticalRate: 0
@@ -41,7 +43,7 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.3}
   - AttackRange: 4
     ForbidRange: 0
-    AttackDamage: 400
+    AttackDamage: 380
     AttackSpeed: 0.6
     SputteringRange: 0
     CriticalRate: 0
@@ -51,7 +53,7 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.3}
   - AttackRange: 4
     ForbidRange: 0
-    AttackDamage: 650
+    AttackDamage: 560
     AttackSpeed: 0.6
     SputteringRange: 0
     CriticalRate: 0

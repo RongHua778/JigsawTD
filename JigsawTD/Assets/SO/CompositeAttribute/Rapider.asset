@@ -17,6 +17,8 @@ MonoBehaviour:
   Icon: {fileID: -1343758528997770693, guid: c08f452247fa17245b5b595ed6454216, type: 3}
   Description: RAPIDERSKILL
   Prefab: {fileID: 1405721755924127496, guid: d71b8f03e81b3ab45b0b1062d0c191df, type: 3}
+  isLock: 1
+  initialLock: 1
   StrategyType: 1
   RangeType: 1
   element: 0
@@ -31,7 +33,7 @@ MonoBehaviour:
   TurretLevels:
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 45
+    AttackDamage: 50
     AttackSpeed: 1
     SputteringRange: 0
     CriticalRate: 0
@@ -41,7 +43,7 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.19}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 55
+    AttackDamage: 70
     AttackSpeed: 1.1
     SputteringRange: 0
     CriticalRate: 0
@@ -51,7 +53,7 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.24}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 65
+    AttackDamage: 100
     AttackSpeed: 1.2
     SputteringRange: 0
     CriticalRate: 0

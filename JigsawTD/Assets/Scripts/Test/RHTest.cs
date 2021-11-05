@@ -7,6 +7,7 @@ public class RHTest : MonoBehaviour
 {
     [SerializeField] GameObject panel = default;
     [SerializeField] InputField moneyInputField = default;
+    [SerializeField] InputField lifeInputField = default;
 
     [SerializeField] InputField drawInputField = default;
 
@@ -68,6 +69,11 @@ public class RHTest : MonoBehaviour
         // waveSystem.waveCoolDown = float.Parse(waveCoolDownField.text);
         waveSystem.LevelInitialize();
         GameManager.Instance.PrepareNextWave();
+    }
+
+    public void GetLifeBtnClick()
+    {
+        GameRes.Life += int.Parse(lifeInputField.text);
     }
 
 }

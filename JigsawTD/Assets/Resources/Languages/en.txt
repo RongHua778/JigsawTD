@@ -6,7 +6,7 @@ STARTGAME=START GAME
 BLUEPRINT=HANDBOOK
 SETTING=SETTING
 QUIT=QUIT
-LEVELSTART=START LEVEL
+LEVELSTART=START GAME
 CONTINUE=Coninue
 RESTART=Restart
 RETURNTOMENU=Return to menu
@@ -14,12 +14,17 @@ QUIT2=Quit
 CONFIRM=Confirm
 TUTORIAL=Tutorial
 WISHLIST=Add to wishlist
+MODESELECT=MODE SELECT
 
 //tujian
 ELEMENTTURRET=Eelement Turret
 REFACTORTURRET=Refactor Turret
 MARK=Mark
 BOSS=BOSS
+BASICENEMY=Enemy
+
+//enemyTips
+BACKGROUND=Background Research
 
 //Battleset
 SELECTEDCOUNT=Already Picked:
@@ -119,10 +124,16 @@ LOSE=END
 PASSLEVEL=You have pass 
 TOTALDAMAGE=Total Damage
 COMPOSITECOUNT=Refactor Turret
+MAXPATH=Longest Path
+MAXMARK=Revealed Mark
+GAINGOLD=Gained Gold
 THANKSINFO=Thank you for experiencing the game demo. If you like our game, \n please add it to your wishlist!
+EXPVALUE=Gain Exp
+BOSSDEFEAT=BOSS Defeated
+
 
 //turretips
-DAMAGEANLYSIS=Damage
+DAMAGEANLYSIS=Turn Damage
 ATTACK=Attack
 RANGE=Range
 SPEED=FireRate
@@ -320,8 +331,8 @@ HAMSTERINFO=There are 15 hamsters, each hamster has 75% damage reduction, and ea
 AIRCRAFTINFO=With aircrafts which can freeze turrets
 
 //Trap
-UNREVEAL=Unreveal Mark
-UNREVEALINFO=Reveal this mark by connect this tile into your path
+UNREVEAL=Unreveal Signal
+UNREVEALINFO=Reveal this signal by connect this tile into your path and it will trigger negative effect to enemy passed by.
 
 SPAWNPOINT=Start Point
 DESTINATION=End Point

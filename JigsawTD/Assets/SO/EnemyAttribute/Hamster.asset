@@ -17,10 +17,12 @@ MonoBehaviour:
   Icon: {fileID: -7297425823691836014, guid: 2138c8f635a68044d8b153780571587c, type: 3}
   Description: HAMSTERINFO
   Prefab: {fileID: 5042288069490103953, guid: d3aac527b4cb7b24483e988a8060353a, type: 3}
+  isLock: 1
+  initialLock: 1
   EnemyType: 6
   InitCount: 5
   CountIncrease: 0
-  Health: 100
-  Speed: 0.6
+  Health: 80
+  Speed: 0.5
   CoolDown: 1
   ReachDamage: 1

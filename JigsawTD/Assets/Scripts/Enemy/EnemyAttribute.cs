@@ -12,4 +12,11 @@ public class EnemyAttribute : ContentAttribute
     public float Speed;
     public float CoolDown;
     public int ReachDamage;
+    public string BackGround;
+
+    public override void MenuShowTips(Vector2 pos)
+    {
+        base.MenuShowTips(pos);
+        MenuUIManager.Instance.ShowEnemyInfoTips(this, pos);
+    }
 }

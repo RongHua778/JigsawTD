@@ -46,6 +46,10 @@ public static class GameRes
     [Header("统计数据")]
     public static int TotalRefactor = 0;
     public static int TotalDamage = 0;
+    private static int maxPath = 0;
+    public static int MaxPath { get => maxPath; set { maxPath = value > maxPath ? value : maxPath; } }
+    public static int MaxMark = 0;
+    public static int GainGold = 0;
 
     [Header("全局元素加成")]
     public static float TempGoldIntensify = 0;
@@ -143,6 +147,13 @@ public static class GameRes
     {
         m_MainUI = mainUI;
         m_FuncUI = funcUI;
+
+        TotalRefactor = 0;
+        TotalDamage = 0;
+        MaxPath = 0;
+        MaxMark = 0;
+        GainGold = 0;
+
         DiscountRate = 0.1f;
         ShopCapacity = 3;
         MaxLock = 1;
@@ -162,6 +173,9 @@ public static class GameRes
         TempWaterIntensify = 0;
         TempFireIntensify = 0;
         TempDustIntensify = 0;
+
+        PreSetShape = null;
+        ForcePlace = null;
 
     }
 

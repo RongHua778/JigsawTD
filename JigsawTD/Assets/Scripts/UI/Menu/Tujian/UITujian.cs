@@ -8,12 +8,14 @@ public class UITujian : IUserInterface
     private Animator m_Anim;
     [SerializeField] TipsElementConstruct[] elementConstructs = default;
     List<int> skillPreviewElements;
+    [SerializeField] GameLevelHolder gameLevelPrefab = default;
     public override void Initialize()
     {
         base.Initialize();
         m_Anim = this.GetComponent<Animator>();
         skillPreviewElements = new List<int> { 0, 1, 2, 3, 4 };
         SetElementSkills();
+        gameLevelPrefab.SetData();
     }
 
     public void SetElementSkills()
@@ -31,6 +33,12 @@ public class UITujian : IUserInterface
     {
         base.Show();
         m_Anim.SetBool("OpenLevel", true);
+    }
+
+    public override void Hide()
+    {
+        base.Hide();
+        MenuUIManager.Instance.HideTips();
     }
 
     public void ClosePanel()

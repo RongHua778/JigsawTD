@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0168100ba70e486479f31ec9f99a31ad, type: 3}
   m_Name: Level4
   m_EditorClassIdentifier: 
-  LevelID: 0
   PlayerHealth: 15
   Wave: 40
-  LevelIntensify: 3
+  LevelIntensify: 2.5
   NormalEnemies:
   - {fileID: 11400000, guid: a2fa830bad8e11c448623ce28354a1bd, type: 2}
   - {fileID: 11400000, guid: a6b4f2578a98cf54caf0ac3718b54059, type: 2}
@@ -23,10 +22,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8efd383e225b02844a5ac997f1e5f924, type: 2}
   - {fileID: 11400000, guid: 4414d8fdced55104fb97c2c6ed6ec11a, type: 2}
   - {fileID: 11400000, guid: 0a577738dc20fea45a9af16979f88841, type: 2}
-  Boss:
+  Boss1:
+  - {fileID: 11400000, guid: f9558f1a6cffea245a720e078208fccf, type: 2}
   - {fileID: 11400000, guid: 56bc6f0aa93753148b97e2e0731037d9, type: 2}
+  Boss2:
+  - {fileID: 11400000, guid: 4868c66738024d74285c7f2ac26477ad, type: 2}
   - {fileID: 11400000, guid: e35af05bb7f906940b71ae1eed8850ff, type: 2}
+  Boss3:
   - {fileID: 11400000, guid: dd4c9f06325d7fb40bc6db21624cdc8d, type: 2}
+  - {fileID: 11400000, guid: 69f15236ccf6c8d468d1e830d7746cd6, type: 2}
+  Boss4:
+  - {fileID: 11400000, guid: dbb0595b1b4e1be4599c5c9d1e97b9e3, type: 2}
   - {fileID: 11400000, guid: bd4a8209b52017c4bb8c391e2596cefb, type: 2}
   LevelInfo: LEVEL4INFO
   TrapCount: 25

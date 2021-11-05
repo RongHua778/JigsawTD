@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    [SerializeField] private Canvas m_Canvas = default;
     [Header("系统")]
     [SerializeField] private BoardSystem m_BoardSystem = default;//版图系统
     [SerializeField] private WaveSystem m_WaveSystem = default;//波次系统
@@ -30,8 +31,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private TrapTips m_TrapTips = default;
     [SerializeField] private BuyGroundTips m_BuyGroundTips = default;
     [SerializeField] private EnemyTips m_EnemyTips = default;
-    [SerializeField] private TurretBaseTips m_TurretBaseTips = default;
-
+    [SerializeField] private UnlockBonusTips m_BonusTips = default;
 
 
     [Header("集合")]
@@ -74,7 +74,7 @@ public class GameManager : Singleton<GameManager>
         m_MessageUI.Initialize();//提示系统UI
         m_GuideVideo.Initialize();//教程视频UI
         m_EnemyTips.Initialize();//敌人TIPS
-        m_TurretBaseTips.Initialize();//基座tips
+        m_BonusTips.Initialize();//奖励解锁TIps
 
         //m_GuideUI.Initialize(m_FuncUI, m_MainUI, m_BluePrintShopUI, m_ShapeSelectUI);//教学系统UI
         //m_GuideUI.Initialize();//IuserInterface初始化
@@ -328,7 +328,9 @@ public class GameManager : Singleton<GameManager>
 
     public void GainMoney(int amount)
     {
-        GameRes.Coin += (int)(amount * (1 + GameRes.OverallMoneyIntensify));
+        int gold= (int)(amount * (1 + GameRes.OverallMoneyIntensify));
+        GameRes.Coin += gold;
+        GameRes.GainGold += gold;
     }
 
     public void GainInterest()
@@ -429,16 +431,38 @@ public class GameManager : Singleton<GameManager>
     public void ShowTurretTips(StrategyBase strategy, Vector2 pos)
     {
         HideTips();
-
-        m_TurretTips.ReadTurret(strategy, pos);
+        SetCanvasPos(m_TurretTips.transform,pos);
+        m_TurretTips.ReadTurret(strategy);
         m_TurretTips.Show();
     }
 
-    public void ShowTrapTips(TrapContent trap)
+    private void SetCanvasPos(Transform tr,Vector2 pos)
+    {
+        Vector2 newPos;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(m_Canvas.transform as RectTransform, pos, m_Canvas.worldCamera, out newPos);
+        tr.position = m_Canvas.transform.TransformPoint(newPos);
+    }
+
+    public void ShowTrapTips(TrapContent trap,Vector2 pos)
     {
         HideTips();
+        SetCanvasPos(m_TrapTips.transform, pos);
         m_TrapTips.ReadTrap(trap, GameRes.FreeTrapCount > 0 ? 0 : m_BoardSystem.SwitchTrapCost);
         m_TrapTips.Show();
+    }
+
+    public void ShowTrapTips(TrapAttribute att,Vector2 pos)
+    {
+        SetCanvasPos(m_TrapTips.transform, pos);
+        m_TrapTips.Show();
+        m_TrapTips.ReadTrapAtt(att);
+    }
+
+    public void ShowTurretTips(TurretAttribute att,Vector2 pos)
+    {
+        SetCanvasPos(m_TurretTips.transform,pos);
+        m_TurretTips.Show();
+        m_TurretTips.ReadAttribute(att);
     }
 
     public void ShowBuyGroundTips()
@@ -454,11 +478,18 @@ public class GameManager : Singleton<GameManager>
         m_TempTips.SendText(text, pos);
     }
 
-    public void ShowBluePrintTips(BluePrintGrid grid)
+    public void ShowBluePrintTips(BluePrintGrid grid,Vector2 pos)
     {
         HideTips();
+        SetCanvasPos(m_TurretTips.transform, pos);
         m_TurretTips.ReadBluePrint(grid);
         m_TurretTips.Show();
+    }
+
+    public void ShowBonusTips(GameLevelInfo info)
+    {
+        m_BonusTips.Show();
+        m_BonusTips.SetBouns(info);
     }
     public void HideTempTips()
     {
@@ -473,12 +504,7 @@ public class GameManager : Singleton<GameManager>
         m_EnemyTips.ReadSequenceInfo(m_WaveSystem.RunningSequence);
     }
 
-    public void ShowTurretBaseTips(TurretBaseContent content)
-    {
-        HideTips();
-        m_TurretBaseTips.Show();
-        m_TurretBaseTips.ReadTurretBase(content);
-    }
+
 
     public void HideEnemyTips()
     {
@@ -490,18 +516,16 @@ public class GameManager : Singleton<GameManager>
         m_TurretTips.Hide();
         m_TrapTips.Hide();
         m_BuyGroundTips.Hide();
-        m_TurretBaseTips.Hide();
     }
 
     #endregion
 
     #region 待加入功能
 
-    public void SetFreeShapeCount(int count)
+    public void LocateCamPos(Vector2 pos)
     {
-        m_FuncUI.FreeShapeCount += count;
+        m_CamControl.LocatePos(pos);
     }
-
     public void AddtoWishList()
     {
         Application.OpenURL("https://store.steampowered.com/app/1664670/_Refactor");

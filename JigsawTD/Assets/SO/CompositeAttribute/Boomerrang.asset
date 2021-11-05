@@ -17,6 +17,8 @@ MonoBehaviour:
   Icon: {fileID: -5153134150779752020, guid: a799722f85e58a34993e12144292e1a9, type: 3}
   Description: BOOMERRANGSKILL
   Prefab: {fileID: 5634142968415057810, guid: f48e2d78274808848bf0c98accb78f83, type: 3}
+  isLock: 1
+  initialLock: 1
   StrategyType: 1
   RangeType: 0
   element: 0
@@ -29,9 +31,9 @@ MonoBehaviour:
   maxElementLevel: 5
   TurretSkill: 9
   TurretLevels:
-  - AttackRange: 4
+  - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 1150
+    AttackDamage: 300
     AttackSpeed: 0.2
     SputteringRange: 0
     CriticalRate: 0
@@ -39,9 +41,9 @@ MonoBehaviour:
     TurretIcon: {fileID: 6252459201115839096, guid: a799722f85e58a34993e12144292e1a9, type: 3}
     CannonSprite: {fileID: -3111040703750061689, guid: ef329b970cf7ced4888442c7bc757356, type: 3}
     ShootPointOffset: {x: 0, y: 0}
-  - AttackRange: 4
+  - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 1750
+    AttackDamage: 400
     AttackSpeed: 0.2
     SputteringRange: 0
     CriticalRate: 0
@@ -49,9 +51,9 @@ MonoBehaviour:
     TurretIcon: {fileID: 3442024006206321382, guid: a799722f85e58a34993e12144292e1a9, type: 3}
     CannonSprite: {fileID: -4017865521878045518, guid: ef329b970cf7ced4888442c7bc757356, type: 3}
     ShootPointOffset: {x: 0, y: 0}
-  - AttackRange: 4
+  - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 2550
+    AttackDamage: 540
     AttackSpeed: 0.2
     SputteringRange: 0
     CriticalRate: 0

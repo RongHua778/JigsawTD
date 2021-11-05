@@ -17,6 +17,8 @@ MonoBehaviour:
   Icon: {fileID: 2252942032037098127, guid: 6e04c07d22153c8489284847581ecaf5, type: 3}
   Description: CORESKILL
   Prefab: {fileID: 3599036617770833836, guid: 67cb0b48bf93f234faa1e8c5410b17ce, type: 3}
+  isLock: 1
+  initialLock: 1
   StrategyType: 1
   RangeType: 0
   element: 0

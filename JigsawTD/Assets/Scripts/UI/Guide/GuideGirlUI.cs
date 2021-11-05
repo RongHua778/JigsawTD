@@ -280,6 +280,7 @@ public class GuideGirlUI : IUserInterface
                 ScaleAndMove.CanControl = true;
 
                 dragGuide.SetActive(true);
+                turretTips_RefactorObj.SetActive(false);
                 break;
             case 1://第二段对话结束，鼠标缩放操作
                 ScaleAndMove.SizeTutorial = true;
@@ -332,6 +333,7 @@ public class GuideGirlUI : IUserInterface
                 Game.Instance.Tutorial = false;
                 break;
             case 22://悬停元素技能后，点击重构按钮
+                turretTips_RefactorObj.SetActive(true);
                 guideIndicator.Show(true, turretTips_RefactorObj.transform);
                 break;
 

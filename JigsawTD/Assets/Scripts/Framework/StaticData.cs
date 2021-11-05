@@ -21,6 +21,12 @@ public class StaticData : Singleton<StaticData>
     public static string TempGroundMask = "TempGround";
     public static LayerMask EnemyLayerMask = 1 << 11;
     public static LayerMask GetGroundLayer = 1 << 8 | 1 << 12;
+
+    public static Vector2 LeftTipsPos = new Vector2(300, Screen.height / 2);
+    public static Vector2 LeftMidTipsPos = new Vector2(800, Screen.height / 2);
+    public static Vector2 RightTipsPos = new Vector2(Screen.width - 300, Screen.height / 2);
+    public static Vector2 RightMidTipsPos = new Vector2(Screen.width - 800, Screen.height / 2);
+
     //public static LayerMask RunTimeFindPathLayer = 1 << 8;
     //抽取品质概率
     public static float[,] QualityChances = new float[6, 5]
@@ -41,6 +47,9 @@ public class StaticData : Singleton<StaticData>
         { 0.3f, 0.35f, 0.4f, 0.45f, 0.6f,0f },
         { 0.3f, 0.35f, 0.4f, 0.45f, 0.5f,0.65f },
     };
+
+    //public static int[] GameLevelExp = new int[9] 
+    //{ 200, 400, 800, 1600, 3200, 6400, 12800, 25600, 51200 };
 
     [Header("工厂类")]
     [SerializeField] TileFactory _tileFactory = default;

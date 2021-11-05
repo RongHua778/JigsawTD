@@ -127,8 +127,10 @@ public class StrategyBase
     #endregion
 
     //×îÖÕ»ù´¡ÊôÐÔ
-    private int damageAnalysis;
-    public int DamageAnalysis { get => damageAnalysis; set => damageAnalysis = value; }
+    private int turnDamage;
+    public int TurnDamage { get => turnDamage; set => turnDamage = value; }
+    private int totalDamage;
+    public int TotalDamage { get => totalDamage; set => totalDamage = value; }
     public float BaseAttack { get => InitAttack * (1 + BaseAttackIntensify * AllAttackIntensifyModify); }
     public float BaseSpeed { get => InitSpeed * (1 + BaseSpeedIntensify * AllSpeedIntensifyModify); }
     public int BaseRange { get => InitRange + BaseRangeIntensify; }
@@ -302,6 +304,11 @@ public class StrategyBase
         BaseSlowRateIntensifyModify = 1;
         PoloIntensifyModify = 1;
 
+    }
+
+    public void ClearTurnAnalysis()
+    {
+        TurnDamage = 0;
     }
 
     public void ClearTurnIntensify()

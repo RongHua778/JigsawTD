@@ -7,8 +7,8 @@ using System.Linq;
 public class TurretTips : TileTips
 {
 
-    Camera mainCam;
-    [SerializeField] Canvas myCanvas = default;
+    //Camera mainCam;
+    //[SerializeField] Canvas myCanvas = default;
     [SerializeField] Text RangeTypeValue = default;
     [SerializeField] Text AttackValue = default;
     [SerializeField] Text SpeedValue = default;
@@ -61,7 +61,7 @@ public class TurretTips : TileTips
 
     public override void Initialize()
     {
-        mainCam = Camera.main;
+        //mainCam = Camera.main;
         CriticalInfo.SetContent(GameMultiLang.GetTraduction("CRITICALINFO"));
         SplashInfo.SetContent(GameMultiLang.GetTraduction("SPLASHINFO"));
         SlowInfo.SetContent(GameMultiLang.GetTraduction("SLOWINFO"));
@@ -76,11 +76,11 @@ public class TurretTips : TileTips
         showingTurret = false;
     }
 
-    public void ReadTurret(StrategyBase Strategy,Vector2 pos)//通过场上防御塔查看
+    public void ReadTurret(StrategyBase Strategy)//通过场上防御塔查看
     {
-        Vector2 newPos;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(myCanvas.transform as RectTransform, pos, myCanvas.worldCamera, out newPos);//new Vector2(300, Screen.height / 2)
-        transform.position = myCanvas.transform.TransformPoint(newPos);
+        //Vector2 newPos;
+        //RectTransformUtility.ScreenPointToLocalPointInRectangle(myCanvas.transform as RectTransform, pos, myCanvas.worldCamera, out newPos);//new Vector2(300, Screen.height / 2)
+        //transform.position = myCanvas.transform.TransformPoint(newPos);
 
         m_Strategy = Strategy;
         BasicInfo(m_Strategy.m_Att, m_Strategy.Quality);
@@ -114,9 +114,9 @@ public class TurretTips : TileTips
 
     public void ReadBluePrint(BluePrintGrid grid)
     {
-        Vector2 newPos;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(myCanvas.transform as RectTransform, new Vector2(900, Screen.height / 2), myCanvas.worldCamera, out newPos);
-        transform.position = myCanvas.transform.TransformPoint(newPos);
+        //Vector2 newPos;
+        //RectTransformUtility.ScreenPointToLocalPointInRectangle(myCanvas.transform as RectTransform, new Vector2(900, Screen.height / 2), myCanvas.worldCamera, out newPos);
+        //transform.position = myCanvas.transform.TransformPoint(newPos);
 
         showingBlueprint = true;
         m_Grid = grid;
@@ -271,7 +271,7 @@ public class TurretTips : TileTips
         SlowRateValue.text = m_Strategy.FinalSlowRate.ToString();
         SlowRateChangeTxt.text = "";
 
-        AnalysisValue.text = m_Strategy.DamageAnalysis.ToString();
+        AnalysisValue.text = m_Strategy.TurnDamage.ToString();
     }
 
     private void UpdateBluePrintInfo()

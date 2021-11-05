@@ -31,6 +31,12 @@ public class TrapAttribute : ContentAttribute
         base.MenuShowTips(pos);
         MenuUIManager.Instance.ShowTrapTips(this, pos);
     }
+
+    public override void GameShowTips(Vector2 pos)
+    {
+        base.GameShowTips(pos);
+        GameManager.Instance.ShowTrapTips(this, pos);
+    }
 }
 
 

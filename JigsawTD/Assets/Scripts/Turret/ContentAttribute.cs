@@ -15,8 +15,13 @@ public class ContentAttribute : ScriptableObject
     public Sprite Icon;
     public string Description;
     public ReusableObject Prefab;
+    public bool isLock;
+    public bool initialLock;
 
     public virtual void MenuShowTips(Vector2 pos)
+    {
+    }
+    public virtual void GameShowTips(Vector2 pos)
     {
     }
 

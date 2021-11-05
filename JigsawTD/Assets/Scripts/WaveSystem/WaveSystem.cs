@@ -101,19 +101,19 @@ public class WaveSystem : IGameSystem
             }
             else if (i == 9)
             {
-                sequences = GenerateSpecificSequence(LevelAttribute.Boss[0].EnemyType, stage, i, true);
+                sequences = GenerateSpecificSequence(LevelAttribute.GetRandomBoss(1).EnemyType, stage, i, true);
             }
             else if (i == 19)
             {
-                sequences = GenerateSpecificSequence(LevelAttribute.Boss[1].EnemyType, stage, i, true);
+                sequences = GenerateSpecificSequence(LevelAttribute.GetRandomBoss(2).EnemyType, stage, i, true);
             }
             else if (i == 29)
             {
-                sequences = GenerateSpecificSequence(LevelAttribute.Boss[2].EnemyType, stage, i, true);
+                sequences = GenerateSpecificSequence(LevelAttribute.GetRandomBoss(3).EnemyType, stage, i, true);
             }
             else if ((i + 1) % 10 == 0)
             {
-                sequences = GenerateSpecificSequence(LevelAttribute.Boss[3].EnemyType, stage, i, true);
+                sequences = GenerateSpecificSequence(LevelAttribute.GetRandomBoss(4).EnemyType, stage, i, true);
             }
             else if ((i + 4) % 10 == 0)
             {
@@ -181,6 +181,8 @@ public class WaveSystem : IGameSystem
             RunningSequence = LevelSequence.Dequeue();
             if (RunningSequence[0].IsBoss)
             {
+                EnemyAttribute attribute = StaticData.Instance.EnemyFactory.Get(RunningSequence[0].EnemyType);
+                attribute.isLock = false;//见到就解锁BOSS
                 bossWarningUIAnim.Show();
             }
         }

@@ -17,6 +17,8 @@ MonoBehaviour:
   Icon: {fileID: 1974467737375703195, guid: 650ade1de42820843ab504b46ce30229, type: 3}
   Description: SNOWSKILL
   Prefab: {fileID: 3184344065496086193, guid: ec76f05b1efa1874b8faa449cea6300a, type: 3}
+  isLock: 1
+  initialLock: 1
   StrategyType: 1
   RangeType: 2
   element: 0
@@ -31,7 +33,7 @@ MonoBehaviour:
   TurretLevels:
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 650
+    AttackDamage: 700
     AttackSpeed: 0.25
     SputteringRange: 0
     CriticalRate: 0
@@ -51,7 +53,7 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.23}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 1600
+    AttackDamage: 1400
     AttackSpeed: 0.25
     SputteringRange: 0
     CriticalRate: 0

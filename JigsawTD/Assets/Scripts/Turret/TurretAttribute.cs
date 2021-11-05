@@ -59,4 +59,10 @@ public class TurretAttribute : ContentAttribute
         MenuUIManager.Instance.ShowTurretTips(this, pos);
     }
 
+    public override void GameShowTips(Vector2 pos)
+    {
+        base.GameShowTips(pos);
+        GameManager.Instance.ShowTurretTips(this, pos);
+    }
+
 }

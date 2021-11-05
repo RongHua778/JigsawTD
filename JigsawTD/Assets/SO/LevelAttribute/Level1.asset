@@ -12,22 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0168100ba70e486479f31ec9f99a31ad, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  LevelID: 0
   PlayerHealth: 25
-  Wave: 40
-  LevelIntensify: 1.5
+  Wave: 30
+  LevelIntensify: 1.25
   NormalEnemies:
   - {fileID: 11400000, guid: a2fa830bad8e11c448623ce28354a1bd, type: 2}
   - {fileID: 11400000, guid: a6b4f2578a98cf54caf0ac3718b54059, type: 2}
   - {fileID: 11400000, guid: 52077df3b03c9b446a10d3ec4b279ff5, type: 2}
   - {fileID: 11400000, guid: 8efd383e225b02844a5ac997f1e5f924, type: 2}
-  Boss:
+  Boss1:
   - {fileID: 11400000, guid: f9558f1a6cffea245a720e078208fccf, type: 2}
+  Boss2:
   - {fileID: 11400000, guid: 4868c66738024d74285c7f2ac26477ad, type: 2}
+  Boss3:
   - {fileID: 11400000, guid: 69f15236ccf6c8d468d1e830d7746cd6, type: 2}
+  Boss4:
   - {fileID: 11400000, guid: dbb0595b1b4e1be4599c5c9d1e97b9e3, type: 2}
   LevelInfo: LEVEL1INFO
   TrapCount: 15
   EliteWave: 15
   Bonus:
-  - {fileID: 11400000, guid: 95641219ac7af8c4e9a6a2cefe944374, type: 2}
+  - 

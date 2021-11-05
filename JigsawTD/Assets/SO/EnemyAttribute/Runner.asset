@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttType: 3
   Name: RUNNER
-  Icon: {fileID: 4062577230677641764, guid: f9835346b30cae840a9eff85ed192e6f, type: 3}
+  Icon: {fileID: 5000823649156328451, guid: f9835346b30cae840a9eff85ed192e6f, type: 3}
   Description: RUNNERINFO
   Prefab: {fileID: 2303344070539863949, guid: b8d466535f2566a4cb8cf786b9a7d19f, type: 3}
+  isLock: 0
+  initialLock: 0
   EnemyType: 1
   InitCount: 2
   CountIncrease: 2

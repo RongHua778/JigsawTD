@@ -10,7 +10,6 @@ public class UILevelManager : IUserInterface
     [SerializeField] Text difficultyInfo_Txt = default;
     private Animator m_Anim;
     [SerializeField] Text difficultyTxt = default;
-    [SerializeField] BonusSetter bonusSetter = default;
     [SerializeField] Toggle tutorialCheck = default;
     [SerializeField] CanvasGroup startGameBtnSprite = default;
 
@@ -18,7 +17,6 @@ public class UILevelManager : IUserInterface
     {
         base.Initialize();
         m_Anim = this.GetComponent<Animator>();
-        bonusSetter.SetInfo();
         tutorialCheck.isOn = false;
     }
     public void SetLevelInfo()
@@ -70,7 +68,6 @@ public class UILevelManager : IUserInterface
             startGameBtnSprite.alpha = 1f;
         }
 
-        bonusSetter.SetInfo();
     }
 
     public override void Show()
