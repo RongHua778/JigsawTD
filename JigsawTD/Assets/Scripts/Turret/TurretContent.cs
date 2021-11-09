@@ -40,7 +40,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     protected bool ShowingRange = false;
     protected Transform rotTrans;
     protected Transform shootPoint;
-    protected float CheckAngle = 10f;
+    //protected float CheckAngle = 10f;
 
     //¿ØÖÆspriteÑÕÉ«
     protected List<SpriteRenderer> sprites = new List<SpriteRenderer>();
@@ -229,7 +229,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     protected bool AngleCheck()
     {
         var angleCheck = Quaternion.Angle(rotTrans.rotation, look_Rotation);
-        if (angleCheck < CheckAngle)
+        if (angleCheck < Strategy.CheckAngle)
         {
             return true;
         }

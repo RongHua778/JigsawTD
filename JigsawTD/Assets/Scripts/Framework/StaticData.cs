@@ -108,6 +108,7 @@ public class StaticData : Singleton<StaticData>
     public ReusableObject GainMoneyPrefab;
     public ReusableObject FrostExplosion;
     public ReusableObject FrostEffectPrefab;
+    public Sprite[] ElementSprites;
 
     [Header("CompositionAttributes")]
     public int LevelUpCostPerRare;

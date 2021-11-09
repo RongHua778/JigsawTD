@@ -8,6 +8,12 @@ public class Boomerrang : CompositeTurret
     float rotSpeed = -360;
     float RotSpeed { get => rotSpeed; set => rotSpeed = value; }
     private SelfBullet cannonBullet;
+
+    public override void InitializeTurret()
+    {
+        base.InitializeTurret();
+        Strategy.CheckAngle = 360f;
+    }
     protected override void RotateTowards()
     {
 
@@ -25,7 +31,6 @@ public class Boomerrang : CompositeTurret
         base.OnSpawn();
         CannonSprite.transform.rotation = Quaternion.identity;
         cannonBullet = CannonSprite.GetComponent<SelfBullet>();
-        CheckAngle = 360f;
     }
 
     private void SelfRotateControl()

@@ -45,17 +45,38 @@ public class StrategyBase
     //二级属性
     private int elementSkillSlot = 2;//元素技能槽数
     public int ElementSKillSlot { get => elementSkillSlot; set => elementSkillSlot = value; }
-
-    public RangeType RangeType = RangeType.Circle;
+    private RangeType rangeType=RangeType.Circle;
+    public RangeType RangeType
+    { 
+        get => rangeType;
+        set 
+        {
+            rangeType = value;
+            switch (rangeType)
+            {
+                case RangeType.Circle:
+                case RangeType.HalfCircle:
+                    CheckAngle = 10f;
+                    RotSpeed = 10f;
+                    break;
+                case RangeType.Line:
+                    CheckAngle = 45f;
+                    RotSpeed = 0f;
+                    break;
+            }
+        }
+    }
     private float initSputteringPercentage = 0.5f;//溅射伤害率
     private float initCriticalPercentage = 1.5f;//暴击伤害率
     private int initTargetCount = 1;//目标数
     private float rotSpeed = 10f;//炮塔转速
+    private float checkAngle = 10f;//攻击检测角度
     private float timeModify = 1;//回合内时间加成修正
     public float TimeModify { get => timeModify; set => timeModify = value; }
     private int shootTriggerCount = 1;//攻击特效触发次数
     public int ShootTriggerCount { get => shootTriggerCount; set => shootTriggerCount = value; }
     public float RotSpeed { get => rotSpeed; set => rotSpeed = value; }
+    public float CheckAngle { get => checkAngle; set => checkAngle=value; }
     private float upgradeDiscount = 0;//升级折扣
     public float UpgradeDiscount { get => Mathf.Max(0, upgradeDiscount); set => upgradeDiscount = value; }
 

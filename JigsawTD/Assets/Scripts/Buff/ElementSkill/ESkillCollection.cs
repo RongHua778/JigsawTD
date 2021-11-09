@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 public class LateIntensify : ElementSkill
 {
-    //所有战斗开始后发生的属性提升翻倍
+    //子弹每有0.1溅射范围，就使溅射伤害提高8%
     public override List<int> Elements => new List<int> { 4, 4, 4 };
 
-    public override void Build()
+    public override void Shoot(Bullet bullet = null)
     {
-        base.Build();
-        strategy.TimeModify += 1;
+        base.Shoot(bullet);
+        bullet.SputteringPercentage += bullet.SputteringRange * 0.08f;
     }
 
 }
@@ -22,7 +22,7 @@ public class EarlyAttack : ElementSkill
     public override void StartTurn()
     {
         base.StartTurn();
-        Duration += GameRes.CurrentWave;
+        Duration += 20;
         intensify = 1f * strategy.TimeModify;
         strategy.TurnAttackIntensify += intensify;
     }
@@ -47,7 +47,7 @@ public class EarlySpeed : ElementSkill
     public override void StartTurn()
     {
         base.StartTurn();
-        Duration += GameRes.CurrentWave;
+        Duration += 20;
         intensify = 1f * strategy.TimeModify;
         strategy.TurnSpeedIntensify += intensify;
     }
@@ -72,7 +72,7 @@ public class EarlySlow : ElementSkill
     public override void StartTurn()
     {
         base.StartTurn();
-        Duration += GameRes.CurrentWave;
+        Duration += 20;
         intensify = 1f * strategy.TimeModify;
         strategy.TurnSlowRateIntensify += intensify;
     }
@@ -97,7 +97,7 @@ public class EarlyCritical : ElementSkill
     public override void StartTurn()
     {
         base.StartTurn();
-        Duration += GameRes.CurrentWave;
+        Duration += 20;
         intensify = 1f * strategy.TimeModify;
         strategy.TurnCriticalRateIntensify += intensify;
     }

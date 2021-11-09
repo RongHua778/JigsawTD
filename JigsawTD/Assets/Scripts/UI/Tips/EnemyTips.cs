@@ -18,7 +18,7 @@ public class EnemyTips : IUserInterface
             else
             {
                 enemyGrids[i].gameObject.SetActive(true);
-                enemyGrids[i].SetEnemyInfo(sequences[i]);
+                enemyGrids[i].SetEnemyInfo(StaticData.Instance.EnemyFactory.Get(sequences[i].EnemyType));
             }
         }
     }

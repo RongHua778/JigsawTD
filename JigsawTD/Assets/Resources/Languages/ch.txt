@@ -26,6 +26,10 @@ BASICENEMY=敌人
 
 //enemyTips
 BACKGROUND=背景研究
+ENEMYHEALTH=生命
+ENEMYSPEED=速度
+ENEMYAMOUNT=数量
+ENEMYDAMAGE=伤害
 
 //Battleset
 SELECTEDCOUNT=已选择：
@@ -109,9 +113,6 @@ MODULELEVELINFO3=模块等级达到2,4,6级时，商店配方数+1
 ENERGYINFO=1.当前回合没有抽取时，获得1点能量\n2.连续不抽取时，会获得额外能量\n3.能量每达到10点，获得1次额外抽取次数
 DEGRADE=降级
 
-//enemytips
-ENEMYDAMAGE=入侵伤害
-
 //shop
 SHOPBLUEPRINT=可锁定：
 OWNBLUEPRINT=拥有配方
@@ -155,7 +156,7 @@ SPEEDUP=%基础攻速
 CRITICALUP=%暴击率
 SPUTTERINGUP=溅射
 SLOWUP=减速
-COMINTENSIFY=作为重构素材时提供
+COMINTENSIFY=重构素材加成
 BUY=购买
 COMPOSITE=重构
 UPGRADE=升级
@@ -203,7 +204,7 @@ RAPIDERSKILL=对同一目标进行攻击时，每次攻击使攻速提升20%，�
 ROTARYSKILL=穿透型子弹;向周围随机攻击，自身所有攻速加成翻倍
 SNIPERSKILL=禁止攻击范围+2，子弹伤害随飞行距离提升15%/格
 ULTRASKILL=所有暴击伤害提升效果翻倍
-SNOWSKILL=穿透型子弹;子弹会持续移动到直线终点，并使敌人当前减速效果翻倍。
+SNOWSKILL=穿透型子弹;子弹会使敌人当前减速效果翻倍。
 COOPORATIVESKILL=每次攻击提升1%*总合成塔数量的攻击力
 BOOMERRANGSKILL=穿透型子弹；无法提升攻速；发射一枚回旋镖，每命中一个敌人就使后续伤害提高10%
 SUPERSKILL=每回合开始30秒后，使当前所有属性值翻倍
@@ -262,74 +263,74 @@ DDEINFO=防御塔溅射在25%-250%之间随机浮动
 
 //E系
 EEE=原子中心
-EEEINFO=战斗开始后发生的所有属性提升翻倍
+EEEINFO=子弹每有0.1溅射范围，就使溅射伤害提高8%
 EEA=强攻核心
-EEAINFO=战斗开始前X秒，攻击力提升100%，X=当前波数
+EEAINFO=战斗开始前20秒，攻击力提升100%
 EEB=加速核心
-EEBINFO=战斗开始前X秒，攻速提升100%，X=当前波数
+EEBINFO=战斗开始前20秒，攻速提升100%
 EEC=减速核心
-EECINFO=战斗开始前X秒，减速提升100%，X=当前波数
+EECINFO=战斗开始前20秒，减速提升100%
 EED=暴击核心
-EEDINFO=战斗开始前X秒，暴击率提升100%，X=当前波数
+EEDINFO=战斗开始前20秒，暴击率提升100%
 
 //综合系
 ABC=廉价基座
 ABCINFO=该防御塔升级费用-50%
-ABD=强化配方
+ABD=环状插件
 ABDINFO=使防御塔攻击范围变为圆形
 ABE=免费奖券
 ABEINFO=合成后使构建模块价格降低50%
 
-ACD=快速升级
-ACDINFO=使模块构建的降价幅度提高10% (上限50%)
+ACD=快速交易
+ACDINFO=使交换标记的价格降低50%
 ACE=科技跃进
 ACEINFO=使模块升级费用-50%
 ADE=幻化构造
 ADEINFO=重构后变化为一个随机技能
-BCD=水泥倾泻
+BCD=加长炮管
 BCDINFO=防御塔攻击范围+1
 BCE=万能元素
 BCEINFO=重构后获得1个万能元素
 BDE=维修工厂
 BDEINFO=相邻标记的效果提升100%
-CDE=闪烁打击
-CDEINFO=攻击有2%概率将敌人传送到2格前的位置
+CDE=铸币工厂
+CDEINFO=每次攻击有5%概率获得2金币
 
 //Enemy
-SOILDER=萨特
-RUNNER=康德
-TANKER=海明威
-RESTORER=尼采
-FROSTER=黑格尔
-HEALER=叔本华
-GOLDKEEPER=运钞车
+SOILDER=鬣狗
+RUNNER=鱼鹰
+TANKER=黄牛
+RESTORER=蜘蛛
+FROSTER=海豹
+HEALER=雄狮
+GOLDKEEPER=补给车
 
-SOILDERINFO=数量较多，集群出动。
-RUNNERINFO=当其直线移动时，会移动更快。
-TANKERINFO=生命值较高但移动缓慢。
-RESTORERINFO=当一定时间内没有受到伤害，会迅速回复生命值。
-FROSTERINFO=死亡后冻结周围的塔一定的时间。
-HEALERINFO=在其一定范围内的敌人提高移动速度。
-GOLDKEEPERINFO=每受到一定伤害就会掉落金币。（抵达终点不会造成伤害）
+SOILDERINFO=使用低成本材料大批量生产，防御力薄弱但是数量巨大
+RUNNERINFO=在直线移动时会突然加速，适合使用减速和弯折路线进行防御
+TANKERINFO=装配了适应性改造的类金装甲，防御力显著提升
+RESTORERINFO=如果一定时间内没有受到伤害，就会开始迅速恢复生命
+FROSTERINFO=运载着极寒原子，在死亡时会触发一次霜爆，冻结周围的防御塔
+HEALERINFO=运载着加速核心，使其自身周围的其他敌人会加速移动
+GOLDKEEPERINFO=敌对文明的资源补给车，每受到一定伤害就会掉落代币
 
 //boss
-DIVIDER=海德格尔（Boss）
-SIXARMOUR=克尔凯郭尔（Boss）
-BLINKER=笛卡尔（Boss）
-BORNER=亚里士多德（Boss）
-BINARY=双子星（Boss）
-ICEBALL=雪球（Boss）
-HAMSTER=仓鼠（Boss）
-AIRCRAFT=航母（Boss）
+DIVIDER=螃蟹
+SIXARMOUR=陆龟
+BLINKER=蝙蝠
+BORNER=蜂巢
+BINARY=狡兔
+ICEBALL=白熊
+HAMSTER=仓鼠
+AIRCRAFT=航蓝鲸
 
-DIVIDERINFO=死亡后会分裂成几个较小的本体。
-SIXARMOURINFO=周身环绕着能抵挡伤害的护甲。
-BLINKERINFO=每当受到一定伤害后会向前闪现一段距离。
-BORNERINFO=每隔一段时间召唤出随机类型的敌人。
-BINARYINFO=同时生成两个双子星，其中一个死亡时另一个会加速前进。
-ICEBALLINFO=每当雪球转向时，会释放一道大范围的冰冻。
-HAMSTERINFO=一共5个仓鼠，每个仓鼠自带75%的伤害减免，每只死亡的仓鼠使所有仓鼠伤害减免降低15%。
-AIRCRAFTINFO=附带若干会冰冻防御塔的僚机
+DIVIDERINFO=可重组外壳使其在死亡时会进行分裂并重组为两个更小的机体，一共可分裂两次
+SIXARMOURINFO=在自身周围均匀环绕着六个护甲，只有击破特定方位的护甲后方可攻击本体
+BLINKERINFO=每当生命值下降25%就会触发一次闪烁，向前瞬移一段距离
+BORNERINFO=当生命值低于75%和25%时，会变形成为堡垒，受到的伤害大幅降低并释放大量基础原型
+BINARYINFO=共有2个狡兔，任意一个死亡时，会触发逃离机制，使另一个的速度大幅提升
+ICEBALLINFO=运载极寒原子，每当转向时就会触发一次大范围的“霜爆”，冻结相邻的防御
+HAMSTERINFO=共有5个仓鼠，每个仓鼠自带75%的伤害减免，每个仓鼠死亡使所有仓鼠的伤害减免下降15%
+AIRCRAFTINFO=携带一定数量的僚机，僚机会对防御塔进行霜冻打击，使其暂时失去攻击能力
 
 //Trap
 UNREVEAL=未揭示信号

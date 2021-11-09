@@ -447,7 +447,7 @@ public class GameManager : Singleton<GameManager>
     {
         HideTips();
         SetCanvasPos(m_TrapTips.transform, pos);
-        m_TrapTips.ReadTrap(trap, GameRes.FreeTrapCount > 0 ? 0 : m_BoardSystem.SwitchTrapCost);
+        m_TrapTips.ReadTrap(trap, GameRes.FreeTrapCount > 0 ? 0 : GameRes.SwitchMarkCost);
         m_TrapTips.Show();
     }
 

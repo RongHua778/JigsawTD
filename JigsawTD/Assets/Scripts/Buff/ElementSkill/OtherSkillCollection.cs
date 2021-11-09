@@ -24,7 +24,8 @@ public class CircleRange : ElementSkill
     public override void Build()
     {
         base.Build();
-        strategy.RangeType = RangeType.Circle;
+        if(strategy.RangeType!=RangeType.Circle)//Rotary会在Initialize时将Checkangle改为360度，所以需要加入一个判断，避免再次修改攻击范围类型使其checkangle变回10度，回旋塔同理
+            strategy.RangeType = RangeType.Circle;
     }
 
     public override void OnEquip()
@@ -68,12 +69,12 @@ public class FreeDraw : ElementSkill
 
 public class TurretLevelUp : ElementSkill
 {
-    //提升1级防御塔等级
+    //交换标记的价格降低50%
     public override List<int> Elements => new List<int> { 0, 2, 3 };
 
     public override void Composite()
     {
-        GameRes.DiscountRate += 0.1f;
+        GameRes.SwitchMarkCost = Mathf.RoundToInt(GameRes.SwitchMarkCost * 0.5f);
     }
 }
 
@@ -181,17 +182,15 @@ public class TrapIntensify : ElementSkill
 
 public class PortalHit : ElementSkill
 {
-    //攻击有2%概率将敌人传送到2格前的位置
+    //攻击有5%概率获得2金币
     public override List<int> Elements => new List<int> { 2, 3, 4 };
     public override string SkillDescription => "PORTALHIT";
 
     public override void Hit(IDamageable target, Bullet bullet = null)
     {
-        if (target.DamageStrategy.IsEnemy)
-        {
-            if (Random.value > 0.98f)
-                ((Enemy)target).Flash(2);
-        }
+        if (Random.value > 0.95f)
+            //((Enemy)target).Flash(2);
+            StaticData.Instance.GainMoneyEffect(((Enemy)target).transform.position, 2);
     }
 
 }

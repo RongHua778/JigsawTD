@@ -21,6 +21,7 @@ public class TurretTips : TileTips
     [SerializeField] Text UpgradeCostValue = default;
     [SerializeField] GameObject AnalysisArea = default;//伤害统计区
     [SerializeField] GameObject UpgradeArea = default;//合成塔升级区
+    [SerializeField] Image IntensifyIcon = default;
     [SerializeField] GameObject IntensifyArea = default;//元素塔加成效果区
 
     [SerializeField] GameObject ElementSkillArea = default;//元素技能区
@@ -95,6 +96,7 @@ public class TurretTips : TileTips
             case StrategyType.Element:
                 QualitySetter.gameObject.SetActive(false);
                 UpgradeArea.SetActive(false);
+                IntensifyIcon.sprite = StaticData.Instance.ElementSprites[(int)Strategy.m_Att.element];
                 IntensifyArea.SetActive(true);
                 ElementSkillArea.SetActive(false);
                 IntensifyValue.text = StaticData.GetElementIntensifyText(Strategy.m_Att.element);
@@ -144,6 +146,7 @@ public class TurretTips : TileTips
         {
             case StrategyType.Element:
                 QualitySetter.gameObject.SetActive(false);
+                IntensifyIcon.sprite = StaticData.Instance.ElementSprites[(int)att.element];
                 IntensifyArea.SetActive(true);
                 IntensifyValue.text = StaticData.GetElementIntensifyText(att.element);
                 break;

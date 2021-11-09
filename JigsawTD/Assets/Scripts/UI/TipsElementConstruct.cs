@@ -14,7 +14,7 @@ public class TipsElementConstruct : MonoBehaviour, IPointerEnterHandler, IPointe
     [SerializeField] Text elementSkillDes = default;
     [SerializeField] GameObject[] areas = default;
     //[SerializeField] Image intensifyImg = default;
-    [SerializeField] Sprite[] elementSprites = default;
+    //[SerializeField] Sprite[] elementSprites = default;
     [SerializeField] ElementBenefitPanel benefitPanel = default;
     public void SetElements(ElementSkill skill)
     {
@@ -31,7 +31,7 @@ public class TipsElementConstruct : MonoBehaviour, IPointerEnterHandler, IPointe
                 continue;
             }
             Elements[i].gameObject.SetActive(true);
-            Elements[i].sprite = elementSprites[skill.Elements[i]];
+            Elements[i].sprite =StaticData.Instance.ElementSprites[skill.Elements[i]];
         }
         //SetIntensifyInfo();
 

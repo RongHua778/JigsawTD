@@ -61,7 +61,7 @@ public class RangeHolder : MonoBehaviour
                 halfCircleForbidRange.gameObject.SetActive(false);
                 lineDetectRange.gameObject.SetActive(true);
                 points = StaticData.GetLinePoints(range, fRange);
-                lineDetectRange.GetComponent<BoxCollider2D>().size = new Vector2(1, range - fRange);
+                lineDetectRange.GetComponent<BoxCollider2D>().size = new Vector2(0.7f, range - fRange - 0.3f);
                 lineDetectRange.GetComponent<BoxCollider2D>().offset = new Vector2(0, fRange + 1 + 0.5f * (range - fRange - 1));
 
                 break;

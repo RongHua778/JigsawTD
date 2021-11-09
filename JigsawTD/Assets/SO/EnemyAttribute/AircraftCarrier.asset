@@ -20,9 +20,14 @@ MonoBehaviour:
   isLock: 1
   initialLock: 1
   EnemyType: 15
+  IsBoss: 1
   InitCount: 1
   CountIncrease: 0
   Health: 1000
   Speed: 0.5
   CoolDown: 1
+  BackGround: 
+  HealthAtt: 5
+  SpeedAtt: 1
+  AmountAtt: 3
   ReachDamage: 5

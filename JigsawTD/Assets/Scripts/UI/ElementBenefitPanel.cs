@@ -7,7 +7,7 @@ public class ElementBenefitPanel : MonoBehaviour
 {
     [SerializeField] Text[] ElementTxt = default;
     [SerializeField] Image[] ElementIcon = default;
-    [SerializeField] Sprite[] elementSprites = default;
+    //[SerializeField] Sprite[] elementSprites = default;
     Transform root;
     ElementSkill m_Skill;
     public void InitializePanel(ElementSkill skill)
@@ -18,7 +18,7 @@ public class ElementBenefitPanel : MonoBehaviour
         {
             ElementType element = (ElementType)m_Skill.Elements[i];
             ElementTxt[i].text = GameMultiLang.GetTraduction(element.ToString()) + StaticData.GetElementIntensifyText(element);
-            ElementIcon[i].sprite = elementSprites[(int)element];
+            ElementIcon[i].sprite =StaticData.Instance.ElementSprites[(int)element];
         }
     }
 

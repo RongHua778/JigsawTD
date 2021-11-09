@@ -25,6 +25,10 @@ BASICENEMY=Enemy
 
 //enemyTips
 BACKGROUND=Background Research
+ENEMYHEALTH=Health
+ENEMYSPEED=Speed
+ENEMYAMOUNT=Amount
+ENEMYDAMAGE=Damage
 
 //Battleset
 SELECTEDCOUNT=Already Picked:
@@ -108,9 +112,6 @@ MODULELEVELINFO3=Shop blueprint +1 when module level reaches 2,4 and 6
 ENERGYINFO=1. Gain 1 energy if you haven't drawed last wave\n2. Gain additional energy if you keep not drawing \n3. Gain 1 extra draw while energy reach 10.
 DEGRADE=Degrade
 
-//enemytips
-ENEMYDAMAGE=Reach Damage
-
 //shop
 SHOPBLUEPRINT=Lock:
 OWNBLUEPRINT=Owned
@@ -154,7 +155,7 @@ SPEEDUP=% FireRate
 CRITICALUP=% Critical
 SPUTTERINGUP= Splash
 SLOWUP= Slow
-COMINTENSIFY=Element Benefit
+COMINTENSIFY=Refactor Benefit
 BUY=Buy
 COMPOSITE=Refactor
 UPGRADE=Upgrade
@@ -203,7 +204,7 @@ RAPIDERSKILL=Firerate increased by 15% each shoot when it is attacking the same 
 ROTARYSKILL=Penetration Bullet; Randomly shoot around and double all firerate increased.
 SNIPERSKILL=Forbid range+2, bullet's damage increased by 10% for each meter it travelled
 ULTRASKILL=Double the increased critical damage.
-SNOWSKILL=Penetration Bullet;Bullet will move to the end of straight direction, and double enemy's current slow.
+SNOWSKILL=Penetration Bullet;Bullet will double enemy's current slow.
 COOPORATIVESKILL=Attack increased by 1% * the amount of refacotor turrets each shoot.
 BOOMERRANGSKILL=Penetration Bullet;Can not increase firerate; Bullet damage will increase by 10% for each enemy it hit.
 SUPERSKILL=Double all current stats after 30s of each wave
@@ -260,48 +261,48 @@ DDEINFO=Turret's splash fluctuates between 25% and 250%
 
 //E系
 EEE=Atomic Center
-EEEINFO=Double all stats increased that occur after the start of each wave
+EEEINFO=Splash damage increased by 8% for every 0.1 splash range.
 EEA=Attack Core
-EEAINFO=Turret's attack increased by 100% before X seconds of each wave, X = Current wave
+EEAINFO=Turret's attack increased by 100% before 20 seconds of each wave
 EEB=Speed Core
-EEBINFO=Turret's firerate increased by 100% before X seconds of each wave, X = Current wave
+EEBINFO=Turret's firerate increased by 100% before 20 seconds of each wave
 EEC=Slow Core
-EECINFO=Turret's slow increased by 100% before X seconds of each wave, X = Current wave
+EECINFO=Turret's slow increased by 100% before 20 seconds of each wave
 EED=Critical Core
-EEDINFO=Turret's splash increased by 100% before X seconds of each wave, X = Current wave
+EEDINFO=Turret's splash increased by 100% before 20 seconds of each wave
 
 
 //综合系
 ABC=Inferior Base
 ABCINFO=Upgrade cost reduced by 50%
-ABD=Improved Formula
+ABD=Annular Plug-in
 ABDINFO=Turn this turret's attack range in to circle
 ABE=Free Tickets
 ABEINFO=Reduce the cost of buidling module by 50%
 
-ACD=Rapid Upgrade
-ACDINFO=Increase the price reduction of module builds by 10% (Up to 50%)
+ACD=Fast Transaction
+ACDINFO=Reduce the cost of relocating mark by 50%
 ACE=Technology Leaps
 ACEINFO=Reduce module upgrade cost by 50%
 ADE=Unreal Structure
 ADEINFO=Becomes a random element skill while refactor
-BCD=Concrete Pouring
+BCD=Longer barrel
 BCDINFO=Range increased by 1
 BCE=Perfect Element
 BCEINFO=Gain 1 perfect element when refactor
 BDE=Repair Factory
 BDEINFO=The effect of adjacent marks will be increased by 100%
-CDE=Blink Strike
-CDEINFO=Each shoot has a 2% chance of teleporting enemy to 2 tiles ahead
+CDE=Money Factory
+CDEINFO=Each shoot has a 5% chance of gaining 5 coins
 
 //Enemy
-SOILDER=Sartre
-RUNNER=Kant
-TANKER=Hemingway
-RESTORER=Nietzsche
-FROSTER=Hegel
-HEALER=Schopenhauer
-GOLDKEEPER=Banknote
+SOILDER=Hyena
+RUNNER=Osprey
+TANKER=Bull
+RESTORER=Spider
+FROSTER=Seal
+HEALER=Lion
+GOLDKEEPER=Supply Truck
 
 SOILDERINFO=There are more of them.
 RUNNERINFO=When it's moving in a straight line, it's moving faster.
@@ -309,17 +310,17 @@ TANKERINFO=High health but move slow.
 RESTORERINFO=It will quickly restore health if no damage is taken for a while.
 FROSTERINFO=Freezes the turrets around it while it die.
 HEALERINFO=Increased the nearby enemies' speed.
-GOLDKEEPERINFO=Gold coins will be dropped every time a certain amount of damage is taken.(will not cause damage to you)
+GOLDKEEPERINFO=Coins will be dropped every time a certain amount of damage is taken
 
 //boss
-DIVIDER=Hidegger (Boss)
-SIXARMOUR=Kierkegaard (Boss)
-BLINKER=Descartes (Boss)
-BORNER=Aristotle (Boss)
-BINARY=Binary Star (Boss)
-ICEBALL=Snow Ball（Boss）
-HAMSTER=Hamster (Boss)
-AIRCRAFT=Aircraft Carrier(Boss)
+DIVIDER=Crab
+SIXARMOUR=Tortoise
+BLINKER=Bat
+BORNER=Honeycomb
+BINARY=Rabbit
+ICEBALL=Bear
+HAMSTER=Hamster
+AIRCRAFT=Whale
 
 DIVIDERINFO=Splits into several smaller bodies while it die.
 SIXARMOURINFO=Surrounded by armors that protects against damage.

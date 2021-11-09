@@ -110,15 +110,15 @@ public class BoardSystem : IGameSystem
     }
 
     //买一块地板多少钱
-    int switchTrapCost;
-    public int SwitchTrapCost
-    {
-        get => switchTrapCost;
-        set
-        {
-            switchTrapCost = value;
-        }
-    }
+    //int switchTrapCost;
+    //public int SwitchTrapCost
+    //{
+    //    get => switchTrapCost;
+    //    set
+    //    {
+    //        switchTrapCost = value;
+    //    }
+    //}
 
     public static bool FindPath { get; set; }
 
@@ -130,7 +130,6 @@ public class BoardSystem : IGameSystem
         selection = transform.Find("Selection").gameObject;
         equipAnim = transform.Find("EquipAnim").gameObject;
         BuyOneGroundMoney = StaticData.Instance.BuyGroundCost;
-        SwitchTrapCost = StaticData.Instance.SwitchTrapCost;
         GameEvents.Instance.onSeekPath += SeekPath;
         GameEvents.Instance.onTileClick += TileClick;
         GameEvents.Instance.onTileUp += TileUp;
@@ -420,9 +419,9 @@ public class BoardSystem : IGameSystem
         {
             GameRes.FreeTrapCount--;
         }
-        else if (GameManager.Instance.ConsumeMoney(SwitchTrapCost))
+        else if (GameManager.Instance.ConsumeMoney(GameRes.SwitchMarkCost))
         {
-            SwitchTrapCost += StaticData.Instance.SwitchTrapCostMultiply;
+            GameRes.SwitchMarkCost += StaticData.Instance.SwitchTrapCostMultiply;
         }
         Vector2 pos = trap.m_GameTile.transform.position;
         ObjectPool.Instance.UnSpawn(trap.m_GameTile);

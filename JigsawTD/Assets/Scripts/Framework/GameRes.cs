@@ -114,6 +114,16 @@ public static class GameRes
         }
     }
 
+    private static int switchMarkCost;
+    public static int SwitchMarkCost
+    {
+        get => switchMarkCost;
+        set
+        {
+            switchMarkCost = value;
+        }
+    }
+
     private static int moduleLevel;
     public static int ModuleLevel   //Ä£¿éµÈ¼¶
     {
@@ -159,6 +169,7 @@ public static class GameRes
         MaxLock = 1;
         ModuleLevel = 1;
         CurrentWave = 0;
+        SwitchMarkCost = StaticData.Instance.SwitchTrapCost;
         Coin = StaticData.Instance.StartCoin;
         Life = LevelManager.Instance.CurrentLevel.PlayerHealth;
         BuyShapeCost = StaticData.Instance.BaseShapeCost;

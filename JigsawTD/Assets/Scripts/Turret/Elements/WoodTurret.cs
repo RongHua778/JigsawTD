@@ -6,12 +6,6 @@ public class WoodTurret : ElementTurret
 {
     private bool isPlayingAudio = false;
 
-    public override void InitializeTurret()
-    {
-        base.InitializeTurret();
-        Strategy.RotSpeed = 0;
-        CheckAngle = 45f;
-    }
 
     public override bool GameUpdate()
     {

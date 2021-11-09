@@ -2,10 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class I1Turret : CompositeTurret
+public class Rotary : CompositeTurret
 {
     float rotSpeed = 0;
     float RotSpeed { get => Mathf.Max(-720, -rotSpeed * Mathf.Pow(Strategy.FinalSpeed, 2)); set => rotSpeed = value; }
+
+    public override void InitializeTurret()
+    {
+        base.InitializeTurret();
+        Strategy.CheckAngle = 360f;
+    }
     protected override void RotateTowards()
     {
 
@@ -23,7 +29,6 @@ public class I1Turret : CompositeTurret
         base.OnSpawn();
         rotTrans.rotation = Quaternion.identity;
         RotSpeed = -10f;
-        CheckAngle = 360f;
     }
 
     private void SelfRotateControl()

@@ -266,7 +266,6 @@ public class SnowSkill : InitialSkill
     {
         if (target.DamageStrategy.IsEnemy)
         {
-            strategy.RotSpeed = 0;
             float increaseSlow = ((Enemy)target).SlowRate * 2f;
             BuffInfo info = new BuffInfo(EnemyBuffName.SlowDown, increaseSlow, 2f);
             ((Enemy)target).Buffable.AddBuff(info);
