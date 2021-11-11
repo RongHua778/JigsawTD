@@ -499,8 +499,8 @@ RectTransform:
   - {fileID: 8639746714240726191}
   - {fileID: 5441383077903208382}
   - {fileID: 2940722689637092006}
-  - {fileID: 3923962415875019894}
   - {fileID: 2726680175615845479}
+  - {fileID: 3923962415875019894}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -536,8 +536,8 @@ MonoBehaviour:
   attBars:
   - {fileID: 7447034428103801397}
   - {fileID: 294151228865462061}
-  - {fileID: 1922531581859455485}
   - {fileID: 652351669139116524}
+  - {fileID: 1922531581859455485}
 --- !u!1001 &61653018651125799
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -797,7 +797,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4478417794646822436, guid: b9e5dcc32f109ca4f9b18184c38ca6f3, type: 3}
       propertyPath: key
-      value: ENEMYDAMAGE
+      value: ENEMYAMOUNT
       objectReference: {fileID: 0}
     - target: {fileID: 4734966483463824240, guid: b9e5dcc32f109ca4f9b18184c38ca6f3, type: 3}
       propertyPath: m_Color.g
@@ -817,7 +817,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5429269723872880537, guid: b9e5dcc32f109ca4f9b18184c38ca6f3, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5429269723872880537, guid: b9e5dcc32f109ca4f9b18184c38ca6f3, type: 3}
       propertyPath: m_AnchorMax.x
@@ -922,7 +922,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4478417794646822436, guid: b9e5dcc32f109ca4f9b18184c38ca6f3, type: 3}
       propertyPath: key
-      value: ENEMYAMOUNT
+      value: ENEMYDAMAGE
       objectReference: {fileID: 0}
     - target: {fileID: 4734966483463824240, guid: b9e5dcc32f109ca4f9b18184c38ca6f3, type: 3}
       propertyPath: m_Color.g
@@ -942,7 +942,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5429269723872880537, guid: b9e5dcc32f109ca4f9b18184c38ca6f3, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5429269723872880537, guid: b9e5dcc32f109ca4f9b18184c38ca6f3, type: 3}
       propertyPath: m_AnchorMax.x

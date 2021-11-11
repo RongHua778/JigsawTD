@@ -35,6 +35,7 @@ public static class GameRes
 {
     private static MainUI m_MainUI;
     private static FuncUI m_FuncUI;
+    private static WaveSystem m_WaveSystem;
 
     [Header("动态数据")]
     public static int PerfectElementCount = 0;//完美元素数量
@@ -90,6 +91,20 @@ public static class GameRes
             }
             life = Mathf.Clamp(value, 0, LevelManager.Instance.CurrentLevel.PlayerHealth);
             m_MainUI.Life = life;
+        }
+    }
+    private static int enemyRemain;
+    public static int EnemyRemain 
+    { 
+        get => enemyRemain;
+        set 
+        {
+            enemyRemain = value;
+            if (enemyRemain <= 0 && !m_WaveSystem.RunningSpawn)
+            {
+                enemyRemain = 0;
+                GameManager.Instance.PrepareNextWave();
+            }
         }
     }
 
@@ -153,10 +168,11 @@ public static class GameRes
     private static int maxLock;
     public static int MaxLock { get => maxLock; set => maxLock = value; }//最大锁定量
 
-    public static void Initialize(MainUI mainUI, FuncUI funcUI)
+    public static void Initialize(MainUI mainUI, FuncUI funcUI,WaveSystem waveSystem)
     {
         m_MainUI = mainUI;
         m_FuncUI = funcUI;
+        m_WaveSystem = waveSystem;
 
         TotalRefactor = 0;
         TotalDamage = 0;

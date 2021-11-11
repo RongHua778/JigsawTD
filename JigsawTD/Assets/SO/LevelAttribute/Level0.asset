@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0168100ba70e486479f31ec9f99a31ad, type: 3}
   m_Name: Level0
   m_EditorClassIdentifier: 
+  IsEndless: 0
   PlayerHealth: 25
   Wave: 20
   LevelIntensify: 1
@@ -31,5 +32,4 @@ MonoBehaviour:
   LevelInfo: LEVEL0INFO
   TrapCount: 0
   EliteWave: 15
-  Bonus:
-  - 
+  ExpIntensify: 1

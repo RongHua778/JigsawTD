@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0168100ba70e486479f31ec9f99a31ad, type: 3}
   m_Name: Level2
   m_EditorClassIdentifier: 
+  IsEndless: 0
   PlayerHealth: 15
-  Wave: 40
+  Wave: 30
   LevelIntensify: 1.5
   NormalEnemies:
   - {fileID: 11400000, guid: a2fa830bad8e11c448623ce28354a1bd, type: 2}
@@ -37,5 +38,4 @@ MonoBehaviour:
   LevelInfo: LEVEL2INFO
   TrapCount: 15
   EliteWave: 15
-  Bonus:
-  - 
+  ExpIntensify: 3

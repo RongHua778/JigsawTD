@@ -9,16 +9,16 @@ public class WaveInfoSetter : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 {
     [SerializeField] Image[] enemyIcons = default;
     [SerializeField] Text waveTxt = default;
-    public void SetWaveInfo(int wave, List<EnemySequence> sequences)
+    public void SetWaveInfo(List<EnemySequence> sequences)
     {
         string lang = PlayerPrefs.GetString("_language");
         switch (lang)
         {
             case "ch":
-                waveTxt.text = GameMultiLang.GetTraduction("NUM") + wave + "/" + LevelManager.Instance.CurrentLevel.Wave + GameMultiLang.GetTraduction("WAVE");
+                waveTxt.text = GameMultiLang.GetTraduction("NUM") + GameRes.CurrentWave + (LevelManager.Instance.CurrentLevel.IsEndless ? "" : "/" + LevelManager.Instance.CurrentLevel.Wave) + GameMultiLang.GetTraduction("WAVE");
                 break;
             case "en":
-                waveTxt.text = GameMultiLang.GetTraduction("WAVE") + wave + "/" + LevelManager.Instance.CurrentLevel.Wave;
+                waveTxt.text = GameMultiLang.GetTraduction("WAVE") + GameRes.CurrentWave + (LevelManager.Instance.CurrentLevel.IsEndless ? "" : "/" + LevelManager.Instance.CurrentLevel.Wave);
                 break;
         }
         foreach (var obj in enemyIcons)

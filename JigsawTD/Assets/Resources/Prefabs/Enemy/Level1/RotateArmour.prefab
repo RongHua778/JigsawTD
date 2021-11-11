@@ -19190,7 +19190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
   model: {fileID: 7619665209501119904}
-  armorIntensify: 30
+  armorIntensify: 40
 --- !u!1 &8360252054385358165
 GameObject:
   m_ObjectHideFlags: 0

@@ -105,7 +105,7 @@ public class MainUI : IUserInterface
         //GameManager.Instance.GainInterest();
         GameManager.Instance.GainMoney(Mathf.Min(300, (StaticData.Instance.BaseWaveIncome +
             StaticData.Instance.WaveMultiplyIncome * (GameRes.CurrentWave - 1))));
-        m_WaveInfoSetter.SetWaveInfo(GameRes.CurrentWave, sequences);
+        m_WaveInfoSetter.SetWaveInfo(sequences);
     }
 
     public bool ConsumeMoney(int cost)

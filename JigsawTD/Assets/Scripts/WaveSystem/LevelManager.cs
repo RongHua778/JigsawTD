@@ -21,10 +21,22 @@ public class LevelManager : Singleton<LevelManager>
     public Dictionary<string, bool> UnlockInfoDIC;
     public List<ContentAttribute> AllContent;
 
-    public LevelAttribute[] Levels = default;
-    public int PremitDifficulty = default;
+    public LevelAttribute[] StandardLevels = default;
+    public LevelAttribute EndlessLevel = default;
 
-    public int PassDiifcutly => PlayerPrefs.GetInt("MaxDifficulty", 0);
+    public int PremitDifficulty = default;
+    public int PassDiifcutly { get => PlayerPrefs.GetInt("MaxDifficulty", 0); set => PlayerPrefs.SetInt("MaxDifficulty", value); }
+
+    public int EndlessHighScore
+    {
+        get => PlayerPrefs.GetInt("EndlessHighscore", 0);
+        set
+        {
+            if (value > PlayerPrefs.GetInt("EndlessHighscore", 0))
+                PlayerPrefs.SetInt("EndlessHighscore", value);
+        }
+    }
+
     [SerializeField] private int maxDifficutly = default;
     public int MaxDifficulty
     {
@@ -32,8 +44,8 @@ public class LevelManager : Singleton<LevelManager>
         set => maxDifficutly = value;
     }
     [SerializeField] private int selectedLevelId = default;
-    public int SelectedLevelID { get => selectedLevelId; set => selectedLevelId = Mathf.Clamp(value, 0, MaxDifficulty); }
-    public LevelAttribute CurrentLevel { get => Levels[SelectedLevelID]; }
+    public int SelectedLevelID { get => selectedLevelId; set => selectedLevelId = Mathf.Clamp(value, 0, PassDiifcutly); }
+    public LevelAttribute CurrentLevel;
 
 
     public void LoadSaveData(Save save)
@@ -87,7 +99,7 @@ public class LevelManager : Singleton<LevelManager>
 
     public int GainExp(int wave)
     {
-        int exp = Mathf.RoundToInt((SelectedLevelID + 1) * 5 * wave * (1 + wave / 10 * 0.25f));
+        int exp = Mathf.RoundToInt(CurrentLevel.ExpIntensify * 5 * wave * (1 + wave / 10 * 0.25f));
         AddExp(exp);
         return exp;
     }
@@ -95,7 +107,7 @@ public class LevelManager : Singleton<LevelManager>
 
     private void UnlockBonus(string bo)
     {
-        foreach(var item in AllContent)
+        foreach (var item in AllContent)
         {
             if (item.Name == bo)
             {

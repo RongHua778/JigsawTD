@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Sound : Singleton<Sound>
 {
+    [SerializeField] AudioMixerGroup musicMixer = default;
+    [SerializeField] AudioMixerGroup effectMixer = default;
     //音乐大小
     public float BgVolume
     {
@@ -30,10 +33,12 @@ public class Sound : Singleton<Sound>
         InitializeMusicDIC();
 
         m_bgSound = this.gameObject.AddComponent<AudioSource>();
+        m_bgSound.outputAudioMixerGroup = musicMixer;
         m_bgSound.playOnAwake = false;
         m_bgSound.loop = true;
 
         m_effectSound = this.gameObject.AddComponent<AudioSource>();
+        m_effectSound.outputAudioMixerGroup = effectMixer;
         EffectVolume = 0.5f;
     }
 

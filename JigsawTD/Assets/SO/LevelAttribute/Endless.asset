@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0168100ba70e486479f31ec9f99a31ad, type: 3}
-  m_Name: Level5
+  m_Name: Endless
   m_EditorClassIdentifier: 
-  IsEndless: 0
+  IsEndless: 1
   PlayerHealth: 15
-  Wave: 40
-  LevelIntensify: 3.25
+  Wave: 500
+  LevelIntensify: 3
   NormalEnemies:
   - {fileID: 11400000, guid: a2fa830bad8e11c448623ce28354a1bd, type: 2}
   - {fileID: 11400000, guid: a6b4f2578a98cf54caf0ac3718b54059, type: 2}
@@ -35,7 +35,7 @@ MonoBehaviour:
   Boss4:
   - {fileID: 11400000, guid: dbb0595b1b4e1be4599c5c9d1e97b9e3, type: 2}
   - {fileID: 11400000, guid: bd4a8209b52017c4bb8c391e2596cefb, type: 2}
-  LevelInfo: LEVEL5INFO
+  LevelInfo: ENDLESSINFO
   TrapCount: 25
   EliteWave: 15
-  ExpIntensify: 6
+  ExpIntensify: 5

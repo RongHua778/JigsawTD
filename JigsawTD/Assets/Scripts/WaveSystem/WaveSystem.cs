@@ -8,21 +8,8 @@ using System.Linq;
 public class WaveSystem : IGameSystem
 {
     [SerializeField] EnemyType TestType = default;
-    public bool Running = false;
-    int enemyRemain = 0;
-    public int EnemyRemain
-    {
-        get => enemyRemain;
-        set
-        {
-            enemyRemain = value;
-            if (enemyRemain <= 0 && !Running)
-            {
-                enemyRemain = 0;
-                GameManager.Instance.PrepareNextWave();
-            }
-        }
-    }
+    public bool RunningSpawn = false;//是否正在生产敌人
+
     public Queue<List<EnemySequence>> LevelSequence = new Queue<List<EnemySequence>>();
     LevelAttribute LevelAttribute;
     [SerializeField] private List<EnemySequence> runningSequence;
@@ -48,17 +35,17 @@ public class WaveSystem : IGameSystem
 
     private void EnemyReach(Enemy enemy)
     {
-        EnemyRemain--;
+        GameRes.EnemyRemain--;
     }
 
     private void EnemyDie(Enemy enemy)
     {
-        EnemyRemain--;
+        GameRes.EnemyRemain--;
     }
 
     public override void GameUpdate()
     {
-        if (Running)
+        if (RunningSpawn)
         {
             for (int i = 0; i < RunningSequence.Count; i++)
             {
@@ -66,7 +53,7 @@ public class WaveSystem : IGameSystem
                 {
                     continue;
                 }
-                Running = false;
+                RunningSpawn = false;
             }
         }
     }
@@ -195,7 +182,7 @@ public class WaveSystem : IGameSystem
 
     public Enemy SpawnEnemy(EnemyAttribute attribute, int pathIndex, float intensify)
     {
-        EnemyRemain++;
+        GameRes.EnemyRemain++;
         Enemy enemy = ObjectPool.Instance.Spawn(attribute.Prefab) as Enemy;
         enemy.Initialize(pathIndex, attribute, UnityEngine.Random.Range(-0.3f, 0.3f), intensify);
         GameManager.Instance.enemies.Add(enemy);

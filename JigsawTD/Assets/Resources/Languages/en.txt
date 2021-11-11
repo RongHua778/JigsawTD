@@ -15,6 +15,15 @@ CONFIRM=Confirm
 TUTORIAL=Tutorial
 WISHLIST=Add to wishlist
 MODESELECT=MODE SELECT
+UNLOCKENDLESS=Unlock after passsing the Difficulty 4 of Standard Mode
+
+//Setting
+RESOLUTION=Resolution
+FULLSCREEN=FullScreen
+LANGUAGE=Language
+MUSIC=Music
+SOUNDEFFECT=Sound
+DEVTEAM=Development Team
 
 //tujian
 ELEMENTTURRET=Eelement Turret
@@ -22,6 +31,7 @@ REFACTORTURRET=Refactor Turret
 MARK=Mark
 BOSS=BOSS
 BASICENEMY=Enemy
+GIRLWORD=Identity verification in progress...Login successful
 
 //enemyTips
 BACKGROUND=Background Research
@@ -40,6 +50,7 @@ TEST1=Test:Clear all save data
 TEST2=Test:Unlock all difficulties
 
 LEVEL1NAME=STANDARD
+LEVEL2NAME=ENDLESS
 LEVELOTHER=MORE INCOMING
 LEVELINFO=DESCRIPTION
 BONUSINFO=REWARD

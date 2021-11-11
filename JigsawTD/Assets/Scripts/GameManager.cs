@@ -51,19 +51,18 @@ public class GameManager : Singleton<GameManager>
     //初始化设定
     public void Initinal()
     {
-        //初始化全局数据
-        GameRes.Initialize(m_MainUI, m_FuncUI);
-
         //形状生成外观类
         ConstructHelper.Initialize();
-
         //初始化系统
+        //初始化全局数据
+        GameRes.Initialize(m_MainUI, m_FuncUI, m_WaveSystem);
 
+        m_MainUI.Initialize();//主界面顶部UI//要在wavesystem之前，因为敌人入侵事件，需要先掉血再判定下一波
         m_WaveSystem.Initialize();//波次系统
         m_CamControl.Initialize(m_MainUI);//摄像机控制
         m_BoardSystem.Initialize();//版图系统
         //初始化UI
-        m_MainUI.Initialize();//主界面顶部UI
+        //m_MainUI.Initialize();//主界面顶部UI
         m_FuncUI.Initialize();//主界面功能UI
         m_BluePrintShopUI.Initialize();//配方系统UI
         m_ShapeSelectUI.Initialize();//抽模块UI
@@ -328,7 +327,7 @@ public class GameManager : Singleton<GameManager>
 
     public void GainMoney(int amount)
     {
-        int gold= (int)(amount * (1 + GameRes.OverallMoneyIntensify));
+        int gold = (int)(amount * (1 + GameRes.OverallMoneyIntensify));
         GameRes.Coin += gold;
         GameRes.GainGold += gold;
     }
@@ -431,19 +430,19 @@ public class GameManager : Singleton<GameManager>
     public void ShowTurretTips(StrategyBase strategy, Vector2 pos)
     {
         HideTips();
-        SetCanvasPos(m_TurretTips.transform,pos);
+        SetCanvasPos(m_TurretTips.transform, pos);
         m_TurretTips.ReadTurret(strategy);
         m_TurretTips.Show();
     }
 
-    private void SetCanvasPos(Transform tr,Vector2 pos)
+    private void SetCanvasPos(Transform tr, Vector2 pos)
     {
         Vector2 newPos;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(m_Canvas.transform as RectTransform, pos, m_Canvas.worldCamera, out newPos);
         tr.position = m_Canvas.transform.TransformPoint(newPos);
     }
 
-    public void ShowTrapTips(TrapContent trap,Vector2 pos)
+    public void ShowTrapTips(TrapContent trap, Vector2 pos)
     {
         HideTips();
         SetCanvasPos(m_TrapTips.transform, pos);
@@ -451,16 +450,16 @@ public class GameManager : Singleton<GameManager>
         m_TrapTips.Show();
     }
 
-    public void ShowTrapTips(TrapAttribute att,Vector2 pos)
+    public void ShowTrapTips(TrapAttribute att, Vector2 pos)
     {
         SetCanvasPos(m_TrapTips.transform, pos);
         m_TrapTips.Show();
         m_TrapTips.ReadTrapAtt(att);
     }
 
-    public void ShowTurretTips(TurretAttribute att,Vector2 pos)
+    public void ShowTurretTips(TurretAttribute att, Vector2 pos)
     {
-        SetCanvasPos(m_TurretTips.transform,pos);
+        SetCanvasPos(m_TurretTips.transform, pos);
         m_TurretTips.Show();
         m_TurretTips.ReadAttribute(att);
     }
@@ -478,7 +477,7 @@ public class GameManager : Singleton<GameManager>
         m_TempTips.SendText(text, pos);
     }
 
-    public void ShowBluePrintTips(BluePrintGrid grid,Vector2 pos)
+    public void ShowBluePrintTips(BluePrintGrid grid, Vector2 pos)
     {
         HideTips();
         SetCanvasPos(m_TurretTips.transform, pos);

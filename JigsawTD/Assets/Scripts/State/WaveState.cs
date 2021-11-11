@@ -28,7 +28,7 @@ public class WaveState : BattleOperationState
         }
         GameRes.MaxPath = BoardSystem.shortestPath.Count;
         yield return new WaitForSeconds(0.5f);
-        m_WaveSystem.Running = true;
+        m_WaveSystem.RunningSpawn = true;
         switch (m_WaveSystem.RunningSequence[0].EnemyType)
         {
             case EnemyType.Soilder:

@@ -128,6 +128,15 @@ public class StaticData : Singleton<StaticData>
         ContentFactory.Initialize();
         ShapeFactory.Initialize();
         EnemyFactory.InitializeFactory();
+        SetTipsPos();
+    }
+
+    public static void SetTipsPos()
+    {
+        LeftTipsPos = new Vector2(Screen.width/5, Screen.height / 2);
+        LeftMidTipsPos = new Vector2(Screen.width / 3, Screen.height / 2);
+        RightTipsPos = new Vector2(Screen.width - Screen.width / 5, Screen.height / 2);
+        RightMidTipsPos = new Vector2(Screen.width - Screen.width / 3, Screen.height / 2);
     }
 
     private void InitializeData()

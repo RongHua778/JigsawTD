@@ -39,13 +39,23 @@ public class GameEndUI : IUserInterface
             GameMultiLang.GetTraduction("DIFFICULTY") + "*5*" +
             GameMultiLang.GetTraduction("WAVE") + "*(1+25%*" +
             GameMultiLang.GetTraduction("BOSSDEFEAT") + ")");
-        //title.text = win ? GameMultiLang.GetTraduction("WIN") : GameMultiLang.GetTraduction("LOSE");
-        title.text = win ? GameMultiLang.GetTraduction("WIN") + GameMultiLang.GetTraduction("DIFFICULTY") + (LevelManager.Instance.SelectedLevelID + 1).ToString() : GameMultiLang.GetTraduction("LOSE"); 
-        if (win)
+
+        if (LevelManager.Instance.CurrentLevel.IsEndless)
         {
-            PlayerPrefs.SetInt("MaxDifficulty", LevelManager.Instance.SelectedLevelID + 1);
+            title.text = GameMultiLang.GetTraduction("WIN") + GameRes.CurrentWave + GameMultiLang.GetTraduction("WAVE");
+            LevelManager.Instance.EndlessHighScore = GameRes.CurrentWave;
         }
-        PlayerPrefs.SetInt("MaxDifficulty", LevelManager.Instance.SelectedLevelID + 1);
+        else
+        {
+            title.text = win ?
+            GameMultiLang.GetTraduction("WIN") + GameMultiLang.GetTraduction("DIFFICULTY") + (LevelManager.Instance.SelectedLevelID + 1).ToString()
+            : GameMultiLang.GetTraduction("LOSE");
+        }
+
+        if (win && !LevelManager.Instance.CurrentLevel.IsEndless)
+        {
+            LevelManager.Instance.PassDiifcutly = LevelManager.Instance.SelectedLevelID + 1;
+        }
         m_BillBoard.SetBillBoard();
         StartCoroutine(SetValueCor());
     }
@@ -134,6 +144,9 @@ public class GameEndUI : IUserInterface
     }
 
 
-
+    public void RestartBtnClick()
+    {
+        Game.Instance.LoadScene(1);
+    }
 
 }

@@ -12,19 +12,28 @@ public class UILevelManager : IUserInterface
     [SerializeField] Text difficultyTxt = default;
     [SerializeField] Toggle tutorialCheck = default;
     [SerializeField] CanvasGroup startGameBtnSprite = default;
+    [SerializeField] Text endlessHighScore = default;
+    [SerializeField] Text endlessUnlockText = default;
+    [SerializeField] GameObject endlessStartBtnObj = default;
+
 
     public override void Initialize()
     {
         base.Initialize();
+        LevelManager.Instance.SelectedLevelID = LevelManager.Instance.PassDiifcutly;
         m_Anim = this.GetComponent<Animator>();
         tutorialCheck.isOn = false;
+        endlessHighScore.text = LevelManager.Instance.EndlessHighScore + GameMultiLang.GetTraduction("WAVE");
     }
     public void SetLevelInfo()
     {
         DifficultyBtnClick(0);
+        //是否已解锁无尽模式
+        endlessStartBtnObj.SetActive(LevelManager.Instance.PassDiifcutly > 4);
+        endlessUnlockText.gameObject.SetActive(LevelManager.Instance.PassDiifcutly <= 4);
     }
 
-    public void StartGameBtnClick()
+    public void StandardModeStart()
     {
         if (!gameStart)
         {
@@ -39,9 +48,22 @@ public class UILevelManager : IUserInterface
                 return;
             }
             gameStart = true;
+            LevelManager.Instance.CurrentLevel = LevelManager.Instance.StandardLevels[LevelManager.Instance.SelectedLevelID];
             Game.Instance.LoadScene(1);
         }
     }
+
+    public void EndlessModeStart()
+    {
+        if (!gameStart)
+        {
+            LevelManager.Instance.CurrentLevel = LevelManager.Instance.EndlessLevel;
+            gameStart = true;
+            Game.Instance.LoadScene(1);
+        }
+    }
+
+
 
     public void DifficultyBtnClick(int count)
     {

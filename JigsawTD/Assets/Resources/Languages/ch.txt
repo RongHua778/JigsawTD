@@ -16,6 +16,13 @@ TUTORIAL=教学
 WISHLIST=加入愿望单
 MODESELECT=模式选择
 
+//Setting
+RESOLUTION=分辨率
+FULLSCREEN=全屏化
+LANGUAGE=语言
+MUSIC=音乐
+SOUNDEFFECT=音效
+DEVTEAM=制作团队
 
 //tujian
 ELEMENTTURRET=元素塔
@@ -23,6 +30,7 @@ REFACTORTURRET=重构塔
 MARK=标记
 BOSS=BOSS
 BASICENEMY=敌人
+GIRLWORD=身份校验中...已获取查看权，信息可查阅
 
 //enemyTips
 BACKGROUND=背景研究
@@ -41,8 +49,9 @@ TEST1=测试：已清除通关数据
 TEST2=测试：已解锁全难度
 
 LEVEL1NAME=标准模式
-LEVELOTHER=更多模式开发中
-LEVELINFO=关卡信息
+LEVEL2NAME=无尽模式
+LEVELOTHER=敬请期待
+LEVELINFO=模式介绍
 BONUSINFO=通关奖励
 DIFFICULTINFO=难度选择
 DIFFICULTY=难度
@@ -51,11 +60,12 @@ BATTLESET=战斗设置
 WAVE=波
 NUM=第
 SKIPTUTORIAL=跳过教程
+UNLOCKENDLESS=通关标准模式难度4后解锁
 
 DIFFICULTY0=
 DIFFICULTY1=1.加入战场标记\n2.坚持30波进攻
-DIFFICULTY2=1.你只有15点生命值\n1.坚持40波进攻
-DIFFICULTY3=1.战场中将出现更多标记
+DIFFICULTY2=1.你只有15点生命值
+DIFFICULTY3=1.战场中将出现更多标记\n1.坚持40波进攻
 DIFFICULTY4=1.一次艰难的挑战
 DIFFICULTY5=1.不可能完成的任务
 
@@ -63,7 +73,8 @@ NEEDTUTORIAL=是否开启教程？
 YES=是
 NO=否
 
-MODE1=在标准模式下，你需要镇守一定波数的敌人入侵，请选择并运用你所擅长的策略，通过这场挑战。
+MODE1=在跃迁基站部署一次针对巴德文明的快速阻击战，敌人会发起有限次的进攻，您将初次掌握模块构建和重构技术，为伟大的星际殖民保驾护航。
+MODE2=巴德文明将发起无限波次的进攻，这是一场资源的消耗战，更是一次对部署官意志和战略的极限考验，既然战争无法避免，那就让敌人的残骸填满宇宙。
 
 //tips
 LACKMONEY=金币不足

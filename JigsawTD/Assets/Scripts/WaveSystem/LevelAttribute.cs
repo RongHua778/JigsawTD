@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Attribute/LevelAttribute", fileName = "LevelAttribute")]
 public class LevelAttribute : ScriptableObject
 {
+    public bool IsEndless;
     public int PlayerHealth;
     public int Wave;
     public float LevelIntensify;
@@ -16,8 +17,7 @@ public class LevelAttribute : ScriptableObject
     public string LevelInfo;
     public int TrapCount;
     public int EliteWave;
-
-    public string[] Bonus;
+    public float ExpIntensify;
 
     public EnemyAttribute GetRandomBoss(int level)
     {
