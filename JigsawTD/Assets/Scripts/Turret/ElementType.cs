@@ -63,7 +63,7 @@ public class Dust : Element
     public override string GetElementName => "E";
     public override void GetComIntensify(StrategyBase strategy, bool add = true)
     {
-        strategy.ComSputteringRangeIntensify += add ? StaticData.Instance.DustSputteringIntensify : -StaticData.Instance.DustSputteringIntensify;
+        strategy.ComSplashRangeIntensify += add ? StaticData.Instance.DustSputteringIntensify : -StaticData.Instance.DustSputteringIntensify;
     }
 }
 

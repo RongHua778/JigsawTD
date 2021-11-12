@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class GameEndUI : IUserInterface
 {
     [SerializeField] TurretBillboard m_BillBoard = default;
     [SerializeField] Text title = default;
+    [SerializeField] Text passTimeTxt = default;
     [SerializeField] Text totalCompositeTxt = default;
     [SerializeField] Text totalDamageTxt = default;
     [SerializeField] Text maxPathTxt = default;
@@ -40,21 +42,28 @@ public class GameEndUI : IUserInterface
             GameMultiLang.GetTraduction("WAVE") + "*(1+25%*" +
             GameMultiLang.GetTraduction("BOSSDEFEAT") + ")");
 
-        if (LevelManager.Instance.CurrentLevel.IsEndless)
+        if (LevelManager.Instance.CurrentLevel.IsEndless)//无尽模式
         {
             title.text = GameMultiLang.GetTraduction("WIN") + GameRes.CurrentWave + GameMultiLang.GetTraduction("WAVE");
             LevelManager.Instance.EndlessHighScore = GameRes.CurrentWave;
         }
-        else
+        else//标准模式
         {
-            title.text = win ?
-            GameMultiLang.GetTraduction("WIN") + GameMultiLang.GetTraduction("DIFFICULTY") + (LevelManager.Instance.SelectedLevelID + 1).ToString()
-            : GameMultiLang.GetTraduction("LOSE");
+            if (win)
+            {
+                title.text = GameMultiLang.GetTraduction("WIN") + GameMultiLang.GetTraduction("DIFFICULTY") + (LevelManager.Instance.CurrentLevel.Difficulty).ToString();
+                GameEvents.Instance.TempWordTrigger(new TempWord(TempWordType.StandardWin, LevelManager.Instance.CurrentLevel.Difficulty));
+            }
+            else
+            {
+                title.text = GameMultiLang.GetTraduction("LOSE");
+                GameEvents.Instance.TempWordTrigger(new TempWord(TempWordType.StandardLose, LevelManager.Instance.CurrentLevel.Difficulty));
+            }
         }
 
         if (win && !LevelManager.Instance.CurrentLevel.IsEndless)
         {
-            LevelManager.Instance.PassDiifcutly = LevelManager.Instance.SelectedLevelID + 1;
+            LevelManager.Instance.PassDiifcutly = LevelManager.Instance.CurrentLevel.Difficulty + 1;
         }
         m_BillBoard.SetBillBoard();
         StartCoroutine(SetValueCor());
@@ -68,6 +77,7 @@ public class GameEndUI : IUserInterface
 
     IEnumerator SetValueCor()
     {
+        passTimeTxt.text = "";
         totalCompositeTxt.text = "";
         totalDamageTxt.text = "";
         maxPathTxt.text = "";
@@ -76,6 +86,9 @@ public class GameEndUI : IUserInterface
         expValueTxt.text = "";
 
         float delta;   //delta为速度，每次加的数大小
+        yield return new WaitForSeconds(waittime);
+        passTimeTxt.text = (GameRes.LevelStart - DateTime.Now).ToString(@"hh\:mm\:ss");
+
         delta = (float)GameRes.TotalRefactor / changeSpeed;
         result = 0;
         for (int i = 0; i < changeSpeed; i++)

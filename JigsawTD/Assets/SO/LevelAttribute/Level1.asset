@@ -13,14 +13,17 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: 
   IsEndless: 0
+  Difficulty: 1
   PlayerHealth: 25
-  Wave: 30
-  LevelIntensify: 1.25
+  Wave: 40
+  LevelIntensify: 1
   NormalEnemies:
   - {fileID: 11400000, guid: a2fa830bad8e11c448623ce28354a1bd, type: 2}
   - {fileID: 11400000, guid: a6b4f2578a98cf54caf0ac3718b54059, type: 2}
   - {fileID: 11400000, guid: 52077df3b03c9b446a10d3ec4b279ff5, type: 2}
   - {fileID: 11400000, guid: 8efd383e225b02844a5ac997f1e5f924, type: 2}
+  - {fileID: 11400000, guid: 4414d8fdced55104fb97c2c6ed6ec11a, type: 2}
+  - {fileID: 11400000, guid: 0a577738dc20fea45a9af16979f88841, type: 2}
   Boss1:
   - {fileID: 11400000, guid: f9558f1a6cffea245a720e078208fccf, type: 2}
   Boss2:

@@ -35,7 +35,7 @@ MonoBehaviour:
     ForbidRange: 0
     AttackDamage: 300
     AttackSpeed: 0.2
-    SputteringRange: 0
+    SplashRange: 0
     CriticalRate: 0
     SlowRate: 0
     TurretIcon: {fileID: 6252459201115839096, guid: a799722f85e58a34993e12144292e1a9, type: 3}
@@ -43,9 +43,9 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 400
+    AttackDamage: 450
     AttackSpeed: 0.2
-    SputteringRange: 0
+    SplashRange: 0
     CriticalRate: 0
     SlowRate: 0
     TurretIcon: {fileID: 3442024006206321382, guid: a799722f85e58a34993e12144292e1a9, type: 3}
@@ -53,9 +53,9 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 540
+    AttackDamage: 700
     AttackSpeed: 0.2
-    SputteringRange: 0
+    SplashRange: 0
     CriticalRate: 0
     SlowRate: 0
     TurretIcon: {fileID: -5153134150779752020, guid: a799722f85e58a34993e12144292e1a9, type: 3}

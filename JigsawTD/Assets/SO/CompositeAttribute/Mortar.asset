@@ -17,6 +17,8 @@ MonoBehaviour:
   Icon: {fileID: 7539865526745803331, guid: 551af557e968b9045aaedf98e3e4550e, type: 3}
   Description: MORTARSKILL
   Prefab: {fileID: 4967710668388058910, guid: 1222c5c9d6ecf7a4195b038a25c2816f, type: 3}
+  isLock: 0
+  initialLock: 0
   StrategyType: 1
   RangeType: 1
   element: 0
@@ -33,7 +35,7 @@ MonoBehaviour:
     ForbidRange: 0
     AttackDamage: 480
     AttackSpeed: 0.35
-    SputteringRange: 0.4
+    SplashRange: 0.3
     CriticalRate: 0
     SlowRate: 0
     TurretIcon: {fileID: 1801364980830264451, guid: 551af557e968b9045aaedf98e3e4550e, type: 3}
@@ -43,7 +45,7 @@ MonoBehaviour:
     ForbidRange: 0
     AttackDamage: 620
     AttackSpeed: 0.35
-    SputteringRange: 0.6
+    SplashRange: 0.5
     CriticalRate: 0
     SlowRate: 0
     TurretIcon: {fileID: 5231916774148396669, guid: 551af557e968b9045aaedf98e3e4550e, type: 3}
@@ -53,7 +55,7 @@ MonoBehaviour:
     ForbidRange: 0
     AttackDamage: 820
     AttackSpeed: 0.35
-    SputteringRange: 0.8
+    SplashRange: 0.7
     CriticalRate: 0
     SlowRate: 0
     TurretIcon: {fileID: 7539865526745803331, guid: 551af557e968b9045aaedf98e3e4550e, type: 3}

@@ -14,7 +14,7 @@ public class TurretTips : TileTips
     [SerializeField] Text SpeedValue = default;
     [SerializeField] Text RangeValue = default;
     [SerializeField] Text CriticalValue = default;
-    [SerializeField] Text SputteringValue = default;
+    [SerializeField] Text SplashRangeValue = default;
     [SerializeField] Text SlowRateValue = default;
     [SerializeField] Text IntensifyValue = default;
     [SerializeField] Text AnalysisValue = default;
@@ -36,7 +36,7 @@ public class TurretTips : TileTips
     [SerializeField] Text SpeedChangeTxt = default;
     [SerializeField] Text RangeChangeTxt = default;
     [SerializeField] Text CriticalChangeTxt = default;
-    [SerializeField] Text SputteringChangeTxt = default;
+    [SerializeField] Text SplashChangeTxt = default;
     [SerializeField] Text SlowRateChangeTxt = default;
 
     //≈‰∑Ωtips
@@ -165,7 +165,7 @@ public class TurretTips : TileTips
         if (Strategy.Quality < 3)
         {
             UpgradeArea.SetActive(true);
-            upgradeCost = StaticData.Instance.LevelUpCostPerRare * m_Strategy.m_Att.Rare * m_Strategy.Quality;
+            upgradeCost = StaticData.Instance.LevelUpCostPerRare[m_Strategy.m_Att.Rare - 1, m_Strategy.Quality - 1];// * m_Strategy.m_Att.Rare * m_Strategy.Quality;
             upgradeCost = (int)(upgradeCost * (1 - m_Strategy.UpgradeDiscount));
             UpgradeCostValue.text = upgradeCost.ToString();
             //UpdateLevelUpInfo();
@@ -247,8 +247,8 @@ public class TurretTips : TileTips
         CriticalValue.text = (att.TurretLevels[quality].CriticalRate * 100).ToString() + "%";
         CriticalChangeTxt.text = "";
 
-        SputteringValue.text = att.TurretLevels[quality].SputteringRange.ToString();
-        SputteringChangeTxt.text = "";
+        SplashRangeValue.text = att.TurretLevels[quality].SplashRange.ToString();
+        SplashChangeTxt.text = "";
 
         SlowRateValue.text = att.TurretLevels[quality].SlowRate.ToString();
         SlowRateChangeTxt.text = "";
@@ -268,8 +268,8 @@ public class TurretTips : TileTips
         CriticalValue.text = (m_Strategy.FinalCriticalRate * 100).ToString() + "%";
         CriticalChangeTxt.text = "";
 
-        SputteringValue.text = m_Strategy.FinalSputteringRange.ToString();
-        SputteringChangeTxt.text = "";
+        SplashRangeValue.text = m_Strategy.FinalSplashRange.ToString();
+        SplashChangeTxt.text = "";
 
         SlowRateValue.text = m_Strategy.FinalSlowRate.ToString();
         SlowRateChangeTxt.text = "";
@@ -280,28 +280,28 @@ public class TurretTips : TileTips
     private void UpdateBluePrintInfo()
     {
         AttackValue.text = m_Strategy.InitAttack.ToString();
-        AttackChangeTxt.text = (m_Strategy.BaseAttackIntensify > 0 ?
-            "+" + m_Strategy.InitAttack * m_Strategy.BaseAttackIntensify : "");
+        AttackChangeTxt.text = (m_Strategy.ComAttackIntensify > 0 ?
+            "+" + m_Strategy.InitAttack * m_Strategy.ComAttackIntensify : "");
 
         SpeedValue.text = m_Strategy.InitSpeed.ToString();
-        SpeedChangeTxt.text = (m_Strategy.BaseSpeedIntensify > 0 ?
-            "+" + m_Strategy.InitSpeed * m_Strategy.BaseSpeedIntensify : "");
+        SpeedChangeTxt.text = (m_Strategy.ComSpeedIntensify > 0 ?
+            "+" + m_Strategy.InitSpeed * m_Strategy.ComSpeedIntensify : "");
 
         RangeValue.text = m_Strategy.InitRange.ToString();
-        RangeChangeTxt.text = (m_Strategy.BaseRangeIntensify > 0 ?
-            "+" + m_Strategy.BaseRangeIntensify : "");
+        RangeChangeTxt.text = (m_Strategy.ComRangeIntensify > 0 ?
+            "+" + m_Strategy.ComRangeIntensify : "");
 
         CriticalValue.text = (m_Strategy.InitCriticalRate * 100).ToString() + "%";
-        CriticalChangeTxt.text = (m_Strategy.BaseCriticalRateIntensify > 0 ?
-            "+" + m_Strategy.BaseCriticalRateIntensify * 100 + "%" : "");
+        CriticalChangeTxt.text = (m_Strategy.ComCriticalIntensify > 0 ?
+            "+" + m_Strategy.ComCriticalIntensify * 100 + "%" : "");
 
-        SputteringValue.text = m_Strategy.InitSputteringRange.ToString();
-        SputteringChangeTxt.text = (m_Strategy.BaseSputteringRangeIntensify > 0 ?
-            "+" + m_Strategy.BaseSputteringRangeIntensify : "");
+        SplashRangeValue.text = m_Strategy.InitSplashRange.ToString();
+        SplashChangeTxt.text = (m_Strategy.ComSplashRangeIntensify > 0 ?
+            "+" + m_Strategy.ComSplashRangeIntensify : "");
 
         SlowRateValue.text = m_Strategy.InitSlowRate.ToString();
-        SlowRateChangeTxt.text = (m_Strategy.BaseSlowRateIntensify > 0 ?
-            "+" + m_Strategy.BaseSlowRateIntensify : "");
+        SlowRateChangeTxt.text = (m_Strategy.ComSlowIntensify > 0 ?
+            "+" + m_Strategy.ComSlowIntensify : "");
     }
 
     public void UpdateLevelUpInfo()
@@ -319,9 +319,9 @@ public class TurretTips : TileTips
         CriticalValue.text = (m_Strategy.FinalCriticalRate * 100).ToString() + "%";
         CriticalChangeTxt.text = (criticalIncrease > 0 ? "+" + criticalIncrease * 100 + "%" : "");
 
-        float sputteringIncrease = m_Strategy.NextSputteringRange - m_Strategy.BaseSputteringRange;
-        SputteringValue.text = m_Strategy.FinalSputteringRange.ToString();
-        SputteringChangeTxt.text = (sputteringIncrease > 0 ? "+" + sputteringIncrease : "");
+        float sputteringIncrease = m_Strategy.NextSplashRange - m_Strategy.BaseSplashRange;
+        SplashRangeValue.text = m_Strategy.FinalSplashRange.ToString();
+        SplashChangeTxt.text = (sputteringIncrease > 0 ? "+" + sputteringIncrease : "");
 
         float slowRateIncrease = m_Strategy.NextSlowRate - m_Strategy.BaseSlowRate;
         SlowRateValue.text = m_Strategy.FinalSlowRate.ToString();

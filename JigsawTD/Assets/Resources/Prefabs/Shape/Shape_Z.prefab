@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -65, y: -242}
+  m_AnchoredPosition: {x: -65, y: -246}
   m_SizeDelta: {x: 130, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5131354774735105816
@@ -688,6 +688,7 @@ GameObject:
   - component: {fileID: 6889555363922204877}
   - component: {fileID: 423573634930684413}
   - component: {fileID: 6889555363922204875}
+  - component: {fileID: 4783710618649501506}
   m_Layer: 0
   m_Name: Shape_Z
   m_TagString: Untagged
@@ -751,6 +752,25 @@ MonoBehaviour:
   holdColor: {r: 1, g: 1, b: 1, a: 1}
   dropColor: {r: 0.48490566, g: 1, b: 0.53602576, a: 0.78431374}
   equipColor: {r: 1, g: 0.6302396, b: 0, a: 0.39215687}
+--- !u!95 &4783710618649501506
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6889555363922204876}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 502687a7dcc721d4f9b4e74f2d995dc8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7441388032842324588
 GameObject:
   m_ObjectHideFlags: 0
@@ -907,7 +927,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 65, y: -242}
+  m_AnchoredPosition: {x: 65, y: -246}
   m_SizeDelta: {x: 130, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2906814837528603473

@@ -17,21 +17,21 @@ public class RandomCritical : ElementSkill
     public override void Composite()
     {
         base.Composite();
-        strategy.InitAttack *= Random.Range(0.5f, 3f);
-        strategy.InitSpeed *= Random.Range(0.5f, 3f);
-        strategy.InitSlowRate *= Random.Range(0.5f, 3f);
-        strategy.InitCriticalRate *= Random.Range(0.5f, 3f);
-        strategy.InitSputteringRange *= Random.Range(0.5f, 3f);
+        strategy.InitAttackModify *= Random.Range(0.5f, 3f);
+        strategy.InitSpeedModify *= Random.Range(0.5f, 3f);
+        strategy.InitSlowRateModify *= Random.Range(0.5f, 3f);
+        strategy.InitCriticalRateModify *= Random.Range(0.5f, 3f);
+        strategy.InitSplashRangeModify *= Random.Range(0.5f, 3f);
     }
 
     public override void OnEquip()
     {
         base.OnEquip();
-        strategy.InitAttack *= Random.Range(0.5f, 3f);
-        strategy.InitSpeed *= Random.Range(0.5f, 3f);
-        strategy.InitSlowRate *= Random.Range(0.5f, 3f);
-        strategy.InitCriticalRate *= Random.Range(0.5f, 3f);
-        strategy.InitSputteringRange *= Random.Range(0.5f, 3f);
+        strategy.InitAttackModify *= Random.Range(0.5f, 3f);
+        strategy.InitSpeedModify *= Random.Range(0.5f, 3f);
+        strategy.InitSlowRateModify *= Random.Range(0.5f, 3f);
+        strategy.InitCriticalRateModify *= Random.Range(0.5f, 3f);
+        strategy.InitSplashRangeModify *= Random.Range(0.5f, 3f);
     }
 }
 

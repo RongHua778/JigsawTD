@@ -63,10 +63,12 @@ NUM=
 SKIPTUTORIAL=Skip tutorial
 
 DIFFICULTY0=
-DIFFICULTY1=1."Mark" will appear in the batllefield\n2.Stick to 30 wave
-DIFFICULTY2=1.Elite enemies exist in normal waves\n2.You have only 15 health
-DIFFICULTY3=1.More marks will apprear in the battlefield\n2.Stick to 40 wave
-DIFFICULTY4=1.The final challenge
+DIFFICULTY1=1."Mark" will appear in the batllefield\n2.Stick to 40 wave
+DIFFICULTY2=1.You have only 15 health
+DIFFICULTY3=1.More marks will apprear in the battlefield
+DIFFICULTY4=1.A tough challenge
+DIFFICULTY5=1.Unpossible task
+
 
 NEEDTUTORIAL=Do you want to start a tutorial?
 YES=YES
@@ -135,6 +137,7 @@ WIN=WIN
 LOSE=END
 PASSLEVEL=You have pass 
 TOTALDAMAGE=Total Damage
+PASSTIME=Total Time
 COMPOSITECOUNT=Refactor Turret
 MAXPATH=Longest Path
 MAXMARK=Revealed Mark
@@ -142,7 +145,8 @@ GAINGOLD=Gained Gold
 THANKSINFO=Thank you for experiencing the game demo. If you like our game, \n please add it to your wishlist!
 EXPVALUE=Gain Exp
 BOSSDEFEAT=BOSS Defeated
-
+BASICANALYSIS=Basic Analysis
+DAMAGEBILLBOARD=Damage Billboard
 
 //turretips
 DAMAGEANLYSIS=Turn Damage
@@ -213,7 +217,7 @@ SCATTERSKILL=Deals 50% less damage, but can attack an additional 3 targets.
 MORTARSKILL=Bullet's splash damage increased by 150%.
 RAPIDERSKILL=Firerate increased by 15% each shoot when it is attacking the same target(up to 300%).
 ROTARYSKILL=Penetration Bullet; Randomly shoot around and double all firerate increased.
-SNIPERSKILL=Forbid range+2, bullet's damage increased by 10% for each meter it travelled
+SNIPERSKILL=Bullet's damage increased by 10% for each meter it travelled
 ULTRASKILL=Double the increased critical damage.
 SNOWSKILL=Penetration Bullet;Bullet will double enemy's current slow.
 COOPORATIVESKILL=Attack increased by 1% * the amount of refacotor turrets each shoot.
@@ -248,7 +252,7 @@ BBEINFO=Splash range increased by 0.02 each shoot.
 
 //C系
 CCC=Forst Technology
-CCCINFO=Gain 2 extra element skill slots
+CCCINFO=Change the amount of turret's element skill slot to 4.
 CCA=Cold Front
 CCAINFO=Attack increases by 2% per second after the start of each wave.
 CCB=Overload Cartridge
@@ -278,9 +282,9 @@ EEAINFO=Turret's attack increased by 100% before 20 seconds of each wave
 EEB=Speed Core
 EEBINFO=Turret's firerate increased by 100% before 20 seconds of each wave
 EEC=Slow Core
-EECINFO=Turret's slow increased by 100% before 20 seconds of each wave
+EECINFO=Turret's slow increased by 1.5 before 20 seconds of each wave
 EED=Critical Core
-EEDINFO=Turret's splash increased by 100% before 20 seconds of each wave
+EEDINFO=Turret's splash increased by 75% before 20 seconds of each wave
 
 
 //综合系

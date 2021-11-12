@@ -10,22 +10,25 @@ public class UISetting : IUserInterface
     private Animator m_Anim;
     public AudioMixer audioMixer;
     public Dropdown resolutionDropdown;
+    public Toggle fullScreenToggle;
     List<Resolution> resolutions;
     public override void Initialize()
     {
         base.Initialize();
         m_Anim = this.GetComponent<Animator>();
         InitializeResolution();
+        fullScreenToggle.isOn = Screen.fullScreen;
     }
 
     private void InitializeResolution()
     {
-        resolutions = Screen.resolutions.ToList();
+        resolutions = Screen.resolutions.Select(resolution => new Resolution { width = resolution.width, height = resolution.height }).Distinct().ToList();
         resolutionDropdown.ClearOptions();
 
         Resolution resolution = new Resolution();
         resolution.width = 2560;
         resolution.height = 1080;
+        resolution.refreshRate = 60;
         resolutions.Add(resolution);
 
         List<string> options = new List<string>();

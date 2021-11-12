@@ -57,7 +57,7 @@ public abstract class Enemy : PathFollower, IDamageable
     private int affectHealerCount = 0;
     public int AffectHealerCount { get => affectHealerCount; set => affectHealerCount = value; }
     float speedIntensify = 0;
-    public virtual float SpeedIntensify { get => speedIntensify + (AffectHealerCount > 0 ? 0.4f : 0); set => speedIntensify = value; }
+    public virtual float SpeedIntensify { get => speedIntensify + (AffectHealerCount > 0 ? 0.6f : 0); set => speedIntensify = value; }
     public override float Speed { get => StunTime > 0 ? 0 : Mathf.Max(0.1f, (speed + SpeedIntensify) * (1 - SlowRate / (SlowRate + 2f))); }
 
     float slowRate = 0;

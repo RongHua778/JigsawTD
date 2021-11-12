@@ -350,10 +350,7 @@ public class GameManager : Singleton<GameManager>
 
     public void RefreshShop(int cost)
     {
-        if (ConsumeMoney(cost))
-        {
-            m_BluePrintShopUI.RefreshShop();
-        }
+        m_BluePrintShopUI.RefreshShop(cost);
     }
 
     public void BuyBluePrint(BluePrintGrid grid, int cost)

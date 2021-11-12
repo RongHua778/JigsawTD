@@ -127,13 +127,6 @@ public class SniperSkill : InitialSkill
     public override TurretSkillName EffectName => TurretSkillName.SniperSkill;
     public override string SkillDescription => "SNIPERSKILL";
 
-    //private float attackIncreased;
-
-    public override void Build()
-    {
-        base.Build();
-        strategy.ForbidRange += 2;
-    }
     public override void Shoot(Bullet bullet = null)
     {
         base.Shoot(bullet);
@@ -189,10 +182,10 @@ public class MortarSkill : InitialSkill
     public override string SkillDescription => "MORTARSKILL";
 
 
-    public override void Build()
+    public override void Shoot(Bullet bullet = null)
     {
-        base.Build();
-        strategy.InitSputteringPercentageIntensify += 1.5f;
+        base.Shoot(bullet);
+        bullet.SplashPercentage += 1.5f;
     }
 
 }
@@ -318,7 +311,7 @@ public class SuperSkill : InitialSkill
         strategy.TurnFixSpeed += strategy.FinalSpeed * strategy.TimeModify;
         strategy.TurnFixCriticalRate += strategy.FinalCriticalRate * strategy.TimeModify;
         strategy.TurnFixSlowRate += strategy.FinalSlowRate * strategy.TimeModify;
-        strategy.TurnFixSputteringRange += strategy.FinalSputteringRange * strategy.TimeModify;
+        strategy.TurnFixSplashRange += strategy.FinalSplashRange * strategy.TimeModify;
     }
 
     public override void EndTurn()

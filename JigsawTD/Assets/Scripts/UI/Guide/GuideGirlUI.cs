@@ -21,7 +21,7 @@ public class GuideGirlUI : IUserInterface
     private FuncUI m_FuncUI;
     private MainUI m_MainUI;
     private BluePrintShopUI m_ShopUI;
-    private ShapeSelectUI m_ShapeUI;
+
     //触发条件：点击指定格子，按钮
     //当满足条件时，控制各UI的显示动画
     [SerializeField] Dialogue[] dialogues = default;
@@ -45,6 +45,14 @@ public class GuideGirlUI : IUserInterface
     [SerializeField] GameObject turretTips_ElementSkillObj = default;
     [SerializeField] GameObject turretTips_RefactorObj = default;
 
+    [Header("小姐姐临时对话")]
+    private const float DialogueTime = 8f;
+    [SerializeField] Dialogue[] StandardLost = default;
+    [SerializeField] Dialogue[] StandardWin = default;
+    [SerializeField] Dialogue[] EndLessEnd = default;
+    [SerializeField] Dialogue[] Refactor = default;
+    [SerializeField] Dialogue[] RefreshShop = default;
+
 
     public void Initialize(FuncUI funcUI, MainUI mainUI, BluePrintShopUI shopUI, ShapeSelectUI shapeUI)
     {
@@ -52,13 +60,15 @@ public class GuideGirlUI : IUserInterface
         m_FuncUI = funcUI;
         m_MainUI = mainUI;
         m_ShopUI = shopUI;
-        m_ShapeUI = shapeUI;
         wordQueue = new Queue<string>();
+        GameEvents.Instance.onTempWord += DisplayTempDialogue;
         if (Game.Instance.Tutorial)
         {
             GameEvents.Instance.onTutorialTrigger += GuideTrigger;
+
             currentDialogue = dialogues[startIndex];
             m_FuncUI.Hide();//因为Preparenextwave自动show了
+            GuideTrigger(TutorialType.None);
         }
         else
         {
@@ -69,10 +79,73 @@ public class GuideGirlUI : IUserInterface
     {
         base.Release();
         GameEvents.Instance.onTutorialTrigger -= GuideTrigger;
+        GameEvents.Instance.onTempWord -= DisplayTempDialogue;
 
     }
 
+    #region 临时对话
+    private void DisplayTempDialogue(TempWord wordType)
+    {
+        if (typingSentence||Game.Instance.Tutorial)
+            return;
+        switch (wordType.WordType)
+        {
+            case TempWordType.StandardLose:
+                StartCoroutine(TempWordCor(StandardLost[wordType.ID]));//id为标准模式难度
+                break;
+            case TempWordType.StandardWin:
+                StartCoroutine(TempWordCor(StandardWin[wordType.ID]));//id为标准模式难度
+                break;
+            case TempWordType.EndlessEnd:
+                break;
+            case TempWordType.RefreshShop:
+                if (Random.value > 0.95f)//有5%概率触发
+                    StartCoroutine(TempWordCor(RefreshShop[wordType.ID]));
+                break;
+            case TempWordType.Refactor:
+                break;
+        }
+    }
 
+
+    IEnumerator TempWordCor(Dialogue dialogue)
+    {
+        typingSentence = true;
+        Show();
+        backBtn.SetActive(false);
+        dialogTxt.text = "";
+        yield return new WaitForSeconds(0.5f);
+        string word = GameMultiLang.GetTraduction(dialogue.Words[Random.Range(0, dialogue.Words.Length)]);
+        dialogTxt.text = word;
+        dialogTxt.maxVisibleCharacters = 0;
+        dialogTxt.ForceMeshUpdate();
+        var textInfo = dialogTxt.textInfo;
+        for (int i = 0; i < textInfo.characterCount; i++)
+        {
+            SetCharacterAlpha(i, 0);
+        }
+
+        // 按时间逐个显示字符
+        var timer = 0f;
+        var interval = 0.03f;
+        while (dialogTxt.maxVisibleCharacters < textInfo.characterCount)
+        {
+            timer += Time.deltaTime;
+            if (timer >= interval)
+            {
+                timer = 0;
+                dialogTxt.maxVisibleCharacters++;
+            }
+
+            yield return null;
+        }
+        yield return new WaitForSeconds(DialogueTime);
+        Hide();
+        typingSentence = false;
+    }
+
+
+    #endregion
     private void StartDialogue()
     {
         backBtn.SetActive(true);
@@ -347,14 +420,19 @@ public class GuideGirlUI : IUserInterface
     public override void Show()
     {
         base.Show();
+        Sound.Instance.PlayEffect("Sound_Guide");
         anim.SetBool("Show", true);
     }
     public override void Hide()
     {
+        Sound.Instance.PlayEffect("Sound_Guide");
         anim.SetBool("Show", false);
     }
     public void HideRoot()
     {
         m_RootUI.gameObject.SetActive(false);
     }
+
+
+
 }

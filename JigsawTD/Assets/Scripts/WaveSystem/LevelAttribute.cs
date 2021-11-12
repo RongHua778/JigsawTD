@@ -6,6 +6,7 @@ using UnityEngine;
 public class LevelAttribute : ScriptableObject
 {
     public bool IsEndless;
+    public int Difficulty;
     public int PlayerHealth;
     public int Wave;
     public float LevelIntensify;

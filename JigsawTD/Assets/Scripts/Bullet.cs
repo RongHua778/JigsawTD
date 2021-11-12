@@ -34,7 +34,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     public float SputteringRange { get => sputteringRange; set => sputteringRange = value; }
 
     private float sputteringPercentage;
-    public float SputteringPercentage { get => sputteringPercentage; set => sputteringPercentage = value; }
+    public float SplashPercentage { get => sputteringPercentage; set => sputteringPercentage = value; }
 
     private float criticalRate;
     public float CriticalRate { get => criticalRate; set => criticalRate = value; }
@@ -76,12 +76,12 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         this.turretParent = turret;
         this.Damage = turret.Strategy.FinalAttack;
         this.bulletSpeed = turret.Strategy.m_Att.BulletSpeed;
-        this.SputteringRange = turret.Strategy.FinalSputteringRange;
+        this.SputteringRange = turret.Strategy.FinalSplashRange;
         this.CriticalRate = turret.Strategy.FinalCriticalRate;
         this.CriticalPercentage = turret.Strategy.FinalCriticalPercentage;
         this.turretEffects = turret.Strategy.TurretSkills;
         this.SlowRate = turret.Strategy.FinalSlowRate;
-        this.SputteringPercentage = turret.Strategy.FinalSputteringPercentage;
+        this.SplashPercentage = turret.Strategy.FinalSplashPercentage;
     }
 
     protected void TriggerShootEffect()
@@ -164,7 +164,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     {
         float finalDamage = isCritical ? Damage * CriticalPercentage : Damage;
         if (isSputtering)
-            finalDamage *= SputteringPercentage;
+            finalDamage *= SplashPercentage;
         float realDamage;
         target.DamageStrategy.ApplyDamage(finalDamage, out realDamage, isCritical);
         turretParent.Strategy.TotalDamage += (int)realDamage;//∑¿”˘À˛…À∫¶Õ≥º∆

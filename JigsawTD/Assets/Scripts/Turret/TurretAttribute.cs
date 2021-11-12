@@ -9,7 +9,7 @@ public class TurretInfo
     public int ForbidRange;
     public float AttackDamage;
     public float AttackSpeed;
-    public float SputteringRange;
+    public float SplashRange;
     public float CriticalRate;
     public float SlowRate;
     [Header("美术资源设置")]

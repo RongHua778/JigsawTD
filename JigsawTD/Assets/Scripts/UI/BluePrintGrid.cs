@@ -4,9 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
+using DG.Tweening;
 
 public class BluePrintGrid : ReusableObject//, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
+
+    public Transform Root { get; set; }
     public static BluePrintGrid SelectingBluePrint = null;
     [SerializeField] Color UnobtainColor = default;
     private bool isLock = false;
@@ -25,8 +28,15 @@ public class BluePrintGrid : ReusableObject//, IPointerEnterHandler, IPointerExi
 
     public Blueprint BluePrint { get => m_BluePrint; set => m_BluePrint = value; }
     bool buildAble = false;
+
+    private void Awake()
+    {
+        Root = transform.Find("Root");
+    }
     public void SetElements(BluePrintShopUI shop, ToggleGroup group, Blueprint bluePrint)
     {
+        Root.transform.position += Vector3.left * 2f;
+        Root.DOLocalMoveX(2f, 0.2f);
         m_Shop = shop;
         m_Toggle = this.GetComponent<Toggle>();
         BluePrint = bluePrint;

@@ -12,24 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0168100ba70e486479f31ec9f99a31ad, type: 3}
   m_Name: TestLevel
   m_EditorClassIdentifier: 
-  LevelID: 0
-  PlayerHealth: 15
-  Wave: 40
+  IsEndless: 0
+  Difficulty: 5
+  PlayerHealth: 1
+  Wave: 1
   LevelIntensify: 2
   NormalEnemies:
-  - {fileID: 11400000, guid: 4414d8fdced55104fb97c2c6ed6ec11a, type: 2}
-  - {fileID: 11400000, guid: 4414d8fdced55104fb97c2c6ed6ec11a, type: 2}
-  - {fileID: 11400000, guid: 4414d8fdced55104fb97c2c6ed6ec11a, type: 2}
-  - {fileID: 11400000, guid: 4414d8fdced55104fb97c2c6ed6ec11a, type: 2}
-  - {fileID: 11400000, guid: 4414d8fdced55104fb97c2c6ed6ec11a, type: 2}
-  - {fileID: 11400000, guid: 4414d8fdced55104fb97c2c6ed6ec11a, type: 2}
-  Boss:
-  - {fileID: 11400000, guid: bd4a8209b52017c4bb8c391e2596cefb, type: 2}
-  - {fileID: 11400000, guid: bd4a8209b52017c4bb8c391e2596cefb, type: 2}
-  - {fileID: 11400000, guid: bd4a8209b52017c4bb8c391e2596cefb, type: 2}
-  - {fileID: 11400000, guid: bd4a8209b52017c4bb8c391e2596cefb, type: 2}
+  - {fileID: 11400000, guid: 52077df3b03c9b446a10d3ec4b279ff5, type: 2}
+  - {fileID: 11400000, guid: 52077df3b03c9b446a10d3ec4b279ff5, type: 2}
+  - {fileID: 11400000, guid: 52077df3b03c9b446a10d3ec4b279ff5, type: 2}
+  - {fileID: 11400000, guid: 52077df3b03c9b446a10d3ec4b279ff5, type: 2}
+  - {fileID: 11400000, guid: 52077df3b03c9b446a10d3ec4b279ff5, type: 2}
+  - {fileID: 11400000, guid: 52077df3b03c9b446a10d3ec4b279ff5, type: 2}
+  Boss1: []
+  Boss2: []
+  Boss3: []
+  Boss4: []
   LevelInfo: LEVEL2INFO
   TrapCount: 15
   EliteWave: 15
-  Bonus:
-  - {fileID: 11400000, guid: 22a169674acbe2c40a2da0d763cc8641, type: 2}
+  ExpIntensify: 0

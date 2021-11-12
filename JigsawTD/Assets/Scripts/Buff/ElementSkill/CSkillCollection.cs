@@ -10,7 +10,7 @@ public class ExtraSkill : ElementSkill
     public override void Build()
     {
         base.Build();
-        strategy.ElementSKillSlot += 2;
+        strategy.ElementSKillSlot = 4;
     }
 
 }
@@ -95,7 +95,7 @@ public class LateSplash : ElementSkill
     public override void Tick(float delta)
     {
         base.Tick(delta);
-        strategy.TurnFixSputteringRange += 0.01f * delta * strategy.TimeModify;
+        strategy.TurnFixSplashRange += 0.01f * delta * strategy.TimeModify;
     }
 
     public override void EndTurn()
@@ -113,7 +113,7 @@ public class SlowPolo : ElementSkill
     {
         foreach (var strategy in intensifiedStrategies)
         {
-            strategy.InitSlowRateIntensify -= 0.5f * strategy.PoloIntensifyModify;
+            strategy.InitSlowRateModify -= 0.5f * strategy.PoloIntensifyModify;
         }
         intensifiedStrategies.Clear();
         List<Vector2Int> points = StaticData.GetCirclePoints(1);
@@ -124,7 +124,7 @@ public class SlowPolo : ElementSkill
             if (hit != null)
             {
                 StrategyBase strategy = hit.GetComponent<TurretContent>().Strategy;
-                strategy.InitSlowRateIntensify += 0.5f * strategy.PoloIntensifyModify;
+                strategy.InitSlowRateModify += 0.5f * strategy.PoloIntensifyModify;
                 intensifiedStrategies.Add(strategy);
             }
         }

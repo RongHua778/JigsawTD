@@ -17,6 +17,8 @@ MonoBehaviour:
   Icon: {fileID: -1944259913073176082, guid: c1be13963e61eae42b02687dd1475717, type: 3}
   Description: SNIPERSKILL
   Prefab: {fileID: 1494963813994468761, guid: 05869ddac62aff043bf7e0106d00bc2e, type: 3}
+  isLock: 0
+  initialLock: 0
   StrategyType: 1
   RangeType: 1
   element: 0
@@ -33,7 +35,7 @@ MonoBehaviour:
     ForbidRange: 0
     AttackDamage: 700
     AttackSpeed: 0.35
-    SputteringRange: 0
+    SplashRange: 0
     CriticalRate: 0
     SlowRate: 0
     TurretIcon: {fileID: -6734541021382769069, guid: c1be13963e61eae42b02687dd1475717, type: 3}
@@ -41,9 +43,9 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.29}
   - AttackRange: 6
     ForbidRange: 0
-    AttackDamage: 1050
+    AttackDamage: 1200
     AttackSpeed: 0.35
-    SputteringRange: 0
+    SplashRange: 0
     CriticalRate: 0
     SlowRate: 0
     TurretIcon: {fileID: -7260088481118571112, guid: c1be13963e61eae42b02687dd1475717, type: 3}
@@ -51,9 +53,9 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.37}
   - AttackRange: 6
     ForbidRange: 0
-    AttackDamage: 1580
+    AttackDamage: 1800
     AttackSpeed: 0.35
-    SputteringRange: 0
+    SplashRange: 0
     CriticalRate: 0
     SlowRate: 0
     TurretIcon: {fileID: -1944259913073176082, guid: c1be13963e61eae42b02687dd1475717, type: 3}

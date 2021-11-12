@@ -45,6 +45,8 @@ public static class GameRes
     public static Action<StrategyBase> NextCompositeCallback = null;
 
     [Header("统计数据")]
+    public static DateTime LevelStart;
+    public static DateTime LevelEnd;
     public static int TotalRefactor = 0;
     public static int TotalDamage = 0;
     private static int maxPath = 0;
@@ -87,6 +89,8 @@ public static class GameRes
         {
             if (value <= 0)
             {
+                if (life <= 0)
+                    return;
                 GameManager.Instance.GameEnd(false);
             }
             life = Mathf.Clamp(value, 0, LevelManager.Instance.CurrentLevel.PlayerHealth);
@@ -174,6 +178,7 @@ public static class GameRes
         m_FuncUI = funcUI;
         m_WaveSystem = waveSystem;
 
+        LevelStart = DateTime.Now;
         TotalRefactor = 0;
         TotalDamage = 0;
         MaxPath = 0;

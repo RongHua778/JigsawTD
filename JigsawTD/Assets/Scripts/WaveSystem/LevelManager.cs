@@ -25,7 +25,7 @@ public class LevelManager : Singleton<LevelManager>
     public LevelAttribute EndlessLevel = default;
 
     public int PremitDifficulty = default;
-    public int PassDiifcutly { get => PlayerPrefs.GetInt("MaxDifficulty", 0); set => PlayerPrefs.SetInt("MaxDifficulty", value); }
+    public int PassDiifcutly { get => PlayerPrefs.GetInt("MaxDifficulty", 0); set => PlayerPrefs.SetInt("MaxDifficulty", Mathf.Min(5, value)); }
 
     public int EndlessHighScore
     {
@@ -43,9 +43,27 @@ public class LevelManager : Singleton<LevelManager>
         get => maxDifficutly;
         set => maxDifficutly = value;
     }
-    [SerializeField] private int selectedLevelId = default;
-    public int SelectedLevelID { get => selectedLevelId; set => selectedLevelId = Mathf.Clamp(value, 0, PassDiifcutly); }
+    [SerializeField] private int selectDifficulty = default;
+    public int SelectDiffculty { get => selectDifficulty; set => selectDifficulty = Mathf.Clamp(value, 0, PassDiifcutly); }
     public LevelAttribute CurrentLevel;
+
+    public bool LevelStart()
+    {
+        if (SelectDiffculty > PremitDifficulty)
+        {
+            MenuUIManager.Instance.ShowMessage(GameMultiLang.GetTraduction("UNPERMIT"));
+            return false;
+        }
+        else if (SelectDiffculty > PassDiifcutly)
+        {
+            MenuUIManager.Instance.ShowMessage(GameMultiLang.GetTraduction("UNPASS"));
+            return false;
+        }
+        CurrentLevel = StandardLevels[SelectDiffculty];
+        if (CurrentLevel.Difficulty > 1)
+            Game.Instance.Tutorial = false;
+        return true;
+    }
 
 
     public void LoadSaveData(Save save)

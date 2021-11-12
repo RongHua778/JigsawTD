@@ -22,12 +22,11 @@ public class StaticData : Singleton<StaticData>
     public static LayerMask EnemyLayerMask = 1 << 11;
     public static LayerMask GetGroundLayer = 1 << 8 | 1 << 12;
 
-    public static Vector2 LeftTipsPos = new Vector2(300, Screen.height / 2);
-    public static Vector2 LeftMidTipsPos = new Vector2(800, Screen.height / 2);
-    public static Vector2 RightTipsPos = new Vector2(Screen.width - 300, Screen.height / 2);
-    public static Vector2 RightMidTipsPos = new Vector2(Screen.width - 800, Screen.height / 2);
+    public static Vector2 LeftTipsPos;
+    public static Vector2 LeftMidTipsPos;
+    public static Vector2 RightTipsPos;
+    public static Vector2 RightMidTipsPos;
 
-    //public static LayerMask RunTimeFindPathLayer = 1 << 8;
     //抽取品质概率
     public static float[,] QualityChances = new float[6, 5]
     {
@@ -35,8 +34,8 @@ public class StaticData : Singleton<StaticData>
         { 0.6f, 0.3f, 0.1f, 0f, 0f },
         { 0.4f, 0.35f, 0.15f, 0.1f, 0f },
         { 0.25f, 0.3f, 0.25f, 0.2f, 0f },
-        { 0.15f, 0.3f, 0.3f, 0.25f, 0.1f },
-        { 0.05f, 0.2f, 0.25f, 0.3f, 0.2f },
+        { 0.1f, 0.25f, 0.3f, 0.25f, 0.1f },
+        { 0f, 0.2f, 0.3f, 0.3f, 0.2f },
     };
     public static float[,] RareChances = new float[6, 6]
     {
@@ -111,14 +110,15 @@ public class StaticData : Singleton<StaticData>
     public Sprite[] ElementSprites;
 
     [Header("CompositionAttributes")]
-    public int LevelUpCostPerRare;
-    public int[,] LevelUpCost = new int[3, 2]//合成塔升级费用
+    public int[,] LevelUpCostPerRare = new int[6, 2]
     {
-        { 75, 150 },
-        { 150,300 },
-        { 250,500 }
+        { 50, 100},
+        { 75, 150},
+        { 125, 250},
+        { 200, 400},
+        { 300, 600},
+        { 450, 900}
     };
-
 
     protected override void Awake()
     {
@@ -133,10 +133,10 @@ public class StaticData : Singleton<StaticData>
 
     public static void SetTipsPos()
     {
-        LeftTipsPos = new Vector2(Screen.width/5, Screen.height / 2);
-        LeftMidTipsPos = new Vector2(Screen.width / 3, Screen.height / 2);
+        LeftTipsPos = new Vector2(Screen.width / 5, Screen.height / 2);
+        LeftMidTipsPos = new Vector2(Screen.width / 2.5f, Screen.height / 2);
         RightTipsPos = new Vector2(Screen.width - Screen.width / 5, Screen.height / 2);
-        RightMidTipsPos = new Vector2(Screen.width - Screen.width / 3, Screen.height / 2);
+        RightMidTipsPos = new Vector2(Screen.width - Screen.width /2.5f, Screen.height / 2);
     }
 
     private void InitializeData()

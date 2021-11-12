@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Level3
   m_EditorClassIdentifier: 
   IsEndless: 0
+  Difficulty: 3
   PlayerHealth: 15
   Wave: 40
   LevelIntensify: 2

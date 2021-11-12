@@ -10,6 +10,7 @@ public enum ShapeType
 }
 public class TileShape : MonoBehaviour
 {
+    private Animator m_Anim;
     public bool IsPreviewing = false;
     List<TileSlot> tilePos = new List<TileSlot>();
     List<TileSlot> turretPos = new List<TileSlot>();
@@ -31,6 +32,7 @@ public class TileShape : MonoBehaviour
 
     private void Awake()
     {
+        m_Anim = this.GetComponent<Animator>();
         turretNameTxt = transform.GetComponentInChildren<Text>();
         tilePos = transform.GetComponentsInChildren<TileSlot>().ToList();
         foreach (var slot in tilePos)
@@ -121,7 +123,7 @@ public class TileShape : MonoBehaviour
     public void SetPreviewPlace()
     {
         IsPreviewing = true;
-
+        m_Anim.SetTrigger("Land");
         bgObj.SetActive(false);
         turretNameTxt.transform.parent.gameObject.SetActive(false);
         Vector2 pos = Camera.main.transform.position;

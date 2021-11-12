@@ -7,6 +7,7 @@ using System;
 
 public class BluePrintShopUI : IUserInterface
 {
+    private bool isRefreshing = false;
     bool Showing = false;//控制动画
     Animator anim;
     public GameObject ShopBtnObj;
@@ -22,6 +23,7 @@ public class BluePrintShopUI : IUserInterface
     public List<BluePrintGrid> OwnBluePrints = new List<BluePrintGrid>();//拥有配方表
 
     int currentLock = 0;
+    private TempWord refreshShopTrigger;
     public int CurrentLock
     {
         get => currentLock;
@@ -57,6 +59,8 @@ public class BluePrintShopUI : IUserInterface
         SetPerfectElementCount(0);
         PerfectInfo.SetContent(GameMultiLang.GetTraduction("PERFECTINFO"));
         CurrentLock = 0;
+
+        refreshShopTrigger = new TempWord(TempWordType.RefreshShop, 0);
     }
 
     public void PrepareForGuide()
@@ -66,11 +70,18 @@ public class BluePrintShopUI : IUserInterface
 
     public void SetPerfectElementCount(int count)
     {
-        PerfectElementTxt.text = GameMultiLang.GetTraduction("OWNPERFECT") + ":" + count;
+        //PerfectElementTxt.text = GameMultiLang.GetTraduction("OWNPERFECT") + ":" + count;
+        PerfectElementTxt.text = count.ToString();
     }
 
-    public void RefreshShop()//刷新商店
+    public void RefreshShop(int cost)//刷新商店
     {
+        if (isRefreshing)
+            return;
+        if (!GameManager.Instance.ConsumeMoney(cost))
+            return;
+        GameEvents.Instance.TempWordTrigger(refreshShopTrigger);
+        GameManager.Instance.HideTips();
         NextRefreshTrun = 3;
         int lockNum = 0;
         foreach (var grid in ShopBluePrints.ToList())
@@ -84,12 +95,21 @@ public class BluePrintShopUI : IUserInterface
                 lockNum++;
             }
         }
+        StartCoroutine(RefreshShopCor(lockNum));
+    }
+
+    private IEnumerator RefreshShopCor(int lockNum)
+    {
+        isRefreshing = true;
         for (int i = 0; i < GameRes.ShopCapacity - lockNum; i++)
         {
             Blueprint bluePrint = ConstructHelper.GetRandomBluePrintByLevel();
             AddBluePrint(bluePrint, true);
+            yield return new WaitForSeconds(0.02f);
         }
+        isRefreshing = false;
     }
+
 
     public void AddBluePrint(Blueprint bluePrint, bool isShopBluePrint)//增加蓝图，isShopblueprint判断加入商店还是拥有
     {

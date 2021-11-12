@@ -88,6 +88,7 @@ public class GameLevelHolder : MonoBehaviour
             CurrentExp = 0;
             GameManager.Instance.ShowBonusTips(LevelManager.Instance.GameLevels[CurrentLevel]);
             CurrentLevel++;
+            Sound.Instance.PlayEffect("Sound_LevelUp");
             ExpCor(Exp - need);
         }
         else

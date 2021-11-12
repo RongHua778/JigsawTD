@@ -9,7 +9,7 @@ public class LateIntensify : ElementSkill
     public override void Shoot(Bullet bullet = null)
     {
         base.Shoot(bullet);
-        bullet.SputteringPercentage += bullet.SputteringRange * 0.08f;
+        bullet.SplashPercentage += bullet.SputteringRange * 0.08f;
     }
 
 }
@@ -74,13 +74,13 @@ public class EarlySlow : ElementSkill
         base.StartTurn();
         Duration += 20;
         intensify = 1f * strategy.TimeModify;
-        strategy.TurnSlowRateIntensify += intensify;
+        strategy.TurnFixSlowRate += intensify;
     }
 
     public override void TickEnd()
     {
         base.TickEnd();
-        strategy.TurnSlowRateIntensify -= intensify;
+        strategy.TurnFixSlowRate -= intensify;
     }
 
     public override void EndTurn()
@@ -98,14 +98,14 @@ public class EarlyCritical : ElementSkill
     {
         base.StartTurn();
         Duration += 20;
-        intensify = 1f * strategy.TimeModify;
-        strategy.TurnCriticalRateIntensify += intensify;
+        intensify = 0.75f * strategy.TimeModify;
+        strategy.TurnFixCriticalRate += intensify;
     }
 
     public override void TickEnd()
     {
         base.TickEnd();
-        strategy.TurnCriticalRateIntensify -= intensify;
+        strategy.TurnFixCriticalRate -= intensify;
     }
 
     public override void EndTurn()

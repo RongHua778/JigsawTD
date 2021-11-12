@@ -24,7 +24,7 @@ MonoBehaviour:
   InitCount: 1
   CountIncrease: 0
   Health: 300
-  Speed: 0.5
+  Speed: 0.6
   CoolDown: 2
   BackGround: 
   HealthAtt: 4

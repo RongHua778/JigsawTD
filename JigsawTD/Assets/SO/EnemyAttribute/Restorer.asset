@@ -23,8 +23,8 @@ MonoBehaviour:
   IsBoss: 0
   InitCount: 2
   CountIncrease: 2
-  Health: 26
-  Speed: 0.7
+  Health: 35
+  Speed: 0.8
   CoolDown: 0.85
   BackGround: 
   HealthAtt: 2

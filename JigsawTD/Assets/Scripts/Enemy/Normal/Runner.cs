@@ -20,7 +20,7 @@ public class Runner : Enemy
             }
             else
             {
-                speedIncreased = 1.5f;
+                speedIncreased = 2f;
             }
         }
     }

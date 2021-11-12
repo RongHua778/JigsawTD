@@ -25,7 +25,7 @@ public class GoldKeeper : Boss
     private void GainMoney()
     {
         LifeCount++;
-        StaticData.Instance.GainMoneyEffect((Vector2)model.position, Mathf.RoundToInt(GameRes.CurrentWave * 1.5f));
+        StaticData.Instance.GainMoneyEffect((Vector2)model.position,Mathf.Min(30, Mathf.RoundToInt(GameRes.CurrentWave)));
     }
 
     protected override void OnDie()

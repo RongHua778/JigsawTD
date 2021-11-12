@@ -7,7 +7,14 @@ using UnityEngine.UI;
 
 public class ShapeSelectUI : IUserInterface//控制形状生成
 {
+    private Animator m_Anim;
     [SerializeField] TileSelect[] tileSelects = default;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        m_Anim = this.GetComponent<Animator>();
+    }
     public void ShowThreeShapes()
     {
         Show();
@@ -31,5 +38,10 @@ public class ShapeSelectUI : IUserInterface//控制形状生成
         Hide();
     }
 
+    public override void Show()
+    {
+        base.Show();
+        m_Anim.SetTrigger("Show");
+    }
 
 }

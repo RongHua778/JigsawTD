@@ -62,7 +62,7 @@ public class SplashSpeed : ElementSkill
 
     public override void Shoot(Bullet bullet = null)
     {
-        strategy.TurnFixSputteringRange += 0.02f * strategy.TimeModify;
+        strategy.TurnFixSplashRange += 0.02f * strategy.TimeModify;
     }
 
 
