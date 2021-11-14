@@ -17,6 +17,8 @@ MonoBehaviour:
   Icon: {fileID: -302460881117483773, guid: 848bbae097f55734ab0a02c063fd3e70, type: 3}
   Description: ESKILL
   Prefab: {fileID: 900867221070031195, guid: 8574fb7c958d9084199e76f94ed13f80, type: 3}
+  isLock: 0
+  initialLock: 0
   StrategyType: 0
   RangeType: 0
   element: 4
@@ -33,7 +35,7 @@ MonoBehaviour:
     ForbidRange: 0
     AttackDamage: 60
     AttackSpeed: 0.55
-    SputteringRange: 0.3
+    SplashRange: 0.25
     CriticalRate: 0
     SlowRate: 0
     TurretIcon: {fileID: -6036163202154314397, guid: 848bbae097f55734ab0a02c063fd3e70, type: 3}
@@ -43,7 +45,7 @@ MonoBehaviour:
     ForbidRange: 0
     AttackDamage: 85
     AttackSpeed: 0.55
-    SputteringRange: 0.35
+    SplashRange: 0.3
     CriticalRate: 0
     SlowRate: 0
     TurretIcon: {fileID: -5104728489556445294, guid: 848bbae097f55734ab0a02c063fd3e70, type: 3}
@@ -53,7 +55,7 @@ MonoBehaviour:
     ForbidRange: 0
     AttackDamage: 120
     AttackSpeed: 0.55
-    SputteringRange: 0.4
+    SplashRange: 0.35
     CriticalRate: 0
     SlowRate: 0
     TurretIcon: {fileID: 2768713202220553346, guid: 848bbae097f55734ab0a02c063fd3e70, type: 3}
@@ -63,7 +65,7 @@ MonoBehaviour:
     ForbidRange: 0
     AttackDamage: 180
     AttackSpeed: 0.55
-    SputteringRange: 0.45
+    SplashRange: 0.4
     CriticalRate: 0
     SlowRate: 0
     TurretIcon: {fileID: 3239631297230032197, guid: 848bbae097f55734ab0a02c063fd3e70, type: 3}
@@ -73,7 +75,7 @@ MonoBehaviour:
     ForbidRange: 0
     AttackDamage: 280
     AttackSpeed: 0.55
-    SputteringRange: 0.5
+    SplashRange: 0.5
     CriticalRate: 0
     SlowRate: 0
     TurretIcon: {fileID: -302460881117483773, guid: 848bbae097f55734ab0a02c063fd3e70, type: 3}

@@ -16,7 +16,7 @@ MonoBehaviour:
   Difficulty: 99
   PlayerHealth: 15
   Wave: 500
-  LevelIntensify: 2.75
+  LevelIntensify: 2
   NormalEnemies:
   - {fileID: 11400000, guid: a2fa830bad8e11c448623ce28354a1bd, type: 2}
   - {fileID: 11400000, guid: a6b4f2578a98cf54caf0ac3718b54059, type: 2}

@@ -23,9 +23,9 @@ MonoBehaviour:
   IsBoss: 1
   InitCount: 5
   CountIncrease: 0
-  Health: 65
-  Speed: 0.8
-  CoolDown: 1
+  Health: 60
+  Speed: 0.7
+  CoolDown: 2
   BackGround: 
   HealthAtt: 3
   SpeedAtt: 1

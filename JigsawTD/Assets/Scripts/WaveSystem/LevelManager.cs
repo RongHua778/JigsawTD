@@ -11,6 +11,7 @@ public class GameLevelInfo
 
 public class LevelManager : Singleton<LevelManager>
 {
+    public bool UnlockAll;
     public GameLevelInfo[] GameLevels = default;
 
     private int gameLevel = 0;
@@ -70,6 +71,14 @@ public class LevelManager : Singleton<LevelManager>
     {
         GameLevel = save.GameLevel;
         GameExp = save.GameExp;
+        if (UnlockAll)//解锁全内容
+        {
+            foreach (var item in AllContent)
+            {
+                item.isLock = false;
+            }
+            return;
+        }
         foreach (var item in AllContent)//根据存档解锁内容，如果不包含新内容，则默认锁定
         {
             if (save.UnlockInfoDIC.ContainsKey(item.Name))
@@ -108,6 +117,14 @@ public class LevelManager : Singleton<LevelManager>
     {
         GameLevel = 0;
         GameExp = 0;
+        if (UnlockAll)//解锁全内容
+        {
+            foreach (var item in AllContent)
+            {
+                item.isLock = false;
+            }
+            return;
+        }
         foreach (var content in AllContent)
         {
             content.isLock = content.initialLock;

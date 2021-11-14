@@ -19,7 +19,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     RangeHolder m_RangeHolder;
 
     private float nextAttackTime;
-    private Quaternion look_Rotation;
+    protected Quaternion look_Rotation;
 
 
     protected RangeType RangeType;
@@ -226,7 +226,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         rotTrans.rotation = Quaternion.LerpUnclamped(rotTrans.rotation, look_Rotation, Strategy.RotSpeed * Time.deltaTime);
     }
 
-    protected bool AngleCheck()
+    protected virtual bool AngleCheck()
     {
         var angleCheck = Quaternion.Angle(rotTrans.rotation, look_Rotation);
         if (angleCheck < Strategy.CheckAngle)
@@ -238,7 +238,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
 
     protected virtual void FireProjectile()
     {
-        if (Time.time - nextAttackTime > 1 / Strategy.FinalSpeed)
+        if (Time.time - nextAttackTime > 1 / Strategy.FinalFireRate)
         {
             if (Target != null && AngleCheck())
             {

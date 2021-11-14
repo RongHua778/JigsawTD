@@ -24,12 +24,12 @@ public class MultiTarget : ElementSkill
 }
 public class AttackSpeed : ElementSkill
 {
-    //每回合每次攻击提升5%攻击力
+    //每回合每次攻击提升2%攻击力
     public override List<int> Elements => new List<int> { 1, 1, 0 };
 
     public override void Shoot(Bullet bullet = null)
     {
-        strategy.TurnAttackIntensify += 0.05f * strategy.TimeModify;
+        strategy.TurnAttackIntensify += 0.02f * strategy.TimeModify;
     }
 }
 
@@ -39,30 +39,30 @@ public class SlowSpeed : ElementSkill
     public override List<int> Elements => new List<int> { 1, 1, 2 };
     public override void Shoot(Bullet bullet = null)
     {
-        strategy.TurnFixSlowRate += 0.08f * strategy.TimeModify;
+        strategy.TurnFixSlowRate += 0.02f * strategy.TimeModify;
     }
 
 }
 
 public class CriticalSpeed : ElementSkill
 {
-    //每次攻击提升本回合3%暴击率
+    //每次攻击提升本回合1%暴击率
     public override List<int> Elements => new List<int> { 1, 1, 3 };
 
     public override void Shoot(Bullet bullet = null)
     {
-        strategy.TurnFixCriticalRate += 0.03f * strategy.TimeModify;
+        strategy.TurnFixCriticalRate += 0.01f * strategy.TimeModify;
     }
 }
 
 public class SplashSpeed : ElementSkill
 {
-    //每回合每次攻击提升0.02溅射
+    //每回合每次攻击提升0.01溅射
     public override List<int> Elements => new List<int> { 1, 1, 4 };
 
     public override void Shoot(Bullet bullet = null)
     {
-        strategy.TurnFixSplashRange += 0.02f * strategy.TimeModify;
+        strategy.TurnFixSplashRange += 0.01f * strategy.TimeModify;
     }
 
 

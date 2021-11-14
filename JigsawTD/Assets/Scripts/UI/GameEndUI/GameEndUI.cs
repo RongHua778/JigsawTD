@@ -44,8 +44,8 @@ public class GameEndUI : IUserInterface
 
         if (LevelManager.Instance.CurrentLevel.IsEndless)//无尽模式
         {
-            title.text = GameMultiLang.GetTraduction("WIN") + GameRes.CurrentWave + GameMultiLang.GetTraduction("WAVE");
-            LevelManager.Instance.EndlessHighScore = GameRes.CurrentWave;
+            title.text = GameMultiLang.GetTraduction("WIN") + (GameRes.CurrentWave - 1) + GameMultiLang.GetTraduction("WAVE");
+            LevelManager.Instance.EndlessHighScore = GameRes.CurrentWave - 1;
         }
         else//标准模式
         {

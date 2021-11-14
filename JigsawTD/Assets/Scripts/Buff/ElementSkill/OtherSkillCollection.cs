@@ -116,12 +116,14 @@ public class RandomSkill : ElementSkill
 
 public class FreeGround : ElementSkill
 {
-    //¹¥»÷·¶Î§+1
+    //¹¥ËÙ½µµÍ30%£¬¹¥»÷¾àÀë+2
     public override List<int> Elements => new List<int> { 1, 2, 3 };
+
     public override void Build()
     {
         base.Build();
-        strategy.ComRangeIntensify += 1;
+        strategy.ComRangeIntensify += 2;
+        strategy.ComSpeedIntensify -= 0.3f;
     }
 
     public override void OnEquip()
@@ -188,7 +190,7 @@ public class PortalHit : ElementSkill
 
     public override void Hit(IDamageable target, Bullet bullet = null)
     {
-        if (Random.value > 0.95f)
+        if (Random.value > 0.92f)
             //((Enemy)target).Flash(2);
             StaticData.Instance.GainMoneyEffect(((Enemy)target).transform.position, 2);
     }

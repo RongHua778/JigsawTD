@@ -214,14 +214,14 @@ ESKILL=Attacks deal splash area damage.
 
 CONSTRUCTORSKILL=Attack increased by 10% for each enemy in range.
 SCATTERSKILL=Deals 50% less damage, but can attack an additional 3 targets.
-MORTARSKILL=Bullet's splash damage increased by 150%.
+MORTARSKILL=Splash damage increased by 15% for every 0.1 splash range.
 RAPIDERSKILL=Firerate increased by 15% each shoot when it is attacking the same target(up to 300%).
-ROTARYSKILL=Penetration Bullet; Randomly shoot around and double all firerate increased.
-SNIPERSKILL=Bullet's damage increased by 10% for each meter it travelled
+ROTARYSKILL=Penetration Bullet can't splash; Randomly shoot around and double all firerate increased.
+SNIPERSKILL=Bullet's damage increased by 20% for each meter it travelled
 ULTRASKILL=Double the increased critical damage.
-SNOWSKILL=Penetration Bullet;Bullet will double enemy's current slow.
-COOPORATIVESKILL=Attack increased by 1% * the amount of refacotor turrets each shoot.
-BOOMERRANGSKILL=Penetration Bullet;Can not increase firerate; Bullet damage will increase by 10% for each enemy it hit.
+SNOWSKILL=Penetration Bullet can't splash;Bullet will double enemy's current slow.
+COOPORATIVESKILL=Attack increased by 2% * the amount of "Cooporative" each shoot.
+BOOMERRANGSKILL=Penetration Bullet can't splash;Bullet damage will increase by 10% for each enemy it hit.
 SUPERSKILL=Double all current stats after 30s of each wave
 CORESKILL=At the start of each wave, it's attack will become 50%/75%/100% of the sum of adjacent turrets.
 
@@ -242,13 +242,13 @@ AAEINFO=Splash range increased by 0.6 when target's distance is less than 3
 BBB=Lightweight Material
 BBBINFO=Bullet's damage is reduced by 35% but attacks 2 additional targets
 BBA=Charged Bullet
-BBAINFO=Attack increased by 5% each shoot.
+BBAINFO=Attack increased by 2% each shoot.
 BBC=Cold Bullet
-BBCINFO=Slow increased by 5% each shoot.
+BBCINFO=Slow increased by 0.02 each shoot.
 BBD=Concussive Shot
-BBDINFO=Critical increased by 3% each shoot.
+BBDINFO=Critical increased by 1% each shoot.
 BBE=Ammunition
-BBEINFO=Splash range increased by 0.02 each shoot.
+BBEINFO=Splash range increased by 0.01 each shoot.
 
 //C系
 CCC=Forst Technology
@@ -276,7 +276,7 @@ DDEINFO=Turret's splash fluctuates between 25% and 250%
 
 //E系
 EEE=Atomic Center
-EEEINFO=Splash damage increased by 8% for every 0.1 splash range.
+EEEINFO=Double all stats increased before 20 seconds of each wave
 EEA=Attack Core
 EEAINFO=Turret's attack increased by 100% before 20 seconds of each wave
 EEB=Speed Core

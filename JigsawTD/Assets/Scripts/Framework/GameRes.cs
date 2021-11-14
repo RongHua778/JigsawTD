@@ -48,6 +48,7 @@ public static class GameRes
     public static DateTime LevelStart;
     public static DateTime LevelEnd;
     public static int TotalRefactor = 0;
+    public static int TotalCooporative = 0;
     public static int TotalDamage = 0;
     private static int maxPath = 0;
     public static int MaxPath { get => maxPath; set { maxPath = value > maxPath ? value : maxPath; } }
@@ -180,6 +181,7 @@ public static class GameRes
 
         LevelStart = DateTime.Now;
         TotalRefactor = 0;
+        TotalCooporative = 0;
         TotalDamage = 0;
         MaxPath = 0;
         MaxMark = 0;

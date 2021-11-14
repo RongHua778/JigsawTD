@@ -17,7 +17,7 @@ MonoBehaviour:
   Icon: {fileID: 1974467737375703195, guid: 650ade1de42820843ab504b46ce30229, type: 3}
   Description: SNOWSKILL
   Prefab: {fileID: 3184344065496086193, guid: ec76f05b1efa1874b8faa449cea6300a, type: 3}
-  isLock: 1
+  isLock: 0
   initialLock: 1
   StrategyType: 1
   RangeType: 2
@@ -31,31 +31,31 @@ MonoBehaviour:
   maxElementLevel: 4
   TurretSkill: 7
   TurretLevels:
-  - AttackRange: 3
+  - AttackRange: 4
     ForbidRange: 0
     AttackDamage: 700
-    AttackSpeed: 0.25
-    SputteringRange: 0
+    AttackSpeed: 0.3
+    SplashRange: 0
     CriticalRate: 0
     SlowRate: 0.3
     TurretIcon: {fileID: -2498145647754195257, guid: 650ade1de42820843ab504b46ce30229, type: 3}
     CannonSprite: {fileID: -264787257917623472, guid: bde35e3e9a4d90044ab007465a63e442, type: 3}
     ShootPointOffset: {x: 0, y: 0.21}
-  - AttackRange: 3
+  - AttackRange: 4
     ForbidRange: 0
     AttackDamage: 1000
-    AttackSpeed: 0.25
-    SputteringRange: 0
+    AttackSpeed: 0.3
+    SplashRange: 0
     CriticalRate: 0
     SlowRate: 0.35
     TurretIcon: {fileID: 5414056219789662719, guid: 650ade1de42820843ab504b46ce30229, type: 3}
     CannonSprite: {fileID: -1221509669150334452, guid: bde35e3e9a4d90044ab007465a63e442, type: 3}
     ShootPointOffset: {x: 0, y: 0.23}
-  - AttackRange: 3
+  - AttackRange: 4
     ForbidRange: 0
     AttackDamage: 1400
-    AttackSpeed: 0.25
-    SputteringRange: 0
+    AttackSpeed: 0.3
+    SplashRange: 0
     CriticalRate: 0
     SlowRate: 0.4
     TurretIcon: {fileID: 1974467737375703195, guid: 650ade1de42820843ab504b46ce30229, type: 3}

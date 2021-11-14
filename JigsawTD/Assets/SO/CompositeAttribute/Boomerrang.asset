@@ -17,10 +17,10 @@ MonoBehaviour:
   Icon: {fileID: -5153134150779752020, guid: a799722f85e58a34993e12144292e1a9, type: 3}
   Description: BOOMERRANGSKILL
   Prefab: {fileID: 5634142968415057810, guid: f48e2d78274808848bf0c98accb78f83, type: 3}
-  isLock: 1
+  isLock: 0
   initialLock: 1
   StrategyType: 1
-  RangeType: 0
+  RangeType: 2
   element: 0
   Bullet: {fileID: 3228400359097999329, guid: 8cff4d87089bb6d43bd9304c1e2efd03, type: 3}
   BulletSpeed: 6
@@ -33,8 +33,8 @@ MonoBehaviour:
   TurretLevels:
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 300
-    AttackSpeed: 0.2
+    AttackDamage: 550
+    AttackSpeed: 0.15
     SplashRange: 0
     CriticalRate: 0
     SlowRate: 0
@@ -43,8 +43,8 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 450
-    AttackSpeed: 0.2
+    AttackDamage: 800
+    AttackSpeed: 0.15
     SplashRange: 0
     CriticalRate: 0
     SlowRate: 0
@@ -53,8 +53,8 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 700
-    AttackSpeed: 0.2
+    AttackDamage: 1200
+    AttackSpeed: 0.15
     SplashRange: 0
     CriticalRate: 0
     SlowRate: 0

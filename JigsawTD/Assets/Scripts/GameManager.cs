@@ -47,6 +47,8 @@ public class GameManager : Singleton<GameManager>
     private BuildingState buildingState;
     private PickingState pickingState;
     private WaveState waveState;
+    private EndState endState;
+    private WonState wonState;
 
     //初始化设定
     public void Initinal()
@@ -85,6 +87,8 @@ public class GameManager : Singleton<GameManager>
         buildingState = new BuildingState(this, m_BoardSystem);
         waveState = new WaveState(this, m_WaveSystem, m_BoardSystem);
         pickingState = new PickingState(this);
+        endState = new EndState(this);
+        wonState = new WonState(this);
 
         //开局准备下一波
         PrepareNextWave();
@@ -198,10 +202,12 @@ public class GameManager : Singleton<GameManager>
     {
         if (GameRes.Life <= 0)//游戏失败
         {
+            TransitionToState(StateName.LoseState);
             return;
         }
         if (GameRes.CurrentWave >= LevelManager.Instance.CurrentLevel.Wave)
         {
+            TransitionToState(StateName.WonState);
             GameEnd(true);
             return;
         }
@@ -235,8 +241,10 @@ public class GameManager : Singleton<GameManager>
                 state = pickingState;
                 break;
             case StateName.WonState:
+                state = wonState;
                 break;
             case StateName.LoseState:
+                state = endState;
                 break;
         }
         if (operationState == null)
@@ -384,7 +392,7 @@ public class GameManager : Singleton<GameManager>
             ShowMessage(GameMultiLang.GetTraduction("PUTFIRST"));
             return;
         }
-        if (operationState.StateName == StateName.WaveState)
+        if (operationState.StateName != StateName.BuildingState)
         {
             ShowMessage(GameMultiLang.GetTraduction("NOTBUILDSTATE"));
             return;

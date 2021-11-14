@@ -85,7 +85,7 @@ public abstract class Enemy : PathFollower, IDamageable
         this.DamageStrategy.ResetStrategy(Mathf.RoundToInt(attribute.Health * intensify));//Çå³ý¼Ó³É
         this.speed = attribute.Speed;
         this.ReachDamage = attribute.ReachDamage;
-        this.SlowResist = GameRes.CurrentWave / (GameRes.CurrentWave + 20);
+        this.SlowResist = GameRes.CurrentWave / (GameRes.CurrentWave + 10);
         SpawnOn(pathIndex, BoardSystem.shortestPoints);
 
     }
@@ -223,7 +223,11 @@ public abstract class Enemy : PathFollower, IDamageable
         Progress = 0f;
         Adjust = 2f;
         ProgressFactor = Adjust * Speed;
+        anim.Play("Default");
+        anim.SetTrigger("Enter");
     }
+
+
 
     public void ApplyBuff(EnemyBuffName buffName, float keyvalue, float duration)
     {

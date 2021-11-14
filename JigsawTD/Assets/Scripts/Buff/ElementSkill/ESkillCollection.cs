@@ -6,10 +6,22 @@ public class LateIntensify : ElementSkill
     //子弹每有0.1溅射范围，就使溅射伤害提高8%
     public override List<int> Elements => new List<int> { 4, 4, 4 };
 
-    public override void Shoot(Bullet bullet = null)
+    public override void StartTurn()
     {
-        base.Shoot(bullet);
-        bullet.SplashPercentage += bullet.SputteringRange * 0.08f;
+        base.StartTurn();
+        Duration += 20;
+    }
+    public override void TickEnd()
+    {
+        base.TickEnd();
+        strategy.TimeModify = 1;
+    }
+
+    public override void EndTurn()
+    {
+        base.EndTurn();
+        Duration = 0;
+        strategy.TimeModify = 2;
     }
 
 }

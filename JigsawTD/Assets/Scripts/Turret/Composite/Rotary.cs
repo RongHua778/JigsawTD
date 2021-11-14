@@ -5,7 +5,7 @@ using UnityEngine;
 public class Rotary : CompositeTurret
 {
     float rotSpeed = 0;
-    float RotSpeed { get => Mathf.Max(-720, -rotSpeed * Mathf.Pow(Strategy.FinalSpeed, 2)); set => rotSpeed = value; }
+    float RotSpeed { get => Mathf.Max(-720, -rotSpeed * Mathf.Pow(Strategy.FinalFireRate, 2)); set => rotSpeed = value; }
 
     public override void InitializeTurret()
     {

@@ -19190,7 +19190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
   model: {fileID: 7619665209501119904}
-  armorIntensify: 40
+  armorIntensify: 35
 --- !u!1 &8360252054385358165
 GameObject:
   m_ObjectHideFlags: 0
@@ -19325,7 +19325,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.2
 --- !u!114 &6941142978531091582
 MonoBehaviour:
   m_ObjectHideFlags: 0

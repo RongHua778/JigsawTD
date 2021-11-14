@@ -22,8 +22,8 @@ MonoBehaviour:
   EnemyType: 0
   IsBoss: 0
   InitCount: 2
-  CountIncrease: 6
-  Health: 15
+  CountIncrease: 5
+  Health: 13
   Speed: 1.2
   CoolDown: 0.3
   BackGround: 

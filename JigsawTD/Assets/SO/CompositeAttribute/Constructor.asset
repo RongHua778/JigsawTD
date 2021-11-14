@@ -17,6 +17,8 @@ MonoBehaviour:
   Icon: {fileID: 5061518847745216781, guid: d9ef5bc7f2e68154eb1935bcb8c3c85e, type: 3}
   Description: CONSTRUCTORSKILL
   Prefab: {fileID: 7540347977943103148, guid: d914d163b81634f4c893b72c05177560, type: 3}
+  isLock: 0
+  initialLock: 0
   StrategyType: 1
   RangeType: 0
   element: 0
@@ -31,9 +33,9 @@ MonoBehaviour:
   TurretLevels:
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 85
+    AttackDamage: 100
     AttackSpeed: 0.8
-    SputteringRange: 0
+    SplashRange: 0
     CriticalRate: 0
     SlowRate: 0
     TurretIcon: {fileID: 6058281127652968510, guid: d9ef5bc7f2e68154eb1935bcb8c3c85e, type: 3}
@@ -41,9 +43,9 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.4}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 130
+    AttackDamage: 150
     AttackSpeed: 0.8
-    SputteringRange: 0
+    SplashRange: 0
     CriticalRate: 0
     SlowRate: 0
     TurretIcon: {fileID: 1138143217412330110, guid: d9ef5bc7f2e68154eb1935bcb8c3c85e, type: 3}
@@ -51,9 +53,9 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.44}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 200
+    AttackDamage: 225
     AttackSpeed: 0.8
-    SputteringRange: 0
+    SplashRange: 0
     CriticalRate: 0
     SlowRate: 0
     TurretIcon: {fileID: 5061518847745216781, guid: d9ef5bc7f2e68154eb1935bcb8c3c85e, type: 3}

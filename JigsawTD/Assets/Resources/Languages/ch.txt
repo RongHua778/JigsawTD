@@ -99,7 +99,7 @@ UNPASS=请先通过上一难度
 PLACERULE=摆放模块
 PLANROUTE=规划路线
 COMPOSITERULE=合成规则
-TRAPRULE=战场标记
+TRAPRULE=战场陷阱
 EQUIPRULE=重构技能
 GUIDEVIDEO01=每个模块由三格基本格和一格防御塔组成。放置模块时需要确保起点和终点之间能够通过基本格相连，而防御塔可以作为障碍。
 GUIDEVIDEO02=注意：防御塔只可以放置在空格或基本格上，而基本格可以放置在任何位置。
@@ -107,8 +107,8 @@ GUIDEVIDEO03=当希望延长路线时，需要提前在规划好的路线上摆�
 GUIDEVIDEO04=提示：点击空白位置也可以花费代币购买单格地板。
 GUIDEVIDEO05=当凑齐配方所需的素材时，可以合成防御塔，并根据组合不同带有不同的效果。
 GUIDEVIDEO06=提示：商店每3回合刷新一次配方，购买配方可以增加合成的机会。
-GUIDEVIDEO07=通过将道路经过战场上随机出现的标记格子，将会揭示该标记，每个标记在敌人经过时会触发特殊效果。
-GUIDEVIDEO08=提示：你可以花费一定代币将标记格子换到其他位置
+GUIDEVIDEO07=通过将道路经过战场上随机出现的陷阱格子，将会揭示该陷阱，每个陷阱在敌人经过时会触发特殊效果。
+GUIDEVIDEO08=提示：你可以花费一定代币将陷阱格子换到其他位置
 GUIDEVIDEO09=每个合成重构塔根据其元素组合会有不同的重构技能，每个重构塔都默认带有1个元素技能。你可以将新重构塔放置在已重构塔上，使其具备额外的元素技能，但这么做会消耗新重构塔。
 GUIDEVIDEO10=提示：每个重构塔默认只可以再配备1个额外元素技能，视乎该重构塔的元素技能槽数量。
 
@@ -120,7 +120,7 @@ CHANCEBEFORE=当前
 CHANCEAFTER=升级后
 MODULELEVELINFO1=当前等级概率
 MODULELEVELINFO2=品质
-MODULELEVELINFO3=模块等级达到2,4,6级时，商店配方数+1
+MODULELEVELINFO3=系统等级达到2,4,6级时，商店配方数+1
 ENERGYINFO=1.当前回合没有抽取时，获得1点能量\n2.连续不抽取时，会获得额外能量\n3.能量每达到10点，获得1次额外抽取次数
 DEGRADE=降级
 
@@ -213,16 +213,16 @@ ESKILL=子弹造成溅射范围伤害
 
 CONSTRUCTORSKILL=攻击范围内每有1个敌人，攻击力就提高10%
 SCATTERSKILL=造成的伤害降低50%，但是可以额外攻击3个目标
-MORTARSKILL=溅射伤害率提高150%
+MORTARSKILL=子弹每有0.1溅射范围就提高15%溅射伤害
 RAPIDERSKILL=对同一目标进行攻击时，每次攻击使攻速提升20%，上限200%
-ROTARYSKILL=穿透型子弹;向周围随机攻击，自身所有攻速加成翻倍
-SNIPERSKILL=子弹伤害随飞行距离提升15%/格
+ROTARYSKILL=穿透子弹，不可溅射;向周围随机攻击，自身所有攻速加成翻倍
+SNIPERSKILL=子弹伤害随飞行距离提升20%/格
 ULTRASKILL=所有暴击伤害提升效果翻倍
-SNOWSKILL=穿透型子弹;子弹会使敌人当前减速效果翻倍。
-COOPORATIVESKILL=每次攻击提升1%*总合成塔数量的攻击力
-BOOMERRANGSKILL=穿透型子弹；无法提升攻速；发射一枚回旋镖，每命中一个敌人就使后续伤害提高10%
+SNOWSKILL=穿透子弹，不可溅射;子弹会使敌人当前减速效果翻倍。
+COOPORATIVESKILL=每次攻击提升2%*总协同塔数量的攻击力
+BOOMERRANGSKILL=穿透子弹，不可溅射；发射一枚回旋镖，每命中一个敌人就使后续伤害提高10%
 SUPERSKILL=每回合开始30秒后，使当前所有属性值翻倍
-CORESKILL=回合开始时，攻击力变为相邻防御塔的攻击力之和的50%/75%/100%（随合成塔等级提升）
+CORESKILL=回合开始时，攻击力变为相邻防御塔的攻击力之和的50%/75%/100%（随等级提升）
 
 //A系
 AAA=重金属化
@@ -240,13 +240,13 @@ AAEINFO=攻击距离小于3的目标时，子弹溅射范围提高0.6
 BBB=轻材料化
 BBBINFO=造成的伤害减少35%，额外攻击2个目标
 BBA=充能子弹
-BBAINFO=每次攻击提升本回合5%攻击力
+BBAINFO=每次攻击提升本回合2%攻击力
 BBC=极寒子弹
-BBCINFO=每次攻击提升本回合0.08减速
+BBCINFO=每次攻击提升本回合0.02减速
 BBD=震荡射击
-BBDINFO=每次攻击提升本回合3%暴击率
+BBDINFO=每次攻击提升本回合1%暴击率
 BBE=加重弹药
-BBEINFO=每次攻击提升本回合0.02溅射范围
+BBEINFO=每次攻击提升本回合0.01溅射范围
 
 
 //C系
@@ -277,7 +277,7 @@ DDEINFO=防御塔溅射在25%-250%之间随机浮动
 
 //E系
 EEE=原子中心
-EEEINFO=子弹每有0.1溅射范围，就使溅射伤害提高8%
+EEEINFO=战斗开始前20秒发生的所有属性提升提高100%
 EEA=强攻核心
 EEAINFO=战斗开始前20秒，攻击力提升100%
 EEB=加速核心
@@ -293,22 +293,22 @@ ABCINFO=该防御塔升级费用-50%
 ABD=环状插件
 ABDINFO=使防御塔攻击范围变为圆形
 ABE=免费奖券
-ABEINFO=合成后使构建模块价格降低50%
+ABEINFO=使模块构建费用-50%
 
 ACD=快速交易
-ACDINFO=使交换标记的价格降低50%
+ACDINFO=使交换陷阱费用-50%
 ACE=科技跃进
-ACEINFO=使模块升级费用-50%
+ACEINFO=使系统升级费用-50%
 ADE=幻化构造
 ADEINFO=重构后变化为一个随机技能
 BCD=加长炮管
-BCDINFO=防御塔攻击范围+1
+BCDINFO=防御塔攻击速度-30%，攻击范围+2
 BCE=万能元素
 BCEINFO=重构后获得1个万能元素
 BDE=维修工厂
 BDEINFO=相邻标记的效果提升100%
 CDE=铸币工厂
-CDEINFO=每次攻击有5%概率获得2金币
+CDEINFO=每次攻击有8%概率获得2金币
 
 //Enemy
 SOILDER=鬣狗
@@ -347,23 +347,23 @@ HAMSTERINFO=共有5个仓鼠，每个仓鼠自带75%的伤害减免，每个仓�
 AIRCRAFTINFO=携带一定数量的僚机，僚机会对防御塔进行霜冻打击，使其暂时失去攻击能力
 
 //Trap
-UNREVEAL=未揭示信号
-UNREVEALINFO=将该地块连接进道路以揭示该信号，敌人在经过时会触发特殊负面效果
+UNREVEAL=未揭示陷阱
+UNREVEALINFO=将该地块连接进道路以揭示该陷阱，敌人在经过时会触发特殊负面效果
 
 SPAWNPOINT=起点
 DESTINATION=终点
 
-STUNTRAP=晕眩标记
+STUNTRAP=晕眩陷阱
 ICETRAP=极寒陷标记
-ARROWTRAP=减速箭头
-BLINKTRAP=闪烁标记
-PROMOTETRAP=强化标记
-IMITATETRAP=复制标记
-EXECUTETRAP=处决标记
-DAMAGEMARK=伤害标记
-FROSTTRAP=冰冻标记
-BONUSTRAP=铸币标记
-EXPLOSIONTRAP=爆炸标记
+ARROWTRAP=减速陷阱
+BLINKTRAP=闪烁陷阱
+PROMOTETRAP=强化陷阱
+IMITATETRAP=复制陷阱
+EXECUTETRAP=处决陷阱
+DAMAGEMARK=伤害陷阱
+FROSTTRAP=冰冻陷阱
+BONUSTRAP=铸币陷阱
+EXPLOSIONTRAP=爆炸陷阱
 
 SPAWNPOINTINFO=敌人的出生点，确保有路线与终点相连。
 DESTINATIONINFO=敌人的目的地，确保有路线与起点相连。
@@ -436,13 +436,13 @@ Guide221=现在,<color=#FFEA6D>点击重构按钮并将其部署在战场上.</c
 Guide332=注意,每个重构塔有<color=#FFEA6D>2个元素技能槽,如果将两个重构塔重叠部署,则会让原重构塔获得额外的元素技能.</color>
 Guide33=合理分配重构塔和元素技能,是提升战斗力的关键,现在直接开始下一波战斗吧.
 //13
-Guide34=最后我将介绍模块等级系统.
-Guide35=抽取模块按钮上方显示了你的当前<color=#FFEA6D>模块等级</color>和其<color=#FFEA6D>升级所需的代币</color>.
-Guide36=<color=#FFEA6D>升级模块可以提高构建元素塔的品质,以及在重构商店刷出新的高级配方.</color>.
+Guide34=最后我将介绍系统等级.
+Guide35=抽取模块按钮上方显示了你的当前<color=#FFEA6D>系统等级</color>和其<color=#FFEA6D>升级所需的代币</color>.
+Guide36=<color=#FFEA6D>升级系统可以提高构建元素塔的品质,以及在重构商店刷出新的高级配方.</color>.
 Guide37=你不需要在每回合都进行构建,<color=#FFEA6D>如果你在本回合没有进行构建,则会使构建价格降低10%</color>.
 Guide38=现在的防御力量充足,请直接开始下一波战斗吧.
 //14
-Guide39=将你的代币灵活投入在抽取模块,升级模块,或升级重构塔上,以获取最大收益.
+Guide39=将你的代币灵活投入在抽取模块,升级系统,或升级重构塔上,以获取最大收益.
 Guide40=<color=#FFEA6D>我把更多指引的内容放在了左上角的指引面板里</color>,请在任何时候查看.
 Guide41=<color=#FFEA6D>请坚持15波进攻</color>,完成这一次教程.
 
@@ -466,7 +466,7 @@ Temp15=AI正在预测部署官的行动...1%离开战场...2%喝杯咖啡...97%�
 
 //刷新商店
 Temp20=据说刷新的数值关乎胜利概率?很抱歉,硅基生命信仰的量子力学中没有关于概率的概念.
-Temp21=似乎人类很信仰"概率"?以至于氪金抽卡成为一种文明?
+Temp21=似乎人类很信仰"概率"?以至于抽卡成为一种文明?
 Temp22=已知单次刷新数据的极限为1兆亿次,指挥官是否准备挑战一下?
 Temp23=我有关于治疗关节炎的全套治疗方法,指挥官不必顾虑.
 

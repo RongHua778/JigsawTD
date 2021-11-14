@@ -17,14 +17,14 @@ MonoBehaviour:
   Icon: {fileID: 1144527560970191391, guid: 2138c8f635a68044d8b153780571587c, type: 3}
   Description: ICEBALLINFO
   Prefab: {fileID: 442356482146141927, guid: ad04705b9ca3b3740a02c5c4f3e0eae0, type: 3}
-  isLock: 1
+  isLock: 0
   initialLock: 1
   EnemyType: 11
   IsBoss: 1
   InitCount: 1
   CountIncrease: 0
   Health: 250
-  Speed: 0.7
+  Speed: 0.6
   CoolDown: 1
   BackGround: 
   HealthAtt: 4

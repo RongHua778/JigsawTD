@@ -17,6 +17,8 @@ MonoBehaviour:
   Icon: {fileID: 5015630989428296150, guid: 170dc2e643d4d3d46bc6b1fdd1cd28d0, type: 3}
   Description: BSKILL
   Prefab: {fileID: 3830102932677347064, guid: 24c7518827485fc418d3132bf749252c, type: 3}
+  isLock: 0
+  initialLock: 0
   StrategyType: 0
   RangeType: 2
   element: 1
@@ -31,9 +33,9 @@ MonoBehaviour:
   TurretLevels:
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 10
+    AttackDamage: 12
     AttackSpeed: 8
-    SputteringRange: 0
+    SplashRange: 0
     CriticalRate: 0
     SlowRate: 0
     TurretIcon: {fileID: 2571443558420675432, guid: 170dc2e643d4d3d46bc6b1fdd1cd28d0, type: 3}
@@ -41,9 +43,9 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.35}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 14
+    AttackDamage: 18
     AttackSpeed: 8
-    SputteringRange: 0
+    SplashRange: 0
     CriticalRate: 0
     SlowRate: 0
     TurretIcon: {fileID: 8134750897822888972, guid: 170dc2e643d4d3d46bc6b1fdd1cd28d0, type: 3}
@@ -51,9 +53,9 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.35}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 20
+    AttackDamage: 26
     AttackSpeed: 8
-    SputteringRange: 0
+    SplashRange: 0
     CriticalRate: 0
     SlowRate: 0
     TurretIcon: {fileID: -5162238023950050135, guid: 170dc2e643d4d3d46bc6b1fdd1cd28d0, type: 3}
@@ -61,9 +63,9 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.41}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 28
+    AttackDamage: 36
     AttackSpeed: 8
-    SputteringRange: 0
+    SplashRange: 0
     CriticalRate: 0
     SlowRate: 0
     TurretIcon: {fileID: -8749453646720632882, guid: 170dc2e643d4d3d46bc6b1fdd1cd28d0, type: 3}
@@ -71,9 +73,9 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.47}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 42
+    AttackDamage: 52
     AttackSpeed: 8
-    SputteringRange: 0
+    SplashRange: 0
     CriticalRate: 0
     SlowRate: 0
     TurretIcon: {fileID: 5015630989428296150, guid: 170dc2e643d4d3d46bc6b1fdd1cd28d0, type: 3}

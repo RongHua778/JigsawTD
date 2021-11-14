@@ -15,15 +15,7 @@ public class BuildingState : BattleOperationState
     {
         yield return new WaitForSeconds(0.1f);
         Sound.Instance.PlayBg("preparing");
-        //重置所有防御塔的回合临时加成
-        foreach (var turret in GameManager.Instance.elementTurrets.behaviors)
-        {
-            ((TurretContent)turret).Strategy.ClearTurnIntensify();
-        }
-        foreach (var turret in GameManager.Instance.compositeTurrets.behaviors)
-        {
-            ((TurretContent)turret).Strategy.ClearTurnIntensify();
-        }
+
         yield break;
     }
 

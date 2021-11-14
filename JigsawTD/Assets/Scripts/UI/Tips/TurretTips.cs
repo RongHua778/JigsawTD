@@ -259,7 +259,7 @@ public class TurretTips : TileTips
         AttackValue.text = m_Strategy.FinalAttack.ToString();
         AttackChangeTxt.text = "";
 
-        SpeedValue.text = m_Strategy.FinalSpeed.ToString();
+        SpeedValue.text = m_Strategy.FinalFireRate.ToString();
         SpeedChangeTxt.text = "";
 
         RangeValue.text = m_Strategy.FinalRange.ToString();
@@ -312,7 +312,7 @@ public class TurretTips : TileTips
         AttackChangeTxt.text = (attackIncrease > 0 ? "+" + attackIncrease : "");
 
         float speedIncrease = m_Strategy.NextSpeed - m_Strategy.BaseSpeed;
-        SpeedValue.text = m_Strategy.FinalSpeed.ToString();
+        SpeedValue.text = m_Strategy.FinalFireRate.ToString();
         SpeedChangeTxt.text = (speedIncrease > 0 ? "+" + speedIncrease : "");
 
         float criticalIncrease = m_Strategy.NextCriticalRate - m_Strategy.BaseCriticalRate;

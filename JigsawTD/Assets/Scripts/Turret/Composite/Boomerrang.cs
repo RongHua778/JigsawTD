@@ -6,17 +6,24 @@ using DG.Tweening;
 public class Boomerrang : CompositeTurret
 {
     float rotSpeed = -360;
+    private float flyTime;
+    public float FlyTime => 1.5f / (Strategy.FinalFireRate / 0.2f);
     float RotSpeed { get => rotSpeed; set => rotSpeed = value; }
     private SelfBullet cannonBullet;
 
-    public override void InitializeTurret()
-    {
-        base.InitializeTurret();
-        Strategy.CheckAngle = 360f;
-    }
     protected override void RotateTowards()
     {
 
+    }
+
+    protected override bool AngleCheck()//回旋镖必须360度确认
+    {
+        var angleCheck = Quaternion.Angle(rotTrans.rotation, look_Rotation);
+        if (angleCheck < 360f)
+        {
+            return true;
+        }
+        return false;
     }
 
     public override bool GameUpdate()
@@ -47,15 +54,25 @@ public class Boomerrang : CompositeTurret
     {
         cannonBullet.Initialize(this);
 
-        Vector2 dir = Target[0].transform.position - transform.position;
-        Vector2 pos = (Vector2)transform.position + dir.normalized * Strategy.FinalRange;
+        Vector2 dir;
+        Vector2 pos;
 
-        DOTween.To(() => RotSpeed, x => RotSpeed = x, -720, 1.5f).SetEase(Ease.OutCubic);
-        cannonBullet.transform.DOMove(pos, 1.5f).SetEase(Ease.OutCubic);
-        yield return new WaitForSeconds(1.5f);
-        DOTween.To(() => RotSpeed, x => RotSpeed = x, -360, 1.5f).SetEase(Ease.InCubic);
-        cannonBullet.transform.DOMove(transform.position, 1.5f).SetEase(Ease.InCubic);
-        yield return new WaitForSeconds(1.5f);
+        if (Strategy.RangeType == RangeType.Line)
+        {
+            pos = (Vector2)transform.position + (Vector2)transform.up * Strategy.FinalRange;
+        }
+        else
+        {
+            dir = Target[0].transform.position - transform.position;
+            pos = (Vector2)transform.position + dir.normalized * Strategy.FinalRange;
+        }
+
+        DOTween.To(() => RotSpeed, x => RotSpeed = x, -720, FlyTime).SetEase(Ease.OutCubic);
+        cannonBullet.transform.DOMove(pos, FlyTime).SetEase(Ease.OutCubic);
+        yield return new WaitForSeconds(FlyTime);
+        DOTween.To(() => RotSpeed, x => RotSpeed = x, -360, FlyTime).SetEase(Ease.InCubic);
+        cannonBullet.transform.DOMove(transform.position, FlyTime).SetEase(Ease.InCubic);
+        yield return new WaitForSeconds(FlyTime);
     }
 
 }

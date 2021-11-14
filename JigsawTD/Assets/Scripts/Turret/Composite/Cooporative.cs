@@ -4,5 +4,9 @@ using UnityEngine;
 
 public class Cooporative : CompositeTurret
 {
-
+    public override void ContentLanded()
+    {
+        base.ContentLanded();
+        GameRes.TotalCooporative++;
+    }
 }

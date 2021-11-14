@@ -29,7 +29,7 @@ public class Binary : Boss
         base.OnDie();
         if (m_brother != null)
         {
-            m_brother.SpeedIntensify += 0.7f;
+            m_brother.SpeedIntensify += 1f;
             m_brother.ProgressFactor = m_brother.Speed * m_brother.Adjust;
             m_brother.m_brother = null;
             m_brother = null;

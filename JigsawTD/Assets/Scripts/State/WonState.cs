@@ -9,4 +9,9 @@ public class WonState : BattleOperationState
     }
 
     public override StateName StateName => StateName.WonState;
+    public override IEnumerator EnterState()
+    {
+        Sound.Instance.PlayBg("Borner");
+        yield return null;
+    }
 }

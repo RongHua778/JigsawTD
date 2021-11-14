@@ -131,7 +131,7 @@ public class SniperSkill : InitialSkill
     {
         base.Shoot(bullet);
         float distance = bullet.GetTargetDistance();
-        bullet.Damage *= (1 + distance * 0.15f);
+        bullet.Damage *= (1 + distance * 0.2f);
     }
 
     //public override void Build()
@@ -185,7 +185,7 @@ public class MortarSkill : InitialSkill
     public override void Shoot(Bullet bullet = null)
     {
         base.Shoot(bullet);
-        bullet.SplashPercentage += 1.5f;
+        bullet.SplashPercentage += bullet.SputteringRange * 0.15f;
     }
 
 }
@@ -273,7 +273,7 @@ public class CooporativeSkill : InitialSkill
 
     public override void Shoot(Bullet bullet = null)
     {
-        strategy.TurnAttackIntensify += 0.01f * GameRes.TotalRefactor * strategy.TimeModify;
+        strategy.TurnAttackIntensify += 0.02f * GameRes.TotalCooporative * strategy.TimeModify;
     }
 }
 
@@ -282,12 +282,7 @@ public class BoomerrangSkill : InitialSkill
     public override TurretSkillName EffectName => TurretSkillName.BoomerrangSkill;
     public override string SkillDescription => "BOOMERRANGSKILL";
 
-    public override void Build()
-    {
-        base.Build();
-        strategy.AllSpeedIntensifyModify = 0;
 
-    }
     public override void Hit(IDamageable target, Bullet bullet = null)
     {
         base.Hit(target, bullet);
@@ -308,7 +303,7 @@ public class SuperSkill : InitialSkill
     public override void TickEnd()
     {
         strategy.TurnFixAttack += strategy.FinalAttack * strategy.TimeModify;
-        strategy.TurnFixSpeed += strategy.FinalSpeed * strategy.TimeModify;
+        strategy.TurnFixSpeed += strategy.FinalFireRate * strategy.TimeModify;
         strategy.TurnFixCriticalRate += strategy.FinalCriticalRate * strategy.TimeModify;
         strategy.TurnFixSlowRate += strategy.FinalSlowRate * strategy.TimeModify;
         strategy.TurnFixSplashRange += strategy.FinalSplashRange * strategy.TimeModify;

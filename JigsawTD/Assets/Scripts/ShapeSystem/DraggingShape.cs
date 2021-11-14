@@ -238,6 +238,11 @@ public class DraggingShape : DraggingActions
                 int x = tile.OffsetCoord.x;
                 int z = tile.OffsetCoord.y;
 
+                if ((z * 25 + x) > 624 || (z * 25 + x) < 0)
+                {
+                    return;
+                }
+
                 GridNodeBase node = grid.nodes[z * grid.width + x];
 
                 if (!node.ChangeAbleNode)
@@ -248,6 +253,7 @@ public class DraggingShape : DraggingActions
                     ChangeNodes.Add(node);
                     grid.CalculateConnectionsForCellAndNeighbours(x, z);
                 }
+
             });
         }
     }

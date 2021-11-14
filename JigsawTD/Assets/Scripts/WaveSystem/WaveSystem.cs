@@ -79,11 +79,11 @@ public class WaveSystem : IGameSystem
             //stage += (((float)i / 10) + 1) * LevelAttribute.LevelIntensify * (0.5f * i + 1);
             if (i <= 39)
             {
-                stage += LevelAttribute.LevelIntensify * (0.05f * Mathf.Pow(i, 1.85f) + 1);
+                stage += LevelAttribute.LevelIntensify * (0.05f * Mathf.Pow(i, 1.8f) + 1);
             }
             else
             {
-                stage += LevelAttribute.LevelIntensify * (0.04f * Mathf.Pow(i, 2f) + 1);//40波后难度快速成长，期望在100波内解决玩家
+                stage += LevelAttribute.LevelIntensify * (0.00004f * Mathf.Pow(i, 4f) + 1);//40波后难度快速成长，期望在100波内解决玩家
             }
 
 
@@ -104,7 +104,11 @@ public class WaveSystem : IGameSystem
             {
                 sequences = GenerateSpecificSequence(LevelAttribute.GetRandomBoss(3).EnemyType, stage, i, true);
             }
-            else if ((i + 1) % 10 == 0)
+            else if (i == 39)
+            {
+                sequences = GenerateSpecificSequence(LevelAttribute.GetRandomBoss(4).EnemyType, stage, i, true);
+            }
+            else if (i > 39 && (i + 1) % 5 == 0)//无尽模式40波后每5波一个BOSS
             {
                 sequences = GenerateSpecificSequence(LevelAttribute.GetRandomBoss(4).EnemyType, stage, i, true);
             }

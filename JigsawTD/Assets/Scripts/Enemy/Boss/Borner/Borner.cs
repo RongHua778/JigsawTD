@@ -45,7 +45,7 @@ public class Borner : Boss
     {
         if (DamageStrategy.CurrentHealth / DamageStrategy.MaxHealth <= 0.7f && form == 0)
         {
-            DamageStrategy.BuffDamageIntensify -= 0.7f;
+            DamageStrategy.BuffDamageIntensify -= 0.8f;
             level = 1;
             form = 1;
             StunTime += 7f;
@@ -55,7 +55,7 @@ public class Borner : Boss
         }
         if (DamageStrategy.CurrentHealth / DamageStrategy.MaxHealth <= 0.3f && form == 1)
         {
-            DamageStrategy.BuffDamageIntensify -= 0.7f;
+            DamageStrategy.BuffDamageIntensify -= 0.8f;
             level = 2;
             form = 2;
             StunTime += 7f;
@@ -70,7 +70,7 @@ public class Borner : Boss
             if (castleCounter <= 0f)
             {
                 level = 0;
-                DamageStrategy.BuffDamageIntensify += 0.7f;
+                DamageStrategy.BuffDamageIntensify += 0.8f;
                 anim.SetBool("Transform", false);
                 Sound.Instance.PlayEffect("Sound_BornerTransform");
             }
