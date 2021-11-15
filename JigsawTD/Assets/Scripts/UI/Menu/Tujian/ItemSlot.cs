@@ -12,10 +12,10 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] Color lockColor = default;
     [SerializeField] GameObject lockIcon = default;
     bool isLock = false;
-    private void Start()
-    {
-        SetContent();
-    }
+    //private void Start()
+    //{
+    //    SetContent();
+    //}
     public void SetContent()
     {
         isLock = contenAtt.isLock;

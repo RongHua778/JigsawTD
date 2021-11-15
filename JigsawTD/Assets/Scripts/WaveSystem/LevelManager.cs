@@ -14,10 +14,8 @@ public class LevelManager : Singleton<LevelManager>
     public bool UnlockAll;
     public GameLevelInfo[] GameLevels = default;
 
-    private int gameLevel = 0;
-    private int gameExp = 0;
-    public int GameLevel { get => gameLevel; set => gameLevel = value; }
-    public int GameExp { get => gameExp; set => gameExp = value; }
+    public int GameLevel { get => PlayerPrefs.GetInt("GameLevel", 0); set => PlayerPrefs.SetInt("GameLevel", Mathf.Clamp(value, 0, GameLevels.Length - 1)); }
+    public int GameExp { get => PlayerPrefs.GetInt("GameExp", 0); set => PlayerPrefs.SetInt("GameExp", value); }
 
     public Dictionary<string, bool> UnlockInfoDIC;
     public List<ContentAttribute> AllContent;
@@ -66,19 +64,37 @@ public class LevelManager : Singleton<LevelManager>
         return true;
     }
 
-
-    public void LoadSaveData(Save save)
+    public void SetUnlockAll(bool value)
     {
-        GameLevel = save.GameLevel;
-        GameExp = save.GameExp;
+        UnlockAll = value;
         if (UnlockAll)//解锁全内容
         {
+            GameLevel = GameLevels.Length - 1;
+            GameExp = GameLevels[GameLevels.Length - 1].ExpRequire;
             foreach (var item in AllContent)
             {
                 item.isLock = false;
             }
-            return;
         }
+        else
+        {
+            foreach (var item in AllContent)
+            {
+                item.isLock = item.initialLock;
+            }
+        }
+    }
+
+    public void LoadSaveData(Save save)
+    {
+        //if (UnlockAll)//解锁全内容
+        //{
+        //    foreach (var item in AllContent)
+        //    {
+        //        item.isLock = false;
+        //    }
+        //    return;
+        //}
         foreach (var item in AllContent)//根据存档解锁内容，如果不包含新内容，则默认锁定
         {
             if (save.UnlockInfoDIC.ContainsKey(item.Name))
@@ -102,8 +118,8 @@ public class LevelManager : Singleton<LevelManager>
     public Save SetSaveData()
     {
         Save save = new Save();
-        save.GameLevel = GameLevel;
-        save.GameExp = GameExp;
+        //save.GameLevel = GameLevel;
+        //save.GameExp = GameExp;
         UnlockInfoDIC = new Dictionary<string, bool>();
         foreach (var item in AllContent)
         {

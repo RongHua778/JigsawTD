@@ -17618,7 +17618,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Version 2.6
+  m_Text: Version 2.61
 --- !u!222 &1077198958
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -35853,6 +35853,14 @@ PrefabInstance:
     - target: {fileID: 3979959846567427920, guid: efad427a633dbca47ac42421b9004594, type: 3}
       propertyPath: m_Name
       value: Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979959846567427947, guid: efad427a633dbca47ac42421b9004594, type: 3}
+      propertyPath: LevelUpMoney.Array.data[5]
+      value: 950
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979959846567427948, guid: efad427a633dbca47ac42421b9004594, type: 3}
+      propertyPath: UnlockAll
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3979959846567427949, guid: efad427a633dbca47ac42421b9004594, type: 3}
       propertyPath: m_RootOrder

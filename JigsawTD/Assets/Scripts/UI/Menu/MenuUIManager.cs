@@ -40,13 +40,13 @@ public class MenuUIManager : Singleton<MenuUIManager>
         if (Input.GetKeyDown(KeyCode.K))
         {
             ShowMessage(GameMultiLang.GetTraduction("TEST1"));
-            LevelManager.Instance.PremitDifficulty = 0;
+            LevelManager.Instance.SetUnlockAll(false);
             PlayerPrefs.DeleteAll();
         }
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyDown(KeyCode.J))//½âËøÈ«ÄÚÈÝ
         {
             ShowMessage(GameMultiLang.GetTraduction("TEST2"));
-            LevelManager.Instance.PremitDifficulty = 5;
+            LevelManager.Instance.SetUnlockAll(true);
             PlayerPrefs.SetInt("MaxDifficulty", 5);
         }
     }

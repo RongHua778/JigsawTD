@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class UITujian : IUserInterface
 {
@@ -9,13 +10,15 @@ public class UITujian : IUserInterface
     [SerializeField] TipsElementConstruct[] elementConstructs = default;
     List<int> skillPreviewElements;
     [SerializeField] GameLevelHolder gameLevelPrefab = default;
+    private List<ItemSlot> items;
     public override void Initialize()
     {
         base.Initialize();
         m_Anim = this.GetComponent<Animator>();
         skillPreviewElements = new List<int> { 0, 1, 2, 3, 4 };
         SetElementSkills();
-        gameLevelPrefab.SetData();
+        //items = GetComponentsInChildren<ItemSlot>().ToList();
+        //gameLevelPrefab.SetData();
     }
 
     public void SetElementSkills()
@@ -33,6 +36,13 @@ public class UITujian : IUserInterface
     {
         base.Show();
         m_Anim.SetBool("OpenLevel", true);
+        gameLevelPrefab.SetData();
+        if (items == null)
+            items = GetComponentsInChildren<ItemSlot>().ToList();
+        foreach (var item in items)
+        {
+            item.SetContent();
+        }
     }
 
     public override void Hide()

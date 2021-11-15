@@ -308,7 +308,7 @@ BCEINFO=重构后获得1个万能元素
 BDE=维修工厂
 BDEINFO=相邻标记的效果提升100%
 CDE=铸币工厂
-CDEINFO=每次攻击有8%概率获得2金币
+CDEINFO=子弹每次命中有8%概率获得2金币
 
 //Enemy
 SOILDER=鬣狗
