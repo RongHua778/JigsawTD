@@ -66,7 +66,7 @@ public class TestWindow : EditorWindow
         trapName= EditorGUILayout.TextField("ÏÝÚå", trapName);
         if (GUILayout.Button("»ñÈ¡", GUILayout.Width(120)))
         {
-            ConstructHelper.GetTrapByName(trapName);
+            ConstructHelper.GetTrapShapeByName(trapName);
         }
         GUILayout.EndHorizontal();
 

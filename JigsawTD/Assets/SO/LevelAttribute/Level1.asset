@@ -15,7 +15,7 @@ MonoBehaviour:
   IsEndless: 0
   Difficulty: 1
   PlayerHealth: 25
-  Wave: 40
+  Wave: 30
   LevelIntensify: 1
   NormalEnemies:
   - {fileID: 11400000, guid: a2fa830bad8e11c448623ce28354a1bd, type: 2}

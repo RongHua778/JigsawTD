@@ -55,7 +55,7 @@ public class MainUI : IUserInterface
 
     public override void Initialize()
     {
-        GameEvents.Instance.onEnemyReach += EnemyReach;
+        //GameEvents.Instance.onEnemyReach += EnemyReach;
         GameSpeed = 1;
 
         m_PausePanel.Initialize();
@@ -69,7 +69,7 @@ public class MainUI : IUserInterface
     {
         base.Release();
         GameSpeed = 1;
-        GameEvents.Instance.onEnemyReach -= EnemyReach;
+        //GameEvents.Instance.onEnemyReach -= EnemyReach;
     }
 
     public void PrepareForGuide()
@@ -92,10 +92,10 @@ public class MainUI : IUserInterface
 
     }
 
-    private void EnemyReach(Enemy enemy)
-    {
-        GameRes.Life -= enemy.ReachDamage;
-    }
+    //private void EnemyReach(Enemy enemy)
+    //{
+    //    GameRes.Life -= enemy.ReachDamage;
+    //}
 
 
 
@@ -103,7 +103,7 @@ public class MainUI : IUserInterface
     {
         GameRes.CurrentWave++;
         //GameManager.Instance.GainInterest();
-        GameManager.Instance.GainMoney(Mathf.Min(300, (StaticData.Instance.BaseWaveIncome +
+        GameManager.Instance.GainMoney(Mathf.Min(400, (StaticData.Instance.BaseWaveIncome +
             StaticData.Instance.WaveMultiplyIncome * (GameRes.CurrentWave - 1))));
         m_WaveInfoSetter.SetWaveInfo(sequences);
     }

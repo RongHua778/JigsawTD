@@ -42,7 +42,7 @@ public class Blueprint
         foreach (Composition com in Compositions)
         {
             if (!com.isPerfect)
-                ObjectPool.Instance.UnSpawn(com.turretTile);//同时移除该防御塔的光环效果
+                ObjectPool.Instance.UnSpawn(com.turretTile);
             else
                 GameManager.Instance.GetPerfectElement(-1);
         }

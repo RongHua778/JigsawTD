@@ -109,16 +109,7 @@ public class BoardSystem : IGameSystem
         }
     }
 
-    //买一块地板多少钱
-    //int switchTrapCost;
-    //public int SwitchTrapCost
-    //{
-    //    get => switchTrapCost;
-    //    set
-    //    {
-    //        switchTrapCost = value;
-    //    }
-    //}
+
 
     public static bool FindPath { get; set; }
 
@@ -177,14 +168,65 @@ public class BoardSystem : IGameSystem
         Physics2D.SyncTransforms();//涉及物理检测前，需要调用
         AstarPath.active.Scan();
 
-        GenerateStartTiles(_startSize, sizeOffset);
+        FirstGameSet(sizeOffset);
+        //if (!LevelManager.Instance.IsContiune)
+        //{
+        //    FirstGameSet(sizeOffset);
+        //}
+        //else
+        //{
+        //    LoadGameSet();
+        //}
 
-        if (!Game.Instance.Tutorial)//只有非教学关带有陷阱
-            GenerateTrapTiles(sizeOffset, _startSize);
 
         Physics2D.SyncTransforms();
         SeekPath();
         ShowPath();
+        CheckPathTrap();
+    }
+
+    private void FirstGameSet(Vector2Int sizeOffset)
+    {
+        GenerateStartTiles(_startSize, sizeOffset);
+
+        if (!Game.Instance.Tutorial)//只有非教学关带有陷阱
+            GenerateTrapTiles(sizeOffset, _startSize);
+    }
+
+    private void LoadGameSet()
+    {
+        Debug.Log("LoadGameSet");
+        foreach (var content in LevelManager.Instance.LastSaveContents)
+        {
+            GameTile tile = null;
+            Vector2Int pos = new Vector2Int(content.posX, content.posY);
+            switch (content.ContentType)
+            {
+                case 0:
+                default:
+                    tile = ConstructHelper.GetNormalTile(GameTileContentType.Empty);
+                    break;
+                case 1:
+                    tile = ConstructHelper.GetDestinationPoint();
+                    DestinationPoint = tile;
+                    break;
+                case 2:
+                    tile = ConstructHelper.GetSpawnPoint();
+                    SpawnPoint = tile;
+                    break;
+                case 3:
+                    tile = ConstructHelper.GetElementTurret((ElementType)content.Element,content.Quality);
+                    break;
+                case 5://陷阱
+                    tile = ConstructHelper.GetTrap(content.ContentName);
+                    break;
+            }
+            tile.SetRotation(content.Direction);
+            tile.transform.position = (Vector3Int)pos;
+            tile.TileLanded();
+            Physics2D.SyncTransforms();
+        }
+
     }
 
     private void GenerateStartTiles(Vector2Int size, Vector2Int offset)
@@ -428,7 +470,7 @@ public class BoardSystem : IGameSystem
         GameTile tile = ConstructHelper.GetNormalTile(GameTileContentType.Empty);
         tile.transform.position = pos;
         tile.TileLanded();
-        ConstructHelper.GetTrapByName(trap.TrapAttribute.Name);
+        ConstructHelper.GetTrapShapeByName(trap.TrapAttribute.Name);
         GameManager.Instance.TransitionToState(StateName.PickingState);
 
     }

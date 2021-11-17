@@ -14,9 +14,17 @@ public class EmptyContent : GameTileContent
         ContentLandedCheck(col);
     }
 
+    protected override void SaveContent()
+    {
+        base.SaveContent();
+        m_ContentStruct.ContentName = "Empty";
+    }
+
+
+
     protected override void ContentLandedCheck(Collider2D col)
     {
-        if (col != null)
+        if (col != null)//底下如果有格子，则回收自身，否则将自身设置为可寻路
         {
             ObjectPool.Instance.UnSpawn(m_GameTile);
             return;

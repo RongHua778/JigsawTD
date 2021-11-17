@@ -80,7 +80,8 @@ public class BluePrintShopUI : IUserInterface
             return;
         if (!GameManager.Instance.ConsumeMoney(cost))
             return;
-        GameEvents.Instance.TempWordTrigger(refreshShopTrigger);
+        if (cost != 0)//自动刷新不触发对白
+            GameEvents.Instance.TempWordTrigger(refreshShopTrigger);
         GameManager.Instance.HideTips();
         NextRefreshTrun = 3;
         int lockNum = 0;

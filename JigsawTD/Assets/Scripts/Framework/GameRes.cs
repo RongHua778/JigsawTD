@@ -33,6 +33,8 @@ public class ShapeInfo
 }
 public static class GameRes
 {
+
+
     private static MainUI m_MainUI;
     private static FuncUI m_FuncUI;
     private static WaveSystem m_WaveSystem;
@@ -175,6 +177,7 @@ public static class GameRes
 
     public static void Initialize(MainUI mainUI, FuncUI funcUI,WaveSystem waveSystem)
     {
+        LevelManager.Instance.SaveContents = new List<ContentStruct>();
         m_MainUI = mainUI;
         m_FuncUI = funcUI;
         m_WaveSystem = waveSystem;
@@ -186,6 +189,7 @@ public static class GameRes
         MaxPath = 0;
         MaxMark = 0;
         GainGold = 0;
+        enemyRemain = 0;
 
         DiscountRate = 0.1f;
         ShopCapacity = 3;

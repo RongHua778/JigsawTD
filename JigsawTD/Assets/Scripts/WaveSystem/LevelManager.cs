@@ -11,6 +11,8 @@ public class GameLevelInfo
 
 public class LevelManager : Singleton<LevelManager>
 {
+
+    #region 基础保存
     public bool UnlockAll;
     public GameLevelInfo[] GameLevels = default;
 
@@ -24,7 +26,15 @@ public class LevelManager : Singleton<LevelManager>
     public LevelAttribute EndlessLevel = default;
 
     public int PremitDifficulty = default;
-    public int PassDiifcutly { get => PlayerPrefs.GetInt("MaxDifficulty", 0); set => PlayerPrefs.SetInt("MaxDifficulty", Mathf.Min(5, value)); }
+    public int PassDiifcutly
+    {
+        get => PlayerPrefs.GetInt("MaxDifficulty", 0);
+        set
+        {
+            if (value > PlayerPrefs.GetInt("MaxDifficulty", 0))
+                PlayerPrefs.SetInt("MaxDifficulty", Mathf.Min(5, value));
+        }
+    }
 
     public int EndlessHighScore
     {
@@ -44,20 +54,30 @@ public class LevelManager : Singleton<LevelManager>
     }
     [SerializeField] private int selectDifficulty = default;
     public int SelectDiffculty { get => selectDifficulty; set => selectDifficulty = Mathf.Clamp(value, 0, PassDiifcutly); }
+
     public LevelAttribute CurrentLevel;
+    #endregion
+
+    #region 临时游戏保存
+    public bool IsContiune { get; set; }
+
+    public List<ContentStruct> LastSaveContents;
+    public List<ContentStruct> SaveContents;
+
+    #endregion
 
     public bool LevelStart()
     {
-        if (SelectDiffculty > PremitDifficulty)
-        {
-            MenuUIManager.Instance.ShowMessage(GameMultiLang.GetTraduction("UNPERMIT"));
-            return false;
-        }
-        else if (SelectDiffculty > PassDiifcutly)
-        {
-            MenuUIManager.Instance.ShowMessage(GameMultiLang.GetTraduction("UNPASS"));
-            return false;
-        }
+        //if (SelectDiffculty > PremitDifficulty)
+        //{
+        //    MenuUIManager.Instance.ShowMessage(GameMultiLang.GetTraduction("UNPERMIT"));
+        //    return false;
+        //}
+        //else if (SelectDiffculty > PassDiifcutly)
+        //{
+        //    MenuUIManager.Instance.ShowMessage(GameMultiLang.GetTraduction("UNPASS"));
+        //    return false;
+        //}
         CurrentLevel = StandardLevels[SelectDiffculty];
         if (CurrentLevel.Difficulty > 1)
             Game.Instance.Tutorial = false;
@@ -66,8 +86,7 @@ public class LevelManager : Singleton<LevelManager>
 
     public void SetUnlockAll(bool value)
     {
-        UnlockAll = value;
-        if (UnlockAll)//解锁全内容
+        if (value)//解锁全内容
         {
             GameLevel = GameLevels.Length - 1;
             GameExp = GameLevels[GameLevels.Length - 1].ExpRequire;
@@ -87,14 +106,21 @@ public class LevelManager : Singleton<LevelManager>
 
     public void LoadSaveData(Save save)
     {
-        //if (UnlockAll)//解锁全内容
-        //{
-        //    foreach (var item in AllContent)
-        //    {
-        //        item.isLock = false;
-        //    }
-        //    return;
-        //}
+        BasicSave(save);
+        LastSaveContents = save.SaveContents;
+        IsContiune = LastSaveContents != null;
+    }
+
+    private void BasicSave(Save save)
+    {
+        if (UnlockAll)//解锁全内容
+        {
+            foreach (var item in AllContent)
+            {
+                item.isLock = false;
+            }
+            return;
+        }
         foreach (var item in AllContent)//根据存档解锁内容，如果不包含新内容，则默认锁定
         {
             if (save.UnlockInfoDIC.ContainsKey(item.Name))
@@ -118,8 +144,8 @@ public class LevelManager : Singleton<LevelManager>
     public Save SetSaveData()
     {
         Save save = new Save();
-        //save.GameLevel = GameLevel;
-        //save.GameExp = GameExp;
+
+        save.SaveContents = SaveContents;
         UnlockInfoDIC = new Dictionary<string, bool>();
         foreach (var item in AllContent)
         {

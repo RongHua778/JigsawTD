@@ -330,7 +330,20 @@ public class CoreSkill : InitialSkill
             if (hit != null)
             {
                 turretStrategy = hit.GetComponent<TurretContent>().Strategy;
-                strategy.InitAttack += turretStrategy.BaseAttack * (0.25f + strategy.Quality * 0.25f) * strategy.TimeModify;
+                float intensify = 0;
+                switch (strategy.Quality)
+                {
+                    case 1:
+                        intensify = 0.5f;
+                        break;
+                    case 2:
+                        intensify = 0.75f;
+                        break;
+                    case 3:
+                        intensify = 1.25f;
+                        break;
+                }
+                strategy.InitAttack += turretStrategy.BaseAttack * intensify * strategy.TimeModify;
             }
         }
     }

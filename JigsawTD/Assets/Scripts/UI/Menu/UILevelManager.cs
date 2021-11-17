@@ -61,7 +61,7 @@ public class UILevelManager : IUserInterface
     {
         LevelManager.Instance.SelectDiffculty += count;
         difficultyInfo_Txt.text = GameMultiLang.GetTraduction("DIFFICULTY" + LevelManager.Instance.SelectDiffculty);
-        if (LevelManager.Instance.SelectDiffculty == 0)
+        if (LevelManager.Instance.SelectDiffculty == 0)//设置教程显示
         {
             difficultyTxt.text = GameMultiLang.GetTraduction("TUTORIAL");
             tutorialCheck.gameObject.SetActive(true);

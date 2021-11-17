@@ -223,7 +223,7 @@ SNOWSKILL=Penetration Bullet can't splash;Bullet will double enemy's current slo
 COOPORATIVESKILL=Attack increased by 2% * the amount of "Cooporative" each shoot.
 BOOMERRANGSKILL=Penetration Bullet can't splash;Bullet damage will increase by 10% for each enemy it hit.
 SUPERSKILL=Double all current stats after 30s of each wave
-CORESKILL=At the start of each wave, it's attack will become 50%/75%/100% of the sum of adjacent turrets.
+CORESKILL=At the start of each wave, it's attack will become 50%/75%/125% of the sum of adjacent turrets.
 
 
 //A系

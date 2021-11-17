@@ -85,7 +85,7 @@ public abstract class Enemy : PathFollower, IDamageable
         this.DamageStrategy.ResetStrategy(Mathf.RoundToInt(attribute.Health * intensify));//Çå³ý¼Ó³É
         this.speed = attribute.Speed;
         this.ReachDamage = attribute.ReachDamage;
-        this.SlowResist = GameRes.CurrentWave / (GameRes.CurrentWave + 10);
+        this.SlowResist = (float)GameRes.CurrentWave / (GameRes.CurrentWave + 20);
         SpawnOn(pathIndex, BoardSystem.shortestPoints);
 
     }

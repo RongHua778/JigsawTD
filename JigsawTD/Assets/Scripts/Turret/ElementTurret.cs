@@ -13,6 +13,13 @@ public abstract class ElementTurret : TurretContent
         GameManager.Instance.elementTurrets.Add(this);
     }
 
+    protected override void SaveContent()
+    {
+        base.SaveContent();
+        m_ContentStruct.Element = (int)Strategy.m_Att.element;
+        m_ContentStruct.Quality = Strategy.Quality;
+    }
+
 
     public override void OnUnSpawn()
     {

@@ -60,7 +60,7 @@ public class RHTest : MonoBehaviour
 
     public void GetTrapClick()
     {
-        ConstructHelper.GetTrapByName(trapInputField.text);
+        ConstructHelper.GetTrapShapeByName(trapInputField.text);
     }
 
     public void SetWaveBtnClick()

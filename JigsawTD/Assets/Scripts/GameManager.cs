@@ -114,6 +114,8 @@ public class GameManager : Singleton<GameManager>
 
             ScaleAndMove.CanControl = true;//默认为锁镜头
         }
+
+
     }
 
     //释放游戏系统

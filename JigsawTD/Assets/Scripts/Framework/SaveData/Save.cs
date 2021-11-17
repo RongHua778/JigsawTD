@@ -6,38 +6,36 @@ using System;
 [Serializable]
 public class Save
 {
-    //public int GameLevel;
-    //public int GameExp;
     public Dictionary<string, bool> UnlockInfoDIC;
 
+    //¡Ÿ ±”Œœ∑±£¥Ê
+    public List<ContentStruct> SaveContents;
+}
 
-    //public void UnlockBonus(string bo)
+
+[Serializable]
+public class ContentStruct
+{
+    public int ContentType;
+    public int posX;
+    public int posY;
+    public int Direction;
+    public string ContentName;
+    //Turret
+    public int Element;
+    public int Quality;
+    public List<List<int>> SkillList;
+    public double[] InitModifies;
+
+    //public ContentStruct(GameTileContentType contentType, Vector2 contentPos, string contentName, int quality = 0, List<List<int>> skills = null, float[] initModify = null)
     //{
-    //    //if (SaveItemDIC.ContainsKey(bo))
-    //    //    SaveItemDIC[bo].isLock = false;
+    //    this.ContentType = contentType;
+    //    this.ContentPos = contentPos;
+    //    this.ContentName = contentName;
+    //    this.Quality = quality;
+    //    this.SkillList = skills;
+    //    this.InitModifies = initModify;
     //}
-
-    //public void AddExp(int exp)
-    //{
-    //    if (GameLevel >= LevelManager.Instance.GameLevels.Length)
-    //        return;
-    //    int need = LevelManager.Instance.GameLevels[GameLevel].ExpRequire - GameExp;
-    //    if (exp >= need)
-    //    {
-    //        foreach(var item in LevelManager.Instance.GameLevels[GameLevel].UnlockItems)
-    //        {
-    //            UnlockBonus(item.Name);
-    //        }
-    //        GameLevel++;
-    //        GameExp = 0;
-    //        AddExp(exp - need);
-    //    }
-    //    else
-    //    {
-    //        GameExp += exp;
-    //    }
-    //}
-
 }
 
 [Serializable]

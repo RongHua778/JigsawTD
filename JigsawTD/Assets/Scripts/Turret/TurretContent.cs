@@ -292,11 +292,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         }
 
     }
-    //public override void CorretRotation()
-    //{
-    //    base.CorretRotation();
-    //    TurretBaseSprite.transform.rotation = Quaternion.identity;
-    //}
+
 
     protected override void ContentLandedCheck(Collider2D col)
     {
@@ -317,7 +313,6 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         Strategy = null;
         frostTime = 0;
         ShowRange(false);
-
     }
 
 }

@@ -15,7 +15,6 @@ public abstract class GameTile : TileBase
     }
 
     GameObject previewGlow;
-    Transform directionCheckPoint;
     Transform tileBase;
 
     public bool isWalkable { get => Content.IsWalkable; }
@@ -59,7 +58,6 @@ public abstract class GameTile : TileBase
         previewGlow = transform.Find("PreviewGlow").gameObject;
         PreviewRenderer = previewGlow.GetComponent<SpriteRenderer>();
         tileBase = transform.Find("TileBase");
-        directionCheckPoint = transform.Find("CheckPoint");
     }
 
     public void SetTileColor(Color colorToSet)
@@ -76,6 +74,7 @@ public abstract class GameTile : TileBase
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         StaticData.CorrectTileCoord(this);
         Previewing = false;
+        GetTileDirection();
 
         Content.ContentLanded();//这个可能会回收自身
         IsLanded = true;//这个必须在CONTENTLANDED下面，否则会导致回收自己
@@ -85,6 +84,7 @@ public abstract class GameTile : TileBase
     {
         content.transform.SetParent(this.transform);
         content.transform.position = transform.position + Vector3.forward * 0.01f;
+        content.transform.localRotation = Quaternion.identity;
         content.m_GameTile = this;
         Content = content;
     }
@@ -139,9 +139,19 @@ public abstract class GameTile : TileBase
     public void SetRandomRotation()
     {
         int randomDir = UnityEngine.Random.Range(0, 4);
-        TileDirection = DirectionExtensions.GetDirection(randomDir);
-        transform.rotation = TileDirection.GetRotation();
+        transform.rotation = DirectionExtensions.GetDirection(randomDir).GetRotation();
         CorrectRotation();
+    }
+
+    public void SetRotation(int direction)
+    {
+        transform.rotation = DirectionExtensions.GetDirection(direction).GetRotation();
+        CorrectRotation();
+    }
+
+    private void GetTileDirection()
+    {
+        TileDirection = DirectionExtensions.GetDirection(transform.position, transform.position + transform.up);
     }
 
     public void CorrectRotation()

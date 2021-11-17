@@ -112,17 +112,10 @@ public static class ConstructHelper
 
 
     //测试用
-    public static TileShape GetTrapByName(string name)//测试用，生成一个随意放置的陷阱
+    public static TileShape GetTrapShapeByName(string name)//测试用，生成一个随意放置的陷阱
     {
-        GameTileContent content = m_ContentFactory.GetTrapContentByName(name);
-        if (content == null)
-        {
-            return null;
-        }
         TileShape shape = m_ShapeFactory.GetDShape();
-        GameTile tile = m_TileFactory.GetBasicTile();
-        tile.SetContent(content);
-        shape.SetTile(tile);
+        shape.SetTile(GetTrap(name));
         return shape;
     }
 
@@ -138,9 +131,7 @@ public static class ConstructHelper
     public static TileShape GetElementTurretByQualityAndElement(ElementType element, int quality)
     {
         TileShape shape = m_ShapeFactory.GetDShape();
-        GameTile tile = m_TileFactory.GetBasicTile();
-        GameTileContent content = m_ContentFactory.GetElementTurret(element, quality);
-        tile.SetContent(content);
+        GameTile tile = GetElementTurret(element, quality);
         shape.SetTile(tile);
         return shape;
     }
@@ -150,9 +141,7 @@ public static class ConstructHelper
     public static TileShape GetTutorialShape(ShapeInfo shapeInfo)
     {
         TileShape shape = m_ShapeFactory.GetShape(shapeInfo.ShapeType);
-        GameTile tile = m_TileFactory.GetBasicTile();
-        GameTileContent content = m_ContentFactory.GetElementTurret(shapeInfo.Element, shapeInfo.Quality);
-        tile.SetContent(content);
+        GameTile tile = GetElementTurret(shapeInfo.Element, shapeInfo.Quality);
         shape.SetTile(tile, shapeInfo.TurretPos);
         return shape;
     }
@@ -163,5 +152,27 @@ public static class ConstructHelper
         Blueprint bluePrint = m_BlurPrintFactory.GetSpecificBluePrint(attribute, e1, e2, e3);
         return bluePrint;
     }
+
+    //读取保存数据
+    public static GameTile GetElementTurret(ElementType element, int quality)
+    {
+        GameTile tile = m_TileFactory.GetBasicTile();
+        GameTileContent content = m_ContentFactory.GetElementTurret(element, quality);
+        tile.SetContent(content);
+        return tile;
+    }
+
+    public static GameTile GetTrap(string name)
+    {
+        GameTileContent content = m_ContentFactory.GetTrapContentByName(name);
+        if (content == null)
+        {
+            return null;
+        }
+        GameTile tile = m_TileFactory.GetBasicTile();
+        tile.SetContent(content);
+        return tile;
+    }
+
 
 }
