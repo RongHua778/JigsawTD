@@ -14,7 +14,7 @@ public class EmptyContent : GameTileContent
         ContentLandedCheck(col);
     }
 
-    protected override void SaveContent()
+    public override void SaveContent()
     {
         base.SaveContent();
         m_ContentStruct.ContentName = "Empty";

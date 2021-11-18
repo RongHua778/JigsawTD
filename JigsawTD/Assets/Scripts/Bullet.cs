@@ -75,7 +75,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     {
         this.turretParent = turret;
         this.Damage = turret.Strategy.FinalAttack;
-        this.bulletSpeed = turret.Strategy.m_Att.BulletSpeed;
+        this.bulletSpeed = turret.Strategy.Attribute.BulletSpeed;
         this.SputteringRange = turret.Strategy.FinalSplashRange;
         this.CriticalRate = turret.Strategy.FinalCriticalRate;
         this.CriticalPercentage = turret.Strategy.FinalCriticalPercentage;

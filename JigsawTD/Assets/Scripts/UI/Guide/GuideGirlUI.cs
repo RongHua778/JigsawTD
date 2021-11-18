@@ -345,8 +345,8 @@ public class GuideGirlUI : IUserInterface
         {
             case 0://第一段对话结束，鼠标移动操作
                    //生成一个专属配方
-                Blueprint blueprint = ConstructHelper.GetSpecificBlueprint("CONSTRUCTOR", 0, 1, 2);
-                m_ShopUI.AddBluePrint(blueprint, true);
+                RefactorStrategy strategy = ConstructHelper.GetSpecificStrategy("CONSTRUCTOR", 0, 1, 2);
+                m_ShopUI.AddBluePrint(strategy, true);
                 m_ShopUI.RemoveGrid(m_ShopUI.ShopBluePrints[0]);//移除1个
 
                 ScaleAndMove.MoveTurorial = true;

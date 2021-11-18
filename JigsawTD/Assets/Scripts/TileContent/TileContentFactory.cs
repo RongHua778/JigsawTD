@@ -168,14 +168,13 @@ public class TileContentFactory : GameObjectFactory
             ElementDIC[(ElementType)UnityEngine.Random.Range(0, ElementDIC.Count)];
     }
     //ºÏ³ÉËþ***********
-    public RefactorTurret GetCompositeTurret(Blueprint bluePrint)
+    public RefactorTurret GetRefactorTurret(RefactorStrategy strategy)
     {
-        RefactorTurret content = Get(bluePrint.CompositeTurretAttribute.Prefab) as RefactorTurret;
-        content.InitializeTurret(bluePrint.ComStrategy);
-        bluePrint.ComStrategy.CompositeSkill();
+        RefactorTurret content = Get(strategy.Attribute.Prefab) as RefactorTurret;
+        content.InitializeTurret(strategy);
+        strategy.CompositeSkill();
         GameRes.TotalRefactor++;
         return content;
-
     }
 
     public TurretAttribute GetCompositeTurretByName(string name)

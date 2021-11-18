@@ -16,17 +16,17 @@ public class TurretItem : MonoBehaviour
     public void SetItemData(TurretContent turret)
     {
         m_Turret = turret;
-        switch (m_Turret.Strategy.m_Att.StrategyType)
+        switch (m_Turret.Strategy.Attribute.StrategyType)
         {
             case StrategyType.Element:
-                string element = StaticData.FormElementName(m_Turret.Strategy.m_Att.element, m_Turret.Strategy.Quality);
-                nameTxt.text = element + " " + GameMultiLang.GetTraduction(m_Turret.Strategy.m_Att.Name);
+                string element = StaticData.FormElementName(m_Turret.Strategy.Attribute.element, m_Turret.Strategy.Quality);
+                nameTxt.text = element + " " + GameMultiLang.GetTraduction(m_Turret.Strategy.Attribute.Name);
                 break;
             case StrategyType.Composite:
-                nameTxt.text = GameMultiLang.GetTraduction(m_Turret.Strategy.m_Att.Name);
+                nameTxt.text = GameMultiLang.GetTraduction(m_Turret.Strategy.Attribute.Name);
                 break;
         }
-        icon.sprite = turret.Strategy.m_Att.TurretLevels[m_Turret.Strategy.Quality-1].TurretIcon;
+        icon.sprite = turret.Strategy.Attribute.TurretLevels[m_Turret.Strategy.Quality-1].TurretIcon;
         damageValue.text = turret.Strategy.TotalDamage.ToString();
         TotalDamage = turret.Strategy.TotalDamage;
     }

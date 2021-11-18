@@ -50,7 +50,7 @@ public class RHTest : MonoBehaviour
 
     public void GetCompositeClick()
     {
-        ConstructHelper.GetCompositeTurretByNameAndElement(compositeInputField.text, int.Parse(e1.text), int.Parse(e2.text), int.Parse(e3.text));
+        ConstructHelper.GetRefactorTurretByNameAndElement(compositeInputField.text, int.Parse(e1.text), int.Parse(e2.text), int.Parse(e3.text));
     }
 
     public void GetElementClick()

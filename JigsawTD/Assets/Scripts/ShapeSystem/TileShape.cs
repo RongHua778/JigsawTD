@@ -67,7 +67,7 @@ public class TileShape : MonoBehaviour
             TileSlot turretSlot = tilePos[posID == -1 ? Random.Range(0, tilePos.Count) : posID];
             tile = specialTile;
             ElementTurret turret = tile.Content as ElementTurret;
-            turretNameTxt.text = StaticData.FormElementName(turret.Strategy.m_Att.element, turret.Strategy.Quality);
+            turretNameTxt.text = StaticData.FormElementName(turret.Strategy.Attribute.element, turret.Strategy.Quality);
             SetTilePos(tile, turretSlot.transform.position);
             tilePos.Remove(turretSlot);
 

@@ -26,10 +26,10 @@ public class RefactorTurret : TurretContent
         m_GameTile.tag = "OnlyCompositeTurret";
     }
 
-    protected override void SaveContent()
+    public override void SaveContent()
     {
         base.SaveContent();
-        m_ContentStruct.ContentName = Strategy.m_Att.Name;
+        m_ContentStruct.ContentName = Strategy.Attribute.Name;
         m_ContentStruct.Quality = Strategy.Quality;
         m_ContentStruct.ElementSlotCount = Strategy.ElementSKillSlot;
         m_ContentStruct.SkillList = new Dictionary<string, List<int>>();
@@ -61,7 +61,7 @@ public class RefactorTurret : TurretContent
                 ((BasicTile)turret.m_GameTile).EquipTurret();
                 BoardSystem.PreviewEquipTile = null;
 
-                turret.m_ContentStruct.SkillList.Add(turret.Strategy.TurretSkills.Count.ToString(), skill.Elements);//加入存档
+                turret.SaveContent();//加入存档
 
                 ObjectPool.Instance.UnSpawn(m_GameTile);
             }

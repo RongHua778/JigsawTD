@@ -31,7 +31,7 @@ public class CircleRange : ElementSkill
     public override void OnEquip()
     {
         base.OnEquip();
-        strategy.m_Turret.GenerateRange();
+        strategy.Turret.GenerateRange();
     }
 
 }
@@ -129,7 +129,7 @@ public class FreeGround : ElementSkill
     public override void OnEquip()
     {
         base.OnEquip();
-        strategy.m_Turret.GenerateRange();
+        strategy.Turret.GenerateRange();
     }
 
 
@@ -169,7 +169,7 @@ public class TrapIntensify : ElementSkill
         List<Vector2Int> points = StaticData.GetCirclePoints(1);
         foreach (var point in points)
         {
-            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
+            Vector2 pos = point + (Vector2)strategy.Turret.transform.position;
             Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TrapMask));
             if (hit != null)
             {

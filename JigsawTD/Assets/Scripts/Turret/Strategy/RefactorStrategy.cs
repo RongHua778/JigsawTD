@@ -3,16 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class Blueprint
+public class RefactorStrategy : StrategyBase
 {
-    public TurretAttribute CompositeTurretAttribute;
-    public StrategyBase ComStrategy;
     List<Composition> compositions = new List<Composition>();
-    public List<Composition> Compositions { get => compositions; set => compositions = value; }
-
-    public void SortBluePrint(List<Composition> coms,int quality)
+    public List<Composition> Compositions { get => compositions; set => compositions = value; }//初始元素组合
+    public RefactorStrategy(TurretAttribute attribute, int quality, List<Composition> initCompositions) : base(attribute, quality)
     {
-        Compositions = coms;
+        this.Compositions = initCompositions;
+        SortCompositions();
+
+        //初始技能
+        GetTurretSkills();
+        //配方自带元素技能
+        GetFirstElementSkill();
+    }
+
+    private void GetFirstElementSkill()
+    {
+        List<int> elements = new List<int>();
+        foreach (var com in Compositions)
+        {
+            elements.Add(com.elementRequirement);
+        }
+        ElementSkill effect = TurretEffectFactory.GetElementSkill(elements);
+        AddElementSkill(effect);
+    }
+
+    public void SortCompositions()//重新排序
+    {
         int temp;
         for (int i = 0; i < compositions.Count - 1; i++)
         {
@@ -35,38 +53,8 @@ public class Blueprint
                 }
             }
         }
-
-        ComStrategy = new StrategyBase(CompositeTurretAttribute, quality);
-        ComStrategy.GetTurretSkills();//初始技能
-
-        //配方自带元素技能
-        List<int> elements = new List<int>();
-        foreach (var com in Compositions)
-        {
-            elements.Add(com.elementRequirement);
-        }
-        ElementSkill effect = TurretEffectFactory.GetElementSkill(elements);
-        ComStrategy.AddElementSkill(effect);
-
     }
 
-    public void BuildBluePrint()
-    {
-        //建造合成塔，移除所有配方
-        foreach (Composition com in Compositions)
-        {
-            if (!com.isPerfect)
-                ObjectPool.Instance.UnSpawn(com.turretTile);
-            else
-                GameManager.Instance.GetPerfectElement(-1);
-        }
-
-        //所有防御塔重新检查侦测效果
-        GameManager.Instance.CheckDetectSkill();
-
-    }
-
-    //检测每个配方是否存在在场上的方法
     public void CheckElement()
     {
         List<IGameBehavior> temp = GameManager.Instance.elementTurrets.behaviors.ToList();
@@ -79,7 +67,7 @@ public class Blueprint
             {
                 ElementTurret turret = temp[j] as ElementTurret;
                 StrategyBase strategy = turret.Strategy;
-                if (compositions[i].elementRequirement == (int)(strategy.m_Att.element) &&
+                if (compositions[i].elementRequirement == (int)(strategy.Attribute.element) &&
                     compositions[i].qualityRequeirement == strategy.Quality)
                 {
                     compositions[i].obtained = true;
@@ -97,8 +85,22 @@ public class Blueprint
         }
     }
 
+    public void RefactorTurret()
+    {
+        //建造合成塔，移除所有配方
+        foreach (Composition com in Compositions)
+        {
+            if (!com.isPerfect)
+                ObjectPool.Instance.UnSpawn(com.turretTile);
+            else
+                GameManager.Instance.GetPerfectElement(-1);
+        }
 
-    //检查是否已满足可以建造的配方条件
+        //所有防御塔重新检查侦测效果
+        GameManager.Instance.CheckDetectSkill();
+
+    }
+
     public bool CheckBuildable()
     {
         bool result = true;

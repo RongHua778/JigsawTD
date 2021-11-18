@@ -70,7 +70,6 @@ public class BluePrintShopUI : IUserInterface
 
     public void SetPerfectElementCount(int count)
     {
-        //PerfectElementTxt.text = GameMultiLang.GetTraduction("OWNPERFECT") + ":" + count;
         PerfectElementTxt.text = count.ToString();
     }
 
@@ -104,21 +103,19 @@ public class BluePrintShopUI : IUserInterface
         isRefreshing = true;
         for (int i = 0; i < GameRes.ShopCapacity - lockNum; i++)
         {
-            Blueprint bluePrint = ConstructHelper.GetRandomBluePrintByLevel();
-            AddBluePrint(bluePrint, true);
+            RefactorStrategy strategy = ConstructHelper.GetRandomRefactorStrategy();
+             AddBluePrint(strategy, true);
             yield return new WaitForSeconds(0.02f);
         }
         isRefreshing = false;
     }
-
-
-    public void AddBluePrint(Blueprint bluePrint, bool isShopBluePrint)//增加蓝图，isShopblueprint判断加入商店还是拥有
+    public void AddBluePrint(RefactorStrategy strategy, bool isShopBluePrint)//增加蓝图，isShopblueprint判断加入商店还是拥有
     {
         BluePrintGrid bluePrintGrid = ObjectPool.Instance.Spawn(bluePrintGridPrefab) as BluePrintGrid;
         bluePrintGrid.transform.SetParent(shopContent);
         bluePrintGrid.transform.localScale = Vector3.one;
         bluePrintGrid.transform.localPosition = Vector3.zero;
-        bluePrintGrid.SetElements(this, shopContent.GetComponent<ToggleGroup>(), bluePrint);
+        bluePrintGrid.SetElements(this, shopContent.GetComponent<ToggleGroup>(), strategy);
         if (isShopBluePrint)
         {
             //bluePrintGrid.transform.SetAsFirstSibling();
@@ -131,6 +128,7 @@ public class BluePrintShopUI : IUserInterface
             MoveBluePrintToPocket(bluePrintGrid);
         }
     }
+
 
     public void OnLockGrid(bool isLock)
     {
@@ -195,10 +193,10 @@ public class BluePrintShopUI : IUserInterface
 
 
 
-    public void CompositeBluePrint(BluePrintGrid grid)//合成对应的配方
+    public void RefactorBluePrint(BluePrintGrid grid)//合成对应的配方
     {
-        grid.BluePrint.BuildBluePrint();
-        ConstructHelper.GetCompositeTurretByBluePrint(grid.BluePrint);
+        grid.Strategy.RefactorTurret();
+        ConstructHelper.GetRefactorTurretByStrategy(grid.Strategy);
         RemoveGrid(grid);
         CheckAllBluePrint();
         GameManager.Instance.HideTips();

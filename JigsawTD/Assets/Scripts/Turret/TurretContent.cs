@@ -69,11 +69,11 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     public virtual void InitializeTurret(StrategyBase strategy)
     {
         this.Strategy = strategy;
-        this.Strategy.m_Turret = this;
+        this.Strategy.Turret = this;
 
         rotTrans.localRotation = Quaternion.identity;
-        bulletPrefab = Strategy.m_Att.Bullet;
-        ShootClip = Strategy.m_Att.ShootSound;
+        bulletPrefab = Strategy.Attribute.Bullet;
+        ShootClip = Strategy.Attribute.ShootSound;
         SetGraphic();
         GenerateRange();
         Activated = true;
@@ -99,8 +99,8 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     //设置不同等级的美术资源
     public virtual void SetGraphic()
     {
-        shootPoint.transform.localPosition = Strategy.m_Att.TurretLevels[Strategy.Quality - 1].ShootPointOffset;
-        CannonSprite.sprite = Strategy.m_Att.TurretLevels[Strategy.Quality - 1].CannonSprite;
+        shootPoint.transform.localPosition = Strategy.Attribute.TurretLevels[Strategy.Quality - 1].ShootPointOffset;
+        CannonSprite.sprite = Strategy.Attribute.TurretLevels[Strategy.Quality - 1].CannonSprite;
     }
 
 

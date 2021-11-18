@@ -18,7 +18,7 @@ public class ElementSelectPreview : MonoBehaviour,IPointerEnterHandler,IPointerE
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        GameManager.Instance.PreviewComposition(true, m_Strategy.m_Att.element, m_Strategy.Quality);
+        GameManager.Instance.PreviewComposition(true, m_Strategy.Attribute.element, m_Strategy.Quality);
         GameManager.Instance.ShowTurretTips(m_Strategy, StaticData.RightMidTipsPos);
         FrameSprite.color = HandleColor;
     }

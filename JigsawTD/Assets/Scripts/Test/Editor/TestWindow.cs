@@ -57,7 +57,7 @@ public class TestWindow : EditorWindow
         e3 = (ElementType)EditorGUILayout.EnumPopup("", e3, GUILayout.Width(60));
         if (GUILayout.Button("ªÒ»°", GUILayout.Width(120)))
         {
-            ConstructHelper.GetCompositeTurretByNameAndElement(turretName, (int)e1, (int)e2, (int)e3);
+            ConstructHelper.GetRefactorTurretByNameAndElement(turretName, (int)e1, (int)e2, (int)e3);
 
         }
         GUILayout.EndHorizontal();

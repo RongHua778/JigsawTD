@@ -131,7 +131,7 @@ public class SniperSkill : InitialSkill
     {
         base.Shoot(bullet);
         float distance = bullet.GetTargetDistance();
-        bullet.Damage *= (1 + distance * 0.2f);
+        bullet.Damage *= (1 + distance * 0.5f);
     }
 
     //public override void Build()
@@ -169,10 +169,15 @@ public class UltraSkill : InitialSkill
     public override TurretSkillName EffectName => TurretSkillName.UltraSkill;
     public override string SkillDescription => "ULTRASKILL";
 
-    public override void PreHit(Bullet bullet = null)
+    //public override void PreHit(Bullet bullet = null)
+    //{
+    //    float increase = bullet.CriticalPercentage - 1.5f;
+    //    bullet.CriticalPercentage += increase * 2f * strategy.TimeModify;
+    //}
+
+    public override void Shoot(Bullet bullet = null)
     {
-        float increase = bullet.CriticalPercentage - 1.5f;
-        bullet.CriticalPercentage += increase * 2f * strategy.TimeModify;
+        bullet.CriticalPercentage += Random.Range(-1f, 4f) * strategy.TimeModify;
     }
 
 }
@@ -202,7 +207,7 @@ public class RapiderSkill : InitialSkill
 
     public override void Shoot(Bullet bullet = null)
     {
-        IDamageable target = strategy.m_Turret.Target[0].Enemy;
+        IDamageable target = strategy.Turret.Target[0].Enemy;
         if (target != lastTarget)
         {
             lastTarget = target;
@@ -319,7 +324,7 @@ public class CoreSkill : InitialSkill
         StrategyBase turretStrategy;
         foreach (var point in points)
         {
-            Vector2 pos = point + (Vector2)strategy.m_Turret.transform.position;
+            Vector2 pos = point + (Vector2)strategy.Turret.transform.position;
             Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
             if (hit != null)
             {
@@ -328,13 +333,13 @@ public class CoreSkill : InitialSkill
                 switch (strategy.Quality)
                 {
                     case 1:
-                        intensify = 0.5f;
+                        intensify = 0.7f;
                         break;
                     case 2:
-                        intensify = 0.75f;
+                        intensify = 1f;
                         break;
                     case 3:
-                        intensify = 1.25f;
+                        intensify = 1.5f;
                         break;
                 }
                 strategy.InitAttack += turretStrategy.BaseAttack * intensify * strategy.TimeModify;

@@ -30454,6 +30454,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game
       objectReference: {fileID: 0}
+    - target: {fileID: 3979959846567427947, guid: efad427a633dbca47ac42421b9004594, type: 3}
+      propertyPath: _strategyFactory
+      value: 
+      objectReference: {fileID: 11400000, guid: 328a3a7240180f7409f1f8d5a3654b4f, type: 2}
     - target: {fileID: 3979959846567427948, guid: efad427a633dbca47ac42421b9004594, type: 3}
       propertyPath: UnlockAll
       value: 1
@@ -36652,6 +36656,22 @@ PrefabInstance:
       propertyPath: AudioSource
       value: 
       objectReference: {fileID: 1166224738}
+    - target: {fileID: 4606533850196202389, guid: a5111fd567cfbdd49b2ee59cd5ce9d83, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 70.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 4606533850196202389, guid: a5111fd567cfbdd49b2ee59cd5ce9d83, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4606533850196202389, guid: a5111fd567cfbdd49b2ee59cd5ce9d83, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -47.397
+      objectReference: {fileID: 0}
+    - target: {fileID: 4606533850196202391, guid: a5111fd567cfbdd49b2ee59cd5ce9d83, type: 3}
+      propertyPath: m_Text
+      value: 75%
+      objectReference: {fileID: 0}
     - target: {fileID: 4606533850250532911, guid: a5111fd567cfbdd49b2ee59cd5ce9d83, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

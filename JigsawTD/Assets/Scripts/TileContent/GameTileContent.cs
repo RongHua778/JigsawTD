@@ -46,14 +46,17 @@ public abstract class GameTileContent : ReusableObject
 
     }
 
-    protected virtual void SaveContent()//放置下的时候，进入保存LIST
+    public virtual void SaveContent()//放置下的时候，进入保存LIST
     {
-        m_ContentStruct = new ContentStruct();
+        if (!LevelManager.Instance.SaveContents.Contains(m_ContentStruct))
+        {
+            m_ContentStruct = new ContentStruct();
+            LevelManager.Instance.SaveContents.Add(m_ContentStruct);
+        }
         m_ContentStruct.ContentType = (int)ContentType;
         m_ContentStruct.posX = Mathf.RoundToInt( transform.position.x);
         m_ContentStruct.posY = Mathf.RoundToInt(transform.position.y);
         m_ContentStruct.Direction = (int)m_gameTile.TileDirection;
-        LevelManager.Instance.SaveContents.Add(m_ContentStruct);
     }
 
     public override void OnUnSpawn()

@@ -43,9 +43,7 @@ public class TurretTips : TileTips
     [SerializeField] GameObject BluePrintArea = default;
     [SerializeField] GameObject BuyBtn = default;
 
-    ////地形加成
-    //[SerializeField] GameObject ElementSkill2Area = default;
-    //[SerializeField] Text ElementSkill2Txt = default;
+
 
     [SerializeField] TurretInfoSetter QualitySetter = default;
     //infoBtn
@@ -79,27 +77,23 @@ public class TurretTips : TileTips
 
     public void ReadTurret(StrategyBase Strategy)//通过场上防御塔查看
     {
-        //Vector2 newPos;
-        //RectTransformUtility.ScreenPointToLocalPointInRectangle(myCanvas.transform as RectTransform, pos, myCanvas.worldCamera, out newPos);//new Vector2(300, Screen.height / 2)
-        //transform.position = myCanvas.transform.TransformPoint(newPos);
-
         m_Strategy = Strategy;
-        BasicInfo(m_Strategy.m_Att, m_Strategy.Quality);
+        BasicInfo(m_Strategy.Attribute, m_Strategy.Quality);
         UpdateRealTimeValue();
         showingTurret = true;
 
         AnalysisArea.SetActive(true);
         BluePrintArea.SetActive(false);
         //根据防御塔类型显示
-        switch (Strategy.m_Att.StrategyType)
+        switch (Strategy.Attribute.StrategyType)
         {
             case StrategyType.Element:
                 QualitySetter.gameObject.SetActive(false);
                 UpgradeArea.SetActive(false);
-                IntensifyIcon.sprite = StaticData.Instance.ElementSprites[(int)Strategy.m_Att.element];
+                IntensifyIcon.sprite = StaticData.Instance.ElementSprites[(int)Strategy.Attribute.element];
                 IntensifyArea.SetActive(true);
                 ElementSkillArea.SetActive(false);
-                IntensifyValue.text = StaticData.GetElementIntensifyText(Strategy.m_Att.element);
+                IntensifyValue.text = StaticData.GetElementIntensifyText(Strategy.Attribute.element);
                 break;
             case StrategyType.Composite:
                 ElementSkillArea.SetActive(true);
@@ -116,15 +110,11 @@ public class TurretTips : TileTips
 
     public void ReadBluePrint(BluePrintGrid grid)
     {
-        //Vector2 newPos;
-        //RectTransformUtility.ScreenPointToLocalPointInRectangle(myCanvas.transform as RectTransform, new Vector2(900, Screen.height / 2), myCanvas.worldCamera, out newPos);
-        //transform.position = myCanvas.transform.TransformPoint(newPos);
-
         showingBlueprint = true;
         m_Grid = grid;
-        m_Strategy = grid.BluePrint.ComStrategy;
+        m_Strategy = grid.Strategy;
 
-        BasicInfo(m_Strategy.m_Att, m_Strategy.Quality);
+        BasicInfo(m_Strategy.Attribute, m_Strategy.Quality);
         UpdateBluePrintInfo();
 
         ElementSkillArea.SetActive(true);
@@ -165,10 +155,10 @@ public class TurretTips : TileTips
         if (Strategy.Quality < 3)
         {
             UpgradeArea.SetActive(true);
-            upgradeCost = StaticData.Instance.LevelUpCostPerRare[m_Strategy.m_Att.Rare - 1, m_Strategy.Quality - 1];// * m_Strategy.m_Att.Rare * m_Strategy.Quality;
+            upgradeCost = StaticData.Instance.LevelUpCostPerRare[m_Strategy.Attribute.Rare - 1, m_Strategy.Quality - 1];// * m_Strategy.m_Att.Rare * m_Strategy.Quality;
             upgradeCost = (int)(upgradeCost * (1 - m_Strategy.UpgradeDiscount));
             UpgradeCostValue.text = upgradeCost.ToString();
-            //UpdateLevelUpInfo();
+
         }
         else
         {
@@ -265,7 +255,7 @@ public class TurretTips : TileTips
         RangeValue.text = m_Strategy.FinalRange.ToString();
         RangeChangeTxt.text = "";
 
-        CriticalValue.text = (m_Strategy.FinalCriticalRate * 100).ToString() + "%";
+        CriticalValue.text = ((int)(m_Strategy.FinalCriticalRate * 100)).ToString() + "%";
         CriticalChangeTxt.text = "";
 
         SplashRangeValue.text = m_Strategy.FinalSplashRange.ToString();
@@ -335,9 +325,9 @@ public class TurretTips : TileTips
         {
             m_Strategy.Quality++;
             m_Strategy.SetQualityValue();
-            m_Strategy.m_Turret.SetGraphic();
-            m_Strategy.m_Turret.m_ContentStruct.Quality = m_Strategy.Quality;
-            BasicInfo(m_Strategy.m_Att, m_Strategy.Quality);
+            m_Strategy.Turret.SetGraphic();
+            m_Strategy.Turret.m_ContentStruct.Quality = m_Strategy.Quality;
+            BasicInfo(m_Strategy.Attribute, m_Strategy.Quality);
             UpdateRealTimeValue();
             UpgradeAreaSet(m_Strategy);
 

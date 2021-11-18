@@ -217,13 +217,13 @@ SCATTERSKILL=Deals 50% less damage, but can attack an additional 3 targets.
 MORTARSKILL=Splash damage increased by 15% for every 0.1 splash range.
 RAPIDERSKILL=Firerate increased by 15% each shoot when it is attacking the same target(up to 300%).
 ROTARYSKILL=Penetration Bullet can't splash; Randomly shoot around and double all firerate increased.
-SNIPERSKILL=Bullet's damage increased by 20% for each meter it travelled
-ULTRASKILL=Double the increased critical damage.
+SNIPERSKILL=Bullet's damage increased by 50% for each meter it travelled
+ULTRASKILL=Bullet's critical damage randomly increased by -100& to 400%
 SNOWSKILL=Penetration Bullet can't splash;Bullet will double enemy's current slow.
 COOPORATIVESKILL=Attack increased by 2% * the amount of "Cooporative" each shoot.
 BOOMERRANGSKILL=Penetration Bullet can't splash;Bullet damage will increase by 10% for each enemy it hit.
 SUPERSKILL=Double all current stats after 30s of each wave
-CORESKILL=At the start of each wave, it's attack will become 50%/75%/125% of the sum of adjacent turrets.
+CORESKILL=At the start of each wave, it's attack will become 70%/100%/150% of the sum of adjacent turrets.
 
 
 //A系

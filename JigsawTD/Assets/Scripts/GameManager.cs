@@ -302,10 +302,10 @@ public class GameManager : Singleton<GameManager>
             ShowMessage(GameMultiLang.GetTraduction("NOTBUILDSTATE"));
             return;
         }
-        if (grid.BluePrint.CheckBuildable())
+        if (grid.Strategy.CheckBuildable())
         {
             TransitionToState(StateName.PickingState);
-            m_BluePrintShopUI.CompositeBluePrint(grid);
+            m_BluePrintShopUI.RefactorBluePrint(grid);
             m_FuncUI.Hide();
             m_BoardSystem.SetTutorialPoss(true);//显示强制摆放位置
             GameEvents.Instance.TutorialTrigger(TutorialType.RefactorBtnClick);

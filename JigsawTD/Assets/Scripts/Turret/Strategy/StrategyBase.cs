@@ -10,25 +10,23 @@ public enum StrategyType
 
 public class StrategyBase
 {
-
-    public Blueprint CompositeBluePrint;
     //字段
-    public TurretContent m_Turret;
-    public TurretAttribute m_Att;
+    public TurretContent Turret;
+    public TurretAttribute Attribute;
     private int quality = 0;
     public int Quality { get => quality; set => quality = value; }
 
 
     public StrategyBase(TurretAttribute attribute, int quality)
     {
-        m_Att = attribute;
+        this.Attribute = attribute;
         this.Quality = quality;
         this.RangeType = attribute.RangeType;
         SetQualityValue();//属性设置
     }
 
 
-    //基础属性
+    #region 基础属性
     private float initAttack;
     private float initSpeed;
     private int initRange;
@@ -41,8 +39,8 @@ public class StrategyBase
     public float InitCriticalRate { get => initCriticalRate; set => initCriticalRate = value; }
     public float InitSplashRange { get => initSputteringRange; set => initSputteringRange = value; }
     public float InitSlowRate { get => initSlowRate; set => initSlowRate = value; }
-
-    //二级属性
+    #endregion
+    #region 二级属性
     private int elementSkillSlot = 2;//元素技能槽数
     public int ElementSKillSlot { get => elementSkillSlot; set => elementSkillSlot = value; }
     private RangeType rangeType = RangeType.Circle;
@@ -82,8 +80,8 @@ public class StrategyBase
 
     private int forbidRange;
     public int ForbidRange { get => forbidRange; set => forbidRange = value; }
-
-    //基础加成
+    #endregion
+    #region 基础加成
     private float initAttackModify = 1;
     private float initFireRateModify = 1;
     private int initRangeModify = 1;
@@ -99,7 +97,7 @@ public class StrategyBase
 
     private int baseTargetCountIntensify;
     public int BaseTargetCountIntensify { get => baseTargetCountIntensify; set => baseTargetCountIntensify = value; }
-
+    #endregion
     #region 元素加成
     private float comAttackIntensify;
     private float comSpeedIntensify;
@@ -215,11 +213,11 @@ public class StrategyBase
 
 
     #region 下级属性
-    public float NextAttack { get => m_Att.TurretLevels[Quality].AttackDamage * InitAttackModify * (1 + ComAttackIntensify); }
-    public float NextSpeed { get => m_Att.TurretLevels[Quality].AttackSpeed * InitFirerateModify * (1 + ComSpeedIntensify); }
-    public float NextSplashRange { get => m_Att.TurretLevels[Quality].SplashRange * InitSplashRangeModify + ComSplashRangeIntensify; }
-    public float NextCriticalRate { get => m_Att.TurretLevels[Quality].CriticalRate * InitCriticalRateModify + ComCriticalIntensify; }
-    public float NextSlowRate { get => m_Att.TurretLevels[Quality].SlowRate * InitSlowRateModify + ComSlowIntensify; }
+    public float NextAttack { get => Attribute.TurretLevels[Quality].AttackDamage * InitAttackModify * (1 + ComAttackIntensify); }
+    public float NextSpeed { get => Attribute.TurretLevels[Quality].AttackSpeed * InitFirerateModify * (1 + ComSpeedIntensify); }
+    public float NextSplashRange { get => Attribute.TurretLevels[Quality].SplashRange * InitSplashRangeModify + ComSplashRangeIntensify; }
+    public float NextCriticalRate { get => Attribute.TurretLevels[Quality].CriticalRate * InitCriticalRateModify + ComCriticalIntensify; }
+    public float NextSlowRate { get => Attribute.TurretLevels[Quality].SlowRate * InitSlowRateModify + ComSlowIntensify; }
     #endregion
 
     public TurretSkill TurretSkill { get; set; }
@@ -239,7 +237,7 @@ public class StrategyBase
     {
         TurretSkills.Clear();
 
-        TurretSkill effect = TurretEffectFactory.GetInitialSkill((int)m_Att.TurretSkill);//自带技能
+        TurretSkill effect = TurretEffectFactory.GetInitialSkill((int)Attribute.TurretSkill);//自带技能
         TurretSkill = effect;
         TurretSkill.strategy = this;
         TurretSkills.Add(effect);
@@ -264,12 +262,12 @@ public class StrategyBase
 
     public virtual void SetQualityValue()
     {
-        InitAttack = m_Att.TurretLevels[Quality - 1].AttackDamage;
-        InitFireRate = m_Att.TurretLevels[Quality - 1].AttackSpeed;
-        InitRange = m_Att.TurretLevels[Quality - 1].AttackRange;
-        InitCriticalRate = m_Att.TurretLevels[Quality - 1].CriticalRate;
-        InitSplashRange = m_Att.TurretLevels[Quality - 1].SplashRange;
-        InitSlowRate = m_Att.TurretLevels[Quality - 1].SlowRate;
+        InitAttack = Attribute.TurretLevels[Quality - 1].AttackDamage;
+        InitFireRate = Attribute.TurretLevels[Quality - 1].AttackSpeed;
+        InitRange = Attribute.TurretLevels[Quality - 1].AttackRange;
+        InitCriticalRate = Attribute.TurretLevels[Quality - 1].CriticalRate;
+        InitSplashRange = Attribute.TurretLevels[Quality - 1].SplashRange;
+        InitSlowRate = Attribute.TurretLevels[Quality - 1].SlowRate;
         //ForbidRange = m_Att.TurretLevels[Quality - 1].ForbidRange;
     }
 
