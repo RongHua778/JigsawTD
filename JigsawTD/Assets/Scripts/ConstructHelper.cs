@@ -95,18 +95,16 @@ public static class ConstructHelper
     {
         TileShape shape = m_ShapeFactory.GetDShape();
         GameTile tile = m_TileFactory.GetBasicTile();
-        CompositeTurret content = m_ContentFactory.GetCompositeTurret(bluePrint);
-        if (GameRes.NextCompositeCallback != null)//下一次合成获得额外加成
-        {
-            GameRes.NextCompositeCallback(bluePrint.ComStrategy);
-            GameRes.NextCompositeCallback = null;
-        }
-        bluePrint.ComStrategy.CompositeSkill();
+        RefactorTurret content = m_ContentFactory.GetCompositeTurret(bluePrint);
+        //if (GameRes.NextCompositeCallback != null)//下一次合成获得额外加成
+        //{
+        //    GameRes.NextCompositeCallback(bluePrint.ComStrategy);
+        //    GameRes.NextCompositeCallback = null;
+        //}
+        //bluePrint.ComStrategy.CompositeSkill();
 
         tile.SetContent(content);
         shape.SetTile(tile);
-
-        GameRes.TotalRefactor++;
         return shape;
     }
 
@@ -146,10 +144,10 @@ public static class ConstructHelper
         return shape;
     }
 
-    public static Blueprint GetSpecificBlueprint(string name, int e1, int e2, int e3)
+    public static Blueprint GetSpecificBlueprint(string name, int e1, int e2, int e3, int quality = 1)
     {
         TurretAttribute attribute = m_ContentFactory.GetCompositeTurretByName(name);
-        Blueprint bluePrint = m_BlurPrintFactory.GetSpecificBluePrint(attribute, e1, e2, e3);
+        Blueprint bluePrint = m_BlurPrintFactory.GetSpecificBluePrint(attribute, e1, e2, e3, quality);
         return bluePrint;
     }
 
@@ -172,6 +170,34 @@ public static class ConstructHelper
         GameTile tile = m_TileFactory.GetBasicTile();
         tile.SetContent(content);
         return tile;
+    }
+
+    public static GameTile GetRefactorTurret(ContentStruct contentStruct)
+    {
+        GameTile tile = m_TileFactory.GetBasicTile();
+        List<int> elements;
+        RefactorTurret content = null;
+        for (int i = 0; i < contentStruct.SkillList.Count; i++)
+        {
+            if (i == 0)
+            {
+                elements = contentStruct.SkillList["1"];
+                Blueprint blueprint = GetSpecificBlueprint(contentStruct.ContentName, elements[0], elements[1], elements[2], contentStruct.Quality);
+                content = m_ContentFactory.GetCompositeTurret(blueprint);
+                content.Strategy.ElementSKillSlot = contentStruct.ElementSlotCount;
+                tile.SetContent(content);
+            }
+            else
+            {
+                elements = contentStruct.SkillList[i.ToString()];
+                ElementSkill skill = TurretEffectFactory.GetElementSkill(elements);
+                content.Strategy.AddElementSkill(skill);
+                ((BasicTile)tile).EquipTurret();
+            }
+        }
+        //还差ddd没做
+        return tile;
+
     }
 
 

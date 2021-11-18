@@ -45,6 +45,7 @@ public class BoardSystem : IGameSystem
     public bool IsLongPress { get => pressCounter >= 0.2f; }
     private float moveDis;
     private Vector3 startPos;
+    private Vector2Int sizeOffset;
 
 
     private static TileBase selectingTile;
@@ -161,22 +162,21 @@ public class BoardSystem : IGameSystem
 
     public void SetGameBoard()
     {
-        Vector2Int sizeOffset = new Vector2Int((int)((_startSize.x - 1) * 0.5f), (int)((_startSize.y - 1) * 0.5f));
+        sizeOffset = new Vector2Int((int)((_startSize.x - 1) * 0.5f), (int)((_startSize.y - 1) * 0.5f));
         StaticData.BoardOffset = new Vector2Int((int)((_groundSize.x - 1) * 0.5f), (int)((_groundSize.y - 1) * 0.5f));
 
         GenerateGroundTiles(_groundSize);
         Physics2D.SyncTransforms();//涉及物理检测前，需要调用
         AstarPath.active.Scan();
 
-        FirstGameSet(sizeOffset);
-        //if (!LevelManager.Instance.IsContiune)
-        //{
-        //    FirstGameSet(sizeOffset);
-        //}
-        //else
-        //{
-        //    LoadGameSet();
-        //}
+        if (!LevelManager.Instance.IsContiune)
+        {
+            FirstGameSet();
+        }
+        else
+        {
+            LoadGameSet();
+        }
 
 
         Physics2D.SyncTransforms();
@@ -185,7 +185,7 @@ public class BoardSystem : IGameSystem
         CheckPathTrap();
     }
 
-    private void FirstGameSet(Vector2Int sizeOffset)
+    private void FirstGameSet()
     {
         GenerateStartTiles(_startSize, sizeOffset);
 
@@ -195,37 +195,48 @@ public class BoardSystem : IGameSystem
 
     private void LoadGameSet()
     {
-        Debug.Log("LoadGameSet");
-        foreach (var content in LevelManager.Instance.LastSaveContents)
+        try
         {
-            GameTile tile = null;
-            Vector2Int pos = new Vector2Int(content.posX, content.posY);
-            switch (content.ContentType)
+            foreach (var content in LevelManager.Instance.LastSaveContents)
             {
-                case 0:
-                default:
-                    tile = ConstructHelper.GetNormalTile(GameTileContentType.Empty);
-                    break;
-                case 1:
-                    tile = ConstructHelper.GetDestinationPoint();
-                    DestinationPoint = tile;
-                    break;
-                case 2:
-                    tile = ConstructHelper.GetSpawnPoint();
-                    SpawnPoint = tile;
-                    break;
-                case 3:
-                    tile = ConstructHelper.GetElementTurret((ElementType)content.Element,content.Quality);
-                    break;
-                case 5://陷阱
-                    tile = ConstructHelper.GetTrap(content.ContentName);
-                    break;
+                GameTile tile = null;
+                Vector2Int pos = new Vector2Int(content.posX, content.posY);
+                switch (content.ContentType)
+                {
+                    case 0:
+                    default:
+                        tile = ConstructHelper.GetNormalTile(GameTileContentType.Empty);
+                        break;
+                    case 1:
+                        tile = ConstructHelper.GetDestinationPoint();
+                        DestinationPoint = tile;
+                        break;
+                    case 2:
+                        tile = ConstructHelper.GetSpawnPoint();
+                        SpawnPoint = tile;
+                        break;
+                    case 3:
+                        tile = ConstructHelper.GetElementTurret((ElementType)content.Element, content.Quality);
+                        break;
+                    case 4:
+                        tile = ConstructHelper.GetRefactorTurret(content);
+                        break;
+                    case 5://陷阱
+                        tile = ConstructHelper.GetTrap(content.ContentName);
+                        break;
+                }
+                tile.SetRotation(content.Direction);
+                tile.transform.position = (Vector3Int)pos;
+                tile.TileLanded();
+                Physics2D.SyncTransforms();
             }
-            tile.SetRotation(content.Direction);
-            tile.transform.position = (Vector3Int)pos;
-            tile.TileLanded();
-            Physics2D.SyncTransforms();
         }
+        catch
+        {
+            Debug.Log("Error when load game");
+
+        }
+
 
     }
 

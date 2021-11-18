@@ -18,7 +18,7 @@ public class RandomCritical : ElementSkill
     {
         base.Composite();
         strategy.InitAttackModify *= Random.Range(0.5f, 3f);
-        strategy.InitSpeedModify *= Random.Range(0.5f, 3f);
+        strategy.InitFirerateModify *= Random.Range(0.5f, 3f);
         strategy.InitSlowRateModify *= Random.Range(0.5f, 3f);
         strategy.InitCriticalRateModify *= Random.Range(0.5f, 3f);
         strategy.InitSplashRangeModify *= Random.Range(0.5f, 3f);
@@ -28,7 +28,7 @@ public class RandomCritical : ElementSkill
     {
         base.OnEquip();
         strategy.InitAttackModify *= Random.Range(0.5f, 3f);
-        strategy.InitSpeedModify *= Random.Range(0.5f, 3f);
+        strategy.InitFirerateModify *= Random.Range(0.5f, 3f);
         strategy.InitSlowRateModify *= Random.Range(0.5f, 3f);
         strategy.InitCriticalRateModify *= Random.Range(0.5f, 3f);
         strategy.InitSplashRangeModify *= Random.Range(0.5f, 3f);

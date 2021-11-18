@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class Boomerrang : CompositeTurret
+public class Boomerrang : RefactorTurret
 {
     float rotSpeed = -360;
     private float flyTime;

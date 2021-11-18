@@ -19,12 +19,12 @@ public class StrategyBase
     public int Quality { get => quality; set => quality = value; }
 
 
-    public StrategyBase(TurretAttribute attribute, int quality, Blueprint comBlueprint = null)
+    public StrategyBase(TurretAttribute attribute, int quality)
     {
         m_Att = attribute;
         this.Quality = quality;
-        CompositeBluePrint = comBlueprint;
         this.RangeType = attribute.RangeType;
+        SetQualityValue();//属性设置
     }
 
 
@@ -36,7 +36,7 @@ public class StrategyBase
     private float initSputteringRange;
     private float initSlowRate;
     public float InitAttack { get => initAttack; set => initAttack = value; }
-    public float InitSpeed { get => initSpeed; set => initSpeed = value; }
+    public float InitFireRate { get => initSpeed; set => initSpeed = value; }
     public int InitRange { get => initRange; set => initRange = value; }
     public float InitCriticalRate { get => initCriticalRate; set => initCriticalRate = value; }
     public float InitSplashRange { get => initSputteringRange; set => initSputteringRange = value; }
@@ -85,13 +85,13 @@ public class StrategyBase
 
     //基础加成
     private float initAttackModify = 1;
-    private float initSpeedModify = 1;
+    private float initFireRateModify = 1;
     private int initRangeModify = 1;
     private float initCriticalRateModify = 1;
     private float initSlowRateModify = 1;
     private float initSplashRangeModify = 1;
     public float InitAttackModify { get => initAttackModify; set => initAttackModify = value; }
-    public float InitSpeedModify { get => initSpeedModify; set => initSpeedModify = value; }
+    public float InitFirerateModify { get => initFireRateModify; set => initFireRateModify = value; }
     public int InitRangeModify { get => initRangeModify; set => initRangeModify = value; }
     public float InitCriticalRateModify { get => initCriticalRateModify; set => initCriticalRateModify = value; }
     public float InitSlowRateModify { get => initSlowRateModify; set => initSlowRateModify = value; }
@@ -141,7 +141,7 @@ public class StrategyBase
     private int totalDamage;
     public int TotalDamage { get => totalDamage; set => totalDamage = value; }
     public float BaseAttack { get => InitAttack * InitAttackModify * (1 + ComAttackIntensify * AllAttackIntensifyModify); }
-    public float BaseSpeed { get => InitSpeed * InitSpeedModify * (1 + ComSpeedIntensify * AllSpeedIntensifyModify); }
+    public float BaseSpeed { get => InitFireRate * InitFirerateModify * (1 + ComSpeedIntensify * AllSpeedIntensifyModify); }
     public int BaseRange { get => InitRange * InitRangeModify + ComRangeIntensify; }
     public float BaseCriticalRate { get => InitCriticalRate * InitCriticalRateModify + ComCriticalIntensify * AllCriticalIntensifyModify; }
     public float BaseCriticalPercentage { get => initCriticalPercentage; }
@@ -216,7 +216,7 @@ public class StrategyBase
 
     #region 下级属性
     public float NextAttack { get => m_Att.TurretLevels[Quality].AttackDamage * InitAttackModify * (1 + ComAttackIntensify); }
-    public float NextSpeed { get => m_Att.TurretLevels[Quality].AttackSpeed * InitSpeedModify * (1 + ComSpeedIntensify); }
+    public float NextSpeed { get => m_Att.TurretLevels[Quality].AttackSpeed * InitFirerateModify * (1 + ComSpeedIntensify); }
     public float NextSplashRange { get => m_Att.TurretLevels[Quality].SplashRange * InitSplashRangeModify + ComSplashRangeIntensify; }
     public float NextCriticalRate { get => m_Att.TurretLevels[Quality].CriticalRate * InitCriticalRateModify + ComCriticalIntensify; }
     public float NextSlowRate { get => m_Att.TurretLevels[Quality].SlowRate * InitSlowRateModify + ComSlowIntensify; }
@@ -235,7 +235,7 @@ public class StrategyBase
         }
     }
 
-    public void GetTurretSkills()//首次获取并激活效果
+    public void GetTurretSkills()//首次获取被动技能效果
     {
         TurretSkills.Clear();
 
@@ -244,15 +244,6 @@ public class StrategyBase
         TurretSkill.strategy = this;
         TurretSkills.Add(effect);
         TurretSkill.Build();
-
-        //元素组合技能
-        List<int> elements = new List<int>();
-        foreach (var com in CompositeBluePrint.Compositions)
-        {
-            elements.Add(com.elementRequirement);
-        }
-        ElementSkill effect2 = TurretEffectFactory.GetElementSkill(elements);
-        AddElementSkill(effect2);
 
     }
 
@@ -274,7 +265,7 @@ public class StrategyBase
     public virtual void SetQualityValue()
     {
         InitAttack = m_Att.TurretLevels[Quality - 1].AttackDamage;
-        InitSpeed = m_Att.TurretLevels[Quality - 1].AttackSpeed;
+        InitFireRate = m_Att.TurretLevels[Quality - 1].AttackSpeed;
         InitRange = m_Att.TurretLevels[Quality - 1].AttackRange;
         InitCriticalRate = m_Att.TurretLevels[Quality - 1].CriticalRate;
         InitSplashRange = m_Att.TurretLevels[Quality - 1].SplashRange;
@@ -295,7 +286,7 @@ public class StrategyBase
         UpgradeDiscount = 0;
         //基础加成
         InitAttackModify = 0;
-        InitSpeedModify = 0;
+        InitFirerateModify = 0;
         InitRangeModify = 0;
         InitCriticalRateModify = 0;
         InitSplashRangeModify = 0;

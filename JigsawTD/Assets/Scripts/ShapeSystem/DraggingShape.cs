@@ -164,10 +164,10 @@ public class DraggingShape : DraggingActions
 
                 if (col.CompareTag("OnlyCompositeTurret"))
                 {
-                    if (tile.Content.ContentType == GameTileContentType.CompositeTurret)
+                    if (tile.Content.ContentType == GameTileContentType.RefactorTurret)
                     {
                         GameTile tTile = col.GetComponent<GameTile>();
-                        StrategyBase strategy = ((CompositeTurret)tTile.Content).Strategy;
+                        StrategyBase strategy = ((RefactorTurret)tTile.Content).Strategy;
                         if (strategy.TurretSkills.Count < strategy.ElementSKillSlot + 1)
                         {
                             SetTileColor(equipColor, tile);

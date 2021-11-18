@@ -40,7 +40,7 @@ public class BasicTile : GameTile
             case GameTileContentType.Trap:
                 TileRenderers[0].sprite = basicTurretBase;
                 break;
-            case GameTileContentType.CompositeTurret:
+            case GameTileContentType.RefactorTurret:
                 TileRenderers[0].sprite = compositeTurretBase;
                 break;
         }

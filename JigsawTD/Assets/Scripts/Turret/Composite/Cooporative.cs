@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cooporative : CompositeTurret
+public class Cooporative : RefactorTurret
 {
     public override void ContentLanded()
     {

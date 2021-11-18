@@ -10,8 +10,9 @@ public class Blueprint
     List<Composition> compositions = new List<Composition>();
     public List<Composition> Compositions { get => compositions; set => compositions = value; }
 
-    public void SortBluePrint()
+    public void SortBluePrint(List<Composition> coms,int quality)
     {
+        Compositions = coms;
         int temp;
         for (int i = 0; i < compositions.Count - 1; i++)
         {
@@ -34,6 +35,19 @@ public class Blueprint
                 }
             }
         }
+
+        ComStrategy = new StrategyBase(CompositeTurretAttribute, quality);
+        ComStrategy.GetTurretSkills();//初始技能
+
+        //配方自带元素技能
+        List<int> elements = new List<int>();
+        foreach (var com in Compositions)
+        {
+            elements.Add(com.elementRequirement);
+        }
+        ElementSkill effect = TurretEffectFactory.GetElementSkill(elements);
+        ComStrategy.AddElementSkill(effect);
+
     }
 
     public void BuildBluePrint()

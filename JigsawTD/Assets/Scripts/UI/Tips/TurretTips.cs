@@ -280,28 +280,28 @@ public class TurretTips : TileTips
     private void UpdateBluePrintInfo()
     {
         AttackValue.text = m_Strategy.InitAttack.ToString();
-        AttackChangeTxt.text = (m_Strategy.ComAttackIntensify > 0 ?
-            "+" + m_Strategy.InitAttack * m_Strategy.ComAttackIntensify : "");
+        AttackChangeTxt.text = (m_Strategy.FinalAttack > m_Strategy.InitAttack ?
+            "+" + (m_Strategy.FinalAttack - m_Strategy.InitAttack) : "");
 
-        SpeedValue.text = m_Strategy.InitSpeed.ToString();
-        SpeedChangeTxt.text = (m_Strategy.ComSpeedIntensify > 0 ?
-            "+" + m_Strategy.InitSpeed * m_Strategy.ComSpeedIntensify : "");
+        SpeedValue.text = m_Strategy.InitFireRate.ToString();
+        SpeedChangeTxt.text = (m_Strategy.FinalFireRate > m_Strategy.InitFireRate ?
+            "+" + (m_Strategy.FinalFireRate - m_Strategy.InitFireRate) : "");
 
         RangeValue.text = m_Strategy.InitRange.ToString();
-        RangeChangeTxt.text = (m_Strategy.ComRangeIntensify > 0 ?
-            "+" + m_Strategy.ComRangeIntensify : "");
+        RangeChangeTxt.text = (m_Strategy.FinalRange > m_Strategy.InitRange ?
+            "+" + (m_Strategy.FinalRange - m_Strategy.InitRange) : "");
 
         CriticalValue.text = (m_Strategy.InitCriticalRate * 100).ToString() + "%";
-        CriticalChangeTxt.text = (m_Strategy.ComCriticalIntensify > 0 ?
-            "+" + m_Strategy.ComCriticalIntensify * 100 + "%" : "");
+        CriticalChangeTxt.text = (m_Strategy.FinalCriticalRate > m_Strategy.InitCriticalRate ?
+            "+" + (m_Strategy.FinalCriticalRate - m_Strategy.InitCriticalRate) * 100 + "%" : "");
 
         SplashRangeValue.text = m_Strategy.InitSplashRange.ToString();
-        SplashChangeTxt.text = (m_Strategy.ComSplashRangeIntensify > 0 ?
-            "+" + m_Strategy.ComSplashRangeIntensify : "");
+        SplashChangeTxt.text = (m_Strategy.FinalSplashRange > m_Strategy.InitSplashRange ?
+            "+" + (m_Strategy.FinalSplashRange - m_Strategy.InitSplashRange) : "");
 
         SlowRateValue.text = m_Strategy.InitSlowRate.ToString();
-        SlowRateChangeTxt.text = (m_Strategy.ComSlowIntensify > 0 ?
-            "+" + m_Strategy.ComSlowIntensify : "");
+        SlowRateChangeTxt.text = (m_Strategy.FinalSlowRate > m_Strategy.InitSlowRate ?
+            "+" + (m_Strategy.FinalSlowRate - m_Strategy.InitSlowRate) : "");
     }
 
     public void UpdateLevelUpInfo()
@@ -336,6 +336,7 @@ public class TurretTips : TileTips
             m_Strategy.Quality++;
             m_Strategy.SetQualityValue();
             m_Strategy.m_Turret.SetGraphic();
+            m_Strategy.m_Turret.m_ContentStruct.Quality = m_Strategy.Quality;
             BasicInfo(m_Strategy.m_Att, m_Strategy.Quality);
             UpdateRealTimeValue();
             UpgradeAreaSet(m_Strategy);

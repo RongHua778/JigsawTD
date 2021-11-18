@@ -133,7 +133,7 @@ public abstract class GameTile : TileBase
         m_DraggingShape = null;
         SetTileColor(Color.white);
         Content = null;
-
+        transform.rotation = Quaternion.identity;
     }
 
     public void SetRandomRotation()

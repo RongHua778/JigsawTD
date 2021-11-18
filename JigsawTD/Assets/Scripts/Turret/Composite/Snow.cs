@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class Snow : CompositeTurret
+public class Snow : RefactorTurret
 {
 
     protected override void Shoot()

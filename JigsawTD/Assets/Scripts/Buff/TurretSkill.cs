@@ -230,12 +230,6 @@ public class ConstructorSkill : InitialSkill
     public override TurretSkillName EffectName => TurretSkillName.ConstructorSkill;
     public override string SkillDescription => "CONSTRUCTORSKILL";
 
-    //public override void PreHit(Bullet bullet = null)
-    //{
-    //    int count = strategy.m_Turret.targetList.Count;
-    //    bullet.Damage *= (1 + count * 0.1f);
-    //}
-
     public override void OnEnter(IDamageable target)
     {
         strategy.TurnAttackIntensify += 0.1f * strategy.TimeModify;

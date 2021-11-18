@@ -24,8 +24,11 @@ public class ContentStruct
     //Turret
     public int Element;
     public int Quality;
-    public List<List<int>> SkillList;
-    public double[] InitModifies;
+
+    public int ElementSlotCount;
+    public Dictionary<string, List<int>> SkillList;
+
+    public List<double> InitModifies;
 
     //public ContentStruct(GameTileContentType contentType, Vector2 contentPos, string contentName, int quality = 0, List<List<int>> skills = null, float[] initModify = null)
     //{

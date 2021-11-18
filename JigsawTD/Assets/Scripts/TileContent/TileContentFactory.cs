@@ -142,10 +142,7 @@ public class TileContentFactory : GameObjectFactory
         int quality = StaticData.RandomNumber(qualityC) + 1;
         TurretAttribute attribute = elementTurrets[UnityEngine.Random.Range(0, StaticData.elementN)];
         ElementTurret content = Get(attribute.Prefab) as ElementTurret;
-        content.Strategy = new StrategyBase(attribute, quality);
-        content.Strategy.m_Turret = content;
-        content.Strategy.SetQualityValue();
-        content.InitializeTurret();
+        content.InitializeTurret(new StrategyBase(attribute, quality));
         return content;
     }
 
@@ -153,10 +150,8 @@ public class TileContentFactory : GameObjectFactory
     {
         TurretAttribute attribute = ElementDIC[element];
         ElementTurret content = Get(attribute.Prefab) as ElementTurret;
-        content.Strategy = new StrategyBase(attribute, quality);
-        content.Strategy.m_Turret = content;
-        content.Strategy.SetQualityValue();
-        content.InitializeTurret();
+        content.InitializeTurret(new StrategyBase(attribute, quality));
+
         return content;
     }
 
@@ -173,12 +168,12 @@ public class TileContentFactory : GameObjectFactory
             ElementDIC[(ElementType)UnityEngine.Random.Range(0, ElementDIC.Count)];
     }
     //ºÏ³ÉËþ***********
-    public CompositeTurret GetCompositeTurret(Blueprint bluePrint)
+    public RefactorTurret GetCompositeTurret(Blueprint bluePrint)
     {
-        CompositeTurret content = Get(bluePrint.CompositeTurretAttribute.Prefab) as CompositeTurret;
-        content.Strategy = bluePrint.ComStrategy;
-        bluePrint.ComStrategy.m_Turret = content;
-        content.InitializeTurret();
+        RefactorTurret content = Get(bluePrint.CompositeTurretAttribute.Prefab) as RefactorTurret;
+        content.InitializeTurret(bluePrint.ComStrategy);
+        bluePrint.ComStrategy.CompositeSkill();
+        GameRes.TotalRefactor++;
         return content;
 
     }

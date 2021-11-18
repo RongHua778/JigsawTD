@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rotary : CompositeTurret
+public class Rotary : RefactorTurret
 {
     float rotSpeed = 0;
     float RotSpeed { get => Mathf.Max(-720, -rotSpeed * Mathf.Pow(Strategy.FinalFireRate, 2)); set => rotSpeed = value; }
 
-    public override void InitializeTurret()
+    public override void InitializeTurret(StrategyBase strategy)
     {
-        base.InitializeTurret();
+        base.InitializeTurret(strategy);
         Strategy.CheckAngle = 360f;
     }
     protected override void RotateTowards()

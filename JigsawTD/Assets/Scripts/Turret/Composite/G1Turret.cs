@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class G1Turret : CompositeTurret
+public class G1Turret : RefactorTurret
 {
     private const float ShootPointSideOffset = 0.16f;
     private const float ShootInterval = 0.12f;

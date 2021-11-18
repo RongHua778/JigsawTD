@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class L1Turret : CompositeTurret
+public class L1Turret : RefactorTurret
 {
 
 

@@ -66,8 +66,11 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
 
     }
 
-    public virtual void InitializeTurret()
+    public virtual void InitializeTurret(StrategyBase strategy)
     {
+        this.Strategy = strategy;
+        this.Strategy.m_Turret = this;
+
         rotTrans.localRotation = Quaternion.identity;
         bulletPrefab = Strategy.m_Att.Bullet;
         ShootClip = Strategy.m_Att.ShootSound;

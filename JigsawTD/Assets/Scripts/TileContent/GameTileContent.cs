@@ -5,11 +5,11 @@ using UnityEngine;
 
 public enum GameTileContentType
 {
-    Empty, Destination, SpawnPoint, ElementTurret, CompositeTurret, Trap, TurretBase
+    Empty, Destination, SpawnPoint, ElementTurret, RefactorTurret, Trap, TurretBase
 }
 public abstract class GameTileContent : ReusableObject
 {
-    protected ContentStruct m_ContentStruct;
+    public ContentStruct m_ContentStruct;
     public virtual bool IsWalkable { get => true; }
     public virtual GameTileContentType ContentType { get; }
 
