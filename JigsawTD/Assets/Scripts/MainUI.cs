@@ -16,8 +16,24 @@ public class MainUI : IUserInterface
     [SerializeField] Text coinTxt = default;
     [SerializeField] WaveInfoSetter m_WaveInfoSetter = default;
     [SerializeField] PausePanel m_PausePanel = default;
+    [SerializeField] Text waveTxt = default;
 
-
+    public int CurrentWave
+    {
+        set
+        {
+            string lang = PlayerPrefs.GetString("_language");
+            switch (lang)
+            {
+                case "ch":
+                    waveTxt.text = GameMultiLang.GetTraduction("NUM") + value + (LevelManager.Instance.CurrentLevel.Mode > 10 ? "" : "/" + LevelManager.Instance.CurrentLevel.Wave) + GameMultiLang.GetTraduction("WAVE");
+                    break;
+                case "en":
+                    waveTxt.text = GameMultiLang.GetTraduction("WAVE") + value + (LevelManager.Instance.CurrentLevel.Mode > 10 ? "" : "/" + LevelManager.Instance.CurrentLevel.Wave);
+                    break;
+            }
+        }
+    }
 
     public int Coin
     {
@@ -55,9 +71,7 @@ public class MainUI : IUserInterface
 
     public override void Initialize()
     {
-        //GameEvents.Instance.onEnemyReach += EnemyReach;
         GameSpeed = 1;
-
         m_PausePanel.Initialize();
         m_Anim = GetComponent<Animator>();
 
@@ -69,7 +83,6 @@ public class MainUI : IUserInterface
     {
         base.Release();
         GameSpeed = 1;
-        //GameEvents.Instance.onEnemyReach -= EnemyReach;
     }
 
     public void PrepareForGuide()
@@ -92,19 +105,9 @@ public class MainUI : IUserInterface
 
     }
 
-    //private void EnemyReach(Enemy enemy)
-    //{
-    //    GameRes.Life -= enemy.ReachDamage;
-    //}
-
-
 
     public void PrepareNextWave(List<EnemySequence> sequences)
     {
-        GameRes.CurrentWave++;
-        //GameManager.Instance.GainInterest();
-        GameManager.Instance.GainMoney(Mathf.Min(400, (StaticData.Instance.BaseWaveIncome +
-            StaticData.Instance.WaveMultiplyIncome * (GameRes.CurrentWave - 1))));
         m_WaveInfoSetter.SetWaveInfo(sequences);
     }
 

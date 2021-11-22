@@ -57,7 +57,7 @@ public class GameManager : Singleton<GameManager>
         ConstructHelper.Initialize();
         //初始化系统
         //初始化全局数据
-        GameRes.Initialize(m_MainUI, m_FuncUI, m_WaveSystem);
+        GameRes.Initialize(m_MainUI, m_FuncUI, m_WaveSystem,m_BluePrintShopUI);
 
         m_MainUI.Initialize();//主界面顶部UI//要在wavesystem之前，因为敌人入侵事件，需要先掉血再判定下一波
         m_WaveSystem.Initialize();//波次系统
@@ -90,11 +90,25 @@ public class GameManager : Singleton<GameManager>
         endState = new EndState(this);
         wonState = new WonState(this);
 
-        //开局准备下一波
-        PrepareNextWave();
+        //读取存档
+        if (LevelManager.Instance.HasLastGame)
+        {
+            GameRes.LoadSaveRes();
+            m_WaveSystem.LoadSaveWave();
+            m_BoardSystem.LoadSaveGame();
+            m_BluePrintShopUI.LoadSaveGame();
+            //继续保存的波
+            ContinueWave();
+        }
+        else
+        {
+            m_WaveSystem.LevelInitialize();
+            RefreshShop(0);
+            m_BoardSystem.FirstGameSet();
+            //开局准备下一波
+            PrepareNextWave();
+        }
 
-        //初始化商店
-        RefreshShop(0);
 
         //关闭显示强制摆放位置
         m_BoardSystem.SetTutorialPoss(false);
@@ -215,11 +229,19 @@ public class GameManager : Singleton<GameManager>
         }
         TransitionToState(StateName.BuildingState);
 
-        m_WaveSystem.GetSequence();
-        m_BluePrintShopUI.NextRefreshTrun--;
+        GameRes.PrepareNextWave();
+        m_WaveSystem.PrepareNextWave();
         m_MainUI.PrepareNextWave(m_WaveSystem.RunningSequence);
-        m_FuncUI.PrepareNextWave();
+        m_FuncUI.Show();
         GameEvents.Instance.TutorialTrigger(TutorialType.NextWaveStart);
+    }
+
+    public void ContinueWave()
+    {
+        TransitionToState(StateName.BuildingState);
+        m_WaveSystem.PrepareNextWave();
+        m_MainUI.PrepareNextWave(m_WaveSystem.RunningSequence);
+        m_FuncUI.Show();
     }
 
     public void GameEnd(bool win)
@@ -259,6 +281,18 @@ public class GameManager : Singleton<GameManager>
             StartCoroutine(OperationState.ExitState(state));
             operationState = state;
         }
+    }
+
+    public void RestartGame()
+    {
+        LevelManager.Instance.ClearLastData();
+        Game.Instance.LoadScene(1);
+    }
+
+    public void ReturnToMenu()
+    {
+        LevelManager.Instance.SaveAll();
+        Game.Instance.LoadScene(0);
     }
     #endregion
 
@@ -348,10 +382,6 @@ public class GameManager : Singleton<GameManager>
         GameRes.Coin += interest;
     }
 
-    public void GainDraw(int amount)
-    {
-        m_FuncUI.DrawRemain += amount;
-    }
 
     public Enemy SpawnEnemy(EnemyType type, int pathIndex, float intensify)
     {
@@ -363,13 +393,7 @@ public class GameManager : Singleton<GameManager>
         m_BluePrintShopUI.RefreshShop(cost);
     }
 
-    public void BuyBluePrint(BluePrintGrid grid, int cost)
-    {
-        if (ConsumeMoney(cost))
-        {
-            m_BluePrintShopUI.MoveBluePrintToPocket(grid);
-        }
-    }
+
 
     public void ShowGuideVideo(int index)
     {
@@ -377,10 +401,6 @@ public class GameManager : Singleton<GameManager>
         m_GuideVideo.ShowPage(index);
     }
 
-    //public void TriggerGuide(TutorialType triggerType)
-    //{
-    //    m_GuideGirlUI.GuideTrigger(triggerType);
-    //}
 
     public void BuyOneGround()
     {
@@ -402,11 +422,6 @@ public class GameManager : Singleton<GameManager>
         m_BoardSystem.SwitchTrap(trap);
     }
 
-    public void GetPerfectElement(int count)
-    {
-        GameRes.PerfectElementCount += count;
-        m_BluePrintShopUI.SetPerfectElementCount(GameRes.PerfectElementCount);
-    }
 
     public void CheckDetectSkill()
     {
@@ -424,13 +439,6 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public void SetModuleSystemDiscount(float discount)
-    {
-        if (GameRes.ModuleLevel < StaticData.Instance.PlayerMaxLevel)
-        {
-            m_FuncUI.PlayerLvUpMoney = Mathf.RoundToInt(m_FuncUI.PlayerLvUpMoney * (1 - discount));
-        }
-    }
     #endregion
 
     #region TIPS
@@ -453,7 +461,7 @@ public class GameManager : Singleton<GameManager>
     {
         HideTips();
         SetCanvasPos(m_TrapTips.transform, pos);
-        m_TrapTips.ReadTrap(trap, GameRes.FreeTrapCount > 0 ? 0 : GameRes.SwitchMarkCost);
+        m_TrapTips.ReadTrap(trap, GameRes.FreeTrapCount > 0 ? 0 : GameRes.SwitchTrapCost);
         m_TrapTips.Show();
     }
 

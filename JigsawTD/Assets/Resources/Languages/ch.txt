@@ -9,12 +9,16 @@ QUIT=退出游戏
 LEVELSTART=开始游戏
 CONTINUE=继续游戏
 RESTART=重新开始
-RETURNTOMENU=返回菜单
-QUIT2=退出游戏
+RETURNTOMENU=保存并返回菜单
+QUIT2=保存并退出游戏
+RETURNTOMENU2=返回菜单
 CONFIRM=确定
+CANCEL=取消
+ABANDON=放弃
 TUTORIAL=教学
 WISHLIST=加入愿望单
 MODESELECT=模式选择
+RETURNTUTORIAL=退出教程
 
 //Setting
 RESOLUTION=分辨率
@@ -63,11 +67,12 @@ SKIPTUTORIAL=跳过教程
 UNLOCKENDLESS=通关标准模式难度4后解锁
 
 DIFFICULTY0=
-DIFFICULTY1=1.加入战场标记\n2.坚持40波进攻
+DIFFICULTY1=1.加入战场标记\n2.坚持30波进攻
 DIFFICULTY2=1.你只有15点生命值
 DIFFICULTY3=1.战场中将出现更多标记
-DIFFICULTY4=1.一次艰难的挑战
-DIFFICULTY5=1.不可能完成的任务
+DIFFICULTY4=1.一次困难的挑战
+DIFFICULTY5=1.一次折磨的挑战
+DIFFICULTY6=1.不可能完成的任务
 
 NEEDTUTORIAL=是否开启教程？
 YES=是
@@ -213,7 +218,7 @@ ESKILL=子弹造成溅射范围伤害
 
 CONSTRUCTORSKILL=攻击范围内每有1个敌人，攻击力就提高10%
 SCATTERSKILL=造成的伤害降低50%，但是可以额外攻击3个目标
-MORTARSKILL=子弹每有0.1溅射范围就提高15%溅射伤害
+MORTARSKILL=子弹每有0.1溅射范围就提高10%溅射伤害
 RAPIDERSKILL=对同一目标进行攻击时，每次攻击使攻速提升20%，上限200%
 ROTARYSKILL=穿透子弹，不可溅射;向周围随机攻击，自身所有攻速加成翻倍
 SNIPERSKILL=子弹伤害随飞行距离提升50%/格
@@ -277,7 +282,7 @@ DDEINFO=防御塔溅射在25%-250%之间随机浮动
 
 //E系
 EEE=原子中心
-EEEINFO=战斗开始前20秒发生的所有属性提升提高100%
+EEEINFO=子弹每溅射到1个敌人，就使子弹伤害提高20%
 EEA=强攻核心
 EEAINFO=战斗开始前20秒，攻击力提升100%
 EEB=加速核心
@@ -343,7 +348,7 @@ BLINKERINFO=每当生命值下降25%就会触发一次闪烁，向前瞬移一�
 BORNERINFO=当生命值低于75%和25%时，会变形成为堡垒，受到的伤害大幅降低并释放大量基础原型
 BINARYINFO=共有2个狡兔，任意一个死亡时，会触发逃离机制，使另一个的速度大幅提升
 ICEBALLINFO=运载极寒原子，每当转向时就会触发一次大范围的“霜爆”，冻结相邻的防御
-HAMSTERINFO=共有5个仓鼠，每个仓鼠自带75%的伤害减免，每个仓鼠死亡使所有仓鼠的伤害减免下降15%
+HAMSTERINFO=共有5个仓鼠，每个仓鼠自带75%的伤害减免，每个仓鼠死亡使所有仓鼠的受到伤害提高25%
 AIRCRAFTINFO=携带一定数量的僚机，僚机会对防御塔进行霜冻打击，使其暂时失去攻击能力
 
 //Trap

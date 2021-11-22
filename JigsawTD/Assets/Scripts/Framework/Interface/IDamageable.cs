@@ -85,7 +85,7 @@ public class BasicEnemyStrategy : DamageStrategy
     public override bool IsEnemy => true;
     protected Enemy enemy;
 
-    public  override int TrapIntensify
+    public override int TrapIntensify
     {
         get => base.TrapIntensify;
         set
@@ -141,7 +141,7 @@ public class ArmourStrategy : DamageStrategy
     }
     public override bool IsDie
     {
-        get => base.IsDie; 
+        get => base.IsDie;
         set
         {
             base.IsDie = value;
@@ -187,7 +187,7 @@ public class HamsterStrategy : BasicEnemyStrategy
     public override bool IsEnemy => true;
 
     public override float DamageIntensify => base.DamageIntensify + HamsterDamageIntensify;
-    public float HamsterDamageIntensify => -Hamster.HamsterCount * 0.15f;
+    public float HamsterDamageIntensify => (-Hamster.HamsterCount * 0.25f) + 0.5f;
 
 
     public HamsterStrategy(IDamageable damageTarget) : base(damageTarget)

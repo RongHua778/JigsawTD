@@ -22,15 +22,14 @@ public class TurretStrategyFactory : GameObjectFactory
         return strategy;
     }
 
-    public RefactorStrategy GetSpecificRefactorStrategy(TurretAttribute attribute, int element1, int element2, int element3, int quality = 1)
+    public RefactorStrategy GetSpecificRefactorStrategy(TurretAttribute attribute, List<int> elements, List<int> qualities, int quality = 1)
     {
         List<Composition> compositions = new List<Composition>();
-        Composition c1 = new Composition(1, element1);
-        Composition c2 = new Composition(1, element2);
-        Composition c3 = new Composition(1, element3);
-        compositions.Add(c1);
-        compositions.Add(c2);
-        compositions.Add(c3);
+        for (int i = 0; i < elements.Count; i++)
+        {
+            Composition c = new Composition(qualities[i], elements[i]);
+            compositions.Add(c);
+        }
         RefactorStrategy strategy = new RefactorStrategy(attribute, quality, compositions);
         return strategy;
     }

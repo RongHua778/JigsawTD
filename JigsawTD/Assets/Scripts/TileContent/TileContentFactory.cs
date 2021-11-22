@@ -137,7 +137,7 @@ public class TileContentFactory : GameObjectFactory
         float[] qualityC = new float[5];
         for (int i = 0; i < 5; i++)
         {
-            qualityC[i] = StaticData.QualityChances[GameRes.ModuleLevel - 1, i];
+            qualityC[i] = StaticData.QualityChances[GameRes.SystemLevel - 1, i];
         }
         int quality = StaticData.RandomNumber(qualityC) + 1;
         TurretAttribute attribute = elementTurrets[UnityEngine.Random.Range(0, StaticData.elementN)];
@@ -194,7 +194,7 @@ public class TileContentFactory : GameObjectFactory
         float[] rareChance = new float[6];
         for (int i = 0; i < 6; i++)
         {
-            rareChance[i] = StaticData.RareChances[GameRes.ModuleLevel - 1, i];
+            rareChance[i] = StaticData.RareChances[GameRes.SystemLevel - 1, i];
         }
         int rare = StaticData.RandomNumber(rareChance) + 1;
         TurretAttribute atrributeToReturn = null;

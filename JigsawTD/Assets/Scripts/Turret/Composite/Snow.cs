@@ -8,6 +8,7 @@ public class Snow : RefactorTurret
 
     protected override void Shoot()
     {
+        PlayAudio(ShootClip, false);
         Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
         bullet.transform.position = shootPoint.position;
         Vector2 pos;

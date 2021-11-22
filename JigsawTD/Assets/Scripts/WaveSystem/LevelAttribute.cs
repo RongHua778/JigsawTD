@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Attribute/LevelAttribute", fileName = "LevelAttribute")]
 public class LevelAttribute : ScriptableObject
 {
-    public bool IsEndless;
+    public int Mode;
     public int Difficulty;
     public int PlayerHealth;
     public int Wave;

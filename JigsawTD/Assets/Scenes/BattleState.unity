@@ -1911,7 +1911,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TestType: 18
   RunningSpawn: 0
-  runningSequence: []
   bossWarningUIAnim: {fileID: 929299449}
 --- !u!4 &107988105
 Transform:
@@ -2475,7 +2474,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 20
+  m_Text: 10
 --- !u!222 &128272528
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4395,8 +4394,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 491704460}
-        m_TargetAssemblyTypeName: GameEndPanel, Assembly-CSharp
+      - m_Target: {fileID: 286649182}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: ReturnToMenu
         m_Mode: 1
         m_Arguments:
@@ -4405,7 +4404,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &251778351
 MonoBehaviour:
@@ -4619,7 +4618,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1383788366}
         m_TargetAssemblyTypeName: PausePanel, Assembly-CSharp
-        m_MethodName: ReturnToMenu
+        m_MethodName: ReturnBtnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7090,9 +7089,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 491704460}
-        m_TargetAssemblyTypeName: GameEndUI, Assembly-CSharp
-        m_MethodName: RestartBtnClick
+      - m_Target: {fileID: 286649182}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11391,7 +11390,7 @@ GameObject:
   - component: {fileID: 708258424}
   - component: {fileID: 708258423}
   m_Layer: 5
-  m_Name: LevelText
+  m_Name: SystemTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13934,8 +13933,6 @@ MonoBehaviour:
   PerfectElementTxt: {fileID: 90581986}
   LockCountTxt: {fileID: 1085680072}
   PerfectInfo: {fileID: 1110740784}
-  ShopBluePrints: []
-  OwnBluePrints: []
 --- !u!95 &878872114
 Animator:
   serializedVersion: 3
@@ -14011,7 +14008,7 @@ GameObject:
   - component: {fileID: 881587329}
   - component: {fileID: 881587328}
   m_Layer: 5
-  m_Name: LvUpMoneyText
+  m_Name: SystemUpgradeCostTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14329,6 +14326,7 @@ MonoBehaviour:
   coinTxt: {fileID: 92572663}
   m_WaveInfoSetter: {fileID: 1492728545}
   m_PausePanel: {fileID: 1383788366}
+  waveTxt: {fileID: 785419717}
   GameSpeedSprites:
   - {fileID: -1736800204824752618, guid: 6ef2bb4213fec4c43b363a647c1155b5, type: 3}
   - {fileID: 7749293484684254102, guid: 6ef2bb4213fec4c43b363a647c1155b5, type: 3}
@@ -14948,7 +14946,7 @@ GameObject:
   - component: {fileID: 954782021}
   - component: {fileID: 954782020}
   m_Layer: 5
-  m_Name: LevelUp
+  m_Name: System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14976,7 +14974,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -139, y: 201}
+  m_AnchoredPosition: {x: -148.20007, y: 201}
   m_SizeDelta: {x: 260, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &954782017
@@ -15992,7 +15990,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1383788366}
         m_TargetAssemblyTypeName: PausePanel, Assembly-CSharp
-        m_MethodName: ExitClick
+        m_MethodName: QuitBtnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -19831,9 +19829,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1383788366}
-        m_TargetAssemblyTypeName: PausePanel, Assembly-CSharp
-        m_MethodName: RestartBtnClick
+      - m_Target: {fileID: 286649182}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -22909,7 +22907,6 @@ MonoBehaviour:
   panel: {fileID: 2065376553}
   moneyInputField: {fileID: 261972939}
   lifeInputField: {fileID: 2072020183}
-  drawInputField: {fileID: 1536643095}
   compositeInputField: {fileID: 1799200400}
   e1: {fileID: 46688065}
   e2: {fileID: 1324163296}
@@ -22917,7 +22914,6 @@ MonoBehaviour:
   qualityInputField: {fileID: 1073961015}
   elementInputField: {fileID: 1459196306}
   trapInputField: {fileID: 1022194282}
-  waveSystem: {fileID: 107988104}
 --- !u!1 &1383788364
 GameObject:
   m_ObjectHideFlags: 0
@@ -22968,6 +22964,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e8fc9550e79ac40aa7fb54e586e8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ReturnTxt: {fileID: 121042851}
+  QuitTxt: {fileID: 387275745}
 --- !u!222 &1383788368
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -23296,7 +23294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a1c8a755ebe1841816e3a5b3aca1ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: RETURNTOMENU
+  key: RETURNTOMENU2
 --- !u!1 &1410460432
 GameObject:
   m_ObjectHideFlags: 0
@@ -24741,7 +24739,6 @@ MonoBehaviour:
   - {fileID: 2006145935}
   - {fileID: 1410460435}
   - {fileID: 476478}
-  waveTxt: {fileID: 785419717}
 --- !u!114 &1492728546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25414,6 +25411,14 @@ MonoBehaviour:
     - Temp15
     DontNeedClickEnd: 0
     WaitingTime: 0
+  - GuideNote: "\u96BE\u5EA66\u5931\u8D25"
+    TriggerType: 0
+    TriggerID: 0
+    Name: KANGDE
+    Words:
+    - Temp15
+    DontNeedClickEnd: 0
+    WaitingTime: 0
   StandardWin:
   - GuideNote: "\u6559\u5B66\u96BE\u5EA6\u83B7\u80DC"
     TriggerType: 0
@@ -25456,6 +25461,14 @@ MonoBehaviour:
     DontNeedClickEnd: 0
     WaitingTime: 0
   - GuideNote: "\u96BE\u5EA65\u83B7\u80DC"
+    TriggerType: 0
+    TriggerID: 0
+    Name: KANGDE
+    Words:
+    - Temp05
+    DontNeedClickEnd: 0
+    WaitingTime: 0
+  - GuideNote: "\u96BE\u5EA66\u83B7\u80DC"
     TriggerType: 0
     TriggerID: 0
     Name: KANGDE
@@ -30454,18 +30467,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game
       objectReference: {fileID: 0}
-    - target: {fileID: 3979959846567427947, guid: efad427a633dbca47ac42421b9004594, type: 3}
-      propertyPath: _strategyFactory
-      value: 
-      objectReference: {fileID: 11400000, guid: 328a3a7240180f7409f1f8d5a3654b4f, type: 2}
     - target: {fileID: 3979959846567427948, guid: efad427a633dbca47ac42421b9004594, type: 3}
-      propertyPath: UnlockAll
+      propertyPath: NeedLoadGame
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3979959846567427948, guid: efad427a633dbca47ac42421b9004594, type: 3}
-      propertyPath: CurrentLevel
-      value: 
-      objectReference: {fileID: 11400000, guid: 00b992198a245254bbe331c2618239cd, type: 2}
     - target: {fileID: 3979959846567427949, guid: efad427a633dbca47ac42421b9004594, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -31283,12 +31288,10 @@ MonoBehaviour:
   LevelBtnObj: {fileID: 954782015}
   m_LevelInfoPanel: {fileID: 911845776}
   DrawBtnTxt: {fileID: 395549260}
-  LevelUpTxt: {fileID: 881587328}
-  PlayerLevelTxt: {fileID: 708258423}
+  SystemUpgradeCostTxt: {fileID: 881587328}
+  SystemLevelTxt: {fileID: 708258423}
   DiscountTxt: {fileID: 1120350217}
-  m_LuckInfo: {fileID: 2136738925}
   m_DrawInfo: {fileID: 659055259}
-  m_LuckProgress: {fileID: 2136738923}
 --- !u!95 &1898166546
 Animator:
   serializedVersion: 3

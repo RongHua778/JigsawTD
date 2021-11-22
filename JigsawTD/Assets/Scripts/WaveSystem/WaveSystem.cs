@@ -10,9 +10,11 @@ public class WaveSystem : IGameSystem
     [SerializeField] EnemyType TestType = default;
     public bool RunningSpawn = false;//是否正在生产敌人
 
-    public Queue<List<EnemySequence>> LevelSequence = new Queue<List<EnemySequence>>();
+    public List<List<EnemySequence>> LevelSequence = new List<List<EnemySequence>>();
     LevelAttribute LevelAttribute;
-    [SerializeField] private List<EnemySequence> runningSequence;
+
+
+    private List<EnemySequence> runningSequence;
     public List<EnemySequence> RunningSequence { get => runningSequence; set => runningSequence = value; }
 
     [SerializeField] BossComeAnim bossWarningUIAnim = default;
@@ -20,7 +22,6 @@ public class WaveSystem : IGameSystem
     public override void Initialize()
     {
         LevelAttribute = LevelManager.Instance.CurrentLevel;
-        LevelInitialize();
         GameEvents.Instance.onEnemyReach += EnemyReach;
         GameEvents.Instance.onEnemyDie += EnemyDie;
         bossWarningUIAnim.Initialize();
@@ -35,8 +36,9 @@ public class WaveSystem : IGameSystem
 
     private void EnemyReach(Enemy enemy)
     {
+        GameRes.Life -= enemy.ReachDamage;//必须先减少LIFE判失败
         GameRes.EnemyRemain--;
-        GameRes.Life -= enemy.ReachDamage;
+        //GameRes.Life -= enemy.ReachDamage;//必须先减少LIFE判失败
     }
 
     private void EnemyDie(Enemy enemy)
@@ -59,22 +61,31 @@ public class WaveSystem : IGameSystem
         }
     }
 
-
+    public void LoadSaveWave()
+    {
+        LevelSequence.Clear();
+        foreach (var saveStruct in LevelManager.Instance.LastGameSave.SaveSequences)
+        {
+            LevelSequence.Add(saveStruct.SequencesList);
+        }
+    }
     public void LevelInitialize()
     {
+        LevelManager.Instance.LastGameSave.SaveSequences = new List<EnemySequenceStruct>();
+
         LevelSequence.Clear();
         float stage = 1;
         List<EnemySequence> sequences = null;
         for (int i = 0; i < LevelAttribute.Wave; i++)
         {
 
-            if (i <= 39)
+            if (i <= 29)
             {
                 stage += LevelAttribute.LevelIntensify * (0.05f * Mathf.Pow(i, 1.8f) + 1);
             }
             else
             {
-                stage += LevelAttribute.LevelIntensify * (0.00004f * Mathf.Pow(i, 4f) + 1);//40波后难度快速成长，期望在100波内解决玩家
+                stage += LevelAttribute.LevelIntensify * (0.00004f * Mathf.Pow(i, 4f) + 1);//30波后难度快速成长，期望在100波内解决玩家
             }
 
 
@@ -95,15 +106,15 @@ public class WaveSystem : IGameSystem
             {
                 sequences = GenerateSpecificSequence(LevelAttribute.GetRandomBoss(3).EnemyType, stage, i, true);
             }
-            else if (i == 39)
+            //else if (i == 39)
+            //{
+            //    sequences = GenerateSpecificSequence(LevelAttribute.GetRandomBoss(4).EnemyType, stage, i, true);
+            //}
+            else if (i > 29 && (i + 1) % 5 == 0)//无尽模式30波后每5波一个BOSS
             {
                 sequences = GenerateSpecificSequence(LevelAttribute.GetRandomBoss(4).EnemyType, stage, i, true);
             }
-            else if (i > 39 && (i + 1) % 5 == 0)//无尽模式40波后每5波一个BOSS
-            {
-                sequences = GenerateSpecificSequence(LevelAttribute.GetRandomBoss(4).EnemyType, stage, i, true);
-            }
-            else if ((i + 4) % 10 == 0)
+            else if ((i + 4) % 10 == 0 && i < 29)//30波前
             {
                 sequences = GenerateSpecificSequence(EnemyType.GoldKeeper, stage, i);
             }
@@ -124,7 +135,10 @@ public class WaveSystem : IGameSystem
             {
                 sequences = GenerateSpecificSequence(TestType, 50f, i);
             }
-            LevelSequence.Enqueue(sequences);
+            LevelSequence.Add(sequences);
+            EnemySequenceStruct eSequence = new EnemySequenceStruct();
+            eSequence.SequencesList = sequences;
+            LevelManager.Instance.LastGameSave.SaveSequences.Add(eSequence);
         }
     }
 
@@ -161,25 +175,42 @@ public class WaveSystem : IGameSystem
         return sequence;
     }
 
-
-    public void GetSequence()
+    public void PrepareNextWave()
     {
-        if (LevelSequence.Count > 0)
+        RunningSequence = LevelSequence[GameRes.CurrentWave - 1];
+        foreach (var sequence in RunningSequence)
         {
-            RunningSequence = LevelSequence.Dequeue();
-            if (RunningSequence[0].IsBoss)
-            {
-                EnemyAttribute attribute = StaticData.Instance.EnemyFactory.Get(RunningSequence[0].EnemyType);
-                attribute.isLock = false;//见到就解锁BOSS
-                bossWarningUIAnim.Show();
-            }
+            sequence.Initialize();
         }
-        else
+        if (RunningSequence[0].IsBoss)
         {
-            Debug.Log("所有波次都生成完了");
+            EnemyAttribute attribute = StaticData.Instance.EnemyFactory.Get(RunningSequence[0].EnemyType);
+            attribute.isLock = false;//见到就解锁BOSS
+            bossWarningUIAnim.Show();
         }
-
     }
+
+
+    //public void GetSequence()
+    //{
+    //    if (LevelSequence.Count > 0)
+    //    {
+    //        RunningSequence = LevelSequence.Dequeue();
+    //        if (RunningSequence[0].IsBoss)
+    //        {
+    //            EnemyAttribute attribute = StaticData.Instance.EnemyFactory.Get(RunningSequence[0].EnemyType);
+    //            attribute.isLock = false;//见到就解锁BOSS
+    //            bossWarningUIAnim.Show();
+    //        }
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("所有波次都生成完了");
+    //    }
+
+    //}
+
+
 
     public Enemy SpawnEnemy(EnemyAttribute attribute, int pathIndex, float intensify)
     {

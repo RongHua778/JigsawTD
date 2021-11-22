@@ -18,14 +18,16 @@ public class TargetBullet : Bullet
     }
     public override void TriggerDamage()
     {
-        TriggerPreHitEffect();
         SputteredCount = 0;
-
+        Collider2D[] hits = null;
         if (SputteringRange > 0)
         {
-            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, SputteringRange, StaticData.EnemyLayerMask);
+            hits = Physics2D.OverlapCircleAll(transform.position, SputteringRange, StaticData.EnemyLayerMask);
             SputteredCount = hits.Length;
-
+        }
+        TriggerPreHitEffect();
+        if (SputteringRange > 0)
+        {
             for (int i = 0; i < hits.Length; i++)
             {
                 TargetPoint target = hits[i].GetComponent<TargetPoint>();

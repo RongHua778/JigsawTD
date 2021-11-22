@@ -66,7 +66,7 @@ public class StaticData : Singleton<StaticData>
 
 
     [Header("战斗基础数值")]
-    public int PlayerMaxLevel;
+    public int SystemMaxLevel;
     public int[] LevelUpMoney;
     public int StartCoin;
     public int StartLotteryDraw;
@@ -114,10 +114,10 @@ public class StaticData : Singleton<StaticData>
     {
         { 50, 100},
         { 75, 150},
-        { 125, 250},
+        { 100, 200},
+        { 150, 300},
         { 200, 400},
-        { 300, 600},
-        { 400, 800}
+        { 300, 600}
     };
 
     protected override void Awake()

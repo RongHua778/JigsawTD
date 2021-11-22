@@ -286,7 +286,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c51ce8f2b50464540adc985be2bf073a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UnlockAll: 0
   GameLevels:
   - ExpRequire: 400
     UnlockItems:
@@ -365,11 +364,38 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 993e7ccb381984e4983180597ec9c10f, type: 2}
   - {fileID: 11400000, guid: 99391903eba8a1041af83dc6b559379e, type: 2}
   - {fileID: 11400000, guid: 00b992198a245254bbe331c2618239cd, type: 2}
-  EndlessLevel: {fileID: 11400000, guid: b6403761d56b0914599f3e8e647a50b7, type: 2}
-  PremitDifficulty: 5
-  maxDifficutly: 5
+  - {fileID: 11400000, guid: aa5a923b0cb87d348914e228fc353f67, type: 2}
+  - {fileID: 11400000, guid: b6403761d56b0914599f3e8e647a50b7, type: 2}
+  PremitDifficulty: 6
+  maxDifficutly: 6
   selectDifficulty: 0
-  CurrentLevel: {fileID: 11400000, guid: b6403761d56b0914599f3e8e647a50b7, type: 2}
+  CurrentLevel: {fileID: 11400000, guid: 00b992198a245254bbe331c2618239cd, type: 2}
+  UnlockAll: 1
+  NeedLoadGame: 1
+  HasLastGame: 0
+  LastGameSave:
+    SaveBluePrints: []
+    SaveRes:
+      Mode: 0
+      Coin: 0
+      Wave: 0
+      BuildCost: 0
+      SwitchTrapCost: 0
+      CurrentLife: 0
+      MaxLife: 0
+      BuildDiscount: 0
+      SystemLevel: 0
+      SystemUpgradeCost: 0
+      TotalRefactor: 0
+      TotalCooporative: 0
+      TotalDamage: 0
+      ShopCapacity: 0
+      NextRefreshTurn: 0
+      PefectElementCount: 0
+      DrawThisTurn: 0
+    SaveContents: []
+    SaveSequences: []
+  GameContents: []
 --- !u!114 &3979959846567427947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,23 +412,23 @@ MonoBehaviour:
   _contentFactory: {fileID: 11400000, guid: e9b28f73aa8e8a840beba1e769ed0c70, type: 2}
   _shapeFactory: {fileID: 11400000, guid: e561f9a0ed33f674284817e826a7cb56, type: 2}
   _enemyFactory: {fileID: 11400000, guid: 49641aa71a9726d44b89676d62fd4df1, type: 2}
-  _bluePrintFacotry: {fileID: 11400000, guid: 328a3a7240180f7409f1f8d5a3654b4f, type: 2}
+  _strategyFactory: {fileID: 11400000, guid: 328a3a7240180f7409f1f8d5a3654b4f, type: 2}
   _nonEnemyFactory: {fileID: 11400000, guid: 30f433efbe7ecd14e811dc996935ecb0, type: 2}
-  PlayerMaxLevel: 6
-  LevelUpMoney: 0000000032000000c8000000900100008a020000e803000052030000
+  SystemMaxLevel: 6
+  LevelUpMoney: 000000003c000000b40000005e010000260200002003000052030000
   StartCoin: 0
   StartLotteryDraw: 0
-  BaseWaveIncome: 5
+  BaseWaveIncome: 25
   WaveMultiplyIncome: 10
   BuyBluePrintCost: 20
-  ShopRefreshCost: 20
+  ShopRefreshCost: 10
   CoinInterest: 0
-  BaseShapeCost: 5
+  BaseShapeCost: 25
   MultipleShapeCost: 10
   BuyGroundCost: 20
   BuyGroundCostMultyply: 20
-  SwitchTrapCost: 50
-  SwitchTrapCostMultiply: 50
+  SwitchTrapCost: 40
+  SwitchTrapCostMultiply: 40
   TileSize: 1
   GoldAttackIntensify: 0.35
   WoodSpeedIntensify: 0.35

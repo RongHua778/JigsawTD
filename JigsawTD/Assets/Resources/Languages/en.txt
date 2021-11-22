@@ -9,9 +9,12 @@ QUIT=QUIT
 LEVELSTART=START GAME
 CONTINUE=Coninue
 RESTART=Restart
-RETURNTOMENU=Return to menu
-QUIT2=Quit
+RETURNTOMENU=Save & Return Menu
+RETURNTOMENU2=Return Menu
+QUIT2=Save & Quit
 CONFIRM=Confirm
+CANCEL=Cancel
+ABANDON=Abandon
 TUTORIAL=Tutorial
 WISHLIST=Add to wishlist
 MODESELECT=MODE SELECT
@@ -214,7 +217,7 @@ ESKILL=Attacks deal splash area damage.
 
 CONSTRUCTORSKILL=Attack increased by 10% for each enemy in range.
 SCATTERSKILL=Deals 50% less damage, but can attack an additional 3 targets.
-MORTARSKILL=Splash damage increased by 15% for every 0.1 splash range.
+MORTARSKILL=Splash damage increased by 10% for every 0.1 splash range.
 RAPIDERSKILL=Firerate increased by 15% each shoot when it is attacking the same target(up to 300%).
 ROTARYSKILL=Penetration Bullet can't splash; Randomly shoot around and double all firerate increased.
 SNIPERSKILL=Bullet's damage increased by 50% for each meter it travelled
@@ -276,7 +279,7 @@ DDEINFO=Turret's splash fluctuates between 25% and 250%
 
 //E系
 EEE=Atomic Center
-EEEINFO=Double all stats increased before 20 seconds of each wave
+EEEINFO=Increased bullet's damage by 20% for each enemy it hit
 EEA=Attack Core
 EEAINFO=Turret's attack increased by 100% before 20 seconds of each wave
 EEB=Speed Core
@@ -343,7 +346,7 @@ BLINKERINFO=Flashes forward a certain distance while it takes a certain amount o
 BORNERINFO=Summon a large amount of enemies every once in a while.
 BINARYINFO=Summon two binary stars at the same time, and when one dies, the other accelerates.
 ICEBALLINFO=Each time the Snow Ball veered, it released a wide freeze.
-HAMSTERINFO=There are 15 hamsters, each hamster has 75% damage reduction, and each hamster death reduces all hamster's damage reduction by 5%.
+HAMSTERINFO=There are 15 hamsters, each hamster has 75% damage reduction, and each hamster death reduces all hamster's damage reduction by 25%.
 AIRCRAFTINFO=With aircrafts which can freeze turrets
 
 //Trap

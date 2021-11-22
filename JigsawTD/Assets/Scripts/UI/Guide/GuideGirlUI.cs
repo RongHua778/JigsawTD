@@ -345,9 +345,12 @@ public class GuideGirlUI : IUserInterface
         {
             case 0://第一段对话结束，鼠标移动操作
                    //生成一个专属配方
-                RefactorStrategy strategy = ConstructHelper.GetSpecificStrategy("CONSTRUCTOR", 0, 1, 2);
+                List<int> elements = new List<int> { 0, 1, 2 };
+                List<int> qualities = new List<int> { 1, 1, 1 };
+                RefactorStrategy strategy = ConstructHelper.GetSpecificStrategy("CONSTRUCTOR", elements,qualities);
+
                 m_ShopUI.AddBluePrint(strategy, true);
-                m_ShopUI.RemoveGrid(m_ShopUI.ShopBluePrints[0]);//移除1个
+                m_ShopUI.RemoveGrid(BluePrintShopUI.ShopBluePrints[0]);//移除1个
 
                 ScaleAndMove.MoveTurorial = true;
                 ScaleAndMove.CanControl = true;

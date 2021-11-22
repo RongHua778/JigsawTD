@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
-using LitJson;
+
+
 
 [RequireComponent(typeof(Sound))]
 public class Game : Singleton<Game>
@@ -20,7 +17,6 @@ public class Game : Singleton<Game>
     protected override void Awake()
     {
         base.Awake();
-        //LoadByJson();
         Application.runInBackground = true;
         DontDestroyOnLoad(this.gameObject);
         TurretEffectFactory.Initialize();
@@ -28,7 +24,7 @@ public class Game : Singleton<Game>
 
     private void Start()
     {
-        LoadByJson();
+        LevelManager.Instance.Initialize();
         //判断当前初始场景在哪里，根据不同场景初始化当前State
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         switch (currentSceneIndex)
@@ -38,7 +34,7 @@ public class Game : Singleton<Game>
                 m_SceneStateController.SetState(new MenuState(m_SceneStateController));
                 break;
             case 1://battle
-                //Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(0);
+                LevelManager.Instance.LoadGame();//直接从战斗场景开始，直接读取存档
                 m_SceneStateController.SetState(new BattleState(m_SceneStateController));
                 break;
         }
@@ -95,76 +91,8 @@ public class Game : Singleton<Game>
     }
 
 
-    private void OnApplicationQuit()
-    {
-        SaveByJson();
-    }
-
-    public void SaveGame()
-    {
-        SaveByJson();
-    }
-    private void SaveByJson()
-    {
-        Save save = LevelManager.Instance.SetSaveData();
-        string filePath = Application.persistentDataPath + "/JsonSave.json";
-        Debug.Log(filePath);
-        string saveJsonStr = JsonMapper.ToJson(save);
-        StreamWriter sw = new StreamWriter(filePath);
-        sw.Write(saveJsonStr);
-        sw.Close();
-
-        Debug.Log("Saved!");
-    }
-
-    private void LoadByJson()
-    {
-        string filePath = Application.persistentDataPath + "/JsonSave.json";
-        if (File.Exists(filePath))
-        {
-            StreamReader sr = new StreamReader(filePath);
-            string jsonStr = sr.ReadToEnd();
-            sr.Close();
-            Save save = JsonMapper.ToObject<Save>(jsonStr);
-            LevelManager.Instance.LoadSaveData(save);
-        }
-        else
-        {
-            LevelManager.Instance.FirstGameData();
-            Debug.Log("NoSaveData.");
-        }
-    }
 
 
-    //存档
-    //public void SaveGame(Save save)
-    //{
-    //    BinaryFormatter bf = new BinaryFormatter();
-    //    FileStream file = File.Create(Application.persistentDataPath + "/gamesave.save");
-    //    bf.Serialize(file, save);
-    //    file.Close();
-    //    Debug.Log("Game Save");
-
-    //}
-
-    //public void LoadGame()
-    //{
-    //    if (File.Exists(Application.persistentDataPath + "/gamesave.save"))
-    //    {
-    //        BinaryFormatter bf = new BinaryFormatter();
-    //        FileStream file = File.Open(Application.persistentDataPath + "/gamesave.save", FileMode.Open);
-    //        Save save = (Save)bf.Deserialize(file);
-    //        file.Close();
-    //        SaveData = save;
-
-    //    }
-    //    else
-    //    {
-    //        Save save = new Save();
-    //        save.Initialize();
-    //        SaveData = save;
-    //    }
-    //}
 
 
 

@@ -49,9 +49,10 @@ public class TrapContent : GameTileContent
         GameManager.Instance.CheckDetectSkill();//任何一个塔放下来，都要所有防御塔检测一次侦测效果
     }
 
-    public override void SaveContent()
+    public override void SaveContent(out ContentStruct contentStruct)
     {
-        base.SaveContent();
+        base.SaveContent(out contentStruct);
+        contentStruct = m_ContentStruct;
         m_ContentStruct.ContentName = TrapAttribute.Name;
     }
 

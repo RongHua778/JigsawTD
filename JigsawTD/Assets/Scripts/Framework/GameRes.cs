@@ -33,14 +33,14 @@ public class ShapeInfo
 }
 public static class GameRes
 {
-
+    public static GameResStruct SaveRes => SetSaveRes();
 
     private static MainUI m_MainUI;
     private static FuncUI m_FuncUI;
+    private static BluePrintShopUI m_BluePrintShop;
     private static WaveSystem m_WaveSystem;
 
     [Header("动态数据")]
-    public static int PerfectElementCount = 0;//完美元素数量
     public static float OverallMoneyIntensify = 0;//金币加成
     public static int FreeGroundTileCount = 0;//免费地板数量
     public static int FreeTrapCount = 0;//免费陷阱换位数量
@@ -71,7 +71,45 @@ public static class GameRes
     static ForcePlace forcePlace;//强制摆位
     public static ForcePlace ForcePlace { get => forcePlace; set => forcePlace = value; }
 
+    private static int perfectElementCount;
+    public static int PerfectElementCount
+    {
+        get => perfectElementCount;
+        set
+        {
+            perfectElementCount = value;
+            m_BluePrintShop.PerfectElementCount = perfectElementCount;
+        }
+    }
 
+    private static int nextRefreshTurn;
+    public static int NextRefreshTurn
+    {
+        get => nextRefreshTurn;
+        set
+        {
+            if (value <= 0)
+            {
+                nextRefreshTurn = 3;
+                GameManager.Instance.RefreshShop(0);
+            }
+            else
+            {
+                nextRefreshTurn = value;
+            }
+            m_BluePrintShop.NextRefreshTrun = nextRefreshTurn;
+        }
+    }
+
+    private static bool drawThisTurn;
+    public static bool DrawThisTurn
+    {
+        get => drawThisTurn;
+        set
+        {
+            drawThisTurn = value;
+        }
+    }
 
     private static int coin;
     public static int Coin//拥有代币
@@ -101,10 +139,10 @@ public static class GameRes
         }
     }
     private static int enemyRemain;
-    public static int EnemyRemain 
-    { 
+    public static int EnemyRemain
+    {
         get => enemyRemain;
-        set 
+        set
         {
             enemyRemain = value;
             if (enemyRemain <= 0 && !m_WaveSystem.RunningSpawn)
@@ -122,43 +160,61 @@ public static class GameRes
         set
         {
             currentWave = value;
+            m_MainUI.CurrentWave = currentWave;
         }
     }
 
-    private static int buyShapeCost;
-    public static int BuyShapeCost//构建价格
+    private static int buildCost;
+    public static int BuildCost//构建价格
     {
-        get => buyShapeCost;
+        get => buildCost;
         set
         {
-            buyShapeCost = Mathf.Max(0, value);
-            m_FuncUI.BuyShapeCost = buyShapeCost;
+            buildCost = Mathf.Max(0, value);
+            m_FuncUI.BuyShapeCost = buildCost;
         }
     }
 
-    private static int switchMarkCost;
-    public static int SwitchMarkCost
+    private static int switchTrapCost;
+    public static int SwitchTrapCost
     {
-        get => switchMarkCost;
+        get => switchTrapCost;
         set
         {
-            switchMarkCost = value;
+            switchTrapCost = value;
         }
     }
 
-    private static int moduleLevel;
-    public static int ModuleLevel   //模块等级
+    private static int systemLevel;
+    public static int SystemLevel   //模块等级
     {
-        get => moduleLevel;
+        get => systemLevel;
         set
         {
-            moduleLevel = Mathf.Clamp(value, 1, 6);
-            m_FuncUI.ModuleLevel = moduleLevel;
+            systemLevel = Mathf.Clamp(value, 1, 6);
+            SystemUpgradeCost = StaticData.Instance.LevelUpMoney[systemLevel];
+            if (systemLevel == 2 || systemLevel == 4 || systemLevel == 6)//2，4,6级增加一个商店容量
+            {
+                ShopCapacity++;
+            }
+            m_FuncUI.SystemLevel = systemLevel;
         }
+    }
+
+    private static int systemUpgradeCost;
+    public static int SystemUpgradeCost
+    {
+        get => systemUpgradeCost;
+        set
+        {
+            systemUpgradeCost = value;
+            m_FuncUI.SystemUpgradeCost = systemUpgradeCost;
+        }
+
     }
 
     private static float discountRate;
-    public static float DiscountRate
+    public static float BuildDiscount
     {
         get => discountRate;
         set
@@ -175,33 +231,37 @@ public static class GameRes
     private static int maxLock;
     public static int MaxLock { get => maxLock; set => maxLock = value; }//最大锁定量
 
-    public static void Initialize(MainUI mainUI, FuncUI funcUI,WaveSystem waveSystem)
+    public static void Initialize(MainUI mainUI, FuncUI funcUI, WaveSystem waveSystem, BluePrintShopUI bluePrintShop)
     {
-        LevelManager.Instance.SaveContents = new List<ContentStruct>();
         m_MainUI = mainUI;
         m_FuncUI = funcUI;
         m_WaveSystem = waveSystem;
+        m_BluePrintShop = bluePrintShop;
 
-        LevelStart = DateTime.Now;
+        DrawThisTurn = true;
         TotalRefactor = 0;
         TotalCooporative = 0;
         TotalDamage = 0;
+        NextRefreshTurn = 4;
+        BuildDiscount = 0.1f;
+        ShopCapacity = 3;
+        SystemLevel = 1;
+        CurrentWave = 0;
+        SwitchTrapCost = StaticData.Instance.SwitchTrapCost;
+        Coin = StaticData.Instance.StartCoin;
+        Life = LevelManager.Instance.CurrentLevel.PlayerHealth;
+        BuildCost = StaticData.Instance.BaseShapeCost;
+
+        PerfectElementCount = 0;
+
+        LevelStart = DateTime.Now;
         MaxPath = 0;
         MaxMark = 0;
         GainGold = 0;
         enemyRemain = 0;
 
-        DiscountRate = 0.1f;
-        ShopCapacity = 3;
         MaxLock = 1;
-        ModuleLevel = 1;
-        CurrentWave = 0;
-        SwitchMarkCost = StaticData.Instance.SwitchTrapCost;
-        Coin = StaticData.Instance.StartCoin;
-        Life = LevelManager.Instance.CurrentLevel.PlayerHealth;
-        BuyShapeCost = StaticData.Instance.BaseShapeCost;
 
-        PerfectElementCount = 0;
         OverallMoneyIntensify = 0;
         FreeGroundTileCount = 0;
         FreeTrapCount = 0;
@@ -217,6 +277,49 @@ public static class GameRes
 
     }
 
+    private static GameResStruct SetSaveRes()
+    {
+        GameResStruct resStruct = new GameResStruct();
+        resStruct.Mode = LevelManager.Instance.CurrentLevel.Mode;
+        resStruct.Coin = Coin;
+        resStruct.Wave = CurrentWave;
+        resStruct.CurrentLife = Life;
+        resStruct.MaxLife = LevelManager.Instance.CurrentLevel.PlayerHealth;
+        resStruct.BuildCost = BuildCost;
+        resStruct.BuildDiscount = BuildDiscount;
+        resStruct.SwitchTrapCost = SwitchTrapCost;
+        resStruct.SystemLevel = SystemLevel;
+        resStruct.SystemUpgradeCost = systemUpgradeCost;
+        resStruct.TotalCooporative = TotalCooporative;
+        resStruct.TotalDamage = TotalDamage;
+        resStruct.TotalRefactor = TotalRefactor;
+        resStruct.ShopCapacity = ShopCapacity;
+        resStruct.NextRefreshTurn = NextRefreshTurn;
+        resStruct.PefectElementCount = PerfectElementCount;
+        resStruct.DrawThisTurn = DrawThisTurn;
+        return resStruct;
+
+    }
+
+    public static void LoadSaveRes()
+    {
+        GameResStruct saveRes = LevelManager.Instance.LastGameSave.SaveRes;
+        Coin = saveRes.Coin;
+        CurrentWave = saveRes.Wave;//prepareNextWave导致+1
+        Life = saveRes.CurrentLife;
+        BuildCost = saveRes.BuildCost;
+        BuildDiscount = saveRes.BuildDiscount;
+        SwitchTrapCost = saveRes.SwitchTrapCost;
+        SystemLevel = saveRes.SystemLevel;
+        SystemUpgradeCost = saveRes.SystemUpgradeCost;
+        TotalCooporative = saveRes.TotalCooporative;
+        TotalRefactor = saveRes.TotalRefactor;
+        ShopCapacity = saveRes.ShopCapacity;
+        NextRefreshTurn = saveRes.NextRefreshTurn;
+        PerfectElementCount = saveRes.PefectElementCount;
+        DrawThisTurn = saveRes.DrawThisTurn;
+    }
+
     public static bool CheckForcePlacement(Vector2 pos, Vector2 dir)
     {
         if (ForcePlace == null)
@@ -226,6 +329,22 @@ public static class GameRes
             return true;
         else
             return false;
+    }
+
+    public static void PrepareNextWave()
+    {
+        NextRefreshTurn--;
+        CurrentWave++;
+
+        //获得回合金币
+        GameManager.Instance.GainMoney(Mathf.Min(300, (StaticData.Instance.BaseWaveIncome +
+        StaticData.Instance.WaveMultiplyIncome * (CurrentWave - 1))));
+        //没抽就减5%的价格
+        if (!DrawThisTurn)
+        {
+            BuildCost = Mathf.RoundToInt(BuildCost * (1 - BuildDiscount));
+        }
+        DrawThisTurn = false;
     }
 
 }

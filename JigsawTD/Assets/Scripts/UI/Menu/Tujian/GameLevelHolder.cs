@@ -62,36 +62,17 @@ public class GameLevelHolder : MonoBehaviour
 
     public void AddExp(int Exp)
     {
-        if (CurrentLevel >= LevelManager.Instance.GameLevels.Length)
-            return;
         ExpCor(Exp);
     }
     private void ExpCor(int Exp)
     {
-        if (CurrentLevel >= LevelManager.Instance.GameLevels.Length)
-            return;
         StartCoroutine(AddExpCor(Exp));
     }
 
     IEnumerator AddExpCor(int Exp)
     {
-        int need = NextExp - CurrentExp;
         float delta;
-        if (Exp >= need)
-        {
-            delta = (float)need / changeSpeed;
-            for (int i = 0; i < changeSpeed; i++)
-            {
-                CurrentExp += (int)delta;
-                yield return new WaitForSeconds(0.02f);
-            }
-            CurrentExp = 0;
-            GameManager.Instance.ShowBonusTips(LevelManager.Instance.GameLevels[CurrentLevel]);
-            CurrentLevel++;
-            Sound.Instance.PlayEffect("Sound_LevelUp");
-            ExpCor(Exp - need);
-        }
-        else
+        if (CurrentLevel >= LevelManager.Instance.GameLevels.Length - 1)
         {
             int final = CurrentExp + Exp;
             delta = (float)Exp / changeSpeed;
@@ -102,6 +83,36 @@ public class GameLevelHolder : MonoBehaviour
             }
             CurrentExp = final;
         }
+        else
+        {
+            int need = NextExp - CurrentExp;
+            if (Exp >= need)
+            {
+                delta = (float)need / changeSpeed;
+                for (int i = 0; i < changeSpeed; i++)
+                {
+                    CurrentExp += (int)delta;
+                    yield return new WaitForSeconds(0.02f);
+                }
+                CurrentExp = 0;
+                GameManager.Instance.ShowBonusTips(LevelManager.Instance.GameLevels[CurrentLevel]);
+                CurrentLevel++;
+                Sound.Instance.PlayEffect("Sound_LevelUp");
+                ExpCor(Exp - need);
+            }
+            else
+            {
+                int final = CurrentExp + Exp;
+                delta = (float)Exp / changeSpeed;
+                for (int i = 0; i < changeSpeed; i++)
+                {
+                    CurrentExp += (int)delta;
+                    yield return new WaitForSeconds(0.02f);
+                }
+                CurrentExp = final;
+            }
+        }
+
     }
 
 }

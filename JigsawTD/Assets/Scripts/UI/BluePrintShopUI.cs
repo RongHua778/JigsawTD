@@ -19,8 +19,7 @@ public class BluePrintShopUI : IUserInterface
     [SerializeField] Text LockCountTxt = default;
     [SerializeField] InfoBtn PerfectInfo = default;
 
-    public List<BluePrintGrid> ShopBluePrints = new List<BluePrintGrid>();//商店配方表
-    public List<BluePrintGrid> OwnBluePrints = new List<BluePrintGrid>();//拥有配方表
+    public static List<BluePrintGrid> ShopBluePrints;//商店配方表
 
     int currentLock = 0;
     private TempWord refreshShopTrigger;
@@ -34,20 +33,17 @@ public class BluePrintShopUI : IUserInterface
         }
     }
 
-    int nextRefreshTrun = 0;
     public int NextRefreshTrun //下次自动刷新回合
     {
-        get => nextRefreshTrun;
         set
         {
-            nextRefreshTrun = value;
-            if (nextRefreshTrun <= 0)
-            {
-                nextRefreshTrun = 3;
-                GameManager.Instance.RefreshShop(0);
-            }
-            NextRefreshTurnsTxt.text = GameMultiLang.GetTraduction("NEXTREFRESH") + ":" + nextRefreshTrun + GameMultiLang.GetTraduction("WAVE");
+            NextRefreshTurnsTxt.text = GameMultiLang.GetTraduction("NEXTREFRESH") + ":" + value + GameMultiLang.GetTraduction("WAVE");
         }
+    }
+
+    public int PerfectElementCount
+    {
+        set=> PerfectElementTxt.text = value.ToString();
     }
 
 
@@ -55,12 +51,10 @@ public class BluePrintShopUI : IUserInterface
     public override void Initialize()
     {
         anim = this.GetComponent<Animator>();
-        NextRefreshTrun = 4;
-        SetPerfectElementCount(0);
         PerfectInfo.SetContent(GameMultiLang.GetTraduction("PERFECTINFO"));
         CurrentLock = 0;
-
         refreshShopTrigger = new TempWord(TempWordType.RefreshShop, 0);
+        ShopBluePrints = new List<BluePrintGrid>();
     }
 
     public void PrepareForGuide()
@@ -68,9 +62,13 @@ public class BluePrintShopUI : IUserInterface
         ShopBtnObj.SetActive(false);
     }
 
-    public void SetPerfectElementCount(int count)
+    public void LoadSaveGame()
     {
-        PerfectElementTxt.text = count.ToString();
+        foreach (var b in LevelManager.Instance.LastGameSave.SaveBluePrints)
+        {
+            RefactorStrategy strategy = ConstructHelper.GetSpecificStrategy(b.Name, b.ElementRequirements,b.QualityRequirements);
+            AddBluePrint(strategy, true);
+        }
     }
 
     public void RefreshShop(int cost)//刷新商店
@@ -116,17 +114,11 @@ public class BluePrintShopUI : IUserInterface
         bluePrintGrid.transform.localScale = Vector3.one;
         bluePrintGrid.transform.localPosition = Vector3.zero;
         bluePrintGrid.SetElements(this, shopContent.GetComponent<ToggleGroup>(), strategy);
-        if (isShopBluePrint)
-        {
-            //bluePrintGrid.transform.SetAsFirstSibling();
-            bluePrintGrid.ShowLockBtn(CurrentLock < GameRes.MaxLock);
-            bluePrintGrid.InShop = true;
-            ShopBluePrints.Add(bluePrintGrid);
-        }
-        else
-        {
-            MoveBluePrintToPocket(bluePrintGrid);
-        }
+
+        bluePrintGrid.ShowLockBtn(CurrentLock < GameRes.MaxLock);
+        bluePrintGrid.InShop = true;
+        ShopBluePrints.Add(bluePrintGrid);
+
     }
 
 
@@ -176,15 +168,15 @@ public class BluePrintShopUI : IUserInterface
         anim.SetBool("Showing", true);
     }
 
-    public void MoveBluePrintToPocket(BluePrintGrid grid)//把商店配方移入拥有
-    {
-        grid.InShop = false;
-        grid.transform.SetAsLastSibling();
-        OwnBluePrints.Add(grid);
-        if (ShopBluePrints.Contains(grid))
-            ShopBluePrints.Remove(grid);
-        grid.transform.SetAsLastSibling();
-    }
+    //public void MoveBluePrintToPocket(BluePrintGrid grid)//把商店配方移入拥有
+    //{
+    //    grid.InShop = false;
+    //    grid.transform.SetAsLastSibling();
+    //    OwnBluePrints.Add(grid);
+    //    if (ShopBluePrints.Contains(grid))
+    //        ShopBluePrints.Remove(grid);
+    //    grid.transform.SetAsLastSibling();
+    //}
 
     public void RefreshBtnClick()
     {
@@ -208,10 +200,7 @@ public class BluePrintShopUI : IUserInterface
         {
             ShopBluePrints.Remove(grid);
         }
-        if (OwnBluePrints.Contains(grid))
-        {
-            OwnBluePrints.Remove(grid);
-        }
+
         ObjectPool.Instance.UnSpawn(grid);
     }
 
@@ -221,10 +210,10 @@ public class BluePrintShopUI : IUserInterface
         {
             bluePrint.CheckElements();
         }
-        foreach (var bluePrint in OwnBluePrints)
-        {
-            bluePrint.CheckElements();
-        }
+        //foreach (var bluePrint in OwnBluePrints)
+        //{
+        //    bluePrint.CheckElements();
+        //}
     }
 
 
@@ -234,10 +223,14 @@ public class BluePrintShopUI : IUserInterface
         {
             blueprint.PreviewElement(value, element, quality);
         }
-        foreach (var blueprint in OwnBluePrints)
-        {
-            blueprint.PreviewElement(value, element, quality);
-        }
+        //foreach (var blueprint in OwnBluePrints)
+        //{
+        //    blueprint.PreviewElement(value, element, quality);
+        //}
 
     }
+
+
+
+
 }

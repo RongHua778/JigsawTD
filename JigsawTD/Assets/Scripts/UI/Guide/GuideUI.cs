@@ -212,7 +212,7 @@ public class GuideUI : IUserInterface
                 //Blueprint blueprint = ConstructHelper.GetSpecificBlueprint("CONSTRUCTOR", 0, 1, 2);
                 //RefactorStrategy strategy=ConstructHelper
                 //m_ShopUI.AddBluePrint(blueprint, true);
-                m_ShopUI.RemoveGrid(m_ShopUI.ShopBluePrints[0]);//ÒÆ³ý1¸ö
+                m_ShopUI.RemoveGrid(BluePrintShopUI.ShopBluePrints[0]);//ÒÆ³ý1¸ö
 
                 ScaleAndMove.MoveTurorial = true;
                 ScaleAndMove.CanControl = true;

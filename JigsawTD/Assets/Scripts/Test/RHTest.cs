@@ -9,8 +9,6 @@ public class RHTest : MonoBehaviour
     [SerializeField] InputField moneyInputField = default;
     [SerializeField] InputField lifeInputField = default;
 
-    [SerializeField] InputField drawInputField = default;
-
     [SerializeField] InputField compositeInputField = default;
     [SerializeField] InputField e1 = default;
     [SerializeField] InputField e2 = default;
@@ -22,8 +20,6 @@ public class RHTest : MonoBehaviour
 
     [SerializeField] InputField trapInputField = default;
 
-   // [SerializeField] InputField waveStateField = default;
-    [SerializeField] WaveSystem waveSystem = default;
 
 
     private void Start()
@@ -43,11 +39,6 @@ public class RHTest : MonoBehaviour
         GameManager.Instance.GainMoney(int.Parse(moneyInputField.text));
     }
 
-    public void GetDrawClick()
-    {
-        GameManager.Instance.GainDraw(int.Parse(drawInputField.text));
-    }
-
     public void GetCompositeClick()
     {
         ConstructHelper.GetRefactorTurretByNameAndElement(compositeInputField.text, int.Parse(e1.text), int.Parse(e2.text), int.Parse(e3.text));
@@ -63,13 +54,6 @@ public class RHTest : MonoBehaviour
         ConstructHelper.GetTrapShapeByName(trapInputField.text);
     }
 
-    public void SetWaveBtnClick()
-    {
-        //waveSystem.waveStage = float.Parse(waveStateField.text);
-        // waveSystem.waveCoolDown = float.Parse(waveCoolDownField.text);
-        waveSystem.LevelInitialize();
-        GameManager.Instance.PrepareNextWave();
-    }
 
     public void GetLifeBtnClick()
     {

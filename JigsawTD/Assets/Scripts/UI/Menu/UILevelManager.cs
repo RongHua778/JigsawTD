@@ -11,7 +11,6 @@ public class UILevelManager : IUserInterface
     private Animator m_Anim;
     [SerializeField] Text difficultyTxt = default;
     [SerializeField] Toggle tutorialCheck = default;
-    [SerializeField] CanvasGroup startGameBtnSprite = default;
     [SerializeField] Text endlessHighScore = default;
     [SerializeField] Text endlessUnlockText = default;
     [SerializeField] GameObject endlessStartBtnObj = default;
@@ -37,11 +36,12 @@ public class UILevelManager : IUserInterface
     {
         if (!gameStart)
         {
-            if (LevelManager.Instance.LevelStart())
-            {
-                Game.Instance.LoadScene(1);
-                gameStart = true;
-            }
+            LevelManager.Instance.HasLastGame = false;
+            LevelManager.Instance.CurrentLevel = LevelManager.Instance.GetLevelAtt(LevelManager.Instance.SelectDiffculty);
+            if (LevelManager.Instance.SelectDiffculty >= 1)
+                Game.Instance.Tutorial = false;
+            gameStart = true;
+            Game.Instance.LoadScene(1);
         }
     }
 
@@ -49,7 +49,8 @@ public class UILevelManager : IUserInterface
     {
         if (!gameStart)
         {
-            LevelManager.Instance.CurrentLevel = LevelManager.Instance.EndlessLevel;
+            LevelManager.Instance.HasLastGame = false;
+            LevelManager.Instance.CurrentLevel = LevelManager.Instance.GetLevelAtt(11);
             gameStart = true;
             Game.Instance.LoadScene(1);
         }
@@ -73,15 +74,6 @@ public class UILevelManager : IUserInterface
             tutorialCheck.isOn = true;
             tutorialCheck.gameObject.SetActive(false);
         }
-        if (LevelManager.Instance.SelectDiffculty > LevelManager.Instance.PremitDifficulty)
-        {
-            startGameBtnSprite.alpha = 0.5f;
-        }
-        else
-        {
-            startGameBtnSprite.alpha = 1f;
-        }
-
     }
 
     public override void Show()

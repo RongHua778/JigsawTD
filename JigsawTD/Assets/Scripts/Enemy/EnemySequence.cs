@@ -6,20 +6,16 @@ using UnityEngine;
 [System.Serializable]
 public class EnemySequence
 {
-    //int wave;
-    public float Intensify;
     public EnemyType EnemyType;
-
+    public float Intensify;
     public int Amount;
-    public float AmountIntensify;
     public float CoolDown;
     public bool IsBoss;
     private float SpawnTimer;
-    //public float waveCoolDown = 2.5f;
-
-    //public List<int> index = new List<int>();
-    //public bool IsEnd;
-    //public int Wave { get => wave; set => wave = value; }
+    private int count;
+    public EnemySequence()
+    {
+    }
 
     public EnemySequence(EnemyType type, int amount, float cooldown, float intensify, bool isBoss)
     {
@@ -29,17 +25,22 @@ public class EnemySequence
         Intensify = intensify;
         SpawnTimer = 0;
         this.IsBoss = isBoss;
-
+        count = Amount;
     }
 
 
 
     bool first = true;
     float coolDown;
+
+    public void Initialize()
+    {
+        count = this.Amount;
+    }
     public bool Progress()
     {
         SpawnTimer += Time.deltaTime;
-        if (Amount > 0)
+        if (count > 0)
         {
             if (first)//第一只出怪冷却为0
             {
@@ -54,7 +55,7 @@ public class EnemySequence
             if (SpawnTimer >= coolDown)
             {
                 SpawnTimer = 0;
-                Amount--;
+                count--;
                 GameManager.Instance.SpawnEnemy(EnemyType, 0, Intensify);
             }
         }

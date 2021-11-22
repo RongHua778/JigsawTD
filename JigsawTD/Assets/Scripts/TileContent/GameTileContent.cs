@@ -23,7 +23,7 @@ public abstract class GameTileContent : ReusableObject
         {
             col.GetComponent<GroundTile>().IsLanded = false;
         }
-        SaveContent();
+        LevelManager.Instance.GameContents.Add(this);
     }
 
     public virtual void OnContentSelected(bool value)
@@ -46,23 +46,22 @@ public abstract class GameTileContent : ReusableObject
 
     }
 
-    public virtual void SaveContent()//放置下的时候，进入保存LIST
+    public virtual void SaveContent(out ContentStruct contentSruct)//放置下的时候，进入保存LIST
     {
-        if (!LevelManager.Instance.SaveContents.Contains(m_ContentStruct))
-        {
-            m_ContentStruct = new ContentStruct();
-            LevelManager.Instance.SaveContents.Add(m_ContentStruct);
-        }
+        m_ContentStruct = new ContentStruct();
+        contentSruct = m_ContentStruct;
         m_ContentStruct.ContentType = (int)ContentType;
-        m_ContentStruct.posX = Mathf.RoundToInt( transform.position.x);
-        m_ContentStruct.posY = Mathf.RoundToInt(transform.position.y);
+        //m_ContentStruct.posX = Mathf.RoundToInt( transform.position.x);
+        //m_ContentStruct.posY = Mathf.RoundToInt(transform.position.y);
+        m_ContentStruct.Pos = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
         m_ContentStruct.Direction = (int)m_gameTile.TileDirection;
+        
     }
 
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
-        LevelManager.Instance.SaveContents.Remove(m_ContentStruct);
+        LevelManager.Instance.GameContents.Remove(this);
     }
 
 }

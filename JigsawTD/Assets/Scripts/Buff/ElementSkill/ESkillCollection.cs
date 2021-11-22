@@ -3,26 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 public class LateIntensify : ElementSkill
 {
-    //子弹每有0.1溅射范围，就使溅射伤害提高8%
+    //子弹溅射到1个敌人，就使子弹伤害提高10%
     public override List<int> Elements => new List<int> { 4, 4, 4 };
 
-    public override void StartTurn()
+    public override void PreHit(Bullet bullet = null)
     {
-        base.StartTurn();
-        Duration += 20;
+        base.PreHit(bullet);
+        bullet.Damage *= (1 + bullet.SputteredCount * 0.2f);
     }
-    public override void TickEnd()
-    {
-        base.TickEnd();
-        strategy.TimeModify = 1;
-    }
+    //public override void StartTurn()
+    //{
+    //    base.StartTurn();
+    //    Duration += 20;
+    //}
+    //public override void TickEnd()
+    //{
+    //    base.TickEnd();
+    //    strategy.TimeModify = 1;
+    //}
 
-    public override void EndTurn()
-    {
-        base.EndTurn();
-        Duration = 0;
-        strategy.TimeModify = 2;
-    }
+    //public override void EndTurn()
+    //{
+    //    base.EndTurn();
+    //    Duration = 0;
+    //    strategy.TimeModify = 2;
+    //}
 
 }
 

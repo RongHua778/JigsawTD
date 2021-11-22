@@ -9,7 +9,7 @@ public class GoldKeeper : Boss
 
     private int LifeCount;
 
-    public override void Initialize(int pathIndex, EnemyAttribute attribute, float pathOffset,float intensify)
+    public override void Initialize(int pathIndex, EnemyAttribute attribute, float pathOffset, float intensify)
     {
         base.Initialize(pathIndex, attribute, pathOffset, intensify);
         LifeCount = 1;
@@ -25,7 +25,7 @@ public class GoldKeeper : Boss
     private void GainMoney()
     {
         LifeCount++;
-        StaticData.Instance.GainMoneyEffect((Vector2)model.position,Mathf.Min(30, Mathf.RoundToInt(GameRes.CurrentWave)));
+        StaticData.Instance.GainMoneyEffect(model.position, Mathf.Min(40, Mathf.RoundToInt(GameRes.CurrentWave * 1.5f)));
     }
 
     protected override void OnDie()

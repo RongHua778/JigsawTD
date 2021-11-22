@@ -4,14 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class UnlockSlot : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
+public class UnlockSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private ContentAttribute contentAtt;
     [SerializeField] Image icon = default;
     [SerializeField] Text nameTxt = default;
     public void OnPointerEnter(PointerEventData eventData)
     {
-        contentAtt.GameShowTips(StaticData.LeftTipsPos);
+        if (contentAtt != null)
+            contentAtt.GameShowTips(StaticData.LeftTipsPos);
     }
 
     public void OnPointerExit(PointerEventData eventData)

@@ -63,7 +63,7 @@ public class FreeDraw : ElementSkill
 
     public override void Composite()
     {
-        GameRes.BuyShapeCost = (int)(GameRes.BuyShapeCost * 0.5f);
+        GameRes.BuildCost = (int)(GameRes.BuildCost * 0.5f);
     }
 }
 
@@ -74,7 +74,7 @@ public class TurretLevelUp : ElementSkill
 
     public override void Composite()
     {
-        GameRes.SwitchMarkCost = Mathf.RoundToInt(GameRes.SwitchMarkCost * 0.5f);
+        GameRes.SwitchTrapCost = Mathf.RoundToInt(GameRes.SwitchTrapCost * 0.5f);
     }
 }
 
@@ -86,7 +86,10 @@ public class SystemDiscount : ElementSkill
 
     public override void Composite()
     {
-        GameManager.Instance.SetModuleSystemDiscount(0.5f);
+        if (GameRes.SystemLevel < StaticData.Instance.SystemMaxLevel)
+        {
+            GameRes.SystemUpgradeCost = Mathf.RoundToInt(GameRes.SystemUpgradeCost * 0.5f);
+        }
     }
 
 }
@@ -144,7 +147,7 @@ public class PerfectElement : ElementSkill
 
     public override void Composite()
     {
-        GameManager.Instance.GetPerfectElement(1);
+        GameRes.PerfectElementCount++;
     }
 
 

@@ -93,7 +93,7 @@ public class RefactorStrategy : StrategyBase
             if (!com.isPerfect)
                 ObjectPool.Instance.UnSpawn(com.turretTile);
             else
-                GameManager.Instance.GetPerfectElement(-1);
+                GameRes.PerfectElementCount--;
         }
 
         //所有防御塔重新检查侦测效果

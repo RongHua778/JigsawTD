@@ -347,11 +347,6 @@ public class TurretTips : TileTips
 
     }
 
-    public void BuyBluePrintBtnClick()
-    {
-        GameManager.Instance.BuyBluePrint(m_Grid, StaticData.Instance.BuyBluePrintCost);
-        BuyBtn.SetActive(m_Grid.InShop);
-    }
 
     public void CompositeBtnClick()
     {

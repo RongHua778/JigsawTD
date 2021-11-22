@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0168100ba70e486479f31ec9f99a31ad, type: 3}
   m_Name: Endless
   m_EditorClassIdentifier: 
-  IsEndless: 1
+  Mode: 11
   Difficulty: 99
   PlayerHealth: 15
   Wave: 500

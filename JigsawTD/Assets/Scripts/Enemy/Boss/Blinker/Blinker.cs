@@ -42,7 +42,7 @@ public class Blinker : Boss
         AnimatorStateInfo stateinfo = anim.GetCurrentAnimatorStateInfo(0);
         if (stateinfo.normalizedTime >= 0.98f/*&&stateinfo.normalizedTime<=1f*/)
         {
-            PointIndex += 4;
+            PointIndex += 3;
 
             //在终点前不会瞬移
             if (PointIndex < PathPoints.Count - 1)
@@ -77,7 +77,7 @@ public class Blinker : Boss
         Vector3 targetPos;
         if (!transfering)
         {
-            targetPos = PathPoints[Mathf.Min(PointIndex + 4,PathPoints.Count - 1)].PathPos;
+            targetPos = PathPoints[Mathf.Min(PointIndex + 3,PathPoints.Count - 1)].PathPos;
             SpawnHoleOnPos(transform.position);
             SpawnHoleOnPos(targetPos);
             anim.Play("Exit");

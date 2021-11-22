@@ -190,7 +190,7 @@ public class MortarSkill : InitialSkill
     public override void Shoot(Bullet bullet = null)
     {
         base.Shoot(bullet);
-        bullet.SplashPercentage += bullet.SputteringRange * 0.15f;
+        bullet.SplashPercentage += (bullet.SputteringRange / 0.1f) * 0.1f;
     }
 
 }

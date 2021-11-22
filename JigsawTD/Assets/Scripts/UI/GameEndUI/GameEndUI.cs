@@ -36,13 +36,16 @@ public class GameEndUI : IUserInterface
 
     public void SetGameResult(bool win)
     {
+        LevelManager.Instance.ClearLastData();//结算页面时，清理当前局保存数据
+
         gainExp = LevelManager.Instance.GainExp(GameRes.CurrentWave);
+
         expInfoBtn.SetContent(GameMultiLang.GetTraduction("EXPVALUE") + "=" +
             GameMultiLang.GetTraduction("DIFFICULTY") + "*5*" +
             GameMultiLang.GetTraduction("WAVE") + "*(1+25%*" +
             GameMultiLang.GetTraduction("BOSSDEFEAT") + ")");
 
-        if (LevelManager.Instance.CurrentLevel.IsEndless)//无尽模式
+        if (LevelManager.Instance.CurrentLevel.Mode == 11)//无尽模式
         {
             title.text = GameMultiLang.GetTraduction("WIN") + (GameRes.CurrentWave) + GameMultiLang.GetTraduction("WAVE");
             LevelManager.Instance.EndlessHighScore = GameRes.CurrentWave;
@@ -61,7 +64,7 @@ public class GameEndUI : IUserInterface
             }
         }
 
-        if (win && !LevelManager.Instance.CurrentLevel.IsEndless)
+        if (win && LevelManager.Instance.CurrentLevel.Mode <= 10)
         {
             LevelManager.Instance.PassDiifcutly = LevelManager.Instance.CurrentLevel.Difficulty + 1;
         }
@@ -143,13 +146,7 @@ public class GameEndUI : IUserInterface
         StopCoroutine(SetValueCor());
     }
 
-    public void ReturnToMenu()
-    {
-        if (Game.Instance != null)
-        {
-            Game.Instance.LoadScene(0);
-        }
-    }
+
     public override void Show()
     {
         base.Show();
@@ -157,9 +154,6 @@ public class GameEndUI : IUserInterface
     }
 
 
-    public void RestartBtnClick()
-    {
-        Game.Instance.LoadScene(1);
-    }
+
 
 }

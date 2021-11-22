@@ -16,6 +16,8 @@ public class MenuUIManager : Singleton<MenuUIManager>
     [SerializeField] TurretTips m_TurretTips = default;
     [SerializeField] TrapTips m_TrapTips = default;
     [SerializeField] EnemyInfoTips m_EnemyInfoTips = default;
+    [SerializeField] ConfirmPanel m_ConfirmPanel = default;
+    [SerializeField] GameObject m_ContinueGameBtn = default;
 
     public void Initinal()
     {
@@ -27,7 +29,12 @@ public class MenuUIManager : Singleton<MenuUIManager>
         m_UIBattleSet.Initialize();
         m_TurretTips.Initialize();
         m_TrapTips.Initialize();
+        m_ConfirmPanel.Initialize();
+        LevelManager.Instance.LoadGame();//每次进入菜单页，就读取一次存档
+        m_ContinueGameBtn.SetActive(LevelManager.Instance.HasLastGame);
+
     }
+
     public void Release()
     {
         m_Message.Release();
@@ -41,21 +48,32 @@ public class MenuUIManager : Singleton<MenuUIManager>
         {
             ShowMessage(GameMultiLang.GetTraduction("TEST1"));
             LevelManager.Instance.SetUnlockAll(false);
+            LevelManager.Instance.PremitDifficulty = 0;
             PlayerPrefs.DeleteAll();
         }
         if (Input.GetKeyDown(KeyCode.J))//解锁全内容
         {
             ShowMessage(GameMultiLang.GetTraduction("TEST2"));
             LevelManager.Instance.SetUnlockAll(true);
-            PlayerPrefs.SetInt("MaxDifficulty", 5);
+            LevelManager.Instance.PremitDifficulty = 6;
+            PlayerPrefs.SetInt("MaxDifficulty", 6);
         }
     }
 
     public void StartGameBtnClick()
     {
+
         m_UILevelManager.Show();
         m_UILevelManager.SetLevelInfo();
     }
+
+    public void ContinueGameBtnClick()
+    {
+        Game.Instance.Tutorial = false;
+        Game.Instance.LoadScene(1);
+    }
+
+
 
     public void TujianBtnClick()
     {
@@ -69,14 +87,14 @@ public class MenuUIManager : Singleton<MenuUIManager>
         m_TurretTips.ReadAttribute(att);
     }
 
-    public void ShowTrapTips(TrapAttribute att,Vector2 pos)
+    public void ShowTrapTips(TrapAttribute att, Vector2 pos)
     {
         m_TrapTips.transform.position = pos;
         m_TrapTips.Show();
         m_TrapTips.ReadTrapAtt(att);
     }
 
-    public void ShowEnemyInfoTips(EnemyAttribute att,Vector2 pos)
+    public void ShowEnemyInfoTips(EnemyAttribute att, Vector2 pos)
     {
         m_EnemyInfoTips.transform.position = pos;
         m_EnemyInfoTips.Show();

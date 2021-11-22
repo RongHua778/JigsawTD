@@ -123,7 +123,9 @@ public static class ConstructHelper
     public static TileShape GetRefactorTurretByNameAndElement(string name, int e1, int e2, int e3)
     {
         TurretAttribute attribute = m_ContentFactory.GetCompositeTurretByName(name);
-        RefactorStrategy strategy = m_StrategyFactory.GetSpecificRefactorStrategy(attribute, e1, e2, e3);
+        List<int> elements = new List<int> { e1, e2, e3 };
+        List<int> qualites = new List<int> { 1, 1, 1 };
+        RefactorStrategy strategy = m_StrategyFactory.GetSpecificRefactorStrategy(attribute, elements, qualites);
         TileShape shape = GetRefactorTurretByStrategy(strategy);
         return shape;
     }
@@ -148,10 +150,10 @@ public static class ConstructHelper
 
 
 
-    public static RefactorStrategy GetSpecificStrategy(string name, int e1, int e2, int e3, int quality = 1)
+    public static RefactorStrategy GetSpecificStrategy(string name, List<int> elements, List<int> qualities, int quality = 1)
     {
         TurretAttribute attribute = m_ContentFactory.GetCompositeTurretByName(name);
-        RefactorStrategy strategy = m_StrategyFactory.GetSpecificRefactorStrategy(attribute, e1, e2, e3, quality);
+        RefactorStrategy strategy = m_StrategyFactory.GetSpecificRefactorStrategy(attribute, elements, qualities, quality);
         return strategy;
     }
 
@@ -181,13 +183,13 @@ public static class ConstructHelper
         GameTile tile = m_TileFactory.GetBasicTile();
         List<int> elements;
         RefactorTurret content = null;
-        RefactorStrategy strategy=null;
+        RefactorStrategy strategy = null;
         for (int i = 0; i < contentStruct.SkillList.Count; i++)
         {
             if (i == 0)
             {
                 elements = contentStruct.SkillList["1"];
-                strategy = GetSpecificStrategy(contentStruct.ContentName, elements[0], elements[1], elements[2], contentStruct.Quality);
+                strategy = GetSpecificStrategy(contentStruct.ContentName, elements, new List<int> { 1, 1, 1 });
                 content = m_ContentFactory.GetRefactorTurret(strategy);
                 strategy.ElementSKillSlot = contentStruct.ElementSlotCount;
                 tile.SetContent(content);

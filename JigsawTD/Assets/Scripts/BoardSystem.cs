@@ -168,39 +168,31 @@ public class BoardSystem : IGameSystem
         GenerateGroundTiles(_groundSize);
         Physics2D.SyncTransforms();//涉及物理检测前，需要调用
         AstarPath.active.Scan();
+    }
 
-        if (!LevelManager.Instance.IsContiune)
-        {
-            FirstGameSet();
-        }
-        else
-        {
-            LoadGameSet();
-        }
-
-
+    private void PathCheck()
+    {
         Physics2D.SyncTransforms();
         SeekPath();
         ShowPath();
         CheckPathTrap();
     }
-
-    private void FirstGameSet()
+    public void FirstGameSet()
     {
         GenerateStartTiles(_startSize, sizeOffset);
-
-        if (!Game.Instance.Tutorial)//只有非教学关带有陷阱
-            GenerateTrapTiles(sizeOffset, _startSize);
+        GenerateTrapTiles(sizeOffset, _startSize);
+        PathCheck();
     }
 
-    private void LoadGameSet()
+    public void LoadSaveGame()
     {
         try
         {
-            foreach (var content in LevelManager.Instance.LastSaveContents)
+            foreach (var content in LevelManager.Instance.LastGameSave.SaveContents)
             {
                 GameTile tile = null;
-                Vector2Int pos = new Vector2Int(content.posX, content.posY);
+                //Vector2Int pos = new Vector2Int(content.posX, content.posY);
+                Vector2Int pos = content.Pos;
                 switch (content.ContentType)
                 {
                     case 0:
@@ -237,7 +229,7 @@ public class BoardSystem : IGameSystem
 
         }
 
-
+        PathCheck();
     }
 
     private void GenerateStartTiles(Vector2Int size, Vector2Int offset)
@@ -472,9 +464,9 @@ public class BoardSystem : IGameSystem
         {
             GameRes.FreeTrapCount--;
         }
-        else if (GameManager.Instance.ConsumeMoney(GameRes.SwitchMarkCost))
+        else if (GameManager.Instance.ConsumeMoney(GameRes.SwitchTrapCost))
         {
-            GameRes.SwitchMarkCost += StaticData.Instance.SwitchTrapCostMultiply;
+            GameRes.SwitchTrapCost += StaticData.Instance.SwitchTrapCostMultiply;
         }
         Vector2 pos = trap.m_GameTile.transform.position;
         ObjectPool.Instance.UnSpawn(trap.m_GameTile);

@@ -12,21 +12,18 @@ public class FuncUI : IUserInterface
 
     [SerializeField] LevelInfoPanel m_LevelInfoPanel = default;
 
-    //[SerializeField] Text LuckPointTxt = default;
     [SerializeField] Text DrawBtnTxt = default;
-    [SerializeField] Text LevelUpTxt = default;
-    [SerializeField] Text PlayerLevelTxt = default;
+    [SerializeField] Text SystemUpgradeCostTxt = default;
+    [SerializeField] Text SystemLevelTxt = default;
     [SerializeField] Text DiscountTxt = default;
-    [SerializeField] InfoBtn m_LuckInfo = default;
     [SerializeField] InfoBtn m_DrawInfo = default;
-    [SerializeField] LuckProgress m_LuckProgress = default;
     Animator m_Anim;
 
     public float DiscountRate { 
         set
         {
-            DiscountTxt.text = GameRes.DiscountRate * 100 + "%";
-            m_DrawInfo.SetContent(GameMultiLang.GetTraduction("DRAWINFO") + "<color=cyan>" + GameRes.DiscountRate * 100 + "%</color>");
+            DiscountTxt.text = GameRes.BuildDiscount * 100 + "%";
+            m_DrawInfo.SetContent(GameMultiLang.GetTraduction("DRAWINFO") + "<color=cyan>" + GameRes.BuildDiscount * 100 + "%</color>");
 
         }
     }
@@ -34,101 +31,40 @@ public class FuncUI : IUserInterface
     bool drawThisTurn = true;
     public bool DrawThisTurn { get => drawThisTurn; set => drawThisTurn = value; }
 
-    private int energyProgress = 0;
-    public int EnergyProgress
-    {
-        get => energyProgress;
-        set => energyProgress = Mathf.Min(5, value);
-    }
-
-    int freeShapeCount;
-    public int FreeShapeCount
-    {
-        get => freeShapeCount;
-        set
-        {
-            freeShapeCount = value;
-            if (freeShapeCount > 0)
-                DrawBtnTxt.text = 0.ToString();
-            else
-                DrawBtnTxt.text = GameRes.BuyShapeCost.ToString();
-        }
-    }
-
     public int BuyShapeCost
     {
-        set=> DrawBtnTxt.text = GameRes.BuyShapeCost.ToString();
+        set=> DrawBtnTxt.text = GameRes.BuildCost.ToString();
     }
 
-    private int drawRemain = 0;
-    public int DrawRemain
+
+    public int SystemLevel
     {
-        get => drawRemain;
         set
         {
-            drawRemain = value;
-
+            SystemLevelTxt.text = value.ToString();
         }
     }
 
-    public int ModuleLevel
+    public int SystemUpgradeCost
     {
         set
         {
-            PlayerLevelTxt.text = value.ToString();
-            PlayerLvUpMoney = StaticData.Instance.LevelUpMoney[value];
-            if (value == 2 || value == 4 || value == 6)//2，4,6级增加一个商店容量
+            if (GameRes.SystemLevel < StaticData.Instance.SystemMaxLevel)
             {
-                GameRes.ShopCapacity++;
-            }
-        }
-    }
-
-    int playerLvUpMoney = 0;
-    public int PlayerLvUpMoney
-    {
-        get => playerLvUpMoney;
-        set
-        {
-            playerLvUpMoney = value;
-            if (GameRes.ModuleLevel < StaticData.Instance.PlayerMaxLevel)
-            {
-                LevelUpTxt.text = PlayerLvUpMoney.ToString();
+                SystemUpgradeCostTxt.text = value.ToString();
             }
             else
             {
-                LevelUpTxt.text = "MAX";
+                SystemUpgradeCostTxt.text = "MAX";
             }
         }
     }
-
-    private int energy;
-    public int Energy
-    {
-        get => energy;
-        set
-        {
-            energy = Mathf.Min(5, value);
-            if (energy >= 10)
-            {
-                energy = 0;
-                DrawRemain++;
-            }
-            m_LuckInfo.SetContent(StaticData.GetEnergyInfo());
-            m_LuckProgress.SetProgress(energy);
-        }
-    }
-
-
-
 
 
     public override void Initialize()
     {
         m_LevelInfoPanel.Initialize();
         m_LevelInfoPanel.SetInfo();
-        Energy = 0;
-        DiscountRate = 0.1f;
         m_Anim = this.GetComponent<Animator>();
     }
 
@@ -155,35 +91,21 @@ public class FuncUI : IUserInterface
 
     public void DrawBtnClick()
     {
-        if (FreeShapeCount > 0)
+        if (GameManager.Instance.ConsumeMoney(GameRes.BuildCost))
         {
-            FreeShapeCount--;
-        }
-        else if (GameManager.Instance.ConsumeMoney(GameRes.BuyShapeCost))
-        {
-            GameRes.BuyShapeCost += StaticData.Instance.MultipleShapeCost;
+            GameRes.BuildCost += StaticData.Instance.MultipleShapeCost;
         }
         else
         {
             return;
         }
-        DrawThisTurn = true;
+        GameRes.DrawThisTurn = true;
         GameManager.Instance.DrawShapes();
         GameManager.Instance.CheckDrawSkill();
 
     }
 
-    public void PrepareNextWave()
-    {
-        Show();
-        if (!DrawThisTurn)
-        {
-            GameRes.BuyShapeCost = Mathf.RoundToInt(GameRes.BuyShapeCost * (1 - GameRes.DiscountRate));//没抽就减5%的价格
-        }
 
-        DrawThisTurn = false;
-        GameManager.Instance.GainDraw(1);
-    }
 
     public void NextWaveBtnClick()
     {
@@ -192,11 +114,11 @@ public class FuncUI : IUserInterface
 
     public void LevelUpBtnClick()
     {
-        if (GameRes.ModuleLevel < StaticData.Instance.PlayerMaxLevel)
+        if (GameRes.SystemLevel < StaticData.Instance.SystemMaxLevel)
         {
-            if (GameManager.Instance.ConsumeMoney(PlayerLvUpMoney))
+            if (GameManager.Instance.ConsumeMoney(GameRes.SystemUpgradeCost))
             {
-                GameRes.ModuleLevel++;
+                GameRes.SystemLevel++;
                 m_LevelInfoPanel.SetInfo();
             }
         }

@@ -10,10 +10,10 @@ public class LevelInfoPanel : IUserInterface
     {
         for (int i = 0; i < qualitySlots.Length; i++)
         {
-            float chanceNow = StaticData.QualityChances[GameRes.ModuleLevel - 1, i];
+            float chanceNow = StaticData.QualityChances[GameRes.SystemLevel - 1, i];
             float chanceAfter = chanceNow;
-            if (GameRes.ModuleLevel < StaticData.Instance.PlayerMaxLevel)
-                chanceAfter = StaticData.QualityChances[GameRes.ModuleLevel, i];
+            if (GameRes.SystemLevel < StaticData.Instance.SystemMaxLevel)
+                chanceAfter = StaticData.QualityChances[GameRes.SystemLevel, i];
             qualitySlots[i].SetSlotInfo(i + 1, chanceNow, chanceAfter);
         }
     }
