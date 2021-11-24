@@ -10,28 +10,8 @@ public class PausePanel : IUserInterface
     [SerializeField] Text QuitTxt = default;
     public override void Show()
     {
-        base.Show();
         SetContent();
-    }
-
-
-    public void ReturnBtnClick()
-    {
-        if (Game.Instance.Tutorial)
-        {
-            LevelManager.Instance.ClearLastData();
-        }
-        LevelManager.Instance.SaveAll();
-        Game.Instance.LoadScene(0);
-    }
-
-    public void QuitBtnClick()
-    {
-        if (Game.Instance.Tutorial)
-        {
-            LevelManager.Instance.ClearLastData();
-        }
-        Game.Instance.QuitGame();
+        base.Show();
     }
 
     private void SetContent()

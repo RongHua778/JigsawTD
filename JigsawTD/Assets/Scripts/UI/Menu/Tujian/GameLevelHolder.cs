@@ -31,13 +31,13 @@ public class GameLevelHolder : MonoBehaviour
         {
             currentLevel = value;
             LevelTxt.text = currentLevel.ToString();
-            if (currentLevel == LevelManager.Instance.GameLevels.Length)
+            if (currentLevel == LevelManager.Instance.MaxGameLevel)
             {
                 CurrentExp = NextExp;
             }
             else
             {
-                NextExp = LevelManager.Instance.GameLevels[currentLevel].ExpRequire;
+                NextExp = LevelManager.Instance.GetLevelInfo(currentLevel).ExpRequire;
             }
 
         }
@@ -57,7 +57,7 @@ public class GameLevelHolder : MonoBehaviour
     {
         CurrentLevel = LevelManager.Instance.GameLevel;
         CurrentExp = LevelManager.Instance.GameExp;
-        NextExp = LevelManager.Instance.GameLevels[CurrentLevel].ExpRequire;
+        NextExp = LevelManager.Instance.GetLevelInfo(CurrentLevel).ExpRequire;
     }
 
     public void AddExp(int Exp)
@@ -72,7 +72,7 @@ public class GameLevelHolder : MonoBehaviour
     IEnumerator AddExpCor(int Exp)
     {
         float delta;
-        if (CurrentLevel >= LevelManager.Instance.GameLevels.Length - 1)
+        if (CurrentLevel >= LevelManager.Instance.MaxGameLevel)
         {
             int final = CurrentExp + Exp;
             delta = (float)Exp / changeSpeed;
@@ -95,7 +95,7 @@ public class GameLevelHolder : MonoBehaviour
                     yield return new WaitForSeconds(0.02f);
                 }
                 CurrentExp = 0;
-                GameManager.Instance.ShowBonusTips(LevelManager.Instance.GameLevels[CurrentLevel]);
+                GameManager.Instance.ShowBonusTips(LevelManager.Instance.GetLevelInfo(CurrentLevel));
                 CurrentLevel++;
                 Sound.Instance.PlayEffect("Sound_LevelUp");
                 ExpCor(Exp - need);

@@ -255,7 +255,7 @@ public class TurretTips : TileTips
         RangeValue.text = m_Strategy.FinalRange.ToString();
         RangeChangeTxt.text = "";
 
-        CriticalValue.text = ((int)(m_Strategy.FinalCriticalRate * 100)).ToString() + "%";
+        CriticalValue.text = (Mathf.RoundToInt(m_Strategy.FinalCriticalRate * 100)).ToString() + "%";
         CriticalChangeTxt.text = "";
 
         SplashRangeValue.text = m_Strategy.FinalSplashRange.ToString();

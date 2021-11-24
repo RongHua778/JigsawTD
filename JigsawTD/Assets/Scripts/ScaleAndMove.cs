@@ -33,9 +33,9 @@ public class ScaleAndMove : IGameSystem
     Vector3 camInitPos;
     Vector3 CamViewPos;
     float CamInitialSize;
-    public static bool MoveTurorial = false;
-    public static bool SizeTutorial = false;
-    public static bool CanControl = false;
+    public bool MoveTurorial = false;
+    public bool SizeTutorial = false;
+    public bool CanControl = false;
     //
     Vector3 speedHorizon = Vector3.zero;
     Vector3 speedVertical = Vector3.zero;

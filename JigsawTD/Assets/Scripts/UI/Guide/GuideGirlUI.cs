@@ -21,6 +21,7 @@ public class GuideGirlUI : IUserInterface
     private FuncUI m_FuncUI;
     private MainUI m_MainUI;
     private BluePrintShopUI m_ShopUI;
+    private ScaleAndMove m_ScaleAndMove;
 
     //触发条件：点击指定格子，按钮
     //当满足条件时，控制各UI的显示动画
@@ -54,27 +55,35 @@ public class GuideGirlUI : IUserInterface
     [SerializeField] Dialogue[] RefreshShop = default;
 
 
-    public void Initialize(FuncUI funcUI, MainUI mainUI, BluePrintShopUI shopUI, ShapeSelectUI shapeUI)
+    public void Initialize(FuncUI funcUI, MainUI mainUI, BluePrintShopUI shopUI, ScaleAndMove scaleAndMove)
     {
         anim = this.GetComponent<Animator>();
         m_FuncUI = funcUI;
         m_MainUI = mainUI;
         m_ShopUI = shopUI;
+        m_ScaleAndMove = scaleAndMove;
         wordQueue = new Queue<string>();
         GameEvents.Instance.onTempWord += DisplayTempDialogue;
+        Invoke(nameof(StarTutorial), 1f);
+    }
+
+    private void StarTutorial()
+    {
         if (Game.Instance.Tutorial)
         {
+            Show();
             GameEvents.Instance.onTutorialTrigger += GuideTrigger;
-
+            LevelManager.Instance.NeedSaveGame = false;
             currentDialogue = dialogues[startIndex];
-            m_FuncUI.Hide();//因为Preparenextwave自动show了
             GuideTrigger(TutorialType.None);
         }
         else
         {
-            ScaleAndMove.CanControl = true;
+            m_ScaleAndMove.CanControl = true;
         }
     }
+
+
     public override void Release()
     {
         base.Release();
@@ -352,15 +361,15 @@ public class GuideGirlUI : IUserInterface
                 m_ShopUI.AddBluePrint(strategy, true);
                 m_ShopUI.RemoveGrid(BluePrintShopUI.ShopBluePrints[0]);//移除1个
 
-                ScaleAndMove.MoveTurorial = true;
-                ScaleAndMove.CanControl = true;
+                m_ScaleAndMove.MoveTurorial = true;
+                m_ScaleAndMove.CanControl = true;
 
                 dragGuide.SetActive(true);
                 turretTips_RefactorObj.SetActive(false);
                 break;
             case 1://第二段对话结束，鼠标缩放操作
-                ScaleAndMove.SizeTutorial = true;
-                ScaleAndMove.CanControl = true;
+                m_ScaleAndMove.SizeTutorial = true;
+                m_ScaleAndMove.CanControl = true;
 
                 wheelGuide.SetActive(true);
                 break;
@@ -407,6 +416,7 @@ public class GuideGirlUI : IUserInterface
             case 14://结束
                 Hide();
                 Game.Instance.Tutorial = false;
+                LevelManager.Instance.NeedSaveGame = true;
                 break;
             case 22://悬停元素技能后，点击重构按钮
                 turretTips_RefactorObj.SetActive(true);

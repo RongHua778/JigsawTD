@@ -1,0 +1,1352 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30dd3cde7485b2640a3677888d15d9b9, type: 3}
+  m_Name: Language
+  m_EditorClassIdentifier: 
+  dataArray:
+  - Key: SCENE1
+    Chinese: Scene1
+    English: Scene1
+  - Key: SCENE2
+    Chinese: Scene2
+    English: Scene2
+  - Key: STARTGAME
+    Chinese: "\u5F00\u59CB\u6E38\u620F"
+    English: START GAME
+  - Key: BLUEPRINT
+    Chinese: "\u6E38\u620F\u56FE\u9274"
+    English: HANDBOOK
+  - Key: SETTING
+    Chinese: "\u6E38\u620F\u8BBE\u7F6E"
+    English: SETTING
+  - Key: QUIT
+    Chinese: "\u9000\u51FA\u6E38\u620F"
+    English: QUIT
+  - Key: LEVELSTART
+    Chinese: "\u5F00\u59CB\u6E38\u620F"
+    English: START GAME
+  - Key: CONTINUE
+    Chinese: "\u7EE7\u7EED\u6E38\u620F"
+    English: Coninue
+  - Key: RESTART
+    Chinese: "\u91CD\u65B0\u5F00\u59CB"
+    English: Restart
+  - Key: RETURNTOMENU
+    Chinese: "\u4FDD\u5B58\u5E76\u8FD4\u56DE\u83DC\u5355"
+    English: Save & Return Menu
+  - Key: QUIT2
+    Chinese: "\u4FDD\u5B58\u5E76\u9000\u51FA\u6E38\u620F"
+    English: Save & Quit
+  - Key: RETURNTOMENU2
+    Chinese: "\u8FD4\u56DE\u83DC\u5355"
+    English: Return Menu
+  - Key: CONFIRM
+    Chinese: "\u786E\u5B9A"
+    English: Confirm
+  - Key: CANCEL
+    Chinese: "\u53D6\u6D88"
+    English: Cancel
+  - Key: ABANDON
+    Chinese: "\u653E\u5F03"
+    English: Abandon
+  - Key: TUTORIAL
+    Chinese: "\u6559\u5B66"
+    English: Tutorial
+  - Key: WISHLIST
+    Chinese: "\u52A0\u5165\u613F\u671B\u5355"
+    English: Add to wishlist
+  - Key: MODESELECT
+    Chinese: "\u6A21\u5F0F\u9009\u62E9"
+    English: MODE SELECT
+  - Key: RETURNTUTORIAL
+    Chinese: "\u9000\u51FA\u6559\u7A0B"
+    English: Quit Tutorial
+  - Key: RESOLUTION
+    Chinese: "\u5206\u8FA8\u7387"
+    English: Resolution
+  - Key: FULLSCREEN
+    Chinese: "\u5168\u5C4F\u5316"
+    English: FullScreen
+  - Key: LANGUAGE
+    Chinese: "\u8BED\u8A00"
+    English: Language
+  - Key: MUSIC
+    Chinese: "\u97F3\u4E50"
+    English: Music
+  - Key: SOUNDEFFECT
+    Chinese: "\u97F3\u6548"
+    English: Sound
+  - Key: DEVTEAM
+    Chinese: "\u5236\u4F5C\u56E2\u961F"
+    English: Development Team
+  - Key: ELEMENTTURRET
+    Chinese: "\u5143\u7D20\u5854"
+    English: Eelement Turret
+  - Key: REFACTORTURRET
+    Chinese: "\u91CD\u6784\u5854"
+    English: Refactor Turret
+  - Key: TRAP
+    Chinese: "\u9677\u9631"
+    English: Trap
+  - Key: BOSS
+    Chinese: BOSS
+    English: BOSS
+  - Key: BASICENEMY
+    Chinese: "\u654C\u4EBA"
+    English: Enemy
+  - Key: GIRLWORD
+    Chinese: "\u8EAB\u4EFD\u6821\u9A8C\u4E2D...\u5DF2\u83B7\u53D6\u67E5\u770B\u6743\uFF0C\u4FE1\u606F\u53EF\u67E5\u9605"
+    English: Identity verification in progress...Login successful
+  - Key: BACKGROUND
+    Chinese: "\u80CC\u666F\u7814\u7A76"
+    English: Background Research
+  - Key: ENEMYHEALTH
+    Chinese: "\u751F\u547D"
+    English: Health
+  - Key: ENEMYSPEED
+    Chinese: "\u901F\u5EA6"
+    English: Speed
+  - Key: ENEMYAMOUNT
+    Chinese: "\u6570\u91CF"
+    English: Amount
+  - Key: ENEMYDAMAGE
+    Chinese: "\u4F24\u5BB3"
+    English: Damage
+  - Key: SELECTEDCOUNT
+    Chinese: "\u5DF2\u9009\u62E9\uFF1A"
+    English: 'Already Picked:'
+  - Key: NOENOUGHELEMENT
+    Chinese: "\u4ECD\u6709\u672A\u9009\u62E9\u7684\u9879"
+    English: There are unselected items
+  - Key: SKILLPREVIEW
+    Chinese: "\u6280\u80FD\u9884\u89C8"
+    English: Skills
+  - Key: BATTLEELEMENT
+    Chinese: "\u53C2\u6218\u5143\u7D20"
+    English: Elements
+  - Key: TEST1
+    Chinese: "\u6D4B\u8BD5\uFF1A\u5DF2\u6E05\u9664\u901A\u5173\u6570\u636E"
+    English: Test:Clear all save data
+  - Key: TEST2
+    Chinese: "\u6D4B\u8BD5\uFF1A\u5DF2\u89E3\u9501\u5168\u96BE\u5EA6"
+    English: Test:Unlock all difficulties
+  - Key: TEST3
+    Chinese: "\u6D4B\u8BD5\uFF1A\u529F\u80FD\u6682\u672A\u5F00\u653E"
+    English: Test:This function have not open
+  - Key: LEVEL1NAME
+    Chinese: "\u6807\u51C6\u6A21\u5F0F"
+    English: STANDARD
+  - Key: LEVEL2NAME
+    Chinese: "\u65E0\u5C3D\u6A21\u5F0F"
+    English: ENDLESS
+  - Key: LEVELOTHER
+    Chinese: "\u656C\u8BF7\u671F\u5F85"
+    English: MORE INCOMING
+  - Key: LEVELINFO
+    Chinese: "\u6A21\u5F0F\u4ECB\u7ECD"
+    English: DESCRIPTION
+  - Key: BONUSINFO
+    Chinese: "\u901A\u5173\u5956\u52B1"
+    English: REWARD
+  - Key: DIFFICULTINFO
+    Chinese: "\u96BE\u5EA6\u9009\u62E9"
+    English: DIFFICULTY
+  - Key: DIFFICULTY
+    Chinese: "\u96BE\u5EA6"
+    English: Difficulty
+  - Key: HIGHSCORE
+    Chinese: "\u6700\u9AD8\u8BB0\u5F55"
+    English: Battle Setting
+  - Key: BATTLESET
+    Chinese: "\u6218\u6597\u8BBE\u7F6E"
+    English: High Score
+  - Key: WAVE
+    Chinese: "\u6CE2"
+    English: Wave
+  - Key: NUM
+    Chinese: "\u7B2C"
+    English: 
+  - Key: SKIPTUTORIAL
+    Chinese: "\u8DF3\u8FC7\u6559\u7A0B"
+    English: Skip tutorial
+  - Key: UNLOCKENDLESS
+    Chinese: "\u901A\u5173\u6807\u51C6\u6A21\u5F0F\u96BE\u5EA64\u540E\u89E3\u9501"
+    English: Unlock after Passing Standard mode on Difficulty 4
+  - Key: DIFFICULTY0
+    Chinese: 
+    English: 
+  - Key: DIFFICULTY1
+    Chinese: "1.\u52A0\u5165\u6218\u573A\u6807\u8BB0\\n2.\u575A\u630130\u6CE2\u8FDB\u653B"
+    English: 1."Trap" will appear in the batllefield\n2.Stick to 40 wave
+  - Key: DIFFICULTY2
+    Chinese: "1.\u4F60\u53EA\u670915\u70B9\u751F\u547D\u503C"
+    English: 1.You have only 15 health
+  - Key: DIFFICULTY3
+    Chinese: "1.\u6218\u573A\u4E2D\u5C06\u51FA\u73B0\u66F4\u591A\u6807\u8BB0"
+    English: 1.More Traps will apprear in the battlefield
+  - Key: DIFFICULTY4
+    Chinese: "1.\u4E00\u6B21\u56F0\u96BE\u7684\u6311\u6218"
+    English: 1.A tough challenge
+  - Key: DIFFICULTY5
+    Chinese: "1.\u4E00\u6B21\u6298\u78E8\u7684\u6311\u6218"
+    English: 1.A torture challenge
+  - Key: DIFFICULTY6
+    Chinese: "1.\u4E0D\u53EF\u80FD\u5B8C\u6210\u7684\u4EFB\u52A1"
+    English: 1.Unpossible task
+  - Key: NEEDTUTORIAL
+    Chinese: "\u662F\u5426\u5F00\u542F\u6559\u7A0B\uFF1F"
+    English: Do you want to start a tutorial?
+  - Key: YES
+    Chinese: "\u662F"
+    English: YES
+  - Key: NO
+    Chinese: "\u5426"
+    English: NO
+  - Key: MODE1
+    Chinese: "\u5728\u8DC3\u8FC1\u57FA\u7AD9\u90E8\u7F72\u4E00\u6B21\u9488\u5BF9\u5DF4\u5FB7\u6587\u660E\u7684\u5FEB\u901F\u963B\u51FB\u6218\uFF0C\u654C\u4EBA\u4F1A\u53D1\u8D77\u6709\u9650\u6B21\u7684\u8FDB\u653B\uFF0C\u60A8\u5C06\u521D\u6B21\u638C\u63E1\u6A21\u5757\u6784\u5EFA\u548C\u91CD\u6784\u6280\u672F\uFF0C\u4E3A\u4F1F\u5927\u7684\u661F\u9645\u6B96\u6C11\u4FDD\u9A7E\u62A4\u822A\u3002"
+    English: A battle against the Bard civilization at the Transition Station, where
+      the enemy will launch 30 wave of attacks, an you have to deploy modules to
+      help secure the great interstellar colony.
+  - Key: MODE2
+    Chinese: "\u5DF4\u5FB7\u6587\u660E\u5C06\u53D1\u8D77\u65E0\u9650\u6CE2\u6B21\u7684\u8FDB\u653B\uFF0C\u8FD9\u662F\u4E00\u573A\u8D44\u6E90\u7684\u6D88\u8017\u6218\uFF0C\u66F4\u662F\u4E00\u6B21\u5BF9\u90E8\u7F72\u5B98\u610F\u5FD7\u548C\u6218\u7565\u7684\u6781\u9650\u8003\u9A8C\uFF0C\u65E2\u7136\u6218\u4E89\u65E0\u6CD5\u907F\u514D\uFF0C\u90A3\u5C31\u8BA9\u654C\u4EBA\u7684\u6B8B\u9AB8\u586B\u6EE1\u5B87\u5B99\u3002"
+    English: The Bard civilization will launch an infinite wave of attacks, a war
+      of resource depletion, but also a test of the deployment officer's will and
+      wit, since war is inevitable, let the enemy's debris fill the universe.
+  - Key: LACKMONEY
+    Chinese: "\u4EE3\u5E01\u4E0D\u8DB3"
+    English: You don't have eneugh tokens
+  - Key: LACKMATERIAL
+    Chinese: "\u91CD\u6784\u6240\u9700\u7D20\u6750\u4E0D\u8DB3"
+    English: You don't have compositions needed
+  - Key: PUTFIRST
+    Chinese: "\u8BF7\u5148\u653E\u7F6E\u7ED3\u6784\u4F53"
+    English: Please place the structure first
+  - Key: NOTBUILDSTATE
+    Chinese: "\u53EA\u53EF\u5728\u975E\u6218\u6597\u9636\u6BB5\u8FDB\u884C"
+    English: Can not operate during battle state
+  - Key: NOROUTE
+    Chinese: "\u5FC5\u987B\u6709\u9053\u8DEF\u8FDE\u63A5\u8D77\u70B9\u548C\u7EC8\u70B9"
+    English: Make sure there are a route available
+  - Key: NOOVERLAP
+    Chinese: "\u9632\u5FA1\u5854\u4E0D\u53EF\u4E0E\u7279\u6B8A\u5730\u5F62\u91CD\u53E0"
+    English: Turret cannot overlap with special tile
+  - Key: ALREADYGROUND
+    Chinese: "\u6B64\u5904\u5DF2\u7ECF\u6709\u683C\u5B50"
+    English: There are already a tile
+  - Key: SKILLFULL
+    Chinese: "\u8BE5\u91CD\u6784\u5854\u5143\u7D20\u6280\u80FD\u69FD\u5DF2\u6EE1"
+    English: This turret's element skill slot is full
+  - Key: GETMONEY
+    Chinese: "\u83B7\u5F97\u4E86\u4EE3\u5E01"
+    English: You have gained
+  - Key: TUTORIALPLACE
+    Chinese: "\u8BF7\u6309\u6559\u7A0B\u4F4D\u7F6E\u6446\u653E\u7ED3\u6784\u4F53"
+    English: Please place structure at tutorial position
+  - Key: EMPTYSLOT
+    Chinese: "\u653E\u7F6E\u4E00\u4E2A\u65B0\u91CD\u6784\u5854\u5728\u8BE5\u91CD\u6784\u5854\u4E0A\u65F6\uFF0C\u53EF\u4F7F\u5176\u88C5\u5907\u65B0\u91CD\u6784\u5854\u7684\u5143\u7D20\u6280\u80FD\u3002"
+    English: When you place a new refactor turret on it, you can equip it with the
+      refactor skill of the new refactor turret.
+  - Key: DEMOINFO
+    Chinese: "\u5F53\u524D\u4E3ADEMO\u6548\u679C\uFF0C\u4E0D\u4EE3\u8868\u6E38\u620F\u6700\u7EC8\u54C1\u8D28"
+    English: DEMO is not the final quality
+  - Key: ISLOCK
+    Chinese: "\u9700\u901A\u8FC7\u6307\u5B9A\u96BE\u5EA6\u89E3\u9501"
+    English: Unlock after passing specific difficulty
+  - Key: UNPERMIT
+    Chinese: "\u6B63\u5F0F\u7248\u89E3\u9501\u8BE5\u96BE\u5EA6"
+    English: Difficuly unlock in the official version
+  - Key: UNPASS
+    Chinese: "\u8BF7\u5148\u901A\u8FC7\u4E0A\u4E00\u96BE\u5EA6"
+    English: Please pass the previous difficulty first
+  - Key: PLACERULE
+    Chinese: "\u6446\u653E\u7ED3\u6784\u4F53"
+    English: Placement Rule
+  - Key: PLANROUTE
+    Chinese: "\u89C4\u5212\u8DEF\u7EBF"
+    English: Plan a Route
+  - Key: COMPOSITERULE
+    Chinese: "\u91CD\u6784\u89C4\u5219"
+    English: Refactor Rule
+  - Key: TRAPRULE
+    Chinese: "\u6218\u573A\u9677\u9631"
+    English: Trap Rule
+  - Key: EQUIPRULE
+    Chinese: "\u91CD\u6784\u6280\u80FD"
+    English: Refactor Skill
+  - Key: GUIDEVIDEO01
+    Chinese: "\u6BCF\u4E2A\u7ED3\u6784\u4F53\u7531\u4E09\u683C\u57FA\u672C\u683C\u548C\u4E00\u683C\u9632\u5FA1\u5854\u7EC4\u6210\u3002\u653E\u7F6E\u7ED3\u6784\u4F53\u65F6\u9700\u8981\u786E\u4FDD\u8D77\u70B9\u548C\u7EC8\u70B9\u4E4B\u95F4\u80FD\u591F\u901A\u8FC7\u57FA\u672C\u683C\u76F8\u8FDE\uFF0C\u800C\u9632\u5FA1\u5854\u53EF\u4EE5\u4F5C\u4E3A\u969C\u788D\u3002"
+    English: Each structure consists of three basic tile and a turret. The basic
+      tile can serves as path while the turret can act as a obstacle.
+  - Key: GUIDEVIDEO02
+    Chinese: "\u6CE8\u610F\uFF1A\u9632\u5FA1\u5854\u53EA\u53EF\u4EE5\u653E\u7F6E\u5728\u7A7A\u683C\u6216\u57FA\u672C\u683C\u4E0A\uFF0C\u800C\u57FA\u672C\u683C\u53EF\u4EE5\u653E\u7F6E\u5728\u4EFB\u4F55\u4F4D\u7F6E\u3002"
+    English: 'Note: Turret can only be placed on empty tile or basic tile while the
+      basic tile can be placed anywhere.'
+  - Key: GUIDEVIDEO03
+    Chinese: "\u5F53\u5E0C\u671B\u5EF6\u957F\u8DEF\u7EBF\u65F6\uFF0C\u9700\u8981\u63D0\u524D\u5728\u89C4\u5212\u597D\u7684\u8DEF\u7EBF\u4E0A\u6446\u653E\u57FA\u672C\u683C\uFF0C\u7136\u540E\u5229\u7528\u9632\u5FA1\u5854\u4F5C\u4E3A\u969C\u788D\u5EF6\u957F\u8DEF\u7EBF\u3002"
+    English: If you want to extend the route, you need to place basic tile in advance,
+      and then place turret as an obstacle.
+  - Key: GUIDEVIDEO04
+    Chinese: "\u63D0\u793A\uFF1A\u70B9\u51FB\u7A7A\u767D\u4F4D\u7F6E\u4E5F\u53EF\u4EE5\u82B1\u8D39\u4EE3\u5E01\u8D2D\u4E70\u5355\u683C\u57FA\u672C\u683C\u3002"
+    English: 'Tip: You can also buy a single basic tile by clicking on a empty tile.'
+  - Key: GUIDEVIDEO05
+    Chinese: "\u5F53\u51D1\u9F50\u914D\u65B9\u6240\u9700\u7684\u7D20\u6750\u65F6\uFF0C\u53EF\u4EE5\u91CD\u6784\u9632\u5FA1\u5854\uFF0C\u5E76\u6839\u636E\u7EC4\u5408\u4E0D\u540C\u5E26\u6709\u4E0D\u540C\u7684\u6548\u679C\u3002"
+    English: When you have all the elements of a blueprint, you can refactor a turret.
+      Refactor turret have different effects depending on it's elements.
+  - Key: GUIDEVIDEO06
+    Chinese: "\u63D0\u793A\uFF1A\u5546\u5E97\u6BCF3\u56DE\u5408\u5237\u65B0\u4E00\u6B21\u914D\u65B9\u3002"
+    English: 'Tip: The store refreshes every 3 waves.'
+  - Key: GUIDEVIDEO07
+    Chinese: "\u901A\u8FC7\u5C06\u9053\u8DEF\u7ECF\u8FC7\u6218\u573A\u4E0A\u968F\u673A\u51FA\u73B0\u7684\u9677\u9631\u683C\u5B50\uFF0C\u5C06\u4F1A\u63ED\u793A\u8BE5\u9677\u9631\uFF0C\u6BCF\u4E2A\u9677\u9631\u5728\u654C\u4EBA\u7ECF\u8FC7\u65F6\u4F1A\u89E6\u53D1\u7279\u6B8A\u6548\u679C\u3002"
+    English: The trap will be revealed when a route is passing the tile. Each trap
+      will trigger a special effect when the enemy passes by.
+  - Key: GUIDEVIDEO08
+    Chinese: "\u63D0\u793A\uFF1A\u4F60\u53EF\u4EE5\u82B1\u8D39\u4E00\u5B9A\u4EE3\u5E01\u5C06\u9677\u9631\u683C\u5B50\u6362\u5230\u5176\u4ED6\u4F4D\u7F6E"
+    English: 'Tip: you can spend some tokens to change the trap to another position.'
+  - Key: GUIDEVIDEO09
+    Chinese: "\u6BCF\u4E2A\u91CD\u6784\u5854\u6839\u636E\u5176\u5143\u7D20\u7EC4\u5408\u4F1A\u6709\u4E0D\u540C\u7684\u5143\u7D20\u6280\u80FD\uFF0C\u6BCF\u4E2A\u91CD\u6784\u5854\u90FD\u9ED8\u8BA4\u5E26\u67091\u4E2A\u5143\u7D20\u6280\u80FD\u3002\u4F60\u53EF\u4EE5\u5C06\u65B0\u91CD\u6784\u5854\u653E\u7F6E\u5728\u5DF2\u91CD\u6784\u5854\u4E0A\uFF0C\u4F7F\u5176\u5177\u5907\u989D\u5916\u7684\u5143\u7D20\u6280\u80FD\uFF0C\u4F46\u8FD9\u4E48\u505A\u4F1A\u6D88\u8017\u65B0\u91CD\u6784\u5854\u3002"
+    English: Each refactor turret has an unique element skill according to it's element
+      combination. You can put the new turret on the existing turret to make it have
+      additional element skills, but doing so will consume the new turret.
+  - Key: GUIDEVIDEO10
+    Chinese: "\u63D0\u793A\uFF1A\u6BCF\u4E2A\u91CD\u6784\u5854\u9ED8\u8BA4\u53EA\u53EF\u4EE5\u518D\u914D\u59071\u4E2A\u989D\u5916\u5143\u7D20\u6280\u80FD\uFF0C\u89C6\u4E4E\u8BE5\u91CD\u6784\u5854\u7684\u5143\u7D20\u6280\u80FD\u69FD\u6570\u91CF\u3002"
+    English: 'Tip: each refactor turret can only be equipped with 1 additional element
+      skill by default, depending on it''s number of element skill slots.'
+  - Key: DRAWINFO
+    Chinese: "\u5F53\u524D\u56DE\u5408\u6CA1\u6709\u6784\u5EFA\u65F6\uFF0C\u6784\u5EFA\u4EF7\u683C\u5C06\u964D\u4F4E\uFF1B\\n\u5F53\u524D\u964D\u4EF7\u767E\u5206\u6BD4\uFF1A"
+    English: 'If you haven''t build last turn, the price will be reduced\n current
+      price reduction percentage:'
+  - Key: NEXTWAVE
+    Chinese: "\u4E0B\u4E00\u6CE2[Space]"
+    English: Next Wave[Space]
+  - Key: DRAWMODULE
+    Chinese: "\u62BD\u53D6\u6A21\u5757"
+    English: Build Structure
+  - Key: CHANCEBEFORE
+    Chinese: "\u5F53\u524D"
+    English: Now
+  - Key: CHANCEAFTER
+    Chinese: "\u5347\u7EA7\u540E"
+    English: After
+  - Key: MODULELEVELINFO1
+    Chinese: "\u5F53\u524D\u7B49\u7EA7\u6982\u7387"
+    English: Current level probability
+  - Key: MODULELEVELINFO2
+    Chinese: "\u54C1\u8D28"
+    English: Quality
+  - Key: MODULELEVELINFO3
+    Chinese: "\u7CFB\u7EDF\u7B49\u7EA7\u8FBE\u52302,4,6\u7EA7\u65F6\uFF0C\u5546\u5E97\u914D\u65B9\u6570+1"
+    English: Shop blueprint +1 when system level reaches 2,4 and 6
+  - Key: DEGRADE
+    Chinese: "\u964D\u7EA7"
+    English: Degrade
+  - Key: SHOPBLUEPRINT
+    Chinese: "\u53EF\u9501\u5B9A\uFF1A"
+    English: 'Lock:'
+  - Key: OWNBLUEPRINT
+    Chinese: "\u62E5\u6709\u914D\u65B9"
+    English: Owned
+  - Key: NEXTREFRESH
+    Chinese: "\u4E0B\u6B21\u5237\u65B0"
+    English: Refresh after
+  - Key: OWNPERFECT
+    Chinese: "\u62E5\u6709\u4E07\u80FD\u5143\u7D20"
+    English: Perfect Element
+  - Key: PERFECTINFO
+    Chinese: "\u4E07\u80FD\u5143\u7D20\u53EF\u4EE5\u4F5C\u4E3A\u4EFB\u610F\u91CD\u6784\u7D20\u6750\u4F7F\u7528"
+    English: Perfect Element can served as any composition for refactor
+  - Key: WIN
+    Chinese: "\u901A\u5173"
+    English: PASS
+  - Key: LOSE
+    Chinese: "\u7ED3\u675F"
+    English: END
+  - Key: PASSLEVEL
+    Chinese: "\u4F60\u901A\u8FC7\u4E86"
+    English: You have pass
+  - Key: TOTALDAMAGE
+    Chinese: "\u9020\u6210\u603B\u4F24\u5BB3"
+    English: Total Damage
+  - Key: PASSTIME
+    Chinese: "\u901A\u5173\u65F6\u95F4"
+    English: Total Time
+  - Key: COMPOSITECOUNT
+    Chinese: "\u91CD\u6784\u9632\u5FA1\u5854"
+    English: Refactor Turret
+  - Key: MAXPATH
+    Chinese: "\u6700\u957F\u8DEF\u5F84"
+    English: Longest Path
+  - Key: MAXTRAP
+    Chinese: "\u63ED\u793A\u9677\u9631"
+    English: Revealed Trap
+  - Key: GAINGOLD
+    Chinese: "\u83B7\u53D6\u4EE3\u5E01"
+    English: Gained Gold
+  - Key: THANKSINFO
+    Chinese: "\u611F\u8C22\u60A8\u4F53\u9A8C\u300A\u91CD\u6784\u300B\u6E38\u620FDEMO\uFF0C\u5982\u679C\u4F60\u559C\u6B22\u6211\u4EEC\u7684\u6E38\u620F\uFF0C\\n\u8BF7\u626B\u7801\u628A\u5B83\u52A0\u5165\u613F\u671B\u5355\u5427\uFF01"
+    English: Thank you for experiencing the game demo. If you like our game, \n please
+      add it to your wishlist!
+  - Key: EXPVALUE
+    Chinese: "\u83B7\u5F97\u7ECF\u9A8C"
+    English: Gain Exp
+  - Key: BOSSDEFEAT
+    Chinese: "\u51FB\u8D25BOSS"
+    English: BOSS Defeated
+  - Key: BASICANALYSIS
+    Chinese: "\u57FA\u7840\u7EDF\u8BA1"
+    English: Basic Analysis
+  - Key: DAMAGEBILLBOARD
+    Chinese: "\u4F24\u5BB3\u6392\u884C"
+    English: Damage Billboard
+  - Key: DAMAGEANLYSIS
+    Chinese: "\u56DE\u5408\u4F24\u5BB3"
+    English: Turn Damage
+  - Key: ATTACK
+    Chinese: "\u653B\u51FB"
+    English: Attack
+  - Key: RANGE
+    Chinese: "\u8303\u56F4"
+    English: Range
+  - Key: SPEED
+    Chinese: "\u653B\u901F"
+    English: FireRate
+  - Key: CRITICAL
+    Chinese: "\u66B4\u51FB\u7387"
+    English: Critical
+  - Key: SPUTTERING
+    Chinese: "\u6E85\u5C04"
+    English: Splash
+  - Key: SLOW
+    Chinese: "\u51CF\u901F"
+    English: Slow
+  - Key: RANGETYPE1
+    Chinese: "\u5706\u578B"
+    English: Circle
+  - Key: RANGETYPE2
+    Chinese: "\u534A\u5706\u578B"
+    English: Semicircle
+  - Key: RANGETYPE3
+    Chinese: "\u76F4\u7EBF\u578B"
+    English: Line
+  - Key: TURRETSKILL
+    Chinese: "\u88AB\u52A8\u6280\u80FD"
+    English: Default Skill
+  - Key: ELEMENTSKILL
+    Chinese: "\u5143\u7D20\u6280\u80FD\u52A0\u6210"
+    English: Element Skill Benefit
+  - Key: TILESKILL
+    Chinese: "\u5730\u5F62\u6548\u679C"
+    English: Tile Benefit
+  - Key: CRITICALINFO
+    Chinese: "\u6BCF1%\u66B4\u51FB\u7387=1%\u989D\u5916\u66B4\u51FB\u4F24\u5BB3\uFF0C\u57FA\u7840\u66B4\u51FB\u4F24\u5BB3\u4E3A150%"
+    English: Critical damage is 150% and each 1% critical give it 1% extra critical
+      damage
+  - Key: SPLASHINFO
+    Chinese: "\u6E85\u5C04\u534A\u5F84\uFF0C\u57FA\u7840\u6E85\u5C04\u4F24\u5BB3\u4E3A50%"
+    English: Splash radius. Default splash damage is 50%
+  - Key: SLOWINFO
+    Chinese: "\u5BF9\u547D\u4E2D\u7684\u654C\u4EBA\u9020\u6210\u51CF\u901F\uFF0C\u654C\u4EBA\u4F1A\u968F\u6CE2\u6570\u63D0\u5347\u51CF\u901F\u6297\u6027"
+    English: Bullet can slow down enemy, enemy's slow resistence will increase each
+      wave
+  - Key: ATTACKUP
+    Chinese: "%\u57FA\u7840\u653B\u51FB"
+    English: '% Attack'
+  - Key: SPEEDUP
+    Chinese: "%\u57FA\u7840\u653B\u901F"
+    English: '% FireRate'
+  - Key: CRITICALUP
+    Chinese: "%\u66B4\u51FB\u7387"
+    English: '% Critical'
+  - Key: SPUTTERINGUP
+    Chinese: "\u6E85\u5C04"
+    English: ' Splash'
+  - Key: SLOWUP
+    Chinese: "\u51CF\u901F"
+    English: ' Slow'
+  - Key: COMINTENSIFY
+    Chinese: "\u91CD\u6784\u7D20\u6750\u52A0\u6210"
+    English: Refactor Benefit
+  - Key: BUY
+    Chinese: "\u8D2D\u4E70"
+    English: Buy
+  - Key: COMPOSITE
+    Chinese: "\u91CD\u6784"
+    English: Refactor
+  - Key: UPGRADE
+    Chinese: "\u5347\u7EA7"
+    English: Upgrade
+  - Key: SWITCHTRAP
+    Chinese: "\u6362\u4F4D"
+    English: Relocate
+  - Key: ELEMENTSLOT
+    Chinese: "\u5143\u7D20\u6280\u80FD"
+    English: Element Skill
+  - Key: TURRETLEVEL
+    Chinese: "\u9632\u5FA1\u5854\u7B49\u7EA7"
+    English: Turret Level
+  - Key: EMPTYSKILL
+    Chinese: "\u7A7A\u6280\u80FD\u69FD"
+    English: Empty slot
+  - Key: RARE
+    Chinese: "\u914D\u65B9\u7B49\u7EA7\uFF1A\u63D0\u9AD8\u6A21\u5757\u7B49\u7EA7\u53EF\u4EE5\u4F7F\u5546\u5E97\u53EF\u80FD\u51FA\u73B0\u66F4\u9AD8\u7B49\u7EA7\u7684\u914D\u65B9"
+    English: 'Blueprint level: Increasing the system level makes it possible to refresh
+      higher levels of blueprints in the store'
+  - Key: REFACTORBENEFIT
+    Chinese: "\u91CD\u6784\u5143\u7D20\u52A0\u6210"
+    English: Refactor Benefit
+  - Key: BUYGROUND
+    Chinese: "\u8D2D\u4E70\u4E00\u5757\u57FA\u7840\u683C"
+    English: Build a basic tile?
+  - Key: //towername
+    Chinese: 
+    English: 
+  - Key: CONSTRUCTOR
+    Chinese: "\u7EC4\u5408\u70AE"
+    English: Constructor
+  - Key: SCATTER
+    Chinese: "\u6563\u5C04\u70AE"
+    English: Scatter
+  - Key: MORTAR
+    Chinese: "\u8FEB\u51FB\u70AE"
+    English: Mortar
+  - Key: ROTARY
+    Chinese: "\u8F6E\u8F6C\u70AE"
+    English: Rotary
+  - Key: SNIPER
+    Chinese: "\u72D9\u51FB\u70AE"
+    English: Sniper
+  - Key: ULTRA
+    Chinese: "\u5DE8\u70AE"
+    English: Ultra
+  - Key: RAPIDER
+    Chinese: "\u75BE\u5C04\u70AE"
+    English: Rapider
+  - Key: SNOW
+    Chinese: "\u96EA\u7403\u70AE"
+    English: SnowBall
+  - Key: COOPORATIVE
+    Chinese: "\u534F\u540C\u5854"
+    English: Cooporative
+  - Key: BOOMERRANG
+    Chinese: "\u56DE\u65CB\u9556"
+    English: Boomerrang
+  - Key: SUPER
+    Chinese: "\u8D85\u80FD\u70AE"
+    English: Super
+  - Key: CORE
+    Chinese: "\u6838\u5FC3\u673A"
+    English: Core
+  - Key: GOLD
+    Chinese: "\u91D1\u5143\u7D20"
+    English: Gold Element
+  - Key: WOOD
+    Chinese: "\u6728\u5143\u7D20"
+    English: Wood Element
+  - Key: WATER
+    Chinese: "\u6C34\u5143\u7D20"
+    English: Water Element
+  - Key: FIRE
+    Chinese: "\u706B\u5143\u7D20"
+    English: Fire Element
+  - Key: DUST
+    Chinese: "\u571F\u5143\u7D20"
+    English: Dust Element
+  - Key: 
+    Chinese: 
+    English: 
+  - Key: ASKILL
+    Chinese: "\u7A33\u56FA\u5B9E\u7528\u7684\u9632\u5FA1\u5854"
+    English: Stable and practical defense tower.
+  - Key: BSKILL
+    Chinese: "\u7A7F\u900F\u578B\u5B50\u5F39, \u53EA\u80FD\u653B\u51FB\u6B63\u524D\u65B9"
+    English: Attacks can deal penetration damage, can only attack front side.
+  - Key: CSKILL
+    Chinese: "\u5B50\u5F39\u53EF\u4EE5\u9020\u6210\u51CF\u901F\u6548\u679C"
+    English: Attacks cause a slowdown effect.
+  - Key: DSKILL
+    Chinese: "\u5B50\u5F39\u6709\u6982\u7387\u9020\u6210\u66B4\u51FB"
+    English: Attacks have a chance to cause critical damage.
+  - Key: ESKILL
+    Chinese: "\u5B50\u5F39\u9020\u6210\u6E85\u5C04\u8303\u56F4\u4F24\u5BB3"
+    English: Attacks deal splash area damage.
+  - Key: CONSTRUCTORSKILL
+    Chinese: "\u653B\u51FB\u8303\u56F4\u5185\u6BCF\u67091\u4E2A\u654C\u4EBA\uFF0C\u653B\u51FB\u529B\u5C31\u63D0\u9AD810%"
+    English: Attack increased by 10% for each enemy in range.
+  - Key: SCATTERSKILL
+    Chinese: "\u9020\u6210\u7684\u4F24\u5BB3\u964D\u4F4E50%\uFF0C\u4F46\u662F\u53EF\u4EE5\u989D\u5916\u653B\u51FB3\u4E2A\u76EE\u6807"
+    English: Deals 50% less damage, but can attack an additional 3 targets.
+  - Key: MORTARSKILL
+    Chinese: "\u5B50\u5F39\u6BCF\u67090.1\u6E85\u5C04\u8303\u56F4\u5C31\u63D0\u9AD810%\u6E85\u5C04\u4F24\u5BB3"
+    English: Splash damage increased by 10% for every 0.1 splash range.
+  - Key: RAPIDERSKILL
+    Chinese: "\u5BF9\u540C\u4E00\u76EE\u6807\u8FDB\u884C\u653B\u51FB\u65F6\uFF0C\u6BCF\u6B21\u653B\u51FB\u4F7F\u653B\u901F\u63D0\u534720%\uFF0C\u4E0A\u9650200%"
+    English: Firerate increased by 20% each shoot when it is attacking the same target(up
+      to 200%).
+  - Key: ROTARYSKILL
+    Chinese: "\u7A7F\u900F\u5B50\u5F39\uFF0C\u4E0D\u53EF\u6E85\u5C04;\u5411\u5468\u56F4\u968F\u673A\u653B\u51FB\uFF0C\u81EA\u8EAB\u6240\u6709\u653B\u901F\u52A0\u6210\u7FFB\u500D"
+    English: Penetration Bullet can't splash; Randomly shoot around and double all
+      firerate increased.
+  - Key: SNIPERSKILL
+    Chinese: "\u5B50\u5F39\u4F24\u5BB3\u968F\u98DE\u884C\u8DDD\u79BB\u63D0\u534750%/\u683C"
+    English: Bullet's damage increased by 50% for each tile it travelled
+  - Key: ULTRASKILL
+    Chinese: "\u5B50\u5F39\u66B4\u51FB\u4F24\u5BB3\u589E\u52A0-100%\u5230400%\u7684\u968F\u673A\u6D6E\u52A8"
+    English: Bullet's critical damage randomly increased by -100& to 400%
+  - Key: SNOWSKILL
+    Chinese: "\u7A7F\u900F\u5B50\u5F39\uFF0C\u4E0D\u53EF\u6E85\u5C04;\u5B50\u5F39\u4F1A\u4F7F\u654C\u4EBA\u5F53\u524D\u51CF\u901F\u6548\u679C\u7FFB\u500D\u3002"
+    English: Penetration Bullet can't splash;Bullet will double enemy's current slow.
+  - Key: COOPORATIVESKILL
+    Chinese: "\u6BCF\u6B21\u653B\u51FB\u63D0\u53472%*\u603B\u534F\u540C\u5854\u6570\u91CF\u7684\u653B\u51FB\u529B"
+    English: Attack increased by 2% * the amount of "Cooporative" each shoot.
+  - Key: BOOMERRANGSKILL
+    Chinese: "\u7A7F\u900F\u5B50\u5F39\uFF0C\u4E0D\u53EF\u6E85\u5C04\uFF1B\u53D1\u5C04\u4E00\u679A\u56DE\u65CB\u9556\uFF0C\u6BCF\u547D\u4E2D\u4E00\u4E2A\u654C\u4EBA\u5C31\u4F7F\u540E\u7EED\u4F24\u5BB3\u63D0\u9AD810%"
+    English: Penetration Bullet can't splash;Bullet damage will increase by 10% for
+      each enemy it hit.
+  - Key: SUPERSKILL
+    Chinese: "\u6BCF\u56DE\u5408\u5F00\u59CB30\u79D2\u540E\uFF0C\u4F7F\u5F53\u524D\u6240\u6709\u5C5E\u6027\u503C\u7FFB\u500D"
+    English: Double all current stats after 30s of each wave
+  - Key: CORESKILL
+    Chinese: "\u56DE\u5408\u5F00\u59CB\u65F6\uFF0C\u653B\u51FB\u529B\u53D8\u4E3A\u76F8\u90BB\u9632\u5FA1\u5854\u7684\u653B\u51FB\u529B\u4E4B\u548C\u768470%/100%/150%\uFF08\u968F\u7B49\u7EA7\u63D0\u5347\uFF09"
+    English: At the start of each wave, it's attack will become 70%/100%/150% of
+      the sum of adjacent turrets.
+  - Key: AAA
+    Chinese: "\u91CD\u91D1\u5C5E\u5316"
+    English: Metalize
+  - Key: AAAINFO
+    Chinese: "\u4F7F\u81EA\u8EAB\u6240\u6709\u653B\u51FB\u52A0\u6210\u7FFB\u500D"
+    English: Double all attack increased
+  - Key: AAB
+    Chinese: "\u5782\u76F4\u6253\u51FB"
+    English: Verical Strike
+  - Key: AABINFO
+    Chinese: "\u653B\u51FB\u8DDD\u79BB\u5C0F\u4E8E3\u7684\u76EE\u6807\u65F6\uFF0C\u653B\u901F\u63D0\u534760%"
+    English: Firerate increased by 60 when target's distance is less than 3
+  - Key: AAC
+    Chinese: "\u51DD\u6EDE\u89C6\u91CE"
+    English: Hitch Vision
+  - Key: AACINFO
+    Chinese: "\u653B\u51FB\u8DDD\u79BB\u5C0F\u4E8E3\u7684\u76EE\u6807\u65F6\uFF0C\u5B50\u5F39\u51CF\u901F\u6548\u679C\u63D0\u53471"
+    English: Slow increased by 1 when target's distance is less than 3
+  - Key: AAD
+    Chinese: "\u4E0D\u7A33\u5B9A\u8F74"
+    English: Unstable Shaft
+  - Key: AADINFO
+    Chinese: "\u653B\u51FB\u8DDD\u79BB\u5C0F\u4E8E3\u7684\u76EE\u6807\u65F6\uFF0C\u5B50\u5F39\u66B4\u51FB\u7387\u63D0\u9AD840%"
+    English: Critical increased by 40% when target's distance is less than 3
+  - Key: AAE
+    Chinese: "\u8FD1\u8DDD\u8F70\u70B8"
+    English: Close Bombing
+  - Key: AAEINFO
+    Chinese: "\u653B\u51FB\u8DDD\u79BB\u5C0F\u4E8E3\u7684\u76EE\u6807\u65F6\uFF0C\u5B50\u5F39\u6E85\u5C04\u8303\u56F4\u63D0\u9AD80.6"
+    English: Splash range increased by 0.6 when target's distance is less than 3
+  - Key: BBB
+    Chinese: "\u8F7B\u6750\u6599\u5316"
+    English: Lightweight Material
+  - Key: BBBINFO
+    Chinese: "\u9020\u6210\u7684\u4F24\u5BB3\u51CF\u5C1135%\uFF0C\u989D\u5916\u653B\u51FB2\u4E2A\u76EE\u6807"
+    English: Bullet's damage is reduced by 35% but attacks 2 additional targets
+  - Key: BBA
+    Chinese: "\u5145\u80FD\u5B50\u5F39"
+    English: Charged Bullet
+  - Key: BBAINFO
+    Chinese: "\u6BCF\u6B21\u653B\u51FB\u63D0\u5347\u672C\u56DE\u54082%\u653B\u51FB\u529B"
+    English: Attack increased by 2% each shoot.
+  - Key: BBC
+    Chinese: "\u6781\u5BD2\u5B50\u5F39"
+    English: Cold Bullet
+  - Key: BBCINFO
+    Chinese: "\u6BCF\u6B21\u653B\u51FB\u63D0\u5347\u672C\u56DE\u54080.02\u51CF\u901F"
+    English: Slow increased by 0.02 each shoot.
+  - Key: BBD
+    Chinese: "\u9707\u8361\u5C04\u51FB"
+    English: Concussive Shot
+  - Key: BBDINFO
+    Chinese: "\u6BCF\u6B21\u653B\u51FB\u63D0\u5347\u672C\u56DE\u54081%\u66B4\u51FB\u7387"
+    English: Critical increased by 1% each shoot.
+  - Key: BBE
+    Chinese: "\u52A0\u91CD\u5F39\u836F"
+    English: Ammunition
+  - Key: BBEINFO
+    Chinese: "\u6BCF\u6B21\u653B\u51FB\u63D0\u5347\u672C\u56DE\u54080.01\u6E85\u5C04\u8303\u56F4"
+    English: Splash range increased by 0.01 each shoot.
+  - Key: CCC
+    Chinese: "\u6025\u51BB\u6280\u672F"
+    English: Forst Technology
+  - Key: CCCINFO
+    Chinese: "\u4F7F\u9632\u5FA1\u5854\u7684\u5143\u7D20\u6280\u80FD\u69FD\u6570\u91CF\u53D8\u4E3A4"
+    English: Change the amount of turret's element skill slot to 4.
+  - Key: CCA
+    Chinese: "\u5BD2\u6C14\u9635\u5730"
+    English: Cold Front
+  - Key: CCAINFO
+    Chinese: "\u6BCF\u56DE\u5408\u5F00\u59CB\u540E\uFF0C\u653B\u51FB\u529B\u6BCF\u79D2\u63D0\u53472%"
+    English: Attack increases by 2% per second after the start of each wave.
+  - Key: CCB
+    Chinese: "\u8FC7\u8F7D\u5F39\u5939"
+    English: Overload Cartridge
+  - Key: CCBINFO
+    Chinese: "\u6BCF\u56DE\u5408\u5F00\u59CB\u540E\uFF0C\u653B\u901F\u6BCF\u79D2\u63D0\u53472%"
+    English: Firerate increases by 2% per second after the start of each wave.
+  - Key: CCD
+    Chinese: "\u70ED\u80FD\u57FA\u5EA7"
+    English: Energy Base
+  - Key: CCDINFO
+    Chinese: "\u6BCF\u56DE\u5408\u5F00\u59CB\u540E\uFF0C\u66B4\u51FB\u7387\u6BCF\u79D2\u63D0\u53471%"
+    English: Critical increases by 1% per second after the start of each wave.
+  - Key: CCE
+    Chinese: "\u586B\u5145\u706B\u836F"
+    English: Filled Gunpowder
+  - Key: CCEINFO
+    Chinese: "\u6BCF\u56DE\u5408\u5F00\u59CB\u540E\uFF0C\u6E85\u5C04\u8303\u56F4\u6BCF\u79D2\u63D0\u53470.01"
+    English: Splash range increases by 0.01 per second after the start of each wave.
+  - Key: DDD
+    Chinese: "\u6DF7\u6C8C\u79D1\u6280"
+    English: Chaos Technology
+  - Key: DDDINFO
+    Chinese: "\u5408\u6210\u6216\u88C5\u5907\u540E\uFF0C\u4F7F\u9632\u5FA1\u5854\u7684\u6240\u6709\u57FA\u7840\u5C5E\u6027\u968F\u673A\u53D8\u531650%-300%\uFF08\u4E0D\u5305\u62EC\u653B\u51FB\u8303\u56F4\uFF09"
+    English: When composited or equipped, randomly changed all base stats of the
+      turret by 50% to 300%(without range)
+  - Key: DDA
+    Chinese: "\u9AD8\u80FD\u7206\u7834"
+    English: Energy Blasting
+  - Key: DDAINFO
+    Chinese: "\u9632\u5FA1\u5854\u653B\u51FB\u529B\u572825%-250%\u4E4B\u95F4\u968F\u673A\u6D6E\u52A8"
+    English: Turret's attack fluctuates between 25% and 250%
+  - Key: DDB
+    Chinese: "\u5F31\u70B9\u51FB\u7834"
+    English: Vulnerability Shoot
+  - Key: DDBINFO
+    Chinese: "\u9632\u5FA1\u5854\u653B\u901F\u572825%-250%\u4E4B\u95F4\u968F\u673A\u6D6E\u52A8"
+    English: Turret's firerate fluctuates between 25% and 250%
+  - Key: DDC
+    Chinese: "\u5BD2\u51B0\u70B8\u5F39"
+    English: Ice Bomb
+  - Key: DDCINFO
+    Chinese: "\u9632\u5FA1\u5854\u51CF\u901F\u572825%-250%\u4E4B\u95F4\u968F\u673A\u6D6E\u52A8"
+    English: Turret's slow fluctuates between 25% and 250%
+  - Key: DDE
+    Chinese: "\u72C2\u8F70\u6EE5\u70B8"
+    English: Bombardment
+  - Key: DDEINFO
+    Chinese: "\u9632\u5FA1\u5854\u6E85\u5C04\u572825%-250%\u4E4B\u95F4\u968F\u673A\u6D6E\u52A8"
+    English: Turret's splash fluctuates between 25% and 250%
+  - Key: EEE
+    Chinese: "\u539F\u5B50\u4E2D\u5FC3"
+    English: Atomic Center
+  - Key: EEEINFO
+    Chinese: "\u5B50\u5F39\u6BCF\u6E85\u5C04\u52301\u4E2A\u654C\u4EBA\uFF0C\u5C31\u4F7F\u5B50\u5F39\u4F24\u5BB3\u63D0\u9AD820%"
+    English: Increased bullet's damage by 20% for each enemy it hit
+  - Key: EEA
+    Chinese: "\u5F3A\u653B\u6838\u5FC3"
+    English: Attack Core
+  - Key: EEAINFO
+    Chinese: "\u6218\u6597\u5F00\u59CB\u524D20\u79D2\uFF0C\u653B\u51FB\u529B\u63D0\u5347100%"
+    English: Turret's attack increased by 100% before 20 seconds of each wave
+  - Key: EEB
+    Chinese: "\u52A0\u901F\u6838\u5FC3"
+    English: Speed Core
+  - Key: EEBINFO
+    Chinese: "\u6218\u6597\u5F00\u59CB\u524D20\u79D2\uFF0C\u653B\u901F\u63D0\u5347100%"
+    English: Turret's firerate increased by 100% before 20 seconds of each wave
+  - Key: EEC
+    Chinese: "\u51CF\u901F\u6838\u5FC3"
+    English: Slow Core
+  - Key: EECINFO
+    Chinese: "\u6218\u6597\u5F00\u59CB\u524D20\u79D2\uFF0C\u51CF\u901F\u63D0\u53471.5"
+    English: Turret's slow increased by 1.5 before 20 seconds of each wave
+  - Key: EED
+    Chinese: "\u66B4\u51FB\u6838\u5FC3"
+    English: Critical Core
+  - Key: EEDINFO
+    Chinese: "\u6218\u6597\u5F00\u59CB\u524D20\u79D2\uFF0C\u66B4\u51FB\u7387\u63D0\u534775%"
+    English: Turret's splash increased by 75% before 20 seconds of each wave
+  - Key: ABC
+    Chinese: "\u5EC9\u4EF7\u57FA\u5EA7"
+    English: Inferior Base
+  - Key: ABCINFO
+    Chinese: "\u8BE5\u9632\u5FA1\u5854\u5347\u7EA7\u8D39\u7528-50%"
+    English: Upgrade cost reduced by 50%
+  - Key: ABD
+    Chinese: "\u73AF\u72B6\u63D2\u4EF6"
+    English: Annular Plug-in
+  - Key: ABDINFO
+    Chinese: "\u4F7F\u9632\u5FA1\u5854\u653B\u51FB\u8303\u56F4\u53D8\u4E3A\u5706\u5F62"
+    English: Turn this turret's attack range in to circle
+  - Key: ABE
+    Chinese: "\u6298\u6263\u5956\u5238"
+    English: Discount Tickets
+  - Key: ABEINFO
+    Chinese: "\u4F7F\u6784\u5EFA\u7ED3\u6784\u4F53\u8D39\u7528-50%"
+    English: Reduce the cost of buidling structure by 50%
+  - Key: ACD
+    Chinese: "\u5FEB\u901F\u4EA4\u6613"
+    English: Fast Transaction
+  - Key: ACDINFO
+    Chinese: "\u4F7F\u4EA4\u6362\u9677\u9631\u8D39\u7528-50%"
+    English: Reduce the cost of relocating Trap by 50%
+  - Key: ACE
+    Chinese: "\u79D1\u6280\u8DC3\u8FDB"
+    English: Technology Leaps
+  - Key: ACEINFO
+    Chinese: "\u4F7F\u7CFB\u7EDF\u5347\u7EA7\u8D39\u7528-50%"
+    English: Reduce module upgrade cost by 50%
+  - Key: ADE
+    Chinese: "\u5E7B\u5316\u6784\u9020"
+    English: Unreal Structure
+  - Key: ADEINFO
+    Chinese: "\u91CD\u6784\u540E\u53D8\u5316\u4E3A\u4E00\u4E2A\u968F\u673A\u6280\u80FD"
+    English: Becomes a random element skill while refactor
+  - Key: BCD
+    Chinese: "\u52A0\u957F\u70AE\u7BA1"
+    English: Longer barrel
+  - Key: BCDINFO
+    Chinese: "\u9632\u5FA1\u5854\u653B\u51FB\u901F\u5EA6-30%\uFF0C\u653B\u51FB\u8303\u56F4+2"
+    English: Firerate - 30%, Range + 2
+  - Key: BCE
+    Chinese: "\u4E07\u80FD\u5143\u7D20"
+    English: Perfect Element
+  - Key: BCEINFO
+    Chinese: "\u91CD\u6784\u540E\u83B7\u5F971\u4E2A\u4E07\u80FD\u5143\u7D20"
+    English: Gain 1 perfect element when refactor
+  - Key: BDE
+    Chinese: "\u7EF4\u4FEE\u5DE5\u5382"
+    English: Repair Factory
+  - Key: BDEINFO
+    Chinese: "\u76F8\u90BB\u6807\u8BB0\u7684\u6548\u679C\u63D0\u5347100%"
+    English: The effect of adjacent Traps will be increased by 100%
+  - Key: CDE
+    Chinese: "\u94F8\u5E01\u5DE5\u5382"
+    English: Money Factory
+  - Key: CDEINFO
+    Chinese: "\u5B50\u5F39\u6BCF\u6B21\u547D\u4E2D\u67098%\u6982\u7387\u83B7\u5F972\u91D1\u5E01"
+    English: Each shoot has a 8% chance of gaining 2 coins
+  - Key: //Enemy
+    Chinese: 
+    English: 
+  - Key: SOILDER
+    Chinese: "\u9B23\u72D7"
+    English: Hyena
+  - Key: RUNNER
+    Chinese: "\u9C7C\u9E70"
+    English: Osprey
+  - Key: TANKER
+    Chinese: "\u9EC4\u725B"
+    English: Bull
+  - Key: RESTORER
+    Chinese: "\u8718\u86DB"
+    English: Spider
+  - Key: FROSTER
+    Chinese: "\u6D77\u8C79"
+    English: Seal
+  - Key: HEALER
+    Chinese: "\u96C4\u72EE"
+    English: Lion
+  - Key: GOLDKEEPER
+    Chinese: "\u8865\u7ED9\u8F66"
+    English: Supply Truck
+  - Key: SOILDERINFO
+    Chinese: "\u4F7F\u7528\u4F4E\u6210\u672C\u6750\u6599\u5927\u6279\u91CF\u751F\u4EA7\uFF0C\u9632\u5FA1\u529B\u8584\u5F31\u4F46\u662F\u6570\u91CF\u5DE8\u5927"
+    English: Produced in large quantities using low-cost materials, they are weakly
+      defended but in large numbers
+  - Key: RUNNERINFO
+    Chinese: "\u5728\u76F4\u7EBF\u79FB\u52A8\u65F6\u4F1A\u7A81\u7136\u52A0\u901F\uFF0C\u9002\u5408\u4F7F\u7528\u51CF\u901F\u548C\u5F2F\u6298\u8DEF\u7EBF\u8FDB\u884C\u9632\u5FA1"
+    English: It will suddenly accelerate when moving in a straight line, better use
+      slow bullet and bending routes to defend
+  - Key: TANKERINFO
+    Chinese: "\u88C5\u914D\u4E86\u9002\u5E94\u6027\u6539\u9020\u7684\u7C7B\u91D1\u88C5\u7532\uFF0C\u9632\u5FA1\u529B\u663E\u8457\u63D0\u5347"
+    English: Equipped with adaptive armor, the defense is significantly improved
+  - Key: RESTORERINFO
+    Chinese: "\u5982\u679C\u4E00\u5B9A\u65F6\u95F4\u5185\u6CA1\u6709\u53D7\u5230\u4F24\u5BB3\uFF0C\u5C31\u4F1A\u5F00\u59CB\u8FC5\u901F\u6062\u590D\u751F\u547D"
+    English: It will quickly restore health if no damage is taken for a while.
+  - Key: FROSTERINFO
+    Chinese: "\u8FD0\u8F7D\u7740\u6781\u5BD2\u539F\u5B50\uFF0C\u5728\u6B7B\u4EA1\u65F6\u4F1A\u89E6\u53D1\u4E00\u6B21\u971C\u7206\uFF0C\u51BB\u7ED3\u5468\u56F4\u7684\u9632\u5FA1\u5854"
+    English: It triggers a frost burst upon death, freezing the surrounding turrets
+  - Key: HEALERINFO
+    Chinese: "\u8FD0\u8F7D\u7740\u52A0\u901F\u6838\u5FC3\uFF0C\u4F7F\u5176\u81EA\u8EAB\u5468\u56F4\u7684\u5176\u4ED6\u654C\u4EBA\u4F1A\u52A0\u901F\u79FB\u52A8"
+    English: Increased the nearby enemies' speed.
+  - Key: GOLDKEEPERINFO
+    Chinese: "\u654C\u5BF9\u6587\u660E\u7684\u8D44\u6E90\u8865\u7ED9\u8F66\uFF0C\u6BCF\u53D7\u5230\u4E00\u5B9A\u4F24\u5BB3\u5C31\u4F1A\u6389\u843D\u4EE3\u5E01"
+    English: Tokens will be dropped every time a certain amount of damage is taken
+  - Key: //boss
+    Chinese: 
+    English: 
+  - Key: DIVIDER
+    Chinese: "\u8783\u87F9"
+    English: Crab
+  - Key: SIXARMOUR
+    Chinese: "\u9646\u9F9F"
+    English: Tortoise
+  - Key: BLINKER
+    Chinese: "\u8759\u8760"
+    English: Bat
+  - Key: BORNER
+    Chinese: "\u8702\u5DE2"
+    English: Honeycomb
+  - Key: BINARY
+    Chinese: "\u72E1\u5154"
+    English: Rabbit
+  - Key: ICEBALL
+    Chinese: "\u767D\u718A"
+    English: Bear
+  - Key: HAMSTER
+    Chinese: "\u4ED3\u9F20"
+    English: Hamster
+  - Key: AIRCRAFT
+    Chinese: "\u84DD\u9CB8"
+    English: Whale
+  - Key: DIVIDERINFO
+    Chinese: "\u53EF\u91CD\u7EC4\u5916\u58F3\u4F7F\u5176\u5728\u6B7B\u4EA1\u65F6\u4F1A\u8FDB\u884C\u5206\u88C2\u5E76\u91CD\u7EC4\u4E3A\u4E24\u4E2A\u66F4\u5C0F\u7684\u673A\u4F53\uFF0C\u4E00\u5171\u53EF\u5206\u88C2\u4E24\u6B21"
+    English: Splits into several smaller bodies while it die.
+  - Key: SIXARMOURINFO
+    Chinese: "\u5728\u81EA\u8EAB\u5468\u56F4\u5747\u5300\u73AF\u7ED5\u7740\u516D\u4E2A\u62A4\u7532\uFF0C\u53EA\u6709\u51FB\u7834\u7279\u5B9A\u65B9\u4F4D\u7684\u62A4\u7532\u540E\u65B9\u53EF\u653B\u51FB\u672C\u4F53"
+    English: It is surrounded by six armor evenly, and can only attack itself after
+      breaking the armor
+  - Key: BLINKERINFO
+    Chinese: "\u6BCF\u5F53\u751F\u547D\u503C\u4E0B\u964D25%\u5C31\u4F1A\u89E6\u53D1\u4E00\u6B21\u95EA\u70C1\uFF0C\u5411\u524D\u77AC\u79FB\u4E00\u6BB5\u8DDD\u79BB"
+    English: Flashes forward a certain distance while it takes a certain amount of
+      damage.
+  - Key: BORNERINFO
+    Chinese: "\u5F53\u751F\u547D\u503C\u4F4E\u4E8E75%\u548C25%\u65F6\uFF0C\u4F1A\u53D8\u5F62\u6210\u4E3A\u5821\u5792\uFF0C\u53D7\u5230\u7684\u4F24\u5BB3\u5927\u5E45\u964D\u4F4E\u5E76\u91CA\u653E\u5927\u91CF\u57FA\u7840\u539F\u578B"
+    English: When it's health fall below 75% and 25%, it will morph into fortresses,
+      taking much less damage and releasing a lot of base archetypes
+  - Key: BINARYINFO
+    Chinese: "\u5171\u67092\u4E2A\u72E1\u5154\uFF0C\u4EFB\u610F\u4E00\u4E2A\u6B7B\u4EA1\u65F6\uFF0C\u4F1A\u89E6\u53D1\u9003\u79BB\u673A\u5236\uFF0C\u4F7F\u53E6\u4E00\u4E2A\u7684\u901F\u5EA6\u5927\u5E45\u63D0\u5347"
+    English: Summon two binary stars at the same time, and when one dies, the other
+      accelerates.
+  - Key: ICEBALLINFO
+    Chinese: "\u8FD0\u8F7D\u6781\u5BD2\u539F\u5B50\uFF0C\u6BCF\u5F53\u8F6C\u5411\u65F6\u5C31\u4F1A\u89E6\u53D1\u4E00\u6B21\u5927\u8303\u56F4\u7684\u201C\u971C\u7206\u201D\uFF0C\u51BB\u7ED3\u76F8\u90BB\u7684\u9632\u5FA1"
+    English: Each time the Snow Ball veered, it released a frost burst.
+  - Key: HAMSTERINFO
+    Chinese: "\u5171\u67095\u4E2A\u4ED3\u9F20\uFF0C\u6BCF\u4E2A\u4ED3\u9F20\u81EA\u5E2675%\u7684\u4F24\u5BB3\u51CF\u514D\uFF0C\u6BCF\u4E2A\u4ED3\u9F20\u6B7B\u4EA1\u4F7F\u6240\u6709\u4ED3\u9F20\u7684\u53D7\u5230\u4F24\u5BB3\u63D0\u9AD825%"
+    English: There are 5 hamsters, each hamster has 75% damage reduction, and each
+      hamster death reduces all hamster's damage reduction by 25%.
+  - Key: AIRCRAFTINFO
+    Chinese: "\u643A\u5E26\u4E00\u5B9A\u6570\u91CF\u7684\u50DA\u673A\uFF0C\u50DA\u673A\u4F1A\u5BF9\u9632\u5FA1\u5854\u8FDB\u884C\u971C\u51BB\u6253\u51FB\uFF0C\u4F7F\u5176\u6682\u65F6\u5931\u53BB\u653B\u51FB\u80FD\u529B"
+    English: With a certain number of wingmen, the wingman will frost the turrets.
+  - Key: UNREVEAL
+    Chinese: "\u672A\u63ED\u793A\u9677\u9631"
+    English: Unreveal Trap
+  - Key: UNREVEALINFO
+    Chinese: "\u5C06\u8BE5\u5730\u5757\u8FDE\u63A5\u8FDB\u9053\u8DEF\u4EE5\u63ED\u793A\u8BE5\u9677\u9631\uFF0C\u654C\u4EBA\u5728\u7ECF\u8FC7\u65F6\u4F1A\u89E6\u53D1\u7279\u6B8A\u8D1F\u9762\u6548\u679C"
+    English: Reveal this trap by connect this tile into your path and it will trigger
+      negative effect to enemy passed by.
+  - Key: SPAWNPOINT
+    Chinese: "\u8D77\u70B9"
+    English: Start Point
+  - Key: DESTINATION
+    Chinese: "\u7EC8\u70B9"
+    English: End Point
+  - Key: STUNTRAP
+    Chinese: "\u6655\u7729\u9677\u9631"
+    English: Stun Trap
+  - Key: ICETRAP
+    Chinese: "\u6781\u5BD2\u9677\u6807\u8BB0"
+    English: Ice Trap
+  - Key: ARROWTRAP
+    Chinese: "\u51CF\u901F\u9677\u9631"
+    English: Slow Arrow
+  - Key: BLINKTRAP
+    Chinese: "\u95EA\u70C1\u9677\u9631"
+    English: Blink Trap
+  - Key: PROMOTETRAP
+    Chinese: "\u5F3A\u5316\u9677\u9631"
+    English: Promote Trap
+  - Key: IMITATETRAP
+    Chinese: "\u590D\u5236\u9677\u9631"
+    English: Imitate Trap
+  - Key: EXECUTETRAP
+    Chinese: "\u5904\u51B3\u9677\u9631"
+    English: Execution Trap
+  - Key: DAMAGETrap
+    Chinese: "\u4F24\u5BB3\u9677\u9631"
+    English: Damage Trap
+  - Key: FROSTTRAP
+    Chinese: "\u51B0\u51BB\u9677\u9631"
+    English: Frost Trap
+  - Key: BONUSTRAP
+    Chinese: "\u94F8\u5E01\u9677\u9631"
+    English: Coin Trap
+  - Key: EXPLOSIONTRAP
+    Chinese: "\u7206\u70B8\u9677\u9631"
+    English: Explosion Trap
+  - Key: SPAWNPOINTINFO
+    Chinese: "\u654C\u4EBA\u7684\u51FA\u751F\u70B9\uFF0C\u786E\u4FDD\u6709\u8DEF\u7EBF\u4E0E\u7EC8\u70B9\u76F8\u8FDE\u3002"
+    English: Enemy borns here, make sure there is a route to the end point.
+  - Key: DESTINATIONINFO
+    Chinese: "\u654C\u4EBA\u7684\u76EE\u7684\u5730\uFF0C\u786E\u4FDD\u6709\u8DEF\u7EBF\u4E0E\u8D77\u70B9\u76F8\u8FDE\u3002"
+    English: Enemy's destination, make sure there is a route to the start point.
+  - Key: STUNTRAPINFO
+    Chinese: "\u7ECF\u8FC7\u7684\u654C\u4EBA\u6655\u77290.5\u79D2\uFF0C\u4E14\u6B64\u524D\u6BCF\u7ECF\u8FC7\u7684\u4E00\u4E2A\u6807\u8BB0\u5C31\u989D\u5916\u6655\u77290.5\u79D2"
+    English: Enemies passing by are stunned for 0.5s, stun time increased by 0.5s
+      for each Trap enemy passed.
+  - Key: ICETRAPINFO
+    Chinese: "\u7ECF\u8FC7\u7684\u654C\u4EBA\u51CF\u901F\u589E\u52A00.5*N\uFF0CN"
+    English: 'Enemies passing by increase slow by 0.5 * N, N '
+  - Key: ARROWTRAPINFO
+    Chinese: "\u6309\u7BAD\u5934\u65B9\u5411\u7ECF\u8FC7\u7684\u654C\u4EBA\u4F1A\u88AB\u51CF\u901F5\u79D2\u3002"
+    English: Enemies passing through this tile with the same direction of the arrow
+      will be slowed down for 5s
+  - Key: BLINKTRAPINFO
+    Chinese: "\u7ECF\u8FC7\u7684\u654C\u4EBA\u4F20\u9001\u52302\u683C\u524D\u7684\u4F4D\u7F6E\u3002\uFF08\u6BCF\u4E2A\u654C\u4EBA\u53EA\u4F1A\u89E6\u53D1\u4E00\u6B21\uFF09"
+    English: Enemies passing by will be teleporting to 2 tiles ahead.(Each enemy
+      once)
+  - Key: PROMOTETRAPINFO
+    Chinese: "\u4F7F\u654C\u4EBA\u7ECF\u8FC7\u7684\u4E0B\u4E00\u4E2A\u6807\u8BB0\u6548\u679C\u63D0\u5347100%(\u53EF\u4EE5\u53E0\u52A0)"
+    English: The effect of the next Trap that enemy passing by will be increased
+      by 100% (Stackable)
+  - Key: IMITATETRAPINFO
+    Chinese: "\u8FD9\u4E2A\u9677\u9631\u6548\u679C\u7B49\u540C\u4E8E\u654C\u4EBA\u7ECF\u8FC7\u7684\u4E0A\u4E00\u4E2A\u6807\u8BB0"
+    English: The effect of this Trap is the same as the last Trap passed by the enemy.
+  - Key: EXECUTETRAPINFO
+    Chinese: "\u5BF9\u7ECF\u8FC7\u7684\u654C\u4EBA\u9020\u621020%\u5DF2\u635F\u5931\u751F\u547D\u503C\u7684\u4F24\u5BB3"
+    English: Deal damage equal to 20% * enemy's lost health
+  - Key: DAMAGETrapINFO
+    Chinese: "\u654C\u4EBA\u5728\u63A5\u4E0B\u67653\u683C\u7684\u79FB\u52A8\u5185\u6240\u53D7\u4F24\u5BB3\u63D0\u9AD850%"
+    English: Enemies passing by will takes 50% addition damage for the next 3 tiles'
+      move.
+  - Key: FROSTTRAPINFO
+    Chinese: "\u63A5\u4E0B\u67653\u683C\u5185\u654C\u4EBA\u6240\u53D7\u51CF\u901F\u6548\u679C\u63D0\u9AD850%"
+    English: Enemies passing by will takes 50% addition slow for the next 3 tiles'
+      move.
+  - Key: BONUSTRAPINFO
+    Chinese: "\u6BCF\u4E2A\u7ECF\u8FC7\u7684\u654C\u4EBA\u4F7F\u4F60\u83B7\u5F972\u91D1\u5E01"
+    English: Each enemy passing by will give you 2 coins
+  - Key: EXPLOSIONTRAPINFO
+    Chinese: "\u7ECF\u8FC7\u7684\u654C\u4EBA\u4F1A\u89E6\u53D1\u4E00\u6B215%\u5F53\u524D\u751F\u547D\u503C\u7684\u8303\u56F4\u4F24\u5BB3"
+    English: Enemy passing by will trigger an explosion equal to 5% of it's current
+      health.
+  - Key: KANGDE
+    Chinese: "\u5EB7\u5FB7"
+    English: Kant
+  - Key: Guide01
+    Chinese: "\u90E8\u7F72\u5B98S0666\u53F7,\u8FD9\u91CC\u662F\u4EBA\u9A6C\u5EA7A*\u7B2C\u5341\u4E5D\u63A5\u53E3.\u6211\u662F\u90E8\u7F72\u6559\u5B98\u5A1C\u53EF."
+    English: Deployment Officer S0666,this is Sagittarius A* port 19.I'm Deployment
+      Instructor Nacho.
+  - Key: Guide02
+    Chinese: "\u786E\u8BA4\u8FDE\u63A5\u5B8C\u6210,\u73B0\u5728\u5F00\u59CB\u57FA\u7840\u53CD\u5E94\u6D4B\u8BD5."
+    English: Connection complete, basic response test begin.
+  - Key: Guide03
+    Chinese: "<color=#FFEA6D>\u8BF7\u6309\u4F4F\u9F20\u6807\u5DE6\u952E\u5E76\u62D6\u52A8\u4EE5\u79FB\u52A8\u89C6\u89D2.</color>"
+    English: <color=#FFEA6D>Please hold down the left mouse button and drag to move
+      the camera.</color>
+  - Key: Guide04
+    Chinese: "\u65B9\u5411\u63A7\u5236\u6B63\u5E38."
+    English: Good.
+  - Key: Guide05
+    Chinese: "<color=#FFEA6D>\u8BF7\u5C1D\u8BD5\u4F7F\u7528\u9F20\u6807\u6EDA\u8F6E\u6765\u7F29\u653E\u89C6\u89D2.</color>"
+    English: <color=#FFEA6D>Then try using the mouse wheel to zoom in and out.</color>
+  - Key: Guide06
+    Chinese: "\u89C6\u91CE\u63A7\u5236\u6B63\u5E38."
+    English: Pefect.
+  - Key: Guide07
+    Chinese: "\u90E8\u7F72\u5B98,\u5DF4\u5FB7\u6587\u660E\u6B63\u8BD5\u56FE\u901A\u8FC7\u8BE5\u63A5\u53E3\u8FDB\u884C\u65F6\u7A7A\u8DC3\u8FC1,\u6307\u6325\u90E8\u6D3E\u9063\u60A8\u6765\u8D1F\u8D23\u8BE5\u63A5\u53E3\u7684\u9632\u5FA1\u90E8\u7F72\u5DE5\u4F5C."
+    English: Deployment officer, the Bard civilization is attempting a time warp
+      through this interface, you are taking charge of the defense deployment.
+  - Key: Guide08
+    Chinese: "\u73B0\u5728,\u6211\u5C06\u5BF9\u4F60\u8FDB\u884C\u4E00\u6B21\u5FEB\u901F\u7684\u6559\u5B66,\u8BF7\u628A\u6CE8\u610F\u529B\u653E\u5728\u753B\u9762\u4E2D\u592E."
+    English: Now, I'm going to give you a quick tutorial. Please focus on the center
+      of the battlefield.
+  - Key: Guide09
+    Chinese: "<color=#FFEA6D>\u7EA2\u8272\u683C</color>\u4E3A\u5165\u53E3,<color=#FFEA6D>\u84DD\u8272\u683C</color>\u4E3A\u51FA\u53E3,\u79FB\u52A8\u7684<color=#FFEA6D>\u84DD\u8272\u7BAD\u5934</color>\u6807\u8BC6\u4E86\u654C\u4EBA\u7684\u884C\u8FDB\u8DEF\u7EBF."
+    English: <color=#FFEA6D>Red squares represent the entrance, blue squares represent
+      the exit, and moving blue arrows mark the enemy's path.</color>
+  - Key: Guide10
+    Chinese: "<color=#FFEA6D>\u573A\u4E0A\u7070\u8272\u683C\u5B50\u4E3A\u57FA\u672C\u683C,\u654C\u4EBA\u5C06\u901A\u8FC7\u57FA\u672C\u683C\u5411\u51FA\u53E3\u79FB\u52A8.</color>"
+    English: <color=#FFEA6D>The grey tile is the basic tile, through which the enemy
+      moves towards the exit.</color>
+  - Key: Guide11
+    Chinese: "\u4F60\u7684\u4EFB\u52A1,\u5C31\u662F\u963B\u6B62\u654C\u4EBA\u62B5\u8FBE\u51FA\u53E3."
+    English: Your job is to prevent the enemy from reaching the exit.
+  - Key: //3
+    Chinese: 
+    English: 
+  - Key: Guide12
+    Chinese: "\u753B\u9762\u53F3\u4E0A\u89D2\u663E\u793A\u4E86\u6211\u4EEC\u4E3A\u4F60\u63D0\u4F9B\u7684\u4EE3\u5E01\u4F9B\u7ED9,<color=#FFEA6D>\u4EE3\u5E01\u4F9B\u7ED9\u91CF\u6BCF\u56DE\u5408\u90FD\u4F1A\u63D0\u9AD810</color>."
+    English: The upper right corner shows our coins supply for you, <color=#FFEA6D>it
+      will increases by 10 per wave.</color>
+  - Key: Guide13
+    Chinese: "\u5728\u753B\u9762\u53F3\u4E0B\u89D2\u662F<color=#FFEA6D>\u6784\u5EFA\u7ED3\u6784\u4F53\u6309\u94AE</color>,\u73B0\u5728\u8BF7<color=#FFEA6D>\u4F7F\u7528\u4EE3\u5E01\u6784\u5EFA\u4E00\u4E2A\u6A21\u5757</color>."
+    English: In the bottom right corner is the <color=#FFEA6D>Building Structure
+      button</color>. <color=#FFEA6D>Now spend some coins to build a module..</color>
+  - Key: //4
+    Chinese: 
+    English: 
+  - Key: Guide14
+    Chinese: "\u6BCF\u4E2A\u6A21\u5757\u75313\u4E2A<color=#FFEA6D>\u57FA\u672C\u683C</color>\u548C1\u4E2A<color=#FFEA6D>\u9632\u5FA1\u5854</color>\u7EC4\u6210,<color=#FFEA6D>\u57FA\u672C\u683C</color>\u53EF\u4EE5\u7528\u4F5C<color=#FFEA6D>\u9053\u8DEF</color>,\u800C<color=#FFEA6D>\u9632\u5FA1\u5854</color>\u53EF\u4EE5\u4F5C\u4E3A<color=#FFEA6D>\u969C\u788D</color>."
+    English: Each module consists of<color=#FFEA6D> 3 "basic tile" and 1 "element
+      turret"</color>, <color=#FFEA6D>basic tiles can be used as a path, while the
+      turret can be used as an obstacle.</color>
+  - Key: Guide15
+    Chinese: "\u901A\u8FC7<color=#FFEA6D>\u5C06\u9632\u5FA1\u5854\u4F5C\u4E3A\u969C\u788D,\u5E76\u786E\u4FDD\u8D77\u70B9\u548C\u7EC8\u70B9\u4E4B\u95F4\u4EE5\u57FA\u672C\u683C\u8FDE\u63A5,\u53EF\u4EE5\u5EF6\u957F\u654C\u4EBA\u7684\u884C\u8FDB\u8DEF\u7EBF</color>."
+    English: <color=#FFEA6D>Using turret as obstacles, and making sure the start
+      and destination point are connected by basic tiles.</color>
+  - Key: Guide16
+    Chinese: "\u73B0\u5728\u8BF7\u9009\u62E91\u4E2A\u7ED3\u6784\u4F53,\u5E76\u6309\u7167<color=#FFEA6D>\u6807\u8BC6\u7684\u4F4D\u7F6E</color>\u8FDB\u884C<color=#FFEA6D>\u65CB\u8F6C\u548C\u6446\u653E</color>,\u4F60\u5C06\u5B66\u4E60\u5230\u57FA\u672C\u7684\u5BFB\u8DEF\u89C4\u5219."
+    English: <color=#FFEA6D>Now select a structure, rotate and position it according
+      to the sign,</color> and you will learn basic pathfinding rules.
+  - Key: //5
+    Chinese: 
+    English: 
+  - Key: Guide17
+    Chinese: "\u4F60<color=#FFEA6D>\u6210\u529F\u5EF6\u957F\u4E86\u654C\u4EBA\u7684\u884C\u8FDB\u8DEF\u7EBF</color>,\u4F60\u53EF\u4EE5\u5728\u63A5\u4E0B\u6765\u7684\u6218\u6597\u4E2D\u7EE7\u7EED\u719F\u7EC3\u8BE5\u6280\u5DE7."
+    English: You successfully extend the enemy's path, which you can continue to
+      master in the rest of the battle.
+  - Key: Guide18
+    Chinese: "\u5728\u753B\u9762\u7684\u53F3\u4E0A\u65B9,\u4F1A\u663E\u793A\u4F60\u5F53\u524D\u751F\u547D\u503C,\u6BCF\u4E2A\u62B5\u8FBE\u7EC8\u70B9\u7684\u654C\u4EBA\u90FD\u4F1A\u8BA9\u4F60\u5931\u53BB\u4E00\u5B9A\u751F\u547D\u503C."
+    English: In the upper right corner is your remaining health, Each enemy that
+      reaches the end will deal 1 damage to you.
+  - Key: Guide181
+    Chinese: "\u5F53\u751F\u547D\u503C\u4E3A0\u65F6,\u4F60\u7684\u4EFB\u52A1\u5BA3\u544A\u5931\u8D25."
+    English: When your health goes to zero, we will be forced to abandon this interface.
+  - Key: //6
+    Chinese: 
+    English: 
+  - Key: Guide19
+    Chinese: "\u5728\u753B\u9762\u7684\u6B63\u4E0A\u65B9,\u4F1A\u663E\u793A\u6211\u4EEC\u63A2\u6D4B\u5230\u7684\u654C\u4EBA\u5269\u4F59\u8FDB\u653B\u6CE2\u6570,\u4EE5\u53CA\u5373\u5C06\u5230\u6765\u7684\u654C\u4EBA\u7C7B\u578B."
+    English: Right at the top shows the incoming waves we detected,\n as well as
+      the type of incoming enemies.
+  - Key: Guide191
+    Chinese: "\u5C06\u9F20\u6807\u60AC\u505C\u5728\u654C\u4EBA\u56FE\u6807\u5904,\u53EF\u4EE5\u67E5\u770B\u654C\u4EBA\u76F8\u5173\u4FE1\u606F."
+    English: To view information about an enemy, move the mouse pointer to the icon
+      of the enemy.
+  - Key: Guide20
+    Chinese: "\u73B0\u5728\u70B9\u51FB\u4E0B\u65B9\u7684<color=#FFEA6D>\u4E0B\u4E00\u6CE2</color>\u6309\u94AE,\u8FD9\u5C06\u5F00\u542F\u8DC3\u8FC1\u5165\u53E3,\u8FCE\u63A5\u6218\u6597\u9636\u6BB5."
+    English: <color=#FFEA6D>Now press the button below to start the battle state.</color>
+  - Key: //7
+    Chinese: 
+    English: 
+  - Key: Guide21
+    Chinese: "\u505A\u5F97\u5F88\u597D,\u4F60\u6210\u529F\u5B88\u4F4F\u4E86\u654C\u4EBA\u7684\u8FDB\u653B."
+    English: Well done.
+  - Key: Guide22
+    Chinese: "<color=#FFEA6D>\u6BCF\u6B21\u8FDB\u884C\u6A21\u5757\u6784\u5EFA\u90FD\u4F1A\u4F7F\u5176\u4EF7\u683C\u63D0\u9AD810</color>,\u4EE3\u5E01\u8FD8\u6709\u5176\u4ED6\u7528\u9014,\u4F60\u9700\u8981\u5408\u7406\u89C4\u5212\u8D44\u6E90\u5206\u914D."
+    English: <color=#FFEA6D>Every time you build a module, the price will increases
+      by 10.</color> Coins also have other uses, and you need to allocate them wisely.
+  - Key: Guide23
+    Chinese: "\u73B0\u5728\u8BF7<color=#FFEA6D>\u518D\u6B21\u6784\u5EFA\u4E00\u4E2A\u7ED3\u6784\u4F53\u5E76\u6309\u6307\u793A\u4F4D\u7F6E\u6446\u653E</color>."
+    English: But now, <color=#FFEA6D>try to build another structure</color>.
+  - Key: //8
+    Chinese: 
+    English: 
+  - Key: Guide24
+    Chinese: "\u8FD9\u6B21\u4F60\u6784\u5EFA\u4E86\u4E00\u4E2A\u91D1\u5143\u7D20\u5854,\u4E0D\u540C\u7684\u5143\u7D20\u5854\u62E5\u6709\u4E0D\u540C\u7684\u7279\u70B9."
+    English: "This time you deploy a new element turret which has different characteristic\u3002"
+  - Key: Guide25
+    Chinese: "\u8BF7<color=#FFEA6D>\u70B9\u51FB\u573A\u4E0A\u7684\u9632\u5FA1\u5854,\u4EE5\u67E5\u770B\u5176\u57FA\u672C\u4FE1\u606F\u53CA\u653B\u51FB\u8303\u56F4</color>."
+    English: <color=#FFEA6D>Now click on the turret on the grid to view its information
+      and attack range</color>.
+  - Key: //21
+    Chinese: 
+    English: 
+  - Key: Guide26
+    Chinese: "\u505A\u5F97\u5F88\u597D,\u5F53\u4F60\u51C6\u5907\u597D\u4E86,\u4F60\u53EF\u4EE5\u968F\u65F6\u5F00\u542F\u4E0B\u4E00\u6CE2\u6218\u6597."
+    English: Well done. When you're ready, you can start the next wave.
+  - Key: //9
+    Chinese: 
+    English: 
+  - Key: Guide27
+    Chinese: "\u6211\u4EEC\u6210\u529F\u5B88\u4F4F\u4E86\u4E24\u6CE2\u8FDB\u653B,\u4F46\u4E3A\u4E86\u8D70\u5F97\u66F4\u8FDC,\u6211\u4EEC\u9700\u8981\u66F4\u5F3A\u529B\u7684<color=#FFEA6D>\u91CD\u6784\u5854</color>."
+    English: We managed to hold off two waves of attack, but to go further, we needed
+      a more powerful turret.
+  - Key: Guide28
+    Chinese: "\u73B0\u5728\u8BF7<color=#FFEA6D>\u6784\u5EFA\u7B2C\u4E09\u4E2A\u6A21\u5757</color>,\u7136\u540E\u6211\u5C06\u6307\u5BFC\u4F60\u5B8C\u6210\u4E00\u6B21<color=#FFEA6D>\"\u91CD\u6784\"</color>."
+    English: <color=#FFEA6D>Now build the third structure</color>, and I'll walk
+      you through a<color=#FFEA6D> "Refactor"</color>
+  - Key: //10
+    Chinese: 
+    English: 
+  - Key: Guide29
+    Chinese: "\u8BF7\u70B9\u51FB\u753B\u9762\u5DE6\u4FA7\u7684\u914D\u65B9\u5546\u5E97\u6309\u94AE,\u6253\u5F00\u914D\u65B9\u5546\u5E97,\u5E76<color=#FFEA6D>\u9009\u62E9\u4E00\u4E2A\u5DF2\u7ECF\u51D1\u9F50\u5143\u7D20\u7684\u914D\u65B9</color>."
+    English: <color=#FFEA6D>Please click the button on the left side to open the
+      shop and select a blueprint that has collect enough element.</color>
+  - Key: //11
+    Chinese: 
+    English: 
+  - Key: Guide30
+    Chinese: "<color=#FFEA6D>\u914D\u65B9\u5546\u5E97\u6BCF3\u56DE\u5408\u4F1A\u5237\u65B0\u4E00\u6279\u91CD\u6784\u5854\u914D\u65B9</color>,\u800C\u6BCF\u4E2A\u91CD\u6784\u5854\u914D\u65B9\u7684\u7EC4\u4EF6\u5219\u662F\u5B8C\u5168\u968F\u673A\u7684."
+    English: <color=#FFEA6D>The shop refreshes a batch of refactor turret blueprint
+      every 3 waves, </color>and the components of each blueprint are completely
+      random.
+  - Key: Guide31
+    Chinese: "\u91CD\u6784\u5854\u62E5\u6709\u81EA\u8EAB\u4E13\u5C5E\u7684<color=#FFEA6D>\u88AB\u52A8\u6280\u80FD</color>,\u540C\u65F6\u4F9D\u636E\u7EC4\u6210\u7684\u914D\u65B9\u4E0D\u540C\u62E5\u6709\u4E13\u5C5E\u7684<color=#FFEA6D>\u5143\u7D20\u6280\u80FD</color>."
+    English: <color=#FFEA6D>Refactor turrets have their own default skill, and a
+      element skill depending on the composition elements.</color>
+  - Key: Guide32
+    Chinese: "\u7EC4\u6210\u5143\u7D20\u4F1A\u540C\u65F6\u63D0\u4F9B\u5C5E\u6027\u52A0\u6210,<color=#FFEA6D>\u8BF7\u5C06\u9F20\u6807\u60AC\u505C\u5728\u5143\u7D20\u6280\u80FD\u69FD\u4E0A</color>,\u53EF\u4EE5\u67E5\u770B\u8BE5\u5143\u7D20\u6280\u80FD\u63D0\u4F9B\u7684\u5C5E\u6027\u52A0\u6210."
+    English: Component elements also provide benefit. <color=#FFEA6D>Hover the mouse
+      over the element skill slot to view the benefit provided by the elements.</color>
+  - Key: //22
+    Chinese: 
+    English: 
+  - Key: Guide221
+    Chinese: "\u73B0\u5728,<color=#FFEA6D>\u70B9\u51FB\u91CD\u6784\u6309\u94AE\u5E76\u5C06\u5176\u90E8\u7F72\u5728\u6218\u573A\u4E0A.</color>"
+    English: Ok,<color=#FFEA6D>now build and place it on the grid.</color>
+  - Key: //12
+    Chinese: 
+    English: 
+  - Key: Guide332
+    Chinese: "\u6CE8\u610F,\u6BCF\u4E2A\u91CD\u6784\u5854\u6709<color=#FFEA6D>2\u4E2A\u5143\u7D20\u6280\u80FD\u69FD,\u5982\u679C\u5C06\u4E24\u4E2A\u91CD\u6784\u5854\u91CD\u53E0\u90E8\u7F72,\u5219\u4F1A\u8BA9\u539F\u91CD\u6784\u5854\u83B7\u5F97\u989D\u5916\u7684\u5143\u7D20\u6280\u80FD.</color>"
+    English: Note that each refactor turret has 2 elemental skill slots, and if you
+      place a new refactor turret on top of it, it will gain a additional elemental
+      skill.
+  - Key: Guide33
+    Chinese: "\u91CD\u6784\u662F\u63D0\u5347\u6218\u6597\u529B\u7684\u5173\u952E,\u73B0\u5728\u76F4\u63A5\u5F00\u59CB\u4E0B\u4E00\u6CE2\u6218\u6597\u5427."
+    English: Refactori is the key to improving your power, so let's move on to the
+      next battle.
+  - Key: //13
+    Chinese: 
+    English: 
+  - Key: Guide34
+    Chinese: "\u6700\u540E\u6211\u5C06\u4ECB\u7ECD<color=#FFEA6D\u7CFB\u7EDF\u7B49\u7EA7.</color>"
+    English: Let me introduce the <color=#FFEA6D>System Level.</color>
+  - Key: Guide35
+    Chinese: "\u7CFB\u7EDF\u5347\u7EA7\u6309\u94AE\u4E0A\u663E\u793A\u4E86\u4F60\u7684\u5F53\u524D<color=#FFEA6D>\u7CFB\u7EDF\u7B49\u7EA7</color>\u548C\u5176<color=#FFEA6D>\u5347\u7EA7\u6240\u9700\u7684\u4EE3\u5E01</color>."
+    English: The system button displays your <color=#FFEA6D>current system level
+      and the tokens required to upgrade it.</color>
+  - Key: Guide36
+    Chinese: "<color=#FFEA6D>\u5347\u7EA7\u7CFB\u7EDF\u53EF\u4EE5\u63D0\u9AD8\u6784\u5EFA\u5143\u7D20\u5854\u7684\u54C1\u8D28,\u4EE5\u53CA\u5728\u91CD\u6784\u5546\u5E97\u5237\u51FA\u65B0\u7684\u9AD8\u7EA7\u914D\u65B9.</color>."
+    English: <color=#FFEA6D>Upgrade your system level will improve the quality of
+      elemental turret and refresh new advanced recipes in the shop.</color>.
+  - Key: Guide37
+    Chinese: "<color=#FFEA6D>\u5982\u679C\u4F60\u5728\u672C\u56DE\u5408\u6CA1\u6709\u8FDB\u884C\u6784\u5EFA\u7ED3\u6784\u4F53,\u5219\u4F1A\u4F7F\u6784\u5EFA\u4EF7\u683C\u964D\u4F4E10%</color>."
+    English: Also, <color=#FFEA6D>if you don't build srtucture in this turn, it will
+      reduce the build price by 10%</color>.
+  - Key: Guide38
+    Chinese: "\u73B0\u5728\u7684\u9632\u5FA1\u529B\u91CF\u5145\u8DB3,\u8BF7\u76F4\u63A5\u5F00\u59CB\u4E0B\u4E00\u6CE2\u6218\u6597\u5427."
+    English: Now we have enough defenses. Let's move on.
+  - Key: //14
+    Chinese: 
+    English: 
+  - Key: Guide39
+    Chinese: "\u5C06\u4F60\u7684\u4EE3\u5E01\u7075\u6D3B\u6295\u5165\u5728\u62BD\u53D6\u6A21\u5757,\u5347\u7EA7\u7CFB\u7EDF,\u6216\u5347\u7EA7\u91CD\u6784\u5854\u4E0A,\u4EE5\u83B7\u53D6\u6700\u5927\u6536\u76CA."
+    English: Invest your tokens flexibly on building modules, upgrade modules, or
+      pgrade rafactor turrets for maximum benefit.
+  - Key: Guide40
+    Chinese: "<color=#FFEA6D>\u6211\u628A\u66F4\u591A\u6307\u5F15\u7684\u5185\u5BB9\u653E\u5728\u4E86\u5DE6\u4E0A\u89D2\u7684\u6307\u5F15\u9762\u677F\u91CC</color>,\u8BF7\u5728\u4EFB\u4F55\u65F6\u5019\u67E5\u770B."
+    English: I've put more of the guidelines in the top left guidance panel, please
+      check it out anytime.
+  - Key: Guide41
+    Chinese: "<color=#FFEA6D>\u8BF7\u575A\u630130\u6CE2\u8FDB\u653B</color>,\u5B8C\u6210\u8FD9\u4E00\u6B21\u6559\u7A0B."
+    English: Now, please stick to 30 waves to complete this tutorial.
+  - Key: "//\u5C0F\u59D0\u59D0\u4E34\u65F6\u5BF9\u8BDD"
+    Chinese: 
+    English: 
+  - Key: "//\u6807\u51C6\u6A21\u5F0F\u80DC\u5229"
+    Chinese: 
+    English: 
+  - Key: Temp00
+    Chinese: "\u770B\u6765\u60A8\u5DF2\u5B8C\u5168\u719F\u6089\u8DC3\u8FC1\u57FA\u7AD9\u7684\u91CD\u6784\u89C4\u5219\u4E86,\u8BF7\u7EE7\u7EED\u52AA\u529B\u524D\u884C."
+    English: It seems that you are fully familiar with the rules of the interstellar
+      battlefield, so please continue to forge ahead.
+  - Key: Temp01
+    Chinese: "\u6B63\u5728\u5206\u6790\u53D6\u80DC\u539F\u56E0...1%\u7684\u5408\u7406\u6218\u672F\u89C4\u5212...2%\u7684\u7075\u6D3B\u8D44\u6E90\u8C03\u914D...\u52A0\u4E0A97%\u7684\u8FD0\u6C14."
+    English: Trying to figure the reason of victory... 1% of tactical planning...
+      2% resource allocation... Plus 97% luck.
+  - Key: Temp02
+    Chinese: "\u6218\u6597\u7ED3\u675F,\u6211\u65B9\u8230\u961F\u83B7\u80DC,\u4E0D\u6127\u662F\u5A1C\u53EF\u5C0A\u656C\u7684\u6307\u6325\u5B98\u3002"
+    English: 'Victory! You deserve the title of The Great Commander! '
+  - Key: Temp03
+    Chinese: "\u505A\u5F97\u597D.\u5047\u4EE5\u65F6\u65E5,\u60A8\u5FC5\u5C06\u6210\u4E3A\u661F\u9645\u68EE\u6797\u4E2D\u7684\u6770\u51FA\u730E\u4EBA."
+    English: "Well done!With time, you\u2019ll become the BIG hunter in the Interstellar
+      Forest."
+  - Key: Temp04
+    Chinese: "\u5E72\u7684\u6F02\u4EAE,\u5DF2\u4E3A\u60A8\u5F00\u653E\u65E0\u5C3D\u6A21\u5F0F\u548C\u79C1\u4EBA\u5496\u5561\u95F4\u7684\u51C6\u5165\u6743\u9650."
+    English: Well done, opening up access to endless mode and private coffee room.
+  - Key: Temp05
+    Chinese: "\u4F60\u53EF\u771F\u662F\u4E2A\u4EBA\u624D\u5440\u670B\u53CB!"
+    English: You're a real talent, my friend!
+  - Key: Temp06
+    Chinese: "\u96BE\u4EE5\u7F6E\u4FE1,\u7B80\u5179.....\u7A0B\u5E8F\u90FD\u88AB\u60CA\u5230\u4EE5\u81F3\u4E8E\u4EA7\u751F\u4E86\u9519\u8BEF,\u7EDD\u4E0D\u662F\u6211\u54AC\u820C\u5934\u4E86."
+    English: "Unbelievable, are you a Trisolaran? Geez\u2026 The program was even
+      shocked to make an error\u2026 If anyone jaw dropped, it can\u2019t be me!!"
+  - Key: "//\u6807\u51C6\u6A21\u5F0F\u5931\u8D25"
+    Chinese: 
+    English: 
+  - Key: Temp10
+    Chinese: "......\u5EFA\u8BAE\u90E8\u7F72\u5B98\u66F4\u6362\u4E00\u4EFD\u5DE5\u4F5C,\u4F8B\u5982\u706B\u661F\u571F\u8C46\u683D\u79CD."
+    English: ... I suggest Commander change a job, such as Martian potato farming.
+  - Key: Temp11
+    Chinese: "\u7A0B\u5E8F\u6267\u884C,\u964D\u4F4E90%\u671F\u5F85\u503C......\u5DF2\u751F\u6548.\u60A8\u7684\u8868\u73B0\u8FD8\u7B97\u4E0D\u9519,\u6307\u6325\u5B98."
+    English: The procedure was executed and the 90% expectation reduction ......
+      has taken effect. You are doing quite well, Commander.
+  - Key: Temp12
+    Chinese: "\u68C0\u6D4B\u5230\u521A\u521A\u7684\u6218\u672F\u6709\u4E9B\u5FAE\u5C0F\u7684\u5931\u8BEF,\u4E3A\u60A8\u5448\u73B0\u6218\u5C40\u6570\u636E\u7EC6\u8282."
+    English: Detecting some minor mistakes in the tactics just now, let me present
+      you with the details of the battle data a while back.
+  - Key: Temp13
+    Chinese: "Faker\u8BF4\u8FC7:\u5982\u679C\u4F60\u7EC3\u5F97\u8DB3\u591F\u591A,\u5C31\u4E0D\u4F1A\u611F\u5230\u5BB3\u6015."
+    English: 'Faker said: if you practice enough, you won''t be scared.'
+  - Key: Temp14
+    Chinese: "\u9ECE\u660E\u5C31\u5728\u773C\u524D,\u8BF7\u4E0D\u8981\u653E\u5F03!\u6211\u5C06\u966A\u4F34\u5728\u60A8\u8EAB\u8FB9!"
+    English: Very unfortunate, but the dawn is around the corner, please don't give
+      up! I will be by your side!
+  - Key: Temp15
+    Chinese: "AI\u6B63\u5728\u9884\u6D4B\u90E8\u7F72\u5B98\u7684\u884C\u52A8...1%\u79BB\u5F00\u6218\u573A...2%\u559D\u676F\u5496\u5561...97%\u518D\u6765\u4E00\u5C40."
+    English: AI is predicting deployment officer actions... One percent left the
+      battlefield... 2% have a cup of coffee... 97%. One more round.
+  - Key: "//\u5237\u65B0\u5546\u5E97"
+    Chinese: 
+    English: 
+  - Key: Temp20
+    Chinese: "\u636E\u8BF4\u5237\u65B0\u7684\u6570\u503C\u5173\u4E4E\u80DC\u5229\u6982\u7387?\u5F88\u62B1\u6B49,\u7845\u57FA\u751F\u547D\u4FE1\u4EF0\u7684\u91CF\u5B50\u529B\u5B66\u4E2D\u6CA1\u6709\u5173\u4E8E\u6982\u7387\u7684\u6982\u5FF5."
+    English: 'I heard that the refreshed value is related to the probability of victory?
+      Sorry to say, in the quantum mechanics of silicon-based life belief, there
+      is no concept of probability! '
+  - Key: Temp21
+    Chinese: "\u4F3C\u4E4E\u4EBA\u7C7B\u5F88\u4FE1\u4EF0\"\u6982\u7387\"?\u4EE5\u81F3\u4E8E\u62BD\u5361\u6210\u4E3A\u4E00\u79CD\u6587\u660E?"
+    English: Humankind seems to believe in the "probability" that Gacha & IAP become
+      a civilization.
+  - Key: Temp22
+    Chinese: "\u5DF2\u77E5\u5355\u6B21\u5237\u65B0\u6570\u636E\u7684\u6781\u9650\u4E3A1\u5146\u4EBF\u6B21,\u6307\u6325\u5B98\u662F\u5426\u51C6\u5907\u6311\u6218\u4E00\u4E0B?"
+    English: No limit for you to refresh! Maybe the max chances are 1 trillion times!
+      Do you want to challenge it?
+  - Key: Temp23
+    Chinese: "\u6211\u6709\u5173\u4E8E\u6CBB\u7597\u5173\u8282\u708E\u7684\u5168\u5957\u6CBB\u7597\u65B9\u6CD5,\u6307\u6325\u5B98\u4E0D\u5FC5\u987E\u8651."
+    English: "I have a set of treatments for arthritis. Don\u2019t worry about clicking
+      the Refresh button. It is okay."
+  - Key: "//\u89E3\u9501\u65B0\u5185\u5BB9"
+    Chinese: 
+    English: 
+  - Key: Temp30
+    Chinese: "\u65B0\u7684\u540C\u4F34\u52A0\u5165\u4E86\u661F\u8FB0\u5927\u6D77\u7684\u5F81\u9014\uFF0C\u8BF7\u67E5\u770B\u540C\u4F34\u4FE1\u606F."
+    English: New companions have joined the journey (to the Star Ocean), please check
+      the companion information.
+  - Key: "//\u65E0\u5C3D\u6A21\u5F0F"
+    Chinese: 
+    English: 
+  - Key: Temp40
+    Chinese: "\u9996\u8F6E\u4F5C\u6218\u7ED3\u675F,\u60A8\u5DF2\u521D\u6B65\u5C55\u73B0\u9886\u5BFC\u529B."
+    English: The first round is over! You started to show your leadership talents
+      gradually!
+  - Key: Temp41
+    Chinese: "\u7B2C\u4E8C\u8F6E\u4F5C\u6218\u5DF2\u7ED3\u675F,\u76F8\u4FE1\u5DF4\u5FB7\u6587\u660E\u5DF2\u7ECF\u611F\u53D7\u5230\u6765\u81EA\u6211\u4EEC\u7684\u5A01\u6151."
+    English: The second round is over! I think the Bard civilization has felt our
+      deterrence!
+  - Key: Temp42
+    Chinese: "\u5F7B\u5E95\u74E6\u89E3\u654C\u4EBA,\u770B\u6765\u6307\u6325\u5B98\u548C\u6211\u6709\u7740\u76F8\u540C\u7ACB\u573A."
+    English: "Completely wipe out the enemy \u2014 you know we share the same goal!"
+  - Key: "//\u6446\u653E\u91CD\u6784\u5854"
+    Chinese: 
+    English: 
+  - Key: Temp50
+    Chinese: "\u5DF2\u5B8C\u6210\u91CD\u6784\u4F53\u5B89\u7F6E,\u8FD9\u5C06\u662F\u4EBA\u7C7B\u547D\u8FD0\u6539\u53D8\u7684\u5F00\u59CB."
+    English: Reconstruction has placed well! It's time to change the destiny of all
+      humankind!
+  - Key: Temp51
+    Chinese: "\u8BF7\u518D\u719F\u6089\u4E00\u4E9B\u4E0D\u540C\u7C7B\u578B\u91CD\u6784\u4F53\u7684\u5C55\u5F00\u65B9\u5F0F\u5427."
+    English: Please familiarize yourself with the expansion way of different types
+      of reconstructions.
+  - Key: Temp52
+    Chinese: "\u7559\u7ED9\u6211\u4EEC\u7684\u65F6\u95F4\u5DF2\u4E0D\u591A\u4E86,\u8BF7\u9AD8\u6548\u8D62\u4E0B\u80DC\u5229."
+    English: "There is not much time left! Let\u2019s win this fast!"
+  - Key: Temp53
+    Chinese: "\u5F00\u62D3\u7684\u91CE\u5FC3\u548C\u5BF9\u6781\u9650\u7684\u8FFD\u6C42\u6211\u4EEC\u4ECE\u672A\u505C\u6B62,\u6307\u6325\u5B98,\u8BF7\u7EE7\u7EED\u5427!"
+    English: Our greatest glory never falls, my commander. Please keep it up!

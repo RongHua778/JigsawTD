@@ -14,24 +14,23 @@ public class GameLevelInfo
 
 public class LevelManager : Singleton<LevelManager>
 {
-
+    [HideInInspector]public List<GameTileContent> GameContents;
     #region 基础保存
-    public GameLevelInfo[] GameLevels = default;
-
-    public int GameLevel { get => PlayerPrefs.GetInt("GameLevel", 0); set => PlayerPrefs.SetInt("GameLevel", Mathf.Clamp(value, 0, GameLevels.Length - 1)); }
+    [SerializeField] private GameLevelInfo[] GameLevels = default;
+    [SerializeField] int permitGameLevel = default;
+    public int MaxGameLevel => Mathf.Min(GameLevels.Length - 1, permitGameLevel);
+    public int GameLevel { get => PlayerPrefs.GetInt("GameLevel", 0); set => PlayerPrefs.SetInt("GameLevel", Mathf.Clamp(value, 0, MaxGameLevel)); }
     public int GameExp { get => PlayerPrefs.GetInt("GameExp", 0); set => PlayerPrefs.SetInt("GameExp", value); }
 
-    public Dictionary<string, bool> UnlockInfoDIC;
     public List<ContentAttribute> AllContent;
 
     public LevelAttribute[] StandardLevels = default;
-    //public LevelAttribute EndlessLevel = default;
     private Dictionary<int, LevelAttribute> LevelDIC;
 
     public int PremitDifficulty = default;
     public int PassDiifcutly
     {
-        get => PlayerPrefs.GetInt("MaxDifficulty", 0);
+        get => Mathf.Min(PremitDifficulty, PlayerPrefs.GetInt("MaxDifficulty", 0));
         set
         {
             if (value > PlayerPrefs.GetInt("MaxDifficulty", 0))
@@ -48,16 +47,6 @@ public class LevelManager : Singleton<LevelManager>
                 PlayerPrefs.SetInt("EndlessHighscore", value);
         }
     }
-
-    [SerializeField] private int maxDifficutly = default;
-    public int MaxDifficulty
-    {
-        get => maxDifficutly;
-        set => maxDifficutly = value;
-    }
-    [SerializeField] private int selectDifficulty = default;
-    public int SelectDiffculty { get => selectDifficulty; set => selectDifficulty = Mathf.Clamp(value, 0, PassDiifcutly); }
-
     public LevelAttribute CurrentLevel;
     #endregion
 
@@ -66,11 +55,11 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] bool UnlockAll = default;//测试用
     [Header("是否读取存档")]
     [SerializeField] bool NeedLoadGame = default;
+    [SerializeField] bool NeedLoadData = default;
     [Header("是否有未完成游戏")]
-    public bool HasLastGame;
+    public bool NeedSaveGame;
     public DataSave LastDataSave;
     public GameSave LastGameSave;
-    public List<GameTileContent> GameContents;
     #endregion
 
     public void Initialize()
@@ -83,8 +72,6 @@ public class LevelManager : Singleton<LevelManager>
         {
             LevelDIC.Add(level.Mode, level);
         }
-        SetUnlockAll(UnlockAll);
-
     }
 
     public LevelAttribute GetLevelAtt(int mode)
@@ -169,7 +156,21 @@ public class LevelManager : Singleton<LevelManager>
         }
     }
 
+    public GameLevelInfo GetLevelInfo(int level)
+    {
+        return GameLevels[level];
+    }
+
     //存档管理
+
+    public void StartNewGame(int modeID)
+    {
+        NeedSaveGame = true;
+        LastGameSave.ClearGame();
+        CurrentLevel = GetLevelAtt(modeID);
+        if (modeID != 0)
+            Game.Instance.Tutorial = false;
+    }
     private void LoadSaveData()
     {
         foreach (var item in AllContent)//根据存档解锁内容，如果不包含新内容，则默认锁定
@@ -192,26 +193,14 @@ public class LevelManager : Singleton<LevelManager>
         }
 
     }
-
-    private void SaveData()
+    private Dictionary<string, bool> SaveUnlockDIC()
     {
-        //解锁情况
-        UnlockInfoDIC = new Dictionary<string, bool>();
-        foreach (var item in AllContent)
+        Dictionary<string, bool> UnlockDIC = new Dictionary<string, bool>();
+        foreach (var item in AllContent)//根据存档解锁内容，如果不包含新内容，则默认锁定
         {
-            UnlockInfoDIC.Add(item.Name, item.isLock);
+            UnlockDIC.Add(item.Name, item.isLock);
         }
-        LastDataSave.UnlockInfoDIC = UnlockInfoDIC;
-    }
-
-    private void SaveGame()
-    {
-        if (GameContents.Count <= 0)
-            return;
-        LastGameSave.SaveRes = GameRes.SaveRes;
-        LastGameSave.SaveBluePrints = SaveAllBlueprints();
-        LastGameSave.SaveContents = SaveContens();
-
+        return UnlockDIC;
     }
 
     private List<ContentStruct> SaveContens()
@@ -224,6 +213,18 @@ public class LevelManager : Singleton<LevelManager>
             SaveContents.Add(contentStruct);
         }
         return SaveContents;
+    }
+
+    private List<EnemySequenceStruct> SaveSequences()
+    {
+        List<EnemySequenceStruct> EStructs = new List<EnemySequenceStruct>();
+        foreach (var sequences in WaveSystem.LevelSequence)
+        {
+            EnemySequenceStruct eStruct = new EnemySequenceStruct();
+            eStruct.SequencesList = sequences;
+            EStructs.Add(eStruct);
+        }
+        return EStructs;
     }
 
     private List<BlueprintStruct> SaveAllBlueprints()
@@ -250,6 +251,7 @@ public class LevelManager : Singleton<LevelManager>
 
     private void FirstGameData()
     {
+        LastDataSave = new DataSave();
         GameLevel = 0;
         GameExp = 0;
         foreach (var content in AllContent)
@@ -260,16 +262,9 @@ public class LevelManager : Singleton<LevelManager>
 
     private void LoadGameSave()
     {
-        if (!NeedLoadGame)
-            return;
-        if (LastGameSave.SaveContents != null)
+        if (LastGameSave.HasLastGame)
         {
             CurrentLevel = GetLevelAtt(LastGameSave.SaveRes.Mode);
-            HasLastGame = true;
-        }
-        else
-        {
-            HasLastGame = false;
         }
     }
 
@@ -279,65 +274,72 @@ public class LevelManager : Singleton<LevelManager>
         LoadByJson();
     }
 
-    public void ClearLastData()//结束一局游戏和重新开始时，调用
-    {
-        HasLastGame = false;
-        LastGameSave = new GameSave();
-        GameContents.Clear();
-    }
+
     private void SaveByJson()
     {
-        try
+        if (NeedLoadData)
         {
-            SaveData();
-            string filePath = Application.persistentDataPath + "/DataSave.json";
-            Debug.Log(filePath);
-            string saveJsonStr = JsonMapper.ToJson(LastDataSave);
-            StreamWriter sw = new StreamWriter(filePath);
-            sw.Write(saveJsonStr);
-            sw.Close();
-            Debug.Log("数据成功存档");
+            try
+            {
+                LastDataSave.SaveData(SaveUnlockDIC());
 
+                string filePath = Application.persistentDataPath + "/DataSave.json";
+                Debug.Log(filePath);
+                string saveJsonStr = JsonMapper.ToJson(LastDataSave);
+                StreamWriter sw = new StreamWriter(filePath);
+                sw.Write(saveJsonStr);
+                sw.Close();
+                Debug.Log("数据成功存档");
+
+            }
+            catch
+            {
+                Debug.LogWarning("数据存档失败");
+
+            }
         }
-        catch
+
+        if (NeedLoadGame)
         {
-            Debug.LogWarning("数据存档失败");
+            if (NeedSaveGame)
+                LastGameSave.SaveGame(SaveAllBlueprints(), GameRes.SaveRes, SaveContens(), SaveSequences());
+            else
+                LastGameSave.ClearGame();
+            GameContents.Clear();
 
+            string filePath2 = Application.persistentDataPath + "/GameSave.json";
+            Debug.Log(filePath2);
+            string saveJsonStr2 = JsonMapper.ToJson(LastGameSave);
+            StreamWriter sw2 = new StreamWriter(filePath2);
+            sw2.Write(saveJsonStr2);
+            sw2.Close();
+            Debug.Log("战斗成功存档");
+            //try
+            //{
+            //    LastGameSave.SaveGame(SaveAllBlueprints(), GameRes.SaveRes, SaveContens(), SaveSequences());
+
+            //    string filePath2 = Application.persistentDataPath + "/GameSave.json";
+            //    Debug.Log(filePath2);
+            //    string saveJsonStr2 = JsonMapper.ToJson(LastGameSave);
+            //    StreamWriter sw2 = new StreamWriter(filePath2);
+            //    sw2.Write(saveJsonStr2);
+            //    sw2.Close();
+            //    Debug.Log("战斗成功存档");
+
+            //}
+            //catch
+            //{
+            //    Debug.LogWarning("战斗存档失败");
+
+            //}
         }
-        SaveGame();
-        string filePath2 = Application.persistentDataPath + "/GameSave.json";
-        Debug.Log(filePath2);
-        string saveJsonStr2 = JsonMapper.ToJson(LastGameSave);
-        StreamWriter sw2 = new StreamWriter(filePath2);
-        sw2.Write(saveJsonStr2);
-        sw2.Close();
-        Debug.Log("战斗成功存档");
-        //try
-        //{
-        //    SaveGame();
-        //    string filePath2 = Application.persistentDataPath + "/GameSave.json";
-        //    Debug.Log(filePath2);
-        //    string saveJsonStr2 = JsonMapper.ToJson(LastGameSave);
-        //    StreamWriter sw2 = new StreamWriter(filePath2);
-        //    sw2.Write(saveJsonStr2);
-        //    sw2.Close();
-        //    Debug.Log("战斗成功存档");
-
-        //}
-        //catch
-        //{
-        //    Debug.LogWarning("战斗存档失败");
-
-        //}
-
-
 
     }
 
     private void LoadByJson()
     {
         string filePath = Application.persistentDataPath + "/DataSave.json";
-        if (File.Exists(filePath))
+        if (NeedLoadData && File.Exists(filePath))
         {
             try
             {
@@ -351,10 +353,9 @@ public class LevelManager : Singleton<LevelManager>
             }
             catch
             {
-                LastDataSave = new DataSave();
+                FirstGameData();
                 Debug.LogWarning("读取存档数据有错误");
             }
-
         }
         else
         {
@@ -363,7 +364,7 @@ public class LevelManager : Singleton<LevelManager>
         }
 
         string filePath2 = Application.persistentDataPath + "/GameSave.json";
-        if (File.Exists(filePath2))
+        if (NeedLoadGame && File.Exists(filePath2))
         {
             try
             {
@@ -387,17 +388,18 @@ public class LevelManager : Singleton<LevelManager>
             LastGameSave = new GameSave();
             Debug.Log("没有可读取战斗");
         }
+
+
     }
 
     public void SaveAll()
     {
         SaveByJson();
-        ClearLastData();
     }
 
 
-    private void OnApplicationQuit()
+    private void OnApplicationQuit()//游戏结算时退出存空档
     {
-        SaveByJson();
+        SaveAll();
     }
 }

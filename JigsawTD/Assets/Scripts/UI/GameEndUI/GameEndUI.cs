@@ -36,7 +36,7 @@ public class GameEndUI : IUserInterface
 
     public void SetGameResult(bool win)
     {
-        LevelManager.Instance.ClearLastData();//结算页面时，清理当前局保存数据
+        LevelManager.Instance.NeedSaveGame = false;
 
         gainExp = LevelManager.Instance.GainExp(GameRes.CurrentWave);
 

@@ -10,7 +10,7 @@ public class WaveSystem : IGameSystem
     [SerializeField] EnemyType TestType = default;
     public bool RunningSpawn = false;//是否正在生产敌人
 
-    public List<List<EnemySequence>> LevelSequence = new List<List<EnemySequence>>();
+    public static List<List<EnemySequence>> LevelSequence = new List<List<EnemySequence>>();
     LevelAttribute LevelAttribute;
 
 
@@ -71,8 +71,6 @@ public class WaveSystem : IGameSystem
     }
     public void LevelInitialize()
     {
-        LevelManager.Instance.LastGameSave.SaveSequences = new List<EnemySequenceStruct>();
-
         LevelSequence.Clear();
         float stage = 1;
         List<EnemySequence> sequences = null;
@@ -136,11 +134,10 @@ public class WaveSystem : IGameSystem
                 sequences = GenerateSpecificSequence(TestType, 50f, i);
             }
             LevelSequence.Add(sequences);
-            EnemySequenceStruct eSequence = new EnemySequenceStruct();
-            eSequence.SequencesList = sequences;
-            LevelManager.Instance.LastGameSave.SaveSequences.Add(eSequence);
         }
     }
+
+
 
 
     private List<EnemySequence> GenerateRandomSequence(int genres, float stage, int wave)

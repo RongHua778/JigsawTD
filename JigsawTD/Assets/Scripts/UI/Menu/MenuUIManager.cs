@@ -31,7 +31,7 @@ public class MenuUIManager : Singleton<MenuUIManager>
         m_TrapTips.Initialize();
         m_ConfirmPanel.Initialize();
         LevelManager.Instance.LoadGame();//每次进入菜单页，就读取一次存档
-        m_ContinueGameBtn.SetActive(LevelManager.Instance.HasLastGame);
+        m_ContinueGameBtn.SetActive(LevelManager.Instance.LastGameSave.HasLastGame);
 
     }
 
@@ -42,23 +42,6 @@ public class MenuUIManager : Singleton<MenuUIManager>
         m_UISetting.Release();
     }
 
-    public void GameUpdate()
-    {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            ShowMessage(GameMultiLang.GetTraduction("TEST1"));
-            LevelManager.Instance.SetUnlockAll(false);
-            LevelManager.Instance.PremitDifficulty = 0;
-            PlayerPrefs.DeleteAll();
-        }
-        if (Input.GetKeyDown(KeyCode.J))//解锁全内容
-        {
-            ShowMessage(GameMultiLang.GetTraduction("TEST2"));
-            LevelManager.Instance.SetUnlockAll(true);
-            LevelManager.Instance.PremitDifficulty = 6;
-            PlayerPrefs.SetInt("MaxDifficulty", 6);
-        }
-    }
 
     public void StartGameBtnClick()
     {
@@ -73,7 +56,10 @@ public class MenuUIManager : Singleton<MenuUIManager>
         Game.Instance.LoadScene(1);
     }
 
+    public void GameUpdate()
+    {
 
+    }
 
     public void TujianBtnClick()
     {

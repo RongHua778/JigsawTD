@@ -80,7 +80,7 @@ public class GameManager : Singleton<GameManager>
         //m_GuideUI.Initialize(m_FuncUI, m_MainUI, m_BluePrintShopUI, m_ShapeSelectUI);//教学系统UI
         //m_GuideUI.Initialize();//IuserInterface初始化
 
-        m_GuideGirlUI.Initialize(m_FuncUI, m_MainUI, m_BluePrintShopUI, m_ShapeSelectUI);
+        m_GuideGirlUI.Initialize(m_FuncUI, m_MainUI, m_BluePrintShopUI, m_CamControl);
         m_GuideGirlUI.Initialize();
 
         //设置操作流程
@@ -91,7 +91,7 @@ public class GameManager : Singleton<GameManager>
         wonState = new WonState(this);
 
         //读取存档
-        if (LevelManager.Instance.HasLastGame)
+        if (LevelManager.Instance.LastGameSave.HasLastGame)
         {
             GameRes.LoadSaveRes();
             m_WaveSystem.LoadSaveWave();
@@ -120,14 +120,9 @@ public class GameManager : Singleton<GameManager>
             m_FuncUI.PrepareForGuide();
             m_MainUI.PrepareForGuide();
             m_BluePrintShopUI.PrepareForGuide();
-            //m_GuideUI.Show();
-            m_GuideGirlUI.Show();
+            m_FuncUI.Hide();//因为Preparenextwave自动show了
         }
-        else
-        {
 
-            ScaleAndMove.CanControl = true;//默认为锁镜头
-        }
 
 
     }
@@ -285,14 +280,25 @@ public class GameManager : Singleton<GameManager>
 
     public void RestartGame()
     {
-        LevelManager.Instance.ClearLastData();
+        if (Game.Instance.OnTransition)
+            return;
+        LevelManager.Instance.LastGameSave.ClearGame();
         Game.Instance.LoadScene(1);
     }
 
     public void ReturnToMenu()
     {
+        if (Game.Instance.OnTransition)
+            return;
         LevelManager.Instance.SaveAll();
         Game.Instance.LoadScene(0);
+    }
+
+    public void QuitGame()
+    {
+        if (Game.Instance.OnTransition)
+            return;
+        Game.Instance.QuitGame();
     }
     #endregion
 

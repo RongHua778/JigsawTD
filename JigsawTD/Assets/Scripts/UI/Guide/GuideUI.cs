@@ -42,10 +42,7 @@ public class GuideUI : IUserInterface
             GuideTrigger(0);
             m_FuncUI.Hide();//因为Preparenextwave自动show了
         }
-        else
-        {
-            ScaleAndMove.CanControl = true;
-        }
+        
     }
 
 
@@ -214,14 +211,12 @@ public class GuideUI : IUserInterface
                 //m_ShopUI.AddBluePrint(blueprint, true);
                 m_ShopUI.RemoveGrid(BluePrintShopUI.ShopBluePrints[0]);//移除1个
 
-                ScaleAndMove.MoveTurorial = true;
-                ScaleAndMove.CanControl = true;
+
 
                 dragGuide.SetActive(true);
                 break;
             case 2://第二段对话结束，鼠标缩放操作
-                ScaleAndMove.SizeTutorial = true;
-                ScaleAndMove.CanControl = true;
+
 
                 wheelGuide.SetActive(true);
                 break;

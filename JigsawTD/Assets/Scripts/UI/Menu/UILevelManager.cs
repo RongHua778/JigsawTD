@@ -15,11 +15,22 @@ public class UILevelManager : IUserInterface
     [SerializeField] Text endlessUnlockText = default;
     [SerializeField] GameObject endlessStartBtnObj = default;
 
+    private int maxDifficulty => LevelManager.Instance.PassDiifcutly;
+    private int selectDifficulty;
+
+    public int SelectDifficulty
+    {
+        get => selectDifficulty;
+        set
+        {
+            selectDifficulty = Mathf.Clamp(value, 0, maxDifficulty);
+        }
+    }
 
     public override void Initialize()
     {
         base.Initialize();
-        LevelManager.Instance.SelectDiffculty = LevelManager.Instance.PassDiifcutly;
+        SelectDifficulty = LevelManager.Instance.PassDiifcutly;
         m_Anim = this.GetComponent<Animator>();
         tutorialCheck.isOn = false;
         endlessHighScore.text = LevelManager.Instance.EndlessHighScore + GameMultiLang.GetTraduction("WAVE");
@@ -28,18 +39,15 @@ public class UILevelManager : IUserInterface
     {
         DifficultyBtnClick(0);
         //是否已解锁无尽模式
-        endlessStartBtnObj.SetActive(LevelManager.Instance.PassDiifcutly > 4);
-        endlessUnlockText.gameObject.SetActive(LevelManager.Instance.PassDiifcutly <= 4);
+        endlessStartBtnObj.SetActive(maxDifficulty > 4);
+        endlessUnlockText.gameObject.SetActive(maxDifficulty <= 4);
     }
 
     public void StandardModeStart()
     {
-        if (!gameStart)
+        if (!Game.Instance.OnTransition)
         {
-            LevelManager.Instance.HasLastGame = false;
-            LevelManager.Instance.CurrentLevel = LevelManager.Instance.GetLevelAtt(LevelManager.Instance.SelectDiffculty);
-            if (LevelManager.Instance.SelectDiffculty >= 1)
-                Game.Instance.Tutorial = false;
+            LevelManager.Instance.StartNewGame(SelectDifficulty);
             gameStart = true;
             Game.Instance.LoadScene(1);
         }
@@ -47,10 +55,9 @@ public class UILevelManager : IUserInterface
 
     public void EndlessModeStart()
     {
-        if (!gameStart)
+        if (!Game.Instance.OnTransition)
         {
-            LevelManager.Instance.HasLastGame = false;
-            LevelManager.Instance.CurrentLevel = LevelManager.Instance.GetLevelAtt(11);
+            LevelManager.Instance.StartNewGame(11);
             gameStart = true;
             Game.Instance.LoadScene(1);
         }
@@ -60,9 +67,9 @@ public class UILevelManager : IUserInterface
 
     public void DifficultyBtnClick(int count)
     {
-        LevelManager.Instance.SelectDiffculty += count;
-        difficultyInfo_Txt.text = GameMultiLang.GetTraduction("DIFFICULTY" + LevelManager.Instance.SelectDiffculty);
-        if (LevelManager.Instance.SelectDiffculty == 0)//设置教程显示
+        SelectDifficulty += count;
+        difficultyInfo_Txt.text = GameMultiLang.GetTraduction("DIFFICULTY" + SelectDifficulty);
+        if (SelectDifficulty == 0)//设置教程显示
         {
             difficultyTxt.text = GameMultiLang.GetTraduction("TUTORIAL");
             tutorialCheck.gameObject.SetActive(true);
@@ -70,7 +77,7 @@ public class UILevelManager : IUserInterface
         }
         else
         {
-            difficultyTxt.text = GameMultiLang.GetTraduction("DIFFICULTY") + " " + LevelManager.Instance.SelectDiffculty.ToString();
+            difficultyTxt.text = GameMultiLang.GetTraduction("DIFFICULTY") + " " + SelectDifficulty.ToString();
             tutorialCheck.isOn = true;
             tutorialCheck.gameObject.SetActive(false);
         }

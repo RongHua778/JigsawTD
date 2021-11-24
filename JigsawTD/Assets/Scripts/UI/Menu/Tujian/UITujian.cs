@@ -6,6 +6,7 @@ using System.Linq;
 
 public class UITujian : IUserInterface
 {
+    [SerializeField] private bool isLock = default;
     private Animator m_Anim;
     [SerializeField] TipsElementConstruct[] elementConstructs = default;
     List<int> skillPreviewElements;
@@ -34,6 +35,11 @@ public class UITujian : IUserInterface
 
     public override void Show()
     {
+        if (isLock)
+        {
+            MenuUIManager.Instance.ShowMessage(GameMultiLang.GetTraduction("TEST3"));
+            return;
+        }
         base.Show();
         m_Anim.SetBool("OpenLevel", true);
         gameLevelPrefab.SetData();

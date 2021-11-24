@@ -286,6 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c51ce8f2b50464540adc985be2bf073a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameContents: []
   GameLevels:
   - ExpRequire: 400
     UnlockItems:
@@ -367,12 +368,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: aa5a923b0cb87d348914e228fc353f67, type: 2}
   - {fileID: 11400000, guid: b6403761d56b0914599f3e8e647a50b7, type: 2}
   PremitDifficulty: 6
-  maxDifficutly: 6
-  selectDifficulty: 0
   CurrentLevel: {fileID: 11400000, guid: 00b992198a245254bbe331c2618239cd, type: 2}
-  UnlockAll: 1
+  UnlockAll: 0
   NeedLoadGame: 1
-  HasLastGame: 0
+  NeedLoadData: 1
+  NeedSaveGame: 0
   LastGameSave:
     SaveBluePrints: []
     SaveRes:
@@ -395,7 +395,6 @@ MonoBehaviour:
       DrawThisTurn: 0
     SaveContents: []
     SaveSequences: []
-  GameContents: []
 --- !u!114 &3979959846567427947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -508,6 +507,10 @@ PrefabInstance:
       propertyPath: defaultLang
       value: ch
       objectReference: {fileID: 0}
+    - target: {fileID: 114177733606087622, guid: fdce7a722c35906468292c084d7fc8c5, type: 3}
+      propertyPath: languageData
+      value: 
+      objectReference: {fileID: 11400000, guid: af6bd4cff502e3d4aa7ddffcc178e9a6, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdce7a722c35906468292c084d7fc8c5, type: 3}
 --- !u!4 &3975025171177546827 stripped

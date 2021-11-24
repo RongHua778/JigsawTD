@@ -12,7 +12,7 @@ public class Game : Singleton<Game>
     public Animator transition;
     public float transitionTime = 0.8f;
     public bool Tutorial = false;
-
+    public bool OnTransition=false;
 
     protected override void Awake()
     {
@@ -35,6 +35,7 @@ public class Game : Singleton<Game>
                 break;
             case 1://battle
                 LevelManager.Instance.LoadGame();//直接从战斗场景开始，直接读取存档
+                LevelManager.Instance.NeedSaveGame = true;
                 m_SceneStateController.SetState(new BattleState(m_SceneStateController));
                 break;
         }
@@ -44,7 +45,21 @@ public class Game : Singleton<Game>
     private void Update()
     {
         m_SceneStateController.StateUpdate();
-
+        //test
+        //if (Input.GetKeyDown(KeyCode.K))
+        //{
+        //    Debug.LogWarning(GameMultiLang.GetTraduction("TEST1"));
+        //    LevelManager.Instance.SetUnlockAll(false);
+        //    LevelManager.Instance.PremitDifficulty = 0;
+        //    PlayerPrefs.DeleteAll();
+        //}
+        //if (Input.GetKeyDown(KeyCode.J))//解锁全内容
+        //{
+        //    Debug.LogWarning(GameMultiLang.GetTraduction("TEST2"));
+        //    LevelManager.Instance.SetUnlockAll(true);
+        //    LevelManager.Instance.PremitDifficulty = 6;
+        //    PlayerPrefs.SetInt("MaxDifficulty", 6);
+        //}
     }
 
 
@@ -63,10 +78,12 @@ public class Game : Singleton<Game>
 
     IEnumerator Transition(int index)
     {
+        OnTransition = true;
         transition.SetTrigger("Start");
         m_SceneStateController.EndState();
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(index, LoadSceneMode.Single);
+        OnTransition = false;
         yield return SceneManager.LoadSceneAsync(index);
         switch (index)
         {
@@ -80,7 +97,6 @@ public class Game : Singleton<Game>
                 break;
         }
         transition.SetTrigger("End");
-
     }
     #endregion
 

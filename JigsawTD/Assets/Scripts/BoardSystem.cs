@@ -409,7 +409,7 @@ public class BoardSystem : IGameSystem
             return;
         if (GameManager.Instance.OperationState.StateName == StateName.WaveState)
         {
-            GameManager.Instance.ShowMessage(GameMultiLang.GetTraduction("NOTBATTLESTATE"));
+            GameManager.Instance.ShowMessage(GameMultiLang.GetTraduction("NOTBUILDSTATE"));
             return;
         }
         if (StaticData.GetNodeWalkable(SelectingTile))

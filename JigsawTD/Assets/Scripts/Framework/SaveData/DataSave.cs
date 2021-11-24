@@ -7,19 +7,42 @@ using System;
 public class DataSave
 {
     public Dictionary<string, bool> UnlockInfoDIC;
+
+    public void SaveData(Dictionary<string, bool> unlockDic)
+    {
+        UnlockInfoDIC = unlockDic;
+    }
 }
 
 [Serializable]
 public class GameSave
 {
-    public List<BlueprintStruct> SaveBluePrints;
+    public bool HasLastGame => SaveContents != null && SaveContents.Count > 0;
+
+    public List<BlueprintStruct> SaveBluePrints=new List<BlueprintStruct>();
 
     public GameResStruct SaveRes;
 
     //¡Ÿ ±”Œœ∑±£¥Ê
-    public List<ContentStruct> SaveContents;
+    public List<ContentStruct> SaveContents = new List<ContentStruct>();
 
-    public List<EnemySequenceStruct> SaveSequences;
+    public List<EnemySequenceStruct> SaveSequences=new List<EnemySequenceStruct>();
+
+    public void ClearGame()
+    {
+        SaveBluePrints.Clear();
+        SaveRes = null;
+        SaveContents.Clear();
+        SaveSequences.Clear();
+    }
+
+    public void SaveGame(List<BlueprintStruct> saveBlueprints, GameResStruct saveRes, List<ContentStruct> saveContents, List<EnemySequenceStruct> saveSequences)
+    {
+        SaveBluePrints = saveBlueprints;
+        SaveRes = saveRes;
+        SaveContents = saveContents;
+        SaveSequences = saveSequences;
+    }
 }
 
 [Serializable]
