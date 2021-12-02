@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Lanuguage;
+using Sirenix.OdinInspector;
 
 
 // Created by: Hamza Herbou        (mobile games developer)
@@ -30,7 +31,13 @@ public class GameMultiLang : MonoBehaviour
 
 	}
 
+	[Button]
+	private void SetLanguage()
+    {
+		PlayerPrefs.SetString("_language", defaultLang);
+	}
 
+	[Button]
 	public void LoadLanguage ()
 	{
 		if (Fields == null)
@@ -68,13 +75,12 @@ public class GameMultiLang : MonoBehaviour
 		LoadLanguageData();
 	}
 
-
     private void LoadLanguageData()
     {
         switch (PlayerPrefs.GetInt("_language_index", 0))
         {
             case 0:
-				for (int i = 0; i < languageData.dataArray.Length; i++)
+				for (int i = 0; i < languageData.dataArray.Count; i++)
 				{
 					if (Fields.ContainsKey(languageData.dataArray[i].Key))
 					{
@@ -85,7 +91,7 @@ public class GameMultiLang : MonoBehaviour
 				}
 				break;
             case 1:
-				for (int i = 0; i < languageData.dataArray.Length; i++)
+				for (int i = 0; i < languageData.dataArray.Count; i++)
 				{
                     if (Fields.ContainsKey(languageData.dataArray[i].Key))
                     {
@@ -108,6 +114,7 @@ public class GameMultiLang : MonoBehaviour
 
 		return Fields [key];
 	}
+
 
 
 }

@@ -35,7 +35,7 @@ public class ScaleAndMove : IGameSystem
     float CamInitialSize;
     public bool MoveTurorial = false;
     public bool SizeTutorial = false;
-    public bool CanControl = false;
+    public bool CanControl = true;
     //
     Vector3 speedHorizon = Vector3.zero;
     Vector3 speedVertical = Vector3.zero;
@@ -84,7 +84,6 @@ public class ScaleAndMove : IGameSystem
                 MoveTurorial = false;
                 CamMovement = Vector2.zero;
                 cam.transform.DOMove(camInitPos, 1f);
-                CanControl = false;
                 GameEvents.Instance.TutorialTrigger(TutorialType.MouseMove);
             }
         }

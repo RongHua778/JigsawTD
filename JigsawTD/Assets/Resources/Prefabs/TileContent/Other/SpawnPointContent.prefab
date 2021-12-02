@@ -45,6 +45,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
+  m_ContentStruct:
+    ContentType: 0
+    Pos: {x: 0, y: 0}
+    Direction: 0
+    ContentName: 
+    Element: 0
+    Quality: 0
+    ElementSlotCount: 0
+    InitModifies: []
   needReset: 0
   Important: 0
 --- !u!1001 &1104040006815339739
@@ -57,6 +66,10 @@ PrefabInstance:
     - target: {fileID: 164810, guid: 25439b931190fde42bcaee3a98082844, type: 3}
       propertyPath: m_Name
       value: SpawnPoint 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 173600, guid: 25439b931190fde42bcaee3a98082844, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 479442, guid: 25439b931190fde42bcaee3a98082844, type: 3}
       propertyPath: m_RootOrder

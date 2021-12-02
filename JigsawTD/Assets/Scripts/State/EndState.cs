@@ -12,7 +12,7 @@ public class EndState : BattleOperationState
 
     public override IEnumerator EnterState()
     {
-        Sound.Instance.PlayBg("preparing");
+        Sound.Instance.PlayBg("Music_Preparing");
         yield return null;
     }
 }

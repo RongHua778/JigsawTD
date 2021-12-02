@@ -33,6 +33,9 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private EnemyTips m_EnemyTips = default;
     [SerializeField] private UnlockBonusTips m_BonusTips = default;
 
+    [Header("其他")]
+    [SerializeField] private RectMaskController m_RectMaskController = default;
+    [SerializeField] private EventPermeater m_EventPermeater = default;
 
     [Header("集合")]
     public GameBehaviorCollection enemies = new GameBehaviorCollection();
@@ -57,7 +60,7 @@ public class GameManager : Singleton<GameManager>
         ConstructHelper.Initialize();
         //初始化系统
         //初始化全局数据
-        GameRes.Initialize(m_MainUI, m_FuncUI, m_WaveSystem,m_BluePrintShopUI);
+        GameRes.Initialize(m_MainUI, m_FuncUI, m_WaveSystem, m_BluePrintShopUI);
 
         m_MainUI.Initialize();//主界面顶部UI//要在wavesystem之前，因为敌人入侵事件，需要先掉血再判定下一波
         m_WaveSystem.Initialize();//波次系统
@@ -80,8 +83,7 @@ public class GameManager : Singleton<GameManager>
         //m_GuideUI.Initialize(m_FuncUI, m_MainUI, m_BluePrintShopUI, m_ShapeSelectUI);//教学系统UI
         //m_GuideUI.Initialize();//IuserInterface初始化
 
-        m_GuideGirlUI.Initialize(m_FuncUI, m_MainUI, m_BluePrintShopUI, m_CamControl);
-        m_GuideGirlUI.Initialize();
+        m_GuideGirlUI.Initialize(m_FuncUI, m_MainUI, m_BluePrintShopUI);
 
         //设置操作流程
         buildingState = new BuildingState(this, m_BoardSystem);
@@ -117,12 +119,16 @@ public class GameManager : Singleton<GameManager>
         //初始化教程
         if (Game.Instance.Tutorial)
         {
-            m_FuncUI.PrepareForGuide();
-            m_MainUI.PrepareForGuide();
+            m_FuncUI.Hide();
+            m_MainUI.Hide();
             m_BluePrintShopUI.PrepareForGuide();
-            m_FuncUI.Hide();//因为Preparenextwave自动show了
+            m_GuideGirlUI.PrepareTutorial();
         }
-
+        else
+        {
+            m_FuncUI.Show();
+            m_MainUI.Show();
+        }
 
 
     }
@@ -205,6 +211,7 @@ public class GameManager : Singleton<GameManager>
             {
                 ((TurretContent)turret).Strategy.StartTurnSkills();
             }
+            GameEvents.Instance.TutorialTrigger(TutorialType.NextWaveBtnClick);
         }
         //参数设置
 
@@ -325,7 +332,7 @@ public class GameManager : Singleton<GameManager>
         m_BluePrintShopUI.CheckAllBluePrint();
         m_BoardSystem.SetTutorialPoss(false);//关闭显示强制摆放位置
         GameRes.ForcePlace = null;
-        GameRes.PreSetShape = null;
+        GameRes.PreSetShape = new ShapeInfo[3];
         //新手引导
         GameEvents.Instance.TutorialTrigger(TutorialType.ConfirmShape);
     }
@@ -549,6 +556,31 @@ public class GameManager : Singleton<GameManager>
     public void AddtoWishList()
     {
         Application.OpenURL("https://store.steampowered.com/app/1664670/_Refactor");
+    }
+
+    public void SetCamMovable(bool value)
+    {
+        m_CamControl.CanControl = value;
+    }
+
+    public void SetSizeTutorial(bool value)
+    {
+        m_CamControl.SizeTutorial = value;
+    }
+
+    public void SetMoveTutorial(bool value)
+    {
+        m_CamControl.MoveTurorial = value;
+    }
+
+    public void SetRectMaskObj(RectTransform obj)
+    {
+        m_RectMaskController.SetTarget(obj);
+    }
+
+    public void SetEventPermeaterTarget(GameObject obj)
+    {
+        m_EventPermeater.target = obj;
     }
 
     #endregion

@@ -62,7 +62,7 @@ public abstract class GameTile : TileBase
 
     public void SetTileColor(Color colorToSet)
     {
-        foreach(var sr in TileRenderers)
+        foreach (var sr in TileRenderers)
         {
             sr.color = colorToSet;
         }
@@ -136,9 +136,9 @@ public abstract class GameTile : TileBase
         transform.rotation = Quaternion.identity;
     }
 
-    public void SetRandomRotation()
+    public void SetRandomRotation(int dir = -1)
     {
-        int randomDir = UnityEngine.Random.Range(0, 4);
+        int randomDir = dir == -1 ? UnityEngine.Random.Range(0, 4) : dir;
         transform.rotation = DirectionExtensions.GetDirection(randomDir).GetRotation();
         CorrectRotation();
     }

@@ -5,10 +5,8 @@ using UnityEngine.UI;
 
 public class FuncUI : IUserInterface
 {
-    public GameObject DrawBtnObj;
-    public GameObject LuckyObj;
-    public GameObject NextBtnObj;
-    public GameObject LevelBtnObj;
+    static Animator BuildBtnAnim, SystemBtnAnim, NextWaveBtnAnim;
+
 
     [SerializeField] LevelInfoPanel m_LevelInfoPanel = default;
 
@@ -17,7 +15,7 @@ public class FuncUI : IUserInterface
     [SerializeField] Text SystemLevelTxt = default;
     [SerializeField] Text DiscountTxt = default;
     [SerializeField] InfoBtn m_DrawInfo = default;
-    Animator m_Anim;
+    //Animator m_Anim;
 
     public float DiscountRate { 
         set
@@ -63,29 +61,44 @@ public class FuncUI : IUserInterface
 
     public override void Initialize()
     {
+        base.Initialize();
         m_LevelInfoPanel.Initialize();
         m_LevelInfoPanel.SetInfo();
-        m_Anim = this.GetComponent<Animator>();
+        BuildBtnAnim = m_RootUI.transform.Find("BuildBtn").GetComponent<Animator>();
+        NextWaveBtnAnim = m_RootUI.transform.Find("NextWave").GetComponent<Animator>();
+        SystemBtnAnim = m_RootUI.transform.Find("System").GetComponent<Animator>();
     }
 
-
-
-    public void PrepareForGuide()
-    {
-        DrawBtnObj.SetActive(false);
-        NextBtnObj.SetActive(false);
-        LuckyObj.SetActive(false);
-        LevelBtnObj.SetActive(false);
-    }
 
     public override void Show()
     {
-        m_Anim.SetBool("Show", true);
+        BuildBtnAnim.SetBool("Show", true);
+        NextWaveBtnAnim.SetBool("Show", true);
+        SystemBtnAnim.SetBool("Show", true);
+
     }
 
     public override void Hide()
     {
-        m_Anim.SetBool("Show", false);
+        BuildBtnAnim.SetBool("Show", false);
+        NextWaveBtnAnim.SetBool("Show", false);
+        SystemBtnAnim.SetBool("Show", false);
+    }
+
+    public static void PlayFuncUIAnim(int partID,string key,bool value)
+    {
+        switch (partID)
+        {
+            case 0:
+                BuildBtnAnim.SetBool(key, value);
+                break;
+            case 1:
+                NextWaveBtnAnim.SetBool(key, value);
+                break;
+            case 2:
+                SystemBtnAnim.SetBool(key, value);
+                break;
+        }
     }
 
 

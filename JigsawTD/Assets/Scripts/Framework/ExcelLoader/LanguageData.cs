@@ -11,7 +11,10 @@ namespace Lanuguage
         public string Key;
         public string Chinese;
         public string English;
+
+
     }
+
 
 }
 

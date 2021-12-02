@@ -17,14 +17,15 @@ namespace EditorTool
 
     public class ExcelTool
     {
-        public static LanguageData[] CreateLanguageArrayWithExcel(string filePath)
+        public static List<LanguageData> CreateLanguageArrayWithExcel(string filePath)
         {
 
+            List<LanguageData> dataList = new List<LanguageData>();
             int columnNum = 0, rowNum = 0;
             DataRowCollection collect = ReadExcel(filePath, ref columnNum, ref rowNum);
 
             //根据excel的定义，第二行开始才是数据
-            LanguageData[] array = new LanguageData[rowNum - 1];
+            //LanguageData[] array = new LanguageData[rowNum - 1];
             for (int i = 1; i < rowNum; i++)
             {
                 LanguageData item = new LanguageData();
@@ -32,9 +33,9 @@ namespace EditorTool
                 item.Key = collect[i][0].ToString();
                 item.Chinese = collect[i][1].ToString();
                 item.English = collect[i][2].ToString();
-                array[i - 1] = item;
+                dataList.Add(item);
             }
-            return array;
+            return dataList;
         }
 
         static DataRowCollection ReadExcel(string filePath, ref int columnNum, ref int rowNum)
@@ -57,22 +58,50 @@ namespace EditorTool
         [MenuItem("CustomEditor/CreateItemAsset")]
         public static void CreateItemAsset()
         {
-            LanguageManager manager = ScriptableObject.CreateInstance<LanguageManager>();
-            //赋值
-            manager.dataArray = ExcelTool.CreateLanguageArrayWithExcel(ExcelConfig.excelsFolderPath + "LanguageExcel.xlsx");
+            //LanguageManager manager;
+            //manager = Resources.Load<LanguageManager>("DataAssets/Language");
+            //if (manager == null)
+            //{
+            //    manager = ScriptableObject.CreateInstance<LanguageManager>();
+            //    if (!Directory.Exists(ExcelConfig.assetPath))
+            //    {
+            //        Directory.CreateDirectory(ExcelConfig.assetPath);
+            //    }
 
-            //确保文件夹存在
+            //    //asset文件的路径 要以"Assets/..."开始，否则CreateAsset会报错
+            //    string assetPath = string.Format("{0}{1}.asset", ExcelConfig.assetPath, "Language");
+            //    //生成一个Asset文件
+            //    AssetDatabase.CreateAsset(manager, assetPath);
+            //    AssetDatabase.SaveAssets();
+            //    AssetDatabase.Refresh();
+            //}
+            bool hasAsset = false;
+            LanguageManager manager;
+            manager = Resources.Load<LanguageManager>("DataAssets/Language");
+            if (manager == null)
+                manager = ScriptableObject.CreateInstance<LanguageManager>();
+            else
+                hasAsset = true;
             if (!Directory.Exists(ExcelConfig.assetPath))
             {
                 Directory.CreateDirectory(ExcelConfig.assetPath);
             }
+            //赋值要在CreateAsset之前，否则重启会导致数据丢失
+            manager.dataArray = ExcelTool.CreateLanguageArrayWithExcel(ExcelConfig.excelsFolderPath + "LanguageExcel.xlsx");
 
-            //asset文件的路径 要以"Assets/..."开始，否则CreateAsset会报错
-            string assetPath = string.Format("{0}{1}.asset", ExcelConfig.assetPath, "Language");
-            //生成一个Asset文件
-            AssetDatabase.CreateAsset(manager, assetPath);
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
+            if (!hasAsset)
+            {
+                //asset文件的路径 要以"Assets/..."开始，否则CreateAsset会报错
+                string assetPath = string.Format("{0}{1}.asset", ExcelConfig.assetPath, "Language");
+                //生成一个Asset文件
+                AssetDatabase.CreateAsset(manager, assetPath);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
+            }
+
+            //赋值
+            //manager.dataArray = ExcelTool.CreateLanguageArrayWithExcel(ExcelConfig.excelsFolderPath + "LanguageExcel.xlsx");
+
 
         }
     }

@@ -44,7 +44,7 @@ public class TileSelect : MonoBehaviour
         GameManager.Instance.PreviewComposition(false);
         GameManager.Instance.SelectShape();
         GameManager.Instance.HideTips();
-
+        GameEvents.Instance.TutorialTrigger(TutorialType.SelectShape);
 
     }
 

@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class UILevelManager : IUserInterface
 {
-    private bool gameStart = false;
     [SerializeField] UIBattleSet m_UIBattleSet = default;
     [SerializeField] Text difficultyInfo_Txt = default;
     private Animator m_Anim;
@@ -48,7 +47,6 @@ public class UILevelManager : IUserInterface
         if (!Game.Instance.OnTransition)
         {
             LevelManager.Instance.StartNewGame(SelectDifficulty);
-            gameStart = true;
             Game.Instance.LoadScene(1);
         }
     }
@@ -58,7 +56,6 @@ public class UILevelManager : IUserInterface
         if (!Game.Instance.OnTransition)
         {
             LevelManager.Instance.StartNewGame(11);
-            gameStart = true;
             Game.Instance.LoadScene(1);
         }
     }

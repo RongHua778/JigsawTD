@@ -1,6 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
+
 public enum Quality
 {
     level1, Level2, level3, Level4, level5
@@ -11,7 +12,8 @@ public class TestWindow : EditorWindow
     string moneyGet = "10000";
     //string element = "0";
     Quality quality = Quality.level1;
-    ElementType element = ElementType.GOLD;
+
+    public ElementType element = ElementType.GOLD;
 
     string turretName = "CONSTRUCTOR";
     ElementType e1 = ElementType.GOLD;
@@ -27,6 +29,7 @@ public class TestWindow : EditorWindow
 
     private void OnGUI()
     {
+        
         GUILayout.BeginHorizontal();
         GUILayout.Label("½ðÇ®");
         moneyGet = EditorGUILayout.TextField("", moneyGet, GUILayout.Width(80));

@@ -16,7 +16,8 @@ public enum TutorialType
     ConfirmShape,
     ShopBtnClick,
     ElementBenefitEnter,
-    RefactorBtnClick
+    RefactorBtnClick,
+    SelectShape
 }
 
 public enum TempWordType

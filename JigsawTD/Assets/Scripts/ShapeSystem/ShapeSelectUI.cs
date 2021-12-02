@@ -21,8 +21,8 @@ public class ShapeSelectUI : IUserInterface//控制形状生成
 
         for (int i = 0; i < tileSelects.Length; i++)
         {
-            TileShape shape = GameRes.PreSetShape != null ?
-                ConstructHelper.GetTutorialShape(GameRes.PreSetShape) : ConstructHelper.GetRandomShapeByLevel();
+            TileShape shape = GameRes.PreSetShape[i] != null ?
+                ConstructHelper.GetTutorialShape(GameRes.PreSetShape[i]) : ConstructHelper.GetRandomShapeByLevel();
             tileSelects[i].InitializeDisplay(i, shape);
         }
 

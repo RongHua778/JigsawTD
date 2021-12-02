@@ -51,8 +51,6 @@ public class LevelManager : Singleton<LevelManager>
     #endregion
 
     #region 临时游戏保存
-    [Header("是否解锁全内容")]
-    [SerializeField] bool UnlockAll = default;//测试用
     [Header("是否读取存档")]
     [SerializeField] bool NeedLoadGame = default;
     [SerializeField] bool NeedLoadData = default;

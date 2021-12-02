@@ -40,7 +40,7 @@ PlayerSettings:
     width: 1
     height: 1
   m_SplashScreenLogos:
-  - logo: {fileID: 21300000, guid: 56d0e50ca8b6c9a4bb0207cd3eba7307, type: 3}
+  - logo: {fileID: 21300000, guid: 7f81778c545297f46b4918403382fe2a, type: 3}
     duration: 2
   - logo: {fileID: 21300000, guid: 06285d9bba8ae32439deee5b1578bcfa, type: 3}
     duration: 2
@@ -658,7 +658,7 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
-    1: EnableDebug
+    1: EnableDebug;ODIN_INSPECTOR;ODIN_INSPECTOR_3
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

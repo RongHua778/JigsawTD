@@ -18,6 +18,7 @@ public class WaveSystem : IGameSystem
     public List<EnemySequence> RunningSequence { get => runningSequence; set => runningSequence = value; }
 
     [SerializeField] BossComeAnim bossWarningUIAnim = default;
+    [SerializeField] GoldKeeperAnim goldKeeperUIAnim = default;
 
     public override void Initialize()
     {
@@ -25,6 +26,7 @@ public class WaveSystem : IGameSystem
         GameEvents.Instance.onEnemyReach += EnemyReach;
         GameEvents.Instance.onEnemyDie += EnemyDie;
         bossWarningUIAnim.Initialize();
+        goldKeeperUIAnim.Initialize();
     }
 
     public override void Release()
@@ -184,6 +186,10 @@ public class WaveSystem : IGameSystem
             EnemyAttribute attribute = StaticData.Instance.EnemyFactory.Get(RunningSequence[0].EnemyType);
             attribute.isLock = false;//见到就解锁BOSS
             bossWarningUIAnim.Show();
+        }
+        else if(RunningSequence[0].EnemyType==EnemyType.GoldKeeper)
+        {
+            goldKeeperUIAnim.Show();
         }
     }
 

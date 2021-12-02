@@ -46,7 +46,7 @@ public class TileShape : MonoBehaviour
 
 
     //在shape上面加上塔
-    public void SetTile(GameTile specialTile, int posID = -1)
+    public void SetTile(GameTile specialTile, int posID = -1, int dir = -1)
     {
         if (specialTile.Content.ContentType == GameTileContentType.ElementTurret)
         {
@@ -68,7 +68,7 @@ public class TileShape : MonoBehaviour
             tile = specialTile;
             ElementTurret turret = tile.Content as ElementTurret;
             turretNameTxt.text = StaticData.FormElementName(turret.Strategy.Attribute.element, turret.Strategy.Quality);
-            SetTilePos(tile, turretSlot.transform.position);
+            SetTilePos(tile, turretSlot.transform.position, dir);
             tilePos.Remove(turretSlot);
 
             for (int i = 0; i < tilePos.Count; i++)
@@ -81,10 +81,10 @@ public class TileShape : MonoBehaviour
 
     }
 
-    private void SetTilePos(GameTile tile, Vector3 pos)
+    private void SetTilePos(GameTile tile, Vector3 pos, int dir=-1)
     {
         tile.transform.position = pos;
-        tile.SetRandomRotation();
+        tile.SetRandomRotation(dir);
         tile.transform.SetParent(this.transform);
         tile.m_DraggingShape = draggingShape;
         tiles.Add(tile);

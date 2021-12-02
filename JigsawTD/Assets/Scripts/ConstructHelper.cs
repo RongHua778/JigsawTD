@@ -144,7 +144,7 @@ public static class ConstructHelper
     {
         TileShape shape = m_ShapeFactory.GetShape(shapeInfo.ShapeType);
         GameTile tile = GetElementTurret(shapeInfo.Element, shapeInfo.Quality);
-        shape.SetTile(tile, shapeInfo.TurretPos);
+        shape.SetTile(tile, shapeInfo.TurretPos, shapeInfo.TurretDir);
         return shape;
     }
 

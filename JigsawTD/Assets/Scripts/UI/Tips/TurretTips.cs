@@ -41,9 +41,6 @@ public class TurretTips : TileTips
 
     //≈‰∑Ωtips
     [SerializeField] GameObject BluePrintArea = default;
-    [SerializeField] GameObject BuyBtn = default;
-
-
 
     [SerializeField] TurretInfoSetter QualitySetter = default;
     //infoBtn

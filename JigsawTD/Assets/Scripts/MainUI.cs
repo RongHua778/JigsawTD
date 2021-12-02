@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
 
 public class MainUI : IUserInterface
 {
-    public GameObject LifeObj;
-    public GameObject MoneyObj;
-    public GameObject TopLeftArea = default;
-    public GameObject WaveObj;
-    private Animator m_Anim;
+
+    static Animator CoinAnim, WaveAnim, LifeAnim;
+
     //UI
     [SerializeField] Image GameSpeedImg = default;
     [SerializeField] Text PlayerLifeTxt = default;
@@ -71,9 +70,14 @@ public class MainUI : IUserInterface
 
     public override void Initialize()
     {
+        base.Initialize();
         GameSpeed = 1;
+        CoinAnim = m_RootUI.transform.Find("Coin").GetComponent<Animator>();
+        LifeAnim = m_RootUI.transform.Find("Life").GetComponent<Animator>();
+        WaveAnim = m_RootUI.transform.Find("Wave").GetComponent<Animator>();
+
         m_PausePanel.Initialize();
-        m_Anim = GetComponent<Animator>();
+       // m_Anim = GetComponent<Animator>();
 
     }
 
@@ -85,24 +89,35 @@ public class MainUI : IUserInterface
         GameSpeed = 1;
     }
 
-    public void PrepareForGuide()
-    {
-        TopLeftArea.SetActive(false);
-        MoneyObj.SetActive(false);
 
-        LifeObj.SetActive(false);
-        WaveObj.SetActive(false);
+    public static void PlayMainUIAnim(int part, string key, bool value)
+    {
+        switch (part)
+        {
+            case 0://Coin
+                CoinAnim.SetBool(key, value);
+                break;
+            case 1://Life
+                LifeAnim.SetBool(key, value);
+                break;
+            case 2://Wave
+                WaveAnim.SetBool(key, value);
+                break;
+        }
     }
 
     public override void Show()
     {
-        m_Anim.SetBool("Show", true);
+        PlayMainUIAnim(0, "Show", true);
+        PlayMainUIAnim(1, "Show", true);
+        PlayMainUIAnim(2, "Show", true);
     }
 
-    public void PlayAnim(string key, bool value)
+    public override void Hide()
     {
-        m_Anim.SetBool(key, value);
-
+        PlayMainUIAnim(0, "Show", false);
+        PlayMainUIAnim(1, "Show", false);
+        PlayMainUIAnim(2, "Show", false);
     }
 
 

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class ForcePlace
 {
     public Vector2 ForcePos;
@@ -15,20 +16,22 @@ public class ForcePlace
         this.GuidePos = guidePoss;
     }
 }
+[System.Serializable]
 public class ShapeInfo
 {
     public ShapeType ShapeType;
     public ElementType Element;
     public int Quality;
     public int TurretPos;
+    public int TurretDir;
 
-    public ShapeInfo(ShapeType type, ElementType element, int quality, int pos)
+    public ShapeInfo(ShapeType type, ElementType element, int quality, int pos,int dir)
     {
         this.ShapeType = type;
         this.Element = element;
         this.Quality = quality;
         this.TurretPos = pos;
-
+        this.TurretDir = dir;
     }
 }
 public static class GameRes
@@ -65,8 +68,8 @@ public static class GameRes
     public static float TempDustIntensify = 0;
 
     //新手引导
-    static ShapeInfo preSetShape;//预设形状
-    public static ShapeInfo PreSetShape { get => preSetShape; set => preSetShape = value; }
+    static ShapeInfo[] preSetShape;//预设形状
+    public static ShapeInfo[] PreSetShape { get => preSetShape; set => preSetShape = value; }
 
     static ForcePlace forcePlace;//强制摆位
     public static ForcePlace ForcePlace { get => forcePlace; set => forcePlace = value; }
@@ -272,10 +275,11 @@ public static class GameRes
         TempFireIntensify = 0;
         TempDustIntensify = 0;
 
-        PreSetShape = null;
+        PreSetShape = new ShapeInfo[3];
         ForcePlace = null;
 
     }
+
 
     private static GameResStruct SetSaveRes()
     {

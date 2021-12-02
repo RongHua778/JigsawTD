@@ -95,14 +95,14 @@ public class Sound : Singleton<Sound>
 
         while (m_bgSound.volume > 0)
         {
-            m_bgSound.volume -= startVolume * Time.deltaTime / 1f;
+            m_bgSound.volume -= startVolume * Time.deltaTime / 0.5f;
             yield return null;
         }
         m_bgSound.clip = clip;
         m_bgSound.Play();
         while (m_bgSound.volume <= startVolume)
         {
-            m_bgSound.volume += startVolume * Time.deltaTime / 1f;
+            m_bgSound.volume += startVolume * Time.deltaTime / 0.5f;
             yield return null;
         }
 
