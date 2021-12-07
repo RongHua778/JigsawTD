@@ -16,7 +16,7 @@ MonoBehaviour:
   Difficulty: 1
   PlayerHealth: 25
   Wave: 30
-  LevelIntensify: 1
+  LevelIntensify: 1.25
   NormalEnemies:
   - {fileID: 11400000, guid: a2fa830bad8e11c448623ce28354a1bd, type: 2}
   - {fileID: 11400000, guid: a6b4f2578a98cf54caf0ac3718b54059, type: 2}
@@ -36,3 +36,15 @@ MonoBehaviour:
   TrapCount: 15
   EliteWave: 15
   ExpIntensify: 2
+  GuideDialogues:
+  - {fileID: 11400000, guid: 7ab18e11346bed543991323cfd1bc14e, type: 2}
+  - {fileID: 11400000, guid: d811c4f58c4b9ad459d255374e67323d, type: 2}
+  - {fileID: 11400000, guid: 70edb0d0a7e7c0d44975fb26735e072a, type: 2}
+  - {fileID: 11400000, guid: c7caaeb7d74ea924a8b5cf3353dfc87a, type: 2}
+  - {fileID: 11400000, guid: 4acbf4411acc3a34fa318b98a127506a, type: 2}
+  - {fileID: 11400000, guid: fae1774364cc01e459761d7d71fa1aa9, type: 2}
+  - {fileID: 11400000, guid: 9d367bc2b14c7344b96a2b98515ccc48, type: 2}
+  - {fileID: 11400000, guid: 421268c475805784cac75f6198499cb3, type: 2}
+  - {fileID: 11400000, guid: 102babdf495ac7347b6a9c9956544858, type: 2}
+  - {fileID: 11400000, guid: 4961e9ad28af68a429c8e18d83a9b220, type: 2}
+  CanSaveGame: 0

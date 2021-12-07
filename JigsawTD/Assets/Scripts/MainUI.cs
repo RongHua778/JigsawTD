@@ -14,7 +14,6 @@ public class MainUI : IUserInterface
     [SerializeField] Text PlayerLifeTxt = default;
     [SerializeField] Text coinTxt = default;
     [SerializeField] WaveInfoSetter m_WaveInfoSetter = default;
-    [SerializeField] PausePanel m_PausePanel = default;
     [SerializeField] Text waveTxt = default;
 
     public int CurrentWave
@@ -75,9 +74,6 @@ public class MainUI : IUserInterface
         CoinAnim = m_RootUI.transform.Find("Coin").GetComponent<Animator>();
         LifeAnim = m_RootUI.transform.Find("Life").GetComponent<Animator>();
         WaveAnim = m_RootUI.transform.Find("Wave").GetComponent<Animator>();
-
-        m_PausePanel.Initialize();
-       // m_Anim = GetComponent<Animator>();
 
     }
 
@@ -143,11 +139,6 @@ public class MainUI : IUserInterface
     public void GuideBookBtnClick()
     {
         GameManager.Instance.ShowGuideVideo(0);
-    }
-
-    public void PauseBtnClick()
-    {
-        m_PausePanel.Show();
     }
 
     public void GameSpeedBtnClick()

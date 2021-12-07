@@ -7,10 +7,11 @@ public class GuideIndicator : MonoBehaviour
     Transform followTr;
     bool isShow = false;
 
-    public void Show(bool value, Transform followTr = null)
+    public void Show(bool value, GameObject FollowObj = null)
     {
         isShow = value;
-        this.followTr = followTr;
+        if (FollowObj != null)
+            this.followTr = FollowObj.transform;
         gameObject.SetActive(isShow);
     }
     private void FixedUpdate()

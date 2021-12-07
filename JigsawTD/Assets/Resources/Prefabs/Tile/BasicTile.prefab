@@ -322,10 +322,6 @@ MonoBehaviour:
   ParentObj: {fileID: 0}
   sprites:
   - {fileID: -1334219258721206692, guid: 40d0b9e2f658f4e49a4a13e65a35bb86, type: 3}
-  - {fileID: -9028146153290436471, guid: 40d0b9e2f658f4e49a4a13e65a35bb86, type: 3}
-  - {fileID: 5298052241823903811, guid: 40d0b9e2f658f4e49a4a13e65a35bb86, type: 3}
-  - {fileID: -5031080086131195028, guid: 40d0b9e2f658f4e49a4a13e65a35bb86, type: 3}
-  - {fileID: 6051944637248819377, guid: 40d0b9e2f658f4e49a4a13e65a35bb86, type: 3}
   basicTurretBase: {fileID: -2751177121866005933, guid: ed75be710d9524b4484adbccb1e29b87, type: 3}
   compositeTurretBase: {fileID: 2219362761703447931, guid: ed75be710d9524b4484adbccb1e29b87, type: 3}
   compositeTurretBase2: {fileID: -7132121176335741257, guid: ed75be710d9524b4484adbccb1e29b87, type: 3}

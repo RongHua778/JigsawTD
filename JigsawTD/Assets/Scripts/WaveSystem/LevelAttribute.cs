@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
+//using UnityEditor;
 
 [CreateAssetMenu(menuName = "Attribute/LevelAttribute", fileName = "LevelAttribute")]
 public class LevelAttribute : ScriptableObject
@@ -20,6 +22,11 @@ public class LevelAttribute : ScriptableObject
     public int EliteWave;
     public float ExpIntensify;
 
+    [Title("教程配置")]
+    //[ListDrawerSettings(CustomAddFunction = "AddDialogue")]
+    public DialogueData[] GuideDialogues = default;
+    public bool CanSaveGame;
+
     public EnemyAttribute GetRandomBoss(int level)
     {
         switch (level)
@@ -36,4 +43,15 @@ public class LevelAttribute : ScriptableObject
         Debug.LogWarning("没有可以返回的BOSS类型");
         return null;
     }
+
+    //private DialogueData AddDialogue()
+    //{
+    //    DialogueData data = ScriptableObject.CreateInstance<DialogueData>();
+    //    string assetPath = string.Format("{0}{1}.asset", "Assets/SO/Dialogues/", "DialogueData" + GuideDialogues.Length);
+    //    //生成一个Asset文件
+    //    AssetDatabase.CreateAsset(data, assetPath);
+    //    AssetDatabase.SaveAssets();
+    //    AssetDatabase.Refresh();
+    //    return data;
+    //}
 }

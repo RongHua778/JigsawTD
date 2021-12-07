@@ -21,7 +21,7 @@ public class GroundTile : TileBase
     public override void OnTileSelected(bool value)
     {
         base.OnTileSelected(value);
-        if (value && !Game.Instance.Tutorial)
+        if (value)
         {
             GameManager.Instance.ShowBuyGroundTips();
         }

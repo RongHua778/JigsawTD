@@ -174,6 +174,12 @@ public class WaveSystem : IGameSystem
         return sequence;
     }
 
+    public void ManualSetSequence(EnemyType type,float stage,int wave)
+    {
+        LevelSequence[wave] = GenerateSpecificSequence(type, stage, wave);
+        PrepareNextWave();
+    }
+
     public void PrepareNextWave()
     {
         RunningSequence = LevelSequence[GameRes.CurrentWave - 1];

@@ -406,7 +406,10 @@ public class BoardSystem : IGameSystem
     public void BuyOneEmptyTile()
     {
         if (Game.Instance.Tutorial)//教程期间无法购买地板
+        {
+            GameManager.Instance.ShowMessage(GameMultiLang.GetTraduction("TUTORIALPLEASE"));
             return;
+        }
         if (GameManager.Instance.OperationState.StateName == StateName.WaveState)
         {
             GameManager.Instance.ShowMessage(GameMultiLang.GetTraduction("NOTBUILDSTATE"));

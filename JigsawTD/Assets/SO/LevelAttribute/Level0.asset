@@ -15,8 +15,8 @@ MonoBehaviour:
   Mode: 0
   Difficulty: 0
   PlayerHealth: 25
-  Wave: 30
-  LevelIntensify: 0.75
+  Wave: 10
+  LevelIntensify: 1
   NormalEnemies:
   - {fileID: 11400000, guid: a2fa830bad8e11c448623ce28354a1bd, type: 2}
   - {fileID: 11400000, guid: a6b4f2578a98cf54caf0ac3718b54059, type: 2}
@@ -34,3 +34,35 @@ MonoBehaviour:
   TrapCount: 0
   EliteWave: 15
   ExpIntensify: 1
+  GuideDialogues:
+  - {fileID: 11400000, guid: e72bd636bef36bb478150d3355e40d0e, type: 2}
+  - {fileID: 11400000, guid: a9bf3ac4b278a744aa856b5e29862543, type: 2}
+  - {fileID: 11400000, guid: 1c6df3c3696afaf4395cd37b5490ddf0, type: 2}
+  - {fileID: 11400000, guid: dc2b9f9b2d7bb984baa0e7650b3b611d, type: 2}
+  - {fileID: 11400000, guid: 6f3def0f48723a54689c532693ceaff2, type: 2}
+  - {fileID: 11400000, guid: 272169cc109c1384a8b7017d6a195e0a, type: 2}
+  - {fileID: 11400000, guid: 5c1f47b29d601f24994a01516ec5ef59, type: 2}
+  - {fileID: 11400000, guid: 3595fe17b1b791b43ab65e501fcf7ea0, type: 2}
+  - {fileID: 11400000, guid: 5d360cf131afd9c4cacfb9b21324d297, type: 2}
+  - {fileID: 11400000, guid: 7b9c072afb600f94dab9c3253a5adc8f, type: 2}
+  - {fileID: 11400000, guid: ab62681fd7786174cbd32ddc839fe794, type: 2}
+  - {fileID: 11400000, guid: e0b830b16c1b62d44b8f977e0bc705c3, type: 2}
+  - {fileID: 11400000, guid: f594f571917c5444196fb3a3b3811aee, type: 2}
+  - {fileID: 11400000, guid: 7e150de439517154ca832a0120aafde5, type: 2}
+  - {fileID: 11400000, guid: 18b3b39b86bf6d44bb37978fabe7f4af, type: 2}
+  - {fileID: 11400000, guid: 24be71d20af7c554691fb8bce0698e2a, type: 2}
+  - {fileID: 11400000, guid: dc055792d41f0e541a7f5501252447e8, type: 2}
+  - {fileID: 11400000, guid: 9c10e1145bf659149af8e3c90a0926ae, type: 2}
+  - {fileID: 11400000, guid: 5bed482c063a906428d9b0e47b2dbb46, type: 2}
+  - {fileID: 11400000, guid: cd1fd807b3e97e443acc791a4f5d46df, type: 2}
+  - {fileID: 11400000, guid: 381079298c0ffba4bb43113a82dc3815, type: 2}
+  - {fileID: 11400000, guid: 3c93d0bc6231de94f88fb448d1d95b3c, type: 2}
+  - {fileID: 11400000, guid: 4133840d23f22274c8bc2b86d0e33e86, type: 2}
+  - {fileID: 11400000, guid: 56c696eb219fa3640b83b95f1527ad26, type: 2}
+  - {fileID: 11400000, guid: c787e4d88d449f64ab947cb02ffe48a9, type: 2}
+  - {fileID: 11400000, guid: b1b96a5f49b7b5d4cbc1caa2eab226bc, type: 2}
+  - {fileID: 11400000, guid: 2d001ef13c9d4c24ab21bfc40e3ef1f7, type: 2}
+  - {fileID: 11400000, guid: 09bd7bafd9cfa4d45b0f862d335ecc48, type: 2}
+  - {fileID: 11400000, guid: e3f7dde97bc16f142b085e51c08b3207, type: 2}
+  - {fileID: 11400000, guid: e273e5caa8cb8f84898bfc0aadae855f, type: 2}
+  CanSaveGame: 0

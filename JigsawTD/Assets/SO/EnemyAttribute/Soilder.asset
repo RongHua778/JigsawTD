@@ -21,7 +21,7 @@ MonoBehaviour:
   initialLock: 0
   EnemyType: 0
   IsBoss: 0
-  InitCount: 2
+  InitCount: 3
   CountIncrease: 5
   Health: 13
   Speed: 1.2

@@ -45,14 +45,13 @@ public class MenuUIManager : Singleton<MenuUIManager>
 
     public void StartGameBtnClick()
     {
-
         m_UILevelManager.Show();
         m_UILevelManager.SetLevelInfo();
     }
 
     public void ContinueGameBtnClick()
     {
-        Game.Instance.Tutorial = false;
+        LevelManager.Instance.LevelEnd = false;
         Game.Instance.LoadScene(1);
     }
 

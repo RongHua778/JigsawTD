@@ -88,6 +88,9 @@ MonoBehaviour:
   - Key: DEVTEAM
     Chinese: "\u5236\u4F5C\u56E2\u961F"
     English: Development Team
+  - Key: BASICTILE
+    Chinese: "\u57FA\u672C\u683C"
+    English: Basic Tile
   - Key: ELEMENTTURRET
     Chinese: "\u5143\u7D20\u5854"
     English: Eelement Turret
@@ -182,22 +185,22 @@ MonoBehaviour:
     Chinese: "\u901A\u5173\u6807\u51C6\u6A21\u5F0F\u96BE\u5EA64\u540E\u89E3\u9501"
     English: Unlock after Passing Standard mode on Difficulty 4
   - Key: DIFFICULTY0
-    Chinese: 
+    Chinese: "1.\u57FA\u7840\u64CD\u4F5C\u53CA\u6A21\u5757\u6559\u5B66"
     English: 
   - Key: DIFFICULTY1
-    Chinese: "1.\u52A0\u5165\u6218\u573A\u6807\u8BB0\\n2.\u575A\u630130\u6CE2\u8FDB\u653B"
+    Chinese: "1.\u91CD\u6784\u673A\u5236\u6559\u5B66\n2.\u575A\u630120\u6CE2\u8FDB\u653B"
     English: 1."Trap" will appear in the batllefield\n2.Stick to 40 wave
   - Key: DIFFICULTY2
-    Chinese: "1.\u4F60\u53EA\u670915\u70B9\u751F\u547D\u503C"
+    Chinese: "1.\u52A0\u5165\u6218\u573A\u9677\u9631\n2.\u575A\u630130\u6CE2\u8FDB\u653B"
     English: 1.You have only 15 health
   - Key: DIFFICULTY3
-    Chinese: "1.\u6218\u573A\u4E2D\u5C06\u51FA\u73B0\u66F4\u591A\u6807\u8BB0"
+    Chinese: "1.\u6218\u573A\u4E2D\u5C06\u51FA\u73B0\u66F4\u591A\u9677\u9631"
     English: 1.More Traps will apprear in the battlefield
   - Key: DIFFICULTY4
-    Chinese: "1.\u4E00\u6B21\u56F0\u96BE\u7684\u6311\u6218"
+    Chinese: 
     English: 1.A tough challenge
   - Key: DIFFICULTY5
-    Chinese: "1.\u4E00\u6B21\u6298\u78E8\u7684\u6311\u6218"
+    Chinese: 
     English: 1.A torture challenge
   - Key: DIFFICULTY6
     Chinese: "1.\u4E0D\u53EF\u80FD\u5B8C\u6210\u7684\u4EFB\u52A1"
@@ -221,6 +224,9 @@ MonoBehaviour:
     English: The Bard civilization will launch an infinite wave of attacks, a war
       of resource depletion, but also a test of the deployment officer's will and
       wit, since war is inevitable, let the enemy's debris fill the universe.
+  - Key: TUTORIALPLEASE
+    Chinese: "\u8BF7\u6309\u6559\u7A0B\u6307\u793A\u64CD\u4F5C"
+    English: 
   - Key: LACKMONEY
     Chinese: "\u4EE3\u5E01\u4E0D\u8DB3"
     English: You don't have eneugh tokens
@@ -254,6 +260,10 @@ MonoBehaviour:
   - Key: WHEELGUIDE
     Chinese: "\u6ED1\u52A8\u6EDA\u8F6E\u7F29\u653E\u89C6\u89D2"
     English: Use mouse wheel to scale the view
+  - Key: PLACEGUIDE
+    Chinese: "\u6309\u4F4F\u6A21\u5757\u53EF\u62D6\u52A8\n\u70B9\u51FB\u65CB\u8F6C\u6309\u94AE\u6216R\u952E\u53EF\u65CB\u8F6C\n\u8BF7\u5C06\u6A21\u5757\u6446\u653E\u5230\u7EFF\u8272\u5149\u6548\u6240\u793A\u4F4D\u7F6E"
+    English: Press and hold to drag the module\nClick the rotate button or R to rotate
+      module\nPlease place the module in the position shown by the green light
   - Key: TUTORIALPLACE
     Chinese: "\u8BF7\u6309\u6559\u7A0B\u4F4D\u7F6E\u6446\u653E\u7ED3\u6784\u4F53"
     English: Please place structure at tutorial position
@@ -274,7 +284,7 @@ MonoBehaviour:
     Chinese: "\u8BF7\u5148\u901A\u8FC7\u4E0A\u4E00\u96BE\u5EA6"
     English: Please pass the previous difficulty first
   - Key: PLACERULE
-    Chinese: "\u6446\u653E\u7ED3\u6784\u4F53"
+    Chinese: "\u6446\u653E\u6A21\u5757"
     English: Placement Rule
   - Key: PLANROUTE
     Chinese: "\u89C4\u5212\u8DEF\u7EBF"
@@ -288,6 +298,9 @@ MonoBehaviour:
   - Key: EQUIPRULE
     Chinese: "\u91CD\u6784\u6280\u80FD"
     English: Refactor Skill
+  - Key: GUIDETXT01
+    Chinese: "1.\u6BCF\u4E2A\u6A21\u5757\u75313\u4E2A\u57FA\u672C\u683C\u548C1\u4E2A\u5143\u7D20\u5854\u683C\u7EC4\u6210.\n\n2.\u57FA\u672C\u683C\u53EF\u4F5C\u4E3A\u9053\u8DEF\uFF0C\u9632\u5FA1\u5854\u53EF\u4F5C\u4E3A\u969C\u788D\u5E76\u8FDB\u884C\u653B\u51FB\u3002\n\n3.\u653E\u7F6E\u6A21\u5757\u65F6\uFF0C\u9632\u5FA1\u5854\u4E0D\u53EF\u4E0E\u8D77\u70B9\uFF0C\u7EC8\u70B9\u53CA\u5176\u4ED6\u9632\u5FA1\u5854\u91CD\u5408\uFF0C\u800C\u57FA\u672C\u683C\u5219\u65E0\u4EFB\u4F55\u9650\u5236\uFF0C\u4E14\u4E0D\u4F1A\u8986\u76D6\u9632\u5FA1\u5854\u3002"
+    English: no translation yet!!!
   - Key: GUIDEVIDEO01
     Chinese: "\u6BCF\u4E2A\u7ED3\u6784\u4F53\u7531\u4E09\u683C\u57FA\u672C\u683C\u548C\u4E00\u683C\u9632\u5FA1\u5854\u7EC4\u6210\u3002\u653E\u7F6E\u7ED3\u6784\u4F53\u65F6\u9700\u8981\u786E\u4FDD\u8D77\u70B9\u548C\u7EC8\u70B9\u4E4B\u95F4\u80FD\u591F\u901A\u8FC7\u57FA\u672C\u683C\u76F8\u8FDE\uFF0C\u800C\u9632\u5FA1\u5854\u53EF\u4EE5\u4F5C\u4E3A\u969C\u788D\u3002"
     English: Each structure consists of three basic tile and a turret. The basic
@@ -327,14 +340,14 @@ MonoBehaviour:
     English: 'Tip: each refactor turret can only be equipped with 1 additional element
       skill by default, depending on it''s number of element skill slots.'
   - Key: DRAWINFO
-    Chinese: "\u5F53\u524D\u56DE\u5408\u6CA1\u6709\u6784\u5EFA\u65F6\uFF0C\u6784\u5EFA\u4EF7\u683C\u5C06\u964D\u4F4E\uFF1B\\n\u5F53\u524D\u964D\u4EF7\u767E\u5206\u6BD4\uFF1A"
+    Chinese: "\u5F53\u524D\u56DE\u5408\u6CA1\u6709\u6784\u5EFA\u65F6\uFF0C\u6784\u5EFA\u4EF7\u683C\u5C06\u964D\u4F4E\uFF1B\n\u5F53\u524D\u964D\u4EF7\u767E\u5206\u6BD4\uFF1A"
     English: 'If you haven''t build last turn, the price will be reduced\n current
       price reduction percentage:'
   - Key: NEXTWAVE
     Chinese: "\u4E0B\u4E00\u6CE2[Space]"
     English: Next Wave[Space]
   - Key: DRAWMODULE
-    Chinese: "\u6784\u5EFA\u7ED3\u6784\u4F53"
+    Chinese: "\u6784\u5EFA\u6A21\u5757"
     English: Build Structure
   - Key: CHANCEBEFORE
     Chinese: "\u5F53\u524D"
@@ -1038,7 +1051,7 @@ MonoBehaviour:
     English: <color=#FFEA6D>Please hold down the left mouse button and drag to move
       the camera.</color>
   - Key: Guide04
-    Chinese: "\u73B0\u5728\u8BF7\u628A\u6CE8\u610F\u529B\u653E\u5728\u6218\u573A\u4E2D\u592E,<color=#FFEA6D>\u7EA2\u8272\u683C\u4E3A\u8DC3\u8FC1\u5165\u53E3,\u84DD\u8272\u683C\u4E3A\u8DC3\u8FC1\u51FA\u53E3</color>,\u9664\u6B64\u4E4B\u5916\u7684<color=#FFEA6D>\u7070\u8272\u683C\u5B50\u4E3A\u57FA\u672C\u683C.</color>"
+    Chinese: "\u73B0\u5728\u8BF7\u628A\u6CE8\u610F\u529B\u653E\u5728\u6218\u573A\u4E2D\u592E,<color=#FFEA6D>\u7EA2\u8272\u683C\u4E3A\u5165\u53E3,\u84DD\u8272\u683C\u4E3A\u51FA\u53E3</color>,\u9664\u6B64\u4E4B\u5916\u7684<color=#FFEA6D>\u7070\u8272\u683C\u5B50\u4E3A\u57FA\u672C\u683C.</color>"
     English: Good.
   - Key: Guide05
     Chinese: "\u654C\u4EBA\u5C06\u4ECE\u8DC3\u8FC1\u5165\u53E3\u51FA\u53D1,\u901A\u8FC7\u57FA\u672C\u683C\u79FB\u52A8,\u5E76\u6700\u7EC8\u62B5\u8FBE\u8DC3\u8FC1\u51FA\u53E3,<color=#FFEA6D>\u84DD\u8272\u79FB\u52A8\u7BAD\u5934\u53EF\u9884\u89C8\u654C\u4EBA\u7684\u884C\u8FDB\u8DEF\u7EBF.</color>"
@@ -1051,7 +1064,7 @@ MonoBehaviour:
     English: Deployment officer, the Bard civilization is attempting a time warp
       through this interface, you are taking charge of the defense deployment.
   - Key: Guide08
-    Chinese: "\u5C4F\u5E55\u4E0A\u65B9\u663E\u793A\u4E86<color=#FFEA6D>\u5F53\u524D\u6CE2\u6570</color>\u53CA<color=#FFEA6D>\u4E0B\u4E00\u6CE2\u654C\u4EBA\u7684\u4FE1\u606F</color>,\u5DF4\u5FB7\u6587\u660E\u6709\u591A\u79CD\u4E0D\u540C\u7684\u654C\u4EBA\u7C7B\u578B,\u5C06\u9F20\u6807\u60AC\u505C\u5728\u56FE\u6807\u4E0A\u53EF\u663E\u793A\u654C\u4EBA\u4FE1\u606F."
+    Chinese: "\u5C4F\u5E55\u4E0A\u65B9\u663E\u793A\u4E86<color=#FFEA6D>\u5F53\u524D\u6CE2\u6570</color>\u53CA<color=#FFEA6D>\u4E0B\u4E00\u6CE2\u654C\u4EBA\u7684\u4FE1\u606F</color>,\u5C06\u9F20\u6807\u60AC\u505C\u5728\u56FE\u6807\u4E0A\u53EF\u663E\u793A\u654C\u4EBA\u4FE1\u606F."
     English: Now, I'm going to give you a quick tutorial. Please focus on the center
       of the battlefield.
   - Key: Guide09
@@ -1066,115 +1079,94 @@ MonoBehaviour:
     Chinese: "\u73B0\u5728\u70B9\u51FB\u6A21\u5757\u6784\u9020\u6309\u94AE,\u8FDB\u884C\u4E00\u6B21\u6A21\u5757\u6784\u9020\u5427!"
     English: Your job is to prevent the enemy from reaching the exit.
   - Key: Guide12
-    Chinese: "\u6BCF\u6B21\u6784\u5EFA\u4F1A\u751F\u6210<color=#FFEA6D>3\u4E2A\u968F\u673A\u53EF\u9009\u6A21\u5757</color>,\u6BCF\u4E2A\u6A21\u5757\u75313\u4E2A<color=#FFEA6D>\u57FA\u672C\u683C</color>\u548C1\u4E2A<color=#FFEA6D>\u5143\u7D20\u5854\u683C</color>\u7EC4\u6210."
+    Chinese: "\u6BCF\u6B21\u6784\u9020\u90FD\u5C06\u751F\u62103\u4E2A\u968F\u673A\u6A21\u5757,\u800C\u6BCF\u4E2A\u6A21\u5757\u75313\u4E2A\u57FA\u672C\u683C\u548C1\u4E2A\u5143\u7D20\u9632\u5FA1\u5854\u7EC4\u6210."
     English: The upper right corner shows our coins supply for you, <color=#FFEA6D>it
       will increases by 10 per wave.</color>
   - Key: Guide13
-    Chinese: "\u6A21\u5757\u53EF\u62FC\u63A5\u8FDB\u6218\u573A,<color=#FFEA6D>\u57FA\u672C\u683C\u53EF\u4EE5\u4F5C\u4E3A\u9053\u8DEF,\u5143\u7D20\u5854\u683C\u53EF\u4EE5\u4F5C\u4E3A\u969C\u788D\u548C\u8FDB\u884C\u653B\u51FB.</color>"
+    Chinese: "\u6A21\u5757\u88AB\u6446\u653E\u8FDB\u6218\u573A\u540E,<color=#FFEA6D>\u57FA\u672C\u683C\u53EF\u4EE5\u4F5C\u4E3A\u9053\u8DEF,\u800C\u9632\u5FA1\u5854\u53EF\u4EE5\u4F5C\u4E3A\u969C\u788D\u4EE5\u53CA\u8FDB\u884C\u653B\u51FB</color>."
     English: In the bottom right corner is the <color=#FFEA6D>Building Structure
       button</color>. <color=#FFEA6D>Now spend some coins to build a structure..</color>
-  - Key: Guide14
-    Chinese: "\u73B0\u5728\u8BF7\u9009\u62E9\u7B2C\u4E00\u4E2A\u6A21\u5757\u5427!"
+  - Key: Guide131
+    Chinese: "\u8FDB\u884C\u6446\u653E\u65F6,<color=#FFEA6D>\u65B0\u6A21\u5757\u53EF\u4EE5\u4E0E\u5DF2\u6709\u683C\u5B50\u91CD\u53E0</color>,\u800C\u9632\u5FA1\u5854\u4F4D\u7F6E\u4E0D\u53EF\u4E0E\u8D77\u70B9,\u7EC8\u70B9\u53CA\u5176\u4ED6\u9632\u5FA1\u5854\u91CD\u53E0."
     English: Each structure consists of<color=#FFEA6D> 3 "basic tile" and 1 "element
       turret"</color>, <color=#FFEA6D>basic tiles can be used as a path, while the
       turret can be used as an obstacle.</color>
+  - Key: Guide14
+    Chinese: "\u73B0\u5728\u5C31\u6765\u9009\u62E9\u7B2C\u4E00\u4E2A\u6A21\u5757\u5427!"
+    English: 
   - Key: Guide15
-    Chinese: "\u901A\u8FC7<color=#FFEA6D>\u5C06\u9632\u5FA1\u5854\u4F5C\u4E3A\u969C\u788D,\u5E76\u786E\u4FDD\u8D77\u70B9\u548C\u7EC8\u70B9\u4E4B\u95F4\u4EE5\u57FA\u672C\u683C\u8FDE\u63A5,\u53EF\u4EE5\u5EF6\u957F\u654C\u4EBA\u7684\u884C\u8FDB\u8DEF\u7EBF</color>."
+    Chinese: "\u505A\u5F97\u4E0D\u9519,\u5B66\u5458.\u901A\u8FC7\u94FA\u8BBE\u57FA\u672C\u683C\u4F5C\u4E3A\u9053\u8DEF,\u5E76\u4EE5\u9632\u5FA1\u5854\u4F5C\u4E3A\u969C\u788D,\u6211\u4EEC\u53EF\u4EE5<color=#FFEA6D>\u5EF6\u957F\u654C\u4EBA\u7684\u884C\u8FDB\u8DEF\u7EBF</color>."
     English: <color=#FFEA6D>Using turret as obstacles, and making sure the start
       and destination point are connected by basic tiles.</color>
   - Key: Guide16
-    Chinese: "\u73B0\u5728\u8BF7\u9009\u62E91\u4E2A\u7ED3\u6784\u4F53,\u5E76\u6309\u7167<color=#FFEA6D>\u6807\u8BC6\u7684\u4F4D\u7F6E</color>\u8FDB\u884C<color=#FFEA6D>\u65CB\u8F6C\u548C\u6446\u653E</color>,\u4F60\u5C06\u5B66\u4E60\u5230\u57FA\u672C\u7684\u5BFB\u8DEF\u89C4\u5219."
+    Chinese: "<color=#FFEA6D>\u8BF7\u70B9\u51FB\u9009\u4E2D\u9632\u5FA1\u5854</color>,\u67E5\u770B\u9632\u5FA1\u5854\u7684\u4FE1\u606F\u9762\u677F\u548C\u653B\u51FB\u8303\u56F4."
     English: <color=#FFEA6D>Now select a structure, rotate and position it according
       to the sign,</color> and you will learn basic pathfinding rules.
-  - Key: //5
-    Chinese: 
-    English: 
   - Key: Guide17
-    Chinese: "\u4F60<color=#FFEA6D>\u6210\u529F\u5EF6\u957F\u4E86\u654C\u4EBA\u7684\u884C\u8FDB\u8DEF\u7EBF</color>,\u4F60\u53EF\u4EE5\u5728\u63A5\u4E0B\u6765\u7684\u6218\u6597\u4E2D\u7EE7\u7EED\u719F\u7EC3\u8BE5\u6280\u5DE7."
+    Chinese: "\u9632\u5FA1\u5854\u51C6\u5907\u5C31\u7EEA,\u70B9\u51FB\u4E0B\u4E00\u6CE2\u6309\u94AE\u5427,\u8BA9\u5DF4\u5FB7\u6587\u660E\u611F\u53D7\u4F60\u4E3A\u4ED6\u4EEC\u9001\u6765\u7684\u7B2C\u4E00\u679A\u70AE\u5F39."
     English: You successfully extend the enemy's path, which you can continue to
       master in the rest of the battle.
   - Key: Guide18
-    Chinese: "\u5728\u753B\u9762\u7684\u53F3\u4E0A\u65B9,\u4F1A\u663E\u793A\u4F60\u5F53\u524D\u751F\u547D\u503C,\u6BCF\u4E2A\u62B5\u8FBE\u7EC8\u70B9\u7684\u654C\u4EBA\u90FD\u4F1A\u8BA9\u4F60\u5931\u53BB\u4E00\u5B9A\u751F\u547D\u503C."
+    Chinese: "\u4F60\u53EF\u4EE5\u4E0D\u5FC5\u5728\u6BCF\u4E2A\u56DE\u5408\u90FD\u6784\u5EFA\u6A21\u5757,\u5982\u679C\u4F60<color=#FFEA6D>\u5728\u4E00\u56DE\u5408\u6CA1\u6709\u8FDB\u884C\u4EFB\u4F55\u6784\u5EFA,\u6784\u5EFA\u4EF7\u683C\u5C06\u4F1A\u4E0B\u964D</color>."
     English: In the upper right corner is your remaining health, Each enemy that
       reaches the end will deal 1 damage to you.
   - Key: Guide181
-    Chinese: "\u5F53\u751F\u547D\u503C\u4E3A0\u65F6,\u4F60\u7684\u4EFB\u52A1\u5BA3\u544A\u5931\u8D25."
+    Chinese: "\u6784\u5EFA\u6309\u94AE<color=#FFEA6D>\u5DE6\u65B9\u7684\u6570\u5B57</color>\u663E\u793A\u4E0D\u8FDB\u884C\u6784\u5EFA\u65F6,\u4E0B\u56DE\u5408\u4EF7\u683C\u7684<color=#FFEA6D>\u964D\u4EF7\u5E45\u5EA6(\u5F53\u524D10%)</color>."
     English: When your health goes to zero, we will be forced to abandon this interface.
-  - Key: //6
-    Chinese: 
-    English: 
   - Key: Guide19
-    Chinese: "\u5728\u753B\u9762\u7684\u6B63\u4E0A\u65B9,\u4F1A\u663E\u793A\u6211\u4EEC\u63A2\u6D4B\u5230\u7684\u654C\u4EBA\u5269\u4F59\u8FDB\u653B\u6CE2\u6570,\u4EE5\u53CA\u5373\u5C06\u5230\u6765\u7684\u654C\u4EBA\u7C7B\u578B."
+    Chinese: "\u5982\u679C\u573A\u4E0A\u9632\u5FA1\u529B\u5145\u8DB3\u7684\u8BDD,\u8FD9\u56DE\u5408\u5C31\u5C1D\u8BD5\u4E0D\u8FDB\u884C\u6784\u5EFA\u76F4\u63A5\u5F00\u59CB\u4E0B\u4E00\u56DE\u5408\u5427."
     English: Right at the top shows the incoming waves we detected,\n as well as
       the type of incoming enemies.
   - Key: Guide191
-    Chinese: "\u5C06\u9F20\u6807\u60AC\u505C\u5728\u654C\u4EBA\u56FE\u6807\u5904,\u53EF\u4EE5\u67E5\u770B\u654C\u4EBA\u76F8\u5173\u4FE1\u606F."
+    Chinese: "\u77E5\u9053\u5417,\u5EF6\u957F\u8DEF\u7EBF\u65F6\u9700\u8981\u63D0\u524D\u89C4\u5212\u654C\u4EBA\u7684\u8DEF\u5F84,<color=#FFEA6D>\u5982\u679C\u65E0\u6CD5\u8FDE\u901A\u8D77\u70B9\u548C\u7EC8\u70B9\u65F6\u662F\u65E0\u6CD5\u6446\u653E\u6A21\u5757\u7684</color>."
     English: To view information about an enemy, move the mouse pointer to the icon
       of the enemy.
   - Key: Guide20
-    Chinese: "\u73B0\u5728\u70B9\u51FB\u4E0B\u65B9\u7684<color=#FFEA6D>\u4E0B\u4E00\u6CE2</color>\u6309\u94AE,\u8FD9\u5C06\u5F00\u542F\u8DC3\u8FC1\u5165\u53E3,\u8FCE\u63A5\u6218\u6597\u9636\u6BB5."
+    Chinese: "\u4E3A\u6B64\u4F60\u9700\u8981\u6BCF\u6B21\u63D0\u524D\u94FA\u8BBE\u4E00\u90E8\u5206\u7684\u8DEF\u6BB5,\u901A\u8FC7\u591A\u6B21\u6446\u653E\u5B8C\u6210\u8DEF\u5F84\u642D\u5EFA."
     English: <color=#FFEA6D>Now press the button below to start the battle state.</color>
-  - Key: //7
-    Chinese: 
-    English: 
   - Key: Guide21
-    Chinese: "\u505A\u5F97\u5F88\u597D,\u4F60\u6210\u529F\u5B88\u4F4F\u4E86\u654C\u4EBA\u7684\u8FDB\u653B."
+    Chinese: "\u7531\u4E8E\u4E0A\u56DE\u5408\u6CA1\u6709\u8FDB\u884C\u6784\u5EFA,\u4F60\u79EF\u7D2F\u4E86\u66F4\u591A\u7684\u4EE3\u5E01,\u672C\u56DE\u5408\u5C31\u5C1D\u8BD5\u8FDE\u7EED\u6784\u5EFA\u4E24\u6B21\u6A21\u5757\u5427."
     English: Well done.
   - Key: Guide22
-    Chinese: "<color=#FFEA6D>\u6BCF\u6B21\u8FDB\u884C\u6A21\u5757\u6784\u5EFA\u90FD\u4F1A\u4F7F\u5176\u4EF7\u683C\u63D0\u9AD810</color>,\u4EE3\u5E01\u8FD8\u6709\u5176\u4ED6\u7528\u9014,\u4F60\u9700\u8981\u5408\u7406\u89C4\u5212\u8D44\u6E90\u5206\u914D."
+    Chinese: "\u5F88\u597D,\u73B0\u5728\u518D\u6765\u6784\u5EFA\u7B2C\u4E8C\u4E2A\u6A21\u5757."
     English: <color=#FFEA6D>Every time you build a structure, the price will increases
       by 10.</color> Coins also have other uses, and you need to allocate them wisely.
   - Key: Guide23
-    Chinese: "\u73B0\u5728\u8BF7<color=#FFEA6D>\u518D\u6B21\u6784\u5EFA\u4E00\u4E2A\u7ED3\u6784\u4F53\u5E76\u6309\u6307\u793A\u4F4D\u7F6E\u6446\u653E</color>."
+    Chinese: "\u63D0\u524D\u94FA\u8BBE\u9053\u8DEF\u662F\u5EF6\u957F\u8DEF\u7EBF\u7684\u91CD\u8981\u6280\u5DE7,\u4F60\u53EF\u4EE5\u5728\u4E4B\u540E\u7684\u6218\u6597\u4E2D\u9010\u6E10\u638C\u63E1."
     English: But now, <color=#FFEA6D>try to build another structure</color>.
-  - Key: //8
-    Chinese: 
-    English: 
   - Key: Guide24
-    Chinese: "\u8FD9\u6B21\u4F60\u6784\u5EFA\u4E86\u4E00\u4E2A\u91D1\u5143\u7D20\u5854,\u4E0D\u540C\u7684\u5143\u7D20\u5854\u62E5\u6709\u4E0D\u540C\u7684\u7279\u70B9."
+    Chinese: "\u5F53\u4F60\u51C6\u5907\u597D\u4E86\u5C31\u5F00\u59CB\u4E0B\u4E00\u6CE2\u6218\u6597\u5427."
     English: "This time you deploy a new element turret which has different characteristic\u3002"
   - Key: Guide25
-    Chinese: "\u8BF7<color=#FFEA6D>\u70B9\u51FB\u573A\u4E0A\u7684\u9632\u5FA1\u5854,\u4EE5\u67E5\u770B\u5176\u57FA\u672C\u4FE1\u606F\u53CA\u653B\u51FB\u8303\u56F4</color>."
+    Chinese: "\u7531\u4E8E\u8DC3\u8FC1\u57FA\u7AD9\u7684\u7269\u8D28\u6CE2\u52A8,\u6211\u4EEC\u80FD\u591F\u83B7\u53D6\u91D1\u6728\u6C34\u706B\u571F5\u79CD\u4E0D\u540C\u7684\u5143\u7D20\u9632\u5FA1\u5854,\u4EE3\u53F7\u4E3AABCDE."
     English: <color=#FFEA6D>Now click on the turret on the grid to view its information
       and attack range</color>.
-  - Key: //21
-    Chinese: 
-    English: 
   - Key: Guide26
-    Chinese: "\u505A\u5F97\u5F88\u597D,\u5F53\u4F60\u51C6\u5907\u597D\u4E86,\u4F60\u53EF\u4EE5\u968F\u65F6\u5F00\u542F\u4E0B\u4E00\u6CE2\u6218\u6597."
+    Chinese: "\u4EE3\u53F7\u540E\u7684\u6570\u5B57\u4E3A\u5143\u7D20\u5854\u7684\u54C1\u8D28,\u4F8B\u5982C1\u4EE3\u8868\u54C1\u8D281\u7684\u6C34\u5143\u7D20,<color=#FFEA6D>\u54C1\u8D28\u8D8A\u9AD8\u7684\u5143\u7D20\u5854\u5C5E\u6027\u4E5F\u8D8A\u5F3A.</color>"
     English: Well done. When you're ready, you can start the next wave.
-  - Key: //9
-    Chinese: 
-    English: 
   - Key: Guide27
-    Chinese: "\u6211\u4EEC\u6210\u529F\u5B88\u4F4F\u4E86\u4E24\u6CE2\u8FDB\u653B,\u4F46\u4E3A\u4E86\u8D70\u5F97\u66F4\u8FDC,\u6211\u4EEC\u9700\u8981\u66F4\u5F3A\u529B\u7684<color=#FFEA6D>\u91CD\u6784\u5854</color>."
+    Chinese: "\u4E3A\u4E86\u83B7\u53D6\u66F4\u9AD8\u54C1\u8D28\u7684\u5143\u7D20\u5854,\u4F60\u9700\u8981\u63D0\u5347<color=#FFEA6D>\u7CFB\u7EDF\u7B49\u7EA7.</color>"
     English: We managed to hold off two waves of attack, but to go further, we needed
       a more powerful turret.
   - Key: Guide28
-    Chinese: "\u73B0\u5728\u8BF7<color=#FFEA6D>\u6784\u5EFA\u7B2C\u4E09\u4E2A\u6A21\u5757</color>,\u7136\u540E\u6211\u5C06\u6307\u5BFC\u4F60\u5B8C\u6210\u4E00\u6B21<color=#FFEA6D>\"\u91CD\u6784\"</color>."
+    Chinese: "\u8FD9\u91CC\u663E\u793A\u4E86\u4F60\u5F53\u524D\u7684\u7CFB\u7EDF\u7B49\u7EA7,\u53CA\u5347\u7EA7\u7CFB\u7EDF\u6240\u9700\u7684\u4EE3\u5E01.\u73B0\u5728\u5C31\u70B9\u51FB\u5347\u7EA7\u4E00\u6B21\u7CFB\u7EDF\u5427!"
     English: <color=#FFEA6D>Now build the third structure</color>, and I'll walk
       you through a<color=#FFEA6D> "Refactor"</color>
-  - Key: //10
-    Chinese: 
-    English: 
   - Key: Guide29
-    Chinese: "\u8BF7\u70B9\u51FB\u753B\u9762\u5DE6\u4FA7\u7684\u914D\u65B9\u5546\u5E97\u6309\u94AE,\u6253\u5F00\u914D\u65B9\u5546\u5E97,\u5E76<color=#FFEA6D>\u9009\u62E9\u4E00\u4E2A\u5DF2\u7ECF\u51D1\u9F50\u5143\u7D20\u7684\u914D\u65B9</color>."
+    Chinese: "\u505A\u5F97\u597D,\u6784\u5EFA\u6A21\u5757\u65F6\u83B7\u53D6\u9AD8\u54C1\u8D28\u5143\u7D20\u5854\u7684\u6982\u7387\u63D0\u5347\u4E86,\u4F60\u53EF\u4EE5\u5728\u4E4B\u540E\u7684\u6218\u6597\u4E2D\u7EE7\u7EED\u63D0\u5347\u7CFB\u7EDF\u7B49\u7EA7."
     English: <color=#FFEA6D>Please click the button on the left side to open the
       shop and select a blueprint that has collect enough element.</color>
-  - Key: //11
-    Chinese: 
-    English: 
   - Key: Guide30
-    Chinese: "<color=#FFEA6D>\u914D\u65B9\u5546\u5E97\u6BCF3\u56DE\u5408\u4F1A\u5237\u65B0\u4E00\u6279\u91CD\u6784\u5854\u914D\u65B9</color>,\u800C\u6BCF\u4E2A\u91CD\u6784\u5854\u914D\u65B9\u7684\u7EC4\u4EF6\u5219\u662F\u5B8C\u5168\u968F\u673A\u7684."
+    Chinese: "\u5173\u4E8E\u6A21\u5757\u548C\u7CFB\u7EDF\u7684\u6559\u5B66\u5C31\u5230\u6B64\u7ED3\u675F,\u68C0\u6D4B\u5230\u672C\u6B21\u5165\u4FB5\u5171\u670910\u6CE2\u654C\u4EBA,\u8BF7\u575A\u5B88\u5230\u6700\u540E!"
     English: <color=#FFEA6D>The shop refreshes a batch of refactor turret blueprint
       every 3 waves, </color>and the components of each blueprint are completely
       random.
   - Key: Guide31
-    Chinese: "\u91CD\u6784\u5854\u62E5\u6709\u81EA\u8EAB\u4E13\u5C5E\u7684<color=#FFEA6D>\u88AB\u52A8\u6280\u80FD</color>,\u540C\u65F6\u4F9D\u636E\u7EC4\u6210\u7684\u914D\u65B9\u4E0D\u540C\u62E5\u6709\u4E13\u5C5E\u7684<color=#FFEA6D>\u5143\u7D20\u6280\u80FD</color>."
+    Chinese: "\u7EC4\u6210\u5143\u7D20\u4F1A\u540C\u65F6\u63D0\u4F9B\u5C5E\u6027\u52A0\u6210,<color=#FFEA6D>\u8BF7\u5C06\u9F20\u6807\u60AC\u505C\u5728\u5143\u7D20\u6280\u80FD\u69FD\u4E0A</color>,\u53EF\u4EE5\u67E5\u770B\u8BE5\u5143\u7D20\u6280\u80FD\u63D0\u4F9B\u7684\u5C5E\u6027\u52A0\u6210."
     English: <color=#FFEA6D>Refactor turrets have their own default skill, and a
       element skill depending on the composition elements.</color>
   - Key: Guide32
-    Chinese: "\u7EC4\u6210\u5143\u7D20\u4F1A\u540C\u65F6\u63D0\u4F9B\u5C5E\u6027\u52A0\u6210,<color=#FFEA6D>\u8BF7\u5C06\u9F20\u6807\u60AC\u505C\u5728\u5143\u7D20\u6280\u80FD\u69FD\u4E0A</color>,\u53EF\u4EE5\u67E5\u770B\u8BE5\u5143\u7D20\u6280\u80FD\u63D0\u4F9B\u7684\u5C5E\u6027\u52A0\u6210."
+    Chinese: 
     English: Component elements also provide benefit. <color=#FFEA6D>Hover the mouse
       over the element skill slot to view the benefit provided by the elements.</color>
   - Key: //22
@@ -1237,15 +1229,15 @@ MonoBehaviour:
     Chinese: 
     English: 
   - Key: Temp00
-    Chinese: "\u770B\u6765\u60A8\u5DF2\u5B8C\u5168\u719F\u6089\u8DC3\u8FC1\u57FA\u7AD9\u7684\u91CD\u6784\u89C4\u5219\u4E86,\u8BF7\u7EE7\u7EED\u52AA\u529B\u524D\u884C."
+    Chinese: "\u770B\u6765\u60A8\u5DF2\u5B8C\u5168\u719F\u6089\u8DC3\u8FC1\u57FA\u7AD9\u7684\u6218\u6597\u89C4\u5219\u4E86,\u8BF7\u7EE7\u7EED\u52AA\u529B\u524D\u884C,\u6211\u5728\u4E0B\u4E00\u4E2A\u6311\u6218\u7B49\u4F60."
     English: It seems that you are fully familiar with the rules of the interstellar
       battlefield, so please continue to forge ahead.
   - Key: Temp01
-    Chinese: "\u6B63\u5728\u5206\u6790\u53D6\u80DC\u539F\u56E0...1%\u7684\u5408\u7406\u6218\u672F\u89C4\u5212...2%\u7684\u7075\u6D3B\u8D44\u6E90\u8C03\u914D...\u52A0\u4E0A97%\u7684\u8FD0\u6C14."
+    Chinese: "\u91CD\u6784\u662F\u4E00\u79CD\u53D6\u80DC\u7684\u65B9\u5F0F,\u4E5F\u662F\u4E00\u79CD\u601D\u60F3."
     English: Trying to figure the reason of victory... 1% of tactical planning...
       2% resource allocation... Plus 97% luck.
   - Key: Temp02
-    Chinese: "\u6218\u6597\u7ED3\u675F,\u6211\u65B9\u8230\u961F\u83B7\u80DC,\u4E0D\u6127\u662F\u5A1C\u53EF\u5C0A\u656C\u7684\u6307\u6325\u5B98\u3002"
+    Chinese: "\u6B63\u5728\u5206\u6790\u53D6\u80DC\u539F\u56E0...1%\u7684\u5408\u7406\u6218\u672F\u89C4\u5212...2%\u7684\u7075\u6D3B\u8D44\u6E90\u8C03\u914D...\u52A0\u4E0A97%\u7684\u8FD0\u6C14."
     English: 'Victory! You deserve the title of The Great Commander! '
   - Key: Temp03
     Chinese: "\u505A\u5F97\u597D.\u5047\u4EE5\u65F6\u65E5,\u60A8\u5FC5\u5C06\u6210\u4E3A\u661F\u9645\u68EE\u6797\u4E2D\u7684\u6770\u51FA\u730E\u4EBA."

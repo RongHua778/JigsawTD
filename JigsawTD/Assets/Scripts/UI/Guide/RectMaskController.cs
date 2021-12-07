@@ -74,10 +74,17 @@ public class RectMaskController : MonoBehaviour
         return position;
     }
 
-    public void SetTarget(RectTransform target)
+    public void SetTarget(GameObject target,float delayTime)
     {
-        m_Target = target;
-        RefreshMask();
+        if (target != null)
+        {
+            m_Target = target.GetComponent<RectTransform>();
+            Invoke(nameof(RefreshMask), delayTime);
+        }
+        else
+        {
+            maskImg.gameObject.SetActive(false);
+        }
     }
 
     private void Start()
@@ -88,6 +95,7 @@ public class RectMaskController : MonoBehaviour
 
     private void RefreshMask()
     {
+        maskImg.gameObject.SetActive(true);
         //_eventPenetrate = GetComponent<EventPermeater>();
         //if (_eventPenetrate != null)
         //    _eventPenetrate.target = m_Target.gameObject;

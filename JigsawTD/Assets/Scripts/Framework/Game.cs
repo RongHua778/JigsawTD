@@ -35,7 +35,6 @@ public class Game : Singleton<Game>
                 break;
             case 1://battle
                 LevelManager.Instance.LoadGame();//直接从战斗场景开始，直接读取存档
-                LevelManager.Instance.NeedSaveGame = true;
                 m_SceneStateController.SetState(new BattleState(m_SceneStateController));
                 break;
         }

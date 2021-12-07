@@ -273,7 +273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transition: {fileID: 3979959846040823351}
   transitionTime: 1
-  Tutorial: 0
+  Tutorial: 1
   OnTransition: 0
 --- !u!114 &3979959846567427948
 MonoBehaviour:
@@ -370,10 +370,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: aa5a923b0cb87d348914e228fc353f67, type: 2}
   - {fileID: 11400000, guid: b6403761d56b0914599f3e8e647a50b7, type: 2}
   PremitDifficulty: 6
-  CurrentLevel: {fileID: 11400000, guid: 00b992198a245254bbe331c2618239cd, type: 2}
-  NeedLoadGame: 0
+  CurrentLevel: {fileID: 11400000, guid: 1cffab4195a17dc4f8326be6876fab11, type: 2}
+  NeedLoadGame: 1
   NeedLoadData: 0
-  NeedSaveGame: 0
   LastGameSave:
     SaveBluePrints: []
     SaveRes:
@@ -396,6 +395,7 @@ MonoBehaviour:
       DrawThisTurn: 0
     SaveContents: []
     SaveSequences: []
+  LevelEnd: 0
 --- !u!114 &3979959846567427947
 MonoBehaviour:
   m_ObjectHideFlags: 0

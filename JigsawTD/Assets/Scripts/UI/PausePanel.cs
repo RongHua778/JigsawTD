@@ -8,15 +8,23 @@ public class PausePanel : IUserInterface
 {
     [SerializeField] Text ReturnTxt = default;
     [SerializeField] Text QuitTxt = default;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        SetContent();
+    }
+
     public override void Show()
     {
-        SetContent();
         base.Show();
+        SetContent();
     }
+
 
     private void SetContent()
     {
-        if (Game.Instance.Tutorial)
+        if (!LevelManager.Instance.CurrentLevel.CanSaveGame)
         {
             ReturnTxt.text = GameMultiLang.GetTraduction("RETURNTUTORIAL");
             QuitTxt.text = GameMultiLang.GetTraduction("QUIT");

@@ -13,30 +13,29 @@ public abstract class GuideEvent
 
 public class ShowGameobject : GuideEvent
 {
-    public List<string> showList=new List<string>();
+    public List<string> showList = new List<string>();
     public List<string> hideList = new List<string>();
     public override void Trigger()
     {
         foreach (var item in showList)
         {
-            GuideGirlUI.GetGuideObj(item).SetActive(true);
+            GameManager.Instance.GetGuideObj(item).SetActive(true);
         }
         foreach (var item in hideList)
         {
-            GuideGirlUI.GetGuideObj(item).SetActive(false);
+            GameManager.Instance.GetGuideObj(item).SetActive(false);
         }
     }
 }
 
-public class ShowIndicator : GuideEvent
+public class ManualSetSquence : GuideEvent
 {
-    public bool show;
-    public Transform tr;
+    public EnemyType EnemyType;
+    public float Stage;
+    public int Wave;
     public override void Trigger()
     {
-        GuideGirlUI.GuideIndicator.gameObject.SetActive(show);
-        if (show)
-            GuideGirlUI.GuideIndicator.transform.position = tr.position;
+        GameManager.Instance.ManualSetSequence(EnemyType, Stage, Wave);
     }
 }
 
@@ -67,29 +66,33 @@ public class PlayMainUIAnim : GuideEvent
 
 public class RectMaskObj : GuideEvent//’⁄’÷Ãÿ∂®«¯”Ú
 {
+    public bool Show;
     public string RectName;
+    public float delayTime;
     public override void Trigger()
     {
-        GameManager.Instance.SetRectMaskObj(GuideGirlUI.GetGuideObj(RectName).GetComponent<RectTransform>());
+        GameManager.Instance.SetRectMaskObj(Show ? GameManager.Instance.GetGuideObj(RectName) : null, delayTime);
     }
 }
 
 public class SetEventPermeaterObj : GuideEvent
 {
+    public bool Show;
     public string ObjName;
     public override void Trigger()
     {
-        GameManager.Instance.SetEventPermeaterTarget(GuideGirlUI.GetGuideObj(ObjName));
+        GameManager.Instance.SetEventPermeaterTarget(Show ? GameManager.Instance.GetGuideObj(ObjName) : null);
     }
 }
 
 public class SetGuideIndicatorPos : GuideEvent
 {
+    public bool Show;
     public string ObjName;
     public override void Trigger()
     {
-        GameObject guideIndicator = GuideGirlUI.GetGuideObj("GuideIndicator");
-        guideIndicator.transform.position = GuideGirlUI.GetGuideObj(ObjName).transform.position;
+        GuideIndicator guideIndicator = GameManager.Instance.GetGuideObj("GuideIndicator").GetComponent<GuideIndicator>();
+        guideIndicator.Show(Show, Show ? GameManager.Instance.GetGuideObj(ObjName) : null);
     }
 }
 public class PlayFuncUIAnim : GuideEvent
@@ -122,6 +125,43 @@ public class SetForcePlace : GuideEvent
     public override void Trigger()
     {
         GameRes.ForcePlace = ForcePlace;
+    }
+}
+
+public class ShowGuideBook : GuideEvent
+{
+    public int PageID;
+    public override void Trigger()
+    {
+        GameManager.Instance.ShowGuideVideo(PageID);
+    }
+}
+
+
+public class EndTutorial : GuideEvent
+{
+    public override void Trigger()
+    {
+        Game.Instance.Tutorial = false;
+    }
+}
+
+public class ShowGuideGirl : GuideEvent
+{
+    public bool Show;
+    public int PosID;
+    public override void Trigger()
+    {
+        GameManager.Instance.ShowGuideGirl(Show, PosID);
+    }
+}
+
+public class GainGold : GuideEvent
+{
+    public int Amount;
+    public override void Trigger()
+    {
+        GameRes.Coin += Amount;
     }
 }
 

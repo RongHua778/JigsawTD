@@ -1,0 +1,134 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76869e3c621ad814084d11d5bbdd94e0, type: 3}
+  m_Name: "\u7CFB\u7EDF\u7B49\u7EA73"
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: GuideConditions
+      Entry: 7
+      Data: 0|GuideCondition[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: GuideStartEvents
+      Entry: 7
+      Data: 1|GuideEvent[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 2|RectMaskObj, Assembly-CSharp
+    - Name: Show
+      Entry: 5
+      Data: false
+    - Name: RectName
+      Entry: 6
+      Data: 
+    - Name: delayTime
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 3|SetEventPermeaterObj, Assembly-CSharp
+    - Name: Show
+      Entry: 5
+      Data: false
+    - Name: ObjName
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 4|SetGuideIndicatorPos, Assembly-CSharp
+    - Name: Show
+      Entry: 5
+      Data: false
+    - Name: ObjName
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: GuideEndEvents
+      Entry: 7
+      Data: 5|GuideEvent[], Assembly-CSharp
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 6|EndTutorial, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 7|SetGuideIndicatorPos, Assembly-CSharp
+    - Name: Show
+      Entry: 5
+      Data: false
+    - Name: ObjName
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 8|ShowGuideGirl, Assembly-CSharp
+    - Name: Show
+      Entry: 5
+      Data: false
+    - Name: PosID
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  TriggerType: 13
+  Words:
+  - Guide29
+  - Guide30
+  DontNeedClickEnd: 0
+  WaitingTime: 0

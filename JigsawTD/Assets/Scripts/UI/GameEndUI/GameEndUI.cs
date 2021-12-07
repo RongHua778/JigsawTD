@@ -36,8 +36,7 @@ public class GameEndUI : IUserInterface
 
     public void SetGameResult(bool win)
     {
-        LevelManager.Instance.NeedSaveGame = false;
-
+        LevelManager.Instance.LevelEnd = true;
         gainExp = LevelManager.Instance.GainExp(GameRes.CurrentWave);
 
         expInfoBtn.SetContent(GameMultiLang.GetTraduction("EXPVALUE") + "=" +

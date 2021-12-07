@@ -133,6 +133,7 @@ public class FuncUI : IUserInterface
             {
                 GameRes.SystemLevel++;
                 m_LevelInfoPanel.SetInfo();
+                GameEvents.Instance.TutorialTrigger(TutorialType.SystemBtnClick);
             }
         }
     }

@@ -96,8 +96,8 @@ public class UILevelManager : IUserInterface
         m_UIBattleSet.Show();
     }
 
-    public void OnTutorialCheck(bool value)
-    {
-        Game.Instance.Tutorial = !value;
-    }
+    //public void OnTutorialCheck(bool value)
+    //{
+    //    Game.Instance.Tutorial = !value;
+    //}
 }

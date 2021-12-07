@@ -23,7 +23,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameEndUI m_GameEndUI = default;
     [SerializeField] private MessageUI m_MessageUI = default;
     [SerializeField] private GuideVideo m_GuideVideo = default;
-
+    [SerializeField] private PausePanel m_PausePanel = default;
 
     [Header("TIPS")]
     [SerializeField] private TurretTips m_TurretTips = default;
@@ -67,7 +67,6 @@ public class GameManager : Singleton<GameManager>
         m_CamControl.Initialize(m_MainUI);//摄像机控制
         m_BoardSystem.Initialize();//版图系统
         //初始化UI
-        //m_MainUI.Initialize();//主界面顶部UI
         m_FuncUI.Initialize();//主界面功能UI
         m_BluePrintShopUI.Initialize();//配方系统UI
         m_ShapeSelectUI.Initialize();//抽模块UI
@@ -79,11 +78,9 @@ public class GameManager : Singleton<GameManager>
         m_GuideVideo.Initialize();//教程视频UI
         m_EnemyTips.Initialize();//敌人TIPS
         m_BonusTips.Initialize();//奖励解锁TIps
+        m_PausePanel.Initialize();//暂停界面
 
-        //m_GuideUI.Initialize(m_FuncUI, m_MainUI, m_BluePrintShopUI, m_ShapeSelectUI);//教学系统UI
-        //m_GuideUI.Initialize();//IuserInterface初始化
-
-        m_GuideGirlUI.Initialize(m_FuncUI, m_MainUI, m_BluePrintShopUI);
+        m_GuideGirlUI.Initialize();//教学小姐姐初始化
 
         //设置操作流程
         buildingState = new BuildingState(this, m_BoardSystem);
@@ -111,25 +108,11 @@ public class GameManager : Singleton<GameManager>
             PrepareNextWave();
         }
 
-
+        m_FuncUI.Show();
+        m_MainUI.Show();
         //关闭显示强制摆放位置
         m_BoardSystem.SetTutorialPoss(false);
-
-
-        //初始化教程
-        if (Game.Instance.Tutorial)
-        {
-            m_FuncUI.Hide();
-            m_MainUI.Hide();
-            m_BluePrintShopUI.PrepareForGuide();
-            m_GuideGirlUI.PrepareTutorial();
-        }
-        else
-        {
-            m_FuncUI.Show();
-            m_MainUI.Show();
-        }
-
+        m_GuideGirlUI.PrepareTutorial();
 
     }
 
@@ -175,8 +158,10 @@ public class GameManager : Singleton<GameManager>
 
     private void KeyboardControl()
     {
-        if (Game.Instance.Tutorial)
+        if (Game.Instance.Tutorial)//教学期间无法加速
+        {
             return;
+        }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             m_MainUI.GameSpeed = 1;
@@ -372,6 +357,10 @@ public class GameManager : Singleton<GameManager>
 
     #region 通用功能
 
+    public void PauseGame()
+    {
+        m_PausePanel.Show();
+    }
     public bool ConsumeMoney(int cost)
     {
         return m_MainUI.ConsumeMoney(cost);
@@ -525,8 +514,6 @@ public class GameManager : Singleton<GameManager>
 
     public void ShowEnemyTips()
     {
-        //if (m_WaveSystem.LevelSequence[0] == null)
-        //    return;
         m_EnemyTips.Show();
         m_EnemyTips.ReadSequenceInfo(m_WaveSystem.RunningSequence);
     }
@@ -548,7 +535,6 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region 待加入功能
-
     public void LocateCamPos(Vector2 pos)
     {
         m_CamControl.LocatePos(pos);
@@ -573,14 +559,38 @@ public class GameManager : Singleton<GameManager>
         m_CamControl.MoveTurorial = value;
     }
 
-    public void SetRectMaskObj(RectTransform obj)
+    public void SetRectMaskObj(GameObject obj,float delayTime)
     {
-        m_RectMaskController.SetTarget(obj);
+        m_RectMaskController.SetTarget(obj,delayTime);
     }
 
     public void SetEventPermeaterTarget(GameObject obj)
     {
-        m_EventPermeater.target = obj;
+        m_EventPermeater.SetTarget(obj);
+    }
+
+    public void ManualSetSequence(EnemyType type, float stage, int wave)
+    {
+        m_WaveSystem.ManualSetSequence(type, stage, wave);
+        m_MainUI.PrepareNextWave(m_WaveSystem.RunningSequence);
+    }
+
+    public GameObject GetGuideObj(string objName)
+    {
+        return m_GuideGirlUI.GetGuideObj(objName);
+    }
+
+    public void ShowGuideGirl(bool value,int posID)
+    {
+        if (value)
+        {
+            m_GuideGirlUI.SetGirlPos(posID);
+            m_GuideGirlUI.Show();
+        }
+        else
+        {
+            m_GuideGirlUI.Hide();
+        }
     }
 
     #endregion

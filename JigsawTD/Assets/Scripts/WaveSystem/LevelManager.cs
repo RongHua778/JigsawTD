@@ -14,7 +14,7 @@ public class GameLevelInfo
 
 public class LevelManager : Singleton<LevelManager>
 {
-    [HideInInspector]public List<GameTileContent> GameContents;
+    [HideInInspector] public List<GameTileContent> GameContents;
     #region 基础保存
     [SerializeField] private GameLevelInfo[] GameLevels = default;
     [SerializeField] int permitGameLevel = default;
@@ -55,9 +55,9 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] bool NeedLoadGame = default;
     [SerializeField] bool NeedLoadData = default;
     [Header("是否有未完成游戏")]
-    public bool NeedSaveGame;
     public DataSave LastDataSave;
     public GameSave LastGameSave;
+    public bool LevelEnd;//游戏是否结束
     #endregion
 
     public void Initialize()
@@ -163,11 +163,9 @@ public class LevelManager : Singleton<LevelManager>
 
     public void StartNewGame(int modeID)
     {
-        NeedSaveGame = true;
+        LevelEnd = false;
         LastGameSave.ClearGame();
         CurrentLevel = GetLevelAtt(modeID);
-        if (modeID != 0)
-            Game.Instance.Tutorial = false;
     }
     private void LoadSaveData()
     {
@@ -299,7 +297,7 @@ public class LevelManager : Singleton<LevelManager>
 
         if (NeedLoadGame)
         {
-            if (NeedSaveGame)
+            if (CurrentLevel.CanSaveGame && !LevelEnd)
                 LastGameSave.SaveGame(SaveAllBlueprints(), GameRes.SaveRes, SaveContens(), SaveSequences());
             else
                 LastGameSave.ClearGame();

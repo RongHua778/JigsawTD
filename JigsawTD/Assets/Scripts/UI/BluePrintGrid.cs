@@ -26,9 +26,14 @@ public class BluePrintGrid : ReusableObject//, IPointerEnterHandler, IPointerExi
     public RefactorStrategy Strategy { get; set; }
     bool buildAble = false;
 
+    private Image BGImage;
+    private Tween matTween;
+
     private void Awake()
     {
         Root = transform.Find("Root");
+        BGImage = Root.Find("BluePrintGridBG").GetComponent<Image>();
+        BGImage.material = new Material(BGImage.material);
     }
 
     public void SetElements(BluePrintShopUI shop, ToggleGroup group, RefactorStrategy strategy)
@@ -70,6 +75,18 @@ public class BluePrintGrid : ReusableObject//, IPointerEnterHandler, IPointerExi
             }
         }
         buildAble = Strategy.CheckBuildable();
+        if (buildAble)
+        {
+            matTween.Kill();
+            BGImage.material.SetFloat("_ShineLocation", 0f);
+            matTween = BGImage.material.DOFloat(1f, "_ShineLocation", 2f).SetLoops(-1);
+        }
+        else
+        {
+            matTween.Kill();
+            BGImage.material.SetFloat("_ShineLocation", 0f);
+
+        }
         compositeIcon.color = buildAble ? Color.white : UnobtainColor;
     }
 
@@ -124,4 +141,6 @@ public class BluePrintGrid : ReusableObject//, IPointerEnterHandler, IPointerExi
     {
         m_LockToggle.gameObject.SetActive(value);
     }
+
+
 }
