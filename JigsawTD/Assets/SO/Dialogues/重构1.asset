@@ -38,7 +38,67 @@ MonoBehaviour:
       Data: 1|GuideEvent[], Assembly-CSharp
     - Name: 
       Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 2|RemoveBluePrint, Assembly-CSharp
+    - Name: ID
+      Entry: 3
       Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 3|AddBluePrint, Assembly-CSharp
+    - Name: TurretName
+      Entry: 1
+      Data: CONSTRUCTOR
+    - Name: Elements
+      Entry: 7
+      Data: 4|System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: Qualities
+      Entry: 7
+      Data: 5|System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -47,13 +107,13 @@ MonoBehaviour:
       Data: 
     - Name: GuideEndEvents
       Entry: 7
-      Data: 2|GuideEvent[], Assembly-CSharp
+      Data: 6|GuideEvent[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 3|ShowGuideGirl, Assembly-CSharp
+      Data: 7|ShowGuideGirl, Assembly-CSharp
     - Name: Show
       Entry: 5
       Data: true

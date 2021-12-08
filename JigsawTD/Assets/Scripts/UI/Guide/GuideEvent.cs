@@ -165,3 +165,25 @@ public class GainGold : GuideEvent
     }
 }
 
+public class AddBluePrint : GuideEvent
+{
+    public string TurretName;
+    public List<int> Elements;
+    public List<int> Qualities;
+
+    public override void Trigger()
+    {
+        RefactorStrategy strategy = ConstructHelper.GetSpecificStrategy(TurretName, Elements, Qualities);
+        GameManager.Instance.AddBluePrint(strategy);
+    }
+}
+
+public class RemoveBluePrint : GuideEvent
+{
+    public int ID;
+    public override void Trigger()
+    {
+        GameManager.Instance.RemoveBluePrint(ID);
+    }
+}
+

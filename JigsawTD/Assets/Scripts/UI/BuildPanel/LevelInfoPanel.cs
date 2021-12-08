@@ -6,6 +6,11 @@ using UnityEngine.UI;
 public class LevelInfoPanel : IUserInterface
 {
     [SerializeField] QualitySlot[] qualitySlots = default;
+    public override void Initialize()
+    {
+        base.Initialize();
+        SetInfo();
+    }
     public void SetInfo()
     {
         for (int i = 0; i < qualitySlots.Length; i++)

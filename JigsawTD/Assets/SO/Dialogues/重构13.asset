@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76869e3c621ad814084d11d5bbdd94e0, type: 3}
-  m_Name: "\u91CD\u67843"
+  m_Name: "\u91CD\u678413"
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -38,52 +38,16 @@ MonoBehaviour:
       Data: 1|GuideEvent[], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 1
     - Name: 
       Entry: 7
-      Data: 2|RectMaskObj, Assembly-CSharp
+      Data: 2|ShowGuideGirl, Assembly-CSharp
     - Name: Show
       Entry: 5
       Data: true
-    - Name: RectName
-      Entry: 1
-      Data: ShopBG
-    - Name: delayTime
-      Entry: 4
-      Data: 0.25
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 3|SetGuideIndicatorPos, Assembly-CSharp
-    - Name: Show
-      Entry: 5
-      Data: false
-    - Name: ObjName
-      Entry: 1
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 4|SetEventPermeaterObj, Assembly-CSharp
-    - Name: Show
-      Entry: 5
-      Data: false
-    - Name: ObjName
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 5|GainGold, Assembly-CSharp
-    - Name: Amount
+    - Name: PosID
       Entry: 3
-      Data: 90
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -95,7 +59,7 @@ MonoBehaviour:
       Data: 
     - Name: GuideEndEvents
       Entry: 7
-      Data: 6|GuideEvent[], Assembly-CSharp
+      Data: 3|GuideEvent[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 0
@@ -105,10 +69,8 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  TriggerType: 9
+  TriggerType: 8
   Words:
-  - Guide203
-  - Guide204
-  - Guide205
+  - Guide208
   DontNeedClickEnd: 1
-  WaitingTime: 1
+  WaitingTime: 0

@@ -328,6 +328,8 @@ public class TurretTips : TileTips
             UpdateRealTimeValue();
             UpgradeAreaSet(m_Strategy);
 
+            ((RefactorTurret)(m_Strategy.Turret)).ShowLandedEffect();
+
         }
     }
     private void FixedUpdate()

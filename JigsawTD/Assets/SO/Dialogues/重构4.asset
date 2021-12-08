@@ -38,7 +38,7 @@ MonoBehaviour:
       Data: 1|GuideEvent[], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 6
     - Name: 
       Entry: 7
       Data: 2|SetEventPermeaterObj, Assembly-CSharp
@@ -79,6 +79,96 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 5|SetPresetShape, Assembly-CSharp
+    - Name: PresetShape
+      Entry: 7
+      Data: 6|ShapeInfo, Assembly-CSharp
+    - Name: ShapeType
+      Entry: 3
+      Data: 1
+    - Name: Element
+      Entry: 3
+      Data: 0
+    - Name: Quality
+      Entry: 3
+      Data: 1
+    - Name: TurretPos
+      Entry: 3
+      Data: 2
+    - Name: TurretDir
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: ShapeSlot
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 7|SetPresetShape, Assembly-CSharp
+    - Name: PresetShape
+      Entry: 7
+      Data: 8|ShapeInfo, Assembly-CSharp
+    - Name: ShapeType
+      Entry: 3
+      Data: 6
+    - Name: Element
+      Entry: 3
+      Data: 0
+    - Name: Quality
+      Entry: 3
+      Data: 1
+    - Name: TurretPos
+      Entry: 3
+      Data: 0
+    - Name: TurretDir
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: ShapeSlot
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 9|SetPresetShape, Assembly-CSharp
+    - Name: PresetShape
+      Entry: 7
+      Data: 10|ShapeInfo, Assembly-CSharp
+    - Name: ShapeType
+      Entry: 3
+      Data: 4
+    - Name: Element
+      Entry: 3
+      Data: 0
+    - Name: Quality
+      Entry: 3
+      Data: 1
+    - Name: TurretPos
+      Entry: 3
+      Data: 1
+    - Name: TurretDir
+      Entry: 3
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: ShapeSlot
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -86,7 +176,7 @@ MonoBehaviour:
       Data: 
     - Name: GuideEndEvents
       Entry: 7
-      Data: 5|GuideEvent[], Assembly-CSharp
+      Data: 11|GuideEvent[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 0

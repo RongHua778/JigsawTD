@@ -69,6 +69,11 @@ public class RefactorTurret : TurretContent
                 ObjectPool.Instance.UnSpawn(tile);
             }
         }
+        ShowLandedEffect();
+    }
+
+    public void ShowLandedEffect()
+    {
         ReusableObject partical = ObjectPool.Instance.Spawn(StaticData.Instance.LandedEffect);
         partical.transform.position = transform.position + Vector3.up * 0.2f;
     }

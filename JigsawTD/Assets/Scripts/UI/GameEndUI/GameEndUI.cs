@@ -55,6 +55,8 @@ public class GameEndUI : IUserInterface
             {
                 title.text = GameMultiLang.GetTraduction("WIN") + GameMultiLang.GetTraduction("DIFFICULTY") + (LevelManager.Instance.CurrentLevel.Difficulty).ToString();
                 GameEvents.Instance.TempWordTrigger(new TempWord(TempWordType.StandardWin, LevelManager.Instance.CurrentLevel.Difficulty));
+                LevelManager.Instance.PassDiifcutly = LevelManager.Instance.CurrentLevel.Difficulty + 1;
+
             }
             else
             {
@@ -63,10 +65,6 @@ public class GameEndUI : IUserInterface
             }
         }
 
-        if (win && LevelManager.Instance.CurrentLevel.Mode <= 10)
-        {
-            LevelManager.Instance.PassDiifcutly = LevelManager.Instance.CurrentLevel.Difficulty + 1;
-        }
         m_BillBoard.SetBillBoard();
         StartCoroutine(SetValueCor());
     }

@@ -5,6 +5,7 @@ using Lanuguage;
 using Sirenix.OdinInspector;
 
 
+
 // Created by: Hamza Herbou        (mobile games developer)
 // email     : hamza95herbou@gmail.com
 
@@ -16,8 +17,9 @@ public class GameMultiLang : MonoBehaviour
 	public static Dictionary<String, String> Fields;
 
 	[SerializeField] string defaultLang = default;
-	[SerializeField] LanguageManager languageData = default;
+	//[SerializeField] LanguageManager languageData = default;
 
+	public static List<LanguageData> LanguageData { get; set; }
 
 	void Awake ()
 	{
@@ -77,27 +79,30 @@ public class GameMultiLang : MonoBehaviour
 
     private void LoadLanguageData()
     {
-        switch (PlayerPrefs.GetInt("_language_index", 0))
+
+		LanguageData = ExcelTool.CreateLanguageArrayWithExcel(ExcelConfig.excelsFolderPath + "LanguageExcel.xlsx");
+
+		switch (PlayerPrefs.GetInt("_language_index", 0))
         {
             case 0:
-				for (int i = 0; i < languageData.dataArray.Count; i++)
+				for (int i = 0; i < LanguageData.Count; i++)
 				{
-					if (Fields.ContainsKey(languageData.dataArray[i].Key))
+					if (Fields.ContainsKey(LanguageData[i].Key))
 					{
-						Debug.Log(languageData.dataArray[i].Key);
+						Debug.Log(LanguageData[i].Key);
 					}
 					else
-						Fields.Add(languageData.dataArray[i].Key, languageData.dataArray[i].English);
+						Fields.Add(LanguageData[i].Key, LanguageData[i].English);
 				}
 				break;
             case 1:
-				for (int i = 0; i < languageData.dataArray.Count; i++)
+				for (int i = 0; i < LanguageData.Count; i++)
 				{
-                    if (Fields.ContainsKey(languageData.dataArray[i].Key))
+                    if (Fields.ContainsKey(LanguageData[i].Key))
                     {
-						Debug.Log(languageData.dataArray[i].Key);
+						Debug.Log(LanguageData[i].Key);
                     }else
-					Fields.Add(languageData.dataArray[i].Key, languageData.dataArray[i].Chinese);
+					Fields.Add(LanguageData[i].Key, LanguageData[i].Chinese);
 				}
 				break;
         }

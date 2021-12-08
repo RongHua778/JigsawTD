@@ -67,7 +67,7 @@ public class BluePrintShopUI : IUserInterface
         foreach (var b in LevelManager.Instance.LastGameSave.SaveBluePrints)
         {
             RefactorStrategy strategy = ConstructHelper.GetSpecificStrategy(b.Name, b.ElementRequirements,b.QualityRequirements);
-            AddBluePrint(strategy, true);
+            AddBluePrint(strategy);
         }
     }
 
@@ -102,12 +102,12 @@ public class BluePrintShopUI : IUserInterface
         for (int i = 0; i < GameRes.ShopCapacity - lockNum; i++)
         {
             RefactorStrategy strategy = ConstructHelper.GetRandomRefactorStrategy();
-             AddBluePrint(strategy, true);
+             AddBluePrint(strategy);
             yield return new WaitForSeconds(0.02f);
         }
         isRefreshing = false;
     }
-    public void AddBluePrint(RefactorStrategy strategy, bool isShopBluePrint)//增加蓝图，isShopblueprint判断加入商店还是拥有
+    public void AddBluePrint(RefactorStrategy strategy)//增加蓝图，isShopblueprint判断加入商店还是拥有
     {
         BluePrintGrid bluePrintGrid = ObjectPool.Instance.Spawn(bluePrintGridPrefab) as BluePrintGrid;
         bluePrintGrid.transform.SetParent(shopContent);
@@ -116,7 +116,6 @@ public class BluePrintShopUI : IUserInterface
         bluePrintGrid.SetElements(this, shopContent.GetComponent<ToggleGroup>(), strategy);
 
         bluePrintGrid.ShowLockBtn(CurrentLock < GameRes.MaxLock);
-        bluePrintGrid.InShop = true;
         ShopBluePrints.Add(bluePrintGrid);
 
     }

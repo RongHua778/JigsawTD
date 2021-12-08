@@ -8,7 +8,6 @@ public class FuncUI : IUserInterface
     static Animator BuildBtnAnim, SystemBtnAnim, NextWaveBtnAnim;
 
 
-    [SerializeField] LevelInfoPanel m_LevelInfoPanel = default;
 
     [SerializeField] Text DrawBtnTxt = default;
     [SerializeField] Text SystemUpgradeCostTxt = default;
@@ -62,8 +61,6 @@ public class FuncUI : IUserInterface
     public override void Initialize()
     {
         base.Initialize();
-        m_LevelInfoPanel.Initialize();
-        m_LevelInfoPanel.SetInfo();
         BuildBtnAnim = m_RootUI.transform.Find("BuildBtn").GetComponent<Animator>();
         NextWaveBtnAnim = m_RootUI.transform.Find("NextWave").GetComponent<Animator>();
         SystemBtnAnim = m_RootUI.transform.Find("System").GetComponent<Animator>();
@@ -125,16 +122,4 @@ public class FuncUI : IUserInterface
         GameManager.Instance.StartNewWave();
     }
 
-    public void LevelUpBtnClick()
-    {
-        if (GameRes.SystemLevel < StaticData.Instance.SystemMaxLevel)
-        {
-            if (GameManager.Instance.ConsumeMoney(GameRes.SystemUpgradeCost))
-            {
-                GameRes.SystemLevel++;
-                m_LevelInfoPanel.SetInfo();
-                GameEvents.Instance.TutorialTrigger(TutorialType.SystemBtnClick);
-            }
-        }
-    }
 }

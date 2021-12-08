@@ -15,7 +15,7 @@ MonoBehaviour:
   Mode: 1
   Difficulty: 1
   PlayerHealth: 25
-  Wave: 30
+  Wave: 20
   LevelIntensify: 1.25
   NormalEnemies:
   - {fileID: 11400000, guid: a2fa830bad8e11c448623ce28354a1bd, type: 2}
@@ -33,7 +33,7 @@ MonoBehaviour:
   Boss4:
   - {fileID: 11400000, guid: dbb0595b1b4e1be4599c5c9d1e97b9e3, type: 2}
   LevelInfo: LEVEL1INFO
-  TrapCount: 15
+  TrapCount: 0
   EliteWave: 15
   ExpIntensify: 2
   GuideDialogues:
@@ -47,4 +47,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 421268c475805784cac75f6198499cb3, type: 2}
   - {fileID: 11400000, guid: 102babdf495ac7347b6a9c9956544858, type: 2}
   - {fileID: 11400000, guid: 4961e9ad28af68a429c8e18d83a9b220, type: 2}
+  - {fileID: 11400000, guid: 93cf20f282f08b9418c7c763a92aa20a, type: 2}
+  - {fileID: 11400000, guid: b29e46c7e6f63064d84bc5158c03a9ae, type: 2}
+  - {fileID: 11400000, guid: 578e7dc33203357489def43c86b94f20, type: 2}
+  - {fileID: 11400000, guid: a4a1d21de11944c49abea04e19d0bf44, type: 2}
+  - {fileID: 11400000, guid: da93faa4a28eeaf4f80d517dd53da1bc, type: 2}
+  - {fileID: 11400000, guid: cd7fe804ec97dab458e086fcd1802395, type: 2}
+  - {fileID: 11400000, guid: 972bc55b3e1d1104987ed18dc0d52e96, type: 2}
   CanSaveGame: 0

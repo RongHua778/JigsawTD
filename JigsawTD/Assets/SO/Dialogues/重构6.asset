@@ -89,7 +89,97 @@ MonoBehaviour:
       Data: 5|GuideEvent[], Assembly-CSharp
     - Name: 
       Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 6|SetPresetShape, Assembly-CSharp
+    - Name: PresetShape
+      Entry: 7
+      Data: 7|ShapeInfo, Assembly-CSharp
+    - Name: ShapeType
+      Entry: 3
+      Data: 4
+    - Name: Element
+      Entry: 3
+      Data: 1
+    - Name: Quality
+      Entry: 3
+      Data: 1
+    - Name: TurretPos
+      Entry: 3
+      Data: 3
+    - Name: TurretDir
+      Entry: 3
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: ShapeSlot
+      Entry: 3
       Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 8|SetPresetShape, Assembly-CSharp
+    - Name: PresetShape
+      Entry: 7
+      Data: 9|ShapeInfo, Assembly-CSharp
+    - Name: ShapeType
+      Entry: 3
+      Data: 5
+    - Name: Element
+      Entry: 3
+      Data: 1
+    - Name: Quality
+      Entry: 3
+      Data: 1
+    - Name: TurretPos
+      Entry: 3
+      Data: 0
+    - Name: TurretDir
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: ShapeSlot
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 10|SetPresetShape, Assembly-CSharp
+    - Name: PresetShape
+      Entry: 7
+      Data: 11|ShapeInfo, Assembly-CSharp
+    - Name: ShapeType
+      Entry: 3
+      Data: 2
+    - Name: Element
+      Entry: 3
+      Data: 1
+    - Name: Quality
+      Entry: 3
+      Data: 1
+    - Name: TurretPos
+      Entry: 3
+      Data: 0
+    - Name: TurretDir
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: ShapeSlot
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 

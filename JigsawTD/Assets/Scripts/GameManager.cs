@@ -593,5 +593,15 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public void AddBluePrint(RefactorStrategy strategy)
+    {
+        m_BluePrintShopUI.AddBluePrint(strategy);
+    }
+
+    public void RemoveBluePrint(int id)
+    {
+        m_BluePrintShopUI.RemoveGrid(BluePrintShopUI.ShopBluePrints[id]);
+    }
+
     #endregion
 }

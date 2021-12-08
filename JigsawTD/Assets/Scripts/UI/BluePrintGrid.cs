@@ -14,8 +14,7 @@ public class BluePrintGrid : ReusableObject//, IPointerEnterHandler, IPointerExi
     [SerializeField] Color UnobtainColor = default;
     private bool isLock = false;
     public bool IsLock { get => isLock; set => isLock = value; }
-    private bool inShop = false;
-    public bool InShop { get => inShop; set => inShop = value; }
+
 
     [SerializeField] Text compositeName = default;
     [SerializeField] Image compositeIcon = default;

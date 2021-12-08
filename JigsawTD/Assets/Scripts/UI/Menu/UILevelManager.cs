@@ -9,7 +9,7 @@ public class UILevelManager : IUserInterface
     [SerializeField] Text difficultyInfo_Txt = default;
     private Animator m_Anim;
     [SerializeField] Text difficultyTxt = default;
-    [SerializeField] Toggle tutorialCheck = default;
+    //[SerializeField] Toggle tutorialCheck = default;
     [SerializeField] Text endlessHighScore = default;
     [SerializeField] Text endlessUnlockText = default;
     [SerializeField] GameObject endlessStartBtnObj = default;
@@ -31,7 +31,7 @@ public class UILevelManager : IUserInterface
         base.Initialize();
         SelectDifficulty = LevelManager.Instance.PassDiifcutly;
         m_Anim = this.GetComponent<Animator>();
-        tutorialCheck.isOn = false;
+        //tutorialCheck.isOn = false;
         endlessHighScore.text = LevelManager.Instance.EndlessHighScore + GameMultiLang.GetTraduction("WAVE");
     }
     public void SetLevelInfo()
@@ -66,18 +66,20 @@ public class UILevelManager : IUserInterface
     {
         SelectDifficulty += count;
         difficultyInfo_Txt.text = GameMultiLang.GetTraduction("DIFFICULTY" + SelectDifficulty);
-        if (SelectDifficulty == 0)//设置教程显示
-        {
-            difficultyTxt.text = GameMultiLang.GetTraduction("TUTORIAL");
-            tutorialCheck.gameObject.SetActive(true);
-            tutorialCheck.isOn = false;
-        }
-        else
-        {
-            difficultyTxt.text = GameMultiLang.GetTraduction("DIFFICULTY") + " " + SelectDifficulty.ToString();
-            tutorialCheck.isOn = true;
-            tutorialCheck.gameObject.SetActive(false);
-        }
+        difficultyTxt.text = GameMultiLang.GetTraduction("DIFFICULTY") + " " + SelectDifficulty.ToString();
+
+        //if (SelectDifficulty == 0)//设置教程显示
+        //{
+        //    difficultyTxt.text = GameMultiLang.GetTraduction("TUTORIAL");
+        //    //tutorialCheck.gameObject.SetActive(true);
+        //    //tutorialCheck.isOn = false;
+        //}
+        //else
+        //{
+        //    difficultyTxt.text = GameMultiLang.GetTraduction("DIFFICULTY") + " " + SelectDifficulty.ToString();
+        //    //tutorialCheck.isOn = true;
+        //    //tutorialCheck.gameObject.SetActive(false);
+        //}
     }
 
     public override void Show()

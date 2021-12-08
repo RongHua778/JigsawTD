@@ -38,16 +38,16 @@ MonoBehaviour:
       Data: 1|GuideEvent[], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
-      Data: 2|SetGuideIndicatorPos, Assembly-CSharp
+      Data: 2|ShowGuideGirl, Assembly-CSharp
     - Name: Show
       Entry: 5
       Data: false
-    - Name: ObjName
-      Entry: 6
-      Data: 
+    - Name: PosID
+      Entry: 3
+      Data: 0
     - Name: 
       Entry: 8
       Data: 
@@ -56,13 +56,13 @@ MonoBehaviour:
       Data: 3|RectMaskObj, Assembly-CSharp
     - Name: Show
       Entry: 5
-      Data: false
+      Data: true
     - Name: RectName
-      Entry: 6
-      Data: 
+      Entry: 1
+      Data: RefactorBtn
     - Name: delayTime
       Entry: 4
-      Data: 0
+      Data: 0.2
     - Name: 
       Entry: 8
       Data: 
@@ -71,10 +71,22 @@ MonoBehaviour:
       Data: 4|SetEventPermeaterObj, Assembly-CSharp
     - Name: Show
       Entry: 5
-      Data: false
+      Data: true
     - Name: ObjName
-      Entry: 6
+      Entry: 1
+      Data: RefactorBtn
+    - Name: 
+      Entry: 8
       Data: 
+    - Name: 
+      Entry: 7
+      Data: 5|SetGuideIndicatorPos, Assembly-CSharp
+    - Name: Show
+      Entry: 5
+      Data: true
+    - Name: ObjName
+      Entry: 1
+      Data: RefactorBtn
     - Name: 
       Entry: 8
       Data: 
@@ -86,7 +98,7 @@ MonoBehaviour:
       Data: 
     - Name: GuideEndEvents
       Entry: 7
-      Data: 5|GuideEvent[], Assembly-CSharp
+      Data: 6|GuideEvent[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 0
@@ -96,7 +108,7 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  TriggerType: 1
+  TriggerType: 4
   Words: []
   DontNeedClickEnd: 0
-  WaitingTime: 1
+  WaitingTime: 0

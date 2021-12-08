@@ -21905,7 +21905,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1276188766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30882,7 +30882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d264950b73f60c429a6dcb710f776ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLock: 1
+  isLock: 0
   elementConstructs:
   - {fileID: 462850911}
   - {fileID: 23447692}
@@ -33115,7 +33115,6 @@ MonoBehaviour:
   m_UIBattleSet: {fileID: 1739481071}
   difficultyInfo_Txt: {fileID: 113173982}
   difficultyTxt: {fileID: 1755905128}
-  tutorialCheck: {fileID: 1276188766}
   endlessHighScore: {fileID: 120006776}
   endlessUnlockText: {fileID: 797784770}
   endlessStartBtnObj: {fileID: 608813503}
@@ -36928,33 +36927,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3940100397282842057, guid: efad427a633dbca47ac42421b9004594, type: 3}
-      propertyPath: languageData
-      value: 
-      objectReference: {fileID: 11400000, guid: af6bd4cff502e3d4aa7ddffcc178e9a6, type: 2}
     - target: {fileID: 3979959846567427920, guid: efad427a633dbca47ac42421b9004594, type: 3}
       propertyPath: m_Name
       value: Game
-      objectReference: {fileID: 0}
-    - target: {fileID: 3979959846567427948, guid: efad427a633dbca47ac42421b9004594, type: 3}
-      propertyPath: NeedLoadData
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3979959846567427948, guid: efad427a633dbca47ac42421b9004594, type: 3}
-      propertyPath: NeedLoadGame
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3979959846567427948, guid: efad427a633dbca47ac42421b9004594, type: 3}
-      propertyPath: permitGameLevel
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3979959846567427948, guid: efad427a633dbca47ac42421b9004594, type: 3}
-      propertyPath: PremitDifficulty
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3979959846567427948, guid: efad427a633dbca47ac42421b9004594, type: 3}
-      propertyPath: GameLevels.Array.data[0].ExpRequire
-      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 3979959846567427949, guid: efad427a633dbca47ac42421b9004594, type: 3}
       propertyPath: m_RootOrder

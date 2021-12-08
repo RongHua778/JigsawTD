@@ -7,8 +7,8 @@ using System.IO;
 using Excel;
 using UnityEditor;
 
-namespace EditorTool
-{
+//namespace EditorTool
+//{
     public class ExcelConfig
     {
         public static readonly string excelsFolderPath = Application.dataPath + "/Excels/";
@@ -105,6 +105,6 @@ namespace EditorTool
 
         }
     }
-}
+//}
 
 
