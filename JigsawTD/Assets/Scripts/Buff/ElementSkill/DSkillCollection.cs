@@ -6,167 +6,105 @@ using DG.Tweening;
 
 public class RandomCritical : ElementSkill
 {
-    //五维属性随机波动
+    //暴击+25%，暴击伤害增加-100%-400%之间的随机波动
     public override List<int> Elements => new List<int> { 3, 3, 3 };
-
-    public override void Composite()
+    public override void Build()
     {
-        base.Composite();
-        strategy.InitAttackModify *= Random.Range(0.5f, 3f);
-        strategy.InitFirerateModify *= Random.Range(0.5f, 3f);
-        strategy.InitSlowRateModify *= Random.Range(0.5f, 3f);
-        strategy.InitCriticalRateModify *= Random.Range(0.5f, 3f);
-        strategy.InitSplashRangeModify *= Random.Range(0.5f, 3f);
+        base.Build();
+        strategy.ComCriticalIntensify += 0.25f;
     }
-
-    public override void OnEquip()
+    public override void Shoot(Bullet bullet = null)
     {
-        base.OnEquip();
-        strategy.InitAttackModify *= Random.Range(0.5f, 3f);
-        strategy.InitFirerateModify *= Random.Range(0.5f, 3f);
-        strategy.InitSlowRateModify *= Random.Range(0.5f, 3f);
-        strategy.InitCriticalRateModify *= Random.Range(0.5f, 3f);
-        strategy.InitSplashRangeModify *= Random.Range(0.5f, 3f);
+        bullet.CriticalPercentage += Random.Range(-1f, 4f) * strategy.TimeModify;
     }
+    //public override void Composite()
+    //{
+    //    base.Composite();
+    //    strategy.InitAttackModify *= Random.Range(0.5f, 3f);
+    //    strategy.InitFirerateModify *= Random.Range(0.5f, 3f);
+    //    strategy.InitSlowRateModify *= Random.Range(0.5f, 3f);
+    //    strategy.InitCriticalRateModify *= Random.Range(0.5f, 3f);
+    //    strategy.InitSplashRangeModify *= Random.Range(0.5f, 3f);
+    //}
+
+    //public override void OnEquip()
+    //{
+    //    base.OnEquip();
+    //    strategy.InitAttackModify *= Random.Range(0.5f, 3f);
+    //    strategy.InitFirerateModify *= Random.Range(0.5f, 3f);
+    //    strategy.InitSlowRateModify *= Random.Range(0.5f, 3f);
+    //    strategy.InitCriticalRateModify *= Random.Range(0.5f, 3f);
+    //    strategy.InitSplashRangeModify *= Random.Range(0.5f, 3f);
+    //}
 }
 
-public class AttackCritical : ElementSkill
+public class CloseCritical : ElementSkill
 {
-    //攻击力在50%-200%之间随机浮动
+    //近战暴击50%
     public override List<int> Elements => new List<int> { 3, 3, 0 };
-    float targetValue;
-    float currentValue;
-    float counter = 2;
-    public override void StartTurn()
+    public override void Shoot(Bullet bullet = null)
     {
-        base.StartTurn();
-        Duration += 999;
-    }
-    public override void Tick(float delta)
-    {
-        base.Tick(delta);
-        counter += delta;
-        if (counter > 2f)
+        if (bullet.GetTargetDistance() < 3f)
         {
-            counter = 0;
-            targetValue = Random.Range(0.25f, 2.5f);
-            DOTween.To(() => currentValue, x => currentValue = x, targetValue, 2);
+            bullet.CriticalRate += 0.5f * strategy.TimeModify;
         }
-        strategy.AttackAdjust = currentValue;
-    }
-
-    public override void EndTurn()
-    {
-        base.EndTurn();
-        Duration = 0;
-        strategy.AttackAdjust = 1;
-        currentValue = 1;
-        counter = 2;
     }
 }
 
-public class SpeedCritical : ElementSkill
+public class HitCritical : ElementSkill
 {
-    //攻击力在50%-200%之间随机浮动
+    //每击暴击率2%
     public override List<int> Elements => new List<int> { 3, 3, 1 };
-    float targetValue;
-    float currentValue;
-    float counter = 2;
-    public override void StartTurn()
+    public override void Shoot(Bullet bullet = null)
     {
-        base.StartTurn();
-        Duration += 999;
-    }
-    public override void Tick(float delta)
-    {
-        base.Tick(delta);
-        counter += delta;
-        if (counter > 2f)
-        {
-            counter = 0;
-            targetValue = Random.Range(0.25f, 2.5f);
-            DOTween.To(() => currentValue, x => currentValue = x, targetValue, 2);
-        }
-        strategy.SpeedAdjust = currentValue;
-    }
-
-    public override void EndTurn()
-    {
-        base.EndTurn();
-        Duration = 0;
-        strategy.SpeedAdjust = 1;
-        currentValue = 1;
-        counter = 2;
+        strategy.TurnFixCriticalRate += 0.02f * strategy.TimeModify;
     }
 }
 
 public class SlowCritical : ElementSkill
 {
-    //攻击力在50%-200%之间随机浮动
+    //每秒+1.5%暴击率
     public override List<int> Elements => new List<int> { 3, 3, 2 };
-    float targetValue;
-    float currentValue;
-    float counter = 2;
     public override void StartTurn()
     {
-        base.StartTurn();
         Duration += 999;
     }
+
     public override void Tick(float delta)
     {
         base.Tick(delta);
-        counter += delta;
-        if (counter > 2f)
-        {
-            counter = 0;
-            targetValue = Random.Range(0.25f, 2.5f);
-            DOTween.To(() => currentValue, x => currentValue = x, targetValue, 2);
-        }
-        strategy.SlowAdjust = currentValue;
+        strategy.TurnFixCriticalRate += 0.015f * delta * strategy.TimeModify;
     }
 
     public override void EndTurn()
     {
-        base.EndTurn();
         Duration = 0;
-        strategy.SlowAdjust = 1;
-        currentValue = 1;
-        counter = 2;
     }
 }
 
-public class SplashCritical : ElementSkill
+public class StartCritical : ElementSkill
 {
-    //攻击力在50%-200%之间随机浮动
+    //开局100%暴击
     public override List<int> Elements => new List<int> { 3, 3, 4 };
-    float targetValue;
-    float currentValue;
-    float counter = 2;
+    float intensify = 0;
     public override void StartTurn()
     {
         base.StartTurn();
-        Duration += 999;
+        Duration += 20;
+        intensify = 1f * strategy.TimeModify;
+        strategy.TurnFixCriticalRate += intensify;
     }
-    public override void Tick(float delta)
+
+    public override void TickEnd()
     {
-        base.Tick(delta);
-        counter += delta;
-        if (counter > 2f)
-        {
-            counter = 0;
-            targetValue = Random.Range(0.25f, 2.5f);
-            DOTween.To(() => currentValue, x => currentValue = x, targetValue, 2);
-        }
-        strategy.SplashAdjust = currentValue;
+        base.TickEnd();
+        strategy.TurnFixCriticalRate -= intensify;
     }
 
     public override void EndTurn()
     {
         base.EndTurn();
         Duration = 0;
-        strategy.SplashAdjust = 1;
-        currentValue = 1;
-        counter = 2;
     }
 }
 

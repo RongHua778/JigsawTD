@@ -80,6 +80,8 @@ public class StrategyBase
 
     private int forbidRange;
     public int ForbidRange { get => forbidRange; set => forbidRange = value; }
+
+    public bool UnFrozable = false;//不可冻结
     #endregion
     #region 基础加成
     private float initAttackModify = 1;

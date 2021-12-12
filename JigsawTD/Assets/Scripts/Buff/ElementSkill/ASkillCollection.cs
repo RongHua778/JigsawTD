@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class DoubleAttack : ElementSkill
 {
@@ -15,80 +16,100 @@ public class DoubleAttack : ElementSkill
     }
 }
 
-public class NearSpeed : ElementSkill
+public class HitAttack : ElementSkill
 {
-    //如果距离小于3，则攻速提升50%
+    //每次攻击提升3%攻击
     public override List<int> Elements => new List<int> { 0, 0, 1 };
-    float intensifyValue;
-    bool isIntensified = false;
+
     public override void Shoot(Bullet bullet = null)
     {
+        strategy.TurnAttackIntensify += 0.03f * strategy.TimeModify;
+    }
+}
 
-        if (bullet.GetTargetDistance() < 3f)
-        {
-            if (!isIntensified)
-            {
-                intensifyValue = 0.6f * strategy.TimeModify;
-                strategy.TurnSpeedIntensify += intensifyValue;
-                isIntensified = true;
-            }
-        }
-        else
-        {
-            if (isIntensified)
-            {
-                strategy.TurnSpeedIntensify -= intensifyValue;
-                isIntensified = false;
-            }
-        }
+public class TimeAttack : ElementSkill
+{
+    //攻击每秒提升2%
+    public override List<int> Elements => new List<int> { 0, 0, 2 };
+
+
+    public override void StartTurn()
+    {
+        Duration += 999;
+    }
+
+    public override void Tick(float delta)
+    {
+        base.Tick(delta);
+        strategy.TurnAttackIntensify += 0.02f * delta * strategy.TimeModify;
     }
 
     public override void EndTurn()
     {
-        isIntensified = false;
-        intensifyValue = 0;
+        Duration = 0;
     }
 }
 
-public class NearSlow : ElementSkill
+public class FlutAttack : ElementSkill
 {
-    //如果距离小于3，则减速效果提高1
-    public override List<int> Elements => new List<int> { 0, 0, 2 };
-
-    public override void Shoot(Bullet bullet = null)
-    {
-        if (bullet.GetTargetDistance() < 3f)
-        {
-            bullet.SlowRate += (1 * strategy.TimeModify);
-        }
-    }
-}
-
-public class NearCritical : ElementSkill
-{
-    //如果距离小于3，则子弹暴击率提高35%
+    //攻击波动
     public override List<int> Elements => new List<int> { 0, 0, 3 };
 
-    public override void Shoot(Bullet bullet = null)
-    {
-        if (bullet.GetTargetDistance() < 3f)
-        {
-            bullet.CriticalRate += 0.4f * strategy.TimeModify;
 
+    float targetValue;
+    float currentValue;
+    float counter = 2;
+    public override void StartTurn()
+    {
+        base.StartTurn();
+        Duration += 999;
+    }
+    public override void Tick(float delta)
+    {
+        base.Tick(delta);
+        counter += delta;
+        if (counter > 2f)
+        {
+            counter = 0;
+            targetValue = Random.Range(0.25f, 2.5f);
+            DOTween.To(() => currentValue, x => currentValue = x, targetValue, 2);
         }
+        strategy.AttackAdjust = currentValue;
+    }
+
+    public override void EndTurn()
+    {
+        base.EndTurn();
+        Duration = 0;
+        strategy.AttackAdjust = 1;
+        currentValue = 1;
+        counter = 2;
     }
 }
-public class NearSplash : ElementSkill
+public class StartAttack : ElementSkill
 {
-    //如果距离小于3，则子弹暴击率提高35%
+    //开局攻击
     public override List<int> Elements => new List<int> { 0, 0, 4 };
 
-    public override void Shoot(Bullet bullet = null)
+    float intensify = 0;
+    public override void StartTurn()
     {
-        if (bullet.GetTargetDistance() < 3f)
-        {
-            bullet.SputteringRange += (0.6f * strategy.TimeModify);
-        }
+        base.StartTurn();
+        Duration += 20;
+        intensify = 1.5f * strategy.TimeModify;
+        strategy.TurnAttackIntensify += intensify;
+    }
+
+    public override void TickEnd()
+    {
+        base.TickEnd();
+        strategy.TurnAttackIntensify -= intensify;
+    }
+
+    public override void EndTurn()
+    {
+        base.EndTurn();
+        Duration = 0;
     }
 }
 

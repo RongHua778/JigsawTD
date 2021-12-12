@@ -84,6 +84,7 @@ public class ScaleAndMove : IGameSystem
                 MoveTurorial = false;
                 CamMovement = Vector2.zero;
                 cam.transform.DOMove(camInitPos, 1f);
+                cam.orthographicSize = CamInitialSize;
                 GameEvents.Instance.TutorialTrigger(TutorialType.MouseMove);
             }
         }

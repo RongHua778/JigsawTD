@@ -186,24 +186,26 @@ MonoBehaviour:
     English: Unlock after Passing Standard mode on Difficulty 4
   - Key: DIFFICULTY0
     Chinese: "1.\u57FA\u7840\u64CD\u4F5C\u53CA\u6A21\u5757\u6559\u5B66"
-    English: 
+    English: 1.Basic tutorial
   - Key: DIFFICULTY1
     Chinese: "1.\u91CD\u6784\u673A\u5236\u6559\u5B66\n2.\u575A\u630120\u6CE2\u8FDB\u653B"
-    English: 1."Trap" will appear in the batllefield\n2.Stick to 40 wave
+    English: '1.Refactor turorial
+
+      2.20 waves'
   - Key: DIFFICULTY2
-    Chinese: "1.\u52A0\u5165\u6218\u573A\u9677\u9631\n2.\u575A\u630130\u6CE2\u8FDB\u653B"
-    English: 1.You have only 15 health
+    Chinese: "1.\u575A\u630130\u6CE2\u8FDB\u653B"
+    English: 1.30 waves
   - Key: DIFFICULTY3
-    Chinese: "1.\u6218\u573A\u4E2D\u5C06\u51FA\u73B0\u66F4\u591A\u9677\u9631"
-    English: 1.More Traps will apprear in the battlefield
+    Chinese: "1.\u52A0\u5165\u6218\u573A\u9677\u9631"
+    English: 1.Traps will apprear in the battlefield
   - Key: DIFFICULTY4
-    Chinese: 
-    English: 1.A tough challenge
+    Chinese: "1.\u989D\u5916\u7684\u9677\u9631"
+    English: 1.More traps appear
   - Key: DIFFICULTY5
-    Chinese: 
+    Chinese: "1.\u8270\u96BE\u7684\u6311\u6218"
     English: 1.A torture challenge
   - Key: DIFFICULTY6
-    Chinese: "1.\u4E0D\u53EF\u80FD\u5B8C\u6210\u7684\u4EFB\u52A1"
+    Chinese: "1.\u4E0D\u53EF\u80FD\u7684\u4EFB\u52A1"
     English: 1.Unpossible task
   - Key: NEEDTUTORIAL
     Chinese: "\u662F\u5426\u5F00\u542F\u6559\u7A0B\uFF1F"
@@ -226,7 +228,7 @@ MonoBehaviour:
       wit, since war is inevitable, let the enemy's debris fill the universe.
   - Key: TUTORIALPLEASE
     Chinese: "\u8BF7\u6309\u6559\u7A0B\u6307\u793A\u64CD\u4F5C"
-    English: 
+    English: Please follow the instructions
   - Key: LACKMONEY
     Chinese: "\u4EE3\u5E01\u4E0D\u8DB3"
     English: You don't have eneugh tokens
@@ -234,8 +236,8 @@ MonoBehaviour:
     Chinese: "\u91CD\u6784\u6240\u9700\u7D20\u6750\u4E0D\u8DB3"
     English: You don't have compositions needed
   - Key: PUTFIRST
-    Chinese: "\u8BF7\u5148\u653E\u7F6E\u7ED3\u6784\u4F53"
-    English: Please place the structure first
+    Chinese: "\u8BF7\u5148\u653E\u7F6E\u6A21\u5757"
+    English: Please place the module first
   - Key: NOTBUILDSTATE
     Chinese: "\u53EA\u53EF\u5728\u975E\u6218\u6597\u9636\u6BB5\u8FDB\u884C"
     English: Can not operate during battle state
@@ -262,11 +264,16 @@ MonoBehaviour:
     English: Use mouse wheel to scale the view
   - Key: PLACEGUIDE
     Chinese: "\u6309\u4F4F\u6A21\u5757\u53EF\u62D6\u52A8\n\u70B9\u51FB\u65CB\u8F6C\u6309\u94AE\u6216R\u952E\u53EF\u65CB\u8F6C\n\u8BF7\u5C06\u6A21\u5757\u6446\u653E\u5230\u7EFF\u8272\u5149\u6548\u6240\u793A\u4F4D\u7F6E"
-    English: Press and hold to drag the module\nClick the rotate button or R to rotate
-      module\nPlease place the module in the position shown by the green light
+    English: 'Press and hold to drag the module
+
+      Click the rotate button or
+      R to rotate module
+
+      Please place the module in the position shown by
+      the green light'
   - Key: TUTORIALPLACE
-    Chinese: "\u8BF7\u6309\u6559\u7A0B\u4F4D\u7F6E\u6446\u653E\u7ED3\u6784\u4F53"
-    English: Please place structure at tutorial position
+    Chinese: "\u8BF7\u6309\u6559\u7A0B\u4F4D\u7F6E\u6446\u653E\u6A21\u5757"
+    English: Please place module at tutorial position
   - Key: EMPTYSLOT
     Chinese: "\u653E\u7F6E\u4E00\u4E2A\u65B0\u91CD\u6784\u5854\u5728\u8BE5\u91CD\u6784\u5854\u4E0A\u65F6\uFF0C\u53EF\u4F7F\u5176\u88C5\u5907\u65B0\u91CD\u6784\u5854\u7684\u5143\u7D20\u6280\u80FD\u3002"
     English: When you place a new refactor turret on it, you can equip it with the
@@ -283,62 +290,90 @@ MonoBehaviour:
   - Key: UNPASS
     Chinese: "\u8BF7\u5148\u901A\u8FC7\u4E0A\u4E00\u96BE\u5EA6"
     English: Please pass the previous difficulty first
-  - Key: PLACERULE
-    Chinese: "\u6446\u653E\u6A21\u5757"
-    English: Placement Rule
-  - Key: PLANROUTE
-    Chinese: "\u89C4\u5212\u8DEF\u7EBF"
-    English: Plan a Route
-  - Key: COMPOSITERULE
-    Chinese: "\u91CD\u6784\u89C4\u5219"
-    English: Refactor Rule
-  - Key: TRAPRULE
-    Chinese: "\u6218\u573A\u9677\u9631"
-    English: Trap Rule
-  - Key: EQUIPRULE
-    Chinese: "\u91CD\u6784\u6280\u80FD"
-    English: Refactor Skill
+  - Key: GUIDEBTN01
+    Chinese: "\u6A21\u5757"
+    English: Module
+  - Key: GUIDEBTN02
+    Chinese: "\u5143\u7D20\u5854"
+    English: Element Turret
+  - Key: GUIDEBTN03
+    Chinese: "\u91CD\u6784\u5854"
+    English: Refactor Turret
+  - Key: GUIDEBTN04
+    Chinese: "\u5143\u7D20\u6280\u80FD"
+    English: Element Skill
+  - Key: GUIDEBTN05
+    Chinese: "\u5143\u7D20\u88C5\u8F7D"
+    English: Element Equipment
+  - Key: GUIDEBTN06
+    Chinese: "\u9677\u9631"
+    English: Trap
   - Key: GUIDETXT01
     Chinese: "1.\u6BCF\u4E2A\u6A21\u5757\u75313\u4E2A\u57FA\u672C\u683C\u548C1\u4E2A\u5143\u7D20\u5854\u683C\u7EC4\u6210.\n\n2.\u57FA\u672C\u683C\u53EF\u4F5C\u4E3A\u9053\u8DEF\uFF0C\u9632\u5FA1\u5854\u53EF\u4F5C\u4E3A\u969C\u788D\u5E76\u8FDB\u884C\u653B\u51FB\u3002\n\n3.\u653E\u7F6E\u6A21\u5757\u65F6\uFF0C\u9632\u5FA1\u5854\u4E0D\u53EF\u4E0E\u8D77\u70B9\uFF0C\u7EC8\u70B9\u53CA\u5176\u4ED6\u9632\u5FA1\u5854\u91CD\u5408\uFF0C\u800C\u57FA\u672C\u683C\u5219\u65E0\u4EFB\u4F55\u9650\u5236\uFF0C\u4E14\u4E0D\u4F1A\u8986\u76D6\u9632\u5FA1\u5854\u3002"
-    English: no translation yet!!!
+    English: '1. Each module consists of three basic tiles and one element turret
+      tile.
+
+      2. Basic tiles can be used as roads, and turret tile can be used
+      as obstacles and attacks.
+
+      3. When placing modules, turrets should not
+      overlap with the starting point, end point or other turrets. The basic tile
+      has no restrictions and will not cover turrets.'
+  - Key: GUIDETXT02
+    Chinese: "1.\u76EE\u524D\u5171\u67095\u79CD\u57FA\u7840\u5143\u7D20\u5854\uFF0C\u4EE3\u53F7\u4E3AABCDE.\n\n2.\u4EE3\u53F7\u540E\u7684\u6570\u5B57\u4E3A\u5143\u7D20\u5854\u54C1\u8D28\uFF0C\u5982C1\u8868\u793A\u54C1\u8D281\u7684\u6C34\u5143\u7D20\u5854\uFF0C\u54C1\u8D28\u8D8A\u9AD8\u9632\u5FA1\u5854\u5C5E\u6027\u8D8A\u5F3A\uFF0C\u6700\u9AD8\u54C1\u8D28\u4E3A5\u7EA7\u3002\n\n3.\u5347\u7EA7\u7CFB\u7EDF\u53EF\u4EE5\u63D0\u9AD8\u83B7\u53D6\u9AD8\u54C1\u8D28\u5143\u7D20\u5854\u7684\u6982\u7387\u3002"
+    English: '1. There are currently 5 element turrets, code-named ABCDE.
+
+      2.
+      The number after the code name is quality. For example, C1 represents water
+      elemental turret of quality 1.
+
+      3. Upgrading the system increases the
+      probability of obtaining high quality turrets.'
+  - Key: GUIDETXT03
+    Chinese: "1.\u91CD\u6784\u5854\u53EF\u4EE5\u7ECF\u7531\u914D\u65B9\u8FDB\u884C\u91CD\u6784\u83B7\u5F97\uFF0C\u6BCF\u4E2A\u914D\u65B9\u75313\u4E2A\u5143\u7D20\u5854\u7D20\u6750\u7EC4\u6210\uFF0C\u91CD\u6784\u540E\u7D20\u6750\u5143\u7D20\u5854\u4F1A\u88AB\u6D88\u8017\u3002\n\n2.\u6BCF\u79CD\u91CD\u6784\u5854\u5E26\u67091\u4E2A\u4E13\u5C5E\u7684\u88AB\u52A8\u6280\u80FD\u548C1\u4E2A\u5143\u7D20\u6280\u80FD\u3002\n\n3.\u91CD\u6784\u5854\u53EF\u4EE5\u8FDB\u884C\u5347\u7EA7\u5E76\u63D0\u5347\u5C5E\u6027\uFF0C\u6700\u9AD8\u7B49\u7EA7\u4E3A3\u3002"
+    English: '1. Refactor turrets can be obtained through blueprint. Each blueprint
+      consists of 3 element turrets, which will be consumed after refactor.
+
+      2.
+      Each refactor turret has a unique default skill and an element skill.
+
+      3.
+      Refactor turrets can be upgraded to a maximum level of 3.'
+  - Key: GUIDETXT04
+    Chinese: "1.\u91CD\u6784\u5854\u6839\u636E\u914D\u65B9\u5143\u7D20\u7EC4\u5408\u4E0D\u540C\uFF0C\u4F1A\u751F\u6210\u4E13\u5C5E\u7684\u5143\u7D20\u6280\u80FD\uFF0C\u76EE\u524D\u5171\u670935\u79CD\u4E0D\u540C\u7684\u5143\u7D20\u6280\u80FD.\n\n2.\u6BCF\u4E2A\u5143\u7D20\u8FD8\u4F1A\u4E3A\u91CD\u6784\u5854\u63D0\u4F9B\u989D\u5916\u7684\u5C5E\u6027\u52A0\u6210\u3002"
+    English: '1. Unique element skills will be generated based on the blueprint element
+      combination. Currently there are 35 different element skills.
+
+      2. Each
+      element also provides an additional stat bonus for refactor turrets.'
+  - Key: GUIDETXT05
+    Chinese: "1.\u91CD\u6784\u5854\u9664\u4E86\u76F4\u63A5\u90E8\u7F72\u5728\u6218\u573A\u4E0A\uFF0C\u8FD8\u53EF\u4EE5\u90E8\u7F72\u5728\u5DF2\u6709\u7684\u91CD\u6784\u5854\u4E0A\uFF0C\u8FD9\u4E48\u505A\u53EF\u4F7F\u5176\u88C5\u8F7D\u65B0\u91CD\u6784\u5854\u7684\u5143\u7D20\u6280\u80FD\uFF0C\u4F46\u662F\u4F1A\u6D88\u8017\u65B0\u91CD\u6784\u5854\u3002\n\n2.\u6BCF\u4E2A\u91CD\u6784\u5854\u9ED8\u8BA4\u62E5\u67092\u4E2A\u5143\u7D20\u6280\u80FD\u69FD\uFF0C\u5373\u6700\u591A\u53EF\u4EE5\u88C5\u8F7D\u4E00\u4E2A\u989D\u5916\u7684\u5143\u7D20\u6280\u80FD\u3002"
+    English: '1. In addition to being deployed directly on the battlefield, refactor
+      turrets can also be deployed on existing refactor turrets, which will equip
+      the existing turret with it''s element skill.
+
+      2. Each refactor turret
+      has 2 element skill slots by default, meaning it can equip up to one additional
+      element skill.'
+  - Key: GUIDETXT06
+    Chinese: "1.\u9677\u9631\u662F\u5728\u6218\u573A\u4E0A\u968F\u673A\u751F\u6210\u7684\u683C\u5B50,\u521D\u59CB\u51FA\u4E8E\u672A\u63ED\u793A\u72B6\u6001.\n\n2.\u5F53\u5C06\u8DEF\u7EBF\u8FDE\u901A\u9677\u9631\u65F6,\u5C06\u63ED\u793A\u8BE5\u9677\u9631\u5E76\u4E14\u654C\u4EBA\u7ECF\u8FC7\u65F6\u4F1A\u89E6\u53D1\u7279\u6B8A\u6548\u679C.\n\n3.\u9677\u9631\u53EF\u4EE5\u82B1\u8D39\u4EE3\u5E01\u6539\u53D8\u5176\u4F4D\u7F6E,\u6BCF\u6B21\u6362\u4F4D\u540E\u4EF7\u683C\u90FD\u4F1A\u4E0A\u5347."
+    English: '1. Traps are randomly generated tiles on the battlefield, initially
+      in an unrevealed state.
+
+      2. When a path has passed a trap, the trap is
+      revealed and a special effect is triggered when an enemy passes by.
+
+      3.
+      The trap can spend tokens to change its position, and the price increases with
+      each switch.'
   - Key: GUIDEVIDEO01
-    Chinese: "\u6BCF\u4E2A\u7ED3\u6784\u4F53\u7531\u4E09\u683C\u57FA\u672C\u683C\u548C\u4E00\u683C\u9632\u5FA1\u5854\u7EC4\u6210\u3002\u653E\u7F6E\u7ED3\u6784\u4F53\u65F6\u9700\u8981\u786E\u4FDD\u8D77\u70B9\u548C\u7EC8\u70B9\u4E4B\u95F4\u80FD\u591F\u901A\u8FC7\u57FA\u672C\u683C\u76F8\u8FDE\uFF0C\u800C\u9632\u5FA1\u5854\u53EF\u4EE5\u4F5C\u4E3A\u969C\u788D\u3002"
-    English: Each structure consists of three basic tile and a turret. The basic
-      tile can serves as path while the turret can act as a obstacle.
+    Chinese: "\u6BCF\u4E2A\u6A21\u5757\u7531\u4E09\u683C\u57FA\u672C\u683C\u548C\u4E00\u683C\u9632\u5FA1\u5854\u7EC4\u6210\u3002\u653E\u7F6E\u6A21\u5757\u65F6\u9700\u8981\u786E\u4FDD\u8D77\u70B9\u548C\u7EC8\u70B9\u4E4B\u95F4\u80FD\u591F\u901A\u8FC7\u57FA\u672C\u683C\u76F8\u8FDE\uFF0C\u800C\u9632\u5FA1\u5854\u53EF\u4EE5\u4F5C\u4E3A\u969C\u788D\u3002"
+    English: Each module consists of three basic tile and a turret. The basic tile
+      can serves as path while the turret can act as a obstacle.
   - Key: GUIDEVIDEO02
     Chinese: "\u6CE8\u610F\uFF1A\u9632\u5FA1\u5854\u53EA\u53EF\u4EE5\u653E\u7F6E\u5728\u7A7A\u683C\u6216\u57FA\u672C\u683C\u4E0A\uFF0C\u800C\u57FA\u672C\u683C\u53EF\u4EE5\u653E\u7F6E\u5728\u4EFB\u4F55\u4F4D\u7F6E\u3002"
     English: 'Note: Turret can only be placed on empty tile or basic tile while the
       basic tile can be placed anywhere.'
-  - Key: GUIDEVIDEO03
-    Chinese: "\u5F53\u5E0C\u671B\u5EF6\u957F\u8DEF\u7EBF\u65F6\uFF0C\u9700\u8981\u63D0\u524D\u5728\u89C4\u5212\u597D\u7684\u8DEF\u7EBF\u4E0A\u6446\u653E\u57FA\u672C\u683C\uFF0C\u7136\u540E\u5229\u7528\u9632\u5FA1\u5854\u4F5C\u4E3A\u969C\u788D\u5EF6\u957F\u8DEF\u7EBF\u3002"
-    English: If you want to extend the route, you need to place basic tile in advance,
-      and then place turret as an obstacle.
-  - Key: GUIDEVIDEO04
-    Chinese: "\u63D0\u793A\uFF1A\u70B9\u51FB\u7A7A\u767D\u4F4D\u7F6E\u4E5F\u53EF\u4EE5\u82B1\u8D39\u4EE3\u5E01\u8D2D\u4E70\u5355\u683C\u57FA\u672C\u683C\u3002"
-    English: 'Tip: You can also buy a single basic tile by clicking on a empty tile.'
-  - Key: GUIDEVIDEO05
-    Chinese: "\u5F53\u51D1\u9F50\u914D\u65B9\u6240\u9700\u7684\u7D20\u6750\u65F6\uFF0C\u53EF\u4EE5\u91CD\u6784\u9632\u5FA1\u5854\uFF0C\u5E76\u6839\u636E\u7EC4\u5408\u4E0D\u540C\u5E26\u6709\u4E0D\u540C\u7684\u6548\u679C\u3002"
-    English: When you have all the elements of a blueprint, you can refactor a turret.
-      Refactor turret have different effects depending on it's elements.
-  - Key: GUIDEVIDEO06
-    Chinese: "\u63D0\u793A\uFF1A\u5546\u5E97\u6BCF3\u56DE\u5408\u5237\u65B0\u4E00\u6B21\u914D\u65B9\u3002"
-    English: 'Tip: The store refreshes every 3 waves.'
-  - Key: GUIDEVIDEO07
-    Chinese: "\u901A\u8FC7\u5C06\u9053\u8DEF\u7ECF\u8FC7\u6218\u573A\u4E0A\u968F\u673A\u51FA\u73B0\u7684\u9677\u9631\u683C\u5B50\uFF0C\u5C06\u4F1A\u63ED\u793A\u8BE5\u9677\u9631\uFF0C\u6BCF\u4E2A\u9677\u9631\u5728\u654C\u4EBA\u7ECF\u8FC7\u65F6\u4F1A\u89E6\u53D1\u7279\u6B8A\u6548\u679C\u3002"
-    English: The trap will be revealed when a route is passing the tile. Each trap
-      will trigger a special effect when the enemy passes by.
-  - Key: GUIDEVIDEO08
-    Chinese: "\u63D0\u793A\uFF1A\u4F60\u53EF\u4EE5\u82B1\u8D39\u4E00\u5B9A\u4EE3\u5E01\u5C06\u9677\u9631\u683C\u5B50\u6362\u5230\u5176\u4ED6\u4F4D\u7F6E"
-    English: 'Tip: you can spend some tokens to change the trap to another position.'
-  - Key: GUIDEVIDEO09
-    Chinese: "\u6BCF\u4E2A\u91CD\u6784\u5854\u6839\u636E\u5176\u5143\u7D20\u7EC4\u5408\u4F1A\u6709\u4E0D\u540C\u7684\u5143\u7D20\u6280\u80FD\uFF0C\u6BCF\u4E2A\u91CD\u6784\u5854\u90FD\u9ED8\u8BA4\u5E26\u67091\u4E2A\u5143\u7D20\u6280\u80FD\u3002\u4F60\u53EF\u4EE5\u5C06\u65B0\u91CD\u6784\u5854\u653E\u7F6E\u5728\u5DF2\u91CD\u6784\u5854\u4E0A\uFF0C\u4F7F\u5176\u5177\u5907\u989D\u5916\u7684\u5143\u7D20\u6280\u80FD\uFF0C\u4F46\u8FD9\u4E48\u505A\u4F1A\u6D88\u8017\u65B0\u91CD\u6784\u5854\u3002"
-    English: Each refactor turret has an unique element skill according to it's element
-      combination. You can put the new turret on the existing turret to make it have
-      additional element skills, but doing so will consume the new turret.
-  - Key: GUIDEVIDEO10
-    Chinese: "\u63D0\u793A\uFF1A\u6BCF\u4E2A\u91CD\u6784\u5854\u9ED8\u8BA4\u53EA\u53EF\u4EE5\u518D\u914D\u59071\u4E2A\u989D\u5916\u5143\u7D20\u6280\u80FD\uFF0C\u89C6\u4E4E\u8BE5\u91CD\u6784\u5854\u7684\u5143\u7D20\u6280\u80FD\u69FD\u6570\u91CF\u3002"
-    English: 'Tip: each refactor turret can only be equipped with 1 additional element
-      skill by default, depending on it''s number of element skill slots.'
   - Key: DRAWINFO
     Chinese: "\u5F53\u524D\u56DE\u5408\u6CA1\u6709\u6784\u5EFA\u65F6\uFF0C\u6784\u5EFA\u4EF7\u683C\u5C06\u964D\u4F4E\uFF1B\n\u5F53\u524D\u964D\u4EF7\u767E\u5206\u6BD4\uFF1A"
     English: 'If you haven''t build last turn, the price will be reduced\n current
@@ -348,7 +383,7 @@ MonoBehaviour:
     English: Next Wave[Space]
   - Key: DRAWMODULE
     Chinese: "\u6784\u5EFA\u6A21\u5757"
-    English: Build Structure
+    English: Build module
   - Key: CHANCEBEFORE
     Chinese: "\u5F53\u524D"
     English: Now
@@ -367,9 +402,6 @@ MonoBehaviour:
   - Key: DEGRADE
     Chinese: "\u964D\u7EA7"
     English: Degrade
-  - Key: SHOPBLUEPRINT
-    Chinese: "\u53EF\u9501\u5B9A\uFF1A"
-    English: 'Lock:'
   - Key: OWNBLUEPRINT
     Chinese: "\u62E5\u6709\u914D\u65B9"
     English: Owned
@@ -524,9 +556,6 @@ MonoBehaviour:
   - Key: BUYGROUND
     Chinese: "\u8D2D\u4E70\u4E00\u5757\u57FA\u7840\u683C"
     English: Build a basic tile?
-  - Key: //towername
-    Chinese: 
-    English: 
   - Key: CONSTRUCTOR
     Chinese: "\u7EC4\u5408\u70AE"
     English: Constructor
@@ -640,156 +669,157 @@ MonoBehaviour:
     Chinese: "\u4F7F\u81EA\u8EAB\u6240\u6709\u653B\u51FB\u52A0\u6210\u7FFB\u500D"
     English: Double all attack increased
   - Key: AAB
-    Chinese: "\u5782\u76F4\u6253\u51FB"
-    English: Verical Strike
+    Chinese: "\u5145\u80FD\u5B50\u5F39"
+    English: Charged Bullet
   - Key: AABINFO
-    Chinese: "\u653B\u51FB\u8DDD\u79BB\u5C0F\u4E8E3\u7684\u76EE\u6807\u65F6\uFF0C\u653B\u901F\u63D0\u534760%"
-    English: Firerate increased by 60 when target's distance is less than 3
+    Chinese: "\u6BCF\u6B21\u653B\u51FB\u63D0\u5347\u672C\u56DE\u54083%\u653B\u51FB\u529B"
+    English: Attack increased by 3% each shoot.
   - Key: AAC
-    Chinese: "\u51DD\u6EDE\u89C6\u91CE"
-    English: Hitch Vision
+    Chinese: "\u5BD2\u6C14\u9635\u5730"
+    English: Cold Front
   - Key: AACINFO
-    Chinese: "\u653B\u51FB\u8DDD\u79BB\u5C0F\u4E8E3\u7684\u76EE\u6807\u65F6\uFF0C\u5B50\u5F39\u51CF\u901F\u6548\u679C\u63D0\u53471"
-    English: Slow increased by 1 when target's distance is less than 3
+    Chinese: "\u6BCF\u56DE\u5408\u5F00\u59CB\u540E\uFF0C\u653B\u51FB\u529B\u6BCF\u79D2\u63D0\u53472%"
+    English: Attack increases by 2% per second after the start of each wave.
   - Key: AAD
-    Chinese: "\u4E0D\u7A33\u5B9A\u8F74"
-    English: Unstable Shaft
+    Chinese: "\u9AD8\u80FD\u7206\u7834"
+    English: Energy Blasting
   - Key: AADINFO
-    Chinese: "\u653B\u51FB\u8DDD\u79BB\u5C0F\u4E8E3\u7684\u76EE\u6807\u65F6\uFF0C\u5B50\u5F39\u66B4\u51FB\u7387\u63D0\u9AD840%"
-    English: Critical increased by 40% when target's distance is less than 3
+    Chinese: "\u9632\u5FA1\u5854\u653B\u51FB\u529B\u572825%-250%\u4E4B\u95F4\u968F\u673A\u6D6E\u52A8"
+    English: Turret's attack fluctuates between 25% and 250%
   - Key: AAE
-    Chinese: "\u8FD1\u8DDD\u8F70\u70B8"
-    English: Close Bombing
+    Chinese: "\u5F3A\u653B\u6838\u5FC3"
+    English: Attack Core
   - Key: AAEINFO
-    Chinese: "\u653B\u51FB\u8DDD\u79BB\u5C0F\u4E8E3\u7684\u76EE\u6807\u65F6\uFF0C\u5B50\u5F39\u6E85\u5C04\u8303\u56F4\u63D0\u9AD80.6"
-    English: Splash range increased by 0.6 when target's distance is less than 3
+    Chinese: "\u6218\u6597\u5F00\u59CB\u524D20\u79D2\uFF0C\u653B\u51FB\u529B\u63D0\u5347150%"
+    English: Turret's attack increased by 150% before 20 seconds of each wave
   - Key: BBB
     Chinese: "\u8F7B\u6750\u6599\u5316"
     English: Lightweight Material
   - Key: BBBINFO
-    Chinese: "\u9020\u6210\u7684\u4F24\u5BB3\u51CF\u5C1135%\uFF0C\u989D\u5916\u653B\u51FB2\u4E2A\u76EE\u6807"
-    English: Bullet's damage is reduced by 35% but attacks 2 additional targets
+    Chinese: "\u5BF9\u540C\u4E00\u76EE\u6807\u8FDB\u884C\u653B\u51FB\u65F6\uFF0C\u6BCF\u6B21\u653B\u51FB\u653B\u901F+20%\uFF0C\u4E0A\u9650300%"
+    English: Firerate increased by 20% each shoot when it is attacking the same target(up
+      to 300%).
   - Key: BBA
-    Chinese: "\u5145\u80FD\u5B50\u5F39"
-    English: Charged Bullet
+    Chinese: "\u5782\u76F4\u6253\u51FB"
+    English: Verical Strike
   - Key: BBAINFO
-    Chinese: "\u6BCF\u6B21\u653B\u51FB\u63D0\u5347\u672C\u56DE\u54082%\u653B\u51FB\u529B"
-    English: Attack increased by 2% each shoot.
+    Chinese: "\u653B\u51FB\u8DDD\u79BB\u5C0F\u4E8E3\u7684\u76EE\u6807\u65F6\uFF0C\u653B\u901F\u63D0\u534775%"
+    English: Firerate increased by 75% when target's distance is less than 3
   - Key: BBC
-    Chinese: "\u6781\u5BD2\u5B50\u5F39"
-    English: Cold Bullet
+    Chinese: "\u8FC7\u8F7D\u5F39\u5939"
+    English: Overload Cartridge
   - Key: BBCINFO
-    Chinese: "\u6BCF\u6B21\u653B\u51FB\u63D0\u5347\u672C\u56DE\u54080.02\u51CF\u901F"
-    English: Slow increased by 0.02 each shoot.
+    Chinese: "\u6BCF\u56DE\u5408\u5F00\u59CB\u540E\uFF0C\u653B\u901F\u6BCF\u79D2\u63D0\u53472%"
+    English: Firerate increases by 2% per second after the start of each wave.
   - Key: BBD
-    Chinese: "\u9707\u8361\u5C04\u51FB"
-    English: Concussive Shot
+    Chinese: "\u5F31\u70B9\u51FB\u7834"
+    English: Vulnerability Shoot
   - Key: BBDINFO
-    Chinese: "\u6BCF\u6B21\u653B\u51FB\u63D0\u5347\u672C\u56DE\u54081%\u66B4\u51FB\u7387"
-    English: Critical increased by 1% each shoot.
+    Chinese: "\u9632\u5FA1\u5854\u653B\u901F\u572825%-250%\u4E4B\u95F4\u968F\u673A\u6D6E\u52A8"
+    English: Turret's firerate fluctuates between 25% and 250%
   - Key: BBE
-    Chinese: "\u52A0\u91CD\u5F39\u836F"
-    English: Ammunition
+    Chinese: "\u52A0\u901F\u6838\u5FC3"
+    English: Speed Core
   - Key: BBEINFO
-    Chinese: "\u6BCF\u6B21\u653B\u51FB\u63D0\u5347\u672C\u56DE\u54080.01\u6E85\u5C04\u8303\u56F4"
-    English: Splash range increased by 0.01 each shoot.
+    Chinese: "\u6218\u6597\u5F00\u59CB\u524D20\u79D2\uFF0C\u653B\u901F\u63D0\u5347150%"
+    English: Turret's firerate increased by 150% before 20 seconds of each wave
   - Key: CCC
     Chinese: "\u6025\u51BB\u6280\u672F"
     English: Forst Technology
   - Key: CCCINFO
-    Chinese: "\u4F7F\u9632\u5FA1\u5854\u7684\u5143\u7D20\u6280\u80FD\u69FD\u6570\u91CF\u53D8\u4E3A4"
-    English: Change the amount of turret's element skill slot to 4.
+    Chinese: "\u5143\u7D20\u6280\u80FD\u69FD+2"
+    English: Turret's element skill slot + 2.
   - Key: CCA
-    Chinese: "\u5BD2\u6C14\u9635\u5730"
-    English: Cold Front
+    Chinese: "\u51DD\u6EDE\u89C6\u91CE"
+    English: Hitch Vision
   - Key: CCAINFO
-    Chinese: "\u6BCF\u56DE\u5408\u5F00\u59CB\u540E\uFF0C\u653B\u51FB\u529B\u6BCF\u79D2\u63D0\u53472%"
-    English: Attack increases by 2% per second after the start of each wave.
+    Chinese: "\u653B\u51FB\u8DDD\u79BB\u5C0F\u4E8E3\u7684\u76EE\u6807\u65F6\uFF0C\u5B50\u5F39\u51CF\u901F\u6548\u679C\u63D0\u53471.5"
+    English: Slow increased by 1.5 when target's distance is less than 3
   - Key: CCB
-    Chinese: "\u8FC7\u8F7D\u5F39\u5939"
-    English: Overload Cartridge
+    Chinese: "\u6781\u5BD2\u5B50\u5F39"
+    English: Cold Bullet
   - Key: CCBINFO
-    Chinese: "\u6BCF\u56DE\u5408\u5F00\u59CB\u540E\uFF0C\u653B\u901F\u6BCF\u79D2\u63D0\u53472%"
-    English: Firerate increases by 2% per second after the start of each wave.
+    Chinese: "\u6BCF\u6B21\u653B\u51FB\u63D0\u5347\u672C\u56DE\u54080.05\u51CF\u901F"
+    English: Slow increased by 0.05 each shoot.
   - Key: CCD
-    Chinese: "\u70ED\u80FD\u57FA\u5EA7"
-    English: Energy Base
+    Chinese: "\u5BD2\u51B0\u70B8\u5F39"
+    English: Ice Bomb
   - Key: CCDINFO
-    Chinese: "\u6BCF\u56DE\u5408\u5F00\u59CB\u540E\uFF0C\u66B4\u51FB\u7387\u6BCF\u79D2\u63D0\u53471%"
-    English: Critical increases by 1% per second after the start of each wave.
+    Chinese: "\u51CF\u901F+0.5\uFF0C\u9632\u5FA1\u5854\u51CF\u901F\u572825%-250%\u4E4B\u95F4\u968F\u673A\u6D6E\u52A8"
+    English: Slow + 0.5, Turret's slow fluctuates between 25% and 250%
   - Key: CCE
-    Chinese: "\u586B\u5145\u706B\u836F"
-    English: Filled Gunpowder
+    Chinese: "\u51CF\u901F\u6838\u5FC3"
+    English: Slow Core
   - Key: CCEINFO
-    Chinese: "\u6BCF\u56DE\u5408\u5F00\u59CB\u540E\uFF0C\u6E85\u5C04\u8303\u56F4\u6BCF\u79D2\u63D0\u53470.01"
-    English: Splash range increases by 0.01 per second after the start of each wave.
+    Chinese: "\u6218\u6597\u5F00\u59CB\u524D20\u79D2\uFF0C\u51CF\u901F\u63D0\u53474"
+    English: Turret's slow increased by 4 before 20 seconds of each wave
   - Key: DDD
     Chinese: "\u6DF7\u6C8C\u79D1\u6280"
     English: Chaos Technology
   - Key: DDDINFO
-    Chinese: "\u5408\u6210\u6216\u88C5\u5907\u540E\uFF0C\u4F7F\u9632\u5FA1\u5854\u7684\u6240\u6709\u57FA\u7840\u5C5E\u6027\u968F\u673A\u53D8\u531650%-300%\uFF08\u4E0D\u5305\u62EC\u653B\u51FB\u8303\u56F4\uFF09"
-    English: When composited or equipped, randomly changed all base stats of the
-      turret by 50% to 300%(without range)
+    Chinese: "\u66B4\u51FB\u7387+25%\uFF0C\u66B4\u51FB\u4F24\u5BB3\u589E\u52A0-100%-400%\u7684\u968F\u673A\u6D6E\u52A8"
+    English: Critical + 25%, Bullet's critical damage randomly increased by -100&
+      to 400%
   - Key: DDA
-    Chinese: "\u9AD8\u80FD\u7206\u7834"
-    English: Energy Blasting
+    Chinese: "\u4E0D\u7A33\u5B9A\u8F74"
+    English: Unstable Shaft
   - Key: DDAINFO
-    Chinese: "\u9632\u5FA1\u5854\u653B\u51FB\u529B\u572825%-250%\u4E4B\u95F4\u968F\u673A\u6D6E\u52A8"
-    English: Turret's attack fluctuates between 25% and 250%
+    Chinese: "\u653B\u51FB\u8DDD\u79BB\u5C0F\u4E8E3\u7684\u76EE\u6807\u65F6\uFF0C\u5B50\u5F39\u66B4\u51FB\u7387\u63D0\u9AD850%"
+    English: Critical increased by 50% when target's distance is less than 3
   - Key: DDB
-    Chinese: "\u5F31\u70B9\u51FB\u7834"
-    English: Vulnerability Shoot
+    Chinese: "\u9707\u8361\u5C04\u51FB"
+    English: Concussive Shot
   - Key: DDBINFO
-    Chinese: "\u9632\u5FA1\u5854\u653B\u901F\u572825%-250%\u4E4B\u95F4\u968F\u673A\u6D6E\u52A8"
-    English: Turret's firerate fluctuates between 25% and 250%
+    Chinese: "\u6BCF\u6B21\u653B\u51FB\u63D0\u5347\u672C\u56DE\u54082%\u66B4\u51FB\u7387"
+    English: Critical increased by 2% each shoot.
   - Key: DDC
-    Chinese: "\u5BD2\u51B0\u70B8\u5F39"
-    English: Ice Bomb
+    Chinese: "\u70ED\u80FD\u57FA\u5EA7"
+    English: Energy Base
   - Key: DDCINFO
-    Chinese: "\u9632\u5FA1\u5854\u51CF\u901F\u572825%-250%\u4E4B\u95F4\u968F\u673A\u6D6E\u52A8"
-    English: Turret's slow fluctuates between 25% and 250%
+    Chinese: "\u6BCF\u56DE\u5408\u5F00\u59CB\u540E\uFF0C\u66B4\u51FB\u7387\u6BCF\u79D2\u63D0\u53471.5%"
+    English: Critical increases by 1.5% per second after the start of each wave.
   - Key: DDE
-    Chinese: "\u72C2\u8F70\u6EE5\u70B8"
-    English: Bombardment
+    Chinese: "\u66B4\u51FB\u6838\u5FC3"
+    English: Critical Core
   - Key: DDEINFO
-    Chinese: "\u9632\u5FA1\u5854\u6E85\u5C04\u572825%-250%\u4E4B\u95F4\u968F\u673A\u6D6E\u52A8"
-    English: Turret's splash fluctuates between 25% and 250%
+    Chinese: "\u6218\u6597\u5F00\u59CB\u524D20\u79D2\uFF0C\u66B4\u51FB\u7387\u63D0\u5347100%"
+    English: Turret's splash increased by 100% before 20 seconds of each wave
   - Key: EEE
     Chinese: "\u539F\u5B50\u4E2D\u5FC3"
     English: Atomic Center
   - Key: EEEINFO
-    Chinese: "\u5B50\u5F39\u6BCF\u6E85\u5C04\u52301\u4E2A\u654C\u4EBA\uFF0C\u5C31\u4F7F\u5B50\u5F39\u4F24\u5BB3\u63D0\u9AD820%"
-    English: Increased bullet's damage by 20% for each enemy it hit
+    Chinese: "\u653B\u51FB\u8303\u56F4\u5185\u6BCF\u67091\u4E2A\u654C\u4EBA\uFF0C\u6E85\u5C04+0.2"
+    English: Splash increased by 0.2 for each enemy in range
   - Key: EEA
-    Chinese: "\u5F3A\u653B\u6838\u5FC3"
-    English: Attack Core
+    Chinese: "\u8FD1\u8DDD\u8F70\u70B8"
+    English: Close Bombing
   - Key: EEAINFO
-    Chinese: "\u6218\u6597\u5F00\u59CB\u524D20\u79D2\uFF0C\u653B\u51FB\u529B\u63D0\u5347100%"
-    English: Turret's attack increased by 100% before 20 seconds of each wave
+    Chinese: "\u653B\u51FB\u8DDD\u79BB\u5C0F\u4E8E3\u7684\u76EE\u6807\u65F6\uFF0C\u5B50\u5F39\u6E85\u5C04\u8303\u56F4\u63D0\u9AD80.75"
+    English: Splash range increased by 0.75 when target's distance is less than 3
   - Key: EEB
-    Chinese: "\u52A0\u901F\u6838\u5FC3"
-    English: Speed Core
+    Chinese: "\u52A0\u91CD\u5F39\u836F"
+    English: Ammunition
   - Key: EEBINFO
-    Chinese: "\u6218\u6597\u5F00\u59CB\u524D20\u79D2\uFF0C\u653B\u901F\u63D0\u5347100%"
-    English: Turret's firerate increased by 100% before 20 seconds of each wave
+    Chinese: "\u6BCF\u6B21\u653B\u51FB\u63D0\u5347\u672C\u56DE\u54080.03\u6E85\u5C04\u8303\u56F4"
+    English: Splash range increased by 0.03 each shoot.
   - Key: EEC
-    Chinese: "\u51CF\u901F\u6838\u5FC3"
-    English: Slow Core
+    Chinese: "\u586B\u5145\u706B\u836F"
+    English: Filled Gunpowder
   - Key: EECINFO
-    Chinese: "\u6218\u6597\u5F00\u59CB\u524D20\u79D2\uFF0C\u51CF\u901F\u63D0\u53471.5"
-    English: Turret's slow increased by 1.5 before 20 seconds of each wave
+    Chinese: "\u6BCF\u56DE\u5408\u5F00\u59CB\u540E\uFF0C\u6E85\u5C04\u8303\u56F4\u6BCF\u79D2\u63D0\u53470.02"
+    English: Splash range increases by 0.02 per second after the start of each wave.
   - Key: EED
-    Chinese: "\u66B4\u51FB\u6838\u5FC3"
-    English: Critical Core
+    Chinese: "\u72C2\u8F70\u6EE5\u70B8"
+    English: Bombardment
   - Key: EEDINFO
-    Chinese: "\u6218\u6597\u5F00\u59CB\u524D20\u79D2\uFF0C\u66B4\u51FB\u7387\u63D0\u534775%"
-    English: Turret's splash increased by 75% before 20 seconds of each wave
+    Chinese: "\u6E85\u5C04+0.25\uFF0C\u9632\u5FA1\u5854\u6E85\u5C04\u572825%-250%\u4E4B\u95F4\u968F\u673A\u6D6E\u52A8"
+    English: Splash + 0.25, Turret's splash fluctuates between 25% and 250%
   - Key: ABC
     Chinese: "\u5EC9\u4EF7\u57FA\u5EA7"
     English: Inferior Base
   - Key: ABCINFO
     Chinese: "\u8BE5\u9632\u5FA1\u5854\u5347\u7EA7\u8D39\u7528-50%"
-    English: Upgrade cost reduced by 50%
+    English: This turret's upgrade cost reduced by 50%
   - Key: ABD
     Chinese: "\u73AF\u72B6\u63D2\u4EF6"
     English: Annular Plug-in
@@ -797,26 +827,26 @@ MonoBehaviour:
     Chinese: "\u4F7F\u9632\u5FA1\u5854\u653B\u51FB\u8303\u56F4\u53D8\u4E3A\u5706\u5F62"
     English: Turn this turret's attack range in to circle
   - Key: ABE
-    Chinese: "\u6298\u6263\u5956\u5238"
+    Chinese: "\u52A0\u88C5\u70AE\u53E3"
     English: Discount Tickets
   - Key: ABEINFO
-    Chinese: "\u4F7F\u6784\u5EFA\u7ED3\u6784\u4F53\u8D39\u7528-50%"
-    English: Reduce the cost of buidling structure by 50%
+    Chinese: "\u653B\u51FB\u529B-30%\uFF0C\u53EF\u989D\u5916\u653B\u51FB1\u4E2A\u76EE\u6807"
+    English: Attack-30%, attack an additional target
   - Key: ACD
-    Chinese: "\u5FEB\u901F\u4EA4\u6613"
-    English: Fast Transaction
+    Chinese: "\u91CD\u578B\u706B\u70AE"
+    English: Great Bombard
   - Key: ACDINFO
-    Chinese: "\u4F7F\u4EA4\u6362\u9677\u9631\u8D39\u7528-50%"
-    English: Reduce the cost of relocating Trap by 50%
+    Chinese: "\u5BF9\u5269\u4F59\u751F\u547D\u503C\u5927\u4E8E50%\u7684\u654C\u4EBA\u9020\u6210\u7684\u4F24\u5BB3\u63D0\u9AD850%"
+    English: Damage increased by 50% if target has more than 50% Health
   - Key: ACE
-    Chinese: "\u79D1\u6280\u8DC3\u8FDB"
-    English: Technology Leaps
+    Chinese: "\u7834\u51B0\u70AE\u5F39"
+    English: Ice Shell
   - Key: ACEINFO
-    Chinese: "\u4F7F\u7CFB\u7EDF\u5347\u7EA7\u8D39\u7528-50%"
-    English: Reduce system upgrade cost by 50%
+    Chinese: "\u5BF9\u5904\u4E8E\u51CF\u901F\u72B6\u6001\u7684\u654C\u4EBA\u9020\u6210\u7684\u4F24\u5BB3\u63D0\u9AD850%"
+    English: Damage increased by 50% if target is slowing down
   - Key: ADE
     Chinese: "\u5E7B\u5316\u6784\u9020"
-    English: Unreal Structure
+    English: Unreal module
   - Key: ADEINFO
     Chinese: "\u91CD\u6784\u540E\u53D8\u5316\u4E3A\u4E00\u4E2A\u968F\u673A\u6280\u80FD"
     English: Becomes a random element skill while refactor
@@ -824,29 +854,26 @@ MonoBehaviour:
     Chinese: "\u52A0\u957F\u70AE\u7BA1"
     English: Longer barrel
   - Key: BCDINFO
-    Chinese: "\u9632\u5FA1\u5854\u653B\u51FB\u901F\u5EA6-30%\uFF0C\u653B\u51FB\u8303\u56F4+2"
-    English: Firerate - 30%, Range + 2
+    Chinese: "\u653B\u51FB\u8303\u56F4+1\uFF0C\u5982\u679C\u653B\u51FB\u8303\u56F4\u5927\u4E8E6\uFF0C\u5219\u989D\u5916+1"
+    English: Range +1, and +2 if range is greater than 6
   - Key: BCE
-    Chinese: "\u4E07\u80FD\u5143\u7D20"
-    English: Perfect Element
-  - Key: BCEINFO
-    Chinese: "\u91CD\u6784\u540E\u83B7\u5F971\u4E2A\u4E07\u80FD\u5143\u7D20"
-    English: Gain 1 perfect element when refactor
-  - Key: BDE
     Chinese: "\u7EF4\u4FEE\u5DE5\u5382"
     English: Repair Factory
-  - Key: BDEINFO
-    Chinese: "\u76F8\u90BB\u6807\u8BB0\u7684\u6548\u679C\u63D0\u5347100%"
-    English: The effect of adjacent Traps will be increased by 100%
-  - Key: CDE
+  - Key: BCEINFO
+    Chinese: "\u8BE5\u9632\u5FA1\u5854\u4E0D\u4F1A\u88AB\u51BB\u7ED3"
+    English: This turret will not be frozen
+  - Key: BDE
     Chinese: "\u94F8\u5E01\u5DE5\u5382"
-    English: Money Factory
-  - Key: CDEINFO
+    English: Repair Factory
+  - Key: BDEINFO
     Chinese: "\u5B50\u5F39\u6BCF\u6B21\u547D\u4E2D\u67098%\u6982\u7387\u83B7\u5F972\u91D1\u5E01"
-    English: Each shoot has a 8% chance of gaining 2 coins
-  - Key: //Enemy
-    Chinese: 
-    English: 
+    English: The bullet has an 8% chance of getting 2 coin
+  - Key: CDE
+    Chinese: "\u60CA\u559C\u5956\u5238"
+    English: Supprise Lottery
+  - Key: CDEINFO
+    Chinese: "\u6A21\u5757\u6784\u5EFA\u8D39\u7528\u964D\u4F4E50%"
+    English: Reduce the cost of building module by 50%
   - Key: SOILDER
     Chinese: "\u9B23\u72D7"
     English: Hyena
@@ -891,9 +918,6 @@ MonoBehaviour:
   - Key: GOLDKEEPERINFO
     Chinese: "\u654C\u5BF9\u6587\u660E\u7684\u8D44\u6E90\u8865\u7ED9\u8F66\uFF0C\u6BCF\u53D7\u5230\u4E00\u5B9A\u4F24\u5BB3\u5C31\u4F1A\u6389\u843D\u4EE3\u5E01"
     English: Tokens will be dropped every time a certain amount of damage is taken
-  - Key: //boss
-    Chinese: 
-    English: 
   - Key: DIVIDER
     Chinese: "\u8783\u87F9"
     English: Crab
@@ -1048,177 +1072,192 @@ MonoBehaviour:
     English: Connection complete, basic response test begin.
   - Key: Guide03
     Chinese: "\u57FA\u7840\u53CD\u5E94\u8FD8\u4E0D\u9519,\u770B\u6765\u53CD\u624B\u6559\u6388\u8FD9\u6B21\u6CA1\u6709\u628A\u8FB9\u89D2\u6599\u5B66\u5458\u4E22\u6765\u6211\u8FD9."
-    English: <color=#FFEA6D>Please hold down the left mouse button and drag to move
-      the camera.</color>
+    English: Looks good, it seems that the "Backhand" professor did not throw the
+      leftover students to me this time.
   - Key: Guide04
     Chinese: "\u73B0\u5728\u8BF7\u628A\u6CE8\u610F\u529B\u653E\u5728\u6218\u573A\u4E2D\u592E,<color=#FFEA6D>\u7EA2\u8272\u683C\u4E3A\u5165\u53E3,\u84DD\u8272\u683C\u4E3A\u51FA\u53E3</color>,\u9664\u6B64\u4E4B\u5916\u7684<color=#FFEA6D>\u7070\u8272\u683C\u5B50\u4E3A\u57FA\u672C\u683C.</color>"
-    English: Good.
+    English: Now, please focus on the center of the battlefield. The <color=#FFEA6D>red
+      tile is the entrance, the blue tile is the exit, and the gray tile is the basic
+      tile</color>.
   - Key: Guide05
-    Chinese: "\u654C\u4EBA\u5C06\u4ECE\u8DC3\u8FC1\u5165\u53E3\u51FA\u53D1,\u901A\u8FC7\u57FA\u672C\u683C\u79FB\u52A8,\u5E76\u6700\u7EC8\u62B5\u8FBE\u8DC3\u8FC1\u51FA\u53E3,<color=#FFEA6D>\u84DD\u8272\u79FB\u52A8\u7BAD\u5934\u53EF\u9884\u89C8\u654C\u4EBA\u7684\u884C\u8FDB\u8DEF\u7EBF.</color>"
-    English: <color=#FFEA6D>Then try using the mouse wheel to zoom in and out.</color>
+    Chinese: "\u654C\u4EBA\u5C06\u4ECE\u5165\u53E3\u51FA\u53D1,\u901A\u8FC7\u57FA\u672C\u683C\u79FB\u52A8,\u5E76\u6700\u7EC8\u62B5\u8FBE\u51FA\u53E3,<color=#FFEA6D>\u84DD\u8272\u79FB\u52A8\u7BAD\u5934\u53EF\u9884\u89C8\u654C\u4EBA\u7684\u884C\u8FDB\u8DEF\u7EBF.</color>"
+    English: The enemy will start at the red tile, move through the base tiles, and
+      finally reach the exit tile, <color=#FFEA6D>where the blue movement arrow previews
+      the enemy's path.</color>
   - Key: Guide06
     Chinese: "\u8FD9\u662F\u4F60\u5F53\u524D\u62E5\u6709\u7684<color=#FFEA6D>\u4EE3\u5E01</color>,\u968F\u7740\u6CE2\u6570\u7684\u8FDB\u884C\u4F60\u5C06\u5728<color=#FFEA6D>\u6BCF\u6CE2\u5F00\u59CB\u65F6\u83B7\u5F97\u989D\u5916\u7684\u4EE3\u5E01.</color>"
-    English: Pefect.
+    English: This is the <color=#FFEA6D>token</color> you currently have, and as
+      the wave progresses you will get additional tokens at the start of each wave.
   - Key: Guide07
     Chinese: "\u8FD9\u662F\u4F60\u5F53\u524D\u7684<color=#FFEA6D>\u751F\u547D\u76FE</color>,\u6BCF\u4E2A\u6F0F\u6389\u7684\u654C\u4EBA\u90FD\u4F1A\u4F7F\u4F60\u5931\u53BB\u4E00\u5B9A\u7684\u751F\u547D\u76FE."
-    English: Deployment officer, the Bard civilization is attempting a time warp
-      through this interface, you are taking charge of the defense deployment.
+    English: This is your current <color=#FFEA6D>health </color>, and every missed
+      enemy will cost your health.
   - Key: Guide08
     Chinese: "\u5C4F\u5E55\u4E0A\u65B9\u663E\u793A\u4E86<color=#FFEA6D>\u5F53\u524D\u6CE2\u6570</color>\u53CA<color=#FFEA6D>\u4E0B\u4E00\u6CE2\u654C\u4EBA\u7684\u4FE1\u606F</color>,\u5C06\u9F20\u6807\u60AC\u505C\u5728\u56FE\u6807\u4E0A\u53EF\u663E\u793A\u654C\u4EBA\u4FE1\u606F."
-    English: Now, I'm going to give you a quick tutorial. Please focus on the center
-      of the battlefield.
+    English: Information about the <color=#FFEA6D>current wave and the enemies</color>
+      is displayed at the top of the screen. Hover the mouse over the icon to display
+      enemy information.
   - Key: Guide09
     Chinese: "\u53F3\u4E0B\u89D2\u662F<color=#FFEA6D>\u6784\u9020\u6A21\u5757\u529F\u80FD</color>,\u6784\u9020\u6A21\u5757\u83B7\u53D6\u9632\u5FA1\u5854\u8FDB\u884C\u9632\u5FA1\u7684\u4E3B\u8981\u65B9\u5F0F."
-    English: <color=#FFEA6D>Red squares represent the entrance, blue squares represent
-      the exit, and moving blue arrows mark the enemy's path.</color>
+    English: The lower right corner is <color=#FFEA6D>the module button,</color>
+      which is the main way to obtains the defense turret.
   - Key: Guide10
     Chinese: "\u6309\u94AE<color=#FFEA6D>\u53F3\u65B9\u7684\u6570\u5B57</color>\u4E3A\u5F53\u524D\u7684<color=#FFEA6D>\u6784\u9020\u4EF7\u683C</color>,<color=#FFEA6D>\u6BCF\u6B21\u8FDB\u884C\u6784\u9020\u90FD\u4F1A\u4F7F\u8BE5\u4EF7\u683C\u63D0\u9AD810.</color>"
-    English: <color=#FFEA6D>The grey tile is the basic tile, through which the enemy
-      moves towards the exit.</color>
+    English: <color=#FFEA6D>The number to the right of the button is the current
+      module price, and the price will increased by 10 each time you build a module.</color>
   - Key: Guide11
     Chinese: "\u73B0\u5728\u70B9\u51FB\u6A21\u5757\u6784\u9020\u6309\u94AE,\u8FDB\u884C\u4E00\u6B21\u6A21\u5757\u6784\u9020\u5427!"
-    English: Your job is to prevent the enemy from reaching the exit.
+    English: Now click on the module build button to build a module!
   - Key: Guide12
     Chinese: "\u6BCF\u6B21\u6784\u9020\u90FD\u5C06\u751F\u62103\u4E2A\u968F\u673A\u6A21\u5757,\u800C\u6BCF\u4E2A\u6A21\u5757\u75313\u4E2A\u57FA\u672C\u683C\u548C1\u4E2A\u5143\u7D20\u9632\u5FA1\u5854\u7EC4\u6210."
-    English: The upper right corner shows our coins supply for you, <color=#FFEA6D>it
-      will increases by 10 per wave.</color>
+    English: Each build will generate three random modules, each of which consists
+      of three base tiles and an element turret.
   - Key: Guide13
     Chinese: "\u6A21\u5757\u88AB\u6446\u653E\u8FDB\u6218\u573A\u540E,<color=#FFEA6D>\u57FA\u672C\u683C\u53EF\u4EE5\u4F5C\u4E3A\u9053\u8DEF,\u800C\u9632\u5FA1\u5854\u53EF\u4EE5\u4F5C\u4E3A\u969C\u788D\u4EE5\u53CA\u8FDB\u884C\u653B\u51FB</color>."
-    English: In the bottom right corner is the <color=#FFEA6D>Building Structure
-      button</color>. <color=#FFEA6D>Now spend some coins to build a structure..</color>
+    English: When modules are placed on the battlefield, <color=#FFEA6D>the basic
+      tile can be used as a path, while the turret can be used as an obstacle and
+      attack.</color>
   - Key: Guide131
     Chinese: "\u8FDB\u884C\u6446\u653E\u65F6,<color=#FFEA6D>\u65B0\u6A21\u5757\u53EF\u4EE5\u4E0E\u5DF2\u6709\u683C\u5B50\u91CD\u53E0</color>,\u800C\u9632\u5FA1\u5854\u4F4D\u7F6E\u4E0D\u53EF\u4E0E\u8D77\u70B9,\u7EC8\u70B9\u53CA\u5176\u4ED6\u9632\u5FA1\u5854\u91CD\u53E0."
-    English: Each structure consists of<color=#FFEA6D> 3 "basic tile" and 1 "element
-      turret"</color>, <color=#FFEA6D>basic tiles can be used as a path, while the
-      turret can be used as an obstacle.</color>
+    English: New modules can overlap with existing tiles, while defense turrets cannot
+      overlap with starting, ending, or other defense towers.
   - Key: Guide14
     Chinese: "\u73B0\u5728\u5C31\u6765\u9009\u62E9\u7B2C\u4E00\u4E2A\u6A21\u5757\u5427!"
-    English: 
+    English: Now try choosing the first module!
   - Key: Guide15
     Chinese: "\u505A\u5F97\u4E0D\u9519,\u5B66\u5458.\u901A\u8FC7\u94FA\u8BBE\u57FA\u672C\u683C\u4F5C\u4E3A\u9053\u8DEF,\u5E76\u4EE5\u9632\u5FA1\u5854\u4F5C\u4E3A\u969C\u788D,\u6211\u4EEC\u53EF\u4EE5<color=#FFEA6D>\u5EF6\u957F\u654C\u4EBA\u7684\u884C\u8FDB\u8DEF\u7EBF</color>."
-    English: <color=#FFEA6D>Using turret as obstacles, and making sure the start
-      and destination point are connected by basic tiles.</color>
+    English: Well done.By laying basic tiles as roads and using turrets as obstacles,
+      we can <color=#FFEA6D>extend the enemy's path</color>.
   - Key: Guide16
     Chinese: "<color=#FFEA6D>\u8BF7\u70B9\u51FB\u9009\u4E2D\u9632\u5FA1\u5854</color>,\u67E5\u770B\u9632\u5FA1\u5854\u7684\u4FE1\u606F\u9762\u677F\u548C\u653B\u51FB\u8303\u56F4."
-    English: <color=#FFEA6D>Now select a structure, rotate and position it according
-      to the sign,</color> and you will learn basic pathfinding rules.
+    English: Now select Defense turret to view the information panel and it's attack
+      scope.
   - Key: Guide17
     Chinese: "\u9632\u5FA1\u5854\u51C6\u5907\u5C31\u7EEA,\u70B9\u51FB\u4E0B\u4E00\u6CE2\u6309\u94AE\u5427,\u8BA9\u5DF4\u5FB7\u6587\u660E\u611F\u53D7\u4F60\u4E3A\u4ED6\u4EEC\u9001\u6765\u7684\u7B2C\u4E00\u679A\u70AE\u5F39."
-    English: You successfully extend the enemy's path, which you can continue to
-      master in the rest of the battle.
+    English: The turrets are ready. Click the next wave button, and let the Bard
+      civilization feel the first cannonball you send them.
   - Key: Guide18
     Chinese: "\u4F60\u53EF\u4EE5\u4E0D\u5FC5\u5728\u6BCF\u4E2A\u56DE\u5408\u90FD\u6784\u5EFA\u6A21\u5757,\u5982\u679C\u4F60<color=#FFEA6D>\u5728\u4E00\u56DE\u5408\u6CA1\u6709\u8FDB\u884C\u4EFB\u4F55\u6784\u5EFA,\u6784\u5EFA\u4EF7\u683C\u5C06\u4F1A\u4E0B\u964D</color>."
-    English: In the upper right corner is your remaining health, Each enemy that
-      reaches the end will deal 1 damage to you.
+    English: You don't have to build modules every turn, and <color=#FFEA6D>if you
+      don't build anything in a turn, the build price will go down.</color>
   - Key: Guide181
     Chinese: "\u6784\u5EFA\u6309\u94AE<color=#FFEA6D>\u5DE6\u65B9\u7684\u6570\u5B57</color>\u663E\u793A\u4E0D\u8FDB\u884C\u6784\u5EFA\u65F6,\u4E0B\u56DE\u5408\u4EF7\u683C\u7684<color=#FFEA6D>\u964D\u4EF7\u5E45\u5EA6(\u5F53\u524D10%)</color>."
-    English: When your health goes to zero, we will be forced to abandon this interface.
+    English: <color=#FFEA6D>The number to the left of the Build button shows the
+      price reduction for the next round (current 10%) without building.</color>
   - Key: Guide19
-    Chinese: "\u5982\u679C\u573A\u4E0A\u9632\u5FA1\u529B\u5145\u8DB3\u7684\u8BDD,\u8FD9\u56DE\u5408\u5C31\u5C1D\u8BD5\u4E0D\u8FDB\u884C\u6784\u5EFA\u76F4\u63A5\u5F00\u59CB\u4E0B\u4E00\u56DE\u5408\u5427."
-    English: Right at the top shows the incoming waves we detected,\n as well as
-      the type of incoming enemies.
+    Chinese: "\u73B0\u5728\u573A\u4E0A\u9632\u5FA1\u529B\u5145\u8DB3,\u8FD9\u56DE\u5408\u5C31\u5C1D\u8BD5\u4E0D\u8FDB\u884C\u6784\u5EFA\u76F4\u63A5\u5F00\u59CB\u4E0B\u4E00\u56DE\u5408\u5427."
+    English: Now you have enough defense power, try not to build this turn and move
+      on to the next wave.
   - Key: Guide191
     Chinese: "\u77E5\u9053\u5417,\u5EF6\u957F\u8DEF\u7EBF\u65F6\u9700\u8981\u63D0\u524D\u89C4\u5212\u654C\u4EBA\u7684\u8DEF\u5F84,<color=#FFEA6D>\u5982\u679C\u65E0\u6CD5\u8FDE\u901A\u8D77\u70B9\u548C\u7EC8\u70B9\u65F6\u662F\u65E0\u6CD5\u6446\u653E\u6A21\u5757\u7684</color>."
-    English: To view information about an enemy, move the mouse pointer to the icon
-      of the enemy.
+    English: To extend the route, you need to plan the enemy's path in advance, and
+      <color=#FFEA6D>you can't place modules if there's no path connect the start
+      and end points.</color>
   - Key: Guide20
     Chinese: "\u4E3A\u6B64\u4F60\u9700\u8981\u6BCF\u6B21\u63D0\u524D\u94FA\u8BBE\u4E00\u90E8\u5206\u7684\u8DEF\u6BB5,\u901A\u8FC7\u591A\u6B21\u6446\u653E\u5B8C\u6210\u8DEF\u5F84\u642D\u5EFA."
-    English: <color=#FFEA6D>Now press the button below to start the battle state.</color>
+    English: To achieve this, you need to lay out a portion of the road at a time,
+      and complete the path by placing it several times.
   - Key: Guide21
     Chinese: "\u7531\u4E8E\u4E0A\u56DE\u5408\u6CA1\u6709\u8FDB\u884C\u6784\u5EFA,\u4F60\u79EF\u7D2F\u4E86\u66F4\u591A\u7684\u4EE3\u5E01,\u672C\u56DE\u5408\u5C31\u5C1D\u8BD5\u8FDE\u7EED\u6784\u5EFA\u4E24\u6B21\u6A21\u5757\u5427."
-    English: Well done.
+    English: You've accumulated more tokens because you didn't build in the last
+      turn, so try building modules twice in a row this turn.
   - Key: Guide22
     Chinese: "\u5F88\u597D,\u73B0\u5728\u518D\u6765\u6784\u5EFA\u7B2C\u4E8C\u4E2A\u6A21\u5757."
-    English: <color=#FFEA6D>Every time you build a structure, the price will increases
-      by 10.</color> Coins also have other uses, and you need to allocate them wisely.
+    English: Good, now let's build the second module.
   - Key: Guide23
     Chinese: "\u63D0\u524D\u94FA\u8BBE\u9053\u8DEF\u662F\u5EF6\u957F\u8DEF\u7EBF\u7684\u91CD\u8981\u6280\u5DE7,\u4F60\u53EF\u4EE5\u5728\u4E4B\u540E\u7684\u6218\u6597\u4E2D\u9010\u6E10\u638C\u63E1."
-    English: But now, <color=#FFEA6D>try to build another structure</color>.
+    English: Laying roads ahead of time is an important skill for extending routes
+      that you can master later in the battle.
   - Key: Guide24
     Chinese: "\u5F53\u4F60\u51C6\u5907\u597D\u4E86\u5C31\u5F00\u59CB\u4E0B\u4E00\u6CE2\u6218\u6597\u5427."
-    English: "This time you deploy a new element turret which has different characteristic\u3002"
+    English: Start the next wave when you're ready.
   - Key: Guide25
     Chinese: "\u7531\u4E8E\u8DC3\u8FC1\u57FA\u7AD9\u7684\u7269\u8D28\u6CE2\u52A8,\u6211\u4EEC\u80FD\u591F\u83B7\u53D6\u91D1\u6728\u6C34\u706B\u571F5\u79CD\u4E0D\u540C\u7684\u5143\u7D20\u9632\u5FA1\u5854,\u4EE3\u53F7\u4E3AABCDE."
-    English: <color=#FFEA6D>Now click on the turret on the grid to view its information
-      and attack range</color>.
+    English: We are able to acquire five different element turrets, Gold, Wood, Water,
+      Fire and Earth, code-named ABCDE.
   - Key: Guide26
     Chinese: "\u4EE3\u53F7\u540E\u7684\u6570\u5B57\u4E3A\u5143\u7D20\u5854\u7684\u54C1\u8D28,\u4F8B\u5982C1\u4EE3\u8868\u54C1\u8D281\u7684\u6C34\u5143\u7D20,<color=#FFEA6D>\u54C1\u8D28\u8D8A\u9AD8\u7684\u5143\u7D20\u5854\u5C5E\u6027\u4E5F\u8D8A\u5F3A.</color>"
-    English: Well done. When you're ready, you can start the next wave.
+    English: The number after the code is the quality. For example, C1 represents
+      the water element of quality 1. <color=#FFEA6D>The higher the quality, the
+      stronger the turret.</color>
   - Key: Guide27
     Chinese: "\u4E3A\u4E86\u83B7\u53D6\u66F4\u9AD8\u54C1\u8D28\u7684\u5143\u7D20\u5854,\u4F60\u9700\u8981\u63D0\u5347<color=#FFEA6D>\u7CFB\u7EDF\u7B49\u7EA7.</color>"
-    English: We managed to hold off two waves of attack, but to go further, we needed
-      a more powerful turret.
+    English: To get higher quality turrets, you need to level up the system.
   - Key: Guide28
     Chinese: "\u8FD9\u91CC\u663E\u793A\u4E86\u4F60\u5F53\u524D\u7684\u7CFB\u7EDF\u7B49\u7EA7,\u53CA\u5347\u7EA7\u7CFB\u7EDF\u6240\u9700\u7684\u4EE3\u5E01.\u73B0\u5728\u5C31\u70B9\u51FB\u5347\u7EA7\u4E00\u6B21\u7CFB\u7EDF\u5427!"
-    English: <color=#FFEA6D>Now build the third structure</color>, and I'll walk
-      you through a<color=#FFEA6D> "Refactor"</color>
+    English: Here shows your current system level and the tokens needed to upgrade
+      the system.Try click on to upgrade now!
   - Key: Guide29
     Chinese: "\u505A\u5F97\u597D,\u6784\u5EFA\u6A21\u5757\u65F6\u83B7\u53D6\u9AD8\u54C1\u8D28\u5143\u7D20\u5854\u7684\u6982\u7387\u63D0\u5347\u4E86,\u4F60\u53EF\u4EE5\u5728\u4E4B\u540E\u7684\u6218\u6597\u4E2D\u7EE7\u7EED\u63D0\u5347\u7CFB\u7EDF\u7B49\u7EA7."
-    English: <color=#FFEA6D>Please click the button on the left side to open the
-      shop and select a blueprint that has collect enough element.</color>
+    English: Well done, the chance of getting a high quality turret when building
+      a module has been increased, and you can continue to upgrade the system later
+      in the battle.
   - Key: Guide30
     Chinese: "\u5173\u4E8E\u6A21\u5757\u548C\u7CFB\u7EDF\u7684\u6559\u5B66\u5C31\u5230\u6B64\u7ED3\u675F,\u68C0\u6D4B\u5230\u672C\u6B21\u5165\u4FB5\u5171\u670910\u6CE2\u654C\u4EBA,\u8BF7\u575A\u5B88\u5230\u6700\u540E!"
-    English: <color=#FFEA6D>The shop refreshes a batch of refactor turret blueprint
-      every 3 waves, </color>and the components of each blueprint are completely
-      random.
-  - Key: Guide31
-    Chinese: "\u7EC4\u6210\u5143\u7D20\u4F1A\u540C\u65F6\u63D0\u4F9B\u5C5E\u6027\u52A0\u6210,<color=#FFEA6D>\u8BF7\u5C06\u9F20\u6807\u60AC\u505C\u5728\u5143\u7D20\u6280\u80FD\u69FD\u4E0A</color>,\u53EF\u4EE5\u67E5\u770B\u8BE5\u5143\u7D20\u6280\u80FD\u63D0\u4F9B\u7684\u5C5E\u6027\u52A0\u6210."
-    English: <color=#FFEA6D>Refactor turrets have their own default skill, and a
-      element skill depending on the composition elements.</color>
-  - Key: Guide32
-    Chinese: 
-    English: Component elements also provide benefit. <color=#FFEA6D>Hover the mouse
-      over the element skill slot to view the benefit provided by the elements.</color>
-  - Key: //22
-    Chinese: 
-    English: 
-  - Key: Guide221
-    Chinese: "\u73B0\u5728,<color=#FFEA6D>\u70B9\u51FB\u91CD\u6784\u6309\u94AE\u5E76\u5C06\u5176\u90E8\u7F72\u5728\u6218\u573A\u4E0A.</color>"
-    English: Ok,<color=#FFEA6D>now build and place it on the grid.</color>
-  - Key: //12
-    Chinese: 
-    English: 
-  - Key: Guide332
-    Chinese: "\u6CE8\u610F,\u6BCF\u4E2A\u91CD\u6784\u5854\u6709<color=#FFEA6D>2\u4E2A\u5143\u7D20\u6280\u80FD\u69FD,\u5982\u679C\u5C06\u4E24\u4E2A\u91CD\u6784\u5854\u91CD\u53E0\u90E8\u7F72,\u5219\u4F1A\u8BA9\u539F\u91CD\u6784\u5854\u83B7\u5F97\u989D\u5916\u7684\u5143\u7D20\u6280\u80FD.</color>"
-    English: Note that each refactor turret has 2 elemental skill slots, and if you
-      place a new refactor turret on top of it, it will gain a additional elemental
-      skill.
-  - Key: Guide33
-    Chinese: "\u91CD\u6784\u662F\u63D0\u5347\u6218\u6597\u529B\u7684\u5173\u952E,\u73B0\u5728\u76F4\u63A5\u5F00\u59CB\u4E0B\u4E00\u6CE2\u6218\u6597\u5427."
-    English: Refactori is the key to improving your power, so let's move on to the
-      next battle.
-  - Key: //13
-    Chinese: 
-    English: 
-  - Key: Guide34
-    Chinese: "\u6700\u540E\u6211\u5C06\u4ECB\u7ECD<color=#FFEA6D\u7CFB\u7EDF\u7B49\u7EA7.</color>"
-    English: Let me introduce the <color=#FFEA6D>System Level.</color>
-  - Key: Guide35
-    Chinese: "\u7CFB\u7EDF\u5347\u7EA7\u6309\u94AE\u4E0A\u663E\u793A\u4E86\u4F60\u7684\u5F53\u524D<color=#FFEA6D>\u7CFB\u7EDF\u7B49\u7EA7</color>\u548C\u5176<color=#FFEA6D>\u5347\u7EA7\u6240\u9700\u7684\u4EE3\u5E01</color>."
-    English: The system button displays your <color=#FFEA6D>current system level
-      and the tokens required to upgrade it.</color>
-  - Key: Guide36
-    Chinese: "<color=#FFEA6D>\u5347\u7EA7\u7CFB\u7EDF\u53EF\u4EE5\u63D0\u9AD8\u6784\u5EFA\u5143\u7D20\u5854\u7684\u54C1\u8D28,\u4EE5\u53CA\u5728\u91CD\u6784\u5546\u5E97\u5237\u51FA\u65B0\u7684\u9AD8\u7EA7\u914D\u65B9.</color>."
-    English: <color=#FFEA6D>Upgrade your system level will improve the quality of
-      elemental turret and refresh new advanced recipes in the shop.</color>.
-  - Key: Guide37
-    Chinese: "<color=#FFEA6D>\u5982\u679C\u4F60\u5728\u672C\u56DE\u5408\u6CA1\u6709\u8FDB\u884C\u6784\u5EFA\u7ED3\u6784\u4F53,\u5219\u4F1A\u4F7F\u6784\u5EFA\u4EF7\u683C\u964D\u4F4E10%</color>."
-    English: Also, <color=#FFEA6D>if you don't build srtucture in this turn, it will
-      reduce the build price by 10%</color>.
-  - Key: Guide38
-    Chinese: "\u73B0\u5728\u7684\u9632\u5FA1\u529B\u91CF\u5145\u8DB3,\u8BF7\u76F4\u63A5\u5F00\u59CB\u4E0B\u4E00\u6CE2\u6218\u6597\u5427."
-    English: Now we have enough defenses. Let's move on.
-  - Key: //14
-    Chinese: 
-    English: 
-  - Key: Guide39
-    Chinese: "\u5C06\u4F60\u7684\u4EE3\u5E01\u7075\u6D3B\u6295\u5165\u5728\u62BD\u53D6\u6A21\u5757,\u5347\u7EA7\u7CFB\u7EDF,\u6216\u5347\u7EA7\u91CD\u6784\u5854\u4E0A,\u4EE5\u83B7\u53D6\u6700\u5927\u6536\u76CA."
-    English: Invest your tokens flexibly on building structures, upgrade system,
-      or ugrade rafactor turrets for maximum benefit.
-  - Key: Guide40
-    Chinese: "<color=#FFEA6D>\u6211\u628A\u66F4\u591A\u6307\u5F15\u7684\u5185\u5BB9\u653E\u5728\u4E86\u5DE6\u4E0A\u89D2\u7684\u6307\u5F15\u9762\u677F\u91CC</color>,\u8BF7\u5728\u4EFB\u4F55\u65F6\u5019\u67E5\u770B."
-    English: I've put more of the guidelines in the top left guidance panel, please
-      check it out anytime.
+    English: This is the end of the module and system teaching, the intrusion detected
+      a total of 10 waves of enemies, please stick to the end!
+  - Key: Guide200
+    Chinese: "\u5728\u4E0A\u4E00\u573A\u7684\u6218\u6597\u4E2D\u4F60\u7684\u8868\u73B0\u4E0D\u9519,\u66F4\u9AD8\u7EA7\u7684\u4F7F\u7528\u6743\u9650\u5DF2\u7ECF\u901A\u8FC7."
+    English: You did well in the last battle, and the advanced access has been approved.
+  - Key: Guide201
+    Chinese: "\u8FD9\u6B21\u6211\u5C06\u6307\u5F15\u4F60\u5173\u4E8E\u91CD\u6784\u7684\u673A\u5236,\u719F\u7EC3\u638C\u63E1\u540E\u5C06\u5927\u5927\u63D0\u9AD8\u6218\u6597\u529B."
+    English: This time I will guide you through the mechanics of refactor, which
+      will greatly improve your combat effectiveness.
+  - Key: Guide202
+    Chinese: "\u9996\u5148\u70B9\u51FB\u5DE6\u4FA7\u7684\u5165\u53E3\u8FDB\u5165\u91CD\u6784\u9762\u677F."
+    English: First click the entry on the left to enter the Refactor panel.
+  - Key: Guide203
+    Chinese: "\u91CD\u6784\u9762\u677F<color=#FFEA6D>\u6BCF3\u56DE\u5408\u4F1A\u5237\u65B0\u4E00\u6279\u91CD\u6784\u914D\u65B9.</color>"
+    English: <color=#FFEA6D>The refactor panel refreshes a batch of blueprints every
+      three waves.</color>
+  - Key: Guide204
+    Chinese: "\u6BCF\u4E2A<color=#FFEA6D>\u91CD\u6784\u914D\u65B9\u75313\u4E2A\u5143\u7D20\u9632\u5FA1\u5854\u4F5C\u4E3A\u7D20\u6750\u7EC4\u6210</color>,\u5F53\u51D1\u9F503\u4E2A\u7D20\u6750\u65F6\u5C06\u53EF\u4EE5\u8FDB\u884C\u91CD\u6784."
+    English: <color=#FFEA6D>Each blueprint is made up of three element turrets</color>,
+      which can be rafactor when all three are assembled.
+  - Key: Guide205
+    Chinese: "\u6211\u4E3A\u4F60\u63D0\u4F9B\u4E86\u4E00\u7B14\u989D\u5916\u7684\u4EE3\u5E01,\u5C1D\u8BD5\u5728\u672C\u56DE\u5408\u6784\u5EFA3\u4E2A\u6A21\u5757\u6765\u51D1\u9F50\u4E00\u4E2A\u914D\u65B9\u5427."
+    English: I've provided you with an extra token, so try building 3 modules this
+      turn to get a blueprint together.
+  - Key: Guide206
+    Chinese: "\u5F88\u597D,\u4F60\u6210\u529F\u51D1\u9F50\u4E86\u91CD\u6784\u5854\u914D\u65B9\u6240\u9700\u7684\u7D20\u6750."
+    English: Good. You've got all the pieces you need to refactor the blueprint.
+  - Key: Guide207
+    Chinese: "\u9009\u4E2D\u6EE1\u8DB3\u6761\u4EF6\u7684\u914D\u65B9\u8FDB\u884C\u91CD\u6784\u5427,\u4F5C\u4E3A<color=#FFEA6D>\u7D20\u6750\u7684\u5143\u7D20\u5854\u5C06\u88AB\u6D88\u8017,\u7136\u540E\u83B7\u5F971\u4E2A\u91CD\u6784\u5854</color>"
+    English: Select the blueprint that meets the criteria for refactor, <color=#FFEA6D>the
+      elements used as the material will be consumed, and a refactor turret will
+      be obtained.</color>
+  - Key: Guide208
+    Chinese: "\u8BF7\u70B9\u51FB\u9009\u4E2D\u573A\u4E0A\u7684\u91CD\u6784\u5854,\u6253\u5F00\u8BE5\u91CD\u6784\u5854\u7684\u4FE1\u606F\u9762\u677F."
+    English: Please click on the turret to open the information panel.
+  - Key: Guide209
+    Chinese: "\u6BCF\u4E2A\u91CD\u6784\u5854\u90FD\u5E26\u6709\u4E00\u4E2A\u5F3A\u529B\u7684<color=#FFEA6D>\u88AB\u52A8\u6280\u80FD,</color>\u8BF7\u64C5\u52A0\u5229\u7528."
+    English: Each refactor turret comes with a powerful <color=#FFEA6D>passive skill</color>,
+      make use of it.
+  - Key: Guide210
+    Chinese: "\u6839\u636E\u91CD\u6784\u914D\u65B9\u7684\u5143\u7D20\u7EC4\u5408,\u8FD8\u9644\u5E261\u4E2A<color=#FFEA6D>\u5143\u7D20\u6280\u80FD</color>,\u6BCF\u4E2A\u5143\u7D20\u6280\u80FD\u90FD\u6709\u81EA\u8EAB\u7684\u7279\u70B9."
+    English: Based on the combination of elements, there is also an <color=#FFEA6D>element
+      skill</color>, each element skill has its own characteristics.
+  - Key: Guide211
+    Chinese: "\u6BCF\u4E2A<color=#FFEA6D>\u91CD\u6784\u5854\u9ED8\u8BA4\u62E5\u67092\u4E2A\u5143\u7D20\u6280\u80FD\u69FD,\u4F60\u53EF\u4EE5\u901A\u8FC7\u5C06\u53E6\u4E00\u4E2A\u91CD\u6784\u5854\u90E8\u7F72\u5728\u8BE5\u91CD\u6784\u5854\u4E0A,\u4F7F\u5176\u88C5\u8F7D\u4E00\u4E2A\u989D\u5916\u7684\u5143\u7D20\u6280\u80FD</color>."
+    English: <color=#FFEA6D>Each refactor turret has 2 element skill slots by default,
+      and you can equip an additional elemental skill by deploying another refactor
+      turret on it</color>.
+  - Key: Guide212
+    Chinese: "\u91CD\u6784\u5854\u53EF\u4EE5\u8FDB\u884C<color=#FFEA6D>\u5347\u7EA7</color>,\u5347\u7EA7\u53EF\u4EE5\u63D0\u5347\u91CD\u6784\u5854\u7684\u7EFC\u5408\u5C5E\u6027,\u7B49\u7EA7\u4E0A\u9650\u4E3A3\u7EA7."
+    English: Refactor turrets can be upgraded, which can improve the overall properties
+      of it.
+  - Key: Guide213
+    Chinese: "\u63D0\u9AD8\u7CFB\u7EDF\u7B49\u7EA7\u53EF\u4EE5\u589E\u52A0\u5546\u5E97\u5237\u65B0\u914D\u65B9\u7684\u6570\u91CF,\u4EE5\u53CA\u53EF\u4EE5\u5237\u51FA\u66F4\u591A\u9AD8\u9636\u7684\u91CD\u6784\u5854\u914D\u65B9."
+    English: Increasing the system level will increases the number of store-refresh
+      blueprints, as well as the ability to spawn more advanced blueprints.
+  - Key: Guide214
+    Chinese: "\u672C\u6B21\u7684\u6559\u7A0B\u5C31\u5230\u6B64\u7ED3\u675F,\u5C31\u5728\u63A5\u4E0B\u6765\u7684\u6218\u6597\u4E2D\u7EE7\u7EED\u5C1D\u8BD5\u8FD0\u7528\u91CD\u6784\u6280\u672F\u5427!"
+    English: This is the end of the tutorial, so continue to try refactor techniques
+      in the  battle!
+  - Key: Guide215
+    Chinese: "<color=#FFEA6D>\u6211\u628A\u5168\u90E8\u6307\u5F15\u7684\u5185\u5BB9\u653E\u5728\u4E86\u5DE6\u4E0A\u89D2\u7684\u6307\u5F15\u9762\u677F\u91CC</color>,\u4F60\u53EF\u4EE5\u5728\u4EFB\u4F55\u65F6\u5019\u67E5\u770B."
+    English: I have put all the tutorials in the guidance panel in the upper left
+      corner, which you can view at any time.
   - Key: Guide41
     Chinese: "<color=#FFEA6D>\u8BF7\u575A\u630130\u6CE2\u8FDB\u653B</color>,\u5B8C\u6210\u8FD9\u4E00\u6B21\u6559\u7A0B."
     English: Now, please stick to 30 waves to complete this tutorial.
@@ -1233,12 +1272,12 @@ MonoBehaviour:
     English: It seems that you are fully familiar with the rules of the interstellar
       battlefield, so please continue to forge ahead.
   - Key: Temp01
-    Chinese: "\u91CD\u6784\u662F\u4E00\u79CD\u53D6\u80DC\u7684\u65B9\u5F0F,\u4E5F\u662F\u4E00\u79CD\u601D\u60F3."
-    English: Trying to figure the reason of victory... 1% of tactical planning...
-      2% resource allocation... Plus 97% luck.
+    Chinese: "\u5E72\u7684\u6F02\u4EAE,\u91CD\u6784\u662F\u4E00\u79CD\u53D6\u80DC\u7684\u65B9\u5F0F,\u4E5F\u662F\u4E00\u79CD\u601D\u60F3."
+    English: Well done, refactoring is not only a way to win, but also a way of thinking.
   - Key: Temp02
     Chinese: "\u6B63\u5728\u5206\u6790\u53D6\u80DC\u539F\u56E0...1%\u7684\u5408\u7406\u6218\u672F\u89C4\u5212...2%\u7684\u7075\u6D3B\u8D44\u6E90\u8C03\u914D...\u52A0\u4E0A97%\u7684\u8FD0\u6C14."
-    English: 'Victory! You deserve the title of The Great Commander! '
+    English: Trying to figure the reason of victory... 1% of tactical planning...
+      2% resource allocation... Plus 97% luck.
   - Key: Temp03
     Chinese: "\u505A\u5F97\u597D.\u5047\u4EE5\u65F6\u65E5,\u60A8\u5FC5\u5C06\u6210\u4E3A\u661F\u9645\u68EE\u6797\u4E2D\u7684\u6770\u51FA\u730E\u4EBA."
     English: "Well done!With time, you\u2019ll become the BIG hunter in the Interstellar
@@ -1278,9 +1317,9 @@ MonoBehaviour:
     Chinese: "AI\u6B63\u5728\u9884\u6D4B\u90E8\u7F72\u5B98\u7684\u884C\u52A8...1%\u79BB\u5F00\u6218\u573A...2%\u559D\u676F\u5496\u5561...97%\u518D\u6765\u4E00\u5C40."
     English: AI is predicting deployment officer actions... One percent left the
       battlefield... 2% have a cup of coffee... 97%. One more round.
-  - Key: "//\u5237\u65B0\u5546\u5E97"
-    Chinese: 
-    English: 
+  - Key: Temp16
+    Chinese: "\u5BF9\u53EF\u80FD\u62B1\u6709\u5E0C\u671B\u662F\u4E00\u79CD\u4EBA\u7C7B\u7684\u7279\u6709\u7684\u975E\u7406\u6027."
+    English: To hope for the possible is a uniquely human irrationality.
   - Key: Temp20
     Chinese: "\u636E\u8BF4\u5237\u65B0\u7684\u6570\u503C\u5173\u4E4E\u80DC\u5229\u6982\u7387?\u5F88\u62B1\u6B49,\u7845\u57FA\u751F\u547D\u4FE1\u4EF0\u7684\u91CF\u5B50\u529B\u5B66\u4E2D\u6CA1\u6709\u5173\u4E8E\u6982\u7387\u7684\u6982\u5FF5."
     English: 'I heard that the refreshed value is related to the probability of victory?

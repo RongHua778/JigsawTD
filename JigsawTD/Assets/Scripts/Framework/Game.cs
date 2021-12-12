@@ -12,7 +12,8 @@ public class Game : Singleton<Game>
     public Animator transition;
     public float transitionTime = 0.8f;
     public bool Tutorial = false;
-    public bool OnTransition=false;
+    public bool OnTransition = false;
+    public bool TestMode = false;
 
     protected override void Awake()
     {
@@ -44,20 +45,22 @@ public class Game : Singleton<Game>
     private void Update()
     {
         m_SceneStateController.StateUpdate();
-        //test
-        if (Input.GetKeyDown(KeyCode.K))
+        if (TestMode)
         {
-            Debug.LogWarning(GameMultiLang.GetTraduction("TEST1"));
-            LevelManager.Instance.SetUnlockAll(false);
-            LevelManager.Instance.PremitDifficulty = 0;
-            PlayerPrefs.DeleteAll();
-        }
-        if (Input.GetKeyDown(KeyCode.J))//解锁全内容
-        {
-            Debug.LogWarning(GameMultiLang.GetTraduction("TEST2"));
-            LevelManager.Instance.SetUnlockAll(true);
-            LevelManager.Instance.PremitDifficulty = 6;
-            PlayerPrefs.SetInt("MaxDifficulty", 6);
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                Debug.LogWarning(GameMultiLang.GetTraduction("TEST1"));
+                LevelManager.Instance.SetUnlockAll(false);
+                LevelManager.Instance.PremitDifficulty = 0;
+                PlayerPrefs.DeleteAll();
+            }
+            if (Input.GetKeyDown(KeyCode.J))//解锁全内容
+            {
+                Debug.LogWarning(GameMultiLang.GetTraduction("TEST2"));
+                LevelManager.Instance.SetUnlockAll(true);
+                LevelManager.Instance.PremitDifficulty = 6;
+                PlayerPrefs.SetInt("MaxDifficulty", 6);
+            }
         }
     }
 

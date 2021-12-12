@@ -175,7 +175,7 @@ public class GameManager : Singleton<GameManager>
             m_MainUI.GameSpeed = 3;
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q)&&LevelManager.Instance.CurrentLevel.Mode!=0)
         {
             m_BluePrintShopUI.ShopBtnClick();
         }

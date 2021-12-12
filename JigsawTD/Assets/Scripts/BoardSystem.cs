@@ -153,11 +153,11 @@ public class BoardSystem : IGameSystem
         }
     }
 
-    private void OnApplicationFocus(bool focus)
-    {
-        if (FindPath)
-            ShowPath();
-    }
+    //private void OnApplicationFocus(bool focus)
+    //{
+    //    if (FindPath)
+    //        ShowPath();
+    //}
 
 
     public void SetGameBoard()

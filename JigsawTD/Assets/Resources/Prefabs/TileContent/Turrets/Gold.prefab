@@ -145,7 +145,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: 4799454438761694576, guid: 768de1dbe1dcb8c45b69b4de6a5821bb, type: 3}
-  m_Color: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -267,6 +267,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
+  m_ContentStruct:
+    ContentType: 0
+    Pos: {x: 0, y: 0}
+    Direction: 0
+    ContentName: 
+    Element: 0
+    Quality: 0
+    ElementSlotCount: 0
+    InitModifies: []
   Activated: 1
   targetList: []
   ShootEffect: {fileID: 3929253023286477454}

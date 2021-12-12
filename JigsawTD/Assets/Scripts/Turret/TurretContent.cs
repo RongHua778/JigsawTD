@@ -7,7 +7,8 @@ using UnityEngine;
 public abstract class TurretContent : GameTileContent, IGameBehavior
 {
     private float frostTime = 0;
-    public bool Activated = true;
+
+    public bool Activated;
     private FrostEffect m_FrostEffect;
 
     public StrategyBase Strategy;//数值计算规则
@@ -130,7 +131,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     public virtual void Frost(float time, FrostEffect effect = null)
     {
         Activated = false;
-        frostTime = time;
+        frostTime =Strategy.UnFrozable ? 0.2f : time;
         if (effect != null)
             m_FrostEffect = effect;
     }

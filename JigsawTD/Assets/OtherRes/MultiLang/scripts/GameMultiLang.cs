@@ -17,7 +17,7 @@ public class GameMultiLang : MonoBehaviour
 	public static Dictionary<String, String> Fields;
 
 	[SerializeField] string defaultLang = default;
-	//[SerializeField] LanguageManager languageData = default;
+	[SerializeField] LanguageManager languageData = default;
 
 	public static List<LanguageData> LanguageData { get; set; }
 
@@ -80,8 +80,8 @@ public class GameMultiLang : MonoBehaviour
     private void LoadLanguageData()
     {
 
-		LanguageData = ExcelTool.CreateLanguageArrayWithExcel(ExcelConfig.excelsFolderPath + "LanguageExcel.xlsx");
-
+		//LanguageData = ExcelTool.CreateLanguageArrayWithExcel(ExcelConfig.excelsFolderPath + "LanguageExcel.xlsx");
+		LanguageData = languageData.dataArray;
 		switch (PlayerPrefs.GetInt("_language_index", 0))
         {
             case 0:

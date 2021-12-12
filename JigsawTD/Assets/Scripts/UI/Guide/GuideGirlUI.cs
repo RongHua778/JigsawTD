@@ -254,6 +254,8 @@ public class GuideGirlUI : SerializedMonoBehaviour
 
     public void GuideTrigger(TutorialType triggetType=TutorialType.None)
     {
+        if (!Game.Instance.Tutorial)
+            return;
         if (currentDialogue.JudgeConditions(triggetType))
         {
             currentDialogue.TriggerGuideStartEvents();

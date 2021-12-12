@@ -54,4 +54,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: da93faa4a28eeaf4f80d517dd53da1bc, type: 2}
   - {fileID: 11400000, guid: cd7fe804ec97dab458e086fcd1802395, type: 2}
   - {fileID: 11400000, guid: 972bc55b3e1d1104987ed18dc0d52e96, type: 2}
+  - {fileID: 11400000, guid: 21f8aa377857fa148a8678068f343a63, type: 2}
   CanSaveGame: 0

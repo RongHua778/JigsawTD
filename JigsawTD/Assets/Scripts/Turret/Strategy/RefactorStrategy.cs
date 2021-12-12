@@ -71,7 +71,7 @@ public class RefactorStrategy : StrategyBase
                     compositions[i].qualityRequeirement == strategy.Quality)
                 {
                     compositions[i].obtained = true;
-                    compositions[i].turretTile = turret.m_GameTile;
+                    compositions[i].turret = turret;
                     temp.Remove(temp[j]);
                     break;
                 }
@@ -91,7 +91,7 @@ public class RefactorStrategy : StrategyBase
         foreach (Composition com in Compositions)
         {
             if (!com.isPerfect)
-                ObjectPool.Instance.UnSpawn(com.turretTile);
+                ObjectPool.Instance.UnSpawn(com.turret.m_GameTile);
             else
                 GameRes.PerfectElementCount--;
         }
@@ -99,6 +99,14 @@ public class RefactorStrategy : StrategyBase
         //所有防御塔重新检查侦测效果
         GameManager.Instance.CheckDetectSkill();
 
+    }
+
+    public void PreviewElements(bool value)
+    {
+        foreach (var com in Compositions)
+        {
+            com.turret.m_GameTile.Highlight(value);
+        }
     }
 
     public bool CheckBuildable()

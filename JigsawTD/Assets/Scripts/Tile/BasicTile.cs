@@ -11,10 +11,10 @@ public class BasicTile : GameTile
     [SerializeField] Sprite compositeTurretBase = default;
     [SerializeField] Sprite compositeTurretBase2 = default;
 
-
     public override void SetContent(GameTileContent content)
     {
         base.SetContent(content);
+        Highlight(false);
         SetBaseSprite(content.ContentType);
     }
 
@@ -50,6 +50,5 @@ public class BasicTile : GameTile
     {
         TileRenderers[0].sprite = compositeTurretBase2;
     }
-
 
 }

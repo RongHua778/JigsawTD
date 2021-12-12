@@ -267,6 +267,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
+  m_ContentStruct:
+    ContentType: 0
+    Pos: {x: 0, y: 0}
+    Direction: 0
+    ContentName: 
+    Element: 0
+    Quality: 0
+    ElementSlotCount: 0
+    InitModifies: []
   Activated: 1
   targetList: []
   ShootEffect: {fileID: 3648418513698993286}

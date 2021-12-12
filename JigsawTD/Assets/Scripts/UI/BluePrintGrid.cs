@@ -99,21 +99,31 @@ public class BluePrintGrid : ReusableObject//, IPointerEnterHandler, IPointerExi
             SelectingBluePrint = this;
             GameManager.Instance.ShowBluePrintTips(this, StaticData.LeftMidTipsPos);
             if (buildAble)
+            {
+                Strategy.PreviewElements(true);
                 GameEvents.Instance.TutorialTrigger(TutorialType.BlueprintSelect);
+            }
             Sound.Instance.PlayEffect("Sound_Click");
+
         }
         else
         {
             if (SelectingBluePrint == this)
+            {
                 OnBluePrintDeselect();
+                GameManager.Instance.HideTips();
+            }
         }
+
     }
 
 
 
     public void OnBluePrintDeselect()
     {
-        GameManager.Instance.HideTips();
+        //GameManager.Instance.HideTips();
+        if(buildAble)
+            Strategy.PreviewElements(false);
     }
 
     public void OnLock(bool value)

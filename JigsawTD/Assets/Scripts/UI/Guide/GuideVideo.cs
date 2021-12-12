@@ -12,17 +12,10 @@ public class GuideVideo :IUserInterface
     {
         base.Initialize();
         anim = this.GetComponent<Animator>();
+        ShowPage(0);
         
     }
 
-    public void PrepareForGuide()
-    {
-        foreach (var item in tabs)
-        {
-            item.gameObject.SetActive(false);
-        }
-        ShowPage(0);
-    }
     public override void Show()
     {
         base.Show();
@@ -31,7 +24,6 @@ public class GuideVideo :IUserInterface
 
     public void ShowPage(int index)
     {
-        tabs[index].gameObject.SetActive(true);
         tabs[index].isOn = true;
     }
 

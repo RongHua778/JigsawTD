@@ -275,6 +275,7 @@ MonoBehaviour:
   transitionTime: 1
   Tutorial: 1
   OnTransition: 0
+  TestMode: 0
 --- !u!114 &3979959846567427948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -374,7 +375,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: aa5a923b0cb87d348914e228fc353f67, type: 2}
   - {fileID: 11400000, guid: b6403761d56b0914599f3e8e647a50b7, type: 2}
   PremitDifficulty: 1
-  CurrentLevel: {fileID: 11400000, guid: 1cffab4195a17dc4f8326be6876fab11, type: 2}
+  CurrentLevel: {fileID: 11400000, guid: 993e7ccb381984e4983180597ec9c10f, type: 2}
   NeedLoadGame: 0
   NeedLoadData: 0
   LastGameSave:
@@ -434,10 +435,10 @@ MonoBehaviour:
   SwitchTrapCost: 40
   SwitchTrapCostMultiply: 40
   TileSize: 1
-  GoldAttackIntensify: 0.35
-  WoodSpeedIntensify: 0.35
+  GoldAttackIntensify: 0.3
+  WoodSpeedIntensify: 0.3
   WaterSlowIntensify: 0.5
-  FireCriticalIntensify: 0.25
+  FireCriticalIntensify: 0.2
   DustSputteringIntensify: 0.25
   CircleCol: {fileID: 379002804665637541, guid: 88314c00e62edfc4ea1c16ad951dd62f, type: 3}
   RangeIndicatorPrefab: {fileID: 7053043907688615658, guid: d8a2a921f17ca0e46b801451269a7676, type: 3}

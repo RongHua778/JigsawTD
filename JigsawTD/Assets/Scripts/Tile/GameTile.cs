@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 public abstract class GameTile : TileBase
 {
     private GameTileContent content;
+
     public GameTileContent Content
     {
         get => content;
@@ -16,6 +17,7 @@ public abstract class GameTile : TileBase
 
     GameObject previewGlow;
     Transform tileBase;
+    [SerializeField] GameObject hightLightEffect = default;
 
     public bool isWalkable { get => Content.IsWalkable; }
     public DraggingShape m_DraggingShape { get; set; }
@@ -158,6 +160,10 @@ public abstract class GameTile : TileBase
     {
         tileBase.rotation = Quaternion.identity;
         Content.CorretRotation();
+    }
+    public void Highlight(bool value)
+    {
+        hightLightEffect.SetActive(value);
     }
 
 }

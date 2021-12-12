@@ -24,7 +24,7 @@ public class CircleRange : ElementSkill
     public override void Build()
     {
         base.Build();
-        if(strategy.RangeType!=RangeType.Circle)//Rotary会在Initialize时将Checkangle改为360度，所以需要加入一个判断，避免再次修改攻击范围类型使其checkangle变回10度，回旋塔同理
+        if (strategy.RangeType != RangeType.Circle)//Rotary会在Initialize时将Checkangle改为360度，所以需要加入一个判断，避免再次修改攻击范围类型使其checkangle变回10度，回旋塔同理
             strategy.RangeType = RangeType.Circle;
     }
 
@@ -56,41 +56,62 @@ public class CircleRange : ElementSkill
 
 
 
-public class FreeDraw : ElementSkill
+public class ExtraTarget : ElementSkill
 {
-    //抽取模块价格降低50%
+    //攻击-30%，目标数+1
     public override List<int> Elements => new List<int> { 0, 1, 4 };
 
-    public override void Composite()
+    public override void Build()
     {
-        GameRes.BuildCost = (int)(GameRes.BuildCost * 0.5f);
+        base.Build();
+        strategy.ComAttackIntensify -= 0.3f;
+        strategy.BaseTargetCountIntensify += 1;
     }
 }
 
-public class TurretLevelUp : ElementSkill
+public class HeavyCannon : ElementSkill
 {
-    //交换标记的价格降低50%
+    //对生命值大于50%的单位造成额外50%伤害
     public override List<int> Elements => new List<int> { 0, 2, 3 };
 
-    public override void Composite()
+    public override void Hit(IDamageable target, Bullet bullet = null)
     {
-        GameRes.SwitchTrapCost = Mathf.RoundToInt(GameRes.SwitchTrapCost * 0.5f);
+        if (target.DamageStrategy.CurrentHealth / target.DamageStrategy.MaxHealth > 0.5f)
+        {
+            float realDamage;
+            target.DamageStrategy.ApplyDamage(bullet.Damage * 0.5f, out realDamage, false);
+            strategy.TurnDamage += (int)realDamage;
+            strategy.TotalDamage += (int)realDamage;
+        }
     }
 }
 
-public class SystemDiscount : ElementSkill
+public class IceShell : ElementSkill
 {
-    //使模块升级费用-50%
+    //对减速敌人造成额外50%伤害
     public override List<int> Elements => new List<int> { 0, 2, 4 };
-    public override string SkillDescription => "SYSTEMDISCOUNT";
 
-    public override void Composite()
+    public override void Hit(IDamageable target, Bullet bullet = null)
     {
-        if (GameRes.SystemLevel < StaticData.Instance.SystemMaxLevel)
+        base.Hit(target, bullet);
+        if (target.DamageStrategy.IsEnemy)
         {
-            GameRes.SystemUpgradeCost = Mathf.RoundToInt(GameRes.SystemUpgradeCost * 0.5f);
+            if (((Enemy)target).SlowRate > 0)
+            {
+                float realDamage;
+                target.DamageStrategy.ApplyDamage(bullet.Damage * 0.5f, out realDamage, false);
+                strategy.TurnDamage += (int)realDamage;
+                strategy.TotalDamage += (int)realDamage;
+            }
         }
     }
+    //public override void Composite()
+    //{
+    //    if (GameRes.SystemLevel < StaticData.Instance.SystemMaxLevel)
+    //    {
+    //        GameRes.SystemUpgradeCost = Mathf.RoundToInt(GameRes.SystemUpgradeCost * 0.5f);
+    //    }
+    //}
 
 }
 public class RandomSkill : ElementSkill
@@ -119,14 +140,21 @@ public class RandomSkill : ElementSkill
 
 public class FreeGround : ElementSkill
 {
-    //攻速降低30%，攻击距离+2
+    //攻击距离+1，如果攻击距离大于6，则额外+1
     public override List<int> Elements => new List<int> { 1, 2, 3 };
 
     public override void Build()
     {
         base.Build();
-        strategy.ComRangeIntensify += 2;
-        strategy.ComSpeedIntensify -= 0.3f;
+        if (strategy.FinalRange > 6)
+        {
+            strategy.ComRangeIntensify += 2;
+        }
+        else
+        {
+            strategy.ComRangeIntensify += 1;
+        }
+
     }
 
     public override void OnEquip()
@@ -141,13 +169,13 @@ public class FreeGround : ElementSkill
 
 public class PerfectElement : ElementSkill
 {
-    //造成的伤害-25%，合成时获得1个万能元素
+    //防御塔不会被冻结
     public override List<int> Elements => new List<int> { 1, 2, 4 };
-    public override string SkillDescription => "PERFECTELEMENT";
 
-    public override void Composite()
+    public override void Build()
     {
-        GameRes.PerfectElementCount++;
+        base.Build();
+        strategy.UnFrozable = true;
     }
 
 
@@ -159,30 +187,32 @@ public class TrapIntensify : ElementSkill
 {
     //相邻陷阱的效果提升100%
     public override List<int> Elements => new List<int> { 1, 3, 4 };
-    public override string SkillDescription => "TRAPINTENSIFY";
 
-    private List<TrapContent> intensifiedTraps = new List<TrapContent>();
-    public override void Detect()
+    //private List<TrapContent> intensifiedTraps = new List<TrapContent>();
+    //public override void Detect()
+    //{
+    //    foreach (var trap in intensifiedTraps)
+    //    {
+    //        trap.TrapIntensify -= 1f;
+    //    }
+    //    intensifiedTraps.Clear();
+    //    List<Vector2Int> points = StaticData.GetCirclePoints(1);
+    //    foreach (var point in points)
+    //    {
+    //        Vector2 pos = point + (Vector2)strategy.Turret.transform.position;
+    //        Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TrapMask));
+    //        if (hit != null)
+    //        {
+    //            TrapContent trap = hit.GetComponent<TrapContent>();
+    //            trap.TrapIntensify += 1f;
+    //            intensifiedTraps.Add(trap);
+    //        }
+    //    }
+    //}
+    public override void Composite()
     {
-        foreach (var trap in intensifiedTraps)
-        {
-            trap.TrapIntensify -= 1f;
-        }
-        intensifiedTraps.Clear();
-        List<Vector2Int> points = StaticData.GetCirclePoints(1);
-        foreach (var point in points)
-        {
-            Vector2 pos = point + (Vector2)strategy.Turret.transform.position;
-            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TrapMask));
-            if (hit != null)
-            {
-                TrapContent trap = hit.GetComponent<TrapContent>();
-                trap.TrapIntensify += 1f;
-                intensifiedTraps.Add(trap);
-            }
-        }
+        GameRes.BuildCost= Mathf.RoundToInt(GameRes.BuildCost * 0.5f);
     }
-
 }
 
 public class PortalHit : ElementSkill

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class ExtraSkill : ElementSkill
 {
@@ -10,126 +11,132 @@ public class ExtraSkill : ElementSkill
     public override void Build()
     {
         base.Build();
-        strategy.ElementSKillSlot = 4;
+        strategy.ElementSKillSlot += 2;
     }
 
 }
 
-public class LateAttack : ElementSkill
+public class CloseSlow : ElementSkill
 {
-    //战斗开始后，攻击力每秒提升2%
+    //近战减速1.5
     public override List<int> Elements => new List<int> { 2, 2, 0 };
 
-    public override void StartTurn()
+    public override void Shoot(Bullet bullet = null)
     {
-        Duration += 999;
-    }
-
-    public override void Tick(float delta)
-    {
-        base.Tick(delta);
-        strategy.TurnAttackIntensify += 0.02f * delta * strategy.TimeModify;
-    }
-
-    public override void EndTurn()
-    {
-        Duration = 0;
+        if (bullet.GetTargetDistance() < 3f)
+        {
+            bullet.SlowRate += (1.5f * strategy.TimeModify);
+        }
     }
 }
-public class LateSpeed : ElementSkill
+public class HitSlow : ElementSkill
 {
-    //每回合开始后攻速每秒提升2%
+    //每击减速0.04
     public override List<int> Elements => new List<int> { 2, 2, 1 };
-    public override string SkillDescription => "LATESPEED";
 
-    public override void StartTurn()
+    public override void Shoot(Bullet bullet = null)
     {
-        Duration += 999;
-    }
-
-    public override void Tick(float delta)
-    {
-        base.Tick(delta);
-        strategy.TurnSpeedIntensify += 0.02f * delta * strategy.TimeModify;
-    }
-
-    public override void EndTurn()
-    {
-        Duration = 0;
+        strategy.TurnFixSlowRate += 0.05f * strategy.TimeModify;
     }
 
 }
 
-public class LateCritical : ElementSkill
+public class FlutSlow : ElementSkill
 {
-    //每回合开始后，暴击率每秒提升1%
+    //波动减速
     public override List<int> Elements => new List<int> { 2, 2, 3 };
 
+    float targetValue;
+    float currentValue;
+    float counter = 2;
+
+    public override void Build()
+    {
+        base.Build();
+        strategy.ComSlowIntensify += 0.5f;
+    }
     public override void StartTurn()
     {
+        base.StartTurn();
         Duration += 999;
     }
-
     public override void Tick(float delta)
     {
         base.Tick(delta);
-        strategy.TurnFixCriticalRate += 0.01f * delta * strategy.TimeModify;
+        counter += delta;
+        if (counter > 2f)
+        {
+            counter = 0;
+            targetValue = Random.Range(0.25f, 2.5f);
+            DOTween.To(() => currentValue, x => currentValue = x, targetValue, 2);
+        }
+        strategy.SlowAdjust = currentValue;
     }
 
     public override void EndTurn()
     {
+        base.EndTurn();
         Duration = 0;
+        strategy.SlowAdjust = 1;
+        currentValue = 1;
+        counter = 2;
     }
 }
 
-public class LateSplash : ElementSkill
+public class StartSlow : ElementSkill
 {
-    //每回合开始后，溅射范围每秒提升0.01
+    //开局减速4
     public override List<int> Elements => new List<int> { 2, 2, 4 };
 
+
+    float intensify = 0;
     public override void StartTurn()
     {
-        Duration += 999;
+        base.StartTurn();
+        Duration += 20;
+        intensify = 4f * strategy.TimeModify;
+        strategy.TurnFixSlowRate += intensify;
     }
 
-    public override void Tick(float delta)
+    public override void TickEnd()
     {
-        base.Tick(delta);
-        strategy.TurnFixSplashRange += 0.01f * delta * strategy.TimeModify;
+        base.TickEnd();
+        strategy.TurnFixSlowRate -= intensify;
     }
 
     public override void EndTurn()
     {
+        base.EndTurn();
         Duration = 0;
     }
 }
-public class SlowPolo : ElementSkill
-{
-    //相邻防御塔减速提高0.5
-    public override List<int> Elements => new List<int> { 2, 2, 4 };
+//public class SlowPolo : ElementSkill
+//{
+//    //相邻防御塔减速提高0.5
+//    public override List<int> Elements => new List<int> { 2, 2, 4 };
 
-    private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
-    public override void Detect()
-    {
-        foreach (var strategy in intensifiedStrategies)
-        {
-            strategy.InitSlowRateModify -= 0.5f * strategy.PoloIntensifyModify;
-        }
-        intensifiedStrategies.Clear();
-        List<Vector2Int> points = StaticData.GetCirclePoints(1);
-        foreach (var point in points)
-        {
-            Vector2 pos = point + (Vector2)strategy.Turret.transform.position;
-            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
-            if (hit != null)
-            {
-                StrategyBase strategy = hit.GetComponent<TurretContent>().Strategy;
-                strategy.InitSlowRateModify += 0.5f * strategy.PoloIntensifyModify;
-                intensifiedStrategies.Add(strategy);
-            }
-        }
-    }
-}
+//    private List<StrategyBase> intensifiedStrategies = new List<StrategyBase>();
+//    public override void Detect()
+//    {
+//        foreach (var strategy in intensifiedStrategies)
+//        {
+//            strategy.InitSlowRateModify -= 0.5f * strategy.PoloIntensifyModify;
+//        }
+//        intensifiedStrategies.Clear();
+//        List<Vector2Int> points = StaticData.GetCirclePoints(1);
+//        foreach (var point in points)
+//        {
+//            Vector2 pos = point + (Vector2)strategy.Turret.transform.position;
+//            Collider2D hit = StaticData.RaycastCollider(pos, LayerMask.GetMask(StaticData.TurretMask));
+//            if (hit != null)
+//            {
+//                StrategyBase strategy = hit.GetComponent<TurretContent>().Strategy;
+//                strategy.InitSlowRateModify += 0.5f * strategy.PoloIntensifyModify;
+//                intensifiedStrategies.Add(strategy);
+//            }
+//        }
+//    }
+//}
 
 
 

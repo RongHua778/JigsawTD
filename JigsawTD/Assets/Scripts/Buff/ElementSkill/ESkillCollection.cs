@@ -1,16 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class LateIntensify : ElementSkill
+using DG.Tweening;
+public class RangeSplash : ElementSkill
 {
-    //子弹溅射到1个敌人，就使子弹伤害提高10%
+    //范围内每个敌人+0.2溅射范围
     public override List<int> Elements => new List<int> { 4, 4, 4 };
 
-    public override void PreHit(Bullet bullet = null)
+    public override void OnEnter(IDamageable target)
     {
-        base.PreHit(bullet);
-        bullet.Damage *= (1 + bullet.SputteredCount * 0.2f);
+        strategy.TurnFixSplashRange += 0.2f * strategy.TimeModify;
     }
+    public override void OnExit(IDamageable target)
+    {
+        strategy.TurnFixSplashRange -= 0.2f * strategy.TimeModify;
+    }
+    //public override void PreHit(Bullet bullet = null)
+    //{
+    //    base.PreHit(bullet);
+    //    bullet.Damage *= (1 + bullet.SputteredCount * 0.2f);
+    //}
     //public override void StartTurn()
     //{
     //    base.StartTurn();
@@ -31,78 +40,47 @@ public class LateIntensify : ElementSkill
 
 }
 
-public class EarlyAttack : ElementSkill
+public class CloseSplash : ElementSkill
 {
+    //近战溅射0.75
     public override List<int> Elements => new List<int> { 4, 4, 0 };
 
-    float intensify = 0;
-    public override void StartTurn()
+    public override void Shoot(Bullet bullet = null)
     {
-        base.StartTurn();
-        Duration += 20;
-        intensify = 1f * strategy.TimeModify;
-        strategy.TurnAttackIntensify += intensify;
-    }
-
-    public override void TickEnd()
-    {
-        base.TickEnd();
-        strategy.TurnAttackIntensify -= intensify;
-    }
-
-    public override void EndTurn()
-    {
-        base.EndTurn();
-        Duration = 0;
+        if (bullet.GetTargetDistance() < 3f)
+        {
+            bullet.SputteringRange += (0.75f * strategy.TimeModify);
+        }
     }
 }
-public class EarlySpeed : ElementSkill
+public class HitSplash : ElementSkill
 {
+    //每击溅射0.03
     public override List<int> Elements => new List<int> { 4, 4, 1 };
 
-    float intensify = 0;
-    public override void StartTurn()
+    public override void Shoot(Bullet bullet = null)
     {
-        base.StartTurn();
-        Duration += 20;
-        intensify = 1f * strategy.TimeModify;
-        strategy.TurnSpeedIntensify += intensify;
-    }
-
-    public override void TickEnd()
-    {
-        base.TickEnd();
-        strategy.TurnSpeedIntensify -= intensify;
-    }
-
-    public override void EndTurn()
-    {
-        base.EndTurn();
-        Duration = 0;
+        strategy.TurnFixSplashRange += 0.03f * strategy.TimeModify;
     }
 }
-public class EarlySlow : ElementSkill
+public class TimeSplash : ElementSkill
 {
+    //每秒+0.02溅射
     public override List<int> Elements => new List<int> { 4, 4, 2 };
 
-    float intensify = 0;
     public override void StartTurn()
     {
-        base.StartTurn();
-        Duration += 20;
-        intensify = 1f * strategy.TimeModify;
-        strategy.TurnFixSlowRate += intensify;
+        Duration += 999;
     }
 
-    public override void TickEnd()
+    public override void Tick(float delta)
     {
-        base.TickEnd();
-        strategy.TurnFixSlowRate -= intensify;
+        base.Tick(delta);
+        strategy.TurnFixSplashRange += 0.02f * delta * strategy.TimeModify;
     }
 
     public override void EndTurn()
     {
-        base.EndTurn();
         Duration = 0;
     }
 }
@@ -110,25 +88,40 @@ public class EarlyCritical : ElementSkill
 {
     public override List<int> Elements => new List<int> { 4, 4, 3 };
 
-    float intensify = 0;
+    float targetValue;
+    float currentValue;
+    float counter = 2;
+
+    public override void Build()
+    {
+        base.Build();
+        strategy.ComSplashRangeIntensify += 0.25f;
+    }
     public override void StartTurn()
     {
         base.StartTurn();
-        Duration += 20;
-        intensify = 0.75f * strategy.TimeModify;
-        strategy.TurnFixCriticalRate += intensify;
+        Duration += 999;
     }
-
-    public override void TickEnd()
+    public override void Tick(float delta)
     {
-        base.TickEnd();
-        strategy.TurnFixCriticalRate -= intensify;
+        base.Tick(delta);
+        counter += delta;
+        if (counter > 2f)
+        {
+            counter = 0;
+            targetValue = Random.Range(0.25f, 2.5f);
+            DOTween.To(() => currentValue, x => currentValue = x, targetValue, 2);
+        }
+        strategy.SplashAdjust = currentValue;
     }
 
     public override void EndTurn()
     {
         base.EndTurn();
         Duration = 0;
+        strategy.SplashAdjust = 1;
+        currentValue = 1;
+        counter = 2;
     }
 }
 //public class PoloGetter : ElementSkill

@@ -31,7 +31,8 @@ public class RHTest : MonoBehaviour
     }
     public void MenuBtnClick()
     {
-        panel.SetActive(!panel.activeSelf);
+        if (Game.Instance.TestMode)
+            panel.SetActive(!panel.activeSelf);
     }
 
     public void GetMoneyClick()

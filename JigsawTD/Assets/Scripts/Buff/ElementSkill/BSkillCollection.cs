@@ -1,70 +1,169 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class MultiTarget : ElementSkill
+using DG.Tweening;
+public class SameTarget : ElementSkill
 {
     //造成的伤害-35%，额外攻击2个目标
     public override List<int> Elements => new List<int> { 1, 1, 1 };
 
-    //public override void Composite()
+    //public override void Build()
     //{
-    //    base.Composite();
-    //    GameRes.TempWoodIntensify += 0.15f;
+    //    base.Build();
+    //    strategy.BaseTargetCountIntensify += 2;
     //}
-    public override void Build()
-    {
-        base.Build();
-        strategy.BaseTargetCountIntensify += 2;
-    }
+
+    //public override void Shoot(Bullet bullet = null)
+    //{
+    //    bullet.Damage *= 0.65f;
+    //}
+
+    private IDamageable lastTarget;
+    private float speedIncreased;
 
     public override void Shoot(Bullet bullet = null)
     {
-        bullet.Damage *= 0.65f;
+        IDamageable target = strategy.Turret.Target[0].Enemy;
+        if (target != lastTarget)
+        {
+            lastTarget = target;
+            strategy.TurnSpeedIntensify -= speedIncreased;
+            speedIncreased = 0;
+            return;
+        }
+        if (speedIncreased < 2.99f)
+        {
+            speedIncreased += 0.2f * strategy.TimeModify;
+            strategy.TurnSpeedIntensify += 0.2f * strategy.TimeModify;
+        }
+    }
+
+    public override void EndTurn()
+    {
+        lastTarget = null;
+        speedIncreased = 0;
     }
 }
-public class AttackSpeed : ElementSkill
+public class CloseSpeed : ElementSkill
 {
-    //每回合每次攻击提升2%攻击力
+    //距离小于3加75攻速
     public override List<int> Elements => new List<int> { 1, 1, 0 };
 
+    float intensifyValue;
+    bool isIntensified = false;
     public override void Shoot(Bullet bullet = null)
     {
-        strategy.TurnAttackIntensify += 0.02f * strategy.TimeModify;
+
+        if (bullet.GetTargetDistance() < 3f)
+        {
+            if (!isIntensified)
+            {
+                intensifyValue = 0.75f * strategy.TimeModify;
+                strategy.TurnSpeedIntensify += intensifyValue;
+                isIntensified = true;
+            }
+        }
+        else
+        {
+            if (isIntensified)
+            {
+                strategy.TurnSpeedIntensify -= intensifyValue;
+                isIntensified = false;
+            }
+        }
+    }
+
+    public override void EndTurn()
+    {
+        isIntensified = false;
+        intensifyValue = 0;
     }
 }
 
-public class SlowSpeed : ElementSkill
+public class TimeSpeed : ElementSkill
 {
-    //每次攻击提升0.08减速
+    //每秒+2%攻速
     public override List<int> Elements => new List<int> { 1, 1, 2 };
-    public override void Shoot(Bullet bullet = null)
+
+    public override void StartTurn()
     {
-        strategy.TurnFixSlowRate += 0.02f * strategy.TimeModify;
+        Duration += 999;
+    }
+
+    public override void Tick(float delta)
+    {
+        base.Tick(delta);
+        strategy.TurnSpeedIntensify += 0.02f * delta * strategy.TimeModify;
+    }
+
+    public override void EndTurn()
+    {
+        Duration = 0;
     }
 
 }
 
-public class CriticalSpeed : ElementSkill
+public class FlutSpeed : ElementSkill
 {
-    //每次攻击提升本回合1%暴击率
+    //攻速波动
     public override List<int> Elements => new List<int> { 1, 1, 3 };
 
-    public override void Shoot(Bullet bullet = null)
+    float targetValue;
+    float currentValue;
+    float counter = 2;
+    public override void StartTurn()
     {
-        strategy.TurnFixCriticalRate += 0.01f * strategy.TimeModify;
+        base.StartTurn();
+        Duration += 999;
+    }
+    public override void Tick(float delta)
+    {
+        base.Tick(delta);
+        counter += delta;
+        if (counter > 2f)
+        {
+            counter = 0;
+            targetValue = Random.Range(0.25f, 2.5f);
+            DOTween.To(() => currentValue, x => currentValue = x, targetValue, 2);
+        }
+        strategy.SpeedAdjust = currentValue;
+    }
+
+    public override void EndTurn()
+    {
+        base.EndTurn();
+        Duration = 0;
+        strategy.SpeedAdjust = 1;
+        currentValue = 1;
+        counter = 2;
     }
 }
 
-public class SplashSpeed : ElementSkill
+public class StartSpeed : ElementSkill
 {
-    //每回合每次攻击提升0.01溅射
+    //开局+150%攻速
     public override List<int> Elements => new List<int> { 1, 1, 4 };
 
-    public override void Shoot(Bullet bullet = null)
+    float intensify = 0;
+    public override void StartTurn()
     {
-        strategy.TurnFixSplashRange += 0.01f * strategy.TimeModify;
+        base.StartTurn();
+        Duration += 20;
+        intensify = 1.5f * strategy.TimeModify;
+        strategy.TurnSpeedIntensify += intensify;
     }
 
+    public override void TickEnd()
+    {
+        base.TickEnd();
+        strategy.TurnSpeedIntensify -= intensify;
+    }
+
+    public override void EndTurn()
+    {
+        base.EndTurn();
+        Duration = 0;
+    }
 
 }
 

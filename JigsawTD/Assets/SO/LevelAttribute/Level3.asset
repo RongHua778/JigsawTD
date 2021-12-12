@@ -36,5 +36,6 @@ MonoBehaviour:
   TrapCount: 25
   EliteWave: 15
   ExpIntensify: 4
-  GuideDialogues: []
+  GuideDialogues:
+  - {fileID: 11400000, guid: ad6d02c88bf5128469e8d9fe74f78c2c, type: 2}
   CanSaveGame: 1
