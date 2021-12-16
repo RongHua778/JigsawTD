@@ -202,11 +202,6 @@ public static class ConstructHelper
                 ((BasicTile)tile).EquipTurret();
             }
         }
-        strategy.InitAttackModify = (float)contentStruct.InitModifies[0];
-        strategy.InitFirerateModify = (float)contentStruct.InitModifies[1];
-        strategy.InitCriticalRateModify = (float)contentStruct.InitModifies[2];
-        strategy.InitSlowRateModify = (float)contentStruct.InitModifies[3];
-        strategy.InitSplashRangeModify = (float)contentStruct.InitModifies[4];
         return tile;
     }
 

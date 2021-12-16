@@ -26,7 +26,9 @@ public abstract class TurretSkill
     public virtual string SkillDescription { get; set; }
     public StrategyBase strategy;
     //public Bullet bullet;
-    public float KeyValue;
+    public virtual string DisplayValue { get; set; }
+    public virtual float KeyValue { get; }
+    public virtual ElementType IntensifyElement => ElementType.None;
     public float Duration;
     public bool IsFinish = false;
 
@@ -190,7 +192,7 @@ public class MortarSkill : InitialSkill
     public override void Shoot(Bullet bullet = null)
     {
         base.Shoot(bullet);
-        bullet.SplashPercentage += (bullet.SputteringRange / 0.1f) * 0.1f;
+        bullet.SplashPercentage += (bullet.SplashRange / 0.1f) * 0.1f;
     }
 
 }
@@ -211,14 +213,14 @@ public class RapiderSkill : InitialSkill
         if (target != lastTarget)
         {
             lastTarget = target;
-            strategy.TurnSpeedIntensify -= speedIncreased;
+            strategy.TurnFireRateIntensify -= speedIncreased;
             speedIncreased = 0;
             return;
         }
         if (speedIncreased < 1.99f)
         {
             speedIncreased += 0.2f * strategy.TimeModify;
-            strategy.TurnSpeedIntensify += 0.2f * strategy.TimeModify;
+            strategy.TurnFireRateIntensify += 0.2f * strategy.TimeModify;
         }
     }
 

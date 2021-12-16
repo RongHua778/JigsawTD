@@ -188,7 +188,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 393207
 --- !u!95 &3979959846040823351
 Animator:
   serializedVersion: 3
@@ -375,7 +375,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: aa5a923b0cb87d348914e228fc353f67, type: 2}
   - {fileID: 11400000, guid: b6403761d56b0914599f3e8e647a50b7, type: 2}
   PremitDifficulty: 1
-  CurrentLevel: {fileID: 11400000, guid: 993e7ccb381984e4983180597ec9c10f, type: 2}
+  CurrentLevel: {fileID: 11400000, guid: fbf3466ab2bed174096203daed7b2d4f, type: 2}
   NeedLoadGame: 0
   NeedLoadData: 0
   LastGameSave:
@@ -435,11 +435,11 @@ MonoBehaviour:
   SwitchTrapCost: 40
   SwitchTrapCostMultiply: 40
   TileSize: 1
-  GoldAttackIntensify: 0.3
-  WoodSpeedIntensify: 0.3
+  GoldAttackIntensify: 0.25
+  WoodFirerateIntensify: 0.25
   WaterSlowIntensify: 0.5
-  FireCriticalIntensify: 0.2
-  DustSputteringIntensify: 0.25
+  FireCritIntensify: 0.15
+  DustSplashIntensify: 0.25
   CircleCol: {fileID: 379002804665637541, guid: 88314c00e62edfc4ea1c16ad951dd62f, type: 3}
   RangeIndicatorPrefab: {fileID: 7053043907688615658, guid: d8a2a921f17ca0e46b801451269a7676, type: 3}
   JumpDamagePrefab: {fileID: 4699521983380265760, guid: 312c9ecb05f5d3f4fa19d5107ffc2833, type: 3}

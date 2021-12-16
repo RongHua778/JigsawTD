@@ -8,63 +8,112 @@ public class RandomCritical : ElementSkill
 {
     //暴击+25%，暴击伤害增加-100%-400%之间的随机波动
     public override List<int> Elements => new List<int> { 3, 3, 3 };
-    public override void Build()
-    {
-        base.Build();
-        strategy.ComCriticalIntensify += 0.25f;
-    }
-    public override void Shoot(Bullet bullet = null)
-    {
-        bullet.CriticalPercentage += Random.Range(-1f, 4f) * strategy.TimeModify;
-    }
-    //public override void Composite()
-    //{
-    //    base.Composite();
-    //    strategy.InitAttackModify *= Random.Range(0.5f, 3f);
-    //    strategy.InitFirerateModify *= Random.Range(0.5f, 3f);
-    //    strategy.InitSlowRateModify *= Random.Range(0.5f, 3f);
-    //    strategy.InitCriticalRateModify *= Random.Range(0.5f, 3f);
-    //    strategy.InitSplashRangeModify *= Random.Range(0.5f, 3f);
-    //}
+    bool reRandom = false;
+    int goldCount;
+    int woodCount;
+    int waterCount;
+    int fireCount;
+    int dustCount;
 
-    //public override void OnEquip()
-    //{
-    //    base.OnEquip();
-    //    strategy.InitAttackModify *= Random.Range(0.5f, 3f);
-    //    strategy.InitFirerateModify *= Random.Range(0.5f, 3f);
-    //    strategy.InitSlowRateModify *= Random.Range(0.5f, 3f);
-    //    strategy.InitCriticalRateModify *= Random.Range(0.5f, 3f);
-    //    strategy.InitSplashRangeModify *= Random.Range(0.5f, 3f);
-    //}
+    public override void StartTurn()
+    {
+        int reRandomAmount = 0;
+        if (strategy.TotalBaseCount != 0)
+        {
+            //记录全元素数量
+            goldCount = strategy.BaseGoldCount;
+            woodCount = strategy.BaseWoodCount;
+            waterCount = strategy.BaseWaterCount;
+            fireCount = strategy.BaseFireCount;
+            dustCount = strategy.BaseDustCount;
+            reRandomAmount = strategy.TotalBaseCount;
+            //清空全元素
+            strategy.BaseGoldCount = 0;
+            strategy.BaseWoodCount = 0;
+            strategy.BaseWaterCount = 0;
+            strategy.BaseFireCount = 0;
+            strategy.BaseDustCount = 0;
+            reRandom = true;
+        }
+        reRandomAmount += 3;
+        strategy.GainRandomTempElement(reRandomAmount);
+
+    }
+
+    public override void EndTurn()
+    {
+        if (reRandom)
+        {
+            strategy.BaseGoldCount = goldCount;
+            strategy.BaseWoodCount = woodCount;
+            strategy.BaseWaterCount = waterCount;
+            strategy.BaseFireCount = fireCount;
+            strategy.BaseDustCount = dustCount;
+            reRandom = false;
+        }
+    }
+
 }
 
 public class CloseCritical : ElementSkill
 {
     //近战暴击50%
-    public override List<int> Elements => new List<int> { 3, 3, 0 };
+    public override List<int> Elements => new List<int> { 0, 0, 3 };
+    public override float KeyValue => 0.5f * strategy.FireCount;
+    public override string DisplayValue => StaticData.ElementDIC[ElementType.FIRE].Colorized((KeyValue * 100).ToString() + "%");
+    public override ElementType IntensifyElement => ElementType.FIRE;
+    float intensifyValue;
+    bool isIntensified = false;
     public override void Shoot(Bullet bullet = null)
     {
+
         if (bullet.GetTargetDistance() < 3f)
         {
-            bullet.CriticalRate += 0.5f * strategy.TimeModify;
+            if (!isIntensified)
+            {
+                intensifyValue = KeyValue;
+                strategy.TurnFixCriticalPercentage += intensifyValue;
+                bullet.CriticalPercentage += intensifyValue;
+                isIntensified = true;
+            }
         }
+        else
+        {
+            if (isIntensified)
+            {
+                strategy.TurnFixCriticalPercentage -= intensifyValue;
+                isIntensified = false;
+            }
+        }
+    }
+
+    public override void EndTurn()
+    {
+        isIntensified = false;
+        intensifyValue = 0;
     }
 }
 
 public class HitCritical : ElementSkill
 {
-    //每击暴击率2%
-    public override List<int> Elements => new List<int> { 3, 3, 1 };
+    //每击暴伤50%
+    public override List<int> Elements => new List<int> { 1, 1, 3 };
+    public override float KeyValue => 0.02f * strategy.FireCount;
+    public override string DisplayValue => StaticData.ElementDIC[ElementType.FIRE].Colorized((KeyValue * 100).ToString() + "%");
+    public override ElementType IntensifyElement => ElementType.FIRE;
     public override void Shoot(Bullet bullet = null)
     {
-        strategy.TurnFixCriticalRate += 0.02f * strategy.TimeModify;
+        strategy.TurnFixCriticalPercentage += KeyValue;
     }
 }
 
 public class SlowCritical : ElementSkill
 {
     //每秒+1.5%暴击率
-    public override List<int> Elements => new List<int> { 3, 3, 2 };
+    public override List<int> Elements => new List<int> { 2, 2, 3 };
+    public override float KeyValue => 0.01f * strategy.FireCount;
+    public override string DisplayValue => StaticData.ElementDIC[ElementType.FIRE].Colorized((KeyValue * 100).ToString() + "%");
+    public override ElementType IntensifyElement => ElementType.FIRE;
     public override void StartTurn()
     {
         Duration += 999;
@@ -73,7 +122,7 @@ public class SlowCritical : ElementSkill
     public override void Tick(float delta)
     {
         base.Tick(delta);
-        strategy.TurnFixCriticalRate += 0.015f * delta * strategy.TimeModify;
+        strategy.TurnFixCriticalPercentage += KeyValue * delta;
     }
 
     public override void EndTurn()
@@ -85,20 +134,23 @@ public class SlowCritical : ElementSkill
 public class StartCritical : ElementSkill
 {
     //开局100%暴击
-    public override List<int> Elements => new List<int> { 3, 3, 4 };
+    public override List<int> Elements => new List<int> { 4, 4, 3 };
+    public override float KeyValue => 0.5f * strategy.FireCount;
+    public override string DisplayValue => StaticData.ElementDIC[ElementType.FIRE].Colorized((KeyValue * 100).ToString() + "%");
+    public override ElementType IntensifyElement => ElementType.FIRE;
     float intensify = 0;
     public override void StartTurn()
     {
         base.StartTurn();
         Duration += 20;
-        intensify = 1f * strategy.TimeModify;
-        strategy.TurnFixCriticalRate += intensify;
+        intensify = KeyValue;
+        strategy.TurnFixCriticalPercentage += intensify;
     }
 
     public override void TickEnd()
     {
         base.TickEnd();
-        strategy.TurnFixCriticalRate -= intensify;
+        strategy.TurnFixCriticalPercentage -= intensify;
     }
 
     public override void EndTurn()
@@ -106,6 +158,7 @@ public class StartCritical : ElementSkill
         base.EndTurn();
         Duration = 0;
     }
+
 }
 
 //public class CopySkill : ElementSkill

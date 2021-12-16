@@ -487,15 +487,15 @@ MonoBehaviour:
   - Key: RANGETYPE3
     Chinese: "\u76F4\u7EBF\u578B"
     English: Line
-  - Key: TURRETSKILL
-    Chinese: "\u88AB\u52A8\u6280\u80FD"
-    English: Default Skill
+  - Key: DESCRIPTION
+    Chinese: "\u57FA\u672C\u4FE1\u606F"
+    English: Description
   - Key: ELEMENTSKILL
     Chinese: "\u5143\u7D20\u6280\u80FD\u52A0\u6210"
     English: Element Skill Benefit
-  - Key: TILESKILL
-    Chinese: "\u5730\u5F62\u6548\u679C"
-    English: Tile Benefit
+  - Key: FOLLOW
+    Chinese: " (\u968F<sprite={0}>\u6570\u91CF\u63D0\u5347)"
+    English: ' (Increased with the amount of <sprite={0}>)'
   - Key: CRITICALINFO
     Chinese: "\u6BCF1%\u66B4\u51FB\u7387=1%\u989D\u5916\u66B4\u51FB\u4F24\u5BB3\uFF0C\u57FA\u7840\u66B4\u51FB\u4F24\u5BB3\u4E3A150%"
     English: Critical damage is 150% and each 1% critical give it 1% extra critical
@@ -538,11 +538,11 @@ MonoBehaviour:
     Chinese: "\u6362\u4F4D"
     English: Relocate
   - Key: ELEMENTSLOT
-    Chinese: "\u5143\u7D20\u6280\u80FD"
-    English: Element Skill
+    Chinese: "\u5143\u7D20\u6570\u91CF"
+    English: Elements
   - Key: TURRETLEVEL
-    Chinese: "\u9632\u5FA1\u5854\u7B49\u7EA7"
-    English: Turret Level
+    Chinese: "\u7B49\u7EA7"
+    English: Level
   - Key: EMPTYSKILL
     Chinese: "\u7A7A\u6280\u80FD\u69FD"
     English: Empty slot
@@ -622,15 +622,51 @@ MonoBehaviour:
   - Key: ESKILL
     Chinese: "\u5B50\u5F39\u9020\u6210\u6E85\u5C04\u8303\u56F4\u4F24\u5BB3"
     English: Attacks deal splash area damage.
+  - Key: CONSTRUCTORSN
+    Chinese: "\u4FA6\u6D4B\u6253\u51FB"
+    English: Detect Strike
+  - Key: SCATTERSN
+    Chinese: "\u6563\u5C04\u653B\u51FB"
+    English: Multi-Shot
+  - Key: MORTARSN
+    Chinese: "\u4E2D\u5FC3\u8F70\u70B8"
+    English: Center Bombing
+  - Key: ROTARYSN
+    Chinese: "\u805A\u80FD\u8F6C\u8F74"
+    English: Shaped Shaft
+  - Key: SNIPERSN
+    Chinese: "\u8BA9\u5B50\u5F39\u98DE"
+    English: Let the bullets fly
+  - Key: ULTRASN
+    Chinese: "\u8D85\u9650\u66B4\u51FB"
+    English: Transfinite Crit
+  - Key: RAPIDERSN
+    Chinese: "\u805A\u7126\u6253\u51FB"
+    English: Focus Strike
+  - Key: SNOWSN
+    Chinese: "\u971C\u51BB\u53CD\u5236"
+    English: Counter Frost
+  - Key: COOPORATIVESN
+    Chinese: "\u534F\u540C\u4F5C\u6218"
+    English: Cooperative Combat
+  - Key: BOOMERRANGSN
+    Chinese: "\u52A8\u80FD\u56DE\u65CB"
+    English: Kinetic Rotary
+  - Key: SUPERSN
+    Chinese: "\u5143\u7D20\u8D85\u8F7D"
+    English: Elemental Overload
+  - Key: CORESN
+    Chinese: "\u80FD\u91CF\u805A\u5408"
+    English: Energy Aggregation
   - Key: CONSTRUCTORSKILL
     Chinese: "\u653B\u51FB\u8303\u56F4\u5185\u6BCF\u67091\u4E2A\u654C\u4EBA\uFF0C\u653B\u51FB\u529B\u5C31\u63D0\u9AD810%"
     English: Attack increased by 10% for each enemy in range.
   - Key: SCATTERSKILL
-    Chinese: "\u9020\u6210\u7684\u4F24\u5BB3\u964D\u4F4E50%\uFF0C\u4F46\u662F\u53EF\u4EE5\u989D\u5916\u653B\u51FB3\u4E2A\u76EE\u6807"
-    English: Deals 50% less damage, but can attack an additional 3 targets.
+    Chinese: "\u9020\u6210\u7684\u4F24\u5BB3\u964D\u4F4E50%\uFF0C\u4F46\u662F\u53EF\u4EE5\u989D\u5916\u653B\u51FB2\u4E2A\u76EE\u6807"
+    English: Deals 50% less damage, but can attack an additional 2 targets.
   - Key: MORTARSKILL
-    Chinese: "\u5B50\u5F39\u6BCF\u67090.1\u6E85\u5C04\u8303\u56F4\u5C31\u63D0\u9AD810%\u6E85\u5C04\u4F24\u5BB3"
-    English: Splash damage increased by 10% for every 0.1 splash range.
+    Chinese: "\u6BCF\u6E85\u5C04\u52301\u4E2A\u76EE\u6807\uFF0C\u5C31\u4F7F\u6E85\u5C04\u4F24\u5BB3\u63D0\u9AD810%"
+    English: Splash damage increased by 10% for each enemy it hit
   - Key: RAPIDERSKILL
     Chinese: "\u5BF9\u540C\u4E00\u76EE\u6807\u8FDB\u884C\u653B\u51FB\u65F6\uFF0C\u6BCF\u6B21\u653B\u51FB\u4F7F\u653B\u901F\u63D0\u534720%\uFF0C\u4E0A\u9650200%"
     English: Firerate increased by 20% each shoot when it is attacking the same target(up
@@ -643,8 +679,8 @@ MonoBehaviour:
     Chinese: "\u5B50\u5F39\u4F24\u5BB3\u968F\u98DE\u884C\u8DDD\u79BB\u63D0\u534750%/\u683C"
     English: Bullet's damage increased by 50% for each tile it travelled
   - Key: ULTRASKILL
-    Chinese: "\u5B50\u5F39\u66B4\u51FB\u4F24\u5BB3\u589E\u52A0-100%\u5230400%\u7684\u968F\u673A\u6D6E\u52A8"
-    English: Bullet's critical damage randomly increased by -100& to 400%
+    Chinese: "\u5B50\u5F39\u7684\u6700\u7EC8\u66B4\u51FB\u4F24\u5BB3\u572825%\u5230250%\u4E4B\u95F4\u968F\u673A\u6D6E\u52A8"
+    English: Bullet's critical damage randomly float between 25% to 250%
   - Key: SNOWSKILL
     Chinese: "\u7A7F\u900F\u5B50\u5F39\uFF0C\u4E0D\u53EF\u6E85\u5C04;\u5B50\u5F39\u4F1A\u4F7F\u654C\u4EBA\u5F53\u524D\u51CF\u901F\u6548\u679C\u7FFB\u500D\u3002"
     English: Penetration Bullet can't splash;Bullet will double enemy's current slow.
@@ -656,164 +692,171 @@ MonoBehaviour:
     English: Penetration Bullet can't splash;Bullet damage will increase by 10% for
       each enemy it hit.
   - Key: SUPERSKILL
-    Chinese: "\u6BCF\u56DE\u5408\u5F00\u59CB30\u79D2\u540E\uFF0C\u4F7F\u5F53\u524D\u6240\u6709\u5C5E\u6027\u503C\u7FFB\u500D"
-    English: Double all current stats after 30s of each wave
+    Chinese: "\u5143\u7D20\u6280\u80FD\u69FD+1\uFF0C\u6BCF\u62E5\u67091\u4E2A\u5143\u7D20\u9020\u6210\u7684\u4F24\u5BB3\u5C31\u63D0\u534710%"
+    English: Element skill slot +1, deal 10% extra damage for each element it has
   - Key: CORESKILL
     Chinese: "\u56DE\u5408\u5F00\u59CB\u65F6\uFF0C\u653B\u51FB\u529B\u53D8\u4E3A\u76F8\u90BB\u9632\u5FA1\u5854\u7684\u653B\u51FB\u529B\u4E4B\u548C\u768470%/100%/150%\uFF08\u968F\u7B49\u7EA7\u63D0\u5347\uFF09"
     English: At the start of each wave, it's attack will become 70%/100%/150% of
       the sum of adjacent turrets.
   - Key: AAA
-    Chinese: "\u91CD\u91D1\u5C5E\u5316"
-    English: Metalize
+    Chinese: "\u91CD\u91D1\u57FA\u5EA7"
+    English: Metal Base
   - Key: AAAINFO
-    Chinese: "\u4F7F\u81EA\u8EAB\u6240\u6709\u653B\u51FB\u52A0\u6210\u7FFB\u500D"
-    English: Double all attack increased
+    Chinese: "\u56DE\u5408\u5F00\u59CB\u65F6\uFF0C\u6BCF\u62E5\u67093\u4E2A\u5143\u7D20\u5C31\u83B7\u5F97+1\u653B\u51FB\u8DDD\u79BB"
+    English: At the start of each wave, gain+1 attack range for every 3 elements
+      it has
   - Key: AAB
-    Chinese: "\u5145\u80FD\u5B50\u5F39"
-    English: Charged Bullet
+    Chinese: "\u8FD1\u6218\u901F\u51FB"
+    English: Close Firerate
   - Key: AABINFO
-    Chinese: "\u6BCF\u6B21\u653B\u51FB\u63D0\u5347\u672C\u56DE\u54083%\u653B\u51FB\u529B"
-    English: Attack increased by 3% each shoot.
+    Chinese: "\u76EE\u6807\u8DDD\u79BB\u5C0F\u4E8E3\u65F6\uFF0C\u63D0\u5347{0}\u653B\u901F"
+    English: Firerate increased by {0} if target's distance is less than 3
   - Key: AAC
-    Chinese: "\u5BD2\u6C14\u9635\u5730"
-    English: Cold Front
+    Chinese: "\u8FD1\u6218\u971C\u51BB"
+    English: Close Frost
   - Key: AACINFO
-    Chinese: "\u6BCF\u56DE\u5408\u5F00\u59CB\u540E\uFF0C\u653B\u51FB\u529B\u6BCF\u79D2\u63D0\u53472%"
-    English: Attack increases by 2% per second after the start of each wave.
+    Chinese: "\u76EE\u6807\u8DDD\u79BB\u5C0F\u4E8E3\u65F6\uFF0C\u63D0\u5347{0}\u51CF\u901F"
+    English: Slow increased by {0} if target's distance is less than 3
   - Key: AAD
-    Chinese: "\u9AD8\u80FD\u7206\u7834"
-    English: Energy Blasting
+    Chinese: "\u8FD1\u6218\u66B4\u51FB"
+    English: Close Crit
   - Key: AADINFO
-    Chinese: "\u9632\u5FA1\u5854\u653B\u51FB\u529B\u572825%-250%\u4E4B\u95F4\u968F\u673A\u6D6E\u52A8"
-    English: Turret's attack fluctuates between 25% and 250%
+    Chinese: "\u76EE\u6807\u8DDD\u79BB\u5C0F\u4E8E3\u65F6\uFF0C\u63D0\u5347{0}\u66B4\u51FB\u4F24\u5BB3"
+    English: Critical damage increased by {0} if target's distance is less than 3
   - Key: AAE
-    Chinese: "\u5F3A\u653B\u6838\u5FC3"
-    English: Attack Core
+    Chinese: "\u8FD1\u6218\u6E85\u5C04"
+    English: Close Splash
   - Key: AAEINFO
-    Chinese: "\u6218\u6597\u5F00\u59CB\u524D20\u79D2\uFF0C\u653B\u51FB\u529B\u63D0\u5347150%"
-    English: Turret's attack increased by 150% before 20 seconds of each wave
+    Chinese: "\u76EE\u6807\u8DDD\u79BB\u5C0F\u4E8E3\u65F6\uFF0C\u63D0\u5347{0}\u6E85\u5C04\u8303\u56F4"
+    English: Splash range increased by {0} if target's distance is less than 3
   - Key: BBB
-    Chinese: "\u8F7B\u6750\u6599\u5316"
-    English: Lightweight Material
+    Chinese: "\u7D2F\u52A0\u6548\u5E94"
+    English: Additive Effect
   - Key: BBBINFO
-    Chinese: "\u5BF9\u540C\u4E00\u76EE\u6807\u8FDB\u884C\u653B\u51FB\u65F6\uFF0C\u6BCF\u6B21\u653B\u51FB\u653B\u901F+20%\uFF0C\u4E0A\u9650300%"
-    English: Firerate increased by 20% each shoot when it is attacking the same target(up
-      to 300%).
+    Chinese: "\u56DE\u5408\u5F00\u59CB\u65F6\uFF0C\u6BCF\u62E5\u67094\u4E2A\u5143\u7D20\u5C31\u653B\u51FB1\u4E2A\u989D\u5916\u7684\u76EE\u6807"
+    English: At the start of each wave, attack 1 additional target this turn for
+      every 4 elements it has
   - Key: BBA
-    Chinese: "\u5782\u76F4\u6253\u51FB"
-    English: Verical Strike
+    Chinese: "\u5F3A\u653B\u5B50\u5F39"
+    English: Attack Bullet
   - Key: BBAINFO
-    Chinese: "\u653B\u51FB\u8DDD\u79BB\u5C0F\u4E8E3\u7684\u76EE\u6807\u65F6\uFF0C\u653B\u901F\u63D0\u534775%"
-    English: Firerate increased by 75% when target's distance is less than 3
+    Chinese: "\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347{0}\u653B\u51FB\u529B"
+    English: Attack increased by {0} each shoot
   - Key: BBC
-    Chinese: "\u8FC7\u8F7D\u5F39\u5939"
-    English: Overload Cartridge
+    Chinese: "\u971C\u51BB\u5B50\u5F39"
+    English: Frost Bullet
   - Key: BBCINFO
-    Chinese: "\u6BCF\u56DE\u5408\u5F00\u59CB\u540E\uFF0C\u653B\u901F\u6BCF\u79D2\u63D0\u53472%"
-    English: Firerate increases by 2% per second after the start of each wave.
+    Chinese: "\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347{0}\u51CF\u901F"
+    English: Slow increased by {0} each shoot
   - Key: BBD
-    Chinese: "\u5F31\u70B9\u51FB\u7834"
-    English: Vulnerability Shoot
+    Chinese: "\u66B4\u51FB\u5B50\u5F39"
+    English: Crit Bullet
   - Key: BBDINFO
-    Chinese: "\u9632\u5FA1\u5854\u653B\u901F\u572825%-250%\u4E4B\u95F4\u968F\u673A\u6D6E\u52A8"
-    English: Turret's firerate fluctuates between 25% and 250%
+    Chinese: "\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347{0}\u7684\u66B4\u51FB\u4F24\u5BB3"
+    English: Critical damage increased by {0} each shoot
   - Key: BBE
-    Chinese: "\u52A0\u901F\u6838\u5FC3"
-    English: Speed Core
+    Chinese: "\u6E85\u5C04\u5B50\u5F39"
+    English: Splash Bullet
   - Key: BBEINFO
-    Chinese: "\u6218\u6597\u5F00\u59CB\u524D20\u79D2\uFF0C\u653B\u901F\u63D0\u5347150%"
-    English: Turret's firerate increased by 150% before 20 seconds of each wave
+    Chinese: "\u6BCF\u6B21\u653B\u51FB\u540E\uFF0C\u63D0\u5347{0}\u6E85\u5C04\u8303\u56F4"
+    English: Splash range increased by {0} each shoot
   - Key: CCC
-    Chinese: "\u6025\u51BB\u6280\u672F"
-    English: Forst Technology
+    Chinese: "\u5BD2\u971C\u539F\u5B50"
+    English: Frost Core
   - Key: CCCINFO
-    Chinese: "\u5143\u7D20\u6280\u80FD\u69FD+2"
-    English: Turret's element skill slot + 2.
+    Chinese: "\u5143\u7D20\u6280\u80FD\u69FD+2\uFF08\u6BCF\u4E2A\u91CD\u6784\u5854\u6280\u80FD\u69FD\u4E0A\u9650\u4E3A5\uFF09"
+    English: Element skill slot + 2, each turret can equip with only one Frost Core
   - Key: CCA
-    Chinese: "\u51DD\u6EDE\u89C6\u91CE"
-    English: Hitch Vision
+    Chinese: "\u84C4\u80FD\u5F3A\u653B"
+    English: Attck Accumulate
   - Key: CCAINFO
-    Chinese: "\u653B\u51FB\u8DDD\u79BB\u5C0F\u4E8E3\u7684\u76EE\u6807\u65F6\uFF0C\u5B50\u5F39\u51CF\u901F\u6548\u679C\u63D0\u53471.5"
-    English: Slow increased by 1.5 when target's distance is less than 3
+    Chinese: "\u56DE\u5408\u5F00\u59CB\u540E\uFF0C\u6BCF\u79D2\u63D0\u5347{0}\u653B\u51FB\u529B"
+    English: Attack increased by {0} every second from the start of each wave
   - Key: CCB
-    Chinese: "\u6781\u5BD2\u5B50\u5F39"
-    English: Cold Bullet
+    Chinese: "\u84C4\u80FD\u901F\u51FB"
+    English: Firerate Accumulate
   - Key: CCBINFO
-    Chinese: "\u6BCF\u6B21\u653B\u51FB\u63D0\u5347\u672C\u56DE\u54080.05\u51CF\u901F"
-    English: Slow increased by 0.05 each shoot.
+    Chinese: "\u56DE\u5408\u5F00\u59CB\u540E\uFF0C\u6BCF\u79D2\u63D0\u5347{0}\u7684\u653B\u901F"
+    English: Firerate increased by {0} every second from the start of each wave
   - Key: CCD
-    Chinese: "\u5BD2\u51B0\u70B8\u5F39"
-    English: Ice Bomb
+    Chinese: "\u84C4\u80FD\u66B4\u51FB"
+    English: Frost Accumulate
   - Key: CCDINFO
-    Chinese: "\u51CF\u901F+0.5\uFF0C\u9632\u5FA1\u5854\u51CF\u901F\u572825%-250%\u4E4B\u95F4\u968F\u673A\u6D6E\u52A8"
-    English: Slow + 0.5, Turret's slow fluctuates between 25% and 250%
+    Chinese: "\u56DE\u5408\u5F00\u59CB\u540E\uFF0C\u6BCF\u79D2\u63D0\u5347{0}\u7684\u66B4\u51FB\u4F24\u5BB3"
+    English: Critical damage increased by {0} every second from the start of each
+      wave
   - Key: CCE
-    Chinese: "\u51CF\u901F\u6838\u5FC3"
-    English: Slow Core
+    Chinese: "\u84C4\u80FD\u6E85\u5C04"
+    English: Splash Accumulate
   - Key: CCEINFO
-    Chinese: "\u6218\u6597\u5F00\u59CB\u524D20\u79D2\uFF0C\u51CF\u901F\u63D0\u53474"
-    English: Turret's slow increased by 4 before 20 seconds of each wave
+    Chinese: "\u56DE\u5408\u5F00\u59CB\u540E\uFF0C\u6BCF\u79D2\u63D0\u5347{0}\u7684\u6E85\u5C04\u8303\u56F4"
+    English: Splash range increased by {0} every second from the start of each wave
   - Key: DDD
-    Chinese: "\u6DF7\u6C8C\u79D1\u6280"
-    English: Chaos Technology
+    Chinese: "\u4E0A\u5E1D\u9AB0\u5B50"
+    English: God's Dice
   - Key: DDDINFO
-    Chinese: "\u66B4\u51FB\u7387+25%\uFF0C\u66B4\u51FB\u4F24\u5BB3\u589E\u52A0-100%-400%\u7684\u968F\u673A\u6D6E\u52A8"
-    English: Critical + 25%, Bullet's critical damage randomly increased by -100&
-      to 400%
+    Chinese: "\u56DE\u5408\u5F00\u59CB\u65F6\uFF0C\u83B7\u5F973\u4E2A\u4E34\u65F6\u5143\u7D20\u5E76\u91CD\u65B0\u968F\u673A\u6240\u6709\u5143\u7D20"
+    English: At the start of each wave, gain 3 elements and randomly change all elements
+      this turn
   - Key: DDA
-    Chinese: "\u4E0D\u7A33\u5B9A\u8F74"
-    English: Unstable Shaft
+    Chinese: "\u8FDC\u7A0B\u5F3A\u653B"
+    English: Long-distance Attack
   - Key: DDAINFO
-    Chinese: "\u653B\u51FB\u8DDD\u79BB\u5C0F\u4E8E3\u7684\u76EE\u6807\u65F6\uFF0C\u5B50\u5F39\u66B4\u51FB\u7387\u63D0\u9AD850%"
-    English: Critical increased by 50% when target's distance is less than 3
+    Chinese: "\u5982\u679C\u76EE\u6807\u8DDD\u79BB\u5927\u4E8E3\uFF0C\u5219\u8DDD\u79BB\u6BCF\u8FDC1\u683C\uFF0C\u5C31\u63D0\u5347{0}\u653B\u51FB\u529B"
+    English: If target's distance is lager than 3, attack increased by {0} for each
+      tile distance
   - Key: DDB
-    Chinese: "\u9707\u8361\u5C04\u51FB"
-    English: Concussive Shot
+    Chinese: "\u8FDC\u7A0B\u901F\u51FB"
+    English: Long-distance Firerate
   - Key: DDBINFO
-    Chinese: "\u6BCF\u6B21\u653B\u51FB\u63D0\u5347\u672C\u56DE\u54082%\u66B4\u51FB\u7387"
-    English: Critical increased by 2% each shoot.
+    Chinese: "\u5982\u679C\u76EE\u6807\u8DDD\u79BB\u5927\u4E8E3\uFF0C\u5219\u8DDD\u79BB\u6BCF\u8FDC1\u683C\uFF0C\u5C31\u63D0\u5347{0}\u653B\u901F"
+    English: If target's distance is lager than 3, firerate increased by {0} for
+      each tile distance
   - Key: DDC
-    Chinese: "\u70ED\u80FD\u57FA\u5EA7"
-    English: Energy Base
+    Chinese: "\u8FDC\u7A0B\u971C\u51BB"
+    English: Long-distance Frost
   - Key: DDCINFO
-    Chinese: "\u6BCF\u56DE\u5408\u5F00\u59CB\u540E\uFF0C\u66B4\u51FB\u7387\u6BCF\u79D2\u63D0\u53471.5%"
-    English: Critical increases by 1.5% per second after the start of each wave.
+    Chinese: "\u5982\u679C\u76EE\u6807\u8DDD\u79BB\u5927\u4E8E3\uFF0C\u5219\u8DDD\u79BB\u6BCF\u8FDC1\u683C\uFF0C\u5C31\u63D0\u5347{0}\u51CF\u901F"
+    English: If target's distance is lager than 3, slow increased by {0} for each
+      tile distance
   - Key: DDE
-    Chinese: "\u66B4\u51FB\u6838\u5FC3"
-    English: Critical Core
+    Chinese: "\u8FDC\u7A0B\u6E85\u5C04"
+    English: Long-distance Splash
   - Key: DDEINFO
-    Chinese: "\u6218\u6597\u5F00\u59CB\u524D20\u79D2\uFF0C\u66B4\u51FB\u7387\u63D0\u5347100%"
-    English: Turret's splash increased by 100% before 20 seconds of each wave
+    Chinese: "\u5982\u679C\u76EE\u6807\u8DDD\u79BB\u5927\u4E8E3\uFF0C\u5219\u8DDD\u79BB\u6BCF\u8FDC1\u683C\uFF0C\u5C31\u63D0\u5347{0}\u6E85\u5C04"
+    English: If target's distance is lager than 3, splash range increased by {0}
+      for each tile distance
   - Key: EEE
-    Chinese: "\u539F\u5B50\u4E2D\u5FC3"
-    English: Atomic Center
+    Chinese: "\u5E73\u7B49\u4E3B\u4E49"
+    English: Egalitarianism
   - Key: EEEINFO
-    Chinese: "\u653B\u51FB\u8303\u56F4\u5185\u6BCF\u67091\u4E2A\u654C\u4EBA\uFF0C\u6E85\u5C04+0.2"
-    English: Splash increased by 0.2 for each enemy in range
+    Chinese: "\u56DE\u5408\u5F00\u59CB\u65F6\uFF0C\u4F7F\u62E5\u6709\u7684\u6570\u91CF\u6700\u5C11\u7684\u6240\u6709\u5143\u7D20\u6570\u91CF+2"
+    English: At the start of each wave, the fewest elements it has gain +2
   - Key: EEA
-    Chinese: "\u8FD1\u8DDD\u8F70\u70B8"
-    English: Close Bombing
+    Chinese: "\u524D\u671F\u5F3A\u653B"
+    English: Rapid Attack
   - Key: EEAINFO
-    Chinese: "\u653B\u51FB\u8DDD\u79BB\u5C0F\u4E8E3\u7684\u76EE\u6807\u65F6\uFF0C\u5B50\u5F39\u6E85\u5C04\u8303\u56F4\u63D0\u9AD80.75"
-    English: Splash range increased by 0.75 when target's distance is less than 3
+    Chinese: "\u6BCF\u56DE\u5408\u5F00\u59CB\u524D20\u79D2\uFF0C\u63D0\u5347{0}\u653B\u51FB\u529B"
+    English: During the first 20 seconds of each wave, attack increased by {0}
   - Key: EEB
-    Chinese: "\u52A0\u91CD\u5F39\u836F"
-    English: Ammunition
+    Chinese: "\u524D\u671F\u901F\u51FB"
+    English: Rapid Firerate
   - Key: EEBINFO
-    Chinese: "\u6BCF\u6B21\u653B\u51FB\u63D0\u5347\u672C\u56DE\u54080.03\u6E85\u5C04\u8303\u56F4"
-    English: Splash range increased by 0.03 each shoot.
+    Chinese: "\u6BCF\u56DE\u5408\u5F00\u59CB\u524D20\u79D2\uFF0C\u63D0\u5347{0}\u653B\u901F"
+    English: During the first 20 seconds of each wave, firerate increased by {0}
   - Key: EEC
-    Chinese: "\u586B\u5145\u706B\u836F"
-    English: Filled Gunpowder
+    Chinese: "\u524D\u671F\u971C\u51BB"
+    English: Rapid Slow
   - Key: EECINFO
-    Chinese: "\u6BCF\u56DE\u5408\u5F00\u59CB\u540E\uFF0C\u6E85\u5C04\u8303\u56F4\u6BCF\u79D2\u63D0\u53470.02"
-    English: Splash range increases by 0.02 per second after the start of each wave.
+    Chinese: "\u6BCF\u56DE\u5408\u5F00\u59CB\u524D20\u79D2\uFF0C\u63D0\u5347{0}\u7684\u653B\u901F"
+    English: During the first 20 seconds of each wave, firerate increased by {0}
   - Key: EED
-    Chinese: "\u72C2\u8F70\u6EE5\u70B8"
-    English: Bombardment
+    Chinese: "\u524D\u671F\u66B4\u51FB"
+    English: Rapid Crit
   - Key: EEDINFO
-    Chinese: "\u6E85\u5C04+0.25\uFF0C\u9632\u5FA1\u5854\u6E85\u5C04\u572825%-250%\u4E4B\u95F4\u968F\u673A\u6D6E\u52A8"
-    English: Splash + 0.25, Turret's splash fluctuates between 25% and 250%
+    Chinese: "\u6BCF\u56DE\u5408\u5F00\u59CB\u524D20\u79D2\uFF0C\u63D0\u5347{0}\u7684\u66B4\u51FB\u4F24\u5BB3"
+    English: During the first 20 seconds of each wave, critical damage increased
+      by {0}
   - Key: ABC
     Chinese: "\u5EC9\u4EF7\u57FA\u5EA7"
     English: Inferior Base
@@ -827,23 +870,24 @@ MonoBehaviour:
     Chinese: "\u4F7F\u9632\u5FA1\u5854\u653B\u51FB\u8303\u56F4\u53D8\u4E3A\u5706\u5F62"
     English: Turn this turret's attack range in to circle
   - Key: ABE
-    Chinese: "\u52A0\u88C5\u70AE\u53E3"
-    English: Discount Tickets
+    Chinese: "\u6539\u88C5\u8D60\u54C1"
+    English: Gift of Modify
   - Key: ABEINFO
-    Chinese: "\u653B\u51FB\u529B-30%\uFF0C\u53EF\u989D\u5916\u653B\u51FB1\u4E2A\u76EE\u6807"
-    English: Attack-30%, attack an additional target
+    Chinese: "\u56DE\u5408\u5F00\u59CB\u65F6\uFF0C\u6BCF\u88C5\u8F7D1\u4E2A\u5143\u7D20\u6280\u80FD\uFF0C\u5C31\u83B7\u5F971\u4E2A\u968F\u673A\u4E34\u65F6\u5143\u7D20"
+    English: At the start of each wave, gain +1 random element for each element skill
+      it has
   - Key: ACD
-    Chinese: "\u91CD\u578B\u706B\u70AE"
-    English: Great Bombard
+    Chinese: "\u5F31\u70B9\u6253\u51FB"
+    English: Weakness Strike
   - Key: ACDINFO
-    Chinese: "\u5BF9\u5269\u4F59\u751F\u547D\u503C\u5927\u4E8E50%\u7684\u654C\u4EBA\u9020\u6210\u7684\u4F24\u5BB3\u63D0\u9AD850%"
-    English: Damage increased by 50% if target has more than 50% Health
+    Chinese: "\u5BF9\u5269\u4F59\u751F\u547D\u503C\u4F4E\u4E8E25%\u7684\u654C\u4EBA\u9020\u6210\u7684\u4F24\u5BB3\u63D0\u9AD850%"
+    English: Damage increased by 50% if target's Health is less than 25%
   - Key: ACE
-    Chinese: "\u7834\u51B0\u70AE\u5F39"
-    English: Ice Shell
+    Chinese: "\u52A0\u957F\u70AE\u7BA1"
+    English: Longer barrel
   - Key: ACEINFO
-    Chinese: "\u5BF9\u5904\u4E8E\u51CF\u901F\u72B6\u6001\u7684\u654C\u4EBA\u9020\u6210\u7684\u4F24\u5BB3\u63D0\u9AD850%"
-    English: Damage increased by 50% if target is slowing down
+    Chinese: "\u653B\u51FB\u8303\u56F4+1\uFF0C\u5982\u679C\u653B\u51FB\u8303\u56F4\u5927\u4E8E\u7B49\u4E8E6\uFF0C\u5219\u989D\u5916+1"
+    English: Range +1, and +2 if range is greater than or equal to 6
   - Key: ADE
     Chinese: "\u5E7B\u5316\u6784\u9020"
     English: Unreal module
@@ -851,17 +895,17 @@ MonoBehaviour:
     Chinese: "\u91CD\u6784\u540E\u53D8\u5316\u4E3A\u4E00\u4E2A\u968F\u673A\u6280\u80FD"
     English: Becomes a random element skill while refactor
   - Key: BCD
-    Chinese: "\u52A0\u957F\u70AE\u7BA1"
-    English: Longer barrel
-  - Key: BCDINFO
-    Chinese: "\u653B\u51FB\u8303\u56F4+1\uFF0C\u5982\u679C\u653B\u51FB\u8303\u56F4\u5927\u4E8E6\uFF0C\u5219\u989D\u5916+1"
-    English: Range +1, and +2 if range is greater than 6
-  - Key: BCE
     Chinese: "\u7EF4\u4FEE\u5DE5\u5382"
     English: Repair Factory
-  - Key: BCEINFO
+  - Key: BCDINFO
     Chinese: "\u8BE5\u9632\u5FA1\u5854\u4E0D\u4F1A\u88AB\u51BB\u7ED3"
     English: This turret will not be frozen
+  - Key: BCE
+    Chinese: "\u4F4E\u6E29\u6539\u9020"
+    English: Frost Transformation
+  - Key: BCEINFO
+    Chinese: "\u65BD\u52A0\u7684\u51BB\u7ED3\u5C42\u6570\u63D0\u9AD8100%"
+    English: Increased the frost effect applied by 100%
   - Key: BDE
     Chinese: "\u94F8\u5E01\u5DE5\u5382"
     English: Repair Factory
@@ -869,11 +913,11 @@ MonoBehaviour:
     Chinese: "\u5B50\u5F39\u6BCF\u6B21\u547D\u4E2D\u67098%\u6982\u7387\u83B7\u5F972\u91D1\u5E01"
     English: The bullet has an 8% chance of getting 2 coin
   - Key: CDE
-    Chinese: "\u60CA\u559C\u5956\u5238"
-    English: Supprise Lottery
+    Chinese: "\u5F3A\u52BF\u6253\u51FB"
+    English: Powerful Blow
   - Key: CDEINFO
-    Chinese: "\u6A21\u5757\u6784\u5EFA\u8D39\u7528\u964D\u4F4E50%"
-    English: Reduce the cost of building module by 50%
+    Chinese: "\u66B4\u51FB\u9020\u6210\u7684\u51CF\u901F\u53CA\u6E85\u5C04\u8303\u56F4\u7FFB\u500D"
+    English: Double the slow and splash range if it is a critical hit
   - Key: SOILDER
     Chinese: "\u9B23\u72D7"
     English: Hyena
@@ -1005,7 +1049,7 @@ MonoBehaviour:
   - Key: EXECUTETRAP
     Chinese: "\u5904\u51B3\u9677\u9631"
     English: Execution Trap
-  - Key: DAMAGETrap
+  - Key: DAMAGETRAP
     Chinese: "\u4F24\u5BB3\u9677\u9631"
     English: Damage Trap
   - Key: FROSTTRAP
@@ -1048,7 +1092,7 @@ MonoBehaviour:
   - Key: EXECUTETRAPINFO
     Chinese: "\u5BF9\u7ECF\u8FC7\u7684\u654C\u4EBA\u9020\u621020%\u5DF2\u635F\u5931\u751F\u547D\u503C\u7684\u4F24\u5BB3"
     English: Deal damage equal to 20% * enemy's lost health
-  - Key: DAMAGETrapINFO
+  - Key: DAMAGETRAPINFO
     Chinese: "\u654C\u4EBA\u5728\u63A5\u4E0B\u67653\u683C\u7684\u79FB\u52A8\u5185\u6240\u53D7\u4F24\u5BB3\u63D0\u9AD850%"
     English: Enemies passing by will takes 50% addition damage for the next 3 tiles'
       move.

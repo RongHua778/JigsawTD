@@ -31,7 +31,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     private float damage;
     public float Damage { get => damage; set => damage = value; }
     private float sputteringRange;
-    public float SputteringRange { get => sputteringRange; set => sputteringRange = value; }
+    public float SplashRange { get => sputteringRange; set => sputteringRange = value; }
 
     private float sputteringPercentage;
     public float SplashPercentage { get => sputteringPercentage; set => sputteringPercentage = value; }
@@ -76,7 +76,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         this.turretParent = turret;
         this.Damage = turret.Strategy.FinalAttack;
         this.bulletSpeed = turret.Strategy.Attribute.BulletSpeed;
-        this.SputteringRange = turret.Strategy.FinalSplashRange;
+        this.SplashRange = turret.Strategy.FinalSplashRange;
         this.CriticalRate = turret.Strategy.FinalCriticalRate;
         this.CriticalPercentage = turret.Strategy.FinalCriticalPercentage;
         this.turretEffects = turret.Strategy.TurretSkills;

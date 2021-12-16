@@ -99,10 +99,6 @@ public class ContentStruct
 
     public int ElementSlotCount;
     public Dictionary<string, List<int>> SkillList;
-
-    public List<double> InitModifies;
-
-
 }
 
 [Serializable]

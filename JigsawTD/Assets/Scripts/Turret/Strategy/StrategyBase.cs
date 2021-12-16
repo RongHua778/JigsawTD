@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 
 public enum StrategyType
 {
@@ -42,7 +41,7 @@ public class StrategyBase
     #endregion
     #region 二级属性
     private int elementSkillSlot = 2;//元素技能槽数
-    public int ElementSKillSlot { get => elementSkillSlot; set => elementSkillSlot = value; }
+    public int ElementSKillSlot { get => Mathf.Min(5, elementSkillSlot); set => elementSkillSlot = value; }
     private RangeType rangeType = RangeType.Circle;
     public RangeType RangeType
     {
@@ -82,38 +81,40 @@ public class StrategyBase
     public int ForbidRange { get => forbidRange; set => forbidRange = value; }
 
     public bool UnFrozable = false;//不可冻结
-    #endregion
-    #region 基础加成
-    private float initAttackModify = 1;
-    private float initFireRateModify = 1;
-    private int initRangeModify = 1;
-    private float initCriticalRateModify = 1;
-    private float initSlowRateModify = 1;
-    private float initSplashRangeModify = 1;
-    public float InitAttackModify { get => initAttackModify; set => initAttackModify = value; }
-    public float InitFirerateModify { get => initFireRateModify; set => initFireRateModify = value; }
-    public int InitRangeModify { get => initRangeModify; set => initRangeModify = value; }
-    public float InitCriticalRateModify { get => initCriticalRateModify; set => initCriticalRateModify = value; }
-    public float InitSlowRateModify { get => initSlowRateModify; set => initSlowRateModify = value; }
-    public float InitSplashRangeModify { get => initSplashRangeModify; set => initSplashRangeModify = value; }
-
+    private int baseRangeIntensify;
+    public int BaseRangeIntensify { get => baseRangeIntensify; set => baseRangeIntensify = value; }
     private int baseTargetCountIntensify;
     public int BaseTargetCountIntensify { get => baseTargetCountIntensify; set => baseTargetCountIntensify = value; }
     #endregion
-    #region 元素加成
-    private float comAttackIntensify;
-    private float comSpeedIntensify;
-    private int comRangeIntensify;
-    private float comCriticalIntensify;
-    private float comSputteringRangeIntensify;
-    private float comSlowIntensify;
-    public float ComAttackIntensify { get => comAttackIntensify; set => comAttackIntensify = value; }
-    public float ComSpeedIntensify { get => comSpeedIntensify; set => comSpeedIntensify = value; }
-    public int ComRangeIntensify { get => comRangeIntensify; set => comRangeIntensify = value; }
-    public float ComCriticalIntensify { get => comCriticalIntensify; set => comCriticalIntensify = value; }
-    public float ComSplashRangeIntensify { get => comSputteringRangeIntensify; set => comSputteringRangeIntensify = value; }
-    public float ComSlowIntensify { get => comSlowIntensify; set => comSlowIntensify = value; }
+    #region 元素数量
+    //基础元素数量
+    public int BaseGoldCount;
+    public int BaseWoodCount;
+    public int BaseWaterCount;
+    public int BaseFireCount;
+    public int BaseDustCount;
+    public int TotalBaseCount => BaseGoldCount + BaseWoodCount + BaseWaterCount + BaseFireCount + BaseDustCount;
+    //临时元素数量
+    public int TempGoldCount;
+    public int TempWoodCount;
+    public int TempWaterCount;
+    public int TempFireCount;
+    public int TempDustCount;
+    //总元素数量
+    public int GoldCount => BaseGoldCount + TempGoldCount;
+    public int WoodCount => BaseWoodCount + TempWoodCount;
+    public int WaterCount => BaseWaterCount + TempWaterCount;
+    public int FireCount => BaseFireCount + TempFireCount;
+    public int DustCount => BaseDustCount + TempDustCount;
+    public int TotalElementCount => GoldCount + WoodCount + WaterCount + FireCount + DustCount;
+    #endregion
 
+    #region 元素加成
+    public float ElementAttackIntensify { get => StaticData.Instance.GoldAttackIntensify * GoldCount; }
+    public float ElementFirerateIntensify { get => StaticData.Instance.WoodFirerateIntensify * WoodCount; }
+    public float ElementSlowIntensify { get => StaticData.Instance.WaterSlowIntensify * WaterCount; }
+    public float ElementCritIntensify { get => StaticData.Instance.FireCritIntensify * FireCount; }
+    public float ElementSplashIntensify { get => StaticData.Instance.DustSplashIntensify * DustCount; }
     #endregion
 
     #region 所有加成二次修正
@@ -140,19 +141,19 @@ public class StrategyBase
     public int TurnDamage { get => turnDamage; set => turnDamage = value; }
     private int totalDamage;
     public int TotalDamage { get => totalDamage; set => totalDamage = value; }
-    public float BaseAttack { get => InitAttack * InitAttackModify * (1 + ComAttackIntensify * AllAttackIntensifyModify); }
-    public float BaseSpeed { get => InitFireRate * InitFirerateModify * (1 + ComSpeedIntensify * AllSpeedIntensifyModify); }
-    public int BaseRange { get => InitRange * InitRangeModify + ComRangeIntensify; }
-    public float BaseCriticalRate { get => InitCriticalRate * InitCriticalRateModify + ComCriticalIntensify * AllCriticalIntensifyModify; }
+    public float BaseAttack { get => InitAttack * (1 + ElementAttackIntensify * AllAttackIntensifyModify); }
+    public float BaseSpeed { get => InitFireRate * (1 + ElementFirerateIntensify * AllSpeedIntensifyModify); }
+    public int BaseRange { get => InitRange + BaseRangeIntensify; }
+    public float BaseCriticalRate { get => InitCriticalRate + ElementCritIntensify * AllCriticalIntensifyModify; }
     public float BaseCriticalPercentage { get => initCriticalPercentage; }
-    public float BaseSplashRange { get => InitSplashRange * InitSplashRangeModify + ComSplashRangeIntensify * BaseSplashRangeIntensifyModify; }
+    public float BaseSplashRange { get => InitSplashRange + ElementSplashIntensify * BaseSplashRangeIntensifyModify; }
     public float BaseSplashPercentage { get => initSplashPercentage; }
-    public float BaseSlowRate { get => InitSlowRate * InitSlowRateModify + ComSlowIntensify * BaseSlowRateIntensifyModify; }
+    public float BaseSlowRate { get => InitSlowRate + ElementSlowIntensify * BaseSlowRateIntensifyModify; }
     public int BaseTargetCount { get => initTargetCount + BaseTargetCountIntensify; }
 
     //战斗中属性
     public float FinalAttack { get => (BaseAttack * (1 + (TurnAttackIntensify - 1) * AllAttackIntensifyModify) + TurnFixAttack * AllAttackIntensifyModify) * AttackAdjust; }
-    public float FinalFireRate { get => Mathf.Min(30, (BaseSpeed * (1 + (TurnSpeedIntensify - 1) * AllSpeedIntensifyModify) + TurnFixSpeed * AllSpeedIntensifyModify) * SpeedAdjust); }//速度上限30
+    public float FinalFireRate { get => Mathf.Min(30, (BaseSpeed * (1 + (TurnFireRateIntensify - 1) * AllSpeedIntensifyModify) + TurnFixSpeed * AllSpeedIntensifyModify) * SpeedAdjust); }//速度上限30
     public int FinalRange { get => BaseRange + TurnFixRange; }
     public float FinalCriticalRate { get => (BaseCriticalRate * (1 + (TurnCriticalRateIntensify - 1) * AllCriticalIntensifyModify) + TurnFixCriticalRate * AllCriticalIntensifyModify) * CritialAdjust; }
     public float FinalCriticalPercentage { get => ((BaseCriticalPercentage + FinalCriticalRate) * TurnCriticalRateIntensify + TurnFixCriticalPercentage) * CritialAdjust; }
@@ -205,7 +206,7 @@ public class StrategyBase
     private float turnSputteringPercentageIntensify = 1;
     private float turnSlowRateIntensify = 1;
     public float TurnAttackIntensify { get => turnAttackIntensify; set => turnAttackIntensify = value; }
-    public float TurnSpeedIntensify { get => turnSpeedIntensify; set => turnSpeedIntensify = value; }
+    public float TurnFireRateIntensify { get => turnSpeedIntensify; set => turnSpeedIntensify = value; }
     public float TurnCriticalRateIntensify { get => turnCriticalRateIntensify; set => turnCriticalRateIntensify = value; }
     public float TurnCriticalPercentageIntensify { get => turnCriticalPercentageIntensify; set => turnCriticalPercentageIntensify = value; }
     public float TurnSplashRangeIntensify { get => turnSputteringRangeIntensify; set => turnSputteringRangeIntensify = value; }
@@ -215,11 +216,11 @@ public class StrategyBase
 
 
     #region 下级属性
-    public float NextAttack { get => Attribute.TurretLevels[Quality].AttackDamage * InitAttackModify * (1 + ComAttackIntensify); }
-    public float NextSpeed { get => Attribute.TurretLevels[Quality].AttackSpeed * InitFirerateModify * (1 + ComSpeedIntensify); }
-    public float NextSplashRange { get => Attribute.TurretLevels[Quality].SplashRange * InitSplashRangeModify + ComSplashRangeIntensify; }
-    public float NextCriticalRate { get => Attribute.TurretLevels[Quality].CriticalRate * InitCriticalRateModify + ComCriticalIntensify; }
-    public float NextSlowRate { get => Attribute.TurretLevels[Quality].SlowRate * InitSlowRateModify + ComSlowIntensify; }
+    public float NextAttack { get => Attribute.TurretLevels[Quality].AttackDamage * (1 + ElementAttackIntensify); }
+    public float NextSpeed { get => Attribute.TurretLevels[Quality].AttackSpeed * (1 + ElementFirerateIntensify); }
+    public float NextSplashRange { get => Attribute.TurretLevels[Quality].SplashRange + ElementSplashIntensify; }
+    public float NextCriticalRate { get => Attribute.TurretLevels[Quality].CriticalRate + ElementCritIntensify; }
+    public float NextSlowRate { get => Attribute.TurretLevels[Quality].SlowRate + ElementSlowIntensify; }
     #endregion
 
     public TurretSkill TurretSkill { get; set; }
@@ -227,13 +228,13 @@ public class StrategyBase
     public List<TurretSkill> TurretSkills = new List<TurretSkill>();
 
 
-    public void GetComIntensify(List<int> elements, bool add = true)
-    {
-        foreach (var element in elements)
-        {
-            StaticData.ElementDIC[(ElementType)element].GetComIntensify(this, add);
-        }
-    }
+    //public void GetComIntensify(List<int> elements, bool add = true)
+    //{
+    //    foreach (var element in elements)
+    //    {
+    //        StaticData.ElementDIC[(ElementType)element].GetComIntensify(this, add);
+    //    }
+    //}
 
     public void GetTurretSkills()//首次获取被动技能效果
     {
@@ -245,6 +246,32 @@ public class StrategyBase
         TurretSkills.Add(effect);
         TurretSkill.Build();
 
+    }
+
+    public void GainRandomTempElement(int amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            int random = Random.Range(0, 5);
+            switch (random)
+            {
+                case 0:
+                    TempGoldCount++;
+                    break;
+                case 1:
+                    TempWoodCount++;
+                    break;
+                case 2:
+                    TempWaterCount++;
+                    break;
+                case 3:
+                    TempFireCount++;
+                    break;
+                case 4:
+                    TempDustCount++;
+                    break;
+            }
+        }
     }
 
     public void AddElementSkill(ElementSkill skill)
@@ -284,13 +311,6 @@ public class StrategyBase
     public virtual void ClearBasicIntensify()
     {
         UpgradeDiscount = 0;
-        //基础加成
-        InitAttackModify = 0;
-        InitFirerateModify = 0;
-        InitRangeModify = 0;
-        InitCriticalRateModify = 0;
-        InitSplashRangeModify = 0;
-        InitSlowRateModify = 0;
         BaseTargetCountIntensify = 0;
 
         //基础加成二次修正
@@ -314,6 +334,11 @@ public class StrategyBase
     {
         ////回合时间修正
         //TimeModify = 1;
+        TempGoldCount = 0;
+        TempWoodCount = 0;
+        TempWaterCount = 0;
+        TempFireCount = 0;
+        TempDustCount = 0;
 
         //回合固定加成
         TurnFixAttack = 0;
@@ -328,7 +353,7 @@ public class StrategyBase
 
         //回合百分比加成
         TurnAttackIntensify = 1;
-        TurnSpeedIntensify = 1;
+        TurnFireRateIntensify = 1;
         TurnCriticalRateIntensify = 1;
         TurnCriticalPercentageIntensify = 1;
         TurnSplashRangeIntensify = 1;

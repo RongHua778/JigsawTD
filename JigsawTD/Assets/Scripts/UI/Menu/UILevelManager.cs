@@ -29,7 +29,8 @@ public class UILevelManager : IUserInterface
     public override void Initialize()
     {
         base.Initialize();
-        SelectDifficulty = LevelManager.Instance.PassDiifcutly;
+        //SelectDifficulty = LevelManager.Instance.PassDiifcutly;
+        SelectDifficulty = 0;
         m_Anim = this.GetComponent<Animator>();
         //tutorialCheck.isOn = false;
         endlessHighScore.text = LevelManager.Instance.EndlessHighScore + GameMultiLang.GetTraduction("WAVE");

@@ -4,7 +4,6 @@ using UnityEngine;
 using DG.Tweening;
 public class SameTarget : ElementSkill
 {
-    //造成的伤害-35%，额外攻击2个目标
     public override List<int> Elements => new List<int> { 1, 1, 1 };
 
     //public override void Build()
@@ -18,37 +17,18 @@ public class SameTarget : ElementSkill
     //    bullet.Damage *= 0.65f;
     //}
 
-    private IDamageable lastTarget;
-    private float speedIncreased;
-
-    public override void Shoot(Bullet bullet = null)
+    public override void StartTurn()
     {
-        IDamageable target = strategy.Turret.Target[0].Enemy;
-        if (target != lastTarget)
-        {
-            lastTarget = target;
-            strategy.TurnSpeedIntensify -= speedIncreased;
-            speedIncreased = 0;
-            return;
-        }
-        if (speedIncreased < 2.99f)
-        {
-            speedIncreased += 0.2f * strategy.TimeModify;
-            strategy.TurnSpeedIntensify += 0.2f * strategy.TimeModify;
-        }
-    }
-
-    public override void EndTurn()
-    {
-        lastTarget = null;
-        speedIncreased = 0;
+        strategy.TurnFixTargetCount += strategy.TotalElementCount / 4;
     }
 }
 public class CloseSpeed : ElementSkill
 {
     //距离小于3加75攻速
-    public override List<int> Elements => new List<int> { 1, 1, 0 };
-
+    public override List<int> Elements => new List<int> { 0, 0, 1 };
+    public override float KeyValue => 0.25f * strategy.WoodCount;
+    public override string DisplayValue => StaticData.ElementDIC[ElementType.WOOD].Colorized((KeyValue * 100).ToString() + "%");
+    public override ElementType IntensifyElement => ElementType.WOOD;
     float intensifyValue;
     bool isIntensified = false;
     public override void Shoot(Bullet bullet = null)
@@ -58,8 +38,8 @@ public class CloseSpeed : ElementSkill
         {
             if (!isIntensified)
             {
-                intensifyValue = 0.75f * strategy.TimeModify;
-                strategy.TurnSpeedIntensify += intensifyValue;
+                intensifyValue = KeyValue;
+                strategy.TurnFireRateIntensify += intensifyValue;
                 isIntensified = true;
             }
         }
@@ -67,7 +47,7 @@ public class CloseSpeed : ElementSkill
         {
             if (isIntensified)
             {
-                strategy.TurnSpeedIntensify -= intensifyValue;
+                strategy.TurnFireRateIntensify -= intensifyValue;
                 isIntensified = false;
             }
         }
@@ -83,8 +63,10 @@ public class CloseSpeed : ElementSkill
 public class TimeSpeed : ElementSkill
 {
     //每秒+2%攻速
-    public override List<int> Elements => new List<int> { 1, 1, 2 };
-
+    public override List<int> Elements => new List<int> { 2, 2, 1 };
+    public override float KeyValue => 0.005f * strategy.WoodCount;
+    public override string DisplayValue => StaticData.ElementDIC[ElementType.WOOD].Colorized((KeyValue*100).ToString() + "%");
+    public override ElementType IntensifyElement => ElementType.WOOD;
     public override void StartTurn()
     {
         Duration += 999;
@@ -93,7 +75,7 @@ public class TimeSpeed : ElementSkill
     public override void Tick(float delta)
     {
         base.Tick(delta);
-        strategy.TurnSpeedIntensify += 0.02f * delta * strategy.TimeModify;
+        strategy.TurnFireRateIntensify += KeyValue * delta;
     }
 
     public override void EndTurn()
@@ -103,60 +85,56 @@ public class TimeSpeed : ElementSkill
 
 }
 
-public class FlutSpeed : ElementSkill
+public class LongSpeed : ElementSkill
 {
     //攻速波动
-    public override List<int> Elements => new List<int> { 1, 1, 3 };
-
-    float targetValue;
-    float currentValue;
-    float counter = 2;
-    public override void StartTurn()
+    public override List<int> Elements => new List<int> { 3, 3, 1 };
+    public override float KeyValue => 0.05f * strategy.WoodCount;
+    public override string DisplayValue => StaticData.ElementDIC[ElementType.WOOD].Colorized((KeyValue * 100).ToString() + "%");
+    public override ElementType IntensifyElement => ElementType.WOOD;
+    float intensifyValue;
+    public override void Shoot(Bullet bullet = null)
     {
-        base.StartTurn();
-        Duration += 999;
-    }
-    public override void Tick(float delta)
-    {
-        base.Tick(delta);
-        counter += delta;
-        if (counter > 2f)
+        strategy.TurnFireRateIntensify -= intensifyValue;
+        float distance = bullet.GetTargetDistance();
+        if (distance > 3)
         {
-            counter = 0;
-            targetValue = Random.Range(0.25f, 2.5f);
-            DOTween.To(() => currentValue, x => currentValue = x, targetValue, 2);
+            intensifyValue = bullet.GetTargetDistance() * KeyValue;
+            strategy.TurnFireRateIntensify += intensifyValue;
         }
-        strategy.SpeedAdjust = currentValue;
+        else
+        {
+            intensifyValue = 0;
+        }
     }
 
     public override void EndTurn()
     {
-        base.EndTurn();
-        Duration = 0;
-        strategy.SpeedAdjust = 1;
-        currentValue = 1;
-        counter = 2;
+        intensifyValue = 0;
     }
 }
 
 public class StartSpeed : ElementSkill
 {
     //开局+150%攻速
-    public override List<int> Elements => new List<int> { 1, 1, 4 };
+    public override List<int> Elements => new List<int> { 4, 4, 1 };
 
+    public override float KeyValue => 0.25f * strategy.WoodCount;
+    public override string DisplayValue => StaticData.ElementDIC[ElementType.WOOD].Colorized((KeyValue * 100).ToString() + "%");
+    public override ElementType IntensifyElement => ElementType.WOOD;
     float intensify = 0;
     public override void StartTurn()
     {
         base.StartTurn();
         Duration += 20;
-        intensify = 1.5f * strategy.TimeModify;
-        strategy.TurnSpeedIntensify += intensify;
+        intensify = KeyValue;
+        strategy.TurnFireRateIntensify += intensify;
     }
 
     public override void TickEnd()
     {
         base.TickEnd();
-        strategy.TurnSpeedIntensify -= intensify;
+        strategy.TurnFireRateIntensify -= intensify;
     }
 
     public override void EndTurn()

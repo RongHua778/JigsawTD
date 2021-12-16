@@ -40,12 +40,6 @@ public class RefactorTurret : TurretContent
             m_ContentStruct.SkillList.Add(i.ToString(), skill.Elements);//Litjson´æ´¢Key±ØÐëÎªString
 
         }
-        m_ContentStruct.InitModifies = new List<double>();
-        m_ContentStruct.InitModifies.Add(Strategy.InitAttackModify);
-        m_ContentStruct.InitModifies.Add(Strategy.InitFirerateModify);
-        m_ContentStruct.InitModifies.Add(Strategy.InitCriticalRateModify);
-        m_ContentStruct.InitModifies.Add(Strategy.InitSlowRateModify);
-        m_ContentStruct.InitModifies.Add(Strategy.InitSplashRangeModify);
     }
 
     protected override void ContentLandedCheck(Collider2D col)

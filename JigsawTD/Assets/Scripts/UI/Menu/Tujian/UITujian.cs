@@ -28,7 +28,6 @@ public class UITujian : IUserInterface
         {
             ElementSkill skill = TurretEffectFactory.GetElementSkill(skills[i]);
             elementConstructs[i].SetElements(skill);
-            elementConstructs[i].canPreview = false;
         }
     }
 

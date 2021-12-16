@@ -8,30 +8,38 @@ public class DoubleAttack : ElementSkill
     //ËùÓÐ¹¥»÷ÌáÉýÐ§¹û·­±¶
     public override List<int> Elements => new List<int> { 0, 0, 0 };
 
-
-    public override void Build()
+    public override void StartTurn()
     {
-        base.Build();
-        strategy.AllAttackIntensifyModify += 1;
+        strategy.TurnFixRange += strategy.TotalElementCount / 3;
+        strategy.Turret.GenerateRange();
+    }
+
+    public override void EndTurn()
+    {
+        strategy.Turret.GenerateRange();
     }
 }
 
 public class HitAttack : ElementSkill
 {
-    //Ã¿´Î¹¥»÷ÌáÉý3%¹¥»÷
-    public override List<int> Elements => new List<int> { 0, 0, 1 };
-
+    //Ã¿´Î¹¥»÷ÌáÉý1%¹¥»÷
+    public override List<int> Elements => new List<int> { 1, 1, 0 };
+    public override float KeyValue => 0.01f * strategy.GoldCount;
+    public override string DisplayValue => StaticData.ElementDIC[ElementType.GOLD].Colorized((KeyValue * 100).ToString() + "%");
+    public override ElementType IntensifyElement => ElementType.GOLD;
     public override void Shoot(Bullet bullet = null)
     {
-        strategy.TurnAttackIntensify += 0.03f * strategy.TimeModify;
+        strategy.TurnAttackIntensify += KeyValue;
     }
 }
 
 public class TimeAttack : ElementSkill
 {
-    //¹¥»÷Ã¿ÃëÌáÉý2%
-    public override List<int> Elements => new List<int> { 0, 0, 2 };
-
+    //¹¥»÷Ã¿ÃëÌáÉý0.5%
+    public override List<int> Elements => new List<int> { 2, 2, 0 };
+    public override float KeyValue => 0.005f * strategy.GoldCount;
+    public override string DisplayValue => StaticData.ElementDIC[ElementType.GOLD].Colorized((KeyValue * 100).ToString() + "%");
+    public override ElementType IntensifyElement => ElementType.GOLD;
 
     public override void StartTurn()
     {
@@ -41,7 +49,7 @@ public class TimeAttack : ElementSkill
     public override void Tick(float delta)
     {
         base.Tick(delta);
-        strategy.TurnAttackIntensify += 0.02f * delta * strategy.TimeModify;
+        strategy.TurnAttackIntensify += KeyValue * delta;
     }
 
     public override void EndTurn()
@@ -50,53 +58,78 @@ public class TimeAttack : ElementSkill
     }
 }
 
-public class FlutAttack : ElementSkill
+public class LongAttack : ElementSkill
 {
     //¹¥»÷²¨¶¯
-    public override List<int> Elements => new List<int> { 0, 0, 3 };
-
-
-    float targetValue;
-    float currentValue;
-    float counter = 2;
-    public override void StartTurn()
+    public override List<int> Elements => new List<int> { 3, 3, 0 };
+    public override float KeyValue => 0.05f * strategy.GoldCount;
+    public override string DisplayValue => StaticData.ElementDIC[ElementType.GOLD].Colorized((KeyValue*100).ToString() + "%");
+    public override ElementType IntensifyElement => ElementType.GOLD;
+    float intensifyValue;
+    public override void Shoot(Bullet bullet = null)
     {
-        base.StartTurn();
-        Duration += 999;
-    }
-    public override void Tick(float delta)
-    {
-        base.Tick(delta);
-        counter += delta;
-        if (counter > 2f)
+        strategy.TurnAttackIntensify -= intensifyValue;
+        float distance = bullet.GetTargetDistance();
+        if (distance > 3)
         {
-            counter = 0;
-            targetValue = Random.Range(0.25f, 2.5f);
-            DOTween.To(() => currentValue, x => currentValue = x, targetValue, 2);
+            intensifyValue = bullet.GetTargetDistance() * KeyValue;
+            strategy.TurnAttackIntensify += intensifyValue;
+            bullet.Damage += strategy.BaseAttack * intensifyValue;
         }
-        strategy.AttackAdjust = currentValue;
+        else
+        {
+            intensifyValue = 0;
+        }
     }
 
     public override void EndTurn()
     {
-        base.EndTurn();
-        Duration = 0;
-        strategy.AttackAdjust = 1;
-        currentValue = 1;
-        counter = 2;
+        intensifyValue = 0;
     }
+
+    //float targetValue;
+    //float currentValue;
+    //float counter = 2;
+    //public override void StartTurn()
+    //{
+    //    base.StartTurn();
+    //    Duration += 999;
+    //}
+    //public override void Tick(float delta)
+    //{
+    //    base.Tick(delta);
+    //    counter += delta;
+    //    if (counter > 2f)
+    //    {
+    //        counter = 0;
+    //        targetValue = Random.Range(0.25f, 2.5f);
+    //        DOTween.To(() => currentValue, x => currentValue = x, targetValue, 2);
+    //    }
+    //    strategy.AttackAdjust = currentValue;
+    //}
+
+    //public override void EndTurn()
+    //{
+    //    base.EndTurn();
+    //    Duration = 0;
+    //    strategy.AttackAdjust = 1;
+    //    currentValue = 1;
+    //    counter = 2;
+    //}
 }
 public class StartAttack : ElementSkill
 {
     //¿ª¾Ö¹¥»÷
-    public override List<int> Elements => new List<int> { 0, 0, 4 };
-
+    public override List<int> Elements => new List<int> { 4, 4, 0 };
+    public override float KeyValue => 0.25f * strategy.GoldCount;
+    public override string DisplayValue => StaticData.ElementDIC[ElementType.GOLD].Colorized((KeyValue * 100).ToString() + "%");
+    public override ElementType IntensifyElement => ElementType.GOLD;
     float intensify = 0;
     public override void StartTurn()
     {
         base.StartTurn();
         Duration += 20;
-        intensify = 1.5f * strategy.TimeModify;
+        intensify = KeyValue;
         strategy.TurnAttackIntensify += intensify;
     }
 

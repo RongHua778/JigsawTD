@@ -56,27 +56,24 @@ public class CircleRange : ElementSkill
 
 
 
-public class ExtraTarget : ElementSkill
+public class ExtraElement : ElementSkill
 {
-    //攻击-30%，目标数+1
     public override List<int> Elements => new List<int> { 0, 1, 4 };
 
-    public override void Build()
+    public override void StartTurn()
     {
-        base.Build();
-        strategy.ComAttackIntensify -= 0.3f;
-        strategy.BaseTargetCountIntensify += 1;
+        strategy.GainRandomTempElement(strategy.TurretSkills.Count - 1);
     }
 }
 
 public class HeavyCannon : ElementSkill
 {
-    //对生命值大于50%的单位造成额外50%伤害
+    //对生命值di于25%的单位造成额外50%伤害
     public override List<int> Elements => new List<int> { 0, 2, 3 };
 
     public override void Hit(IDamageable target, Bullet bullet = null)
     {
-        if (target.DamageStrategy.CurrentHealth / target.DamageStrategy.MaxHealth > 0.5f)
+        if (target.DamageStrategy.CurrentHealth / target.DamageStrategy.MaxHealth < 0.25f)
         {
             float realDamage;
             target.DamageStrategy.ApplyDamage(bullet.Damage * 0.5f, out realDamage, false);
@@ -86,32 +83,32 @@ public class HeavyCannon : ElementSkill
     }
 }
 
-public class IceShell : ElementSkill
+public class FreeGround : ElementSkill
 {
-    //对减速敌人造成额外50%伤害
+    //攻击距离+1，如果攻击距离大于6，则额外+1
     public override List<int> Elements => new List<int> { 0, 2, 4 };
 
-    public override void Hit(IDamageable target, Bullet bullet = null)
+    public override void Build()
     {
-        base.Hit(target, bullet);
-        if (target.DamageStrategy.IsEnemy)
+        base.Build();
+        if (strategy.FinalRange >= 6)
         {
-            if (((Enemy)target).SlowRate > 0)
-            {
-                float realDamage;
-                target.DamageStrategy.ApplyDamage(bullet.Damage * 0.5f, out realDamage, false);
-                strategy.TurnDamage += (int)realDamage;
-                strategy.TotalDamage += (int)realDamage;
-            }
+            strategy.BaseRangeIntensify += 2;
         }
+        else
+        {
+            strategy.BaseRangeIntensify += 1;
+        }
+
     }
-    //public override void Composite()
-    //{
-    //    if (GameRes.SystemLevel < StaticData.Instance.SystemMaxLevel)
-    //    {
-    //        GameRes.SystemUpgradeCost = Mathf.RoundToInt(GameRes.SystemUpgradeCost * 0.5f);
-    //    }
-    //}
+
+    public override void OnEquip()
+    {
+        base.OnEquip();
+        strategy.Turret.GenerateRange();
+    }
+
+
 
 }
 public class RandomSkill : ElementSkill
@@ -138,39 +135,12 @@ public class RandomSkill : ElementSkill
 
 
 
-public class FreeGround : ElementSkill
-{
-    //攻击距离+1，如果攻击距离大于6，则额外+1
-    public override List<int> Elements => new List<int> { 1, 2, 3 };
 
-    public override void Build()
-    {
-        base.Build();
-        if (strategy.FinalRange > 6)
-        {
-            strategy.ComRangeIntensify += 2;
-        }
-        else
-        {
-            strategy.ComRangeIntensify += 1;
-        }
-
-    }
-
-    public override void OnEquip()
-    {
-        base.OnEquip();
-        strategy.Turret.GenerateRange();
-    }
-
-
-
-}
 
 public class PerfectElement : ElementSkill
 {
     //防御塔不会被冻结
-    public override List<int> Elements => new List<int> { 1, 2, 4 };
+    public override List<int> Elements => new List<int> { 1, 2, 3 };
 
     public override void Build()
     {
@@ -180,13 +150,54 @@ public class PerfectElement : ElementSkill
 
 
 }
+public class IceShell : ElementSkill
+{
+    //施加的冻结层数提高100%
+    public override List<int> Elements => new List<int> { 1, 2, 4 };
+
+    public override void Build()
+    {
+        base.Build();
+        Debug.Log("暂未实现冻结功能");
+    }
+    public override void Hit(IDamageable target, Bullet bullet = null)
+    {
+        base.Hit(target, bullet);
+        //if (target.DamageStrategy.IsEnemy)
+        //{
+        //    if (((Enemy)target).SlowRate > 0)
+        //    {
+        //        float realDamage;
+        //        target.DamageStrategy.ApplyDamage(bullet.Damage * 0.5f, out realDamage, false);
+        //        strategy.TurnDamage += (int)realDamage;
+        //        strategy.TotalDamage += (int)realDamage;
+        //    }
+        //}
+    }
+
+}
 
 
 
+
+public class PortalHit : ElementSkill
+{
+    //攻击有5%概率获得2金币
+    public override List<int> Elements => new List<int> { 1, 3, 4 };
+    public override string SkillDescription => "PORTALHIT";
+
+    public override void Hit(IDamageable target, Bullet bullet = null)
+    {
+        if (Random.value > 0.92f)
+            //((Enemy)target).Flash(2);
+            StaticData.Instance.GainMoneyEffect(((ReusableObject)target).transform.position, 2);
+    }
+
+}
 public class TrapIntensify : ElementSkill
 {
     //相邻陷阱的效果提升100%
-    public override List<int> Elements => new List<int> { 1, 3, 4 };
+    public override List<int> Elements => new List<int> { 2, 3, 4 };
 
     //private List<TrapContent> intensifiedTraps = new List<TrapContent>();
     //public override void Detect()
@@ -209,57 +220,15 @@ public class TrapIntensify : ElementSkill
     //        }
     //    }
     //}
-    public override void Composite()
+    public override void PreHit(Bullet bullet = null)
     {
-        GameRes.BuildCost= Mathf.RoundToInt(GameRes.BuildCost * 0.5f);
-    }
-}
-
-public class PortalHit : ElementSkill
-{
-    //攻击有5%概率获得2金币
-    public override List<int> Elements => new List<int> { 2, 3, 4 };
-    public override string SkillDescription => "PORTALHIT";
-
-    public override void Hit(IDamageable target, Bullet bullet = null)
-    {
-        if (Random.value > 0.92f)
-            //((Enemy)target).Flash(2);
-            StaticData.Instance.GainMoneyEffect(((Enemy)target).transform.position, 2);
-    }
-
-}
-
-public class LateDamage : ElementSkill
-{
-    //每回合开始后，每秒造成的伤害提高1%，上限100%
-    public override List<int> Elements => new List<int> { 6, 6, 6 };
-    public override string SkillDescription => "LATEDAMAGE";
-
-    private float interval;
-    private float damageIncreased = 0;
-
-    public override void Tick(float delta)
-    {
-        base.Tick(delta);
-        interval += delta;
-        if (interval > 1f)
+        if (bullet.isCritical)
         {
-            interval = 0;
-            if (damageIncreased < 0.99f)
-                damageIncreased += 0.01f;
+            bullet.SlowRate *= 2;
+            bullet.SplashRange *= 2;
         }
     }
-
-    public override void Shoot(Bullet bullet = null)
-    {
-        bullet.Damage *= (1 + damageIncreased);
-    }
-    public override void EndTurn()
-    {
-        damageIncreased = 0;
-        interval = 0;
-    }
-
 }
+
+
 

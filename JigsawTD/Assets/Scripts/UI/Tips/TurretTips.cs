@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using TMPro;
 
 public class TurretTips : TileTips
 {
@@ -19,15 +20,18 @@ public class TurretTips : TileTips
     [SerializeField] Text IntensifyValue = default;
     [SerializeField] Text AnalysisValue = default;
     [SerializeField] Text UpgradeCostValue = default;
+
+    [SerializeField] TextMeshProUGUI defaultSkillTxt = default;
     [SerializeField] GameObject AnalysisArea = default;//伤害统计区
     [SerializeField] GameObject UpgradeArea = default;//合成塔升级区
     [SerializeField] Image IntensifyIcon = default;
     [SerializeField] GameObject IntensifyArea = default;//元素塔加成效果区
 
+    [SerializeField] ElementHolder ElementsHolder = default;//元素数量
     [SerializeField] GameObject ElementSkillArea = default;//元素技能区
-    [SerializeField] Transform ElementSkillContent = default;//元素技能滑动区
-    [SerializeField] TipsElementConstruct ElementConstructPrefab = default;
-    List<TipsElementConstruct> elementConstructs = new List<TipsElementConstruct>();//合成塔组成元素区
+    //[SerializeField] Transform ElementSkillContent = default;//元素技能滑动区
+    //[SerializeField] TipsElementConstruct ElementConstructPrefab = default;
+    [SerializeField] List<TipsElementConstruct> elementConstructs;//合成塔组成元素区
     //[SerializeField] TipsElementConstruct elementConstruct2 = default;//第二元素技能区
     //合成塔升级区
 
@@ -52,7 +56,7 @@ public class TurretTips : TileTips
     private StrategyBase m_Strategy;
     private BluePrintGrid m_Grid;
     public bool showingTurret = false;
-    bool showingBlueprint = false;
+    //bool showingBlueprint = false;
     int upgradeCost;
 
     public override void Initialize()
@@ -68,7 +72,7 @@ public class TurretTips : TileTips
         base.Hide();
         m_Grid = null;
         m_Strategy = null;
-        showingBlueprint = false;
+        //showingBlueprint = false;
         showingTurret = false;
     }
 
@@ -79,7 +83,7 @@ public class TurretTips : TileTips
         UpdateRealTimeValue();
         showingTurret = true;
 
-        AnalysisArea.SetActive(true);
+        //AnalysisArea.SetActive(true);
         BluePrintArea.SetActive(false);
         //根据防御塔类型显示
         switch (Strategy.Attribute.StrategyType)
@@ -90,7 +94,7 @@ public class TurretTips : TileTips
                 IntensifyIcon.sprite = StaticData.Instance.ElementSprites[(int)Strategy.Attribute.element];
                 IntensifyArea.SetActive(true);
                 ElementSkillArea.SetActive(false);
-                IntensifyValue.text = StaticData.GetElementIntensifyText(Strategy.Attribute.element);
+                IntensifyValue.text = StaticData.ElementDIC[Strategy.Attribute.element].GetIntensifyText(1);
                 break;
             case StrategyType.Composite:
                 ElementSkillArea.SetActive(true);
@@ -107,12 +111,13 @@ public class TurretTips : TileTips
 
     public void ReadBluePrint(BluePrintGrid grid)
     {
-        showingBlueprint = true;
+       // showingBlueprint = true;
         m_Grid = grid;
         m_Strategy = grid.Strategy;
 
         BasicInfo(m_Strategy.Attribute, m_Strategy.Quality);
         UpdateBluePrintInfo();
+
 
         ElementSkillArea.SetActive(true);
         AnalysisArea.SetActive(false);
@@ -135,7 +140,7 @@ public class TurretTips : TileTips
                 QualitySetter.gameObject.SetActive(false);
                 IntensifyIcon.sprite = StaticData.Instance.ElementSprites[(int)att.element];
                 IntensifyArea.SetActive(true);
-                IntensifyValue.text = StaticData.GetElementIntensifyText(att.element);
+                IntensifyValue.text = StaticData.ElementDIC[att.element].GetIntensifyText(1);
                 break;
             case StrategyType.Composite:
                 QualitySetter.gameObject.SetActive(true);
@@ -170,16 +175,24 @@ public class TurretTips : TileTips
         }
         for (int i = 0; i < m_Strategy.ElementSKillSlot; i++)
         {
-            if (i > elementConstructs.Count - 1)
-            {
-                TipsElementConstruct construct = Instantiate(ElementConstructPrefab, ElementSkillContent);
-                elementConstructs.Add(construct);
-            }
+            //if (i > elementConstructs.Count - 1)
+            //{
+            //    TipsElementConstruct construct = Instantiate(ElementConstructPrefab, ElementSkillContent);
+            //    elementConstructs.Add(construct);
+            //}
             elementConstructs[i].gameObject.SetActive(true);
             if (i < m_Strategy.TurretSkills.Count - 1)
                 elementConstructs[i].SetElements((ElementSkill)m_Strategy.TurretSkills[i + 1]);//第一个是被动技能
             else
                 elementConstructs[i].SetEmpty();
+        }
+    }
+
+    private void UpdateSkillValues()
+    {
+        for (int i = 0; i < m_Strategy.ElementSKillSlot; i++)
+        {
+            elementConstructs[i].UpdateDes();
         }
     }
 
@@ -193,12 +206,15 @@ public class TurretTips : TileTips
                 string element = StaticData.FormElementName(att.element, quality);
                 Name.text = element + " " + GameMultiLang.GetTraduction(att.Name);
                 QualitySetter.gameObject.SetActive(false);
+                defaultSkillTxt.text = GameMultiLang.GetTraduction("DESCRIPTION");
                 break;
             case StrategyType.Composite:
                 Name.text = GameMultiLang.GetTraduction(att.Name);
                 QualitySetter.gameObject.SetActive(true);
                 QualitySetter.SetRare(att.Rare);
                 QualitySetter.SetLevel(quality);
+
+                defaultSkillTxt.text = GameMultiLang.GetTraduction(att.Name + "SN");
                 break;
         }
 
@@ -262,6 +278,8 @@ public class TurretTips : TileTips
         SlowRateChangeTxt.text = "";
 
         AnalysisValue.text = m_Strategy.TurnDamage.ToString();
+
+        ElementsHolder.SetElementCount(m_Strategy);
     }
 
     private void UpdateBluePrintInfo()
@@ -289,6 +307,8 @@ public class TurretTips : TileTips
         SlowRateValue.text = m_Strategy.InitSlowRate.ToString();
         SlowRateChangeTxt.text = (m_Strategy.FinalSlowRate > m_Strategy.InitSlowRate ?
             "+" + (m_Strategy.FinalSlowRate - m_Strategy.InitSlowRate) : "");
+
+        ElementsHolder.SetElementCount(m_Strategy);
     }
 
     public void UpdateLevelUpInfo()
@@ -337,11 +357,12 @@ public class TurretTips : TileTips
         if (showingTurret)
         {
             UpdateRealTimeValue();
+            UpdateSkillValues();
         }
-        if (showingBlueprint)
-        {
-            UpdateBluePrintInfo();
-        }
+        //if (showingBlueprint)
+        //{
+        //    UpdateBluePrintInfo();
+        //}
 
 
     }

@@ -6,68 +6,109 @@ public class RangeSplash : ElementSkill
 {
     //·¶Î§ÄÚÃ¿¸öµÐÈË+0.2½¦Éä·¶Î§
     public override List<int> Elements => new List<int> { 4, 4, 4 };
-
-    public override void OnEnter(IDamageable target)
+    List<int> ElementsCount;
+    int minValue;
+    public override void StartTurn()
     {
-        strategy.TurnFixSplashRange += 0.2f * strategy.TimeModify;
+        minValue = 999;
+        ElementsCount = new List<int>();
+        ElementsCount.Add(strategy.GoldCount);
+        ElementsCount.Add(strategy.WoodCount);
+        ElementsCount.Add(strategy.WaterCount);
+        ElementsCount.Add(strategy.FireCount);
+        ElementsCount.Add(strategy.DustCount);
+        for (int i = 0; i < ElementsCount.Count; i++)
+        {
+            if (ElementsCount[i] != 0 && ElementsCount[i] < minValue)
+            {
+                minValue = ElementsCount[i];
+            }
+        }
+        for (int i = 0; i < ElementsCount.Count; i++)
+        {
+            if (ElementsCount[i] == minValue)
+            {
+                switch (i)
+                {
+                    case 0:
+                        strategy.TempGoldCount += 2;
+                        break;
+                    case 1:
+                        strategy.TempWoodCount += 2;
+                        break;
+                    case 2:
+                        strategy.TempWaterCount += 2;
+                        break;
+                    case 3:
+                        strategy.TempFireCount += 2;
+                        break;
+                    case 4:
+                        strategy.TempDustCount += 2;
+                        break;
+                }
+            }
+        }
     }
-    public override void OnExit(IDamageable target)
-    {
-        strategy.TurnFixSplashRange -= 0.2f * strategy.TimeModify;
-    }
-    //public override void PreHit(Bullet bullet = null)
-    //{
-    //    base.PreHit(bullet);
-    //    bullet.Damage *= (1 + bullet.SputteredCount * 0.2f);
-    //}
-    //public override void StartTurn()
-    //{
-    //    base.StartTurn();
-    //    Duration += 20;
-    //}
-    //public override void TickEnd()
-    //{
-    //    base.TickEnd();
-    //    strategy.TimeModify = 1;
-    //}
-
-    //public override void EndTurn()
-    //{
-    //    base.EndTurn();
-    //    Duration = 0;
-    //    strategy.TimeModify = 2;
-    //}
 
 }
 
 public class CloseSplash : ElementSkill
 {
     //½üÕ½½¦Éä0.75
-    public override List<int> Elements => new List<int> { 4, 4, 0 };
-
+    public override List<int> Elements => new List<int> { 0, 0, 4 };
+    public override float KeyValue => 0.25f * strategy.DustCount;
+    public override string DisplayValue => StaticData.ElementDIC[ElementType.DUST].Colorized(KeyValue.ToString());
+    public override ElementType IntensifyElement => ElementType.DUST;
+    float intensifyValue;
+    bool isIntensified = false;
     public override void Shoot(Bullet bullet = null)
     {
+
         if (bullet.GetTargetDistance() < 3f)
         {
-            bullet.SputteringRange += (0.75f * strategy.TimeModify);
+            if (!isIntensified)
+            {
+                intensifyValue = KeyValue;
+                strategy.TurnFixSplashRange += intensifyValue;
+                bullet.SplashRange += intensifyValue;
+                isIntensified = true;
+            }
         }
+        else
+        {
+            if (isIntensified)
+            {
+                strategy.TurnFixSplashRange -= intensifyValue;
+                isIntensified = false;
+            }
+        }
+    }
+
+    public override void EndTurn()
+    {
+        isIntensified = false;
+        intensifyValue = 0;
     }
 }
 public class HitSplash : ElementSkill
 {
-    //Ã¿»÷½¦Éä0.03
-    public override List<int> Elements => new List<int> { 4, 4, 1 };
-
+    //Ã¿»÷½¦Éä0.01
+    public override List<int> Elements => new List<int> { 1, 1, 4 };
+    public override float KeyValue => 0.01f * strategy.DustCount;
+    public override string DisplayValue => StaticData.ElementDIC[ElementType.DUST].Colorized(KeyValue.ToString());
+    public override ElementType IntensifyElement => ElementType.DUST;
     public override void Shoot(Bullet bullet = null)
     {
-        strategy.TurnFixSplashRange += 0.03f * strategy.TimeModify;
+        strategy.TurnFixSplashRange += KeyValue;
     }
 }
 public class TimeSplash : ElementSkill
 {
     //Ã¿Ãë+0.02½¦Éä
-    public override List<int> Elements => new List<int> { 4, 4, 2 };
-
+    public override List<int> Elements => new List<int> { 2, 2, 4 };
+    public override float KeyValue => 0.005f * strategy.DustCount;
+    public override string DisplayValue => StaticData.ElementDIC[ElementType.DUST].Colorized((KeyValue).ToString());
+    public override ElementType IntensifyElement => ElementType.DUST;
     public override void StartTurn()
     {
         Duration += 999;
@@ -76,7 +117,7 @@ public class TimeSplash : ElementSkill
     public override void Tick(float delta)
     {
         base.Tick(delta);
-        strategy.TurnFixSplashRange += 0.02f * delta * strategy.TimeModify;
+        strategy.TurnFixSplashRange += KeyValue * delta;
     }
 
     public override void EndTurn()
@@ -84,44 +125,32 @@ public class TimeSplash : ElementSkill
         Duration = 0;
     }
 }
-public class EarlyCritical : ElementSkill
+public class LongSplash : ElementSkill
 {
-    public override List<int> Elements => new List<int> { 4, 4, 3 };
-
-    float targetValue;
-    float currentValue;
-    float counter = 2;
-
-    public override void Build()
+    public override List<int> Elements => new List<int> { 3, 3, 4 };
+    public override float KeyValue => 0.05f * strategy.DustCount;
+    public override string DisplayValue => StaticData.ElementDIC[ElementType.DUST].Colorized(KeyValue.ToString());
+    public override ElementType IntensifyElement => ElementType.DUST;
+    float intensifyValue;
+    public override void Shoot(Bullet bullet = null)
     {
-        base.Build();
-        strategy.ComSplashRangeIntensify += 0.25f;
-    }
-    public override void StartTurn()
-    {
-        base.StartTurn();
-        Duration += 999;
-    }
-    public override void Tick(float delta)
-    {
-        base.Tick(delta);
-        counter += delta;
-        if (counter > 2f)
+        strategy.TurnFixSplashRange -= intensifyValue;
+        float distance = bullet.GetTargetDistance();
+        if (distance > 3)
         {
-            counter = 0;
-            targetValue = Random.Range(0.25f, 2.5f);
-            DOTween.To(() => currentValue, x => currentValue = x, targetValue, 2);
+            intensifyValue = bullet.GetTargetDistance() * KeyValue;
+            strategy.TurnFixSplashRange += intensifyValue;
+            bullet.SplashRange += intensifyValue;
         }
-        strategy.SplashAdjust = currentValue;
+        else
+        {
+            intensifyValue = 0;
+        }
     }
 
     public override void EndTurn()
     {
-        base.EndTurn();
-        Duration = 0;
-        strategy.SplashAdjust = 1;
-        currentValue = 1;
-        counter = 2;
+        intensifyValue = 0;
     }
 }
 //public class PoloGetter : ElementSkill

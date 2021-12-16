@@ -9,7 +9,7 @@ public class TileTips : IUserInterface
     [SerializeField] protected Animator anim;
     [SerializeField] protected Image Icon = default;
     [SerializeField] protected Text Name = default;
-    [SerializeField] protected Text Description = default;
+    [SerializeField] protected TextMeshProUGUI Description = default;
 
 
     public override void Show()

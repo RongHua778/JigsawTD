@@ -16,7 +16,6 @@ public class BluePrintShopUI : IUserInterface
     [SerializeField] Text NextRefreshTurnsTxt = default;
     [SerializeField] Transform shopContent = default;
     [SerializeField] Text PerfectElementTxt = default;
-    [SerializeField] Text LockCountTxt = default;
     [SerializeField] InfoBtn PerfectInfo = default;
 
     public static List<BluePrintGrid> ShopBluePrints;//…ÃµÍ≈‰∑Ω±Ì
@@ -29,7 +28,7 @@ public class BluePrintShopUI : IUserInterface
         set
         {
             currentLock = value;
-            LockCountTxt.text = GameMultiLang.GetTraduction("SHOPBLUEPRINT") + CurrentLock.ToString() + "/" + GameRes.MaxLock.ToString();
+            //LockCountTxt.text = GameMultiLang.GetTraduction("SHOPBLUEPRINT") + CurrentLock.ToString() + "/" + GameRes.MaxLock.ToString();
         }
     }
 

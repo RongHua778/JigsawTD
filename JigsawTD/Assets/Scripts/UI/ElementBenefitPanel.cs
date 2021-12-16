@@ -6,20 +6,16 @@ using UnityEngine.UI;
 public class ElementBenefitPanel : MonoBehaviour
 {
     [SerializeField] Text[] ElementTxt = default;
-    [SerializeField] Image[] ElementIcon = default;
-    //[SerializeField] Sprite[] elementSprites = default;
     Transform root;
-    ElementSkill m_Skill;
-    public void InitializePanel(ElementSkill skill)
+    public void InitializePanel(StrategyBase strategy)
     {
         root = transform.Find("Root");
-        m_Skill = skill;
-        for (int i = 0; i < ElementTxt.Length; i++)
-        {
-            ElementType element = (ElementType)m_Skill.Elements[i];
-            ElementTxt[i].text = GameMultiLang.GetTraduction(element.ToString()) + StaticData.GetElementIntensifyText(element);
-            ElementIcon[i].sprite =StaticData.Instance.ElementSprites[(int)element];
-        }
+        ElementTxt[0].text = GameMultiLang.GetTraduction(ElementType.GOLD.ToString()) + " " + StaticData.ElementDIC[ElementType.GOLD].GetIntensifyText(strategy.GoldCount);
+        ElementTxt[1].text = GameMultiLang.GetTraduction(ElementType.WOOD.ToString()) + " " + StaticData.ElementDIC[ElementType.WOOD].GetIntensifyText(strategy.WoodCount);
+        ElementTxt[2].text = GameMultiLang.GetTraduction(ElementType.WATER.ToString()) + " " + StaticData.ElementDIC[ElementType.WATER].GetIntensifyText(strategy.WaterCount);
+        ElementTxt[3].text = GameMultiLang.GetTraduction(ElementType.FIRE.ToString()) + " " + StaticData.ElementDIC[ElementType.FIRE].GetIntensifyText(strategy.FireCount);
+        ElementTxt[4].text = GameMultiLang.GetTraduction(ElementType.DUST.ToString()) + " " + StaticData.ElementDIC[ElementType.DUST].GetIntensifyText(strategy.DustCount);
+
     }
 
     public void Show()

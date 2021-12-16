@@ -92,10 +92,10 @@ public class StaticData : Singleton<StaticData>
 
     [Header("元素加成")]
     public float GoldAttackIntensify = 0.3f;
-    public float WoodSpeedIntensify = 0.3f;
+    public float WoodFirerateIntensify = 0.3f;
     public float WaterSlowIntensify = 0.5f;
-    public float FireCriticalIntensify = 0.2f;
-    public float DustSputteringIntensify = 0.25f;
+    public float FireCritIntensify = 0.2f;
+    public float DustSplashIntensify = 0.25f;
     public static Dictionary<ElementType, Element> ElementDIC;
 
     [Header("Prefabs")]
@@ -136,13 +136,14 @@ public class StaticData : Singleton<StaticData>
         LeftTipsPos = new Vector2(Screen.width / 5, Screen.height / 2);
         LeftMidTipsPos = new Vector2(Screen.width / 2.5f, Screen.height / 2);
         RightTipsPos = new Vector2(Screen.width - Screen.width / 5, Screen.height / 2);
-        RightMidTipsPos = new Vector2(Screen.width - Screen.width /2.5f, Screen.height / 2);
+        RightMidTipsPos = new Vector2(Screen.width - Screen.width / 2.5f, Screen.height / 2);
     }
 
     private void InitializeData()
     {
         //元素字典
         ElementDIC = new Dictionary<ElementType, Element>();
+        ElementDIC.Add(ElementType.None, new None());
         ElementDIC.Add(ElementType.GOLD, new Gold());
         ElementDIC.Add(ElementType.WOOD, new Wood());
         ElementDIC.Add(ElementType.WATER, new Water());
@@ -386,12 +387,10 @@ public class StaticData : Singleton<StaticData>
         return null;
     }
 
-    public static string GetElementIntensifyText(ElementType element)//根据元素及品质设置显示加成效果
-    {
-        string intensifyTxt = "+";
-        intensifyTxt += ElementDIC[element].GetIntensifyText;
-        return intensifyTxt;
-    }
+    //public static string GetElementIntensifyText(ElementType element,int amount)//根据元素及品质设置显示加成效果
+    //{
+    //    return ElementDIC[element].GetIntensifyText(amount);
+    //}
 
     public static string SetElementSkillInfo(ElementSkill skill)
     {
@@ -408,10 +407,6 @@ public class StaticData : Singleton<StaticData>
         string finalDes = "";
         if (attribute.Description != "")
             finalDes += GameMultiLang.GetTraduction(attribute.Description);
-        //if (strategy.TurretSkill != null)
-        //{
-        //    finalDes += GameMultiLang.GetTraduction(strategy.TurretSkill.SkillDescription);
-        //}
         return finalDes;
     }
 
