@@ -14,6 +14,7 @@ public class EnemyAttribute : ContentAttribute
     public float Health;
     public float Speed;
     public float CoolDown;
+    public float Frost;
     public string BackGround;
     [Header("Tips²ÎÊý")]
     public int HealthAtt;

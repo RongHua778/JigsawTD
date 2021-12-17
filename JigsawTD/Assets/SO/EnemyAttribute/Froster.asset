@@ -17,7 +17,7 @@ MonoBehaviour:
   Icon: {fileID: -4512359869375799480, guid: f9835346b30cae840a9eff85ed192e6f, type: 3}
   Description: FROSTERINFO
   Prefab: {fileID: 8425249393752721173, guid: db9a50174f5434e48a77f2d501819d68, type: 3}
-  isLock: 1
+  isLock: 0
   initialLock: 0
   EnemyType: 5
   IsBoss: 0
@@ -26,6 +26,7 @@ MonoBehaviour:
   Health: 30
   Speed: 0.8
   CoolDown: 0.85
+  Frost: 2
   BackGround: 
   HealthAtt: 2
   SpeedAtt: 1

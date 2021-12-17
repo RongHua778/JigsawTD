@@ -83,7 +83,7 @@ public class TurretTips : TileTips
         UpdateRealTimeValue();
         showingTurret = true;
 
-        //AnalysisArea.SetActive(true);
+        AnalysisArea.SetActive(true);
         BluePrintArea.SetActive(false);
         //根据防御塔类型显示
         switch (Strategy.Attribute.StrategyType)

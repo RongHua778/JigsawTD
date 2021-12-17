@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AircraftCarrier : Enemy
+public class AircraftCarrier : Boss
 {
     public override string ExplosionEffect => "BossExplosionBlue";
 
@@ -26,6 +26,7 @@ public class AircraftCarrier : Enemy
 
     protected override void OnEnemyUpdate()
     {
+        base.OnEnemyUpdate();
         if (bornCounter < bornCD)
         {
             bornCounter += Time.deltaTime;
@@ -34,12 +35,12 @@ public class AircraftCarrier : Enemy
                 StartCoroutine(BornCor());  //开局3秒后第一次诞生小飞机
             }
         }
-        if (!secondBorn && DamageStrategy.CurrentHealth < DamageStrategy.MaxHealth * 0.5f)
-        {
-            secondBorn = true;
-            StopAllCoroutines();
-            StartCoroutine(BornCor());  //开局后生命值低于50%第二次诞生小飞机
-        }
+        //if (!secondBorn && DamageStrategy.CurrentHealth < DamageStrategy.MaxHealth * 0.5f)
+        //{
+        //    secondBorn = true;
+        //    StopAllCoroutines();
+        //    StartCoroutine(BornCor());  //开局后生命值低于50%第二次诞生小飞机
+        //}
     }
 
     IEnumerator BornCor()

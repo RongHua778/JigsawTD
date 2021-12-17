@@ -256,6 +256,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthBar
       objectReference: {fileID: 0}
+    - target: {fileID: 3727689228522642995, guid: 2362ca59ddd854447ba882941722eec4, type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 393207
+      objectReference: {fileID: 0}
     - target: {fileID: 3727689228522642998, guid: 2362ca59ddd854447ba882941722eec4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

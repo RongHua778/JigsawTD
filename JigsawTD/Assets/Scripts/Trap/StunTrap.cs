@@ -8,7 +8,7 @@ public class StunTrap : TrapContent
     {
         base.OnContentPass(enemy);
         float stunTime = enemy.PassedTraps.Count * 0.5f * TrapIntensify * enemy.DamageStrategy.TrapIntensify;
-        enemy.StunTime += stunTime;
+        enemy.DamageStrategy.StunTime += stunTime;
         enemy.DamageStrategy.TrapIntensify = 1;
     }
 

@@ -39,7 +39,8 @@ public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
 
     public virtual void Initiate(AircraftCarrier boss, float maxHealth)
     {
-        DamageStrategy.ResetStrategy(maxHealth);
+        DamageStrategy.MaxHealth = maxHealth;
+        DamageStrategy.IsDie = false;
         boss.AddAircraft(this);
     }
 

@@ -95,6 +95,7 @@ public class SlowBuff : TimeBuff
     {
         intensifyValue = KeyValue * (1 - Target.SlowResist);
         Target.SlowRate += intensifyValue;
+        ((BasicEnemyStrategy)(Target.DamageStrategy)).CurrentFrost += intensifyValue;
     }
     public override void End()
     {
@@ -190,66 +191,8 @@ public class TileBaseDamageIntensify : TileBuff
 
 
 
-public class DamageTarget : TileBuff
-{
-    public override EnemyBuffName BuffName => EnemyBuffName.DamageTarget;
-
-    public override bool IsTimeBase => false;
-
-    public override bool IsStackable => false;
 
 
-    public override void Affect()
-    {
-        float damageReturn;
-        Target.DamageStrategy.ApplyDamage(Target.TargetDamageCounter * KeyValue, out damageReturn);
-        // ((TrapContent)(Target.LastTrap)).DamageAnalysis += (int)damageReturn;
-        Target.TargetDamageCounter = 0;
 
-    }
 
-    public override void End()
-    {
 
-    }
-}
-
-public class TileStun : TileBuff
-{
-    public override EnemyBuffName BuffName => EnemyBuffName.TileStun;
-
-    public override bool IsTimeBase => false;
-
-    public override bool IsStackable => false;
-
-    public override void Affect()
-    {
-        //BuffInfo info = new BuffInfo(EnemyBuffName.Stun, Target.TileStunCounter * KeyValue, 0);
-        //Target.Buffable.AddBuff(info);
-        //Target.TileStunCounter = 0;
-    }
-
-    public override void End()
-    {
-
-    }
-}
-
-public class Stun : TimeBuff
-{
-    public override EnemyBuffName BuffName => EnemyBuffName.Stun;
-
-    public override bool IsTimeBase => true;
-
-    public override bool IsStackable => true;
-
-    public override void Affect()
-    {
-        Target.StunTime += KeyValue;
-    }
-
-    public override void End()
-    {
-
-    }
-}

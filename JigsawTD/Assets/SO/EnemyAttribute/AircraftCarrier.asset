@@ -26,6 +26,7 @@ MonoBehaviour:
   Health: 650
   Speed: 0.6
   CoolDown: 1
+  Frost: 5
   BackGround: 
   HealthAtt: 5
   SpeedAtt: 1

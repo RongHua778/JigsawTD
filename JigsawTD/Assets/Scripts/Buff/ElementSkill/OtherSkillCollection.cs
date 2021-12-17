@@ -155,24 +155,10 @@ public class IceShell : ElementSkill
     //施加的冻结层数提高100%
     public override List<int> Elements => new List<int> { 1, 2, 4 };
 
-    public override void Build()
+    public override void PreHit(Bullet bullet = null)
     {
-        base.Build();
-        Debug.Log("暂未实现冻结功能");
-    }
-    public override void Hit(IDamageable target, Bullet bullet = null)
-    {
-        base.Hit(target, bullet);
-        //if (target.DamageStrategy.IsEnemy)
-        //{
-        //    if (((Enemy)target).SlowRate > 0)
-        //    {
-        //        float realDamage;
-        //        target.DamageStrategy.ApplyDamage(bullet.Damage * 0.5f, out realDamage, false);
-        //        strategy.TurnDamage += (int)realDamage;
-        //        strategy.TotalDamage += (int)realDamage;
-        //    }
-        //}
+        base.PreHit(bullet);
+        bullet.SlowRate *= 2f;
     }
 
 }

@@ -18,6 +18,7 @@ public abstract class DamageStrategy
     protected float maxHealth;
     private bool isDie;
     private int trapIntensify = 1;
+    public float StunTime;
     public virtual int TrapIntensify
     {
         get => trapIntensify;
@@ -72,11 +73,16 @@ public abstract class DamageStrategy
 
     }
 
-    public virtual void ResetStrategy(float maxHealth)
+    public virtual void ResetStrategy(EnemyAttribute attribute, float intensify)
     {
         IsDie = false;
-        this.MaxHealth = maxHealth;
+        this.MaxHealth = Mathf.RoundToInt(attribute.Health * intensify);
         BuffDamageIntensify = 0;
+    }
+
+    public virtual void StrategyUpdate()
+    {
+
     }
 }
 
@@ -84,6 +90,41 @@ public class BasicEnemyStrategy : DamageStrategy
 {
     public override bool IsEnemy => true;
     protected Enemy enemy;
+    public float MaxFrost = 2f;
+    public float UnfrostableTime;
+    private FrostEffect m_FrostEffect;
+
+    public override bool IsDie
+    {
+        get => base.IsDie;
+        set
+        {
+            base.IsDie = value;
+            if (m_FrostEffect != null)
+            {
+                m_FrostEffect.Broke();
+                m_FrostEffect = null;
+            }
+        }
+    }
+    private float frostTime;
+    private float currentFrost;
+    public float CurrentFrost
+    {
+        get => currentFrost;
+        set
+        {
+            if (UnfrostableTime > 0)
+                return;
+            currentFrost = value;
+            if (currentFrost >= MaxFrost)
+            {
+                currentFrost = 0;
+                FrostEnemy(3f);
+            }
+            enemy.HealthBar.FrostAmount = CurrentFrost / MaxFrost;
+        }
+    }
 
     public override int TrapIntensify
     {
@@ -118,10 +159,47 @@ public class BasicEnemyStrategy : DamageStrategy
         enemy.Buffable.AddBuff(info);
     }
 
-    public override void ResetStrategy(float maxHealth)
+    public override void ResetStrategy(EnemyAttribute attribute, float intensify)
     {
-        base.ResetStrategy(maxHealth);
+        base.ResetStrategy(attribute, intensify);
+        MaxFrost = attribute.Frost;
         TrapIntensify = 1;
+        CurrentFrost = 0;
+        StunTime = 0;
+        frostTime = 0;
+        UnfrostableTime = 0;
+    }
+
+    public void FrostEnemy(float time)
+    {
+        FrostEffect frosteffect = ObjectPool.Instance.Spawn(StaticData.Instance.FrostEffectPrefab) as FrostEffect;
+        frosteffect.transform.position = ModelTrans.position;
+        frosteffect.transform.localScale = Vector3.one * 0.85f;
+        frostTime += time;
+        StunTime += time;
+        UnfrostableTime += 5f;//ÃâÒß¶³½áÊ±¼ä
+        m_FrostEffect = frosteffect;
+    }
+
+    public override void StrategyUpdate()
+    {
+        if (frostTime > 0)
+        {
+            frostTime -= Time.deltaTime;
+            if (frostTime <= 0.2f && m_FrostEffect != null)
+            {
+                m_FrostEffect.Broke();
+                m_FrostEffect = null;
+            }
+        }
+        if (StunTime > 0)
+        {
+            StunTime -= Time.deltaTime;
+        }
+        if (UnfrostableTime > 0)
+        {
+            UnfrostableTime -= Time.deltaTime;
+        }
     }
 
 }

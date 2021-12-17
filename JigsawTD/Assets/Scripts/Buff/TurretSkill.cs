@@ -120,6 +120,7 @@ public class RotarySkill : InitialSkill
     public override void Build()
     {
         base.Build();
+        strategy.BaseWoodCount++;
         strategy.AllSpeedIntensifyModify += 1;
     }
 
@@ -176,10 +177,16 @@ public class UltraSkill : InitialSkill
     //    float increase = bullet.CriticalPercentage - 1.5f;
     //    bullet.CriticalPercentage += increase * 2f * strategy.TimeModify;
     //}
-
-    public override void Shoot(Bullet bullet = null)
+    public override void Build()
     {
-        bullet.CriticalPercentage += Random.Range(-1f, 4f) * strategy.TimeModify;
+        base.Build();
+        strategy.BaseFireCount += 2;
+    }
+
+    public override void PreHit(Bullet bullet = null)
+    {
+        bullet.CriticalPercentage *= Random.Range(0.25f, 2.5f);
+
     }
 
 }
@@ -188,11 +195,16 @@ public class MortarSkill : InitialSkill
     public override TurretSkillName EffectName => TurretSkillName.MortarSkill;
     public override string SkillDescription => "MORTARSKILL";
 
-
-    public override void Shoot(Bullet bullet = null)
+    public override void Build()
     {
-        base.Shoot(bullet);
-        bullet.SplashPercentage += (bullet.SplashRange / 0.1f) * 0.1f;
+        base.Build();
+        strategy.BaseDustCount++;
+    }
+
+    public override void PreHit(Bullet bullet = null)
+    {
+        base.PreHit(bullet);
+        bullet.SplashPercentage += bullet.SputteredCount * 0.2f;
     }
 
 }
@@ -256,15 +268,17 @@ public class SnowSkill : InitialSkill
 
     public override string SkillDescription => "SNOWSKILL";
 
-    public override void Hit(IDamageable target, Bullet bullet = null)
+    public override void Build()
     {
-        if (target.DamageStrategy.IsEnemy)
-        {
-            float increaseSlow = ((Enemy)target).SlowRate * 2f;
-            BuffInfo info = new BuffInfo(EnemyBuffName.SlowDown, increaseSlow, 2f);
-            ((Enemy)target).Buffable.AddBuff(info);
-        }
+        base.Build();
+        strategy.BaseWaterCount++;
     }
+
+    public override void PreHit(Bullet bullet = null)
+    {
+        bullet.SlowRate *= 2;
+    }
+
 }
 
 public class CooporativeSkill : InitialSkill
@@ -283,6 +297,11 @@ public class BoomerrangSkill : InitialSkill
     public override TurretSkillName EffectName => TurretSkillName.BoomerrangSkill;
     public override string SkillDescription => "BOOMERRANGSKILL";
 
+    public override void Build()
+    {
+        base.Build();
+        strategy.BaseGoldCount++;
+    }
 
     public override void Hit(IDamageable target, Bullet bullet = null)
     {
@@ -294,25 +313,16 @@ public class BoomerrangSkill : InitialSkill
 public class SuperSkill : InitialSkill
 {
     public override TurretSkillName EffectName => TurretSkillName.SuperSkill;
-    public override string SkillDescription => "SUPERSKILL";
 
-    public override void StartTurn()
+    public override void Build()
     {
-        Duration += 30;
+        base.Build();
+        strategy.ElementSKillSlot++;
     }
 
-    public override void TickEnd()
+    public override void PreHit(Bullet bullet = null)
     {
-        strategy.TurnFixAttack += strategy.FinalAttack * strategy.TimeModify;
-        strategy.TurnFixSpeed += strategy.FinalFireRate * strategy.TimeModify;
-        strategy.TurnFixCriticalRate += strategy.FinalCriticalRate * strategy.TimeModify;
-        strategy.TurnFixSlowRate += strategy.FinalSlowRate * strategy.TimeModify;
-        strategy.TurnFixSplashRange += strategy.FinalSplashRange * strategy.TimeModify;
-    }
-
-    public override void EndTurn()
-    {
-        Duration = 0;
+        bullet.Damage *= (1 + 0.1f * strategy.TotalElementCount);
     }
 }
 

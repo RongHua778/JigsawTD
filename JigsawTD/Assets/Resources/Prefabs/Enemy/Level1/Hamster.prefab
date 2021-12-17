@@ -471,6 +471,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0.0099983215
       objectReference: {fileID: 0}
+    - target: {fileID: 3727689228522642992, guid: 329ede47c9c5c9b4d85f87899af9994d, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3727689228522642994, guid: 329ede47c9c5c9b4d85f87899af9994d, type: 3}
       propertyPath: m_Name
       value: HealthBarBoss

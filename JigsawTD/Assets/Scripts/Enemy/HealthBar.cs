@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class HealthBar : ReusableObject
 {
     [SerializeField] Image healthProgress = default;
+    [SerializeField] Image frostProgess = default;
 
     [SerializeField] Vector2 enemyOffset = default;
     [SerializeField] Vector2 iconStartPos = default;
@@ -27,9 +28,21 @@ public class HealthBar : ReusableObject
         }
     }
 
+    float frostAmount;
+    public float FrostAmount
+    {
+        get => frostAmount;
+        set
+        {
+            frostAmount = value;
+            frostProgess.fillAmount = value;
+        }
+    }
+
     public override void OnUnSpawn()
     {
         FillAmount = 1;
+        FrostAmount = 0;
         iconShowList.Clear();
     }
 

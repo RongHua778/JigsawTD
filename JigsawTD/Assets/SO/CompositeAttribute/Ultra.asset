@@ -36,7 +36,7 @@ MonoBehaviour:
     AttackDamage: 1000
     AttackSpeed: 0.25
     SplashRange: 0
-    CriticalRate: 0.3
+    CriticalRate: 0
     SlowRate: 0
     TurretIcon: {fileID: -850260506764051562, guid: e4922f05a8d12a5478500ccd8eddc736, type: 3}
     CannonSprite: {fileID: -3895616843713057360, guid: 268b8018b7cb9f34cafa09f27ec0e24e, type: 3}
@@ -46,7 +46,7 @@ MonoBehaviour:
     AttackDamage: 1500
     AttackSpeed: 0.25
     SplashRange: 0
-    CriticalRate: 0.4
+    CriticalRate: 0
     SlowRate: 0
     TurretIcon: {fileID: 2189043933734579029, guid: e4922f05a8d12a5478500ccd8eddc736, type: 3}
     CannonSprite: {fileID: 250269721118904390, guid: 268b8018b7cb9f34cafa09f27ec0e24e, type: 3}
@@ -56,7 +56,7 @@ MonoBehaviour:
     AttackDamage: 2250
     AttackSpeed: 0.25
     SplashRange: 0
-    CriticalRate: 0.5
+    CriticalRate: 0
     SlowRate: 0
     TurretIcon: {fileID: 3750989098115402312, guid: e4922f05a8d12a5478500ccd8eddc736, type: 3}
     CannonSprite: {fileID: 1633734841747217399, guid: 268b8018b7cb9f34cafa09f27ec0e24e, type: 3}

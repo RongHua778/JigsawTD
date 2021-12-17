@@ -20,6 +20,7 @@ public class Blinker : Boss
 
     protected override void OnEnemyUpdate()
     {
+        base.OnEnemyUpdate();
         if (DamageStrategy.CurrentHealth / DamageStrategy.MaxHealth < 0.75f && blink >= 3)
         {
             BlinkAfterAnim();
@@ -81,7 +82,7 @@ public class Blinker : Boss
             SpawnHoleOnPos(transform.position);
             SpawnHoleOnPos(targetPos);
             anim.Play("Exit");
-            StunTime += 0.5f;
+            DamageStrategy.StunTime += 0.5f;
             transfering = true;
         }
         Blink();

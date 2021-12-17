@@ -43,22 +43,13 @@ public abstract class Enemy : PathFollower, IDamageable
 
     public int ReachDamage { get; set; }
 
-    private float stunTime;
-    public float StunTime//眩晕时间
-    {
-        get => stunTime;
-        set
-        {
-            stunTime = value;
-            ProgressFactor = Speed * Adjust;
-        }
-    }
 
     private int affectHealerCount = 0;
     public int AffectHealerCount { get => affectHealerCount; set => affectHealerCount = value; }
     float speedIntensify = 0;
     public virtual float SpeedIntensify { get => speedIntensify + (AffectHealerCount > 0 ? 0.6f : 0); set => speedIntensify = value; }
-    public override float Speed { get => StunTime > 0 ? 0 : Mathf.Max(0.1f, (speed + SpeedIntensify) * (1 - SlowRate / (SlowRate + 2f))); }
+    public override float Speed { get => (Mathf.Max(0.2f, (speed + SpeedIntensify) * (1 - SlowRate / (SlowRate + 2f)))); }
+    public override float ProgressFactor { get => ((BasicEnemyStrategy)DamageStrategy).StunTime > 0 ? 0 : base.ProgressFactor; set => base.ProgressFactor = value; }
 
     float slowRate = 0;
     public float SlowRate
@@ -82,10 +73,10 @@ public abstract class Enemy : PathFollower, IDamageable
         this.pathTiles = BoardSystem.shortestPath;
         this.PathOffset = pathOffset;
         this.Intensify = intensify;
-        this.DamageStrategy.ResetStrategy(Mathf.RoundToInt(attribute.Health * intensify));//清除加成
+        this.DamageStrategy.ResetStrategy(attribute,intensify);//清除加成
         this.speed = attribute.Speed;
         this.ReachDamage = attribute.ReachDamage;
-        this.SlowResist = (float)GameRes.CurrentWave / (GameRes.CurrentWave + 20);
+        this.SlowResist = (float)GameRes.CurrentWave / (GameRes.CurrentWave + 10);
         SpawnOn(pathIndex, BoardSystem.shortestPoints);
 
     }
@@ -108,11 +99,10 @@ public abstract class Enemy : PathFollower, IDamageable
     protected virtual void SetStrategy()
     {
         DamageStrategy = new BasicEnemyStrategy(this);
-
     }
     public override bool GameUpdate()
     {
-        OnEnemyUpdate();
+       
         if (DamageStrategy.IsDie)
         {
             OnDie();
@@ -121,12 +111,7 @@ public abstract class Enemy : PathFollower, IDamageable
             ObjectPool.Instance.UnSpawn(this);
             return false;
         }
-        if (StunTime >= 0)
-        {
-            StunTime -= Time.deltaTime;
-            if (StunTime < 0)
-                ProgressFactor = Speed * Adjust;
-        }
+        OnEnemyUpdate();
         Progress += Time.deltaTime * ProgressFactor;
 
         if (Progress >= 0.5f && !trapTriggered)
@@ -161,7 +146,7 @@ public abstract class Enemy : PathFollower, IDamageable
 
     protected virtual void OnEnemyUpdate()
     {
-
+        DamageStrategy.StrategyUpdate();
     }
     protected virtual void OnDie()
     {
@@ -248,7 +233,6 @@ public abstract class Enemy : PathFollower, IDamageable
         AffectHealerCount = 0;
 
         SlowRate = 0;
-        StunTime = 0;
         Buffable.RemoveAllBuffs();
 
     }

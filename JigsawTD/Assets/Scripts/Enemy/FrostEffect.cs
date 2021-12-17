@@ -10,10 +10,11 @@ public class FrostEffect : ReusableObject
     {
         anim = this.GetComponent<Animator>();
     }
-    public void Broke()
+    public void Broke(float time = 0)
     {
         anim.SetTrigger("Broke");
     }
+
 
     public void ReclaimFrost()
     {

@@ -17,6 +17,8 @@ MonoBehaviour:
   Icon: {fileID: 4066939847818862564, guid: 62703dca31f30d8499eaa26af53751e7, type: 3}
   Description: DSKILL
   Prefab: {fileID: 5446042232708124106, guid: ebaafe7a79a077f42aa6b5b2ab6852c6, type: 3}
+  isLock: 0
+  initialLock: 0
   StrategyType: 0
   RangeType: 1
   element: 3
@@ -31,9 +33,9 @@ MonoBehaviour:
   TurretLevels:
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 70
+    AttackDamage: 90
     AttackSpeed: 0.55
-    SputteringRange: 0
+    SplashRange: 0
     CriticalRate: 0.3
     SlowRate: 0
     TurretIcon: {fileID: 1986921473018733175, guid: 62703dca31f30d8499eaa26af53751e7, type: 3}
@@ -41,40 +43,40 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.31}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 100
+    AttackDamage: 135
     AttackSpeed: 0.55
-    SputteringRange: 0
-    CriticalRate: 0.35
+    SplashRange: 0
+    CriticalRate: 0.4
     SlowRate: 0
     TurretIcon: {fileID: 5985605957332268481, guid: 62703dca31f30d8499eaa26af53751e7, type: 3}
     CannonSprite: {fileID: -1527832347604743927, guid: 6de4522e4ff4399429dddadebe803987, type: 3}
     ShootPointOffset: {x: 0, y: 0.37}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 145
+    AttackDamage: 200
     AttackSpeed: 0.55
-    SputteringRange: 0
-    CriticalRate: 0.4
+    SplashRange: 0
+    CriticalRate: 0.5
     SlowRate: 0
     TurretIcon: {fileID: -6989943570539390412, guid: 62703dca31f30d8499eaa26af53751e7, type: 3}
     CannonSprite: {fileID: 4879016508016108855, guid: 6de4522e4ff4399429dddadebe803987, type: 3}
     ShootPointOffset: {x: 0, y: 0.42}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 215
+    AttackDamage: 300
     AttackSpeed: 0.55
-    SputteringRange: 0
-    CriticalRate: 0.45
+    SplashRange: 0
+    CriticalRate: 0.6
     SlowRate: 0
     TurretIcon: {fileID: -144716485756555352, guid: 62703dca31f30d8499eaa26af53751e7, type: 3}
     CannonSprite: {fileID: -4313575289805417258, guid: 6de4522e4ff4399429dddadebe803987, type: 3}
     ShootPointOffset: {x: 0, y: 0.44}
   - AttackRange: 3
     ForbidRange: 0
-    AttackDamage: 335
+    AttackDamage: 450
     AttackSpeed: 0.55
-    SputteringRange: 0
-    CriticalRate: 0.5
+    SplashRange: 0
+    CriticalRate: 0.7
     SlowRate: 0
     TurretIcon: {fileID: 4066939847818862564, guid: 62703dca31f30d8499eaa26af53751e7, type: 3}
     CannonSprite: {fileID: -1273360545368378337, guid: 6de4522e4ff4399429dddadebe803987, type: 3}

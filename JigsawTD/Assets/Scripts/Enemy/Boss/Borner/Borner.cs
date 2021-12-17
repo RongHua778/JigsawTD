@@ -7,8 +7,8 @@ public class Borner : Boss
     public override string ExplosionEffect => "BossExplosionPurple";
 
 
-    [SerializeField] float[] bornCD;
-    [SerializeField] int[] enemyOneBorn;
+    [SerializeField] float[] bornCD=default;
+    [SerializeField] int[] enemyOneBorn=default;
     int level;
     int form;
     float castleCounter;
@@ -22,6 +22,7 @@ public class Borner : Boss
 
     protected override void OnEnemyUpdate()
     {
+        base.OnEnemyUpdate();
         bornCounter += Time.deltaTime;
         if (bornCounter > bornCD[level])
         {
@@ -48,7 +49,7 @@ public class Borner : Boss
             DamageStrategy.BuffDamageIntensify -= 0.8f;
             level = 1;
             form = 1;
-            StunTime += 7f;
+            DamageStrategy.StunTime += 7f;
             castleCounter = 7f;
             anim.SetBool("Transform", true);
             Sound.Instance.PlayEffect("Sound_BornerTransform");
@@ -58,7 +59,7 @@ public class Borner : Boss
             DamageStrategy.BuffDamageIntensify -= 0.8f;
             level = 2;
             form = 2;
-            StunTime += 7f;
+            DamageStrategy.StunTime += 7f;
             castleCounter = 7f;
             anim.SetBool("Transform", true);
             Sound.Instance.PlayEffect("Sound_BornerTransform");

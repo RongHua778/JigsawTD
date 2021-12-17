@@ -17,7 +17,7 @@ MonoBehaviour:
   Icon: {fileID: 2497086793369854952, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
   Description: SIXARMOURINFO
   Prefab: {fileID: 1089310082073990611, guid: 01171ff9a6ad7854bbfd9f7ab8a16b75, type: 3}
-  isLock: 0
+  isLock: 1
   initialLock: 1
   EnemyType: 7
   IsBoss: 1
@@ -26,6 +26,7 @@ MonoBehaviour:
   Health: 30
   Speed: 0.7
   CoolDown: 1
+  Frost: 4
   BackGround: 
   HealthAtt: 4
   SpeedAtt: 1

@@ -16,7 +16,8 @@ public class Armorer : Boss
         Armor[] armors = GetComponentsInChildren<Armor>();
         for (int i = 0; i < armors.Length; i++)
         {
-            armors[i].DamageStrategy.ResetStrategy(Armor);
+            armors[i].DamageStrategy.MaxHealth=Armor;
+            armors[i].DamageStrategy.IsDie = false;
             armors[i].ReArmor();
         }
     }

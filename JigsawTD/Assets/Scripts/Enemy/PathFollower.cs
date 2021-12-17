@@ -28,7 +28,7 @@ public class PathFollower : ReusableObject,IGameBehavior
     public float DirectionAngleTo { get => directionAngleTo; set => directionAngleTo = value; }
     public virtual float Speed { get => speed;}
     public float Adjust { get => adjust; set => adjust = value; }
-    public float ProgressFactor { get => progressFactor; set => progressFactor = value; }
+    public virtual float ProgressFactor { get => progressFactor; set => progressFactor = value; }
     public float Progress { get => progress; set => progress = value; }
     public List<PathPoint> PathPoints { get => pathPoints; set => pathPoints = value; }
     public float PathOffset { get => pathOffset; set => pathOffset = value; }
