@@ -508,6 +508,11 @@ public class BoardSystem : IGameSystem
         }
         tutorialObjs.Clear();
     }
+
+    //private void OnApplicationFocus(bool focus)
+    //{
+    //    ShowPath();
+    //}
 }
 
 

@@ -348,7 +348,7 @@ MonoBehaviour:
   healthProgress: {fileID: 3727689228102059129}
   frostProgess: {fileID: 9177601326618387358}
   enemyOffset: {x: 0, y: 0.5}
-  iconStartPos: {x: 84, y: -28}
+  iconStartPos: {x: 84, y: -44}
   iconOffset: {x: -40, y: 0}
   Icons:
   - {fileID: 5757985738362144293}
@@ -390,7 +390,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 44.075, y: -28.4}
+  m_AnchoredPosition: {x: 44.075, y: -44.8}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4468601652192062755
@@ -541,7 +541,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 44.075, y: -28.4}
+  m_AnchoredPosition: {x: 44.075, y: -44.794044}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6866954545900017969
@@ -616,7 +616,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 44.075, y: -28.4}
+  m_AnchoredPosition: {x: 44.075, y: -44.794044}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7144064755263886628
@@ -691,7 +691,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 44.075, y: -28.4}
+  m_AnchoredPosition: {x: 44.075, y: -44.794044}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4304160877447347039

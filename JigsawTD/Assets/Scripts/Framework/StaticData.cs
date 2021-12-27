@@ -465,10 +465,10 @@ public class StaticData : Singleton<StaticData>
         return node.Walkable;
     }
 
-    public void ShowJumpDamage(Vector2 pos, int amount)
+    public void ShowJumpDamage(Vector2 pos, int amount,bool isCritical)
     {
         JumpDamage obj = ObjectPool.Instance.Spawn(JumpDamagePrefab) as JumpDamage;
-        obj.Jump(amount, pos);
+        obj.Jump(amount, pos,isCritical);
     }
 
 

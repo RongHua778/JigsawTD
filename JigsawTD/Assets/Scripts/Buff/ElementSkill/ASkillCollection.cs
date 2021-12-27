@@ -37,7 +37,7 @@ public class TimeAttack : ElementSkill
 {
     //¹¥»÷Ã¿ÃëÌáÉý0.5%
     public override List<int> Elements => new List<int> { 2, 2, 0 };
-    public override float KeyValue => 0.005f * strategy.GoldCount;
+    public override float KeyValue => 0.01f * strategy.GoldCount;
     public override string DisplayValue => StaticData.ElementDIC[ElementType.GOLD].Colorized((KeyValue * 100).ToString() + "%");
     public override ElementType IntensifyElement => ElementType.GOLD;
 
@@ -62,8 +62,8 @@ public class LongAttack : ElementSkill
 {
     //¹¥»÷²¨¶¯
     public override List<int> Elements => new List<int> { 3, 3, 0 };
-    public override float KeyValue => 0.05f * strategy.GoldCount;
-    public override string DisplayValue => StaticData.ElementDIC[ElementType.GOLD].Colorized((KeyValue*100).ToString() + "%");
+    public override float KeyValue => 0.25f * strategy.GoldCount;
+    public override string DisplayValue => StaticData.ElementDIC[ElementType.GOLD].Colorized((KeyValue * 100).ToString() + "%");
     public override ElementType IntensifyElement => ElementType.GOLD;
     float intensifyValue;
     public override void Shoot(Bullet bullet = null)
@@ -72,7 +72,7 @@ public class LongAttack : ElementSkill
         float distance = bullet.GetTargetDistance();
         if (distance > 3)
         {
-            intensifyValue = bullet.GetTargetDistance() * KeyValue;
+            intensifyValue = (bullet.GetTargetDistance() - 3) * KeyValue;
             strategy.TurnAttackIntensify += intensifyValue;
             bullet.Damage += strategy.BaseAttack * intensifyValue;
         }
@@ -121,7 +121,7 @@ public class StartAttack : ElementSkill
 {
     //¿ª¾Ö¹¥»÷
     public override List<int> Elements => new List<int> { 4, 4, 0 };
-    public override float KeyValue => 0.25f * strategy.GoldCount;
+    public override float KeyValue => 0.5f * strategy.GoldCount;
     public override string DisplayValue => StaticData.ElementDIC[ElementType.GOLD].Colorized((KeyValue * 100).ToString() + "%");
     public override ElementType IntensifyElement => ElementType.GOLD;
     float intensify = 0;

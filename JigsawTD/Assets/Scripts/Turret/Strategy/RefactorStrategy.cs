@@ -105,7 +105,8 @@ public class RefactorStrategy : StrategyBase
     {
         foreach (var com in Compositions)
         {
-            com.turret.m_GameTile.Highlight(value);
+            if (!com.isPerfect)
+                com.turret.m_GameTile.Highlight(value);
         }
     }
 

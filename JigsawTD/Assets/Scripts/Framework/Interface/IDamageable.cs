@@ -61,10 +61,11 @@ public abstract class DamageStrategy
         realDamage = amount * (1 + DamageIntensify);
         CurrentHealth -= realDamage;
         GameRes.TotalDamage += (int)realDamage;
-        if (isCritical)
-        {
-            StaticData.Instance.ShowJumpDamage(ModelTrans.position, (int)realDamage);
-        }
+        StaticData.Instance.ShowJumpDamage(ModelTrans.position, (int)realDamage, isCritical);
+        //if (isCritical)
+        //{
+        //    StaticData.Instance.ShowJumpDamage(ModelTrans.position, (int)realDamage,isCritical);
+        //}
     }
 
 
@@ -100,11 +101,7 @@ public class BasicEnemyStrategy : DamageStrategy
         set
         {
             base.IsDie = value;
-            if (m_FrostEffect != null)
-            {
-                m_FrostEffect.Broke();
-                m_FrostEffect = null;
-            }
+            UnFrost();
         }
     }
     private float frostTime;
@@ -142,6 +139,14 @@ public class BasicEnemyStrategy : DamageStrategy
         this.ModelTrans = enemy.model;
     }
 
+    public void UnFrost()
+    {
+        if (m_FrostEffect != null)
+        {
+            m_FrostEffect.Broke();
+            m_FrostEffect = null;
+        }
+    }
 
     public override float BuffDamageIntensify
     {
@@ -177,8 +182,9 @@ public class BasicEnemyStrategy : DamageStrategy
         frosteffect.transform.localScale = Vector3.one * 0.85f;
         frostTime += time;
         StunTime += time;
-        UnfrostableTime += 5f;//免疫冻结时间
+        UnfrostableTime += 6f;//免疫冻结时间
         m_FrostEffect = frosteffect;
+        Sound.Instance.PlayEffect("Sound_EnemyExplosionFrost");
     }
 
     public override void StrategyUpdate()
@@ -186,10 +192,9 @@ public class BasicEnemyStrategy : DamageStrategy
         if (frostTime > 0)
         {
             frostTime -= Time.deltaTime;
-            if (frostTime <= 0.2f && m_FrostEffect != null)
+            if (frostTime <= 0.2f)
             {
-                m_FrostEffect.Broke();
-                m_FrostEffect = null;
+                UnFrost();
             }
         }
         if (StunTime > 0)

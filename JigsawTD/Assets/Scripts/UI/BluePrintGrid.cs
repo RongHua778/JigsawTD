@@ -112,6 +112,7 @@ public class BluePrintGrid : ReusableObject//, IPointerEnterHandler, IPointerExi
             {
                 OnBluePrintDeselect();
                 GameManager.Instance.HideTips();
+                SelectingBluePrint = null;
             }
         }
 
@@ -122,6 +123,7 @@ public class BluePrintGrid : ReusableObject//, IPointerEnterHandler, IPointerExi
     public void OnBluePrintDeselect()
     {
         //GameManager.Instance.HideTips();
+        //SelectingBluePrint = null;
         if(buildAble)
             Strategy.PreviewElements(false);
     }

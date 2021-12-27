@@ -8,20 +8,24 @@ public class TileTips : IUserInterface
 {
     [SerializeField] protected Animator anim;
     [SerializeField] protected Image Icon = default;
-    [SerializeField] protected Text Name = default;
+    [SerializeField] protected TextMeshProUGUI Name = default;
     [SerializeField] protected TextMeshProUGUI Description = default;
 
 
     public override void Show()
     {
-        //Sound.Instance.PlayEffect("Sound_Click");
+        base.Show();
         anim.SetBool("isOpen", true);
     }
 
 
-    public override void Hide()
+    //public override void Hide()
+    //{
+    //    anim.SetBool("isOpen", false);
+    //}
+
+    public virtual void CloseTips()
     {
         anim.SetBool("isOpen", false);
     }
-
 }

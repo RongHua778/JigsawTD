@@ -17,3 +17,5 @@ MonoBehaviour:
   Icon: {fileID: 3584539639483946653, guid: 77f1f203341c46246ad62b6652017dda, type: 3}
   Description: EXECUTETRAPINFO
   Prefab: {fileID: 7496585715104819807, guid: b3263af6d3b9581499e543461755737f, type: 3}
+  isLock: 0
+  initialLock: 0

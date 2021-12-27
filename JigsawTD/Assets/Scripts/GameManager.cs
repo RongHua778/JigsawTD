@@ -71,9 +71,11 @@ public class GameManager : Singleton<GameManager>
         m_BluePrintShopUI.Initialize();//配方系统UI
         m_ShapeSelectUI.Initialize();//抽模块UI
         m_GameEndUI.Initialize();//游戏结束UI
+
         m_TrapTips.Initialize();//防御塔TIPS
         m_TurretTips.Initialize();//陷阱及其他TIPS
         m_BuyGroundTips.Initialize();//购买地板TIPS
+
         m_MessageUI.Initialize();//提示系统UI
         m_GuideVideo.Initialize();//教程视频UI
         m_EnemyTips.Initialize();//敌人TIPS
@@ -469,6 +471,7 @@ public class GameManager : Singleton<GameManager>
 
     public void ShowTrapTips(TrapAttribute att, Vector2 pos)
     {
+        HideTips();
         SetCanvasPos(m_TrapTips.transform, pos);
         m_TrapTips.Show();
         m_TrapTips.ReadTrapAtt(att);
@@ -476,14 +479,16 @@ public class GameManager : Singleton<GameManager>
 
     public void ShowTurretTips(TurretAttribute att, Vector2 pos)
     {
+        HideTips();
         SetCanvasPos(m_TurretTips.transform, pos);
         m_TurretTips.Show();
         m_TurretTips.ReadAttribute(att);
     }
 
-    public void ShowBuyGroundTips()
+    public void ShowBuyGroundTips(Vector2 pos)
     {
         HideTips();
+        SetCanvasPos(m_BuyGroundTips.transform, pos);
         m_BuyGroundTips.ReadInfo(GameRes.FreeGroundTileCount > 0 ? 0 : m_BoardSystem.BuyOneGroundMoney);
         m_BuyGroundTips.Show();
     }
@@ -527,9 +532,9 @@ public class GameManager : Singleton<GameManager>
 
     public void HideTips()
     {
-        m_TurretTips.Hide();
-        m_TrapTips.Hide();
-        m_BuyGroundTips.Hide();
+        m_TurretTips.CloseTips();
+        m_TrapTips.CloseTips();
+        m_BuyGroundTips.CloseTips();
     }
 
     #endregion

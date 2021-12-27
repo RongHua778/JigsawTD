@@ -17,3 +17,5 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: c28e3e62c18d361459a70e76b72ff131, type: 3}
   Description: SPAWNPOINTINFO
   Prefab: {fileID: -5650298545676880583, guid: d8f1fb0847b1f1347ba6041df5ab0bbf, type: 3}
+  isLock: 0
+  initialLock: 0

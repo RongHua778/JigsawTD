@@ -19,7 +19,7 @@ public class TurretTips : TileTips
     [SerializeField] Text SlowRateValue = default;
     [SerializeField] Text IntensifyValue = default;
     [SerializeField] Text AnalysisValue = default;
-    [SerializeField] Text UpgradeCostValue = default;
+    [SerializeField] TextMeshProUGUI UpgradeCostValue = default;
 
     [SerializeField] TextMeshProUGUI defaultSkillTxt = default;
     [SerializeField] GameObject AnalysisArea = default;//伤害统计区
@@ -56,15 +56,24 @@ public class TurretTips : TileTips
     private StrategyBase m_Strategy;
     private BluePrintGrid m_Grid;
     public bool showingTurret = false;
-    //bool showingBlueprint = false;
+    //public bool showingBlueprint = false;
     int upgradeCost;
+
+    [SerializeField] Animator TileInfo_Anim = default;
 
     public override void Initialize()
     {
+        base.Initialize();
         //mainCam = Camera.main;
         CriticalInfo.SetContent(GameMultiLang.GetTraduction("CRITICALINFO"));
         SplashInfo.SetContent(GameMultiLang.GetTraduction("SPLASHINFO"));
         SlowInfo.SetContent(GameMultiLang.GetTraduction("SLOWINFO"));
+    }
+
+    public override void Show()
+    {
+        base.Show();
+        TileInfo_Anim.SetTrigger("Show");
     }
 
     public override void Hide()
@@ -74,6 +83,16 @@ public class TurretTips : TileTips
         m_Strategy = null;
         //showingBlueprint = false;
         showingTurret = false;
+
+    }
+
+    public override void CloseTips()
+    {
+        base.CloseTips();
+        if (BluePrintGrid.SelectingBluePrint != null)
+        {
+            BluePrintGrid.SelectingBluePrint.OnBluePrintDeselect();
+        }
     }
 
     public void ReadTurret(StrategyBase Strategy)//通过场上防御塔查看
@@ -98,6 +117,7 @@ public class TurretTips : TileTips
                 break;
             case StrategyType.Composite:
                 ElementSkillArea.SetActive(true);
+                UpgradeArea.SetActive(true);
                 UpgradeAreaSet(Strategy);
                 IntensifyArea.SetActive(false);
 
@@ -111,7 +131,7 @@ public class TurretTips : TileTips
 
     public void ReadBluePrint(BluePrintGrid grid)
     {
-       // showingBlueprint = true;
+        //showingBlueprint = true;
         m_Grid = grid;
         m_Strategy = grid.Strategy;
 
@@ -144,7 +164,7 @@ public class TurretTips : TileTips
                 break;
             case StrategyType.Composite:
                 QualitySetter.gameObject.SetActive(true);
-                QualitySetter.SetRare(att.Rare);
+                //QualitySetter.SetRare(att.Rare);
                 IntensifyArea.SetActive(false);
                 break;
         }
@@ -156,15 +176,13 @@ public class TurretTips : TileTips
     {
         if (Strategy.Quality < 3)
         {
-            UpgradeArea.SetActive(true);
             upgradeCost = StaticData.Instance.LevelUpCostPerRare[m_Strategy.Attribute.Rare - 1, m_Strategy.Quality - 1];// * m_Strategy.m_Att.Rare * m_Strategy.Quality;
             upgradeCost = (int)(upgradeCost * (1 - m_Strategy.UpgradeDiscount));
-            UpgradeCostValue.text = upgradeCost.ToString();
-
+            UpgradeCostValue.text = GameMultiLang.GetTraduction("UPGRADE") + "<sprite=7>" + upgradeCost.ToString();
         }
         else
         {
-            UpgradeArea.SetActive(false);
+            UpgradeCostValue.text = "MAX";
         }
     }
     private void SetElementSkill()
@@ -175,11 +193,6 @@ public class TurretTips : TileTips
         }
         for (int i = 0; i < m_Strategy.ElementSKillSlot; i++)
         {
-            //if (i > elementConstructs.Count - 1)
-            //{
-            //    TipsElementConstruct construct = Instantiate(ElementConstructPrefab, ElementSkillContent);
-            //    elementConstructs.Add(construct);
-            //}
             elementConstructs[i].gameObject.SetActive(true);
             if (i < m_Strategy.TurretSkills.Count - 1)
                 elementConstructs[i].SetElements((ElementSkill)m_Strategy.TurretSkills[i + 1]);//第一个是被动技能
@@ -211,7 +224,7 @@ public class TurretTips : TileTips
             case StrategyType.Composite:
                 Name.text = GameMultiLang.GetTraduction(att.Name);
                 QualitySetter.gameObject.SetActive(true);
-                QualitySetter.SetRare(att.Rare);
+                //QualitySetter.SetRare(att.Rare);
                 QualitySetter.SetLevel(quality);
 
                 defaultSkillTxt.text = GameMultiLang.GetTraduction(att.Name + "SN");
@@ -313,7 +326,8 @@ public class TurretTips : TileTips
 
     public void UpdateLevelUpInfo()
     {
-
+        if (m_Strategy.Quality >= 3)//满级不预览
+            return;
         float attackIncrease = m_Strategy.NextAttack - m_Strategy.BaseAttack;
         AttackValue.text = m_Strategy.FinalAttack.ToString();
         AttackChangeTxt.text = (attackIncrease > 0 ? "+" + attackIncrease : "");
@@ -338,7 +352,7 @@ public class TurretTips : TileTips
 
     public void UpgradeBtnClick()
     {
-        if (GameManager.Instance.ConsumeMoney(upgradeCost))
+        if (m_Strategy.Quality < 3 && GameManager.Instance.ConsumeMoney(upgradeCost))
         {
             m_Strategy.Quality++;
             m_Strategy.SetQualityValue();

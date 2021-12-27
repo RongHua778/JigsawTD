@@ -17,7 +17,7 @@ MonoBehaviour:
   Icon: {fileID: 1974467737375703195, guid: 650ade1de42820843ab504b46ce30229, type: 3}
   Description: SNOWSKILL
   Prefab: {fileID: 3184344065496086193, guid: ec76f05b1efa1874b8faa449cea6300a, type: 3}
-  isLock: 0
+  isLock: 1
   initialLock: 1
   StrategyType: 1
   RangeType: 2

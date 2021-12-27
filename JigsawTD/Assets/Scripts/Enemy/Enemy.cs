@@ -166,6 +166,7 @@ public abstract class Enemy : PathFollower, IDamageable
     {
         anim.SetTrigger("Exit");
         yield return new WaitForSeconds(0.5f);
+        ((BasicEnemyStrategy)DamageStrategy).UnFrost();//消失过程中解除冰冻
         GameEvents.Instance.EnemyReach(this);
         ObjectPool.Instance.UnSpawn(this);
     }

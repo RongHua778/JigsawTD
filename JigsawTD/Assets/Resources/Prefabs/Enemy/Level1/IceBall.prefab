@@ -19205,7 +19205,7 @@ MonoBehaviour:
   model: {fileID: 7619665209501119904}
   freezeRange: 3
   freezeTime: 2
-  frostCD: 5
+  frostCD: 6
   rotateObj: {fileID: 1024523415723577758}
 --- !u!1 &8360252054385358165
 GameObject:

@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a06a8e352dd064bab9b6bf5b84988e, type: 3}
   m_Name: GroundAttribute
   m_EditorClassIdentifier: 
+  AttType: 0
   Name: "\u7A7A\u683C"
   Icon: {fileID: 0}
   Description: 
-  ContentPrefab: {fileID: 526080560332341766, guid: cb077d7d1dc073a458a97285a6c13b01, type: 3}
-  BuffInfos: []
+  Prefab: {fileID: 0}
+  isLock: 0
+  initialLock: 0

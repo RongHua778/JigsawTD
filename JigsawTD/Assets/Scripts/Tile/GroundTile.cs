@@ -23,7 +23,7 @@ public class GroundTile : TileBase
         base.OnTileSelected(value);
         if (value)
         {
-            GameManager.Instance.ShowBuyGroundTips();
+            GameManager.Instance.ShowBuyGroundTips(StaticData.LeftTipsPos);
         }
     }
     public override void OnSpawn()

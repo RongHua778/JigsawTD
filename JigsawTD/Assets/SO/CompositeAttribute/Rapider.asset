@@ -17,7 +17,7 @@ MonoBehaviour:
   Icon: {fileID: -1343758528997770693, guid: c08f452247fa17245b5b595ed6454216, type: 3}
   Description: RAPIDERSKILL
   Prefab: {fileID: 1405721755924127496, guid: d71b8f03e81b3ab45b0b1062d0c191df, type: 3}
-  isLock: 0
+  isLock: 1
   initialLock: 1
   StrategyType: 1
   RangeType: 1

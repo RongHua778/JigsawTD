@@ -47,8 +47,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
   sputteringEffect: {fileID: 3494240544614092349, guid: eb6cba38b10cbae4595d14d7b62081a8, type: 3}
-  turretParent: {fileID: 0}
-  hit: 0
   isCritical: 0
   SputteredCount: 0
 --- !u!58 &1293055410048731590

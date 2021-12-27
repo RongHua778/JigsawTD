@@ -56,7 +56,7 @@ public class CloseSplash : ElementSkill
 {
     //Ω¸’ΩΩ¶…‰0.75
     public override List<int> Elements => new List<int> { 0, 0, 4 };
-    public override float KeyValue => 0.25f * strategy.DustCount;
+    public override float KeyValue => 0.5f * strategy.DustCount;
     public override string DisplayValue => StaticData.ElementDIC[ElementType.DUST].Colorized(KeyValue.ToString());
     public override ElementType IntensifyElement => ElementType.DUST;
     float intensifyValue;
@@ -106,7 +106,7 @@ public class TimeSplash : ElementSkill
 {
     //√ø√Î+0.02Ω¶…‰
     public override List<int> Elements => new List<int> { 2, 2, 4 };
-    public override float KeyValue => 0.005f * strategy.DustCount;
+    public override float KeyValue => 0.01f * strategy.DustCount;
     public override string DisplayValue => StaticData.ElementDIC[ElementType.DUST].Colorized((KeyValue).ToString());
     public override ElementType IntensifyElement => ElementType.DUST;
     public override void StartTurn()
@@ -128,7 +128,7 @@ public class TimeSplash : ElementSkill
 public class LongSplash : ElementSkill
 {
     public override List<int> Elements => new List<int> { 3, 3, 4 };
-    public override float KeyValue => 0.05f * strategy.DustCount;
+    public override float KeyValue => 0.25f * strategy.DustCount;
     public override string DisplayValue => StaticData.ElementDIC[ElementType.DUST].Colorized(KeyValue.ToString());
     public override ElementType IntensifyElement => ElementType.DUST;
     float intensifyValue;
@@ -138,7 +138,7 @@ public class LongSplash : ElementSkill
         float distance = bullet.GetTargetDistance();
         if (distance > 3)
         {
-            intensifyValue = bullet.GetTargetDistance() * KeyValue;
+            intensifyValue = (bullet.GetTargetDistance()-3) * KeyValue;
             strategy.TurnFixSplashRange += intensifyValue;
             bullet.SplashRange += intensifyValue;
         }

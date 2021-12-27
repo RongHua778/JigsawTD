@@ -459,7 +459,7 @@ MonoBehaviour:
     English: Damage Billboard
   - Key: DAMAGEANLYSIS
     Chinese: "\u56DE\u5408\u4F24\u5BB3"
-    English: Turn Damage
+    English: Damage
   - Key: ATTACK
     Chinese: "\u653B\u51FB"
     English: Attack
@@ -497,16 +497,15 @@ MonoBehaviour:
     Chinese: " (\u968F<sprite={0}>\u6570\u91CF\u63D0\u5347)"
     English: ' (Increased with the amount of <sprite={0}>)'
   - Key: CRITICALINFO
-    Chinese: "\u6BCF1%\u66B4\u51FB\u7387=1%\u989D\u5916\u66B4\u51FB\u4F24\u5BB3\uFF0C\u57FA\u7840\u66B4\u51FB\u4F24\u5BB3\u4E3A150%"
-    English: Critical damage is 150% and each 1% critical give it 1% extra critical
-      damage
+    Chinese: "\u57FA\u7840\u66B4\u51FB\u4F24\u5BB3\u4E3A200%"
+    English: Default critical damage is 200%
   - Key: SPLASHINFO
     Chinese: "\u6E85\u5C04\u534A\u5F84\uFF0C\u57FA\u7840\u6E85\u5C04\u4F24\u5BB3\u4E3A50%"
     English: Splash radius. Default splash damage is 50%
   - Key: SLOWINFO
-    Chinese: "\u5BF9\u547D\u4E2D\u7684\u654C\u4EBA\u9020\u6210\u51CF\u901F\uFF0C\u654C\u4EBA\u4F1A\u968F\u6CE2\u6570\u63D0\u5347\u51CF\u901F\u6297\u6027"
-    English: Bullet can slow down enemy, enemy's slow resistence will increase each
-      wave
+    Chinese: "\u5BF9\u76EE\u6807\u9020\u6210\u51CF\u901F\uFF0C\u5E76\u7D2F\u79EF\u51BB\u7ED3\u5C42\u6570\uFF1B\u76EE\u6807\u51BB\u7ED3\u5C42\u6570\u6EE1\u540E\u4F1A\u51BB\u7ED33\u79D2\uFF0C\u6B64\u540E\u514D\u75AB\u51BB\u7ED3\u6548\u679C6\u79D2\u3002"
+    English: Slow down enemy and accumulate frost effect. Enemy wiil be frost by
+      3s while has frost effect is full.
   - Key: ATTACKUP
     Chinese: "%\u57FA\u7840\u653B\u51FB"
     English: '% Attack'
@@ -665,32 +664,34 @@ MonoBehaviour:
     Chinese: "\u9020\u6210\u7684\u4F24\u5BB3\u964D\u4F4E50%\uFF0C\u4F46\u662F\u53EF\u4EE5\u989D\u5916\u653B\u51FB2\u4E2A\u76EE\u6807"
     English: Deals 50% less damage, but can attack an additional 2 targets.
   - Key: MORTARSKILL
-    Chinese: "\u6BCF\u6E85\u5C04\u52301\u4E2A\u76EE\u6807\uFF0C\u5C31\u4F7F\u6E85\u5C04\u4F24\u5BB3\u63D0\u9AD810%"
-    English: Splash damage increased by 10% for each enemy it hit
+    Chinese: "<sprite=4>\u6570\u91CF+1\uFF0C\u4E14\u5B50\u5F39\u6BCF\u6E85\u5C04\u52301\u4E2A\u76EE\u6807\uFF0C\u5C31\u4F7F\u6E85\u5C04\u4F24\u5BB3\u63D0\u9AD820%"
+    English: <sprite=4>+1, Splash damage increased by 20% for each enemy it hit
   - Key: RAPIDERSKILL
     Chinese: "\u5BF9\u540C\u4E00\u76EE\u6807\u8FDB\u884C\u653B\u51FB\u65F6\uFF0C\u6BCF\u6B21\u653B\u51FB\u4F7F\u653B\u901F\u63D0\u534720%\uFF0C\u4E0A\u9650200%"
     English: Firerate increased by 20% each shoot when it is attacking the same target(up
       to 200%).
   - Key: ROTARYSKILL
-    Chinese: "\u7A7F\u900F\u5B50\u5F39\uFF0C\u4E0D\u53EF\u6E85\u5C04;\u5411\u5468\u56F4\u968F\u673A\u653B\u51FB\uFF0C\u81EA\u8EAB\u6240\u6709\u653B\u901F\u52A0\u6210\u7FFB\u500D"
-    English: Penetration Bullet can't splash; Randomly shoot around and double all
-      firerate increased.
+    Chinese: "\u7A7F\u900F\u5B50\u5F39\uFF0C\u4E0D\u53EF\u6E85\u5C04\uFF1B\u968F\u673A\u65B9\u5411\u653B\u51FB\uFF1B<sprite=1>\u6570\u91CF+1\uFF0C\u4E14\u81EA\u8EAB\u6240\u6709\u653B\u901F\u52A0\u6210\u7FFB\u500D"
+    English: <sprite=1>+1, Penetration Bullet can't splash; Randomly shoot around
+      and double all firerate increased.
   - Key: SNIPERSKILL
     Chinese: "\u5B50\u5F39\u4F24\u5BB3\u968F\u98DE\u884C\u8DDD\u79BB\u63D0\u534750%/\u683C"
     English: Bullet's damage increased by 50% for each tile it travelled
   - Key: ULTRASKILL
-    Chinese: "\u5B50\u5F39\u7684\u6700\u7EC8\u66B4\u51FB\u4F24\u5BB3\u572825%\u5230250%\u4E4B\u95F4\u968F\u673A\u6D6E\u52A8"
-    English: Bullet's critical damage randomly float between 25% to 250%
+    Chinese: "<sprite=3>\u6570\u91CF+2\uFF0C\u4E14\u5B50\u5F39\u7684\u6700\u7EC8\u66B4\u51FB\u4F24\u5BB3\u572825%\u5230250%\u4E4B\u95F4\u968F\u673A\u6D6E\u52A8"
+    English: <sprite=3>+2, Bullet's final critical damage randomly float between
+      25% to 250%
   - Key: SNOWSKILL
-    Chinese: "\u7A7F\u900F\u5B50\u5F39\uFF0C\u4E0D\u53EF\u6E85\u5C04;\u5B50\u5F39\u4F1A\u4F7F\u654C\u4EBA\u5F53\u524D\u51CF\u901F\u6548\u679C\u7FFB\u500D\u3002"
-    English: Penetration Bullet can't splash;Bullet will double enemy's current slow.
+    Chinese: "\u7A7F\u900F\u5B50\u5F39\uFF0C\u4E0D\u53EF\u6E85\u5C04;<sprite=2>\u6570\u91CF+1\uFF0C\u5B50\u5F39\u65BD\u52A0\u53CC\u500D\u7684\u51BB\u7ED3\u5C42\u6570"
+    English: Penetration Bullet can't splash;<sprite=2>+1, Double bullet's frost
+      effect.
   - Key: COOPORATIVESKILL
     Chinese: "\u6BCF\u6B21\u653B\u51FB\u63D0\u53472%*\u603B\u534F\u540C\u5854\u6570\u91CF\u7684\u653B\u51FB\u529B"
     English: Attack increased by 2% * the amount of "Cooporative" each shoot.
   - Key: BOOMERRANGSKILL
-    Chinese: "\u7A7F\u900F\u5B50\u5F39\uFF0C\u4E0D\u53EF\u6E85\u5C04\uFF1B\u53D1\u5C04\u4E00\u679A\u56DE\u65CB\u9556\uFF0C\u6BCF\u547D\u4E2D\u4E00\u4E2A\u654C\u4EBA\u5C31\u4F7F\u540E\u7EED\u4F24\u5BB3\u63D0\u9AD810%"
-    English: Penetration Bullet can't splash;Bullet damage will increase by 10% for
-      each enemy it hit.
+    Chinese: "\u7A7F\u900F\u5B50\u5F39\uFF0C\u4E0D\u53EF\u6E85\u5C04\uFF1B<sprite=0>\u6570\u91CF+1\uFF0C\u56DE\u65CB\u9556\u6BCF\u547D\u4E2D\u4E00\u4E2A\u654C\u4EBA\u5C31\u4F7F\u540E\u7EED\u4F24\u5BB3\u63D0\u9AD810%"
+    English: Penetration Bullet can't splash;<sprite=0>+1, Bullet damage will increase
+      by 10% for each enemy it hit.
   - Key: SUPERSKILL
     Chinese: "\u5143\u7D20\u6280\u80FD\u69FD+1\uFF0C\u6BCF\u62E5\u67091\u4E2A\u5143\u7D20\u9020\u6210\u7684\u4F24\u5BB3\u5C31\u63D0\u534710%"
     English: Element skill slot +1, deal 10% extra damage for each element it has
@@ -848,8 +849,8 @@ MonoBehaviour:
     Chinese: "\u524D\u671F\u971C\u51BB"
     English: Rapid Slow
   - Key: EECINFO
-    Chinese: "\u6BCF\u56DE\u5408\u5F00\u59CB\u524D20\u79D2\uFF0C\u63D0\u5347{0}\u7684\u653B\u901F"
-    English: During the first 20 seconds of each wave, firerate increased by {0}
+    Chinese: "\u6BCF\u56DE\u5408\u5F00\u59CB\u524D20\u79D2\uFF0C\u63D0\u5347{0}\u7684\u51CF\u901F"
+    English: During the first 20 seconds of each wave, slow increased by {0}
   - Key: EED
     Chinese: "\u524D\u671F\u66B4\u51FB"
     English: Rapid Crit
@@ -901,11 +902,11 @@ MonoBehaviour:
     Chinese: "\u8BE5\u9632\u5FA1\u5854\u4E0D\u4F1A\u88AB\u51BB\u7ED3"
     English: This turret will not be frozen
   - Key: BCE
-    Chinese: "\u4F4E\u6E29\u6539\u9020"
-    English: Frost Transformation
+    Chinese: "\u4E07\u80FD\u5143\u7D20"
+    English: Perfect Element
   - Key: BCEINFO
-    Chinese: "\u65BD\u52A0\u7684\u51BB\u7ED3\u5C42\u6570\u63D0\u9AD8100%"
-    English: Increased the frost effect applied by 100%
+    Chinese: "\u83B7\u5F971\u4E2A\u4E07\u80FD\u5143\u7D20"
+    English: Gain 1 perfect element
   - Key: BDE
     Chinese: "\u94F8\u5E01\u5DE5\u5382"
     English: Repair Factory
@@ -1006,8 +1007,8 @@ MonoBehaviour:
     English: Summon two binary stars at the same time, and when one dies, the other
       accelerates.
   - Key: ICEBALLINFO
-    Chinese: "\u8FD0\u8F7D\u6781\u5BD2\u539F\u5B50\uFF0C\u6BCF\u5F53\u8F6C\u5411\u65F6\u5C31\u4F1A\u89E6\u53D1\u4E00\u6B21\u5927\u8303\u56F4\u7684\u201C\u971C\u7206\u201D\uFF0C\u51BB\u7ED3\u76F8\u90BB\u7684\u9632\u5FA1"
-    English: Each time the Snow Ball veered, it released a frost burst.
+    Chinese: "\u8FD0\u8F7D\u6781\u5BD2\u539F\u5B50\uFF0C\u6BCF\u96945\u79D2\u5C31\u4F1A\u89E6\u53D1\u4E00\u6B21\u5927\u8303\u56F4\u7684\u201C\u971C\u7206\u201D\uFF0C\u51BB\u7ED3\u76F8\u90BB\u7684\u9632\u5FA1"
+    English: Released a frost burst every 5 seconds
   - Key: HAMSTERINFO
     Chinese: "\u5171\u67095\u4E2A\u4ED3\u9F20\uFF0C\u6BCF\u4E2A\u4ED3\u9F20\u81EA\u5E2675%\u7684\u4F24\u5BB3\u51CF\u514D\uFF0C\u6BCF\u4E2A\u4ED3\u9F20\u6B7B\u4EA1\u4F7F\u6240\u6709\u4ED3\u9F20\u7684\u53D7\u5230\u4F24\u5BB3\u63D0\u9AD825%"
     English: There are 5 hamsters, each hamster has 75% damage reduction, and each

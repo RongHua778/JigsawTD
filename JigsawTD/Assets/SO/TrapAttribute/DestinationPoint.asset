@@ -17,3 +17,5 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: 6774f12f95fd05f4f883d9233b90fe25, type: 3}
   Description: DESTINATIONINFO
   Prefab: {fileID: 7783551210583405030, guid: dc1f79158d8f5fe4a81f6b23af2e0b81, type: 3}
+  isLock: 0
+  initialLock: 0

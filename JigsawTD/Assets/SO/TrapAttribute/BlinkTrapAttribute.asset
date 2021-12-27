@@ -17,5 +17,5 @@ MonoBehaviour:
   Icon: {fileID: 5112721545276643150, guid: 77f1f203341c46246ad62b6652017dda, type: 3}
   Description: BLINKTRAPINFO
   Prefab: {fileID: 3221097787184527278, guid: 0b292102891540541b775c26bdfcbcb9, type: 3}
-  isLock: 0
+  isLock: 1
   initialLock: 1

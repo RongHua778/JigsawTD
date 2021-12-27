@@ -64,7 +64,7 @@ public class StrategyBase
         }
     }
     private float initSplashPercentage = 0.5f;//溅射伤害率
-    private float initCriticalPercentage = 1.5f;//暴击伤害率
+    private float initCriticalPercentage = 2f;//暴击伤害率
     private int initTargetCount = 1;//目标数
     private float rotSpeed = 10f;//炮塔转速
     private float checkAngle = 10f;//攻击检测角度
@@ -155,8 +155,8 @@ public class StrategyBase
     public float FinalAttack { get => (BaseAttack * (1 + (TurnAttackIntensify - 1) * AllAttackIntensifyModify) + TurnFixAttack * AllAttackIntensifyModify) * AttackAdjust; }
     public float FinalFireRate { get => Mathf.Min(30, (BaseSpeed * (1 + (TurnFireRateIntensify - 1) * AllSpeedIntensifyModify) + TurnFixSpeed * AllSpeedIntensifyModify) * SpeedAdjust); }//速度上限30
     public int FinalRange { get => BaseRange + TurnFixRange; }
-    public float FinalCriticalRate { get => (BaseCriticalRate * (1 + (TurnCriticalRateIntensify - 1) * AllCriticalIntensifyModify) + TurnFixCriticalRate * AllCriticalIntensifyModify) * CritialAdjust; }
-    public float FinalCriticalPercentage { get => ((BaseCriticalPercentage + FinalCriticalRate) * TurnCriticalRateIntensify + TurnFixCriticalPercentage) * CritialAdjust; }
+    public float FinalCriticalRate { get => (BaseCriticalRate * (1 + (TurnCriticalRateIntensify - 1) * AllCriticalIntensifyModify) + TurnFixCriticalRate * AllCriticalIntensifyModify) * CriticalAdjust; }
+    public float FinalCriticalPercentage { get => (BaseCriticalPercentage  * TurnCriticalRateIntensify + TurnFixCriticalPercentage) * CriticalAdjust; }
 
     public float FinalSplashRange { get => (BaseSplashRange * TurnSplashRangeIntensify + TurnFixSplashRange) * SplashAdjust; }
     public float FinalSplashPercentage { get => BaseSplashPercentage * TurnSplashPercentageIntensify + TurnFixSplashPercentage; }
@@ -171,7 +171,7 @@ public class StrategyBase
     private float splashAdjust = 1;
     public float AttackAdjust { get => attackAdjust; set => attackAdjust = value; }
     public float SpeedAdjust { get => speedAdjust; set => speedAdjust = value; }
-    public float CritialAdjust { get => critialAdjust; set => critialAdjust = value; }
+    public float CriticalAdjust { get => critialAdjust; set => critialAdjust = value; }
     public float SlowAdjust { get => slowAdjust; set => slowAdjust = value; }
     public float SplashAdjust { get => splashAdjust; set => splashAdjust = value; }
     #endregion

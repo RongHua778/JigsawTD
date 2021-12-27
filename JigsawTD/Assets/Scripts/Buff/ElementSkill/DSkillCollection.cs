@@ -59,7 +59,7 @@ public class CloseCritical : ElementSkill
 {
     //近战暴击50%
     public override List<int> Elements => new List<int> { 0, 0, 3 };
-    public override float KeyValue => 0.5f * strategy.FireCount;
+    public override float KeyValue => 1f * strategy.FireCount;
     public override string DisplayValue => StaticData.ElementDIC[ElementType.FIRE].Colorized((KeyValue * 100).ToString() + "%");
     public override ElementType IntensifyElement => ElementType.FIRE;
     float intensifyValue;
@@ -111,7 +111,7 @@ public class SlowCritical : ElementSkill
 {
     //每秒+1.5%暴击率
     public override List<int> Elements => new List<int> { 2, 2, 3 };
-    public override float KeyValue => 0.01f * strategy.FireCount;
+    public override float KeyValue => 0.02f * strategy.FireCount;
     public override string DisplayValue => StaticData.ElementDIC[ElementType.FIRE].Colorized((KeyValue * 100).ToString() + "%");
     public override ElementType IntensifyElement => ElementType.FIRE;
     public override void StartTurn()
@@ -135,7 +135,7 @@ public class StartCritical : ElementSkill
 {
     //开局100%暴击
     public override List<int> Elements => new List<int> { 4, 4, 3 };
-    public override float KeyValue => 0.5f * strategy.FireCount;
+    public override float KeyValue => 1f * strategy.FireCount;
     public override string DisplayValue => StaticData.ElementDIC[ElementType.FIRE].Colorized((KeyValue * 100).ToString() + "%");
     public override ElementType IntensifyElement => ElementType.FIRE;
     float intensify = 0;

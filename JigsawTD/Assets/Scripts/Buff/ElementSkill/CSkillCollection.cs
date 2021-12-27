@@ -20,7 +20,7 @@ public class CloseSlow : ElementSkill
 {
     //近战减速
     public override List<int> Elements => new List<int> { 0, 0, 2 };
-    public override float KeyValue => 0.5f * strategy.WaterCount;
+    public override float KeyValue => 1f * strategy.WaterCount;
     public override string DisplayValue => StaticData.ElementDIC[ElementType.WATER].Colorized(KeyValue.ToString());
     public override ElementType IntensifyElement => ElementType.WATER;
     float intensifyValue;
@@ -71,9 +71,9 @@ public class HitSlow : ElementSkill
 
 public class LongSlow : ElementSkill
 {
-    //波动减速
+    //长距减速
     public override List<int> Elements => new List<int> { 3, 3, 2 };
-    public override float KeyValue => 0.1f * strategy.WaterCount;
+    public override float KeyValue => 0.5f * strategy.WaterCount;
     public override string DisplayValue => StaticData.ElementDIC[ElementType.WATER].Colorized(KeyValue.ToString());
     public override ElementType IntensifyElement => ElementType.WATER;
     float intensifyValue;
@@ -83,7 +83,7 @@ public class LongSlow : ElementSkill
         float distance = bullet.GetTargetDistance();
         if (distance > 3)
         {
-            intensifyValue = bullet.GetTargetDistance() * KeyValue;
+            intensifyValue = (bullet.GetTargetDistance()-3) * KeyValue;
             strategy.TurnFixSlowRate += intensifyValue;
             bullet.SlowRate += intensifyValue;
         }
@@ -104,7 +104,7 @@ public class StartSlow : ElementSkill
     //开局减速4
     public override List<int> Elements => new List<int> { 4, 4, 2 };
 
-    public override float KeyValue => 0.5f * strategy.WaterCount;
+    public override float KeyValue => 1f * strategy.WaterCount;
     public override string DisplayValue => StaticData.ElementDIC[ElementType.WATER].Colorized(KeyValue.ToString());
     public override ElementType IntensifyElement => ElementType.WATER;
     float intensify = 0;

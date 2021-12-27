@@ -37,7 +37,7 @@ MonoBehaviour:
     m_StrikethroughOffset: 0
     m_StrikethroughThickness: 0
     m_TabWidth: 0
-  spriteSheet: {fileID: 2800000, guid: c1adb061981b34a4d8939af774283c66, type: 3}
+  spriteSheet: {fileID: 2800000, guid: 0587c3d158733a542bbdadd8f0293900, type: 3}
   m_SpriteCharacterTable:
   - m_ElementType: 2
     m_Unicode: 65534
@@ -75,6 +75,18 @@ MonoBehaviour:
     m_Scale: 1
     m_Name: ElementIcon_Collection_5
     m_HashCode: -161979082
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 12
+    m_Scale: 1
+    m_Name: ElementIcon_Collection2_6
+    m_HashCode: -1050295097
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 13
+    m_Scale: 1
+    m_Name: ElementIcon_Collection2_7
+    m_HashCode: -1050295098
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
@@ -166,6 +178,36 @@ MonoBehaviour:
     m_Scale: 1.3
     m_AtlasIndex: 0
     sprite: {fileID: 748139466501554947, guid: c1adb061981b34a4d8939af774283c66, type: 3}
+  - m_Index: 12
+    m_Metrics:
+      m_Width: 64
+      m_Height: 64
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 48
+      m_HorizontalAdvance: 64
+    m_GlyphRect:
+      m_X: 384
+      m_Y: 0
+      m_Width: 64
+      m_Height: 64
+    m_Scale: 1.5
+    m_AtlasIndex: 0
+    sprite: {fileID: 3689267445902380687, guid: 0587c3d158733a542bbdadd8f0293900, type: 3}
+  - m_Index: 13
+    m_Metrics:
+      m_Width: 64
+      m_Height: 64
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 48
+      m_HorizontalAdvance: 64
+    m_GlyphRect:
+      m_X: 448
+      m_Y: 0
+      m_Width: 64
+      m_Height: 64
+    m_Scale: 1.5
+    m_AtlasIndex: 0
+    sprite: {fileID: 6937617879340934035, guid: 0587c3d158733a542bbdadd8f0293900, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []
 --- !u!21 &6065252441359063951
@@ -188,7 +230,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: c1adb061981b34a4d8939af774283c66, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0587c3d158733a542bbdadd8f0293900, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:

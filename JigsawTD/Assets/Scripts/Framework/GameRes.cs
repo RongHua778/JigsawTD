@@ -343,6 +343,8 @@ public static class GameRes
         //获得回合金币
         GameManager.Instance.GainMoney(Mathf.Min(300, (StaticData.Instance.BaseWaveIncome +
         StaticData.Instance.WaveMultiplyIncome * (CurrentWave - 1))));
+        //BuildCost = Mathf.RoundToInt(BuildCost * (1 - BuildDiscount));
+
         //没抽就减5%的价格
         if (!DrawThisTurn)
         {

@@ -13,7 +13,7 @@ public class TurretInfoSetter : MonoBehaviour
 
     private void Start()
     {
-        rareInfo.SetContent(GameMultiLang.GetTraduction("RARE"));
+        //rareInfo.SetContent(GameMultiLang.GetTraduction("RARE"));
     }
     public void SetRare(int quality)
     {

@@ -42,7 +42,7 @@ public class BluePrintShopUI : IUserInterface
 
     public int PerfectElementCount
     {
-        set=> PerfectElementTxt.text = value.ToString();
+        set => PerfectElementTxt.text = value.ToString();
     }
 
 
@@ -65,7 +65,7 @@ public class BluePrintShopUI : IUserInterface
     {
         foreach (var b in LevelManager.Instance.LastGameSave.SaveBluePrints)
         {
-            RefactorStrategy strategy = ConstructHelper.GetSpecificStrategy(b.Name, b.ElementRequirements,b.QualityRequirements);
+            RefactorStrategy strategy = ConstructHelper.GetSpecificStrategy(b.Name, b.ElementRequirements, b.QualityRequirements);
             AddBluePrint(strategy);
         }
     }
@@ -78,7 +78,8 @@ public class BluePrintShopUI : IUserInterface
             return;
         if (cost != 0)//自动刷新不触发对白
             GameEvents.Instance.TempWordTrigger(refreshShopTrigger);
-        GameManager.Instance.HideTips();//如果选择了已经打开的配方则关闭，待修复问题
+        if (BluePrintGrid.SelectingBluePrint != null)
+            GameManager.Instance.HideTips();//如果选择了已经打开的配方则关闭，待修复问题
         NextRefreshTrun = 3;
         int lockNum = 0;
         foreach (var grid in ShopBluePrints.ToList())
@@ -101,7 +102,7 @@ public class BluePrintShopUI : IUserInterface
         for (int i = 0; i < GameRes.ShopCapacity - lockNum; i++)
         {
             RefactorStrategy strategy = ConstructHelper.GetRandomRefactorStrategy();
-             AddBluePrint(strategy);
+            AddBluePrint(strategy);
             yield return new WaitForSeconds(0.02f);
         }
         isRefreshing = false;

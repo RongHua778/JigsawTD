@@ -25,8 +25,6 @@ public class FuncUI : IUserInterface
         }
     }
 
-    bool drawThisTurn = true;
-    public bool DrawThisTurn { get => drawThisTurn; set => drawThisTurn = value; }
 
     public int BuyShapeCost
     {

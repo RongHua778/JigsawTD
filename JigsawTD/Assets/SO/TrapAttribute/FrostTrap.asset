@@ -17,3 +17,5 @@ MonoBehaviour:
   Icon: {fileID: -47297616180671556, guid: 77f1f203341c46246ad62b6652017dda, type: 3}
   Description: FROSTTRAPINFO
   Prefab: {fileID: 6749070376678447189, guid: f194274714525524c82988b8b4ad1cdf, type: 3}
+  isLock: 0
+  initialLock: 0

@@ -275,7 +275,6 @@ MonoBehaviour:
     Element: 0
     Quality: 0
     ElementSlotCount: 0
-    InitModifies: []
   Activated: 1
   targetList: []
   ShootEffect: {fileID: 3929253023286477454}

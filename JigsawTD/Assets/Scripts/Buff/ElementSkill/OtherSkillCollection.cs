@@ -155,10 +155,10 @@ public class IceShell : ElementSkill
     //施加的冻结层数提高100%
     public override List<int> Elements => new List<int> { 1, 2, 4 };
 
-    public override void PreHit(Bullet bullet = null)
+    public override void Composite()
     {
-        base.PreHit(bullet);
-        bullet.SlowRate *= 2f;
+        base.Composite();
+        GameRes.PerfectElementCount++;
     }
 
 }

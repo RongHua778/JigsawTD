@@ -15,9 +15,11 @@ public class TipsElementConstruct : MonoBehaviour
     private ElementSkill m_Skill;
     public void SetElements(ElementSkill skill)
     {
-        areas[1].SetActive(false);
-        areas[0].SetActive(true);
+        areas[1].SetActive(false);//空状态
+        areas[0].SetActive(true);//标准状态
         m_Skill = skill;
+
+        //设置元素显示
         for (int i = 0; i < skill.Elements.Count; i++)
         {
             if (i >= skill.Elements.Count)
@@ -28,7 +30,7 @@ public class TipsElementConstruct : MonoBehaviour
             Elements[i].gameObject.SetActive(true);
             Elements[i].sprite = StaticData.Instance.ElementSprites[skill.Elements[i]];
         }
-
+        //描述及名称设置
         string key = "";
         foreach (var element in skill.Elements)
         {
