@@ -31,20 +31,20 @@ public class StaticData : Singleton<StaticData>
     public static float[,] QualityChances = new float[6, 5]
     {
         { 1f, 0f, 0f, 0f, 0f },
-        { 0.6f, 0.3f, 0.1f, 0f, 0f },
-        { 0.4f, 0.35f, 0.15f, 0.1f, 0f },
-        { 0.25f, 0.3f, 0.25f, 0.2f, 0f },
-        { 0.1f, 0.25f, 0.3f, 0.25f, 0.1f },
-        { 0f, 0.2f, 0.3f, 0.3f, 0.2f },
+        { 0.55f, 0.3f, 0.15f, 0f, 0f },
+        { 0.3f, 0.35f, 0.2f, 0.15f, 0f },
+        { 0.2f, 0.25f, 0.3f, 0.25f, 0f },
+        { 0.05f, 0.2f, 0.3f, 0.3f, 0.15f },
+        { 0f, 0.15f, 0.3f, 0.3f, 0.25f },
     };
     public static float[,] RareChances = new float[6, 6]
     {
-        { 0.3f, 0f, 0f, 0f, 0f,0f },
-        { 0.3f, 0.45f, 0f, 0f, 0f ,0f},
-        { 0.3f, 0.35f, 0.5f, 0f, 0f,0f },
-        { 0.3f, 0.35f, 0.4f, 0.55f, 0f,0f },
-        { 0.3f, 0.35f, 0.4f, 0.45f, 0.6f,0f },
-        { 0.3f, 0.35f, 0.4f, 0.45f, 0.5f,0.65f },
+        { 0.1f, 0f, 0f, 0f, 0f,0f },
+        { 0.1f, 0.1f, 0f, 0f, 0f ,0f},
+        { 0.1f, 0.2f, 0.3f, 0f, 0f,0f },
+        { 0.1f, 0.2f, 0.3f, 0.6f, 0f,0f },
+        { 0.1f, 0.2f, 0.3f, 0.6f, 1.2f,0f },
+        { 0.1f, 0.2f, 0.3f, 0.6f, 1.2f,2.4f },
     };
 
     //public static int[] GameLevelExp = new int[9] 
@@ -109,6 +109,9 @@ public class StaticData : Singleton<StaticData>
     public ReusableObject FrostEffectPrefab;
     public Sprite[] ElementSprites;
 
+    public Color NormalBlue;
+    public Color HighlightBlue;
+
     [Header("CompositionAttributes")]
     public int[,] LevelUpCostPerRare = new int[6, 2]
     {
@@ -129,6 +132,7 @@ public class StaticData : Singleton<StaticData>
         ShapeFactory.Initialize();
         EnemyFactory.InitializeFactory();
         SetTipsPos();
+
     }
 
     public static void SetTipsPos()
@@ -465,10 +469,10 @@ public class StaticData : Singleton<StaticData>
         return node.Walkable;
     }
 
-    public void ShowJumpDamage(Vector2 pos, int amount,bool isCritical)
+    public void ShowJumpDamage(Vector2 pos, int amount, bool isCritical)
     {
         JumpDamage obj = ObjectPool.Instance.Spawn(JumpDamagePrefab) as JumpDamage;
-        obj.Jump(amount, pos,isCritical);
+        obj.Jump(amount, pos, isCritical);
     }
 
 

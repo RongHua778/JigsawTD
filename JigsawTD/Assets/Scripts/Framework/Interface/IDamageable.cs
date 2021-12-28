@@ -113,7 +113,16 @@ public class BasicEnemyStrategy : DamageStrategy
         {
             if (UnfrostableTime > 0)
                 return;
+            //if (value - currentFrost > MaxFrost / 4)//每次最多增加25%的冻结值
+            //{
+            //    currentFrost += MaxFrost / 4;
+            //}
+            //else
+            //{
+            //    currentFrost = value;
+            //}
             currentFrost = value;
+
             if (currentFrost >= MaxFrost)
             {
                 currentFrost = 0;

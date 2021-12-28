@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class PenetrateBullet : Bullet
 {
-
+    Vector3 initScale;
     public override BulletType BulletType => BulletType.Penetrate;
     public override void Initialize(TurretContent turret, TargetPoint target = null, Vector2? pos = null)
     {
         base.Initialize(turret, target, pos);
+        initScale = transform.localScale;
+        transform.localScale *= (1 + (SplashRange / (SplashRange + 10)) * 5);
     }
 
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
+        transform.localScale = initScale;
     }
     public override bool GameUpdate()
     {
@@ -36,24 +39,5 @@ public class PenetrateBullet : Bullet
         }
     }
 
-    public override void TriggerDamage()//½¦Éä×Óµ¯²»»áÔì³É½¦Éä
-    {
-        //if (SputteringRange > 0)
-        //{
-        //    ParticalControl effect = ObjectPool.Instance.Spawn(SputteringEffect) as ParticalControl;
-        //    effect.transform.position = transform.position;
-        //    effect.transform.localScale = Vector3.one * SputteringRange;//´©Í¸×Óµ¯µÄ½¦Éä·¶Î§¼õ°ë
-        //    effect.PlayEffect();
-        //    Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, SputteringRange / 2, enemyLayerMask);
-        //    SputteredCount = hits.Length;
-        //    TriggerPreHitEffect();
-        //    foreach (Collider2D hit in hits)
-        //    {
-        //        TargetPoint target = hit.GetComponent<TargetPoint>();
-        //        EnemyDamageProcess(target.Enemy, true);
-        //    }
-        //}
-        base.TriggerDamage();
 
-    }
 }

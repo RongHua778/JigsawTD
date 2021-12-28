@@ -121,8 +121,10 @@ public class RotarySkill : InitialSkill
     {
         base.Build();
         strategy.BaseWoodCount++;
-        strategy.AllSpeedIntensifyModify += 1;
+        //strategy.AllSpeedIntensifyModify += 1;
     }
+
+
 
 }
 public class SniperSkill : InitialSkill

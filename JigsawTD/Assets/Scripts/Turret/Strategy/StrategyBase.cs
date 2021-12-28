@@ -156,7 +156,7 @@ public class StrategyBase
     public float FinalFireRate { get => Mathf.Min(30, (BaseSpeed * (1 + (TurnFireRateIntensify - 1) * AllSpeedIntensifyModify) + TurnFixSpeed * AllSpeedIntensifyModify) * SpeedAdjust); }//速度上限30
     public int FinalRange { get => BaseRange + TurnFixRange; }
     public float FinalCriticalRate { get => (BaseCriticalRate * (1 + (TurnCriticalRateIntensify - 1) * AllCriticalIntensifyModify) + TurnFixCriticalRate * AllCriticalIntensifyModify) * CriticalAdjust; }
-    public float FinalCriticalPercentage { get => (BaseCriticalPercentage  * TurnCriticalRateIntensify + TurnFixCriticalPercentage) * CriticalAdjust; }
+    public float FinalCriticalPercentage { get => (BaseCriticalPercentage * TurnCriticalRateIntensify + TurnFixCriticalPercentage) * CriticalAdjust; }
 
     public float FinalSplashRange { get => (BaseSplashRange * TurnSplashRangeIntensify + TurnFixSplashRange) * SplashAdjust; }
     public float FinalSplashPercentage { get => BaseSplashPercentage * TurnSplashPercentageIntensify + TurnFixSplashPercentage; }

@@ -165,7 +165,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         return true;
     }
 
-    private bool TrackTarget()
+    protected virtual bool TrackTarget()
     {
         if (Target.Count == 0)
         {

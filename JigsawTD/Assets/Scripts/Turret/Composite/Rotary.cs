@@ -17,6 +17,7 @@ public class Rotary : RefactorTurret
 
     }
 
+
     public override bool GameUpdate()
     {
         base.GameUpdate();

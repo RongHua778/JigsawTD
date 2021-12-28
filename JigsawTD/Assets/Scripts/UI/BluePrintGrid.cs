@@ -15,8 +15,6 @@ public class BluePrintGrid : ReusableObject//, IPointerEnterHandler, IPointerExi
     private bool isLock = false;
     public bool IsLock { get => isLock; set => isLock = value; }
 
-
-    [SerializeField] Text compositeName = default;
     [SerializeField] Image compositeIcon = default;
     [SerializeField] ElementGrid[] elementGrids = default;
     [SerializeField] Toggle m_LockToggle = default;
@@ -44,7 +42,6 @@ public class BluePrintGrid : ReusableObject//, IPointerEnterHandler, IPointerExi
         Strategy = strategy;
         Strategy.CheckElement();
         m_Toggle.group = group;
-        compositeName.text = Strategy.Attribute.Name;
         compositeIcon.sprite = Strategy.Attribute.TurretLevels[0].TurretIcon;
         //给每一个组件设置图片
         RefreshElementsSprite();
@@ -122,8 +119,6 @@ public class BluePrintGrid : ReusableObject//, IPointerEnterHandler, IPointerExi
 
     public void OnBluePrintDeselect()
     {
-        //GameManager.Instance.HideTips();
-        //SelectingBluePrint = null;
         if(buildAble)
             Strategy.PreviewElements(false);
     }

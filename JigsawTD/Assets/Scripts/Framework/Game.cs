@@ -36,6 +36,7 @@ public class Game : Singleton<Game>
                 break;
             case 1://battle
                 LevelManager.Instance.LoadGame();//直接从战斗场景开始，直接读取存档
+                LevelManager.Instance.SetUnlockAll(TestMode);//直接场景开始，如果测试模式则解锁全部
                 m_SceneStateController.SetState(new BattleState(m_SceneStateController));
                 break;
         }

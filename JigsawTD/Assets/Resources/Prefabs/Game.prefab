@@ -275,7 +275,7 @@ MonoBehaviour:
   transitionTime: 1
   Tutorial: 1
   OnTransition: 0
-  TestMode: 0
+  TestMode: 1
 --- !u!114 &3979959846567427948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,7 +375,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: aa5a923b0cb87d348914e228fc353f67, type: 2}
   - {fileID: 11400000, guid: b6403761d56b0914599f3e8e647a50b7, type: 2}
   PremitDifficulty: 1
-  CurrentLevel: {fileID: 11400000, guid: fbf3466ab2bed174096203daed7b2d4f, type: 2}
+  CurrentLevel: {fileID: 11400000, guid: 99391903eba8a1041af83dc6b559379e, type: 2}
   NeedLoadGame: 0
   NeedLoadData: 0
   LastGameSave:
@@ -443,7 +443,7 @@ MonoBehaviour:
   CircleCol: {fileID: 379002804665637541, guid: 88314c00e62edfc4ea1c16ad951dd62f, type: 3}
   RangeIndicatorPrefab: {fileID: 7053043907688615658, guid: d8a2a921f17ca0e46b801451269a7676, type: 3}
   JumpDamagePrefab: {fileID: 4699521983380265760, guid: 312c9ecb05f5d3f4fa19d5107ffc2833, type: 3}
-  UnrevealTrap: {fileID: 21300000, guid: d1ca03103b154aa438a9b361da7fd1e2, type: 3}
+  UnrevealTrap: {fileID: 21300000, guid: e8ecebd490ee97447a3e4938bf2835cc, type: 3}
   LandedEffect: {fileID: 3581280347063733391, guid: 6c69b997b2840b04fae94e6a1ba14337, type: 3}
   GainMoneyPrefab: {fileID: 1926441791724971538, guid: 772397d6e2f78d142a70b5168e1282e4, type: 3}
   FrostExplosion: {fileID: 2080882099982660507, guid: 3ca80b13c462a3945a930eee7d9e845f, type: 3}
@@ -454,6 +454,8 @@ MonoBehaviour:
   - {fileID: -1944646343138658995, guid: c1adb061981b34a4d8939af774283c66, type: 3}
   - {fileID: 8301336526219819719, guid: c1adb061981b34a4d8939af774283c66, type: 3}
   - {fileID: 4681832599104827414, guid: c1adb061981b34a4d8939af774283c66, type: 3}
+  NormalBlue: {r: 0.1764706, g: 0.63529414, b: 0.70980394, a: 1}
+  HighlightBlue: {r: 0.4862745, g: 0.96862745, b: 1, a: 1}
 --- !u!1001 &3979959846311218703
 PrefabInstance:
   m_ObjectHideFlags: 0

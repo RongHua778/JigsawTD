@@ -27,9 +27,15 @@ public class ElementGrid : MonoBehaviour
             perfectIcon.SetActive(false);
 
         if (composition.obtained)
+        {
             Img_Icon.color = Color.white;
+            Txt_ElementName.color = StaticData.Instance.HighlightBlue;
+        }
         else
+        {
             Img_Icon.color = UnobtainColor;
+            Txt_ElementName.color = StaticData.Instance.NormalBlue;
+        }
     }
 
 
