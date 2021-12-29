@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttType: 3
   Name: GOLDKEEPER
-  Icon: {fileID: 21300000, guid: 391aae71d8536744abedccf0f37ad9f5, type: 3}
+  Icon: {fileID: 21300000, guid: b872626303873e5468df87c50f80136c, type: 3}
   Description: GOLDKEEPERINFO
   Prefab: {fileID: -1710581719449573739, guid: 821b74dddf1519344ad3a3ff63562b2e, type: 3}
-  isLock: 1
+  isLock: 0
   initialLock: 1
   EnemyType: 17
   IsBoss: 0

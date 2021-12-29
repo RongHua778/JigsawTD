@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using System;
+using TMPro;
 
 public class BluePrintShopUI : IUserInterface
 {
@@ -17,6 +18,8 @@ public class BluePrintShopUI : IUserInterface
     [SerializeField] Transform shopContent = default;
     [SerializeField] Text PerfectElementTxt = default;
     [SerializeField] InfoBtn PerfectInfo = default;
+    [SerializeField] TextMeshProUGUI refreshCost_Txt = default;
+
 
     public static List<BluePrintGrid> ShopBluePrints;//…ÃµÍ≈‰∑Ω±Ì
 
@@ -54,6 +57,9 @@ public class BluePrintShopUI : IUserInterface
         CurrentLock = 0;
         refreshShopTrigger = new TempWord(TempWordType.RefreshShop, 0);
         ShopBluePrints = new List<BluePrintGrid>();
+
+        refreshCost_Txt.text = "<sprite=7>10";
+
     }
 
     public void PrepareForGuide()

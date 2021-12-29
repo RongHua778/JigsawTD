@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttType: 3
   Name: SIXARMOUR
-  Icon: {fileID: 2497086793369854952, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
+  Icon: {fileID: -4788419046780123179, guid: 3bb8fedca4a450c4394380955543fa19, type: 3}
   Description: SIXARMOURINFO
   Prefab: {fileID: 1089310082073990611, guid: 01171ff9a6ad7854bbfd9f7ab8a16b75, type: 3}
-  isLock: 1
+  isLock: 0
   initialLock: 1
   EnemyType: 7
   IsBoss: 1

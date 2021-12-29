@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttType: 3
   Name: BORNER
-  Icon: {fileID: 5503619113886890817, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
+  Icon: {fileID: -5175694205835647808, guid: 3bb8fedca4a450c4394380955543fa19, type: 3}
   Description: BORNERINFO
   Prefab: {fileID: 3559500654722631785, guid: 310738398761dc541a7590eecd33631f, type: 3}
-  isLock: 1
+  isLock: 0
   initialLock: 1
   EnemyType: 12
   IsBoss: 1

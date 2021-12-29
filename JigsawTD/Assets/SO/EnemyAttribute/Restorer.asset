@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttType: 3
   Name: RESTORER
-  Icon: {fileID: -1992789463179596284, guid: f9835346b30cae840a9eff85ed192e6f, type: 3}
+  Icon: {fileID: 2190462774799631289, guid: 578e3995339e79c419ae0345354e31ce, type: 3}
   Description: RESTORERINFO
   Prefab: {fileID: 821673950540951135, guid: 673cb8fb8fac45949b3e29c50a2d7ac3, type: 3}
   isLock: 0

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class FuncUI : IUserInterface
 {
@@ -9,14 +10,15 @@ public class FuncUI : IUserInterface
 
 
 
-    [SerializeField] Text DrawBtnTxt = default;
-    [SerializeField] Text SystemUpgradeCostTxt = default;
+    [SerializeField] TextMeshProUGUI DrawBtnTxt = default;
+    [SerializeField] TextMeshProUGUI SystemUpgradeCostTxt = default;
     [SerializeField] Text SystemLevelTxt = default;
     [SerializeField] Text DiscountTxt = default;
     [SerializeField] InfoBtn m_DrawInfo = default;
     //Animator m_Anim;
 
-    public float DiscountRate { 
+    public float DiscountRate
+    {
         set
         {
             DiscountTxt.text = GameRes.BuildDiscount * 100 + "%";
@@ -28,7 +30,7 @@ public class FuncUI : IUserInterface
 
     public int BuyShapeCost
     {
-        set=> DrawBtnTxt.text = GameRes.BuildCost.ToString();
+        set => DrawBtnTxt.text = "<sprite=7>" + GameRes.BuildCost.ToString();
     }
 
 
@@ -46,7 +48,7 @@ public class FuncUI : IUserInterface
         {
             if (GameRes.SystemLevel < StaticData.Instance.SystemMaxLevel)
             {
-                SystemUpgradeCostTxt.text = value.ToString();
+                SystemUpgradeCostTxt.text = "<sprite=7>" + value.ToString();
             }
             else
             {
@@ -80,7 +82,7 @@ public class FuncUI : IUserInterface
         SystemBtnAnim.SetBool("Show", false);
     }
 
-    public static void PlayFuncUIAnim(int partID,string key,bool value)
+    public static void PlayFuncUIAnim(int partID, string key, bool value)
     {
         switch (partID)
         {

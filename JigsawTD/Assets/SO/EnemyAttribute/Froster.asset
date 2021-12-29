@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttType: 3
   Name: FROSTER
-  Icon: {fileID: -4512359869375799480, guid: f9835346b30cae840a9eff85ed192e6f, type: 3}
+  Icon: {fileID: -3036264889557432030, guid: 578e3995339e79c419ae0345354e31ce, type: 3}
   Description: FROSTERINFO
   Prefab: {fileID: 8425249393752721173, guid: db9a50174f5434e48a77f2d501819d68, type: 3}
   isLock: 0

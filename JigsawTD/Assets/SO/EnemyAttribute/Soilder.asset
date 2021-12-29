@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttType: 3
   Name: SOILDER
-  Icon: {fileID: 4062577230677641764, guid: f9835346b30cae840a9eff85ed192e6f, type: 3}
+  Icon: {fileID: -2386991861145963595, guid: 578e3995339e79c419ae0345354e31ce, type: 3}
   Description: SOILDERINFO
   Prefab: {fileID: 496477690780185357, guid: 0a0eaa2abe1fb674fa53f8a4364f22be, type: 3}
   isLock: 0

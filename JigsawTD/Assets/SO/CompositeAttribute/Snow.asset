@@ -17,7 +17,7 @@ MonoBehaviour:
   Icon: {fileID: 1974467737375703195, guid: 650ade1de42820843ab504b46ce30229, type: 3}
   Description: SNOWSKILL
   Prefab: {fileID: 3184344065496086193, guid: ec76f05b1efa1874b8faa449cea6300a, type: 3}
-  isLock: 1
+  isLock: 0
   initialLock: 1
   StrategyType: 1
   RangeType: 2
@@ -25,8 +25,8 @@ MonoBehaviour:
   Bullet: {fileID: 6504941539332389289, guid: d783f38712dd14d4e9cc485d051d7b20, type: 3}
   BulletSpeed: 2
   ShootSound: {fileID: 8300000, guid: 4ed1e1b069a2797408e854b01ab7ce17, type: 3}
-  Rare: 4
-  totalLevel: 9
+  Rare: 3
+  totalLevel: 8
   elementNumber: 3
   maxElementLevel: 4
   TurretSkill: 7

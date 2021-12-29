@@ -17,16 +17,16 @@ MonoBehaviour:
   Icon: {fileID: 8783240499713188425, guid: 5ffd5a68966da114d9a58cd1e921a4ef, type: 3}
   Description: SUPERSKILL
   Prefab: {fileID: 2682830154004877270, guid: 38a933d8a495386418cc643b0a8dbb6d, type: 3}
-  isLock: 1
+  isLock: 0
   initialLock: 1
   StrategyType: 1
-  RangeType: 1
+  RangeType: 0
   element: 0
   Bullet: {fileID: 3971056745658777380, guid: 4c77cf9cbcc0a9740bc10c328648420d, type: 3}
   BulletSpeed: 8
   ShootSound: {fileID: 8300000, guid: b72eee29e7c25884ab75b8dcff12d468, type: 3}
-  Rare: 3
-  totalLevel: 8
+  Rare: 4
+  totalLevel: 10
   elementNumber: 3
   maxElementLevel: 4
   TurretSkill: 10
@@ -34,7 +34,7 @@ MonoBehaviour:
   - AttackRange: 4
     ForbidRange: 0
     AttackDamage: 250
-    AttackSpeed: 0.6
+    AttackSpeed: 0.5
     SplashRange: 0
     CriticalRate: 0
     SlowRate: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   - AttackRange: 4
     ForbidRange: 0
     AttackDamage: 400
-    AttackSpeed: 0.6
+    AttackSpeed: 0.5
     SplashRange: 0
     CriticalRate: 0
     SlowRate: 0
@@ -54,7 +54,7 @@ MonoBehaviour:
   - AttackRange: 4
     ForbidRange: 0
     AttackDamage: 600
-    AttackSpeed: 0.6
+    AttackSpeed: 0.5
     SplashRange: 0
     CriticalRate: 0
     SlowRate: 0

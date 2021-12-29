@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttType: 3
   Name: DIVIDER
-  Icon: {fileID: -8847467542957845770, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
+  Icon: {fileID: -7874449627132867146, guid: 3bb8fedca4a450c4394380955543fa19, type: 3}
   Description: DIVIDERINFO
   Prefab: {fileID: -4008761052356302502, guid: 74ed77649a912194784c510912c2ef8e, type: 3}
-  isLock: 1
+  isLock: 0
   initialLock: 1
   EnemyType: 8
   IsBoss: 1
