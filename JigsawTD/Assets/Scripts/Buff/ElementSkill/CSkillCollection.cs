@@ -21,7 +21,7 @@ public class CloseSlow : ElementSkill
     //½üÕ½¼õËÙ
     public override List<int> Elements => new List<int> { 0, 0, 2 };
     public override float KeyValue => 1f * strategy.WaterCount;
-    public override string DisplayValue => StaticData.ElementDIC[ElementType.WATER].Colorized(KeyValue.ToString());
+    public override string DisplayValue => StaticData.ElementDIC[ElementType.WATER].Colorized((strategy == null ? 1f : KeyValue).ToString());
     public override ElementType IntensifyElement => ElementType.WATER;
     float intensifyValue;
     bool isIntensified = false;
@@ -83,7 +83,7 @@ public class LongSlow : ElementSkill
         float distance = bullet.GetTargetDistance();
         if (distance > 3)
         {
-            intensifyValue = (bullet.GetTargetDistance()-3) * KeyValue;
+            intensifyValue = (bullet.GetTargetDistance() - 3) * KeyValue;
             strategy.TurnFixSlowRate += intensifyValue;
             bullet.SlowRate += intensifyValue;
         }

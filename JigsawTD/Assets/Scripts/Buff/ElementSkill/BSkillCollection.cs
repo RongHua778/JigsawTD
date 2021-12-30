@@ -27,7 +27,7 @@ public class CloseSpeed : ElementSkill
     //距离小于3加75攻速
     public override List<int> Elements => new List<int> { 0, 0, 1 };
     public override float KeyValue => 0.5f * strategy.WoodCount;
-    public override string DisplayValue => StaticData.ElementDIC[ElementType.WOOD].Colorized((KeyValue * 100).ToString() + "%");
+    public override string DisplayValue => StaticData.ElementDIC[ElementType.WOOD].Colorized((strategy == null ? 0.5f : (KeyValue * 100)).ToString() + "%");
     public override ElementType IntensifyElement => ElementType.WOOD;
     float intensifyValue;
     bool isIntensified = false;

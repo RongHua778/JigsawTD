@@ -62,7 +62,7 @@ MonoBehaviour:
       Data: 4
     - Name: 
       Entry: 1
-      Data: BuildBtn
+      Data: Build
     - Name: 
       Entry: 1
       Data: NextWave

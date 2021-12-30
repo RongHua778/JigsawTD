@@ -50,7 +50,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 1
-      Data: BuildBtn
+      Data: Build
     - Name: 
       Entry: 13
       Data: 
@@ -80,7 +80,7 @@ MonoBehaviour:
       Data: true
     - Name: RectName
       Entry: 1
-      Data: BuildBtn
+      Data: Build
     - Name: delayTime
       Entry: 4
       Data: 1

@@ -61,7 +61,7 @@ public class FuncUI : IUserInterface
     public override void Initialize()
     {
         base.Initialize();
-        BuildBtnAnim = m_RootUI.transform.Find("BuildBtn").GetComponent<Animator>();
+        BuildBtnAnim = m_RootUI.transform.Find("Build").GetComponent<Animator>();
         NextWaveBtnAnim = m_RootUI.transform.Find("NextWave").GetComponent<Animator>();
         SystemBtnAnim = m_RootUI.transform.Find("System").GetComponent<Animator>();
     }

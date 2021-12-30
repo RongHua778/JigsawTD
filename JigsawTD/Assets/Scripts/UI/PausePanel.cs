@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 
 public class PausePanel : IUserInterface
 {
-    [SerializeField] Text ReturnTxt = default;
-    [SerializeField] Text QuitTxt = default;
+    [SerializeField] TextMeshProUGUI ReturnTxt = default;
+    [SerializeField] TextMeshProUGUI QuitTxt = default;
 
     public override void Initialize()
     {

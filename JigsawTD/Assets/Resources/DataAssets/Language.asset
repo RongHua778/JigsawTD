@@ -379,8 +379,8 @@ MonoBehaviour:
     English: 'If you haven''t build last turn, the price will be reduced\n current
       price reduction percentage:'
   - Key: NEXTWAVE
-    Chinese: "\u4E0B\u4E00\u6CE2[Space]"
-    English: Next Wave[Space]
+    Chinese: "\u4E0B\u4E00\u6CE2"
+    English: Next Wave
   - Key: DRAWMODULE
     Chinese: "\u6784\u5EFA\u6A21\u5757"
     English: Build module
@@ -500,8 +500,9 @@ MonoBehaviour:
     Chinese: "\u57FA\u7840\u66B4\u51FB\u4F24\u5BB3\u4E3A200%"
     English: Default critical damage is 200%
   - Key: SPLASHINFO
-    Chinese: "\u6E85\u5C04\u534A\u5F84\uFF0C\u57FA\u7840\u6E85\u5C04\u4F24\u5BB3\u4E3A50%"
-    English: Splash radius. Default splash damage is 50%
+    Chinese: "\u6E85\u5C04\u534A\u5F84\uFF0C\u57FA\u7840\u6E85\u5C04\u4F24\u5BB3\u4E3A50%\uFF1B\u7A7F\u900F\u578B\u5B50\u5F39\u4E0D\u4F1A\u6E85\u5C04\uFF0C\u4F46\u4F1A\u589E\u52A0\u5B50\u5F39\u4F53\u79EF\u3002"
+    English: "Splash radius. Default splash damage is 50%\uFF1BPenetration bullet
+      will not splash, but can increase bullet's size."
   - Key: SLOWINFO
     Chinese: "\u5BF9\u76EE\u6807\u9020\u6210\u51CF\u901F\uFF0C\u5E76\u7D2F\u79EF\u51BB\u7ED3\u5C42\u6570\uFF1B\u76EE\u6807\u51BB\u7ED3\u5C42\u6570\u6EE1\u540E\u4F1A\u51BB\u7ED33\u79D2\uFF0C\u6B64\u540E\u514D\u75AB\u51BB\u7ED3\u6548\u679C6\u79D2\u3002"
     English: Slow down enemy and accumulate frost effect. Enemy wiil be frost by
@@ -671,9 +672,8 @@ MonoBehaviour:
     English: Firerate increased by 20% each shoot when it is attacking the same target(up
       to 200%).
   - Key: ROTARYSKILL
-    Chinese: "\u7A7F\u900F\u5B50\u5F39\uFF0C\u4E0D\u53EF\u6E85\u5C04\uFF1B\u968F\u673A\u65B9\u5411\u653B\u51FB\uFF1B<sprite=1>\u6570\u91CF+1\uFF0C\u4E14\u81EA\u8EAB\u6240\u6709\u653B\u901F\u52A0\u6210\u7FFB\u500D"
-    English: <sprite=1>+1, Penetration Bullet can't splash; Randomly shoot around
-      and double all firerate increased.
+    Chinese: "\u7A7F\u900F\u5B50\u5F39\uFF1B<sprite=1>\u6570\u91CF+1\uFF0C\u81EA\u52A8\u5411\u968F\u673A\u65B9\u5411\u53D1\u5C04\u70AE\u5F39"
+    English: <sprite=1>+1, Penetration Bullet; Randomly shoot around.
   - Key: SNIPERSKILL
     Chinese: "\u5B50\u5F39\u4F24\u5BB3\u968F\u98DE\u884C\u8DDD\u79BB\u63D0\u534750%/\u683C"
     English: Bullet's damage increased by 50% for each tile it travelled
@@ -682,16 +682,15 @@ MonoBehaviour:
     English: <sprite=3>+2, Bullet's final critical damage randomly float between
       25% to 250%
   - Key: SNOWSKILL
-    Chinese: "\u7A7F\u900F\u5B50\u5F39\uFF0C\u4E0D\u53EF\u6E85\u5C04;<sprite=2>\u6570\u91CF+1\uFF0C\u5B50\u5F39\u65BD\u52A0\u53CC\u500D\u7684\u51BB\u7ED3\u5C42\u6570"
-    English: Penetration Bullet can't splash;<sprite=2>+1, Double bullet's frost
-      effect.
+    Chinese: "\u7A7F\u900F\u5B50\u5F39;<sprite=2>\u6570\u91CF+1\uFF0C\u5B50\u5F39\u65BD\u52A0\u53CC\u500D\u7684\u51BB\u7ED3\u5C42\u6570"
+    English: Penetration Bullet;<sprite=2>+1, Double bullet's frost effect.
   - Key: COOPORATIVESKILL
     Chinese: "\u6BCF\u6B21\u653B\u51FB\u63D0\u53472%*\u603B\u534F\u540C\u5854\u6570\u91CF\u7684\u653B\u51FB\u529B"
     English: Attack increased by 2% * the amount of "Cooporative" each shoot.
   - Key: BOOMERRANGSKILL
-    Chinese: "\u7A7F\u900F\u5B50\u5F39\uFF0C\u4E0D\u53EF\u6E85\u5C04\uFF1B<sprite=0>\u6570\u91CF+1\uFF0C\u56DE\u65CB\u9556\u6BCF\u547D\u4E2D\u4E00\u4E2A\u654C\u4EBA\u5C31\u4F7F\u540E\u7EED\u4F24\u5BB3\u63D0\u9AD810%"
-    English: Penetration Bullet can't splash;<sprite=0>+1, Bullet damage will increase
-      by 10% for each enemy it hit.
+    Chinese: "\u7A7F\u900F\u5B50\u5F39\uFF1B<sprite=0>\u6570\u91CF+1\uFF0C\u56DE\u65CB\u9556\u6BCF\u547D\u4E2D\u4E00\u4E2A\u654C\u4EBA\u5C31\u4F7F\u540E\u7EED\u4F24\u5BB3\u63D0\u9AD810%"
+    English: Penetration Bullet;<sprite=0>+1, Bullet damage will increase by 10%
+      for each enemy it hit.
   - Key: SUPERSKILL
     Chinese: "\u5143\u7D20\u6280\u80FD\u69FD+1\uFF0C\u6BCF\u62E5\u67091\u4E2A\u5143\u7D20\u9020\u6210\u7684\u4F24\u5BB3\u5C31\u63D0\u534710%"
     English: Element skill slot +1, deal 10% extra damage for each element it has
@@ -700,8 +699,8 @@ MonoBehaviour:
     English: At the start of each wave, it's attack will become 70%/100%/150% of
       the sum of adjacent turrets.
   - Key: AAA
-    Chinese: "\u91CD\u91D1\u57FA\u5EA7"
-    English: Metal Base
+    Chinese: "24K\u57FA\u5EA7"
+    English: 24K Base
   - Key: AAAINFO
     Chinese: "\u56DE\u5408\u5F00\u59CB\u65F6\uFF0C\u6BCF\u62E5\u67093\u4E2A\u5143\u7D20\u5C31\u83B7\u5F97+1\u653B\u51FB\u8DDD\u79BB"
     English: At the start of each wave, gain+1 attack range for every 3 elements

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class MenuUIManager : Singleton<MenuUIManager>
 {
+    [SerializeField] Canvas m_Canvas = default;
     //界面系统
     [SerializeField] UILevelManager m_UILevelManager = default;
     [SerializeField] MenuMessage m_Message = default;
@@ -27,8 +28,11 @@ public class MenuUIManager : Singleton<MenuUIManager>
         m_UITujian.Initialize();
         m_UISetting.Initialize();
         m_UIBattleSet.Initialize();
+
         m_TurretTips.Initialize();
         m_TrapTips.Initialize();
+        m_EnemyInfoTips.Initialize();
+
         m_ConfirmPanel.Initialize();
         LevelManager.Instance.LoadGame();//每次进入菜单页，就读取一次存档
         m_ContinueGameBtn.SetActive(LevelManager.Instance.LastGameSave.HasLastGame);
@@ -67,25 +71,34 @@ public class MenuUIManager : Singleton<MenuUIManager>
 
     public void ShowTurretTips(TurretAttribute att, Vector2 pos)
     {
-        m_TurretTips.transform.position = pos;
+        //m_TurretTips.transform.position = pos;
+        SetCanvasPos(m_TurretTips.transform, pos);
         m_TurretTips.Show();
         m_TurretTips.ReadAttribute(att);
     }
 
     public void ShowTrapTips(TrapAttribute att, Vector2 pos)
     {
-        m_TrapTips.transform.position = pos;
+        //m_TrapTips.transform.position = pos;
+        SetCanvasPos(m_TrapTips.transform, pos);
+
         m_TrapTips.Show();
         m_TrapTips.ReadTrapAtt(att);
     }
 
     public void ShowEnemyInfoTips(EnemyAttribute att, Vector2 pos)
     {
-        m_EnemyInfoTips.transform.position = pos;
+        //m_EnemyInfoTips.transform.position = pos;
+        SetCanvasPos(m_EnemyInfoTips.transform, pos);
         m_EnemyInfoTips.Show();
         m_EnemyInfoTips.ReadEnemyAtt(att);
     }
-
+    private void SetCanvasPos(Transform tr, Vector2 pos)
+    {
+        Vector2 newPos;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(m_Canvas.transform as RectTransform, pos, m_Canvas.worldCamera, out newPos);
+        tr.position = m_Canvas.transform.TransformPoint(newPos);
+    }
     public void SettingBtnClick()
     {
         m_UISetting.Show();
@@ -93,9 +106,9 @@ public class MenuUIManager : Singleton<MenuUIManager>
 
     internal void HideTips()
     {
-        m_TurretTips.Hide();
-        m_TrapTips.Hide();
-        m_EnemyInfoTips.Hide();
+        m_TurretTips.CloseTips();
+        m_TrapTips.CloseTips();
+        m_EnemyInfoTips.CloseTips();
     }
 
     public void ShowMessage(string content)

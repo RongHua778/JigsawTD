@@ -110,7 +110,7 @@ MonoBehaviour:
       Data: true
     - Name: ObjName
       Entry: 1
-      Data: System
+      Data: SystemBtn
     - Name: 
       Entry: 8
       Data: 
@@ -134,7 +134,7 @@ MonoBehaviour:
       Data: true
     - Name: ObjName
       Entry: 1
-      Data: System
+      Data: SystemBtn
     - Name: 
       Entry: 8
       Data: 

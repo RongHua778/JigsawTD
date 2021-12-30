@@ -138,6 +138,7 @@ MonoBehaviour:
   contenAtt: {fileID: 11400000, guid: 493c6f7428affb6409f06eaac5d19930, type: 2}
   icon: {fileID: 8537589224688509853}
   nameTxt: {fileID: 8537589223999562756}
+  normalColor: {r: 1, g: 0.8, b: 0.49803922, a: 1}
   lockColor: {r: 0.254717, g: 0.254717, b: 0.254717, a: 0.78431374}
   lockIcon: {fileID: 2722303937973056151}
 --- !u!1 &8537589223999562758
@@ -198,7 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.94509804, b: 0.6, a: 1}
+  m_Color: {r: 1, g: 0.8, b: 0.49803922, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

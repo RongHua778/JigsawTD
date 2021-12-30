@@ -6,7 +6,11 @@ using UnityEngine.UI;
 public class FinalToggle : MonoBehaviour
 {
     [SerializeField] CanvasGroup m_canvasGroup = default;
+    [SerializeField] Text m_Text = default;
+    [SerializeField] Color normalColor = default;
+    [SerializeField] Color hiligtedColor = default;
 
+    [SerializeField] bool needCanvas = default;
     Toggle m_Toggle;
     private void Awake()
     {
@@ -23,13 +27,21 @@ public class FinalToggle : MonoBehaviour
     {
         if (value)
         {
-            m_canvasGroup.alpha = 1;
-            m_canvasGroup.blocksRaycasts = true;
+            m_Text.color = hiligtedColor;
+            if (needCanvas)
+            {
+                m_canvasGroup.alpha = 1;
+                m_canvasGroup.blocksRaycasts = true;
+            }
         }
         else
         {
-            m_canvasGroup.alpha = 0;
-            m_canvasGroup.blocksRaycasts = false;
+            m_Text.color = normalColor;
+            if (needCanvas)
+            {
+                m_canvasGroup.alpha = 0;
+                m_canvasGroup.blocksRaycasts = false;
+            }
         }
     }
 

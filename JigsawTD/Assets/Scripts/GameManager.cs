@@ -501,7 +501,7 @@ public class GameManager : Singleton<GameManager>
 
     public void ShowBluePrintTips(BluePrintGrid grid, Vector2 pos)
     {
-        HideTips();
+        //HideTips();
         SetCanvasPos(m_TurretTips.transform, pos);
         m_TurretTips.ReadBluePrint(grid);
         m_TurretTips.Show();

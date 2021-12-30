@@ -11,4 +11,6 @@ public class EnemyInfoTips : TileTips
     {
         grid.SetEnemyInfo(att);
     }
+
+
 }

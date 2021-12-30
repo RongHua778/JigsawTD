@@ -9,6 +9,7 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] ContentAttribute contenAtt = default;
     [SerializeField] Image icon = default;
     [SerializeField] Text nameTxt = default;
+    [SerializeField] Color normalColor = default;
     [SerializeField] Color lockColor = default;
     [SerializeField] GameObject lockIcon = default;
     bool isLock = false;
@@ -23,7 +24,7 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         icon.sprite = contenAtt.Icon;
         nameTxt.text = isLock ? "" : GameMultiLang.GetTraduction(contenAtt.Name);
         icon.color = isLock ? lockColor : Color.white;
-        nameTxt.color = isLock ? Color.gray : Color.white;
+        nameTxt.color = isLock ? Color.gray : normalColor;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

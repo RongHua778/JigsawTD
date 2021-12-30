@@ -27,6 +27,14 @@ public class UITujian : IUserInterface
         for (int i = 0; i < skills.Count; i++)
         {
             ElementSkill skill = TurretEffectFactory.GetElementSkill(skills[i]);
+            TurretAttribute attribute = StaticData.Instance.ContentFactory.GetElementAttribute(ElementType.GOLD);
+            skill.strategy = new StrategyBase(attribute, 1);
+            skill.strategy.BaseGoldCount++;
+            skill.strategy.BaseWoodCount++;
+            skill.strategy.BaseWaterCount++;
+            skill.strategy.BaseFireCount++;
+            skill.strategy.BaseDustCount++;
+
             elementConstructs[i].SetElements(skill);
         }
     }
