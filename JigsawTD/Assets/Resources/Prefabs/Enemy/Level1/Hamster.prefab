@@ -443,6 +443,18 @@ PrefabInstance:
       propertyPath: enemyOffset.y
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 3025247164957576973, guid: 329ede47c9c5c9b4d85f87899af9994d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 3025247164957576973, guid: 329ede47c9c5c9b4d85f87899af9994d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -12.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 3025247164957576973, guid: 329ede47c9c5c9b4d85f87899af9994d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -14.88
+      objectReference: {fileID: 0}
     - target: {fileID: 3727689228102059128, guid: 329ede47c9c5c9b4d85f87899af9994d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1

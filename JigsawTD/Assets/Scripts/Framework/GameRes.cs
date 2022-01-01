@@ -46,7 +46,6 @@ public static class GameRes
     [Header("动态数据")]
     public static float OverallMoneyIntensify = 0;//金币加成
     public static int FreeGroundTileCount = 0;//免费地板数量
-    public static int FreeTrapCount = 0;//免费陷阱换位数量
     public static Action<StrategyBase> NextCompositeCallback = null;
 
     [Header("统计数据")]
@@ -267,7 +266,6 @@ public static class GameRes
 
         OverallMoneyIntensify = 0;
         FreeGroundTileCount = 0;
-        FreeTrapCount = 0;
 
         TempGoldIntensify = 0;
         TempWoodIntensify = 0;

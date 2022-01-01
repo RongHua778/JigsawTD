@@ -7,14 +7,19 @@ public class TargetBullet : Bullet
     public override BulletType BulletType => BulletType.Target;
     protected override Vector2 TargetPos
     {
-        get
-        {
-            if (Target == null)
-                return base.TargetPos;
-            else
-                return Target.Position;
-        }
+        get => Target == null ? base.TargetPos : Target.Position;
         set => base.TargetPos = value;
+    }
+
+    public override bool GameUpdate()
+    {
+        if (Target != null && !Target.gameObject.activeSelf)//∑…µΩµÿ√Ê
+        {
+            TargetPos = Target.transform.position;
+            Target = null;
+        }
+        RotateBullet(TargetPos);
+        return MoveTowards(TargetPos);
     }
     public override void TriggerDamage()
     {

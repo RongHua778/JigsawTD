@@ -17,7 +17,7 @@ MonoBehaviour:
   Icon: {fileID: -5669832503402990067, guid: 3bb8fedca4a450c4394380955543fa19, type: 3}
   Description: BLINKERINFO
   Prefab: {fileID: 6267006511136032490, guid: 6e5bc6ae01d3be54da6c424d1c71c1b7, type: 3}
-  isLock: 0
+  isLock: 1
   initialLock: 1
   EnemyType: 9
   IsBoss: 0
@@ -26,7 +26,7 @@ MonoBehaviour:
   Health: 180
   Speed: 0.5
   CoolDown: 1
-  Frost: 4
+  Frost: 3
   BackGround: 
   HealthAtt: 3
   SpeedAtt: 4

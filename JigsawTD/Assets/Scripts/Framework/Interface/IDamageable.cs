@@ -113,14 +113,7 @@ public class BasicEnemyStrategy : DamageStrategy
         {
             if (UnfrostableTime > 0)
                 return;
-            //if (value - currentFrost > MaxFrost / 4)//每次最多增加25%的冻结值
-            //{
-            //    currentFrost += MaxFrost / 4;
-            //}
-            //else
-            //{
-            //    currentFrost = value;
-            //}
+
             currentFrost = value;
 
             if (currentFrost >= MaxFrost)
@@ -176,11 +169,11 @@ public class BasicEnemyStrategy : DamageStrategy
     public override void ResetStrategy(EnemyAttribute attribute, float intensify)
     {
         base.ResetStrategy(attribute, intensify);
-        MaxFrost = attribute.Frost;
+        MaxFrost = attribute.Frost * (1 + enemy.SlowResist);
         TrapIntensify = 1;
         CurrentFrost = 0;
         StunTime = 0;
-        frostTime = 0;
+        frostTime = 0; 
         UnfrostableTime = 0;
     }
 

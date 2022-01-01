@@ -17,7 +17,7 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: b872626303873e5468df87c50f80136c, type: 3}
   Description: GOLDKEEPERINFO
   Prefab: {fileID: -1710581719449573739, guid: 821b74dddf1519344ad3a3ff63562b2e, type: 3}
-  isLock: 0
+  isLock: 1
   initialLock: 1
   EnemyType: 17
   IsBoss: 0
@@ -26,7 +26,7 @@ MonoBehaviour:
   Health: 200
   Speed: 0.6
   CoolDown: 2
-  Frost: 4
+  Frost: 3
   BackGround: 
   HealthAtt: 4
   SpeedAtt: 1

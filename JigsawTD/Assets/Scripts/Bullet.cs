@@ -6,7 +6,7 @@ using System.Linq;
 
 public enum BulletType
 {
-    Ground, Target, Penetrate,Self
+    Ground, Target, Penetrate, Self
 }
 public abstract class Bullet : ReusableObject, IGameBehavior
 {
@@ -108,22 +108,10 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         {
             effect.Hit(target, this);
         }
-        if (SlowRate > 0 && target.DamageStrategy.IsEnemy)//技能可能会修改slowrate
-        {
-            target.DamageStrategy.ApplyBuff(EnemyBuffName.SlowDown, SlowRate, 2f);
-        }
     }
 
-    public virtual bool GameUpdate()
-    {
-        if (Target != null && !Target.gameObject.activeSelf)
-        {
-            TargetPos = Target.transform.position;
-            Target = null;
-        }
-        RotateBullet(TargetPos);
-        return MoveTowards(TargetPos);
-    }
+    public abstract bool GameUpdate();
+
 
     protected void RotateBullet(Vector2 pos)
     {
@@ -147,7 +135,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
 
     public float GetTargetDistance()
     {
-        float distanceToTarget = ((Vector2)turretParent.transform.position - TargetPos).magnitude;
+        float distanceToTarget = ((Vector2)turretParent.transform.position - (Vector2)Target.transform.position).magnitude;
         return distanceToTarget;
     }
 
@@ -162,6 +150,10 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     }
     public void DealRealDamage(IDamageable target, bool isSputtering = false)
     {
+        if (SlowRate > 0 && target.DamageStrategy.IsEnemy)//技能可能会修改slowrate
+        {
+            target.DamageStrategy.ApplyBuff(EnemyBuffName.SlowDown, isSputtering ? 0.35f * SlowRate : SlowRate, 2f);
+        }
         float finalDamage = isCritical ? Damage * CriticalPercentage : Damage;
         if (isSputtering)
             finalDamage *= SplashPercentage;

@@ -131,7 +131,7 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     public virtual void Frost(float time, FrostEffect effect = null)
     {
         Activated = false;
-        frostTime =Strategy.UnFrozable ? 0.2f : time;
+        frostTime = Strategy.UnFrozable ? 0.2f : time;
         if (effect != null)
             m_FrostEffect = effect;
     }
@@ -316,6 +316,8 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
         targetList.Clear();
         Strategy = null;
         frostTime = 0;
+        if (m_FrostEffect != null)
+            m_FrostEffect.Broke();
         ShowRange(false);
     }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class EventPermeater : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,IPointerClickHandler,IPointerEnterHandler
+public class EventPermeater : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,IPointerClickHandler//,IPointerEnterHandler
 {
     // 事件穿透对象
     private GameObject m_Target;
@@ -39,11 +39,12 @@ public class EventPermeater : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         //PassEvent(eventData, ExecuteEvents.submitHandler);
         PassEvent(eventData, ExecuteEvents.pointerClickHandler);
     }
-    //监听进入
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        PassEvent(eventData, ExecuteEvents.pointerEnterHandler);
-    }
+    ////监听进入
+    //public void OnPointerEnter(PointerEventData eventData)
+    //{
+    //    PassEvent(eventData, ExecuteEvents.pointerClickHandler);
+    //}
+
 
     // 把事件透下去
     public void PassEvent<T>(PointerEventData data, ExecuteEvents.EventFunction<T> function)

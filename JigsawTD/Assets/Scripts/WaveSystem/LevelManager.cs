@@ -19,7 +19,7 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] private GameLevelInfo[] GameLevels = default;
     [SerializeField] int permitGameLevel = default;
     public int MaxGameLevel => Mathf.Min(GameLevels.Length - 1, permitGameLevel);
-    public int GameLevel { get => PlayerPrefs.GetInt("GameLevel", 0); set => PlayerPrefs.SetInt("GameLevel", Mathf.Clamp(value, 0, MaxGameLevel)); }
+    public int GameLevel { get => PlayerPrefs.GetInt("GameLevel", 0); set => PlayerPrefs.SetInt("GameLevel", Mathf.Min(value,MaxGameLevel)); }
     public int GameExp { get => PlayerPrefs.GetInt("GameExp", 0); set => PlayerPrefs.SetInt("GameExp", value); }
 
     public List<ContentAttribute> AllContent;
@@ -99,10 +99,7 @@ public class LevelManager : Singleton<LevelManager>
         }
         else
         {
-            foreach (var item in AllContent)
-            {
-                item.isLock = item.initialLock;
-            }
+            FirstGameData();
         }
     }
 

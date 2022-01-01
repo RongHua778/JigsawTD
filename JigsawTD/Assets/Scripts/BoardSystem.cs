@@ -463,22 +463,17 @@ public class BoardSystem : IGameSystem
 
     public void SwitchTrap(TrapContent trap)
     {
-        if (GameRes.FreeTrapCount > 0)
-        {
-            GameRes.FreeTrapCount--;
-        }
-        else if (GameManager.Instance.ConsumeMoney(GameRes.SwitchTrapCost))
+        if (GameManager.Instance.ConsumeMoney(GameRes.SwitchTrapCost))
         {
             GameRes.SwitchTrapCost += StaticData.Instance.SwitchTrapCostMultiply;
+            Vector2 pos = trap.m_GameTile.transform.position;
+            ObjectPool.Instance.UnSpawn(trap.m_GameTile);
+            GameTile tile = ConstructHelper.GetNormalTile(GameTileContentType.Empty);
+            tile.transform.position = pos;
+            tile.TileLanded();
+            ConstructHelper.GetTrapShapeByName(trap.TrapAttribute.Name);
+            GameManager.Instance.TransitionToState(StateName.PickingState);
         }
-        Vector2 pos = trap.m_GameTile.transform.position;
-        ObjectPool.Instance.UnSpawn(trap.m_GameTile);
-        GameTile tile = ConstructHelper.GetNormalTile(GameTileContentType.Empty);
-        tile.transform.position = pos;
-        tile.TileLanded();
-        ConstructHelper.GetTrapShapeByName(trap.TrapAttribute.Name);
-        GameManager.Instance.TransitionToState(StateName.PickingState);
-
     }
 
     public void SetTutorialPoss(bool value)

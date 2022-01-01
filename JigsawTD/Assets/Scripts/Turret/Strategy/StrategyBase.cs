@@ -63,7 +63,7 @@ public class StrategyBase
             }
         }
     }
-    private float initSplashPercentage = 0.5f;//溅射伤害率
+    private float initSplashPercentage = 0.35f;//溅射伤害率
     private float initCriticalPercentage = 2f;//暴击伤害率
     private int initTargetCount = 1;//目标数
     private float rotSpeed = 10f;//炮塔转速

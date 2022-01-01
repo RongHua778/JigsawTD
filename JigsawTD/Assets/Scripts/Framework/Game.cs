@@ -36,7 +36,7 @@ public class Game : Singleton<Game>
                 break;
             case 1://battle
                 LevelManager.Instance.LoadGame();//直接从战斗场景开始，直接读取存档
-                LevelManager.Instance.SetUnlockAll(TestMode);//直接场景开始，如果测试模式则解锁全部
+                //LevelManager.Instance.SetUnlockAll(TestMode);//直接场景开始，如果测试模式则解锁全部
                 m_SceneStateController.SetState(new BattleState(m_SceneStateController));
                 break;
         }
@@ -52,7 +52,7 @@ public class Game : Singleton<Game>
             {
                 Debug.LogWarning(GameMultiLang.GetTraduction("TEST1"));
                 LevelManager.Instance.SetUnlockAll(false);
-                LevelManager.Instance.PremitDifficulty = 0;
+                LevelManager.Instance.PremitDifficulty = 1;
                 PlayerPrefs.DeleteAll();
             }
             if (Input.GetKeyDown(KeyCode.J))//解锁全内容

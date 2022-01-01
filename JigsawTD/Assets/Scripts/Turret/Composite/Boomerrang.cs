@@ -52,7 +52,7 @@ public class Boomerrang : RefactorTurret
 
     private IEnumerator ShootCor()
     {
-        cannonBullet.Initialize(this);
+        cannonBullet.Initialize(this,Target[0]);
 
         Vector2 dir;
         Vector2 pos;

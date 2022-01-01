@@ -7,7 +7,10 @@ using System.Linq;
 
 public class WaveSystem : IGameSystem
 {
+    [Header("测试用")]
+    [SerializeField] float testIntensify = default;
     [SerializeField] EnemyType TestType = default;
+    [Space]
     public bool RunningSpawn = false;//是否正在生产敌人
 
     public static List<List<EnemySequence>> LevelSequence = new List<List<EnemySequence>>();
@@ -133,7 +136,7 @@ public class WaveSystem : IGameSystem
 
             if (TestType != EnemyType.None)//测试特定敌人用
             {
-                sequences = GenerateSpecificSequence(TestType, 50f, i);
+                sequences = GenerateSpecificSequence(TestType, testIntensify, i);
             }
             LevelSequence.Add(sequences);
         }

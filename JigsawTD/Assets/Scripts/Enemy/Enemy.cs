@@ -48,7 +48,7 @@ public abstract class Enemy : PathFollower, IDamageable
     public int AffectHealerCount { get => affectHealerCount; set => affectHealerCount = value; }
     float speedIntensify = 0;
     public virtual float SpeedIntensify { get => speedIntensify + (AffectHealerCount > 0 ? 0.6f : 0); set => speedIntensify = value; }
-    public override float Speed { get => (Mathf.Max(0.2f, (speed + SpeedIntensify) * (1 - SlowRate / (SlowRate + 2f)))); }
+    public override float Speed { get => (Mathf.Max(0.2f, (speed + SpeedIntensify) * (1 - SlowRate / (SlowRate + SlowResist)))); }
     public override float ProgressFactor { get => ((BasicEnemyStrategy)DamageStrategy).StunTime > 0 ? 0 : base.ProgressFactor; set => base.ProgressFactor = value; }
 
     float slowRate = 0;
@@ -73,10 +73,11 @@ public abstract class Enemy : PathFollower, IDamageable
         this.pathTiles = BoardSystem.shortestPath;
         this.PathOffset = pathOffset;
         this.Intensify = intensify;
-        this.DamageStrategy.ResetStrategy(attribute,intensify);//清除加成
+        this.SlowResist = (float)GameRes.CurrentWave * 0.2f;
+        this.DamageStrategy.ResetStrategy(attribute, intensify);//清除加成
         this.speed = attribute.Speed;
         this.ReachDamage = attribute.ReachDamage;
-        this.SlowResist = (float)GameRes.CurrentWave / (GameRes.CurrentWave + 10);
+        
         SpawnOn(pathIndex, BoardSystem.shortestPoints);
 
     }
@@ -102,7 +103,7 @@ public abstract class Enemy : PathFollower, IDamageable
     }
     public override bool GameUpdate()
     {
-       
+
         if (DamageStrategy.IsDie)
         {
             OnDie();

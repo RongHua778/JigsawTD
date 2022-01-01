@@ -323,7 +323,7 @@ MonoBehaviour:
   - ExpRequire: 120000
     UnlockItems:
     - {fileID: 11400000, guid: c10d0ad6d60f8eb419d0ea97cd6014b0, type: 2}
-  permitGameLevel: 0
+  permitGameLevel: 9
   AllContent:
   - {fileID: 11400000, guid: 8b69e55deebc49d44b73c6e458a12794, type: 2}
   - {fileID: 11400000, guid: 2a0c266b352137f45b20d3723395e650, type: 2}
@@ -431,7 +431,7 @@ MonoBehaviour:
   BaseShapeCost: 25
   MultipleShapeCost: 10
   BuyGroundCost: 20
-  BuyGroundCostMultyply: 20
+  BuyGroundCostMultyply: 10
   SwitchTrapCost: 40
   SwitchTrapCostMultiply: 40
   TileSize: 1

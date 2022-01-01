@@ -93,7 +93,7 @@ public class SlowBuff : TimeBuff
 
     public override void Affect()
     {
-        intensifyValue = KeyValue * (1 - Target.SlowResist);
+        intensifyValue = KeyValue;
         Target.SlowRate += intensifyValue;
         ((BasicEnemyStrategy)(Target.DamageStrategy)).CurrentFrost += intensifyValue;
     }
