@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttType: 0
   Name: ARROWTRAP
-  Icon: {fileID: -2834877147454124499, guid: 77f1f203341c46246ad62b6652017dda, type: 3}
+  Icon: {fileID: 214896905544742249, guid: cffbd8a6b4a532b449809fc31b585268, type: 3}
   Description: ARROWTRAPINFO
   Prefab: {fileID: 3452595739242333879, guid: ee774973d577ef84aab35c8203d62838, type: 3}
   isLock: 0

@@ -8,6 +8,8 @@ public class SelfBullet : Bullet
 
     public override void Initialize(TurretContent turret, TargetPoint target = null, Vector2? pos = null)
     {
+        this.Target = target;
+        this.TargetPos = pos ?? target.Position;
         SetAttribute(turret);
         TriggerShootEffect();
     }

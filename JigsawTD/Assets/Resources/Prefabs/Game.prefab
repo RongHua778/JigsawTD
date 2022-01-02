@@ -291,39 +291,41 @@ MonoBehaviour:
   GameContents: []
   GameLevels:
   - ExpRequire: 300
-    UnlockItems:
-    - {fileID: 11400000, guid: 49b78835926160f46b82645449e248b6, type: 2}
+    UnlockItems: []
   - ExpRequire: 600
     UnlockItems:
-    - {fileID: 11400000, guid: f258f850157d22f47b339af2c0ef6e49, type: 2}
+    - {fileID: 11400000, guid: 49b78835926160f46b82645449e248b6, type: 2}
   - ExpRequire: 1200
     UnlockItems:
-    - {fileID: 11400000, guid: 8ab8442024210ec4f8786111aead38c8, type: 2}
+    - {fileID: 11400000, guid: f258f850157d22f47b339af2c0ef6e49, type: 2}
   - ExpRequire: 2400
     UnlockItems:
-    - {fileID: 11400000, guid: d4f7c44b4edeb1140837b0a7bccb27d4, type: 2}
+    - {fileID: 11400000, guid: 8ab8442024210ec4f8786111aead38c8, type: 2}
   - ExpRequire: 4800
     UnlockItems:
-    - {fileID: 11400000, guid: 95641219ac7af8c4e9a6a2cefe944374, type: 2}
+    - {fileID: 11400000, guid: d4f7c44b4edeb1140837b0a7bccb27d4, type: 2}
   - ExpRequire: 9600
     UnlockItems:
-    - {fileID: 11400000, guid: bd18a2582f85635438ff7d96cb4a6138, type: 2}
+    - {fileID: 11400000, guid: 95641219ac7af8c4e9a6a2cefe944374, type: 2}
   - ExpRequire: 18000
     UnlockItems:
-    - {fileID: 11400000, guid: 354eee86bbc7cdf4e8be1496b32979b2, type: 2}
+    - {fileID: 11400000, guid: bd18a2582f85635438ff7d96cb4a6138, type: 2}
   - ExpRequire: 32000
     UnlockItems:
-    - {fileID: 11400000, guid: b97947ffb3f15a14ca54916da2ef71e6, type: 2}
+    - {fileID: 11400000, guid: 354eee86bbc7cdf4e8be1496b32979b2, type: 2}
   - ExpRequire: 50000
     UnlockItems:
-    - {fileID: 11400000, guid: 22a169674acbe2c40a2da0d763cc8641, type: 2}
+    - {fileID: 11400000, guid: b97947ffb3f15a14ca54916da2ef71e6, type: 2}
   - ExpRequire: 80000
     UnlockItems:
-    - {fileID: 11400000, guid: 879c171f538d1b04c886f8130cc13b7d, type: 2}
+    - {fileID: 11400000, guid: 22a169674acbe2c40a2da0d763cc8641, type: 2}
   - ExpRequire: 120000
     UnlockItems:
+    - {fileID: 11400000, guid: 879c171f538d1b04c886f8130cc13b7d, type: 2}
+  - ExpRequire: 180000
+    UnlockItems:
     - {fileID: 11400000, guid: c10d0ad6d60f8eb419d0ea97cd6014b0, type: 2}
-  permitGameLevel: 9
+  permitGameLevel: 15
   AllContent:
   - {fileID: 11400000, guid: 8b69e55deebc49d44b73c6e458a12794, type: 2}
   - {fileID: 11400000, guid: 2a0c266b352137f45b20d3723395e650, type: 2}
@@ -374,10 +376,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 00b992198a245254bbe331c2618239cd, type: 2}
   - {fileID: 11400000, guid: aa5a923b0cb87d348914e228fc353f67, type: 2}
   - {fileID: 11400000, guid: b6403761d56b0914599f3e8e647a50b7, type: 2}
-  PremitDifficulty: 1
-  CurrentLevel: {fileID: 11400000, guid: 99391903eba8a1041af83dc6b559379e, type: 2}
-  NeedLoadGame: 0
-  NeedLoadData: 0
+  PremitDifficulty: 6
+  CurrentLevel: {fileID: 11400000, guid: 1cffab4195a17dc4f8326be6876fab11, type: 2}
+  NeedLoadGame: 1
   LastGameSave:
     SaveBluePrints: []
     SaveRes:
@@ -400,7 +401,7 @@ MonoBehaviour:
       DrawThisTurn: 0
     SaveContents: []
     SaveSequences: []
-  LevelEnd: 0
+  LevelEnd: 1
 --- !u!114 &3979959846567427947
 MonoBehaviour:
   m_ObjectHideFlags: 0

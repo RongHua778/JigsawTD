@@ -23,6 +23,8 @@ public class Game : Singleton<Game>
         TurretEffectFactory.Initialize();
     }
 
+    
+
     private void Start()
     {
         LevelManager.Instance.Initialize();
@@ -51,14 +53,14 @@ public class Game : Singleton<Game>
             if (Input.GetKeyDown(KeyCode.K))
             {
                 Debug.LogWarning(GameMultiLang.GetTraduction("TEST1"));
-                LevelManager.Instance.SetUnlockAll(false);
+                LevelManager.Instance.SetGameLevel(0);
                 LevelManager.Instance.PremitDifficulty = 1;
                 PlayerPrefs.DeleteAll();
             }
             if (Input.GetKeyDown(KeyCode.J))//解锁全内容
             {
                 Debug.LogWarning(GameMultiLang.GetTraduction("TEST2"));
-                LevelManager.Instance.SetUnlockAll(true);
+                LevelManager.Instance.SetGameLevel(99);
                 LevelManager.Instance.PremitDifficulty = 6;
                 PlayerPrefs.SetInt("MaxDifficulty", 6);
             }

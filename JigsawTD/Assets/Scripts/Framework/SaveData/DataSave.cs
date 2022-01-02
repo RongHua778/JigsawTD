@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-[Serializable]
-public class DataSave
-{
-    public Dictionary<string, bool> UnlockInfoDIC;
+//[Serializable]
+//public class DataSave
+//{
+//    public Dictionary<string, bool> UnlockInfoDIC;
 
-    public void SaveData(Dictionary<string, bool> unlockDic)
-    {
-        UnlockInfoDIC = unlockDic;
-    }
-}
+//    public void SaveData(Dictionary<string, bool> unlockDic)
+//    {
+//        UnlockInfoDIC = unlockDic;
+//    }
+//}
 
 [Serializable]
 public class GameSave

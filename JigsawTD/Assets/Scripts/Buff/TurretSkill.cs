@@ -120,7 +120,7 @@ public class RotarySkill : InitialSkill
     public override void Build()
     {
         base.Build();
-        strategy.BaseWoodCount++;
+        strategy.BaseWoodCount += 2;
         //strategy.AllSpeedIntensifyModify += 1;
     }
 
@@ -200,7 +200,7 @@ public class MortarSkill : InitialSkill
     public override void Build()
     {
         base.Build();
-        strategy.BaseDustCount++;
+        strategy.BaseDustCount += 2;
     }
 
     public override void PreHit(Bullet bullet = null)
@@ -273,7 +273,7 @@ public class SnowSkill : InitialSkill
     public override void Build()
     {
         base.Build();
-        strategy.BaseWaterCount++;
+        strategy.BaseWaterCount += 2;
     }
 
     public override void PreHit(Bullet bullet = null)
@@ -302,13 +302,13 @@ public class BoomerrangSkill : InitialSkill
     public override void Build()
     {
         base.Build();
-        strategy.BaseGoldCount++;
+        strategy.BaseGoldCount += 2;
     }
 
     public override void Hit(IDamageable target, Bullet bullet = null)
     {
         base.Hit(target, bullet);
-        bullet.Damage *= 1.1f;
+        bullet.Damage *= 1.05f;
     }
 }
 
@@ -356,15 +356,11 @@ public class CoreSkill : InitialSkill
                         intensify = 1.5f;
                         break;
                 }
-                strategy.InitAttack += turretStrategy.BaseAttack * intensify * strategy.TimeModify;
+                strategy.TurnFixAttack += turretStrategy.BaseAttack * intensify * (1 + strategy.ElementAttackIntensify);
             }
         }
     }
 
-    public override void EndTurn()
-    {
-        strategy.InitAttack = 0;
-    }
 }
 
 

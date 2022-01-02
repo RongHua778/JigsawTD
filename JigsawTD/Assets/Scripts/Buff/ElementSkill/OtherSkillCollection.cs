@@ -68,18 +68,13 @@ public class ExtraElement : ElementSkill
 
 public class HeavyCannon : ElementSkill
 {
-    //对生命值di于25%的单位造成额外50%伤害
+    //额外一个技能槽
     public override List<int> Elements => new List<int> { 0, 2, 3 };
 
-    public override void Hit(IDamageable target, Bullet bullet = null)
+    public override void Build()
     {
-        if (target.DamageStrategy.CurrentHealth / target.DamageStrategy.MaxHealth < 0.25f)
-        {
-            float realDamage;
-            target.DamageStrategy.ApplyDamage(bullet.Damage * 0.5f, out realDamage, false);
-            strategy.TurnDamage += (int)realDamage;
-            strategy.TotalDamage += (int)realDamage;
-        }
+        base.Build();
+        strategy.ElementSKillSlot++;
     }
 }
 

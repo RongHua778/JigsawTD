@@ -257,9 +257,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 36
-    m_FontStyle: 0
+    m_Font: {fileID: 12800000, guid: 7c47e1d79a8d9f3438f5c99c99015fa6, type: 3}
+    m_FontSize: 40
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
@@ -1649,9 +1649,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 36
-    m_FontStyle: 0
+    m_Font: {fileID: 12800000, guid: 7c47e1d79a8d9f3438f5c99c99015fa6, type: 3}
+    m_FontSize: 40
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 48
@@ -2020,7 +2020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2f1bb5477ddfcc4faab948daa32faf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testIntensify: 100
+  testIntensify: 10
   TestType: 18
   RunningSpawn: 0
   bossWarningUIAnim: {fileID: 929299449}
@@ -4647,6 +4647,7 @@ MonoBehaviour:
   m_BonusTips: {fileID: 4852159259407358207}
   m_RectMaskController: {fileID: 57838986}
   m_EventPermeater: {fileID: 898346120}
+  LockKeyboard: 0
 --- !u!4 &286649183
 Transform:
   m_ObjectHideFlags: 0
@@ -18780,12 +18781,16 @@ PrefabInstance:
       value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 2428495454860525341, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2428495454860525341, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
       propertyPath: m_Color.g
-      value: 0.8627451
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2428495454860525341, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
       propertyPath: m_Color.r
-      value: 0.3372549
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2428495454860525341, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
       propertyPath: m_RaycastTarget
@@ -26207,12 +26212,16 @@ PrefabInstance:
       value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 2428495454860525341, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2428495454860525341, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
       propertyPath: m_Color.g
-      value: 0.8627451
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2428495454860525341, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
       propertyPath: m_Color.r
-      value: 0.3372549
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2428495454860525341, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
       propertyPath: m_RaycastTarget
@@ -28942,6 +28951,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3940100397282842057, guid: efad427a633dbca47ac42421b9004594, type: 3}
+      propertyPath: languageData
+      value: 
+      objectReference: {fileID: 11400000, guid: af6bd4cff502e3d4aa7ddffcc178e9a6, type: 2}
     - target: {fileID: 3979959846567427920, guid: efad427a633dbca47ac42421b9004594, type: 3}
       propertyPath: m_Name
       value: Game
@@ -34363,7 +34376,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7630329879752075439, guid: 224161ca1d3272e449202df1fe5f50ac, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -167.74995
+      value: -167.74997
       objectReference: {fileID: 0}
     - target: {fileID: 7630329879752075439, guid: 224161ca1d3272e449202df1fe5f50ac, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -34586,11 +34599,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2428495454860525341, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
       propertyPath: m_Color.g
-      value: 0.8627451
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2428495454860525341, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
       propertyPath: m_Color.r
-      value: 0.3372549
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2428495454860525341, guid: e5ebc99b70fa2d641a043c0741a0110a, type: 3}
       propertyPath: m_RaycastTarget

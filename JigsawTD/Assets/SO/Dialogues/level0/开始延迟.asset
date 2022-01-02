@@ -38,7 +38,7 @@ MonoBehaviour:
       Data: 1|GuideEvent[], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 5
     - Name: 
       Entry: 7
       Data: 2|ShowGameobject, Assembly-CSharp
@@ -127,6 +127,15 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 8|LockKeyboard, Assembly-CSharp
+    - Name: isLock
+      Entry: 5
+      Data: true
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -134,13 +143,13 @@ MonoBehaviour:
       Data: 
     - Name: GuideEndEvents
       Entry: 7
-      Data: 8|GuideEvent[], Assembly-CSharp
+      Data: 9|GuideEvent[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 9|ShowGuideGirl, Assembly-CSharp
+      Data: 10|ShowGuideGirl, Assembly-CSharp
     - Name: Show
       Entry: 5
       Data: true

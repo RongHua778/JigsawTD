@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttType: 0
   Name: ICETRAP
-  Icon: {fileID: -6436588411321994143, guid: 77f1f203341c46246ad62b6652017dda, type: 3}
+  Icon: {fileID: 7547124080013126665, guid: cffbd8a6b4a532b449809fc31b585268, type: 3}
   Description: ICETRAPINFO
   Prefab: {fileID: 1967630184950370932, guid: c62c48ec4f6ca9d4bbc81ab93eb771d7, type: 3}
   isLock: 0

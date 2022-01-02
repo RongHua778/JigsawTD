@@ -340,12 +340,13 @@ MonoBehaviour:
       3.
       Refactor turrets can be upgraded to a maximum level of 3.'
   - Key: GUIDETXT04
-    Chinese: "1.\u91CD\u6784\u5854\u6839\u636E\u914D\u65B9\u5143\u7D20\u7EC4\u5408\u4E0D\u540C\uFF0C\u4F1A\u751F\u6210\u4E13\u5C5E\u7684\u5143\u7D20\u6280\u80FD\uFF0C\u76EE\u524D\u5171\u670935\u79CD\u4E0D\u540C\u7684\u5143\u7D20\u6280\u80FD.\n\n2.\u6BCF\u4E2A\u5143\u7D20\u8FD8\u4F1A\u4E3A\u91CD\u6784\u5854\u63D0\u4F9B\u989D\u5916\u7684\u5C5E\u6027\u52A0\u6210\u3002"
+    Chinese: "1.\u91CD\u6784\u5854\u6839\u636E\u914D\u65B9\u5143\u7D20\u7EC4\u5408\u4E0D\u540C\uFF0C\u4F1A\u751F\u6210\u4E13\u5C5E\u7684\u5143\u7D20\u6280\u80FD\uFF0C\u76EE\u524D\u5171\u670935\u79CD\u4E0D\u540C\u7684\u5143\u7D20\u6280\u80FD.\n\n2.\u6BCF\u4E2A\u5143\u7D20\u6280\u80FD\u4E3A\u91CD\u6784\u589E\u52A03\u4E2A\u5143\u7D20\uFF0C\u6BCF\u4E2A\u5143\u7D20\u4F1A\u63D0\u4F9B\u989D\u5916\u7684\u5C5E\u6027\u52A0\u6210\u3002"
     English: '1. Unique element skills will be generated based on the blueprint element
       combination. Currently there are 35 different element skills.
 
       2. Each
-      element also provides an additional stat bonus for refactor turrets.'
+      element skill provides 3 elements to refactor turret and each element also
+      provides an additional stat bonus.'
   - Key: GUIDETXT05
     Chinese: "1.\u91CD\u6784\u5854\u9664\u4E86\u76F4\u63A5\u90E8\u7F72\u5728\u6218\u573A\u4E0A\uFF0C\u8FD8\u53EF\u4EE5\u90E8\u7F72\u5728\u5DF2\u6709\u7684\u91CD\u6784\u5854\u4E0A\uFF0C\u8FD9\u4E48\u505A\u53EF\u4F7F\u5176\u88C5\u8F7D\u65B0\u91CD\u6784\u5854\u7684\u5143\u7D20\u6280\u80FD\uFF0C\u4F46\u662F\u4F1A\u6D88\u8017\u65B0\u91CD\u6784\u5854\u3002\n\n2.\u6BCF\u4E2A\u91CD\u6784\u5854\u9ED8\u8BA4\u62E5\u67092\u4E2A\u5143\u7D20\u6280\u80FD\u69FD\uFF0C\u5373\u6700\u591A\u53EF\u4EE5\u88C5\u8F7D\u4E00\u4E2A\u989D\u5916\u7684\u5143\u7D20\u6280\u80FD\u3002"
     English: '1. In addition to being deployed directly on the battlefield, refactor
@@ -500,7 +501,7 @@ MonoBehaviour:
     Chinese: "\u57FA\u7840\u66B4\u51FB\u4F24\u5BB3\u4E3A200%"
     English: Default critical damage is 200%
   - Key: SPLASHINFO
-    Chinese: "\u6E85\u5C04\u534A\u5F84\uFF0C\u57FA\u7840\u6E85\u5C04\u4F24\u5BB3\u4E3A50%\uFF1B\u7A7F\u900F\u578B\u5B50\u5F39\u4E0D\u4F1A\u6E85\u5C04\uFF0C\u4F46\u4F1A\u589E\u52A0\u5B50\u5F39\u4F53\u79EF\u3002"
+    Chinese: "\u6E85\u5C04\u534A\u5F84\uFF0C\u6E85\u5C04\u9020\u621035%\u4F24\u5BB3\u53CA\u51CF\u901F\u6548\u679C\uFF1B\u7A7F\u900F\u578B\u5B50\u5F39\u4E0D\u4F1A\u6E85\u5C04\uFF0C\u4F46\u4F1A\u589E\u52A0\u5B50\u5F39\u4F53\u79EF\u3002"
     English: "Splash radius. Default splash damage is 50%\uFF1BPenetration bullet
       will not splash, but can increase bullet's size."
   - Key: SLOWINFO
@@ -592,6 +593,21 @@ MonoBehaviour:
   - Key: CORE
     Chinese: "\u6838\u5FC3\u673A"
     English: Core
+  - Key: GOLDBENEFIT
+    Chinese: "\u91D1\u5143\u7D20+25%\u653B\u51FB"
+    English: Gold Element + 25% Attack
+  - Key: WOODBENEFIT
+    Chinese: "\u6728\u5143\u7D20+25%\u653B\u901F"
+    English: Wood Element +25% Firerate
+  - Key: WATERBENEFIT
+    Chinese: "\u6C34\u5143\u7D20+0.5\u51CF\u901F"
+    English: Water Element +0.5 Slow
+  - Key: FIREBENEFIT
+    Chinese: "\u706B\u5143\u7D20+15%\u66B4\u51FB\u7387"
+    English: Fire Element +15% Crit
+  - Key: DUSTBENEFIT
+    Chinese: "\u571F\u5143\u7D20+0.25\u6E85\u5C04"
+    English: Dust Element +0.25 Splash
   - Key: GOLD
     Chinese: "\u91D1\u5143\u7D20"
     English: Gold Element
@@ -614,13 +630,14 @@ MonoBehaviour:
     Chinese: "\u7A7F\u900F\u578B\u5B50\u5F39, \u53EA\u80FD\u653B\u51FB\u6B63\u524D\u65B9"
     English: Attacks can deal penetration damage, can only attack front side.
   - Key: CSKILL
-    Chinese: "\u5B50\u5F39\u53EF\u4EE5\u9020\u6210\u51CF\u901F\u6548\u679C"
-    English: Attacks cause a slowdown effect.
+    Chinese: "\u53EF\u4EE5\u9020\u6210\u51CF\u901F\u6548\u679C\uFF1B\u5E76\u79EF\u7D2F\u51BB\u7ED3\u5C42\u6570\uFF0C\u8FBE\u5230\u4E00\u5B9A\u51BB\u7ED3\u5C42\u6570\u540E\u4F1A\u51BB\u7ED3\u76EE\u68073\u79D2\u3002"
+    English: Attacks cause a slowdown effect. Enemy wiil be frost by 3s while has
+      frost effect is full.
   - Key: DSKILL
-    Chinese: "\u5B50\u5F39\u6709\u6982\u7387\u9020\u6210\u66B4\u51FB"
+    Chinese: "\u6709\u6982\u7387\u9020\u6210\u66B4\u51FB"
     English: Attacks have a chance to cause critical damage.
   - Key: ESKILL
-    Chinese: "\u5B50\u5F39\u9020\u6210\u6E85\u5C04\u8303\u56F4\u4F24\u5BB3"
+    Chinese: "\u80FD\u591F\u9020\u6210\u6E85\u5C04\u8303\u56F4\u4F24\u5BB3"
     English: Attacks deal splash area damage.
   - Key: CONSTRUCTORSN
     Chinese: "\u4FA6\u6D4B\u6253\u51FB"
@@ -665,15 +682,15 @@ MonoBehaviour:
     Chinese: "\u9020\u6210\u7684\u4F24\u5BB3\u964D\u4F4E50%\uFF0C\u4F46\u662F\u53EF\u4EE5\u989D\u5916\u653B\u51FB2\u4E2A\u76EE\u6807"
     English: Deals 50% less damage, but can attack an additional 2 targets.
   - Key: MORTARSKILL
-    Chinese: "<sprite=4>\u6570\u91CF+1\uFF0C\u4E14\u5B50\u5F39\u6BCF\u6E85\u5C04\u52301\u4E2A\u76EE\u6807\uFF0C\u5C31\u4F7F\u6E85\u5C04\u4F24\u5BB3\u63D0\u9AD820%"
-    English: <sprite=4>+1, Splash damage increased by 20% for each enemy it hit
+    Chinese: "<sprite=4>\u6570\u91CF+2\uFF0C\u4E14\u5B50\u5F39\u6BCF\u6E85\u5C04\u52301\u4E2A\u76EE\u6807\uFF0C\u5C31\u4F7F\u6E85\u5C04\u4F24\u5BB3\u63D0\u9AD820%"
+    English: <sprite=4>+2, Splash damage increased by 20% for each enemy it hit
   - Key: RAPIDERSKILL
     Chinese: "\u5BF9\u540C\u4E00\u76EE\u6807\u8FDB\u884C\u653B\u51FB\u65F6\uFF0C\u6BCF\u6B21\u653B\u51FB\u4F7F\u653B\u901F\u63D0\u534720%\uFF0C\u4E0A\u9650200%"
     English: Firerate increased by 20% each shoot when it is attacking the same target(up
       to 200%).
   - Key: ROTARYSKILL
-    Chinese: "\u7A7F\u900F\u5B50\u5F39\uFF1B<sprite=1>\u6570\u91CF+1\uFF0C\u81EA\u52A8\u5411\u968F\u673A\u65B9\u5411\u53D1\u5C04\u70AE\u5F39"
-    English: <sprite=1>+1, Penetration Bullet; Randomly shoot around.
+    Chinese: "\u7A7F\u900F\u5B50\u5F39\uFF1B<sprite=1>\u6570\u91CF+2\uFF0C\u81EA\u52A8\u5411\u968F\u673A\u65B9\u5411\u53D1\u5C04\u70AE\u5F39"
+    English: <sprite=1>+2, Penetration Bullet; Randomly shoot around.
   - Key: SNIPERSKILL
     Chinese: "\u5B50\u5F39\u4F24\u5BB3\u968F\u98DE\u884C\u8DDD\u79BB\u63D0\u534750%/\u683C"
     English: Bullet's damage increased by 50% for each tile it travelled
@@ -682,14 +699,14 @@ MonoBehaviour:
     English: <sprite=3>+2, Bullet's final critical damage randomly float between
       25% to 250%
   - Key: SNOWSKILL
-    Chinese: "\u7A7F\u900F\u5B50\u5F39;<sprite=2>\u6570\u91CF+1\uFF0C\u5B50\u5F39\u65BD\u52A0\u53CC\u500D\u7684\u51BB\u7ED3\u5C42\u6570"
-    English: Penetration Bullet;<sprite=2>+1, Double bullet's frost effect.
+    Chinese: "\u7A7F\u900F\u5B50\u5F39;<sprite=2>\u6570\u91CF+2\uFF0C\u5B50\u5F39\u65BD\u52A0\u53CC\u500D\u7684\u51BB\u7ED3\u5C42\u6570"
+    English: Penetration Bullet;<sprite=2>+2, Double bullet's frost effect.
   - Key: COOPORATIVESKILL
     Chinese: "\u6BCF\u6B21\u653B\u51FB\u63D0\u53472%*\u603B\u534F\u540C\u5854\u6570\u91CF\u7684\u653B\u51FB\u529B"
     English: Attack increased by 2% * the amount of "Cooporative" each shoot.
   - Key: BOOMERRANGSKILL
-    Chinese: "\u7A7F\u900F\u5B50\u5F39\uFF1B<sprite=0>\u6570\u91CF+1\uFF0C\u56DE\u65CB\u9556\u6BCF\u547D\u4E2D\u4E00\u4E2A\u654C\u4EBA\u5C31\u4F7F\u540E\u7EED\u4F24\u5BB3\u63D0\u9AD810%"
-    English: Penetration Bullet;<sprite=0>+1, Bullet damage will increase by 10%
+    Chinese: "\u7A7F\u900F\u5B50\u5F39\uFF1B<sprite=0>\u6570\u91CF+2\uFF0C\u56DE\u65CB\u9556\u6BCF\u547D\u4E2D\u4E00\u4E2A\u654C\u4EBA\u5C31\u4F7F\u540E\u7EED\u4F24\u5BB3\u63D0\u9AD810%"
+    English: Penetration Bullet;<sprite=0>+2, Bullet damage will increase by 10%
       for each enemy it hit.
   - Key: SUPERSKILL
     Chinese: "\u5143\u7D20\u6280\u80FD\u69FD+1\uFF0C\u6BCF\u62E5\u67091\u4E2A\u5143\u7D20\u9020\u6210\u7684\u4F24\u5BB3\u5C31\u63D0\u534710%"
@@ -733,7 +750,7 @@ MonoBehaviour:
     Chinese: "\u7D2F\u52A0\u6548\u5E94"
     English: Additive Effect
   - Key: BBBINFO
-    Chinese: "\u56DE\u5408\u5F00\u59CB\u65F6\uFF0C\u6BCF\u62E5\u67094\u4E2A\u5143\u7D20\u5C31\u653B\u51FB1\u4E2A\u989D\u5916\u7684\u76EE\u6807"
+    Chinese: "\u56DE\u5408\u5F00\u59CB\u65F6\uFF0C\u6BCF\u62E5\u67094\u4E2A\u5143\u7D20\u672C\u56DE\u5408\u5C31\u653B\u51FB1\u4E2A\u989D\u5916\u7684\u76EE\u6807"
     English: At the start of each wave, attack 1 additional target this turn for
       every 4 elements it has
   - Key: BBA
@@ -765,7 +782,7 @@ MonoBehaviour:
     English: Frost Core
   - Key: CCCINFO
     Chinese: "\u5143\u7D20\u6280\u80FD\u69FD+2\uFF08\u6BCF\u4E2A\u91CD\u6784\u5854\u6280\u80FD\u69FD\u4E0A\u9650\u4E3A5\uFF09"
-    English: Element skill slot + 2, each turret can equip with only one Frost Core
+    English: Element skill slot + 2, each turret can has maximum 5 slots
   - Key: CCA
     Chinese: "\u84C4\u80FD\u5F3A\u653B"
     English: Attck Accumulate
@@ -827,8 +844,8 @@ MonoBehaviour:
     English: If target's distance is lager than 3, splash range increased by {0}
       for each tile distance
   - Key: EEE
-    Chinese: "\u5E73\u7B49\u4E3B\u4E49"
-    English: Egalitarianism
+    Chinese: "\u5747\u8861\u4E4B\u9053"
+    English: Blanced Path
   - Key: EEEINFO
     Chinese: "\u56DE\u5408\u5F00\u59CB\u65F6\uFF0C\u4F7F\u62E5\u6709\u7684\u6570\u91CF\u6700\u5C11\u7684\u6240\u6709\u5143\u7D20\u6570\u91CF+2"
     English: At the start of each wave, the fewest elements it has gain +2
@@ -870,18 +887,18 @@ MonoBehaviour:
     Chinese: "\u4F7F\u9632\u5FA1\u5854\u653B\u51FB\u8303\u56F4\u53D8\u4E3A\u5706\u5F62"
     English: Turn this turret's attack range in to circle
   - Key: ABE
-    Chinese: "\u6539\u88C5\u8D60\u54C1"
-    English: Gift of Modify
+    Chinese: "\u80FD\u6E90\u6EA2\u51FA"
+    English: Energy Overflow
   - Key: ABEINFO
     Chinese: "\u56DE\u5408\u5F00\u59CB\u65F6\uFF0C\u6BCF\u88C5\u8F7D1\u4E2A\u5143\u7D20\u6280\u80FD\uFF0C\u5C31\u83B7\u5F971\u4E2A\u968F\u673A\u4E34\u65F6\u5143\u7D20"
     English: At the start of each wave, gain +1 random element for each element skill
       it has
   - Key: ACD
-    Chinese: "\u5F31\u70B9\u6253\u51FB"
-    English: Weakness Strike
+    Chinese: "\u5F3A\u5236\u52A0\u88C5"
+    English: Force Equip
   - Key: ACDINFO
-    Chinese: "\u5BF9\u5269\u4F59\u751F\u547D\u503C\u4F4E\u4E8E25%\u7684\u654C\u4EBA\u9020\u6210\u7684\u4F24\u5BB3\u63D0\u9AD850%"
-    English: Damage increased by 50% if target's Health is less than 25%
+    Chinese: "\u5143\u7D20\u6280\u80FD\u69FD+1\uFF08\u6BCF\u4E2A\u91CD\u6784\u5854\u6280\u80FD\u69FD\u4E0A\u9650\u4E3A5\uFF09"
+    English: Element skill slot + 1, each turret can has maximum 5 slots
   - Key: ACE
     Chinese: "\u52A0\u957F\u70AE\u7BA1"
     English: Longer barrel
@@ -913,8 +930,8 @@ MonoBehaviour:
     Chinese: "\u5B50\u5F39\u6BCF\u6B21\u547D\u4E2D\u67098%\u6982\u7387\u83B7\u5F972\u91D1\u5E01"
     English: The bullet has an 8% chance of getting 2 coin
   - Key: CDE
-    Chinese: "\u5F3A\u52BF\u6253\u51FB"
-    English: Powerful Blow
+    Chinese: "\u9AD8\u7206\u70B8\u5F39"
+    English: Powerful Hesh
   - Key: CDEINFO
     Chinese: "\u66B4\u51FB\u9020\u6210\u7684\u51CF\u901F\u53CA\u6E85\u5C04\u8303\u56F4\u7FFB\u500D"
     English: Double the slow and splash range if it is a critical hit
@@ -1181,13 +1198,13 @@ MonoBehaviour:
     English: The turrets are ready. Click the next wave button, and let the Bard
       civilization feel the first cannonball you send them.
   - Key: Guide18
-    Chinese: "\u4F60\u53EF\u4EE5\u4E0D\u5FC5\u5728\u6BCF\u4E2A\u56DE\u5408\u90FD\u6784\u5EFA\u6A21\u5757,\u5982\u679C\u4F60<color=#FFEA6D>\u5728\u4E00\u56DE\u5408\u6CA1\u6709\u8FDB\u884C\u4EFB\u4F55\u6784\u5EFA,\u6784\u5EFA\u4EF7\u683C\u5C06\u4F1A\u4E0B\u964D</color>."
-    English: You don't have to build modules every turn, and <color=#FFEA6D>if you
-      don't build anything in a turn, the build price will go down.</color>
+    Chinese: "\u4F60\u53EF\u4EE5\u4E0D\u5FC5\u5728\u6BCF\u4E2A\u56DE\u5408\u90FD\u6784\u5EFA\u6A21\u5757,<color=#FFEA6D>\u6784\u5EFA\u4EF7\u683C\u5728\u6BCF\u56DE\u5408\u5F00\u59CB\u65F6\u90FD\u4F1A\u4E0B\u964D10%</color>."
+    English: You don't have to build modules every turn, and <color=#FFEA6D>the build
+      price will go down at the start of each turn.</color>
   - Key: Guide181
-    Chinese: "\u6784\u5EFA\u6309\u94AE<color=#FFEA6D>\u5DE6\u65B9\u7684\u6570\u5B57</color>\u663E\u793A\u4E0D\u8FDB\u884C\u6784\u5EFA\u65F6,\u4E0B\u56DE\u5408\u4EF7\u683C\u7684<color=#FFEA6D>\u964D\u4EF7\u5E45\u5EA6(\u5F53\u524D10%)</color>."
+    Chinese: "\u6784\u5EFA\u6309\u94AE<color=#FFEA6D>\u5DE6\u65B9\u7684\u6570\u5B57</color>\u663E\u793A\u6BCF\u56DE\u5408\u4EF7\u683C\u7684<color=#FFEA6D>\u964D\u4EF7\u5E45\u5EA6(\u5F53\u524D10%)</color>."
     English: <color=#FFEA6D>The number to the left of the Build button shows the
-      price reduction for the next round (current 10%) without building.</color>
+      price reduction rate (current 10%).</color>
   - Key: Guide19
     Chinese: "\u73B0\u5728\u573A\u4E0A\u9632\u5FA1\u529B\u5145\u8DB3,\u8FD9\u56DE\u5408\u5C31\u5C1D\u8BD5\u4E0D\u8FDB\u884C\u6784\u5EFA\u76F4\u63A5\u5F00\u59CB\u4E0B\u4E00\u56DE\u5408\u5427."
     English: Now you have enough defense power, try not to build this turn and move
@@ -1278,11 +1295,19 @@ MonoBehaviour:
     English: Each refactor turret comes with a powerful <color=#FFEA6D>passive skill</color>,
       make use of it.
   - Key: Guide210
-    Chinese: "\u6839\u636E\u91CD\u6784\u914D\u65B9\u7684\u5143\u7D20\u7EC4\u5408,\u8FD8\u9644\u5E261\u4E2A<color=#FFEA6D>\u5143\u7D20\u6280\u80FD</color>,\u6BCF\u4E2A\u5143\u7D20\u6280\u80FD\u90FD\u6709\u81EA\u8EAB\u7684\u7279\u70B9."
+    Chinese: "\u6839\u636E\u91CD\u6784\u914D\u65B9\u7684\u5143\u7D20\u7EC4\u5408,\u6BCF\u4E2A\u91CD\u6784\u5854\u90FD\u62E5\u67091\u4E2A<color=#FFEA6D>\u5143\u7D20\u6280\u80FD</color>\uFF0C\u8BF7\u7559\u610F\u5176\u6280\u80FD\u6548\u679C."
     English: Based on the combination of elements, there is also an <color=#FFEA6D>element
-      skill</color>, each element skill has its own characteristics.
+      skill</color>.
+  - Key: Guide2101
+    Chinese: "\u5143\u7D20\u6280\u80FD\u4F1A\u4F7F\u91CD\u6784\u5854\u589E\u52A03\u4E2A\u5143\u7D20,<color=#FFEA6D>\u5143\u7D20\u4E3A\u9632\u5FA1\u5854\u63D0\u4F9B\u7279\u5B9A\u5C5E\u6027\u52A0\u6210</color>."
+    English: Elemental skills add 3 elements to the refactor turret, and <color=#FFEA6D>elements
+      provide specific attribute bonus to the turret.</color>
+  - Key: Guide2102
+    Chinese: "\u91CD\u6784\u5854\u62E5\u6709\u7684\u5168\u90E8\u5143\u7D20\u6570\u91CF\u663E\u793A\u5728\u6280\u80FD\u533A\u4E0A\u65B9,\u5C06\u9F20\u6807\u60AC\u505C\u5728\u8BE5\u533A\u57DF\u53EF\u4EE5\u67E5\u770B\u52A0\u6210\u6C47\u603B\u4FE1\u606F."
+    English: The total number of elements is displayed above the skill area, hold
+      your mouse on this area will display the detailed info.
   - Key: Guide211
-    Chinese: "\u6BCF\u4E2A<color=#FFEA6D>\u91CD\u6784\u5854\u9ED8\u8BA4\u62E5\u67092\u4E2A\u5143\u7D20\u6280\u80FD\u69FD,\u4F60\u53EF\u4EE5\u901A\u8FC7\u5C06\u53E6\u4E00\u4E2A\u91CD\u6784\u5854\u90E8\u7F72\u5728\u8BE5\u91CD\u6784\u5854\u4E0A,\u4F7F\u5176\u88C5\u8F7D\u4E00\u4E2A\u989D\u5916\u7684\u5143\u7D20\u6280\u80FD</color>."
+    Chinese: "\u6BCF\u4E2A\u91CD\u6784\u5854<color=#FFEA6D>\u9ED8\u8BA4\u62E5\u67092\u4E2A\u5143\u7D20\u6280\u80FD\u69FD</color>,\u4F60\u53EF\u4EE5\u5728\u6B64\u540E<color=#FFEA6D>\u5C06\u65B0\u91CD\u6784\u5854\u90E8\u7F72\u5728\u8BE5\u91CD\u6784\u5854\u4E0A,\u4F7F\u5176\u88C5\u8F7D\u4E00\u4E2A\u989D\u5916\u5143\u7D20\u6280\u80FD.</color>"
     English: <color=#FFEA6D>Each refactor turret has 2 element skill slots by default,
       and you can equip an additional elemental skill by deploying another refactor
       turret on it</color>.

@@ -63,7 +63,6 @@ public abstract class Bullet : ReusableObject, IGameBehavior
 
     public virtual void Initialize(TurretContent turret, TargetPoint target = null, Vector2? pos = null)
     {
-        this.turretParent = turret;
         this.Target = target;
         this.TargetPos = pos ?? target.Position;
 

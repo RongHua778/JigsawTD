@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttType: 0
   Name: DAMAGETRAP
-  Icon: {fileID: -1834239815237150624, guid: 77f1f203341c46246ad62b6652017dda, type: 3}
+  Icon: {fileID: 741186660645370822, guid: cffbd8a6b4a532b449809fc31b585268, type: 3}
   Description: DAMAGETRAPINFO
   Prefab: {fileID: 2869067965855928848, guid: ff388b9dcb814cf4ba73a8702ab78c3d, type: 3}
   isLock: 0

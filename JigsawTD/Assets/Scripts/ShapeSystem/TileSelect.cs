@@ -11,7 +11,7 @@ public class TileSelect : MonoBehaviour
     public TileShape Shape { get; set; }
     [SerializeField] LevelDownSelect m_LevelDownSelect = default;
     [SerializeField] ElementSelectPreview m_ElementPreview = default;
-
+    [SerializeField] ElementInfoBtn m_InfoBtn = default;
 
 
     public void InitializeDisplay(int displayID, TileShape shape)
@@ -21,13 +21,14 @@ public class TileSelect : MonoBehaviour
         StrategyBase strategy = Shape.m_ElementTurret.Strategy;
         if (strategy.Quality > 1)
         {
-            m_LevelDownSelect.SetStrategy(Shape.m_ElementTurret.Strategy);
+            m_LevelDownSelect.SetStrategy(strategy);
             m_LevelDownSelect.gameObject.SetActive(true);
         }
         else
         {
             m_LevelDownSelect.gameObject.SetActive(false);
         }
+        m_InfoBtn.SetStrategy(strategy);
         m_ElementPreview.SetStrategy(strategy);
     }
 

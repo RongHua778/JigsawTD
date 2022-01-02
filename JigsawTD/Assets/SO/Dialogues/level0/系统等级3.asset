@@ -89,7 +89,7 @@ MonoBehaviour:
       Data: 5|GuideEvent[], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
       Data: 6|EndTutorial, Assembly-CSharp
@@ -117,6 +117,15 @@ MonoBehaviour:
     - Name: PosID
       Entry: 3
       Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 9|LockKeyboard, Assembly-CSharp
+    - Name: isLock
+      Entry: 5
+      Data: false
     - Name: 
       Entry: 8
       Data: 

@@ -10,6 +10,7 @@ public class Boomerrang : RefactorTurret
     public float FlyTime => 1.5f / (Strategy.FinalFireRate / 0.2f);
     float RotSpeed { get => rotSpeed; set => rotSpeed = value; }
     private SelfBullet cannonBullet;
+    private Vector3 bulletInitScale;
 
     protected override void RotateTowards()
     {
@@ -52,7 +53,8 @@ public class Boomerrang : RefactorTurret
 
     private IEnumerator ShootCor()
     {
-        cannonBullet.Initialize(this,Target[0]);
+        cannonBullet.Initialize(this, Target[0]);
+        bulletInitScale = cannonBullet.transform.localScale;
 
         Vector2 dir;
         Vector2 pos;
@@ -69,9 +71,11 @@ public class Boomerrang : RefactorTurret
 
         DOTween.To(() => RotSpeed, x => RotSpeed = x, -720, FlyTime).SetEase(Ease.OutCubic);
         cannonBullet.transform.DOMove(pos, FlyTime).SetEase(Ease.OutCubic);
+        cannonBullet.transform.DOScale(bulletInitScale * (1 + (Strategy.FinalSplashRange / (Strategy.FinalSplashRange + 10)) * 5), FlyTime).SetEase(Ease.OutCubic);
         yield return new WaitForSeconds(FlyTime);
         DOTween.To(() => RotSpeed, x => RotSpeed = x, -360, FlyTime).SetEase(Ease.InCubic);
         cannonBullet.transform.DOMove(transform.position, FlyTime).SetEase(Ease.InCubic);
+        cannonBullet.transform.DOScale(bulletInitScale, FlyTime).SetEase(Ease.InCubic);
         yield return new WaitForSeconds(FlyTime);
     }
 

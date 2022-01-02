@@ -11,8 +11,16 @@ public class TipsElementConstruct : MonoBehaviour
     [SerializeField] TextMeshProUGUI elementSkillName = default;
     [SerializeField] TextMeshProUGUI elementSkillDes = default;
     [SerializeField] GameObject[] areas = default;
+    [SerializeField] InfoBtn emptyInfo = default;
     private string SkillDes;
     private ElementSkill m_Skill;
+
+
+    private void Start()
+    {
+        emptyInfo.SetContent(GameMultiLang.GetTraduction("EMPTYSLOT"));
+
+    }
     public void SetElements(ElementSkill skill)
     {
         areas[1].SetActive(false);//¿Õ×´Ì¬

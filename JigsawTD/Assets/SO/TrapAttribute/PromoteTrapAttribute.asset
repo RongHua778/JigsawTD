@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttType: 0
   Name: PROMOTETRAP
-  Icon: {fileID: -8850144073333168560, guid: 77f1f203341c46246ad62b6652017dda, type: 3}
+  Icon: {fileID: 3110106419351770709, guid: cffbd8a6b4a532b449809fc31b585268, type: 3}
   Description: PROMOTETRAPINFO
   Prefab: {fileID: 8525636314392825116, guid: 9b513d676a84dcb45b871456abe7ec2d, type: 3}
   isLock: 1

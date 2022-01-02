@@ -17,7 +17,6 @@ public class TileShape : MonoBehaviour
     Camera renderCam;
     GameObject bgObj;
     DraggingShape draggingShape;
-    Text turretNameTxt;
     public ElementTurret m_ElementTurret;
 
     [HideInInspector]
@@ -30,7 +29,6 @@ public class TileShape : MonoBehaviour
     private void Awake()
     {
         m_Anim = this.GetComponent<Animator>();
-        turretNameTxt = transform.GetComponentInChildren<Text>();
         tilePos = transform.GetComponentsInChildren<TileSlot>().ToList();
         foreach (var slot in tilePos)
         {
@@ -67,7 +65,6 @@ public class TileShape : MonoBehaviour
             TileSlot turretSlot = tilePos[posID == -1 ? Random.Range(0, tilePos.Count) : posID];
             tile = specialTile;
             ElementTurret turret = tile.Content as ElementTurret;
-            turretNameTxt.text = StaticData.FormElementName(turret.Strategy.Attribute.element, turret.Strategy.Quality);
             SetTilePos(tile, turretSlot.transform.position, dir);
             tilePos.Remove(turretSlot);
 
@@ -113,7 +110,6 @@ public class TileShape : MonoBehaviour
         IsPreviewing = true;
         m_Anim.SetTrigger("Land");
         bgObj.SetActive(false);
-        turretNameTxt.transform.parent.gameObject.SetActive(false);
         Vector2 pos = Camera.main.transform.position;
         renderCam.gameObject.SetActive(false);
         transform.position = new Vector3(Mathf.Round(pos.x), Mathf.Round(pos.y), -1f);

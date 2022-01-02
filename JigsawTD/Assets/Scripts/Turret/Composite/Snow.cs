@@ -9,19 +9,61 @@ public class Snow : RefactorTurret
     protected override void Shoot()
     {
         PlayAudio(ShootClip, false);
-        Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
-        bullet.transform.position = shootPoint.position;
-        Vector2 pos;
-        if (Strategy.RangeType == RangeType.Line)
+        //var targets = Target.GetEnumerator();
+        //while (targets.MoveNext())
+        //{
+        //    Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab) as Bullet;
+        //    bullet.transform.position = shootPoint.position;
+        //    Vector2 pos;
+        //    if (Strategy.RangeType == RangeType.Line)
+        //    {
+        //        pos = (Vector2)shootPoint.position + (Vector2)transform.up * Strategy.FinalRange;
+        //    }
+        //    else
+        //    {
+        //        Vector2 dir = Target[0].transform.position - transform.position;
+        //        pos = (Vector2)shootPoint.position + dir.normalized * Strategy.FinalRange;
+        //    }
+        //    bullet.Initialize(this, Target[0], pos);
+        //}
+
+        //PlayAudio(ShootClip, false);
+        //Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab).GetComponent<Bullet>();
+        //bullet.transform.position = shootPoint.position;
+        //Vector2 pos;
+        //if (Strategy.RangeType == RangeType.Line)
+        //{
+        //    pos = (Vector2)shootPoint.position + (Vector2)transform.up * Strategy.FinalRange;
+        //}
+        //else
+        //{
+        //    Vector2 dir = Target[0].transform.position - transform.position;
+        //    pos = (Vector2)shootPoint.position + dir.normalized * Strategy.FinalRange;
+        //}
+        //bullet.Initialize(this, Target[0], pos);
+        StartCoroutine(ShootCor());
+    }
+
+    private IEnumerator ShootCor()
+    {
+        var targets = Target.GetEnumerator();
+        while (targets.MoveNext())
         {
-            pos = (Vector2)shootPoint.position + (Vector2)transform.up * Strategy.FinalRange;
+            Bullet bullet = ObjectPool.Instance.Spawn(this.bulletPrefab) as Bullet;
+            bullet.transform.position = shootPoint.position;
+            Vector2 pos;
+            if (Strategy.RangeType == RangeType.Line)
+            {
+                pos = (Vector2)shootPoint.position + (Vector2)transform.up * Strategy.FinalRange;
+            }
+            else
+            {
+                Vector2 dir = targets.Current.transform.position - transform.position;
+                pos = (Vector2)shootPoint.position + dir.normalized * Strategy.FinalRange;
+            }
+            bullet.Initialize(this, targets.Current, pos);
+            yield return new WaitForSeconds(0.1f);
         }
-        else
-        {
-            Vector2 dir = Target[0].transform.position - transform.position;
-            pos = (Vector2)shootPoint.position + dir.normalized * Strategy.FinalRange;
-        }
-        bullet.Initialize(this, Target[0], pos);
     }
 
     //protected override void Shoot()

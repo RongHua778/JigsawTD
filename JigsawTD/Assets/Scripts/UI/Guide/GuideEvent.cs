@@ -187,3 +187,12 @@ public class RemoveBluePrint : GuideEvent
     }
 }
 
+public class LockKeyboard : GuideEvent
+{
+    public bool isLock;
+    public override void Trigger()
+    {
+        GameManager.Instance.LockKeyboard = isLock;
+    }
+}
+

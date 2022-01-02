@@ -53,6 +53,8 @@ public class GameManager : Singleton<GameManager>
     private EndState endState;
     private WonState wonState;
 
+    public bool LockKeyboard = false;
+
     //初始化设定
     public void Initinal()
     {
@@ -160,7 +162,7 @@ public class GameManager : Singleton<GameManager>
 
     private void KeyboardControl()
     {
-        if (Game.Instance.Tutorial)//教学期间无法加速
+        if (LockKeyboard)//教学期间无法加速
         {
             return;
         }

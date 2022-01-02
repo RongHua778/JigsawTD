@@ -191,7 +191,7 @@ Material:
     - _ShineGlow: 0.5
     - _ShineLocation: 1
     - _ShineRotate: 0.5
-    - _ShineWidth: 0.086
+    - _ShineWidth: 0.1
     - _TextureScrollXSpeed: 1
     - _TextureScrollYSpeed: 0
     - _TwistUvAmount: 1
@@ -231,5 +231,5 @@ Material:
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
     - _OverlayColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ShineColor: {r: 0.075898856, g: 0.3490411, b: 0.49056602, a: 1}
+    - _ShineColor: {r: 0.7529412, g: 0.5351115, b: 0.36078432, a: 1}
   m_BuildTextureStacks: []

@@ -74,7 +74,7 @@ public abstract class DamageStrategy
 
     }
 
-    public virtual void ResetStrategy(EnemyAttribute attribute, float intensify)
+    public virtual void ResetStrategy(EnemyAttribute attribute, float intensify,float slowResist)
     {
         IsDie = false;
         this.MaxHealth = Mathf.RoundToInt(attribute.Health * intensify);
@@ -166,10 +166,10 @@ public class BasicEnemyStrategy : DamageStrategy
         enemy.Buffable.AddBuff(info);
     }
 
-    public override void ResetStrategy(EnemyAttribute attribute, float intensify)
+    public override void ResetStrategy(EnemyAttribute attribute, float intensify,float slowResist)
     {
-        base.ResetStrategy(attribute, intensify);
-        MaxFrost = attribute.Frost * (1 + enemy.SlowResist);
+        base.ResetStrategy(attribute, intensify, slowResist);
+        MaxFrost = attribute.Frost * slowResist;
         TrapIntensify = 1;
         CurrentFrost = 0;
         StunTime = 0;

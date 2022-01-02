@@ -291,7 +291,7 @@ public class StrategyBase
 
     public virtual void SetQualityValue()
     {
-        InitAttack = Attribute.TurretLevels[Quality - 1].AttackDamage;
+        InitAttack = Attribute.TurretLevels[Quality - 1].AttackDamage;//核心机在回合中升级会清零攻击力，所以改为加法
         InitFireRate = Attribute.TurretLevels[Quality - 1].AttackSpeed;
         InitRange = Attribute.TurretLevels[Quality - 1].AttackRange;
         InitCriticalRate = Attribute.TurretLevels[Quality - 1].CriticalRate;
