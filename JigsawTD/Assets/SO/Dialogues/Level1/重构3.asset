@@ -83,7 +83,7 @@ MonoBehaviour:
       Data: 5|GainGold, Assembly-CSharp
     - Name: Amount
       Entry: 3
-      Data: 90
+      Data: 100
     - Name: 
       Entry: 8
       Data: 

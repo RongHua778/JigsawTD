@@ -66,3 +66,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e3f7dde97bc16f142b085e51c08b3207, type: 2}
   - {fileID: 11400000, guid: e273e5caa8cb8f84898bfc0aadae855f, type: 2}
   CanSaveGame: 0
+  WinDialogue: {fileID: 11400000, guid: 063f77f5678c6ed44b672814c0d02e5a, type: 2}
+  LostDialogue: {fileID: 11400000, guid: 0d7b1c482eaba59419e8267786bc02dc, type: 2}

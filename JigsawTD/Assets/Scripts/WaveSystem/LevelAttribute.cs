@@ -27,6 +27,10 @@ public class LevelAttribute : ScriptableObject
     public DialogueData[] GuideDialogues = default;
     public bool CanSaveGame;
 
+    [Title("Ð¡½ã½ã¶Ô°×")]
+    public DialogueData WinDialogue;
+    public DialogueData LostDialogue;
+
     public EnemyAttribute GetRandomBoss(int level)
     {
         switch (level)

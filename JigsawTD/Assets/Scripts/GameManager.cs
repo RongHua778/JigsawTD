@@ -382,13 +382,6 @@ public class GameManager : Singleton<GameManager>
         GameRes.GainGold += gold;
     }
 
-    public void GainInterest()
-    {
-        int interest = Mathf.Min(100, (int)(GameRes.Coin * StaticData.Instance.CoinInterest));
-        GameRes.Coin += interest;
-    }
-
-
     public Enemy SpawnEnemy(EnemyType type, int pathIndex, float intensify)
     {
         return m_WaveSystem.SpawnEnemy(StaticData.Instance.EnemyFactory.Get(type), pathIndex, intensify);

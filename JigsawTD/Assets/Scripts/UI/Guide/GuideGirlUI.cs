@@ -14,7 +14,7 @@ public class GuideGirlUI : SerializedMonoBehaviour
     private const float DialogueTime = 8f;
 
     private Transform m_RootUI;
-    [SerializeField]private RectTransform m_GirlTr=default;
+    [SerializeField] private RectTransform m_GirlTr = default;
     private Animator anim;
 
     private GameObject backBtn;
@@ -29,18 +29,14 @@ public class GuideGirlUI : SerializedMonoBehaviour
     private DialogueData[] m_Dialogues;
 
     [Title("小姐姐临时对话")]
-    [SerializeField] DialogueData[] StandardLost = default;
-    [SerializeField] DialogueData[] StandardWin = default;
-    //[SerializeField] Dialogue[] EndLessEnd = default;
-    //[SerializeField] Dialogue[] Refactor = default;
-    [SerializeField] DialogueData[] RefreshShop = default;
+    [SerializeField] DialogueData RefreshShop = default;
 
 
     [Title("教学物体")]
     [SerializeField] GameObject[] GuideObjects = default;
     Dictionary<string, GameObject> GuideDIC = new Dictionary<string, GameObject>();
     [SerializeField] GameObject ClickTip = default;
-    
+
     public void Initialize()
     {
         m_RootUI = transform.Find("Root");
@@ -102,24 +98,23 @@ public class GuideGirlUI : SerializedMonoBehaviour
         switch (wordType.WordType)
         {
             case TempWordType.StandardLose:
-                StartCoroutine(TempWordCor(StandardLost[wordType.ID]));//id为标准模式难度
+                StartCoroutine(TempWordCor(LevelManager.Instance.CurrentLevel.LostDialogue));
                 break;
             case TempWordType.StandardWin:
-                StartCoroutine(TempWordCor(StandardWin[wordType.ID]));//id为标准模式难度
+                StartCoroutine(TempWordCor(LevelManager.Instance.CurrentLevel.WinDialogue));
                 break;
-            //case TempWordType.EndlessEnd:
-            //    break;
+            case TempWordType.EndlessEnd://id为通过波数,30=0,40=1,50=2
+                StartCoroutine(TempWordCor(LevelManager.Instance.CurrentLevel.WinDialogue, wordType.ID));
+                break;
             case TempWordType.RefreshShop:
-                if (UnityEngine.Random.value > 0.95f)//有5%概率触发
-                    StartCoroutine(TempWordCor(RefreshShop[wordType.ID]));
+                if (Random.value > 0.95f)//有5%概率触发
+                    StartCoroutine(TempWordCor(RefreshShop,Random.Range(0,RefreshShop.Words.Length-1)));
                 break;
-                //case TempWordType.Refactor:
-                //    break;
         }
     }
 
 
-    IEnumerator TempWordCor(DialogueData dialogue)
+    IEnumerator TempWordCor(DialogueData dialogue, int id = 0)
     {
         typingSentence = true;
         SetGirlPos(1);
@@ -129,7 +124,7 @@ public class GuideGirlUI : SerializedMonoBehaviour
         backBtn.SetActive(false);
         dialogTxt.text = "";
         yield return new WaitForSeconds(0.5f);
-        string word = GameMultiLang.GetTraduction(dialogue.Words[UnityEngine.Random.Range(0, dialogue.Words.Length)]);
+        string word = GameMultiLang.GetTraduction(dialogue.Words[id]);
         dialogTxt.text = word;
         dialogTxt.maxVisibleCharacters = 0;
         dialogTxt.ForceMeshUpdate();
@@ -252,7 +247,7 @@ public class GuideGirlUI : SerializedMonoBehaviour
     }
 
 
-    public void GuideTrigger(TutorialType triggetType=TutorialType.None)
+    public void GuideTrigger(TutorialType triggetType = TutorialType.None)
     {
         if (!Game.Instance.Tutorial)
             return;
@@ -297,7 +292,7 @@ public class GuideGirlUI : SerializedMonoBehaviour
             case 1:
                 m_GirlTr.anchorMin = new Vector2(0f, 0);
                 m_GirlTr.anchorMax = new Vector2(0f, 0);
-                m_GirlTr.anchoredPosition = new Vector2(430, 150);
+                m_GirlTr.anchoredPosition = new Vector2(380, 100);
                 break;
         }
     }

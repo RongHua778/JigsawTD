@@ -106,9 +106,23 @@ MonoBehaviour:
   - Key: BASICENEMY
     Chinese: "\u654C\u4EBA"
     English: Enemy
-  - Key: GIRLWORD
-    Chinese: "\u8EAB\u4EFD\u6821\u9A8C\u4E2D...\u5DF2\u83B7\u53D6\u67E5\u770B\u6743\uFF0C\u4FE1\u606F\u53EF\u67E5\u9605"
-    English: Identity verification in progress...Login successful
+  - Key: GIRLWORD1
+    Chinese: "\u8EAB\u4EFD\u9A8C\u8BC1\u4E2D\u2026\u6B22\u8FCE\u60A8\u56DE\u6765\u90E8\u7F72\u5B98\uFF01"
+    English: Identity verification in progress...Welcome back, Commander!
+  - Key: GIRLWORD2
+    Chinese: "\u4ECA\u5929\u53C8\u4E0A\u5934\u4E86\u51E0\u5C40\uFF1F"
+    English: How was your day? How many games you played?
+  - Key: GIRLWORD3
+    Chinese: "\u53C8\u6765\u6B23\u8D4F\u60A8\u7684\u85CF\u54C1\u4E86\uFF1F\u771F\u662F\u4E2A\u81EA\u2026\u2026\u5514\uFF0C\u81EA\u4FE1\u7684\u90E8\u7F72\u5B98\uFF01"
+    English: Looking at your collection again? What a... Oh, confident commander!
+  - Key: GIRLWORD4
+    Chinese: "\u60A8\u89C1\u8FC7\u53CD\u624B\u535A\u58EB\u5417\uFF0C\u542C\u8BF4\u4ED6\u53EF\u4EE5\u53CD\u624B\u8865\u5200."
+    English: Have you seen Dr. Backhand? I heard he can use mouse in the opposite
+      direction.
+  - Key: GIRLWORD5
+    Chinese: "\u542C\u8BF4\u5199\u4E0B\u597D\u8BC4\u4F1A\u4F7F\u9632\u5FA1\u5854\u7684\u66B4\u51FB\u7387\u63D0\u9AD80.001%."
+    English: I heard that writing a good comment will slightly increase the critical
+      rate of 0.001%.
   - Key: BACKGROUND
     Chinese: "\u80CC\u666F\u7814\u7A76"
     English: Background Research
@@ -376,9 +390,11 @@ MonoBehaviour:
     English: 'Note: Turret can only be placed on empty tile or basic tile while the
       basic tile can be placed anywhere.'
   - Key: DRAWINFO
-    Chinese: "\u5F53\u524D\u56DE\u5408\u6CA1\u6709\u6784\u5EFA\u65F6\uFF0C\u6784\u5EFA\u4EF7\u683C\u5C06\u964D\u4F4E\uFF1B\n\u5F53\u524D\u964D\u4EF7\u767E\u5206\u6BD4\uFF1A"
-    English: 'If you haven''t build last turn, the price will be reduced\n current
-      price reduction percentage:'
+    Chinese: "\u6BCF\u4E2A\u56DE\u5408\u5F00\u59CB\u65F6\uFF0C\u6784\u5EFA\u4EF7\u683C\u5C06\u964D\u4F4E\uFF1B\n\u5F53\u524D\u964D\u4EF7\u767E\u5206\u6BD4\uFF1A"
+    English: 'At the start of each turn, the price will be reduced.
+
+      Current
+      price reduction rate:'
   - Key: NEXTWAVE
     Chinese: "\u4E0B\u4E00\u6CE2"
     English: Next Wave
@@ -443,8 +459,8 @@ MonoBehaviour:
     Chinese: "\u83B7\u53D6\u4EE3\u5E01"
     English: Gained Gold
   - Key: THANKSINFO
-    Chinese: "\u611F\u8C22\u60A8\u4F53\u9A8C\u300A\u91CD\u6784\u300B\u6E38\u620FDEMO\uFF0C\u5982\u679C\u4F60\u559C\u6B22\u6211\u4EEC\u7684\u6E38\u620F\uFF0C\\n\u8BF7\u626B\u7801\u628A\u5B83\u52A0\u5165\u613F\u671B\u5355\u5427\uFF01"
-    English: Thank you for experiencing the game demo. If you like our game, \n please
+    Chinese: "\u611F\u8C22\u60A8\u4F53\u9A8C\u300A\u91CD\u6784\u300B\u6E38\u620FDEMO\uFF0C\u5982\u679C\u4F60\u559C\u6B22\u6211\u4EEC\u7684\u6E38\u620F\uFF0C\u8BF7\u626B\u7801\u628A\u5B83\u52A0\u5165\u613F\u671B\u5355\u5427\uFF01"
+    English: Thank you for experiencing the game demo. If you like our game, please
       add it to your wishlist!
   - Key: EXPVALUE
     Chinese: "\u83B7\u5F97\u7ECF\u9A8C"
@@ -705,9 +721,9 @@ MonoBehaviour:
     Chinese: "\u6BCF\u6B21\u653B\u51FB\u63D0\u53472%*\u603B\u534F\u540C\u5854\u6570\u91CF\u7684\u653B\u51FB\u529B"
     English: Attack increased by 2% * the amount of "Cooporative" each shoot.
   - Key: BOOMERRANGSKILL
-    Chinese: "\u7A7F\u900F\u5B50\u5F39\uFF1B<sprite=0>\u6570\u91CF+2\uFF0C\u56DE\u65CB\u9556\u6BCF\u547D\u4E2D\u4E00\u4E2A\u654C\u4EBA\u5C31\u4F7F\u540E\u7EED\u4F24\u5BB3\u63D0\u9AD810%"
-    English: Penetration Bullet;<sprite=0>+2, Bullet damage will increase by 10%
-      for each enemy it hit.
+    Chinese: "\u7A7F\u900F\u5B50\u5F39\uFF1B<sprite=0>\u6570\u91CF+2\uFF0C\u56DE\u65CB\u9556\u6BCF\u547D\u4E2D\u4E00\u4E2A\u654C\u4EBA\u5C31\u4F7F\u540E\u7EED\u4F24\u5BB3\u63D0\u9AD85%"
+    English: Penetration Bullet;<sprite=0>+2, Bullet damage will increase by 5% for
+      each enemy it hit.
   - Key: SUPERSKILL
     Chinese: "\u5143\u7D20\u6280\u80FD\u69FD+1\uFF0C\u6BCF\u62E5\u67091\u4E2A\u5143\u7D20\u9020\u6210\u7684\u4F24\u5BB3\u5C31\u63D0\u534710%"
     English: Element skill slot +1, deal 10% extra damage for each element it has
@@ -1341,8 +1357,8 @@ MonoBehaviour:
     English: It seems that you are fully familiar with the rules of the interstellar
       battlefield, so please continue to forge ahead.
   - Key: Temp01
-    Chinese: "\u5E72\u7684\u6F02\u4EAE,\u91CD\u6784\u662F\u4E00\u79CD\u53D6\u80DC\u7684\u65B9\u5F0F,\u4E5F\u662F\u4E00\u79CD\u601D\u60F3."
-    English: Well done, refactoring is not only a way to win, but also a way of thinking.
+    Chinese: "\u5E72\u7684\u6F02\u4EAE,\u5408\u7406\u7684\u91CD\u6784\u4E0D\u4EC5\u662F\u4E00\u79CD\u667A\u6167,\u4E5F\u662F\u4E00\u95E8\u827A\u672F."
+    English: Well done, reasonable refactor is not only a wisdom, but also an art.
   - Key: Temp02
     Chinese: "\u6B63\u5728\u5206\u6790\u53D6\u80DC\u539F\u56E0...1%\u7684\u5408\u7406\u6218\u672F\u89C4\u5212...2%\u7684\u7075\u6D3B\u8D44\u6E90\u8C03\u914D...\u52A0\u4E0A97%\u7684\u8FD0\u6C14."
     English: Trying to figure the reason of victory... 1% of tactical planning...
@@ -1355,8 +1371,8 @@ MonoBehaviour:
     Chinese: "\u5E72\u7684\u6F02\u4EAE,\u5DF2\u4E3A\u60A8\u5F00\u653E\u65E0\u5C3D\u6A21\u5F0F\u548C\u79C1\u4EBA\u5496\u5561\u95F4\u7684\u51C6\u5165\u6743\u9650."
     English: Well done, opening up access to endless mode and private coffee room.
   - Key: Temp05
-    Chinese: "\u4F60\u53EF\u771F\u662F\u4E2A\u4EBA\u624D\u5440\u670B\u53CB!"
-    English: You're a real talent, my friend!
+    Chinese: "\u4F60\u53EF\u771F\u662F\u4E2A\u4EBA\u624D\u5440\u670B\u53CB!\u8FD9\u6E38\u620F\u5C31\u662F\u8FD9\u4E48\u73A9\u7684\u3002"
+    English: "That\u2019s how it\u2019s done! You\u2019re a real inspiration, friend!"
   - Key: Temp06
     Chinese: "\u96BE\u4EE5\u7F6E\u4FE1,\u7B80\u5179.....\u7A0B\u5E8F\u90FD\u88AB\u60CA\u5230\u4EE5\u81F3\u4E8E\u4EA7\u751F\u4E86\u9519\u8BEF,\u7EDD\u4E0D\u662F\u6211\u54AC\u820C\u5934\u4E86."
     English: "Unbelievable, are you a Trisolaran? Geez\u2026 The program was even
@@ -1365,30 +1381,31 @@ MonoBehaviour:
     Chinese: 
     English: 
   - Key: Temp10
+    Chinese: "\u4E0D\u53EF\u80FD\u7684\u5931\u8D25,\u8BF7\u8054\u7CFB\u5F00\u53D1\u8005\u4F60\u662F\u5982\u4F55\u505A\u5230\u7684\uFF1F"
+    English: Impossible to fail, please tell the developer how you did it?
+  - Key: Temp11
     Chinese: "......\u5EFA\u8BAE\u90E8\u7F72\u5B98\u66F4\u6362\u4E00\u4EFD\u5DE5\u4F5C,\u4F8B\u5982\u706B\u661F\u571F\u8C46\u683D\u79CD."
     English: ... I suggest Commander change a job, such as Martian potato farming.
-  - Key: Temp11
+  - Key: Temp12
     Chinese: "\u7A0B\u5E8F\u6267\u884C,\u964D\u4F4E90%\u671F\u5F85\u503C......\u5DF2\u751F\u6548.\u60A8\u7684\u8868\u73B0\u8FD8\u7B97\u4E0D\u9519,\u6307\u6325\u5B98."
     English: The procedure was executed and the 90% expectation reduction ......
       has taken effect. You are doing quite well, Commander.
-  - Key: Temp12
+  - Key: Temp13
     Chinese: "\u68C0\u6D4B\u5230\u521A\u521A\u7684\u6218\u672F\u6709\u4E9B\u5FAE\u5C0F\u7684\u5931\u8BEF,\u4E3A\u60A8\u5448\u73B0\u6218\u5C40\u6570\u636E\u7EC6\u8282."
     English: Detecting some minor mistakes in the tactics just now, let me present
       you with the details of the battle data a while back.
-  - Key: Temp13
-    Chinese: "Faker\u8BF4\u8FC7:\u5982\u679C\u4F60\u7EC3\u5F97\u8DB3\u591F\u591A,\u5C31\u4E0D\u4F1A\u611F\u5230\u5BB3\u6015."
-    English: 'Faker said: if you practice enough, you won''t be scared.'
   - Key: Temp14
     Chinese: "\u9ECE\u660E\u5C31\u5728\u773C\u524D,\u8BF7\u4E0D\u8981\u653E\u5F03!\u6211\u5C06\u966A\u4F34\u5728\u60A8\u8EAB\u8FB9!"
     English: Very unfortunate, but the dawn is around the corner, please don't give
       up! I will be by your side!
   - Key: Temp15
-    Chinese: "AI\u6B63\u5728\u9884\u6D4B\u90E8\u7F72\u5B98\u7684\u884C\u52A8...1%\u79BB\u5F00\u6218\u573A...2%\u559D\u676F\u5496\u5561...97%\u518D\u6765\u4E00\u5C40."
+    Chinese: "AI\u6B63\u5728\u9884\u6D4B\u90E8\u7F72\u5B98\u7684\u884C\u52A8...1%\u79BB\u5F00\u6218\u573A...99%\u518D\u6765\u4E00\u5C40."
     English: AI is predicting deployment officer actions... One percent left the
       battlefield... 2% have a cup of coffee... 97%. One more round.
   - Key: Temp16
-    Chinese: "\u5BF9\u53EF\u80FD\u62B1\u6709\u5E0C\u671B\u662F\u4E00\u79CD\u4EBA\u7C7B\u7684\u7279\u6709\u7684\u975E\u7406\u6027."
-    English: To hope for the possible is a uniquely human irrationality.
+    Chinese: "\u7EC3\u4E60\u4E00\u4E2A\u5957\u8DEF\u9700\u8981\u4E09\u4E2A\u6708\uFF0C\u800C\u4F60\u4E00\u4E2A\u6708\u5C31\u591F\u4E86\u3002"
+    English: It takes three months to practice a routine, and you can do it in one
+      month.
   - Key: Temp20
     Chinese: "\u636E\u8BF4\u5237\u65B0\u7684\u6570\u503C\u5173\u4E4E\u80DC\u5229\u6982\u7387?\u5F88\u62B1\u6B49,\u7845\u57FA\u751F\u547D\u4FE1\u4EF0\u7684\u91CF\u5B50\u529B\u5B66\u4E2D\u6CA1\u6709\u5173\u4E8E\u6982\u7387\u7684\u6982\u5FF5."
     English: 'I heard that the refreshed value is related to the probability of victory?
@@ -1403,44 +1420,26 @@ MonoBehaviour:
     English: No limit for you to refresh! Maybe the max chances are 1 trillion times!
       Do you want to challenge it?
   - Key: Temp23
-    Chinese: "\u6211\u6709\u5173\u4E8E\u6CBB\u7597\u5173\u8282\u708E\u7684\u5168\u5957\u6CBB\u7597\u65B9\u6CD5,\u6307\u6325\u5B98\u4E0D\u5FC5\u987E\u8651."
-    English: "I have a set of treatments for arthritis. Don\u2019t worry about clicking
-      the Refresh button. It is okay."
-  - Key: "//\u89E3\u9501\u65B0\u5185\u5BB9"
-    Chinese: 
-    English: 
+    Chinese: "\u6211\u6709\u5173\u4E8E\u6CBB\u7597\u8171\u9798\u708E\u7684\u5168\u5957\u6CBB\u7597\u65B9\u6CD5,\u6307\u6325\u5B98\u4E0D\u5FC5\u987E\u8651."
+    English: "I have a set of treatments for tenosynovitis. Don\u2019t worry about
+      clicking the Refresh button. It is okay."
   - Key: Temp30
     Chinese: "\u65B0\u7684\u540C\u4F34\u52A0\u5165\u4E86\u661F\u8FB0\u5927\u6D77\u7684\u5F81\u9014\uFF0C\u8BF7\u67E5\u770B\u540C\u4F34\u4FE1\u606F."
     English: New companions have joined the journey (to the Star Ocean), please check
       the companion information.
-  - Key: "//\u65E0\u5C3D\u6A21\u5F0F"
-    Chinese: 
-    English: 
   - Key: Temp40
-    Chinese: "\u9996\u8F6E\u4F5C\u6218\u7ED3\u675F,\u60A8\u5DF2\u521D\u6B65\u5C55\u73B0\u9886\u5BFC\u529B."
-    English: The first round is over! You started to show your leadership talents
-      gradually!
+    Chinese: "\u4E00\u573A\u7D27\u51D1\u7684\u6218\u5F79\uFF0C\u8BF7\u518D\u8BD5\u8BD5\u66F4\u957F\u8FDC\u7684\u89C4\u5212\u60A8\u7684\u4F5C\u6218\u5E03\u5C40\uFF01"
+    English: A tight campaign, please try to plan your battle further!
   - Key: Temp41
-    Chinese: "\u7B2C\u4E8C\u8F6E\u4F5C\u6218\u5DF2\u7ED3\u675F,\u76F8\u4FE1\u5DF4\u5FB7\u6587\u660E\u5DF2\u7ECF\u611F\u53D7\u5230\u6765\u81EA\u6211\u4EEC\u7684\u5A01\u6151."
-    English: The second round is over! I think the Bard civilization has felt our
-      deterrence!
+    Chinese: "\u505A\u5F97\u4E0D\u9519\uFF0C\u76F8\u4FE1\u5DF4\u5FB7\u6587\u660E\u5DF2\u7ECF\u611F\u53D7\u5230\u6765\u81EA\u6211\u4EEC\u7684\u5A01\u6151."
+    English: Welldonw! I think the Bard civilization has felt our deterrence!
   - Key: Temp42
+    Chinese: "\u91CD\u6784\u5854\u53D1\u6325\u4E86\u6781\u5927\u6218\u529B,\u8FD9\u5C06\u662F\u4EBA\u7C7B\u547D\u8FD0\u6539\u53D8\u7684\u5F00\u59CB."
+    English: The refactor turrets played a great battle force! It's time to change
+      the destiny of all humankind!
+  - Key: Temp43
     Chinese: "\u5F7B\u5E95\u74E6\u89E3\u654C\u4EBA,\u770B\u6765\u6307\u6325\u5B98\u548C\u6211\u6709\u7740\u76F8\u540C\u7ACB\u573A."
     English: "Completely wipe out the enemy \u2014 you know we share the same goal!"
-  - Key: "//\u6446\u653E\u91CD\u6784\u5854"
-    Chinese: 
-    English: 
-  - Key: Temp50
-    Chinese: "\u5DF2\u5B8C\u6210\u91CD\u6784\u4F53\u5B89\u7F6E,\u8FD9\u5C06\u662F\u4EBA\u7C7B\u547D\u8FD0\u6539\u53D8\u7684\u5F00\u59CB."
-    English: Reconstruction has placed well! It's time to change the destiny of all
-      humankind!
-  - Key: Temp51
-    Chinese: "\u8BF7\u518D\u719F\u6089\u4E00\u4E9B\u4E0D\u540C\u7C7B\u578B\u91CD\u6784\u4F53\u7684\u5C55\u5F00\u65B9\u5F0F\u5427."
-    English: Please familiarize yourself with the expansion way of different types
-      of reconstructions.
-  - Key: Temp52
-    Chinese: "\u7559\u7ED9\u6211\u4EEC\u7684\u65F6\u95F4\u5DF2\u4E0D\u591A\u4E86,\u8BF7\u9AD8\u6548\u8D62\u4E0B\u80DC\u5229."
-    English: "There is not much time left! Let\u2019s win this fast!"
-  - Key: Temp53
+  - Key: Temp44
     Chinese: "\u5F00\u62D3\u7684\u91CE\u5FC3\u548C\u5BF9\u6781\u9650\u7684\u8FFD\u6C42\u6211\u4EEC\u4ECE\u672A\u505C\u6B62,\u6307\u6325\u5B98,\u8BF7\u7EE7\u7EED\u5427!"
     English: Our greatest glory never falls, my commander. Please keep it up!

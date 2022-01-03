@@ -48,6 +48,9 @@ public class GameEndUI : IUserInterface
         {
             title.text = GameMultiLang.GetTraduction("WIN") + (GameRes.CurrentWave) + GameMultiLang.GetTraduction("WAVE");
             LevelManager.Instance.EndlessHighScore = GameRes.CurrentWave;
+            int tempWordID = Mathf.Clamp((GameRes.CurrentWave - 30) / 10, 0, 5);
+            GameEvents.Instance.TempWordTrigger(new TempWord(TempWordType.EndlessEnd, tempWordID));
+
         }
         else//标准模式
         {

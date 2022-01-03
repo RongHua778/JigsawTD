@@ -39,3 +39,5 @@ MonoBehaviour:
   GuideDialogues:
   - {fileID: 11400000, guid: ad6d02c88bf5128469e8d9fe74f78c2c, type: 2}
   CanSaveGame: 1
+  WinDialogue: {fileID: 11400000, guid: c7ffce76877601e4892d6c2bb2d30b71, type: 2}
+  LostDialogue: {fileID: 11400000, guid: a06fb438aff11f1499a36263abcec9f5, type: 2}

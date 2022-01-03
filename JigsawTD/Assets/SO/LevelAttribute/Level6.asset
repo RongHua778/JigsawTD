@@ -38,3 +38,5 @@ MonoBehaviour:
   ExpIntensify: 7
   GuideDialogues: []
   CanSaveGame: 1
+  WinDialogue: {fileID: 11400000, guid: d6944f4c090e2ed41884702308408e71, type: 2}
+  LostDialogue: {fileID: 11400000, guid: 57cd2a77045b94c42b1dcce4d8b200d7, type: 2}

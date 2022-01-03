@@ -421,20 +421,20 @@ MonoBehaviour:
   _strategyFactory: {fileID: 11400000, guid: 328a3a7240180f7409f1f8d5a3654b4f, type: 2}
   _nonEnemyFactory: {fileID: 11400000, guid: 30f433efbe7ecd14e811dc996935ecb0, type: 2}
   SystemMaxLevel: 6
-  LevelUpMoney: 000000003c000000b40000005e010000260200002003000052030000
+  LevelUpMoney: 0000000050000000c80000005e010000260200002003000052030000
   StartCoin: 0
   StartLotteryDraw: 0
-  BaseWaveIncome: 25
+  BaseWaveIncome: 35
   WaveMultiplyIncome: 10
   BuyBluePrintCost: 20
   ShopRefreshCost: 10
   CoinInterest: 0
-  BaseShapeCost: 25
+  BaseShapeCost: 39
   MultipleShapeCost: 10
-  BuyGroundCost: 20
+  BuyGroundCost: 10
   BuyGroundCostMultyply: 10
-  SwitchTrapCost: 40
-  SwitchTrapCostMultiply: 40
+  SwitchTrapCost: 30
+  SwitchTrapCostMultiply: 30
   TileSize: 1
   GoldAttackIntensify: 0.25
   WoodFirerateIntensify: 0.25

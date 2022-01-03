@@ -40,15 +40,13 @@ public class StaticData : Singleton<StaticData>
     public static float[,] RareChances = new float[6, 6]
     {
         { 0.1f, 0f, 0f, 0f, 0f,0f },
-        { 0.1f, 0.1f, 0f, 0f, 0f ,0f},
-        { 0.1f, 0.2f, 0.3f, 0f, 0f,0f },
-        { 0.1f, 0.2f, 0.3f, 0.6f, 0f,0f },
-        { 0.1f, 0.2f, 0.3f, 0.6f, 1.2f,0f },
-        { 0.1f, 0.2f, 0.3f, 0.6f, 1.2f,2.4f },
+        { 0.1f, 0.15f, 0f, 0f, 0f ,0f},
+        { 0.1f, 0.15f, 0.225f, 0f, 0f,0f },
+        { 0.1f, 0.15f, 0.225f, 0.34f, 0f,0f },
+        { 0.1f, 0.15f, 0.225f, 0.34f, 0.51f,0f },
+        { 0.1f, 0.15f, 0.225f, 0.34f, 0.51f,0.76f },
     };
 
-    //public static int[] GameLevelExp = new int[9] 
-    //{ 200, 400, 800, 1600, 3200, 6400, 12800, 25600, 51200 };
 
     [Header("工厂类")]
     [SerializeField] TileFactory _tileFactory = default;
@@ -69,12 +67,9 @@ public class StaticData : Singleton<StaticData>
     public int SystemMaxLevel;
     public int[] LevelUpMoney;
     public int StartCoin;
-    public int StartLotteryDraw;
     public int BaseWaveIncome;
     public int WaveMultiplyIncome;
-    public int BuyBluePrintCost;
     public int ShopRefreshCost;
-    public float CoinInterest;
     public int BaseShapeCost;
     public int MultipleShapeCost;
     public int BuyGroundCost;
