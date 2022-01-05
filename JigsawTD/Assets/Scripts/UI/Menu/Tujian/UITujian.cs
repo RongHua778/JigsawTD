@@ -7,18 +7,23 @@ using System.Linq;
 public class UITujian : IUserInterface
 {
     private Animator m_Anim;
+    [SerializeField] GameLevelHolder gameLevelPrefab = default;
+    [SerializeField] UITujian_ListHolder[] listHolders = default;
+
     [SerializeField] TipsElementConstruct[] elementConstructs = default;
     List<int> skillPreviewElements;
-    [SerializeField] GameLevelHolder gameLevelPrefab = default;
-    private List<ItemSlot> items;
     public override void Initialize()
     {
         base.Initialize();
         m_Anim = this.GetComponent<Animator>();
+
+        foreach (var item in listHolders)
+        {
+            item.SetContent();
+        }
+
         skillPreviewElements = new List<int> { 0, 1, 2, 3, 4 };
         SetElementSkills();
-        //items = GetComponentsInChildren<ItemSlot>().ToList();
-        //gameLevelPrefab.SetData();
     }
 
     public void SetElementSkills()
@@ -41,30 +46,25 @@ public class UITujian : IUserInterface
 
     public override void Show()
     {
-        if (!Game.Instance.TestMode)
-        {
-            MenuUIManager.Instance.ShowMessage(GameMultiLang.GetTraduction("TEST3"));
-            return;
-        }
+        //if (!Game.Instance.TestMode)
+        //{
+        //    MenuManager.Instance.ShowMessage(GameMultiLang.GetTraduction("TEST3"));
+        //    return;
+        //}
         base.Show();
         m_Anim.SetBool("OpenLevel", true);
         gameLevelPrefab.SetData();
-        if (items == null)
-            items = GetComponentsInChildren<ItemSlot>().ToList();
-        foreach (var item in items)
-        {
-            item.SetContent();
-        }
     }
 
     public override void Hide()
     {
         base.Hide();
-        MenuUIManager.Instance.HideTips();
+        MenuManager.Instance.HideTips();
     }
 
-    public void ClosePanel()
+    public override void ClosePanel()
     {
         m_Anim.SetBool("OpenLevel", false);
+        MenuManager.Instance.ShowMenu();
     }
 }

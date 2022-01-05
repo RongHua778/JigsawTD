@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Divider : Boss
 {
-    public override string ExplosionEffect => "BossExplosionRed";
     [SerializeField] Sprite[] DividerSprites = default;
     public int dividing;
     public int springs;

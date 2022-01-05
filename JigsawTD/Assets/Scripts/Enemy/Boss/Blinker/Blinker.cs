@@ -5,8 +5,6 @@ using DG.Tweening;
 
 public class Blinker : Boss
 {
-    public override string ExplosionEffect => "BossExplosionPurple";
-
 
     int blink;
     [SerializeField] private ReusableObject holePrefab = default;

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2194822630672348227}
   - component: {fileID: 1724806501761630068}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -200,9 +200,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
-  PointIndex: 0
   model: {fileID: 2194822630672348227}
-  CurrentPoint:
-    PathPos: {x: 0, y: 0}
-    PathDirection: 0
-    ExitPoint: {x: 0, y: 0}

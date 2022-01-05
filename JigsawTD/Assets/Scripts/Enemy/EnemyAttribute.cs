@@ -25,6 +25,6 @@ public class EnemyAttribute : ContentAttribute
     public override void MenuShowTips(Vector2 pos)
     {
         base.MenuShowTips(pos);
-        MenuUIManager.Instance.ShowEnemyInfoTips(this, pos);
+        MenuManager.Instance.ShowEnemyInfoTips(this, pos);
     }
 }

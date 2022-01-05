@@ -17,7 +17,6 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private ShapeSelectUI m_ShapeSelectUI = default;
     [SerializeField] private MainUI m_MainUI = default;
     [SerializeField] private FuncUI m_FuncUI = default;
-    //[SerializeField] private GuideUI m_GuideUI = default;
     [SerializeField] private GuideGirlUI m_GuideGirlUI = default;
 
     [SerializeField] private GameEndUI m_GameEndUI = default;
@@ -52,6 +51,7 @@ public class GameManager : Singleton<GameManager>
     private WaveState waveState;
     private EndState endState;
     private WonState wonState;
+    private Dictionary<StateName, BattleOperationState> StateDIC = new Dictionary<StateName, BattleOperationState>();
 
     public bool LockKeyboard = false;
 
@@ -92,33 +92,48 @@ public class GameManager : Singleton<GameManager>
         pickingState = new PickingState(this);
         endState = new EndState(this);
         wonState = new WonState(this);
+        StateDIC.Add(buildingState.StateName, buildingState);
+        StateDIC.Add(waveState.StateName, waveState);
+        StateDIC.Add(pickingState.StateName, pickingState);
+        StateDIC.Add(endState.StateName, endState);
+        StateDIC.Add(wonState.StateName, wonState);
 
-        //读取存档
-        if (LevelManager.Instance.LastGameSave.HasLastGame)
-        {
-            GameRes.LoadSaveRes();
-            m_WaveSystem.LoadSaveWave();
-            m_BoardSystem.LoadSaveGame();
-            m_BluePrintShopUI.LoadSaveGame();
-            //继续保存的波
-            ContinueWave();
-        }
-        else
-        {
-            m_WaveSystem.LevelInitialize();
-            RefreshShop(0);
-            m_BoardSystem.FirstGameSet();
-            //开局准备下一波
-            PrepareNextWave();
-        }
 
-        m_FuncUI.Show();
         m_MainUI.Show();
         //关闭显示强制摆放位置
         m_BoardSystem.SetTutorialPoss(false);
         m_GuideGirlUI.PrepareTutorial();
 
+        if (LevelManager.Instance.LastGameSave.HasLastGame)
+        {
+            LoadGame();
+        }
+        else
+        {
+            StartNewGame();
+        }
+
     }
+
+    private void LoadGame()
+    {
+        GameRes.LoadSaveRes();
+        m_WaveSystem.LoadSaveWave();
+        m_BoardSystem.LoadSaveGame();
+        m_BluePrintShopUI.LoadSaveGame();
+        //继续保存的波
+        ContinueWave();
+    }
+
+    private void StartNewGame()
+    {
+        m_WaveSystem.LevelInitialize();
+        RefreshShop(0);
+        m_BoardSystem.FirstGameSet();
+        //开局准备下一波
+        PrepareNextWave();
+    }
+
 
     //释放游戏系统
     public void Release()
@@ -179,7 +194,7 @@ public class GameManager : Singleton<GameManager>
             m_MainUI.GameSpeed = 3;
         }
 
-        if (Input.GetKeyDown(KeyCode.Q)&&LevelManager.Instance.CurrentLevel.Mode!=0)
+        if (Input.GetKeyDown(KeyCode.Q) && LevelManager.Instance.CurrentLevel.Mode != 0)
         {
             m_BluePrintShopUI.ShopBtnClick();
         }
@@ -241,27 +256,9 @@ public class GameManager : Singleton<GameManager>
         m_GameEndUI.SetGameResult(win);
     }
 
-    public void TransitionToState(StateName stateName)
+    private void TransitionToState(StateName stateName)
     {
-        BattleOperationState state = null;
-        switch (stateName)
-        {
-            case StateName.BuildingState:
-                state = buildingState;
-                break;
-            case StateName.WaveState:
-                state = waveState;
-                break;
-            case StateName.PickingState:
-                state = pickingState;
-                break;
-            case StateName.WonState:
-                state = wonState;
-                break;
-            case StateName.LoseState:
-                state = endState;
-                break;
-        }
+        BattleOperationState state = StateDIC[stateName];
         if (operationState == null)
         {
             operationState = state;
@@ -278,8 +275,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (Game.Instance.OnTransition)
             return;
-        LevelManager.Instance.LastGameSave.ClearGame();
-        Game.Instance.LoadScene(1);
+        LevelManager.Instance.StartNewGame(LevelManager.Instance.CurrentLevel.Mode);
     }
 
     public void ReturnToMenu()
@@ -418,7 +414,11 @@ public class GameManager : Singleton<GameManager>
             ShowMessage(GameMultiLang.GetTraduction("NOTBUILDSTATE"));
             return;
         }
-        m_BoardSystem.SwitchTrap(trap);
+        if (ConsumeMoney(GameRes.SwitchTrapCost))
+        {
+            m_BoardSystem.SwitchTrap(trap);
+            TransitionToState(StateName.PickingState);
+        }
     }
 
 
@@ -460,7 +460,7 @@ public class GameManager : Singleton<GameManager>
     {
         HideTips();
         SetCanvasPos(m_TrapTips.transform, pos);
-        m_TrapTips.ReadTrap(trap,GameRes.SwitchTrapCost);
+        m_TrapTips.ReadTrap(trap, GameRes.SwitchTrapCost);
         m_TrapTips.Show();
     }
 
@@ -559,9 +559,9 @@ public class GameManager : Singleton<GameManager>
         m_CamControl.MoveTurorial = value;
     }
 
-    public void SetRectMaskObj(GameObject obj,float delayTime)
+    public void SetRectMaskObj(GameObject obj, float delayTime)
     {
-        m_RectMaskController.SetTarget(obj,delayTime);
+        m_RectMaskController.SetTarget(obj, delayTime);
     }
 
     public void SetEventPermeaterTarget(GameObject obj)
@@ -580,7 +580,7 @@ public class GameManager : Singleton<GameManager>
         return m_GuideGirlUI.GetGuideObj(objName);
     }
 
-    public void ShowGuideGirl(bool value,int posID)
+    public void ShowGuideGirl(bool value, int posID)
     {
         if (value)
         {

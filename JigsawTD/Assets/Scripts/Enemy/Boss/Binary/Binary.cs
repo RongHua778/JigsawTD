@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Binary : Boss
 {
-    public override string ExplosionEffect => "BossExplosionPurple";
 
     public static Binary FirstBinary;
     private Binary m_brother;

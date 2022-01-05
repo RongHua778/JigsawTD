@@ -6,7 +6,7 @@ using System.IO;
 using LitJson;
 
 [System.Serializable]
-public class GameLevelInfo
+public struct GameLevelInfo
 {
     public int ExpRequire;
     public ContentAttribute[] UnlockItems;
@@ -14,9 +14,10 @@ public class GameLevelInfo
 
 public class LevelManager : Singleton<LevelManager>
 {
-    [HideInInspector] public List<GameTileContent> GameContents;
+    
     #region 基础保存
     [SerializeField] private GameLevelInfo[] GameLevels = default;
+    [Header("允许最大等级")]
     [SerializeField] int permitGameLevel = default;
     public int MaxGameLevel => Mathf.Min(GameLevels.Length - 1, permitGameLevel);
     public int GameLevel { get => PlayerPrefs.GetInt("GameLevel", 0); set => PlayerPrefs.SetInt("GameLevel", Mathf.Min(value, MaxGameLevel)); }
@@ -54,11 +55,10 @@ public class LevelManager : Singleton<LevelManager>
 
 
     #region 临时游戏保存
+    [HideInInspector] public List<GameTileContent> GameSaveContents;
     [Header("是否读取存档")]
     [SerializeField] bool NeedLoadGame = default;
-    //[SerializeField] bool NeedLoadData = default;
     [Header("是否有未完成游戏")]
-    //public DataSave LastDataSave;
     public GameSave LastGameSave;
     public bool LevelEnd = true;//游戏是否结束
     #endregion
@@ -69,7 +69,6 @@ public class LevelManager : Singleton<LevelManager>
         SaveGameFilePath = Application.persistentDataPath + "/GameSave.json";
 
         LevelDIC = new Dictionary<int, LevelAttribute>();
-        GameContents = new List<GameTileContent>();
 
         foreach (var level in StandardLevels)
         {
@@ -116,16 +115,12 @@ public class LevelManager : Singleton<LevelManager>
 
     }
 
-
-
-
     public int GainExp(int wave)
     {
         int exp = Mathf.RoundToInt(CurrentLevel.ExpIntensify * 5 * wave * (1 + wave / 10 * 0.25f));
         AddExp(exp);
         return exp;
     }
-
 
     private void UnlockBonus(string bo)
     {
@@ -175,37 +170,24 @@ public class LevelManager : Singleton<LevelManager>
     {
         LevelEnd = false;
         LastGameSave.ClearGame();
+        GameSaveContents.Clear();
         CurrentLevel = GetLevelAtt(modeID);
         DeleteGameSave();
+        Game.Instance.LoadScene(1);
     }
-    //private void LoadSaveData()
-    //{
-    //    foreach (var item in AllContent)//根据存档解锁内容，如果不包含新内容，则默认锁定
-    //    {
-    //        if (LastDataSave.UnlockInfoDIC.ContainsKey(item.Name))
-    //        {
-    //            item.isLock = LastDataSave.UnlockInfoDIC[item.Name];
-    //        }
-    //        else
-    //        {
-    //            item.isLock = true;
-    //        }
-    //    }
-    //    for (int i = 0; i < GameLevel; i++)//解锁低于当前等级的奖励
-    //    {
-    //        foreach (var item in GameLevels[i].UnlockItems)
-    //        {
-    //            item.isLock = false;
-    //        }
-    //    }
 
-    //}
+    public void ContinueLastGame()
+    {
+        LevelEnd = false;
+        DeleteGameSave();
+        Game.Instance.LoadScene(1);
+    }
 
     private List<ContentStruct> SaveContens()
     {
         List<ContentStruct> SaveContents = new List<ContentStruct>();
         ContentStruct contentStruct;
-        foreach (var content in GameContents)
+        foreach (var content in GameSaveContents)
         {
             content.SaveContent(out contentStruct);
             SaveContents.Add(contentStruct);
@@ -266,28 +248,6 @@ public class LevelManager : Singleton<LevelManager>
 
     private void SaveByJson()
     {
-        //if (NeedLoadData)
-        //{
-        //    try
-        //    {
-        //        LastDataSave.SaveData(SaveUnlockDIC());
-
-        //        string filePath = Application.persistentDataPath + "/DataSave.json";
-        //        Debug.Log(filePath);
-        //        string saveJsonStr = JsonMapper.ToJson(LastDataSave);
-        //        StreamWriter sw = new StreamWriter(filePath);
-        //        sw.Write(saveJsonStr);
-        //        sw.Close();
-        //        Debug.Log("数据成功存档");
-
-        //    }
-        //    catch
-        //    {
-        //        Debug.LogWarning("数据存档失败");
-
-        //    }
-        //}
-
         if (NeedLoadGame)
         {
             if (!LevelEnd && CurrentLevel.CanSaveGame)
@@ -307,7 +267,7 @@ public class LevelManager : Singleton<LevelManager>
             {
                 LastGameSave.ClearGame();
             }
-            GameContents.Clear();
+            GameSaveContents.Clear();
 
 
 
@@ -338,31 +298,6 @@ public class LevelManager : Singleton<LevelManager>
 
     private void LoadByJson()
     {
-        //string filePath = Application.persistentDataPath + "/DataSave.json";
-        //if (NeedLoadData && File.Exists(filePath))
-        //{
-        //    try
-        //    {
-        //        StreamReader sr = new StreamReader(filePath);
-        //        string jsonStr = sr.ReadToEnd();
-        //        sr.Close();
-        //        SetGameLevel(GameLevel);
-        //        //DataSave save = JsonMapper.ToObject<DataSave>(jsonStr);
-        //        //LastDataSave = save;
-        //        //LoadSaveData();
-        //        Debug.Log("成功读取存档");
-        //    }
-        //    catch
-        //    {
-        //        SetGameLevel(0);
-        //        Debug.LogWarning("读取存档数据有错误");
-        //    }
-        //}
-        //else
-        //{
-        //    SetGameLevel(0);
-        //    Debug.Log("没有可读取存档");
-        //}
         SetGameLevel(GameLevel);//基于等级解锁内容
 
         if (NeedLoadGame && File.Exists(SaveGameFilePath))

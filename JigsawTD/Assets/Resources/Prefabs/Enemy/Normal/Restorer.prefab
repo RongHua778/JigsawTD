@@ -60,6 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
   model: {fileID: 7619665209501119904}
+  ExplosionPrefab: {fileID: 550125806612273610, guid: b84b54b7d83a0204ab300a00418ef730, type: 3}
 --- !u!95 &8228902068761863343
 Animator:
   serializedVersion: 3

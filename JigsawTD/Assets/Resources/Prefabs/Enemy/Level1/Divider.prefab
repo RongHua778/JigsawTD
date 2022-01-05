@@ -79,6 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
   model: {fileID: 7619665209501119904}
+  ExplosionPrefab: {fileID: 4814509631623709245, guid: da26032d01e11f8489ff266989819e3b, type: 3}
   DividerSprites:
   - {fileID: -8360756241666586474, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}
   - {fileID: 6048167617135722125, guid: 7c14298c1e59a8e4ca5ff99eefe181d3, type: 3}

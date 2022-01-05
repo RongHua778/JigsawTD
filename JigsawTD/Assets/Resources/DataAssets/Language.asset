@@ -182,10 +182,10 @@ MonoBehaviour:
     English: Difficulty
   - Key: HIGHSCORE
     Chinese: "\u6700\u9AD8\u8BB0\u5F55"
-    English: Battle Setting
+    English: HIGHSCORE
   - Key: BATTLESET
     Chinese: "\u6218\u6597\u8BBE\u7F6E"
-    English: High Score
+    English: Battle Setting
   - Key: WAVE
     Chinese: "\u6CE2"
     English: Wave
@@ -430,10 +430,10 @@ MonoBehaviour:
     English: Perfect Element
   - Key: PERFECTINFO
     Chinese: "\u4E07\u80FD\u5143\u7D20\u53EF\u4EE5\u4F5C\u4E3A\u4EFB\u610F\u91CD\u6784\u7D20\u6750\u4F7F\u7528"
-    English: Perfect Element can served as any composition for refactor
+    English: Perfect Element can served as any element for refactor
   - Key: WIN
     Chinese: "\u901A\u5173"
-    English: PASS
+    English: 
   - Key: LOSE
     Chinese: "\u7ED3\u675F"
     English: END

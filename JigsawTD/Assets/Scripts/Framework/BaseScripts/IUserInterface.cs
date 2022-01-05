@@ -27,6 +27,8 @@ public abstract class IUserInterface : MonoBehaviour
         m_Active = false;
     }
 
+    public virtual void ClosePanel() { }
+
     public virtual void Release() { }
     public virtual void Update() { }
 }

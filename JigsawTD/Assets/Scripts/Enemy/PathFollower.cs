@@ -11,7 +11,7 @@ public class PathFollower : ReusableObject,IGameBehavior
     DirectionChange directionChange;
     public virtual DirectionChange DirectionChange { get => directionChange; set => directionChange = value; }
 
-    [SerializeField] public Transform model = default;
+    [HideInInspector] public Transform model;
     protected PathPoint CurrentPoint;
     protected Vector3 positionFrom, positionTo;
     private float progress;
@@ -32,6 +32,11 @@ public class PathFollower : ReusableObject,IGameBehavior
     public float Progress { get => progress; set => progress = value; }
     public List<PathPoint> PathPoints { get => pathPoints; set => pathPoints = value; }
     public float PathOffset { get => pathOffset; set => pathOffset = value; }
+
+    protected virtual void Awake()
+    {
+        model = transform.Find("Model");
+    }
 
     public virtual bool GameUpdate()
     {

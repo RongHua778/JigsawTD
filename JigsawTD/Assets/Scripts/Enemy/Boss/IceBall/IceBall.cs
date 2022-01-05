@@ -5,7 +5,6 @@ using DG.Tweening;
 
 public class IceBall : Boss
 {
-    public override string ExplosionEffect => "BossExplosionBlue";
 
     public float freezeRange;
     public float freezeTime;

@@ -423,13 +423,10 @@ MonoBehaviour:
   SystemMaxLevel: 6
   LevelUpMoney: 0000000050000000c80000005e010000260200002003000052030000
   StartCoin: 0
-  StartLotteryDraw: 0
-  BaseWaveIncome: 35
+  BaseWaveIncome: 25
   WaveMultiplyIncome: 10
-  BuyBluePrintCost: 20
   ShopRefreshCost: 10
-  CoinInterest: 0
-  BaseShapeCost: 39
+  BaseShapeCost: 28
   MultipleShapeCost: 10
   BuyGroundCost: 10
   BuyGroundCostMultyply: 10

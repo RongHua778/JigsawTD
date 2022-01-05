@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class GoldKeeper : Boss
 {
-    public override string ExplosionEffect => "BossExplosionYellow";
-
 
     private int LifeCount;
 

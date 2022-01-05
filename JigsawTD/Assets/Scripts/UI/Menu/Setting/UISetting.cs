@@ -76,10 +76,10 @@ public class UISetting : IUserInterface
         m_Anim.SetBool("OpenLevel", true);
     }
 
-
-    public void ClosePanel()
+    public override void ClosePanel()
     {
         StaticData.SetTipsPos();
         m_Anim.SetBool("OpenLevel", false);
+        MenuManager.Instance.ShowMenu();
     }
 }

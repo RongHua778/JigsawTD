@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Runner : Enemy
 {
-    public override string ExplosionEffect => "EnemyExplosionBlue";
     public override float SpeedIntensify { get => base.SpeedIntensify + speedIncreased; set => base.SpeedIntensify = value; }
 
     private float speedIncreased = 0;

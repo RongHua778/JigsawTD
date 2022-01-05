@@ -23,7 +23,7 @@ public abstract class GameTileContent : ReusableObject
         {
             col.GetComponent<GroundTile>().IsLanded = false;
         }
-        LevelManager.Instance.GameContents.Add(this);
+        LevelManager.Instance.GameSaveContents.Add(this);
     }
 
     public virtual void OnContentSelected(bool value)
@@ -51,8 +51,6 @@ public abstract class GameTileContent : ReusableObject
         m_ContentStruct = new ContentStruct();
         contentSruct = m_ContentStruct;
         m_ContentStruct.ContentType = (int)ContentType;
-        //m_ContentStruct.posX = Mathf.RoundToInt( transform.position.x);
-        //m_ContentStruct.posY = Mathf.RoundToInt(transform.position.y);
         m_ContentStruct.Pos = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
         m_ContentStruct.Direction = (int)m_gameTile.TileDirection;
         
@@ -61,7 +59,7 @@ public abstract class GameTileContent : ReusableObject
     public override void OnUnSpawn()
     {
         base.OnUnSpawn();
-        LevelManager.Instance.GameContents.Remove(this);
+        LevelManager.Instance.GameSaveContents.Remove(this);
     }
 
 }

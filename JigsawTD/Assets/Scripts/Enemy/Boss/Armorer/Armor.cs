@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Armor : MonoBehaviour,IDamageable
 {
-    public string ExplosionEffect => "EnemyExplosionYellow";
     public string ExplosionSound => "Sound_EnemyExplosion";
-    private ReusableObject ExplosionPrefab;
+    [SerializeField] private ReusableObject ExplosionPrefab;
 
     public HealthBar HealthBar { get; set; }
 
@@ -17,8 +16,6 @@ public class Armor : MonoBehaviour,IDamageable
     {
         DamageStrategy = new ArmourStrategy(this);
         HealthBar = transform.Find("HealthBarSmall").GetComponent<HealthBar>();
-        ExplosionPrefab = Resources.Load<ReusableObject>("Prefabs/Effects/Enemy/" + ExplosionEffect);
-
     }
 
 

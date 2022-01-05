@@ -12,7 +12,7 @@ public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
     public string ExplosionSound => "Sound_EnemyExplosion";
     public string ExplosionEffect => "EnemyExplosionBlue";
 
-    private ReusableObject ExplosionPrefab;
+    [SerializeField]private ReusableObject ExplosionPrefab;
 
     public HealthBar HealthBar { get; set; }
     public DamageStrategy DamageStrategy { get; set; }

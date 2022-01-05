@@ -33,12 +33,10 @@ public class Game : Singleton<Game>
         switch (currentSceneIndex)
         {
             case 0://menu
-                //Camera.main.GetComponent<UniversalAdditionalCameraData>().SetRenderer(1);
                 m_SceneStateController.SetState(new MenuState(m_SceneStateController));
                 break;
-            case 1://battle
+            case 1://battle//测试
                 LevelManager.Instance.LoadGame();//直接从战斗场景开始，直接读取存档
-                //LevelManager.Instance.SetUnlockAll(TestMode);//直接场景开始，如果测试模式则解锁全部
                 m_SceneStateController.SetState(new BattleState(m_SceneStateController));
                 break;
         }

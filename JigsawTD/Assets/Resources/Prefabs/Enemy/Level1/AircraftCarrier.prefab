@@ -14323,6 +14323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
   model: {fileID: 7619665209501119904}
+  ExplosionPrefab: {fileID: 4814509631623709245, guid: 5f97e7072f35f4247ba239aeefa4f705, type: 3}
   aircarftIntensify: 0.08
   airCraftPrefab: {fileID: 3805183255559639336, guid: 3f4b164b244241543ab8992a7aa77762, type: 3}
 --- !u!1 &6742057777134879647

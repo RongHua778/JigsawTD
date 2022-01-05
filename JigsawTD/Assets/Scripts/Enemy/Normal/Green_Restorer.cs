@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Green_Restorer : Enemy
 {
-    public override string ExplosionEffect => "EnemyExplosionGreen";
     protected override void SetStrategy()
     {
         DamageStrategy = new RestorerStrategy(this);

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AircraftCarrier : Boss
 {
-    public override string ExplosionEffect => "BossExplosionBlue";
 
     [SerializeField] float aircarftIntensify;
     [SerializeField] Aircraft airCraftPrefab = default;
@@ -13,14 +12,12 @@ public class AircraftCarrier : Boss
     float bornCounter;
     float bornCD;
     int maxEnemyNumber;
-    private bool secondBorn;
 
     public override void Initialize(int pathIndex, EnemyAttribute attribute, float pathOffset, float intensify)
     {
         base.Initialize(pathIndex, attribute, pathOffset, intensify);
         bornCD = 2;
         maxEnemyNumber = 12;
-        secondBorn = false;
     }
 
 
@@ -35,12 +32,6 @@ public class AircraftCarrier : Boss
                 StartCoroutine(BornCor());  //开局3秒后第一次诞生小飞机
             }
         }
-        //if (!secondBorn && DamageStrategy.CurrentHealth < DamageStrategy.MaxHealth * 0.5f)
-        //{
-        //    secondBorn = true;
-        //    StopAllCoroutines();
-        //    StartCoroutine(BornCor());  //开局后生命值低于50%第二次诞生小飞机
-        //}
     }
 
     IEnumerator BornCor()

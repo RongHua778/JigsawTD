@@ -13,12 +13,10 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] Color lockColor = default;
     [SerializeField] GameObject lockIcon = default;
     bool isLock = false;
-    //private void Start()
-    //{
-    //    SetContent();
-    //}
-    public void SetContent()
+
+    public void SetContent(ContentAttribute attribute)
     {
+        contenAtt = attribute;
         isLock = contenAtt.isLock;
         lockIcon.SetActive(isLock);
         icon.sprite = contenAtt.Icon;
@@ -36,6 +34,6 @@ public class ItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        MenuUIManager.Instance.HideTips();
+        MenuManager.Instance.HideTips();
     }
 }

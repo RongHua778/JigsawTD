@@ -9,12 +9,7 @@ public class TurretInfoSetter : MonoBehaviour
     [SerializeField] Sprite[] rareSprite = default;
     [SerializeField] Image rareIcon = default;
     [SerializeField] GameObject[] levelIcons = default;
-    [SerializeField] InfoBtn rareInfo = default;
 
-    private void Start()
-    {
-        //rareInfo.SetContent(GameMultiLang.GetTraduction("RARE"));
-    }
     public void SetRare(int quality)
     {
         rareIcon.sprite = rareSprite[quality - 1];

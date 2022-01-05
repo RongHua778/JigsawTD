@@ -112,10 +112,10 @@ public class StaticData : Singleton<StaticData>
     {
         { 50, 100},
         { 75, 150},
-        { 100, 200},
-        { 150, 300},
-        { 200, 400},
-        { 300, 600}
+        { 125, 250},
+        { 175, 350},
+        { 250, 500},
+        { 350, 700}
     };
 
     protected override void Awake()

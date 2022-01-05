@@ -223,6 +223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
   model: {fileID: 7619665209501119904}
+  ExplosionPrefab: {fileID: -6034455848977891584, guid: c563cad02289a8749aacab7b722c9044, type: 3}
 --- !u!1 &8360252054385358165
 GameObject:
   m_ObjectHideFlags: 0

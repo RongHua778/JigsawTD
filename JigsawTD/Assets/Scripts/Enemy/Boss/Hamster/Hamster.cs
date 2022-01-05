@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Hamster : Enemy
 {
-    public override string ExplosionEffect => "BossExplosionRed";
 
     public static bool isFirstHamster = false;
     public static int HamsterCount;

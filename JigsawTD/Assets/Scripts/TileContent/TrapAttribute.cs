@@ -29,7 +29,7 @@ public class TrapAttribute : ContentAttribute
     public override void MenuShowTips(Vector2 pos)
     {
         base.MenuShowTips(pos);
-        MenuUIManager.Instance.ShowTrapTips(this, pos);
+        MenuManager.Instance.ShowTrapTips(this, pos);
     }
 
     public override void GameShowTips(Vector2 pos)

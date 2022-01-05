@@ -6,8 +6,7 @@ using UnityEngine;
 public abstract class Enemy : PathFollower, IDamageable
 {
     public virtual string ExplosionSound => "Sound_EnemyExplosion";
-    public virtual string ExplosionEffect { get; }
-    protected ReusableObject ExplosionPrefab;
+    [SerializeField] protected ReusableObject ExplosionPrefab;
     [Header("ª˘±æ≈‰÷√")]
     protected Animator anim;
     public HealthBar HealthBar { get; set; }
@@ -83,8 +82,9 @@ public abstract class Enemy : PathFollower, IDamageable
 
     }
 
-    public virtual void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         SetStrategy();
         HealthBar = model.GetComponentInChildren<HealthBar>();
         enemySprite = model.Find("GFX").GetComponent<SpriteRenderer>();
@@ -92,9 +92,6 @@ public abstract class Enemy : PathFollower, IDamageable
         Buffable = this.GetComponent<BuffableEntity>();
         enemyCol = enemySprite.GetComponent<CircleCollider2D>();
         anim = GetComponent<Animator>();
-
-        ExplosionPrefab = Resources.Load<ReusableObject>("Prefabs/Effects/Enemy/" + ExplosionEffect);
-
 
     }
 

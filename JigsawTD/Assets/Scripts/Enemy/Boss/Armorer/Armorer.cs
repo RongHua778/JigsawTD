@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Armorer : Boss
 {
-    public override string ExplosionEffect => "BossExplosionYellow";
-
     [SerializeField] float armorIntensify; 
     public float Armor { get; set; }
 

@@ -5,7 +5,6 @@ using UnityEngine;
 public interface IDamageable
 {
     string ExplosionSound { get; }
-    string ExplosionEffect { get; }
     DamageStrategy DamageStrategy { get; set; }
     HealthBar HealthBar { get; set; }
 }
@@ -14,6 +13,7 @@ public abstract class DamageStrategy
 {
     public IDamageable damageTarget;
     public Transform ModelTrans;
+
     protected float currentHealth;
     protected float maxHealth;
     private bool isDie;
