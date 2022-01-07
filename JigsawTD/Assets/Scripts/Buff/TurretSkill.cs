@@ -56,7 +56,7 @@ public abstract class TurretSkill
 
     }
 
-    public virtual void Hit(IDamageable target, Bullet bullet = null)
+    public virtual void Hit(IDamage target, Bullet bullet = null)
     {
 
     }
@@ -96,12 +96,12 @@ public abstract class TurretSkill
 
     }
 
-    public virtual void OnEnter(IDamageable target)
+    public virtual void OnEnter(IDamage target)
     {
 
     }
 
-    public virtual void OnExit(IDamageable target)
+    public virtual void OnExit(IDamage target)
     {
 
     }
@@ -218,12 +218,12 @@ public class RapiderSkill : InitialSkill
     public override TurretSkillName EffectName => TurretSkillName.RapiderSkill;
     public override string SkillDescription => "RAPIDERSKILL";
 
-    private IDamageable lastTarget;
+    private IDamage lastTarget;
     private float speedIncreased;
 
     public override void Shoot(Bullet bullet = null)
     {
-        IDamageable target = strategy.Turret.Target[0].Enemy;
+        IDamage target = strategy.Turret.Target[0].Enemy;
         if (target != lastTarget)
         {
             lastTarget = target;
@@ -251,11 +251,11 @@ public class ConstructorSkill : InitialSkill
     public override TurretSkillName EffectName => TurretSkillName.ConstructorSkill;
     public override string SkillDescription => "CONSTRUCTORSKILL";
 
-    public override void OnEnter(IDamageable target)
+    public override void OnEnter(IDamage target)
     {
         strategy.TurnAttackIntensify += 0.1f * strategy.TimeModify;
     }
-    public override void OnExit(IDamageable target)
+    public override void OnExit(IDamage target)
     {
         strategy.TurnAttackIntensify -= 0.1f * strategy.TimeModify;
     }
@@ -305,7 +305,7 @@ public class BoomerrangSkill : InitialSkill
         strategy.BaseGoldCount += 2;
     }
 
-    public override void Hit(IDamageable target, Bullet bullet = null)
+    public override void Hit(IDamage target, Bullet bullet = null)
     {
         base.Hit(target, bullet);
         bullet.Damage *= 1.05f;

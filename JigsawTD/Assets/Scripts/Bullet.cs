@@ -101,7 +101,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         }
     }
 
-    protected void TriggerHitEffect(IDamageable target)
+    protected void TriggerHitEffect(IDamage target)
     {
         foreach (TurretSkill effect in turretEffects)
         {
@@ -147,7 +147,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     {
         ReclaimBullet();
     }
-    public void DealRealDamage(IDamageable target, bool isSputtering = false)
+    public void DealRealDamage(IDamage target, bool isSputtering = false)
     {
         if (SlowRate > 0 && target.DamageStrategy.IsEnemy)//技能可能会修改slowrate
         {
@@ -162,7 +162,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         turretParent.Strategy.TurnDamage += (int)realDamage;//回合伤害统计
     }
 
-    public void DamageProcess(IDamageable target, bool isSputtering = false)
+    public void DamageProcess(IDamage target, bool isSputtering = false)
     {
         TriggerHitEffect(target);
         DealRealDamage(target, isSputtering);

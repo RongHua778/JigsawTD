@@ -24,10 +24,10 @@ public class MainUI : IUserInterface
             switch (lang)
             {
                 case "ch":
-                    waveTxt.text = GameMultiLang.GetTraduction("NUM") + value + (LevelManager.Instance.CurrentLevel.Mode > 10 ? "" : "/" + LevelManager.Instance.CurrentLevel.Wave) + GameMultiLang.GetTraduction("WAVE");
+                    waveTxt.text = GameMultiLang.GetTraduction("NUM") + value + (LevelManager.Instance.CurrentLevel.Difficulty == 99 ? "" : "/" + LevelManager.Instance.CurrentLevel.Wave) + GameMultiLang.GetTraduction("WAVE");
                     break;
                 case "en":
-                    waveTxt.text = GameMultiLang.GetTraduction("WAVE") + value + (LevelManager.Instance.CurrentLevel.Mode > 10 ? "" : "/" + LevelManager.Instance.CurrentLevel.Wave);
+                    waveTxt.text = GameMultiLang.GetTraduction("WAVE") + value + (LevelManager.Instance.CurrentLevel.Difficulty == 99 ? "" : "/" + LevelManager.Instance.CurrentLevel.Wave);
                     break;
             }
         }

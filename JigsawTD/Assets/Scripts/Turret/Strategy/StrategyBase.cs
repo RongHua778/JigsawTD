@@ -390,7 +390,7 @@ public class StrategyBase
         }
     }
 
-    public void EnterSkill(IDamageable target)
+    public void EnterSkill(IDamage target)
     {
         for (int i = 0; i < TurretSkills.Count; i++)
         {
@@ -398,7 +398,7 @@ public class StrategyBase
         }
     }
 
-    public void ExitSkill(IDamageable target)
+    public void ExitSkill(IDamage target)
     {
         for (int i = 0; i < TurretSkills.Count; i++)
         {

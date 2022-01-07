@@ -19,7 +19,7 @@ public class UIEndlessMode : MonoBehaviour
 
     public void EndlessModeStart()
     {
-        LevelManager.Instance.StartNewGame(11);
+        LevelManager.Instance.StartNewGame(99);
     }
 
 }

@@ -194,7 +194,7 @@ public class GameManager : Singleton<GameManager>
             m_MainUI.GameSpeed = 3;
         }
 
-        if (Input.GetKeyDown(KeyCode.Q) && LevelManager.Instance.CurrentLevel.Mode != 0)
+        if (Input.GetKeyDown(KeyCode.Q) && LevelManager.Instance.CurrentLevel.Difficulty != 0)
         {
             m_BluePrintShopUI.ShopBtnClick();
         }
@@ -275,7 +275,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (Game.Instance.OnTransition)
             return;
-        LevelManager.Instance.StartNewGame(LevelManager.Instance.CurrentLevel.Mode);
+        LevelManager.Instance.StartNewGame(LevelManager.Instance.CurrentLevel.Difficulty);
     }
 
     public void ReturnToMenu()

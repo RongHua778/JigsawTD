@@ -55,7 +55,7 @@ public class EnemySequenceStruct
 [Serializable]
 public class GameResStruct
 {
-    public int Mode;//0=standard,1=Endless
+    public int Difficulty;//0=standard,1=Endless
     public int Coin;
     public int Wave;
     public int BuildCost;

@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using TMPro;
+using DG.Tweening;
 
 public class GameEndUI : IUserInterface
 {
     [SerializeField] TurretBillboard m_BillBoard = default;
-    [SerializeField] Text title = default;
+    [SerializeField] Image titleBG = default;
+    [SerializeField] TextMeshProUGUI title = default;
     [SerializeField] Text passTimeTxt = default;
     [SerializeField] Text totalCompositeTxt = default;
     [SerializeField] Text totalDamageTxt = default;
@@ -17,6 +20,13 @@ public class GameEndUI : IUserInterface
     [SerializeField] Text expValueTxt = default;
     [SerializeField] InfoBtn expInfoBtn = default;
     [SerializeField] GameLevelHolder gameLevelPrefab = default;
+
+    [SerializeField] GameObject NextLevelBtn = default;
+    [SerializeField] GameObject RestartBtn = default;
+
+    [Header("标题底图")]
+    [SerializeField] Sprite[] TitleBGs = default;
+
     int changeSpeed = 10;
     float waittime = 0.05f;
     float result = 0;
@@ -44,27 +54,42 @@ public class GameEndUI : IUserInterface
             GameMultiLang.GetTraduction("WAVE") + "*(1+25%*" +
             GameMultiLang.GetTraduction("BOSSDEFEAT") + ")");
 
-        if (LevelManager.Instance.CurrentLevel.Mode == 11)//无尽模式
+        if (LevelManager.Instance.CurrentLevel.Difficulty == 99)//无尽模式
         {
-            title.text = GameMultiLang.GetTraduction("WIN") + (GameRes.CurrentWave) + GameMultiLang.GetTraduction("WAVE");
+            title.text = GameMultiLang.GetTraduction("PASSLEVEL") +  (GameRes.CurrentWave) +  GameMultiLang.GetTraduction("WAVE");
             LevelManager.Instance.EndlessHighScore = GameRes.CurrentWave;
-            int tempWordID = Mathf.Clamp((GameRes.CurrentWave - 30) / 10, 0, 5);
+            int tempWordID = Mathf.Clamp((GameRes.CurrentWave - 20) / 10, 0, 5);
+            titleBG.sprite = TitleBGs[tempWordID + 2];
             GameEvents.Instance.TempWordTrigger(new TempWord(TempWordType.EndlessEnd, tempWordID));
-
         }
         else//标准模式
         {
             if (win)
             {
-                title.text = GameMultiLang.GetTraduction("WIN") + GameMultiLang.GetTraduction("DIFFICULTY") + (LevelManager.Instance.CurrentLevel.Difficulty).ToString();
+                title.text = GameMultiLang.GetTraduction("WIN")+ GameMultiLang.GetTraduction("DIFFICULTY") + (LevelManager.Instance.CurrentLevel.Difficulty).ToString();
                 GameEvents.Instance.TempWordTrigger(new TempWord(TempWordType.StandardWin, LevelManager.Instance.CurrentLevel.Difficulty));
                 LevelManager.Instance.PassDiifcutly = LevelManager.Instance.CurrentLevel.Difficulty + 1;
+                titleBG.sprite = TitleBGs[LevelManager.Instance.CurrentLevel.Difficulty + 1];
+                if (LevelManager.Instance.CurrentLevel.Difficulty < 6)//当前难度低于最大难度时，显示下一难度
+                {
+                    NextLevelBtn.SetActive(true);
+                    RestartBtn.SetActive(false);
+                }
+                else
+                {
+                    NextLevelBtn.SetActive(false);
+                    RestartBtn.SetActive(false);
+                }
 
             }
             else
             {
                 title.text = GameMultiLang.GetTraduction("LOSE");
                 GameEvents.Instance.TempWordTrigger(new TempWord(TempWordType.StandardLose, LevelManager.Instance.CurrentLevel.Difficulty));
+
+                titleBG.sprite = TitleBGs[0];
+                NextLevelBtn.SetActive(false);
+                RestartBtn.SetActive(true);
             }
         }
 
@@ -144,6 +169,11 @@ public class GameEndUI : IUserInterface
 
         SetExp();
         StopCoroutine(SetValueCor());
+    }
+
+    public void NextLevelBtnClick()
+    {
+        LevelManager.Instance.StartNewGame(LevelManager.Instance.CurrentLevel.Difficulty + 1);
     }
 
 

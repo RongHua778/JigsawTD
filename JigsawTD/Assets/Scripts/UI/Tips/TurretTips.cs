@@ -8,8 +8,6 @@ using TMPro;
 public class TurretTips : TileTips
 {
 
-    //Camera mainCam;
-    //[SerializeField] Canvas myCanvas = default;
     [SerializeField] Text RangeTypeValue = default;
     [SerializeField] Text AttackValue = default;
     [SerializeField] Text SpeedValue = default;
@@ -81,9 +79,7 @@ public class TurretTips : TileTips
         base.Hide();
         m_Grid = null;
         m_Strategy = null;
-        //showingBlueprint = false;
         showingTurret = false;
-
     }
 
     public override void CloseTips()

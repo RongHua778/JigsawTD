@@ -86,14 +86,7 @@ public class FreeGround : ElementSkill
     public override void Build()
     {
         base.Build();
-        if (strategy.FinalRange >= 6)
-        {
-            strategy.BaseRangeIntensify += 2;
-        }
-        else
-        {
-            strategy.BaseRangeIntensify += 1;
-        }
+        strategy.BaseRangeIntensify += 1;
 
     }
 
@@ -167,7 +160,7 @@ public class PortalHit : ElementSkill
     public override List<int> Elements => new List<int> { 1, 3, 4 };
     public override string SkillDescription => "PORTALHIT";
 
-    public override void Hit(IDamageable target, Bullet bullet = null)
+    public override void Hit(IDamage target, Bullet bullet = null)
     {
         if (Random.value > 0.92f)
             //((Enemy)target).Flash(2);

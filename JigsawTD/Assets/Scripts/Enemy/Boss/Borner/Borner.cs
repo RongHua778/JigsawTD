@@ -35,7 +35,7 @@ public class Borner : Boss
         for (int i = 0; i < enemyOneBorn[level]; i++)
         {
             int typeInt = Random.Range(0, 6);
-            GameManager.Instance.SpawnEnemy((EnemyType)typeInt, PointIndex, Intensify / 2);
+            GameManager.Instance.SpawnEnemy((EnemyType)typeInt, PointIndex, Intensify / 3);
         }
     }
 

@@ -6,8 +6,6 @@ using System.Linq;
 
 public class BuffableEntity : MonoBehaviour
 {
-    //public Dictionary<int, EnemyBuff> Buffs = new Dictionary<int, EnemyBuff>();
-
     public List<EnemyBuff> TileBuffs = new List<EnemyBuff>();
     public List<EnemyBuff> TimeBuffs = new List<EnemyBuff>();
     public Enemy Enemy { get; set; }

@@ -43,7 +43,6 @@ public class WaveSystem : IGameSystem
     {
         GameRes.Life -= enemy.ReachDamage;//必须先减少LIFE判失败
         GameRes.EnemyRemain--;
-        //GameRes.Life -= enemy.ReachDamage;//必须先减少LIFE判失败
     }
 
     private void EnemyDie(Enemy enemy)

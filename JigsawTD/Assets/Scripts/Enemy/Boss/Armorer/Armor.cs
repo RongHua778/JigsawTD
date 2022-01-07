@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Armor : MonoBehaviour,IDamageable
+public class Armor : MonoBehaviour,IDamage
 {
     public string ExplosionSound => "Sound_EnemyExplosion";
     [SerializeField] private ReusableObject ExplosionPrefab;

@@ -7,7 +7,7 @@ public enum Destination
     boss, target, Random
 }
 
-public abstract class Aircraft : ReusableObject, IDamageable, IGameBehavior
+public abstract class Aircraft : ReusableObject, IDamage, IGameBehavior
 {
     public string ExplosionSound => "Sound_EnemyExplosion";
     public string ExplosionEffect => "EnemyExplosionBlue";

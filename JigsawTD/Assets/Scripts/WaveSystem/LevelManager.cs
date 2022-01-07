@@ -35,7 +35,7 @@ public class LevelManager : Singleton<LevelManager>
         set
         {
             if (value > PlayerPrefs.GetInt("MaxDifficulty", 0))
-                PlayerPrefs.SetInt("MaxDifficulty", Mathf.Min(5, value));
+                PlayerPrefs.SetInt("MaxDifficulty", Mathf.Min(6, value));
         }
     }
 
@@ -72,7 +72,7 @@ public class LevelManager : Singleton<LevelManager>
 
         foreach (var level in StandardLevels)
         {
-            LevelDIC.Add(level.Mode, level);
+            LevelDIC.Add(level.Difficulty, level);
         }
     }
 
@@ -168,10 +168,12 @@ public class LevelManager : Singleton<LevelManager>
 
     public void StartNewGame(int modeID)
     {
+        CurrentLevel = GetLevelAtt(modeID);
+        if (CurrentLevel == null)
+            return;
         LevelEnd = false;
         LastGameSave.ClearGame();
         GameSaveContents.Clear();
-        CurrentLevel = GetLevelAtt(modeID);
         DeleteGameSave();
         Game.Instance.LoadScene(1);
     }
@@ -234,7 +236,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (LastGameSave.HasLastGame)
         {
-            CurrentLevel = GetLevelAtt(LastGameSave.SaveRes.Mode);
+            CurrentLevel = GetLevelAtt(LastGameSave.SaveRes.Difficulty);
             DeleteGameSave();
         }
     }

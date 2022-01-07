@@ -282,7 +282,7 @@ public static class GameRes
     private static GameResStruct SetSaveRes()
     {
         GameResStruct resStruct = new GameResStruct();
-        resStruct.Mode = LevelManager.Instance.CurrentLevel.Mode;
+        resStruct.Difficulty = LevelManager.Instance.CurrentLevel.Difficulty;
         resStruct.Coin = Coin;
         resStruct.Wave = CurrentWave;
         resStruct.CurrentLife = Life;

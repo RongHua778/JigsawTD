@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : PathFollower, IDamageable
+public abstract class Enemy : PathFollower, IDamage
 {
     public virtual string ExplosionSound => "Sound_EnemyExplosion";
     [SerializeField] protected ReusableObject ExplosionPrefab;
@@ -61,8 +61,6 @@ public abstract class Enemy : PathFollower, IDamageable
             HealthBar.ShowIcon(0, slowRate > 0f);
         }
     }
-
-    public float TargetDamageCounter { get; set; }
 
     public BuffableEntity Buffable { get; set; }
     private float slowResist;
@@ -155,12 +153,6 @@ public abstract class Enemy : PathFollower, IDamageable
     }
 
 
-    protected override void PrepareNextState()
-    {
-        base.PrepareNextState();
-
-    }
-
     protected IEnumerator ExitCor()
     {
         anim.SetTrigger("Exit");
@@ -227,8 +219,6 @@ public abstract class Enemy : PathFollower, IDamageable
         base.OnUnSpawn();
         PassedTraps.Clear();
         isOutTroing = false;
-        //ObjectPool.Instance.UnSpawn(healthBar);
-        TargetDamageCounter = 0;
         SpeedIntensify = 0;
         AffectHealerCount = 0;
 
