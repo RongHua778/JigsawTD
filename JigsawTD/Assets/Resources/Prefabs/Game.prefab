@@ -275,7 +275,7 @@ MonoBehaviour:
   transitionTime: 1
   Tutorial: 1
   OnTransition: 0
-  TestMode: 1
+  TestMode: 0
 --- !u!114 &3979959846567427948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,7 +288,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c51ce8f2b50464540adc985be2bf073a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameContents: []
   GameLevels:
   - ExpRequire: 300
     UnlockItems: []
@@ -325,7 +324,7 @@ MonoBehaviour:
   - ExpRequire: 180000
     UnlockItems:
     - {fileID: 11400000, guid: c10d0ad6d60f8eb419d0ea97cd6014b0, type: 2}
-  permitGameLevel: 15
+  permitGameLevel: 1
   AllContent:
   - {fileID: 11400000, guid: 8b69e55deebc49d44b73c6e458a12794, type: 2}
   - {fileID: 11400000, guid: 2a0c266b352137f45b20d3723395e650, type: 2}
@@ -376,13 +375,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 00b992198a245254bbe331c2618239cd, type: 2}
   - {fileID: 11400000, guid: aa5a923b0cb87d348914e228fc353f67, type: 2}
   - {fileID: 11400000, guid: b6403761d56b0914599f3e8e647a50b7, type: 2}
-  PremitDifficulty: 6
+  PremitDifficulty: 1
   CurrentLevel: {fileID: 11400000, guid: 1cffab4195a17dc4f8326be6876fab11, type: 2}
+  GameSaveContents: []
   NeedLoadGame: 1
   LastGameSave:
+    HasLastGame: 0
     SaveBluePrints: []
     SaveRes:
-      Mode: 0
+      Difficulty: 0
       Coin: 0
       Wave: 0
       BuildCost: 0
@@ -421,7 +422,7 @@ MonoBehaviour:
   _strategyFactory: {fileID: 11400000, guid: 328a3a7240180f7409f1f8d5a3654b4f, type: 2}
   _nonEnemyFactory: {fileID: 11400000, guid: 30f433efbe7ecd14e811dc996935ecb0, type: 2}
   SystemMaxLevel: 6
-  LevelUpMoney: 0000000050000000c80000005e010000260200002003000052030000
+  LevelUpMoney: 000000003c000000c80000005e010000260200002003000052030000
   StartCoin: 0
   BaseWaveIncome: 25
   WaveMultiplyIncome: 10

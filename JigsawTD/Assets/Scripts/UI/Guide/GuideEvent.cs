@@ -196,3 +196,13 @@ public class LockKeyboard : GuideEvent
     }
 }
 
+public class SetTriggerOnce : GuideEvent
+{
+    public string triggerKey;
+    public int value;
+    public override void Trigger()
+    {
+        PlayerPrefs.SetInt(triggerKey, value);
+    }
+}
+

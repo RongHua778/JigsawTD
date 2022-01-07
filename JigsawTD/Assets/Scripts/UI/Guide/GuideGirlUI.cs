@@ -30,7 +30,7 @@ public class GuideGirlUI : SerializedMonoBehaviour
 
     [Title("小姐姐临时对话")]
     [SerializeField] DialogueData RefreshShop = default;
-
+    [SerializeField] DialogueData DemoDialogue = default;
 
     [Title("教学物体")]
     [SerializeField] GameObject[] GuideObjects = default;
@@ -109,6 +109,9 @@ public class GuideGirlUI : SerializedMonoBehaviour
             case TempWordType.RefreshShop:
                 if (Random.value > 0.95f)//有5%概率触发
                     StartCoroutine(TempWordCor(RefreshShop,Random.Range(0,RefreshShop.Words.Length-1)));
+                break;
+            case TempWordType.Demo:
+                StartCoroutine(TempWordCor(DemoDialogue, wordType.ID));
                 break;
         }
     }

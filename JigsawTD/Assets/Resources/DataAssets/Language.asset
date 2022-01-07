@@ -40,12 +40,27 @@ MonoBehaviour:
   - Key: RESTART
     Chinese: "\u91CD\u65B0\u5F00\u59CB"
     English: Restart
+  - Key: NEXTLEVEL
+    Chinese: "\u4E0B\u4E00\u96BE\u5EA6"
+    English: Next Level
   - Key: RETURNTOMENU
     Chinese: "\u4FDD\u5B58\u5E76\u8FD4\u56DE\u83DC\u5355"
     English: Save & Return Menu
   - Key: QUIT2
     Chinese: "\u4FDD\u5B58\u5E76\u9000\u51FA\u6E38\u620F"
     English: Save & Quit
+  - Key: BILLBOARD
+    Chinese: "\u6392\u884C\u699C"
+    English: LEADERBOARD
+  - Key: ENDLESSBILLBOARD
+    Chinese: "\u65E0\u5C3D\u6392\u884C\u699C"
+    English: Endless Mode Leaderboard
+  - Key: RANK
+    Chinese: "\u6392\u540D"
+    English: Rank
+  - Key: ID
+    Chinese: "\u73A9\u5BB6"
+    English: ID
   - Key: RETURNTOMENU2
     Chinese: "\u8FD4\u56DE\u83DC\u5355"
     English: Return Menu
@@ -179,7 +194,7 @@ MonoBehaviour:
     English: DIFFICULTY
   - Key: DIFFICULTY
     Chinese: "\u96BE\u5EA6"
-    English: Difficulty
+    English: 'Difficulty '
   - Key: HIGHSCORE
     Chinese: "\u6700\u9AD8\u8BB0\u5F55"
     English: HIGHSCORE
@@ -433,13 +448,13 @@ MonoBehaviour:
     English: Perfect Element can served as any element for refactor
   - Key: WIN
     Chinese: "\u901A\u5173"
-    English: 
+    English: 'Pass '
   - Key: LOSE
     Chinese: "\u7ED3\u675F"
     English: END
   - Key: PASSLEVEL
-    Chinese: "\u4F60\u901A\u8FC7\u4E86"
-    English: You have pass
+    Chinese: "\u901A\u8FC7"
+    English: 'Pass '
   - Key: TOTALDAMAGE
     Chinese: "\u9020\u6210\u603B\u4F24\u5BB3"
     English: Total Damage
@@ -458,6 +473,12 @@ MonoBehaviour:
   - Key: GAINGOLD
     Chinese: "\u83B7\u53D6\u4EE3\u5E01"
     English: Gained Gold
+  - Key: DISCORD
+    Chinese: "\u52A0\u5165Discord"
+    English: Join Discord
+  - Key: QQ
+    Chinese: "QQ\u7FA4"
+    English: QQ Group
   - Key: THANKSINFO
     Chinese: "\u611F\u8C22\u60A8\u4F53\u9A8C\u300A\u91CD\u6784\u300B\u6E38\u620FDEMO\uFF0C\u5982\u679C\u4F60\u559C\u6B22\u6211\u4EEC\u7684\u6E38\u620F\uFF0C\u8BF7\u626B\u7801\u628A\u5B83\u52A0\u5165\u613F\u671B\u5355\u5427\uFF01"
     English: Thank you for experiencing the game demo. If you like our game, please
@@ -919,8 +940,8 @@ MonoBehaviour:
     Chinese: "\u52A0\u957F\u70AE\u7BA1"
     English: Longer barrel
   - Key: ACEINFO
-    Chinese: "\u653B\u51FB\u8303\u56F4+1\uFF0C\u5982\u679C\u653B\u51FB\u8303\u56F4\u5927\u4E8E\u7B49\u4E8E6\uFF0C\u5219\u989D\u5916+1"
-    English: Range +1, and +2 if range is greater than or equal to 6
+    Chinese: "\u653B\u51FB\u8303\u56F4+1"
+    English: Range +1
   - Key: ADE
     Chinese: "\u5E7B\u5316\u6784\u9020"
     English: Unreal module
@@ -1346,9 +1367,6 @@ MonoBehaviour:
   - Key: Guide41
     Chinese: "<color=#FFEA6D>\u8BF7\u575A\u630130\u6CE2\u8FDB\u653B</color>,\u5B8C\u6210\u8FD9\u4E00\u6B21\u6559\u7A0B."
     English: Now, please stick to 30 waves to complete this tutorial.
-  - Key: "//\u5C0F\u59D0\u59D0\u4E34\u65F6\u5BF9\u8BDD"
-    Chinese: 
-    English: 
   - Key: "//\u6807\u51C6\u6A21\u5F0F\u80DC\u5229"
     Chinese: 
     English: 
@@ -1443,3 +1461,10 @@ MonoBehaviour:
   - Key: Temp44
     Chinese: "\u5F00\u62D3\u7684\u91CE\u5FC3\u548C\u5BF9\u6781\u9650\u7684\u8FFD\u6C42\u6211\u4EEC\u4ECE\u672A\u505C\u6B62,\u6307\u6325\u5B98,\u8BF7\u7EE7\u7EED\u5427!"
     English: Our greatest glory never falls, my commander. Please keep it up!
+  - Key: "//\u5C0F\u59D0\u59D0\u4E34\u65F6\u5BF9\u8BDD"
+    Chinese: 
+    English: 
+  - Key: Temp51
+    Chinese: "\u90E8\u7F72\u5B98\uFF0C\u91CD\u6784DEMO\u4F53\u9A8C\u5185\u5BB9\u5DF2\u7ECF\u7ED3\u675F\uFF0C\u6B63\u5F0F\u7248\u5C06\u4E8E2-3\u6708\u4EFD\u4E0A\u7EBF\uFF0C\u52A0\u5165\u91CD\u6784\u5148\u9063\u6D4B\u8BD5QQ\u7FA4<color=#FFEA6D>809891580</color>\u7B2C\u4E00\u65F6\u95F4\u540C\u6B65\u4E0A\u7EBF\u6D88\u606F."
+    English: Deployment officer, the DEMO has been completed, the official version
+      will be launched in February.You can follow our discord to get the latest news.

@@ -18,3 +18,13 @@ public class HasGold : GuideCondition
         return GameRes.Coin >= Amount;
     }
 }
+
+public class FirstTime : GuideCondition
+{
+    public string trigger;
+    public int value;
+    public override bool Judge()
+    {
+        return PlayerPrefs.GetInt(trigger, 0) != value;
+    }
+}

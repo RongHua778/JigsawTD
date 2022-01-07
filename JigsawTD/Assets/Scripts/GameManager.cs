@@ -102,7 +102,7 @@ public class GameManager : Singleton<GameManager>
         m_MainUI.Show();
         //关闭显示强制摆放位置
         m_BoardSystem.SetTutorialPoss(false);
-        m_GuideGirlUI.PrepareTutorial();
+
 
         if (LevelManager.Instance.LastGameSave.HasLastGame)
         {
@@ -132,6 +132,7 @@ public class GameManager : Singleton<GameManager>
         m_BoardSystem.FirstGameSet();
         //开局准备下一波
         PrepareNextWave();
+        m_GuideGirlUI.PrepareTutorial();
     }
 
 
@@ -542,6 +543,17 @@ public class GameManager : Singleton<GameManager>
     public void AddtoWishList()
     {
         Application.OpenURL("https://store.steampowered.com/app/1664670/_Refactor");
+    }
+
+    public void JoinDiscord()
+    {
+        Application.OpenURL("https://discord.gg/bPgMZ6kgBH");
+
+    }
+
+    public void JoinQQ()
+    {
+        Application.OpenURL("https://jq.qq.com/?_wv=1027&k=wuuN4Bll");
     }
 
     public void SetCamMovable(bool value)

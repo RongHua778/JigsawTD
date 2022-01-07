@@ -65,7 +65,7 @@ MonoBehaviour:
       Data: 3|GuideEvent[], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
       Data: 4|RectMaskObj, Assembly-CSharp
@@ -99,6 +99,12 @@ MonoBehaviour:
     - Name: isLock
       Entry: 5
       Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 7|EndTutorial, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 

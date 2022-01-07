@@ -15,7 +15,7 @@ MonoBehaviour:
   Mode: 1
   Difficulty: 1
   PlayerHealth: 25
-  Wave: 20
+  Wave: 2
   LevelIntensify: 1.25
   NormalEnemies:
   - {fileID: 11400000, guid: a2fa830bad8e11c448623ce28354a1bd, type: 2}
@@ -54,7 +54,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: da93faa4a28eeaf4f80d517dd53da1bc, type: 2}
   - {fileID: 11400000, guid: cd7fe804ec97dab458e086fcd1802395, type: 2}
   - {fileID: 11400000, guid: 972bc55b3e1d1104987ed18dc0d52e96, type: 2}
-  - {fileID: 11400000, guid: 21f8aa377857fa148a8678068f343a63, type: 2}
   CanSaveGame: 0
   WinDialogue: {fileID: 11400000, guid: 3b7319aad1e3c094bbcfa99391fbbb6b, type: 2}
   LostDialogue: {fileID: 11400000, guid: 677b97dfba4d7a54ebcab04bb7b727c6, type: 2}

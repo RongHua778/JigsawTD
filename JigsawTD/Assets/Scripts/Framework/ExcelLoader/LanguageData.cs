@@ -15,6 +15,15 @@ namespace Lanuguage
 
     }
 
+    [Serializable]
+
+    public class SpriteData
+    {
+        public string Key;
+        public Sprite Chinese;
+        public Sprite English;
+    }
+
 
 }
 

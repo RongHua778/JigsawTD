@@ -61,6 +61,9 @@ public class GameEndUI : IUserInterface
             int tempWordID = Mathf.Clamp((GameRes.CurrentWave - 20) / 10, 0, 5);
             titleBG.sprite = TitleBGs[tempWordID + 2];
             GameEvents.Instance.TempWordTrigger(new TempWord(TempWordType.EndlessEnd, tempWordID));
+            SteamLeaderboard.UpdateScore(GameRes.CurrentWave);
+            NextLevelBtn.SetActive(false);
+            RestartBtn.SetActive(true);
         }
         else//标准模式
         {
@@ -173,6 +176,12 @@ public class GameEndUI : IUserInterface
 
     public void NextLevelBtnClick()
     {
+        if (LevelManager.Instance.CurrentLevel.Difficulty + 1 >= LevelManager.Instance.PremitDifficulty)
+        {
+            TempWord tempWord = new TempWord(TempWordType.Demo, 0);
+            GameEvents.Instance.TempWordTrigger(tempWord);
+            return;
+        }
         LevelManager.Instance.StartNewGame(LevelManager.Instance.CurrentLevel.Difficulty + 1);
     }
 

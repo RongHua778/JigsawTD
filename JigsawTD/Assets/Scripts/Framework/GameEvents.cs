@@ -27,7 +27,8 @@ public enum TempWordType
     StandardWin,
     EndlessEnd,
     RefreshShop,
-    Refactor
+    Refactor,
+    Demo
 }
 
 public struct TempWord

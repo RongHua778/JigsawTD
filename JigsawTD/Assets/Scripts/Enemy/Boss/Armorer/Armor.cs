@@ -5,7 +5,7 @@ using UnityEngine;
 public class Armor : MonoBehaviour,IDamage
 {
     public string ExplosionSound => "Sound_EnemyExplosion";
-    [SerializeField] private ReusableObject ExplosionPrefab;
+    [SerializeField] private ReusableObject ExplosionPrefab=default;
 
     public HealthBar HealthBar { get; set; }
 

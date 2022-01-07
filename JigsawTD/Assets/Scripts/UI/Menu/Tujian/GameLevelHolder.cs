@@ -95,8 +95,8 @@ public class GameLevelHolder : MonoBehaviour
                     yield return new WaitForSeconds(0.02f);
                 }
                 CurrentExp = 0;
-                GameManager.Instance.ShowBonusTips(LevelManager.Instance.GetLevelInfo(CurrentLevel));
                 CurrentLevel++;
+                GameManager.Instance.ShowBonusTips(LevelManager.Instance.GetLevelInfo(CurrentLevel));
                 Sound.Instance.PlayEffect("Sound_LevelUp");
                 ExpCor(Exp - need);
             }

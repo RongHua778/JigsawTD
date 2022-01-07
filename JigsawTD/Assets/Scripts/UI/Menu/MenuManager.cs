@@ -3,16 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Steamworks;
 
 public class MenuManager : Singleton<MenuManager>
 {
     Canvas m_Canvas;
     //界面系统
     [SerializeField] UIMenu m_UIMenu = default;
-    [SerializeField] UIMode m_UILevelManager = default;
+    [SerializeField] UIMode m_UIMode = default;
     [SerializeField] MenuMessage m_UIMessage = default;
     [SerializeField] UITujian m_UITujian = default;
     [SerializeField] UISetting m_UISetting = default;
+    [SerializeField] UIBillBoard m_UIBillboard = default;
     //tips
     [SerializeField] TurretTips m_TurretTips = default;
     [SerializeField] TrapTips m_TrapTips = default;
@@ -25,15 +27,16 @@ public class MenuManager : Singleton<MenuManager>
         //UI
         m_UIMenu.Initialize();
         m_UIMessage.Initialize();
-        m_UILevelManager.Initialize();
+        m_UIMode.Initialize();
         m_UITujian.Initialize();
         m_UISetting.Initialize();
-
+        m_UIBillboard.Initialize();
         //TIPS
         m_TurretTips.Initialize();
         m_TrapTips.Initialize();
         m_EnemyInfoTips.Initialize();
 
+        SteamLeaderboard.Init();
 
     }
 
@@ -42,10 +45,15 @@ public class MenuManager : Singleton<MenuManager>
 
     }
 
-    public void StartGame()
+    public void OpenBillboard()
+    {
+        m_UIBillboard.Show();
+    }
+
+    public void OpenMode()
     {
         m_UIMenu.ClosePanel();
-        m_UILevelManager.Show();
+        m_UIMode.Show();
     }
 
     public void ContinueGame()

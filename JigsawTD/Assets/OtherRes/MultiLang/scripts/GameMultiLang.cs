@@ -5,21 +5,20 @@ using Lanuguage;
 using Sirenix.OdinInspector;
 
 
-
-// Created by: Hamza Herbou        (mobile games developer)
-// email     : hamza95herbou@gmail.com
-
-
 public class GameMultiLang : MonoBehaviour
 {
 	public static GameMultiLang Instance;
 
 	public static Dictionary<String, String> Fields;
+	public static Dictionary<string, Sprite> SpriteFields;
 
 	[SerializeField] string defaultLang = default;
 	[SerializeField] LanguageManager languageData = default;
 
+	[SerializeField] List<SpriteData> SpriteDatas = default;
 	public static List<LanguageData> LanguageData { get; set; }
+
+
 
 	void Awake ()
 	{
@@ -44,8 +43,13 @@ public class GameMultiLang : MonoBehaviour
 	{
 		if (Fields == null)
 			Fields = new Dictionary<string, string> ();
+
+		if (SpriteFields == null)
+			SpriteFields = new Dictionary<string, Sprite>();
 		
 		Fields.Clear ();
+		SpriteFields.Clear();
+
 		string lang = PlayerPrefs.GetString ("_language", defaultLang);
 		PlayerPrefs.SetString("_language", lang);
 		switch (lang)
@@ -94,6 +98,11 @@ public class GameMultiLang : MonoBehaviour
 					else
 						Fields.Add(LanguageData[i].Key, LanguageData[i].English);
 				}
+				//图片
+				for (int i = 0; i < SpriteDatas.Count; i++)
+				{
+					SpriteFields.Add(SpriteDatas[i].Key, SpriteDatas[i].English);
+				}
 				break;
             case 1:
 				for (int i = 0; i < LanguageData.Count; i++)
@@ -103,6 +112,11 @@ public class GameMultiLang : MonoBehaviour
 						Debug.Log(LanguageData[i].Key);
                     }else
 					Fields.Add(LanguageData[i].Key, LanguageData[i].Chinese);
+				}
+				//图片
+				for (int i = 0; i < SpriteDatas.Count; i++)
+				{
+					SpriteFields.Add(SpriteDatas[i].Key, SpriteDatas[i].Chinese);
 				}
 				break;
         }
@@ -118,6 +132,17 @@ public class GameMultiLang : MonoBehaviour
 		}
 
 		return Fields [key];
+	}
+
+	public static Sprite GetSprite(string key)
+	{
+		if (!SpriteFields.ContainsKey(key))
+		{
+			Debug.LogError("There is no key with name: [" + key + "] in your sprite files");
+			return null;
+		}
+
+		return SpriteFields[key];
 	}
 
 

@@ -32,7 +32,7 @@ public class UIMenu : IUserInterface
 
     public void StartGameBtnClick()
     {
-        MenuManager.Instance.StartGame();
+        MenuManager.Instance.OpenMode();
 
     }
 
