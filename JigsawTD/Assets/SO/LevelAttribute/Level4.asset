@@ -27,9 +27,9 @@ MonoBehaviour:
   Boss1:
   - {fileID: 11400000, guid: 56bc6f0aa93753148b97e2e0731037d9, type: 2}
   Boss2:
-  - {fileID: 11400000, guid: dd4c9f06325d7fb40bc6db21624cdc8d, type: 2}
+  - {fileID: 11400000, guid: 69f15236ccf6c8d468d1e830d7746cd6, type: 2}
   Boss3:
-  - {fileID: 11400000, guid: bd4a8209b52017c4bb8c391e2596cefb, type: 2}
+  - {fileID: 11400000, guid: dbb0595b1b4e1be4599c5c9d1e97b9e3, type: 2}
   Boss4:
   - {fileID: 11400000, guid: bd4a8209b52017c4bb8c391e2596cefb, type: 2}
   LevelInfo: LEVEL4INFO

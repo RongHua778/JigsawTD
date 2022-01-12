@@ -133,7 +133,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 0
-  bundleVersion: 0.27
+  bundleVersion: 0.32
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -732,7 +732,14 @@ PlayerSettings:
   XboxOneOverrideIdentityName: 
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    Analytics: 1
+    Build: 0
+    Collab: 0
+    Game Performance: 0
+    Purchasing: 0
+    UDP: 0
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -746,11 +753,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: 
+  cloudProjectId: 88c2d7c2-4064-42e1-aff1-d7730fde586e
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: Refactor (1)
+  organizationId: kingdom-jack
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   virtualTexturingSupportEnabled: 0

@@ -26,19 +26,7 @@ MonoBehaviour:
       Data: 0|GuideCondition[], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 1|FirstTime, Assembly-CSharp
-    - Name: trigger
-      Entry: 1
-      Data: TrapGuide
-    - Name: value
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 0
     - Name: 
       Entry: 13
       Data: 
@@ -47,7 +35,7 @@ MonoBehaviour:
       Data: 
     - Name: GuideStartEvents
       Entry: 7
-      Data: 2|GuideEvent[], Assembly-CSharp
+      Data: 1|GuideEvent[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 0
@@ -59,13 +47,13 @@ MonoBehaviour:
       Data: 
     - Name: GuideEndEvents
       Entry: 7
-      Data: 3|GuideEvent[], Assembly-CSharp
+      Data: 2|GuideEvent[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 3
     - Name: 
       Entry: 7
-      Data: 4|ShowGuideBook, Assembly-CSharp
+      Data: 3|ShowGuideBook, Assembly-CSharp
     - Name: PageID
       Entry: 3
       Data: 5
@@ -74,13 +62,13 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 5|EndTutorial, Assembly-CSharp
+      Data: 4|EndTutorial, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 6|SetTriggerOnce, Assembly-CSharp
+      Data: 5|SetTriggerOnce, Assembly-CSharp
     - Name: triggerKey
       Entry: 1
       Data: TrapGuide

@@ -23,6 +23,9 @@ public class WaveSystem : IGameSystem
     [SerializeField] BossComeAnim bossWarningUIAnim = default;
     [SerializeField] GoldKeeperAnim goldKeeperUIAnim = default;
 
+    public EnemyType NextBoss;
+    public int NextBossWave;
+
     public override void Initialize()
     {
         LevelAttribute = LevelManager.Instance.CurrentLevel;
@@ -176,7 +179,7 @@ public class WaveSystem : IGameSystem
         return sequence;
     }
 
-    public void ManualSetSequence(EnemyType type,float stage,int wave)
+    public void ManualSetSequence(EnemyType type, float stage, int wave)
     {
         LevelSequence[wave] = GenerateSpecificSequence(type, stage, wave);
         PrepareNextWave();
@@ -191,13 +194,23 @@ public class WaveSystem : IGameSystem
         }
         if (RunningSequence[0].IsBoss)
         {
-            EnemyAttribute attribute = StaticData.Instance.EnemyFactory.Get(RunningSequence[0].EnemyType);
-            attribute.isLock = false;//见到就解锁BOSS
+            //EnemyAttribute attribute = StaticData.Instance.EnemyFactory.Get(RunningSequence[0].EnemyType);
+            //attribute.isLock = false;//见到就解锁BOSS
             bossWarningUIAnim.Show();
         }
-        else if(RunningSequence[0].EnemyType==EnemyType.GoldKeeper)
+        else if (RunningSequence[0].EnemyType == EnemyType.GoldKeeper)
         {
             goldKeeperUIAnim.Show();
+        }
+        //下个BOSS预告
+        for (int i = GameRes.CurrentWave - 1; i < LevelSequence.Count; i++)
+        {
+            if (LevelSequence[i][0].IsBoss)
+            {
+                NextBoss = LevelSequence[i][0].EnemyType;
+                NextBossWave = i - GameRes.CurrentWave + 1;
+                break;
+            }
         }
     }
 

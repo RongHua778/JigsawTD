@@ -15,7 +15,7 @@ MonoBehaviour:
   Mode: 1
   Difficulty: 1
   PlayerHealth: 25
-  Wave: 2
+  Wave: 30
   LevelIntensify: 1.25
   NormalEnemies:
   - {fileID: 11400000, guid: a2fa830bad8e11c448623ce28354a1bd, type: 2}
@@ -29,7 +29,7 @@ MonoBehaviour:
   Boss2:
   - {fileID: 11400000, guid: 4868c66738024d74285c7f2ac26477ad, type: 2}
   Boss3:
-  - {fileID: 11400000, guid: dbb0595b1b4e1be4599c5c9d1e97b9e3, type: 2}
+  - {fileID: 11400000, guid: bd4a8209b52017c4bb8c391e2596cefb, type: 2}
   Boss4:
   - {fileID: 11400000, guid: dbb0595b1b4e1be4599c5c9d1e97b9e3, type: 2}
   LevelInfo: LEVEL1INFO

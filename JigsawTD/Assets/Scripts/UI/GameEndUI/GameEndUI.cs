@@ -176,7 +176,7 @@ public class GameEndUI : IUserInterface
 
     public void NextLevelBtnClick()
     {
-        if (LevelManager.Instance.CurrentLevel.Difficulty + 1 >= LevelManager.Instance.PremitDifficulty)
+        if (LevelManager.Instance.CurrentLevel.Difficulty + 1 > LevelManager.Instance.PermitDifficulty)
         {
             TempWord tempWord = new TempWord(TempWordType.Demo, 0);
             GameEvents.Instance.TempWordTrigger(tempWord);

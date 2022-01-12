@@ -19,6 +19,11 @@ public class SteamLeaderboard : MonoBehaviour
 
     public static List<LeaderboardEntry_t> EndlessLeaderBoard = new List<LeaderboardEntry_t>();
 
+    private void Start()
+    {
+        Init();
+    }
+
     public static void UpdateScore(int score)
     {
         if (!s_initialized)
@@ -43,6 +48,7 @@ public class SteamLeaderboard : MonoBehaviour
         else
         {
             Debug.Log("download(" + 50 + ") to steam leaderboard(" + s_leaderboardName + ")");
+            EndlessLeaderBoard.Clear();
             SteamAPICall_t hSteamAPICall = SteamUserStats.DownloadLeaderboardEntries(s_currentLeaderboard, ELeaderboardDataRequest.k_ELeaderboardDataRequestGlobal, 1, 50);
             m_downloadResult.Set(hSteamAPICall, OnLeaderboardDownloadResult);
 
@@ -54,7 +60,6 @@ public class SteamLeaderboard : MonoBehaviour
         EndlessLeaderBoard.Clear();
         SteamAPICall_t hSteamAPICall = SteamUserStats.FindLeaderboard(s_leaderboardName);
         m_findResult.Set(hSteamAPICall, OnLeaderboardFindResult);
-        //InitTimer();
     }
 
     static private void OnLeaderboardFindResult(LeaderboardFindResult_t pCallback, bool failure)

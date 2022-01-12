@@ -19,6 +19,7 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] private GameLevelInfo[] GameLevels = default;
     [Header("允许最大等级")]
     [SerializeField] int permitGameLevel = default;
+    public int PermitDifficulty = default;
     public int MaxGameLevel => Mathf.Min(GameLevels.Length - 1, permitGameLevel);
     public int GameLevel { get => PlayerPrefs.GetInt("GameLevel", 0); set => PlayerPrefs.SetInt("GameLevel", Mathf.Min(value, MaxGameLevel)); }
     public int GameExp { get => PlayerPrefs.GetInt("GameExp", 0); set => PlayerPrefs.SetInt("GameExp", value); }
@@ -28,10 +29,9 @@ public class LevelManager : Singleton<LevelManager>
     public LevelAttribute[] StandardLevels = default;
     private Dictionary<int, LevelAttribute> LevelDIC;
 
-    public int PremitDifficulty = default;
     public int PassDiifcutly
     {
-        get => Mathf.Min(PremitDifficulty, PlayerPrefs.GetInt("MaxDifficulty", 0));
+        get => Mathf.Min(PermitDifficulty, PlayerPrefs.GetInt("MaxDifficulty", 0));
         set
         {
             if (value > PlayerPrefs.GetInt("MaxDifficulty", 0))

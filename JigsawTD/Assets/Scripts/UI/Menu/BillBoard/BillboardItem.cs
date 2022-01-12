@@ -27,7 +27,7 @@ public class BillboardItem : MonoBehaviour
         }
 
         name_Txt.text = name;
-        score_Txt.text = score.ToString();
+        score_Txt.text = score.ToString()+GameMultiLang.GetTraduction("WAVE");
     }
 
 }

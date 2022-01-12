@@ -14,14 +14,14 @@ public class UIMode : IUserInterface
     {
         base.Initialize();
         m_Anim = this.GetComponent<Animator>();
-        m_UIStandardMode.SetInfo();
-        m_UIEndlessMode.SetInfo();
     }
 
     public override void Show()
     {
         base.Show();
         m_Anim.SetBool("OpenLevel", true);
+        m_UIStandardMode.SetInfo();
+        m_UIEndlessMode.SetInfo();
     }
 
     public override void ClosePanel()

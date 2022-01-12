@@ -117,9 +117,9 @@ public class MainUI : IUserInterface
     }
 
 
-    public void PrepareNextWave(List<EnemySequence> sequences)
+    public void PrepareNextWave(List<EnemySequence> sequences,EnemyType nextBoss)
     {
-        m_WaveInfoSetter.SetWaveInfo(sequences);
+        m_WaveInfoSetter.SetWaveInfo(sequences,nextBoss);
     }
 
     public bool ConsumeMoney(int cost)

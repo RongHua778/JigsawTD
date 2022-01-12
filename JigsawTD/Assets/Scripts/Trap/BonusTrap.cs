@@ -20,7 +20,7 @@ public class BonusTrap : TrapContent
     public override void OnContentPass(Enemy enemy, GameTileContent content = null)
     {
         base.OnContentPass(enemy, content);
-        StaticData.Instance.GainMoneyEffect(enemy.model.position, Mathf.RoundToInt(2 * TrapIntensify * enemy.DamageStrategy.TrapIntensify));
+        StaticData.Instance.GainMoneyEffect(enemy.model.position, Mathf.RoundToInt(3 * TrapIntensify * enemy.DamageStrategy.TrapIntensify));
         enemy.DamageStrategy.TrapIntensify = 1;
     }
 }

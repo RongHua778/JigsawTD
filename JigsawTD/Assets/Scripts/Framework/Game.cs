@@ -52,14 +52,16 @@ public class Game : Singleton<Game>
             {
                 Debug.LogWarning(GameMultiLang.GetTraduction("TEST1"));
                 LevelManager.Instance.SetGameLevel(0);
-                LevelManager.Instance.PremitDifficulty = 1;
+                LevelManager.Instance.PassDiifcutly = 0;
+                //LevelManager.Instance.PermitDifficulty = 2;
                 PlayerPrefs.DeleteAll();
             }
             if (Input.GetKeyDown(KeyCode.J))//解锁全内容
             {
                 Debug.LogWarning(GameMultiLang.GetTraduction("TEST2"));
                 LevelManager.Instance.SetGameLevel(99);
-                LevelManager.Instance.PremitDifficulty = 6;
+                LevelManager.Instance.PassDiifcutly = 6;
+                //LevelManager.Instance.PermitDifficulty = 6;
                 PlayerPrefs.SetInt("MaxDifficulty", 6);
             }
         }

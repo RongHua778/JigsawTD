@@ -275,7 +275,7 @@ MonoBehaviour:
   transitionTime: 1
   Tutorial: 1
   OnTransition: 0
-  TestMode: 0
+  TestMode: 1
 --- !u!114 &3979959846567427948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,6 +294,7 @@ MonoBehaviour:
   - ExpRequire: 600
     UnlockItems:
     - {fileID: 11400000, guid: 49b78835926160f46b82645449e248b6, type: 2}
+    - {fileID: 11400000, guid: c09d9ab69fe482743be7a990ad9a6fcd, type: 2}
   - ExpRequire: 1200
     UnlockItems:
     - {fileID: 11400000, guid: f258f850157d22f47b339af2c0ef6e49, type: 2}
@@ -324,7 +325,7 @@ MonoBehaviour:
   - ExpRequire: 180000
     UnlockItems:
     - {fileID: 11400000, guid: c10d0ad6d60f8eb419d0ea97cd6014b0, type: 2}
-  permitGameLevel: 1
+  permitGameLevel: 99
   AllContent:
   - {fileID: 11400000, guid: 8b69e55deebc49d44b73c6e458a12794, type: 2}
   - {fileID: 11400000, guid: 2a0c266b352137f45b20d3723395e650, type: 2}
@@ -375,7 +376,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 00b992198a245254bbe331c2618239cd, type: 2}
   - {fileID: 11400000, guid: aa5a923b0cb87d348914e228fc353f67, type: 2}
   - {fileID: 11400000, guid: b6403761d56b0914599f3e8e647a50b7, type: 2}
-  PremitDifficulty: 1
+  PermitDifficulty: 6
   CurrentLevel: {fileID: 11400000, guid: 1cffab4195a17dc4f8326be6876fab11, type: 2}
   GameSaveContents: []
   NeedLoadGame: 1
@@ -518,6 +519,22 @@ PrefabInstance:
       propertyPath: languageData
       value: 
       objectReference: {fileID: 11400000, guid: af6bd4cff502e3d4aa7ddffcc178e9a6, type: 2}
+    - target: {fileID: 114177733606087622, guid: fdce7a722c35906468292c084d7fc8c5, type: 3}
+      propertyPath: SpriteDatas.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114177733606087622, guid: fdce7a722c35906468292c084d7fc8c5, type: 3}
+      propertyPath: SpriteDatas.Array.data[0].Key
+      value: LOGO
+      objectReference: {fileID: 0}
+    - target: {fileID: 114177733606087622, guid: fdce7a722c35906468292c084d7fc8c5, type: 3}
+      propertyPath: SpriteDatas.Array.data[0].Chinese
+      value: 
+      objectReference: {fileID: 21300000, guid: 319537e221f92e746b3fbcc31fad9419, type: 3}
+    - target: {fileID: 114177733606087622, guid: fdce7a722c35906468292c084d7fc8c5, type: 3}
+      propertyPath: SpriteDatas.Array.data[0].English
+      value: 
+      objectReference: {fileID: 21300000, guid: 6466fb14f206a114fbb7f0f83c2fe623, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdce7a722c35906468292c084d7fc8c5, type: 3}
 --- !u!4 &3975025171177546827 stripped

@@ -132,6 +132,12 @@ public class SniperSkill : InitialSkill
     public override TurretSkillName EffectName => TurretSkillName.SniperSkill;
     public override string SkillDescription => "SNIPERSKILL";
 
+    public override void Build()
+    {
+        base.Build();
+        strategy.BaseGoldCount += 2;
+    }
+
     public override void Shoot(Bullet bullet = null)
     {
         base.Shoot(bullet);
@@ -298,12 +304,6 @@ public class BoomerrangSkill : InitialSkill
 {
     public override TurretSkillName EffectName => TurretSkillName.BoomerrangSkill;
     public override string SkillDescription => "BOOMERRANGSKILL";
-
-    public override void Build()
-    {
-        base.Build();
-        strategy.BaseGoldCount += 2;
-    }
 
     public override void Hit(IDamage target, Bullet bullet = null)
     {

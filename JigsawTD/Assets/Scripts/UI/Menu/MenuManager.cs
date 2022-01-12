@@ -36,7 +36,7 @@ public class MenuManager : Singleton<MenuManager>
         m_TrapTips.Initialize();
         m_EnemyInfoTips.Initialize();
 
-        SteamLeaderboard.Init();
+        SteamLeaderboard.DownloadScore();
 
     }
 

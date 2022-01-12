@@ -1,11 +1,10 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class WaveInfoSetter : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class WaveInfoHolder : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] Image[] enemyIcons = default;
     public void SetWaveInfo(List<EnemySequence> sequences)

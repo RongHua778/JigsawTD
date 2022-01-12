@@ -30,6 +30,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private TrapTips m_TrapTips = default;
     [SerializeField] private BuyGroundTips m_BuyGroundTips = default;
     [SerializeField] private EnemyTips m_EnemyTips = default;
+    [SerializeField] private BossTips m_BossTips = default;
     [SerializeField] private UnlockBonusTips m_BonusTips = default;
 
     [Header("其他")]
@@ -81,6 +82,7 @@ public class GameManager : Singleton<GameManager>
         m_MessageUI.Initialize();//提示系统UI
         m_GuideVideo.Initialize();//教程视频UI
         m_EnemyTips.Initialize();//敌人TIPS
+        m_BossTips.Initialize();//BossTips
         m_BonusTips.Initialize();//奖励解锁TIps
         m_PausePanel.Initialize();//暂停界面
 
@@ -238,7 +240,7 @@ public class GameManager : Singleton<GameManager>
 
         GameRes.PrepareNextWave();
         m_WaveSystem.PrepareNextWave();
-        m_MainUI.PrepareNextWave(m_WaveSystem.RunningSequence);
+        m_MainUI.PrepareNextWave(m_WaveSystem.RunningSequence, m_WaveSystem.NextBoss);
         m_FuncUI.Show();
         GameEvents.Instance.TutorialTrigger(TutorialType.NextWaveStart);
     }
@@ -247,7 +249,7 @@ public class GameManager : Singleton<GameManager>
     {
         TransitionToState(StateName.BuildingState);
         m_WaveSystem.PrepareNextWave();
-        m_MainUI.PrepareNextWave(m_WaveSystem.RunningSequence);
+        m_MainUI.PrepareNextWave(m_WaveSystem.RunningSequence, m_WaveSystem.NextBoss);
         m_FuncUI.Show();
     }
 
@@ -519,6 +521,16 @@ public class GameManager : Singleton<GameManager>
         m_EnemyTips.ReadSequenceInfo(m_WaveSystem.RunningSequence);
     }
 
+    public void ShowBossTips()
+    {
+        m_BossTips.Show();
+        m_BossTips.ReadSequenceInfo(m_WaveSystem.NextBoss, m_WaveSystem.NextBossWave);
+    }
+
+    public void HideBossTips()
+    {
+        m_BossTips.Hide();
+    }
 
 
     public void HideEnemyTips()
@@ -584,7 +596,7 @@ public class GameManager : Singleton<GameManager>
     public void ManualSetSequence(EnemyType type, float stage, int wave)
     {
         m_WaveSystem.ManualSetSequence(type, stage, wave);
-        m_MainUI.PrepareNextWave(m_WaveSystem.RunningSequence);
+        m_MainUI.PrepareNextWave(m_WaveSystem.RunningSequence, m_WaveSystem.NextBoss);
     }
 
     public GameObject GetGuideObj(string objName)

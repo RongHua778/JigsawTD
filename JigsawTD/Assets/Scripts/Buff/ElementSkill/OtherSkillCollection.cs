@@ -162,7 +162,7 @@ public class PortalHit : ElementSkill
 
     public override void Hit(IDamage target, Bullet bullet = null)
     {
-        if (Random.value > 0.92f)
+        if (Random.value > 0.9f)
             //((Enemy)target).Flash(2);
             StaticData.Instance.GainMoneyEffect(((ReusableObject)target).transform.position, 2);
     }
