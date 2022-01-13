@@ -193,7 +193,7 @@ public class UltraSkill : InitialSkill
 
     public override void PreHit(Bullet bullet = null)
     {
-        bullet.CriticalPercentage *= Random.Range(0.25f, 2.5f);
+        bullet.CriticalPercentage *= Random.Range(0.5f, 2.5f);
 
     }
 
@@ -305,10 +305,17 @@ public class BoomerrangSkill : InitialSkill
     public override TurretSkillName EffectName => TurretSkillName.BoomerrangSkill;
     public override string SkillDescription => "BOOMERRANGSKILL";
 
+    private float InitAttack;
+    private float intensify;
+    public override void Shoot(Bullet bullet = null)
+    {
+        InitAttack = bullet.Damage;
+        intensify = 0;
+    }
     public override void Hit(IDamage target, Bullet bullet = null)
     {
-        base.Hit(target, bullet);
-        bullet.Damage *= 1.05f;
+        intensify += 0.3f;
+        bullet.Damage = InitAttack * (1 + intensify);
     }
 }
 

@@ -25,8 +25,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _ColorMask: 15
-    - _SliderX: 185.00827
-    - _SliderY: 117.50461
+    - _SliderX: 133.911
+    - _SliderY: 50.000385
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
@@ -34,6 +34,6 @@ Material:
     - _StencilWriteMask: 255
     - _UseUIAlphaClip: 0
     m_Colors:
-    - _Center: {r: 638.5701, g: 284.00003, b: 0, a: 0}
+    - _Center: {r: 765.00006, g: -320, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

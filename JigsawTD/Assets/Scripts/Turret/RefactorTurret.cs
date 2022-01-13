@@ -58,8 +58,9 @@ public class RefactorTurret : TurretContent
 
                 ObjectPool.Instance.UnSpawn(m_GameTile);
             }
-            else
+            else//正常部署
             {
+                //上传一次重构塔重构次数
                 ObjectPool.Instance.UnSpawn(tile);
             }
         }

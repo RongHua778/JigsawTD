@@ -733,9 +733,9 @@ MonoBehaviour:
     Chinese: "<sprite=0>\u6570\u91CF+2\uFF0C\u5B50\u5F39\u4F24\u5BB3\u968F\u98DE\u884C\u8DDD\u79BB\u63D0\u534750%/\u683C"
     English: <sprite=0>+2, Bullet's damage increased by 50% for each tile it travelled
   - Key: ULTRASKILL
-    Chinese: "<sprite=3>\u6570\u91CF+2\uFF0C\u4E14\u5B50\u5F39\u7684\u6700\u7EC8\u66B4\u51FB\u4F24\u5BB3\u572825%\u5230250%\u4E4B\u95F4\u968F\u673A\u6D6E\u52A8"
+    Chinese: "<sprite=3>\u6570\u91CF+2\uFF0C\u5B50\u5F39\u6700\u7EC8\u66B4\u51FB\u4F24\u5BB3\u968F\u673A\u53D8\u4E3A\u8D77\u59CB\u503C\u768450%\u5230250%"
     English: <sprite=3>+2, Bullet's final critical damage randomly float between
-      25% to 250%
+      50% to 250%
   - Key: SNOWSKILL
     Chinese: "\u7A7F\u900F\u5B50\u5F39;<sprite=2>\u6570\u91CF+2\uFF0C\u5B50\u5F39\u65BD\u52A0\u53CC\u500D\u7684\u51BB\u7ED3\u5C42\u6570"
     English: Penetration Bullet;<sprite=2>+2,bullet cause double frost effect.
@@ -743,8 +743,8 @@ MonoBehaviour:
     Chinese: "\u6BCF\u6B21\u653B\u51FB\u63D0\u53472%*\u603B\u534F\u540C\u5854\u6570\u91CF\u7684\u653B\u51FB\u529B"
     English: Attack increased by 2% * the amount of "Cooporator" each shoot.
   - Key: BOOMERRANGSKILL
-    Chinese: "\u7A7F\u900F\u5B50\u5F39\uFF1B\u56DE\u65CB\u9556\u6BCF\u547D\u4E2D\u4E00\u4E2A\u654C\u4EBA\u5C31\u4F7F\u540E\u7EED\u4F24\u5BB3\u63D0\u9AD85%"
-    English: Penetration Bullet; Bullet damage will increase by 5% for each enemy
+    Chinese: "\u7A7F\u900F\u5B50\u5F39\uFF1B\u56DE\u65CB\u9556\u6BCF\u547D\u4E2D\u4E00\u4E2A\u654C\u4EBA\u5C31\u4F7F\u540E\u7EED\u4F24\u5BB3\u63D0\u9AD830%"
+    English: Penetration Bullet; Bullet damage will increase by 30% for each enemy
       it hit.
   - Key: SUPERSKILL
     Chinese: "\u5143\u7D20\u6280\u80FD\u69FD+1\uFF0C\u6BCF\u62E5\u67091\u4E2A\u5143\u7D20\u9020\u6210\u7684\u4F24\u5BB3\u5C31\u63D0\u534710%"
@@ -957,11 +957,11 @@ MonoBehaviour:
     Chinese: "\u8BE5\u9632\u5FA1\u5854\u4E0D\u4F1A\u88AB\u51BB\u7ED3"
     English: This turret will not be frozen
   - Key: BCE
-    Chinese: "\u4E07\u80FD\u5143\u7D20"
-    English: Perfect Element
+    Chinese: "\u5F3A\u52BF\u7206\u5F39"
+    English: Amazing Bomb
   - Key: BCEINFO
-    Chinese: "\u83B7\u5F971\u4E2A\u4E07\u80FD\u5143\u7D20"
-    English: Gain 1 perfect element
+    Chinese: "\u6E85\u5C04\u4F24\u5BB3\u53CA\u9020\u6210\u7684\u51CF\u901F\u6548\u679C\u63D0\u9AD835%"
+    English: Spalsh deal 35% extra dmg and slow effect.
   - Key: BDE
     Chinese: "\u94F8\u5E01\u5DE5\u5382"
     English: Repair Factory
@@ -1016,8 +1016,9 @@ MonoBehaviour:
     Chinese: "\u8FD0\u8F7D\u7740\u52A0\u901F\u6838\u5FC3\uFF0C\u4F7F\u5176\u81EA\u8EAB\u5468\u56F4\u7684\u5176\u4ED6\u654C\u4EBA\u4F1A\u52A0\u901F\u79FB\u52A8"
     English: Increased the adjacent enemies' speed .
   - Key: GOLDKEEPERINFO
-    Chinese: "\u654C\u5BF9\u6587\u660E\u7684\u8D44\u6E90\u8865\u7ED9\u8F66\uFF0C\u6BCF\u53D7\u5230\u4E00\u5B9A\u4F24\u5BB3\u5C31\u4F1A\u6389\u843D\u4EE3\u5E01"
-    English: Tokens will be dropped every time a certain amount of damage is taken
+    Chinese: "\u6BCF\u53D7\u5230\u4E00\u5B9A\u4F24\u5BB3\u5C31\u4F1A\u6389\u843D\u4EE3\u5E01,\u6210\u529F\u6467\u6BC1\u8865\u7ED9\u8F66\u5219\u83B7\u5F971\u4E2A\u5B8C\u7F8E\u5143\u7D20"
+    English: "Gain tokens every time a certain amount of damage is taken\uFF0Cand
+      gain 1 perfect element if destroy it."
   - Key: DIVIDER
     Chinese: "\u8783\u87F9"
     English: Crab

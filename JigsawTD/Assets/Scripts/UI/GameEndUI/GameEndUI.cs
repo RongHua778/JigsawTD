@@ -18,7 +18,7 @@ public class GameEndUI : IUserInterface
     [SerializeField] Text maxMarkTxt = default;
     [SerializeField] Text gainGoldTxt = default;
     [SerializeField] Text expValueTxt = default;
-    [SerializeField] InfoBtn expInfoBtn = default;
+    //[SerializeField] InfoBtn expInfoBtn = default;
     [SerializeField] GameLevelHolder gameLevelPrefab = default;
 
     [SerializeField] GameObject NextLevelBtn = default;
@@ -49,14 +49,14 @@ public class GameEndUI : IUserInterface
         LevelManager.Instance.LevelEnd = true;
         gainExp = LevelManager.Instance.GainExp(GameRes.CurrentWave);
 
-        expInfoBtn.SetContent(GameMultiLang.GetTraduction("EXPVALUE") + "=" +
-            GameMultiLang.GetTraduction("DIFFICULTY") + "*5*" +
-            GameMultiLang.GetTraduction("WAVE") + "*(1+25%*" +
-            GameMultiLang.GetTraduction("BOSSDEFEAT") + ")");
+        //expInfoBtn.SetContent(GameMultiLang.GetTraduction("EXPVALUE") + "=" +
+        //    GameMultiLang.GetTraduction("DIFFICULTY") + "*5*" +
+        //    GameMultiLang.GetTraduction("WAVE") + "*(1+25%*" +
+        //    GameMultiLang.GetTraduction("BOSSDEFEAT") + ")");
 
         if (LevelManager.Instance.CurrentLevel.Difficulty == 99)//无尽模式
         {
-            title.text = GameMultiLang.GetTraduction("PASSLEVEL") +  (GameRes.CurrentWave) +  GameMultiLang.GetTraduction("WAVE");
+            title.text = GameMultiLang.GetTraduction("PASSLEVEL") + (GameRes.CurrentWave) + GameMultiLang.GetTraduction("WAVE");
             LevelManager.Instance.EndlessHighScore = GameRes.CurrentWave;
             int tempWordID = Mathf.Clamp((GameRes.CurrentWave - 20) / 10, 0, 5);
             titleBG.sprite = TitleBGs[tempWordID + 2];
@@ -69,7 +69,7 @@ public class GameEndUI : IUserInterface
         {
             if (win)
             {
-                title.text = GameMultiLang.GetTraduction("WIN")+ GameMultiLang.GetTraduction("DIFFICULTY") + (LevelManager.Instance.CurrentLevel.Difficulty).ToString();
+                title.text = GameMultiLang.GetTraduction("WIN") + GameMultiLang.GetTraduction("DIFFICULTY") + (LevelManager.Instance.CurrentLevel.Difficulty).ToString();
                 GameEvents.Instance.TempWordTrigger(new TempWord(TempWordType.StandardWin, LevelManager.Instance.CurrentLevel.Difficulty));
                 LevelManager.Instance.PassDiifcutly = LevelManager.Instance.CurrentLevel.Difficulty + 1;
                 titleBG.sprite = TitleBGs[LevelManager.Instance.CurrentLevel.Difficulty + 1];
@@ -95,10 +95,51 @@ public class GameEndUI : IUserInterface
                 RestartBtn.SetActive(true);
             }
         }
-
         m_BillBoard.SetBillBoard();
         StartCoroutine(SetValueCor());
+
+        if (LevelManager.Instance.CurrentLevel.Mode > 1)//难度2开始统计数据
+        {
+            ModeData data = SetModeData(LevelManager.Instance.CurrentLevel.Mode, GameRes.CurrentWave, win, m_BillBoard.HighestTurret);
+            UnityAnalystics.UploadModeData(data);
+        }
+
     }
+
+    private ModeData SetModeData(int modeID, int wave, bool win, TurretContent highestTurret)
+    {
+        ModeData modeData = new ModeData();
+        modeData.ModeID = LevelManager.Instance.CurrentLevel.Mode;
+        modeData.Wave = wave;
+        //首次胜利数据
+        if (win)
+        {
+            int winCount = PlayerPrefs.GetInt("Mode" + modeID + "Win", 0);
+            winCount++;
+            PlayerPrefs.SetInt("Mode" + modeID + "Win", winCount);
+            if (winCount > 0 && winCount < 2)   //  首次取胜
+            {
+                modeData.BeforeLost = PlayerPrefs.GetInt("Mode" + modeID + "Lost", 0);
+            }
+            else
+            {
+                modeData.BeforeLost = 999;
+            }
+        }
+        else
+        {
+            int lostCount = PlayerPrefs.GetInt("Mode" + modeID + "Lost", 0);
+            lostCount++;
+            PlayerPrefs.SetInt("Mode" + modeID + "Lost", lostCount);
+        }
+
+        if (highestTurret != null)
+        {
+            modeData.HighestTurretStrategy = highestTurret.Strategy;
+        }
+        return modeData;
+    }
+
 
     private void SetExp()
     {

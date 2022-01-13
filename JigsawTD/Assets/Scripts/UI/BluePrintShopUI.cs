@@ -82,10 +82,10 @@ public class BluePrintShopUI : IUserInterface
             return;
         if (!GameManager.Instance.ConsumeMoney(cost))
             return;
-        if (cost != 0)//自动刷新不触发对白
+        if (cost != 0)//手动刷新触发对白
         {
             GameEvents.Instance.TempWordTrigger(refreshShopTrigger);
-            NextRefreshTrun = 3;
+            //GameRes.NextRefreshTurn = 3;
         }
         if (BluePrintGrid.SelectingBluePrint != null)
             GameManager.Instance.HideTips();//如果选择了已经打开的配方则关闭，待修复问题
@@ -217,10 +217,6 @@ public class BluePrintShopUI : IUserInterface
         {
             bluePrint.CheckElements();
         }
-        //foreach (var bluePrint in OwnBluePrints)
-        //{
-        //    bluePrint.CheckElements();
-        //}
     }
 
 

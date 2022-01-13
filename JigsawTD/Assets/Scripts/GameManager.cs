@@ -424,6 +424,10 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public void CheckAllBlueprints()
+    {
+        m_BluePrintShopUI.CheckAllBluePrint();
+    }
 
     public void CheckDetectSkill()
     {

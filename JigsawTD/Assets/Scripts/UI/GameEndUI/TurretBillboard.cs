@@ -7,8 +7,11 @@ public class TurretBillboard : MonoBehaviour
     [SerializeField] TurretItem turretItemPrefab = default;
     [SerializeField] Transform contentParent = default;
     private List<TurretItem> turrets = new List<TurretItem>();
+    public TurretContent HighestTurret;
     public void SetBillBoard()
     {
+        turrets.Clear();
+        HighestTurret = null;
         TurretItem item;
         foreach (var elementTurret in GameManager.Instance.elementTurrets.behaviors)
         {
@@ -45,5 +48,7 @@ public class TurretBillboard : MonoBehaviour
             turrets[i].transform.SetAsFirstSibling();
             turrets[i].SetRank(turrets.Count - i - 1);
         }
+        if (turrets.Count > 0)
+            HighestTurret = turrets[turrets.Count - 1].m_Turret;
     }
 }

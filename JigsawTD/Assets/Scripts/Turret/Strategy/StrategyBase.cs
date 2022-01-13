@@ -85,6 +85,10 @@ public class StrategyBase
     public int BaseRangeIntensify { get => baseRangeIntensify; set => baseRangeIntensify = value; }
     private int baseTargetCountIntensify;
     public int BaseTargetCountIntensify { get => baseTargetCountIntensify; set => baseTargetCountIntensify = value; }
+
+    private float baseSplashPercentageIntensify;
+    public float BaseSplashPercentageIntensify { get => baseSplashPercentageIntensify; set => baseSplashPercentageIntensify = value; }
+
     #endregion
     #region 元素数量
     //基础元素数量
@@ -115,6 +119,8 @@ public class StrategyBase
     public float ElementSlowIntensify { get => StaticData.Instance.WaterSlowIntensify * WaterCount; }
     public float ElementCritIntensify { get => StaticData.Instance.FireCritIntensify * FireCount; }
     public float ElementSplashIntensify { get => StaticData.Instance.DustSplashIntensify * DustCount; }
+    #endregion
+    #region 二级属性加成
     #endregion
 
     #region 所有加成二次修正
@@ -147,7 +153,7 @@ public class StrategyBase
     public float BaseCriticalRate { get => InitCriticalRate + ElementCritIntensify * AllCriticalIntensifyModify; }
     public float BaseCriticalPercentage { get => initCriticalPercentage; }
     public float BaseSplashRange { get => InitSplashRange + ElementSplashIntensify * BaseSplashRangeIntensifyModify; }
-    public float BaseSplashPercentage { get => initSplashPercentage; }
+    public float BaseSplashPercentage { get => initSplashPercentage + BaseSplashPercentageIntensify; }
     public float BaseSlowRate { get => InitSlowRate + ElementSlowIntensify * BaseSlowRateIntensifyModify; }
     public int BaseTargetCount { get => initTargetCount + BaseTargetCountIntensify; }
 

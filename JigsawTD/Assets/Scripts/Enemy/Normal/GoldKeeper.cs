@@ -30,7 +30,7 @@ public class GoldKeeper : Boss
     protected override void OnDie()
     {
         base.OnDie();
-        GainMoney();
+        StaticData.Instance.GainPerfectEffect(model.position,1);
     }
 
 }

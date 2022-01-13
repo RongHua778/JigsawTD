@@ -143,10 +143,15 @@ public class IceShell : ElementSkill
     //施加的冻结层数提高100%
     public override List<int> Elements => new List<int> { 1, 2, 4 };
 
-    public override void Composite()
+    //public override void Composite()
+    //{
+    //    base.Composite();
+    //    GameRes.PerfectElementCount++;
+    //}
+    public override void Build()
     {
-        base.Composite();
-        GameRes.PerfectElementCount++;
+        base.Build();
+        strategy.BaseSplashPercentageIntensify += 0.35f;
     }
 
 }

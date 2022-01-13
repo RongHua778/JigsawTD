@@ -102,6 +102,7 @@ public class StaticData : Singleton<StaticData>
     public ReusableObject GainMoneyPrefab;
     public ReusableObject FrostExplosion;
     public ReusableObject FrostEffectPrefab;
+    public ReusableObject GainPerfectPrefab;
     public Sprite[] ElementSprites;
 
     public Color NormalBlue;
@@ -603,6 +604,15 @@ public class StaticData : Singleton<StaticData>
         GameObject obj = ObjectPool.Instance.Spawn(GainMoneyPrefab).gameObject;
         obj.transform.position = pos + Vector2.up * 0.2f;
         Sound.Instance.PlayEffect("Sound_GainCoin");
+    }
+
+    public void GainPerfectEffect(Vector2 pos, int amount)
+    {
+        GameRes.PerfectElementCount+= amount;
+        GameManager.Instance.CheckAllBlueprints();
+        GameObject obj = ObjectPool.Instance.Spawn(GainPerfectPrefab).gameObject;
+        obj.transform.position = pos + Vector2.up * 0.2f;
+        //Sound.Instance.PlayEffect("Sound_GainCoin");
     }
 
     public void FrostTurretEffect(Vector2 pos, float distance, float frostTime)

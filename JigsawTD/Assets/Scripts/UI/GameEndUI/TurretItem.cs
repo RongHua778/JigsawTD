@@ -9,7 +9,7 @@ public class TurretItem : MonoBehaviour
     [SerializeField] Text nameTxt = default;
     [SerializeField] Text damageValue = default;
     public int TotalDamage;
-    private TurretContent m_Turret;
+    public TurretContent m_Turret;
     [SerializeField] Sprite[] medalSprites = default;
     [SerializeField] Image medalImg = default;
     [SerializeField] Text rankTxt = default;

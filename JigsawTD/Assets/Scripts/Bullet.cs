@@ -151,7 +151,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     {
         if (SlowRate > 0 && target.DamageStrategy.IsEnemy)//技能可能会修改slowrate
         {
-            target.DamageStrategy.ApplyBuff(EnemyBuffName.SlowDown, isSputtering ? 0.35f * SlowRate : SlowRate, 2f);
+            target.DamageStrategy.ApplyBuff(EnemyBuffName.SlowDown, isSputtering ? SplashPercentage * SlowRate : SlowRate, 2f);
         }
         float finalDamage = isCritical ? Damage * CriticalPercentage : Damage;
         if (isSputtering)
