@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76869e3c621ad814084d11d5bbdd94e0, type: 3}
-  m_Name: "\u9677\u963101"
+  m_Name: "\u91CD\u678415_1"
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -50,41 +50,16 @@ MonoBehaviour:
       Data: 2|GuideEvent[], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 3
-    - Name: 
-      Entry: 7
-      Data: 3|ShowGuideBook, Assembly-CSharp
-    - Name: PageID
-      Entry: 3
-      Data: 6
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 4|EndTutorial, Assembly-CSharp
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 5|SetTriggerOnce, Assembly-CSharp
-    - Name: triggerKey
-      Entry: 1
-      Data: TrapGuide
-    - Name: value
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 0
     - Name: 
       Entry: 13
       Data: 
     - Name: 
       Entry: 8
       Data: 
-  TriggerType: 0
-  Words: []
+  TriggerType: 14
+  Words:
+  - Guide211
+  - Guide2112
   DontNeedClickEnd: 0
-  WaitingTime: 2
+  WaitingTime: 0

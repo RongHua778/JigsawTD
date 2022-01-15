@@ -189,14 +189,14 @@ public static class ConstructHelper
             if (i == 0)
             {
                 elements = contentStruct.SkillList["1"];
-                strategy = GetSpecificStrategy(contentStruct.ContentName, elements, new List<int> { 1, 1, 1 },contentStruct.Quality);
+                strategy = GetSpecificStrategy(contentStruct.ContentName, elements, new List<int> { 1, 1, 1 }, contentStruct.Quality);
                 content = m_ContentFactory.GetRefactorTurret(strategy);
                 strategy.ElementSKillSlot = contentStruct.ElementSlotCount;
                 tile.SetContent(content);
             }
             else
             {
-                elements = contentStruct.SkillList[i.ToString()];
+                elements = contentStruct.SkillList[(i + 1).ToString()];
                 ElementSkill skill = TurretEffectFactory.GetElementSkill(elements);
                 content.Strategy.AddElementSkill(skill);
                 ((BasicTile)tile).EquipTurret();

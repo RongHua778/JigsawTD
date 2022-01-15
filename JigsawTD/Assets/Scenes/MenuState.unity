@@ -10172,7 +10172,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Version 0.32
+  m_Text: Version 0.33
 --- !u!222 &1077198958
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -20514,7 +20514,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3979959846567427951, guid: efad427a633dbca47ac42421b9004594, type: 3}
       propertyPath: TestMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efad427a633dbca47ac42421b9004594, type: 3}

@@ -14830,7 +14830,7 @@ RectTransform:
   m_Children:
   - {fileID: 1331304356}
   m_Father: {fileID: 1576089491}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -14851,6 +14851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tabs:
   - {fileID: 124387792}
+  - {fileID: 1459731651}
   - {fileID: 239639833}
   - {fileID: 1825946236}
   - {fileID: 693339490}
@@ -23970,6 +23971,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1459731651 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5997309877125664608, guid: ee22cbd4dce38eb4d98ffcdfa20ce836, type: 3}
+  m_PrefabInstance: {fileID: 724882134}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1472115503 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7657273233478030997, guid: a8fa2dcbd97b8b848a51bef95d7253e3, type: 3}
@@ -24608,7 +24620,7 @@ RectTransform:
   m_Children:
   - {fileID: 866425617}
   m_Father: {fileID: 1576089491}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -25702,8 +25714,8 @@ RectTransform:
   - {fileID: 1957241413}
   - {fileID: 1919595583}
   - {fileID: 525447487}
-  - {fileID: 976930640}
   - {fileID: 1524556390}
+  - {fileID: 976930640}
   - {fileID: 1383788365}
   - {fileID: 1847973130}
   m_Father: {fileID: 0}
@@ -29497,6 +29509,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turretItemPrefab: {fileID: 4095630545508232088, guid: b640f0e6da72a0b459628e6cb6ef815c, type: 3}
   contentParent: {fileID: 1136599142}
+  HighestTurret: {fileID: 0}
 --- !u!222 &1828182191
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -29919,6 +29932,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game
       objectReference: {fileID: 0}
+    - target: {fileID: 3979959846567427948, guid: efad427a633dbca47ac42421b9004594, type: 3}
+      propertyPath: CurrentLevel
+      value: 
+      objectReference: {fileID: 11400000, guid: aa5a923b0cb87d348914e228fc353f67, type: 2}
     - target: {fileID: 3979959846567427949, guid: efad427a633dbca47ac42421b9004594, type: 3}
       propertyPath: m_RootOrder
       value: 6

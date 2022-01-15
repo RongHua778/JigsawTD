@@ -30,6 +30,7 @@ public class GuideVideo :IUserInterface
     public override void Hide()
     {
         anim.SetBool("isOpen", false);
+        GameEvents.Instance.TutorialTrigger(TutorialType.GuideBookContinue);
     }
 
 }

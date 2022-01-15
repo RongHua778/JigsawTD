@@ -380,7 +380,7 @@ MonoBehaviour:
       2. Refactor
       turrets can be upgraded to a maximum level of 3.'
   - Key: GUIDETXT05
-    Chinese: "1.\u91CD\u6784\u5854\u6839\u636E\u914D\u65B9\u5143\u7D20\u7EC4\u5408\u4E0D\u540C\uFF0C\u4F1A\u751F\u6210\u4E13\u5C5E\u7684\u5143\u7D20\u6280\u80FD.\n\n2.\u6BCF\u4E2A\u5143\u7D20\u6280\u80FD\u4E3A\u91CD\u6784\u589E\u52A03\u4E2A\u5143\u7D20\uFF0C\u6BCF\u4E2A\u5143\u7D20\u4F1A\u63D0\u4F9B\u989D\u5916\u7684\u5C5E\u6027\u52A0\u6210\uFF0C\u5404\u5143\u7D20\u52A0\u6210\u5982\u4E0B\uFF1A"
+    Chinese: "1.\u91CD\u6784\u5854\u6839\u636E\u914D\u65B9\u5143\u7D20\u7EC4\u5408\u4E0D\u540C\uFF0C\u4F1A\u751F\u6210\u4E13\u5C5E\u7684\u5143\u7D20\u6280\u80FD.\n\n2.\u6BCF\u4E2A\u5143\u7D20\u6280\u80FD\u4E3A\u91CD\u6784\u589E\u52A03\u4E2A\u5BF9\u5E94\u7684\u5143\u7D20\uFF0C\u6BCF\u4E2A\u5143\u7D20\u4F1A\u63D0\u4F9B\u989D\u5916\u7684\u5C5E\u6027\u52A0\u6210\uFF0C\u5404\u5143\u7D20\u52A0\u6210\u5982\u4E0B\uFF1A"
     English: '1. Unique element skills will be generated based on the element combination.
 
       2.
@@ -533,7 +533,7 @@ MonoBehaviour:
     Chinese: "\u5143\u7D20\u6280\u80FD\u52A0\u6210"
     English: Element Skill Bonus
   - Key: FOLLOW
-    Chinese: " (\u968F<sprite={0}>\u6570\u91CF\u63D0\u5347)"
+    Chinese: " (\u968F\u8BE5\u5854<sprite={0}>\u6570\u91CF\u63D0\u5347)"
     English: ' (Increased with the amount of <sprite={0}>)'
   - Key: CRITICALINFO
     Chinese: "\u57FA\u7840\u66B4\u51FB\u4F24\u5BB3\u4E3A200%"
@@ -562,7 +562,7 @@ MonoBehaviour:
     Chinese: "\u51CF\u901F"
     English: ' Slow'
   - Key: COMINTENSIFY
-    Chinese: "\u91CD\u6784\u7D20\u6750\u52A0\u6210"
+    Chinese: "\u91CD\u6784\u5143\u7D20\u52A0\u6210"
     English: Stats Bonus for Refactor
   - Key: BUY
     Chinese: "\u8D2D\u4E70"
@@ -747,7 +747,7 @@ MonoBehaviour:
     English: Penetration Bullet; Bullet damage will increase by 30% for each enemy
       it hit.
   - Key: SUPERSKILL
-    Chinese: "\u5143\u7D20\u6280\u80FD\u69FD+1\uFF0C\u6BCF\u62E5\u67091\u4E2A\u5143\u7D20\u9020\u6210\u7684\u4F24\u5BB3\u5C31\u63D0\u534710%"
+    Chinese: "\u5143\u7D20\u6280\u80FD\u69FD+1\uFF0C\u8BE5\u5854\u6BCF\u62E5\u67091\u4E2A\u5143\u7D20\u9020\u6210\u7684\u4F24\u5BB3\u5C31\u63D0\u534710%"
     English: Element skill slot +1, bullet's damage increased by 10% for each element
       it has
   - Key: CORESKILL
@@ -758,7 +758,7 @@ MonoBehaviour:
     Chinese: "24K\u57FA\u5EA7"
     English: 24K Base
   - Key: AAAINFO
-    Chinese: "\u56DE\u5408\u5F00\u59CB\u65F6\uFF0C\u6BCF\u62E5\u67093\u4E2A\u5143\u7D20\u5C31\u83B7\u5F97+1\u653B\u51FB\u8DDD\u79BB"
+    Chinese: "\u56DE\u5408\u5F00\u59CB\u65F6\uFF0C\u8BE5\u5854\u6BCF\u62E5\u67093\u4E2A\u5143\u7D20\u5C31\u83B7\u5F97+1\u653B\u51FB\u8DDD\u79BB"
     English: At the start of each wave, gain +1 attack range for every 3 elements
       it has
   - Key: AAB
@@ -789,7 +789,7 @@ MonoBehaviour:
     Chinese: "\u7D2F\u52A0\u6548\u5E94"
     English: Additive Effect
   - Key: BBBINFO
-    Chinese: "\u56DE\u5408\u5F00\u59CB\u65F6\uFF0C\u6BCF\u62E5\u67094\u4E2A\u5143\u7D20\u672C\u56DE\u5408\u5C31\u653B\u51FB1\u4E2A\u989D\u5916\u7684\u76EE\u6807"
+    Chinese: "\u56DE\u5408\u5F00\u59CB\u65F6\uFF0C\u8BE5\u5854\u6BCF\u62E5\u67094\u4E2A\u5143\u7D20\u672C\u56DE\u5408\u5C31\u653B\u51FB1\u4E2A\u989D\u5916\u7684\u76EE\u6807"
     English: At the start of each wave, attack 1 additional target this turn for
       every 4 elements it has
   - Key: BBA
@@ -851,7 +851,7 @@ MonoBehaviour:
     Chinese: "\u4E0A\u5E1D\u9AB0\u5B50"
     English: God's Dice
   - Key: DDDINFO
-    Chinese: "\u56DE\u5408\u5F00\u59CB\u65F6\uFF0C\u83B7\u5F973\u4E2A\u4E34\u65F6\u5143\u7D20\u5E76\u91CD\u65B0\u968F\u673A\u6240\u6709\u5143\u7D20"
+    Chinese: "\u56DE\u5408\u5F00\u59CB\u65F6\uFF0C\u8BE5\u5854\u83B7\u5F973\u4E2A\u4E34\u65F6\u5143\u7D20\u5E76\u91CD\u65B0\u968F\u673A\u6240\u6709\u5143\u7D20"
     English: At the start of each wave, gain 3 elements and randomly change all elements
       this turn
   - Key: DDA
@@ -886,7 +886,7 @@ MonoBehaviour:
     Chinese: "\u5747\u8861\u4E4B\u9053"
     English: Blanced Path
   - Key: EEEINFO
-    Chinese: "\u56DE\u5408\u5F00\u59CB\u65F6\uFF0C\u4F7F\u62E5\u6709\u7684\u6570\u91CF\u6700\u5C11\u7684\u6240\u6709\u5143\u7D20\u6570\u91CF+2"
+    Chinese: "\u56DE\u5408\u5F00\u59CB\u65F6\uFF0C\u4F7F\u8BE5\u5854\u5DF2\u62E5\u6709\u7684\u6570\u91CF\u6700\u5C11\u7684\u6240\u6709\u5143\u7D20\u6570\u91CF+2"
     English: At the start of each wave, the fewest elements it has gain +2
   - Key: EEA
     Chinese: "\u524D\u671F\u5F3A\u653B"
@@ -929,7 +929,7 @@ MonoBehaviour:
     Chinese: "\u80FD\u6E90\u6EA2\u51FA"
     English: Energy Overflow
   - Key: ABEINFO
-    Chinese: "\u56DE\u5408\u5F00\u59CB\u65F6\uFF0C\u6BCF\u88C5\u8F7D1\u4E2A\u5143\u7D20\u6280\u80FD\uFF0C\u5C31\u83B7\u5F971\u4E2A\u968F\u673A\u4E34\u65F6\u5143\u7D20"
+    Chinese: "\u56DE\u5408\u5F00\u59CB\u65F6\uFF0C\u8BE5\u5854\u6BCF\u88C5\u8F7D1\u4E2A\u5143\u7D20\u6280\u80FD\uFF0C\u5C31\u83B7\u5F971\u4E2A\u968F\u673A\u4E34\u65F6\u5143\u7D20"
     English: At the start of each wave, gain +1 random element for each element skill
       it has
   - Key: ACD
@@ -1055,9 +1055,9 @@ MonoBehaviour:
     English: Flashes forward a certain distance while it takes a certain amount of
       damage.
   - Key: BORNERINFO
-    Chinese: "\u5F53\u751F\u547D\u503C\u4F4E\u4E8E75%\u548C25%\u65F6\uFF0C\u4F1A\u53D8\u5F62\u6210\u4E3A\u5821\u5792\uFF0C\u53D7\u5230\u7684\u4F24\u5BB3\u5927\u5E45\u964D\u4F4E\u5E76\u91CA\u653E\u5927\u91CF\u57FA\u7840\u539F\u578B"
-    English: When it's health fall below 75% and 25%, it will morph into fortress,
-      taking much less damage and releasing a lot of base archetypes
+    Chinese: "\u6BCF\u9694\u4E00\u6BB5\u65F6\u95F4\uFF0C\u4F1A\u53D8\u8EAB\u6210\u4E3A\u5821\u5792\uFF0C\u53D7\u5230\u7684\u4F24\u5BB3\u5927\u5E45\u964D\u4F4E\u5E76\u91CA\u653E\u57FA\u7840\u539F\u578B"
+    English: Every once in a while, it will morph into fortress, taking much less
+      damage and releasing some archetypes
   - Key: BINARYINFO
     Chinese: "\u5171\u67092\u4E2A\u72E1\u5154\uFF0C\u4EFB\u610F\u4E00\u4E2A\u6B7B\u4EA1\u65F6\uFF0C\u4F1A\u89E6\u53D1\u9003\u79BB\u673A\u5236\uFF0C\u4F7F\u53E6\u4E00\u4E2A\u7684\u901F\u5EA6\u5927\u5E45\u63D0\u5347"
     English: Summon two binary stars at the same time, and when one dies, the other
@@ -1325,15 +1325,15 @@ MonoBehaviour:
     English: Each refactor turret comes with a powerful <color=#FFEA6D>default skill</color>,
       make use of it.
   - Key: Guide210
-    Chinese: "\u6839\u636E\u91CD\u6784\u914D\u65B9\u7684\u5143\u7D20\u7EC4\u5408,\u6BCF\u4E2A\u91CD\u6784\u5854\u90FD\u62E5\u67091\u4E2A<color=#FFEA6D>\u5143\u7D20\u6280\u80FD</color>."
+    Chinese: "\u6839\u636E\u91CD\u6784\u914D\u65B9\u7684\u5143\u7D20\u7EC4\u5408,\u6BCF\u4E2A\u91CD\u6784\u5854\u8FD8\u62E5\u67091\u4E2A<color=#FFEA6D>\u5143\u7D20\u6280\u80FD</color>."
     English: Based on the combination of elements, it also has an <color=#FFEA6D>element
       skill</color>.
   - Key: Guide2101
-    Chinese: "\u5143\u7D20\u6280\u80FD\u4F1A\u4F7F\u91CD\u6784\u5854\u589E\u52A03\u4E2A\u5143\u7D20,<color=#FFEA6D>\u5143\u7D20\u4E3A\u9632\u5FA1\u5854\u63D0\u4F9B\u7279\u5B9A\u5C5E\u6027\u52A0\u6210</color>."
+    Chinese: "\u6BCF\u4E2A\u5143\u7D20\u6280\u80FD\u4F1A\u4E3A\u91CD\u6784\u5854<color=#FFEA6D>\u589E\u52A03\u4E2A\u5BF9\u5E94\u5143\u7D20</color>,\u91CD\u6784\u5854\u62E5\u6709\u7684\u6BCF\u4E2A\u5143\u7D20\u90FD\u4F1A\u4F7F\u5176<color=#FFEA6D>\u83B7\u5F97\u7279\u5B9A\u5C5E\u6027\u52A0\u6210</color>."
     English: Each elemental skill add 3 elements to the refactor turret, and <color=#FFEA6D>elements
       provide stats bonus to the turret.</color>
   - Key: Guide2102
-    Chinese: "\u91CD\u6784\u5854\u62E5\u6709\u7684\u5168\u90E8\u5143\u7D20\u6570\u91CF\u663E\u793A\u5728\u6280\u80FD\u533A\u4E0A\u65B9,\u5C06\u9F20\u6807\u60AC\u505C\u5728\u8BE5\u533A\u57DF\u53EF\u4EE5\u67E5\u770B\u52A0\u6210\u6C47\u603B\u4FE1\u606F."
+    Chinese: "\u91CD\u6784\u5854\u62E5\u6709\u7684<color=#FFEA6D>\u5143\u7D20\u6570\u91CF\u663E\u793A\u5728\u6280\u80FD\u533A\u4E0A\u65B9</color>,<color=#FFEA6D>\u6839\u636E\u62E5\u6709\u7684\u5143\u7D20\u4E0D\u540C\u53EF\u4EE5\u8BA9\u4F60\u6253\u9020\u5404\u5177\u7279\u70B9\u7684\u91CD\u6784\u5854.</color>"
     English: The total number of elements is displayed above the skill area, by holding
       your mouse on it can display the overall bonus info.
   - Key: Guide211

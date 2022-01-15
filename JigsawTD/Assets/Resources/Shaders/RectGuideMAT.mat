@@ -25,8 +25,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _ColorMask: 15
-    - _SliderX: 133.911
-    - _SliderY: 50.000385
+    - _SliderX: 133.91078
+    - _SliderY: 50.000343
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0

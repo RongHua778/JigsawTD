@@ -99,7 +99,9 @@ public class LevelManager : Singleton<LevelManager>
     public void SetGameLevel(int level)
     {
         GameLevel = level;
-        GameExp = 0;
+        //GameExp = 0;
+        if (level == 0)
+            GameExp = 0;
         foreach (var item in AllContent)
         {
             item.isLock = item.initialLock;

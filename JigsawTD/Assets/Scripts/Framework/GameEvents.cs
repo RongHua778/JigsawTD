@@ -18,7 +18,8 @@ public enum TutorialType
     ElementBenefitEnter,
     RefactorBtnClick,
     SelectShape,
-    SystemBtnClick
+    SystemBtnClick,
+    GuideBookContinue
 }
 
 public enum TempWordType
