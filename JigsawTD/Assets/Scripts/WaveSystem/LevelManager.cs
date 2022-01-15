@@ -239,7 +239,7 @@ public class LevelManager : Singleton<LevelManager>
         if (LastGameSave.HasLastGame)
         {
             CurrentLevel = GetLevelAtt(LastGameSave.SaveRes.Difficulty);
-            DeleteGameSave();
+            //DeleteGameSave();
         }
     }
 
