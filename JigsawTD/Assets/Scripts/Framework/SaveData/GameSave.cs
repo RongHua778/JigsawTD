@@ -87,6 +87,8 @@ public class ContentStruct
     public int Element;
     public int Quality;
 
+    public bool TrapRevealed;
+
     public int ElementSlotCount;
     public Dictionary<string, List<int>> SkillList;
 }

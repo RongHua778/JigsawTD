@@ -116,7 +116,7 @@ public static class ConstructHelper
     public static TileShape GetTrapShapeByName(string name)//测试用，生成一个随意放置的陷阱
     {
         TileShape shape = m_ShapeFactory.GetDShape();
-        shape.SetTile(GetTrap(name));
+        shape.SetTile(GetTrap(name, true));
         return shape;
     }
 
@@ -166,9 +166,9 @@ public static class ConstructHelper
         return tile;
     }
 
-    public static GameTile GetTrap(string name)
+    public static GameTile GetTrap(string name, bool isReveal)
     {
-        GameTileContent content = m_ContentFactory.GetTrapContentByName(name);
+        GameTileContent content = m_ContentFactory.GetTrapContentByName(name, isReveal);
         if (content == null)
         {
             return null;

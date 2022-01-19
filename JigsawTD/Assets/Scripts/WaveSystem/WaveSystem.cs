@@ -10,6 +10,8 @@ public class WaveSystem : IGameSystem
     [Header("测试用")]
     [SerializeField] float testIntensify = default;
     [SerializeField] EnemyType TestType = default;
+    [SerializeField] int TestEnemyCount = default;
+    [SerializeField] float TestCoolDown = default;
     [Space]
     public bool RunningSpawn = false;//是否正在生产敌人
 
@@ -90,7 +92,7 @@ public class WaveSystem : IGameSystem
             }
             else
             {
-                stage += LevelAttribute.LevelIntensify * (0.00004f * Mathf.Pow(i, 4f) + 1);//30波后难度快速成长，期望在100波内解决玩家
+                stage += LevelAttribute.LevelIntensify * (0.00004f * Mathf.Pow(i, 3.9f) + 1);//原本4f 30波后难度快速成长，期望在100波内解决玩家
             }
 
 
@@ -138,7 +140,7 @@ public class WaveSystem : IGameSystem
 
             if (TestType != EnemyType.None)//测试特定敌人用
             {
-                sequences = GenerateSpecificSequence(TestType, testIntensify, i);
+                sequences = TestSequenceSet();
             }
             LevelSequence.Add(sequences);
         }
@@ -172,11 +174,22 @@ public class WaveSystem : IGameSystem
     private EnemySequence SequenceInfoSet(int genres, float stage, int wave, EnemyType type, bool isBoss = false)
     {
         EnemyAttribute attribute = StaticData.Instance.EnemyFactory.Get(type);
-        int amount = Mathf.RoundToInt(attribute.InitCount + ((float)wave / 5) * attribute.CountIncrease / genres);
-        //float coolDown = (float)(5f + wave / 2) / amount;
+        int amount = Mathf.Min(attribute.MaxAmount / genres, Mathf.RoundToInt(attribute.InitCount + ((float)wave / 5) * attribute.CountIncrease / genres));
         float coolDown = attribute.CoolDown * genres;
+
+
         EnemySequence sequence = new EnemySequence(type, amount, coolDown, stage, isBoss);
         return sequence;
+    }
+
+    private List<EnemySequence> TestSequenceSet()
+    {
+        List<EnemySequence> sequencesToReturn = new List<EnemySequence>();
+
+        EnemyAttribute attribute = StaticData.Instance.EnemyFactory.Get(TestType);
+        EnemySequence sequence = new EnemySequence(TestType, TestEnemyCount, TestCoolDown, testIntensify, attribute.IsBoss);
+        sequencesToReturn.Add(sequence);
+        return sequencesToReturn;
     }
 
     public void ManualSetSequence(EnemyType type, float stage, int wave)

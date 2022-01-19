@@ -21,21 +21,29 @@ public class PenetrateBullet : Bullet
     public override bool GameUpdate()
     {
         RotateBullet(TargetPos);
-        return MoveTowards(TargetPos);
+        //MoveTowards(TargetPos);
+        return DistanceCheck(TargetPos);
+        //return MoveTowardsRig(TargetPos);
+    }
+
+    public void FixedUpdate()
+    {
+        MoveTowardsRig(TargetPos);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<TargetPoint>())
+        TargetPoint point = collision.GetComponent<TargetPoint>();
+        if (point != null)
         {
             SputteredCount = 0;
             TriggerPreHitEffect();
-            IDamage enemy = collision.GetComponent<TargetPoint>().Enemy;
-            DamageProcess(enemy);
+            //IDamage enemy = collision.GetComponent<TargetPoint>().Enemy;
+            DamageProcess(point);
 
-            ParticalControl effect = ObjectPool.Instance.Spawn(SputteringEffect) as ParticalControl;
-            effect.transform.position = transform.position;
-            effect.transform.localScale = 0.2f * Vector3.one;
-            effect.PlayEffect();
+            //ParticalControl effect = ObjectPoolNew.Instance.Spawn(SputteringEffect, transform.position) as ParticalControl;
+            //effect.transform.position = transform.position;
+            //effect.transform.localScale = 0.2f * Vector3.one;
+            //effect.PlayEffect();
         }
     }
 

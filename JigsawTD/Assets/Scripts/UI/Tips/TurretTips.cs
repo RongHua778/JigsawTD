@@ -228,7 +228,7 @@ public class TurretTips : TileTips
         }
 
         string rangeTypeTxt = "";
-        switch (att.RangeType)
+        switch (m_Strategy == null ? att.RangeType : m_Strategy.RangeType)
         {
             case RangeType.Circle:
                 rangeTypeTxt = GameMultiLang.GetTraduction("RANGETYPE1");

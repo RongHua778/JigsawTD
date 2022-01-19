@@ -196,14 +196,18 @@ public class GameManager : Singleton<GameManager>
         {
             m_MainUI.GameSpeed = 3;
         }
-
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseGame(!m_PausePanel.IsVisible());
+        }
         if (Input.GetKeyDown(KeyCode.Q) && LevelManager.Instance.CurrentLevel.Difficulty != 0)
         {
             m_BluePrintShopUI.ShopBtnClick();
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            m_FuncUI.NextWaveBtnClick();
+            if (OperationState.StateName == StateName.BuildingState)
+                m_FuncUI.NextWaveBtnClick();
         }
     }
 
@@ -214,10 +218,7 @@ public class GameManager : Singleton<GameManager>
         {
             m_FuncUI.Hide();
             TransitionToState(StateName.WaveState);
-            foreach (var turret in compositeTurrets.behaviors)
-            {
-                ((TurretContent)turret).Strategy.StartTurnSkills();
-            }
+
             GameEvents.Instance.TutorialTrigger(TutorialType.NextWaveBtnClick);
         }
         //参数设置
@@ -262,15 +263,15 @@ public class GameManager : Singleton<GameManager>
     private void TransitionToState(StateName stateName)
     {
         BattleOperationState state = StateDIC[stateName];
-        if (operationState == null)
+        if (OperationState == null)
         {
-            operationState = state;
-            StartCoroutine(operationState.EnterState());
+            OperationState = state;
+            StartCoroutine(OperationState.EnterState());
         }
         else
         {
             StartCoroutine(OperationState.ExitState(state));
-            operationState = state;
+            //operationState = state;
         }
     }
 
@@ -360,9 +361,12 @@ public class GameManager : Singleton<GameManager>
 
     #region 通用功能
 
-    public void PauseGame()
+    public void PauseGame(bool value)
     {
-        m_PausePanel.Show();
+        if (value)
+            m_PausePanel.Show();
+        else
+            m_PausePanel.Hide();
     }
     public bool ConsumeMoney(int cost)
     {
@@ -443,6 +447,11 @@ public class GameManager : Singleton<GameManager>
         {
             (((TurretContent)turret).Strategy).DrawTurretSkill();
         }
+    }
+
+    public void SetShowJumpDamage(bool value)
+    {
+        GameRes.ShowDamage = value;
     }
 
     #endregion

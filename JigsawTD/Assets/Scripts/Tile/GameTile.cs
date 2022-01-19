@@ -131,7 +131,7 @@ public abstract class GameTile : TileBase
             BoardSystem.SelectingTile = null;
         }
         ObjectPool.Instance.UnSpawn(Content);
-        gameObject.tag = "Untagged";
+        gameObject.tag = StaticData.Untagged;
         m_DraggingShape = null;
         SetTileColor(Color.white);
         Content = null;

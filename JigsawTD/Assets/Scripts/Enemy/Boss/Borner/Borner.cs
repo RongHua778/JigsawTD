@@ -40,7 +40,7 @@ public class Borner : Boss
     private IEnumerator CastleBorn()
     {
         float bornTime = 3f;
-        int bornCount = 2 + GameRes.CurrentWave / 5;
+        int bornCount = Mathf.Min(14, 2 + GameRes.CurrentWave / 5);
         DamageStrategy.StunTime += bornTime;
         anim.SetBool("Transform", true);
         Sound.Instance.PlayEffect("Sound_BornerTransform");

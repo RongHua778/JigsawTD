@@ -23,6 +23,7 @@ MonoBehaviour:
   IsBoss: 0
   InitCount: 1
   CountIncrease: 0.5
+  MaxAmount: 6
   Health: 120
   Speed: 0.6
   CoolDown: 3.5
@@ -31,4 +32,4 @@ MonoBehaviour:
   HealthAtt: 3
   SpeedAtt: 1
   AmountAtt: 1
-  ReachDamage: 2
+  ReachDamage: 0

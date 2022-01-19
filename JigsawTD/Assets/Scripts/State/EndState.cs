@@ -12,6 +12,7 @@ public class EndState : BattleOperationState
 
     public override IEnumerator EnterState()
     {
+        gameManager.OperationState = this;
         Sound.Instance.PlayBg("lastwave");
         yield return null;
     }

@@ -6,7 +6,7 @@ using TMPro;
 
 public class GroundTile : TileBase
 {
-    public override bool IsLanded
+    public override bool IsLanded//上方是否有TILE
     {
         get => base.IsLanded;
         set

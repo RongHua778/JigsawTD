@@ -13,7 +13,7 @@ public class TurretBaseContent : GameTileContent
     public override void ContentLanded()
     {
         base.ContentLanded();
-        m_GameTile.tag = "OnlyCompositeTurret";
+        m_GameTile.tag = StaticData.OnlyRefactorTag;
         StaticData.SetNodeWalkable(m_GameTile, false, false);
     }
 

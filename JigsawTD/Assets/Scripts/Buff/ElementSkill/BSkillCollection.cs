@@ -26,7 +26,7 @@ public class CloseSpeed : ElementSkill
 {
     //距离小于3加75攻速
     public override List<int> Elements => new List<int> { 0, 0, 1 };
-    public override float KeyValue => 0.5f * strategy.WoodCount;
+    public override float KeyValue => 0.3f * strategy.WoodCount;
     public override string DisplayValue => StaticData.ElementDIC[ElementType.WOOD].Colorized((strategy == null ? 0.5f : (KeyValue * 100)).ToString() + "%");
     public override ElementType IntensifyElement => ElementType.WOOD;
     float intensifyValue;
@@ -64,7 +64,7 @@ public class TimeSpeed : ElementSkill
 {
     //每秒+2%攻速
     public override List<int> Elements => new List<int> { 2, 2, 1 };
-    public override float KeyValue => 0.01f * strategy.WoodCount;
+    public override float KeyValue => 0.006f * strategy.WoodCount;
     public override string DisplayValue => StaticData.ElementDIC[ElementType.WOOD].Colorized((KeyValue * 100).ToString() + "%");
     public override ElementType IntensifyElement => ElementType.WOOD;
     public override void StartTurn()
@@ -89,7 +89,7 @@ public class LongSpeed : ElementSkill
 {
     //攻速波动
     public override List<int> Elements => new List<int> { 3, 3, 1 };
-    public override float KeyValue => 0.25f * strategy.WoodCount;
+    public override float KeyValue => 0.15f * strategy.WoodCount;
     public override string DisplayValue => StaticData.ElementDIC[ElementType.WOOD].Colorized((KeyValue * 100).ToString() + "%");
     public override ElementType IntensifyElement => ElementType.WOOD;
     float intensifyValue;
@@ -119,7 +119,7 @@ public class StartSpeed : ElementSkill
     //开局+150%攻速
     public override List<int> Elements => new List<int> { 4, 4, 1 };
 
-    public override float KeyValue => 0.5f * strategy.WoodCount;
+    public override float KeyValue => 0.3f * strategy.WoodCount;
     public override string DisplayValue => StaticData.ElementDIC[ElementType.WOOD].Colorized((KeyValue * 100).ToString() + "%");
     public override ElementType IntensifyElement => ElementType.WOOD;
     float intensify = 0;

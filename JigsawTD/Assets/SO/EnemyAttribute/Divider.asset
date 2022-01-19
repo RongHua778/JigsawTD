@@ -23,6 +23,7 @@ MonoBehaviour:
   IsBoss: 1
   InitCount: 1
   CountIncrease: 0
+  MaxAmount: 1
   Health: 70
   Speed: 0.7
   CoolDown: 1

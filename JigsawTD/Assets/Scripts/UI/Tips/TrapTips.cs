@@ -6,7 +6,9 @@ using TMPro;
 
 public class TrapTips : TileTips
 {
-    [SerializeField] GameObject AnalysisArea = default;
+    [SerializeField] GameObject DamageAnalysisArea = default;
+    [SerializeField] GameObject CoinAnalysisArea = default;
+    [SerializeField] Text CoinAnalysisText = default;
     [SerializeField] Text AnalysisTxt = default;
     [SerializeField] TextMeshProUGUI switchTrapCostTxt = default;
     [SerializeField] GameObject switchTrapArea = default;
@@ -39,13 +41,24 @@ public class TrapTips : TileTips
 
         if (trapContent.DamageAnalysis > 0)
         {
-            AnalysisArea.SetActive(true);
+            DamageAnalysisArea.SetActive(true);
             AnalysisTxt.text = m_Trap.DamageAnalysis.ToString();
         }
         else
         {
-            AnalysisArea.SetActive(false);
+            DamageAnalysisArea.SetActive(false);
         }
+
+        if (trapContent.CoinAnalysis > 0)
+        {
+            CoinAnalysisArea.SetActive(true);
+            CoinAnalysisText.text = m_Trap.CoinAnalysis.ToString();
+        }
+        else
+        {
+            CoinAnalysisArea.SetActive(false);
+        }
+
 
     }
 
@@ -54,8 +67,8 @@ public class TrapTips : TileTips
         m_TrapAtt = trapAtt;
         BasicInfo();
         switchTrapArea.SetActive(false);
-        AnalysisArea.SetActive(false);
-
+        DamageAnalysisArea.SetActive(false);
+        CoinAnalysisArea.SetActive(false);
     }
 
     private void BasicInfo()

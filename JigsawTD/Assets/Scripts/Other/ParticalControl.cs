@@ -10,17 +10,30 @@ public class ParticalControl : ReusableObject
         ps = this.GetComponent<ParticleSystem>();
     }
 
-    private void Update()
+    //private void Update()
+    //{
+    //    if (!ps.IsAlive())
+    //    {
+    //        ObjectPoolNew.Instance.UnSpawn(this);                     
+    //    }
+    //}
+    private void FixedUpdate()
     {
         if (!ps.IsAlive())
         {
-            ObjectPool.Instance.UnSpawn(this);                     
+            ObjectPool.Instance.UnSpawn(this);
         }
     }
 
     public void PlayEffect()
     {
         ps.Play();
+        //Invoke(nameof(ReclaimPartical), ReclaimTime);
     }
+
+    //protected void ReclaimPartical()
+    //{
+    //    ObjectPoolNew.Instance.UnSpawn(this);
+    //}
 
 }

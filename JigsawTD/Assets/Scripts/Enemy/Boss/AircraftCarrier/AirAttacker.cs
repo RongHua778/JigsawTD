@@ -57,13 +57,18 @@ public class AirAttacker : Aircraft
     {
         if (targetTurret.Activated)
         {
-            FrostEffect frosteffect = ObjectPool.Instance.Spawn(StaticData.Instance.FrostEffectPrefab) as FrostEffect;
-            frosteffect.transform.position = targetTurret.transform.position;
-            ReusableObject partical = ObjectPool.Instance.Spawn(StaticData.Instance.FrostExplosion);
-            partical.transform.position = transform.position;
-            partical.transform.localScale = Vector3.one;
+            //FrostEffect frosteffect = ObjectPool.Instance.Spawn(StaticData.Instance.FrostEffectPrefab) as FrostEffect;
+            //frosteffect.transform.position = targetTurret.transform.position;
+
+
+
+            //ReusableObject partical = ObjectPool.Instance.Spawn(StaticData.Instance.FrostExplosion);
+            //partical.transform.position = transform.position;
+            //partical.transform.localScale = Vector3.one;
+
+            FrostEffect frosteffect = StaticData.Instance.FrostEffect(targetTurret.transform.position);
             targetTurret.Frost(freezeTime, frosteffect);
-            Sound.Instance.PlayEffect("Sound_EnemyExplosionFrost");
+            //Sound.Instance.PlayEffect("Sound_EnemyExplosionFrost");
         }
         targetTurret = null;
 

@@ -21,7 +21,7 @@ public class Game : Singleton<Game>
         Application.runInBackground = true;
         DontDestroyOnLoad(this.gameObject);
         TurretEffectFactory.Initialize();
-        UnityAnalystics.EnableAnalysitics();
+        //UnityAnalystics.EnableAnalysitics();
     }
 
     

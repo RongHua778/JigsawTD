@@ -151,7 +151,7 @@ public class StrategyBase
     public float BaseSpeed { get => InitFireRate * (1 + ElementFirerateIntensify * AllSpeedIntensifyModify); }
     public int BaseRange { get => InitRange + BaseRangeIntensify; }
     public float BaseCriticalRate { get => InitCriticalRate + ElementCritIntensify * AllCriticalIntensifyModify; }
-    public float BaseCriticalPercentage { get => initCriticalPercentage; }
+    public float BaseCriticalPercentage { get => initCriticalPercentage + FireCount * 0.15f; }
     public float BaseSplashRange { get => InitSplashRange + ElementSplashIntensify * BaseSplashRangeIntensifyModify; }
     public float BaseSplashPercentage { get => initSplashPercentage + BaseSplashPercentageIntensify; }
     public float BaseSlowRate { get => InitSlowRate + ElementSlowIntensify * BaseSlowRateIntensifyModify; }

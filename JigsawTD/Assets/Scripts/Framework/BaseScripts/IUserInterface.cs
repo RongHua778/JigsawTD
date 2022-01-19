@@ -21,6 +21,13 @@ public abstract class IUserInterface : MonoBehaviour
         m_Active = true;
     }
 
+    public void SetActive()
+    {
+        m_RootUI.SetActive(true);
+        m_Active = true;
+
+    }
+
     public virtual void Hide()
     {
         m_RootUI.SetActive(false);

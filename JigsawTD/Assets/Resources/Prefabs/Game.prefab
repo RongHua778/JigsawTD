@@ -436,7 +436,7 @@ MonoBehaviour:
   SwitchTrapCostMultiply: 30
   TileSize: 1
   GoldAttackIntensify: 0.25
-  WoodFirerateIntensify: 0.25
+  WoodFirerateIntensify: 0.15
   WaterSlowIntensify: 0.5
   FireCritIntensify: 0.15
   DustSplashIntensify: 0.25

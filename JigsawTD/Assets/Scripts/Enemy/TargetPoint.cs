@@ -10,8 +10,13 @@ public class TargetPoint : MonoBehaviour
 
     private void Awake()
     {
-        Enemy = transform.root.GetComponent<IDamage>();
+        SetEnemy();
     }
 
+    protected virtual void SetEnemy()
+    {
+        Enemy = transform.root.GetComponent<IDamage>();
+
+    }
 
 }

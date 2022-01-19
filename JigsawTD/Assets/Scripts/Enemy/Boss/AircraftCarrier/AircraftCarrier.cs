@@ -17,7 +17,7 @@ public class AircraftCarrier : Boss
     {
         base.Initialize(pathIndex, attribute, pathOffset, intensify);
         bornCD = 2;
-        maxEnemyNumber = 12;
+        maxEnemyNumber = Mathf.Min(22, Mathf.RoundToInt(2 + GameRes.CurrentWave / 3));
     }
 
 

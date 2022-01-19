@@ -225,12 +225,13 @@ public class TileContentFactory : GameObjectFactory
 
     //陷阱*************
 
-    public TrapContent GetTrapContentByName(string name)
+    public TrapContent GetTrapContentByName(string name, bool isReveal = false)
     {
         if (TrapDIC.ContainsKey(name))
         {
             TrapContent content = Get(TrapDIC[name].Prefab) as TrapContent;
             content.Initialize(TrapDIC[name]);
+            if (isReveal) content.RevealTrap();
             return content;
         }
         Debug.LogWarning("没有对应名字的陷阱");

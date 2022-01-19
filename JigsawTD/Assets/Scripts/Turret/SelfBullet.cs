@@ -25,8 +25,8 @@ public class SelfBullet : Bullet
         {
             SputteredCount = 0;
             TriggerPreHitEffect();
-            IDamage enemy = collision.GetComponent<TargetPoint>().Enemy;
-            DamageProcess(enemy);
+           
+            DamageProcess(collision.GetComponent<TargetPoint>());
 
             ParticalControl effect = ObjectPool.Instance.Spawn(SputteringEffect) as ParticalControl;
             effect.transform.position = transform.position;

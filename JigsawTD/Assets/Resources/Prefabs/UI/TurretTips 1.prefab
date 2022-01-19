@@ -148,7 +148,6 @@ MonoBehaviour:
   - {fileID: 1847170245126204430}
   - {fileID: 6668083381141584801}
   - {fileID: 3034298702131058728}
-  rareInfo: {fileID: 0}
 --- !u!1 &552435339183098343
 GameObject:
   m_ObjectHideFlags: 0
@@ -7014,8 +7013,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 42.659, y: 1.72}
-  m_SizeDelta: {x: 150.49, y: 37.43}
+  m_AnchoredPosition: {x: 63.83637, y: 1.72}
+  m_SizeDelta: {x: 192.8448, y: 37.43}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8964863820135514773
 CanvasRenderer:

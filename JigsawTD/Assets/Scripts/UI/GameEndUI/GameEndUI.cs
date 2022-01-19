@@ -58,7 +58,7 @@ public class GameEndUI : IUserInterface
         {
             title.text = GameMultiLang.GetTraduction("PASSLEVEL") + (GameRes.CurrentWave) + GameMultiLang.GetTraduction("WAVE");
             LevelManager.Instance.EndlessHighScore = GameRes.CurrentWave;
-            int tempWordID = Mathf.Clamp((GameRes.CurrentWave - 20) / 10, 0, 5);
+            int tempWordID = Mathf.Clamp(GameRes.CurrentWave / 20, 0, 5);
             titleBG.sprite = TitleBGs[tempWordID + 2];
             GameEvents.Instance.TempWordTrigger(new TempWord(TempWordType.EndlessEnd, tempWordID));
             SteamLeaderboard.UpdateScore(GameRes.CurrentWave);
@@ -98,11 +98,11 @@ public class GameEndUI : IUserInterface
         m_BillBoard.SetBillBoard();
         StartCoroutine(SetValueCor());
 
-        if (LevelManager.Instance.CurrentLevel.Mode > 1)//难度2开始统计数据
-        {
-            ModeData data = SetModeData(LevelManager.Instance.CurrentLevel.Mode, GameRes.CurrentWave, win, m_BillBoard.HighestTurret);
-            UnityAnalystics.UploadModeData(data);
-        }
+        //if (LevelManager.Instance.CurrentLevel.Mode > 1)//难度2开始统计数据
+        //{
+        //    ModeData data = SetModeData(LevelManager.Instance.CurrentLevel.Mode, GameRes.CurrentWave, win, m_BillBoard.HighestTurret);
+        //    UnityAnalystics.UploadModeData(data);
+        //}
 
     }
 

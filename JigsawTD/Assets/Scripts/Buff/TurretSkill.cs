@@ -193,7 +193,7 @@ public class UltraSkill : InitialSkill
 
     public override void PreHit(Bullet bullet = null)
     {
-        bullet.CriticalPercentage *= Random.Range(0.5f, 2.5f);
+        bullet.CriticalPercentage *= Random.Range(0.5f, 3f);
 
     }
 
@@ -279,7 +279,7 @@ public class SnowSkill : InitialSkill
     public override void Build()
     {
         base.Build();
-        strategy.BaseWaterCount += 2;
+        strategy.BaseWaterCount += 1;
     }
 
     public override void PreHit(Bullet bullet = null)
@@ -331,7 +331,7 @@ public class SuperSkill : InitialSkill
 
     public override void PreHit(Bullet bullet = null)
     {
-        bullet.Damage *= (1 + 0.1f * strategy.TotalElementCount);
+        bullet.Damage *= (1 + 0.2f * strategy.TotalElementCount);
     }
 }
 

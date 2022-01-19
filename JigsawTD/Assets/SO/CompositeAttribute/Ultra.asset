@@ -34,7 +34,7 @@ MonoBehaviour:
   - AttackRange: 5
     ForbidRange: 0
     AttackDamage: 1000
-    AttackSpeed: 0.25
+    AttackSpeed: 0.3
     SplashRange: 0
     CriticalRate: 0
     SlowRate: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   - AttackRange: 5
     ForbidRange: 0
     AttackDamage: 1500
-    AttackSpeed: 0.25
+    AttackSpeed: 0.3
     SplashRange: 0
     CriticalRate: 0
     SlowRate: 0
@@ -54,7 +54,7 @@ MonoBehaviour:
   - AttackRange: 5
     ForbidRange: 0
     AttackDamage: 2250
-    AttackSpeed: 0.25
+    AttackSpeed: 0.3
     SplashRange: 0
     CriticalRate: 0
     SlowRate: 0

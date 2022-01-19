@@ -10,6 +10,7 @@ public class ExcutionTrap : TrapContent
         float damage = (enemy.DamageStrategy.MaxHealth - enemy.DamageStrategy.CurrentHealth) * 0.2f * TrapIntensify * enemy.DamageStrategy.TrapIntensify;
         float damageReturn;
         enemy.DamageStrategy.ApplyDamage(damage, out damageReturn, true);
+        StaticData.Instance.ShowJumpDamage(enemy.model.position, (int)damageReturn, true);
         DamageAnalysis += (int)damageReturn;
         enemy.DamageStrategy.TrapIntensify = 1;
     }

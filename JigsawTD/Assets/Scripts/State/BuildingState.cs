@@ -13,10 +13,10 @@ public class BuildingState : BattleOperationState
 
     public override IEnumerator EnterState()
     {
-        yield return new WaitForSeconds(0.1f);
+
         Sound.Instance.PlayBg("Music_Preparing");
-
-
+        yield return new WaitForSeconds(0.1f);
+        gameManager.OperationState = this;
         yield break;
     }
 

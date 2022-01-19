@@ -22,8 +22,8 @@ public class RefactorTurret : TurretContent
     public override void ContentLanded()
     {
         GameManager.Instance.compositeTurrets.Add(this);
+        m_GameTile.tag = StaticData.OnlyRefactorTag;//这个放上面，避免装备元素技能后，把Gametile改了
         base.ContentLanded();
-        m_GameTile.tag = "OnlyCompositeTurret";
     }
 
     public override void SaveContent(out ContentStruct contentStruct)
@@ -60,7 +60,6 @@ public class RefactorTurret : TurretContent
             }
             else//正常部署
             {
-                //上传一次重构塔重构次数
                 ObjectPool.Instance.UnSpawn(tile);
             }
         }

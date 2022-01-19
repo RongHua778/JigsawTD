@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface IDamage
 {
+
     DamageStrategy DamageStrategy { get; set; }
     HealthBar HealthBar { get; set; }
 }
@@ -30,7 +31,7 @@ public abstract class DamageStrategy
         set => isDie = value;
     }
     public abstract bool IsEnemy { get; }
-    public virtual float DamageIntensify { get => BuffDamageIntensify; }
+    public virtual float DamageIntensify { get => 1 + BuffDamageIntensify; }
     public virtual float CurrentHealth
     {
         get => currentHealth;
@@ -58,10 +59,10 @@ public abstract class DamageStrategy
 
     public virtual void ApplyDamage(float amount, out float realDamage, bool isCritical = false)
     {
-        realDamage = amount * (1 + DamageIntensify);
+        realDamage = amount * DamageIntensify;
         CurrentHealth -= realDamage;
         GameRes.TotalDamage += (int)realDamage;
-        StaticData.Instance.ShowJumpDamage(ModelTrans.position, (int)realDamage, isCritical);
+        //StaticData.Instance.ShowJumpDamage(ModelTrans.position, (int)realDamage, isCritical);
 
     }
 
@@ -71,7 +72,7 @@ public abstract class DamageStrategy
 
     }
 
-    public virtual void ResetStrategy(EnemyAttribute attribute, float intensify,float slowResist)
+    public virtual void ResetStrategy(EnemyAttribute attribute, float intensify, float slowResist)
     {
         IsDie = false;
         this.MaxHealth = Mathf.RoundToInt(attribute.Health * intensify);
@@ -102,6 +103,7 @@ public class BasicEnemyStrategy : DamageStrategy
         }
     }
     private float frostTime;
+    public bool IsFrosted => frostTime > 0;
     private float currentFrost;
     public float CurrentFrost
     {
@@ -159,31 +161,29 @@ public class BasicEnemyStrategy : DamageStrategy
 
     public override void ApplyBuff(EnemyBuffName buffName, float keyvalue, float duration)
     {
-        BuffInfo info = new BuffInfo(EnemyBuffName.SlowDown, keyvalue, duration);
+        BuffInfo info = new BuffInfo(buffName, keyvalue, duration);
         enemy.Buffable.AddBuff(info);
     }
 
-    public override void ResetStrategy(EnemyAttribute attribute, float intensify,float slowResist)
+    public override void ResetStrategy(EnemyAttribute attribute, float intensify, float slowResist)
     {
         base.ResetStrategy(attribute, intensify, slowResist);
         MaxFrost = attribute.Frost * slowResist;
         TrapIntensify = 1;
         CurrentFrost = 0;
         StunTime = 0;
-        frostTime = 0; 
+        frostTime = 0;
         UnfrostableTime = 0;
     }
 
     public void FrostEnemy(float time)
     {
-        FrostEffect frosteffect = ObjectPool.Instance.Spawn(StaticData.Instance.FrostEffectPrefab) as FrostEffect;
-        frosteffect.transform.position = ModelTrans.position;
+        FrostEffect frosteffect = StaticData.Instance.FrostEffect(ModelTrans.position);
         frosteffect.transform.localScale = Vector3.one * 0.85f;
         frostTime += time;
         StunTime += time;
         UnfrostableTime += 6f;//√‚“ﬂ∂≥Ω· ±º‰
         m_FrostEffect = frosteffect;
-        Sound.Instance.PlayEffect("Sound_EnemyExplosionFrost");
     }
 
     public override void StrategyUpdate()
@@ -194,6 +194,7 @@ public class BasicEnemyStrategy : DamageStrategy
             if (frostTime <= 0.2f)
             {
                 UnFrost();
+                frostTime = 0;
             }
         }
         if (StunTime > 0)
@@ -268,8 +269,8 @@ public class HamsterStrategy : BasicEnemyStrategy
 {
     public override bool IsEnemy => true;
 
-    public override float DamageIntensify => base.DamageIntensify + HamsterDamageIntensify;
-    public float HamsterDamageIntensify => (-Hamster.HamsterCount * 0.25f) + 0.5f;
+    public override float DamageIntensify => base.DamageIntensify * HamsterDamageIntensify;
+    public float HamsterDamageIntensify => 1.5f - 0.25f * Hamster.HamsterCount;// (-Hamster.HamsterCount * 0.25f) + 0.5f;
 
 
     public HamsterStrategy(IDamage damageTarget) : base(damageTarget)

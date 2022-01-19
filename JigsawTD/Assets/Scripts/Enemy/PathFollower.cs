@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PathFollower : ReusableObject,IGameBehavior
 {
@@ -12,6 +13,7 @@ public class PathFollower : ReusableObject,IGameBehavior
     public virtual DirectionChange DirectionChange { get => directionChange; set => directionChange = value; }
 
     [HideInInspector] public Transform model;
+    [SerializeField] SpriteRenderer pathSprite = default;
     protected PathPoint CurrentPoint;
     protected Vector3 positionFrom, positionTo;
     private float progress;
@@ -179,6 +181,11 @@ public class PathFollower : ReusableObject,IGameBehavior
         transform.localPosition = positionFrom;
         Adjust = 1 / (Mathf.PI * Mathf.Max(Mathf.Abs(PathOffset), 0.2f));
         ProgressFactor = Adjust * Speed;
+    }
+
+    public void TransparentPath(float value)
+    {
+        pathSprite.DOColor(new Color(1, 1, 1, value), 1f);
     }
 
 

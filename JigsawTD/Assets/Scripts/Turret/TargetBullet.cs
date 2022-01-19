@@ -19,8 +19,17 @@ public class TargetBullet : Bullet
             Target = null;
         }
         RotateBullet(TargetPos);
-        return MoveTowards(TargetPos);
+        MoveTowards(TargetPos);
+        return DistanceCheck(TargetPos);
+        //return MoveTowards(TargetPos);
     }
+
+    //private void FixedUpdate()
+    //{
+    //    MoveTowardsRig(TargetPos);
+    //}
+
+
     public override void TriggerDamage()
     {
         SputteredCount = 0;
@@ -40,11 +49,11 @@ public class TargetBullet : Bullet
                 {
                     if (target == Target)
                     {
-                        DamageProcess(target.Enemy);
+                        DamageProcess(target, true);
                     }
                     else
                     {
-                        DamageProcess(target.Enemy, true);
+                        DamageProcess(target, i < 9, true);//溅射前8个目标显示伤害跳字
                     }
                 }
 
@@ -55,7 +64,7 @@ public class TargetBullet : Bullet
             if (Target != null)
             {
                 TriggerPreHitEffect();
-                DamageProcess(Target.Enemy);
+                DamageProcess(Target, true);
             }
         }
         ParticalControl effect = ObjectPool.Instance.Spawn(SputteringEffect) as ParticalControl;

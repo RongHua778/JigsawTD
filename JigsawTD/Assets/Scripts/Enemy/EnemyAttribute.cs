@@ -11,6 +11,7 @@ public class EnemyAttribute : ContentAttribute
     public bool IsBoss;
     public int InitCount;
     public float CountIncrease;
+    public int MaxAmount;
     public float Health;
     public float Speed;
     public float CoolDown;

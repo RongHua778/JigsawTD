@@ -162,7 +162,7 @@ public class DraggingShape : DraggingActions
             if (tile.Content.ContentType != GameTileContentType.Empty)//如果是有防御塔的，就比对冲突
             {
 
-                if (col.CompareTag("OnlyCompositeTurret"))
+                if (col.CompareTag(StaticData.OnlyRefactorTag))
                 {
                     if (tile.Content.ContentType == GameTileContentType.RefactorTurret)
                     {
@@ -190,7 +190,7 @@ public class DraggingShape : DraggingActions
                 }
 
 
-                if (col.CompareTag("UnDropablePoint"))//冲突，返回，所有颜色被设为红色
+                if (col.CompareTag(StaticData.UndropablePoint))//冲突，返回，所有颜色被设为红色
                 {
                     canDrop = false;
                     overLapPoint = true;

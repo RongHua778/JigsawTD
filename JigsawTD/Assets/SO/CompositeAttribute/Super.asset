@@ -20,7 +20,7 @@ MonoBehaviour:
   isLock: 0
   initialLock: 1
   StrategyType: 1
-  RangeType: 0
+  RangeType: 1
   element: 0
   Bullet: {fileID: 3971056745658777380, guid: 4c77cf9cbcc0a9740bc10c328648420d, type: 3}
   BulletSpeed: 8
@@ -33,8 +33,8 @@ MonoBehaviour:
   TurretLevels:
   - AttackRange: 4
     ForbidRange: 0
-    AttackDamage: 250
-    AttackSpeed: 0.5
+    AttackDamage: 400
+    AttackSpeed: 0.35
     SplashRange: 0
     CriticalRate: 0
     SlowRate: 0
@@ -43,8 +43,8 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.3}
   - AttackRange: 4
     ForbidRange: 0
-    AttackDamage: 400
-    AttackSpeed: 0.5
+    AttackDamage: 600
+    AttackSpeed: 0.35
     SplashRange: 0
     CriticalRate: 0
     SlowRate: 0
@@ -53,8 +53,8 @@ MonoBehaviour:
     ShootPointOffset: {x: 0, y: 0.3}
   - AttackRange: 4
     ForbidRange: 0
-    AttackDamage: 600
-    AttackSpeed: 0.5
+    AttackDamage: 900
+    AttackSpeed: 0.35
     SplashRange: 0
     CriticalRate: 0
     SlowRate: 0

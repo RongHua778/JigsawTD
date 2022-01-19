@@ -62,7 +62,7 @@ public class ExtraElement : ElementSkill
 
     public override void StartTurn()
     {
-        strategy.GainRandomTempElement(strategy.TurretSkills.Count - 1);
+        strategy.GainRandomTempElement(strategy.TurretSkills.Count-1);
     }
 }
 
@@ -148,11 +148,23 @@ public class IceShell : ElementSkill
     //    base.Composite();
     //    GameRes.PerfectElementCount++;
     //}
-    public override void Build()
+    //public override void Build()
+    //{
+    //    base.Build();
+    //    strategy.BaseSplashPercentageIntensify += 0.35f;
+    //}
+
+    public override void PreHit(Bullet bullet = null)
     {
-        base.Build();
-        strategy.BaseSplashPercentageIntensify += 0.35f;
+        if(bullet.Target!=null&& bullet.Target.Enemy.DamageStrategy.IsEnemy)
+        {
+            if (((BasicEnemyStrategy)bullet.Target.Enemy.DamageStrategy).IsFrosted)
+            {
+                bullet.Damage *= 2f;
+            }
+        }
     }
+
 
 }
 
@@ -161,16 +173,49 @@ public class IceShell : ElementSkill
 
 public class PortalHit : ElementSkill
 {
-    //攻击有5%概率获得2金币
+    //赏金大炮 该他每回合第一次暴击时，获得暴击伤害除以50的金币
+    //暴击时造成的溅射伤害翻倍
     public override List<int> Elements => new List<int> { 1, 3, 4 };
     public override string SkillDescription => "PORTALHIT";
 
-    public override void Hit(IDamage target, Bullet bullet = null)
+    public override void PreHit(Bullet bullet = null)
     {
-        if (Random.value > 0.9f)
-            //((Enemy)target).Flash(2);
-            StaticData.Instance.GainMoneyEffect(((ReusableObject)target).transform.position, 2);
+        if (bullet.isCritical)
+        {
+            bullet.SplashPercentage *= 2f;
+        }
     }
+
+    //public override void PreHit(Bullet bullet = null)
+    //{
+    //    base.PreHit(bullet);
+    //}
+
+    //private bool firstCrit;
+
+    ////public override void Hit(IDamage target, Bullet bullet = null)
+    ////{
+    ////    //if (Random.value > 0.9f)
+    ////    //    //((Enemy)target).Flash(2);
+    ////    //    StaticData.Instance.GainMoneyEffect(((ReusableObject)target).transform.position, 2);
+
+    ////}
+
+    //public override void StartTurn()
+    //{
+    //    firstCrit = false;
+    //}
+    //public override void PreHit(Bullet bullet = null)
+    //{
+    //    if (!firstCrit && bullet.isCritical)
+    //    {
+    //        int gainCoin = Mathf.RoundToInt(bullet.Damage * bullet.CriticalPercentage / 50);
+    //        GameManager.Instance.ShowMessage(GameMultiLang.GetTraduction("GETMONEY") + gainCoin);
+    //        GameObject coinEffect = StaticData.Instance.GainMoneyEffect(bullet.transform.position, gainCoin);
+    //        coinEffect.transform.localScale = Vector2.one * Mathf.Clamp(1 * (Mathf.Log10(gainCoin) + 1), 1f, 5f);
+    //        firstCrit = true;
+    //    }
+    //}
 
 }
 public class TrapIntensify : ElementSkill

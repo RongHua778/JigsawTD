@@ -116,6 +116,19 @@ public class Sound : Singleton<Sound>
     //播放音效
     public void PlayEffect(string audioName)
     {
+
+        //if (canPlay)
+        //{
+        //    canPlay = false;
+        //    if (!EffectMusic.ContainsKey(audioName))
+        //    {
+        //        Debug.Log("使用了错误的音效名");
+        //        return;
+        //    }
+        //    AudioClip clip = EffectMusic[audioName];
+        //    m_effectSound.PlayOneShot(clip);
+        //    StartCoroutine(Reset());
+        //}
         if (!EffectMusic.ContainsKey(audioName))
         {
             Debug.Log("使用了错误的音效名");
@@ -123,9 +136,17 @@ public class Sound : Singleton<Sound>
         }
         AudioClip clip = EffectMusic[audioName];
         m_effectSound.PlayOneShot(clip);
-
+        //StartCoroutine(Reset());
 
     }
+
+    //bool canPlay = true;
+
+    //IEnumerator Reset()
+    //{
+    //    yield return new WaitForSeconds(0.2f);
+    //    canPlay = true;
+    //}
 
     public void PlayEffect(AudioClip clip)
     {

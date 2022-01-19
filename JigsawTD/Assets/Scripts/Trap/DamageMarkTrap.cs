@@ -20,7 +20,7 @@ public class DamageMarkTrap : TrapContent
     public override void OnContentPass(Enemy enemy, GameTileContent content = null)
     {
         base.OnContentPass(enemy, content);
-        BuffInfo buff = new BuffInfo(EnemyBuffName.TileBaseDamageIntensify, 0.5f * TrapIntensify * enemy.DamageStrategy.TrapIntensify, 3);
+        BuffInfo buff = new BuffInfo(EnemyBuffName.TileBaseDamageIntensify, 0.35f * TrapIntensify * enemy.DamageStrategy.TrapIntensify, 3);
         enemy.Buffable.AddBuff(buff);
         enemy.DamageStrategy.TrapIntensify = 1;
     }

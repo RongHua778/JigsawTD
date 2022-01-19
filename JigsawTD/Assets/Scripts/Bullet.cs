@@ -11,6 +11,8 @@ public enum BulletType
 public abstract class Bullet : ReusableObject, IGameBehavior
 {
     [SerializeField] private ParticalControl sputteringEffect = default;
+
+    [SerializeField] private Rigidbody2D m_Rig;
     public abstract BulletType BulletType { get; }
     private TargetPoint target;
     public TargetPoint Target { get => target; set => target = value; }
@@ -25,7 +27,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         set => targetPos = value;
     }
 
-    protected readonly float minDistanceToDealDamage = .1f;
+    protected readonly float minDistanceToDealDamage = .15f;
 
     private float bulletSpeed;
     private float damage;
@@ -112,17 +114,8 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     public abstract bool GameUpdate();
 
 
-    protected void RotateBullet(Vector2 pos)
+    protected bool DistanceCheck(Vector2 pos)
     {
-        Vector2 targetPos = pos - (Vector2)transform.position;
-        float angle = Vector3.SignedAngle(transform.up, targetPos, transform.forward);
-        transform.Rotate(0f, 0f, angle);
-    }
-
-    protected bool MoveTowards(Vector2 pos)
-    {
-        transform.position = Vector2.MoveTowards(transform.position,
-            pos, bulletSpeed * Time.deltaTime);
         float distanceToTarget = ((Vector2)transform.position - pos).magnitude;
         if ((distanceToTarget < minDistanceToDealDamage))
         {
@@ -130,6 +123,32 @@ public abstract class Bullet : ReusableObject, IGameBehavior
             return false;
         }
         return true;
+    }
+
+    protected void RotateBullet(Vector2 pos)
+    {
+        Vector2 targetPos = pos - (Vector2)transform.position;
+        float angle = Vector3.SignedAngle(transform.up, targetPos, transform.forward);
+        transform.Rotate(0f, 0f, angle);
+    }
+
+    protected void MoveTowards(Vector2 pos)
+    {
+        transform.position = Vector2.MoveTowards(transform.position,
+            pos, bulletSpeed * Time.deltaTime);
+
+        //float distanceToTarget = ((Vector2)transform.position - pos).magnitude;
+        //if ((distanceToTarget < minDistanceToDealDamage))
+        //{
+        //    TriggerDamage();
+        //    return false;
+        //}
+        //return true;
+    }
+
+    protected void MoveTowardsRig(Vector2 pos)
+    {
+        m_Rig.MovePosition(m_Rig.position + (pos - m_Rig.position).normalized * bulletSpeed * Time.fixedDeltaTime);
     }
 
     public float GetTargetDistance()
@@ -147,7 +166,7 @@ public abstract class Bullet : ReusableObject, IGameBehavior
     {
         ReclaimBullet();
     }
-    public void DealRealDamage(IDamage target, bool isSputtering = false)
+    public void DealRealDamage(IDamage target, Vector2 pos, bool showDamage = true, bool isSputtering = false)
     {
         if (SlowRate > 0 && target.DamageStrategy.IsEnemy)//技能可能会修改slowrate
         {
@@ -160,12 +179,14 @@ public abstract class Bullet : ReusableObject, IGameBehavior
         target.DamageStrategy.ApplyDamage(finalDamage, out realDamage, isCritical);
         turretParent.Strategy.TotalDamage += (int)realDamage;//防御塔伤害统计
         turretParent.Strategy.TurnDamage += (int)realDamage;//回合伤害统计
+        if (showDamage)
+            StaticData.Instance.ShowJumpDamage(pos, (int)realDamage, isCritical);
     }
 
-    public void DamageProcess(IDamage target, bool isSputtering = false)
+    public void DamageProcess(TargetPoint target, bool showDamage = true, bool isSputtering = false)
     {
-        TriggerHitEffect(target);
-        DealRealDamage(target, isSputtering);
+        TriggerHitEffect(target.Enemy);
+        DealRealDamage(target.Enemy, target.Position, showDamage, isSputtering);
     }
 
 

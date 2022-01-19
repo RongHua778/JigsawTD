@@ -6,6 +6,7 @@ public abstract class ReusableObject : MonoBehaviour,IResuable
 {
     [HideInInspector]
     public Transform ParentObj = null;
+    public bool isActive;
     public virtual void OnSpawn()
     {
 

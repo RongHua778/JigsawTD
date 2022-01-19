@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Armor : MonoBehaviour,IDamage
+public class Armor : MonoBehaviour, IDamage
 {
     public string ExplosionSound => "Sound_EnemyExplosion";
-    [SerializeField] private ReusableObject ExplosionPrefab=default;
+    [SerializeField] private ReusableObject ExplosionPrefab = default;
 
     public HealthBar HealthBar { get; set; }
 
     public DamageStrategy DamageStrategy { get; set; }
+
 
 
     private void Awake()
@@ -39,7 +40,7 @@ public class Armor : MonoBehaviour,IDamage
         if (bullet != null)
         {
             bullet.TriggerPreHitEffect();
-            bullet.DealRealDamage(this);
+            bullet.DealRealDamage(this, transform.position, true);
             GameManager.Instance.nonEnemies.Remove(bullet);
             bullet.ReclaimBullet();
 

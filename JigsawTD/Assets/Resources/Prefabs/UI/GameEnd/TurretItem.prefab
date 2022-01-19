@@ -252,6 +252,7 @@ MonoBehaviour:
   nameTxt: {fileID: 6271226935717374060}
   damageValue: {fileID: 6271226935401015236}
   TotalDamage: 0
+  m_Turret: {fileID: 0}
   medalSprites:
   - {fileID: 7426647921341105080, guid: 25f737b9dca8cf947a1f157855d52b21, type: 3}
   - {fileID: -2239754777116457893, guid: 25f737b9dca8cf947a1f157855d52b21, type: 3}
@@ -348,8 +349,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 148.5, y: 0.0000076294}
-  m_SizeDelta: {x: 216.03, y: 64.79}
+  m_AnchoredPosition: {x: 128.26, y: 0.0000076294}
+  m_SizeDelta: {x: 256.51, y: 64.79}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6271226935401015237
 CanvasRenderer:

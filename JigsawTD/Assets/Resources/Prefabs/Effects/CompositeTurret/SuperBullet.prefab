@@ -9478,6 +9478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ParentObj: {fileID: 0}
   sputteringEffect: {fileID: 3494240544614092349, guid: 39f5cb71662d9694b8ebc3c5106fb8a1, type: 3}
+  m_Rig: {fileID: 0}
   isCritical: 0
   SputteredCount: 0
 --- !u!58 &2479922576969674396

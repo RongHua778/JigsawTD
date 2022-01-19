@@ -50,7 +50,7 @@ public class UnityAnalystics
     //        Debug.Log("ModeWin-Upload:" + result2 + " ModeID:" + modeID);
     //    }
     //}
-
+    //Game Awakeµ÷ÓÃ
     public static void EnableAnalysitics()
     {
         Analytics.enabled = true;

@@ -12,6 +12,7 @@ public abstract class ElementTurret : TurretContent
     {
         base.ContentLanded();
         GameManager.Instance.elementTurrets.Add(this);
+        m_GameTile.tag = StaticData.UndropablePoint;
     }
 
     public override void SaveContent(out ContentStruct contentStruct)
@@ -29,7 +30,7 @@ public abstract class ElementTurret : TurretContent
         Collider2D col = StaticData.RaycastCollider(transform.position, LayerMask.GetMask(StaticData.TempGroundMask));
         if (col != null)
         {
-            col.GetComponent<GroundTile>().IsLanded = true;
+            col.GetComponent<GroundTile>().IsLanded = true;//元素塔可能被回收，回收时，将地板TILE设为上方没有物体
         }
         GameManager.Instance.elementTurrets.Remove(this);
     }

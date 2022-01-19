@@ -66,6 +66,9 @@ public static class GameRes
     public static float TempFireIntensify = 0;
     public static float TempDustIntensify = 0;
 
+    [Header("战斗设置")]
+    public static bool ShowDamage=true;
+
     //新手引导
     static ShapeInfo[] preSetShape;//预设形状
     public static ShapeInfo[] PreSetShape { get => preSetShape; set => preSetShape = value; }

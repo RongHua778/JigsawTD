@@ -275,7 +275,6 @@ public abstract class TurretContent : GameTileContent, IGameBehavior
     public override void ContentLanded()
     {
         base.ContentLanded();
-        m_GameTile.tag = "UnDropablePoint";
         Collider2D col = StaticData.RaycastCollider(transform.position, LayerMask.GetMask(StaticData.ConcreteTileMask));
         ContentLandedCheck(col);
 

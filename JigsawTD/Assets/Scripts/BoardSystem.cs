@@ -214,7 +214,7 @@ public class BoardSystem : IGameSystem
                         tile = ConstructHelper.GetRefactorTurret(content);
                         break;
                     case 5://ÏÝÚå
-                        tile = ConstructHelper.GetTrap(content.ContentName);
+                        tile = ConstructHelper.GetTrap(content.ContentName,content.TrapRevealed);
                         break;
                 }
                 tile.SetRotation(content.Direction);
@@ -327,6 +327,14 @@ public class BoardSystem : IGameSystem
             ObjectPool.Instance.UnSpawn(pl);
         }
         followers.behaviors.Clear();
+    }
+
+    public void TransparentPath(float value)
+    {
+        foreach (PathFollower pl in followers.behaviors)
+        {
+            pl.TransparentPath(value);
+        }
     }
 
     public void GetPathTiles()

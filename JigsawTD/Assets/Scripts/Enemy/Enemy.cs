@@ -65,14 +65,15 @@ public abstract class Enemy : PathFollower, IDamage
     public BuffableEntity Buffable { get; set; }
     private float slowResist;
     public float SlowResist { get => (1 + slowResist); set => slowResist = value; }//减速抗性
-
+    private bool Exited;
     public virtual void Initialize(int pathIndex, EnemyAttribute attribute, float pathOffset, float intensify)
     {
+        Exited = false;
         this.pathTiles = BoardSystem.shortestPath;
         this.PathOffset = pathOffset;
         this.Intensify = intensify;
         this.SlowResist = GameRes.CurrentWave * 0.2f;
-        this.DamageStrategy.ResetStrategy(attribute, intensify,SlowResist);//清除加成
+        this.DamageStrategy.ResetStrategy(attribute, intensify, SlowResist);//清除加成
         this.speed = attribute.Speed;
         this.ReachDamage = attribute.ReachDamage;
 
@@ -108,6 +109,17 @@ public abstract class Enemy : PathFollower, IDamage
             ObjectPool.Instance.UnSpawn(this);
             return false;
         }
+        if (Exited)
+        {
+            ((BasicEnemyStrategy)DamageStrategy).UnFrost();
+            GameEvents.Instance.EnemyReach(this);
+            ObjectPool.Instance.UnSpawn(this);
+            return false;
+        }
+        if (isOutTroing)
+        {
+            return true;
+        }
         OnEnemyUpdate();
         Progress += Time.deltaTime * ProgressFactor;
 
@@ -117,18 +129,23 @@ public abstract class Enemy : PathFollower, IDamage
             CurrentTile = pathTiles[PointIndex];
         }
 
-        while (Progress >= 1f)
+        if (!isOutTroing && Progress >= 1f)
         {
+
             if (PointIndex == PathPoints.Count - 1)
             {
+                //StartCoroutine(ExitCor());
+                //return false;
                 isOutTroing = true;
-                StartCoroutine(ExitCor());
-                return false;
+                anim.SetTrigger("Exit");
+                return true;
             }
             trapTriggered = false;
             Progress = 0;
             PrepareNextState();
         }
+
+
         if (DirectionChange == DirectionChange.None)
         {
             transform.localPosition = Vector3.LerpUnclamped(positionFrom, positionTo, Progress);
@@ -153,11 +170,18 @@ public abstract class Enemy : PathFollower, IDamage
     }
 
 
+    public void EnemyExit()
+    {
+        Exited = true;
+    }
+
     protected IEnumerator ExitCor()
     {
+        isOutTroing = true;
         anim.SetTrigger("Exit");
         yield return new WaitForSeconds(0.5f);
         ((BasicEnemyStrategy)DamageStrategy).UnFrost();//消失过程中解除冰冻
+
         GameEvents.Instance.EnemyReach(this);
         ObjectPool.Instance.UnSpawn(this);
     }
@@ -221,7 +245,7 @@ public abstract class Enemy : PathFollower, IDamage
         isOutTroing = false;
         SpeedIntensify = 0;
         AffectHealerCount = 0;
-
+        
         SlowRate = 0;
         Buffable.RemoveAllBuffs();
 

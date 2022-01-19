@@ -19,6 +19,10 @@ public class StaticData : Singleton<StaticData>
     public static string TempTurretMask = "TempTurret";
     public static string TurretMask = "Turret";
     public static string TempGroundMask = "TempGround";
+
+    public static string Untagged = "Untagged";
+    public static string OnlyRefactorTag = "OnlyCompositeTurret";
+    public static string UndropablePoint = "UnDropablePoint";
     public static LayerMask EnemyLayerMask = 1 << 11;
     public static LayerMask GetGroundLayer = 1 << 8 | 1 << 12;
 
@@ -467,6 +471,8 @@ public class StaticData : Singleton<StaticData>
 
     public void ShowJumpDamage(Vector2 pos, int amount, bool isCritical)
     {
+        if (!GameRes.ShowDamage)
+            return;
         JumpDamage obj = ObjectPool.Instance.Spawn(JumpDamagePrefab) as JumpDamage;
         obj.Jump(amount, pos, isCritical);
     }
@@ -598,17 +604,19 @@ public class StaticData : Singleton<StaticData>
         return result;
     }
 
-    public void GainMoneyEffect(Vector2 pos, int amount)
+    public GameObject GainMoneyEffect(Vector2 pos, int amount)
     {
         GameManager.Instance.GainMoney(amount);
         GameObject obj = ObjectPool.Instance.Spawn(GainMoneyPrefab).gameObject;
         obj.transform.position = pos + Vector2.up * 0.2f;
+        obj.transform.localScale = Vector3.one;
         Sound.Instance.PlayEffect("Sound_GainCoin");
+        return obj;
     }
 
     public void GainPerfectEffect(Vector2 pos, int amount)
     {
-        GameRes.PerfectElementCount+= amount;
+        GameRes.PerfectElementCount += amount;
         GameManager.Instance.CheckAllBlueprints();
         GameObject obj = ObjectPool.Instance.Spawn(GainPerfectPrefab).gameObject;
         obj.transform.position = pos + Vector2.up * 0.2f;
@@ -627,23 +635,23 @@ public class StaticData : Singleton<StaticData>
             FrostEffect frosteffect = null;
             if (turret.Activated)
             {
-                frosteffect = ObjectPool.Instance.Spawn(FrostEffectPrefab) as FrostEffect;
-                frosteffect.transform.position = col.transform.position;
+                frosteffect = FrostEffect(col.transform.position);
+
+                //    ObjectPool.Instance.Spawn(FrostEffectPrefab) as FrostEffect;
+                //frosteffect.transform.position = col.transform.position;
             }
             turret.Frost(frostTime, frosteffect);
         }
         Sound.Instance.PlayEffect("Sound_EnemyExplosionFrost");
-        //for (int i = 0; i < co; i++)
-        //{
-        //    TurretContent turret = attachedResult[i].GetComponent<TurretContent>();
-        //    FrostEffect frosteffect = null;
-        //    if (turret.Activated)
-        //    {
-        //        frosteffect = ObjectPool.Instance.Spawn(frostPrefab) as FrostEffect;
-        //        frosteffect.transform.position = attachedResult[i].transform.position;
-        //    }
-        //    turret.Frost(freezeTime, frosteffect);
-        //}
+
+    }
+
+    public FrostEffect FrostEffect(Vector2 pos)
+    {
+        FrostEffect effect = ObjectPool.Instance.Spawn(FrostEffectPrefab) as FrostEffect;
+        effect.transform.position = pos;
+        Sound.Instance.PlayEffect("Sound_EnemyExplosionFrost");
+        return effect;
     }
 
     public static string FormElementName(ElementType element, int quality)

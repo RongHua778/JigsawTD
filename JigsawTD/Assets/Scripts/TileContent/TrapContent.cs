@@ -14,6 +14,9 @@ public class TrapContent : GameTileContent
     int damageAnalysis;
     public int DamageAnalysis { get => damageAnalysis; set => damageAnalysis = value; }
 
+    int coinAnalysis;
+    public int CoinAnalysis { get => coinAnalysis; set => coinAnalysis = value; }
+
     float trapIntensify = 1;
     public float TrapIntensify { get => trapIntensify; set => trapIntensify = value; }
 
@@ -41,7 +44,7 @@ public class TrapContent : GameTileContent
     public override void ContentLanded()
     {
         base.ContentLanded();
-        m_GameTile.tag = "UnDropablePoint";
+        m_GameTile.tag = StaticData.UndropablePoint;
         StaticData.SetNodeWalkable(m_GameTile, true);
         Collider2D col = StaticData.RaycastCollider(transform.position, LayerMask.GetMask(StaticData.ConcreteTileMask));
         ContentLandedCheck(col);
@@ -53,7 +56,9 @@ public class TrapContent : GameTileContent
     {
         base.SaveContent(out contentStruct);
         contentStruct = m_ContentStruct;
+        contentStruct.TrapRevealed = IsReveal;
         m_ContentStruct.ContentName = TrapAttribute.Name;
+        
     }
 
 
@@ -96,7 +101,7 @@ public class TrapContent : GameTileContent
             GameTile tile = col.GetComponent<GameTile>();
             ObjectPool.Instance.UnSpawn(tile);
         }
-        m_GameTile.IsLanded = false;//设为不可放置
+        //m_GameTile.IsLanded = false;//设为不可放置
     }
 
     public void RevealTrap()//揭示陷阱

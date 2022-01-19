@@ -10,12 +10,11 @@ public class PickingState : BattleOperationState
     {
         
     }
-
     public override IEnumerator EnterState()
     {
+        gameManager.OperationState = this;
         yield break;
     }
-
     public override IEnumerator ExitState(BattleOperationState newState)
     {
         gameManager.StartCoroutine(newState.EnterState());

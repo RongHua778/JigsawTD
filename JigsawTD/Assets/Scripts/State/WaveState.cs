@@ -16,13 +16,16 @@ public class WaveState : BattleOperationState
 
     public override IEnumerator EnterState()
     {
+        gameManager.OperationState = this;
         //计算陷阱列表及效果
         m_BoardSystem.GetPathTiles();
-        foreach (var turret in GameManager.Instance.elementTurrets.behaviors)
+        m_BoardSystem.TransparentPath(0.15f);
+        foreach (var turret in GameManager.Instance.compositeTurrets.behaviors)
         {
             ((TurretContent)turret).Strategy.ClearTurnAnalysis();
+            ((TurretContent)turret).Strategy.StartTurnSkills();
         }
-        foreach (var turret in GameManager.Instance.compositeTurrets.behaviors)
+        foreach (var turret in GameManager.Instance.elementTurrets.behaviors)
         {
             ((TurretContent)turret).Strategy.ClearTurnAnalysis();
         }
@@ -72,14 +75,14 @@ public class WaveState : BattleOperationState
                 Sound.Instance.PlayBg("Music_Boss");
                 break;
         }
-
         yield break;
     }
 
     public override IEnumerator ExitState(BattleOperationState newState)
     {
+       
         yield return new WaitForSeconds(0.5f);
-        gameManager.StartCoroutine(newState.EnterState());
+        m_BoardSystem.TransparentPath(1f);
         //重置所有防御塔的回合临时加成
         foreach (var turret in GameManager.Instance.elementTurrets.behaviors)
         {
@@ -89,6 +92,8 @@ public class WaveState : BattleOperationState
         {
             ((TurretContent)turret).Strategy.ClearTurnIntensify();
         }
+        yield return new WaitForSeconds(0.1f);
+        gameManager.StartCoroutine(newState.EnterState());
         yield break;
     }
 }
